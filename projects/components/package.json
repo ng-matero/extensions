@@ -1,0 +1,8 @@
+{
+  "name": "@ng-matero/extensions",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^8.2.0",
+    "@angular/core": "^8.2.0"
+  }
+}
