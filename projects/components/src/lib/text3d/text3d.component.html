@@ -1,0 +1,9 @@
+<div class="mtx-text3d-wrap"
+     [ngStyle]="{'transform': 'rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) rotateZ(' + rotateZ + 'deg)'}">
+  <span class="mtx-text3d"
+        *ngFor="let i of arr"
+        [ngStyle]="{'z-index': -i,'transform':'translate3d(0, 0,'+ -i + 'px)'}">
+    {{text}}
+    <ng-container [ngTemplateOutlet]="template"></ng-container>
+  </span>
+</div>

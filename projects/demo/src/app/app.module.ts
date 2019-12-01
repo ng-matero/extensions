@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { MtxProgressModule, MtxDialogModule, MtxAlertModule } from '@ng-matero/extensions';
+import { MtxText3dModule } from '@ng-matero/extensions/lib/text3d';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { MtxProgressModule, MtxDialogModule, MtxAlertModule } from '@ng-matero/e
     MtxProgressModule,
     MtxDialogModule,
     MtxAlertModule,
+    MtxText3dModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
