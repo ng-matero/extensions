@@ -21,6 +21,9 @@
     "paths": {
       "@ng-matero/extensions": [
         "projects/components/src/public-api.ts"
+      ],
+      "@ng-matero/extensions/*": [
+        "projects/components/src/*"
       ]
     }
   },
