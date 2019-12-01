@@ -1,9 +1,16 @@
 <h2>Progress</h2>
 <div>
-  <mtx-progress [value]="70"></mtx-progress>
+  <mtx-progress [value]="70" height="2px"></mtx-progress>
 </div>
 
-<h2>dialog</h2>
+<h2>Dialog</h2>
 <div>
   <button (click)="alert()">Alert</button>
+</div>
+
+<h2>Alert</h2>
+<div>
+  <mtx-alert type="info">
+    <strong>Warning!</strong> Better check yourself, you're not looking too good.
+  </mtx-alert>
 </div>

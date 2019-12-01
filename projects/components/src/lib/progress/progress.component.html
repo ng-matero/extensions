@@ -1,3 +1,7 @@
-<div class="mtx-progress-bar"
-     [ngStyle]="{ 'width.%': value, 'background-color': foreground }">
+<div class="mtx-progress"
+     [ngStyle]="{ 'height': height, 'background-color': background }">
+  <div role="progressbar"
+       class="mtx-progress-bar{{striped ? ' mtx-progress-bar-striped' : ''}}"
+       [ngStyle]="{ 'width.%': value, 'background-color': foreground }">
+  </div>
 </div>

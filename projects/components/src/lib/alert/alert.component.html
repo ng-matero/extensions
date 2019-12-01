@@ -1,0 +1,12 @@
+<ng-template [ngIf]="isOpen">
+  <div [class]="'mtx-alert mtx-alert-' + type"
+       [ngStyle]="{'background-color': background}"
+       role="alert">
+    <ng-content></ng-content>
+    <ng-template [ngIf]="dismissible">
+      <button type="button" class="close" aria-label="Close" (click)="handleClose()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </ng-template>
+  </div>
+</ng-template>

@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { MtxProgressModule, MtxDialogModule } from '@ng-matero/extensions';
+import { MtxProgressModule, MtxDialogModule, MtxAlertModule } from '@ng-matero/extensions';
 
 @NgModule({
   declarations: [AppComponent],
@@ -15,6 +15,7 @@ import { MtxProgressModule, MtxDialogModule } from '@ng-matero/extensions';
     AppRoutingModule,
     MtxProgressModule,
     MtxDialogModule,
+    MtxAlertModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
