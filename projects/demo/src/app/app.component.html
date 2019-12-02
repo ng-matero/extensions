@@ -15,6 +15,16 @@
   </mtx-alert>
 </div>
 
+<h2>Data Grid</h2>
+<mtx-grid class="mat-elevation-z1"
+          [data]="list"
+          [columns]="columns"
+          [loading]="isLoading"
+          [front]="true"
+          [pageSizeOptions]="[1,2]"
+          [pageSize]="2">
+</mtx-grid>
+
 <h1>Experiment</h1>
 <h2>3D Text</h2>
 <div>

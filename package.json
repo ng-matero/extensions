@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~8.2.2",
     "@angular/platform-browser-dynamic": "~8.2.2",
     "@angular/router": "~8.2.2",
+    "photoviewer": "^3.4.0",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"

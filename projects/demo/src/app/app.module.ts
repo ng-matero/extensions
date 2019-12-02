@@ -5,7 +5,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { MtxProgressModule, MtxDialogModule, MtxAlertModule } from '@ng-matero/extensions';
+import {
+  MtxProgressModule,
+  MtxDialogModule,
+  MtxAlertModule,
+  MtxDataGridModule,
+} from '@ng-matero/extensions';
 import { MtxText3dModule } from '@ng-matero/extensions/lib/text3d';
 
 @NgModule({
@@ -17,6 +22,7 @@ import { MtxText3dModule } from '@ng-matero/extensions/lib/text3d';
     MtxProgressModule,
     MtxDialogModule,
     MtxAlertModule,
+    MtxDataGridModule,
     MtxText3dModule,
   ],
   providers: [],
