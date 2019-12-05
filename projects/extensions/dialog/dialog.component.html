@@ -2,9 +2,11 @@
 <div mat-dialog-content *ngIf="data.description">
   <p>{{data.description}}</p>
 </div>
-<div mat-dialog-actions fxLayoutAlign="end center">
+<div mat-dialog-actions>
   <button *ngFor="let btn of data.buttons"
           mat-button
           [color]="btn.type"
-          (click)="onClick(btn.onClick)">{{btn.text}}</button>
+          (click)="onClick(btn.onClick)">
+    {{btn.text}}
+  </button>
 </div>

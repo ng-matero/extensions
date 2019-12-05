@@ -8,6 +8,7 @@ import {
 
 @Component({
   selector: 'mtx-alert',
+  exportAs: 'mtxAlert',
   host: {
     class: 'mtx-alert-wrap',
   },
@@ -26,9 +27,9 @@ export class MtxAlertComponent implements OnInit {
   /** Text color */
   @Input() color: string;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
-  handleClose() {}
+  handleClose() { }
 }

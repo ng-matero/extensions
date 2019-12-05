@@ -3,33 +3,32 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "components": {
+    "extensions": {
       "projectType": "library",
-      "root": "projects/components",
-      "sourceRoot": "projects/components/src",
+      "root": "projects/extensions",
       "prefix": "mtx",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/components/tsconfig.lib.json",
-            "project": "projects/components/ng-package.json"
+            "tsConfig": "projects/extensions/tsconfig.lib.json",
+            "project": "projects/extensions/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/components/src/test.ts",
-            "tsConfig": "projects/components/tsconfig.spec.json",
-            "karmaConfig": "projects/components/karma.conf.js"
+            "main": "projects/extensions/test.ts",
+            "tsConfig": "projects/extensions/tsconfig.spec.json",
+            "karmaConfig": "projects/extensions/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/components/tsconfig.lib.json",
-              "projects/components/tsconfig.spec.json"
+              "projects/extensions/tsconfig.lib.json",
+              "projects/extensions/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -161,5 +160,5 @@
       }
     }
   },
-  "defaultProject": "components"
+  "defaultProject": "extensions"
 }

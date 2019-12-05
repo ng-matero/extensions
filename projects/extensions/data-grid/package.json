@@ -1,0 +1,10 @@
+{
+  "ngPackage": {
+    "lib": {
+      "entryFile": "public-api.ts",
+      "umdModuleIds": {
+        "photoviewer": "PhotoViewer"
+      }
+    }
+  }
+}

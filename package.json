@@ -8,9 +8,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:lib": "ng build components",
+    "build:lib": "ng build extensions",
     "prepublish": "npm run build:lib",
-    "publish": "cd dist/components && npm publish --access public"
+    "publish": "cd dist/extensions && npm publish --access public"
   },
   "private": true,
   "dependencies": {

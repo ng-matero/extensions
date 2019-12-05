@@ -1,11 +1,9 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/components",
+  "dest": "../../dist/extensions",
   "lib": {
-    "entryFile": "src/public-api.ts",
-    "umdModuleIds": {
-      "photoviewer": "PhotoViewer"
-    }
+    "flatModuleFile": "extensions",
+    "entryFile": "public-api.ts"
   },
   "whitelistedNonPeerDependencies": [
     "angular",

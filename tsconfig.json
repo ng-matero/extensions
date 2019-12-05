@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "rootDir": ".",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
@@ -20,13 +21,16 @@
     ],
     "paths": {
       "@ng-matero/extensions": [
-        "projects/components/src/public-api.ts"
+        "projects/extensions"
       ],
       "@ng-matero/extensions/*": [
-        "projects/components/src/*"
+        "projects/extensions/*"
       ]
     }
   },
+  "include": [
+    "projects/**/*.ts"
+  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true

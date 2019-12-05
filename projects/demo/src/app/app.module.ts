@@ -11,7 +11,7 @@ import {
   MtxAlertModule,
   MtxDataGridModule,
 } from '@ng-matero/extensions';
-import { MtxText3dModule } from '@ng-matero/extensions/lib/text3d';
+import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,4 +28,4 @@ import { MtxText3dModule } from '@ng-matero/extensions/lib/text3d';
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

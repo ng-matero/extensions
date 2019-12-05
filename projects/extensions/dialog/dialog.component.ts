@@ -4,6 +4,7 @@ import { DialogData } from './dialog.config';
 
 @Component({
   selector: 'mtx-dialog',
+  exportAs: 'mtxDialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
 })

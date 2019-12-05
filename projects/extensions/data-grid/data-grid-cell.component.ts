@@ -1,10 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { GridColumn } from './data-grid.interface';
-import { MtxDialog } from '../dialog';
+import { MtxDialog } from '@ng-matero/extensions/dialog';
 import PhotoViewer from 'photoviewer';
 
 @Component({
   selector: 'mtx-grid-cell',
+  exportAs: 'mtxGridCell',
   templateUrl: './data-grid-cell.component.html',
 })
 export class MtxDataGridCellComponent implements OnInit {
@@ -16,7 +17,7 @@ export class MtxDataGridCellComponent implements OnInit {
 
   colValue = '';
 
-  constructor(private dialog: MtxDialog) {}
+  constructor(private dialog: MtxDialog) { }
 
   private str2arr(str: string) {
     return str.replace(/[\r\n\s]/g, '').split(',');

@@ -16,6 +16,7 @@ import { GridColumn } from './data-grid.interface';
 
 @Component({
   selector: 'mtx-grid',
+  exportAs: 'mtxGrid',
   templateUrl: './data-grid.component.html',
   styleUrls: ['./data-grid.component.scss'],
   host: {
@@ -66,7 +67,7 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
   dataSource: MatTableDataSource<any>;
   selection: SelectionModel<any>;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<any>(this.data);

@@ -8,6 +8,7 @@ import {
 
 @Component({
   selector: 'mtx-progress',
+  exportAs: 'mtxProgress',
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -26,7 +27,7 @@ export class MtxProgressComponent implements OnInit {
 
   @Input() striped: boolean;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }
