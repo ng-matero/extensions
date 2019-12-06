@@ -1,6 +1,7 @@
 {
   "ngPackage": {
     "lib": {
+      "flatModuleFile": "mtxDialog",
       "entryFile": "public-api.ts"
     }
   }

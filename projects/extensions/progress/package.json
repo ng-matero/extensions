@@ -1,6 +1,7 @@
 {
   "ngPackage": {
     "lib": {
+      "flatModuleFile": "mtxProgress",
       "entryFile": "public-api.ts"
     }
   }

@@ -1,6 +1,25 @@
 {
   "name": "@ng-matero/extensions",
   "version": "0.1.0",
+  "description": "Angular Material Extensions",
+  "author": "nzbin<nzb329@163.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ng-matero/extensions.git"
+  },
+  "keywords": [
+    "angular",
+    "angular material",
+    "angular components",
+    "angular material extensions",
+    "angular admin",
+    "ng-matero"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ng-matero/extensions/issues"
+  },
+  "homepage": "https://github.com/ng-matero/extensions#readme",
   "dependencies": {
     "@angular/cdk": "~8.2.3",
     "@angular/material": "~8.2.3",
@@ -10,5 +29,6 @@
     "@angular/animations": "~8.2.0",
     "@angular/common": "~8.2.0",
     "@angular/core": "~8.2.0"
-  }
+  },
+  "sideEffects": false
 }

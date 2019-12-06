@@ -24,6 +24,9 @@
   "files": [
     "public-api.ts"
   ],
+  "include": [
+    "./**/*.ts"
+  ],
   "exclude": [
     "test.ts",
     "**/*.spec.ts"

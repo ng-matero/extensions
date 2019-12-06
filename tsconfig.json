@@ -1,9 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "rootDir": ".",
-    "outDir": "./dist/out-tsc",
+    "outDir": "./dist/extensions",
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -28,9 +28,6 @@
       ]
     }
   },
-  "include": [
-    "projects/**/*.ts"
-  ],
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true

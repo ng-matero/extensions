@@ -1,6 +1,7 @@
 {
   "ngPackage": {
     "lib": {
+      "flatModuleFile": "mtxDataGrid",
       "entryFile": "public-api.ts",
       "umdModuleIds": {
         "photoviewer": "PhotoViewer"
