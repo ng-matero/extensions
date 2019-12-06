@@ -67,7 +67,7 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
   dataSource: MatTableDataSource<any>;
   selection: SelectionModel<any>;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<any>(this.data);

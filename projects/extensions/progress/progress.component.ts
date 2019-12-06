@@ -27,7 +27,7 @@ export class MtxProgressComponent implements OnInit {
 
   @Input() striped: boolean;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

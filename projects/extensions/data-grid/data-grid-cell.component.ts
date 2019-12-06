@@ -17,7 +17,7 @@ export class MtxDataGridCellComponent implements OnInit {
 
   colValue = '';
 
-  constructor(private dialog: MtxDialog) { }
+  constructor(private dialog: MtxDialog) {}
 
   private str2arr(str: string) {
     return str.replace(/[\r\n\s]/g, '').split(',');
