@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { MaterialModule } from './material.module';
 import {
   MtxProgressModule,
   MtxDialogModule,
@@ -13,12 +14,15 @@ import {
 } from '@ng-matero/extensions';
 import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 
+import { DialogOverviewComponent } from './app.component';
+
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, DialogOverviewComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    MaterialModule,
     MtxProgressModule,
     MtxDialogModule,
     MtxAlertModule,
@@ -27,5 +31,6 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [DialogOverviewComponent]
 })
 export class AppModule { }

@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, TemplateRef } from '@angular/core';
+import { ComponentType } from '@angular/cdk/portal';
 import { MatDialog } from '@angular/material/dialog';
+
 import { MtxDialogComponent } from './dialog.component';
 import { DialogData } from './dialog.config';
 
@@ -10,32 +12,31 @@ const defaults: DialogData = {
     {
       type: '',
       text: 'Close',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       type: 'warn',
       text: 'Ok',
-      onClick: () => {},
+      onClick: () => { },
     },
   ],
-  disableClose: true,
   width: '300px',
 };
 
 @Injectable()
 export class MtxDialog {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) { }
 
-  open(config: DialogData) {
+  open(config: DialogData, componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogComponent) {
     const data = Object.assign({}, defaults, config);
 
-    this.dialog.open(MtxDialogComponent, {
+    return this.dialog.open(componentOrTemplateRef, {
       ...data,
       data,
     });
   }
 
-  alert(title: string, onOk = () => {}) {
+  alert(title: string, onOk = () => { }) {
     this.open({
       title,
       buttons: [
@@ -47,10 +48,11 @@ export class MtxDialog {
           },
         },
       ],
+      disableClose: true,
     });
   }
 
-  confirm(title: string, onOk = () => {}, onClose = () => {}) {
+  confirm(title: string, onOk = () => { }, onClose = () => { }) {
     this.open({
       title,
       buttons: [
@@ -69,6 +71,7 @@ export class MtxDialog {
           },
         },
       ],
+      disableClose: true,
     });
   }
 }

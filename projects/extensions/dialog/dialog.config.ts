@@ -1,9 +1,9 @@
 import { MatDialogConfig } from '@angular/material';
 
 export interface DialogData extends MatDialogConfig {
-  title: string;
+  title?: string;
   description?: string;
-  buttons: DialogBtns[];
+  buttons?: DialogBtns[];
 }
 
 export interface DialogBtns {

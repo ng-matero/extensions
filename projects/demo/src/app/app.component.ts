@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 
 import { MtxDialog } from '@ng-matero/extensions';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 const ELEMENT_DATA: any[] = [
   {
@@ -124,11 +125,48 @@ export class AppComponent {
   list = ELEMENT_DATA;
   isLoading = false;
 
-  constructor(private mtxDialog: MtxDialog) {}
+  constructor(private mtxDialog: MtxDialog) { }
 
   alert() {
     this.mtxDialog.alert(`My name is Zongbin!`, () => {
       this.mtxDialog.alert(`Glad to meet you!`);
     });
   }
+
+  open() {
+    const dialogRef = this.mtxDialog.open({
+      width: '250px',
+    }, DialogOverviewComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+}
+
+@Component({
+  selector: 'app-dialog-overview',
+  template: `
+        <h1 mat-dialog-title>Hi {{data.name}}</h1>
+      <div mat-dialog-content>
+        <p>What's your favorite animal?</p>
+        <mat-form-field>
+          <input matInput>
+        </mat-form-field>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button (click)="onNoClick()">No Thanks</button>
+        <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+      </div>`,
+})
+export class DialogOverviewComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogOverviewComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
