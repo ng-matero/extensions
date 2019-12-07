@@ -21,14 +21,14 @@
   },
   "homepage": "https://github.com/ng-matero/extensions#readme",
   "dependencies": {
-    "@angular/cdk": "~8.2.3",
-    "@angular/material": "~8.2.3",
     "photoviewer": "~3.4.0"
   },
   "peerDependencies": {
     "@angular/animations": "~8.2.0",
+    "@angular/cdk": "~8.2.0",
     "@angular/common": "~8.2.0",
-    "@angular/core": "~8.2.0"
+    "@angular/core": "~8.2.0",
+    "@angular/material": "~8.2.0"
   },
   "sideEffects": false
 }
