@@ -11,7 +11,7 @@
 
 <h2>Alert</h2>
 <div>
-  <mtx-alert type="info">
+  <mtx-alert type="info" [dismissible]="true" (closed)="onClosed($event)">
     <strong>Warning!</strong> Better check yourself, you're not looking too good.
   </mtx-alert>
 </div>
@@ -21,7 +21,7 @@
           [data]="list"
           [columns]="columns"
           [loading]="isLoading"
-          [front]="true"
+          [frontPage]="true"
           [pageSizeOptions]="[1,2]"
           [pageSize]="2">
 </mtx-grid>

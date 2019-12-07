@@ -32,7 +32,6 @@ export class MtxDialog {
     componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogComponent
   ) {
     const data = Object.assign({}, defaults, config);
-
     return this.dialog.open(componentOrTemplateRef, {
       ...data,
       data,

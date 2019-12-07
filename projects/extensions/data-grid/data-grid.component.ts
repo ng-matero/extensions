@@ -36,10 +36,11 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
 
   @Input() loading = true;
 
+  /** Whether to show tooltip on columns */
   @Input() tooltip = true;
 
-  /** If to page on the front end */
-  @Input() front = false;
+  /** Whether to page on the front end */
+  @Input() frontPage = false;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
@@ -59,9 +60,9 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
 
   @Output() page = new EventEmitter<PageEvent>();
 
-  @Output() changeSort = new EventEmitter<Sort>(); // sort
+  @Output() changeSort = new EventEmitter<Sort>();
 
-  @Output() changeSelect = new EventEmitter<any[]>(); // checkbox
+  @Output() changeSelect = new EventEmitter<any[]>();
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<any>;
@@ -78,7 +79,7 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
     this.displayedColumns = this.columns.map(item => item.index);
     this.dataSource = new MatTableDataSource<any>(this.data);
     this.selection = new SelectionModel<any>(true, []);
-    if (this.front) {
+    if (this.frontPage) {
       this.dataSource.paginator = this.paginator;
     }
   }

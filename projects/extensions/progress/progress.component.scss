@@ -1,7 +1,7 @@
 $white: #fff !default;
 $progress-height: 1rem !default;
 
-@mixin gradient-striped($color: rgba($white, 0.15), $angle: 45deg) {
+@mixin gradient-striped($color: rgba($white, .15), $angle: 45deg) {
   background-image: linear-gradient(
     $angle,
     $color 25%,
@@ -19,9 +19,9 @@ $progress-height: 1rem !default;
   height: $progress-height;
   margin: 8px 0;
   overflow: hidden;
-  font-size: 0.75rem;
+  font-size: .75rem;
   background-color: #e9ecef;
-  border-radius: 0.25rem;
+  border-radius: .25rem;
 }
 
 .mtx-progress-bar {
@@ -31,10 +31,11 @@ $progress-height: 1rem !default;
   color: #fff;
   text-align: center;
   background-color: #007bff;
-  transition: width 0.6s ease;
+  transition: width .6s ease;
 }
 
 .mtx-progress-bar-striped {
   @include gradient-striped();
+
   background-size: $progress-height $progress-height;
 }

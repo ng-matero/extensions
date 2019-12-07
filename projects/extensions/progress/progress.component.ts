@@ -15,14 +15,19 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxProgressComponent implements OnInit {
+  /** The progress value */
   @Input() value = 0;
 
+  /** The progress height */
   @Input() height: string;
 
+  /** The progress text color */
   @Input() color: string;
 
+  /** The progress bar color */
   @Input() foreground: string;
 
+  /** The progress track color */
   @Input() background: string;
 
   @Input() striped: boolean;
