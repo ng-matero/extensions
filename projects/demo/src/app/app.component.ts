@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 
+import { MatDialog } from '@angular/material';
 import { MtxDialog } from '@ng-matero/extensions';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
@@ -125,7 +126,7 @@ export class AppComponent {
   list = ELEMENT_DATA;
   isLoading = false;
 
-  constructor(private mtxDialog: MtxDialog) {}
+  constructor(private matDialog: MatDialog, private mtxDialog: MtxDialog) {}
 
   onClosed(e: any) {
     console.log(e);
@@ -138,12 +139,10 @@ export class AppComponent {
   }
 
   open() {
-    const dialogRef = this.mtxDialog.open(
-      {
-        width: '250px',
-      },
-      DialogOverviewComponent
-    );
+    const dialogRef = this.matDialog.open(DialogOverviewComponent, {
+      width: '250px',
+      data: {name: 'this.name', animal: 'this.animal'}
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
@@ -158,7 +157,7 @@ export class AppComponent {
     <div mat-dialog-content>
       <p>What's your favorite animal?</p>
       <mat-form-field>
-        <input matInput />
+        <input matInput/>
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
