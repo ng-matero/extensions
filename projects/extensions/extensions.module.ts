@@ -8,4 +8,4 @@ import { MtxProgressModule } from '@ng-matero/extensions/progress';
 @NgModule({
   exports: [MtxAlertModule, MtxDataGridModule, MtxDialogModule, MtxProgressModule],
 })
-export class ExtensionsModule { }
+export class MaterialExtensionsModule { }

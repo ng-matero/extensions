@@ -12,7 +12,7 @@ import {
   MtxAlertModule,
   MtxDataGridModule,
 } from '@ng-matero/extensions';
-// import { MtxText3dModule } from '@ng-matero/extensions/text3d';
+import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 
 import { DialogOverviewComponent } from './app.component';
 
@@ -27,7 +27,7 @@ import { DialogOverviewComponent } from './app.component';
     MtxDialogModule,
     MtxAlertModule,
     MtxDataGridModule,
-    // MtxText3dModule,
+    MtxText3dModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
