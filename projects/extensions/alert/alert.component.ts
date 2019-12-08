@@ -36,6 +36,9 @@ export class MtxAlertComponent implements OnInit {
   /** Text color */
   @Input() color: string;
 
+  /** Material elevation */
+  @Input() elevation = 0;
+
   /** This event fires when alert closed, $event is an instance of Alert component */
   @Output() closed = new EventEmitter<MtxAlertComponent>();
 

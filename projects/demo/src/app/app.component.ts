@@ -139,8 +139,8 @@ export class AppComponent {
   }
 
   open() {
-    const dialogRef = this.matDialog.open(DialogOverviewComponent, {
-      width: '250px',
+    const dialogRef = this.mtxDialog.originalOpen(DialogOverviewComponent, {
+      width: '550px',
       data: {name: 'this.name', animal: 'this.animal'}
     });
 
@@ -156,9 +156,7 @@ export class AppComponent {
     <h1 mat-dialog-title>Hi {{ data.name }}</h1>
     <div mat-dialog-content>
       <p>What's your favorite animal?</p>
-      <mat-form-field>
-        <input matInput/>
-      </mat-form-field>
+      {{data|json}}
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="onNoClick()">No Thanks</button>

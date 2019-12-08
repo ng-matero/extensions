@@ -1,5 +1,5 @@
 <ng-template [ngIf]="isOpen">
-  <div [class]="'mtx-alert mtx-alert-' + type"
+  <div [ngClass]="['mtx-alert', 'mtx-alert-' + type, 'mat-elevation-z' + elevation]"
        [ngClass]="{'mtx-alert-dismissible': dismissible}"
        role="alert">
     <ng-content></ng-content>

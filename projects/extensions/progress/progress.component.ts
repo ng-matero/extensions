@@ -15,6 +15,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxProgressComponent implements OnInit {
+  /**
+   * Progress types
+   * `default`, `info`, `success`, `warning` and `danger`
+   */
+  @Input() type = 'info';
+
   /** The progress value */
   @Input() value = 0;
 
@@ -30,7 +36,11 @@ export class MtxProgressComponent implements OnInit {
   /** The progress track color */
   @Input() background: string;
 
+  /** Whether applies striped class */
   @Input() striped: boolean;
+
+  /** Whether applies animated class */
+  @Input() animate: boolean;
 
   constructor() {}
 

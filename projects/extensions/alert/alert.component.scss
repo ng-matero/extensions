@@ -1,9 +1,3 @@
-// The host element class
-// We can add some classes to the host element to modify its background color.
-.mtx-alert-wrap {
-  display: block;
-}
-
 .mtx-alert {
   position: relative;
   padding: .75rem 1.25rem;
@@ -17,7 +11,7 @@
   top: 0;
   bottom: 0;
   right: 0;
-  padding: .75rem 1.25rem;
+  padding: 0 1.25rem;
   font-size: 1.5rem;
   line-height: 1;
   color: inherit;
@@ -35,25 +29,25 @@
   padding-right: 4rem;
 }
 
-.mtx-alert-info {
-  background-color: #2196f3;
-  border-color: #2196f3;
-  color: #fff;
-}
-
-.mtx-alert-warn {
-  background-color: #fb8c00;
-  border-color: #fb8c00;
-  color: #fff;
-}
-
 .mtx-alert-success {
   background-color: #4caf50;
   border-color: #4caf50;
   color: #fff;
 }
 
-.mtx-alert-error {
+.mtx-alert-info {
+  background-color: #2196f3;
+  border-color: #2196f3;
+  color: #fff;
+}
+
+.mtx-alert-warning {
+  background-color: #fb8c00;
+  border-color: #fb8c00;
+  color: #fff;
+}
+
+.mtx-alert-danger {
   background-color: #ff5252;
   border-color: #ff5252;
   color: #fff;

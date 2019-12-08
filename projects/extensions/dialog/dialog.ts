@@ -27,6 +27,13 @@ const defaults: DialogData = {
 export class MtxDialog {
   constructor(public dialog: MatDialog) {}
 
+  originalOpen(
+    componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogComponent,
+    config: any
+  ) {
+    return this.dialog.open(componentOrTemplateRef, config);
+  }
+
   open(
     config: DialogData,
     componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogComponent

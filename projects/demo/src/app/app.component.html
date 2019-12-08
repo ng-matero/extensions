@@ -1,6 +1,7 @@
 <h2>Progress</h2>
 <div>
   <mtx-progress [value]="70" height="2px"></mtx-progress>
+  <mtx-progress [value]="60" [striped]="true" [animate]="true">60</mtx-progress>
 </div>
 
 <h2>Dialog</h2>
@@ -11,7 +12,7 @@
 
 <h2>Alert</h2>
 <div>
-  <mtx-alert type="info" [dismissible]="true" (closed)="onClosed($event)">
+  <mtx-alert type="danger" [dismissible]="true" (closed)="onClosed($event)" [elevation]="2">
     <strong>Warning!</strong> Better check yourself, you're not looking too good.
   </mtx-alert>
 </div>
