@@ -8,6 +8,13 @@ const ELEMENT_DATA: any[] = [
   {
     position: 1,
     name: 'Hydrogen',
+    tags: [
+      {
+        a: 1,
+        b: 2,
+      },
+    ],
+    obj: {},
     weight: 1.0079,
     symbol: 'H',
     gender: 'male',
@@ -23,6 +30,13 @@ const ELEMENT_DATA: any[] = [
   {
     position: 2,
     name: 'Helium',
+    tags: [
+      {
+        a: 3,
+        b: 4,
+      },
+    ],
+    obj: null,
     weight: 4.0026,
     symbol: 'He',
     gender: 'male',
@@ -62,6 +76,11 @@ export class AppComponent {
       index: 'name',
       width: 'auto',
       sort: true,
+    },
+    {
+      title: 'Tags',
+      index: 'tags.0.b',
+      width: 'auto',
     },
     {
       title: 'Weight',
@@ -141,7 +160,7 @@ export class AppComponent {
   open() {
     const dialogRef = this.mtxDialog.originalOpen(DialogOverviewComponent, {
       width: '550px',
-      data: {name: 'this.name', animal: 'this.animal'}
+      data: { name: 'this.name', animal: 'this.animal' },
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -156,7 +175,7 @@ export class AppComponent {
     <h1 mat-dialog-title>Hi {{ data.name }}</h1>
     <div mat-dialog-content>
       <p>What's your favorite animal?</p>
-      {{data|json}}
+      {{ data | json }}
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="onNoClick()">No Thanks</button>

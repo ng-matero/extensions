@@ -36,7 +36,8 @@ export class MtxDataGridCellComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.colValue = this.getObjValue(this.data, this.col.index.split('.'));
+    const tmpIndexArr = this.col.index ? this.col.index.split('.') : [];
+    this.colValue = this.getObjValue(this.data, tmpIndexArr);
   }
 
   confirm(title: string, fn?: (p: any) => void, data?: any) {
