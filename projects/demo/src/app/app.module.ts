@@ -1,36 +1,39 @@
+/**
+ * @license
+ * Copyright Google LLC All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+
+import { Directionality } from '@angular/cdk/bidi';
+import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
-
-import { MaterialModule } from './material.module';
-import {
-  MtxProgressModule,
-  MtxDialogModule,
-  MtxAlertModule,
-  MtxDataGridModule,
-} from '@ng-matero/extensions';
-import { MtxText3dModule } from '@ng-matero/extensions/text3d';
-
-import { DialogOverviewComponent } from './app.component';
+import { DevAppDirectionality } from './dev-app/dev-app-directionality';
+import { DevAppModule } from './dev-app/dev-app-module';
+import { DEV_APP_ROUTES } from './dev-app/routes';
+import { DevAppRippleOptions } from './dev-app/ripple-options';
 
 @NgModule({
-  declarations: [AppComponent, DialogOverviewComponent],
   imports: [
-    BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,
-    MaterialModule,
-    MtxProgressModule,
-    MtxDialogModule,
-    MtxAlertModule,
-    MtxDataGridModule,
-    MtxText3dModule,
+    BrowserModule,
+    DevAppModule,
+    HttpClientModule,
+    RouterModule.forRoot(DEV_APP_ROUTES),
   ],
-  providers: [],
+  declarations: [AppComponent],
+  providers: [
+    { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
+    { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: DevAppRippleOptions },
+    { provide: Directionality, useClass: DevAppDirectionality },
+  ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogOverviewComponent]
 })
-export class AppModule { }
+export class AppModule {}
