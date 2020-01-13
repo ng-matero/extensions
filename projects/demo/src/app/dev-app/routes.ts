@@ -12,5 +12,7 @@ import { DevAppHome } from './dev-app-home';
 
 export const DEV_APP_ROUTES: Routes = [
   { path: '', component: DevAppHome },
+  { path: 'alert', loadChildren: '../alert/alert-demo.module#AlertDemoModule' },
+  { path: 'dialog', loadChildren: '../dialog/dialog-demo.module#DialogDemoModule' },
   { path: '**', component: DevApp404 },
 ];
