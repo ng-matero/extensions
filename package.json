@@ -8,6 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "build:site": "ng build --prod --build-optimizer",
+    "deploy:ghpages": "angular-cli-ghpages --no-silent --dir=dist/demos",
     "build:lib": "ng build extensions",
     "prepublish": "npm run build:lib",
     "publish": "cd dist/extensions && npm publish --access public"
@@ -39,6 +41,7 @@
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
+    "angular-cli-ghpages": "^0.6.2",
     "codelyzer": "^5.0.0",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
