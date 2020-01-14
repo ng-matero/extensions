@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build:site": "ng build --prod --build-optimizer",
+    "build:site": "ng build demos --prod --build-optimizer --baseHref=./",
     "deploy:ghpages": "angular-cli-ghpages --no-silent --dir=dist/demos",
     "build:lib": "ng build extensions",
     "prepublish": "npm run build:lib",
