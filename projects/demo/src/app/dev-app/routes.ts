@@ -1,18 +1,29 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import { Routes } from '@angular/router';
 import { DevApp404 } from './dev-app-404';
 import { DevAppHome } from './dev-app-home';
 
 export const DEV_APP_ROUTES: Routes = [
   { path: '', component: DevAppHome },
-  { path: 'alert', loadChildren: '../alert/alert-demo.module#AlertDemoModule' },
-  { path: 'dialog', loadChildren: '../dialog/dialog-demo.module#DialogDemoModule' },
+  {
+    path: 'alert',
+    loadChildren: () => import('../alert/alert-demo.module').then(m => m.AlertDemoModule),
+  },
+  {
+    path: 'data-grid',
+    loadChildren: () =>
+      import('../data-grid/data-grid-demo.module').then(m => m.DataGridDemoModule),
+  },
+  {
+    path: 'dialog',
+    loadChildren: () => import('../dialog/dialog-demo.module').then(m => m.DialogDemoModule),
+  },
+  {
+    path: 'progress',
+    loadChildren: () => import('../progress/progress-demo.module').then(m => m.ProgressDemoModule),
+  },
+  {
+    path: 'text3d',
+    loadChildren: () => import('../text3d/text3d-demo.module').then(m => m.Text3dDemoModule),
+  },
   { path: '**', component: DevApp404 },
 ];

@@ -10,8 +10,8 @@ import { DialogOverviewComponent } from './dialog-demo.component';
 @NgModule({
   imports: [
     MatButtonModule,
-    MtxDialogModule,
     MatDialogModule,
+    MtxDialogModule,
     RouterModule.forChild([{ path: '', component: DialogDemoComponent }]),
   ],
   declarations: [DialogDemoComponent, DialogOverviewComponent],
