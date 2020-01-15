@@ -1,17 +1,9 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import { Directionality } from '@angular/cdk/bidi';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, ElementRef, Inject, ViewEncapsulation } from '@angular/core';
 import { DevAppRippleOptions } from './ripple-options';
 import { DevAppDirectionality } from './dev-app-directionality';
-import { menus } from './menu';
+import { menus } from './menus';
 
 /** Root component for the dev-app demos. */
 @Component({
