@@ -26,6 +26,8 @@
     "@angular/platform-browser": "~8.2.2",
     "@angular/platform-browser-dynamic": "~8.2.2",
     "@angular/router": "~8.2.2",
+    "@ngx-progressbar/core": "^5.3.2",
+    "@ngx-progressbar/router": "^5.3.2",
     "ngx-color": "^4.1.0",
     "photoviewer": "^3.4.0",
     "rxjs": "~6.4.0",
