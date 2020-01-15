@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { DialogDemoComponent } from './dialog-demo.component';
@@ -10,7 +9,6 @@ import { DialogOverviewComponent } from './dialog-demo.component';
 @NgModule({
   imports: [
     MatButtonModule,
-    MatDialogModule,
     MtxDialogModule,
     RouterModule.forChild([{ path: '', component: DialogDemoComponent }]),
   ],

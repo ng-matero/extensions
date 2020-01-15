@@ -13,6 +13,7 @@ import {
   MatIconModule,
 } from '@angular/material';
 
+import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxDataGridComponent } from './data-grid.component';
 import { MtxDataGridCellComponent } from './data-grid-cell.component';
 
@@ -28,6 +29,7 @@ import { MtxDataGridCellComponent } from './data-grid-cell.component';
     MatChipsModule,
     MatTooltipModule,
     MatIconModule,
+    MtxDialogModule,
   ],
   exports: [MtxDataGridComponent, MtxDataGridCellComponent],
   declarations: [MtxDataGridComponent, MtxDataGridCellComponent],
