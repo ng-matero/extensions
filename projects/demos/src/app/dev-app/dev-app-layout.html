@@ -3,15 +3,20 @@
 <mat-sidenav-container class="demo-container">
   <mat-sidenav #start role="navigation">
     <mat-nav-list>
-      <a *ngFor="let navItem of navItems"
-         mat-list-item
-         (click)="start.close()"
-         routerLinkActive="active"
-         #routerLinkActiveInstance="routerLinkActive"
-         [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
-         [routerLink]="[navItem.route]">
-        {{navItem.name}}
-      </a>
+      <ng-container *ngFor="let navItems of navItemsArr">
+
+        <div class="nav-item-title">{{navItems.title}}</div>
+
+        <a *ngFor="let navItem of navItems.children"
+           mat-list-item
+           (click)="start.close()"
+           routerLinkActive="active"
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+           [routerLink]="[navItem.route]">
+          {{navItem.name}}
+        </a>
+      </ng-container>
 
       <hr>
 

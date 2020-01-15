@@ -11,7 +11,7 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 import { ChangeDetectorRef, Component, ElementRef, Inject, ViewEncapsulation } from '@angular/core';
 import { DevAppRippleOptions } from './ripple-options';
 import { DevAppDirectionality } from './dev-app-directionality';
-import { menu } from './menu';
+import { menus } from './menu';
 
 /** Root component for the dev-app demos. */
 @Component({
@@ -22,7 +22,7 @@ import { menu } from './menu';
 })
 export class DevAppLayout {
   dark = false;
-  navItems = menu;
+  navItemsArr = menus;
 
   constructor(
     private _element: ElementRef<HTMLElement>,
