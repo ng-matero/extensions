@@ -128,6 +128,12 @@ MIT
 @ng-matero/extensions
 MIT
 
+@ngx-progressbar/core
+MIT
+
+@ngx-progressbar/router
+MIT
+
 core-js
 MIT
 Copyright (c) 2014-2019 Denis Pushkarev
