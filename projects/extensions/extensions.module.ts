@@ -6,8 +6,17 @@ import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxProgressModule } from '@ng-matero/extensions/progress';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
 
+import { MtxText3dModule } from '@ng-matero/extensions/text3d';
+
 @NgModule({
-  exports: [MtxAlertModule, MtxDataGridModule, MtxDialogModule, MtxProgressModule, MtxSelectModule],
+  exports: [
+    MtxAlertModule,
+    MtxDataGridModule,
+    MtxDialogModule,
+    MtxProgressModule,
+    MtxSelectModule,
+    MtxText3dModule,
+  ],
   declarations: [],
 })
 export class MaterialExtensionsModule {}
