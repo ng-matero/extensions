@@ -125,9 +125,6 @@ MIT
 @angular/router
 MIT
 
-@ng-matero/extensions
-MIT
-
 @ngx-progressbar/core
 MIT
 
