@@ -9,6 +9,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./dialog-demo.component.scss'],
 })
 export class DialogDemoComponent implements OnInit {
+  animal: string;
+
   constructor(private mtxDialog: MtxDialog) {}
 
   ngOnInit() {}
@@ -19,14 +21,57 @@ export class DialogDemoComponent implements OnInit {
     });
   }
 
+  confirm() {
+    this.mtxDialog.confirm(
+      `What's your name?`,
+      () => {
+        this.mtxDialog.alert(`Hi, Zongbin!`);
+      },
+      () => {
+        this.mtxDialog.alert(`I don't know.`);
+      }
+    );
+  }
+
   open() {
+    this.mtxDialog.open({
+      title: 'This is the title',
+      description: 'You can write some messages here.',
+      buttons: [
+        {
+          type: '',
+          text: 'Close',
+          onClick: () => {
+            this.mtxDialog.alert(`You click Close button.`);
+          },
+        },
+        {
+          type: 'primary',
+          text: 'View',
+          onClick: () => {
+            this.mtxDialog.alert(`You click View button.`);
+          },
+        },
+        {
+          type: 'warn',
+          text: 'Ok',
+          onClick: () => {
+            this.mtxDialog.alert(`You click Ok button.`);
+          },
+        },
+      ],
+    });
+  }
+
+  openOriginal() {
     const dialogRef = this.mtxDialog.originalOpen(DialogOverviewComponent, {
       width: '550px',
-      data: { name: 'this.name', animal: 'this.animal' },
+      data: { name: 'nzbin', animal: 'panda' },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      this.animal = result;
     });
   }
 }
@@ -34,13 +79,16 @@ export class DialogDemoComponent implements OnInit {
 @Component({
   selector: 'dialog-overview',
   template: `
-    <h1 mat-dialog-title>Hi {{ data.name }}</h1>
+    <h1 mat-dialog-title>Hi, {{ data.name }}</h1>
     <div mat-dialog-content>
       <p>What's your favorite animal?</p>
+      <mat-form-field>
+        <input matInput [(ngModel)]="data.animal" />
+      </mat-form-field>
     </div>
     <div mat-dialog-actions>
       <button mat-button (click)="onNoClick()">No Thanks</button>
-      <button mat-button cdkFocusInitial>Ok</button>
+      <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
     </div>
   `,
 })
