@@ -23,7 +23,7 @@
     </ng-container>
     <!-- Buttons -->
     <ng-container *ngSwitchCase="'button'">
-      <ng-container *ngFor="let btn of col.buttons; index as i; last as isLast">
+      <ng-container *ngFor="let btn of col.buttons; index as i; last as isLast;">
         <ng-container *ngIf="!btn.iif || btn.iif(data)">
           <button *ngIf="btn.pop; else btnDefaultTpl"
                   mat-icon-button
