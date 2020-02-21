@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
+
 import { DialogDemoComponent } from './dialog-demo.component';
 import { DialogOverviewComponent } from './dialog-demo.component';
 

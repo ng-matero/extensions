@@ -9,6 +9,11 @@ export const DEV_APP_ROUTES: Routes = [
     loadChildren: () => import('../alert/alert-demo.module').then(m => m.AlertDemoModule),
   },
   {
+    path: 'checkbox-group',
+    loadChildren: () =>
+      import('../checkbox-group/checkbox-group.module').then(m => m.CheckboxGroupModule),
+  },
+  {
     path: 'data-grid',
     loadChildren: () =>
       import('../data-grid/data-grid-demo.module').then(m => m.DataGridDemoModule),

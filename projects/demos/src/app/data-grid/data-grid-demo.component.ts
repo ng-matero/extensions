@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GridColumn } from '@ng-matero/extensions/data-grid';
 
 const ELEMENT_DATA: any[] = [
   {
@@ -51,7 +52,7 @@ const ELEMENT_DATA: any[] = [
   styleUrls: ['./data-grid-demo.component.scss'],
 })
 export class DataGridDemoComponent implements OnInit {
-  columns = [
+  columns: GridColumn[] = [
     {
       title: 'Select',
       index: 'select',
