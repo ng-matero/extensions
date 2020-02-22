@@ -1,5 +1,10 @@
 .mtx-checkbox-group {
-    .mat-checkbox {
-        margin-right: 16px;
+  .mat-checkbox {
+    margin-right: 16px;
+
+    [dir='rtl'] & {
+      margin-right: auto;
+      margin-left: 16px;
     }
+  }
 }

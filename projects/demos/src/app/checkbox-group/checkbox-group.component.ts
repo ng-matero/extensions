@@ -17,4 +17,8 @@ export class CheckboxGroupComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  changeOptions(e: any) {
+    console.log(e);
+  }
 }

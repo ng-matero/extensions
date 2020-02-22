@@ -29,7 +29,7 @@ import { MtxCheckboxGroupOption } from './checkbox-group.interface';
   ],
 })
 export class MtxCheckboxGroupComponent implements OnInit {
-  @Output() checkedChange = new EventEmitter<{
+  @Output() change = new EventEmitter<{
     model: MtxCheckboxGroupOption[];
     index: number;
   }>();
@@ -37,13 +37,13 @@ export class MtxCheckboxGroupComponent implements OnInit {
   @Input() selectAllLabel = 'Select All';
   @Input() showSelectAll = true;
 
-  checkedAll = false;
-  indeterminate = false;
+  selectAll = false;
+  selectAllIndeterminate = false;
 
   options: MtxCheckboxGroupOption[] = [];
 
-  onChange: (value: any) => void = () => null;
-  onTouched: () => any = () => null;
+  onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
+  onTouched: () => void = () => null;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -65,29 +65,29 @@ export class MtxCheckboxGroupComponent implements OnInit {
     this.onTouched = fn;
   }
 
-  updateSingleChecked(e?: boolean, index?: number) {
+  updateSingleChecked(e?: boolean, index?: number): void {
     if (this.options.filter(item => item.checked || !item.disabled).every(item => !item.checked)) {
-      this.checkedAll = false;
-      this.indeterminate = false;
+      this.selectAll = false;
+      this.selectAllIndeterminate = false;
     } else if (
       this.options.filter(item => item.checked || !item.disabled).every(item => item.checked)
     ) {
-      this.checkedAll = true;
-      this.indeterminate = false;
+      this.selectAll = true;
+      this.selectAllIndeterminate = false;
     } else {
-      this.indeterminate = true;
+      this.selectAllIndeterminate = true;
     }
 
-    this.checkedChange.emit({
+    this.change.emit({
       model: this.options,
       index,
     });
   }
 
   updateAllChecked(e?: boolean, index?: number): void {
-    this.checkedAll = !this.checkedAll;
-    this.indeterminate = false;
-    if (this.checkedAll) {
+    this.selectAll = !this.selectAll;
+    this.selectAllIndeterminate = false;
+    if (this.selectAll) {
       this.options
         .filter(item => item.checked || !item.disabled)
         .forEach(item => (item.checked = true));
@@ -97,7 +97,7 @@ export class MtxCheckboxGroupComponent implements OnInit {
         .forEach(item => (item.checked = !!item.disabled));
     }
 
-    this.checkedChange.emit({
+    this.change.emit({
       model: this.options,
       index,
     });
