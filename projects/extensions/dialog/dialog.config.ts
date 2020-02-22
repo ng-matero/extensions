@@ -1,12 +1,12 @@
 import { MatDialogConfig } from '@angular/material';
 
-export interface DialogData extends MatDialogConfig {
+export interface MtxDialogData extends MatDialogConfig {
   title?: string;
   description?: string;
-  buttons?: DialogBtns[];
+  buttons?: MtxDialogBtns[];
 }
 
-export interface DialogBtns {
+export interface MtxDialogBtns {
   type?: '' | 'primary' | 'accent' | 'warn';
   text: string;
   onClick: () => void;

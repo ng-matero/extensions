@@ -1,7 +1,7 @@
 /**
  * 可编辑单元格矩阵
  */
-export interface GridEditCell {
+export interface MtxGridEditCell {
   key: string;
   value: string;
   visible: boolean;
@@ -10,11 +10,11 @@ export interface GridEditCell {
 /**
  * 标签信息
  */
-export interface GridColumnTag {
-  [key: number]: GridColumnTagValue;
-  [key: string]: GridColumnTagValue;
+export interface MtxGridColumnTag {
+  [key: number]: MtxGridColumnTagValue;
+  [key: string]: MtxGridColumnTagValue;
 }
-export interface GridColumnTagValue {
+export interface MtxGridColumnTagValue {
   text?: string;
   color?: string;
 }
@@ -22,7 +22,7 @@ export interface GridColumnTagValue {
 /**
  * 按钮配置
  */
-export interface GridColumnButton {
+export interface MtxGridColumnButton {
   icon?: string;
   text?: string;
   type?: string;
@@ -30,7 +30,7 @@ export interface GridColumnButton {
   click?: (record: any) => void;
   pop?: boolean;
   popTitle?: string;
-  children?: GridColumnButton[];
+  children?: MtxGridColumnButton[];
   iif?: (record: any) => boolean;
   tooltip?: string;
 }
@@ -38,7 +38,7 @@ export interface GridColumnButton {
 /**
  * 表格
  */
-export interface GridColumn {
+export interface MtxGridColumn {
   title: string;
   index?: string;
   checked?: boolean;
@@ -64,10 +64,10 @@ export interface GridColumn {
   edit?: boolean; // 是否可编辑
   editType?: 'text' | 'number' | 'select' | 'textarea';
   format?: (data: any) => any; // 数值类型，金钱格式等
-  tag?: GridColumnTag;
+  tag?: MtxGridColumnTag;
   cat?: string; // 字段分类
   static?: boolean; // 是否是固定显示的值
-  buttons?: GridColumnButton[];
+  buttons?: MtxGridColumnButton[];
   videoLink?: string;
   iif?: boolean | (() => any);
   sum?: string; // 标记是否是总计列

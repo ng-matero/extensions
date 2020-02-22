@@ -12,7 +12,7 @@ import {
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource, MatPaginator, Sort, PageEvent } from '@angular/material';
 
-import { GridColumn } from './data-grid.interface';
+import { MtxGridColumn } from './data-grid.interface';
 
 @Component({
   selector: 'mtx-grid',
@@ -26,7 +26,7 @@ import { GridColumn } from './data-grid.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxDataGridComponent implements OnInit, OnChanges {
-  @Input() columns: GridColumn[] = [];
+  @Input() columns: MtxGridColumn[] = [];
 
   @Input() data = [];
 

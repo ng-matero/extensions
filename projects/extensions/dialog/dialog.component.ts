@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DialogData } from './dialog.config';
+import { MtxDialogData } from './dialog.config';
 
 @Component({
   selector: 'mtx-dialog',
@@ -11,7 +11,7 @@ import { DialogData } from './dialog.config';
 export class MtxDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<MtxDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData
+    @Inject(MAT_DIALOG_DATA) public data: MtxDialogData
   ) {}
 
   ngOnInit() {}

@@ -1,50 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GridColumn } from '@ng-matero/extensions/data-grid';
+import { MtxGridColumn } from '@ng-matero/extensions/data-grid';
 
-const ELEMENT_DATA: any[] = [
-  {
-    position: 1,
-    name: 'Hydrogen',
-    tag: [
-      {
-        color: 'red',
-        value: [1, 2],
-      },
-    ],
-    weight: 1.0079,
-    symbol: 'H',
-    gender: 'male',
-    mobile: '13198765432',
-    tele: '80675432',
-    city: 'New York',
-    address: '555 Lexington Avenue',
-    date: '1423456765768',
-    website: 'www.matero.com',
-    company: 'matero',
-    email: 'Hydrogen@gmail.com',
-  },
-  {
-    position: 2,
-    name: 'Helium',
-    tag: [
-      {
-        color: 'blue',
-        value: [3, 4],
-      },
-    ],
-    weight: 4.0026,
-    symbol: 'He',
-    gender: 'male',
-    mobile: '13034676675',
-    tele: '80675432',
-    city: 'Shanghai',
-    address: '88 Songshan Road',
-    date: '1423456765768',
-    website: 'www.matero.com',
-    company: 'matero',
-    email: 'Helium@gmail.com',
-  },
-];
+import { ELEMENT_DATA } from './data';
 
 @Component({
   selector: 'app-data-grid-demo',
@@ -52,7 +9,7 @@ const ELEMENT_DATA: any[] = [
   styleUrls: ['./data-grid-demo.component.scss'],
 })
 export class DataGridDemoComponent implements OnInit {
-  columns: GridColumn[] = [
+  columns: MtxGridColumn[] = [
     {
       title: 'Select',
       index: 'select',
@@ -82,9 +39,7 @@ export class DataGridDemoComponent implements OnInit {
       index: 'weight',
       width: 'auto',
       type: 'format',
-      format: (data: any) => {
-        return data.weight * 100;
-      },
+      format: (data: any) => data.weight * 100,
     },
     {
       title: 'Symbol',
@@ -139,6 +94,7 @@ export class DataGridDemoComponent implements OnInit {
   ];
   list = ELEMENT_DATA;
   isLoading = false;
+
   constructor() {}
 
   ngOnInit() {}

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { GridColumn } from './data-grid.interface';
+import { MtxGridColumn } from './data-grid.interface';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import PhotoViewer from 'photoviewer';
 
@@ -13,7 +13,7 @@ export class MtxDataGridCellComponent implements OnInit {
   @Input() data = {};
 
   /** Col definition */
-  @Input() col: GridColumn;
+  @Input() col: MtxGridColumn;
 
   colValue = '';
 

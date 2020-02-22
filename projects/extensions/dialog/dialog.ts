@@ -3,9 +3,9 @@ import { ComponentType } from '@angular/cdk/portal';
 import { MatDialog } from '@angular/material/dialog';
 
 import { MtxDialogComponent } from './dialog.component';
-import { DialogData } from './dialog.config';
+import { MtxDialogData } from './dialog.config';
 
-const defaults: DialogData = {
+const defaults: MtxDialogData = {
   title: '',
   description: '',
   buttons: [
@@ -35,7 +35,7 @@ export class MtxDialog {
   }
 
   open(
-    config: DialogData,
+    config: MtxDialogData,
     componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogComponent
   ) {
     const data = Object.assign({}, defaults, config);
