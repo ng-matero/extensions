@@ -14,6 +14,11 @@ export const DEV_APP_ROUTES: Routes = [
       import('../checkbox-group/checkbox-group.module').then(m => m.CheckboxGroupModule),
   },
   {
+    path: 'color-picker',
+    loadChildren: () =>
+      import('../color-picker/color-picker.module').then(m => m.ColorPickerModule),
+  },
+  {
     path: 'data-grid',
     loadChildren: () =>
       import('../data-grid/data-grid-demo.module').then(m => m.DataGridDemoModule),

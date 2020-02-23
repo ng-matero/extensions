@@ -1,11 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+import { SharedModule } from '../shared.module';
 
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 
@@ -14,14 +9,9 @@ import { DialogOverviewComponent } from './dialog-demo.component';
 
 @NgModule({
   imports: [
-    CommonModule,
-    FormsModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MtxDialogModule,
+    SharedModule,
     RouterModule.forChild([{ path: '', component: DialogDemoComponent }]),
+    MtxDialogModule,
   ],
   declarations: [DialogDemoComponent, DialogOverviewComponent],
   entryComponents: [DialogOverviewComponent],

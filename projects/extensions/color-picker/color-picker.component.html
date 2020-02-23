@@ -1,1 +1,9 @@
-<p>color-picker works!</p>
+<input matInput
+       [matMenuTriggerFor]="colorPickerPopover"
+       (menuClosed)="onCloseColorPicker()">
+
+<mat-menu #colorPickerPopover="matMenu" class="mtx-color-picker" [hasBackdrop]="true">
+    <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+        <color-chrome [color]="'#f60'" (onChangeComplete)="changeComplete($event)"></color-chrome>
+    </div>
+</mat-menu>

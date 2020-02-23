@@ -7,8 +7,8 @@ import { ProgressDemoComponent } from './progress-demo.component';
 
 @NgModule({
   imports: [
-    MtxProgressModule,
     RouterModule.forChild([{ path: '', component: ProgressDemoComponent }]),
+    MtxProgressModule,
   ],
   declarations: [ProgressDemoComponent],
 })

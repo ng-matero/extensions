@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared.module';
 
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
 
@@ -8,9 +8,9 @@ import { CheckboxGroupComponent } from './checkbox-group.component';
 
 @NgModule({
   imports: [
-    FormsModule,
-    MtxCheckboxGroupModule,
+    SharedModule,
     RouterModule.forChild([{ path: '', component: CheckboxGroupComponent }]),
+    MtxCheckboxGroupModule,
   ],
   declarations: [CheckboxGroupComponent],
 })

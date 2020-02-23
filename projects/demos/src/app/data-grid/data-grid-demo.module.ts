@@ -7,8 +7,8 @@ import { DataGridDemoComponent } from './data-grid-demo.component';
 
 @NgModule({
   imports: [
-    MtxDataGridModule,
     RouterModule.forChild([{ path: '', component: DataGridDemoComponent }]),
+    MtxDataGridModule,
   ],
   declarations: [DataGridDemoComponent],
 })

@@ -6,7 +6,7 @@ import { MtxAlertModule } from '@ng-matero/extensions/alert';
 import { AlertDemoComponent } from './alert-demo.component';
 
 @NgModule({
-  imports: [MtxAlertModule, RouterModule.forChild([{ path: '', component: AlertDemoComponent }])],
+  imports: [RouterModule.forChild([{ path: '', component: AlertDemoComponent }]), MtxAlertModule],
   declarations: [AlertDemoComponent],
 })
 export class AlertDemoModule {}
