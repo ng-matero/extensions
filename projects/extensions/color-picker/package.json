@@ -1,0 +1,9 @@
+{
+    "ngPackage": {
+      "lib": {
+        "flatModuleFile": "mtxColorPicker",
+        "entryFile": "public-api.ts"
+      }
+    }
+  }
+  
