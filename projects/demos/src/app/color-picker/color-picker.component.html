@@ -1,8 +1,8 @@
 <p>color-picker works!</p>
 
 <mat-form-field>
-    <mat-label>Phone number</mat-label>
-    <mtx-color-picker [value]="'#000'"></mtx-color-picker>
-    <mat-icon matSuffix>phone</mat-icon>
+    <mat-label>Color picker</mat-label>
+    <mtx-color-picker value="#3f51b5" (change)="changeColor($event)"></mtx-color-picker>
+    <mat-icon matSuffix>palette</mat-icon>
     <mat-hint>Include area code</mat-hint>
 </mat-form-field>

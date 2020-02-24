@@ -9,12 +9,18 @@ import {
   Self,
   ElementRef,
   Input,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+
+import { Color } from 'ngx-color';
+
+let nextUniqueId = 0;
 
 @Component({
   selector: 'mtx-color-picker',
@@ -25,29 +31,51 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
   providers: [{ provide: MatFormFieldControl, useExisting: MtxColorPickerComponent }],
 })
 export class MtxColorPickerComponent
-  implements OnInit, ControlValueAccessor, MatFormFieldControl<string>, OnDestroy {
-  stateChanges = new Subject<void>();
-  id: string;
-  focused = false;
-  errorState = false;
-  controlType?: string;
-  // autofilled?: boolean;
+  implements OnInit, OnDestroy, ControlValueAccessor, MatFormFieldControl<any> {
+  // value: T | null;
+  // stateChanges: Observable<void>;
+  // id: string;
+  // placeholder: string;
+  // ngControl: NgControl | null;
+  // focused = false;
   // empty: boolean;
   // shouldLabelFloat: boolean;
-  // placeholder: string;
   // required: boolean;
   // disabled: boolean;
+  // errorState: boolean;
+  // controlType?: string;
+  // autofilled?: boolean;
+  // setDescribedByIds(ids: string[]): void;
+  // onContainerClick(event: MouseEvent): void;
 
-  describedBy = '';
-
-  get empty() {
-    return true;
+  /** Value of the color picker control. */
+  @Input()
+  get value(): string | null {
+    return this._value;
   }
-
-  get shouldLabelFloat() {
-    return this.focused || !this.empty;
+  set value(newValue: string | null) {
+    this._value = newValue;
+    this.stateChanges.next();
   }
+  private _value = null;
 
+  stateChanges = new Subject<void>();
+
+  /** Unique id for this input. */
+  private _uid = `mat-select-${nextUniqueId++}`;
+
+  /** Unique id of the element. */
+  @Input()
+  get id(): string {
+    return this._id;
+  }
+  set id(value: string) {
+    this._id = value || this._uid;
+    this.stateChanges.next();
+  }
+  private _id: string;
+
+  /** Placeholder to be shown if no value has been selected. */
   @Input()
   get placeholder(): string {
     return this._placeholder;
@@ -57,6 +85,20 @@ export class MtxColorPickerComponent
     this.stateChanges.next();
   }
   private _placeholder: string;
+
+  /** Whether the input is focused. */
+  get focused(): boolean {
+    return this._focused || this._panelOpen;
+  }
+  private _focused = false;
+
+  get empty(): boolean {
+    return !this.value;
+  }
+
+  get shouldLabelFloat(): boolean {
+    return this.focused || !this.empty;
+  }
 
   @Input()
   get required(): boolean {
@@ -78,28 +120,37 @@ export class MtxColorPickerComponent
   }
   private _disabled = false;
 
-  @Input()
-  get value(): string | null {
-    return null;
-  }
-  set value(color: string | null) {
-    console.log(color);
-    this.stateChanges.next();
-  }
+  /** Event emitted when the color changed */
+  @Output() change = new EventEmitter<{ color: Color; $event: MouseEvent }>();
 
-  onChange = (_: any) => {};
-  onTouched = () => {};
+  errorState = false;
+
+  /** A name for this control that can be used by `mat-form-field`. */
+  controlType = 'mtx-color-picker';
+
+  /** The aria-describedby attribute on the select for improved a11y. */
+  _ariaDescribedby: string;
+
+  /** Whether or not the overlay panel is open. */
+  _panelOpen = false;
+
+  /** `View -> model callback called when value changes` */
+  _onChange: (value: any) => void = () => {};
+
+  /** `View -> model callback called when select has been touched` */
+  _onTouched = () => {};
 
   constructor(
     private _focusMonitor: FocusMonitor,
     private _elementRef: ElementRef<HTMLElement>,
-    @Optional() @Self() public ngControl: NgControl
+    @Optional() @Self() public ngControl: NgControl,
+    private cdr: ChangeDetectorRef
   ) {
     _focusMonitor.monitor(_elementRef, true).subscribe(origin => {
-      if (this.focused && !origin) {
-        this.onTouched();
+      if (this._focused && !origin) {
+        this._onTouched();
       }
-      this.focused = !!origin;
+      this._focused = !!origin;
       this.stateChanges.next();
     });
 
@@ -115,32 +166,66 @@ export class MtxColorPickerComponent
     this._focusMonitor.stopMonitoring(this._elementRef);
   }
 
+  /** Implemented as part of MatFormFieldControl. */
   setDescribedByIds(ids: string[]) {
-    this.describedBy = ids.join(' ');
+    this._ariaDescribedby = ids.join(' ');
   }
 
+  /** Implemented as part of MatFormFieldControl. */
   onContainerClick(event: MouseEvent) {
-    // console.log(event);
+    this.open();
   }
 
+  /**
+   * Sets the select's value. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param value New value to be written to the model.
+   */
   writeValue(color: string | null): void {
     this.value = color;
   }
 
+  /**
+   * Saves a callback function to be invoked when the select's value
+   * changes from user input. Part of the ControlValueAccessor interface
+   * required to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the value changes.
+   */
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this._onChange = fn;
   }
 
+  /**
+   * Saves a callback function to be invoked when the select is blurred
+   * by the user. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param fn Callback to be triggered when the component has been touched.
+   */
   registerOnTouched(fn: any): void {
-    this.onTouched = fn;
+    this._onTouched = fn;
   }
 
-  changeComplete(e: any) {
-    console.log(e);
+  /** Opens the overlay panel. */
+  open() {
+    this._panelOpen = true;
   }
 
-  onCloseColorPicker() {
-    this.focused = false;
-    this.stateChanges.next();
+  /** Closes the overlay panel and focuses the host element. */
+  close() {
+    if (this._panelOpen) {
+      this._panelOpen = false;
+      this.cdr.markForCheck();
+      this._onTouched();
+    }
+  }
+
+  /** The callback of color changed */
+  changeColor(model: { color: Color; $event: MouseEvent }) {
+    this.value = model.color.hex;
+
+    this.change.emit({ color: model.color, $event: model.$event });
   }
 }

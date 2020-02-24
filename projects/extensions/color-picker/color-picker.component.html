@@ -1,9 +1,11 @@
 <input matInput
+       [(ngModel)]="value"
        [matMenuTriggerFor]="colorPickerPopover"
-       (menuClosed)="onCloseColorPicker()">
+       (menuClosed)="close()"
+       (menuOpened)="open()">
 
 <mat-menu #colorPickerPopover="matMenu" class="mtx-color-picker" [hasBackdrop]="true">
     <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
-        <color-chrome [color]="'#f60'" (onChangeComplete)="changeComplete($event)"></color-chrome>
+        <color-chrome [color]="value" (onChangeComplete)="changeColor($event)"></color-chrome>
     </div>
 </mat-menu>
