@@ -59,7 +59,7 @@ export class MtxColorPickerComponent
   }
   private _value = null;
 
-  stateChanges = new Subject<void>();
+  readonly stateChanges: Subject<void> = new Subject<void>();
 
   /** Unique id for this input. */
   private _uid = `mat-select-${nextUniqueId++}`;
@@ -121,7 +121,7 @@ export class MtxColorPickerComponent
   private _disabled = false;
 
   /** Event emitted when the color changed */
-  @Output() change = new EventEmitter<{ color: Color; $event: MouseEvent }>();
+  @Output() readonly colorChange = new EventEmitter<{ color: Color; $event: MouseEvent }>();
 
   errorState = false;
 
@@ -226,6 +226,6 @@ export class MtxColorPickerComponent
   changeColor(model: { color: Color; $event: MouseEvent }) {
     this.value = model.color.hex;
 
-    this.change.emit({ color: model.color, $event: model.$event });
+    this.colorChange.emit({ color: model.color, $event: model.$event });
   }
 }
