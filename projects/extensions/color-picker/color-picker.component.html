@@ -1,8 +1,8 @@
 <input matInput
        [(ngModel)]="value"
        [matMenuTriggerFor]="colorPickerPopover"
-       (menuClosed)="close()"
-       (menuOpened)="open()">
+       (menuOpened)="open()"
+       (menuClosed)="close()">
 
 <mat-menu #colorPickerPopover="matMenu" class="mtx-color-picker" [hasBackdrop]="true">
     <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">

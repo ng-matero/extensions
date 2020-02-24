@@ -2,6 +2,10 @@
   position: relative;
   display: block;
 
+  .mat-table {
+    width: 100%;
+  }
+
   .mat-progress-bar {
     position: absolute;
     top: 0;
