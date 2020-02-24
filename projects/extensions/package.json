@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Angular Material Extensions",
   "author": "nzbin<nzb329@163.com>",
   "repository": {
@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/ng-matero/extensions#readme",
   "dependencies": {
-    "ngx-color": "^4.1.1",
+    "ngx-color": "~4.1.1",
     "photoviewer": "~3.4.0"
   },
   "peerDependencies": {
