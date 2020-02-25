@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-color-picker',
@@ -6,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./color-picker.component.scss'],
 })
 export class ColorPickerComponent implements OnInit {
-  constructor() {}
+  color = '#3f51b5';
+
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {}
 

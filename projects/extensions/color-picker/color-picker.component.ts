@@ -11,19 +11,30 @@ import {
   Input,
   Output,
   EventEmitter,
+  Inject,
+  DoCheck,
+  ViewChild,
+  Host,
+  AfterViewInit,
+  NgZone,
 } from '@angular/core';
-import { MatFormFieldControl } from '@angular/material/form-field';
+import { DOCUMENT } from '@angular/common';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { Subject } from 'rxjs';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
+import { _supportsShadowDom } from '@angular/cdk/platform';
+import { Subject, Observable, merge, fromEvent, Subscription } from 'rxjs';
+import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
 
 import { Color } from 'ngx-color';
+import { MatMenuTrigger } from '@angular/material';
 
 let nextUniqueId = 0;
 
 @Component({
   selector: 'mtx-color-picker',
+  exportAs: 'mtxColorPicker',
   templateUrl: './color-picker.component.html',
   styleUrls: ['./color-picker.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -31,7 +42,13 @@ let nextUniqueId = 0;
   providers: [{ provide: MatFormFieldControl, useExisting: MtxColorPickerComponent }],
 })
 export class MtxColorPickerComponent
-  implements OnInit, OnDestroy, ControlValueAccessor, MatFormFieldControl<any> {
+  implements
+    OnInit,
+    OnDestroy,
+    DoCheck,
+    AfterViewInit,
+    ControlValueAccessor,
+    MatFormFieldControl<any> {
   // value: T | null;
   // stateChanges: Observable<void>;
   // id: string;
@@ -55,6 +72,7 @@ export class MtxColorPickerComponent
   }
   set value(newValue: string | null) {
     this._value = newValue;
+    this._onChange(newValue);
     this.stateChanges.next();
   }
   private _value = null;
@@ -134,6 +152,33 @@ export class MtxColorPickerComponent
   /** Whether or not the overlay panel is open. */
   _panelOpen = false;
 
+  @ViewChild('colorPickerTrigger', { static: true }) trigger: MatMenuTrigger;
+
+  /** The subscription for closing actions (some are bound to document). */
+  private _closingActionsSubscription: Subscription;
+
+  /** Whether the element is inside of a ShadowRoot component. */
+  private _isInsideShadowRoot: boolean;
+
+  /**
+   * Whether the autocomplete can open the next time it is focused. Used to prevent a focused,
+   * closed autocomplete from being reopened if the user switches to another browser tab and then
+   * comes back.
+   */
+  private _canOpenOnNextFocus = true;
+
+  /**
+   * Event handler for when the window is blurred. Needs to be an
+   * arrow function in order to preserve the context.
+   */
+  private _windowBlurHandler = () => {
+    // If the user blurred the window while the autocomplete is focused, it means that it'll be
+    // refocused when they come back. In this case we want to skip the first focus event, if the
+    // pane was closed, in order to avoid reopening it unintentionally.
+    this._canOpenOnNextFocus =
+      this._document.activeElement !== this._elementRef.nativeElement || this._panelOpen;
+  };
+
   /** `View -> model callback called when value changes` */
   _onChange: (value: any) => void = () => {};
 
@@ -143,8 +188,11 @@ export class MtxColorPickerComponent
   constructor(
     private _focusMonitor: FocusMonitor,
     private _elementRef: ElementRef<HTMLElement>,
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _zone: NgZone,
     @Optional() @Self() public ngControl: NgControl,
-    private cdr: ChangeDetectorRef
+    @Optional() @Host() private _formField: MatFormField,
+    @Optional() @Inject(DOCUMENT) private _document: any
   ) {
     _focusMonitor.monitor(_elementRef, true).subscribe(origin => {
       if (this._focused && !origin) {
@@ -166,13 +214,37 @@ export class MtxColorPickerComponent
     this._focusMonitor.stopMonitoring(this._elementRef);
   }
 
+  ngDoCheck(): void {
+    if (this.ngControl) {
+      this.errorState = this.ngControl.invalid && this.ngControl.touched;
+      this.stateChanges.next();
+    }
+  }
+
+  ngAfterViewInit() {
+    if (typeof window !== 'undefined') {
+      this._zone.runOutsideAngular(() => {
+        window.addEventListener('blur', this._windowBlurHandler);
+      });
+
+      if (_supportsShadowDom()) {
+        const element = this._elementRef.nativeElement;
+        const rootNode = element.getRootNode ? element.getRootNode() : null;
+
+        // We need to take the `ShadowRoot` off of `window`, because the built-in types are
+        // incorrect. See https://github.com/Microsoft/TypeScript/issues/27929.
+        this._isInsideShadowRoot = rootNode instanceof (window as any).ShadowRoot;
+      }
+    }
+  }
+
   /** Implemented as part of MatFormFieldControl. */
   setDescribedByIds(ids: string[]) {
     this._ariaDescribedby = ids.join(' ');
   }
 
   /** Implemented as part of MatFormFieldControl. */
-  onContainerClick(event: MouseEvent) {
+  onContainerClick() {
     this.open();
   }
 
@@ -182,8 +254,8 @@ export class MtxColorPickerComponent
    *
    * @param value New value to be written to the model.
    */
-  writeValue(color: string | null): void {
-    this.value = color;
+  writeValue(value: string | null): void {
+    this.value = value || '';
   }
 
   /**
@@ -217,7 +289,8 @@ export class MtxColorPickerComponent
   close() {
     if (this._panelOpen) {
       this._panelOpen = false;
-      this.cdr.markForCheck();
+
+      this._changeDetectorRef.markForCheck();
       this._onTouched();
     }
   }
@@ -225,7 +298,28 @@ export class MtxColorPickerComponent
   /** The callback of color changed */
   changeColor(model: { color: Color; $event: MouseEvent }) {
     this.value = model.color.hex;
-
     this.colorChange.emit({ color: model.color, $event: model.$event });
+  }
+
+  /** Stream of clicks outside of the color picker panel. */
+  private _getOutsideClickStream(): Observable<any> {
+    return merge(
+      fromEvent(this._document, 'click') as Observable<MouseEvent>,
+      fromEvent(this._document, 'touchend') as Observable<TouchEvent>
+    ).pipe(
+      filter(event => {
+        // If we're in the Shadow DOM, the event target will be the shadow root, so we have to
+        // fall back to check the first element in the path of the click event.
+        const clickTarget = (this._isInsideShadowRoot && event.composedPath
+          ? event.composedPath()[0]
+          : event.target) as HTMLElement;
+        const formField = this._formField ? this._formField._elementRef.nativeElement : null;
+
+        return (
+          clickTarget !== this._elementRef.nativeElement &&
+          (!formField || !formField.contains(clickTarget))
+        );
+      })
+    );
   }
 }
