@@ -2,7 +2,7 @@
        [(ngModel)]="value"
        [placeholder]="placeholder"
        [disabled]="disabled"
-       (focusin)="colorPickerTrigger.openMenu()">
+       (focusin)="_handleFocus()">
 
 <div #colorPickerTrigger="matMenuTrigger"
      [matMenuTriggerFor]="colorPickerPopover"
@@ -10,7 +10,7 @@
      (menuClosed)="close()">
 </div>
 
-<mat-menu #colorPickerPopover="matMenu" class="mtx-color-picker" [hasBackdrop]="true">
+<mat-menu #colorPickerPopover="matMenu" class="mtx-color-picker" [hasBackdrop]="false">
     <div (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
         <color-chrome [color]="value" (onChangeComplete)="changeColor($event)"></color-chrome>
     </div>

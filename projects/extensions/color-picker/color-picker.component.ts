@@ -25,7 +25,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
 import { _supportsShadowDom } from '@angular/cdk/platform';
 import { Subject, Observable, merge, fromEvent, Subscription } from 'rxjs';
-import { delay, filter, map, switchMap, take, tap } from 'rxjs/operators';
+import { filter } from 'rxjs/operators';
 
 import { Color } from 'ngx-color';
 import { MatMenuTrigger } from '@angular/material';
@@ -280,6 +280,18 @@ export class MtxColorPickerComponent
     this._onTouched = fn;
   }
 
+  /** Open panel with input focusin event. */
+  _handleFocus() {
+    this.trigger.openMenu();
+
+    this._closingActionsSubscription = merge(this._getOutsideClickStream())
+      .pipe()
+      .subscribe(event => {
+        this.trigger.closeMenu();
+        this._closingActionsSubscription.unsubscribe();
+      });
+  }
+
   /** Opens the overlay panel. */
   open() {
     this._panelOpen = true;
@@ -289,13 +301,12 @@ export class MtxColorPickerComponent
   close() {
     if (this._panelOpen) {
       this._panelOpen = false;
-
       this._changeDetectorRef.markForCheck();
       this._onTouched();
     }
   }
 
-  /** The callback of color changed */
+  /** The callback of color changed. */
   changeColor(model: { color: Color; $event: MouseEvent }) {
     this.value = model.color.hex;
     this.colorChange.emit({ color: model.color, $event: model.$event });
