@@ -98,4 +98,16 @@ export class DataGridDemoComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {}
+
+  changePage(e: any) {
+    console.log(e);
+  }
+
+  changeSort(e: any) {
+    console.log(e);
+  }
+
+  changeSelection(e: any) {
+    console.log(e);
+  }
 }

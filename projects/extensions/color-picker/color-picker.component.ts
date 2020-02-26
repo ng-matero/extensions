@@ -22,13 +22,14 @@ import { DOCUMENT } from '@angular/common';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
 import { _supportsShadowDom } from '@angular/cdk/platform';
 import { Subject, Observable, merge, fromEvent, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { Color } from 'ngx-color';
+import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
 import { MatMenuTrigger } from '@angular/material';
+
+import { Color } from 'ngx-color';
 
 let nextUniqueId = 0;
 
@@ -49,22 +50,6 @@ export class MtxColorPickerComponent
     AfterViewInit,
     ControlValueAccessor,
     MatFormFieldControl<any> {
-  // value: T | null;
-  // stateChanges: Observable<void>;
-  // id: string;
-  // placeholder: string;
-  // ngControl: NgControl | null;
-  // focused = false;
-  // empty: boolean;
-  // shouldLabelFloat: boolean;
-  // required: boolean;
-  // disabled: boolean;
-  // errorState: boolean;
-  // controlType?: string;
-  // autofilled?: boolean;
-  // setDescribedByIds(ids: string[]): void;
-  // onContainerClick(event: MouseEvent): void;
-
   /** Value of the color picker control. */
   @Input()
   get value(): string | null {
@@ -77,6 +62,7 @@ export class MtxColorPickerComponent
   }
   private _value = null;
 
+  /** Implemented as part of MatFormFieldControl. */
   readonly stateChanges: Subject<void> = new Subject<void>();
 
   /** Unique id for this input. */
@@ -93,7 +79,7 @@ export class MtxColorPickerComponent
   }
   private _id: string;
 
-  /** Placeholder to be shown if no value has been selected. */
+  /** Placeholder to be shown if value is empty. */
   @Input()
   get placeholder(): string {
     return this._placeholder;
@@ -146,7 +132,7 @@ export class MtxColorPickerComponent
   /** A name for this control that can be used by `mat-form-field`. */
   controlType = 'mtx-color-picker';
 
-  /** The aria-describedby attribute on the select for improved a11y. */
+  /** The aria-describedby attribute on the color picker for improved a11y. */
   _ariaDescribedby: string;
 
   /** Whether or not the overlay panel is open. */
@@ -161,8 +147,8 @@ export class MtxColorPickerComponent
   private _isInsideShadowRoot: boolean;
 
   /**
-   * Whether the autocomplete can open the next time it is focused. Used to prevent a focused,
-   * closed autocomplete from being reopened if the user switches to another browser tab and then
+   * Whether the color picker can open the next time it is focused. Used to prevent a focused,
+   * closed color picker from being reopened if the user switches to another browser tab and then
    * comes back.
    */
   private _canOpenOnNextFocus = true;
@@ -172,7 +158,7 @@ export class MtxColorPickerComponent
    * arrow function in order to preserve the context.
    */
   private _windowBlurHandler = () => {
-    // If the user blurred the window while the autocomplete is focused, it means that it'll be
+    // If the user blurred the window while the color picker is focused, it means that it'll be
     // refocused when they come back. In this case we want to skip the first focus event, if the
     // pane was closed, in order to avoid reopening it unintentionally.
     this._canOpenOnNextFocus =
@@ -307,7 +293,7 @@ export class MtxColorPickerComponent
   }
 
   /** The callback of color changed. */
-  changeColor(model: { color: Color; $event: MouseEvent }) {
+  onColorChange(model: { color: Color; $event: MouseEvent }) {
     this.value = model.color.hex;
     this.colorChange.emit({ color: model.color, $event: model.$event });
   }

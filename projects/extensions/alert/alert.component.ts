@@ -42,13 +42,13 @@ export class MtxAlertComponent implements OnInit {
   /** This event fires when alert closed, $event is an instance of Alert component */
   @Output() closed = new EventEmitter<MtxAlertComponent>();
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {}
 
   handleClose(): void {
     this.isOpen = false;
-    this.cdr.markForCheck();
+    this._changeDetectorRef.markForCheck();
     this.closed.emit(this);
   }
 }

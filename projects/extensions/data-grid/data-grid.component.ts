@@ -11,7 +11,6 @@ import {
 } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource, MatPaginator, Sort, PageEvent } from '@angular/material';
-
 import { MtxGridColumn } from './data-grid.interface';
 
 @Component({
@@ -60,9 +59,9 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
 
   @Output() page = new EventEmitter<PageEvent>();
 
-  @Output() changeSort = new EventEmitter<Sort>();
+  @Output() sortChange = new EventEmitter<Sort>();
 
-  @Output() changeSelect = new EventEmitter<any[]>();
+  @Output() selectionChange = new EventEmitter<any[]>();
 
   displayedColumns: string[];
   dataSource: MatTableDataSource<any>;
@@ -85,7 +84,7 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
   }
 
   handleSortChange(sort: Sort) {
-    this.changeSort.emit(sort);
+    this.sortChange.emit(sort);
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -100,12 +99,12 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
     this.isAllSelected()
       ? this.selection.clear()
       : this.dataSource.data.forEach(row => this.selection.select(row));
-    this.changeSelect.emit(this.selection.selected);
+    this.selectionChange.emit(this.selection.selected);
   }
 
   /** Select single row */
   singleToggle(row: any) {
     this.selection.toggle(row);
-    this.changeSelect.emit(this.selection.selected);
+    this.selectionChange.emit(this.selection.selected);
   }
 }

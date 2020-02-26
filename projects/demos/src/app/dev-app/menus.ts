@@ -8,7 +8,6 @@ export const menus = [
       { name: 'Data Grid', route: '/data-grid' },
       { name: 'Dialog', route: '/dialog' },
       { name: 'Progress', route: '/progress' },
-      { name: 'Select', route: '/select' },
     ],
   },
   {

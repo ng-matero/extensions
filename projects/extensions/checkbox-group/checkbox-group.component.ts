@@ -29,13 +29,13 @@ import { MtxCheckboxGroupOption } from './checkbox-group.interface';
   ],
 })
 export class MtxCheckboxGroupComponent implements OnInit {
+  @Input() selectAllLabel = 'Select All';
+  @Input() showSelectAll = true;
+
   @Output() change = new EventEmitter<{
     model: MtxCheckboxGroupOption[];
     index: number;
   }>();
-
-  @Input() selectAllLabel = 'Select All';
-  @Input() showSelectAll = true;
 
   selectAll = false;
   selectAllIndeterminate = false;
@@ -45,7 +45,7 @@ export class MtxCheckboxGroupComponent implements OnInit {
   onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
   onTouched: () => void = () => null;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {}
 
@@ -54,7 +54,7 @@ export class MtxCheckboxGroupComponent implements OnInit {
     if (this.options) {
       this.updateSingleChecked();
     }
-    this.cdr.markForCheck();
+    this._changeDetectorRef.markForCheck();
   }
 
   registerOnChange(fn: (value: MtxCheckboxGroupOption[]) => {}): void {

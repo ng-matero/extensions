@@ -4,5 +4,8 @@
           [loading]="isLoading"
           [frontPage]="true"
           [pageSizeOptions]="[5,10,20]"
-          [pageSize]="10">
+          [pageSize]="10"
+          (page)="changePage($event)"
+          (sortChange)="changeSort($event)"
+          (selectionChange)="changeSelection($event)">
 </mtx-grid>
