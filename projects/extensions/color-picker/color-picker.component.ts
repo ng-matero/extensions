@@ -138,7 +138,7 @@ export class MtxColorPickerComponent
   /** Whether or not the overlay panel is open. */
   _panelOpen = false;
 
-  @ViewChild('colorPickerTrigger', { static: true }) trigger: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, { static: true }) trigger: MatMenuTrigger;
 
   /** The subscription for closing actions (some are bound to document). */
   private _closingActionsSubscription: Subscription;
