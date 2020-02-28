@@ -168,7 +168,7 @@ export class MtxColorPickerComponent
   /** `View -> model callback called when value changes` */
   _onChange: (value: any) => void = () => {};
 
-  /** `View -> model callback called when select has been touched` */
+  /** `View -> model callback called when color picker has been touched` */
   _onTouched = () => {};
 
   constructor(

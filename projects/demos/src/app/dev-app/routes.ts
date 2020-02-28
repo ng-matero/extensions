@@ -32,6 +32,10 @@ export const DEV_APP_ROUTES: Routes = [
     loadChildren: () => import('../progress/progress-demo.module').then(m => m.ProgressDemoModule),
   },
   {
+    path: 'select',
+    loadChildren: () => import('../select/select.module').then(m => m.SelectModule),
+  },
+  {
     path: 'text3d',
     loadChildren: () => import('../text3d/text3d-demo.module').then(m => m.Text3dDemoModule),
   },
