@@ -66,7 +66,7 @@ export class MtxColorPickerComponent
   readonly stateChanges: Subject<void> = new Subject<void>();
 
   /** Unique id for this input. */
-  private _uid = `mat-select-${nextUniqueId++}`;
+  private _uid = `mtx-color-picker-${nextUniqueId++}`;
 
   /** Unique id of the element. */
   @Input()
@@ -168,7 +168,7 @@ export class MtxColorPickerComponent
   /** `View -> model callback called when value changes` */
   _onChange: (value: any) => void = () => {};
 
-  /** `View -> model callback called when select has been touched` */
+  /** `View -> model callback called when color picker has been touched` */
   _onTouched = () => {};
 
   constructor(
@@ -235,7 +235,7 @@ export class MtxColorPickerComponent
   }
 
   /**
-   * Sets the select's value. Part of the ControlValueAccessor interface
+   * Sets the color-picker's value. Part of the ControlValueAccessor interface
    * required to integrate with Angular's core forms API.
    *
    * @param value New value to be written to the model.
@@ -245,7 +245,7 @@ export class MtxColorPickerComponent
   }
 
   /**
-   * Saves a callback function to be invoked when the select's value
+   * Saves a callback function to be invoked when the color-picker's value
    * changes from user input. Part of the ControlValueAccessor interface
    * required to integrate with Angular's core forms API.
    *
@@ -256,7 +256,7 @@ export class MtxColorPickerComponent
   }
 
   /**
-   * Saves a callback function to be invoked when the select is blurred
+   * Saves a callback function to be invoked when the color picker is blurred
    * by the user. Part of the ControlValueAccessor interface required
    * to integrate with Angular's core forms API.
    *
