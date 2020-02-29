@@ -1,7 +1,11 @@
 <mat-form-field>
     <mat-label>Color picker</mat-label>
 
-    <mtx-select></mtx-select>
+    <mtx-select [items]="items"
+                [(ngModel)]="value"
+                bindLabel="name"
+                bindValue="id"
+                [multiple]="true"></mtx-select>
 
     <mat-hint>Choose your favorite color</mat-hint>
     <mat-error>Please enter the color</mat-error>

@@ -22,6 +22,9 @@ let nextUniqueId = 0;
 @Component({
   exportAs: 'mtxSelect',
   selector: 'mtx-select',
+  host: {
+    class: 'mtx-select',
+  },
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -30,6 +33,13 @@ let nextUniqueId = 0;
 })
 export class MtxSelectComponent
   implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<any> {
+  /** Mtx Select Options */
+  @Input() items = [];
+  @Input() multiple = false;
+  @Input() appendTo = 'body';
+  @Input() bindLabel = 'label';
+  @Input() bindValue = '';
+
   /** Value of the color picker control. */
   @Input()
   get value(): string | null {
@@ -77,7 +87,7 @@ export class MtxSelectComponent
   private _focused = false;
 
   get empty(): boolean {
-    return !this.value;
+    return !this.value || (Array.isArray(this.value) && this.value.length === 0);
   }
 
   get shouldLabelFloat(): boolean {
@@ -124,6 +134,14 @@ export class MtxSelectComponent
     private _changeDetectorRef: ChangeDetectorRef,
     @Optional() @Self() public ngControl: NgControl
   ) {
+    _focusMonitor.monitor(_elementRef, true).subscribe(origin => {
+      if (this._focused && !origin) {
+        this._onTouched();
+      }
+      this._focused = !!origin;
+      this.stateChanges.next();
+    });
+
     if (this.ngControl != null) {
       this.ngControl.valueAccessor = this;
     }
@@ -155,7 +173,7 @@ export class MtxSelectComponent
    * @param value New value to be written to the model.
    */
   writeValue(value: string | null): void {
-    this.value = value || '';
+    this.value = value;
   }
 
   /**

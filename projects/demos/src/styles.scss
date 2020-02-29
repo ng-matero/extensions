@@ -28,5 +28,3 @@ $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 .demo-unicorn-dark-theme {
   @include angular-material-theme($dark-theme);
 }
-
-@import "~@ng-select/ng-select/themes/default.theme.css";

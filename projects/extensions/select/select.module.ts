@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { MtxSelectComponent } from './select.component';
 
 @NgModule({
-  imports: [CommonModule, NgSelectModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule],
   exports: [MtxSelectComponent],
   declarations: [MtxSelectComponent],
 })
