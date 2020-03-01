@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-select',
@@ -7,16 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectComponent implements OnInit {
   items = [
-    { name: 1, id: 1 },
-    { name: 2, id: 2 },
-    { name: 3, id: 3 },
-    { name: 4, id: 4 },
-    { name: 5, id: 5 },
+    { name: 'Apple', id: 1 },
+    { name: 'Lemon', id: 2 },
+    { name: 'Lime', id: 3 },
+    { name: 'Orange', id: 4, disabled: true },
+    { name: 'Strawberry', id: 5 },
   ];
 
-  value = [1];
+  value = 2;
+  disableSelect = false;
 
   constructor() {}
 
   ngOnInit() {}
+
+  change(e: any) {
+    console.log(e);
+  }
 }

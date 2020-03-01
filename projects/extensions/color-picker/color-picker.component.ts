@@ -124,9 +124,6 @@ export class MtxColorPickerComponent
   }
   private _disabled = false;
 
-  /** Event emitted when the color changed */
-  @Output() readonly colorChange = new EventEmitter<{ color: Color; $event: MouseEvent }>();
-
   errorState = false;
 
   /** A name for this control that can be used by `mat-form-field`. */
@@ -135,10 +132,19 @@ export class MtxColorPickerComponent
   /** The aria-describedby attribute on the color picker for improved a11y. */
   _ariaDescribedby: string;
 
-  /** Whether or not the overlay panel is open. */
-  _panelOpen = false;
+  /** `View -> model callback called when value changes` */
+  _onChange: (value: any) => void = () => {};
+
+  /** `View -> model callback called when color picker has been touched` */
+  _onTouched = () => {};
+
+  /** Event emitted when the color changed */
+  @Output() readonly colorChange = new EventEmitter<{ color: Color; $event: MouseEvent }>();
 
   @ViewChild(MatMenuTrigger, { static: true }) trigger: MatMenuTrigger;
+
+  /** Whether or not the overlay panel is open. */
+  _panelOpen = false;
 
   /** The subscription for closing actions (some are bound to document). */
   private _closingActionsSubscription: Subscription;
@@ -164,12 +170,6 @@ export class MtxColorPickerComponent
     this._canOpenOnNextFocus =
       this._document.activeElement !== this._elementRef.nativeElement || this._panelOpen;
   };
-
-  /** `View -> model callback called when value changes` */
-  _onChange: (value: any) => void = () => {};
-
-  /** `View -> model callback called when color picker has been touched` */
-  _onTouched = () => {};
 
   constructor(
     private _focusMonitor: FocusMonitor,

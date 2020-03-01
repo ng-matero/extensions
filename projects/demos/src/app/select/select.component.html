@@ -1,12 +1,20 @@
+<p>
+    <mat-checkbox [(ngModel)]="disableSelect">Disable select</mat-checkbox>
+</p>
+
 <mat-form-field>
-    <mat-label>Color picker</mat-label>
+    <mat-label>Select Food</mat-label>
 
     <mtx-select [items]="items"
                 [(ngModel)]="value"
+                placeholder="select food"
                 bindLabel="name"
                 bindValue="id"
-                [multiple]="true"></mtx-select>
+                [disabled]="disableSelect"
+                [appendTo]="'body'"
+                (change)="change($event)">
+    </mtx-select>
 
-    <mat-hint>Choose your favorite color</mat-hint>
-    <mat-error>Please enter the color</mat-error>
+    <mat-hint>Choose your favorite food</mat-hint>
+    <mat-error>Please choose a food</mat-error>
 </mat-form-field>

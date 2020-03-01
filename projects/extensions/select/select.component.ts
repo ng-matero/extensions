@@ -10,12 +10,16 @@ import {
   ChangeDetectorRef,
   Optional,
   Self,
+  Output,
+  EventEmitter,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material';
-import { Subject } from 'rxjs';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { Subject } from 'rxjs';
+
+import { CompareWithFn, GroupValueFn } from '@ng-select/ng-select/lib/ng-select.component';
 
 let nextUniqueId = 0;
 
@@ -23,7 +27,10 @@ let nextUniqueId = 0;
   exportAs: 'mtxSelect',
   selector: 'mtx-select',
   host: {
-    class: 'mtx-select',
+    'class': 'mtx-select',
+    '[class.mtx-select-floating]': 'shouldLabelFloat',
+    '[attr.id]': 'id',
+    '[attr.aria-describedby]': 'describedBy',
   },
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
@@ -34,11 +41,59 @@ let nextUniqueId = 0;
 export class MtxSelectComponent
   implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<any> {
   /** Mtx Select Options */
-  @Input() items = [];
-  @Input() multiple = false;
-  @Input() appendTo = 'body';
+  @Input() addTag: boolean | ((term: string) => any | Promise<any>) = true;
+  @Input() addTagText = 'Add item';
+  @Input() appearance = 'underline';
+  @Input() appendTo: string;
   @Input() bindLabel = 'label';
   @Input() bindValue = '';
+  @Input() closeOnSelect = true;
+  @Input() clearAllText = 'Clear all';
+  @Input() clearable = true;
+  @Input() clearOnBackspace = true;
+  @Input() compareWith: CompareWithFn = (a: any, b: any) => true;
+  @Input() dropdownPosition: 'bottom' | 'top' | 'auto' = 'auto';
+  @Input() groupBy: () => void | string;
+  @Input() groupValue: GroupValueFn;
+  @Input() selectableGroup = false;
+  @Input() selectableGroupAsModel = true;
+  @Input() hideSelected = false;
+  @Input() items = [];
+  @Input() isOpen: boolean;
+  @Input() loading = false;
+  @Input() loadingText = 'Loading...';
+  @Input() labelForId = null;
+  @Input() markFirst = true;
+  @Input() maxSelectedItems: number;
+  @Input() multiple = false;
+  @Input() notFoundText = 'No items found';
+  @Input() searchable = true;
+  @Input() readonly = false;
+  @Input() searchFn = null;
+  @Input() searchWhileComposing = true;
+  @Input() clearSearchOnAdd = true;
+  @Input() selectOnTab = false;
+  @Input() trackByFn = null;
+  @Input() inputAttrs: { [key: string]: string } = {};
+  @Input() tabIndex: number;
+  @Input() openOnEnter = true;
+  @Input() minTermLength = 0;
+  @Input() keyDownFn = (_: KeyboardEvent) => true;
+  @Input() virtualScroll = false;
+  @Input() typeToSearchText = 'Type to search';
+  @Input() typeahead: Subject<string>;
+
+  @Output() blur = new EventEmitter();
+  @Output() focus = new EventEmitter();
+  @Output() change = new EventEmitter();
+  @Output() open = new EventEmitter();
+  @Output() close = new EventEmitter();
+  @Output() search = new EventEmitter<{ term: string; items: any[] }>();
+  @Output() clear = new EventEmitter();
+  @Output() add = new EventEmitter();
+  @Output() remove = new EventEmitter();
+  @Output() scroll = new EventEmitter<{ start: number; end: number }>();
+  @Output() scrollToEnd = new EventEmitter();
 
   /** Value of the color picker control. */
   @Input()
@@ -55,9 +110,6 @@ export class MtxSelectComponent
   /** Implemented as part of MatFormFieldControl. */
   readonly stateChanges: Subject<void> = new Subject<void>();
 
-  /** Unique id for this input. */
-  private _uid = `mtx-select-${nextUniqueId++}`;
-
   /** Unique id of the element. */
   @Input()
   get id(): string {
@@ -68,6 +120,8 @@ export class MtxSelectComponent
     this.stateChanges.next();
   }
   private _id: string;
+  /** Unique id for this input. */
+  private _uid = `mtx-select-${nextUniqueId++}`;
 
   /** Placeholder to be shown if value is empty. */
   @Input()
