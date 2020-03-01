@@ -6,7 +6,7 @@
     "entryFile": "public-api.ts"
   },
   "whitelistedNonPeerDependencies": [
-    "angular",
+    "@ng-select/ng-select",
     "ngx-color",
     "photoviewer"
   ]

@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/ng-matero/extensions#readme",
   "dependencies": {
+    "@ng-select/ng-select": "~3.7.2",
     "ngx-color": "~4.1.1",
     "photoviewer": "~3.4.0"
   },

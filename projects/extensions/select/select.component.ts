@@ -30,7 +30,7 @@ let nextUniqueId = 0;
     'class': 'mtx-select',
     '[class.mtx-select-floating]': 'shouldLabelFloat',
     '[attr.id]': 'id',
-    '[attr.aria-describedby]': 'describedBy',
+    '[attr.aria-describedby]': '_ariaDescribedby || null',
   },
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],

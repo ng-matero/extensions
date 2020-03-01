@@ -2,7 +2,10 @@
   "ngPackage": {
     "lib": {
       "flatModuleFile": "mtxSelect",
-      "entryFile": "public-api.ts"
+      "entryFile": "public-api.ts",
+      "umdModuleIds": {
+        "@ng-select/ng-select": "ng-select"
+      }
     }
   }
 }
