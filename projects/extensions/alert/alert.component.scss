@@ -20,6 +20,11 @@
   border: 0;
   cursor: pointer;
 
+  [dir='rtl'] & {
+    right: unset;
+    left: 0;
+  }
+
   &:hover {
     opacity: .75;
   }

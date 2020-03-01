@@ -64,6 +64,12 @@ $ng-select-value-font-size: .875em !default;
     }
   }
 
+  &.ng-select-disabled {
+    .ng-value {
+      color: $ng-select-disabled-text;
+    }
+  }
+
   &.ng-select-single {
     .ng-select-container {
       .ng-value-container {
@@ -75,13 +81,6 @@ $ng-select-value-font-size: .875em !default;
   }
 
   &.ng-select-multiple {
-    &.ng-select-disabled {
-      > .ng-select-container .ng-value-container .ng-value {
-        background-color: $ng-select-disabled-text;
-        color: $ng-select-disabled-text;
-      }
-    }
-
     .ng-select-container {
       .ng-value-container {
         margin: -4px 0;
@@ -207,28 +206,28 @@ $ng-select-value-font-size: .875em !default;
   }
 
   .ng-dropdown-header {
-    border-bottom: 1px solid $ng-select-divider;
-    padding: 0 16px;
-    line-height: 3em;
     min-height: 3em;
+    padding: 0 16px;
+    border-bottom: 1px solid $ng-select-divider;
+    line-height: 3em;
   }
 
   .ng-dropdown-footer {
-    border-top: 1px solid $ng-select-divider;
-    padding: 0 16px;
-    line-height: 3em;
     min-height: 3em;
+    padding: 0 16px;
+    border-top: 1px solid $ng-select-divider;
+    line-height: 3em;
   }
 
   .ng-dropdown-panel-items {
     .ng-optgroup {
-      user-select: none;
-      cursor: pointer;
-      line-height: 3em;
       height: 3em;
       padding: 0 16px;
-      color: $ng-select-secondary-text;
       font-weight: 500;
+      line-height: 3em;
+      color: $ng-select-secondary-text;
+      cursor: pointer;
+      user-select: none;
 
       &.ng-option-marked {
         background: rgba(0, 0, 0, .04);
@@ -245,16 +244,16 @@ $ng-select-value-font-size: .875em !default;
     }
 
     .ng-option {
-      line-height: 3em;
+      position: relative;
       min-height: 3em;
+      padding: 0 16px;
+      color: $ng-select-primary-text;
+      line-height: 3em;
+      text-overflow: ellipsis;
+      text-decoration: none;
+      text-align: left;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
-      padding: 0 16px;
-      text-decoration: none;
-      position: relative;
-      color: $ng-select-primary-text;
-      text-align: left;
 
       @include rtl {
         text-align: right;

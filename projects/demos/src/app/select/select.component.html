@@ -1,6 +1,11 @@
 <p>
-    <mat-checkbox [(ngModel)]="disableSelect">Disable select</mat-checkbox>
+    <code>mtx-select</code> is a Material form field wrapper of <code>ng-select</code>
 </p>
+
+<div class="mb-3 mx-n3">
+    <mat-checkbox class="mx-3" [(ngModel)]="multipleSelect">Mulitple select</mat-checkbox>
+    <mat-checkbox [(ngModel)]="disableSelect">Disable select</mat-checkbox>
+</div>
 
 <mat-form-field>
     <mat-label>Select Food</mat-label>
@@ -11,8 +16,9 @@
                 bindLabel="name"
                 bindValue="id"
                 [disabled]="disableSelect"
+                [multiple]="multipleSelect"
                 [appendTo]="'body'"
-                (change)="change($event)">
+                required>
     </mtx-select>
 
     <mat-hint>Choose your favorite food</mat-hint>

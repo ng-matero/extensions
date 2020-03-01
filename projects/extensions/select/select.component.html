@@ -1,7 +1,7 @@
-<ng-select [(ngModel)]="value"
-           [items]="items"
-           [disabled]="disabled"
+<ng-select #ngSelect
+           [(ngModel)]="value"
            [placeholder]="placeholder"
+           [items]="items"
            [addTag]="addTag"
            [addTagText]="addTagText"
            [appendTo]="appendTo"
@@ -12,7 +12,6 @@
            [clearAllText]="clearAllText"
            [clearable]="clearable"
            [clearOnBackspace]="clearOnBackspace"
-           [compareWith]="compareWith"
            [dropdownPosition]="dropdownPosition"
            [groupBy]="groupBy"
            [groupValue]="groupValue"

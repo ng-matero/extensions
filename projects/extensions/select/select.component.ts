@@ -24,8 +24,8 @@ import { CompareWithFn, GroupValueFn } from '@ng-select/ng-select/lib/ng-select.
 let nextUniqueId = 0;
 
 @Component({
-  exportAs: 'mtxSelect',
   selector: 'mtx-select',
+  exportAs: 'mtxSelect',
   host: {
     'class': 'mtx-select',
     '[class.mtx-select-floating]': 'shouldLabelFloat',
@@ -45,13 +45,13 @@ export class MtxSelectComponent
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
   @Input() appendTo: string;
-  @Input() bindLabel = 'label';
-  @Input() bindValue = '';
+  @Input() bindLabel: string;
+  @Input() bindValue: string;
   @Input() closeOnSelect = true;
   @Input() clearAllText = 'Clear all';
   @Input() clearable = true;
   @Input() clearOnBackspace = true;
-  @Input() compareWith: CompareWithFn = (a: any, b: any) => true;
+  @Input() compareWith: CompareWithFn; // TODO:
   @Input() dropdownPosition: 'bottom' | 'top' | 'auto' = 'auto';
   @Input() groupBy: () => void | string;
   @Input() groupValue: GroupValueFn;
@@ -97,10 +97,10 @@ export class MtxSelectComponent
 
   /** Value of the color picker control. */
   @Input()
-  get value(): string | null {
+  get value(): any {
     return this._value;
   }
-  set value(newValue: string | null) {
+  set value(newValue: any) {
     this._value = newValue;
     this._onChange(newValue);
     this.stateChanges.next();
@@ -164,6 +164,7 @@ export class MtxSelectComponent
   }
   set disabled(value: boolean) {
     this._disabled = coerceBooleanProperty(value);
+    this.readonly = this._disabled;
     this.stateChanges.next();
   }
   private _disabled = false;
@@ -226,7 +227,7 @@ export class MtxSelectComponent
    *
    * @param value New value to be written to the model.
    */
-  writeValue(value: string | null): void {
+  writeValue(value: any): void {
     this.value = value;
   }
 

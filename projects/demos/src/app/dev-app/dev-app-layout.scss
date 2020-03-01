@@ -5,12 +5,17 @@ body {
 }
 
 body {
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
   margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  text-align: unset;
 }
 
 h1 {
   font-size: 20px;
+}
+
+button:focus {
+  outline: unset;
 }
 
 // Helps fonts on OSX looks more consistent with other systems

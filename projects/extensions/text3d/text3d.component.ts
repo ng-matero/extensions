@@ -10,6 +10,7 @@ import {
 
 @Component({
   selector: 'mtx-text3d',
+  exportAs: 'mtxText3d',
   templateUrl: './text3d.component.html',
   styleUrls: ['./text3d.component.scss'],
   encapsulation: ViewEncapsulation.None,
