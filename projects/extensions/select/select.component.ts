@@ -211,7 +211,10 @@ export class MtxSelectComponent
     }
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    this.stateChanges.complete();
+    this._focusMonitor.stopMonitoring(this._elementRef);
+  }
 
   /** Implemented as part of MatFormFieldControl. */
   setDescribedByIds(ids: string[]) {
