@@ -26,7 +26,7 @@ export interface MtxGridColumnButton {
   icon?: string;
   text?: string;
   type?: string;
-  color?: string;
+  color?: 'primary' | 'accent' | 'warn';
   click?: (record: any) => void;
   pop?: boolean;
   popTitle?: string;

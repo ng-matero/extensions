@@ -1,4 +1,4 @@
-import { MatDialogConfig } from '@angular/material';
+import { MatDialogConfig } from '@angular/material/dialog';
 
 export interface MtxDialogData extends MatDialogConfig {
   title?: string;

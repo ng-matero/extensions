@@ -27,7 +27,7 @@ import { Subject, Observable, merge, fromEvent, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
-import { MatMenuTrigger } from '@angular/material';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 import { Color } from 'ngx-color';
 

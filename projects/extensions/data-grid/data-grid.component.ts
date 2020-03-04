@@ -10,7 +10,9 @@ import {
   OnChanges,
 } from '@angular/core';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatTableDataSource, MatPaginator, Sort, PageEvent } from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Sort } from '@angular/material/sort';
 import { MtxGridColumn } from './data-grid.interface';
 
 @Component({
