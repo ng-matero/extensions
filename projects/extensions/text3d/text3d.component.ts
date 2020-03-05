@@ -35,5 +35,5 @@ export class MtxText3dComponent implements OnInit {
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

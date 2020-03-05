@@ -49,18 +49,7 @@ export interface MtxGridColumn {
   width?: string;
   desc?: string;
   sort?: boolean | string;
-  type?:
-    | 'text'
-    | 'checkbox'
-    | 'tag'
-    | 'badge'
-    | 'button'
-    | 'link'
-    | 'img'
-    | 'number'
-    | 'currency'
-    | 'percent'
-    | 'format';
+  type?: 'text' | 'checkbox' | 'tag' | 'badge' | 'button' | 'link' | 'img' | 'number' | 'currency' | 'percent' | 'format';
   edit?: boolean; // 是否可编辑
   editType?: 'text' | 'number' | 'select' | 'textarea';
   format?: (data: any) => any; // 数值类型，金钱格式等

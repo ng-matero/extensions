@@ -12,12 +12,12 @@ const defaults: MtxDialogData = {
     {
       type: '',
       text: 'Close',
-      onClick: () => {},
+      onClick: () => { },
     },
     {
       type: 'warn',
       text: 'Ok',
-      onClick: () => {},
+      onClick: () => { },
     },
   ],
   width: '300px',
@@ -25,7 +25,7 @@ const defaults: MtxDialogData = {
 
 @Injectable()
 export class MtxDialog {
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog) { }
 
   originalOpen(
     componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogComponent,
@@ -45,39 +45,34 @@ export class MtxDialog {
     });
   }
 
-  alert(title: string, onOk = () => {}) {
+  alert(title: string, onOk = () => { }) {
     this.open({
       title,
       buttons: [
         {
           type: 'warn',
           text: 'Ok',
-          onClick: () => {
-            onOk();
-          },
+          onClick: () => onOk()
+          ,
         },
       ],
       disableClose: true,
     });
   }
 
-  confirm(title: string, onOk = () => {}, onClose = () => {}) {
+  confirm(title: string, onOk = () => { }, onClose = () => { }) {
     this.open({
       title,
       buttons: [
         {
           type: '',
           text: 'Close',
-          onClick: () => {
-            onClose();
-          },
+          onClick: () => onClose(),
         },
         {
           type: 'warn',
           text: 'Ok',
-          onClick: () => {
-            onOk();
-          },
+          onClick: () => onOk(),
         },
       ],
       disableClose: true,

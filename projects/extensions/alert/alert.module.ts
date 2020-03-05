@@ -8,4 +8,4 @@ import { MtxAlertComponent } from './alert.component';
   exports: [MtxAlertComponent],
   declarations: [MtxAlertComponent],
 })
-export class MtxAlertModule {}
+export class MtxAlertModule { }

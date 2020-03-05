@@ -13,9 +13,9 @@ export class MtxDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<MtxDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: MtxDialogData
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   onClick(fn: () => void) {
     fn.call(this);

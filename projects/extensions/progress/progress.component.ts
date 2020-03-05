@@ -42,7 +42,7 @@ export class MtxProgressComponent implements OnInit {
   /** Whether applies animated class */
   @Input() animate: boolean;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 }

@@ -21,4 +21,4 @@ import { MtxColorPickerComponent } from './color-picker.component';
   exports: [MtxColorPickerComponent],
   declarations: [MtxColorPickerComponent],
 })
-export class MtxColorPickerModule {}
+export class MtxColorPickerModule { }

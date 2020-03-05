@@ -8,4 +8,4 @@ import { MtxProgressComponent } from './progress.component';
   exports: [MtxProgressComponent],
   declarations: [MtxProgressComponent],
 })
-export class MtxProgressModule {}
+export class MtxProgressModule { }

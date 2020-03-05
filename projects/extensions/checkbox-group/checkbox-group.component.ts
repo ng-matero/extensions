@@ -45,9 +45,9 @@ export class MtxCheckboxGroupComponent implements OnInit {
   onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
   onTouched: () => void = () => null;
 
-  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private _changeDetectorRef: ChangeDetectorRef) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   writeValue(value: MtxCheckboxGroupOption[]): void {
     this.options = value;

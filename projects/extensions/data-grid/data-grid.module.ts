@@ -31,4 +31,4 @@ import { MtxDataGridCellComponent } from './data-grid-cell.component';
   exports: [MtxDataGridComponent, MtxDataGridCellComponent],
   declarations: [MtxDataGridComponent, MtxDataGridCellComponent],
 })
-export class MtxDataGridModule {}
+export class MtxDataGridModule { }

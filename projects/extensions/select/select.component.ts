@@ -97,9 +97,7 @@ export class MtxSelectComponent
 
   /** Value of the color picker control. */
   @Input()
-  get value(): any {
-    return this._value;
-  }
+  get value(): any { return this._value; }
   set value(newValue: any) {
     this._value = newValue;
     this._onChange(newValue);
@@ -112,9 +110,7 @@ export class MtxSelectComponent
 
   /** Unique id of the element. */
   @Input()
-  get id(): string {
-    return this._id;
-  }
+  get id(): string { return this._id; }
   set id(value: string) {
     this._id = value || this._uid;
     this.stateChanges.next();
@@ -125,9 +121,7 @@ export class MtxSelectComponent
 
   /** Placeholder to be shown if value is empty. */
   @Input()
-  get placeholder(): string {
-    return this._placeholder;
-  }
+  get placeholder(): string { return this._placeholder; }
   set placeholder(value: string) {
     this._placeholder = value;
     this.stateChanges.next();
@@ -135,23 +129,17 @@ export class MtxSelectComponent
   private _placeholder: string;
 
   /** Whether the input is focused. */
-  get focused(): boolean {
-    return this._focused;
-  }
+  get focused(): boolean { return this._focused; }
   private _focused = false;
 
   get empty(): boolean {
     return !this.value || (Array.isArray(this.value) && this.value.length === 0);
   }
 
-  get shouldLabelFloat(): boolean {
-    return this.focused || !this.empty;
-  }
+  get shouldLabelFloat(): boolean { return this.focused || !this.empty; }
 
   @Input()
-  get required(): boolean {
-    return this._required;
-  }
+  get required(): boolean { return this._required; }
   set required(value: boolean) {
     this._required = coerceBooleanProperty(value);
     this.stateChanges.next();
@@ -159,9 +147,7 @@ export class MtxSelectComponent
   private _required = false;
 
   @Input()
-  get disabled(): boolean {
-    return this._disabled;
-  }
+  get disabled(): boolean { return this._disabled; }
   set disabled(value: boolean) {
     this._disabled = coerceBooleanProperty(value);
     this.readonly = this._disabled;
@@ -178,10 +164,10 @@ export class MtxSelectComponent
   _ariaDescribedby: string;
 
   /** `View -> model callback called when value changes` */
-  _onChange: (value: any) => void = () => {};
+  _onChange: (value: any) => void = () => { };
 
   /** `View -> model callback called when color picker has been touched` */
-  _onTouched = () => {};
+  _onTouched = () => { };
 
   constructor(
     private _focusMonitor: FocusMonitor,
@@ -202,7 +188,7 @@ export class MtxSelectComponent
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   ngDoCheck(): void {
     if (this.ngControl) {
@@ -222,7 +208,7 @@ export class MtxSelectComponent
   }
 
   /** Implemented as part of MatFormFieldControl. */
-  onContainerClick() {}
+  onContainerClick() { }
 
   /**
    * Sets the select's value. Part of the ControlValueAccessor interface

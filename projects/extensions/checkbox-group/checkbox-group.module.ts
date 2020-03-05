@@ -10,4 +10,4 @@ import { MtxCheckboxGroupComponent } from './checkbox-group.component';
   exports: [MtxCheckboxGroupComponent],
   declarations: [MtxCheckboxGroupComponent],
 })
-export class MtxCheckboxGroupModule {}
+export class MtxCheckboxGroupModule { }
