@@ -2,10 +2,26 @@
           [data]="list"
           [columns]="columns"
           [loading]="isLoading"
-          [frontPage]="true"
+          [pageOnFront]="true"
+          [showPaginator]="true"
           [pageSizeOptions]="[5,10,20]"
           [pageSize]="10"
           (page)="changePage($event)"
           (sortChange)="changeSort($event)"
           (selectionChange)="changeSelection($event)">
+</mtx-grid>
+
+<hr>
+
+<mtx-grid class="mat-elevation-z1"
+          [data]="list2"
+          [columns]="columns2"
+          [length]="total2"
+          [loading]="isLoading2"
+          [pageOnFront]="false"
+          [showPaginator]="true"
+          [pageIndex]="query.page"
+          [pageSize]="query.per_page"
+          [pageSizeOptions]="[5,10,20]"
+          (page)="getNextPage($event)">
 </mtx-grid>

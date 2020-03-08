@@ -35,17 +35,17 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
 
   @Input() length = 0;
 
-  @Input() loading = true;
+  @Input() loading = false;
 
   /** Whether to show tooltip on columns */
   @Input() tooltip = true;
 
   /** Whether to page on the front end */
-  @Input() frontPage = false;
+  @Input() pageOnFront = true;
 
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  @Input() showPager = true;
+  @Input() showPaginator = true;
 
   @Input() pageDisabled = false;
 
@@ -73,14 +73,17 @@ export class MtxDataGridComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     this.dataSource = new MatTableDataSource<any>(this.data);
-    this.dataSource.paginator = this.paginator;
+    if (this.pageOnFront) {
+      this.dataSource.paginator = this.paginator;
+    }
   }
 
+  // Waiting for async data
   ngOnChanges() {
     this.displayedColumns = this.columns.map(item => item.index);
     this.dataSource = new MatTableDataSource<any>(this.data);
     this.selection = new SelectionModel<any>(true, []);
-    if (this.frontPage) {
+    if (this.pageOnFront) {
       this.dataSource.paginator = this.paginator;
     }
   }

@@ -50,7 +50,8 @@
   </table>
 </div>
 <!-- Paginator -->
-<mat-paginator [showFirstLastButtons]="showFirstLastButtons"
+<mat-paginator [class.mat-paginator-hidden]="!showPaginator"
+               [showFirstLastButtons]="showFirstLastButtons"
                [length]="length"
                [pageIndex]="pageIndex"
                [pageSize]="pageSize"

@@ -4,6 +4,7 @@
 
   .mat-table {
     width: 100%;
+    border-collapse: separate;
   }
 
   .mat-progress-bar {
@@ -14,7 +15,6 @@
 
   .mtx-data-grid-content {
     max-width: 100%;
-    max-height: 80vh;
     overflow: auto;
   }
 
@@ -58,6 +58,10 @@
 
   .mat-paginator {
     border-top: 1px solid #e0e0e0;
+  }
+
+  .mat-paginator-hidden {
+    display: none;
   }
 
   .mat-cell img {
