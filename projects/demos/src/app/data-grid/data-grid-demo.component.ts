@@ -1,28 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { PageEvent } from '@angular/material';
 import { MtxGridColumn } from '@ng-matero/extensions/data-grid';
 
 import { ELEMENT_DATA } from './data';
-import { HttpClient } from '@angular/common/http';
-import { PageEvent } from '@angular/material';
-
-/**
- * 序列化 JSON，同时转义，删除两边空格
- */
-export function serialize(obj = {}) {
-  const arr = [];
-  for (const k of Object.keys(obj)) {
-    arr.push(
-      `${k}=${encodeURIComponent(
-        typeof obj[k] === 'string'
-          ? String.prototype.trim.call(obj[k])
-          : obj[k] === null
-            ? ''
-            : obj[k]
-      )}`
-    );
-  }
-  return arr.join('&');
-}
+import { serialize } from './utils';
 
 const TAG = {
   true: { text: 'Yes', color: 'red-100' },
@@ -35,26 +17,9 @@ const TAG = {
   styleUrls: ['./data-grid-demo.component.scss'],
 })
 export class DataGridDemoComponent implements OnInit {
-  columns: MtxGridColumn[] = [
-    { title: 'Select', index: 'select', type: 'checkbox', fixed: 'left', width: '30px' },
-    { title: 'Position', index: 'position', width: 'auto', sort: true },
-    { title: 'Name', index: 'name', width: 'auto', sort: true },
-    { title: 'tags', index: 'tag.0.value', width: 'auto' },
-    {
-      title: 'Weight', index: 'weight', width: 'auto', type: 'format',
-      format: (data: any) => data.weight * 100,
-    },
-    { title: 'Symbol', index: 'symbol', width: 'auto' },
-    { title: 'Gender', index: 'gender', width: 'auto' },
-    { title: 'Mobile', index: 'mobile', width: 'auto' },
-    { title: 'Tele', index: 'tele', width: 'auto' },
-    { title: 'City', index: 'city', width: 'auto' },
-    { title: 'Address', index: 'address', width: '200px' },
-    { title: 'Date', index: 'date', width: 'auto' },
-    { title: 'Website', index: 'website', width: 'auto' },
-    { title: 'Company', index: 'company', width: 'auto' },
-    { title: 'Email', index: 'email', width: 'auto' },
-  ];
+  @ViewChild('status', { static: true }) status: TemplateRef<any>;
+
+  columns: MtxGridColumn[] = [];
   list = ELEMENT_DATA;
   isLoading = false;
 
@@ -104,7 +69,57 @@ export class DataGridDemoComponent implements OnInit {
     this.getData();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.columns = [
+      { title: 'Select', index: 'select', type: 'checkbox', fixed: 'left', width: '30px' },
+      { title: 'Position', index: 'position', sort: true },
+      { title: 'Name', index: 'name', sort: true },
+      { title: 'tags', index: 'tag.0.value' },
+      {
+        title: 'Weight', index: 'weight', type: 'format',
+        format: (data: any) => data.weight * 100,
+      },
+      { title: 'Symbol', index: 'symbol' },
+      { title: 'Gender', index: 'gender' },
+      { title: 'Mobile', index: 'mobile' },
+      { title: 'Tele', index: 'tele' },
+      { title: 'City', index: 'city' },
+      { title: 'Address', index: 'address', width: '200px' },
+      { title: 'Date', index: 'date' },
+      { title: 'Website', index: 'website' },
+      { title: 'Company', index: 'company' },
+      { title: 'Email', index: 'email' },
+      { title: 'Status', index: 'status', type: 'template', template: this.status },
+      {
+        title: 'Option',
+        index: 'option',
+        width: '80px',
+        fixed: 'right',
+        right: '0px',
+        type: 'button',
+        checked: true,
+        buttons: [
+          {
+            type: 'icon',
+            text: 'edit',
+            icon: 'edit',
+            tooltip: 'Edit',
+            click: () => { alert('edit'); },
+          },
+          {
+            type: 'icon',
+            text: 'delete',
+            icon: 'delete',
+            tooltip: 'Delete',
+            color: 'warn',
+            pop: true,
+            popTitle: 'Confirm delete?',
+            click: () => { alert('delete'); },
+          },
+        ],
+      }
+    ];
+  }
 
   getNextPage(e: PageEvent) {
     this.query.page = e.pageIndex;

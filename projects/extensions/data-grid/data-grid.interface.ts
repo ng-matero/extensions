@@ -1,3 +1,5 @@
+import { TemplateRef } from '@angular/core';
+
 /**
  * 可编辑单元格矩阵
  */
@@ -23,9 +25,9 @@ export interface MtxGridColumnTagValue {
  * 按钮配置
  */
 export interface MtxGridColumnButton {
-  icon?: string;
+  type?: 'basic' | 'icon';
   text?: string;
-  type?: string;
+  icon?: string;
   color?: 'primary' | 'accent' | 'warn';
   click?: (record: any) => void;
   pop?: boolean;
@@ -49,10 +51,10 @@ export interface MtxGridColumn {
   width?: string;
   desc?: string;
   sort?: boolean | string;
-  type?: 'text' | 'checkbox' | 'tag' | 'badge' | 'button' | 'link' | 'img' | 'number' | 'currency' | 'percent' | 'format';
-  edit?: boolean; // 是否可编辑
-  editType?: 'text' | 'number' | 'select' | 'textarea';
+  type?: 'text' | 'checkbox' | 'tag' | 'badge' | 'button' | 'link' | 'img' |
+  'number' | 'currency' | 'percent' | 'format' | 'template';
   format?: (data: any) => any; // 数值类型，金钱格式等
+  template?: TemplateRef<any>;
   tag?: MtxGridColumnTag;
   cat?: string; // 字段分类
   static?: boolean; // 是否是固定显示的值

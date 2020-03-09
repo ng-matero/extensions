@@ -19,6 +19,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Hydrogen@gmail.com',
+    status: false
   },
   {
     position: 2,
@@ -40,6 +41,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Helium@gmail.com',
+    status: true
   },
   {
     position: 3,
@@ -55,6 +57,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Lithium@gmail.com',
+    status: false
   },
   {
     position: 4,
@@ -70,6 +73,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Beryllium@gmail.com',
+    status: false
   },
   {
     position: 5,
@@ -85,6 +89,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Boron@gmail.com',
+    status: true
   },
   {
     position: 6,
@@ -100,6 +105,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Carbon@gmail.com',
+    status: false
   },
   {
     position: 7,
@@ -115,6 +121,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Nitrogen@gmail.com',
+    status: true
   },
   {
     position: 8,
@@ -130,6 +137,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Oxygen@gmail.com',
+    status: false
   },
   {
     position: 9,
@@ -145,6 +153,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Fluorine@gmail.com',
+    status: true
   },
   {
     position: 10,
@@ -160,6 +169,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Neon@gmail.com',
+    status: true
   },
   {
     position: 11,
@@ -175,6 +185,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Fluorine@gmail.com',
+    status: false
   },
   {
     position: 12,
@@ -190,6 +201,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Neon@gmail.com',
+    status: true
   },
   {
     position: 13,
@@ -205,6 +217,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Fluorine@gmail.com',
+    status: true
   },
   {
     position: 14,
@@ -220,5 +233,6 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Neon@gmail.com',
+    status: false
   },
 ];

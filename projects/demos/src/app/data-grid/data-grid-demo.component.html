@@ -11,6 +11,10 @@
           (selectionChange)="changeSelection($event)">
 </mtx-grid>
 
+<ng-template #status let-row="row" let-index='index' let-col="col">
+    <mat-slide-toggle [checked]="row.status">Slide me!</mat-slide-toggle>
+</ng-template>
+
 <hr>
 
 <mtx-grid class="mat-elevation-z1"

@@ -40,21 +40,21 @@ export class DialogDemoComponent implements OnInit {
       buttons: [
         {
           type: '',
-          text: 'Close',
+          text: 'CLOSE',
           onClick: () => {
             this.mtxDialog.alert(`You click Close button.`);
           },
         },
         {
           type: 'primary',
-          text: 'View',
+          text: 'VIEW',
           onClick: () => {
             this.mtxDialog.alert(`You click View button.`);
           },
         },
         {
           type: 'warn',
-          text: 'Ok',
+          text: 'OK',
           onClick: () => {
             this.mtxDialog.alert(`You click Ok button.`);
           },

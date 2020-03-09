@@ -11,12 +11,12 @@ const defaults: MtxDialogData = {
   buttons: [
     {
       type: '',
-      text: 'Close',
+      text: 'CLOSE',
       onClick: () => { },
     },
     {
       type: 'warn',
-      text: 'Ok',
+      text: 'OK',
       onClick: () => { },
     },
   ],
@@ -51,7 +51,7 @@ export class MtxDialog {
       buttons: [
         {
           type: 'warn',
-          text: 'Ok',
+          text: 'OK',
           onClick: () => onOk()
           ,
         },
@@ -66,12 +66,12 @@ export class MtxDialog {
       buttons: [
         {
           type: '',
-          text: 'Close',
+          text: 'CLOSE',
           onClick: () => onClose(),
         },
         {
           type: 'warn',
-          text: 'Ok',
+          text: 'OK',
           onClick: () => onOk(),
         },
       ],

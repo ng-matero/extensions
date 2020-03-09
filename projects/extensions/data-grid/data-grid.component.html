@@ -11,8 +11,9 @@
 
         <th mat-header-cell
             *matHeaderCellDef
-            [ngClass]="{'mat-table-sticky-left':col.fixed==='left','mat-table-sticky-right':col.fixed==='right'}"
-            [ngStyle]="{'width':col.width,'min-width':col.width}"
+            [ngClass]="{'mat-table-sticky-left': col.fixed === 'left',
+                        'mat-table-sticky-right': col.fixed === 'right'}"
+            [ngStyle]="{'width': col.width,'min-width': col.width}"
             mat-sort-header [disabled]="!col.sort">
 
           <mat-checkbox *ngIf="col.type==='checkbox'"
@@ -25,20 +26,29 @@
 
         </th>
         <td mat-cell
-            *matCellDef="let row; let r=index;"
-            [ngClass]="{'mat-table-sticky-left':col.fixed==='left','mat-table-sticky-right':col.fixed==='right'}"
-            [ngStyle]="{'width':col.width,'min-width':col.width}">
+            *matCellDef="let row; let index=index;"
+            [ngClass]="{'mat-table-sticky-left': col.fixed === 'left',
+                        'mat-table-sticky-right': col.fixed === 'right'}"
+            [ngStyle]="{'width': col.width,'min-width': col.width}">
 
-          <mat-checkbox *ngIf="col.type==='checkbox'"
-                        (click)="$event.stopPropagation()"
-                        (change)="$event ? singleToggle(row) : null"
-                        [checked]="selection.isSelected(row)">
-          </mat-checkbox>
-
-          <mtx-grid-cell *ngIf="col.type!=='checkbox'"
-                         [data]="row"
-                         [col]="col">
-          </mtx-grid-cell>
+          <ng-container [ngSwitch]="col.type">
+            <ng-container *ngSwitchCase="'checkbox'">
+              <mat-checkbox (click)="$event.stopPropagation()"
+                            (change)="$event ? singleToggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+              </mat-checkbox>
+            </ng-container>
+            <ng-container *ngSwitchCase="'template'">
+              <ng-template [ngTemplateOutlet]="col.template"
+                           [ngTemplateOutletContext]="{ $implicit: row, row: row, index: index, col: col }">
+              </ng-template>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              <mtx-grid-cell [data]="row"
+                             [col]="col">
+              </mtx-grid-cell>
+            </ng-container>
+          </ng-container>
 
         </td>
 

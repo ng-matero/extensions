@@ -64,10 +64,18 @@
     display: none;
   }
 
-  .mat-cell img {
-    width: 30px;
-    border-radius: 4px;
-    cursor: pointer;
+  .mat-cell {
+    img {
+      width: 30px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .mat-icon {
+      width: 18px;
+      height: 18px;
+      font-size: 18px;
+    }
   }
 
   // Fix checkbox height issue
