@@ -7,15 +7,15 @@ Angular Material Extensions
 
 ## Installation
 
-The Ng-Matero Extensions is just a extended library of Angular Material, so you need install Angular Material first and setup it. [Learn more about setup](https://material.angular.io/guide/getting-started).
+The Ng-Matero Extensions is just a extended library of Angular Material, so you need install the Angular Material first and setup it. [Learn more about setup](https://material.angular.io/guide/getting-started).
 
-1. Install the Extensions library:
+Install the Extensions library:
 
 ```bash
 $ npm install @ng-matero/extensions --save
 ```
 
-2. Once installed you need to import the main module:
+Once installed you need to import the main module:
 
 ```ts
 import { MaterialExtensionsModule } from '@ng-matero/extensions';
