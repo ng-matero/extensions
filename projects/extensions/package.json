@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Angular Material Extensions",
   "author": "nzbin<nzb329@163.com>",
   "repository": {
@@ -9,11 +9,20 @@
   },
   "keywords": [
     "angular",
-    "angular material",
-    "angular components",
-    "angular material extensions",
-    "angular admin",
-    "ng-matero"
+    "angular-material",
+    "angular-components",
+    "angular-material-extensions",
+    "angular-admin",
+    "ng-matero",
+    "color-picker",
+    "ngx-color",
+    "ngx-color-picker",
+    "material-color-picker",
+    "ng-select",
+    "typeahead",
+    "autocomplete",
+    "data-grid",
+    "ngx-data-grid"
   ],
   "license": "MIT",
   "bugs": {
