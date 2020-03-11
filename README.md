@@ -5,11 +5,11 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/ng-matero/extensions/blob/dev/LICENSE)
 [![Gitter](https://img.shields.io/gitter/room/ng-matero/extensions.svg?style=flat-square)](https://gitter.im/matero-io/extensions)
 
-The Ng-Matero Extensions is a extended library of Angular Material.
+The Ng-Matero Extensions is an extended library of Angular Material.
 
 ## Installation
 
-At first, you need install the Angular Material and setup it. [Learn more about setup](https://material.angular.io/guide/getting-started).
+At first, you should install the Angular Material and setup it. [Learn more about the setup](https://material.angular.io/guide/getting-started).
 
 Install the Extensions library:
 
