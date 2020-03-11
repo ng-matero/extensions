@@ -1,15 +1,15 @@
 # Ng-Matero Extensions
 
-Angular Material Extensions
-
 [![npm](https://img.shields.io/npm/v/@ng-matero/extensions.svg?style=flat-square)](https://www.npmjs.com/package/@ng-matero/extensions)
 [![GitHub Release Date](https://img.shields.io/github/release-date/ng-matero/extensions?style=flat-square)](https://github.com/ng-matero/extensions/releases)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/ng-matero/extensions/blob/dev/LICENSE)
 [![Gitter](https://img.shields.io/gitter/room/ng-matero/extensions.svg?style=flat-square)](https://gitter.im/matero-io/extensions)
 
+The Ng-Matero Extensions is an extended library of Angular Material.
+
 ## Installation
 
-The Ng-Matero Extensions is just a extended library of Angular Material, so you need install the Angular Material first and setup it. [Learn more about setup](https://material.angular.io/guide/getting-started).
+At first, you should install the Angular Material and setup it. [Learn more about the setup](https://material.angular.io/guide/getting-started).
 
 Install the Extensions library:
 
@@ -30,6 +30,24 @@ import { MaterialExtensionsModule } from '@ng-matero/extensions';
 export class YourAppModule {
 }
 ```
+
+Alternatively you could only import modules you need, e.g. color-picker and select.
+
+```ts
+import { MtxColorPickerModule, MtxSelectModule } from '@ng-matero/extensions';
+
+@NgModule({
+  ...
+  imports: [MtxColorPickerModule, MtxSelectModule, ...],
+  ...
+})
+export class YourAppModule {
+}
+```
+
+## Road Map
+
+Check [the project](https://github.com/ng-matero/extensions/projects/1) to know the develop plans.
 
 ## License
 
