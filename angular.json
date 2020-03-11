@@ -160,5 +160,8 @@
       }
     }
   },
-  "defaultProject": "extensions"
+  "defaultProject": "extensions",
+  "cli": {
+    "analytics": false
+  }
 }
