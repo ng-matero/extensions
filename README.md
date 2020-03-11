@@ -31,6 +31,24 @@ export class YourAppModule {
 }
 ```
 
+Alternatively you could only import modules you need, e.g. color-picker and select.
+
+```ts
+import { MtxColorPickerModule, MtxSelectModule } from '@ng-matero/extensions';
+
+@NgModule({
+  ...
+  imports: [MtxColorPickerModule, MtxSelectModule, ...],
+  ...
+})
+export class YourAppModule {
+}
+```
+
+## Road Map
+
+Check [the project](https://github.com/ng-matero/extensions/projects/1) to know the develop plans.
+
 ## License
 
 MIT

@@ -9,10 +9,10 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:site": "ng build demos --prod --build-optimizer --baseHref=./",
-    "deploy:ghpages": "angular-cli-ghpages --no-silent --dir=dist/demos",
+    "deploy": "angular-cli-ghpages --no-silent --dir=dist/demos",
+    "release": "npm run build:site && npm run deploy:ghpages",
     "build:lib": "ng build extensions",
-    "prepublish": "npm run build:lib",
-    "publish": "cd dist/extensions && npm publish --access public"
+    "publish": "npm run build:lib && cd dist/extensions && npm publish --access public"
   },
   "private": true,
   "dependencies": {
