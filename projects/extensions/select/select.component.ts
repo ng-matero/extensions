@@ -41,7 +41,7 @@ let nextUniqueId = 0;
 export class MtxSelectComponent
   implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<any> {
   /** Mtx Select Options */
-  @Input() addTag: boolean | ((term: string) => any | Promise<any>) = true;
+  @Input() addTag: boolean | ((term: string) => any | Promise<any>) = false;
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
   @Input() appendTo: string;
