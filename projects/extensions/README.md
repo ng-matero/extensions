@@ -1,9 +1,9 @@
 # Ng-Matero Extensions
 
-[![npm](https://img.shields.io/npm/v/@ng-matero/extensions.svg?style=flat-square)](https://www.npmjs.com/package/@ng-matero/extensions)
-[![GitHub Release Date](https://img.shields.io/github/release-date/ng-matero/extensions?style=flat-square)](https://github.com/ng-matero/extensions/releases)
-[![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/ng-matero/extensions/blob/dev/LICENSE)
-[![Gitter](https://img.shields.io/gitter/room/ng-matero/extensions.svg?style=flat-square)](https://gitter.im/matero-io/extensions)
+[![npm](https://img.shields.io/npm/v/@ng-matero/extensions.svg)](https://www.npmjs.com/package/@ng-matero/extensions)
+[![GitHub Release Date](https://img.shields.io/github/release-date/ng-matero/extensions)](https://github.com/ng-matero/extensions/releases)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ng-matero/extensions/blob/dev/LICENSE)
+[![Gitter](https://img.shields.io/gitter/room/ng-matero/extensions.svg)](https://gitter.im/matero-io/extensions)
 
 The Ng-Matero Extensions is an extended library of Angular Material.
 
