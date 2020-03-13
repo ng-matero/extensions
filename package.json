@@ -12,7 +12,7 @@
     "build:site": "ng build demos --prod --build-optimizer --baseHref=./",
     "deploy": "angular-cli-ghpages --no-silent --dir=dist/demos",
     "release": "npm run build:site && npm run deploy:ghpages",
-    "build:lib": "ng build extensions",
+    "build:lib": "ng build extensions --prod",
     "publish": "npm run build:lib && cd dist/extensions && npm publish --access public"
   },
   "private": true,
