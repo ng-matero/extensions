@@ -20,6 +20,7 @@ import { DevAppModule } from './dev-app/dev-app-module';
 import { DEV_APP_ROUTES } from './dev-app/routes';
 import { DevAppRippleOptions } from './dev-app/ripple-options';
 import { DevAppDirectionality } from './dev-app/dev-app-directionality';
+import { environment } from '../environments/environment.prod';
 
 @NgModule({
   imports: [
