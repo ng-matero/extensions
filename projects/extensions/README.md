@@ -45,7 +45,7 @@ export class YourAppModule {
 }
 ```
 
-## Road Map
+## Roadmap
 
 Check [the project](https://github.com/ng-matero/extensions/projects/1) to know the develop plans.
 
