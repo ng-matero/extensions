@@ -11,8 +11,6 @@
     <mat-label>Select Food</mat-label>
 
     <mtx-select [items]="items"
-                [(ngModel)]="value"
-                placeholder="select food"
                 bindLabel="name"
                 bindValue="id"
                 [disabled]="disableSelect"
@@ -20,6 +18,17 @@
                 [appendTo]="'body'"
                 required>
     </mtx-select>
+
+    <mat-hint>Choose your favorite food</mat-hint>
+    <mat-error>Please choose a food</mat-error>
+</mat-form-field>
+
+<mat-form-field class="mx-3">
+    <mat-label>Select Food</mat-label>
+
+    <mat-select required>
+        <mat-option *ngFor="let item of items;" [value]="item.id">{{item.name}}</mat-option>
+    </mat-select>
 
     <mat-hint>Choose your favorite food</mat-hint>
     <mat-error>Please choose a food</mat-error>

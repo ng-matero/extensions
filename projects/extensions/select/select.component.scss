@@ -25,7 +25,7 @@ $ng-select-value-font-size: .875em !default;
   padding-top: calc(.4375em + .84375em);
   margin-top: calc(-.4375em - .84375em);
   padding-bottom: .4375em;
-  margin-bottom: calc(-.4375em - .0625em);
+  margin-bottom: -.4375em;
 
   &.ng-select-opened {
     > .ng-select-container {
@@ -73,6 +73,15 @@ $ng-select-value-font-size: .875em !default;
   &.ng-select-single {
     .ng-select-container {
       .ng-value-container {
+        // vertical align with material form field
+        .ng-placeholder,
+        .ng-value {
+          &::after {
+            display: inline-block;
+            content: '';
+          }
+        }
+
         .ng-input {
           left: 0;
         }
@@ -86,12 +95,10 @@ $ng-select-value-font-size: .875em !default;
         margin: -4px 0;
 
         .ng-value {
-          min-height: 32px;
-          padding: 7px 12px;
           margin: 4px;
           border-radius: 16px;
-          font-size: $ng-select-value-font-size;
           line-height: 18px;
+          font-size: $ng-select-value-font-size;
           background-color: $ng-select-selected;
 
           &.ng-value-disabled {
@@ -100,6 +107,7 @@ $ng-select-value-font-size: .875em !default;
 
           .ng-value-label {
             display: inline-block;
+            margin: 0 8px;
           }
 
           .ng-value-icon {
@@ -115,21 +123,17 @@ $ng-select-value-font-size: .875em !default;
             }
 
             &.left {
-              margin-right: 8px;
               margin-left: -4px;
 
               @include rtl {
                 margin-right: -4px;
-                margin-left: 8px;
               }
             }
 
             &.right {
               margin-right: -4px;
-              margin-left: 8px;
 
               @include rtl {
-                margin-right: 8px;
                 margin-left: -4px;
               }
             }
