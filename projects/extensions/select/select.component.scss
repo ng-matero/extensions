@@ -13,7 +13,7 @@ $ng-select-disabled-text: rgba(black, .38) !default;
 $ng-select-divider: rgba(black, .12) !default;
 $ng-select-bg: #fff !default;
 
-$ng-select-border: #ccc !default;
+$ng-select-border: rgba(0, 0, 0, .54) !default;
 $ng-select-border-radius: 4px !default;
 $ng-select-selected: lighten($ng-select-highlight, 46) !default;
 $ng-select-marked: lighten($ng-select-highlight, 48) !default;
@@ -31,12 +31,8 @@ $ng-select-value-font-size: .875em !default;
     > .ng-select-container {
       .ng-arrow {
         top: -2px;
-        border-color: transparent transparent darken($ng-select-border, 20);
+        border-color: transparent transparent $ng-select-border;
         border-width: 0 5px 5px;
-
-        &:hover {
-          border-color: transparent transparent darken($ng-select-border, 60);
-        }
       }
     }
   }
@@ -152,7 +148,7 @@ $ng-select-value-font-size: .875em !default;
 
   .ng-clear-wrapper {
     height: 18px;
-    color: darken($ng-select-border, 20);
+    color: $ng-select-border;
     text-align: center;
 
     &:hover .ng-clear {
@@ -163,14 +159,8 @@ $ng-select-value-font-size: .875em !default;
   .ng-arrow-wrapper {
     width: 18px;
 
-    &:hover {
-      .ng-arrow {
-        border-top-color: darken($ng-select-border, 50);
-      }
-    }
-
     .ng-arrow {
-      border-color: darken($ng-select-border, 30) transparent transparent;
+      border-color: $ng-select-border transparent transparent;
       border-style: solid;
       border-width: 5px 5px 2.5px;
     }
