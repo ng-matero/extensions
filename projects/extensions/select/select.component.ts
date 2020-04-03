@@ -95,7 +95,7 @@ export class MtxSelectComponent
   @Output() scroll = new EventEmitter<{ start: number; end: number }>();
   @Output() scrollToEnd = new EventEmitter();
 
-  /** Value of the color picker control. */
+  /** Value of the select control. */
   @Input()
   get value(): any { return this._value; }
   set value(newValue: any) {
@@ -116,6 +116,7 @@ export class MtxSelectComponent
     this.stateChanges.next();
   }
   private _id: string;
+
   /** Unique id for this input. */
   private _uid = `mtx-select-${nextUniqueId++}`;
 
@@ -160,13 +161,13 @@ export class MtxSelectComponent
   /** A name for this control that can be used by `mat-form-field`. */
   controlType = 'mtx-select';
 
-  /** The aria-describedby attribute on the color picker for improved a11y. */
+  /** The aria-describedby attribute on the select for improved a11y. */
   _ariaDescribedby: string;
 
   /** `View -> model callback called when value changes` */
   _onChange: (value: any) => void = () => { };
 
-  /** `View -> model callback called when color picker has been touched` */
+  /** `View -> model callback called when select has been touched` */
   _onTouched = () => { };
 
   constructor(
@@ -205,6 +206,11 @@ export class MtxSelectComponent
   /** Implemented as part of MatFormFieldControl. */
   setDescribedByIds(ids: string[]) {
     this._ariaDescribedby = ids.join(' ');
+  }
+
+  /** Implemented as part of MatFormFieldControl. */
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
   }
 
   /** Implemented as part of MatFormFieldControl. */
