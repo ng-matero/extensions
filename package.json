@@ -27,7 +27,7 @@
     "@angular/platform-browser": "~9.0.6",
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
-    "@ng-select/ng-select": "^3.7.3",
+    "@ng-select/ng-select": "^4.0.0",
     "@ngx-progressbar/core": "^5.3.2",
     "@ngx-progressbar/router": "^5.3.2",
     "ngx-color": "^5.0.1",
