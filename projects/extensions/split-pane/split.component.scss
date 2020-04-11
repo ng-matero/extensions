@@ -1,0 +1,104 @@
+$horizontal-gutter-icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==';
+$vertical-gutter-icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCAMAAABl/6zIAAAABlBMVEUAAADMzMzIT8AyAAAAAXRSTlMAQObYZgAAABRJREFUeAFjYGRkwIMJSeMHlBkOABP7AEGzSuPKAAAAAElFTkSuQmCC';
+
+.mtx-split {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  > .mtx-split-gutter {
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    background-color: #eee;
+
+    > .mtx-split-gutter-handle {
+      width: 100%;
+      height: 100%;
+      background-position: center center;
+      background-repeat: no-repeat;
+    }
+  }
+
+  > .mtx-split-pane {
+    flex-grow: 0;
+    flex-shrink: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    /* When <mtx-split-pane [visible]="false"> force size to 0. */
+
+    &.mtx-split-pane-hidden {
+      flex: 0 1 0 !important;
+      overflow-x: hidden;
+      overflow-y: hidden;
+    }
+  }
+
+  &.mtx-split-horizontal {
+    flex-direction: row;
+
+    > .mtx-split-gutter {
+      flex-direction: row;
+      height: 100%; // <- Fix safari bug about gutter height when direction is horizontal.
+      cursor: col-resize;
+
+      > .mtx-split-gutter-handle {
+        background-image: url($horizontal-gutter-icon);
+      }
+    }
+
+    > .mtx-split-pane {
+      height: 100%;
+    }
+  }
+
+  &.mtx-split-vertical {
+    flex-direction: column;
+
+    > .mtx-split-gutter {
+      flex-direction: column;
+      width: 100%;
+      cursor: row-resize;
+
+      .mtx-split-gutter-handle {
+        background-image: url($vertical-gutter-icon);
+      }
+    }
+
+    > .mtx-split-pane {
+      width: 100%;
+
+      &.mtx-split-pane-hidden {
+        max-width: 0;
+      }
+    }
+  }
+
+  /* When disabled remove gutters background image and specific cursor. */
+
+  &.mtx-split-disabled {
+    > .mtx-split-gutter {
+      cursor: default;
+
+      .mtx-split-gutter-handle {
+        background-image: none;
+      }
+    }
+  }
+
+  /* Add transition only when transition enabled + split initialized + not currently dragging. */
+
+  &.mtx-split-transition.mtx-split-init:not(.mtx-dragging) {
+    > .mtx-split-gutter,
+    > .mtx-split-pane {
+      transition: flex-basis .3s;
+    }
+  }
+}

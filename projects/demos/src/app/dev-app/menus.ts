@@ -9,6 +9,7 @@ export const menus = [
       { name: 'Dialog', route: '/dialog' },
       { name: 'Progress', route: '/progress' },
       { name: 'Select', route: '/select' },
+      { name: 'Split Pane', route: '/split-pane' },
     ],
   },
   {

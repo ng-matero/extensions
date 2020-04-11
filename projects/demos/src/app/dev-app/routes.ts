@@ -36,6 +36,10 @@ export const DEV_APP_ROUTES: Routes = [
     loadChildren: () => import('../select/select.module').then(m => m.SelectModule),
   },
   {
+    path: 'split-pane',
+    loadChildren: () => import('../split-pane/split-pane.module').then(m => m.SplitPaneModule),
+  },
+  {
     path: 'text3d',
     loadChildren: () => import('../text3d/text3d-demo.module').then(m => m.Text3dDemoModule),
   },

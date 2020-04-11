@@ -7,6 +7,7 @@ import { MtxGridModule } from '@ng-matero/extensions/data-grid';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxProgressModule } from '@ng-matero/extensions/progress';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
+import { MtxSplitModule } from '@ng-matero/extensions/split-pane';
 
 import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 
@@ -20,7 +21,8 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
     MtxProgressModule,
     MtxSelectModule,
     MtxText3dModule,
+    MtxSplitModule
   ],
   declarations: [],
 })
-export class MaterialExtensionsModule {}
+export class MaterialExtensionsModule { }

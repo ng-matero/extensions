@@ -15,6 +15,7 @@ import { MtxGridModule } from '@ng-matero/extensions/data-grid';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxProgressModule } from '@ng-matero/extensions/progress';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
+import { MtxSplitModule } from '@ng-matero/extensions/split-pane';
 import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 
 @NgModule({
@@ -35,6 +36,7 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
     MtxDialogModule,
     MtxProgressModule,
     MtxSelectModule,
+    MtxSplitModule,
     MtxText3dModule
   ],
   exports: [
@@ -53,6 +55,7 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
     MtxDialogModule,
     MtxProgressModule,
     MtxSelectModule,
+    MtxSplitModule,
     MtxText3dModule
   ],
 })
