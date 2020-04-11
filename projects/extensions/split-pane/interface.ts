@@ -1,11 +1,11 @@
 import { MtxSplitPaneDirective } from './split-pane.directive';
 
-export interface IPoint {
+export interface MtxSplitPoint {
   x: number;
   y: number;
 }
 
-export interface IArea {
+export interface MtxSplitArea {
   component: MtxSplitPaneDirective;
   order: number;
   size: number | null;
@@ -15,30 +15,30 @@ export interface IArea {
 
 // CREATED ON DRAG START
 
-export interface ISplitSnapshot {
+export interface MtxSplitSnapshot {
   gutterNum: number;
   allAreasSizePixel: number;
   allInvolvedAreasSizePercent: number;
   lastSteppedOffset: number;
-  areasBeforeGutter: Array<IAreaSnapshot>;
-  areasAfterGutter: Array<IAreaSnapshot>;
+  areasBeforeGutter: Array<MtxSplitAreaSnapshot>;
+  areasAfterGutter: Array<MtxSplitAreaSnapshot>;
 }
 
-export interface IAreaSnapshot {
-  area: IArea;
+export interface MtxSplitAreaSnapshot {
+  area: MtxSplitArea;
   sizePixelAtStart: number;
   sizePercentAtStart: number;
 }
 
 // CREATED ON DRAG PROGRESS
 
-export interface ISplitSideAbsorptionCapacity {
+export interface MtxSplitSideAbsorptionCapacity {
   remain: number;
-  list: Array<IAreaAbsorptionCapacity>;
+  list: Array<MtxSplitAreaAbsorptionCapacity>;
 }
 
-export interface IAreaAbsorptionCapacity {
-  areaSnapshot: IAreaSnapshot;
+export interface MtxSplitAreaAbsorptionCapacity {
+  areaSnapshot: MtxSplitAreaSnapshot;
   pixelAbsorb: number;
   percentAfterAbsorption: number;
   pixelRemain: number;
@@ -46,9 +46,9 @@ export interface IAreaAbsorptionCapacity {
 
 // CREATED TO SEND OUTSIDE
 
-export interface IOutputData {
+export interface MtxSplitOutputData {
   gutterNum: number;
-  sizes: IOutputAreaSizes;
+  sizes: MtxSplitOutputAreaSizes;
 }
 
-export interface IOutputAreaSizes extends Array<number | '*'> {}
+export interface MtxSplitOutputAreaSizes extends Array<number | '*'> { }

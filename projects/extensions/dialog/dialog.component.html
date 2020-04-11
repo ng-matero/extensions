@@ -1,8 +1,8 @@
-<h1 mat-dialog-title *ngIf="data.title">{{data.title}}</h1>
-<div mat-dialog-content *ngIf="data.description">
+<h1 class="mtx-dialog-title" *ngIf="data.title">{{data.title}}</h1>
+<div class="mtx-dialog-content" *ngIf="data.description">
   <p>{{data.description}}</p>
 </div>
-<div mat-dialog-actions>
+<div class="mtx-dialog-actions">
   <button *ngFor="let btn of data.buttons"
           mat-button
           [color]="btn.type"

@@ -18,12 +18,12 @@ import { Observable, Subscriber, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import {
-  IArea,
-  IPoint,
-  ISplitSnapshot,
-  IAreaSnapshot,
-  IOutputData,
-  IOutputAreaSizes,
+  MtxSplitArea,
+  MtxSplitPoint,
+  MtxSplitSnapshot,
+  MtxSplitAreaSnapshot,
+  MtxSplitOutputData,
+  MtxSplitOutputAreaSizes,
 } from './interface';
 import { MtxSplitPaneDirective } from './split-pane.directive';
 import {
@@ -220,31 +220,31 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
 
   ////
 
-  @Output() dragStart = new EventEmitter<IOutputData>(false);
-  @Output() dragEnd = new EventEmitter<IOutputData>(false);
-  @Output() gutterClick = new EventEmitter<IOutputData>(false);
-  @Output() gutterDblClick = new EventEmitter<IOutputData>(false);
+  @Output() dragStart = new EventEmitter<MtxSplitOutputData>(false);
+  @Output() dragEnd = new EventEmitter<MtxSplitOutputData>(false);
+  @Output() gutterClick = new EventEmitter<MtxSplitOutputData>(false);
+  @Output() gutterDblClick = new EventEmitter<MtxSplitOutputData>(false);
 
-  private transitionEndSubscriber: Subscriber<IOutputAreaSizes>;
-  @Output() get transitionEnd(): Observable<IOutputAreaSizes> {
+  private transitionEndSubscriber: Subscriber<MtxSplitOutputAreaSizes>;
+  @Output() get transitionEnd(): Observable<MtxSplitOutputAreaSizes> {
     return new Observable(subscriber => (this.transitionEndSubscriber = subscriber)).pipe(
-      debounceTime<IOutputAreaSizes>(20)
+      debounceTime<MtxSplitOutputAreaSizes>(20)
     );
   }
 
-  private dragProgressSubject: Subject<IOutputData> = new Subject();
-  dragProgress$: Observable<IOutputData> = this.dragProgressSubject.asObservable();
+  private dragProgressSubject: Subject<MtxSplitOutputData> = new Subject();
+  dragProgress$: Observable<MtxSplitOutputData> = this.dragProgressSubject.asObservable();
 
   ////
 
   private isDragging = false;
   private dragListeners: Array<() => void> = [];
-  private snapshot: ISplitSnapshot | null = null;
-  private startPoint: IPoint | null = null;
-  private endPoint: IPoint | null = null;
+  private snapshot: MtxSplitSnapshot | null = null;
+  private startPoint: MtxSplitPoint | null = null;
+  private endPoint: MtxSplitPoint | null = null;
 
-  public readonly displayedAreas: Array<IArea> = [];
-  private readonly hidedAreas: Array<IArea> = [];
+  public readonly displayedAreas: Array<MtxSplitArea> = [];
+  private readonly hidedAreas: Array<MtxSplitArea> = [];
 
   @ViewChildren('gutterEls') private gutterEls: QueryList<ElementRef>;
 
@@ -270,7 +270,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
   }
 
   public addArea(component: MtxSplitPaneDirective): void {
-    const newArea: IArea = {
+    const newArea: MtxSplitArea = {
       component,
       order: 0,
       size: 0,
@@ -337,11 +337,11 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     this.build(true, true);
   }
 
-  public getVisibleAreaSizes(): IOutputAreaSizes {
+  public getVisibleAreaSizes(): MtxSplitOutputAreaSizes {
     return this.displayedAreas.map(a => (a.size === null ? '*' : a.size));
   }
 
-  public setVisibleAreaSizes(sizes: IOutputAreaSizes): boolean {
+  public setVisibleAreaSizes(sizes: MtxSplitOutputAreaSizes): boolean {
     if (sizes.length !== this.displayedAreas.length) {
       return false;
     }
@@ -560,7 +560,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     };
 
     this.displayedAreas.forEach(area => {
-      const areaSnapshot: IAreaSnapshot = {
+      const areaSnapshot: MtxSplitAreaSnapshot = {
         area,
         sizePixelAtStart: getElementPixelSize(area.component.elRef, this.direction),
         sizePercentAtStart: this.unit === 'percent' ? area.size : -1, // If pixel mode, anyway, will not be used.

@@ -1,14 +1,14 @@
 import { ElementRef } from '@angular/core';
 
 import {
-  IArea,
-  IPoint,
-  IAreaSnapshot,
-  ISplitSideAbsorptionCapacity,
-  IAreaAbsorptionCapacity,
+  MtxSplitArea,
+  MtxSplitPoint,
+  MtxSplitAreaSnapshot,
+  MtxSplitSideAbsorptionCapacity,
+  MtxSplitAreaAbsorptionCapacity,
 } from './interface';
 
-export function getPointFromEvent(event: MouseEvent | TouchEvent): IPoint {
+export function getPointFromEvent(event: MouseEvent | TouchEvent): MtxSplitPoint {
   // TouchEvent
   if (
     (event as TouchEvent).changedTouches !== undefined &&
@@ -68,7 +68,7 @@ export function isUserSizesValid(unit: 'percent' | 'pixel', sizes: Array<number 
   }
 }
 
-export function getAreaMinSize(a: IArea): null | number {
+export function getAreaMinSize(a: MtxSplitArea): null | number {
   if (a.size === null) {
     return null;
   }
@@ -88,7 +88,7 @@ export function getAreaMinSize(a: IArea): null | number {
   return a.component.minSize;
 }
 
-export function getAreaMaxSize(a: IArea): null | number {
+export function getAreaMaxSize(a: MtxSplitArea): null | number {
   if (a.size === null) {
     return null;
   }
@@ -110,10 +110,10 @@ export function getAreaMaxSize(a: IArea): null | number {
 
 export function getGutterSideAbsorptionCapacity(
   unit: 'percent' | 'pixel',
-  sideAreas: Array<IAreaSnapshot>,
+  sideAreas: Array<MtxSplitAreaSnapshot>,
   pixels: number,
   allAreasSizePixel: number
-): ISplitSideAbsorptionCapacity {
+): MtxSplitSideAbsorptionCapacity {
   return sideAreas.reduce(
     (acc, area) => {
       const res = getAreaAbsorptionCapacity(unit, area, acc.remain, allAreasSizePixel);
@@ -127,10 +127,10 @@ export function getGutterSideAbsorptionCapacity(
 
 function getAreaAbsorptionCapacity(
   unit: 'percent' | 'pixel',
-  areaSnapshot: IAreaSnapshot,
+  areaSnapshot: MtxSplitAreaSnapshot,
   pixels: number,
   allAreasSizePixel: number
-): IAreaAbsorptionCapacity {
+): MtxSplitAreaAbsorptionCapacity {
   // No pain no gain
   if (pixels === 0) {
     return {
@@ -161,10 +161,10 @@ function getAreaAbsorptionCapacity(
 }
 
 function getAreaAbsorptionCapacityPercent(
-  areaSnapshot: IAreaSnapshot,
+  areaSnapshot: MtxSplitAreaSnapshot,
   pixels: number,
   allAreasSizePixel: number
-): IAreaAbsorptionCapacity {
+): MtxSplitAreaAbsorptionCapacity {
   const tempPixelSize = areaSnapshot.sizePixelAtStart + pixels;
   const tempPercentSize = (tempPixelSize / allAreasSizePixel) * 100;
 
@@ -225,10 +225,10 @@ function getAreaAbsorptionCapacityPercent(
 }
 
 function getAreaAbsorptionCapacityPixel(
-  areaSnapshot: IAreaSnapshot,
+  areaSnapshot: MtxSplitAreaSnapshot,
   pixels: number,
   containerSizePixel: number
-): IAreaAbsorptionCapacity {
+): MtxSplitAreaAbsorptionCapacity {
   const tempPixelSize = areaSnapshot.sizePixelAtStart + pixels;
 
   // ENLARGE AREA
@@ -282,7 +282,7 @@ function getAreaAbsorptionCapacityPixel(
   }
 }
 
-export function updateAreaSize(unit: 'percent' | 'pixel', item: IAreaAbsorptionCapacity) {
+export function updateAreaSize(unit: 'percent' | 'pixel', item: MtxSplitAreaAbsorptionCapacity) {
   if (unit === 'percent') {
     item.areaSnapshot.area.size = item.percentAfterAbsorption;
   } else if (unit === 'pixel') {

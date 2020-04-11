@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { MtxDialogData } from './dialog.config';
@@ -8,6 +8,8 @@ import { MtxDialogData } from './dialog.config';
   exportAs: 'mtxDialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxDialogComponent implements OnInit {
   constructor(
