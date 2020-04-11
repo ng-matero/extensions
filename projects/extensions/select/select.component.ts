@@ -19,7 +19,8 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
 
-import { CompareWithFn, GroupValueFn } from '@ng-select/ng-select/lib/ng-select.component';
+export type CompareWithFn = (a: any, b: any) => boolean;
+export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
 let nextUniqueId = 0;
 
