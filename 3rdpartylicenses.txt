@@ -108,12 +108,6 @@ MIT
 @ng-select/ng-select
 MIT
 
-@ngx-progressbar/core
-MIT
-
-@ngx-progressbar/router
-MIT
-
 core-js
 MIT
 Copyright (c) 2014-2020 Denis Pushkarev
@@ -185,6 +179,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
+
+ngx-progressbar
 
 photoviewer
 MIT
