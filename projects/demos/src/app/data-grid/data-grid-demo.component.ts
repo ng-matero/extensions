@@ -101,7 +101,7 @@ export class DataGridDemoComponent implements OnInit {
   multiSelectable = true;
   columnHideable = true;
   columnMovable = true;
-  rowHoverable = true;
+  rowHover = true;
   rowStriped = false;
 
   constructor() { }

@@ -4,8 +4,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material.module';
 
-import { NgProgressModule } from '@ngx-progressbar/core';
-import { NgProgressRouterModule } from '@ngx-progressbar/router';
+import { NgProgressModule } from 'ngx-progressbar';
+import { NgProgressHttpModule } from 'ngx-progressbar/http';
+import { NgProgressRouterModule } from 'ngx-progressbar/router';
 
 import { MtxAlertModule } from '@ng-matero/extensions/alert';
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
@@ -25,6 +26,7 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
     RouterModule,
     MaterialModule,
     NgProgressModule,
+    NgProgressHttpModule,
     NgProgressRouterModule,
     MtxGridModule,
     MtxColorPickerModule,
@@ -42,6 +44,7 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
     RouterModule,
     MaterialModule,
     NgProgressModule,
+    NgProgressHttpModule,
     NgProgressRouterModule,
     MtxGridModule,
     MtxColorPickerModule,

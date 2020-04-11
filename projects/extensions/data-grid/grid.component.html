@@ -14,7 +14,7 @@
 
 <!-- Main Table -->
 <div class="mtx-grid-content">
-  <mat-table [ngClass]="{'mat-table-hover': rowHoverable, 'mat-table-striped': rowStriped}"
+  <mat-table [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped}"
              [dataSource]="dataSource" matSort (matSortChange)="handleSortChange($event)">
 
     <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"

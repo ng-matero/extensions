@@ -60,14 +60,14 @@
           [columns]="columnsPinnable">
 </mtx-grid>
 
-<h3>Hoverable & Striped effect</h3>
+<h3>Hover & Striped effect</h3>
 <div class="mb-3">
-    <mat-checkbox [(ngModel)]="rowHoverable">hoverable</mat-checkbox>
+    <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
     <mat-checkbox class="mx-3" [(ngModel)]="rowStriped">striped</mat-checkbox>
 </div>
 <mtx-grid [data]="list"
           [columns]="columns"
-          [rowHoverable]="rowHoverable"
+          [rowHover]="rowHover"
           [rowStriped]="rowStriped">
 </mtx-grid>
 

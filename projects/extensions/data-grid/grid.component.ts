@@ -82,9 +82,9 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
   @Output() sortChange = new EventEmitter<Sort>();
 
-  /** Table style */
+  /** Hover & Striped style */
 
-  @Input() rowHoverable = false;
+  @Input() rowHover = false;
 
   @Input() rowStriped = false;
 

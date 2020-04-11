@@ -4,8 +4,7 @@
   position: relative;
   display: block;
   width: 100%;
-
-  @include mat-elevation(1);
+  border: 1px solid rgba(0, 0, 0, .15);
 
   .mtx-grid-toolbar {
     display: flex;
@@ -27,7 +26,7 @@
 
     &.mat-table-striped {
       .mat-row-odd {
-        background-color: rgba(0, 0, 0, .05);
+        background-color: rgba(0, 0, 0, .03);
       }
     }
 
