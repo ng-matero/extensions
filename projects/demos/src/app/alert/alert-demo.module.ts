@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-
-import { MtxAlertModule } from '@ng-matero/extensions/alert';
+import { SharedModule } from '../shared.module';
 
 import { AlertDemoComponent } from './alert-demo.component';
 
 @NgModule({
-  imports: [RouterModule.forChild([{ path: '', component: AlertDemoComponent }]), MtxAlertModule],
+  imports: [SharedModule, RouterModule.forChild([{ path: '', component: AlertDemoComponent }])],
   declarations: [AlertDemoComponent],
 })
 export class AlertDemoModule {}

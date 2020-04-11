@@ -1,0 +1,59 @@
+@import '~@angular/material/theming';
+
+.mtx-grid-column-selection {
+  .mat-menu-content {
+    padding: 0;
+  }
+}
+
+.mtx-grid-column-selection-inner {
+  padding: 16px;
+}
+
+.mtx-grid-column-selection-list {
+  display: block;
+  max-width: 100%;
+
+  &.cdk-drop-list-dragging {
+    .mtx-grid-column-selection-item:not(.cdk-drag-placeholder) {
+      transition: transform 250ms cubic-bezier(0, 0, .2, 1);
+    }
+  }
+
+  &.cdk-drop-list {
+    .mtx-grid-column-selection-label {
+      padding: 0 4px;
+    }
+  }
+}
+
+.mtx-grid-column-selection-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 0;
+  color: rgba(0, 0, 0, .87);
+
+  &.cdk-drag-disabled {
+    .cdk-drag-handle {
+      opacity: .35;
+      cursor: no-drop;
+    }
+  }
+
+  .cdk-drag-handle {
+    cursor: move;
+  }
+
+  &.cdk-drag-preview {
+    @include mat-elevation(3);
+  }
+
+  &.cdk-drag-placeholder {
+    opacity: 0;
+  }
+
+  &.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, .2, 1);
+  }
+}

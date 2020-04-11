@@ -1,31 +1,92 @@
-<mtx-grid class="mat-elevation-z1"
-          [data]="list"
-          [columns]="columns"
-          [loading]="isLoading"
-          [pageOnFront]="true"
-          [showPaginator]="true"
-          [pageSizeOptions]="[5,10,20]"
-          [pageSize]="10"
-          (page)="changePage($event)"
-          (sortChange)="changeSort($event)"
-          (selectionChange)="changeSelection($event)">
+<p>
+    The <code>mtx-grid</code> is an powerful material table component. It supports cell selectable,
+    row selectable, multiple row selectable, row expandable, column hiding, column moving and so on.
+</p>
+
+<h3>Basic</h3>
+<mtx-grid [data]="list"
+          [columns]="columns">
 </mtx-grid>
 
-<ng-template #status let-row="row" let-index='index' let-col="col">
+<h3>Hide Pagination</h3>
+<p>If you hide the pagination, the data will not be paging.</p>
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [showPaginator]="false">
+</mtx-grid>
+
+<h3>Row Selectable</h3>
+<mat-radio-group [(ngModel)]="multiSelectable" class="d-block mb-3">
+    <mat-radio-button [value]="false">Single</mat-radio-button>
+    <mat-radio-button [value]="true" class="mx-3">Multiple</mat-radio-button>
+</mat-radio-group>
+
+<p>If you choose multiple option, you can press <kbd>ctrl</kbd>/<kbd>command</kbd> +
+    click or select checkboxs to choose multiple row.</p>
+
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [multiSelectable]="multiSelectable"
+          [rowSelectable]="true">
+</mtx-grid>
+
+<h3>Expandable Row</h3>
+<mtx-grid [data]="list"
+          [columns]="columnsExpandable"
+          [expandable]="true"
+          [expansionTemplate]="expansionTpl">
+</mtx-grid>
+<ng-template #expansionTpl let-row>
+    {{row.name}}
+</ng-template>
+
+<h3>Column Hiding & Moving</h3>
+<div class="mb-3">
+    <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
+    <mat-checkbox class="mx-3" [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
+</div>
+<p>Click the column shown button and open the column panel, you can select or drag the columns.</p>
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [showToolbar]="true"
+          [columnHideable]="columnHideable"
+          [columnMovable]="columnMovable">
+</mtx-grid>
+
+<h3>Column Pinnable</h3>
+<p>The <code>name</code> and <code>weight</code> column pinned left, the <code>email</code> column
+    pinned right. Scroll the columns to test.</p>
+<mtx-grid [data]="list"
+          [columns]="columnsPinnable">
+</mtx-grid>
+
+<h3>Hoverable & Striped effect</h3>
+<div class="mb-3">
+    <mat-checkbox [(ngModel)]="rowHoverable">hoverable</mat-checkbox>
+    <mat-checkbox class="mx-3" [(ngModel)]="rowStriped">striped</mat-checkbox>
+</div>
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [rowHoverable]="rowHoverable"
+          [rowStriped]="rowStriped">
+</mtx-grid>
+
+<h3>Row with option buttons</h3>
+<mtx-grid [data]="list"
+          [columns]="columnsWithButtons">
+</mtx-grid>
+
+<h3>Custom cell template</h3>
+<p>The status column is a custom cell.</p>
+<mtx-grid [data]="list"
+          [columns]="columnsWithCustomCell">
+</mtx-grid>
+<ng-template #statusTpl let-row let-index="index" let-col="colDef">
     <mat-slide-toggle [checked]="row.status">Slide me!</mat-slide-toggle>
 </ng-template>
 
-<hr>
-
-<mtx-grid class="mat-elevation-z1"
-          [data]="list2"
-          [columns]="columns2"
-          [length]="total2"
-          [loading]="isLoading2"
-          [pageOnFront]="false"
-          [showPaginator]="true"
-          [pageIndex]="query.page"
-          [pageSize]="query.per_page"
-          [pageSizeOptions]="[5,10,20]"
-          (page)="getNextPage($event)">
+<h3>Data Formatting</h3>
+<p>The <code>name</code> field use a formatter.</p>
+<mtx-grid [data]="list"
+          [columns]="columnsWithFormatting">
 </mtx-grid>

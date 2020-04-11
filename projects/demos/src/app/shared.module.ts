@@ -7,6 +7,15 @@ import { MaterialModule } from './material.module';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressRouterModule } from '@ngx-progressbar/router';
 
+import { MtxAlertModule } from '@ng-matero/extensions/alert';
+import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
+import { MtxColorPickerModule } from '@ng-matero/extensions/color-picker';
+import { MtxGridModule } from '@ng-matero/extensions/data-grid';
+import { MtxDialogModule } from '@ng-matero/extensions/dialog';
+import { MtxProgressModule } from '@ng-matero/extensions/progress';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
+import { MtxText3dModule } from '@ng-matero/extensions/text3d';
+
 @NgModule({
   declarations: [],
   imports: [
@@ -17,6 +26,14 @@ import { NgProgressRouterModule } from '@ngx-progressbar/router';
     MaterialModule,
     NgProgressModule,
     NgProgressRouterModule,
+    MtxGridModule,
+    MtxColorPickerModule,
+    MtxAlertModule,
+    MtxCheckboxGroupModule,
+    MtxDialogModule,
+    MtxProgressModule,
+    MtxSelectModule,
+    MtxText3dModule
   ],
   exports: [
     CommonModule,
@@ -26,6 +43,14 @@ import { NgProgressRouterModule } from '@ngx-progressbar/router';
     MaterialModule,
     NgProgressModule,
     NgProgressRouterModule,
+    MtxGridModule,
+    MtxColorPickerModule,
+    MtxAlertModule,
+    MtxCheckboxGroupModule,
+    MtxDialogModule,
+    MtxProgressModule,
+    MtxSelectModule,
+    MtxText3dModule
   ],
 })
-export class SharedModule {}
+export class SharedModule { }
