@@ -29,7 +29,7 @@
     "@angular/platform-browser-dynamic": "~9.0.6",
     "@angular/router": "~9.0.6",
     "@ng-select/ng-select": "^4.0.0",
-    "ngx-color": "^5.0.1",
+    "ngx-color": "^5.0.3",
     "ngx-progressbar": "^6.0.2",
     "photoviewer": "^3.4.0",
     "rxjs": "~6.5.4",

@@ -30,8 +30,8 @@
   },
   "homepage": "https://github.com/ng-matero/extensions#readme",
   "dependencies": {
-    "@ng-select/ng-select": "~3.7.3",
-    "ngx-color": "~4.1.1",
+    "@ng-select/ng-select": "~4.0.0",
+    "ngx-color": "~5.0.0",
     "photoviewer": "~3.4.0"
   },
   "peerDependencies": {
