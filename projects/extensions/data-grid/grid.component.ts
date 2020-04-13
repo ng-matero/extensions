@@ -109,15 +109,17 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
   private _selectedRow: any;
 
-  @Output() rowSelectionChange = new EventEmitter<any>();
+  @Output() rowSelectionChange = new EventEmitter<any[]>();
 
   rowSelection: SelectionModel<any>;
 
   /** Cell selection */
 
+  cellSelection = [];
+
   @Input() cellSelectable = true;
 
-  @Output() cellSelectionChange = new EventEmitter<any>();
+  @Output() cellSelectionChange = new EventEmitter<any[]>();
 
   private _selectedCell: MtxGridCellSelectionDirective;
 
@@ -228,7 +230,10 @@ export class MtxGridComponent implements OnInit, OnChanges {
     // If not the same cell
     if (this._selectedCell !== cellRef) {
       const colValue = this._dataGridSrv.getCellValue(rowData, colDef);
-      this.cellSelectionChange.emit({ cellData: colValue, rowData, colDef });
+      this.cellSelection = []; // reset
+      this.cellSelection.push({ cellData: colValue, rowData, colDef });
+
+      this.cellSelectionChange.emit(this.cellSelection);
 
       if (this._selectedCell) {
         this._selectedCell.unselect(); // the selectedCell will be undefined

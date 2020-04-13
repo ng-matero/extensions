@@ -99,6 +99,8 @@ export class DataGridDemoComponent implements OnInit {
   columnsWithCustomCell: MtxGridColumn[] = [];
 
   multiSelectable = true;
+  rowSelectable = true;
+  hideRowSelectionCheckbox = false;
   columnHideable = true;
   columnMovable = true;
   rowHover = true;
@@ -126,6 +128,14 @@ export class DataGridDemoComponent implements OnInit {
   }
 
   changeSelection(e: any) {
+    console.log(e);
+  }
+
+  onRowSelect(e: any) {
+    console.log(e);
+  }
+
+  onCellSelect(e: any) {
     console.log(e);
   }
 

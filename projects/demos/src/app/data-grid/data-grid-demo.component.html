@@ -17,7 +17,8 @@
 </mtx-grid>
 
 <h3>Hide Pagination</h3>
-<p>If you hide the pagination, you should set <code>pageOnFront</code> false to show all the data.</p>
+<p>If you hide the pagination, you should set <code>pageOnFront</code> false to show all the data.
+</p>
 <mtx-grid [data]="list"
           [columns]="columns"
           [pageOnFront]="false"
@@ -25,7 +26,9 @@
 </mtx-grid>
 
 <h3>Row Selectable</h3>
-<mat-radio-group [(ngModel)]="multiSelectable" class="d-block mb-3">
+<mat-checkbox [(ngModel)]="rowSelectable">Row selectable</mat-checkbox>
+<mat-checkbox class="mx-3" [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
+<mat-radio-group [(ngModel)]="multiSelectable">
     <mat-radio-button [value]="false">Single</mat-radio-button>
     <mat-radio-button [value]="true" class="mx-3">Multiple</mat-radio-button>
 </mat-radio-group>
@@ -36,7 +39,10 @@
 <mtx-grid [data]="list"
           [columns]="columns"
           [multiSelectable]="multiSelectable"
-          [rowSelectable]="true">
+          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [rowSelectable]="rowSelectable"
+          (rowSelectionChange)="onRowSelect($event)"
+          (cellSelectionChange)="onCellSelect($event)">
 </mtx-grid>
 
 <h3>Expandable Row</h3>
