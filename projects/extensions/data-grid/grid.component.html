@@ -4,18 +4,19 @@
 <!-- Toolbar -->
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
   <mtx-grid-column-selection [columns]="columnSelectionData"
-                        [selectable]="columnHideable"
-                        [selectedType]="columnHidingChecked"
-                        [sortable]="columnMovable"
-                        (selectionChange)="handleColumnHidingChange($event)"
-                        (sortChange)="handleColumnMovingChange($event)">
+                             [selectable]="columnHideable"
+                             [selectedType]="columnHidingChecked"
+                             [sortable]="columnMovable"
+                             (selectionChange)="handleColumnHidingChange($event)"
+                             (sortChange)="handleColumnMovingChange($event)">
   </mtx-grid-column-selection>
 </div>
 
 <!-- Main Table -->
 <div class="mtx-grid-content">
   <mat-table [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped}"
-             [dataSource]="dataSource" matSort (matSortChange)="handleSortChange($event)">
+             [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
+             matSort (matSortChange)="handleSortChange($event)">
 
     <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"
                   matColumnDef="MatCheckboxColumnDef">
@@ -25,7 +26,7 @@
                       [indeterminate]="rowSelection.hasValue() && !isAllSelected()">
         </mat-checkbox>
       </mat-header-cell>
-      <mat-cell *matCellDef="let row; let index=index" class="mat-checkbox-column-cell">
+      <mat-cell *matCellDef="let row;" class="mat-checkbox-column-cell">
         <mat-checkbox (click)="$event.stopPropagation()"
                       (change)="$event ? handleSingleToggle(row) : null"
                       [checked]="rowSelection.isSelected(row)">
@@ -33,7 +34,7 @@
       </mat-cell>
     </ng-container>
 
-    <ng-container *ngFor="let col of columns; let index=index;">
+    <ng-container *ngFor="let col of columns;">
       <ng-container [matColumnDef]="col.field"
                     [sticky]="col.pinned==='left'"
                     [stickyEnd]="col.pinned==='right'">
@@ -45,22 +46,20 @@
 
           <span class="mat-expanison-placeholder" *ngIf="col.showExpand"></span>{{col.header}}
         </mat-header-cell>
-        <mat-cell *matCellDef="let row; let index=index;"
+        <mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
                   [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                   [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
                   mtx-selectable-cell (cellSelectionChange)="handleCellSelect($event, row, col)">
 
           <ng-container *ngIf="col.cellTemplate else defaultCellTpl">
             <ng-template [ngTemplateOutlet]="col.cellTemplate"
-                         [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: index, colDef: col }">
+                         [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: getIndex(index, dataIndex), colDef: col }">
             </ng-template>
           </ng-container>
 
           <ng-template #defaultCellTpl>
-            <button *ngIf="col.showExpand"
-                    mat-icon-button
-                    mtx-expansion-toggle
-                    (toggleChange)="handleExpansionChange($event, row, index, col);">
+            <button *ngIf="col.showExpand" mat-icon-button mtx-expansion-toggle
+                    (toggleChange)="handleExpansionChange($event, row, col, dataIndex);">
               <mat-icon>keyboard_arrow_right</mat-icon>
             </button>
 
@@ -72,25 +71,30 @@
       </ng-container>
     </ng-container>
 
-    <!-- Expanded Content Column - The expandable row is made up of this one column that spans across all columns -->
-    <ng-container matColumnDef="MatExpansionColumnDef">
-      <mat-cell *matCellDef="let row; let index=index" [attr.colspan]="displayedColumns.length">
-        <ng-template [ngTemplateOutlet]="expansionTemplate"
-                     [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: index }">
-        </ng-template>
-      </mat-cell>
-    </ng-container>
-
     <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
     </mat-header-row>
-    <mat-row *matRowDef="let row; let index = index; columns: displayedColumns;"
-             [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': isOddRow(index)}"
+    <mat-row *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
+             [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': isOddRow(index, dataIndex)}"
              (click)="handleRowSelect($event, row)">
     </mat-row>
-    <mat-row class="mat-expanison-row"
-             *matRowDef="let row; columns: ['MatExpansionColumnDef']; when: isExpansionRow; let index = index"
-             [@expansion]="expansionRowStates[index-1].expanded ? 'expanded' : 'collapsed'">
-    </mat-row>
+
+    <ng-container *ngIf="expandable">
+      <!-- Expanded Content Column - The expandable row is made up of this one column that spans across all columns -->
+      <ng-container matColumnDef="MatExpansionColumnDef">
+        <mat-cell *matCellDef="let row; let dataIndex = dataIndex"
+                  [attr.colspan]="displayedColumns.length">
+          <ng-template [ngTemplateOutlet]="expansionTemplate"
+                       [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex }">
+          </ng-template>
+        </mat-cell>
+      </ng-container>
+
+      <mat-row class="mat-expanison-row"
+               *matRowDef="let row; columns: ['MatExpansionColumnDef']; let dataIndex = dataIndex"
+               [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
+      </mat-row>
+    </ng-container>
+
   </mat-table>
 </div>
 <!-- Paginator -->

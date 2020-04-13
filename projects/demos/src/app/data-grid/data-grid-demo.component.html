@@ -17,9 +17,10 @@
 </mtx-grid>
 
 <h3>Hide Pagination</h3>
-<p>If you hide the pagination, the data will not be paging.</p>
+<p>If you hide the pagination, you should set <code>pageOnFront</code> false to show all the data.</p>
 <mtx-grid [data]="list"
           [columns]="columns"
+          [pageOnFront]="false"
           [showPaginator]="false">
 </mtx-grid>
 
@@ -71,7 +72,7 @@
 <h3>Hover & Striped effect</h3>
 <div class="mb-3">
     <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
-    <mat-checkbox class="mx-3" [(ngModel)]="rowStriped">striped</mat-checkbox>
+    <mat-checkbox class="mx-3" [(ngModel)]="rowStriped">Striped</mat-checkbox>
 </div>
 <mtx-grid [data]="list"
           [columns]="columns"

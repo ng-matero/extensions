@@ -98,10 +98,6 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
   expansionRowStates = [];
 
-  isExpansionRow = (i: number, row: any) => {
-    return this.expandable && this.expansionRowStates[i].hasOwnProperty('expansion');
-  };
-
   /** Whether support multiple row/cell selection */
   @Input() multiSelectable = true;
 
@@ -170,17 +166,12 @@ export class MtxGridComponent implements OnInit, OnChanges {
     if (this.expandable) {
       this.expansionRowStates = []; // reset
 
-      const rows = [];
-
-      this.data.forEach(element => {
-        rows.push(element, element);
-        this.expansionRowStates.push({ expanded: false }, { expansion: true });
+      this.data.forEach(_ => {
+        this.expansionRowStates.push({ expanded: false });
       });
-
-      this.dataSource = new MatTableDataSource<any>(rows);
-    } else {
-      this.dataSource = new MatTableDataSource<any>(this.data);
     }
+
+    this.dataSource = new MatTableDataSource<any>(this.data);
 
     this.rowSelection = new SelectionModel<any>(true, []);
 
@@ -207,14 +198,12 @@ export class MtxGridComponent implements OnInit, OnChanges {
     });
   }
 
-  isOddRow(index: number) {
-    let remainder = index % 2;
+  isOddRow(index: number, dataIndex: number) {
+    return typeof index === 'undefined' ? dataIndex % 2 : index % 2;
+  }
 
-    if (this.expandable) {
-      remainder = index % 4;
-    }
-
-    return remainder === 0;
+  getIndex(index: number, dataIndex: number) {
+    return typeof index === 'undefined' ? dataIndex : index;
   }
 
   handleSortChange(sort: Sort) {
@@ -225,8 +214,8 @@ export class MtxGridComponent implements OnInit, OnChanges {
   handleExpansionChange(
     expansionRef: MtxGridExpansionToggleDirective,
     rowData: any,
-    index: number,
-    column: any
+    column: any,
+    index: number
   ) {
     if (this.expandable) {
       this.expansionRowStates[index].expanded = !this.expansionRowStates[index].expanded;
@@ -263,7 +252,7 @@ export class MtxGridComponent implements OnInit, OnChanges {
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.rowSelection.selected.length;
-    const numRows = this.expandable ? this.dataSource.data.length / 2 : this.dataSource.data.length;
+    const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
@@ -309,6 +298,9 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
   /** Customize expansion event */
   toggleExpansion(index: number) {
+    if (!this.expandable) {
+      throw new Error('The `expandable` should be set true.');
+    }
     this.expansionRowStates[index].expanded = !this.expansionRowStates[index].expanded;
     return this.expansionRowStates[index].expanded;
   }

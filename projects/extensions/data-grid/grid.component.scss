@@ -67,7 +67,7 @@
     }
 
     [dir='rtl'] & {
-      padding-left: auto;
+      padding-left: 4px;
       padding-right: 24px;
 
       &.mat-checkbox-column-cell {
@@ -84,7 +84,7 @@
 
     [dir='rtl'] & {
       padding-left: 24px;
-      padding-right: auto;
+      padding-right: 4px;
     }
   }
 
@@ -130,6 +130,10 @@
     &:last-of-type {
       border-bottom: none;
     }
+  }
+
+  .mat-row-last {
+    border-bottom-width: 0;
   }
 
   .mat-cell {

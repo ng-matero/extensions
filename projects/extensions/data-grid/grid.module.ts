@@ -14,7 +14,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxGridComponent } from './grid.component';
@@ -42,7 +41,6 @@ import { MtxGridService } from './grid.service';
     MatFormFieldModule,
     MatMenuModule,
     DragDropModule,
-    MatSlideToggleModule,
   ],
   exports: [
     MtxGridComponent,
