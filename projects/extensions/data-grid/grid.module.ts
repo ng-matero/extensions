@@ -18,7 +18,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxGridComponent } from './grid.component';
 import { MtxGridCellComponent } from './cell.component';
-import { MtxGridColumnSelectionComponent } from './column-selection.component';
+import { MtxGridColumnMenuComponent } from './column-menu.component';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridService } from './grid.service';
@@ -45,17 +45,17 @@ import { MtxGridService } from './grid.service';
   exports: [
     MtxGridComponent,
     MtxGridCellComponent,
-    MtxGridColumnSelectionComponent,
+    MtxGridColumnMenuComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
   ],
   declarations: [
     MtxGridComponent,
     MtxGridCellComponent,
-    MtxGridColumnSelectionComponent,
+    MtxGridColumnMenuComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
   ],
   providers: [MtxGridService],
 })
-export class MtxGridModule { }
+export class MtxGridModule {}

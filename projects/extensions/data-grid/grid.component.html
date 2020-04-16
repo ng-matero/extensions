@@ -3,35 +3,42 @@
 
 <!-- Toolbar -->
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
-  <mtx-grid-column-selection [columns]="columnSelectionData"
-                             [selectable]="columnHideable"
-                             [selectedType]="columnHidingChecked"
-                             [sortable]="columnMovable"
-                             (selectionChange)="handleColumnHidingChange($event)"
-                             (sortChange)="handleColumnMovingChange($event)">
-  </mtx-grid-column-selection>
+  <mtx-grid-column-menu [columns]="columnMenuData"
+                        [buttonText]="columnMenuButtonText"
+                        [buttonType]="columnMenuButtonType"
+                        [buttonColor]="columnMenuButtonColor"
+                        [buttonClass]="columnMenuButtonClass"
+                        [buttonIcon]="columnMenuButtonIcon"
+                        [selectable]="columnHideable"
+                        [selectedType]="columnHidingChecked"
+                        [sortable]="columnMovable"
+                        (selectionChange)="handleColumnHidingChange($event)"
+                        (sortChange)="handleColumnMovingChange($event)">
+  </mtx-grid-column-menu>
 </div>
 
 <!-- Main Table -->
 <div class="mtx-grid-content">
-  <mat-table [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped}"
-             [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
-             matSort (matSortChange)="handleSortChange($event)">
+  <table mat-table [ngClass]="{'mat-table-hover': rowHover, 
+                               'mat-table-striped': rowStriped,
+                               'mat-table-expandable': expandable}"
+         [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
+         matSort (matSortChange)="handleSortChange($event)">
 
     <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"
-                  matColumnDef="MatCheckboxColumnDef">
-      <mat-header-cell *matHeaderCellDef class="mat-checkbox-column-cell">
+                  matColumnDef="MtxGridCheckboxColumnDef">
+      <th mat-header-cell *matHeaderCellDef class="mtx-grid-checkbox-cell">
         <mat-checkbox (change)="$event ? handleMasterToggle() : null"
                       [checked]="rowSelection.hasValue() && isAllSelected()"
                       [indeterminate]="rowSelection.hasValue() && !isAllSelected()">
         </mat-checkbox>
-      </mat-header-cell>
-      <mat-cell *matCellDef="let row;" class="mat-checkbox-column-cell">
+      </th>
+      <td mat-cell *matCellDef="let row;" class="mtx-grid-checkbox-cell">
         <mat-checkbox (click)="$event.stopPropagation()"
                       (change)="$event ? handleSingleToggle(row) : null"
                       [checked]="rowSelection.isSelected(row)">
         </mat-checkbox>
-      </mat-cell>
+      </td>
     </ng-container>
 
     <ng-container *ngFor="let col of columns;">
@@ -39,17 +46,17 @@
                     [sticky]="col.pinned==='left'"
                     [stickyEnd]="col.pinned==='right'">
 
-        <mat-header-cell *matHeaderCellDef
-                         [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
-                         [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
-                         mat-sort-header [disabled]="!col.sortable">
+        <th mat-header-cell *matHeaderCellDef
+            [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
+            [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
+            mat-sort-header [disabled]="!col.sortable">
 
-          <span class="mat-expanison-placeholder" *ngIf="col.showExpand"></span>{{col.header}}
-        </mat-header-cell>
-        <mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
-                  [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
-                  [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
-                  mtx-selectable-cell (cellSelectionChange)="handleCellSelect($event, row, col)">
+          <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>{{col.header}}
+        </th>
+        <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
+            [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
+            [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
+            mtx-selectable-cell (cellSelectionChange)="handleCellSelect($event, row, col)">
 
           <ng-container *ngIf="col.cellTemplate else defaultCellTpl">
             <ng-template [ngTemplateOutlet]="col.cellTemplate"
@@ -66,39 +73,44 @@
             <mtx-grid-cell [rowData]="row" [colDef]="col"> </mtx-grid-cell>
           </ng-template>
 
-        </mat-cell>
+        </td>
 
       </ng-container>
     </ng-container>
 
-    <mat-header-row mat-header-row *matHeaderRowDef="displayedColumns; sticky: true">
-    </mat-header-row>
-    <mat-row *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
-             [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': isOddRow(index, dataIndex)}"
-             (click)="handleRowSelect($event, row)">
-    </mat-row>
+    <tr mat-header-row mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row
+        *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
+        [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': isOddRow(index, dataIndex)}"
+        (click)="handleRowSelect($event, row)">
+    </tr>
 
     <ng-container *ngIf="expandable">
       <!-- Expanded Content Column - The expandable row is made up of this one column that spans across all columns -->
-      <ng-container matColumnDef="MatExpansionColumnDef">
-        <mat-cell *matCellDef="let row; let dataIndex = dataIndex"
-                  [attr.colspan]="displayedColumns.length">
-          <ng-template [ngTemplateOutlet]="expansionTemplate"
-                       [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex }">
-          </ng-template>
-        </mat-cell>
+      <ng-container matColumnDef="MtxGridExpansionColumnDef">
+        <td mat-cell *matCellDef="let row; let dataIndex = dataIndex"
+            [attr.colspan]="displayedColumns.length">
+          <div class="mtx-grid-expanison-detail"
+               [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
+            <ng-template [ngTemplateOutlet]="expansionTemplate"
+                         [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex }">
+            </ng-template>
+          </div>
+        </td>
       </ng-container>
 
-      <mat-row class="mat-expanison-row"
-               *matRowDef="let row; columns: ['MatExpansionColumnDef']; let dataIndex = dataIndex"
-               [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
-      </mat-row>
+      <tr mat-row [ngClass]="{'mtx-grid-expanison': true, 
+                              'expanded': expansionRowStates[dataIndex].expanded,
+                              'collapsed': !expansionRowStates[dataIndex].expanded}"
+          *matRowDef="let row; columns: ['MtxGridExpansionColumnDef']; let dataIndex = dataIndex">
+      </tr>
     </ng-container>
 
-  </mat-table>
+  </table>
 </div>
+
 <!-- Paginator -->
-<mat-paginator [class.mat-paginator-hidden]="!showPaginator"
+<mat-paginator [class.mat-paginator-hidden]="!showPaginator || hasNoResult"
                [showFirstLastButtons]="showFirstLastButtons"
                [length]="length"
                [pageIndex]="pageIndex"
@@ -108,3 +120,12 @@
                (page)="page.emit($event)"
                [disabled]="pageDisabled">
 </mat-paginator>
+
+<!-- No Result -->
+<div class="mtx-grid-no-result" *ngIf="hasNoResult">
+  <ng-container *ngIf="noResultTemplate else defaultNoResultTpl">
+    <ng-template [ngTemplateOutlet]="noResultTemplate"
+                 [ngTemplateOutletContext]="{ $implicit: 'aaa' }"></ng-template>
+  </ng-container>
+  <ng-template #defaultNoResultTpl>{{noResultText}}</ng-template>
+</div>

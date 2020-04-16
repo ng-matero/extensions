@@ -1,33 +1,33 @@
 @import '~@angular/material/theming';
 
-.mtx-grid-column-selection {
+.mtx-grid-column-menu {
   .mat-menu-content {
     padding: 0;
   }
 }
 
-.mtx-grid-column-selection-inner {
+.mtx-grid-column-menu-inner {
   padding: 16px;
 }
 
-.mtx-grid-column-selection-list {
+.mtx-grid-column-menu-list {
   display: block;
   max-width: 100%;
 
   &.cdk-drop-list-dragging {
-    .mtx-grid-column-selection-item:not(.cdk-drag-placeholder) {
+    .mtx-grid-column-menu-item:not(.cdk-drag-placeholder) {
       transition: transform 250ms cubic-bezier(0, 0, .2, 1);
     }
   }
 
   &.cdk-drop-list {
-    .mtx-grid-column-selection-label {
+    .mtx-grid-column-menu-item-label {
       padding: 0 4px;
     }
   }
 }
 
-.mtx-grid-column-selection-item {
+.mtx-grid-column-menu-item {
   display: flex;
   flex-direction: row;
   align-items: center;

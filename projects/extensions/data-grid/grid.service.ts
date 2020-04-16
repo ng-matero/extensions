@@ -3,7 +3,7 @@ import { MtxGridColumn } from './grid.interface';
 
 @Injectable()
 export class MtxGridService {
-  constructor() { }
+  constructor() {}
 
   /**
    * Get cell value from column key
