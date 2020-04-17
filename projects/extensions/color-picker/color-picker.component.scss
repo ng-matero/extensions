@@ -1,5 +1,18 @@
-.mtx-color-picker {
-  .mat-menu-content {
-    padding: 0 !important;
+.mat-menu-panel {
+  .mat-menu-content:not(:empty) {
+    padding: 0;
+  }
+
+  .mtx-color-picker {
+    padding: 8px;
+
+    .chrome-picker {
+      box-shadow: none;
+      border-radius: 0;
+
+      .saturation {
+        border-radius: 0;
+      }
+    }
   }
 }
