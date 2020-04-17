@@ -25,6 +25,13 @@
           [showPaginator]="false">
 </mtx-grid>
 
+<h3>Sortable</h3>
+<mtx-grid [data]="list"
+          [columns]="columnsSortable"
+          [sortOnFront]="true"
+          (sortChange)="log($event)">
+</mtx-grid>
+
 <h3>Row Selectable</h3>
 <mat-checkbox [(ngModel)]="rowSelectable">Row selectable</mat-checkbox>
 <mat-checkbox class="mx-3" [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
@@ -41,8 +48,8 @@
           [multiSelectable]="multiSelectable"
           [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
           [rowSelectable]="rowSelectable"
-          (rowSelectionChange)="onRowSelect($event)"
-          (cellSelectionChange)="onCellSelect($event)">
+          (rowSelectionChange)="log($event)"
+          (cellSelectionChange)="log($event)">
 </mtx-grid>
 
 <h3>Expandable Row</h3>

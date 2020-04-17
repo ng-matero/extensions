@@ -27,6 +27,14 @@ export class DataGridDemoComponent implements OnInit {
     { header: 'City', field: 'city' },
   ];
 
+  columnsSortable: MtxGridColumn[] = [
+    { header: 'Name', field: 'name', sortable: true },
+    { header: 'Weight', field: 'weight', sortable: true },
+    { header: 'Gender', field: 'gender', sortable: true },
+    { header: 'Mobile', field: 'mobile', sortable: true },
+    { header: 'City', field: 'city', sortable: true },
+  ];
+
   columnsExpandable: MtxGridColumn[] = [
     { header: 'Name', field: 'name', showExpand: true },
     { header: 'Weight', field: 'weight' },
@@ -119,23 +127,7 @@ export class DataGridDemoComponent implements OnInit {
     ];
   }
 
-  changePage(e: any) {
-    console.log(e);
-  }
-
-  changeSort(e: any) {
-    console.log(e);
-  }
-
-  changeSelection(e: any) {
-    console.log(e);
-  }
-
-  onRowSelect(e: any) {
-    console.log(e);
-  }
-
-  onCellSelect(e: any) {
+  log(e: any) {
     console.log(e);
   }
 
