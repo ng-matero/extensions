@@ -14,7 +14,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Sort } from '@angular/material/sort';
+import { Sort, MatSort } from '@angular/material/sort';
 
 import { MtxGridColumn, MtxGridColumnSelectionItem } from './grid.interface';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
@@ -40,10 +40,13 @@ import { MtxGridService } from './grid.service';
   ],
 })
 export class MtxGridComponent implements OnInit, OnChanges {
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   dataSource: MatTableDataSource<any>;
+  @Input() displayedColumns: string[];
 
   @Input() columns: MtxGridColumn[] = [];
-  @Input() displayedColumns: string[];
   @Input() data = [];
   @Input() length = 0;
 
@@ -54,9 +57,6 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
   /** Whether to page on the front end */
   @Input() pageOnFront = true;
-
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-
   @Input() showPaginator = true;
   @Input() pageDisabled = false;
   @Input() showFirstLastButtons = true;
@@ -66,6 +66,9 @@ export class MtxGridComponent implements OnInit, OnChanges {
   @Input() hidePageSize = false;
   @Output() page = new EventEmitter<PageEvent>();
 
+  /** Sort */
+
+  @Input() sortOnFront = true;
   @Output() sortChange = new EventEmitter<Sort>();
 
   /** Hover & Striped style */
@@ -136,9 +139,9 @@ export class MtxGridComponent implements OnInit, OnChanges {
     return this.data.length === 0 && !this.loading;
   }
 
-  constructor(private _dataGridSrv: MtxGridService) {}
+  constructor(private _dataGridSrv: MtxGridService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   // Waiting for async data
   ngOnChanges() {
@@ -175,6 +178,10 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
     if (this.pageOnFront) {
       this.dataSource.paginator = this.paginator;
+    }
+
+    if (this.sortOnFront) {
+      this.dataSource.sort = this.sort;
     }
   }
 

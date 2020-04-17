@@ -26,7 +26,7 @@ export class MtxGridColumnMenuComponent implements OnInit {
   @Input() dndSortable = true;
 
   @Input() get buttonText() {
-    const defaultText = `Column ${this.selectedType === 'show' ? 'Shown' : 'Hidden'}`;
+    const defaultText = `Columns ${this.selectedType === 'show' ? 'Shown' : 'Hidden'}`;
     const text = this._buttonText ? this._buttonText : defaultText;
     return text;
   }

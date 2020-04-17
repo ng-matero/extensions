@@ -123,7 +123,6 @@
     &.collapsed {
       .mat-cell {
         border-bottom-width: 0;
-        transition: border-bottom-width 225ms cubic-bezier(.4, 0, .2, 1);
       }
     }
   }
@@ -212,5 +211,12 @@
     justify-content: center;
     align-items: center;
     min-height: 150px;
+  }
+
+  .mat-sort-header-icon {
+    width: 18px;
+    height: 18px;
+    margin: 0 4px;
+    font-size: 18px;
   }
 }
