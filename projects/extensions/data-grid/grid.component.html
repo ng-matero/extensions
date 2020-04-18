@@ -1,5 +1,5 @@
 <!-- Progress Bar-->
-<mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<mat-progress-bar class="mtx-progress-bar" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 
 <!-- Toolbar -->
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
@@ -19,7 +19,7 @@
 
 <!-- Main Table -->
 <div class="mtx-grid-content">
-  <table mat-table [ngClass]="{'mat-table-hover': rowHover, 
+  <table mat-table [ngClass]="{'mat-table-hover': rowHover,
                                'mat-table-striped': rowStriped,
                                'mat-table-expandable': expandable}"
          [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
@@ -103,7 +103,7 @@
         </td>
       </ng-container>
 
-      <tr mat-row [ngClass]="{'mtx-grid-expanison': true, 
+      <tr mat-row [ngClass]="{'mtx-grid-expanison': true,
                               'expanded': expansionRowStates[dataIndex].expanded,
                               'collapsed': !expansionRowStates[dataIndex].expanded}"
           *matRowDef="let row; columns: ['MtxGridExpansionColumnDef']; let dataIndex = dataIndex">
