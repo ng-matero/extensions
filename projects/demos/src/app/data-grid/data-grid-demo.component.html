@@ -16,6 +16,12 @@
           [columns]="columns">
 </mtx-grid>
 
+<h3>Loading Status</h3>
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [loading]="true">
+</mtx-grid>
+
 <h3>Hide Pagination</h3>
 <p>If you hide the pagination, you should set <code>pageOnFront</code> false to show all the data.
 </p>

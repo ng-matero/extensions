@@ -1,5 +1,5 @@
 <!-- Progress Bar-->
-<mat-progress-bar class="mtx-progress-bar" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<mat-progress-bar class="mtx-grid-progress" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 
 <!-- Toolbar -->
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
@@ -128,8 +128,7 @@
 <!-- No Result -->
 <div class="mtx-grid-no-result" *ngIf="hasNoResult">
   <ng-container *ngIf="noResultTemplate else defaultNoResultTpl">
-    <ng-template [ngTemplateOutlet]="noResultTemplate"
-                 [ngTemplateOutletContext]="{ $implicit: 'aaa' }"></ng-template>
+    <ng-template [ngTemplateOutlet]="noResultTemplate"></ng-template>
   </ng-container>
   <ng-template #defaultNoResultTpl>{{noResultText}}</ng-template>
 </div>

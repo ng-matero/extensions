@@ -49,7 +49,6 @@ export class MtxGridComponent implements OnInit, OnChanges {
   @Input() columns: MtxGridColumn[] = [];
   @Input() data = [];
   @Input() length = 0;
-
   @Input() loading = false;
 
   /** Whether to show tooltip on columns */
