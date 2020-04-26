@@ -221,6 +221,7 @@ export class MtxColorPickerComponent
    */
   writeValue(value: string | null): void {
     this.value = value || '';
+    this._changeDetectorRef.markForCheck();
   }
 
   /**

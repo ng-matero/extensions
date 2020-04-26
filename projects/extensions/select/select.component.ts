@@ -225,6 +225,7 @@ export class MtxSelectComponent
    */
   writeValue(value: any): void {
     this.value = value;
+    this._changeDetectorRef.markForCheck();
   }
 
   /**
