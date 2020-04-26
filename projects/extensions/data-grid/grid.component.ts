@@ -135,7 +135,7 @@ export class MtxGridComponent implements OnInit, OnChanges {
   @Input() noResultTemplate: TemplateRef<any>;
 
   get hasNoResult() {
-    return this.data.length === 0 && !this.loading;
+    return (!this.data || this.data.length === 0) && !this.loading;
   }
 
   constructor(private _dataGridSrv: MtxGridService) { }
@@ -185,17 +185,14 @@ export class MtxGridComponent implements OnInit, OnChanges {
   }
 
   countPinnedPosition() {
-    const count = (acc: number, cur: MtxGridColumn) => acc + parseFloat(cur.width);
+    const count = (acc: number, cur: MtxGridColumn) => acc + parseFloat(cur.width || '80px');
 
-    const pinnedLeftCols = this.columns.filter(
-      col => col.pinned && col.pinned === 'left' && col.width
-    );
+    const pinnedLeftCols = this.columns.filter(col => col.pinned && col.pinned === 'left');
     pinnedLeftCols.forEach((item, idx) => {
       item.left = pinnedLeftCols.slice(0, idx).reduce(count, 0) + 'px';
     });
 
-    const pinnedRightCols = this.columns
-      .filter(col => col.pinned && col.pinned === 'right' && col.width)
+    const pinnedRightCols = this.columns.filter(col => col.pinned && col.pinned === 'right')
       .reverse();
     pinnedRightCols.forEach((item, idx) => {
       item.right = pinnedRightCols.slice(0, idx).reduce(count, 0) + 'px';

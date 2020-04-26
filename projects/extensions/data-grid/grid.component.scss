@@ -147,7 +147,9 @@
     }
 
     &:last-of-type {
-      border-bottom: none;
+      .mat-cell {
+        border-bottom-width: 0;
+      }
     }
   }
 
