@@ -2,7 +2,8 @@
        [(ngModel)]="value"
        [placeholder]="placeholder"
        [disabled]="disabled"
-       (focusin)="_handleFocus()">
+       (focusin)="_handleFocus()"
+       autocomplete="off">
 
 <div #colorPickerTrigger="matMenuTrigger"
      [matMenuTriggerFor]="colorPickerPopover"

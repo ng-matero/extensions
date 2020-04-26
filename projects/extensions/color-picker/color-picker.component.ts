@@ -53,7 +53,7 @@ export class MtxColorPickerComponent
     this._onChange(newValue);
     this.stateChanges.next();
   }
-  private _value = null;
+  private _value = '';
 
   /** Implemented as part of MatFormFieldControl. */
   readonly stateChanges: Subject<void> = new Subject<void>();
