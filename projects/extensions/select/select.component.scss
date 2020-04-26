@@ -67,6 +67,14 @@ $ng-select-value-font-size: .875em !default;
   }
 
   &.ng-select-single {
+    // vertical align with material form field
+    &.ng-select-filtered {
+      .ng-placeholder {
+        display: initial;
+        visibility: hidden;
+      }
+    }
+
     .ng-select-container {
       .ng-value-container {
         // vertical align with material form field
