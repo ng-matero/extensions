@@ -16,6 +16,9 @@ import { MtxCheckboxGroupOption } from './checkbox-group.interface';
 @Component({
   selector: 'mtx-checkbox-group',
   exportAs: 'mtxCheckboxGroup',
+  host: {
+    class: 'mtx-checkbox-group'
+  },
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
   encapsulation: ViewEncapsulation.None,

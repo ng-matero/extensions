@@ -1,17 +1,15 @@
-<div class="mtx-checkbox-group">
-    <mat-checkbox class="mtx-checkbox-select-all"
-                  *ngIf="showSelectAll"
-                  [checked]="selectAll"
-                  [(indeterminate)]="selectAllIndeterminate"
-                  (change)="updateAllChecked($event, -1);">
-        {{selectAllLabel}}
-    </mat-checkbox>
+<mat-checkbox class="mtx-checkbox-select-all"
+              *ngIf="showSelectAll"
+              [checked]="selectAll"
+              [(indeterminate)]="selectAllIndeterminate"
+              (change)="updateAllChecked($event, -1);">
+    {{selectAllLabel}}
+</mat-checkbox>
 
-    <mat-checkbox class="mtx-checkbox-single"
-                  *ngFor="let item of options; let i = index;"
-                  [(ngModel)]="item.checked"
-                  [disabled]="item.disabled"
-                  (change)="updateSingleChecked($event, i)">
-        {{item.label}}
-    </mat-checkbox>
-</div>
+<mat-checkbox class="mtx-checkbox-single"
+              *ngFor="let item of options; let i = index;"
+              [(ngModel)]="item.checked"
+              [disabled]="item.disabled"
+              (change)="updateSingleChecked($event, i)">
+    {{item.label}}
+</mat-checkbox>
