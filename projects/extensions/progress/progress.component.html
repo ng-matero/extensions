@@ -1,9 +1,6 @@
-<div class="mtx-progress"
-     [ngStyle]="{ 'height': height, 'background-color': background }">
-  <div [class]="'mtx-progress-bar mtx-progress-bar-' + type"
-       [ngClass]="{'mtx-progress-bar-striped': striped, 'mtx-progress-bar-animated': animate}"
-       [ngStyle]="{ 'width.%': value, 'background-color': foreground }"
-       role="progressbar">
-    <ng-content></ng-content>
-  </div>
+<div [class]="'mtx-progress-fill mtx-progress-fill-' + type"
+     [ngClass]="{'mtx-progress-fill-striped': striped, 'mtx-progress-fill-animated': animate}"
+     [ngStyle]="{ 'width.%': value, 'background-color': foreground }"
+     role="progress-fill">
+  <ng-content></ng-content>
 </div>

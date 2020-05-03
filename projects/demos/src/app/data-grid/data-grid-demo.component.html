@@ -1,14 +1,14 @@
 <p>
-    The <code>mtx-grid</code> is an powerful material table component. It supports cell selectable,
-    row selectable, multiple row selectable, row expandable, column hiding, column moving and so on.
+  The <code>mtx-grid</code> is an powerful material table component. It supports cell selectable,
+  row selectable, multiple row selectable, row expandable, column hiding, column moving and so on.
 
-    <a mat-raised-button color="primary"
-       href="https://github.com/ng-matero/extensions/blob/master/projects/demos/src/app/data-grid/data-grid-demo.component.html"
-       target="_blank">
-        View Code
-    </a>
-    <a mat-raised-button color="accent"
-       href="https://nzbin.gitbook.io/material-extensions/data-grid" target="_blank">API</a>
+  <a mat-raised-button color="primary"
+     href="https://github.com/ng-matero/extensions/blob/master/projects/demos/src/app/data-grid/data-grid-demo.component.html"
+     target="_blank">
+    View Code
+  </a>
+  <a mat-raised-button color="accent"
+     href="https://nzbin.gitbook.io/material-extensions/data-grid" target="_blank">API</a>
 </p>
 
 <h3>Basic</h3>
@@ -42,12 +42,12 @@
 <mat-checkbox [(ngModel)]="rowSelectable">Row selectable</mat-checkbox>
 <mat-checkbox class="mx-3" [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
 <mat-radio-group [(ngModel)]="multiSelectable">
-    <mat-radio-button [value]="false">Single</mat-radio-button>
-    <mat-radio-button [value]="true" class="mx-3">Multiple</mat-radio-button>
+  <mat-radio-button [value]="false">Single</mat-radio-button>
+  <mat-radio-button [value]="true" class="mx-3">Multiple</mat-radio-button>
 </mat-radio-group>
 
 <p>If you choose multiple option, you can press <kbd>ctrl</kbd>/<kbd>command</kbd> +
-    click or select checkboxs to choose multiple row.</p>
+  click or select checkboxs to choose multiple row.</p>
 
 <mtx-grid [data]="list"
           [columns]="columns"
@@ -65,13 +65,13 @@
           [expansionTemplate]="expansionTpl">
 </mtx-grid>
 <ng-template #expansionTpl let-row>
-    {{row.name}}
+  {{row.name}}
 </ng-template>
 
 <h3>Column Hiding & Moving</h3>
 <div class="mb-3">
-    <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
-    <mat-checkbox class="mx-3" [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
+  <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
+  <mat-checkbox class="mx-3" [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
 </div>
 <p>Click the <kbd>Column Shown</kbd> button, you can select or drag the columns.</p>
 <mtx-grid [data]="list"
@@ -83,15 +83,15 @@
 
 <h3>Column Pinnable</h3>
 <p>The <code>name</code> and <code>weight</code> column pinned left, the <code>email</code> column
-    pinned right. Scroll the columns to test.</p>
+  pinned right. Scroll the columns to test.</p>
 <mtx-grid [data]="list"
           [columns]="columnsPinnable">
 </mtx-grid>
 
 <h3>Hover & Striped effect</h3>
 <div class="mb-3">
-    <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
-    <mat-checkbox class="mx-3" [(ngModel)]="rowStriped">Striped</mat-checkbox>
+  <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
+  <mat-checkbox class="mx-3" [(ngModel)]="rowStriped">Striped</mat-checkbox>
 </div>
 <mtx-grid [data]="list"
           [columns]="columns"
@@ -110,7 +110,7 @@
           [columns]="columnsWithCustomCell">
 </mtx-grid>
 <ng-template #statusTpl let-row let-index="index" let-col="colDef">
-    <mat-slide-toggle [checked]="row.status">Slide me!</mat-slide-toggle>
+  <mat-slide-toggle [checked]="row.status">Slide me!</mat-slide-toggle>
 </ng-template>
 
 <h3>Data Formatting</h3>

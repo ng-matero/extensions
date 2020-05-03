@@ -1,80 +1,80 @@
 <ng-container [ngSwitch]="buttonType">
-    <ng-container *ngSwitchCase="'raised'">
-        <button [ngClass]="buttonClass" mat-raised-button [color]="buttonColor"
-                [matMenuTriggerFor]="menu">
-            <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
-        </button>
-    </ng-container>
-    <ng-container *ngSwitchCase="'stroked'">
-        <button [ngClass]="buttonClass" mat-stroked-button [color]="buttonColor"
-                [matMenuTriggerFor]="menu">
-            <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
-        </button>
-    </ng-container>
-    <ng-container *ngSwitchCase="'flat'">
-        <button [ngClass]="buttonClass" mat-flat-button [color]="buttonColor"
-                [matMenuTriggerFor]="menu">
-            <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
-        </button>
-    </ng-container>
-    <ng-container *ngSwitchCase="'icon'">
-        <button [ngClass]="buttonClass" mat-icon-button [color]="buttonColor"
-                [matMenuTriggerFor]="menu">
-            <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon>
-        </button>
-    </ng-container>
-    <ng-container *ngSwitchCase="'fab'">
-        <button [ngClass]="buttonClass" mat-fab [color]="buttonColor" [matMenuTriggerFor]="menu">
-            <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
-        </button>
-    </ng-container>
-    <ng-container *ngSwitchCase="'mini-fab'">
-        <button [ngClass]="buttonClass" mat-mini-fab [color]="buttonColor"
-                [matMenuTriggerFor]="menu">
-            <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
-        </button>
-    </ng-container>
-    <ng-container *ngSwitchDefault>
-        <button [ngClass]="buttonClass" mat-button [color]="buttonColor" [matMenuTriggerFor]="menu">
-            <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
-        </button>
-    </ng-container>
+  <ng-container *ngSwitchCase="'raised'">
+    <button [ngClass]="buttonClass" mat-raised-button [color]="buttonColor"
+            [matMenuTriggerFor]="menu">
+      <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'stroked'">
+    <button [ngClass]="buttonClass" mat-stroked-button [color]="buttonColor"
+            [matMenuTriggerFor]="menu">
+      <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'flat'">
+    <button [ngClass]="buttonClass" mat-flat-button [color]="buttonColor"
+            [matMenuTriggerFor]="menu">
+      <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'icon'">
+    <button [ngClass]="buttonClass" mat-icon-button [color]="buttonColor"
+            [matMenuTriggerFor]="menu">
+      <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon>
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'fab'">
+    <button [ngClass]="buttonClass" mat-fab [color]="buttonColor" [matMenuTriggerFor]="menu">
+      <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="'mini-fab'">
+    <button [ngClass]="buttonClass" mat-mini-fab [color]="buttonColor"
+            [matMenuTriggerFor]="menu">
+      <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    <button [ngClass]="buttonClass" mat-button [color]="buttonColor" [matMenuTriggerFor]="menu">
+      <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
+    </button>
+  </ng-container>
 </ng-container>
 
 <mat-menu #menu="matMenu" class="mtx-grid-column-menu">
-    <div class="mtx-grid-column-menu-inner"
-         (click)="$event.stopPropagation()"
-         (keydown)="$event.stopPropagation()">
+  <div class="mtx-grid-column-menu-inner"
+       (click)="$event.stopPropagation()"
+       (keydown)="$event.stopPropagation()">
 
-        <div class="mtx-grid-column-menu-list"
-             cdkDropList (cdkDropListDropped)="handleDrop($event)"
-             *ngIf="sortable">
-            <div class="mtx-grid-column-menu-item" *ngFor="let col of columns"
-                 cdkDrag [cdkDragDisabled]="selectedType === 'show'? !col.show : col.hide">
-                <mat-icon cdkDragHandle>drag_handle</mat-icon>
-                <ng-template [ngTemplateOutlet]="checkboxList"
-                             [ngTemplateOutletContext]="{ $implicit: col }">
-                </ng-template>
-            </div>
-        </div>
-
-        <div class="mtx-grid-column-menu-list" *ngIf="!sortable">
-            <div class="mtx-grid-column-menu-item" *ngFor="let col of columns">
-                <ng-template [ngTemplateOutlet]="checkboxList"
-                             [ngTemplateOutletContext]="{ $implicit: col }">
-                </ng-template>
-            </div>
-        </div>
+    <div class="mtx-grid-column-menu-list"
+         cdkDropList (cdkDropListDropped)="handleDrop($event)"
+         *ngIf="sortable">
+      <div class="mtx-grid-column-menu-item" *ngFor="let col of columns"
+           cdkDrag [cdkDragDisabled]="selectedType === 'show'? !col.show : col.hide">
+        <mat-icon cdkDragHandle>drag_handle</mat-icon>
+        <ng-template [ngTemplateOutlet]="checkboxList"
+                     [ngTemplateOutletContext]="{ $implicit: col }">
+        </ng-template>
+      </div>
     </div>
+
+    <div class="mtx-grid-column-menu-list" *ngIf="!sortable">
+      <div class="mtx-grid-column-menu-item" *ngFor="let col of columns">
+        <ng-template [ngTemplateOutlet]="checkboxList"
+                     [ngTemplateOutletContext]="{ $implicit: col }">
+        </ng-template>
+      </div>
+    </div>
+  </div>
 </mat-menu>
 
 <ng-template #checkboxList let-col>
-    <mat-checkbox class="mtx-grid-column-menu-item-label"
-                  *ngIf="selectable"
-                  [(ngModel)]="col[selectedType]"
-                  [disabled]="col.disabled"
-                  (change)="handleSelect($event)">
-        {{col.label}}
-    </mat-checkbox>
-    <span class="mtx-grid-column-menu-item-label" *ngIf="!selectable">{{col.label}}</span>
+  <mat-checkbox class="mtx-grid-column-menu-item-label"
+                *ngIf="selectable"
+                [(ngModel)]="col[selectedType]"
+                [disabled]="col.disabled"
+                (change)="handleSelect($event)">
+    {{col.label}}
+  </mat-checkbox>
+  <span class="mtx-grid-column-menu-item-label" *ngIf="!selectable">{{col.label}}</span>
 </ng-template>

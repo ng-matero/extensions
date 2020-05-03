@@ -3,7 +3,7 @@
               [checked]="selectAll"
               [(indeterminate)]="selectAllIndeterminate"
               (change)="updateAllChecked($event, -1);">
-    {{selectAllLabel}}
+  {{selectAllLabel}}
 </mat-checkbox>
 
 <mat-checkbox class="mtx-checkbox-single"
@@ -11,5 +11,5 @@
               [(ngModel)]="item.checked"
               [disabled]="item.disabled"
               (change)="updateSingleChecked($event, i)">
-    {{item.label}}
+  {{item.label}}
 </mat-checkbox>

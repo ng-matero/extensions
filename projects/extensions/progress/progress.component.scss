@@ -1,6 +1,6 @@
 $white: #fff !default;
 $progress-height: 1rem !default;
-$progress-bar-animation-timing: 1s linear infinite !default;
+$progress-fill-animation-timing: 1s linear infinite !default;
 
 @mixin gradient-striped($color: rgba($white, .15), $angle: 45deg) {
   background-image: linear-gradient(
@@ -21,11 +21,11 @@ $progress-bar-animation-timing: 1s linear infinite !default;
   margin: 8px 0;
   overflow: hidden;
   font-size: .75rem;
-  background-color: #eceff1;
+  background-color: rgba(0, 25, 45, .05);
   border-radius: .25rem;
 }
 
-.mtx-progress-bar {
+.mtx-progress-fill {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -33,41 +33,41 @@ $progress-bar-animation-timing: 1s linear infinite !default;
   transition: width .6s ease;
 }
 
-.mtx-progress-bar-success {
+.mtx-progress-fill-success {
   color: #fff;
   background-color: #4caf50;
 }
 
-.mtx-progress-bar-info {
+.mtx-progress-fill-info {
   color: #fff;
   background-color: #2196f3;
 }
 
-.mtx-progress-bar-warning {
+.mtx-progress-fill-warning {
   color: #fff;
   background-color: #fb8c00;
 }
 
-.mtx-progress-bar-danger {
+.mtx-progress-fill-danger {
   color: #fff;
   background-color: #ff5252;
 }
 
-.mtx-progress-bar-striped {
+.mtx-progress-fill-striped {
   @include gradient-striped();
 
   background-size: $progress-height $progress-height;
 }
 
-.mtx-progress-bar-animated {
-  animation: mtx-progress-bar-stripes $progress-bar-animation-timing;
+.mtx-progress-fill-animated {
+  animation: mtx-progress-fill-stripes $progress-fill-animation-timing;
 
   @media (prefers-reduced-motion: reduce) {
     animation: none;
   }
 }
 
-@keyframes mtx-progress-bar-stripes {
+@keyframes mtx-progress-fill-stripes {
   from {
     background-position: $progress-height 0;
   }
