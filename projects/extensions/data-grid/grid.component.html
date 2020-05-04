@@ -23,7 +23,7 @@
                                'mat-table-striped': rowStriped,
                                'mat-table-expandable': expandable}"
          [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
-         matSort (matSortChange)="handleSortChange($event)">
+         matSort (matSortChange)="handleSortChange($event)" [trackBy]="trackBy">
 
     <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"
                   matColumnDef="MtxGridCheckboxColumnDef">
