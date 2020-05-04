@@ -4,9 +4,7 @@
 
   <a mat-raised-button color="primary"
      href="https://github.com/ng-matero/extensions/blob/master/projects/demos/src/app/data-grid/data-grid-demo.component.html"
-     target="_blank">
-    View Code
-  </a>
+     target="_blank">View Code</a>
   <a mat-raised-button color="accent"
      href="https://nzbin.gitbook.io/material-extensions/data-grid" target="_blank">API</a>
 </p>
@@ -123,3 +121,22 @@
 <mtx-grid [data]="[]"
           [columns]="columnsWithFormatting">
 </mtx-grid>
+
+<h3>Custom Header Template</h3>
+<mtx-grid [data]="list"
+          [columns]="columnsWithCustomHeader"
+          [headerTemplate]="headerTpl">
+</mtx-grid>
+<ng-template #headerTpl let-col>
+  {{col.header}} <mat-icon [matTooltip]="col.description">info</mat-icon>
+</ng-template>
+
+<h3>Custom Footer Template</h3>
+<mtx-grid [data]="list"
+          [columns]="columnsWithCustomFooter"
+          [showFooter]="true"
+          [footerTemplate]="{'cost': footerTpl}">
+</mtx-grid>
+<ng-template #footerTpl let-col let-data="data">
+    <div>{{getTotalCost() | currency}}</div>
+</ng-template>

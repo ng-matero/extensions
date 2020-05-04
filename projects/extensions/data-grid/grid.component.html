@@ -19,9 +19,10 @@
 
 <!-- Main Table -->
 <div class="mtx-grid-content">
-  <table mat-table [ngClass]="{'mat-table-hover': rowHover,
-                               'mat-table-striped': rowStriped,
-                               'mat-table-expandable': expandable}"
+  <table mat-table
+         [ngClass]="{'mat-table-hover': rowHover,
+                     'mat-table-striped': rowStriped,
+                     'mat-table-expandable': expandable}"
          [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
          matSort (matSortChange)="handleSortChange($event)">
 
@@ -39,6 +40,7 @@
                       [checked]="rowSelection.isSelected(row)">
         </mat-checkbox>
       </td>
+      <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 
     <ng-container *ngFor="let col of columns;">
@@ -50,35 +52,89 @@
             [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
             [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
           <div class="mat-header-cell-inner">
-            <div mat-sort-header [disabled]="!col.sortable">
-              <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>
-              <span>{{col.header}}</span>
-              <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>
-            </div>
+
+            <ng-template [ngIf]="isTemplateRef(headerTemplate)" [ngIfElse]="headerCellTpl">
+              <ng-template [ngTemplateOutlet]="headerTemplate"
+                           [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
+              </ng-template>
+            </ng-template>
+            <ng-template #headerCellTpl>
+              <ng-template [ngIf]="headerTemplate && isTemplateRef(headerTemplate[col.field])"
+                           [ngIfElse]="defaultHeaderCellTpl">
+                <ng-template [ngTemplateOutlet]="headerTemplate[col.field]"
+                             [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
+                </ng-template>
+              </ng-template>
+            </ng-template>
+            <ng-template #defaultHeaderCellTpl>
+              <div mat-sort-header [disabled]="!col.sortable">
+                <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>
+                <span>{{col.header}}</span>
+                <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>
+              </div>
+            </ng-template>
+
           </div>
         </th>
+
         <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
             [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
             [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
             mtx-selectable-cell (cellSelectionChange)="handleCellSelect($event, row, col)">
 
-          <ng-container *ngIf="col.cellTemplate else defaultCellTpl">
-            <ng-template [ngTemplateOutlet]="col.cellTemplate"
+          <ng-template [ngIf]="isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
+            <ng-template [ngTemplateOutlet]="cellTemplate"
                          [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: getIndex(index, dataIndex), colDef: col }">
             </ng-template>
-          </ng-container>
-
+          </ng-template>
+          <ng-template #cellTpl>
+            <ng-template [ngIf]="cellTemplate && isTemplateRef(cellTemplate[col.field])"
+                         [ngIfElse]="colDefCellTpl">
+              <ng-template [ngTemplateOutlet]="cellTemplate[col.field]"
+                           [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: getIndex(index, dataIndex), colDef: col }">
+              </ng-template>
+            </ng-template>
+          </ng-template>
+          <ng-template #colDefCellTpl>
+            <ng-template [ngIf]="col.cellTemplate" [ngIfElse]="defaultCellTpl"
+                         [ngTemplateOutlet]="col.cellTemplate"
+                         [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: getIndex(index, dataIndex), colDef: col }">
+            </ng-template>
+          </ng-template>
           <ng-template #defaultCellTpl>
             <button *ngIf="col.showExpand" mat-icon-button mtx-expansion-toggle
                     (toggleChange)="handleExpansionChange($event, row, col, dataIndex);">
               <mat-icon>keyboard_arrow_right</mat-icon>
             </button>
 
-            <mtx-grid-cell [rowData]="row" [colDef]="col"> </mtx-grid-cell>
+            <mtx-grid-cell [rowData]="row" [colDef]="col"></mtx-grid-cell>
           </ng-template>
 
         </td>
 
+        <td mat-footer-cell *matFooterCellDef
+            [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
+            [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
+          <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>
+
+          <ng-template [ngIf]="isTemplateRef(footerTemplate)" [ngIfElse]="footerCellTpl">
+            <ng-template [ngTemplateOutlet]="footerTemplate"
+                         [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }">
+            </ng-template>
+          </ng-template>
+          <ng-template #footerCellTpl>
+            <ng-template [ngIf]="footerTemplate && isTemplateRef(footerTemplate[col.field])"
+                         [ngIfElse]="defaultFooterCellTpl">
+              <ng-template [ngTemplateOutlet]="footerTemplate[col.field]"
+                           [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }">
+              </ng-template>
+            </ng-template>
+          </ng-template>
+          <ng-template #defaultFooterCellTpl>
+            <span>{{col.footer}}</span>
+          </ng-template>
+
+        </td>
       </ng-container>
     </ng-container>
 
@@ -88,6 +144,9 @@
         [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': isOddRow(index, dataIndex)}"
         (click)="handleRowSelect($event, row)">
     </tr>
+    <ng-container *ngIf="whetherShowFooter">
+      <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
+    </ng-container>
 
     <ng-container *ngIf="expandable">
       <!-- Expanded Content Column - The expandable row is made up of this one column that spans across all columns -->

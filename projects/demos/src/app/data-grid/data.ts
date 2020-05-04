@@ -19,7 +19,8 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Boron@gmail.com',
-    status: false
+    status: false,
+    cost: 4
   },
   {
     position: 2,
@@ -41,7 +42,8 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Helium@gmail.com',
-    status: true
+    status: true,
+    cost: 5
   },
   {
     position: 3,
@@ -63,6 +65,7 @@ export const ELEMENT_DATA: any[] = [
     website: 'www.matero.com',
     company: 'matero',
     email: 'Nitrogen@gmail.com',
-    status: true
+    status: true,
+    cost: 2
   },
 ];

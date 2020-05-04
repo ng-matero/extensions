@@ -109,6 +109,8 @@ export class MtxGridComponent implements OnInit, OnChanges {
   /** Toolbar */
 
   @Input() showToolbar = false;
+  @Input() toolbarTitle = '';
+  @Input() toolbarTemplate: TemplateRef<any>;
 
   columnMenuData: MtxGridColumnSelectionItem[] = [];
 
@@ -129,8 +131,7 @@ export class MtxGridComponent implements OnInit, OnChanges {
   @Input() columnPinnable = true;
   @Output() columnPinningChange = new EventEmitter<string[]>();
 
-  // No Result
-
+  /** No Result */
   @Input() noResultText = 'No records found';
   @Input() noResultTemplate: TemplateRef<any>;
 
@@ -138,7 +139,25 @@ export class MtxGridComponent implements OnInit, OnChanges {
     return (!this.data || this.data.length === 0) && !this.loading;
   }
 
+  /** Header */
+  @Input() headerTemplate: TemplateRef<any>;
+
+  /** Footer */
+  @Input() showFooter = false;
+  @Input() footerTemplate: TemplateRef<any>;
+
+  get whetherShowFooter() {
+    return this.showFooter && this.data?.length > 0 && !this.loading;
+  }
+
+  /** Cell */
+  @Input() cellTemplate: TemplateRef<any>;
+
   constructor(private _dataGridSrv: MtxGridService) { }
+
+  isTemplateRef(obj: any) {
+    return obj instanceof TemplateRef;
+  }
 
   ngOnInit() { }
 
@@ -148,7 +167,7 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
     this.columnMenuData = this.columns.map(item => {
       return {
-        label: item.header,
+        label: item.header as string,
         field: item.field,
         show: !item.hide,
         hide: item.hide,

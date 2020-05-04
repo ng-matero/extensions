@@ -32,8 +32,8 @@ export interface MtxGridColumnButton {
  * Grid
  */
 export interface MtxGridColumn {
-  header?: string;
   field: string;
+  header?: string | TemplateRef<any>;
   hide?: boolean;
   disabled?: boolean;
   pinned?: 'left' | 'right';
@@ -50,6 +50,7 @@ export interface MtxGridColumn {
   showExpand?: boolean;
   description?: string;
   i18n?: string;
+  footer?: string | TemplateRef<any>;
 }
 
 /**
@@ -61,4 +62,11 @@ export interface MtxGridColumnSelectionItem {
   show?: boolean;
   hide?: boolean;
   disabled?: boolean;
+}
+
+/**
+ * Cell Template
+ */
+export interface MtxGridCellTemplate {
+  [key: string]: TemplateRef<any>;
 }
