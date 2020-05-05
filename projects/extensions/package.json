@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "9.3.3",
+  "version": "9.4.0",
   "description": "Angular Material Extensions",
   "author": "nzbin<nzb329@163.com>",
   "repository": {
@@ -30,16 +30,16 @@
   },
   "homepage": "https://github.com/ng-matero/extensions#readme",
   "dependencies": {
-    "@ng-select/ng-select": "~4.0.0",
-    "ngx-color": "~5.0.0",
-    "photoviewer": "~3.4.0"
+    "@ng-select/ng-select": "^4.0.0",
+    "ngx-color": "^5.0.0",
+    "photoviewer": "^3.4.0"
   },
   "peerDependencies": {
-    "@angular/animations": "~9.0.0",
-    "@angular/cdk": "~9.1.0",
-    "@angular/common": "~9.0.0",
-    "@angular/core": "~9.0.0",
-    "@angular/material": "~9.1.0"
+    "@angular/animations": "^9.0.0",
+    "@angular/cdk": "^9.1.0",
+    "@angular/common": "^9.0.0",
+    "@angular/core": "^9.0.0",
+    "@angular/material": "^9.1.0"
   },
   "sideEffects": false
 }
