@@ -75,6 +75,7 @@
 <mtx-grid [data]="list"
           [columns]="columns"
           [showToolbar]="true"
+          [toolbarTitle]="'Data Grid'"
           [columnHideable]="columnHideable"
           [columnMovable]="columnMovable">
 </mtx-grid>
@@ -103,12 +104,22 @@
 </mtx-grid>
 
 <h3>Custom cell template</h3>
-<p>The status column is a custom cell.</p>
+<p>The status column are custom cells.</p>
 <mtx-grid [data]="list"
           [columns]="columnsWithCustomCell">
 </mtx-grid>
 <ng-template #statusTpl let-row let-index="index" let-col="colDef">
   <mat-slide-toggle [checked]="row.status">Slide me!</mat-slide-toggle>
+</ng-template>
+
+<p>There has another easiest way to custom cells. You can use property
+  <code>{{cellTemplateString}}</code></p>
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [cellTemplate]="{city: cityTpl}">
+</mtx-grid>
+<ng-template #cityTpl let-row let-index="index" let-col="colDef">
+  <button mat-raised-button color="primary">{{row.city}}</button>
 </ng-template>
 
 <h3>Data Formatting</h3>
@@ -134,9 +145,20 @@
 <h3>Custom Footer Template</h3>
 <mtx-grid [data]="list"
           [columns]="columnsWithCustomFooter"
-          [showFooter]="true"
-          [footerTemplate]="{'cost': footerTpl}">
+          [showSummary]="true"
+          [summaryTemplate]="{'cost': footerTpl}">
 </mtx-grid>
-<ng-template #footerTpl let-col let-data="data">
-    <div>{{getTotalCost() | currency}}</div>
+<ng-template #footerTpl let-data>
+  <div>{{getTotalCost() | currency}}</div>
+</ng-template>
+
+<h3>Custom Toolbar Template</h3>
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [showToolbar]="true"
+          [showColumnMenuButton]="false"
+          [toolbarTemplate]="toolbarTpl">
+</mtx-grid>
+<ng-template #toolbarTpl>
+  <input placeholder="Search">
 </ng-template>

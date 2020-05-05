@@ -115,12 +115,12 @@ export class DataGridDemoComponent implements OnInit {
   ];
 
   columnsWithCustomFooter: MtxGridColumn[] = [
-    { header: 'Name', field: 'name', footer: 'Total' },
-    { header: 'Weight', field: 'weight', },
+    { header: 'Name', field: 'name', summary: 'Total' },
+    { header: 'Weight', field: 'weight', summary: (data) => data },
     { header: 'Gender', field: 'gender', },
     { header: 'Mobile', field: 'mobile', },
     { header: 'City', field: 'city', },
-    { header: 'Cost', field: 'cost', type: 'currency'},
+    { header: 'Cost', field: 'cost', type: 'currency' },
   ];
 
   multiSelectable = true;
@@ -130,6 +130,8 @@ export class DataGridDemoComponent implements OnInit {
   columnMovable = true;
   rowHover = true;
   rowStriped = false;
+
+  cellTemplateString = '[cellTemplate]=\"{city: cityTpl}\"';
 
   constructor() { }
 

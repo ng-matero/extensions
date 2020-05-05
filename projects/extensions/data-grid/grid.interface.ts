@@ -33,7 +33,7 @@ export interface MtxGridColumnButton {
  */
 export interface MtxGridColumn {
   field: string;
-  header?: string | TemplateRef<any>;
+  header?: string;
   hide?: boolean;
   disabled?: boolean;
   pinned?: 'left' | 'right';
@@ -43,14 +43,14 @@ export interface MtxGridColumn {
   resizable?: boolean;
   sortable?: boolean | string;
   type?: 'tag' | 'button' | 'link' | 'image' | 'number' | 'currency' | 'percent' | 'boolean';
-  formatter?: (data: any, index?: number) => any;
-  cellTemplate?: TemplateRef<any>;
   tag?: MtxGridColumnTag;
   buttons?: MtxGridColumnButton[];
+  formatter?: (rowData: any, colDef?: any) => void;
+  cellTemplate?: TemplateRef<any> | null;
   showExpand?: boolean;
   description?: string;
   i18n?: string;
-  footer?: string | TemplateRef<any>;
+  summary?: ((colData: any, colDef?: any) => void) | string;
 }
 
 /**

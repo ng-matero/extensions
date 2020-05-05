@@ -14,7 +14,9 @@
 
   .mtx-grid-toolbar {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 48px;
     padding: 8px;
     border-bottom: 1px solid rgba(0, 0, 0, .15);
   }

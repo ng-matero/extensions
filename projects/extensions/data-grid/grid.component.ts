@@ -114,7 +114,7 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
   columnMenuData: MtxGridColumnSelectionItem[] = [];
 
-  @Input() columnMenuButton = false;
+  @Input() showColumnMenuButton = true;
   @Input() columnMenuButtonText = '';
   @Input() columnMenuButtonType = 'stroked';
   @Input() columnMenuButtonColor = '';
@@ -139,24 +139,45 @@ export class MtxGridComponent implements OnInit, OnChanges {
     return (!this.data || this.data.length === 0) && !this.loading;
   }
 
-  /** Header */
+  /** thead */
   @Input() headerTemplate: TemplateRef<any>;
 
-  /** Footer */
-  @Input() showFooter = false;
-  @Input() footerTemplate: TemplateRef<any>;
+  /** tbody */
+  @Input() cellTemplate: TemplateRef<any>;
 
-  get whetherShowFooter() {
-    return this.showFooter && this.data?.length > 0 && !this.loading;
+  /** tfoot */
+  @Input() showSummary = false;
+  @Input() summaryTemplate: TemplateRef<any>;
+
+  get whetherShowSummary() {
+    return this.showSummary && this.data?.length > 0 && !this.loading;
   }
 
-  /** Cell */
-  @Input() cellTemplate: TemplateRef<any>;
+  getColData(data: any, colDef: MtxGridColumn) {
+    return data.map((item: any) => item[colDef.field]);
+  }
+
+  formatSummary(summary: any, data: any, colDef: MtxGridColumn) {
+    if (this.isString(summary)) {
+      return summary;
+    } else if (this.isFunction(summary)) {
+      const colData = this.getColData(data, colDef);
+      return summary(colData, colDef);
+    }
+  }
 
   constructor(private _dataGridSrv: MtxGridService) { }
 
   isTemplateRef(obj: any) {
     return obj instanceof TemplateRef;
+  }
+
+  isString(fn: any) {
+    return Object.prototype.toString.call(fn) === '[object String]';
+  }
+
+  isFunction(fn: any) {
+    return Object.prototype.toString.call(fn) === '[object Function]';
   }
 
   ngOnInit() { }

@@ -3,18 +3,27 @@
 
 <!-- Toolbar -->
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
-  <mtx-grid-column-menu [columns]="columnMenuData"
-                        [buttonText]="columnMenuButtonText"
-                        [buttonType]="columnMenuButtonType"
-                        [buttonColor]="columnMenuButtonColor"
-                        [buttonClass]="columnMenuButtonClass"
-                        [buttonIcon]="columnMenuButtonIcon"
-                        [selectable]="columnHideable"
-                        [selectedType]="columnHidingChecked"
-                        [sortable]="columnMovable"
-                        (selectionChange)="handleColumnHidingChange($event)"
-                        (sortChange)="handleColumnMovingChange($event)">
-  </mtx-grid-column-menu>
+  <div class="mtx-grid-toolbar-title" *ngIf="toolbarTitle">{{toolbarTitle}}</div>
+  <div class="mtx-grid-toolbar-template">
+    <ng-template [ngIf]="toolbarTemplate">
+      <ng-template [ngTemplateOutlet]="toolbarTemplate"></ng-template>
+    </ng-template>
+  </div>
+  <div class="mtx-grid-toolbar-actions">
+    <mtx-grid-column-menu *ngIf="showColumnMenuButton"
+                          [columns]="columnMenuData"
+                          [buttonText]="columnMenuButtonText"
+                          [buttonType]="columnMenuButtonType"
+                          [buttonColor]="columnMenuButtonColor"
+                          [buttonClass]="columnMenuButtonClass"
+                          [buttonIcon]="columnMenuButtonIcon"
+                          [selectable]="columnHideable"
+                          [selectedType]="columnHidingChecked"
+                          [sortable]="columnMovable"
+                          (selectionChange)="handleColumnHidingChange($event)"
+                          (sortChange)="handleColumnMovingChange($event)">
+    </mtx-grid-column-menu>
+  </div>
 </div>
 
 <!-- Main Table -->
@@ -53,20 +62,20 @@
             [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
           <div class="mat-header-cell-inner">
 
-            <ng-template [ngIf]="isTemplateRef(headerTemplate)" [ngIfElse]="headerCellTpl">
+            <ng-template [ngIf]="isTemplateRef(headerTemplate)" [ngIfElse]="headerTpl">
               <ng-template [ngTemplateOutlet]="headerTemplate"
                            [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
               </ng-template>
             </ng-template>
-            <ng-template #headerCellTpl>
+            <ng-template #headerTpl>
               <ng-template [ngIf]="headerTemplate && isTemplateRef(headerTemplate[col.field])"
-                           [ngIfElse]="defaultHeaderCellTpl">
+                           [ngIfElse]="defaultHeaderTpl">
                 <ng-template [ngTemplateOutlet]="headerTemplate[col.field]"
                              [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
                 </ng-template>
               </ng-template>
             </ng-template>
-            <ng-template #defaultHeaderCellTpl>
+            <ng-template #defaultHeaderTpl>
               <div mat-sort-header [disabled]="!col.sortable">
                 <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>
                 <span>{{col.header}}</span>
@@ -117,21 +126,21 @@
             [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
           <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>
 
-          <ng-template [ngIf]="isTemplateRef(footerTemplate)" [ngIfElse]="footerCellTpl">
-            <ng-template [ngTemplateOutlet]="footerTemplate"
+          <ng-template [ngIf]="isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
+            <ng-template [ngTemplateOutlet]="summaryTemplate"
                          [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }">
             </ng-template>
           </ng-template>
-          <ng-template #footerCellTpl>
-            <ng-template [ngIf]="footerTemplate && isTemplateRef(footerTemplate[col.field])"
-                         [ngIfElse]="defaultFooterCellTpl">
-              <ng-template [ngTemplateOutlet]="footerTemplate[col.field]"
-                           [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }">
+          <ng-template #summaryTpl>
+            <ng-template [ngIf]="summaryTemplate && isTemplateRef(summaryTemplate[col.field])"
+                         [ngIfElse]="defaultSummaryTpl">
+              <ng-template [ngTemplateOutlet]="summaryTemplate[col.field]"
+                           [ngTemplateOutletContext]="{ $implicit: getColData(data, col), colData: getColData(data, col), colDef: col }">
               </ng-template>
             </ng-template>
           </ng-template>
-          <ng-template #defaultFooterCellTpl>
-            <span>{{col.footer}}</span>
+          <ng-template #defaultSummaryTpl>
+            <span [innerHTML]="formatSummary(col.summary, data, col)"></span>
           </ng-template>
 
         </td>
@@ -144,7 +153,7 @@
         [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': isOddRow(index, dataIndex)}"
         (click)="handleRowSelect($event, row)">
     </tr>
-    <ng-container *ngIf="whetherShowFooter">
+    <ng-container *ngIf="whetherShowSummary">
       <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
     </ng-container>
 
@@ -186,8 +195,8 @@
 
 <!-- No Result -->
 <div class="mtx-grid-no-result" *ngIf="hasNoResult">
-  <ng-container *ngIf="noResultTemplate else defaultNoResultTpl">
+  <ng-template [ngIf]="noResultTemplate" [ngIfElse]="defaultNoResultTpl">
     <ng-template [ngTemplateOutlet]="noResultTemplate"></ng-template>
-  </ng-container>
+  </ng-template>
   <ng-template #defaultNoResultTpl>{{noResultText}}</ng-template>
 </div>

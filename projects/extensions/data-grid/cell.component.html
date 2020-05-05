@@ -1,6 +1,6 @@
 <!-- Formatting -->
 <ng-container *ngIf="colDef.formatter else defaultFormattingTpl">
-  <span [innerHTML]="colDef.formatter(rowData)"></span>
+  <span [innerHTML]="colDef.formatter(rowData, colDef)"></span>
 </ng-container>
 
 <ng-template #defaultFormattingTpl>
