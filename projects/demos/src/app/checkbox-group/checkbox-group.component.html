@@ -1,2 +1,6 @@
 <mtx-checkbox-group [(ngModel)]="foods" (change)="changeOptions($event)">
 </mtx-checkbox-group>
+
+<p>Hide select all</p>
+<mtx-checkbox-group [(ngModel)]="foods" (change)="changeOptions($event)" [showSelectAll]="false">
+</mtx-checkbox-group>

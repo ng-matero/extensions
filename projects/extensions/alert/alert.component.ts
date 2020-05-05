@@ -13,7 +13,7 @@ import {
   selector: 'mtx-alert',
   exportAs: 'mtxAlert',
   host: {
-    class: 'mtx-alert-wrap',
+    class: 'mtx-alert',
   },
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],

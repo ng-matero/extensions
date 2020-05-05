@@ -11,6 +11,10 @@ import {
 @Component({
   selector: 'mtx-text3d',
   exportAs: 'mtxText3d',
+  host: {
+    'class': 'mtx-text3d',
+    '[style.transform]': 'transform'
+  },
   templateUrl: './text3d.component.html',
   styleUrls: ['./text3d.component.scss'],
   encapsulation: ViewEncapsulation.None,
@@ -28,6 +32,10 @@ export class MtxText3dComponent implements OnInit {
   @Input() rotateZ = 0;
 
   arr = [];
+
+  get transform() {
+    return `rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg) rotateZ(${this.rotateZ}deg)`;
+  }
 
   constructor() {
     for (let i = 1; i <= this.num; i++) {
