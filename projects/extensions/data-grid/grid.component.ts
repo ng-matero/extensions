@@ -17,7 +17,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Sort, MatSort } from '@angular/material/sort';
 
-import { MtxGridColumn, MtxGridColumnSelectionItem } from './grid.interface';
+import { MtxGridColumn, MtxGridColumnSelectionItem, MtxGridCellTemplate } from './grid.interface';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
@@ -144,14 +144,14 @@ export class MtxGridComponent implements OnInit, OnChanges {
   }
 
   /** thead */
-  @Input() headerTemplate: TemplateRef<any>;
+  @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate;
 
   /** tbody */
-  @Input() cellTemplate: TemplateRef<any>;
+  @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate;
 
   /** tfoot */
   @Input() showSummary = false;
-  @Input() summaryTemplate: TemplateRef<any>;
+  @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate;
 
   get whetherShowSummary() {
     return this.showSummary && this.data?.length > 0 && !this.loading;
@@ -210,7 +210,7 @@ export class MtxGridComponent implements OnInit, OnChanges {
     if (this.expandable) {
       this.expansionRowStates = []; // reset
 
-      this.data.forEach(_ => {
+      this.data?.forEach(_ => {
         this.expansionRowStates.push({ expanded: false });
       });
     }
