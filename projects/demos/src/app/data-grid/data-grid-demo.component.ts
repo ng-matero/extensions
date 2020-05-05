@@ -131,6 +131,10 @@ export class DataGridDemoComponent implements OnInit {
   rowHover = true;
   rowStriped = false;
 
+  trackByName(index: number, item: any) {
+    return item.name;
+  }
+  
   cellTemplateString = '[cellTemplate]=\"{city: cityTpl}\"';
 
   constructor() { }

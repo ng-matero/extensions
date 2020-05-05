@@ -9,6 +9,7 @@ import {
   ViewChild,
   OnChanges,
   TemplateRef,
+  TrackByFunction,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -134,6 +135,9 @@ export class MtxGridComponent implements OnInit, OnChanges {
   /** No Result */
   @Input() noResultText = 'No records found';
   @Input() noResultTemplate: TemplateRef<any>;
+
+  // Tracking function
+  @Input() trackBy: TrackByFunction<any>;
 
   get hasNoResult() {
     return (!this.data || this.data.length === 0) && !this.loading;
