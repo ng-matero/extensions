@@ -9,6 +9,11 @@ import {
 @Component({
   selector: 'mtx-progress',
   exportAs: 'mtxProgress',
+  host: {
+    'class': 'mtx-progress',
+    '[style.height]': 'height',
+    '[style.backgroundColor]': 'background'
+  },
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.scss'],
   encapsulation: ViewEncapsulation.None,

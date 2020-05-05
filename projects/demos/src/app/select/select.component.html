@@ -1,35 +1,35 @@
 <p>
-    <code>mtx-select</code> is a Material form field wrapper of <code>ng-select</code>.
+  <code>mtx-select</code> is a Material form field wrapper of <code>ng-select</code>.
 </p>
 
 <div class="mb-3 mx-n3">
-    <mat-checkbox class="mx-3" [(ngModel)]="multipleSelect">Mulitple select</mat-checkbox>
-    <mat-checkbox [(ngModel)]="disableSelect">Disable select</mat-checkbox>
+  <mat-checkbox class="mx-3" [(ngModel)]="multipleSelect">Mulitple select</mat-checkbox>
+  <mat-checkbox [(ngModel)]="disableSelect">Disable select</mat-checkbox>
 </div>
 
 <mat-form-field>
-    <mat-label>Select Food</mat-label>
+  <mat-label>Select Food</mat-label>
 
-    <mtx-select [items]="items"
-                bindLabel="name"
-                bindValue="id"
-                [disabled]="disableSelect"
-                [multiple]="multipleSelect"
-                [appendTo]="'body'"
-                required>
-    </mtx-select>
+  <mtx-select [items]="items"
+              bindLabel="name"
+              bindValue="id"
+              [disabled]="disableSelect"
+              [multiple]="multipleSelect"
+              [appendTo]="'body'"
+              required>
+  </mtx-select>
 
-    <mat-hint>Choose your favorite food</mat-hint>
-    <mat-error>Please choose a food</mat-error>
+  <mat-hint>Choose your favorite food</mat-hint>
+  <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 
 <mat-form-field class="mx-3">
-    <mat-label>Select Food</mat-label>
+  <mat-label>Select Food</mat-label>
 
-    <mat-select required>
-        <mat-option *ngFor="let item of items;" [value]="item.id">{{item.name}}</mat-option>
-    </mat-select>
+  <mat-select required>
+    <mat-option *ngFor="let item of items;" [value]="item.id">{{item.name}}</mat-option>
+  </mat-select>
 
-    <mat-hint>Choose your favorite food</mat-hint>
-    <mat-error>Please choose a food</mat-error>
+  <mat-hint>Choose your favorite food</mat-hint>
+  <mat-error>Please choose a food</mat-error>
 </mat-form-field>

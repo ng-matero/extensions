@@ -106,6 +106,23 @@ export class DataGridDemoComponent implements OnInit {
 
   columnsWithCustomCell: MtxGridColumn[] = [];
 
+  columnsWithCustomHeader: MtxGridColumn[] = [
+    { header: 'Name', field: 'name', description: 'Info about the name' },
+    { header: 'Weight', field: 'weight', description: 'Info about the weight' },
+    { header: 'Gender', field: 'gender', description: 'Info about the gender' },
+    { header: 'Mobile', field: 'mobile', description: 'Info about the mobile' },
+    { header: 'City', field: 'city', description: 'Info about the city' },
+  ];
+
+  columnsWithCustomFooter: MtxGridColumn[] = [
+    { header: 'Name', field: 'name', summary: 'Total' },
+    { header: 'Weight', field: 'weight', summary: (data) => data },
+    { header: 'Gender', field: 'gender', },
+    { header: 'Mobile', field: 'mobile', },
+    { header: 'City', field: 'city', },
+    { header: 'Cost', field: 'cost', type: 'currency' },
+  ];
+
   multiSelectable = true;
   rowSelectable = true;
   hideRowSelectionCheckbox = false;
@@ -117,6 +134,8 @@ export class DataGridDemoComponent implements OnInit {
   trackByName(index: number, item: any) {
     return item.name;
   }
+  
+  cellTemplateString = '[cellTemplate]=\"{city: cityTpl}\"';
 
   constructor() { }
 
@@ -133,6 +152,10 @@ export class DataGridDemoComponent implements OnInit {
 
   log(e: any) {
     console.log(e);
+  }
+
+  getTotalCost() {
+    return this.list.map(t => t.cost).reduce((acc, value) => acc + value, 0);
   }
 
 }

@@ -12,9 +12,9 @@
 </div>
 
 <mat-menu #colorPickerPopover="matMenu" class="mtx-color-picker-panel" [hasBackdrop]="false">
-    <div class="mtx-color-picker"
-         (click)="$event.stopPropagation()"
-         (keydown)="$event.stopPropagation()">
-        <color-chrome [color]="value" (onChangeComplete)="onColorChange($event)"></color-chrome>
-    </div>
+  <div class="mtx-color-picker"
+       (click)="$event.stopPropagation()"
+       (keydown)="$event.stopPropagation()">
+    <color-chrome [color]="value" (onChangeComplete)="onColorChange($event)"></color-chrome>
+  </div>
 </mat-menu>

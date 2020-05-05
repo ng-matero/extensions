@@ -14,7 +14,9 @@
 
   .mtx-grid-toolbar {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 48px;
     padding: 8px;
     border-bottom: 1px solid rgba(0, 0, 0, .15);
   }
@@ -192,11 +194,6 @@
     display: none;
   }
 
-  // Fix checkbox height issue
-  .mat-checkbox {
-    display: flex;
-  }
-
   .mtx-grid-checkbox-cell {
     flex: none;
     justify-content: center;
@@ -220,5 +217,18 @@
     height: 18px;
     margin: 0 4px;
     font-size: 18px;
+  }
+
+  .mat-header-cell-inner {
+    display: flex;
+    align-items: center;
+  }
+
+  .mat-footer-row {
+    .mat-footer-cell {
+      border-bottom-width: 0;
+      border-top: 1px solid rgba(0, 0, 0, .12);
+      background-color: rgba(0, 0, 0, .06);
+    }
   }
 }

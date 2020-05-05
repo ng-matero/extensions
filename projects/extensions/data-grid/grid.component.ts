@@ -110,10 +110,12 @@ export class MtxGridComponent implements OnInit, OnChanges {
   /** Toolbar */
 
   @Input() showToolbar = false;
+  @Input() toolbarTitle = '';
+  @Input() toolbarTemplate: TemplateRef<any>;
 
   columnMenuData: MtxGridColumnSelectionItem[] = [];
 
-  @Input() columnMenuButton = false;
+  @Input() showColumnMenuButton = true;
   @Input() columnMenuButtonText = '';
   @Input() columnMenuButtonType = 'stroked';
   @Input() columnMenuButtonColor = '';
@@ -130,8 +132,7 @@ export class MtxGridComponent implements OnInit, OnChanges {
   @Input() columnPinnable = true;
   @Output() columnPinningChange = new EventEmitter<string[]>();
 
-  // No Result
-
+  /** No Result */
   @Input() noResultText = 'No records found';
   @Input() noResultTemplate: TemplateRef<any>;
 
@@ -142,7 +143,46 @@ export class MtxGridComponent implements OnInit, OnChanges {
     return (!this.data || this.data.length === 0) && !this.loading;
   }
 
+  /** thead */
+  @Input() headerTemplate: TemplateRef<any>;
+
+  /** tbody */
+  @Input() cellTemplate: TemplateRef<any>;
+
+  /** tfoot */
+  @Input() showSummary = false;
+  @Input() summaryTemplate: TemplateRef<any>;
+
+  get whetherShowSummary() {
+    return this.showSummary && this.data?.length > 0 && !this.loading;
+  }
+
+  getColData(data: any, colDef: MtxGridColumn) {
+    return data.map((item: any) => item[colDef.field]);
+  }
+
+  formatSummary(summary: any, data: any, colDef: MtxGridColumn) {
+    if (this.isString(summary)) {
+      return summary;
+    } else if (this.isFunction(summary)) {
+      const colData = this.getColData(data, colDef);
+      return summary(colData, colDef);
+    }
+  }
+
   constructor(private _dataGridSrv: MtxGridService) { }
+
+  isTemplateRef(obj: any) {
+    return obj instanceof TemplateRef;
+  }
+
+  isString(fn: any) {
+    return Object.prototype.toString.call(fn) === '[object String]';
+  }
+
+  isFunction(fn: any) {
+    return Object.prototype.toString.call(fn) === '[object Function]';
+  }
 
   ngOnInit() { }
 
@@ -152,7 +192,7 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
     this.columnMenuData = this.columns.map(item => {
       return {
-        label: item.header,
+        label: item.header as string,
         field: item.field,
         show: !item.hide,
         hide: item.hide,

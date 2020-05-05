@@ -1,6 +1,6 @@
 <!-- Formatting -->
 <ng-container *ngIf="colDef.formatter else defaultFormattingTpl">
-  <span [innerHTML]="colDef.formatter(rowData) || '--'"></span>
+  <span [innerHTML]="colDef.formatter(rowData, colDef)"></span>
 </ng-container>
 
 <ng-template #defaultFormattingTpl>
@@ -67,11 +67,11 @@
     </ng-container>
     <!-- Number -->
     <ng-container *ngSwitchCase="'number'">
-      {{(colValue | number:'1.2-2') || '--'}}
+      {{(colValue | number) || '--'}}
     </ng-container>
     <!-- Currency -->
     <ng-container *ngSwitchCase="'currency'">
-      {{(colValue | currency:'¥') || '--'}}
+      {{(colValue | currency) || '--'}}
     </ng-container>
     <!-- Percent -->
     <ng-container *ngSwitchCase="'percent'">
