@@ -52,6 +52,9 @@ export class MtxGridComponent implements OnInit, OnChanges {
   @Input() length = 0;
   @Input() loading = false;
 
+  // Tracking function
+  @Input() trackBy: TrackByFunction<any>;
+
   /** Whether to show tooltip on columns */
   @Input() tooltip = true;
 
@@ -135,9 +138,6 @@ export class MtxGridComponent implements OnInit, OnChanges {
   /** No Result */
   @Input() noResultText = 'No records found';
   @Input() noResultTemplate: TemplateRef<any>;
-
-  // Tracking function
-  @Input() trackBy: TrackByFunction<any>;
 
   get hasNoResult() {
     return (!this.data || this.data.length === 0) && !this.loading;

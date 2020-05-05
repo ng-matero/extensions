@@ -116,7 +116,7 @@ export class DataGridDemoComponent implements OnInit {
 
   columnsWithCustomFooter: MtxGridColumn[] = [
     { header: 'Name', field: 'name', summary: 'Total' },
-    { header: 'Weight', field: 'weight', summary: (data) => data },
+    { header: 'Weight', field: 'weight', summary: (data) => Math.max(...data) },
     { header: 'Gender', field: 'gender', },
     { header: 'Mobile', field: 'mobile', },
     { header: 'City', field: 'city', },
@@ -131,10 +131,6 @@ export class DataGridDemoComponent implements OnInit {
   rowHover = true;
   rowStriped = false;
 
-  trackByName(index: number, item: any) {
-    return item.name;
-  }
-  
   cellTemplateString = '[cellTemplate]=\"{city: cityTpl}\"';
 
   constructor() { }
@@ -150,12 +146,16 @@ export class DataGridDemoComponent implements OnInit {
     ];
   }
 
+  trackByName(index: number, item: any) {
+    return item.name;
+  }
+
   log(e: any) {
     console.log(e);
   }
 
-  getTotalCost() {
-    return this.list.map(t => t.cost).reduce((acc, value) => acc + value, 0);
+  getTotalCost(data: any) {
+    return data.reduce((acc: any, value: any) => acc + value, 0);
   }
 
 }
