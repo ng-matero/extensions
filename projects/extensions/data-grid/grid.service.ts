@@ -8,7 +8,7 @@ export class MtxGridService {
   /**
    * Get cell value from column key
    * @param data row data
-   * @param col column definition e.g. `a.b.c`
+   * @param col  column definition e.g. `a.b.c`
    */
   getCellValue(data: {}, col: MtxGridColumn) {
     const keyArr = col.field ? col.field.split('.') : [];

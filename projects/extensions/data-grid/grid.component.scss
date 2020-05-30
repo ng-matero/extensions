@@ -21,10 +21,24 @@
     border-bottom: 1px solid rgba(0, 0, 0, .15);
   }
 
-  .mtx-grid-content {
+  .mtx-grid-layout {
     display: flex;
-    max-width: 100%;
+    flex: 1 1 auto;
     overflow: auto;
+  }
+
+  .mtx-grid-content {
+    width: 0;
+  }
+
+  .mtx-grid-sidebar {
+    width: 30px;
+    border-left: 1px solid rgba(0, 0, 0, .15);
+
+    [dir='rtl'] & {
+      border-left: none;
+      border-right: 1px solid rgba(0, 0, 0, .15);
+    }
   }
 
   .mat-table {

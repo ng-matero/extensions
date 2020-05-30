@@ -3,6 +3,7 @@
   <span [innerHTML]="colDef.formatter(rowData, colDef)"></span>
 </ng-container>
 
+<!-- TODO: -->
 <ng-template #defaultFormattingTpl>
   <ng-container [ngSwitch]="colDef.type">
     <!-- Tag -->

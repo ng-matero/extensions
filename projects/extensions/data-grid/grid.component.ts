@@ -10,6 +10,7 @@ import {
   OnChanges,
   TemplateRef,
   TrackByFunction,
+  OnDestroy,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -40,11 +41,12 @@ import { MtxGridService } from './grid.service';
     ]),
   ],
 })
-export class MtxGridComponent implements OnInit, OnChanges {
+export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
+
   @Input() displayedColumns: string[];
 
   @Input() columns: MtxGridColumn[] = [];
@@ -95,7 +97,7 @@ export class MtxGridComponent implements OnInit, OnChanges {
 
   private _selectedRow: any;
 
-  rowSelection: SelectionModel<any>;
+  rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
   @Input() rowSelectable = false;
   @Input() hideRowSelectionCheckbox = false;
@@ -157,6 +159,9 @@ export class MtxGridComponent implements OnInit, OnChanges {
     return this.showSummary && this.data?.length > 0 && !this.loading;
   }
 
+  /** Sidebar */
+  @Input() showSidebar = false;
+
   getColData(data: any, colDef: MtxGridColumn) {
     return data.map((item: any) => item[colDef.field]);
   }
@@ -184,23 +189,23 @@ export class MtxGridComponent implements OnInit, OnChanges {
     return Object.prototype.toString.call(fn) === '[object Function]';
   }
 
-  ngOnInit() { }
-
   // Waiting for async data
   ngOnChanges() {
+    this.countPinnedPosition();
+
     this.displayedColumns = this.columns.filter(item => !item.hide).map(item => item.field);
 
-    this.columnMenuData = this.columns.map(item => {
-      return {
-        label: item.header as string,
-        field: item.field,
-        show: !item.hide,
-        hide: item.hide,
-        disabled: item.disabled,
-      };
-    });
-
-    this.countPinnedPosition();
+    if (this.showColumnMenuButton) {
+      this.columnMenuData = this.columns.map(item => {
+        return {
+          label: item.header as string,
+          field: item.field,
+          show: !item.hide,
+          hide: item.hide,
+          disabled: item.disabled,
+        };
+      });
+    }
 
     if (this.rowSelectable && !this.hideRowSelectionCheckbox) {
       this.displayedColumns.unshift('MtxGridCheckboxColumnDef');
@@ -215,10 +220,6 @@ export class MtxGridComponent implements OnInit, OnChanges {
       });
     }
 
-    this.dataSource = new MatTableDataSource<any>(this.data);
-
-    this.rowSelection = new SelectionModel<any>(true, []);
-
     if (this.pageOnFront) {
       this.dataSource.paginator = this.paginator;
     }
@@ -226,7 +227,13 @@ export class MtxGridComponent implements OnInit, OnChanges {
     if (this.sortOnFront) {
       this.dataSource.sort = this.sort;
     }
+
+    this.dataSource.data = this.data;
   }
+
+  ngOnInit() { }
+
+  ngOnDestroy() { }
 
   countPinnedPosition() {
     const count = (acc: number, cur: MtxGridColumn) => acc + parseFloat(cur.width || '80px');

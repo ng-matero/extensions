@@ -174,11 +174,6 @@ export class MtxColorPickerComponent
 
   ngOnInit() { }
 
-  ngOnDestroy() {
-    this.stateChanges.complete();
-    this._focusMonitor.stopMonitoring(this._elementRef);
-  }
-
   ngDoCheck(): void {
     if (this.ngControl) {
       this.errorState = this.ngControl.invalid && this.ngControl.touched;
@@ -201,6 +196,11 @@ export class MtxColorPickerComponent
         this._isInsideShadowRoot = rootNode instanceof (window as any).ShadowRoot;
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.stateChanges.complete();
+    this._focusMonitor.stopMonitoring(this._elementRef);
   }
 
   /** Implemented as part of MatFormFieldControl. */
