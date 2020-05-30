@@ -21,7 +21,7 @@ $progress-fill-animation-timing: 1s linear infinite !default;
   margin: 8px 0;
   overflow: hidden;
   font-size: .75rem;
-  background-color: rgba(0, 25, 45, .05);
+  background-color: rgba(140, 150, 160, .15);
   border-radius: .25rem;
 }
 
@@ -34,22 +34,22 @@ $progress-fill-animation-timing: 1s linear infinite !default;
 }
 
 .mtx-progress-fill-success {
-  color: #fff;
+  color: $white;
   background-color: #4caf50;
 }
 
 .mtx-progress-fill-info {
-  color: #fff;
+  color: $white;
   background-color: #2196f3;
 }
 
 .mtx-progress-fill-warning {
-  color: #fff;
+  color: $white;
   background-color: #fb8c00;
 }
 
 .mtx-progress-fill-danger {
-  color: #fff;
+  color: $white;
   background-color: #ff5252;
 }
 

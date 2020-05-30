@@ -1,6 +1,3 @@
-$horizontal-gutter-icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==';
-$vertical-gutter-icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCAMAAABl/6zIAAAABlBMVEUAAADMzMzIT8AyAAAAAXRSTlMAQObYZgAAABRJREFUeAFjYGRkwIMJSeMHlBkOABP7AEGzSuPKAAAAAElFTkSuQmCC';
-
 .mtx-split {
   display: flex;
   flex-wrap: nowrap;
@@ -16,7 +13,7 @@ $vertical-gutter-icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCA
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
-    background-color: #eee;
+    background-color: rgba(150, 150, 150, .15);
 
     > .mtx-split-gutter-handle {
       width: 100%;
@@ -49,9 +46,7 @@ $vertical-gutter-icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCA
       height: 100%; // <- Fix safari bug about gutter height when direction is horizontal.
       cursor: col-resize;
 
-      > .mtx-split-gutter-handle {
-        background-image: url($horizontal-gutter-icon);
-      }
+      // > .mtx-split-gutter-handle {}
     }
 
     > .mtx-split-pane {
@@ -67,9 +62,7 @@ $vertical-gutter-icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFCA
       width: 100%;
       cursor: row-resize;
 
-      .mtx-split-gutter-handle {
-        background-image: url($vertical-gutter-icon);
-      }
+      // > .mtx-split-gutter-handle {}
     }
 
     > .mtx-split-pane {
