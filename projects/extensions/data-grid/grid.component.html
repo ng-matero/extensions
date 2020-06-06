@@ -37,15 +37,18 @@
       <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"
                     matColumnDef="MtxGridCheckboxColumnDef">
         <th mat-header-cell *matHeaderCellDef class="mtx-grid-checkbox-cell">
-          <mat-checkbox (change)="$event ? handleMasterToggle() : null"
+          <mat-checkbox *ngIf="multiSelectable"
                         [checked]="rowSelection.hasValue() && isAllSelected()"
-                        [indeterminate]="rowSelection.hasValue() && !isAllSelected()">
+                        [indeterminate]="rowSelection.hasValue() && !isAllSelected()"
+                        (change)="$event ? handleMasterToggle() : null">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row;" class="mtx-grid-checkbox-cell">
-          <mat-checkbox (click)="$event.stopPropagation()"
-                        (change)="$event ? handleSingleToggle(row) : null"
-                        [checked]="rowSelection.isSelected(row)">
+          <mat-checkbox *ngIf="!(rowSelectionFormatter.hideCheckbox && rowSelectionFormatter.hideCheckbox(row))"
+                        [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled(row)"
+                        [checked]="rowSelection.isSelected(row)"
+                        (click)="$event.stopPropagation()"
+                        (change)="$event ? handleSingleToggle(row) : null">
           </mat-checkbox>
         </td>
         <td mat-footer-cell *matFooterCellDef></td>

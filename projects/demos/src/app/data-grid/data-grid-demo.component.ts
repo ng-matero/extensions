@@ -125,6 +125,7 @@ export class DataGridDemoComponent implements OnInit {
 
   multiSelectable = true;
   rowSelectable = true;
+  rowSelected = ELEMENT_DATA.slice(1, 2);
   hideRowSelectionCheckbox = false;
   columnHideable = true;
   columnMovable = true;

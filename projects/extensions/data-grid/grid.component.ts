@@ -18,7 +18,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Sort, MatSort } from '@angular/material/sort';
 
-import { MtxGridColumn, MtxGridColumnSelectionItem, MtxGridCellTemplate } from './grid.interface';
+import {
+  MtxGridColumn,
+  MtxGridColumnSelectionItem,
+  MtxGridCellTemplate,
+  MtxGridRowSelectionFormatter,
+  MtxGridRowClassFormatter,
+} from './grid.interface';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
@@ -95,12 +101,13 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Row selection */
 
-  private _selectedRow: any;
-
   rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
+  @Input() rowSelected = [];
   @Input() rowSelectable = false;
   @Input() hideRowSelectionCheckbox = false;
+  @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
+  @Input() rowClassFormatter: MtxGridRowClassFormatter = {};
   @Output() rowSelectionChange = new EventEmitter<any[]>();
 
   /** Cell selection */
@@ -189,6 +196,8 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     return Object.prototype.toString.call(fn) === '[object Function]';
   }
 
+  ngOnInit() { }
+
   // Waiting for async data
   ngOnChanges() {
     this.countPinnedPosition();
@@ -229,9 +238,11 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     }
 
     this.dataSource.data = this.data;
-  }
 
-  ngOnInit() { }
+    if (this.rowSelectable) {
+      this.rowSelection = new SelectionModel<any>(this.multiSelectable, this.rowSelected);
+    }
+  }
 
   ngOnDestroy() { }
 
@@ -243,7 +254,8 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
       item.left = pinnedLeftCols.slice(0, idx).reduce(count, 0) + 'px';
     });
 
-    const pinnedRightCols = this.columns.filter(col => col.pinned && col.pinned === 'right')
+    const pinnedRightCols = this.columns
+      .filter(col => col.pinned && col.pinned === 'right')
       .reverse();
     pinnedRightCols.forEach((item, idx) => {
       item.right = pinnedRightCols.slice(0, idx).reduce(count, 0) + 'px';
@@ -295,11 +307,16 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Row select event */
   handleRowSelect(event: MouseEvent, rowData: any) {
-    if (this.rowSelectable) {
+    if (
+      this.rowSelectable &&
+      !(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(rowData)) &&
+      !(this.rowSelectionFormatter.hideCheckbox && this.rowSelectionFormatter.hideCheckbox(rowData))
+    ) {
       // metaKey -> command key
       if (!event.ctrlKey && !event.metaKey) {
         this.rowSelection.clear();
       }
+
       this.handleSingleToggle(rowData);
     }
   }
@@ -321,10 +338,6 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Select single row */
   handleSingleToggle(row: any) {
-    if (!this.multiSelectable) {
-      this.rowSelection.clear();
-    }
-
     this.rowSelection.toggle(row);
     this.rowSelectionChange.emit(this.rowSelection.selected);
   }

@@ -18,6 +18,8 @@ export class MtxGridCellComponent implements OnInit {
 
   colValue = '';
 
+  viewer: PhotoViewer;
+
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) { }
 
   ngOnInit() {
@@ -57,6 +59,6 @@ export class MtxGridCellComponent implements OnInit {
       };
     }
 
-    const viewer = new PhotoViewer(imgs, options);
+    this.viewer = new PhotoViewer(imgs, options);
   }
 }

@@ -70,3 +70,18 @@ export interface MtxGridColumnSelectionItem {
 export interface MtxGridCellTemplate {
   [key: string]: TemplateRef<any>;
 }
+
+/**
+ * Row Selection Formatter
+ */
+export interface MtxGridRowSelectionFormatter {
+  disabled?: (rowData: any) => boolean;
+  hideCheckbox?: (rowData: any) => boolean;
+}
+
+/**
+ * Row Class Formatter
+ */
+export interface MtxGridRowClassFormatter {
+  [className: string]: (rowData: any) => boolean;
+}
