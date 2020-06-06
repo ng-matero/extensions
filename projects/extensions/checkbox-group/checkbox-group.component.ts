@@ -9,7 +9,7 @@ import {
   ChangeDetectorRef,
   forwardRef,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 import { MtxCheckboxGroupOption } from './checkbox-group.interface';
 
@@ -31,7 +31,7 @@ import { MtxCheckboxGroupOption } from './checkbox-group.interface';
     },
   ],
 })
-export class MtxCheckboxGroupComponent implements OnInit {
+export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
   @Input() selectAllLabel = 'Select All';
   @Input() showSelectAll = true;
 

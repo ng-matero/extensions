@@ -27,7 +27,7 @@ export class MtxAlertComponent implements OnInit {
    */
   @Input() type = 'default';
 
-  /** Is alert visible */
+  /** Whether alert visible */
   @Input() isOpen = true;
 
   /** Whether displays an inline "Close" button */
