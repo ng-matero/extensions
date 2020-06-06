@@ -47,7 +47,7 @@ export class YourAppModule {
 
 ## Roadmap
 
-Check [the project](https://github.com/ng-matero/extensions/projects/1) to know the develop plans.
+Check [the projects](https://github.com/ng-matero/extensions/projects) to know the develop plans.
 
 ## License
 

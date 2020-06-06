@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "9.4.2",
+  "version": "9.5.0",
   "description": "Angular Material Extensions",
   "author": "nzbin<nzb329@163.com>",
   "repository": {
@@ -28,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/ng-matero/extensions/issues"
   },
-  "homepage": "https://github.com/ng-matero/extensions#readme",
+  "homepage": "https://ng-matero.github.io/extensions/",
   "dependencies": {
     "@ng-select/ng-select": "^4.0.0",
     "ngx-color": "^5.0.0",
