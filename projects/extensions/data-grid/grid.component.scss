@@ -213,6 +213,11 @@
     justify-content: center;
     min-width: 40px;
 
+    // Fix checkbox height
+    .mat-checkbox {
+      display: flex;
+    }
+
     // Fix RTL checkbox margin
     .mat-checkbox-inner-container {
       margin-left: 0;

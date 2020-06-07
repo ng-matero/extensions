@@ -51,7 +51,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 
-  dataSource: MatTableDataSource<any> = new MatTableDataSource();
+  dataSource: MatTableDataSource<any>;
 
   @Input() displayedColumns: string[];
 
@@ -162,8 +162,9 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() showSummary = false;
   @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate;
 
+  // TODO:
   get whetherShowSummary() {
-    return this.showSummary && this.data?.length > 0 && !this.loading;
+    return this.showSummary;
   }
 
   /** Sidebar */
@@ -229,6 +230,9 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
       });
     }
 
+    // TODO:
+    this.dataSource = new MatTableDataSource<any>(this.data);
+
     if (this.pageOnFront) {
       this.dataSource.paginator = this.paginator;
     }
@@ -236,8 +240,6 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     if (this.sortOnFront) {
       this.dataSource.sort = this.sort;
     }
-
-    this.dataSource.data = this.data;
 
     if (this.rowSelectable) {
       this.rowSelection = new SelectionModel<any>(this.multiSelectable, this.rowSelected);
