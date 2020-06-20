@@ -9,19 +9,19 @@
      href="https://nzbin.gitbook.io/material-extensions/data-grid" target="_blank">API</a>
 </p>
 
-<h3>Basic</h3>
+<h2>Basic</h2>
 <mtx-grid [data]="list"
           [columns]="columns"
           [trackBy]="trackByName">
 </mtx-grid>
 
-<h3>Loading Status</h3>
+<h2>Loading Status</h2>
 <mtx-grid [data]="list"
           [columns]="columns"
           [loading]="true">
 </mtx-grid>
 
-<h3>Hide Pagination</h3>
+<h2>Hide Pagination</h2>
 <p>If you hide the pagination, you should set <code>pageOnFront</code> false to show all the data.
 </p>
 <mtx-grid [data]="list"
@@ -30,14 +30,14 @@
           [showPaginator]="false">
 </mtx-grid>
 
-<h3>Sortable</h3>
+<h2>Sortable</h2>
 <mtx-grid [data]="list"
           [columns]="columnsSortable"
           [sortOnFront]="true"
           (sortChange)="log($event)">
 </mtx-grid>
 
-<h3>Row Selectable</h3>
+<h2>Row Selectable</h2>
 <mat-checkbox [(ngModel)]="rowSelectable">Row selectable</mat-checkbox>
 <mat-checkbox class="mx-3" [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
 <mat-radio-group [(ngModel)]="multiSelectable">
@@ -58,7 +58,7 @@
           (cellSelectionChange)="log($event)">
 </mtx-grid>
 
-<h3>Expandable Row</h3>
+<h2>Expandable Row</h2>
 <mtx-grid [data]="list"
           [columns]="columnsExpandable"
           [expandable]="true"
@@ -68,7 +68,7 @@
   {{row.name}}
 </ng-template>
 
-<h3>Column Hiding & Moving</h3>
+<h2>Column Hiding & Moving</h2>
 <div class="mb-3">
   <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
   <mat-checkbox class="mx-3" [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
@@ -82,14 +82,14 @@
           [columnMovable]="columnMovable">
 </mtx-grid>
 
-<h3>Column Pinnable</h3>
+<h2>Column Pinnable</h2>
 <p>The <code>name</code> and <code>weight</code> column pinned left, the <code>email</code> column
   pinned right. Scroll the columns to test.</p>
 <mtx-grid [data]="list"
           [columns]="columnsPinnable">
 </mtx-grid>
 
-<h3>Hover & Striped effect</h3>
+<h2>Hover & Striped effect</h2>
 <div class="mb-3">
   <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
   <mat-checkbox class="mx-3" [(ngModel)]="rowStriped">Striped</mat-checkbox>
@@ -100,12 +100,12 @@
           [rowStriped]="rowStriped">
 </mtx-grid>
 
-<h3>Row with option buttons</h3>
+<h2>Row with option buttons</h2>
 <mtx-grid [data]="list"
           [columns]="columnsWithButtons">
 </mtx-grid>
 
-<h3>Custom cell template</h3>
+<h2>Custom cell template</h2>
 <p>The status column are custom cells.</p>
 <mtx-grid [data]="list"
           [columns]="columnsWithCustomCell">
@@ -124,18 +124,18 @@
   <button mat-raised-button color="primary">{{row.city}}</button>
 </ng-template>
 
-<h3>Data Formatting</h3>
+<h2>Data Formatting</h2>
 <p>The <code>name</code> field use a formatter.</p>
 <mtx-grid [data]="list"
           [columns]="columnsWithFormatting">
 </mtx-grid>
 
-<h3>No Result</h3>
+<h2>No Result</h2>
 <mtx-grid [data]="[]"
           [columns]="columnsWithFormatting">
 </mtx-grid>
 
-<h3>Custom Header Template</h3>
+<h2>Custom Header Template</h2>
 <mtx-grid [data]="list"
           [columns]="columnsWithCustomHeader"
           [headerTemplate]="headerTpl">
@@ -144,7 +144,7 @@
   {{col.header}} <mat-icon [matTooltip]="col.description">info</mat-icon>
 </ng-template>
 
-<h3>Custom Footer Template</h3>
+<h2>Custom Footer Template</h2>
 <mtx-grid [data]="list"
           [columns]="columnsWithCustomFooter"
           [showSummary]="true"
@@ -154,7 +154,7 @@
   <div>{{getTotalCost(data) | currency}}</div>
 </ng-template>
 
-<h3>Custom Toolbar Template</h3>
+<h2>Custom Toolbar Template</h2>
 <mtx-grid [data]="list"
           [columns]="columns"
           [showToolbar]="true"
