@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared.module';
 import { RouterModule } from '@angular/router';
+import { SharedModule } from '../shared';
+
 import { SplitPaneComponent } from './split-pane.component';
 
 @NgModule({

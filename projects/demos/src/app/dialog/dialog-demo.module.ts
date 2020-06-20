@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared.module';
+import { SharedModule } from '../shared';
 
 import { DialogDemoComponent } from './dialog-demo.component';
 import { DialogOverviewComponent } from './dialog-demo.component';

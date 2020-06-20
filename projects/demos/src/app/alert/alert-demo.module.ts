@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../shared.module';
+import { SharedModule } from '../shared';
 
 import { AlertDemoComponent } from './alert-demo.component';
 
@@ -8,4 +8,4 @@ import { AlertDemoComponent } from './alert-demo.component';
   imports: [SharedModule, RouterModule.forChild([{ path: '', component: AlertDemoComponent }])],
   declarations: [AlertDemoComponent],
 })
-export class AlertDemoModule {}
+export class AlertDemoModule { }

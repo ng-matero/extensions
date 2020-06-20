@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from '../material.module';
 
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
@@ -18,8 +18,9 @@ import { MtxSelectModule } from '@ng-matero/extensions/select';
 import { MtxSplitModule } from '@ng-matero/extensions/split-pane';
 import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 
+import { DocsHeadingComponent } from './docs-heading';
+
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     ReactiveFormsModule,
@@ -56,7 +57,10 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
     MtxProgressModule,
     MtxSelectModule,
     MtxSplitModule,
-    MtxText3dModule
+    MtxText3dModule,
+
+    DocsHeadingComponent
   ],
+  declarations: [DocsHeadingComponent],
 })
 export class SharedModule { }

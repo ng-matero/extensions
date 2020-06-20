@@ -9,19 +9,19 @@
      href="https://nzbin.gitbook.io/material-extensions/data-grid" target="_blank">API</a>
 </p>
 
-<h2>Basic</h2>
+<docs-heading text="Basic"></docs-heading>
 <mtx-grid [data]="list"
           [columns]="columns"
           [trackBy]="trackByName">
 </mtx-grid>
 
-<h2>Loading Status</h2>
+<docs-heading text="Loading Status"></docs-heading>
 <mtx-grid [data]="list"
           [columns]="columns"
           [loading]="true">
 </mtx-grid>
 
-<h2>Hide Pagination</h2>
+<docs-heading text="Hide Pagination"></docs-heading>
 <p>If you hide the pagination, you should set <code>pageOnFront</code> false to show all the data.
 </p>
 <mtx-grid [data]="list"
@@ -30,14 +30,14 @@
           [showPaginator]="false">
 </mtx-grid>
 
-<h2>Sortable</h2>
+<docs-heading text="Sortable"></docs-heading>
 <mtx-grid [data]="list"
           [columns]="columnsSortable"
           [sortOnFront]="true"
           (sortChange)="log($event)">
 </mtx-grid>
 
-<h2>Row Selectable</h2>
+<docs-heading text="Row Selectable"></docs-heading>
 <mat-checkbox [(ngModel)]="rowSelectable">Row selectable</mat-checkbox>
 <mat-checkbox class="mx-3" [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
 <mat-radio-group [(ngModel)]="multiSelectable">
@@ -58,7 +58,7 @@
           (cellSelectionChange)="log($event)">
 </mtx-grid>
 
-<h2>Expandable Row</h2>
+<docs-heading text="Expandable Row"></docs-heading>
 <mtx-grid [data]="list"
           [columns]="columnsExpandable"
           [expandable]="true"
@@ -68,7 +68,7 @@
   {{row.name}}
 </ng-template>
 
-<h2>Column Hiding & Moving</h2>
+<docs-heading text="Column Hiding & Moving"></docs-heading>
 <div class="mb-3">
   <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
   <mat-checkbox class="mx-3" [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
@@ -82,14 +82,14 @@
           [columnMovable]="columnMovable">
 </mtx-grid>
 
-<h2>Column Pinnable</h2>
+<docs-heading text="Column Pinnable"></docs-heading>
 <p>The <code>name</code> and <code>weight</code> column pinned left, the <code>email</code> column
   pinned right. Scroll the columns to test.</p>
 <mtx-grid [data]="list"
           [columns]="columnsPinnable">
 </mtx-grid>
 
-<h2>Hover & Striped effect</h2>
+<docs-heading text="Hover & Striped effect"></docs-heading>
 <div class="mb-3">
   <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
   <mat-checkbox class="mx-3" [(ngModel)]="rowStriped">Striped</mat-checkbox>
@@ -100,12 +100,12 @@
           [rowStriped]="rowStriped">
 </mtx-grid>
 
-<h2>Row with option buttons</h2>
+<docs-heading text="Row with option buttons"></docs-heading>
 <mtx-grid [data]="list"
           [columns]="columnsWithButtons">
 </mtx-grid>
 
-<h2>Custom cell template</h2>
+<docs-heading text="Custom cell template"></docs-heading>
 <p>The status column are custom cells.</p>
 <mtx-grid [data]="list"
           [columns]="columnsWithCustomCell">
@@ -124,18 +124,18 @@
   <button mat-raised-button color="primary">{{row.city}}</button>
 </ng-template>
 
-<h2>Data Formatting</h2>
+<docs-heading text="Data Formatting"></docs-heading>
 <p>The <code>name</code> field use a formatter.</p>
 <mtx-grid [data]="list"
           [columns]="columnsWithFormatting">
 </mtx-grid>
 
-<h2>No Result</h2>
+<docs-heading text="No Result"></docs-heading>
 <mtx-grid [data]="[]"
           [columns]="columnsWithFormatting">
 </mtx-grid>
 
-<h2>Custom Header Template</h2>
+<docs-heading text="Custom Header Template"></docs-heading>
 <mtx-grid [data]="list"
           [columns]="columnsWithCustomHeader"
           [headerTemplate]="headerTpl">
@@ -144,7 +144,7 @@
   {{col.header}} <mat-icon [matTooltip]="col.description">info</mat-icon>
 </ng-template>
 
-<h2>Custom Footer Template</h2>
+<docs-heading text="Custom Footer Template"></docs-heading>
 <mtx-grid [data]="list"
           [columns]="columnsWithCustomFooter"
           [showSummary]="true"
@@ -154,7 +154,7 @@
   <div>{{getTotalCost(data) | currency}}</div>
 </ng-template>
 
-<h2>Custom Toolbar Template</h2>
+<docs-heading text="Custom Toolbar Template"></docs-heading>
 <mtx-grid [data]="list"
           [columns]="columns"
           [showToolbar]="true"

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared.module';
+import { SharedModule } from '../shared';
 
 import { DevApp404 } from './dev-app-404';
 import { DevAppHome } from './dev-app-home';

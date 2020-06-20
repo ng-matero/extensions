@@ -1,9 +1,10 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { ChangeDetectorRef, Component, ElementRef, Inject, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, Inject, ViewEncapsulation, AfterContentInit } from '@angular/core';
 import { DevAppRippleOptions } from './ripple-options';
 import { DevAppDirectionality } from './dev-app-directionality';
 import { menus } from './menus';
+import { Router, NavigationEnd } from '@angular/router';
 
 /** Root component for the dev-app demos. */
 @Component({
@@ -19,11 +20,25 @@ export class DevAppLayout {
   constructor(
     private _element: ElementRef<HTMLElement>,
     private _overlayContainer: OverlayContainer,
+    private _router: Router,
     public rippleOptions: DevAppRippleOptions,
     @Inject(Directionality) public dir: DevAppDirectionality,
-    cdr: ChangeDetectorRef
+    private _cdr: ChangeDetectorRef
   ) {
-    dir.change.subscribe(() => cdr.markForCheck());
+    dir.change.subscribe(() => _cdr.markForCheck());
+
+    this._router.events.subscribe(s => {
+      if (s instanceof NavigationEnd) {
+        const urlTree = this._router.parseUrl(this._router.url);
+        if (urlTree.fragment) {
+          // TODO:
+          setTimeout(() => {
+            const element = document.querySelector('#' + urlTree.fragment);
+            if (element) { element.scrollIntoView(true); }
+          });
+        }
+      }
+    });
   }
 
   toggleFullscreen() {
