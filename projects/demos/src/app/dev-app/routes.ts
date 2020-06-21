@@ -6,7 +6,7 @@ export const DEV_APP_ROUTES: Routes = [
   { path: '', component: DevAppHome },
   {
     path: 'alert',
-    loadChildren: () => import('../alert/alert-demo.module').then(m => m.AlertDemoModule),
+    loadChildren: () => import('../alert/alert.module').then(m => m.AlertModule),
   },
   {
     path: 'checkbox-group',
@@ -21,15 +21,15 @@ export const DEV_APP_ROUTES: Routes = [
   {
     path: 'data-grid',
     loadChildren: () =>
-      import('../data-grid/data-grid-demo.module').then(m => m.DataGridDemoModule),
+      import('../data-grid/data-grid.module').then(m => m.DataGridModule),
   },
   {
     path: 'dialog',
-    loadChildren: () => import('../dialog/dialog-demo.module').then(m => m.DialogDemoModule),
+    loadChildren: () => import('../dialog/dialog.module').then(m => m.DialogModule),
   },
   {
     path: 'progress',
-    loadChildren: () => import('../progress/progress-demo.module').then(m => m.ProgressDemoModule),
+    loadChildren: () => import('../progress/progress.module').then(m => m.ProgressModule),
   },
   {
     path: 'select',

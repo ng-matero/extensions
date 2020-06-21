@@ -9,11 +9,11 @@ const TAG = {
 };
 
 @Component({
-  selector: 'app-data-grid-demo',
-  templateUrl: './data-grid-demo.component.html',
-  styleUrls: ['./data-grid-demo.component.scss'],
+  selector: 'app-data-grid',
+  templateUrl: './data-grid.component.html',
+  styleUrls: ['./data-grid.component.scss'],
 })
-export class DataGridDemoComponent implements OnInit {
+export class DataGridComponent implements OnInit {
   @ViewChild('statusTpl', { static: true }) statusTpl: TemplateRef<any>;
 
   list = ELEMENT_DATA;

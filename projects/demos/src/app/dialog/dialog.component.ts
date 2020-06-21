@@ -4,11 +4,11 @@ import { MtxDialog } from '@ng-matero/extensions';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
-  selector: 'dialog-demo',
-  templateUrl: './dialog-demo.component.html',
-  styleUrls: ['./dialog-demo.component.scss'],
+  selector: 'app-dialog',
+  templateUrl: './dialog.component.html',
+  styleUrls: ['./dialog.component.scss'],
 })
-export class DialogDemoComponent implements OnInit {
+export class DialogComponent implements OnInit {
   animal: string;
 
   constructor(private mtxDialog: MtxDialog) {}
