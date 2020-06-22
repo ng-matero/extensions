@@ -1,0 +1,18 @@
+<div class="mb-3">
+  <mat-checkbox [(ngModel)]="rowSelectable">Row selectable</mat-checkbox>
+  <mat-checkbox class="mx-3" [(ngModel)]="hideRowSelectionCheckbox">Hide checkbox</mat-checkbox>
+  <mat-radio-group [(ngModel)]="multiSelectable">
+    <mat-radio-button [value]="false">Single</mat-radio-button>
+    <mat-radio-button [value]="true" class="mx-3">Multiple</mat-radio-button>
+  </mat-radio-group>
+</div>
+
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [multiSelectable]="multiSelectable"
+          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [rowSelectable]="rowSelectable"
+          [rowSelected]="rowSelected"
+          (rowSelectionChange)="log($event)"
+          (cellSelectionChange)="log($event)">
+</mtx-grid>

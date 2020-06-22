@@ -18,7 +18,11 @@ import { MtxSelectModule } from '@ng-matero/extensions/select';
 import { MtxSplitModule } from '@ng-matero/extensions/split-pane';
 import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 
-import { DocsHeadingComponent } from './docs-heading';
+import { HeaderLinkComponent } from './doc-heading/header-link';
+import { DocHeadingComponent } from './doc-heading/doc-heading';
+import { ExampleViewerComponent } from './example-viewer/example-viewer.component';
+
+import { CopierService } from './copier/copier.service';
 
 @NgModule({
   imports: [
@@ -59,8 +63,11 @@ import { DocsHeadingComponent } from './docs-heading';
     MtxSplitModule,
     MtxText3dModule,
 
-    DocsHeadingComponent
+    HeaderLinkComponent,
+    DocHeadingComponent,
+    ExampleViewerComponent
   ],
-  declarations: [DocsHeadingComponent],
+  declarations: [HeaderLinkComponent, DocHeadingComponent, ExampleViewerComponent],
+  providers: [CopierService],
 })
 export class SharedModule { }

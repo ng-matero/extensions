@@ -1,0 +1,9 @@
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [expandable]="true"
+          [expansionTemplate]="expansionTpl">
+</mtx-grid>
+
+<ng-template #expansionTpl let-row>
+  {{row.name}}
+</ng-template>

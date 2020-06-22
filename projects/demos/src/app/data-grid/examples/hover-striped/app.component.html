@@ -1,0 +1,10 @@
+<div class="mb-3">
+  <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
+  <mat-checkbox class="mx-3" [(ngModel)]="rowStriped">Striped</mat-checkbox>
+</div>
+
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [rowHover]="rowHover"
+          [rowStriped]="rowStriped">
+</mtx-grid>

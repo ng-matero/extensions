@@ -1,4 +1,4 @@
-export const ELEMENT_DATA: any[] = [
+export const EXAMPLE_DATA: any[] = [
   {
     position: 1,
     name: 'Boron',

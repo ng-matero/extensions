@@ -1,0 +1,37 @@
+<div class="docs-example-viewer-wrapper">
+  <div class="docs-example-viewer-title">
+    <span>{{exampleData.title}}</span>
+
+    <div class="docs-example-viewer-title-spacer"></div>
+
+    <button mat-icon-button type="button" (click)="toggleSourceView()" [matTooltip]="'View source'">
+      <mat-icon>code</mat-icon>
+    </button>
+  </div>
+
+  <div class="docs-example-viewer-source" *ngIf="showSource">
+    <mat-tab-group>
+      <mat-tab *ngFor="let f of exampleData.files" [label]="f.file">
+        <div class="docs-example-source-wrapper">
+          <div class="button-bar">
+            <button mat-icon-button type="button" (click)="copySource(textContent)"
+                    class="docs-example-source-copy docs-example-button"
+                    [matTooltip]="'Copy example source'"
+                    title="Copy example source" aria-label="Copy example source to clipboard">
+              <mat-icon>content_copy</mat-icon>
+            </button>
+          </div>
+          <div class="code-snippet">
+            <pre class="docs-example-source" [innerHtml]="f.content" #textContent></pre>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+
+  <div class="docs-example-viewer-body">
+    <div *ngIf="exampleData.description" [innerHtml]="exampleData.description"></div>
+
+    <ng-template #demo></ng-template>
+  </div>
+</div>

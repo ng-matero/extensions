@@ -1,0 +1,12 @@
+<div class="mb-3">
+  <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
+  <mat-checkbox class="mx-3" [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
+</div>
+
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [showToolbar]="true"
+          [toolbarTitle]="'Data Grid'"
+          [columnHideable]="columnHideable"
+          [columnMovable]="columnMovable">
+</mtx-grid>

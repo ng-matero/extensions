@@ -1,0 +1,9 @@
+<mtx-grid [data]="list"
+          [columns]="columns"
+          [showSummary]="true"
+          [summaryTemplate]="{'cost': footerTpl}">
+</mtx-grid>
+
+<ng-template #footerTpl let-data>
+  <div>{{getTotalCost(data) | currency}}</div>
+</ng-template>
