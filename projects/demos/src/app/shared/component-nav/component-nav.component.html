@@ -1,0 +1,17 @@
+<mat-nav-list>
+  <ng-container *ngFor="let navItems of menus">
+
+    <div class="nav-item-title">{{navItems.title}}</div>
+
+    <a *ngFor="let navItem of navItems.children"
+       mat-list-item
+       (click)="navChange.emit()"
+       routerLinkActive="active"
+       #routerLinkActiveInstance="routerLinkActive"
+       [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+       [routerLink]="[navItem.route]">
+      {{navItem.name}}
+    </a>
+  </ng-container>
+
+</mat-nav-list>

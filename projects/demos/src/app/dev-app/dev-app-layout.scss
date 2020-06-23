@@ -56,34 +56,9 @@ p {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.mat-sidenav {
-  min-width: 15vw;
-  position: fixed;
-
-  .mat-button {
-    width: 100%;
-    position: relative;
-    bottom: 0;
-    margin: 24px 0;
-  }
-
-  .mat-list-item {
-    &.active {
-      background-color: rgba(63, 80, 181, .15);
-    }
-  }
-}
-
 .docs-container {
   width: 100%;
   height: calc(100% - 56px);
-}
-
-.nav-item-title {
-  padding: 0 16px;
-  margin: 16px 0 8px;
-  color: rgba(0, 0, 0, .35);
-  font-size: 80%;
 }
 
 .docs-header {
@@ -95,8 +70,9 @@ p {
     height: 56px;
   }
 
-  .mat-icon {
-    cursor: pointer;
+  .docs-angular-logo {
+    height: 26px;
+    margin: 0 4px 3px 0;
   }
 
   .docs-toolbar {

@@ -1,24 +1,21 @@
-import { Component, OnInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-data-grid',
   templateUrl: './data-grid.component.html',
   styleUrls: ['./data-grid.component.scss'],
 })
-export class DataGridComponent implements OnInit {
+export class DataGridComponent {
 
-  constructor(public route: ActivatedRoute) {
+  constructor(public route: ActivatedRoute, private router: Router) {
     let r = route;
     while (!r.routeConfig.path) {
       r = r.parent;
     }
   }
 
-  ngOnInit() { }
-
   trackByName(index: number, item: any) {
     return item.name;
   }
-
 }

@@ -9,7 +9,7 @@ import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
 
 import { AppComponent } from './app.component';
 import { DevAppModule } from './dev-app/dev-app-module';
-import { DEV_APP_ROUTES } from './dev-app/routes';
+import { DEV_APP_ROUTES } from './routes';
 import { DevAppRippleOptions } from './dev-app/ripple-options';
 import { DevAppDirectionality } from './dev-app/dev-app-directionality';
 import { environment } from '../environments/environment.prod';

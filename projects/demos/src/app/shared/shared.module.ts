@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
@@ -21,6 +22,7 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 import { HeaderLinkComponent } from './doc-heading/header-link';
 import { DocHeadingComponent } from './doc-heading/doc-heading';
 import { ExampleViewerComponent } from './example-viewer/example-viewer.component';
+import { ComponentNavComponent } from './component-nav/component-nav.component';
 
 import { CopierService } from './copier/copier.service';
 
@@ -31,6 +33,8 @@ import { CopierService } from './copier/copier.service';
     FormsModule,
     RouterModule,
     MaterialModule,
+    FlexLayoutModule,
+
     NgProgressModule,
     NgProgressHttpModule,
     NgProgressRouterModule,
@@ -50,6 +54,8 @@ import { CopierService } from './copier/copier.service';
     FormsModule,
     RouterModule,
     MaterialModule,
+    FlexLayoutModule,
+
     NgProgressModule,
     NgProgressHttpModule,
     NgProgressRouterModule,
@@ -65,9 +71,15 @@ import { CopierService } from './copier/copier.service';
 
     HeaderLinkComponent,
     DocHeadingComponent,
-    ExampleViewerComponent
+    ExampleViewerComponent,
+    ComponentNavComponent
   ],
-  declarations: [HeaderLinkComponent, DocHeadingComponent, ExampleViewerComponent],
+  declarations: [
+    HeaderLinkComponent,
+    DocHeadingComponent,
+    ExampleViewerComponent,
+    ComponentNavComponent
+  ],
   providers: [CopierService],
 })
 export class SharedModule { }
