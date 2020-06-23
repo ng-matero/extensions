@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
-import { DevApp404 } from './dev-app/dev-app-404';
-import { DevAppHome } from './dev-app/dev-app-home';
+import { DocsApp404 } from './docs-app-404';
+import { DocsAppHome } from './docs-app-home';
 
-export const DEV_APP_ROUTES: Routes = [
-  { path: '', component: DevAppHome },
+export const DOCS_APP_ROUTES: Routes = [
+  { path: '', component: DocsAppHome },
   {
     path: 'alert',
     loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule),
@@ -43,5 +43,5 @@ export const DEV_APP_ROUTES: Routes = [
     path: 'text3d',
     loadChildren: () => import('./text3d/text3d-demo.module').then(m => m.Text3dDemoModule),
   },
-  { path: '**', component: DevApp404 },
+  { path: '**', component: DocsApp404 },
 ];

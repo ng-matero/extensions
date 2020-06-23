@@ -9,6 +9,7 @@ import { PlatformLocation } from '@angular/common';
       <mat-icon>link</mat-icon>
     </a>
   `,
+  styleUrls:['./header-link.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderLinkComponent implements OnInit {

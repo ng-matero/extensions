@@ -62,8 +62,7 @@ p {
 }
 
 .docs-header {
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 999;
 
   &.mat-toolbar {
@@ -74,13 +73,6 @@ p {
     height: 26px;
     margin: 0 4px 3px 0;
   }
-
-  .docs-toolbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-  }
 }
 
 // stretch to screen size in fullscreen mode
@@ -90,21 +82,4 @@ p {
   padding: 32px;
   box-sizing: border-box;
   overflow: auto;
-
-  h1, h2, h3, h4, h5, h6 {
-    .header-link {
-      display: inline-flex;
-      padding: 2px 0;
-      margin: 0 4px;
-      color: #6e6e6e;
-      text-decoration: none;
-      user-select: none;
-      visibility: hidden;
-      vertical-align: text-top;
-    }
-
-    &:hover .header-link {
-      visibility: visible;
-    }
-  }
 }

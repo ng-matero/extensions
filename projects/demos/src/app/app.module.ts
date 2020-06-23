@@ -6,12 +6,16 @@ import { RouterModule } from '@angular/router';
 import { Directionality } from '@angular/cdk/bidi';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
+import { SharedModule } from './shared';
 
 import { AppComponent } from './app.component';
-import { DevAppModule } from './dev-app/dev-app-module';
-import { DEV_APP_ROUTES } from './routes';
-import { DevAppRippleOptions } from './dev-app/ripple-options';
-import { DevAppDirectionality } from './dev-app/dev-app-directionality';
+import { DocsAppHome } from './docs-app-home';
+import { DocsApp404 } from './docs-app-404';
+import { DOCS_APP_ROUTES } from './routes';
+
+import { DocsAppModule } from './layout/docs-app-module';
+import { DocsAppRippleOptions } from './shared/ripple-options';
+import { DocsAppDirectionality } from './shared/directionality';
 import { environment } from '../environments/environment.prod';
 
 @NgModule({
@@ -19,14 +23,15 @@ import { environment } from '../environments/environment.prod';
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(DEV_APP_ROUTES),
-    DevAppModule,
+    RouterModule.forRoot(DOCS_APP_ROUTES),
+    SharedModule,
+    DocsAppModule,
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, DocsAppHome, DocsApp404],
   providers: [
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
-    { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: DevAppRippleOptions },
-    { provide: Directionality, useClass: DevAppDirectionality },
+    { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: DocsAppRippleOptions },
+    { provide: Directionality, useClass: DocsAppDirectionality },
   ],
   bootstrap: [AppComponent],
 })

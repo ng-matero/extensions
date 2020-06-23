@@ -3,24 +3,25 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Directionality } from '@angular/cdk/bidi';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { DevAppRippleOptions } from './ripple-options';
-import { DevAppDirectionality } from './dev-app-directionality';
+import { MatSidenav } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { MatSidenav } from '@angular/material/sidenav';
+
+import { DocsAppRippleOptions } from '../shared/ripple-options';
+import { DocsAppDirectionality } from '../shared/directionality';
 
 const SMALL_WIDTH_BREAKPOINT = 959;
 
 @Component({
-  selector: 'dev-app-layout',
+  selector: 'docs-app-layout',
   host: {
     '[attr.dir]': 'dir.value'
   },
-  templateUrl: 'dev-app-layout.html',
-  styleUrls: ['dev-app-layout.scss'],
+  templateUrl: 'docs-app-layout.html',
+  styleUrls: ['docs-app-layout.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DevAppLayout {
+export class DocsAppLayout {
   dark = false;
 
   isScreenSmall: Observable<boolean>;
@@ -29,8 +30,8 @@ export class DevAppLayout {
     private _element: ElementRef<HTMLElement>,
     private _overlayContainer: OverlayContainer,
     private _router: Router,
-    public rippleOptions: DevAppRippleOptions,
-    @Inject(Directionality) public dir: DevAppDirectionality,
+    public rippleOptions: DocsAppRippleOptions,
+    @Inject(Directionality) public dir: DocsAppDirectionality,
     breakpoints: BreakpointObserver,
     cdr: ChangeDetectorRef
   ) {

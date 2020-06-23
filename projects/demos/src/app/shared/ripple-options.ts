@@ -14,7 +14,7 @@ import { RippleGlobalOptions } from '@angular/material/core';
  * so that the global options can be changed at runtime.
  */
 @Injectable({ providedIn: 'root' })
-export class DevAppRippleOptions implements RippleGlobalOptions {
+export class DocsAppRippleOptions implements RippleGlobalOptions {
   /** Whether ripples should be disabled */
   disabled: boolean = false;
 }
