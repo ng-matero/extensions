@@ -8,7 +8,6 @@
   example-viewer {
     .docs-example-viewer-wrapper {
       border: 1px solid rgba(mat-color($foreground, secondary-text), .2);
-      // margin: 4px;
     }
 
     .docs-example-viewer-title {
@@ -28,11 +27,11 @@
       overflow: auto;
     }
 
-    code-snippet {
+    .code-snippet {
       background: rgba(mat-color($foreground, secondary-text), .01);
     }
 
-    .docs-example-viewer-source code-snippet {
+    .docs-example-viewer-source .code-snippet {
       border-bottom: 1px solid mat-color($foreground, divider);
     }
   }

@@ -1,6 +1,35 @@
 <ng-progress color="white"></ng-progress>
 
-<mat-sidenav-container class="demo-container">
+<mat-toolbar class="docs-header mat-elevation-z6" color="primary">
+  <button mat-icon-button (click)="start.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <div class="docs-toolbar">
+    <h1>Angular Material Extensions</h1>
+    <div>
+      <button mat-icon-button (click)="toggleFullscreen()"
+              matTooltip="Toggle fullscreen">
+        <mat-icon>fullscreen</mat-icon>
+      </button>
+      <button mat-icon-button (click)="toggleTheme()"
+              matTooltip="Toggle the theme">
+        <mat-icon>{{dark ? 'brightness_3' : 'wb_sunny'}}</mat-icon>
+      </button>
+      <button mat-icon-button (click)="dir.value = (dir.value === 'rtl' ? 'ltr' : 'rtl')"
+              matTooltip="Toggle between RTL and LTR">
+        <mat-icon>
+          {{dir.value === 'rtl' ? 'format_textdirection_r_to_l' : 'format_textdirection_l_to_r'}}
+        </mat-icon>
+      </button>
+
+      <a mat-icon-button href="https://github.com/ng-matero/extensions" target="_blank">
+        <img alt="angular" src="assets/img/github-circle-white-transparent.svg">
+      </a>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container class="docs-container">
   <mat-sidenav #start role="navigation">
     <mat-nav-list>
       <ng-container *ngFor="let navItems of navItemsArr">
@@ -23,35 +52,8 @@
     </mat-nav-list>
     <button mat-button tabindex="-1" (click)="start.close()">CLOSE</button>
   </mat-sidenav>
-  <main>
-    <mat-toolbar class="demo-header" color="primary">
-      <button mat-icon-button (click)="start.open('mouse')">
-        <mat-icon>menu</mat-icon>
-      </button>
-      <div class="demo-toolbar">
-        <h1>Angular Material Extensions</h1>
-        <div>
-          <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
-            <mat-icon>fullscreen</mat-icon>
-          </button>
-          <button mat-button (click)="toggleTheme()">{{dark ? 'Light' : 'Dark'}} theme</button>
-          <button mat-button (click)="rippleOptions.disabled = !rippleOptions.disabled">
-            {{rippleOptions.disabled ? 'Enable' : 'Disable'}} ripples
-          </button>
-          <button mat-button (click)="dir.value = (dir.value === 'rtl' ? 'ltr' : 'rtl')"
-                  title="Toggle between RTL and LTR">
-            {{dir.value.toUpperCase()}}
-          </button>
 
-          <a mat-icon-button href="https://github.com/ng-matero/extensions" target="_blank">
-            <img alt="angular" src="assets/img/github-circle-white-transparent.svg">
-          </a>
-        </div>
-      </div>
-    </mat-toolbar>
-
-    <div [attr.dir]="dir.value" class="demo-content mat-app-background">
-      <router-outlet></router-outlet>
-    </div>
+  <main [attr.dir]="dir.value" class="docs-content mat-app-background">
+    <router-outlet></router-outlet>
   </main>
 </mat-sidenav-container>

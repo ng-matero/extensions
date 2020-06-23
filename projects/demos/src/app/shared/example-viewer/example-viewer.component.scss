@@ -5,17 +5,12 @@
 
 .docs-example-viewer-wrapper {
   border-radius: 4px;
-  // margin: 24px 0;
-
-  h3 {
-    margin-top: 10px;
-  }
 }
 
 .docs-example-viewer-title {
+  display: flex;
   align-content: center;
   align-items: center;
-  display: flex;
   justify-content: center;
   padding: 8px 8px 8px 16px;
 }
@@ -33,6 +28,10 @@
   padding: 8px;
 }
 
+.code-snippet {
+  padding: 20px;
+}
+
 .docs-example-source {
   // TODO(annieyw): remove when standalone snippets are removed
   padding: 0;
@@ -40,10 +39,4 @@
   border: none;
   background: none;
   font-size: 14px;
-}
-
-.code-snippet {
-  padding: 20px;
-  background: rgba(0, 0, 0, .01);
-  border-bottom: 1px solid rgba(0, 0, 0, .12);
 }

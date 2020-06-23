@@ -43,7 +43,7 @@ export class DevAppLayout {
 
   toggleFullscreen() {
     // Cast to `any`, because the typings don't include the browser-prefixed methods.
-    const elem = this._element.nativeElement.querySelector('.demo-content') as any;
+    const elem = this._element.nativeElement.querySelector('.docs-content') as any;
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.webkitRequestFullScreen) {
@@ -56,7 +56,7 @@ export class DevAppLayout {
   }
 
   toggleTheme() {
-    const darkThemeClass = 'demo-unicorn-dark-theme';
+    const darkThemeClass = 'docs-dark-theme';
 
     this.dark = !this.dark;
 
