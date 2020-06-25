@@ -1,5 +1,8 @@
 @import '~@angular/material/theming';
 
+// 3rd-Plugins
+@import '~photoviewer/dist/photoviewer.css';
+
 // Styles for the docs app that are based on the current theme.
 @import './app/shared/example-viewer/example-viewer-theme';
 @import './highlightjs/material-light';

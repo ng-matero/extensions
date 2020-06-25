@@ -21,6 +21,7 @@ import { DataGridNoResultComponent, dataGridNoResultExampleConfig } from './exam
 import { DataGridCustomHeaderTemplateComponent, dataGridCustomHeaderTemplateExampleConfig } from './examples/custom-header-template';
 import { DataGridCustomFooterTemplateComponent, dataGridCustomFooterTemplateExampleConfig } from './examples/custom-footer-template';
 import { DataGridCustomToolbarTemplateComponent, dataGridCustomToolbarTemplateExampleConfig } from './examples/custom-toolbar-template';
+import { DataGridRemoteDataComponent, dataGridRemoteDataExampleConfig } from './examples/remote-data';
 
 @NgModule({
   imports: [
@@ -46,7 +47,8 @@ import { DataGridCustomToolbarTemplateComponent, dataGridCustomToolbarTemplateEx
           dataGridNoResultExampleConfig,
           dataGridCustomHeaderTemplateExampleConfig,
           dataGridCustomFooterTemplateExampleConfig,
-          dataGridCustomToolbarTemplateExampleConfig
+          dataGridCustomToolbarTemplateExampleConfig,
+          dataGridRemoteDataExampleConfig
         ],
       },
     }]),
@@ -70,7 +72,8 @@ import { DataGridCustomToolbarTemplateComponent, dataGridCustomToolbarTemplateEx
     DataGridNoResultComponent,
     DataGridCustomHeaderTemplateComponent,
     DataGridCustomFooterTemplateComponent,
-    DataGridCustomToolbarTemplateComponent
+    DataGridCustomToolbarTemplateComponent,
+    DataGridRemoteDataComponent
   ],
 })
 export class DataGridModule { }

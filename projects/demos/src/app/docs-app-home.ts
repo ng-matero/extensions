@@ -29,7 +29,12 @@ import { DOCS } from './shared/component-nav/component-nav.component';
     margin-bottom: 1rem;
   }
   .docs-component-list-item {
+    display: block;
+    height: 100%;
     text-decoration: none;
+  }
+  mat-card {
+    height: 100%;
   }
   .docs-component-list-item-summary {
     color: rgba(0,0,0,.54);
