@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn } from '@ng-matero/extensions';
+import { MtxGridColumn, MtxGridRowSelectionFormatter } from '@ng-matero/extensions';
 
 @Component({
   selector: 'data-grid-example',
@@ -19,9 +19,13 @@ export class AppComponent {
   list = EXAMPLE_DATA;
 
   multiSelectable = true;
-  rowSelectable = true;
-  rowSelected = EXAMPLE_DATA.slice(1, 2);
   hideRowSelectionCheckbox = false;
+  rowSelectable = true;
+  rowSelected = EXAMPLE_DATA.slice(2, 3);
+  rowSelectionFormatter: MtxGridRowSelectionFormatter = {
+    disabled: (data) => data.name === 'Boron',
+    hideCheckbox: (data) => data.name === 'John',
+  };
 
   log(e: any) {
     console.log(e);
