@@ -1,6 +1,5 @@
-<mtx-checkbox-group [(ngModel)]="foods" (change)="changeOptions($event)">
-</mtx-checkbox-group>
-
-<p>Hide select all</p>
-<mtx-checkbox-group [(ngModel)]="foods" (change)="changeOptions($event)" [showSelectAll]="false">
-</mtx-checkbox-group>
+<ng-container *ngIf="route.data | async as data">
+  <ng-container *ngFor="let exampleData of data.examples">
+    <example-viewer [exampleData]="exampleData"></example-viewer>
+  </ng-container>
+</ng-container>

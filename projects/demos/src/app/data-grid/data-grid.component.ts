@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-data-grid',
@@ -8,7 +8,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 })
 export class DataGridComponent {
 
-  constructor(public route: ActivatedRoute, private router: Router) {
+  constructor(public route: ActivatedRoute) {
     let r = route;
     while (!r.routeConfig.path) {
       r = r.parent;

@@ -1,14 +1,5 @@
-<p>
-  <code>mtx-color-picker</code> has used Chrome picker style of <code>ngx-color</code>, it can't
-  change the picker
-  style now.
-</p>
-
-<mat-form-field>
-  <mat-label>Color picker</mat-label>
-  <mtx-color-picker [(ngModel)]="color" (colorChange)="changeColor($event)" required>
-  </mtx-color-picker>
-  <mat-icon matSuffix>palette</mat-icon>
-  <mat-hint>Choose your favorite color</mat-hint>
-  <mat-error>Please enter the color</mat-error>
-</mat-form-field>
+<ng-container *ngIf="route.data | async as data">
+  <ng-container *ngFor="let exampleData of data.examples">
+    <example-viewer [exampleData]="exampleData"></example-viewer>
+  </ng-container>
+</ng-container>

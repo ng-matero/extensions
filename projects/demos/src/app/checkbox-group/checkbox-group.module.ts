@@ -4,11 +4,24 @@ import { SharedModule } from '../shared';
 
 import { CheckboxGroupComponent } from './checkbox-group.component';
 
+import { CheckboxGroupConfigurableComponent, checkboxGroupConfigurableExampleConfig } from './examples/configurable';
+
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forChild([{ path: '', component: CheckboxGroupComponent }])
+    RouterModule.forChild([{
+      path: '',
+      component: CheckboxGroupComponent,
+      data: {
+        examples: [
+          checkboxGroupConfigurableExampleConfig
+        ],
+      },
+    }])
   ],
-  declarations: [CheckboxGroupComponent],
+  declarations: [
+    CheckboxGroupComponent,
+    CheckboxGroupConfigurableComponent
+  ],
 })
-export class CheckboxGroupModule {}
+export class CheckboxGroupModule { }

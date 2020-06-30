@@ -1,32 +1,5 @@
-<h2>Normal</h2>
-<mtx-alert type="info">
-  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-</mtx-alert>
-<mtx-alert type="success">
-  <strong>Well done!</strong> You successfully read this important alert message.
-</mtx-alert>
-<mtx-alert type="warning">
-  <strong>Warning!</strong> Better check yourself, you're not looking too good.
-</mtx-alert>
-<mtx-alert type="danger">
-  <strong>Oh snap!</strong> Change a few things up and try submitting again.
-</mtx-alert>
-
-<h2>Dismissible</h2>
-<mtx-alert type="info" [dismissible]="true" (closed)="onClosed($event)">
-  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-</mtx-alert>
-<mtx-alert type="success" [dismissible]="true" (closed)="onClosed($event)">
-  <strong>Well done!</strong> You successfully read this important alert message.
-</mtx-alert>
-
-<h2>Elevation</h2>
-<mtx-alert type="danger" elevation="3">
-  <strong>Well done!</strong> You successfully read this important alert message.
-</mtx-alert>
-<mtx-alert type="warning" elevation="3">
-  <strong>Warning!</strong> Better check yourself, you're not looking too good.
-</mtx-alert>
-<mtx-alert type="default" elevation="3">
-  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
-</mtx-alert>
+<ng-container *ngIf="route.data | async as data">
+  <ng-container *ngFor="let exampleData of data.examples">
+    <example-viewer [exampleData]="exampleData"></example-viewer>
+  </ng-container>
+</ng-container>

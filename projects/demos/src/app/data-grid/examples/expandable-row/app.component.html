@@ -1,7 +1,8 @@
 <mtx-grid [data]="list"
           [columns]="columns"
           [expandable]="true"
-          [expansionTemplate]="expansionTpl">
+          [expansionTemplate]="expansionTpl"
+          (expansionChange)="log($event)">
 </mtx-grid>
 
 <ng-template #expansionTpl let-row>

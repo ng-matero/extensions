@@ -17,4 +17,8 @@ export class AppComponent {
   ];
 
   list = EXAMPLE_DATA;
+
+  log(e: any) {
+    console.log(e);
+  }
 }

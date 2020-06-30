@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alert',
@@ -6,7 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['alert.component.scss'],
 })
 export class AlertComponent {
-  onClosed(e: any) {
-    console.log(e);
-  }
+  constructor(public route: ActivatedRoute) { }
 }

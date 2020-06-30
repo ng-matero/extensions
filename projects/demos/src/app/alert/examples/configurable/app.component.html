@@ -1,0 +1,27 @@
+<h2>Alert configuration</h2>
+
+<section>
+  <label>Type:</label>
+  <mat-radio-group [(ngModel)]="type">
+    <mat-radio-button class="m-3" value="info">Info</mat-radio-button>
+    <mat-radio-button class="m-3" value="success">Success</mat-radio-button>
+    <mat-radio-button class="m-3" value="warning">Warning</mat-radio-button>
+    <mat-radio-button class="m-3" value="danger">Danger</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="dismissible" [labelPosition]="'before'">Dismissible</mat-checkbox>
+</section>
+
+<section>
+  <label>Elevation:</label>
+  <mat-slider min="0" max="24" [(ngModel)]="elevation"></mat-slider>
+</section>
+
+<h2>Result</h2>
+
+<mtx-alert [type]="type" [elevation]="elevation" [dismissible]="dismissible"
+           (closed)="onClosed($event)">
+  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+</mtx-alert>

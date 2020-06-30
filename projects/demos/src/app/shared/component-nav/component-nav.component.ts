@@ -10,14 +10,14 @@ export const DOCS = [
         route: '/alert'
       },
       {
+        name: 'Checkbox Group',
+        summary: 'Allows the user to create a set of checkbox with select all.',
+        route: '/checkbox-group'
+      },
+      {
         name: 'Color Picker',
         summary: 'An extra input to select color enhanced by the ngx-color.',
         route: '/color-picker'
-      },
-      {
-        name: 'Checkbox Group',
-        summary: 'Allows the user to create a set of checkbox with configuration.',
-        route: '/checkbox-group'
       },
       {
         name: 'Data Grid',
