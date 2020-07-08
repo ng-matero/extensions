@@ -12,12 +12,28 @@ import {
   Self,
   Output,
   EventEmitter,
+  TemplateRef,
+  ContentChild,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { Subject } from 'rxjs';
+
+import {
+  MtxSelectOptionTemplateDirective,
+  MtxSelectLabelTemplateDirective,
+  MtxSelectHeaderTemplateDirective,
+  MtxSelectFooterTemplateDirective,
+  MtxSelectOptgroupTemplateDirective,
+  MtxSelectNotFoundTemplateDirective,
+  MtxSelectTypeToSearchTemplateDirective,
+  MtxSelectLoadingTextTemplateDirective,
+  MtxSelectMultiLabelTemplateDirective,
+  MtxSelectTagTemplateDirective,
+  MtxSelectLoadingSpinnerTemplateDirective
+} from './templates.directive';
 
 export type CompareWithFn = (a: any, b: any) => boolean;
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
@@ -41,7 +57,20 @@ let nextUniqueId = 0;
 })
 export class MtxSelectComponent
   implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<any> {
-  /** Mtx Select Options */
+  // MtxSelect custom templates
+  @ContentChild(MtxSelectOptionTemplateDirective, { read: TemplateRef }) optionTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectOptgroupTemplateDirective, { read: TemplateRef }) optgroupTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectLabelTemplateDirective, { read: TemplateRef }) labelTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectMultiLabelTemplateDirective, { read: TemplateRef }) multiLabelTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectHeaderTemplateDirective, { read: TemplateRef }) headerTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectFooterTemplateDirective, { read: TemplateRef }) footerTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectNotFoundTemplateDirective, { read: TemplateRef }) notFoundTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectTypeToSearchTemplateDirective, { read: TemplateRef }) typeToSearchTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectLoadingTextTemplateDirective, { read: TemplateRef }) loadingTextTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectTagTemplateDirective, { read: TemplateRef }) tagTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectLoadingSpinnerTemplateDirective, { read: TemplateRef }) loadingSpinnerTemplate: TemplateRef<any>;
+
+  /** MtxSelect options */
   @Input() addTag: boolean | ((term: string) => any | Promise<any>) = false;
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
