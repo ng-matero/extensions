@@ -4,6 +4,7 @@
 [![GitHub Release Date](https://img.shields.io/github/release-date/ng-matero/extensions)](https://github.com/ng-matero/extensions/releases)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ng-matero/extensions/blob/dev/LICENSE)
 [![Gitter](https://img.shields.io/gitter/room/ng-matero/extensions.svg)](https://gitter.im/matero-io/extensions)
+[![API docs](https://img.shields.io/badge/API%20docs-gitbook-red)](https://nzbin.gitbook.io/material-extensions/)
 
 The Ng-Matero Extensions is an extended library of Angular Material.
 
