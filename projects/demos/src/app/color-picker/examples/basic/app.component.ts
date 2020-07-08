@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'color-picker-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
