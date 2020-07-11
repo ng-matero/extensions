@@ -19,7 +19,7 @@ export interface ExampleType {
   debug?: boolean;
   files: {
     file: string;
-    content?: string,
+    content?: string;
     filecontent: { default: string };
   }[];
 }
@@ -43,10 +43,12 @@ export class ExampleViewerComponent implements OnInit, OnDestroy {
     private readonly snackbar: MatSnackBar,
     private readonly copier: CopierService,
     private componentFactoryResolver: ComponentFactoryResolver
-  ) { }
+  ) {}
 
   ngOnInit() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.exampleData.component);
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
+      this.exampleData.component
+    );
     this.demoComponentRef = this.demoRef.createComponent(componentFactory);
   }
 

@@ -5,13 +5,14 @@ import { MtxGridColumn } from '@ng-matero/extensions';
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [
     {
-      header: 'Name', field: 'name',
-      formatter: (data: any) => `<span class="label">${data.name}</span>`
+      header: 'Name',
+      field: 'name',
+      formatter: (data: any) => `<span class="label">${data.name}</span>`,
     },
     { header: 'Weight', field: 'weight' },
     { header: 'Gender', field: 'gender' },

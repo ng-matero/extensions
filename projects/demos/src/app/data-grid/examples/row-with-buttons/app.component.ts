@@ -5,7 +5,7 @@ import { MtxGridColumn } from '@ng-matero/extensions';
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [
@@ -27,7 +27,9 @@ export class AppComponent {
           text: 'edit',
           icon: 'edit',
           tooltip: 'Edit',
-          click: () => { alert('edit'); },
+          click: () => {
+            alert('edit');
+          },
         },
         {
           type: 'icon',
@@ -37,10 +39,12 @@ export class AppComponent {
           color: 'warn',
           pop: true,
           popTitle: 'Confirm delete?',
-          click: () => { alert('delete'); },
+          click: () => {
+            alert('delete');
+          },
         },
       ],
-    }
+    },
   ];
 
   list = EXAMPLE_DATA;

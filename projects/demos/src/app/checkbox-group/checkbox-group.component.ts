@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -7,5 +7,5 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./checkbox-group.component.scss'],
 })
 export class CheckboxGroupComponent {
-  constructor(public route: ActivatedRoute) { }
+  constructor(public route: ActivatedRoute) {}
 }

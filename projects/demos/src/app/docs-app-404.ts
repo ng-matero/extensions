@@ -8,4 +8,4 @@ import { Component } from '@angular/core';
   `,
   host: { class: 'mat-typography' },
 })
-export class DocsApp404 { }
+export class DocsApp404 {}

@@ -20,7 +20,7 @@ export class MtxGridCellComponent implements OnInit {
 
   viewer: PhotoViewer;
 
-  constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) { }
+  constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
 
   ngOnInit() {
     this.colValue = this._dataGridSrv.getCellValue(this.rowData, this.colDef);

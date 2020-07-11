@@ -5,7 +5,7 @@ import { MtxGridColumn, MtxGridRowSelectionFormatter } from '@ng-matero/extensio
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [
@@ -23,8 +23,8 @@ export class AppComponent {
   rowSelectable = true;
   rowSelected = EXAMPLE_DATA.slice(2, 3);
   rowSelectionFormatter: MtxGridRowSelectionFormatter = {
-    disabled: (data) => data.name === 'Boron',
-    hideCheckbox: (data) => data.name === 'John',
+    disabled: data => data.name === 'Boron',
+    hideCheckbox: data => data.name === 'John',
   };
 
   log(e: any) {

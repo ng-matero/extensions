@@ -7,6 +7,5 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./dialog.component.scss'],
 })
 export class DialogComponent {
-  constructor(public route: ActivatedRoute) { }
+  constructor(public route: ActivatedRoute) {}
 }
-

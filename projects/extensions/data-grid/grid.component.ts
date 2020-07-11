@@ -183,7 +183,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  constructor(private _dataGridSrv: MtxGridService) { }
+  constructor(private _dataGridSrv: MtxGridService) {}
 
   isTemplateRef(obj: any) {
     return obj instanceof TemplateRef;
@@ -197,7 +197,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     return Object.prototype.toString.call(fn) === '[object Function]';
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   // Waiting for async data
   ngOnChanges() {
@@ -246,7 +246,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  ngOnDestroy() { }
+  ngOnDestroy() {}
 
   countPinnedPosition() {
     const count = (acc: number, cur: MtxGridColumn) => acc + parseFloat(cur.width || '80px');

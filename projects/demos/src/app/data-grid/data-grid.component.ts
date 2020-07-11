@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./data-grid.component.scss'],
 })
 export class DataGridComponent {
-
   constructor(public route: ActivatedRoute) {
     let r = route;
     while (!r.routeConfig.path) {

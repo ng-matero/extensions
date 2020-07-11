@@ -1,4 +1,10 @@
-import { Component, OnInit, Inject, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Inject,
+  ViewEncapsulation,
+  ChangeDetectionStrategy,
+} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { MtxDialogData } from './dialog.config';
@@ -15,9 +21,9 @@ export class MtxDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<MtxDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: MtxDialogData
-  ) { }
+  ) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   onClick(fn: () => void) {
     fn.call(this);

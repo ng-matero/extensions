@@ -7,5 +7,5 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./color-picker.component.scss'],
 })
 export class ColorPickerComponent {
-  constructor(public route: ActivatedRoute) { }
+  constructor(public route: ActivatedRoute) {}
 }

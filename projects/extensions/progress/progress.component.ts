@@ -12,7 +12,7 @@ import {
   host: {
     'class': 'mtx-progress',
     '[style.height]': 'height',
-    '[style.backgroundColor]': 'background'
+    '[style.backgroundColor]': 'background',
   },
   templateUrl: './progress.component.html',
   styleUrls: ['./progress.component.scss'],
@@ -47,7 +47,7 @@ export class MtxProgressComponent implements OnInit {
   /** Whether applies animated class */
   @Input() animate: boolean;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

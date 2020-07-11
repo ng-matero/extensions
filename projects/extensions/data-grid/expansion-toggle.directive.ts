@@ -37,7 +37,7 @@ export class MtxGridExpansionToggleDirective {
 
   @Output() toggleChange = new EventEmitter<MtxGridExpansionToggleDirective>();
 
-  constructor() { }
+  constructor() {}
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
@@ -51,5 +51,5 @@ export class MtxGridExpansionToggleDirective {
     this.toggleChange.emit(this);
   }
 
-  private render(): void { }
+  private render(): void {}
 }

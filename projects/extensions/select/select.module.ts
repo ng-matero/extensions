@@ -16,7 +16,7 @@ import {
   MtxSelectOptgroupTemplateDirective,
   MtxSelectOptionTemplateDirective,
   MtxSelectTagTemplateDirective,
-  MtxSelectTypeToSearchTemplateDirective
+  MtxSelectTypeToSearchTemplateDirective,
 } from './templates.directive';
 
 @NgModule({
@@ -33,7 +33,7 @@ import {
     MtxSelectTypeToSearchTemplateDirective,
     MtxSelectLoadingTextTemplateDirective,
     MtxSelectTagTemplateDirective,
-    MtxSelectLoadingSpinnerTemplateDirective
+    MtxSelectLoadingSpinnerTemplateDirective,
   ],
   declarations: [
     MtxSelectComponent,
@@ -50,4 +50,4 @@ import {
     MtxSelectLoadingSpinnerTemplateDirective,
   ],
 })
-export class MtxSelectModule { }
+export class MtxSelectModule {}

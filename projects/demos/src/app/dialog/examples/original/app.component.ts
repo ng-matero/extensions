@@ -5,12 +5,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 @Component({
   selector: 'dialog-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   animal: string;
 
-  constructor(private mtxDialog: MtxDialog) { }
+  constructor(private mtxDialog: MtxDialog) {}
 
   openOriginal() {
     const dialogRef = this.mtxDialog.originalOpen(DialogOverviewComponent, {

@@ -7,5 +7,5 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['alert.component.scss'],
 })
 export class AlertComponent {
-  constructor(public route: ActivatedRoute) { }
+  constructor(public route: ActivatedRoute) {}
 }

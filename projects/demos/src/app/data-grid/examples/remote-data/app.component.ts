@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   columns: MtxGridColumn[] = [
@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
     return p;
   }
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.getData();
@@ -62,7 +62,8 @@ export class AppComponent implements OnInit {
 
   getData() {
     this.isLoading = true;
-    this.http.get('https://api.github.com/search/repositories', { params: this.params as any })
+    this.http
+      .get('https://api.github.com/search/repositories', { params: this.params as any })
       .subscribe(
         (res: any) => {
           this.list = res.items;
@@ -74,7 +75,8 @@ export class AppComponent implements OnInit {
         },
         () => {
           this.isLoading = false;
-        });
+        }
+      );
   }
 
   getNextPage(e: PageEvent) {

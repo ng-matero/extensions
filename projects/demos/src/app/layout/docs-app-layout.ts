@@ -15,7 +15,7 @@ const SMALL_WIDTH_BREAKPOINT = 959;
 @Component({
   selector: 'docs-app-layout',
   host: {
-    '[attr.dir]': 'dir.value'
+    '[attr.dir]': 'dir.value',
   },
   templateUrl: 'docs-app-layout.html',
   styleUrls: ['docs-app-layout.scss'],
@@ -37,7 +37,8 @@ export class DocsAppLayout {
   ) {
     dir.change.subscribe(() => cdr.markForCheck());
 
-    this.isScreenSmall = breakpoints.observe(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`)
+    this.isScreenSmall = breakpoints
+      .observe(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`)
       .pipe(map(breakpoint => breakpoint.matches));
 
     this._router.events.subscribe(s => {
@@ -47,7 +48,9 @@ export class DocsAppLayout {
           // TODO:
           setTimeout(() => {
             const element = document.querySelector('#' + urlTree.fragment);
-            if (element) { element.scrollIntoView(true); }
+            if (element) {
+              element.scrollIntoView(true);
+            }
           });
         }
       }

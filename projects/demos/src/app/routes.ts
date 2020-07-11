@@ -41,7 +41,7 @@ export const DOCS_APP_ROUTES: Routes = [
   },
   {
     path: 'text3d',
-    loadChildren: () => import('./text3d/text3d-demo.module').then(m => m.Text3dDemoModule),
+    loadChildren: () => import('./text3d/text3d.module').then(m => m.Text3dModule),
   },
   { path: '**', component: DocsApp404 },
 ];

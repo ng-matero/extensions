@@ -5,4 +5,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
   template: `<docs-app-layout></docs-app-layout>`,
   encapsulation: ViewEncapsulation.None,
 })
-export class AppComponent { }
+export class AppComponent {}

@@ -5,7 +5,7 @@ import { MtxGridColumn } from '@ng-matero/extensions';
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
   @ViewChild('statusTpl', { static: true }) statusTpl: TemplateRef<any>;

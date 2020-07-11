@@ -4,7 +4,7 @@ import { MtxDialog } from '@ng-matero/extensions';
 @Component({
   selector: 'dialog-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
   constructor(private mtxDialog: MtxDialog) {}

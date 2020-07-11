@@ -23,11 +23,10 @@ import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { _supportsShadowDom } from '@angular/cdk/platform';
-import { Subject, Observable, merge, fromEvent, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-
 import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
 import { MatMenuTrigger } from '@angular/material/menu';
+import { Subject, Observable, merge, fromEvent, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 import { Color } from 'ngx-color';
 
@@ -43,11 +42,18 @@ let nextUniqueId = 0;
   providers: [{ provide: MatFormFieldControl, useExisting: MtxColorPickerComponent }],
 })
 export class MtxColorPickerComponent
-  implements OnInit, OnDestroy, DoCheck, AfterViewInit,
-  ControlValueAccessor, MatFormFieldControl<any> {
+  implements
+    OnInit,
+    OnDestroy,
+    DoCheck,
+    AfterViewInit,
+    ControlValueAccessor,
+    MatFormFieldControl<any> {
   /** Value of the color picker control. */
   @Input()
-  get value(): string | null { return this._value; }
+  get value(): string | null {
+    return this._value;
+  }
   set value(newValue: string | null) {
     this._value = newValue;
     this._onChange(newValue);
@@ -63,7 +69,9 @@ export class MtxColorPickerComponent
 
   /** Unique id of the element. */
   @Input()
-  get id(): string { return this._id; }
+  get id(): string {
+    return this._id;
+  }
   set id(value: string) {
     this._id = value || this._uid;
     this.stateChanges.next();
@@ -72,7 +80,9 @@ export class MtxColorPickerComponent
 
   /** Placeholder to be shown if value is empty. */
   @Input()
-  get placeholder(): string { return this._placeholder; }
+  get placeholder(): string {
+    return this._placeholder;
+  }
   set placeholder(value: string) {
     this._placeholder = value;
     this.stateChanges.next();
@@ -80,15 +90,23 @@ export class MtxColorPickerComponent
   private _placeholder: string;
 
   /** Whether the input is focused. */
-  get focused(): boolean { return this._focused || this._panelOpen; }
+  get focused(): boolean {
+    return this._focused || this._panelOpen;
+  }
   private _focused = false;
 
-  get empty(): boolean { return !this.value; }
+  get empty(): boolean {
+    return !this.value;
+  }
 
-  get shouldLabelFloat(): boolean { return this.focused || !this.empty; }
+  get shouldLabelFloat(): boolean {
+    return this.focused || !this.empty;
+  }
 
   @Input()
-  get required(): boolean { return this._required; }
+  get required(): boolean {
+    return this._required;
+  }
   set required(value: boolean) {
     this._required = coerceBooleanProperty(value);
     this.stateChanges.next();
@@ -96,7 +114,9 @@ export class MtxColorPickerComponent
   private _required = false;
 
   @Input()
-  get disabled(): boolean { return this._disabled; }
+  get disabled(): boolean {
+    return this._disabled;
+  }
   set disabled(value: boolean) {
     this._disabled = coerceBooleanProperty(value);
     this.stateChanges.next();
@@ -112,10 +132,10 @@ export class MtxColorPickerComponent
   _ariaDescribedby: string;
 
   /** `View -> model callback called when value changes` */
-  _onChange: (value: any) => void = () => { };
+  _onChange: (value: any) => void = () => {};
 
   /** `View -> model callback called when color picker has been touched` */
-  _onTouched = () => { };
+  _onTouched = () => {};
 
   /** Event emitted when the color changed */
   @Output() readonly colorChange = new EventEmitter<{ color: Color; $event: MouseEvent }>();
@@ -172,7 +192,7 @@ export class MtxColorPickerComponent
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngDoCheck(): void {
     if (this.ngControl) {

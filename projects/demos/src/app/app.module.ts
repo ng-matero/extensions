@@ -35,4 +35,4 @@ import { environment } from '../environments/environment.prod';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

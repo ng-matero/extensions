@@ -32,7 +32,7 @@ import {
   MtxSelectLoadingTextTemplateDirective,
   MtxSelectMultiLabelTemplateDirective,
   MtxSelectTagTemplateDirective,
-  MtxSelectLoadingSpinnerTemplateDirective
+  MtxSelectLoadingSpinnerTemplateDirective,
 } from './templates.directive';
 
 export type CompareWithFn = (a: any, b: any) => boolean;
@@ -58,17 +58,28 @@ let nextUniqueId = 0;
 export class MtxSelectComponent
   implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<any> {
   // MtxSelect custom templates
-  @ContentChild(MtxSelectOptionTemplateDirective, { read: TemplateRef }) optionTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectOptgroupTemplateDirective, { read: TemplateRef }) optgroupTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectLabelTemplateDirective, { read: TemplateRef }) labelTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectMultiLabelTemplateDirective, { read: TemplateRef }) multiLabelTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectHeaderTemplateDirective, { read: TemplateRef }) headerTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectFooterTemplateDirective, { read: TemplateRef }) footerTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectNotFoundTemplateDirective, { read: TemplateRef }) notFoundTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectTypeToSearchTemplateDirective, { read: TemplateRef }) typeToSearchTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectLoadingTextTemplateDirective, { read: TemplateRef }) loadingTextTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectOptionTemplateDirective, { read: TemplateRef })
+  optionTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectOptgroupTemplateDirective, { read: TemplateRef })
+  optgroupTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectLabelTemplateDirective, { read: TemplateRef }) labelTemplate: TemplateRef<
+    any
+  >;
+  @ContentChild(MtxSelectMultiLabelTemplateDirective, { read: TemplateRef })
+  multiLabelTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectHeaderTemplateDirective, { read: TemplateRef })
+  headerTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectFooterTemplateDirective, { read: TemplateRef })
+  footerTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectNotFoundTemplateDirective, { read: TemplateRef })
+  notFoundTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectTypeToSearchTemplateDirective, { read: TemplateRef })
+  typeToSearchTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectLoadingTextTemplateDirective, { read: TemplateRef })
+  loadingTextTemplate: TemplateRef<any>;
   @ContentChild(MtxSelectTagTemplateDirective, { read: TemplateRef }) tagTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectLoadingSpinnerTemplateDirective, { read: TemplateRef }) loadingSpinnerTemplate: TemplateRef<any>;
+  @ContentChild(MtxSelectLoadingSpinnerTemplateDirective, { read: TemplateRef })
+  loadingSpinnerTemplate: TemplateRef<any>;
 
   /** MtxSelect options */
   @Input() addTag: boolean | ((term: string) => any | Promise<any>) = false;
@@ -127,7 +138,9 @@ export class MtxSelectComponent
 
   /** Value of the select control. */
   @Input()
-  get value(): any { return this._value; }
+  get value(): any {
+    return this._value;
+  }
   set value(newValue: any) {
     this._value = newValue;
     this._onChange(newValue);
@@ -140,7 +153,9 @@ export class MtxSelectComponent
 
   /** Unique id of the element. */
   @Input()
-  get id(): string { return this._id; }
+  get id(): string {
+    return this._id;
+  }
   set id(value: string) {
     this._id = value || this._uid;
     this.stateChanges.next();
@@ -152,7 +167,9 @@ export class MtxSelectComponent
 
   /** Placeholder to be shown if value is empty. */
   @Input()
-  get placeholder(): string { return this._placeholder; }
+  get placeholder(): string {
+    return this._placeholder;
+  }
   set placeholder(value: string) {
     this._placeholder = value;
     this.stateChanges.next();
@@ -160,17 +177,23 @@ export class MtxSelectComponent
   private _placeholder: string;
 
   /** Whether the input is focused. */
-  get focused(): boolean { return this._focused; }
+  get focused(): boolean {
+    return this._focused;
+  }
   private _focused = false;
 
   get empty(): boolean {
     return !this.value || (Array.isArray(this.value) && this.value.length === 0);
   }
 
-  get shouldLabelFloat(): boolean { return this.focused || !this.empty; }
+  get shouldLabelFloat(): boolean {
+    return this.focused || !this.empty;
+  }
 
   @Input()
-  get required(): boolean { return this._required; }
+  get required(): boolean {
+    return this._required;
+  }
   set required(value: boolean) {
     this._required = coerceBooleanProperty(value);
     this.stateChanges.next();
@@ -178,7 +201,9 @@ export class MtxSelectComponent
   private _required = false;
 
   @Input()
-  get disabled(): boolean { return this._disabled; }
+  get disabled(): boolean {
+    return this._disabled;
+  }
   set disabled(value: boolean) {
     this._disabled = coerceBooleanProperty(value);
     this.readonly = this._disabled;
@@ -195,10 +220,10 @@ export class MtxSelectComponent
   _ariaDescribedby: string;
 
   /** `View -> model callback called when value changes` */
-  _onChange: (value: any) => void = () => { };
+  _onChange: (value: any) => void = () => {};
 
   /** `View -> model callback called when select has been touched` */
-  _onTouched = () => { };
+  _onTouched = () => {};
 
   constructor(
     private _focusMonitor: FocusMonitor,
@@ -219,7 +244,7 @@ export class MtxSelectComponent
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngDoCheck(): void {
     if (this.ngControl) {
@@ -244,7 +269,7 @@ export class MtxSelectComponent
   }
 
   /** Implemented as part of MatFormFieldControl. */
-  onContainerClick() { }
+  onContainerClick() {}
 
   /**
    * Sets the select's value. Part of the ControlValueAccessor interface

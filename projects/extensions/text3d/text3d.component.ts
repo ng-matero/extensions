@@ -13,7 +13,7 @@ import {
   exportAs: 'mtxText3d',
   host: {
     'class': 'mtx-text3d',
-    '[style.transform]': 'transform'
+    '[style.transform]': 'transform',
   },
   templateUrl: './text3d.component.html',
   styleUrls: ['./text3d.component.scss'],
@@ -43,5 +43,5 @@ export class MtxText3dComponent implements OnInit {
     }
   }
 
-  ngOnInit() { }
+  ngOnInit() {}
 }

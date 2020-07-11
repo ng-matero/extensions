@@ -17,7 +17,7 @@ import { MtxCheckboxGroupOption } from './checkbox-group.interface';
   selector: 'mtx-checkbox-group',
   exportAs: 'mtxCheckboxGroup',
   host: {
-    class: 'mtx-checkbox-group'
+    class: 'mtx-checkbox-group',
   },
   templateUrl: './checkbox-group.component.html',
   styleUrls: ['./checkbox-group.component.scss'],
@@ -48,9 +48,9 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
   onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
   onTouched: () => void = () => null;
 
-  constructor(private _changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   writeValue(value: MtxCheckboxGroupOption[]): void {
     this.options = value;
