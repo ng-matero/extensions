@@ -18,11 +18,13 @@ import {
   MtxSelectTagTemplateDirective,
   MtxSelectTypeToSearchTemplateDirective,
 } from './templates.directive';
+import { MtxOptionComponent } from './option.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule],
   exports: [
     MtxSelectComponent,
+    MtxOptionComponent,
     MtxSelectOptgroupTemplateDirective,
     MtxSelectOptionTemplateDirective,
     MtxSelectLabelTemplateDirective,
@@ -37,6 +39,7 @@ import {
   ],
   declarations: [
     MtxSelectComponent,
+    MtxOptionComponent,
     MtxSelectOptgroupTemplateDirective,
     MtxSelectOptionTemplateDirective,
     MtxSelectLabelTemplateDirective,

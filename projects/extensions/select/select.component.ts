@@ -14,12 +14,17 @@ import {
   EventEmitter,
   TemplateRef,
   ContentChild,
+  ContentChildren,
+  QueryList,
+  AfterViewInit,
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { Subject } from 'rxjs';
+import { Subject, merge } from 'rxjs';
+import { takeUntil, startWith } from 'rxjs/operators';
 
 import {
   MtxSelectOptionTemplateDirective,
@@ -34,6 +39,8 @@ import {
   MtxSelectTagTemplateDirective,
   MtxSelectLoadingSpinnerTemplateDirective,
 } from './templates.directive';
+import { MtxOptionComponent } from './option.component';
+import { NgSelectComponent } from '@ng-select/ng-select';
 
 export type CompareWithFn = (a: any, b: any) => boolean;
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
@@ -56,15 +63,22 @@ let nextUniqueId = 0;
   providers: [{ provide: MatFormFieldControl, useExisting: MtxSelectComponent }],
 })
 export class MtxSelectComponent
-  implements OnInit, OnDestroy, DoCheck, ControlValueAccessor, MatFormFieldControl<any> {
+  implements
+    OnInit,
+    OnDestroy,
+    DoCheck,
+    AfterViewInit,
+    ControlValueAccessor,
+    MatFormFieldControl<any> {
+  @ViewChild('ngSelect', { static: true }) ngSelect: NgSelectComponent;
+
   // MtxSelect custom templates
   @ContentChild(MtxSelectOptionTemplateDirective, { read: TemplateRef })
   optionTemplate: TemplateRef<any>;
   @ContentChild(MtxSelectOptgroupTemplateDirective, { read: TemplateRef })
   optgroupTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectLabelTemplateDirective, { read: TemplateRef }) labelTemplate: TemplateRef<
-    any
-  >;
+  @ContentChild(MtxSelectLabelTemplateDirective, { read: TemplateRef })
+  labelTemplate: TemplateRef<any>;
   @ContentChild(MtxSelectMultiLabelTemplateDirective, { read: TemplateRef })
   multiLabelTemplate: TemplateRef<any>;
   @ContentChild(MtxSelectHeaderTemplateDirective, { read: TemplateRef })
@@ -81,6 +95,9 @@ export class MtxSelectComponent
   @ContentChild(MtxSelectLoadingSpinnerTemplateDirective, { read: TemplateRef })
   loadingSpinnerTemplate: TemplateRef<any>;
 
+  @ContentChildren(MtxOptionComponent, { descendants: true })
+  mtxOptions: QueryList<MtxOptionComponent>;
+
   /** MtxSelect options */
   @Input() addTag: boolean | ((term: string) => any | Promise<any>) = false;
   @Input() addTagText = 'Add item';
@@ -92,14 +109,13 @@ export class MtxSelectComponent
   @Input() clearAllText = 'Clear all';
   @Input() clearable = true;
   @Input() clearOnBackspace = true;
-  @Input() compareWith: CompareWithFn; // TODO:
+  @Input() compareWith: CompareWithFn;
   @Input() dropdownPosition: 'bottom' | 'top' | 'auto' = 'auto';
   @Input() groupBy: () => void | string;
   @Input() groupValue: GroupValueFn;
   @Input() selectableGroup = false;
   @Input() selectableGroupAsModel = true;
   @Input() hideSelected = false;
-  @Input() items = [];
   @Input() isOpen: boolean;
   @Input() loading = false;
   @Input() loadingText = 'Loading...';
@@ -135,6 +151,18 @@ export class MtxSelectComponent
   @Output() remove = new EventEmitter();
   @Output() scroll = new EventEmitter<{ start: number; end: number }>();
   @Output() scrollToEnd = new EventEmitter();
+
+  @Input()
+  get items() {
+    return this._items;
+  }
+  set items(value: any[]) {
+    this._itemsAreUsed = true;
+    this._items = value;
+  }
+  private _items = [];
+  private _itemsAreUsed: boolean;
+  private readonly _destroy$ = new Subject<void>();
 
   /** Value of the select control. */
   @Input()
@@ -244,7 +272,19 @@ export class MtxSelectComponent
     }
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Fix compareWith warning of undefined value
+    // https://github.com/ng-select/ng-select/issues/1537
+    if (this.compareWith) {
+      this.ngSelect.compareWith = this.compareWith;
+    }
+  }
+
+  ngAfterViewInit() {
+    if (!this._itemsAreUsed) {
+      this._setItemsFromMtxOptions();
+    }
+  }
 
   ngDoCheck(): void {
     if (this.ngControl) {
@@ -254,6 +294,8 @@ export class MtxSelectComponent
   }
 
   ngOnDestroy() {
+    this._destroy$.next();
+    this._destroy$.complete();
     this.stateChanges.complete();
     this._focusMonitor.stopMonitoring(this._elementRef);
   }
@@ -302,5 +344,41 @@ export class MtxSelectComponent
    */
   registerOnTouched(fn: any): void {
     this._onTouched = fn;
+  }
+
+  /** NgSelect: _setItemsFromNgOptions */
+
+  private _setItemsFromMtxOptions() {
+    const mapNgOptions = (options: QueryList<MtxOptionComponent>) => {
+      this.items = options.map(option => ({
+        $ngOptionValue: option.value,
+        $ngOptionLabel: option.elementRef.nativeElement.innerHTML,
+        disabled: option.disabled,
+      }));
+      this.ngSelect.itemsList.setItems(this.items);
+      if (this.ngSelect.hasValue) {
+        this.ngSelect.itemsList.mapSelectedItems();
+      }
+      this.ngSelect.detectChanges();
+    };
+
+    const handleOptionChange = () => {
+      const changedOrDestroyed = merge(this.mtxOptions.changes, this._destroy$);
+      merge(...this.mtxOptions.map(option => option.stateChange$))
+        .pipe(takeUntil(changedOrDestroyed))
+        .subscribe(option => {
+          const item = this.ngSelect.itemsList.findItem(option.value);
+          item.disabled = option.disabled;
+          item.label = option.label || item.label;
+          this.ngSelect.detectChanges();
+        });
+    };
+
+    this.mtxOptions.changes
+      .pipe(startWith(this.mtxOptions), takeUntil(this._destroy$))
+      .subscribe(options => {
+        mapNgOptions(options);
+        handleOptionChange();
+      });
   }
 }
