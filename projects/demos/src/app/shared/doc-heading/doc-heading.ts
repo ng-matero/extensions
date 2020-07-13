@@ -3,10 +3,10 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 @Component({
   selector: 'doc-heading',
   template: `
-    <h2 [id]="id">
+    <h3 [id]="id">
       <span>{{text}}</span>
       <header-link [example]="text"></header-link>
-    </h2>
+    </h3>
   `,
   encapsulation: ViewEncapsulation.None,
 })

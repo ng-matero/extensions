@@ -6,7 +6,7 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-family: Roboto, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
   text-align: unset;
 }
 
@@ -14,20 +14,21 @@ code,
 kbd,
 pre,
 samp {
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
   font-size: 1em;
 }
 
 code {
-  font-size: 87.5%;
-  color: #e83e8c;
+  padding: 3px;
+  font-size: 90%;
+  background-color: rgba(0, 0, 0, .03);
   word-wrap: break-word;
 }
 
 kbd {
   display: inline-block;
   padding: 3px 5px;
-  font: 11px SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
+  font-size: 75%;
   line-height: 10px;
   color: #444d56;
   vertical-align: middle;
@@ -47,6 +48,11 @@ hr {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+}
+
+a {
+  color: #3f51b5;
+  text-decoration: none;
 }
 
 // Helps fonts on OSX looks more consistent with other systems

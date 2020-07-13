@@ -8,6 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { NgProgressRouterModule } from 'ngx-progressbar/router';
+import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 
 import { MtxAlertModule } from '@ng-matero/extensions/alert';
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
@@ -38,6 +39,8 @@ import { CopierService } from './copier/copier.service';
     NgProgressModule,
     NgProgressHttpModule,
     NgProgressRouterModule,
+    NgOptionHighlightModule,
+
     MtxGridModule,
     MtxColorPickerModule,
     MtxAlertModule,
@@ -46,7 +49,7 @@ import { CopierService } from './copier/copier.service';
     MtxProgressModule,
     MtxSelectModule,
     MtxSplitModule,
-    MtxText3dModule
+    MtxText3dModule,
   ],
   exports: [
     CommonModule,
@@ -59,6 +62,8 @@ import { CopierService } from './copier/copier.service';
     NgProgressModule,
     NgProgressHttpModule,
     NgProgressRouterModule,
+    NgOptionHighlightModule,
+
     MtxGridModule,
     MtxColorPickerModule,
     MtxAlertModule,
@@ -72,14 +77,14 @@ import { CopierService } from './copier/copier.service';
     HeaderLinkComponent,
     DocHeadingComponent,
     ExampleViewerComponent,
-    ComponentNavComponent
+    ComponentNavComponent,
   ],
   declarations: [
     HeaderLinkComponent,
     DocHeadingComponent,
     ExampleViewerComponent,
-    ComponentNavComponent
+    ComponentNavComponent,
   ],
   providers: [CopierService],
 })
-export class SharedModule { }
+export class SharedModule {}

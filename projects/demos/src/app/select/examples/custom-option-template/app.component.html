@@ -1,0 +1,28 @@
+<p>Custom dropdown panel option template using <b>ng-option-tmp</b></p>
+
+<mat-form-field>
+  <mat-label>Select City</mat-label>
+
+  <mtx-select [items]="cities" [(ngModel)]="selectedCity" bindLabel="name" bindValue="name">
+    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+      <div *ngIf="item.name === 'Kaunas'">{{item.name}}</div>
+      <mat-card class="example-card" *ngIf="item.name !== 'Kaunas'">
+        <mat-card-header>
+          <mat-card-title [ngOptionHighlight]="search">{{item.name}}</mat-card-title>
+          <mat-card-subtitle>Card subtitle</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+          <img height="15" width="15" [src]="item.avatar" />
+          Some quick example text to build
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+    </ng-template>
+  </mtx-select>
+
+  <mat-hint>Choose your city</mat-hint>
+  <mat-error>Please choose a city</mat-error>
+</mat-form-field>

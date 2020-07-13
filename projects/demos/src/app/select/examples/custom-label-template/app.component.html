@@ -1,0 +1,15 @@
+<p>Custom selected item label using <b>ng-label-tmp</b></p>
+
+<mat-form-field>
+  <mat-label>Select City</mat-label>
+
+  <mtx-select [items]="cities" [(ngModel)]="selectedCity" bindLabel="name" bindValue="name">
+    <ng-template ng-label-tmp let-item="item">
+      <img height="15" width="15" [src]="item.avatar" />
+      {{item.name}}
+    </ng-template>
+  </mtx-select>
+
+  <mat-hint>Choose your city</mat-hint>
+  <mat-error>Please choose a city</mat-error>
+</mat-form-field>

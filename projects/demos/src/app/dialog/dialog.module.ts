@@ -5,27 +5,30 @@ import { SharedModule } from '../shared';
 import { DialogComponent } from './dialog.component';
 
 import { DialogBasicComponent, dialogBasicExampleConfig } from './examples/basic';
-import { DialogOriginalComponent, dialogOriginalExampleConfig, DialogOverviewComponent } from './examples/original';
+import {
+  DialogOriginalComponent,
+  dialogOriginalExampleConfig,
+  DialogOverviewComponent,
+} from './examples/original';
 
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forChild([{
-      path: '',
-      component: DialogComponent,
-      data: {
-        examples: [
-          dialogBasicExampleConfig,
-          dialogOriginalExampleConfig
-        ],
+    RouterModule.forChild([
+      {
+        path: '',
+        component: DialogComponent,
+        data: {
+          examples: [dialogBasicExampleConfig, dialogOriginalExampleConfig],
+        },
       },
-    }]),
+    ]),
   ],
   declarations: [
     DialogComponent,
     DialogBasicComponent,
     DialogOriginalComponent,
-    DialogOverviewComponent
+    DialogOverviewComponent,
   ],
 })
-export class DialogModule { }
+export class DialogModule {}

@@ -1,0 +1,24 @@
+<p>
+  If you have simple use case, you can omit items array and bind options directly in html using
+  <b>mtx-option</b>
+  component.
+</p>
+
+<div>
+  <button mat-raised-button (click)="toggleDisabled()">Toggle disabled</button>
+</div>
+
+<mat-form-field>
+  <mat-label>Select Car</mat-label>
+
+  <mtx-select [multiple]="true" [(ngModel)]="selectedCars">
+    <mtx-option *ngFor="let car of cars" [value]="car.id" [disabled]="car.disabled">{{car.name}}
+    </mtx-option>
+    <mtx-option [value]="'custom'">Custom</mtx-option>
+  </mtx-select>
+
+  <mat-hint>Choose your favorite car</mat-hint>
+  <mat-error>Please choose a car</mat-error>
+</mat-form-field>
+
+<p>Selected car ID: {{selectedCars | json}}</p>
