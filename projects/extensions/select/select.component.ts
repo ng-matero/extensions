@@ -349,7 +349,7 @@ export class MtxSelectComponent
   /** NgSelect: _setItemsFromNgOptions */
 
   private _setItemsFromMtxOptions() {
-    const mapNgOptions = (options: QueryList<MtxOptionComponent>) => {
+    const mapMtxOptions = (options: QueryList<MtxOptionComponent>) => {
       this.items = options.map(option => ({
         $ngOptionValue: option.value,
         $ngOptionLabel: option.elementRef.nativeElement.innerHTML,
@@ -377,7 +377,7 @@ export class MtxSelectComponent
     this.mtxOptions.changes
       .pipe(startWith(this.mtxOptions), takeUntil(this._destroy$))
       .subscribe(options => {
-        mapNgOptions(options);
+        mapMtxOptions(options);
         handleOptionChange();
       });
   }

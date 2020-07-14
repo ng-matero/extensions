@@ -20,8 +20,8 @@
                           [selectable]="columnHideable"
                           [selectedType]="columnHidingChecked"
                           [sortable]="columnMovable"
-                          (selectionChange)="handleColumnHidingChange($event)"
-                          (sortChange)="handleColumnMovingChange($event)">
+                          (selectionChange)="_handleColumnHidingChange($event)"
+                          (sortChange)="_handleColumnMovingChange($event)">
     </mtx-grid-column-menu>
   </div>
 </div>
@@ -32,15 +32,15 @@
     <table mat-table
            [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
            [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
-           matSort (matSortChange)="handleSortChange($event)" [trackBy]="trackBy">
+           matSort (matSortChange)="_handleSortChange($event)" [trackBy]="trackBy">
 
       <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"
                     matColumnDef="MtxGridCheckboxColumnDef">
         <th mat-header-cell *matHeaderCellDef class="mtx-grid-checkbox-cell">
           <mat-checkbox *ngIf="multiSelectable"
-                        [checked]="rowSelection.hasValue() && isAllSelected()"
-                        [indeterminate]="rowSelection.hasValue() && !isAllSelected()"
-                        (change)="$event ? handleMasterToggle() : null">
+                        [checked]="rowSelection.hasValue() && _isAllSelected()"
+                        [indeterminate]="rowSelection.hasValue() && !_isAllSelected()"
+                        (change)="$event ? _toggleMasterCheckbox() : null">
           </mat-checkbox>
         </th>
         <td mat-cell *matCellDef="let row;" class="mtx-grid-checkbox-cell">
@@ -48,7 +48,7 @@
                         [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled(row)"
                         [checked]="rowSelection.isSelected(row)"
                         (click)="$event.stopPropagation()"
-                        (change)="$event ? handleSingleToggle(row) : null">
+                        (change)="$event ? _toggleNormalCheckbox(row) : null">
           </mat-checkbox>
         </td>
         <td mat-footer-cell *matFooterCellDef></td>
@@ -64,13 +64,13 @@
               [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
             <div class="mat-header-cell-inner">
 
-              <ng-template [ngIf]="isTemplateRef(headerTemplate)" [ngIfElse]="headerTpl">
+              <ng-template [ngIf]="_isTemplateRef(headerTemplate)" [ngIfElse]="headerTpl">
                 <ng-template [ngTemplateOutlet]="headerTemplate"
                              [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
                 </ng-template>
               </ng-template>
               <ng-template #headerTpl>
-                <ng-template [ngIf]="headerTemplate && isTemplateRef(headerTemplate[col.field])"
+                <ng-template [ngIf]="headerTemplate && _isTemplateRef(headerTemplate[col.field])"
                              [ngIfElse]="defaultHeaderTpl">
                   <ng-template [ngTemplateOutlet]="headerTemplate[col.field]"
                                [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
@@ -91,30 +91,30 @@
           <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
               [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
               [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
-              mtx-selectable-cell (cellSelectionChange)="handleCellSelect($event, row, col)">
+              mtx-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
 
-            <ng-template [ngIf]="isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
+            <ng-template [ngIf]="_isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
               <ng-template [ngTemplateOutlet]="cellTemplate"
-                           [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: getIndex(index, dataIndex), colDef: col }">
+                           [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
               </ng-template>
             </ng-template>
             <ng-template #cellTpl>
-              <ng-template [ngIf]="cellTemplate && isTemplateRef(cellTemplate[col.field])"
+              <ng-template [ngIf]="cellTemplate && _isTemplateRef(cellTemplate[col.field])"
                            [ngIfElse]="colDefCellTpl">
                 <ng-template [ngTemplateOutlet]="cellTemplate[col.field]"
-                             [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: getIndex(index, dataIndex), colDef: col }">
+                             [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
                 </ng-template>
               </ng-template>
             </ng-template>
             <ng-template #colDefCellTpl>
               <ng-template [ngIf]="col.cellTemplate" [ngIfElse]="defaultCellTpl"
                            [ngTemplateOutlet]="col.cellTemplate"
-                           [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: getIndex(index, dataIndex), colDef: col }">
+                           [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
               </ng-template>
             </ng-template>
             <ng-template #defaultCellTpl>
               <button *ngIf="col.showExpand" mat-icon-button mtx-expansion-toggle
-                      (toggleChange)="handleExpansionChange($event, row, col, dataIndex);">
+                      (toggleChange)="_handleExpansionChange($event, row, col, dataIndex);">
                 <mat-icon>keyboard_arrow_right</mat-icon>
               </button>
 
@@ -128,21 +128,21 @@
               [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
             <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>
 
-            <ng-template [ngIf]="isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
+            <ng-template [ngIf]="_isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
               <ng-template [ngTemplateOutlet]="summaryTemplate"
                            [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }">
               </ng-template>
             </ng-template>
             <ng-template #summaryTpl>
-              <ng-template [ngIf]="summaryTemplate && isTemplateRef(summaryTemplate[col.field])"
+              <ng-template [ngIf]="summaryTemplate && _isTemplateRef(summaryTemplate[col.field])"
                            [ngIfElse]="defaultSummaryTpl">
                 <ng-template [ngTemplateOutlet]="summaryTemplate[col.field]"
-                             [ngTemplateOutletContext]="{ $implicit: getColData(data, col), colData: getColData(data, col), colDef: col }">
+                             [ngTemplateOutletContext]="{ $implicit: _getColData(data, col), colData: _getColData(data, col), colDef: col }">
                 </ng-template>
               </ng-template>
             </ng-template>
             <ng-template #defaultSummaryTpl>
-              <span [innerHTML]="formatSummary(col.summary, data, col)"></span>
+              <span [innerHTML]="_formatSummary(col.summary, data, col)"></span>
             </ng-template>
 
           </td>
@@ -152,8 +152,8 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
       <tr mat-row
           *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
-          [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': isOddRow(index, dataIndex)}"
-          (click)="handleRowSelect($event, row)">
+          [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': _isOddRow(index, dataIndex)}"
+          (click)="_selectRow($event, row)">
       </tr>
       <ng-container *ngIf="whetherShowSummary">
         <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>

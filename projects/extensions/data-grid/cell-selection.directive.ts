@@ -14,8 +14,6 @@ import { MtxGridComponent } from './grid.component';
 })
 export class MtxGridCellSelectionDirective {
   private _selected = false;
-  private _active = false;
-  private _parentRow: HTMLElement;
   private _rowData: any;
 
   shiftKeyPressed = false;

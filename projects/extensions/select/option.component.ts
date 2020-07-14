@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 
 @Component({
   selector: 'mtx-option',
+  exportAs: 'mtxOption',
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<ng-content></ng-content>`,
 })

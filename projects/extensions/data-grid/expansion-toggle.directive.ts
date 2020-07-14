@@ -50,6 +50,4 @@ export class MtxGridExpansionToggleDirective {
     this._opened = !this._opened;
     this.toggleChange.emit(this);
   }
-
-  private render(): void {}
 }

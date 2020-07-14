@@ -45,8 +45,8 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
 
   options: MtxCheckboxGroupOption[] = [];
 
-  onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
-  onTouched: () => void = () => null;
+  _onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
+  _onTouched: () => void = () => null;
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
@@ -55,20 +55,20 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
   writeValue(value: MtxCheckboxGroupOption[]): void {
     this.options = value;
     if (this.options) {
-      this.updateSingleChecked();
+      this._updateNormalChecked();
     }
     this._changeDetectorRef.markForCheck();
   }
 
   registerOnChange(fn: (value: MtxCheckboxGroupOption[]) => {}): void {
-    this.onChange = fn;
+    this._onChange = fn;
   }
 
   registerOnTouched(fn: () => {}): void {
-    this.onTouched = fn;
+    this._onTouched = fn;
   }
 
-  updateSingleChecked(e?: boolean, index?: number): void {
+  _updateNormalChecked(e?: boolean, index?: number): void {
     if (this.options.filter(item => item.checked || !item.disabled).every(item => !item.checked)) {
       this.selectAll = false;
       this.selectAllIndeterminate = false;
@@ -87,7 +87,7 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
     });
   }
 
-  updateAllChecked(e?: boolean, index?: number): void {
+  _updateMasterChecked(e?: boolean, index?: number): void {
     this.selectAll = !this.selectAll;
     this.selectAllIndeterminate = false;
     if (this.selectAll) {

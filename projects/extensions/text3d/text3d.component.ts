@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   Input,
   ContentChild,
   TemplateRef,
@@ -20,7 +19,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxText3dComponent implements OnInit {
+export class MtxText3dComponent {
   @ContentChild(TemplateRef, { static: false }) template: TemplateRef<any>;
 
   @Input() text = '';
@@ -42,6 +41,4 @@ export class MtxText3dComponent implements OnInit {
       this.arr.push(i);
     }
   }
-
-  ngOnInit() {}
 }

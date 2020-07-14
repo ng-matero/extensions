@@ -47,7 +47,7 @@
        (keydown)="$event.stopPropagation()">
 
     <div class="mtx-grid-column-menu-list"
-         cdkDropList (cdkDropListDropped)="handleDrop($event)"
+         cdkDropList (cdkDropListDropped)="_handleDroped($event)"
          *ngIf="sortable">
       <div class="mtx-grid-column-menu-item" *ngFor="let col of columns"
            cdkDrag [cdkDragDisabled]="selectedType === 'show'? !col.show : col.hide">
@@ -73,7 +73,7 @@
                 *ngIf="selectable"
                 [(ngModel)]="col[selectedType]"
                 [disabled]="col.disabled"
-                (change)="handleSelect($event)">
+                (change)="_handleSelection($event)">
     {{col.label}}
   </mat-checkbox>
   <span class="mtx-grid-column-menu-item-label" *ngIf="!selectable">{{col.label}}</span>

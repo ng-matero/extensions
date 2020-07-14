@@ -1,10 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-} from '@angular/core';
+import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'mtx-progress',
@@ -19,7 +13,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxProgressComponent implements OnInit {
+export class MtxProgressComponent {
   /**
    * Progress types
    * `default`, `info`, `success`, `warning` and `danger`
@@ -46,8 +40,4 @@ export class MtxProgressComponent implements OnInit {
 
   /** Whether applies animated class */
   @Input() animate: boolean;
-
-  constructor() {}
-
-  ngOnInit() {}
 }

@@ -1,15 +1,15 @@
-<mat-checkbox class="mtx-checkbox-select-all"
+<mat-checkbox class="mtx-checkbox-master"
               *ngIf="showSelectAll"
               [checked]="selectAll"
               [(indeterminate)]="selectAllIndeterminate"
-              (change)="updateAllChecked($event, -1);">
+              (change)="_updateMasterChecked($event, -1);">
   {{selectAllLabel}}
 </mat-checkbox>
 
-<mat-checkbox class="mtx-checkbox-single"
+<mat-checkbox class="mtx-checkbox-normal"
               *ngFor="let item of options; let i = index;"
               [(ngModel)]="item.checked"
               [disabled]="item.disabled"
-              (change)="updateSingleChecked($event, i)">
+              (change)="_updateNormalChecked($event, i)">
   {{item.label}}
 </mat-checkbox>

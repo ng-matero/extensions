@@ -230,7 +230,7 @@ export class MtxColorPickerComponent
 
   /** Implemented as part of MatFormFieldControl. */
   onContainerClick() {
-    this.open();
+    this._openPanel();
   }
 
   /**
@@ -279,12 +279,12 @@ export class MtxColorPickerComponent
   }
 
   /** Opens the overlay panel. */
-  open() {
+  _openPanel() {
     this._panelOpen = true;
   }
 
   /** Closes the overlay panel and focuses the host element. */
-  close() {
+  _closePanel() {
     if (this._panelOpen) {
       this._panelOpen = false;
       this._changeDetectorRef.markForCheck();
@@ -293,7 +293,7 @@ export class MtxColorPickerComponent
   }
 
   /** The callback of color changed. */
-  onColorChange(model: { color: Color; $event: MouseEvent }) {
+  _onColorChanged(model: { color: Color; $event: MouseEvent }) {
     this.value = model.color.hex;
     this.colorChange.emit({ color: model.color, $event: model.$event });
   }

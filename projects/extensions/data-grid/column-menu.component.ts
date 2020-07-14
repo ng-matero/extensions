@@ -56,12 +56,12 @@ export class MtxGridColumnMenuComponent implements OnInit {
 
   ngOnInit() {}
 
-  handleDrop(event: CdkDragDrop<string[]>) {
+  _handleDroped(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
     this.sortChange.emit(this.columnFields);
   }
 
-  handleSelect(e: any) {
+  _handleSelection(e: any) {
     this.selectionChange.emit(this.columnFields);
   }
 }

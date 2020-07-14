@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   ViewEncapsulation,
   Input,
@@ -20,7 +19,7 @@ import {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxAlertComponent implements OnInit {
+export class MtxAlertComponent {
   /**
    * Alert types
    * `default`, `info`, `success`, `warning` and `danger`
@@ -44,9 +43,7 @@ export class MtxAlertComponent implements OnInit {
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
-  ngOnInit() {}
-
-  handleClose(): void {
+  _onClosed(): void {
     this.isOpen = false;
     this._changeDetectorRef.markForCheck();
     this.closed.emit(this);

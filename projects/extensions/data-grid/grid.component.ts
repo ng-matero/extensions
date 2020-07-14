@@ -170,30 +170,30 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   /** Sidebar */
   @Input() showSidebar = false;
 
-  getColData(data: any, colDef: MtxGridColumn) {
+  _getColData(data: any, colDef: MtxGridColumn) {
     return data.map((item: any) => item[colDef.field]);
   }
 
-  formatSummary(summary: any, data: any, colDef: MtxGridColumn) {
-    if (this.isString(summary)) {
+  _formatSummary(summary: any, data: any, colDef: MtxGridColumn) {
+    if (this._isString(summary)) {
       return summary;
-    } else if (this.isFunction(summary)) {
-      const colData = this.getColData(data, colDef);
+    } else if (this._isFunction(summary)) {
+      const colData = this._getColData(data, colDef);
       return summary(colData, colDef);
     }
   }
 
   constructor(private _dataGridSrv: MtxGridService) {}
 
-  isTemplateRef(obj: any) {
+  _isTemplateRef(obj: any) {
     return obj instanceof TemplateRef;
   }
 
-  isString(fn: any) {
+  _isString(fn: any) {
     return Object.prototype.toString.call(fn) === '[object String]';
   }
 
-  isFunction(fn: any) {
+  _isFunction(fn: any) {
     return Object.prototype.toString.call(fn) === '[object Function]';
   }
 
@@ -201,7 +201,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   // Waiting for async data
   ngOnChanges() {
-    this.countPinnedPosition();
+    this._countPinnedPosition();
 
     this.displayedColumns = this.columns.filter(item => !item.hide).map(item => item.field);
 
@@ -248,7 +248,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnDestroy() {}
 
-  countPinnedPosition() {
+  _countPinnedPosition() {
     const count = (acc: number, cur: MtxGridColumn) => acc + parseFloat(cur.width || '80px');
 
     const pinnedLeftCols = this.columns.filter(col => col.pinned && col.pinned === 'left');
@@ -264,20 +264,20 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  isOddRow(index: number, dataIndex: number) {
+  _isOddRow(index: number, dataIndex: number) {
     return typeof index === 'undefined' ? dataIndex % 2 : index % 2;
   }
 
-  getIndex(index: number, dataIndex: number) {
+  _getIndex(index: number, dataIndex: number) {
     return typeof index === 'undefined' ? dataIndex : index;
   }
 
-  handleSortChange(sort: Sort) {
+  _handleSortChange(sort: Sort) {
     this.sortChange.emit(sort);
   }
 
   /** Expansion change event */
-  handleExpansionChange(
+  _handleExpansionChange(
     expansionRef: MtxGridExpansionToggleDirective,
     rowData: any,
     column: any,
@@ -290,7 +290,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /** Cell select event */
-  handleCellSelect(cellRef: MtxGridCellSelectionDirective, rowData: any, colDef: any): void {
+  _selectCell(cellRef: MtxGridCellSelectionDirective, rowData: any, colDef: any): void {
     // If not the same cell
     if (this._selectedCell !== cellRef) {
       const colValue = this._dataGridSrv.getCellValue(rowData, colDef);
@@ -308,7 +308,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /** Row select event */
-  handleRowSelect(event: MouseEvent, rowData: any) {
+  _selectRow(event: MouseEvent, rowData: any) {
     if (
       this.rowSelectable &&
       !(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(rowData)) &&
@@ -319,34 +319,34 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
         this.rowSelection.clear();
       }
 
-      this.handleSingleToggle(rowData);
+      this._toggleNormalCheckbox(rowData);
     }
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
-  isAllSelected() {
+  _isAllSelected() {
     const numSelected = this.rowSelection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  handleMasterToggle() {
-    this.isAllSelected()
+  /** Select all rows if they are not all selected; otherwise clear selection. */
+  _toggleMasterCheckbox() {
+    this._isAllSelected()
       ? this.rowSelection.clear()
       : this.dataSource.data.forEach(row => this.rowSelection.select(row));
     this.rowSelectionChange.emit(this.rowSelection.selected);
   }
 
-  /** Select single row */
-  handleSingleToggle(row: any) {
+  /** Select normal row */
+  _toggleNormalCheckbox(row: any) {
     this.rowSelection.toggle(row);
     this.rowSelectionChange.emit(this.rowSelection.selected);
   }
 
   /** Column change event */
 
-  handleColumnHidingChange(columns: string[]) {
+  _handleColumnHidingChange(columns: string[]) {
     this.columnHidingChange.emit(columns);
 
     this.displayedColumns = Object.assign([], columns);
@@ -356,7 +356,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  handleColumnMovingChange(columns: string[]) {
+  _handleColumnMovingChange(columns: string[]) {
     this.columnMovingChange.emit(columns);
 
     this.displayedColumns = Object.assign([], columns);

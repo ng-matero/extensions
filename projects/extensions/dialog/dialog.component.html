@@ -6,7 +6,7 @@
   <button *ngFor="let btn of data.buttons"
           mat-button
           [color]="btn.type"
-          (click)="onClick(btn.onClick)">
+          (click)="_onClick(btn.onClick)">
     {{btn.text}}
   </button>
 </div>
