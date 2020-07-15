@@ -1,0 +1,50 @@
+<h2>Progress configuration</h2>
+
+<section>
+  <label>Type:</label>
+  <mat-radio-group [(ngModel)]="type">
+    <mat-radio-button value="info">Info</mat-radio-button>
+    <mat-radio-button value="success">Success</mat-radio-button>
+    <mat-radio-button value="warning">Warning</mat-radio-button>
+    <mat-radio-button value="danger">Danger</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <label>Progress:</label>
+  <mat-slider min="0" max="100" [(ngModel)]="value"></mat-slider>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="striped" [labelPosition]="'before'">Striped</mat-checkbox>
+  <mat-checkbox *ngIf="striped" [(ngModel)]="animate" [labelPosition]="'before'">Animate
+  </mat-checkbox>
+</section>
+
+<section>
+  <label>Height:</label>
+  <mat-slider min="1" max="16" [(ngModel)]="height"></mat-slider>
+</section>
+
+<section>
+  <mat-form-field>
+    <mat-label>Foreground color</mat-label>
+    <mtx-color-picker [(ngModel)]="foreground">
+    </mtx-color-picker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Background color</mat-label>
+    <mtx-color-picker [(ngModel)]="background">
+    </mtx-color-picker>
+  </mat-form-field>
+</section>
+
+<h2>Result</h2>
+
+<mtx-progress [type]="type"
+              [value]="value"
+              [striped]="striped" [animate]="animate"
+              [height]="height + 'px'"
+              [foreground]="foreground" [background]="background">
+  {{height>=14 ? value + '%' : ''}}
+</mtx-progress>

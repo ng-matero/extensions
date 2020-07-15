@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-progress',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./progress.component.scss'],
 })
 export class ProgressComponent {
-  constructor() {}
+  constructor(public route: ActivatedRoute) {}
 }
