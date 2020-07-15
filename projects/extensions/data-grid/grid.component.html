@@ -155,7 +155,7 @@
           [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': _isOddRow(index, dataIndex)}"
           (click)="_selectRow($event, row)">
       </tr>
-      <ng-container *ngIf="whetherShowSummary">
+      <ng-container *ngIf="_whetherShowSummary">
         <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
       </ng-container>
 
@@ -188,7 +188,7 @@
 </div>
 
 <!-- Paginator -->
-<mat-paginator [class.mat-paginator-hidden]="!showPaginator || hasNoResult"
+<mat-paginator [class.mat-paginator-hidden]="!showPaginator || _hasNoResult"
                [showFirstLastButtons]="showFirstLastButtons"
                [length]="length"
                [pageIndex]="pageIndex"
@@ -200,7 +200,7 @@
 </mat-paginator>
 
 <!-- No Result -->
-<div class="mtx-grid-no-result" *ngIf="hasNoResult">
+<div class="mtx-grid-no-result" *ngIf="_hasNoResult">
   <ng-template [ngIf]="noResultTemplate" [ngIfElse]="defaultNoResultTpl">
     <ng-template [ngTemplateOutlet]="noResultTemplate"></ng-template>
   </ng-template>

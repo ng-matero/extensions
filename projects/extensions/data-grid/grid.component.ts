@@ -148,7 +148,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() noResultText = 'No records found';
   @Input() noResultTemplate: TemplateRef<any>;
 
-  get hasNoResult() {
+  get _hasNoResult() {
     return (!this.data || this.data.length === 0) && !this.loading;
   }
 
@@ -163,7 +163,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate;
 
   // TODO:
-  get whetherShowSummary() {
+  get _whetherShowSummary() {
     return this.showSummary;
   }
 
@@ -300,7 +300,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
       this.cellSelectionChange.emit(this.cellSelection);
 
       if (this._selectedCell) {
-        this._selectedCell.unselect(); // the selectedCell will be undefined
+        this._selectedCell.deselect(); // the selectedCell will be undefined
       }
     }
 

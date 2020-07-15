@@ -16,30 +16,30 @@ export class MtxGridCellComponent implements OnInit {
   /** Column definition */
   @Input() colDef: MtxGridColumn;
 
-  colValue = '';
+  _colValue = '';
 
-  viewer: PhotoViewer;
+  _viewer: PhotoViewer;
 
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
 
   ngOnInit() {
-    this.colValue = this._dataGridSrv.getCellValue(this.rowData, this.colDef);
+    this._colValue = this._dataGridSrv.getCellValue(this.rowData, this.colDef);
   }
 
-  confirm(event: MouseEvent, title: string, fn?: (p: any) => void, data?: any) {
+  _handleActionConfirm(event: MouseEvent, title: string, fn?: (p: any) => void, data?: any) {
     event.preventDefault();
     event.stopPropagation();
     this._dialog.confirm(title, () => fn(data));
   }
 
-  handleOptionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: any) {
+  _handleActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: any) {
     event.preventDefault();
     event.stopPropagation();
     btn.click(rowData);
   }
 
-  /** Preview the image */
-  preview(urlStr: string, multi = false) {
+  /** Preview big image */
+  _onPreview(urlStr: string, multi = false) {
     const imgs = [];
 
     let options: PhotoViewer.Options = {};
@@ -59,6 +59,6 @@ export class MtxGridCellComponent implements OnInit {
       };
     }
 
-    this.viewer = new PhotoViewer(imgs, options);
+    this._viewer = new PhotoViewer(imgs, options);
   }
 }

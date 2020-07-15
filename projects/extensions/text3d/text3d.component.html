@@ -1,6 +1,6 @@
 <span class="mtx-text3d-layer"
-      [ngStyle]="{'z-index': -i, 'transform': 'translate3d(0, 0,'+ -i + 'px)'}"
-      *ngFor="let i of arr">
+      *ngFor="let i of _depthArr"
+      [ngStyle]="{'z-index': -i, 'transform': 'translate3d(0, 0,'+ -i + 'px)'}">
   {{text}}
   <ng-container [ngTemplateOutlet]="template"></ng-container>
 </span>

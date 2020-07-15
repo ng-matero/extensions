@@ -8,58 +8,58 @@
   <ng-container [ngSwitch]="colDef.type">
     <!-- Tag -->
     <ng-container *ngSwitchCase="'tag'">
-      <mat-chip-list *ngIf="colDef.tag[colValue]; else tagEmptyTpl">
-        <mat-chip color="primary" [ngClass]="['bg-' + colDef.tag[colValue].color]">
-          {{colDef.tag[colValue].text}}
+      <mat-chip-list *ngIf="colDef.tag[_colValue]; else tagEmptyTpl">
+        <mat-chip color="primary" [ngClass]="['bg-' + colDef.tag[_colValue].color]">
+          {{colDef.tag[_colValue].text}}
         </mat-chip>
       </mat-chip-list>
-      <ng-template #tagEmptyTpl>{{colValue}}</ng-template>
+      <ng-template #tagEmptyTpl>{{_colValue}}</ng-template>
     </ng-container>
     <!-- Image -->
     <ng-container *ngSwitchCase="'image'">
-      <img class="mat-cell-img" [src]="colValue" (click)="preview(colValue)">
+      <img class="mat-cell-img" [src]="_colValue" (click)="_onPreview(_colValue)">
     </ng-container>
     <!-- Link -->
     <ng-container *ngSwitchCase="'link'">
-      <a [href]="colValue" target="_blank">{{colValue}}</a>
+      <a [href]="_colValue" target="_blank">{{_colValue}}</a>
     </ng-container>
     <!-- Buttons -->
     <ng-container *ngSwitchCase="'button'">
       <ng-container *ngFor="let btn of colDef.buttons; index as i; last as isLast;">
         <ng-container *ngIf="!btn.iif || btn.iif(rowData)">
           <ng-container *ngIf="btn.pop; else btnDefaultTpl">
-            <button class="mat-cell-option-button"
+            <button class="mat-cell-action-button"
                     *ngIf="btn.type==='basic'"
                     mat-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip"
-                    (click)="confirm($event, btn.popTitle, btn.click, rowData)">
+                    (click)="_handleActionConfirm($event, btn.popTitle, btn.click, rowData)">
               <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text}}
             </button>
-            <button class="mat-cell-option-button"
+            <button class="mat-cell-action-button"
                     *ngIf="!btn.type || btn.type==='icon'"
                     mat-icon-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip"
-                    (click)="confirm($event, btn.popTitle, btn.click, rowData)">
+                    (click)="_handleActionConfirm($event, btn.popTitle, btn.click, rowData)">
               <mat-icon>{{btn.icon}}</mat-icon>
             </button>
           </ng-container>
           <ng-template #btnDefaultTpl>
-            <button class="mat-cell-option-button"
+            <button class="mat-cell-action-button"
                     *ngIf="btn.type==='basic'"
                     mat-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip"
-                    (click)="handleOptionClick($event, btn, rowData)">
+                    (click)="_handleActionClick($event, btn, rowData)">
               <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text}}
             </button>
-            <button class="mat-cell-option-button"
+            <button class="mat-cell-action-button"
                     *ngIf="!btn.type || btn.type==='icon'"
                     mat-icon-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip"
-                    (click)="handleOptionClick($event, btn, rowData)">
+                    (click)="_handleActionClick($event, btn, rowData)">
               <mat-icon>{{btn.icon}}</mat-icon>
             </button>
           </ng-template>
@@ -68,23 +68,23 @@
     </ng-container>
     <!-- Number -->
     <ng-container *ngSwitchCase="'number'">
-      {{(colValue | number) || '--'}}
+      {{(_colValue | number) || '--'}}
     </ng-container>
     <!-- Currency -->
     <ng-container *ngSwitchCase="'currency'">
-      {{(colValue | currency) || '--'}}
+      {{(_colValue | currency) || '--'}}
     </ng-container>
     <!-- Percent -->
     <ng-container *ngSwitchCase="'percent'">
-      {{(colValue | percent) || '--'}}
+      {{(_colValue | percent) || '--'}}
     </ng-container>
     <!-- Boolean -->
     <ng-container *ngSwitchCase="'boolean'">
-      {{colValue}}
+      {{_colValue}}
     </ng-container>
     <!-- Default -->
     <ng-container *ngSwitchDefault>
-      {{colValue || '--'}}
+      {{_colValue || '--'}}
     </ng-container>
   </ng-container>
 </ng-template>

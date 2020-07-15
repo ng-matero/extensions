@@ -50,7 +50,7 @@ export class MtxGridCellSelectionDirective {
     this.cellSelectionChange.emit(this);
   }
 
-  unselect(): void {
+  deselect(): void {
     this._selected = false;
     this.cellSelectionChange.emit(this);
   }
