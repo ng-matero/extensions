@@ -70,6 +70,7 @@
   .mat-cell {
     min-width: 80px;
     padding: 4px 10px;
+    box-sizing: border-box;
   }
 
   .mat-cell:first-of-type,
