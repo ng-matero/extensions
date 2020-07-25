@@ -12,7 +12,7 @@
 
 <section>
   <label>Progress:</label>
-  <mat-slider min="0" max="100" [(ngModel)]="value"></mat-slider>
+  <mat-slider min="0" max="100" thumbLabel [(ngModel)]="value"></mat-slider>
 </section>
 
 <section>
@@ -23,7 +23,7 @@
 
 <section>
   <label>Height:</label>
-  <mat-slider min="1" max="16" [(ngModel)]="height"></mat-slider>
+  <mat-slider min="1" max="16" thumbLabel [(ngModel)]="height"></mat-slider>
 </section>
 
 <section>
@@ -31,11 +31,19 @@
     <mat-label>Foreground color</mat-label>
     <mtx-color-picker [(ngModel)]="foreground">
     </mtx-color-picker>
+    <button mat-button *ngIf="foreground" matSuffix mat-icon-button aria-label="Clear"
+            (click)="foreground=''">
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
   <mat-form-field>
     <mat-label>Background color</mat-label>
     <mtx-color-picker [(ngModel)]="background">
     </mtx-color-picker>
+    <button mat-button *ngIf="background" matSuffix mat-icon-button aria-label="Clear"
+            (click)="background=''">
+      <mat-icon>close</mat-icon>
+    </button>
   </mat-form-field>
 </section>
 

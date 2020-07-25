@@ -1,1 +1,5 @@
-<mtx-text3d text="3D Text"></mtx-text3d>
+<ng-container *ngIf="route.data | async as data">
+  <ng-container *ngFor="let exampleData of data.examples">
+    <example-viewer [exampleData]="exampleData"></example-viewer>
+  </ng-container>
+</ng-container>

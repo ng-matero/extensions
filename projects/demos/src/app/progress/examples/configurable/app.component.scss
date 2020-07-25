@@ -2,7 +2,11 @@
   margin: 1em;
 }
 
-.mat-checkbox,
+.mat-checkbox {
+  display: inline-block;
+  margin: 1rem 1rem 1rem 0;
+}
+
 .mat-form-field {
   margin-right: 1rem;
 }

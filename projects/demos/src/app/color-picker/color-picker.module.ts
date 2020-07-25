@@ -9,19 +9,16 @@ import { ColorPickerBasicComponent, colorPickerBasicExampleConfig } from './exam
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forChild([{
-      path: '',
-      component: ColorPickerComponent,
-      data: {
-        examples: [
-          colorPickerBasicExampleConfig
-        ],
+    RouterModule.forChild([
+      {
+        path: '',
+        component: ColorPickerComponent,
+        data: {
+          examples: [colorPickerBasicExampleConfig],
+        },
       },
-    }])
+    ]),
   ],
-  declarations: [
-    ColorPickerComponent,
-    ColorPickerBasicComponent
-  ],
+  declarations: [ColorPickerComponent, ColorPickerBasicComponent],
 })
-export class ColorPickerModule { }
+export class ColorPickerModule {}
