@@ -229,9 +229,7 @@ export class MtxColorPickerComponent
   }
 
   /** Implemented as part of MatFormFieldControl. */
-  onContainerClick() {
-    this._openPanel();
-  }
+  onContainerClick() {}
 
   /**
    * Sets the color-picker's value. Part of the ControlValueAccessor interface
@@ -266,7 +264,7 @@ export class MtxColorPickerComponent
     this._onTouched = fn;
   }
 
-  /** Open panel with input focusin event. */
+  /** Open panel with input focus event. */
   _handleFocus() {
     this.trigger.openMenu();
 
@@ -280,7 +278,9 @@ export class MtxColorPickerComponent
 
   /** Opens the overlay panel. */
   _openPanel() {
-    this._panelOpen = true;
+    if (this._focused) {
+      this._panelOpen = true;
+    }
   }
 
   /** Closes the overlay panel and focuses the host element. */

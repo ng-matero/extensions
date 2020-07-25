@@ -12,7 +12,7 @@ import {
   exportAs: 'mtxText3d',
   host: {
     'class': 'mtx-text3d',
-    '[style.transform]': '_transform',
+    '[style.transform]': 'transform',
   },
   templateUrl: './text3d.component.html',
   styleUrls: ['./text3d.component.scss'],
@@ -30,15 +30,17 @@ export class MtxText3dComponent {
   @Input() rotateY = 0;
   @Input() rotateZ = 0;
 
-  _depthArr = [];
-
-  get _transform() {
+  get transform() {
     return `rotateX(${this.rotateX}deg) rotateY(${this.rotateY}deg) rotateZ(${this.rotateZ}deg)`;
   }
 
-  constructor() {
+  get depthArr() {
+    const tmpArr = [];
     for (let i = 1; i <= this.depth; i++) {
-      this._depthArr.push(i);
+      tmpArr.push(i);
     }
+    return tmpArr;
   }
+
+  constructor() {}
 }

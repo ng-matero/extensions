@@ -35,15 +35,14 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
   @Input() selectAllLabel = 'Select All';
   @Input() showSelectAll = true;
 
-  @Output() change = new EventEmitter<{
-    model: MtxCheckboxGroupOption[];
-    index: number;
-  }>();
+  @Output() change = new EventEmitter<{ model: MtxCheckboxGroupOption[]; index: number }>();
 
   selectAll = false;
   selectAllIndeterminate = false;
 
   options: MtxCheckboxGroupOption[] = [];
+
+  controlDisabled = false;
 
   _onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
   _onTouched: () => void = () => null;
@@ -53,10 +52,11 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
   ngOnInit() {}
 
   writeValue(value: MtxCheckboxGroupOption[]): void {
-    this.options = value;
-    if (this.options) {
-      this._updateNormalChecked();
+    if (value) {
+      this.options = value;
     }
+
+    this._checkMasterCheckboxState();
     this._changeDetectorRef.markForCheck();
   }
 
@@ -68,7 +68,11 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
     this._onTouched = fn;
   }
 
-  _updateNormalChecked(e?: boolean, index?: number): void {
+  setDisabledState(isDisabled: boolean) {
+    this.controlDisabled = isDisabled;
+  }
+
+  private _checkMasterCheckboxState() {
     if (this.options.filter(item => item.checked || !item.disabled).every(item => !item.checked)) {
       this.selectAll = false;
       this.selectAllIndeterminate = false;
@@ -80,6 +84,10 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
     } else {
       this.selectAllIndeterminate = true;
     }
+  }
+
+  _updateNormalCheckboxState(e?: boolean, index?: number): void {
+    this._checkMasterCheckboxState();
 
     this.change.emit({
       model: this.options,
@@ -87,7 +95,7 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
     });
   }
 
-  _updateMasterChecked(e?: boolean, index?: number): void {
+  _updateMasterCheckboxState(e?: boolean, index?: number): void {
     this.selectAll = !this.selectAll;
     this.selectAllIndeterminate = false;
     if (this.selectAll) {
