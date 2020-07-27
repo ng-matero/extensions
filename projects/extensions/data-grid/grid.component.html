@@ -32,7 +32,7 @@
     <table mat-table
            [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
            [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
-           matSort (matSortChange)="_handleSortChange($event)" [trackBy]="trackBy">
+           matSort (matSortChange)="_handleSortChange($event)" [matSortActive]="sortActive" [matSortDirection]="sortDirection" [matSortDisableClear]="sortDisableClear" [trackBy]="trackBy">
 
       <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"
                     matColumnDef="MtxGridCheckboxColumnDef">

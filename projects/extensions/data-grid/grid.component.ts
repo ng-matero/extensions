@@ -16,7 +16,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Sort, MatSort } from '@angular/material/sort';
+import { Sort, MatSort, SortDirection } from '@angular/material/sort';
 
 import {
   MtxGridColumn,
@@ -81,6 +81,9 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() sortOnFront = true;
   @Output() sortChange = new EventEmitter<Sort>();
+  @Input() sortActive: string;
+  @Input() sortDirection: SortDirection;
+  @Input() sortDisableClear: boolean;
 
   /** Hover & Striped style */
 
