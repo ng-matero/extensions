@@ -82,6 +82,10 @@
     <ng-container *ngSwitchCase="'boolean'">
       {{_colValue}}
     </ng-container>
+    <!-- Date -->
+    <ng-container *ngSwitchCase="'date'">
+      {{(_colValue | date) || '--'}}
+    </ng-container>
     <!-- Default -->
     <ng-container *ngSwitchDefault>
       {{_colValue || '--'}}

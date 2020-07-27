@@ -42,7 +42,7 @@ export interface MtxGridColumn {
   width?: string;
   resizable?: boolean;
   sortable?: boolean | string;
-  type?: 'tag' | 'button' | 'link' | 'image' | 'number' | 'currency' | 'percent' | 'boolean';
+  type?: 'tag' | 'button' | 'link' | 'image' | 'number' | 'currency' | 'percent' | 'boolean' | 'date';
   tag?: MtxGridColumnTag;
   buttons?: MtxGridColumnButton[];
   formatter?: (rowData: any, colDef?: any) => void;
