@@ -68,15 +68,15 @@
     </ng-container>
     <!-- Number -->
     <ng-container *ngSwitchCase="'number'">
-      {{(_colValue | number) || '--'}}
+      {{(_colValue | number: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)}}
     </ng-container>
     <!-- Currency -->
     <ng-container *ngSwitchCase="'currency'">
-      {{(_colValue | currency) || '--'}}
+      {{(_colValue | currency: colDef.typeParameter?.currencyCode : colDef.typeParameter?.display : colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)}}
     </ng-container>
     <!-- Percent -->
     <ng-container *ngSwitchCase="'percent'">
-      {{(_colValue | percent) || '--'}}
+      {{(_colValue | percent: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)}}
     </ng-container>
     <!-- Boolean -->
     <ng-container *ngSwitchCase="'boolean'">
@@ -84,7 +84,7 @@
     </ng-container>
     <!-- Date -->
     <ng-container *ngSwitchCase="'date'">
-      {{(_colValue | date) || '--'}}
+      {{(_colValue | date: colDef.typeParameter?.format : colDef.typeParameter?.timezone : colDef.typeParameter?.locale)}}
     </ng-container>
     <!-- Default -->
     <ng-container *ngSwitchDefault>
