@@ -1,5 +1,8 @@
 <mtx-grid [data]="list"
           [columns]="columns"
           [sortOnFront]="true"
+          sortActive="name"
+          sortDirection="asc"
+          sortDisableClear="true"
           (sortChange)="log($event)">
 </mtx-grid>
