@@ -12,7 +12,7 @@ export class AppComponent {
     { header: 'Name', field: 'name', sortable: true },
     { header: 'Weight', field: 'weight', sortable: true },
     { header: 'Gender', field: 'gender', sortable: true },
-    { header: 'Mobile', field: 'mobile', sortable: true },
+    { header: 'Mobile', field: 'mobile', sortable: false },
     {
       header: 'City',
       field: 'city',

@@ -1,9 +1,10 @@
 <mtx-grid [data]="list"
           [columns]="columns"
-          [sortOnFront]="true"
+          sortOnFront="true"
           sortActive="name"
           sortDirection="asc"
-          sortDisableClear="false"
+          sortDisableClear="true"
+          sortDisabled="false"
           sortStart="asc"
           (sortChange)="log($event)">
 </mtx-grid>
