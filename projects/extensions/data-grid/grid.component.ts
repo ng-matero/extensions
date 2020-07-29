@@ -80,10 +80,11 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   /** Sort */
 
   @Input() sortOnFront = true;
-  @Output() sortChange = new EventEmitter<Sort>();
   @Input() sortActive: string;
   @Input() sortDirection: SortDirection;
-  @Input() sortDisableClear: boolean;
+  @Input() sortStart: 'asc' | 'desc' = 'asc';
+  @Input() sortDisableClear: boolean = false;
+  @Output() sortChange = new EventEmitter<Sort>();
 
   /** Hover & Striped style */
 

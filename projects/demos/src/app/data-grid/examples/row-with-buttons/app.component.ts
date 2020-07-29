@@ -17,11 +17,21 @@ export class AppComponent {
     {
       header: 'Operation',
       field: 'operation',
-      width: '120px',
+      width: '160px',
       pinned: 'right',
       right: '0px',
       type: 'button',
       buttons: [
+        {
+          type: 'icon',
+          text: 'copy',
+          icon: 'file_copy',
+          tooltip: 'copy',
+          disabled: true,
+          click: () => {
+            alert('copy');
+          },
+        },
         {
           type: 'icon',
           text: 'edit',

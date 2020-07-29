@@ -1,12 +1,77 @@
 import { TemplateRef } from '@angular/core';
 
 /**
+ * Grid
+ */
+export interface MtxGridColumn {
+  field: string;
+  header?: string;
+  hide?: boolean;
+  disabled?: boolean;
+  pinned?: 'left' | 'right';
+  left?: string;
+  right?: string;
+  width?: string;
+  resizable?: boolean;
+  sortable?: boolean | string;
+  sortProp?: MtxGridColumnSortProp;
+  type?: MtxGridColumnType;
+  typeParameter?: MtxGridColumnTypeParameter;
+  tag?: MtxGridColumnTag;
+  buttons?: MtxGridColumnButton[];
+  formatter?: (rowData: any, colDef?: any) => void;
+  cellTemplate?: TemplateRef<any> | null;
+  showExpand?: boolean;
+  description?: string;
+  i18n?: string;
+  summary?: ((colData: any, colDef?: any) => void) | string;
+}
+
+/**
+ * Column type
+ */
+
+export declare type MtxGridColumnType =
+  | 'tag'
+  | 'button'
+  | 'link'
+  | 'image'
+  | 'boolean'
+  | 'number'
+  | 'currency'
+  | 'percent'
+  | 'date';
+
+/**
+ * Column type parameter
+ */
+export interface MtxGridColumnTypeParameter {
+  currencyCode?: string;
+  display?: string | boolean;
+  digitsInfo?: string;
+  format?: string;
+  locale?: string;
+  timezone?: string;
+}
+
+/**
+ * Column sort properties
+ */
+export interface MtxGridColumnSortProp {
+  arrowPosition?: 'before' | 'after';
+  disableClear?: boolean;
+  id?: string;
+  start?: 'asc' | 'desc';
+}
+
+/**
  * Tag
  */
 export interface MtxGridColumnTag {
   [key: number]: MtxGridColumnTagValue;
   [key: string]: MtxGridColumnTagValue;
 }
+
 export interface MtxGridColumnTagValue {
   text?: string;
   color?: string;
@@ -26,39 +91,7 @@ export interface MtxGridColumnButton {
   children?: MtxGridColumnButton[];
   iif?: (record: any) => boolean;
   tooltip?: string;
-}
-
-/**
- * Grid
- */
-export interface MtxGridColumn {
-  field: string;
-  header?: string;
-  hide?: boolean;
   disabled?: boolean;
-  pinned?: 'left' | 'right';
-  left?: string;
-  right?: string;
-  width?: string;
-  resizable?: boolean;
-  sortable?: boolean | string;
-  type?: 'tag' | 'button' | 'link' | 'image' | 'number' | 'currency' | 'percent' | 'boolean' | 'date';
-  typeParameter?: {
-    currencyCode?: string;
-    display?: string | boolean;
-    digitsInfo?: string;
-    format?: string;
-    timezone?: string;
-    locale?: string;
-  };
-  tag?: MtxGridColumnTag;
-  buttons?: MtxGridColumnButton[];
-  formatter?: (rowData: any, colDef?: any) => void;
-  cellTemplate?: TemplateRef<any> | null;
-  showExpand?: boolean;
-  description?: string;
-  i18n?: string;
-  summary?: ((colData: any, colDef?: any) => void) | string;
 }
 
 /**
@@ -73,14 +106,14 @@ export interface MtxGridColumnSelectionItem {
 }
 
 /**
- * Cell Template
+ * Cell template
  */
 export interface MtxGridCellTemplate {
   [key: string]: TemplateRef<any>;
 }
 
 /**
- * Row Selection Formatter
+ * Row selection formatter
  */
 export interface MtxGridRowSelectionFormatter {
   disabled?: (rowData: any) => boolean;
@@ -88,7 +121,7 @@ export interface MtxGridRowSelectionFormatter {
 }
 
 /**
- * Row Class Formatter
+ * Row class formatter
  */
 export interface MtxGridRowClassFormatter {
   [className: string]: (rowData: any) => boolean;

@@ -13,8 +13,4 @@ export class DataGridComponent {
       r = r.parent;
     }
   }
-
-  trackByName(index: number, item: any) {
-    return item.name;
-  }
 }

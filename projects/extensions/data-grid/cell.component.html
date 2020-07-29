@@ -15,14 +15,6 @@
       </mat-chip-list>
       <ng-template #tagEmptyTpl>{{_colValue}}</ng-template>
     </ng-container>
-    <!-- Image -->
-    <ng-container *ngSwitchCase="'image'">
-      <img class="mat-cell-img" [src]="_colValue" (click)="_onPreview(_colValue)">
-    </ng-container>
-    <!-- Link -->
-    <ng-container *ngSwitchCase="'link'">
-      <a [href]="_colValue" target="_blank">{{_colValue}}</a>
-    </ng-container>
     <!-- Buttons -->
     <ng-container *ngSwitchCase="'button'">
       <ng-container *ngFor="let btn of colDef.buttons; index as i; last as isLast;">
@@ -33,6 +25,7 @@
                     mat-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip"
+                    [disabled]="btn.disabled"
                     (click)="_handleActionConfirm($event, btn.popTitle, btn.click, rowData)">
               <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text}}
             </button>
@@ -41,6 +34,7 @@
                     mat-icon-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip"
+                    [disabled]="btn.disabled"
                     (click)="_handleActionConfirm($event, btn.popTitle, btn.click, rowData)">
               <mat-icon>{{btn.icon}}</mat-icon>
             </button>
@@ -51,6 +45,7 @@
                     mat-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip"
+                    [disabled]="btn.disabled"
                     (click)="_handleActionClick($event, btn, rowData)">
               <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text}}
             </button>
@@ -59,12 +54,25 @@
                     mat-icon-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip"
+                    [disabled]="btn.disabled"
                     (click)="_handleActionClick($event, btn, rowData)">
               <mat-icon>{{btn.icon}}</mat-icon>
             </button>
           </ng-template>
         </ng-container>
       </ng-container>
+    </ng-container>
+    <!-- Link -->
+    <ng-container *ngSwitchCase="'link'">
+      <a [href]="_colValue" target="_blank">{{_colValue}}</a>
+    </ng-container>
+    <!-- Image -->
+    <ng-container *ngSwitchCase="'image'">
+      <img class="mat-cell-img" [src]="_colValue" (click)="_onPreview(_colValue)">
+    </ng-container>
+    <!-- Boolean -->
+    <ng-container *ngSwitchCase="'boolean'">
+      {{_colValue}}
     </ng-container>
     <!-- Number -->
     <ng-container *ngSwitchCase="'number'">
@@ -77,10 +85,6 @@
     <!-- Percent -->
     <ng-container *ngSwitchCase="'percent'">
       {{(_colValue | percent: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)}}
-    </ng-container>
-    <!-- Boolean -->
-    <ng-container *ngSwitchCase="'boolean'">
-      {{_colValue}}
     </ng-container>
     <!-- Date -->
     <ng-container *ngSwitchCase="'date'">

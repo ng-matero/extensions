@@ -32,7 +32,13 @@
     <table mat-table
            [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
            [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
-           matSort (matSortChange)="_handleSortChange($event)" [matSortActive]="sortActive" [matSortDirection]="sortDirection" [matSortDisableClear]="sortDisableClear" [trackBy]="trackBy">
+           matSort
+           [matSortActive]="sortActive"
+           [matSortDirection]="sortDirection"
+           [matSortDisableClear]="sortDisableClear"
+           [matSortStart]="sortStart"
+           (matSortChange)="_handleSortChange($event)"
+           [trackBy]="trackBy">
 
       <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"
                     matColumnDef="MtxGridCheckboxColumnDef">
@@ -78,7 +84,11 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultHeaderTpl>
-                <div mat-sort-header [disabled]="!col.sortable">
+                <div [mat-sort-header]="col.sortProp?.id || col.field"
+                     [disabled]="!col.sortable"
+                     [arrowPosition]="col.sortProp?.arrowPosition"
+                     [disableClear]="col.sortProp?.disableClear"
+                     [start]="col.sortProp?.start">
                   <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>
                   <span>{{col.header}}</span>
                   <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>

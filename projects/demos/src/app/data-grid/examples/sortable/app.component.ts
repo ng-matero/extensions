@@ -13,7 +13,16 @@ export class AppComponent {
     { header: 'Weight', field: 'weight', sortable: true },
     { header: 'Gender', field: 'gender', sortable: true },
     { header: 'Mobile', field: 'mobile', sortable: true },
-    { header: 'City', field: 'city', sortable: true },
+    {
+      header: 'City',
+      field: 'city',
+      sortable: true,
+      sortProp: {
+        arrowPosition: 'before',
+        disableClear: true,
+        start: 'desc',
+      },
+    },
   ];
 
   list = EXAMPLE_DATA;
