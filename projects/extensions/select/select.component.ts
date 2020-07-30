@@ -140,17 +140,17 @@ export class MtxSelectComponent
   @Input() typeToSearchText = 'Type to search';
   @Input() typeahead: Subject<string>;
 
-  @Output() blur = new EventEmitter();
-  @Output() focus = new EventEmitter();
-  @Output() change = new EventEmitter();
-  @Output() open = new EventEmitter();
-  @Output() close = new EventEmitter();
-  @Output() search = new EventEmitter<{ term: string; items: any[] }>();
-  @Output() clear = new EventEmitter();
-  @Output() add = new EventEmitter();
-  @Output() remove = new EventEmitter();
-  @Output() scroll = new EventEmitter<{ start: number; end: number }>();
-  @Output() scrollToEnd = new EventEmitter();
+  @Output('blur') blurEvent = new EventEmitter();
+  @Output('focus') focusEvent = new EventEmitter();
+  @Output('change') changeEvent = new EventEmitter();
+  @Output('open') openEvent = new EventEmitter();
+  @Output('close') closeEvent = new EventEmitter();
+  @Output('search') searchEvent = new EventEmitter<{ term: string; items: any[] }>();
+  @Output('clear') clearEvent = new EventEmitter();
+  @Output('add') addEvent = new EventEmitter();
+  @Output('remove') removeEvent = new EventEmitter();
+  @Output('scroll') scroll = new EventEmitter<{ start: number; end: number }>();
+  @Output('scrollToEnd') scrollToEnd = new EventEmitter();
 
   @Input()
   get items() {
@@ -380,5 +380,21 @@ export class MtxSelectComponent
         mapMtxOptions(options);
         handleOptionChange();
       });
+  }
+
+  open() {
+    this.ngSelect.open();
+  }
+
+  close() {
+    this.ngSelect.close();
+  }
+
+  focus() {
+    this.ngSelect.focus();
+  }
+
+  blur() {
+    this.ngSelect.blur();
   }
 }
