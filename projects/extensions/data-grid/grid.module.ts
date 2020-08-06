@@ -22,6 +22,7 @@ import { MtxGridColumnMenuComponent } from './column-menu.component';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridService } from './grid.service';
+import { MtxGridToObservablePipe } from './to-observable.pipe';
 
 @NgModule({
   imports: [
@@ -48,6 +49,7 @@ import { MtxGridService } from './grid.service';
     MtxGridColumnMenuComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
+    MtxGridToObservablePipe,
   ],
   declarations: [
     MtxGridComponent,
@@ -55,6 +57,7 @@ import { MtxGridService } from './grid.service';
     MtxGridColumnMenuComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
+    MtxGridToObservablePipe,
   ],
   providers: [MtxGridService],
 })

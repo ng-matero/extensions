@@ -1,11 +1,12 @@
 import { TemplateRef } from '@angular/core';
+import { Observable } from 'rxjs';
 
 /**
  * Grid
  */
 export interface MtxGridColumn {
   field: string;
-  header?: string;
+  header?: string | Observable<any>;
   hide?: boolean;
   disabled?: boolean;
   pinned?: 'left' | 'right';
@@ -82,15 +83,20 @@ export interface MtxGridColumnTagValue {
  */
 export interface MtxGridColumnButton {
   type?: 'basic' | 'icon';
-  text?: string;
+  text?: string | Observable<any>;
   icon?: string;
   color?: 'primary' | 'accent' | 'warn';
   click?: (record: any) => void;
   pop?: boolean;
-  popTitle?: string;
+  popTitle?: string | Observable<any>;
+  popDescription?: string | Observable<any>;
+  popOkType?: '' | 'primary' | 'accent' | 'warn';
+  popOkText?: string | Observable<any>;
+  popCloseType?: '' | 'primary' | 'accent' | 'warn';
+  popCloseText?: string | Observable<any>;
   children?: MtxGridColumnButton[];
   iif?: (record: any) => boolean;
-  tooltip?: string;
+  tooltip?: string | Observable<any>;
   disabled?: boolean;
 }
 

@@ -24,18 +24,24 @@
                     *ngIf="btn.type==='basic'"
                     mat-button
                     [color]="btn.color || 'primary'"
-                    [matTooltip]="btn.tooltip"
+                    [matTooltip]="btn.tooltip | toObservable | async"
                     [disabled]="btn.disabled"
-                    (click)="_handleActionConfirm($event, btn.popTitle, btn.click, rowData)">
-              <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text}}
+                    (click)="_handleActionConfirm($event, btn.popTitle, btn.popDescription,
+                                                          btn.popCloseType, btn.popCloseText,
+                                                          btn.popOkType, btn.popOkText,
+                                                          btn.click, rowData)">
+              <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text | toObservable | async}}
             </button>
             <button class="mat-cell-action-button"
                     *ngIf="!btn.type || btn.type==='icon'"
                     mat-icon-button
                     [color]="btn.color || 'primary'"
-                    [matTooltip]="btn.tooltip"
+                    [matTooltip]="btn.tooltip | toObservable | async"
                     [disabled]="btn.disabled"
-                    (click)="_handleActionConfirm($event, btn.popTitle, btn.click, rowData)">
+                    (click)="_handleActionConfirm($event, btn.popTitle, btn.popDescription,
+                                                          btn.popCloseType, btn.popCloseText,
+                                                          btn.popOkType, btn.popOkText,
+                                                          btn.click, rowData)">
               <mat-icon>{{btn.icon}}</mat-icon>
             </button>
           </ng-container>
@@ -44,16 +50,16 @@
                     *ngIf="btn.type==='basic'"
                     mat-button
                     [color]="btn.color || 'primary'"
-                    [matTooltip]="btn.tooltip"
+                    [matTooltip]="btn.tooltip | toObservable | async"
                     [disabled]="btn.disabled"
                     (click)="_handleActionClick($event, btn, rowData)">
-              <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text}}
+              <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text | toObservable | async}}
             </button>
             <button class="mat-cell-action-button"
                     *ngIf="!btn.type || btn.type==='icon'"
                     mat-icon-button
                     [color]="btn.color || 'primary'"
-                    [matTooltip]="btn.tooltip"
+                    [matTooltip]="btn.tooltip | toObservable | async"
                     [disabled]="btn.disabled"
                     (click)="_handleActionClick($event, btn, rowData)">
               <mat-icon>{{btn.icon}}</mat-icon>

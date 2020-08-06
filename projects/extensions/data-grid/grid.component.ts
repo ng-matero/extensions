@@ -28,6 +28,7 @@ import {
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
+import { Observable, isObservable } from 'rxjs';
 
 @Component({
   selector: 'mtx-grid',
@@ -200,6 +201,10 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   _isFunction(fn: any) {
     return Object.prototype.toString.call(fn) === '[object Function]';
+  }
+
+  _isObservable(data: any) {
+    return isObservable(data);
   }
 
   ngOnInit() {}
