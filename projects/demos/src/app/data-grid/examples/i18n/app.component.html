@@ -1,0 +1,9 @@
+<mat-radio-group [(ngModel)]="defaultlang" (change)="translate.use($event.value)">
+  <mat-radio-button *ngFor="let lang of langs" [value]="lang.value">
+    {{lang.label}}
+  </mat-radio-button>
+</mat-radio-group>
+
+<mtx-grid [data]="list"
+          [columns]="columns">
+</mtx-grid>

@@ -1,0 +1,12 @@
+{
+  "name": "Name",
+  "weight": "Weight",
+  "gender": "Gender",
+  "mobile": "Mobile",
+  "city": "City",
+  "operation": "Operation",
+  "delete": "Delete",
+  "confirm_delete": "Confirm delete?",
+  "close": "CLOSE",
+  "ok": "OK"
+}

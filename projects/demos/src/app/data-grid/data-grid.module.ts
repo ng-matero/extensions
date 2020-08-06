@@ -1,6 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 import { SharedModule } from '../shared';
+
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+// Required for AOT compilation
+export function TranslateHttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/', '_json');
+}
 
 import { DataGridComponent } from './data-grid.component';
 
@@ -21,11 +30,19 @@ import { DataGridNoResultComponent, dataGridNoResultExampleConfig } from './exam
 import { DataGridCustomHeaderTemplateComponent, dataGridCustomHeaderTemplateExampleConfig } from './examples/custom-header-template';
 import { DataGridCustomFooterTemplateComponent, dataGridCustomFooterTemplateExampleConfig } from './examples/custom-footer-template';
 import { DataGridCustomToolbarTemplateComponent, dataGridCustomToolbarTemplateExampleConfig } from './examples/custom-toolbar-template';
+import { DataGridI18nComponent, dataGridI18nExampleConfig } from './examples/i18n';
 import { DataGridRemoteDataComponent, dataGridRemoteDataExampleConfig } from './examples/remote-data';
 
 @NgModule({
   imports: [
     SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: TranslateHttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     RouterModule.forChild([{
       path: '',
       component: DataGridComponent,
@@ -48,7 +65,8 @@ import { DataGridRemoteDataComponent, dataGridRemoteDataExampleConfig } from './
           dataGridCustomHeaderTemplateExampleConfig,
           dataGridCustomFooterTemplateExampleConfig,
           dataGridCustomToolbarTemplateExampleConfig,
-          dataGridRemoteDataExampleConfig
+          dataGridI18nExampleConfig,
+          dataGridRemoteDataExampleConfig,
         ],
       },
     }]),
@@ -73,7 +91,8 @@ import { DataGridRemoteDataComponent, dataGridRemoteDataExampleConfig } from './
     DataGridCustomHeaderTemplateComponent,
     DataGridCustomFooterTemplateComponent,
     DataGridCustomToolbarTemplateComponent,
-    DataGridRemoteDataComponent
+    DataGridI18nComponent,
+    DataGridRemoteDataComponent,
   ],
 })
 export class DataGridModule { }

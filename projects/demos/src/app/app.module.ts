@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { Directionality } from '@angular/cdk/bidi';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
+
 import { SharedModule } from './shared';
 
 import { AppComponent } from './app.component';
@@ -24,8 +25,8 @@ import { environment } from '../environments/environment.prod';
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(DOCS_APP_ROUTES),
-    SharedModule,
     DocsAppModule,
+    SharedModule,
   ],
   declarations: [AppComponent, DocsAppHome, DocsApp404],
   providers: [

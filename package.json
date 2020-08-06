@@ -31,6 +31,8 @@
     "@angular/router": "~9.1.12",
     "@ng-select/ng-option-highlight": "0.0.5",
     "@ng-select/ng-select": "^4.0.4",
+    "@ngx-translate/core": "^12.1.2",
+    "@ngx-translate/http-loader": "^4.0.0",
     "ngx-color": "^5.1.4",
     "ngx-progressbar": "^6.0.2",
     "photoviewer": "^3.4.0",
