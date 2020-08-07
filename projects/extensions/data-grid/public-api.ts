@@ -6,3 +6,4 @@ export * from './cell.component';
 export * from './column-menu.component';
 export * from './expansion-toggle.directive';
 export * from './cell-selection.directive';
+export * from './to-observable.pipe';
