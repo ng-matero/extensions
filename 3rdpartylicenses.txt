@@ -136,6 +136,12 @@ MIT
 @ng-select/ng-select
 MIT
 
+@ngx-translate/core
+MIT
+
+@ngx-translate/http-loader
+MIT
+
 core-js
 MIT
 Copyright (c) 2014-2020 Denis Pushkarev
