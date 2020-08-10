@@ -1,0 +1,11 @@
+@import '~@angular/material/theming';
+
+@mixin mtx-split-theme($theme) {
+  $foreground: map-get($theme, foreground);
+
+  .mtx-split {
+    > .mtx-split-gutter {
+      background-color: mat-color($foreground, divider);
+    }
+  }
+}

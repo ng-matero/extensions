@@ -1,0 +1,118 @@
+@import '~@angular/material/theming';
+
+@mixin mtx-select-theme($theme) {
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .ng-select {
+    .ng-select-container {
+      .ng-value-container {
+        .ng-placeholder {
+          color: mat-color($foreground, hint-text);
+        }
+      }
+    }
+
+    &.ng-select-opened {
+      .ng-arrow-wrapper {
+        .ng-arrow {
+          border-color: transparent transparent mat-color($foreground, secondary-text);
+        }
+      }
+    }
+
+    &.ng-select-disabled {
+      .ng-value {
+        color: mat-color($foreground, hint-text);
+      }
+    }
+
+    &.ng-select-multiple {
+      .ng-select-container {
+        .ng-value-container {
+          .ng-value {
+            color: mat-color($foreground, text);
+            background-color: mat-color($background, unselected-chip);
+
+            &.ng-value-disabled {
+              opacity: .4;
+            }
+
+            .ng-value-icon {
+              &:hover {
+                background-color: mat-color($foreground, divider);
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .ng-clear-wrapper {
+      color: mat-color($foreground, secondary-text);
+
+      &:hover .ng-clear {
+        color: mat-color($warn);
+      }
+    }
+
+    .ng-arrow-wrapper {
+      .ng-arrow {
+        border-color: mat-color($foreground, secondary-text) transparent transparent;
+      }
+    }
+  }
+
+  .ng-dropdown-panel {
+    background-color: mat-color($background, card);
+
+    &.multiple {
+      .ng-option {
+        &.selected {
+          background: mat-color($foreground, divider);
+        }
+
+        &.marked {
+          background: mat-color($background, hover);
+        }
+      }
+    }
+
+    .ng-dropdown-header {
+      border-bottom: 1px solid mat-color($foreground, divider);
+    }
+
+    .ng-dropdown-footer {
+      border-top: 1px solid mat-color($foreground, divider);
+    }
+
+    .ng-dropdown-panel-items {
+      .ng-option,
+      .ng-optgroup {
+        &.ng-option-marked {
+          background: mat-color($background, hover);
+        }
+
+        &.ng-option-selected {
+          background: mat-color($foreground, divider);
+          color: mat-color($foreground, text);
+        }
+      }
+
+      .ng-optgroup {
+        color: mat-color($foreground, secondary-text);
+      }
+
+      .ng-option {
+        &.ng-option-disabled {
+          color: mat-color($foreground, hint-text);
+        }
+
+        .ng-tag-label {
+          color: mat-color($foreground, hint-text);
+        }
+      }
+    }
+  }
+}

@@ -4,7 +4,6 @@
   position: relative;
   display: block;
   width: 100%;
-  border: 1px solid rgba(0, 0, 0, .15);
 
   .mtx-grid-progress {
     position: absolute;
@@ -18,7 +17,6 @@
     align-items: center;
     min-height: 48px;
     padding: 8px;
-    border-bottom: 1px solid rgba(0, 0, 0, .15);
   }
 
   .mtx-grid-layout {
@@ -33,30 +31,12 @@
 
   .mtx-grid-sidebar {
     width: 30px;
-    border-left: 1px solid rgba(0, 0, 0, .15);
-
-    [dir='rtl'] & {
-      border-left: none;
-      border-right: 1px solid rgba(0, 0, 0, .15);
-    }
   }
 
   .mat-table {
     flex: none;
     min-width: 100%;
     border-collapse: separate;
-
-    &.mat-table-striped {
-      .mat-row-odd {
-        background-color: rgba(0, 0, 0, .03);
-      }
-    }
-
-    &.mat-table-hover {
-      .mat-row:hover {
-        background-color: rgba(0, 0, 0, .05);
-      }
-    }
   }
 
   .mat-footer-row,
@@ -110,24 +90,6 @@
     flex: none;
   }
 
-  .mat-table-sticky-left {
-    border-right: 1px solid rgba(0, 0, 0, .15);
-
-    [dir='rtl'] & {
-      border-right-width: 0;
-      border-left: 1px solid rgba(0, 0, 0, .15);
-    }
-  }
-
-  .mat-table-sticky-right {
-    border-left: 1px solid rgba(0, 0, 0, .15);
-
-    [dir='rtl'] & {
-      border-left-width: 0;
-      border-right: 1px solid rgba(0, 0, 0, .15);
-    }
-  }
-
   .mtx-grid-expanison {
     height: 0;
     overflow: hidden;
@@ -159,10 +121,6 @@
   }
 
   .mat-row {
-    &.selected {
-      background-color: rgba(0, 0, 0, .05);
-    }
-
     &:last-of-type {
       .mat-cell {
         border-bottom-width: 0;
@@ -175,10 +133,6 @@
       width: 30px;
       border-radius: 4px;
       cursor: pointer;
-    }
-
-    .mat-chip {
-      color: rgba(0, 0, 0, .87);
     }
 
     .mat-cell-action-button {
@@ -195,14 +149,6 @@
         transform: rotate(90deg);
       }
     }
-
-    &.selected {
-      box-shadow: inset 0 0 0 1px #29b6f6;
-    }
-  }
-
-  .mat-paginator {
-    border-top: 1px solid rgba(0, 0, 0, .15);
   }
 
   .mat-paginator-hidden {
@@ -242,13 +188,5 @@
   .mat-header-cell-inner {
     display: flex;
     align-items: center;
-  }
-
-  .mat-footer-row {
-    .mat-footer-cell {
-      border-bottom-width: 0;
-      border-top: 1px solid rgba(0, 0, 0, .12);
-      background-color: rgba(0, 0, 0, .06);
-    }
   }
 }

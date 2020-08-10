@@ -1,18 +1,18 @@
-$white: #fff !default;
 $progress-height: 1rem !default;
 $progress-fill-animation-timing: 1s linear infinite !default;
 
-@mixin gradient-striped($color: rgba($white, .15), $angle: 45deg) {
-  background-image: linear-gradient(
-    $angle,
-    $color 25%,
-    transparent 25%,
-    transparent 50%,
-    $color 50%,
-    $color 75%,
-    transparent 75%,
-    transparent
-  );
+@mixin gradient-striped($color: rgba(white, .15), $angle: 45deg) {
+  background-image:
+    linear-gradient(
+      $angle,
+      $color 25%,
+      transparent 25%,
+      transparent 50%,
+      $color 50%,
+      $color 75%,
+      transparent 75%,
+      transparent
+    );
 }
 
 .mtx-progress {
@@ -21,7 +21,6 @@ $progress-fill-animation-timing: 1s linear infinite !default;
   margin: 8px 0;
   overflow: hidden;
   font-size: .75rem;
-  background-color: rgba(140, 150, 160, .15);
   border-radius: .25rem;
 }
 
@@ -31,26 +30,6 @@ $progress-fill-animation-timing: 1s linear infinite !default;
   justify-content: center;
   text-align: center;
   transition: width .6s ease;
-}
-
-.mtx-progress-fill-success {
-  color: $white;
-  background-color: #4caf50;
-}
-
-.mtx-progress-fill-info {
-  color: $white;
-  background-color: #2196f3;
-}
-
-.mtx-progress-fill-warning {
-  color: $white;
-  background-color: #fb8c00;
-}
-
-.mtx-progress-fill-danger {
-  color: $white;
-  background-color: #ff5252;
 }
 
 .mtx-progress-fill-striped {

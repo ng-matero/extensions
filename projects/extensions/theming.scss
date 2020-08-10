@@ -1,0 +1,13 @@
+@import './alert/alert-theme';
+@import './data-grid/grid-theme';
+@import './progress/progress-theme';
+@import './select/select-theme';
+@import './split-pane/split-theme';
+
+@mixin material-extensions-theme($theme) {
+  @include mtx-alert-theme($theme);
+  @include mtx-grid-theme($theme);
+  @include mtx-progress-theme($theme);
+  @include mtx-select-theme($theme);
+  @include mtx-split-theme($theme);
+}
