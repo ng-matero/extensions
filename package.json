@@ -13,6 +13,7 @@
     "deploy": "angular-cli-ghpages --no-silent --dir=dist/demos",
     "release": "npm run build:site && npm run deploy",
     "build:lib": "ng build extensions --prod",
+    "copy:scss": "gulp --gulpfile gulpfile.js",
     "publish": "npm run build:lib && cd dist/extensions && npm publish --access public"
   },
   "private": true,
@@ -51,6 +52,7 @@
     "@types/node": "^12.11.1",
     "angular-cli-ghpages": "^0.6.2",
     "codelyzer": "^5.1.2",
+    "gulp": "^4.0.2",
     "highlight-loader": "^0.7.3",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
