@@ -32,7 +32,6 @@
   flex-direction: row;
   align-items: center;
   padding: 4px 0;
-  color: rgba(0, 0, 0, .87);
 
   &.cdk-drag-disabled {
     .cdk-drag-handle {
@@ -46,7 +45,7 @@
   }
 
   &.cdk-drag-preview {
-    @include mat-elevation(3);
+    @include mat-elevation(2);
   }
 
   &.cdk-drag-placeholder {
