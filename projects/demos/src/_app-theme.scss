@@ -1,0 +1,24 @@
+@import '~@angular/material/theming';
+
+@import '../../extensions/theming.scss';
+
+@import './app/shared/example-viewer/example-viewer-theme';
+@import './highlightjs/material-light';
+@import './highlightjs/material-dark';
+
+@import '~photoviewer/dist/photoviewer.css';
+
+// Styles for the docs app that are based on the current theme.
+@mixin extensions-docs-app-theme($theme) {
+  $is-dark-theme: map-get($theme, is-dark);
+
+  @include material-extensions-theme($theme);
+  @include example-viewer-theme($theme);
+
+  @if $is-dark-theme {
+    @include highlightjs-material-dark();
+  }
+  @else {
+    @include highlightjs-material-light();
+  }
+}

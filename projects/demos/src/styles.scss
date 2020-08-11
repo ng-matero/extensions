@@ -1,12 +1,5 @@
 @import '~@angular/material/theming';
-
-// 3rd-Plugins
-@import '~photoviewer/dist/photoviewer.css';
-
-// Styles for the docs app that are based on the current theme.
-@import './app/shared/example-viewer/example-viewer-theme';
-@import './highlightjs/material-light';
-@import './highlightjs/material-dark';
+@import './app-theme';
 
 @include mat-core();
 
@@ -16,8 +9,7 @@ $accent: mat-palette($mat-pink, A200, A100, A400);
 $theme: mat-light-theme($primary, $accent);
 
 @include angular-material-theme($theme);
-@include example-viewer-theme($theme);
-@include highlightjs-material-light();
+@include extensions-docs-app-theme($theme);
 
 // Define an alternate dark theme.
 .docs-dark-theme {
@@ -26,6 +18,5 @@ $theme: mat-light-theme($primary, $accent);
   $theme: mat-dark-theme($primary, $accent);
 
   @include angular-material-theme($theme);
-  @include example-viewer-theme($theme);
-  @include highlightjs-material-dark();
+  @include extensions-docs-app-theme($theme);
 }
