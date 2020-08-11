@@ -79,4 +79,8 @@
       }
     }
   }
+
+  .mtx-grid-column-menu-item {
+    color: mat-color($foreground, text);
+  }
 }
