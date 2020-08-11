@@ -18,6 +18,8 @@ Install the Extensions library:
 $ npm install @ng-matero/extensions --save
 ```
 
+## Setup
+
 Once installed you need to import the main module:
 
 ```ts
@@ -44,6 +46,16 @@ import { MtxColorPickerModule, MtxSelectModule } from '@ng-matero/extensions';
 })
 export class YourAppModule {
 }
+```
+
+## Theming
+
+After import modules, you must define a theme. [More details about theming](https://material.angular.io/guide/theming).
+
+```scss
+@import '~@ng-matero/extensions/theming';
+
+@include material-extensions-theme($theme);
 ```
 
 ## Roadmap
