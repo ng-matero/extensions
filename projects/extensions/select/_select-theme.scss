@@ -11,6 +11,12 @@
         .ng-placeholder {
           color: mat-color($foreground, hint-text);
         }
+
+        .ng-input {
+          > input {
+            color: mat-color($foreground, text);
+          }
+        }
       }
     }
 
