@@ -33,7 +33,8 @@
     "@ng-select/ng-select": "^4.0.0",
     "ngx-color": "^5.0.0",
     "photoviewer": "^3.4.0"
-  },
+  ,    "tslib": "^2.0.0"
+},
   "peerDependencies": {
     "@angular/animations": "^9.0.0",
     "@angular/cdk": "^9.1.0",
