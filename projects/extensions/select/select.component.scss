@@ -14,7 +14,6 @@
 
   .ng-select-container {
     align-items: center;
-    color: inherit;
 
     .ng-value-container {
       align-items: center;
@@ -161,8 +160,8 @@
       height: 3em;
       padding: 14px 16px;
       font-weight: 500;
-      cursor: pointer;
       user-select: none;
+      cursor: pointer;
 
       &.ng-option-disabled {
         cursor: default;
@@ -172,7 +171,6 @@
     .ng-option {
       position: relative;
       padding: 14px 16px;
-      color: inherit;
       text-overflow: ellipsis;
       text-decoration: none;
       text-align: left;

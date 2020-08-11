@@ -7,6 +7,8 @@
 
   .ng-select {
     .ng-select-container {
+      color: mat-color($foreground, text);
+
       .ng-value-container {
         .ng-placeholder {
           color: mat-color($foreground, hint-text);
@@ -94,23 +96,29 @@
     }
 
     .ng-dropdown-panel-items {
-      .ng-option,
       .ng-optgroup {
+        color: mat-color($foreground, secondary-text);
+
         &.ng-option-marked {
           background: mat-color($background, hover);
         }
 
         &.ng-option-selected {
           background: mat-color($foreground, divider);
-          color: mat-color($foreground, text);
         }
       }
 
-      .ng-optgroup {
-        color: mat-color($foreground, secondary-text);
-      }
-
       .ng-option {
+        color: mat-color($foreground, text);
+
+        &.ng-option-marked {
+          background: mat-color($background, hover);
+        }
+
+        &.ng-option-selected {
+          background: mat-color($foreground, divider);
+        }
+
         &.ng-option-disabled {
           color: mat-color($foreground, hint-text);
         }
