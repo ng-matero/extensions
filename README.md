@@ -34,14 +34,15 @@ export class YourAppModule {
 }
 ```
 
-Alternatively you could only import modules you need, e.g. color-picker and select.
+Alternatively you could only import modules you need, e.g. data-grid and select.
 
 ```ts
-import { MtxColorPickerModule, MtxSelectModule } from '@ng-matero/extensions';
+import { MtxGridModule } from '@ng-matero/extensions/data-grid';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
 
 @NgModule({
   ...
-  imports: [MtxColorPickerModule, MtxSelectModule, ...],
+  imports: [MtxGridModule, MtxSelectModule, ...],
   ...
 })
 export class YourAppModule {
@@ -60,7 +61,7 @@ After import modules, you must define a theme. [More details about theming](http
 
 ## Roadmap
 
-Check [the projects](https://github.com/ng-matero/extensions/projects) to know the develop plans.
+Check [projects](https://github.com/ng-matero/extensions/projects) to know the develop plans.
 
 ## License
 
