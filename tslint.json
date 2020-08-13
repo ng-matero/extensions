@@ -119,8 +119,8 @@
       "ban-keywords",
       "check-format",
       "allow-leading-underscore"
-    ]
-  ,    "whitespace": {
+    ],
+    "whitespace": {
       "options": [
         "check-branch",
         "check-decl",
@@ -130,5 +130,5 @@
         "check-typecast"
       ]
     }
-}
+  }
 }
