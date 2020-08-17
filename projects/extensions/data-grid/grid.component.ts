@@ -28,7 +28,7 @@ import {
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
-import { Observable, isObservable } from 'rxjs';
+import { isObservable } from 'rxjs';
 
 @Component({
   selector: 'mtx-grid',
@@ -218,7 +218,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     if (this.showColumnMenuButton) {
       this.columnMenuData = this.columns.map(item => {
         return {
-          label: item.header as string,
+          label: item.header,
           field: item.field,
           show: !item.hide,
           hide: item.hide,

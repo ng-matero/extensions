@@ -104,7 +104,7 @@ export interface MtxGridColumnButton {
  * Column selection
  */
 export interface MtxGridColumnSelectionItem {
-  label: string;
+  label: string | Observable<any>;
   field: string;
   show?: boolean;
   hide?: boolean;
