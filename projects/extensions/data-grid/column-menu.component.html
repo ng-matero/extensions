@@ -74,7 +74,9 @@
                 [(ngModel)]="col[selectedType]"
                 [disabled]="col.disabled"
                 (change)="_handleSelection($event)">
-    {{col.label}}
+    {{col.label | toObservable | async}}
   </mat-checkbox>
-  <span class="mtx-grid-column-menu-item-label" *ngIf="!selectable">{{col.label}}</span>
+  <span class="mtx-grid-column-menu-item-label" *ngIf="!selectable">
+    {{col.label | toObservable | async}}
+  </span>
 </ng-template>
