@@ -1,0 +1,11 @@
+.mat-button-loading {
+  .mat-button-wrapper {
+    visibility: hidden;
+  }
+
+  .mat-progress-spinner {
+    position: absolute;
+    top: calc(50% - 10px);
+    left: calc(50% - 10px);
+  }
+}

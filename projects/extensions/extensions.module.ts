@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { MtxAlertModule } from '@ng-matero/extensions/alert';
+import { MtxButtonModule } from '@ng-matero/extensions/button';
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
 import { MtxColorPickerModule } from '@ng-matero/extensions/color-picker';
 import { MtxGridModule } from '@ng-matero/extensions/data-grid';
@@ -14,6 +15,7 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 @NgModule({
   exports: [
     MtxAlertModule,
+    MtxButtonModule,
     MtxCheckboxGroupModule,
     MtxColorPickerModule,
     MtxGridModule,
