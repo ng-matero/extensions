@@ -8,23 +8,35 @@ function copyRoot() {
 }
 
 function copyAlert() {
-  return src([`${SRC}/alert/*-theme.scss`]).pipe(dest(`${DEST}/alert`));
+  return src([`${SRC}/alert/*.scss`]).pipe(dest(`${DEST}/alert`));
+}
+
+function copyButton() {
+  return src([`${SRC}/button/*.scss`]).pipe(dest(`${DEST}/button`));
 }
 
 function copyGrid() {
-  return src([`${SRC}/data-grid/*-theme.scss`]).pipe(dest(`${DEST}/data-grid`));
+  return src([`${SRC}/data-grid/*.scss`]).pipe(dest(`${DEST}/data-grid`));
 }
 
 function copyProgress() {
-  return src([`${SRC}/progress/*-theme.scss`]).pipe(dest(`${DEST}/progress`));
+  return src([`${SRC}/progress/*.scss`]).pipe(dest(`${DEST}/progress`));
 }
 
 function copySelect() {
-  return src([`${SRC}/select/*-theme.scss`]).pipe(dest(`${DEST}/select`));
+  return src([`${SRC}/select/*.scss`]).pipe(dest(`${DEST}/select`));
 }
 
 function copySplit() {
-  return src([`${SRC}/split-pane/*-theme.scss`]).pipe(dest(`${DEST}/split-pane`));
+  return src([`${SRC}/split-pane/*.scss`]).pipe(dest(`${DEST}/split-pane`));
 }
 
-exports.default = series(copyRoot, copyAlert, copyGrid, copyProgress, copySelect, copySplit);
+exports.default = series(
+  copyRoot,
+  copyAlert,
+  copyButton,
+  copyGrid,
+  copyProgress,
+  copySelect,
+  copySplit
+);
