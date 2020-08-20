@@ -1,0 +1,35 @@
+<h2>Loading button configuration</h2>
+
+<section>
+  <label>Color:</label>
+  <mat-radio-group [(ngModel)]="color">
+    <mat-radio-button value="basic">Basic</mat-radio-button>
+    <mat-radio-button value="primary">Primary</mat-radio-button>
+    <mat-radio-button value="accent">Accent</mat-radio-button>
+    <mat-radio-button value="warn">Warn</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="disabled" [labelPosition]="'before'">Disabled</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="loading" [labelPosition]="'before'">Loading</mat-checkbox>
+</section>
+
+<h2>Result</h2>
+
+<button mat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button mat-raised-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button mat-stroked-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button mat-flat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button mat-icon-button [loading]="loading" [color]="color" [disabled]="disabled">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<button mat-fab [loading]="loading" [color]="color" [disabled]="disabled">
+  <mat-icon>delete</mat-icon>
+</button>
+<button mat-mini-fab [loading]="loading" [color]="color" [disabled]="disabled">
+  <mat-icon>menu</mat-icon>
+</button>

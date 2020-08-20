@@ -11,10 +11,11 @@ import { NgProgressRouterModule } from 'ngx-progressbar/router';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 
 import { MtxAlertModule } from '@ng-matero/extensions/alert';
+import { MtxButtonModule } from '@ng-matero/extensions/button';
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
 import { MtxColorPickerModule } from '@ng-matero/extensions/color-picker';
-import { MtxGridModule } from '@ng-matero/extensions/data-grid';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
+import { MtxGridModule } from '@ng-matero/extensions/data-grid';
 import { MtxProgressModule } from '@ng-matero/extensions/progress';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
 import { MtxSplitModule } from '@ng-matero/extensions/split-pane';
@@ -41,11 +42,12 @@ import { CopierService } from './copier/copier.service';
     NgProgressRouterModule,
     NgOptionHighlightModule,
 
-    MtxGridModule,
-    MtxColorPickerModule,
     MtxAlertModule,
+    MtxButtonModule,
     MtxCheckboxGroupModule,
+    MtxColorPickerModule,
     MtxDialogModule,
+    MtxGridModule,
     MtxProgressModule,
     MtxSelectModule,
     MtxSplitModule,
@@ -65,6 +67,7 @@ import { CopierService } from './copier/copier.service';
     NgOptionHighlightModule,
 
     MtxGridModule,
+    MtxButtonModule,
     MtxColorPickerModule,
     MtxAlertModule,
     MtxCheckboxGroupModule,

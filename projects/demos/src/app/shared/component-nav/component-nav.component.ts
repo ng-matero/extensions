@@ -10,6 +10,11 @@ export const DOCS = [
         route: '/alert',
       },
       {
+        name: 'Button',
+        summary: 'Provide a material button loading directive.',
+        route: '/button',
+      },
+      {
         name: 'Checkbox Group',
         summary: 'Allows the user to create a set of checkbox with select all.',
         route: '/checkbox-group',

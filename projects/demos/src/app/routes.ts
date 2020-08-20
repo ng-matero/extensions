@@ -9,6 +9,10 @@ export const DOCS_APP_ROUTES: Routes = [
     loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule),
   },
   {
+    path: 'button',
+    loadChildren: () => import('./button/button.module').then(m => m.ButtonModule),
+  },
+  {
     path: 'checkbox-group',
     loadChildren: () =>
       import('./checkbox-group/checkbox-group.module').then(m => m.CheckboxGroupModule),
