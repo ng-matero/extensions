@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   ChangeDetectionStrategy,
   ViewEncapsulation,
   Input,
@@ -8,6 +7,7 @@ import {
   EventEmitter,
   ChangeDetectorRef,
   forwardRef,
+  AfterViewInit,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
@@ -31,29 +31,68 @@ import { MtxCheckboxGroupOption } from './checkbox-group.interface';
     },
   ],
 })
-export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
+export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAccessor {
+  @Input() items: MtxCheckboxGroupOption[] = [];
+  @Input() bindLabel = 'label';
+  @Input() bindValue: string;
+  @Input() showSelectAll = false;
   @Input() selectAllLabel = 'Select All';
-  @Input() showSelectAll = true;
+  @Input()
+  get compareWith() {
+    return this._compareWith;
+  }
+  set compareWith(fn: (o1: any, o2: any) => boolean) {
+    if (typeof fn !== 'function') {
+      throw Error('`compareWith` must be a function.');
+    }
+    // `compareWith` and `bindValue` cannot coexist
+    if (!this.bindValue) {
+      this._compareWith = fn;
+    }
+  }
+  private _compareWith = (o1: any, o2: any) => o1 === o2;
 
   @Output() change = new EventEmitter<{ model: MtxCheckboxGroupOption[]; index: number }>();
+
+  controlDisabled = false;
 
   selectAll = false;
   selectAllIndeterminate = false;
 
-  options: MtxCheckboxGroupOption[] = [];
-
-  controlDisabled = false;
+  selectedItems: MtxCheckboxGroupOption[] = [];
 
   _onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
   _onTouched: () => void = () => null;
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
-  ngOnInit() {}
+  ngAfterViewInit() {}
+
+  private _selectValue(value: any) {
+    const correspondingOption = this.items.find((option: MtxCheckboxGroupOption) => {
+      try {
+        return this._compareWith(this.bindValue ? option[this.bindValue] : option, value);
+      } catch (error) {
+        console.warn(error);
+        return false;
+      }
+    });
+
+    if (correspondingOption) {
+      correspondingOption.checked = true;
+    }
+
+    return correspondingOption;
+  }
 
   writeValue(value: MtxCheckboxGroupOption[]): void {
     if (value) {
-      this.options = value;
+      if (!Array.isArray(value)) {
+        throw Error('Value must be an array.');
+      }
+
+      value.forEach((currentValue: any) => this._selectValue(currentValue));
+      this.selectedItems = value;
     }
 
     this._checkMasterCheckboxState();
@@ -73,11 +112,17 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
   }
 
   private _checkMasterCheckboxState() {
-    if (this.options.filter(item => item.checked || !item.disabled).every(item => !item.checked)) {
+    if (
+      this.items
+        .filter(option => option.checked || !option.disabled)
+        .every(option => !option.checked)
+    ) {
       this.selectAll = false;
       this.selectAllIndeterminate = false;
     } else if (
-      this.options.filter(item => item.checked || !item.disabled).every(item => item.checked)
+      this.items
+        .filter(option => option.checked || !option.disabled)
+        .every(option => option.checked)
     ) {
       this.selectAll = true;
       this.selectAllIndeterminate = false;
@@ -86,31 +131,36 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
     }
   }
 
+  private _getSelectedItems(index?: number) {
+    this.selectedItems = this.items.filter(option => option.checked);
+
+    if (this.bindValue) {
+      this.selectedItems = this.selectedItems.map(option => option[this.bindValue]);
+    }
+
+    this._onChange(this.selectedItems);
+
+    this.change.emit({ model: this.selectedItems, index });
+  }
+
   _updateNormalCheckboxState(e?: boolean, index?: number): void {
     this._checkMasterCheckboxState();
-
-    this.change.emit({
-      model: this.options,
-      index,
-    });
+    this._getSelectedItems(index);
   }
 
   _updateMasterCheckboxState(e?: boolean, index?: number): void {
     this.selectAll = !this.selectAll;
     this.selectAllIndeterminate = false;
     if (this.selectAll) {
-      this.options
-        .filter(item => item.checked || !item.disabled)
-        .forEach(item => (item.checked = true));
+      this.items
+        .filter(option => option.checked || !option.disabled)
+        .forEach(option => (option.checked = true));
     } else {
-      this.options
-        .filter(item => item.checked || !item.disabled)
-        .forEach(item => (item.checked = !!item.disabled));
+      this.items
+        .filter(option => option.checked || !option.disabled)
+        .forEach(option => (option.checked = !!option.disabled));
     }
 
-    this.change.emit({
-      model: this.options,
-      index,
-    });
+    this._getSelectedItems(index);
   }
 }

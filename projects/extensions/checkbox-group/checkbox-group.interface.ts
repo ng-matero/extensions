@@ -1,6 +1,6 @@
 export interface MtxCheckboxGroupOption {
-  label: string;
-  value: string;
+  label?: string | number | boolean;
+  value?: string | number | boolean;
   checked?: boolean;
   disabled?: boolean;
 }

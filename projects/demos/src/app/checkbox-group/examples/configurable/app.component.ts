@@ -8,12 +8,14 @@ import { MtxCheckboxGroupOption } from '@ng-matero/extensions/checkbox-group';
 })
 export class AppComponent {
   foods: MtxCheckboxGroupOption[] = [
-    { value: 'steak-0', label: 'Steak', checked: true },
-    { value: 'pizza-1', label: 'Pizza', disabled: true },
-    { value: 'tacos-2', label: 'Tacos' },
+    { value: 1, label: 'Steak' },
+    { value: 2, label: 'Pizza' },
+    { value: 3, label: 'Tacos' },
   ];
 
-  showSelectAll = true;
+  selectedFoods = [1];
+
+  showSelectAll = false;
 
   constructor() {}
 

@@ -8,9 +8,9 @@
 </mat-checkbox>
 
 <mat-checkbox class="mtx-checkbox-normal"
-              *ngFor="let item of options; let i = index;"
+              *ngFor="let item of items; let i = index;"
               [(ngModel)]="item.checked"
               [disabled]="controlDisabled || item.disabled"
               (change)="_updateNormalCheckboxState($event, i)">
-  {{item.label}}
+  {{item[bindLabel]}}
 </mat-checkbox>

@@ -6,6 +6,10 @@
 
 <h2>Result</h2>
 
-<mtx-checkbox-group [showSelectAll]="showSelectAll" [(ngModel)]="foods"
+<mtx-checkbox-group [showSelectAll]="showSelectAll"
+                    [items]="foods" bindValue="value"
+                    [(ngModel)]="selectedFoods"
                     (change)="changeOptions($event)">
 </mtx-checkbox-group>
+
+{{selectedFoods|json}}
