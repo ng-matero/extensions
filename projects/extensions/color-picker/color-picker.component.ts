@@ -42,13 +42,7 @@ let nextUniqueId = 0;
   providers: [{ provide: MatFormFieldControl, useExisting: MtxColorPickerComponent }],
 })
 export class MtxColorPickerComponent
-  implements
-    OnInit,
-    OnDestroy,
-    DoCheck,
-    AfterViewInit,
-    ControlValueAccessor,
-    MatFormFieldControl<any> {
+  implements OnDestroy, DoCheck, AfterViewInit, ControlValueAccessor, MatFormFieldControl<any> {
   /** Value of the color picker control. */
   @Input()
   get value(): string | null {
@@ -192,8 +186,6 @@ export class MtxColorPickerComponent
     }
   }
 
-  ngOnInit() {}
-
   ngDoCheck(): void {
     if (this.ngControl) {
       this.errorState = this.ngControl.invalid && this.ngControl.touched;
@@ -262,6 +254,11 @@ export class MtxColorPickerComponent
    */
   registerOnTouched(fn: any): void {
     this._onTouched = fn;
+  }
+
+  /** Implemented as part of MatFormFieldControl. */
+  setDisabledState(isDisabled: boolean) {
+    this.disabled = isDisabled;
   }
 
   /** Open panel with input focus event. */
