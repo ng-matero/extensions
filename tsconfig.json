@@ -14,10 +14,10 @@
       "path": "./projects/extensions/tsconfig.spec.json"
     },
     {
-      "path": "./projects/demos/tsconfig.app.json"
+      "path": "./projects/docs/tsconfig.app.json"
     },
     {
-      "path": "./projects/demos/tsconfig.spec.json"
+      "path": "./projects/docs/tsconfig.spec.json"
     }
   ]
 }

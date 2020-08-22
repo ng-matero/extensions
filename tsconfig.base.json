@@ -17,7 +17,7 @@
     "paths": {
       "@ng-matero/extensions": ["projects/extensions"],
       "@ng-matero/extensions/*": ["projects/extensions/*"],
-      "@assets/*": ["projects/demos/src/assets/*"]
+      "@assets/*": ["projects/docs/src/assets/*"]
     }
   },
   "angularCompilerOptions": {
