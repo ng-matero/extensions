@@ -305,13 +305,20 @@ export class MtxSelectComponent
     this._ariaDescribedby = ids.join(' ');
   }
 
-  /** Implemented as part of MatFormFieldControl. */
+  /**
+   * Disables the select. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
+   */
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
   }
 
   /** Implemented as part of MatFormFieldControl. */
-  onContainerClick() {}
+  onContainerClick() {
+    this.open();
+  }
 
   /**
    * Sets the select's value. Part of the ControlValueAccessor interface

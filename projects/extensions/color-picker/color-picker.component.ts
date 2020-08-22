@@ -221,12 +221,12 @@ export class MtxColorPickerComponent
   }
 
   /** Implemented as part of MatFormFieldControl. */
-  onContainerClick() {}
+  onContainerClick() {
+    this._handleFocus();
+  }
 
   /**
-   * Sets the color-picker's value. Part of the ControlValueAccessor interface
-   * required to integrate with Angular's core forms API.
-   *
+   * Sets the model value. Implemented as part of ControlValueAccessor.
    * @param value New value to be written to the model.
    */
   writeValue(value: string | null): void {
@@ -235,28 +235,27 @@ export class MtxColorPickerComponent
   }
 
   /**
-   * Saves a callback function to be invoked when the color-picker's value
-   * changes from user input. Part of the ControlValueAccessor interface
-   * required to integrate with Angular's core forms API.
-   *
-   * @param fn Callback to be triggered when the value changes.
+   * Registers a callback to be triggered when the model value changes.
+   * Implemented as part of ControlValueAccessor.
+   * @param fn Callback to be registered.
    */
   registerOnChange(fn: any): void {
     this._onChange = fn;
   }
 
   /**
-   * Saves a callback function to be invoked when the color picker is blurred
-   * by the user. Part of the ControlValueAccessor interface required
-   * to integrate with Angular's core forms API.
-   *
-   * @param fn Callback to be triggered when the component has been touched.
+   * Registers a callback to be triggered when the control is touched.
+   * Implemented as part of ControlValueAccessor.
+   * @param fn Callback to be registered.
    */
   registerOnTouched(fn: any): void {
     this._onTouched = fn;
   }
 
-  /** Implemented as part of MatFormFieldControl. */
+  /**
+   * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
+   * @param isDisabled Whether the control should be disabled.
+   */
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
   }

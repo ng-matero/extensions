@@ -100,6 +100,10 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
 
   ngAfterViewInit() {}
 
+  /**
+   * Finds and selects and option based on its value.
+   * @returns Option that has the corresponding value.
+   */
   private _selectValue(value: MtxCheckboxGroupOption) {
     const correspondingOption = this.items.find((option: MtxCheckboxGroupOption) => {
       try {
@@ -118,6 +122,10 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
     return correspondingOption;
   }
 
+  /**
+   * Sets the model value. Implemented as part of ControlValueAccessor.
+   * @param value New value to be written to the model.
+   */
   writeValue(value: any[]): void {
     if (value) {
       if (!Array.isArray(value)) {
@@ -132,14 +140,28 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
     this._changeDetectorRef.markForCheck();
   }
 
+  /**
+   * Registers a callback to be triggered when the model value changes.
+   * Implemented as part of ControlValueAccessor.
+   * @param fn Callback to be registered.
+   */
   registerOnChange(fn: (value: MtxCheckboxGroupOption[]) => {}): void {
     this._onChange = fn;
   }
 
+  /**
+   * Registers a callback to be triggered when the control is touched.
+   * Implemented as part of ControlValueAccessor.
+   * @param fn Callback to be registered.
+   */
   registerOnTouched(fn: () => {}): void {
     this._onTouched = fn;
   }
 
+  /**
+   * Sets the disabled state of the control. Implemented as a part of ControlValueAccessor.
+   * @param isDisabled Whether the control should be disabled.
+   */
   setDisabledState(isDisabled: boolean) {
     this._disabled = isDisabled;
   }
@@ -180,11 +202,13 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
     this.change.emit({ model: this.selectedItems, index });
   }
 
+  /** Handle normal checkbox toggle */
   _updateNormalCheckboxState(e?: boolean, index?: number): void {
     this._checkMasterCheckboxState();
     this._getSelectedItems(index);
   }
 
+  /** Handle master checkbox toggle */
   _updateMasterCheckboxState(e?: boolean, index?: number): void {
     this.selectAll = !this.selectAll;
     this.selectAllIndeterminate = false;
