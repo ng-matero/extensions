@@ -1,8 +1,8 @@
-import { AppComponent as CheckboxGroupConfigurableComponent } from './app.component';
+import { AppComponent as CheckboxGroupSelectAllComponent } from './app.component';
 
-const checkboxGroupConfigurableExampleConfig = {
-  title: 'Configurable checkbox group',
-  component: CheckboxGroupConfigurableComponent,
+const checkboxGroupSelectAllExampleConfig = {
+  title: 'SelectAll',
+  component: CheckboxGroupSelectAllComponent,
   files: [
     {
       file: 'app.component.html',
@@ -22,4 +22,4 @@ const checkboxGroupConfigurableExampleConfig = {
   ],
 };
 
-export { CheckboxGroupConfigurableComponent, checkboxGroupConfigurableExampleConfig };
+export { CheckboxGroupSelectAllComponent, checkboxGroupSelectAllExampleConfig };

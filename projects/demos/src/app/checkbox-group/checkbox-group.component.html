@@ -1,5 +1,6 @@
 <ng-container *ngIf="route.data | async as data">
   <ng-container *ngFor="let exampleData of data.examples">
+    <doc-heading [text]="exampleData.title"></doc-heading>
     <example-viewer [exampleData]="exampleData"></example-viewer>
   </ng-container>
 </ng-container>

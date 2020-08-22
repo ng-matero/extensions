@@ -4,24 +4,44 @@ import { SharedModule } from '../shared';
 
 import { CheckboxGroupComponent } from './checkbox-group.component';
 
-import { CheckboxGroupConfigurableComponent, checkboxGroupConfigurableExampleConfig } from './examples/configurable';
+import { CheckboxGroupBasicComponent, checkboxGroupBasicExampleConfig } from './examples/basic';
+import {
+  CheckboxGroupBindLabelBindValueComponent,
+  checkboxGroupBindLabelBindValueExampleConfig,
+} from './examples/bind-label-bind-value';
+import {
+  CheckboxGroupCompareWithComponent,
+  checkboxGroupCompareWithExampleConfig,
+} from './examples/compare-with';
+import {
+  CheckboxGroupSelectAllComponent,
+  checkboxGroupSelectAllExampleConfig,
+} from './examples/select-all';
 
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forChild([{
-      path: '',
-      component: CheckboxGroupComponent,
-      data: {
-        examples: [
-          checkboxGroupConfigurableExampleConfig
-        ],
+    RouterModule.forChild([
+      {
+        path: '',
+        component: CheckboxGroupComponent,
+        data: {
+          examples: [
+            checkboxGroupBasicExampleConfig,
+            checkboxGroupBindLabelBindValueExampleConfig,
+            checkboxGroupCompareWithExampleConfig,
+            checkboxGroupSelectAllExampleConfig,
+          ],
+        },
       },
-    }])
+    ]),
   ],
   declarations: [
     CheckboxGroupComponent,
-    CheckboxGroupConfigurableComponent
+    CheckboxGroupBasicComponent,
+    CheckboxGroupBindLabelBindValueComponent,
+    CheckboxGroupCompareWithComponent,
+    CheckboxGroupSelectAllComponent,
   ],
 })
-export class CheckboxGroupModule { }
+export class CheckboxGroupModule {}
