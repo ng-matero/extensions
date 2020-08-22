@@ -8,10 +8,18 @@ import {
   ChangeDetectorRef,
   forwardRef,
   AfterViewInit,
+  ContentChildren,
+  QueryList,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ThemePalette } from '@angular/material/core';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { MtxCheckboxGroupOption } from './checkbox-group.interface';
+
+export class MtxCheckboxBase {
+  constructor(public label?: any, public value?: any) {}
+}
 
 @Component({
   selector: 'mtx-checkbox-group',
@@ -32,9 +40,24 @@ import { MtxCheckboxGroupOption } from './checkbox-group.interface';
   ],
 })
 export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAccessor {
-  @Input() items: MtxCheckboxGroupOption[] = [];
+  @ContentChildren(forwardRef(() => MatCheckbox), { descendants: true })
+  _checkboxes: QueryList<MatCheckbox>;
+
+  @Input()
+  get items(): MtxCheckboxGroupOption[] {
+    return this._items;
+  }
+  set items(value) {
+    this._originalItems = JSON.parse(JSON.stringify(value));
+    this._items = value.map(option => {
+      return option instanceof Object ? option : new MtxCheckboxBase(option, option);
+    });
+  }
+  private _items: MtxCheckboxGroupOption[] = [];
+  private _originalItems: MtxCheckboxGroupOption[] = [];
+
   @Input() bindLabel = 'label';
-  @Input() bindValue: string;
+  @Input() bindValue = 'value';
   @Input() showSelectAll = false;
   @Input() selectAllLabel = 'Select All';
   @Input()
@@ -45,19 +68,28 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
     if (typeof fn !== 'function') {
       throw Error('`compareWith` must be a function.');
     }
-    // `compareWith` and `bindValue` cannot coexist
-    if (!this.bindValue) {
+
+    if (fn) {
       this._compareWith = fn;
     }
   }
-  private _compareWith = (o1: any, o2: any) => o1 === o2;
+  private _compareWith: (o1: any, o2: any) => boolean;
+
+  @Input()
+  get disabled(): boolean {
+    return this._disabled;
+  }
+  set disabled(value: boolean) {
+    this._disabled = coerceBooleanProperty(value);
+  }
+  private _disabled = false;
 
   @Output() change = new EventEmitter<{ model: MtxCheckboxGroupOption[]; index: number }>();
 
-  controlDisabled = false;
-
   selectAll = false;
   selectAllIndeterminate = false;
+
+  color: ThemePalette = 'accent';
 
   selectedItems: MtxCheckboxGroupOption[] = [];
 
@@ -68,10 +100,11 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
 
   ngAfterViewInit() {}
 
-  private _selectValue(value: any) {
+  private _selectValue(value: MtxCheckboxGroupOption) {
     const correspondingOption = this.items.find((option: MtxCheckboxGroupOption) => {
       try {
-        return this._compareWith(this.bindValue ? option[this.bindValue] : option, value);
+        const compareValue = option[this.bindValue] === value;
+        return this._compareWith ? this._compareWith(option, value) : compareValue;
       } catch (error) {
         console.warn(error);
         return false;
@@ -85,7 +118,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
     return correspondingOption;
   }
 
-  writeValue(value: MtxCheckboxGroupOption[]): void {
+  writeValue(value: any[]): void {
     if (value) {
       if (!Array.isArray(value)) {
         throw Error('Value must be an array.');
@@ -108,7 +141,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   }
 
   setDisabledState(isDisabled: boolean) {
-    this.controlDisabled = isDisabled;
+    this._disabled = isDisabled;
   }
 
   private _checkMasterCheckboxState() {
@@ -134,7 +167,11 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   private _getSelectedItems(index?: number) {
     this.selectedItems = this.items.filter(option => option.checked);
 
-    if (this.bindValue) {
+    if (this.compareWith) {
+      this.selectedItems = this._originalItems.filter(option =>
+        this.selectedItems.find(selectedOption => this._compareWith(option, selectedOption))
+      );
+    } else {
       this.selectedItems = this.selectedItems.map(option => option[this.bindValue]);
     }
 
@@ -151,6 +188,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   _updateMasterCheckboxState(e?: boolean, index?: number): void {
     this.selectAll = !this.selectAll;
     this.selectAllIndeterminate = false;
+
     if (this.selectAll) {
       this.items
         .filter(option => option.checked || !option.disabled)
