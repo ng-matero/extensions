@@ -1,0 +1,22 @@
+<div>
+  <mat-checkbox class="mx-3" [(ngModel)]="multipleSelect">Mulitple select</mat-checkbox>
+  <mat-checkbox [(ngModel)]="disableSelect">Disable select</mat-checkbox>
+</div>
+
+<mat-form-field>
+  <mat-label>Select Food</mat-label>
+
+  <mtx-select [items]="items"
+              [(ngModel)]="value"
+              placeholder="select food"
+              bindLabel="name"
+              bindValue="id"
+              [disabled]="disableSelect"
+              [multiple]="multipleSelect"
+              [appendTo]="'body'"
+              required>
+  </mtx-select>
+
+  <mat-hint>Choose your favorite food</mat-hint>
+  <mat-error>Please choose a food</mat-error>
+</mat-form-field>

@@ -1,0 +1,54 @@
+<mat-sidenav-container class="demo-container">
+  <mat-sidenav #start role="navigation">
+    <mat-nav-list>
+      <a *ngFor="let navItem of navItems"
+         mat-list-item
+         (click)="start.close()"
+         routerLinkActive
+         #routerLinkActiveInstance="routerLinkActive"
+         [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+         [routerLink]="[navItem.route]">
+        {{navItem.name}}
+      </a>
+
+      <hr>
+    </mat-nav-list>
+    <button mat-button tabindex="-1" (click)="start.close()">CLOSE</button>
+  </mat-sidenav>
+  <main>
+    <mat-toolbar color="primary">
+      <button mat-icon-button (click)="start.open('mouse')">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="demo-toolbar">
+        <h1>Angular Material Demos</h1>
+        <div>
+          <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
+            <mat-icon>fullscreen</mat-icon>
+          </button>
+          <button mat-button (click)="isDark = !isDark">
+            {{isDark ? 'Light' : 'Dark'}} theme
+          </button>
+          <button mat-button (click)="rippleOptions.disabled = !rippleOptions.disabled">
+            {{rippleOptions.disabled ? 'Enable' : 'Disable'}} ripples
+          </button>
+          <button mat-button (click)="toggleStrongFocus()">
+            {{strongFocus ? 'Disable strong focus' : 'Enable strong focus'}}
+          </button>
+          <button mat-button (click)="dir.value = (dir.value === 'rtl' ? 'ltr' : 'rtl')"
+                  title="Toggle between RTL and LTR">
+            {{dir.value.toUpperCase()}}
+          </button>
+          <button mat-button (click)="selectNextDensity()"
+                  title="Use next density scale: {{densityScales[getNextDensityIndex()]}}">
+            Density scale: {{densityScales[this.currentDensityIndex]}}
+          </button>
+        </div>
+      </div>
+    </mat-toolbar>
+
+    <div [attr.dir]="dir.value" class="demo-content mat-app-background">
+      <ng-content></ng-content>
+    </div>
+  </main>
+</mat-sidenav-container>

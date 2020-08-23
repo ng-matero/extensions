@@ -1,0 +1,10 @@
+<p class="mx-n2">
+  <button class="mx-2" mat-raised-button color="warn" (click)="alert()">Alert</button>
+  <button class="mx-2" mat-raised-button color="accent" (click)="confirm()">Confirm</button>
+  <button class="mx-2" mat-raised-button color="primary" (click)="open()">Open Dialog</button>
+  <button class="mx-2" mat-raised-button (click)="openOriginal()">Open Original Dialog</button>
+</p>
+
+<p *ngIf="animal">
+  You chose: <i>{{animal}}</i>
+</p>

@@ -1,0 +1,15 @@
+<mat-checkbox [(ngModel)]="loading">Loading</mat-checkbox>
+
+<button mat-button [loading]="loading" [color]="color">Button</button>
+<button mat-raised-button [loading]="loading" [color]="color">Button</button>
+<button mat-stroked-button [loading]="loading" [color]="color">Button</button>
+<button mat-flat-button [loading]="loading" [color]="color">Button</button>
+<button mat-icon-button [loading]="loading" [color]="color">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<button mat-fab [loading]="loading" [color]="color">
+  <mat-icon>delete</mat-icon>
+</button>
+<button mat-mini-fab [loading]="loading" [color]="color">
+  <mat-icon>menu</mat-icon>
+</button>
