@@ -2,6 +2,7 @@
 
 @import '../../extensions/theming.scss';
 
+@import './app/shared/component-category-list/component-category-list-theme';
 @import './app/shared/example-viewer/example-viewer-theme';
 @import './highlightjs/material-light';
 @import './highlightjs/material-dark';
@@ -13,6 +14,7 @@
   $is-dark-theme: map-get($theme, is-dark);
 
   @include material-extensions-theme($theme);
+  @include component-category-list-theme($theme);
   @include example-viewer-theme($theme);
 
   @if $is-dark-theme {

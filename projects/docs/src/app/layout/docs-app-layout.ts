@@ -57,20 +57,6 @@ export class DocsAppLayout {
     });
   }
 
-  toggleFullscreen() {
-    // Cast to `any`, because the typings don't include the browser-prefixed methods.
-    const elem = this._element.nativeElement.querySelector('.docs-content') as any;
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullScreen) {
-      elem.webkitRequestFullScreen();
-    } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen();
-    } else if (elem.msRequestFullScreen) {
-      elem.msRequestFullScreen();
-    }
-  }
-
   toggleTheme() {
     const darkThemeClass = 'docs-dark-theme';
 

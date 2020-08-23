@@ -25,6 +25,7 @@ import { HeaderLinkComponent } from './doc-heading/header-link';
 import { DocHeadingComponent } from './doc-heading/doc-heading';
 import { ExampleViewerComponent } from './example-viewer/example-viewer.component';
 import { ComponentNavComponent } from './component-nav/component-nav.component';
+import { ComponentCategoryList } from './component-category-list/component-category-list.component';
 
 import { CopierService } from './copier/copier.service';
 
@@ -81,12 +82,14 @@ import { CopierService } from './copier/copier.service';
     DocHeadingComponent,
     ExampleViewerComponent,
     ComponentNavComponent,
+    ComponentCategoryList
   ],
   declarations: [
     HeaderLinkComponent,
     DocHeadingComponent,
     ExampleViewerComponent,
     ComponentNavComponent,
+    ComponentCategoryList
   ],
   providers: [CopierService],
 })

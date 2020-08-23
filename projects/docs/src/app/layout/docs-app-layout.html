@@ -12,14 +12,6 @@
 
   <span fxFlex></span>
 
-  <button fxHide.lt-md mat-button (click)="rippleOptions.disabled = !rippleOptions.disabled"
-          matTooltip="Toggle ripples">
-    {{rippleOptions.disabled ? 'Enable' : 'Disable'}} ripples
-  </button>
-  <button fxHide.lt-md mat-icon-button (click)="toggleFullscreen()"
-          matTooltip="Toggle fullscreen">
-    <mat-icon>fullscreen</mat-icon>
-  </button>
   <button mat-icon-button (click)="toggleTheme()"
           matTooltip="Toggle the theme">
     <mat-icon>{{dark ? 'brightness_3' : 'wb_sunny'}}</mat-icon>

@@ -4,12 +4,16 @@ import { PlatformLocation } from '@angular/common';
 @Component({
   selector: 'header-link',
   template: `
-    <a aria-label="Link to this heading" class="docs-markdown-a header-link"
-      [attr.aria-describedby]="example" [href]="getFragmentUrl()">
+    <a
+      aria-label="Link to this heading"
+      class="docs-markdown-a header-link"
+      [attr.aria-describedby]="example"
+      [href]="getFragmentUrl()"
+    >
       <mat-icon>link</mat-icon>
     </a>
   `,
-  styleUrls:['./header-link.scss'],
+  styleUrls: ['./header-link.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class HeaderLinkComponent implements OnInit {
@@ -21,10 +25,14 @@ export class HeaderLinkComponent implements OnInit {
 
   private _text = '';
 
-  constructor(private platformLocation: PlatformLocation) { }
+  constructor(private platformLocation: PlatformLocation) {}
 
   ngOnInit() {
-    this._text = this.example.toLowerCase().split(' ').filter(s => s !== '&').join('-');
+    this._text = this.example
+      .toLowerCase()
+      .split(' ')
+      .filter(s => s !== '&')
+      .join('-');
   }
 
   getFragmentUrl(): string {

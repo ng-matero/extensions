@@ -1,9 +1,8 @@
 import { Routes } from '@angular/router';
-import { DocsApp404 } from './docs-app-404';
-import { DocsAppHome } from './docs-app-home';
+import { ComponentCategoryList } from './shared/component-category-list/component-category-list.component';
 
 export const DOCS_APP_ROUTES: Routes = [
-  { path: '', component: DocsAppHome },
+  { path: '', component: ComponentCategoryList },
   {
     path: 'alert',
     loadChildren: () => import('./alert/alert.module').then(m => m.AlertModule),
@@ -19,13 +18,11 @@ export const DOCS_APP_ROUTES: Routes = [
   },
   {
     path: 'color-picker',
-    loadChildren: () =>
-      import('./color-picker/color-picker.module').then(m => m.ColorPickerModule),
+    loadChildren: () => import('./color-picker/color-picker.module').then(m => m.ColorPickerModule),
   },
   {
     path: 'data-grid',
-    loadChildren: () =>
-      import('./data-grid/data-grid.module').then(m => m.DataGridModule),
+    loadChildren: () => import('./data-grid/data-grid.module').then(m => m.DataGridModule),
   },
   {
     path: 'dialog',
@@ -47,5 +44,5 @@ export const DOCS_APP_ROUTES: Routes = [
     path: 'text3d',
     loadChildren: () => import('./text3d/text3d.module').then(m => m.Text3dModule),
   },
-  { path: '**', component: DocsApp404 },
+  { path: '**', redirectTo: '' },
 ];
