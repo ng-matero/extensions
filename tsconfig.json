@@ -18,6 +18,12 @@
     },
     {
       "path": "./projects/docs/tsconfig.spec.json"
+    },
+    {
+      "path": "./projects/dev-app/tsconfig.app.json"
+    },
+    {
+      "path": "./projects/dev-app/tsconfig.spec.json"
     }
   ]
 }
