@@ -7,7 +7,6 @@ import { MatSidenav } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { DocsAppRippleOptions } from '../shared/ripple-options';
 import { DocsAppDirectionality } from '../shared/directionality';
 
 const SMALL_WIDTH_BREAKPOINT = 959;
@@ -30,7 +29,6 @@ export class DocsAppLayout {
     private _element: ElementRef<HTMLElement>,
     private _overlayContainer: OverlayContainer,
     private _router: Router,
-    public rippleOptions: DocsAppRippleOptions,
     @Inject(Directionality) public dir: DocsAppDirectionality,
     breakpoints: BreakpointObserver,
     cdr: ChangeDetectorRef
