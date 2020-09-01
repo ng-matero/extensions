@@ -1,0 +1,27 @@
+.docs-container {
+  width: 100%;
+  height: calc(100% - 56px);
+}
+
+.docs-header {
+  position: relative;
+  z-index: 999;
+
+  &.mat-toolbar {
+    height: 56px;
+  }
+
+  .docs-angular-logo {
+    height: 26px;
+    margin: 0 4px 3px 0;
+  }
+}
+
+// stretch to screen size in fullscreen mode
+.docs-content {
+  width: 100%;
+  height: 100%;
+  padding: 32px;
+  box-sizing: border-box;
+  overflow: auto;
+}

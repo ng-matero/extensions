@@ -1,0 +1,13 @@
+.docs-header {
+  position: relative;
+  z-index: 999;
+
+  &.mat-toolbar {
+    height: 56px;
+  }
+
+  .docs-angular-logo {
+    height: 26px;
+    margin: 0 4px 3px 0;
+  }
+}

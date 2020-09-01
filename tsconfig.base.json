@@ -1,9 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "projects",
     "rootDir": ".",
-    "outDir": "./dist/extensions",
+    "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -15,9 +15,8 @@
     "typeRoots": ["node_modules/@types"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@ng-matero/extensions": ["projects/extensions"],
-      "@ng-matero/extensions/*": ["projects/extensions/*"],
-      "@assets/*": ["projects/docs/src/assets/*"]
+      "@ng-matero/extensions": ["extensions"],
+      "@ng-matero/extensions/*": ["extensions/*"]
     }
   },
   "angularCompilerOptions": {

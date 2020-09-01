@@ -1,16 +1,10 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { EventEmitter, Injectable, OnDestroy } from '@angular/core';
 
-@Injectable()
-export class DocsAppDirectionality implements Directionality, OnDestroy {
+@Injectable({
+  providedIn: 'root',
+})
+export class AppDirectionality implements Directionality, OnDestroy {
   readonly change = new EventEmitter<Direction>();
 
   get value(): Direction {

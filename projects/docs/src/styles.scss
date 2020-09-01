@@ -1,5 +1,6 @@
 @import '~@angular/material/theming';
-@import './app-theme';
+@import './styles/app-theme';
+@import './styles/reboot';
 
 @include mat-core();
 
