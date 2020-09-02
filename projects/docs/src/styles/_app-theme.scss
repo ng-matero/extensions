@@ -1,8 +1,11 @@
 @import '~@angular/material/theming';
 @import '../../extensions/theming.scss';
 
-@import './app/pages/component-category-list/component-category-list-theme';
-@import './app/shared/example-viewer/example-viewer-theme';
+@import '../app/pages/component-category-list/component-category-list-theme';
+@import '../app/pages/component-page-header/component-page-header-theme';
+@import '../app/pages/component-sidenav/component-sidenav-theme';
+@import '../app/pages/homepage/homepage-theme';
+@import '../app/shared/example-viewer/example-viewer-theme';
 
 @import './highlightjs/material-light';
 @import './highlightjs/material-dark';
@@ -15,6 +18,9 @@
 
   @include material-extensions-theme($theme);
   @include component-category-list-theme($theme);
+  @include component-page-header-theme($theme);
+  @include component-viewer-sidenav-theme($theme);
+  @include home-page-theme($theme);
   @include example-viewer-theme($theme);
 
   @if $is-dark-theme {

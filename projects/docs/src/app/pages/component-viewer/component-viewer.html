@@ -1,0 +1,14 @@
+<div class="docs-component-viewer">
+  <nav mat-tab-nav-bar class="docs-component-viewer-tabbed-content"
+       aria-label="Documentation Sections"
+       id="component-viewer">
+    <a mat-tab-link class="docs-component-viewer-section-tab"
+       *ngFor="let section of sections"
+       [routerLink]="componentId + '/' + section.toLowerCase()"
+       routerLinkActive #rla="routerLinkActive"
+       [active]="rla.isActive">{{section}}</a>
+  </nav>
+  <div class="docs-component-viewer-content">
+    <router-outlet></router-outlet>
+  </div>
+</div>

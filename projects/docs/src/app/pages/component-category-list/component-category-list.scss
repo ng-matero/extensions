@@ -1,0 +1,45 @@
+
+.docs-component-category-section-title {
+  margin-bottom: 0;
+  font-size: 24px;
+  font-weight: 500;
+  text-align: center;
+}
+
+.docs-component-category-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  justify-content: center;
+}
+
+.docs-component-category-list-item {
+  display: inline-flex;
+  margin: 20px;
+  vertical-align: top;
+  width: 280px;
+
+  &,
+  &:active,
+  &:hover,
+  &:focus {
+    text-decoration: none;
+  }
+}
+
+.docs-component-category-list-card {
+  width: 100%;
+}
+
+.docs-component-category-list-card-title {
+  align-items: center;
+  display: flex;
+  padding: 15px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.docs-component-category-list-card-summary {
+  padding: 0 15px 15px 15px;
+  font-size: 15px;
+}

@@ -1,0 +1,22 @@
+@import '~@angular/material/theming';
+
+@mixin component-viewer-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  guide-viewer,
+  app-component-viewer {
+    color: mat-color($foreground, text);
+
+    .mat-tab-label:focus {
+      color: mat-color($foreground, text);
+    }
+  }
+
+  .docs-api-h3 {
+    border-bottom: 1px solid mat-color($foreground, divider);
+  }
+}

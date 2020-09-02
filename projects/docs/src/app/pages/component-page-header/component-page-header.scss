@@ -1,0 +1,29 @@
+.component-page-header {
+  display: flex;
+  align-items: center;
+  padding-left: 24px;
+}
+
+h1 {
+  font-weight: 300;
+  margin: 0;
+  padding: 28px 8px;
+  font-size: 20px;
+  color: white;
+  outline: none;
+}
+
+.sidenav-toggle {
+  display: flex;
+  padding: 0;
+  margin: 8px;
+  min-width: 64px;
+
+  mat-icon {
+    font-size: 30px;
+    height: 64px;
+    width: 64px;
+    line-height: 64px;
+    color: white;
+  }
+}

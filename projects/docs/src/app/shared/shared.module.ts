@@ -17,7 +17,7 @@ import { DocHeadingComponent } from './doc-heading/doc-heading';
 import { ExampleViewerComponent } from './example-viewer/example-viewer.component';
 
 import { CopierService } from './copier/copier.service';
-import { HeaderComponent } from './header/header.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   imports: [
@@ -49,13 +49,13 @@ import { HeaderComponent } from './header/header.component';
     HeaderLinkComponent,
     DocHeadingComponent,
     ExampleViewerComponent,
-    HeaderComponent,
+    NavbarComponent,
   ],
   declarations: [
     HeaderLinkComponent,
     DocHeadingComponent,
     ExampleViewerComponent,
-    HeaderComponent,
+    NavbarComponent,
   ],
   providers: [CopierService],
 })

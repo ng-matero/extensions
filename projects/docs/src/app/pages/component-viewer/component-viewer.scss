@@ -1,0 +1,35 @@
+app-component-viewer {
+  font-weight: 400;
+
+  // spacing for the component viewer
+  padding: 20px 50px;
+}
+
+.docs-component-viewer-section-tab {
+  text-transform: uppercase;
+}
+
+.docs-component-viewer-tabbed-content {
+  margin-bottom: 25px;
+}
+
+.docs-component-viewer-content {
+  position: relative;
+  min-height: 500px;
+
+  table-of-contents {
+    top: 35px;
+    position: sticky;
+  }
+}
+
+.docs-component-view-text-content {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.docs-component-api,
+.docs-component-overview {
+  width: 80%;
+  display: inline-flex;
+}

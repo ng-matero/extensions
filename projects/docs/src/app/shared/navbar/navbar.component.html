@@ -1,0 +1,22 @@
+<ng-progress color="white"></ng-progress>
+
+<mat-toolbar class="docs-header mat-elevation-z6" color="primary">
+  <a mat-button class="docs-button" routerLink="/" aria-label="Angular Material">
+    <img class="docs-angular-logo" src="assets/img/angular-white-transparent.svg" alt="angular">
+    <span fxHide.lt-md>Material Extensions</span>
+  </a>
+
+  <a mat-button routerLink="components" fxHide.lt-sm>Components</a>
+  <a mat-button routerLink="guides" fxHide.lt-sm>Guides</a>
+
+  <span fxFlex></span>
+
+  <button mat-icon-button (click)="toggleTheme()"
+          matTooltip="Toggle the theme">
+    <mat-icon>{{dark ? 'brightness_3' : 'wb_sunny'}}</mat-icon>
+  </button>
+
+  <a mat-icon-button href="https://github.com/ng-matero/extensions" target="_blank">
+    <img alt="angular" src="assets/img/github-circle-white-transparent.svg">
+  </a>
+</mat-toolbar>

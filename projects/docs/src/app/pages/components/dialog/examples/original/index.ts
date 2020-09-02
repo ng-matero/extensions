@@ -1,5 +1,5 @@
 import { AppComponent as DialogOriginalComponent } from './app.component';
-import { DialogOverviewComponent } from './app.component';
+import { DialogOverviewExampleComponent } from './app.component';
 
 const dialogOriginalExampleConfig = {
   title: 'Material original dialog',
@@ -28,4 +28,4 @@ const dialogOriginalExampleConfig = {
   ],
 };
 
-export { DialogOriginalComponent, dialogOriginalExampleConfig, DialogOverviewComponent };
+export { DialogOriginalComponent, dialogOriginalExampleConfig, DialogOverviewExampleComponent };

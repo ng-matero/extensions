@@ -1,0 +1,39 @@
+@import '~@angular/material/theming';
+
+@mixin component-viewer-sidenav-theme($theme) {
+  $primary: map-get($theme, primary);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+  $nav-background-opacity: if($is-dark-theme, .2, .03);
+  $nav-background-focus-opacity: if($is-dark-theme, .25, .08);
+
+  .docs-component-viewer-nav-content {
+    border-right: 1px solid mat-color($foreground, divider);
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, .26);
+    }
+
+    a {
+      color: map-get($foreground, secondary-text);
+
+      &:hover {
+        color: mat-color($foreground, text);
+      }
+
+      &.docs-component-viewer-sidenav-item-selected {
+        background: rgba(mat-color($primary, default), .15);
+        color: lighten(mat-color($primary, default), if($is-dark-theme, 25%, 0));
+      }
+
+      &.docs-component-viewer-sidenav-item-selected:hover {
+        background: rgba(mat-color($primary, default), .3);
+      }
+    }
+
+    .mat-list-item {
+      color: rgba(mat-color($foreground, secondary-text), .65);
+    }
+  }
+}

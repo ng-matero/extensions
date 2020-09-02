@@ -3,12 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
+import { Directionality } from '@angular/cdk/bidi';
 
-import { SharedModule } from '@shared';
+import { SharedModule, AppDirectionality } from '@shared';
 
 import { AppComponent } from './app.component';
 import { DOCS_APP_ROUTES } from './routes';
-import { ComponentsSidenavModule } from './pages/component-sidenav/component-sidenav.module';
 
 @NgModule({
   imports: [
@@ -21,10 +21,9 @@ import { ComponentsSidenavModule } from './pages/component-sidenav/component-sid
       relativeLinkResolution: 'corrected',
     }),
     SharedModule,
-    ComponentsSidenavModule
   ],
   declarations: [AppComponent],
-  providers: [],
+  providers: [{ provide: Directionality, useClass: AppDirectionality }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

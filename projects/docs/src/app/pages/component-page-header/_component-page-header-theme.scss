@@ -1,0 +1,12 @@
+@mixin component-page-header-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  .component-page-header {
+    background-color: mat-color($primary, default);
+  }
+}

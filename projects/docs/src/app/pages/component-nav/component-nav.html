@@ -1,0 +1,21 @@
+<div class="docs-component-viewer-nav">
+  <div class="docs-component-viewer-nav-content">
+    <mat-nav-list>
+      <ng-container *ngFor="let navItems of menus">
+
+        <div class="nav-item-title">{{navItems.title}}</div>
+
+        <a *ngFor="let navItem of navItems.children"
+           mat-list-item
+           (click)="navChange.emit()"
+           routerLinkActive="docs-component-viewer-sidenav-item-selected"
+           #routerLinkActiveInstance="routerLinkActive"
+           [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+           [routerLink]="['/components/' + navItem.route]">
+          {{navItem.name}}
+        </a>
+      </ng-container>
+
+    </mat-nav-list>
+  </div>
+</div>

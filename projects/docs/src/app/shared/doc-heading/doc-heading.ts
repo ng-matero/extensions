@@ -4,8 +4,8 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
   selector: 'doc-heading',
   template: `
     <h3 [id]="id">
-      <span>{{text}}</span>
       <header-link [example]="text"></header-link>
+      <span> {{text}}</span>
     </h3>
   `,
   encapsulation: ViewEncapsulation.None,

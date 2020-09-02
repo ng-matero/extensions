@@ -7,15 +7,19 @@ h6 {
   .header-link {
     display: inline-flex;
     padding: 2px 0;
-    margin: 0 4px;
+    margin-left: -30px;
     color: #6e6e6e;
     text-decoration: none;
     user-select: none;
     visibility: hidden;
-    vertical-align: text-top;
+    vertical-align: middle;
   }
 
   &:hover .header-link {
     visibility: visible;
+  }
+
+  span {
+    vertical-align: middle;
   }
 }
