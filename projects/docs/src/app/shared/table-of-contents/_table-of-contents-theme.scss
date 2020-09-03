@@ -1,0 +1,22 @@
+@mixin table-of-contents-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  .docs-toc-container {
+    border-left: solid 4px mat-color($primary);
+
+    .docs-link {
+      color: mat-color($foreground, secondary-text);
+      transition: color 100ms;
+
+      &:hover,
+      &.docs-active {
+        color: mat-color($primary, if($is-dark-theme, 200, default));
+      }
+    }
+  }
+}

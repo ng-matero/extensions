@@ -4,6 +4,7 @@ app-component-sidenav {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .docs-component-viewer-sidenav-container {

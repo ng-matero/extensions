@@ -3,11 +3,19 @@
 <mat-toolbar class="docs-navbar-header" color="primary">
   <a mat-button class="docs-button" routerLink="/" aria-label="Angular Material">
     <img class="docs-angular-logo" src="assets/img/angular-white-transparent.svg" alt="angular">
-    <span fxHide.lt-md>Material Extensions</span>
+    <span>Material Extensions</span>
   </a>
 
   <a mat-button class="docs-navbar-link" routerLink="components" fxHide.lt-sm>Components</a>
   <a mat-button class="docs-navbar-link" routerLink="guides" fxHide.lt-sm>Guides</a>
+
+  <button mat-icon-button [matMenuTriggerFor]="menu" fxHide.gt-xs>
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item routerLink="components">Components</button>
+    <button mat-menu-item routerLink="guides">Guides</button>
+  </mat-menu>
 
   <span fxFlex></span>
 
@@ -19,9 +27,4 @@
   <a mat-icon-button href="https://github.com/ng-matero/extensions" target="_blank">
     <img alt="angular" src="assets/img/github-circle-white-transparent.svg">
   </a>
-</mat-toolbar>
-
-<mat-toolbar class="docs-navbar" aria-label="Section Nav Bar" color="primary" fxHide.gt-sm>
-  <a mat-button class="docs-navbar-link" routerLink="components">Components</a>
-  <a mat-button class="docs-navbar-link" routerLink="guides">Guides</a>
 </mat-toolbar>

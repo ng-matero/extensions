@@ -6,6 +6,7 @@
 @import '../app/pages/component-sidenav/component-sidenav-theme';
 @import '../app/pages/homepage/homepage-theme';
 @import '../app/shared/example-viewer/example-viewer-theme';
+@import '../app/shared/table-of-contents/table-of-contents-theme';
 
 @import './highlightjs/material-light';
 @import './highlightjs/material-dark';
@@ -22,6 +23,7 @@
   @include component-viewer-sidenav-theme($theme);
   @include home-page-theme($theme);
   @include example-viewer-theme($theme);
+  @include table-of-contents-theme($theme);
 
   @if $is-dark-theme {
     @include highlightjs-material-dark();

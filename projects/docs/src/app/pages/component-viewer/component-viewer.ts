@@ -1,7 +1,6 @@
 import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Params, Router, NavigationEnd } from '@angular/router';
-import { combineLatest, ReplaySubject, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
+import { Subject } from 'rxjs';
 import { ComponentPageTitle } from '../page-title/page-title';
 
 @Component({
