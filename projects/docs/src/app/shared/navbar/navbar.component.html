@@ -1,13 +1,13 @@
 <ng-progress color="white"></ng-progress>
 
-<mat-toolbar class="docs-header mat-elevation-z6" color="primary">
+<mat-toolbar class="docs-navbar-header" color="primary">
   <a mat-button class="docs-button" routerLink="/" aria-label="Angular Material">
     <img class="docs-angular-logo" src="assets/img/angular-white-transparent.svg" alt="angular">
     <span fxHide.lt-md>Material Extensions</span>
   </a>
 
-  <a mat-button routerLink="components" fxHide.lt-sm>Components</a>
-  <a mat-button routerLink="guides" fxHide.lt-sm>Guides</a>
+  <a mat-button class="docs-navbar-link" routerLink="components" fxHide.lt-sm>Components</a>
+  <a mat-button class="docs-navbar-link" routerLink="guides" fxHide.lt-sm>Guides</a>
 
   <span fxFlex></span>
 
@@ -19,4 +19,9 @@
   <a mat-icon-button href="https://github.com/ng-matero/extensions" target="_blank">
     <img alt="angular" src="assets/img/github-circle-white-transparent.svg">
   </a>
+</mat-toolbar>
+
+<mat-toolbar class="docs-navbar" aria-label="Section Nav Bar" color="primary" fxHide.gt-sm>
+  <a mat-button class="docs-navbar-link" routerLink="components">Components</a>
+  <a mat-button class="docs-navbar-link" routerLink="guides">Guides</a>
 </mat-toolbar>

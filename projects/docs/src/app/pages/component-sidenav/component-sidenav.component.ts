@@ -17,7 +17,7 @@ const SMALL_WIDTH_BREAKPOINT = 959;
 })
 export class ComponentSidenav {
   dark = false;
-
+  isExtraScreenSmall: Observable<boolean>;
   isScreenSmall: Observable<boolean>;
 
   constructor(
@@ -26,6 +26,10 @@ export class ComponentSidenav {
     private _router: Router,
     breakpoints: BreakpointObserver
   ) {
+    this.isExtraScreenSmall = breakpoints
+      .observe(`(max-width: ${EXTRA_SMALL_WIDTH_BREAKPOINT}px)`)
+      .pipe(map(breakpoint => breakpoint.matches));
+
     this.isScreenSmall = breakpoints
       .observe(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`)
       .pipe(map(breakpoint => breakpoint.matches));

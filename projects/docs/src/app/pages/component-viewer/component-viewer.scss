@@ -1,8 +1,15 @@
+@import '../../../styles/constants';
+
 app-component-viewer {
   font-weight: 400;
 
   // spacing for the component viewer
   padding: 20px 50px;
+
+  @media ($mat-xsmall) {
+    padding-left: $content-padding-side-xs;
+    padding-right: $content-padding-side-xs;
+  }
 }
 
 .docs-component-viewer-section-tab {
@@ -17,9 +24,30 @@ app-component-viewer {
   position: relative;
   min-height: 500px;
 
+  // Display outlet components with toc as flex and switch to
+  // vertical direction on small screens
+  component-overview,
+  component-api {
+    display: flex;
+    align-items: flex-start;
+
+    @media (max-width: $small-breakpoint-width) {
+      flex-direction: column;
+    }
+  }
+
   table-of-contents {
     top: 35px;
     position: sticky;
+
+    // Reposition on top of content on small screens and remove
+    // sticky positioning
+    @media (max-width: $small-breakpoint-width) {
+      order: -1;
+      position: inherit;
+      width: auto;
+      padding-left: 0;
+    }
   }
 }
 
@@ -32,4 +60,9 @@ app-component-viewer {
 .docs-component-overview {
   width: 80%;
   display: inline-flex;
+
+  @media (max-width: $small-breakpoint-width) {
+    width: 100%;
+    margin-right: 0;
+  }
 }

@@ -1,4 +1,12 @@
-.docs-header {
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.docs-navbar-header {
   position: relative;
   z-index: 999;
 
@@ -9,5 +17,11 @@
   .docs-angular-logo {
     height: 26px;
     margin: 0 4px 3px 0;
+  }
+}
+
+.docs-navbar {
+  &.mat-toolbar {
+    height: 36px;
   }
 }

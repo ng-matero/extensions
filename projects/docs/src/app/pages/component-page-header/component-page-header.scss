@@ -1,20 +1,30 @@
+@import '../../../styles/constants';
+
 .component-page-header {
   display: flex;
   align-items: center;
   padding-left: 24px;
-}
 
-h1 {
-  font-weight: 300;
-  margin: 0;
-  padding: 28px 8px;
-  font-size: 20px;
-  color: white;
-  outline: none;
+  @media (max-width: $small-breakpoint-width) {
+    padding-left: 0;
+  }
+
+  h1 {
+    font-weight: 300;
+    padding: 28px 8px;
+    margin: 0;
+    font-size: 20px;
+    color: white;
+    outline: none;
+
+    @media (max-width: $small-breakpoint-width) {
+      padding: 24px 8px;
+      font-size: 20px;
+    }
+  }
 }
 
 .sidenav-toggle {
-  display: flex;
   padding: 0;
   margin: 8px;
   min-width: 64px;

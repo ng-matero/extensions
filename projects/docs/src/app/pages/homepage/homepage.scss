@@ -1,3 +1,5 @@
+@import '../../../styles/constants';
+
 // The margin between two sections
 $margin-promotion-sections: 60px;
 $margin-promotion-sections-small: 15px;
@@ -88,7 +90,7 @@ $margin-promotion-sections-small: 15px;
 /**
   * Rules for when the device is detected to be a small screen.
   */
-@media (max-width: 720px) {
+@media (max-width: $small-breakpoint-width) {
   .docs-header-section {
     padding-top: $margin-promotion-sections-small;
   }

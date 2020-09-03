@@ -14,9 +14,9 @@ export class ComponentPageTitle {
   }
 
   set title(title: string) {
-    this._title = title;
+    this._title = title && this.capitalizeTitle(title);
     if (title !== '') {
-      title = `${title} | Angular Material`;
+      title = `${this._title} | Angular Material Extensions`;
     } else {
       title = this._originalTitle;
     }
@@ -24,4 +24,11 @@ export class ComponentPageTitle {
   }
 
   constructor(private bodyTitle: Title) {}
+
+  capitalizeTitle(title: string): string {
+    return title
+      .split('-')
+      .join(' ')
+      .replace(/\b\w+\b/g, word => word.substring(0, 1).toUpperCase() + word.substring(1));
+  }
 }

@@ -1,8 +1,9 @@
+@import '../../../styles/constants';
+
 app-component-sidenav {
   display: flex;
   flex-direction: column;
   overflow: auto;
-  height: calc(100% - 56px);
 }
 
 .docs-component-viewer-sidenav-container {
@@ -35,6 +36,7 @@ app-component-sidenav {
   // The rule will match the element following the router-outlet which will be the routed component.
   router-outlet + * {
     flex-grow: 1;
+    overflow: auto;
   }
 }
 
@@ -51,7 +53,26 @@ app-component-sidenav {
   padding-left: 25px;
 }
 
-@media (max-width: 720px) {
+@media (max-width: $small-breakpoint-width) {
+  // Add specific rule to prevent default rule conflict
+  .docs-component-viewer-sidenav-container .docs-component-viewer-sidenav {
+    // position right above the content
+    z-index: 4;
+  }
+
+  .docs-component-viewer-nav {
+    position: relative;
+    top: 0;
+
+    .docs-component-viewer-nav-content {
+      box-sizing: border-box;
+      margin: 0;
+      max-height: initial;
+    }
+  }
+}
+
+@media (max-width: $extra-small-breakpoint-width) {
   .docs-component-viewer-sidenav-container {
     flex: 1 0 auto;
   }

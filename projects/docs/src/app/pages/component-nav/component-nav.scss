@@ -3,31 +3,31 @@ $sidenav-width: 240px;
 .docs-component-viewer-nav {
   position: sticky;
   top: 0;
+}
 
-  .docs-component-viewer-nav-content {
-    width: $sidenav-width;
-    height: 100vh;
-    border-right: 1px solid rgba(0, 0, 0, .12);
-    overflow: auto;
+.docs-component-viewer-nav-content {
+  width: $sidenav-width;
+  height: calc(100vh - 56px);
+  border-right: 1px solid rgba(0, 0, 0, .12);
+  overflow: auto;
 
-    ul {
-      list-style-type: none;
-      margin: 0 0 5px 0;
-      padding: 0;
-      overflow: hidden;
-    }
+  ul {
+    list-style-type: none;
+    margin: 0 0 5px 0;
+    padding: 0;
+    overflow: hidden;
+  }
 
-    li {
-      font-size: 13px;
-      line-height: 16px;
-      margin: 0;
-      padding: 5px 15px 5px 20px;
-    }
+  li {
+    font-size: 13px;
+    line-height: 16px;
+    margin: 0;
+    padding: 5px 15px 5px 20px;
+  }
 
-    a {
-      display: block;
-      text-decoration: none;
-    }
+  a {
+    display: block;
+    text-decoration: none;
   }
 }
 

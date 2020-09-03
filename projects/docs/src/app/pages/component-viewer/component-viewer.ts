@@ -29,12 +29,7 @@ export class ComponentViewer implements OnDestroy {
     this.router.events.subscribe(s => {
       if (s instanceof NavigationEnd) {
         this.componentId = s.url.split('/')[2];
-        this._componentPageTitle.title =
-          this.componentId &&
-          this.componentId
-            .split('-')
-            .join(' ')
-            .replace(/\b\w+\b/g, word => word.substring(0, 1).toUpperCase() + word.substring(1));
+        this._componentPageTitle.title = this.componentId && this.componentId;
       }
     });
   }
