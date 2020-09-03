@@ -65,7 +65,6 @@ export class ComponentSidenav {
   }
 
   toggleSidenav(sidenav: MatSidenav): Promise<MatDrawerToggleResult> {
-    console.log(sidenav);
     return sidenav.toggle();
   }
 }
