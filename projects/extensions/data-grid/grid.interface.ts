@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
  */
 export interface MtxGridColumn {
   field: string;
-  header?: string | Observable<any>;
+  header?: string | Observable<string>;
   hide?: boolean;
   disabled?: boolean;
   pinned?: 'left' | 'right';
@@ -83,20 +83,20 @@ export interface MtxGridColumnTagValue {
  */
 export interface MtxGridColumnButton {
   type?: 'basic' | 'icon';
-  text?: string | Observable<any>;
+  text?: string | Observable<string>;
   icon?: string;
   color?: 'primary' | 'accent' | 'warn';
   click?: (record: any) => void;
   pop?: boolean;
-  popTitle?: string | Observable<any>;
-  popDescription?: string | Observable<any>;
+  popTitle?: string | Observable<string>;
+  popDescription?: string | Observable<string>;
   popOkType?: '' | 'primary' | 'accent' | 'warn';
-  popOkText?: string | Observable<any>;
+  popOkText?: string | Observable<string>;
   popCloseType?: '' | 'primary' | 'accent' | 'warn';
-  popCloseText?: string | Observable<any>;
+  popCloseText?: string | Observable<string>;
   children?: MtxGridColumnButton[];
   iif?: (record: any) => boolean;
-  tooltip?: string | Observable<any>;
+  tooltip?: string | Observable<string>;
   disabled?: boolean;
 }
 
@@ -104,7 +104,7 @@ export interface MtxGridColumnButton {
  * Column selection
  */
 export interface MtxGridColumnSelectionItem {
-  label: string | Observable<any>;
+  label: string | Observable<string>;
   field: string;
   show?: boolean;
   hide?: boolean;

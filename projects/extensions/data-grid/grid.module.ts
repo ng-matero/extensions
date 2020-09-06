@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
+import { MtxUtilsModule } from '@ng-matero/extensions/utils';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxGridComponent } from './grid.component';
 import { MtxGridCellComponent } from './cell.component';
@@ -22,7 +23,6 @@ import { MtxGridColumnMenuComponent } from './column-menu.component';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridService } from './grid.service';
-import { MtxGridToObservablePipe } from './to-observable.pipe';
 
 @NgModule({
   imports: [
@@ -37,11 +37,12 @@ import { MtxGridToObservablePipe } from './to-observable.pipe';
     MatChipsModule,
     MatTooltipModule,
     MatIconModule,
-    MtxDialogModule,
     MatSelectModule,
     MatFormFieldModule,
     MatMenuModule,
     DragDropModule,
+    MtxDialogModule,
+    MtxUtilsModule,
   ],
   exports: [
     MtxGridComponent,
@@ -49,7 +50,6 @@ import { MtxGridToObservablePipe } from './to-observable.pipe';
     MtxGridColumnMenuComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
-    MtxGridToObservablePipe,
   ],
   declarations: [
     MtxGridComponent,
@@ -57,7 +57,6 @@ import { MtxGridToObservablePipe } from './to-observable.pipe';
     MtxGridColumnMenuComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
-    MtxGridToObservablePipe,
   ],
   providers: [MtxGridService],
 })

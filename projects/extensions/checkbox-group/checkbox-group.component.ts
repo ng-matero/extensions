@@ -48,6 +48,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
     return this._items;
   }
   set items(value) {
+    // TODO: Deep clone
     this._originalItems = JSON.parse(JSON.stringify(value));
     this._items = value.map(option => {
       return option instanceof Object ? option : new MtxCheckboxBase(option, option);

@@ -1,12 +1,12 @@
-<h1 class="mtx-dialog-title" *ngIf="data.title">{{data.title}}</h1>
+<h1 class="mtx-dialog-title" *ngIf="data.title">{{data.title | toObservable | async}}</h1>
 <div class="mtx-dialog-content" *ngIf="data.description">
-  <p>{{data.description}}</p>
+  <p>{{data.description | toObservable | async}}</p>
 </div>
 <div class="mtx-dialog-actions">
   <button *ngFor="let btn of data.buttons"
           mat-button
           [color]="btn.type"
           (click)="_onClick(btn.onClick)">
-    {{btn.text}}
+    {{btn.text | toObservable | async}}
   </button>
 </div>

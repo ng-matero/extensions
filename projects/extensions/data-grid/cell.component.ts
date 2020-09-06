@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
-import { Subject, Observable, isObservable } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { MtxGridColumn, MtxGridColumnButton } from './grid.interface';
 import { MtxGridService } from './grid.service';
@@ -12,7 +11,7 @@ import PhotoViewer from 'photoviewer';
   exportAs: 'mtxGridCell',
   templateUrl: './cell.component.html',
 })
-export class MtxGridCellComponent implements OnInit, OnDestroy {
+export class MtxGridCellComponent implements OnInit {
   /** Row data */
   @Input() rowData = {};
 
@@ -23,50 +22,32 @@ export class MtxGridCellComponent implements OnInit, OnDestroy {
 
   _viewer: PhotoViewer;
 
-  private readonly _destroy$ = new Subject<void>();
-
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
-
-  ngOnDestroy() {
-    this._destroy$.next();
-    this._destroy$.complete();
-  }
 
   ngOnInit() {
     this._colValue = this._dataGridSrv.getCellValue(this.rowData, this.colDef);
   }
 
-  getTranslateVal(data: Observable<any>): string {
-    let translateValue = '';
-    data.pipe(takeUntil(this._destroy$)).subscribe(res => (translateValue = res));
-    return translateValue;
-  }
-
   _handleActionConfirm(
     event: MouseEvent,
-    title: string | Observable<any>,
-    description: string | Observable<any> = '',
+    title: string | Observable<string>,
+    description: string | Observable<string> = '',
     closeType: '' | 'primary' | 'accent' | 'warn' = '',
-    closeText: string | Observable<any> = 'CLOSE',
+    closeText: string | Observable<string> = 'CLOSE',
     okType: '' | 'primary' | 'accent' | 'warn' = 'primary',
-    okText: string | Observable<any> = 'OK',
+    okText: string | Observable<string> = 'OK',
     fn?: (p: any) => void,
     data?: any
   ) {
     event.preventDefault();
     event.stopPropagation();
 
-    const _title = isObservable(title) ? this.getTranslateVal(title) : title;
-    const _desc = isObservable(description) ? this.getTranslateVal(description) : description;
-    const _closeText = isObservable(closeText) ? this.getTranslateVal(closeText) : closeText;
-    const _okText = isObservable(okText) ? this.getTranslateVal(okText) : okText;
-
     this._dialog.open({
-      title: _title,
-      description: _desc,
+      title,
+      description,
       buttons: [
-        { type: closeType, text: _closeText, onClick: () => {} },
-        { type: okType, text: _okText, onClick: () => fn(data) },
+        { type: closeType, text: closeText, onClick: () => {} },
+        { type: okType, text: okText, onClick: () => fn(data) },
       ],
     });
   }
@@ -88,7 +69,7 @@ export class MtxGridCellComponent implements OnInit, OnDestroy {
         imgs.push({ title: index + 1, src: url });
       });
     } else {
-      this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
+      this._dataGridSrv.str2arr(urlStr).forEach(url => {
         imgs.push({ src: url });
       });
 

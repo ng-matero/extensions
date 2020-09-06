@@ -19,5 +19,5 @@
               [labelPosition]="option.labelPosition"
               [required]="option.required"
               (change)="_updateNormalCheckboxState($event, i)">
-  {{option[bindLabel]}}
+  {{option[bindLabel] | toObservable | async}}
 </mat-checkbox>

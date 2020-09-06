@@ -1,0 +1,8 @@
+{
+  "ngPackage": {
+    "lib": {
+      "flatModuleFile": "mtxUtils",
+      "entryFile": "public-api.ts"
+    }
+  }
+}
