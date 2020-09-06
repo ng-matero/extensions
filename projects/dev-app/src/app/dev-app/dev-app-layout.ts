@@ -11,6 +11,7 @@ import { ChangeDetectorRef, Component, ElementRef, Inject, ViewEncapsulation } f
 import { DevAppRippleOptions } from './ripple-options';
 import { DevAppDirectionality } from './dev-app-directionality';
 import { DOCUMENT } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 const isDarkThemeKey = 'ANGULAR_COMPONENTS_DEV_APP_DARK_THEME';
 
@@ -44,12 +45,19 @@ export class DevAppLayout {
   /** List of possible global density scale values. */
   densityScales = [0, -1, -2, 'minimum', 'maximum'];
 
+  langs = [
+    { label: 'English', value: 'en-US' },
+    { label: '中文简体', value: 'zh-CN' },
+  ];
+  defaultlang = 'en-US';
+
   constructor(
     private _element: ElementRef<HTMLElement>,
     public rippleOptions: DevAppRippleOptions,
     @Inject(Directionality) public dir: DevAppDirectionality,
     cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private _document: Document
+    @Inject(DOCUMENT) private _document: Document,
+    public translate: TranslateService
   ) {
     dir.change.subscribe(() => cdr.markForCheck());
     this.updateDensityClasses();
@@ -64,6 +72,9 @@ export class DevAppLayout {
     } catch (error) {
       console.error(`Failed to read ${isDarkThemeKey} from localStorage: `, error);
     }
+
+    translate.addLangs(this.langs.map(item => item.value));
+    translate.setDefaultLang(this.defaultlang);
   }
 
   get isDark(): boolean {
@@ -142,5 +153,9 @@ export class DevAppLayout {
         this._document.body.classList.remove(className);
       }
     }
+  }
+
+  useLanguage(language: string) {
+    this.translate.use(language);
   }
 }

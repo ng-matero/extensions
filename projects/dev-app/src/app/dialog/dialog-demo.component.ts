@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 
 import { MtxDialog } from '@ng-matero/extensions';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'dev-dialog-demo',
@@ -11,7 +12,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class DialogDemoComponent implements OnInit {
   animal: string;
 
-  constructor(private mtxDialog: MtxDialog) {}
+  constructor(private mtxDialog: MtxDialog, public translate: TranslateService) {}
 
   ngOnInit() {}
 
@@ -40,21 +41,21 @@ export class DialogDemoComponent implements OnInit {
       buttons: [
         {
           type: '',
-          text: 'CLOSE',
+          text: this.translate.stream('close'),
           onClick: () => {
             this.mtxDialog.alert(`You click Close button.`);
           },
         },
         {
           type: 'primary',
-          text: 'VIEW',
+          text: this.translate.stream('view'),
           onClick: () => {
             this.mtxDialog.alert(`You click View button.`);
           },
         },
         {
           type: 'warn',
-          text: 'OK',
+          text: this.translate.stream('ok'),
           onClick: () => {
             this.mtxDialog.alert(`You click Ok button.`);
           },

@@ -1,0 +1,16 @@
+{
+  "name": "姓名",
+  "weight": "体重",
+  "gender": "性别",
+  "mobile": "手机",
+  "city": "城市",
+  "operation": "操作",
+  "delete": "删除",
+  "confirm_delete": "确认删除？",
+  "close": "关闭",
+  "ok": "确定",
+  "steak": "牛排",
+  "pizza": "披萨",
+  "tacos": "玉米卷",
+  "view": "查看"
+}

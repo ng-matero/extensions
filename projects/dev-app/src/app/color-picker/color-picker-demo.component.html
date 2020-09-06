@@ -1,13 +1,27 @@
-<p>
-    <code>mtx-color-picker</code> has used Chrome picker style of <code>ngx-color</code>, it can't change the picker
-    style now.
-</p>
-
-<mat-form-field>
+<div>
+  <mat-form-field>
     <mat-label>Color picker</mat-label>
-    <mtx-color-picker [(ngModel)]="color" (colorChange)="changeColor($event)" required>
+    <mtx-color-picker [(ngModel)]="color" (colorChange)="onColorChange($event)" required
+                      [disabled]="disabled">
     </mtx-color-picker>
     <mat-icon matSuffix>palette</mat-icon>
     <mat-hint>Choose your favorite color</mat-hint>
     <mat-error>Please enter the color</mat-error>
-</mat-form-field>
+  </mat-form-field>
+
+  <mat-slide-toggle [(ngModel)]="disabled">Disabled</mat-slide-toggle>
+</div>
+
+<div>
+  <mat-form-field>
+    <mat-label>Color picker</mat-label>
+    <mtx-color-picker [formControl]="color2" (colorChange)="onColorChange($event)" required>
+    </mtx-color-picker>
+    <mat-icon matSuffix>palette</mat-icon>
+    <mat-hint>Choose your favorite color</mat-hint>
+    <mat-error>Please enter the color</mat-error>
+  </mat-form-field>
+
+  <mat-slide-toggle (change)="toggleDisabled($event)" [checked]="color2.disabled">Disabled
+  </mat-slide-toggle>
+</div>

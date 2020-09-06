@@ -23,6 +23,16 @@
       <div class="demo-toolbar">
         <h1>Angular Material Demos</h1>
         <div>
+          <button mat-icon-button class="matero-toolbar-button" [matMenuTriggerFor]="menu">
+            <mat-icon>translate</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let lang of langs" (click)="useLanguage(lang.value)">
+              <span>{{ lang.label }}</span>
+            </button>
+          </mat-menu>
+
           <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
             <mat-icon>fullscreen</mat-icon>
           </button>

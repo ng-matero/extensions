@@ -6,6 +6,9 @@ import { Component } from '@angular/core';
   styleUrls: ['alert-demo.component.scss'],
 })
 export class AlertDemoComponent {
+  dismissible = false;
+  elevation = 0;
+
   onClosed(e: any) {
     console.log(e);
   }
