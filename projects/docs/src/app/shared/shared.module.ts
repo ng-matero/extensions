@@ -15,9 +15,8 @@ import { MaterialExtensionsModule } from '@ng-matero/extensions';
 import { HeaderLinkComponent } from './doc-heading/header-link';
 import { DocHeadingComponent } from './doc-heading/doc-heading';
 import { ExampleViewerComponent } from './example-viewer/example-viewer.component';
-
-import { CopierService } from './copier/copier.service';
 import { NavbarComponent } from './navbar/navbar.component';
+import { CopierService } from './copier/copier.service';
 import { NavigationFocus } from './navigation-focus/navigation-focus';
 import { TableOfContents } from './table-of-contents/table-of-contents';
 

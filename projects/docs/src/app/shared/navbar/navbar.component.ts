@@ -1,6 +1,5 @@
-import { Component, ElementRef } from '@angular/core';
-import { Router } from '@angular/router';
-import { OverlayContainer } from '@angular/cdk/overlay';
+import { Component } from '@angular/core';
+import { AppThemes } from '@shared/themes';
 
 @Component({
   selector: 'app-navbar',
@@ -10,14 +9,10 @@ import { OverlayContainer } from '@angular/cdk/overlay';
 export class NavbarComponent {
   dark = false;
 
-  constructor(
-    private _element: ElementRef<HTMLElement>,
-    private _overlayContainer: OverlayContainer,
-    private _router: Router
-  ) {}
+  constructor(private _appThemes: AppThemes) {}
 
   toggleTheme() {
-    const darkThemeClass = 'docs-dark-theme';
     this.dark = !this.dark;
+    this._appThemes.value = this.dark ? 'docs-theme-dark' : 'docs-theme-light';
   }
 }

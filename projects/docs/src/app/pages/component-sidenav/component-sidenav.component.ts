@@ -1,6 +1,5 @@
-import { Component, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { OverlayContainer } from '@angular/cdk/overlay';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav, MatDrawerToggleResult } from '@angular/material/sidenav';
 import { Observable } from 'rxjs';
@@ -16,16 +15,10 @@ const SMALL_WIDTH_BREAKPOINT = 959;
   encapsulation: ViewEncapsulation.None,
 })
 export class ComponentSidenav {
-  dark = false;
   isExtraScreenSmall: Observable<boolean>;
   isScreenSmall: Observable<boolean>;
 
-  constructor(
-    private _element: ElementRef<HTMLElement>,
-    private _overlayContainer: OverlayContainer,
-    private _router: Router,
-    breakpoints: BreakpointObserver
-  ) {
+  constructor(private _router: Router, breakpoints: BreakpointObserver) {
     this.isExtraScreenSmall = breakpoints
       .observe(`(max-width: ${EXTRA_SMALL_WIDTH_BREAKPOINT}px)`)
       .pipe(map(breakpoint => breakpoint.matches));
@@ -48,20 +41,6 @@ export class ComponentSidenav {
         }
       }
     });
-  }
-
-  toggleTheme() {
-    const darkThemeClass = 'docs-dark-theme';
-
-    this.dark = !this.dark;
-
-    if (this.dark) {
-      this._element.nativeElement.classList.add(darkThemeClass);
-      this._overlayContainer.getContainerElement().classList.add(darkThemeClass);
-    } else {
-      this._element.nativeElement.classList.remove(darkThemeClass);
-      this._overlayContainer.getContainerElement().classList.remove(darkThemeClass);
-    }
   }
 
   toggleSidenav(sidenav: MatSidenav): Promise<MatDrawerToggleResult> {

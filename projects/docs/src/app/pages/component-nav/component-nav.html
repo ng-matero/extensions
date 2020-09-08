@@ -11,7 +11,7 @@
            routerLinkActive="docs-component-viewer-sidenav-item-selected"
            #routerLinkActiveInstance="routerLinkActive"
            [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
-           [routerLink]="['/components/' + navItem.route]">
+           [routerLink]="['/components/' + navItem.id]">
           {{navItem.name}}
         </a>
       </ng-container>

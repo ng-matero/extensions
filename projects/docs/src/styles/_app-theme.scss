@@ -3,6 +3,7 @@
 
 @import '../app/pages/component-category-list/component-category-list-theme';
 @import '../app/pages/component-page-header/component-page-header-theme';
+@import '../app/pages/component-nav/component-nav-theme';
 @import '../app/pages/component-sidenav/component-sidenav-theme';
 @import '../app/pages/homepage/homepage-theme';
 @import '../app/shared/example-viewer/example-viewer-theme';
@@ -20,6 +21,7 @@
   @include material-extensions-theme($theme);
   @include component-category-list-theme($theme);
   @include component-page-header-theme($theme);
+  @include component-viewer-nav-theme($theme);
   @include component-viewer-sidenav-theme($theme);
   @include home-page-theme($theme);
   @include example-viewer-theme($theme);

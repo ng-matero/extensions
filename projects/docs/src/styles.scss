@@ -14,7 +14,7 @@ $theme: mat-light-theme($primary, $accent);
 @include extensions-docs-app-theme($theme);
 
 // Define an alternate dark theme.
-.docs-dark-theme {
+.docs-theme-dark {
   $primary: mat-palette($mat-pink);
   $accent: mat-palette($mat-blue-grey);
   $theme: mat-dark-theme($primary, $accent);

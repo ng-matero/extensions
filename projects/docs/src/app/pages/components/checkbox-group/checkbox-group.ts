@@ -4,6 +4,14 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedModule } from '@shared';
 
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+// Required for AOT compilation
+export function TranslateHttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/checkbox-group/', '_json');
+}
+
 import { CheckboxGroupBasicComponent, checkboxGroupBasicExampleConfig } from './examples/basic';
 import {
   CheckboxGroupBindLabelBindValueComponent,
@@ -17,6 +25,8 @@ import {
   CheckboxGroupSelectAllComponent,
   checkboxGroupSelectAllExampleConfig,
 } from './examples/select-all';
+
+import { CheckboxGroupI18nComponent, checkboxGroupI18nExampleConfig } from './examples/i18n';
 
 @Component({
   selector: 'app-checkbox-group-overview',
@@ -37,6 +47,13 @@ export class CheckboxGroupApiComponent {
 @NgModule({
   imports: [
     SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: TranslateHttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     RouterModule.forChild([
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       {
@@ -48,6 +65,7 @@ export class CheckboxGroupApiComponent {
             checkboxGroupBindLabelBindValueExampleConfig,
             checkboxGroupCompareWithExampleConfig,
             checkboxGroupSelectAllExampleConfig,
+            checkboxGroupI18nExampleConfig,
           ],
         },
       },
@@ -65,6 +83,7 @@ export class CheckboxGroupApiComponent {
     CheckboxGroupBindLabelBindValueComponent,
     CheckboxGroupCompareWithComponent,
     CheckboxGroupSelectAllComponent,
+    CheckboxGroupI18nComponent,
   ],
 })
 export class CheckboxGroupModule {}

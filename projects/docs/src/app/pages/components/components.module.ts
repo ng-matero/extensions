@@ -1,15 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-
 import { SharedModule } from '@shared';
-
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-// Required for AOT compilation
-export function TranslateHttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '_json');
-}
 
 import { ComponentViewer } from '../component-viewer/component-viewer';
 
@@ -64,17 +55,7 @@ const routes = [
 ];
 
 @NgModule({
-  imports: [
-    SharedModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: TranslateHttpLoaderFactory,
-        deps: [HttpClient],
-      },
-    }),
-    RouterModule.forChild(routes),
-  ],
+  imports: [SharedModule, RouterModule.forChild(routes)],
   declarations: [],
   exports: [],
 })

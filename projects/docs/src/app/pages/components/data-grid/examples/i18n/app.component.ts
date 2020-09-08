@@ -62,7 +62,6 @@ export class AppComponent {
     { label: '中文简体', value: 'zh-CN' },
     { label: 'English', value: 'en-US' },
   ];
-
   defaultlang = 'zh-CN';
 
   constructor(public translate: TranslateService) {

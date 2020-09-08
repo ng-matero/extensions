@@ -4,6 +4,14 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedModule } from '@shared';
 
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+// Required for AOT compilation
+export function TranslateHttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/data-grid/', '_json');
+}
+
 import { DataGridBasicComponent, dataGridBasicExampleConfig } from './examples/basic';
 import {
   DataGridLoadingStatusComponent,
@@ -88,6 +96,13 @@ export class DataGridApiComponent {
 @NgModule({
   imports: [
     SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: TranslateHttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     RouterModule.forChild([
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       {

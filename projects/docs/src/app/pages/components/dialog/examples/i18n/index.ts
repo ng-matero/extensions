@@ -1,8 +1,8 @@
-import { AppComponent as DataGridI18nComponent } from './app.component';
+import { AppComponent as DialogI18nComponent } from './app.component';
 
-const dataGridI18nExampleConfig = {
-  title: 'I18n ngx-translate',
-  component: DataGridI18nComponent,
+const dialogI18nExampleConfig = {
+  title: 'I18n confirmation',
+  component: DialogI18nComponent,
   files: [
     {
       file: 'app.component.html',
@@ -21,15 +21,15 @@ const dataGridI18nExampleConfig = {
     },
     {
       file: 'assets/zh-CN.json',
-      content: require('!!highlight-loader?raw=true&lang=json!@assets/i18n/data-grid/zh-CN_json'),
-      filecontent: require('!!raw-loader!@assets/i18n/data-grid/zh-CN_json'),
+      content: require('!!highlight-loader?raw=true&lang=json!@assets/i18n/dialog/zh-CN_json'),
+      filecontent: require('!!raw-loader!@assets/i18n/dialog/zh-CN_json'),
     },
     {
       file: 'assets/en-US.json',
-      content: require('!!highlight-loader?raw=true&lang=json!@assets/i18n/data-grid/en-US_json'),
-      filecontent: require('!!raw-loader!@assets/i18n/data-grid/en-US_json'),
+      content: require('!!highlight-loader?raw=true&lang=json!@assets/i18n/dialog/en-US_json'),
+      filecontent: require('!!raw-loader!@assets/i18n/dialog/en-US_json'),
     },
   ],
 };
 
-export { DataGridI18nComponent, dataGridI18nExampleConfig };
+export { DialogI18nComponent, dialogI18nExampleConfig };

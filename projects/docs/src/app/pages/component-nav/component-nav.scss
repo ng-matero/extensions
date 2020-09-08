@@ -8,7 +8,6 @@ $sidenav-width: 240px;
 .docs-component-viewer-nav-content {
   width: $sidenav-width;
   height: calc(100vh - 56px);
-  border-right: 1px solid rgba(0, 0, 0, .12);
   overflow: auto;
 
   ul {
@@ -34,6 +33,5 @@ $sidenav-width: 240px;
 .nav-item-title {
   padding: 0 16px;
   margin: 16px 0 8px;
-  color: rgba(150, 150, 150, .75);
   font-size: 80%;
 }

@@ -5,49 +5,49 @@ export const COMPONENTS_MENU = [
     title: 'Basic',
     children: [
       {
+        id: 'alert',
         name: 'Alert',
         summary: 'Provide contextual feedback messages for typical user actions.',
-        route: '/alert',
       },
       {
+        id: 'button',
         name: 'Button',
         summary: 'Provide a material button loading directive.',
-        route: '/button',
       },
       {
+        id: 'checkbox-group',
         name: 'Checkbox Group',
         summary: 'Allows the user to create a set of checkbox with select all.',
-        route: '/checkbox-group',
       },
       {
+        id: 'color-picker',
         name: 'Color Picker',
         summary: 'An extra input to select color enhanced by the ngx-color.',
-        route: '/color-picker',
       },
       {
+        id: 'data-grid',
         name: 'Data Grid',
         summary: 'A powerful grid for material table.',
-        route: '/data-grid',
       },
       {
+        id: 'dialog',
         name: 'Dialog',
         summary: 'A configurable modal to show alert and confirmation.',
-        route: '/dialog',
       },
       {
+        id: 'progress',
         name: 'Progress',
         summary: 'A linear progress indicator with Bootstrap style.',
-        route: '/progress',
       },
       {
+        id: 'select',
         name: 'Select',
         summary: 'An ng-select wrapper to be used in the form field.',
-        route: '/select',
       },
       {
+        id: 'split-pane',
         name: 'Split Pane',
         summary: 'An component for creating multi-view layouts.',
-        route: '/split-pane',
       },
     ],
   },
@@ -55,9 +55,9 @@ export const COMPONENTS_MENU = [
     title: 'Experimental',
     children: [
       {
+        id: 'text3d',
         name: 'Text 3D',
         summary: 'Experimental component for 3d text.',
-        route: '/text3d',
       },
     ],
   },

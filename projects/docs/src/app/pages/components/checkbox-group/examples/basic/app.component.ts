@@ -12,7 +12,7 @@ export class AppComponent {
     { label: 'Pizza', value: 'pizza', color: 'accent' },
     { label: 'Tacos', value: 'tacos', color: 'warn' },
   ];
-  selectedFoods = ['steak', 'pizza'];
+  selectedFoods = ['steak', 'pizza', 'tacos'];
 
   cars = ['Ford', 'Chevrolet', 'Dodge'];
   selectedCars = ['Dodge'];
