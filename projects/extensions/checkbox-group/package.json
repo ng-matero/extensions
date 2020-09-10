@@ -1,9 +1,8 @@
 {
-    "ngPackage": {
-      "lib": {
-        "flatModuleFile": "mtxCheckboxGroup",
-        "entryFile": "public-api.ts"
-      }
+  "ngPackage": {
+    "lib": {
+      "flatModuleFile": "mtxCheckboxGroup",
+      "entryFile": "public-api.ts"
     }
   }
-  
+}
