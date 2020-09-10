@@ -10,10 +10,10 @@ export class MtxGridService {
    * @param data row data
    * @param col  column definition e.g. `a.b.c`
    */
-  getCellValue(data: {}, col: MtxGridColumn) {
+  getCellValue(data: any, col: MtxGridColumn) {
     const keyArr = col.field ? col.field.split('.') : [];
 
-    let tmp = '';
+    let tmp: any = '';
 
     keyArr.forEach((key: string, i: number) => {
       if (i === 0) {

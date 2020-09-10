@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxGridColumn } from '@ng-matero/extensions/data-grid';
+import { MtxGridColumn, MtxGridRowSelectionFormatter } from '@ng-matero/extensions/data-grid';
 import { EXAMPLE_DATA } from './data';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -13,27 +13,35 @@ export class DataGridDemoComponent {
     {
       header: this.translate.stream('name'),
       field: 'name',
+      showExpand: false,
+      minWidth: 200,
     },
     {
       header: this.translate.stream('weight'),
       field: 'weight',
+      minWidth: 100,
+      maxWidth: 300,
     },
     {
       header: this.translate.stream('gender'),
       field: 'gender',
+      minWidth: 100,
     },
     {
       header: this.translate.stream('mobile'),
       field: 'mobile',
+      minWidth: 150,
     },
     {
       header: this.translate.stream('city'),
       field: 'city',
+      minWidth: 150,
     },
     {
       header: this.translate.stream('operation'),
       field: 'operation',
-      width: '40px',
+      minWidth: 150,
+      maxWidth: 'auto',
       pinned: 'right',
       right: '0px',
       type: 'button',
@@ -58,9 +66,29 @@ export class DataGridDemoComponent {
 
   list = EXAMPLE_DATA;
 
+  multiSelectable = true;
+  hideRowSelectionCheckbox = false;
+  rowSelectable = true;
+  rowSelected = EXAMPLE_DATA.slice(2, 3);
+  rowSelectionFormatter: MtxGridRowSelectionFormatter = {
+    disabled: data => data.name === 'Boron',
+    hideCheckbox: data => data.name === 'John',
+  };
+  expandable = false;
+  showSummary = false;
+  columnResizable = false;
+
+  // mat-table
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = EXAMPLE_DATA;
+
   constructor(public translate: TranslateService) {}
 
   trackByName(index: number, item: any) {
     return item.name;
+  }
+
+  log(e: any) {
+    console.log(e);
   }
 }

@@ -14,6 +14,8 @@ export interface MtxGridColumn {
   right?: string;
   width?: string;
   resizable?: boolean;
+  minWidth?: number | string;
+  maxWidth?: number | string;
   sortable?: boolean | string;
   sortProp?: MtxGridColumnSortProp;
   type?: MtxGridColumnType;

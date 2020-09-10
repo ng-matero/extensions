@@ -14,6 +14,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatColumnResizeModule } from '@angular/material-experimental/column-resize';
 
 import { MtxUtilsModule } from '@ng-matero/extensions/utils';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
@@ -41,6 +42,7 @@ import { MtxGridService } from './grid.service';
     MatFormFieldModule,
     MatMenuModule,
     DragDropModule,
+    MatColumnResizeModule,
     MtxDialogModule,
     MtxUtilsModule,
   ],
@@ -50,6 +52,7 @@ import { MtxGridService } from './grid.service';
     MtxGridColumnMenuComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
+    MatColumnResizeModule,
   ],
   declarations: [
     MtxGridComponent,

@@ -33,10 +33,16 @@
     width: 30px;
   }
 
-  .mat-table {
+  .mat-table:not(.mat-column-resize-table) {
     flex: none;
     min-width: 100%;
     border-collapse: separate;
+
+    .mat-header-cell,
+    .mat-footer-cell,
+    .mat-cell {
+      min-width: 80px;
+    }
   }
 
   .mat-footer-row,
@@ -48,7 +54,6 @@
   .mat-header-cell,
   .mat-footer-cell,
   .mat-cell {
-    min-width: 80px;
     padding: 4px 10px;
     box-sizing: border-box;
   }
@@ -158,6 +163,7 @@
   .mtx-grid-checkbox-cell {
     flex: none;
     justify-content: center;
+    width: 40px;
     min-width: 40px;
 
     // Fix checkbox height

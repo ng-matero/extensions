@@ -41,6 +41,10 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
+import {
+  MatColumnResizeModule,
+  MatDefaultEnabledColumnResizeModule,
+} from '@angular/material-experimental/column-resize';
 
 @NgModule({
   exports: [
@@ -86,6 +90,8 @@ import { MatTreeModule } from '@angular/material/tree';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
+    MatColumnResizeModule,
+    // MatDefaultEnabledColumnResizeModule
   ],
 })
 export class MaterialModule {}

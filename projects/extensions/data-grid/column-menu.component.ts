@@ -19,7 +19,7 @@ import { MtxGridColumnSelectionItem } from './grid.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxGridColumnMenuComponent implements OnInit {
-  @Input() columns = [];
+  @Input() columns: MtxGridColumnSelectionItem[] = [];
   @Input() selectable = true;
   @Input() selectedType: 'show' | 'hide' = 'show';
   @Input() sortable = true;

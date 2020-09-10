@@ -47,7 +47,11 @@ export class MtxGridCellComponent implements OnInit {
       description,
       buttons: [
         { type: closeType, text: closeText, onClick: () => {} },
-        { type: okType, text: okText, onClick: () => fn(data) },
+        {
+          type: okType,
+          text: okText,
+          onClick: () => (fn ? fn(data) : {}),
+        },
       ],
     });
   }
@@ -55,18 +59,21 @@ export class MtxGridCellComponent implements OnInit {
   _handleActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: any) {
     event.preventDefault();
     event.stopPropagation();
-    btn.click(rowData);
+
+    if (btn.click) {
+      btn.click(rowData);
+    }
   }
 
   /** Preview big image */
   _onPreview(urlStr: string, multi = false) {
-    const imgs = [];
+    const imgs: PhotoViewer.Img[] = [];
 
     let options: PhotoViewer.Options = {};
 
     if (multi) {
       this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
-        imgs.push({ title: index + 1, src: url });
+        imgs.push({ title: index + 1 + '', src: url });
       });
     } else {
       this._dataGridSrv.str2arr(urlStr).forEach(url => {

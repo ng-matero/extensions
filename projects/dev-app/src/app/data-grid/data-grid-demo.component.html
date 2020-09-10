@@ -1,4 +1,68 @@
+<mat-checkbox [(ngModel)]="multiSelectable">multiSelectable</mat-checkbox>
+<mat-checkbox [(ngModel)]="hideRowSelectionCheckbox">hideRowSelectionCheckbox</mat-checkbox>
+<mat-checkbox [(ngModel)]="rowSelectable">rowSelectable</mat-checkbox>
+<mat-checkbox [(ngModel)]="expandable">expandable</mat-checkbox>
+<mat-checkbox [(ngModel)]="showSummary">showSummary</mat-checkbox>
+<mat-checkbox [(ngModel)]="columnResizable">columnResizable</mat-checkbox>
+
 <mtx-grid [data]="list"
           [columns]="columns"
-          [trackBy]="trackByName">
+          [columnResizable]="columnResizable"
+          [multiSelectable]="multiSelectable"
+          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [rowSelectable]="rowSelectable"
+          [rowSelected]="rowSelected"
+          [rowSelectionFormatter]="rowSelectionFormatter"
+          (rowSelectionChange)="log($event)"
+          (cellSelectionChange)="log($event)"
+          [trackBy]="trackByName"
+          [expandable]="expandable"
+          [expansionTemplate]="expansionTpl"
+          (expansionChange)="log($event)"
+          [showSummary]="showSummary"
+          [summaryTemplate]="{'weight': footerTpl}">
 </mtx-grid>
+
+<ng-template #expansionTpl let-row>
+  {{row.name}}
+</ng-template>
+
+<ng-template #footerTpl let-data>
+  <div>{{data | json}}</div>
+</ng-template>
+
+<hr>
+
+<table mat-table columnResize [dataSource]="dataSource" class="mat-elevation-z8 example-table">
+  <!-- Position Column -->
+  <ng-container matColumnDef="position" sticky>
+    <th mat-header-cell *matHeaderCellDef resizable [matResizableMaxWidthPx]="100"> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+    <td mat-footer-cell *matFooterCellDef> Footer cell </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name" sticky>
+    <th mat-header-cell *matHeaderCellDef resizable [matResizableMinWidthPx]="150"> Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    <td mat-footer-cell *matFooterCellDef> Footer cell </td>
+  </ng-container>
+
+  <!-- Weight Column (not resizable) -->
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef> Weight (Not resizable) </th>
+    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+    <td mat-footer-cell *matFooterCellDef> Footer cell </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef resizable> Symbol </th>
+    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+    <td mat-footer-cell *matFooterCellDef> Footer cell </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns;"></tr>
+</table>

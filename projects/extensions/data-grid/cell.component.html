@@ -1,14 +1,14 @@
 <!-- Formatting -->
 <ng-container *ngIf="colDef.formatter; else defaultFormattingTpl">
-  <span [innerHTML]="colDef.formatter(rowData, colDef)"></span>
+  <span [innerHTML]="colDef.formatter!(rowData, colDef)"></span>
 </ng-container>
 
-<!-- TODO: -->
+<!-- TODO: Replace template with ts -->
 <ng-template #defaultFormattingTpl>
   <ng-container [ngSwitch]="colDef.type">
     <!-- Tag -->
     <ng-container *ngSwitchCase="'tag'">
-      <mat-chip-list *ngIf="colDef.tag[_colValue]; else tagEmptyTpl">
+      <mat-chip-list *ngIf="colDef.tag && colDef.tag[_colValue]; else tagEmptyTpl">
         <mat-chip color="primary" [ngClass]="['bg-' + colDef.tag[_colValue].color]">
           {{colDef.tag[_colValue].text}}
         </mat-chip>
