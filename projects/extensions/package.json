@@ -30,6 +30,8 @@
   },
   "homepage": "https://ng-matero.github.io/extensions/",
   "dependencies": {
+    "@angular/cdk-experimental": "^10.0.0",
+    "@angular/material-experimental": "^10.0.0",
     "@ng-select/ng-select": "^5.0.0",
     "ngx-color": "^6.0.0",
     "photoviewer": "^3.4.0",
