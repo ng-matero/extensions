@@ -120,7 +120,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
 
   ////
 
-  private _gutterSize = 12;
+  private _gutterSize = 1;
 
   @Input() set gutterSize(v: number) {
     this._gutterSize = getInputPositiveNumber(v, 11);

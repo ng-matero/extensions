@@ -1,11 +1,16 @@
 @import '~@angular/material/theming';
 
 @mixin mtx-split-theme($theme) {
+  $accent: map-get($theme, accent);
   $foreground: map-get($theme, foreground);
 
   .mtx-split {
     > .mtx-split-gutter {
-      background-color: mat-color($foreground, divider);
+      background-color: rgba(mat-color($foreground, divider), .24);
+
+      &:hover {
+        background-color: mat-color($accent);
+      }
     }
   }
 }
