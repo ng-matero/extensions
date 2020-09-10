@@ -76,6 +76,10 @@ import {
   DataGridRemoteDataComponent,
   dataGridRemoteDataExampleConfig,
 } from './examples/remote-data';
+import {
+  DataGridColumnResizeComponent,
+  dataGridColumnResizeExampleConfig,
+} from './examples/column-resize';
 
 @Component({
   selector: 'app-data-grid-overview',
@@ -112,6 +116,7 @@ export class DataGridApiComponent {
         data: {
           examples: [
             dataGridBasicExampleConfig,
+            dataGridColumnResizeExampleConfig,
             dataGridLoadingStatusExampleConfig,
             dataGridHidePaginationExampleConfig,
             dataGridSortableExampleConfig,
@@ -146,6 +151,7 @@ export class DataGridApiComponent {
     DataGridApiComponent,
 
     DataGridBasicComponent,
+    DataGridColumnResizeComponent,
     DataGridLoadingStatusComponent,
     DataGridHidePaginationComponent,
     DataGridSortableComponent,
