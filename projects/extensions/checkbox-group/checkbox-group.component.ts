@@ -187,10 +187,10 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
     }
   }
 
-  private _getSelectedItems(index?: number) {
+  private _getSelectedItems(index: number) {
     this.selectedItems = this.items.filter(option => option.checked);
 
-    if (this.compareWith) {
+    if (this._compareWith) {
       this.selectedItems = this._originalItems.filter(option =>
         this.selectedItems.find(selectedOption => this._compareWith(option, selectedOption))
       );
@@ -204,13 +204,13 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   }
 
   /** Handle normal checkbox toggle */
-  _updateNormalCheckboxState(e?: boolean, index?: number): void {
+  _updateNormalCheckboxState(e: boolean, index: number): void {
     this._checkMasterCheckboxState();
     this._getSelectedItems(index);
   }
 
   /** Handle master checkbox toggle */
-  _updateMasterCheckboxState(e?: boolean, index?: number): void {
+  _updateMasterCheckboxState(e: boolean, index: number): void {
     this.selectAll = !this.selectAll;
     this.selectAllIndeterminate = false;
 

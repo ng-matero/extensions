@@ -122,7 +122,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
 
   private _gutterSize = 12;
 
-  @Input() set gutterSize(v: number | null) {
+  @Input() set gutterSize(v: number) {
     this._gutterSize = getInputPositiveNumber(v, 11);
 
     this.build(false, false);
@@ -228,7 +228,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
   private transitionEndSubscriber: Subscriber<MtxSplitOutputAreaSizes>;
   @Output() get transitionEnd(): Observable<MtxSplitOutputAreaSizes> {
     return new Observable(subscriber => (this.transitionEndSubscriber = subscriber)).pipe(
-      debounceTime<MtxSplitOutputAreaSizes>(20)
+      debounceTime<any>(20)
     );
   }
 
@@ -289,12 +289,12 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
 
   public removeArea(component: MtxSplitPaneDirective): void {
     if (this.displayedAreas.some(a => a.component === component)) {
-      const area = this.displayedAreas.find(a => a.component === component);
+      const area = this.displayedAreas.find(a => a.component === component) as MtxSplitArea;
       this.displayedAreas.splice(this.displayedAreas.indexOf(area), 1);
 
       this.build(true, true);
     } else if (this.hidedAreas.some(a => a.component === component)) {
-      const area = this.hidedAreas.find(a => a.component === component);
+      const area = this.hidedAreas.find(a => a.component === component) as MtxSplitArea;
       this.hidedAreas.splice(this.hidedAreas.indexOf(area), 1);
     }
   }
@@ -346,7 +346,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
       return false;
     }
 
-    const formatedSizes = sizes.map(s => getInputPositiveNumber(s, null));
+    const formatedSizes = sizes.map(s => getInputPositiveNumber(s, null)) as number[];
     const isValid = isUserSizesValid(this.unit, formatedSizes);
 
     if (isValid === false) {
@@ -369,7 +369,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
       // If user provided 'order' for each area, use it to sort them.
       if (this.displayedAreas.every(a => a.component.order !== null)) {
         this.displayedAreas.sort(
-          (a, b) => ((a.component.order as number) - b.component.order) as number
+          (a, b) => ((a.component.order as number) - (b.component.order as number)) as number
         );
       }
 
@@ -385,7 +385,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     if (resetSizes === true) {
       const useUserSizes = isUserSizesValid(
         this.unit,
-        this.displayedAreas.map(a => a.component.size)
+        this.displayedAreas.map(a => a.component.size) as number[]
       );
 
       switch (this.unit) {
@@ -513,7 +513,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
   _clickTimeout: number | null = null;
 
   public clickGutter(event: MouseEvent | TouchEvent, gutterNum: number): void {
-    const tempPoint = getPointFromEvent(event);
+    const tempPoint = getPointFromEvent(event) as MtxSplitPoint;
 
     // Be sure mouseup/touchend happened at same point as mousedown/touchstart to trigger click/dblclick
     if (this.startPoint && this.startPoint.x === tempPoint.x && this.startPoint.y === tempPoint.y) {
@@ -563,22 +563,22 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
       const areaSnapshot: MtxSplitAreaSnapshot = {
         area,
         sizePixelAtStart: getElementPixelSize(area.component.elRef, this.direction),
-        sizePercentAtStart: this.unit === 'percent' ? area.size : -1, // If pixel mode, anyway, will not be used.
+        sizePercentAtStart: (this.unit === 'percent' ? area.size : -1) as number, // If pixel mode, anyway, will not be used.
       };
 
       if (area.order < gutterOrder) {
         if (this.restrictMove === true) {
-          this.snapshot.areasBeforeGutter = [areaSnapshot];
+          (this.snapshot as MtxSplitSnapshot).areasBeforeGutter = [areaSnapshot];
         } else {
-          this.snapshot.areasBeforeGutter.unshift(areaSnapshot);
+          (this.snapshot as MtxSplitSnapshot).areasBeforeGutter.unshift(areaSnapshot);
         }
       } else if (area.order > gutterOrder) {
         if (this.restrictMove === true) {
-          if (this.snapshot.areasAfterGutter.length === 0) {
-            this.snapshot.areasAfterGutter = [areaSnapshot];
+          if ((this.snapshot as MtxSplitSnapshot).areasAfterGutter.length === 0) {
+            (this.snapshot as MtxSplitSnapshot).areasAfterGutter = [areaSnapshot];
           }
         } else {
-          this.snapshot.areasAfterGutter.push(areaSnapshot);
+          (this.snapshot as MtxSplitSnapshot).areasAfterGutter.push(areaSnapshot);
         }
       }
     });
@@ -648,32 +648,32 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
 
     let offset =
       this.direction === 'horizontal'
-        ? this.startPoint.x - this.endPoint.x
-        : this.startPoint.y - this.endPoint.y;
+        ? (this.startPoint as MtxSplitPoint).x - this.endPoint.x
+        : (this.startPoint as MtxSplitPoint).y - this.endPoint.y;
     if (this.dir === 'rtl') {
       offset = -offset;
     }
     const steppedOffset = Math.round(offset / this.gutterStep) * this.gutterStep;
 
-    if (steppedOffset === this.snapshot.lastSteppedOffset) {
+    if (steppedOffset === (this.snapshot as MtxSplitSnapshot).lastSteppedOffset) {
       return;
     }
 
-    this.snapshot.lastSteppedOffset = steppedOffset;
+    (this.snapshot as MtxSplitSnapshot).lastSteppedOffset = steppedOffset;
 
     // Need to know if each gutter side areas could reacts to steppedOffset
 
     let areasBefore = getGutterSideAbsorptionCapacity(
       this.unit,
-      this.snapshot.areasBeforeGutter,
+      (this.snapshot as MtxSplitSnapshot).areasBeforeGutter,
       -steppedOffset,
-      this.snapshot.allAreasSizePixel
+      (this.snapshot as MtxSplitSnapshot).allAreasSizePixel
     );
     let areasAfter = getGutterSideAbsorptionCapacity(
       this.unit,
-      this.snapshot.areasAfterGutter,
+      (this.snapshot as MtxSplitSnapshot).areasAfterGutter,
       steppedOffset,
-      this.snapshot.allAreasSizePixel
+      (this.snapshot as MtxSplitSnapshot).allAreasSizePixel
     );
 
     // Each gutter side areas can't absorb all offset
@@ -682,16 +682,16 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
       } else if (Math.abs(areasBefore.remain) > Math.abs(areasAfter.remain)) {
         areasAfter = getGutterSideAbsorptionCapacity(
           this.unit,
-          this.snapshot.areasAfterGutter,
+          (this.snapshot as MtxSplitSnapshot).areasAfterGutter,
           steppedOffset + areasBefore.remain,
-          this.snapshot.allAreasSizePixel
+          (this.snapshot as MtxSplitSnapshot).allAreasSizePixel
         );
       } else {
         areasBefore = getGutterSideAbsorptionCapacity(
           this.unit,
-          this.snapshot.areasBeforeGutter,
+          (this.snapshot as MtxSplitSnapshot).areasBeforeGutter,
           -(steppedOffset - areasAfter.remain),
-          this.snapshot.allAreasSizePixel
+          (this.snapshot as MtxSplitSnapshot).allAreasSizePixel
         );
       }
     }
@@ -700,9 +700,9 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     else if (areasBefore.remain !== 0) {
       areasAfter = getGutterSideAbsorptionCapacity(
         this.unit,
-        this.snapshot.areasAfterGutter,
+        (this.snapshot as MtxSplitSnapshot).areasAfterGutter,
         steppedOffset + areasBefore.remain,
-        this.snapshot.allAreasSizePixel
+        (this.snapshot as MtxSplitSnapshot).allAreasSizePixel
       );
     }
     // Areas after gutter can't absorbs all offset > need to recalculate sizes for areas before gutter.
@@ -710,9 +710,9 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     else if (areasAfter.remain !== 0) {
       areasBefore = getGutterSideAbsorptionCapacity(
         this.unit,
-        this.snapshot.areasBeforeGutter,
+        (this.snapshot as MtxSplitSnapshot).areasBeforeGutter,
         -(steppedOffset - areasAfter.remain),
-        this.snapshot.allAreasSizePixel
+        (this.snapshot as MtxSplitSnapshot).allAreasSizePixel
       );
     }
 
@@ -729,7 +729,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
 
       if (areaToReset) {
         areaToReset.percentAfterAbsorption =
-          this.snapshot.allInvolvedAreasSizePercent -
+          (this.snapshot as MtxSplitSnapshot).allInvolvedAreasSizePercent -
           all
             .filter(a => a !== areaToReset)
             .reduce((total, a) => total + a.percentAfterAbsorption, 0);
@@ -742,7 +742,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     areasAfter.list.forEach(item => updateAreaSize(this.unit, item));
 
     this.refreshStyleSizes();
-    this.notify('progress', this.snapshot.gutterNum);
+    this.notify('progress', (this.snapshot as MtxSplitSnapshot).gutterNum);
   }
 
   private stopDragging(event?: Event): void {
@@ -771,14 +771,15 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     // If moved from starting point, notify end
     if (
       this.endPoint &&
-      (this.startPoint.x !== this.endPoint.x || this.startPoint.y !== this.endPoint.y)
+      ((this.startPoint as MtxSplitPoint).x !== this.endPoint.x ||
+        (this.startPoint as MtxSplitPoint).y !== this.endPoint.y)
     ) {
-      this.notify('end', this.snapshot.gutterNum);
+      this.notify('end', (this.snapshot as MtxSplitSnapshot).gutterNum);
     }
 
     this.renderer.removeClass(this.elRef.nativeElement, 'mtx-dragging');
     this.renderer.removeClass(
-      this.gutterEls.toArray()[this.snapshot.gutterNum - 1].nativeElement,
+      this.gutterEls.toArray()[(this.snapshot as MtxSplitSnapshot).gutterNum - 1].nativeElement,
       'mtx-dragged'
     );
     this.snapshot = null;

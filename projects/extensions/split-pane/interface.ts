@@ -51,4 +51,4 @@ export interface MtxSplitOutputData {
   sizes: MtxSplitOutputAreaSizes;
 }
 
-export interface MtxSplitOutputAreaSizes extends Array<number | '*'> { }
+export interface MtxSplitOutputAreaSizes extends Array<number | '*'> {}

@@ -61,7 +61,7 @@ export class MtxOptionComponent implements OnChanges, AfterViewChecked, OnDestro
     this.stateChange$.complete();
   }
 
-  private _isDisabled(value) {
+  private _isDisabled(value: null) {
     return value != null && `${value}` !== 'false';
   }
 }

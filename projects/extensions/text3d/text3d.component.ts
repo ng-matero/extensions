@@ -35,7 +35,7 @@ export class MtxText3dComponent {
   }
 
   get depthArr() {
-    const tmpArr = [];
+    const tmpArr: number[] = [];
     for (let i = 1; i <= this.depth; i++) {
       tmpArr.push(i);
     }

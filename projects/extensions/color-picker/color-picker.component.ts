@@ -53,7 +53,7 @@ export class MtxColorPickerComponent
     this._onChange(newValue);
     this.stateChanges.next();
   }
-  private _value = '';
+  private _value: string | null = '';
 
   /** Implemented as part of MatFormFieldControl. */
   readonly stateChanges: Subject<void> = new Subject<void>();
@@ -188,7 +188,7 @@ export class MtxColorPickerComponent
 
   ngDoCheck(): void {
     if (this.ngControl) {
-      this.errorState = this.ngControl.invalid && this.ngControl.touched;
+      this.errorState = (this.ngControl.invalid && this.ngControl.touched) as boolean;
       this.stateChanges.next();
     }
   }

@@ -160,7 +160,7 @@ export class MtxSelectComponent
     this._itemsAreUsed = true;
     this._items = value;
   }
-  private _items = [];
+  private _items: any[] = [];
   private _itemsAreUsed: boolean;
   private readonly _destroy$ = new Subject<void>();
 
@@ -288,7 +288,7 @@ export class MtxSelectComponent
 
   ngDoCheck(): void {
     if (this.ngControl) {
-      this.errorState = this.ngControl.invalid && this.ngControl.touched;
+      this.errorState = (this.ngControl.invalid && this.ngControl.touched) as boolean;
       this.stateChanges.next();
     }
   }

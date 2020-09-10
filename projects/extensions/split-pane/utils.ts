@@ -8,7 +8,7 @@ import {
   MtxSplitAreaAbsorptionCapacity,
 } from './interface';
 
-export function getPointFromEvent(event: MouseEvent | TouchEvent): MtxSplitPoint {
+export function getPointFromEvent(event: MouseEvent | TouchEvent): MtxSplitPoint | null {
   // TouchEvent
   if (
     (event as TouchEvent).changedTouches !== undefined &&
@@ -55,11 +55,14 @@ export function getInputPositiveNumber<T>(v: any, defaultValue: T): number | T {
   return !isNaN(v) && v >= 0 ? v : defaultValue;
 }
 
-export function isUserSizesValid(unit: 'percent' | 'pixel', sizes: Array<number | null>): boolean {
+export function isUserSizesValid(
+  unit: 'percent' | 'pixel',
+  sizes: Array<number>
+): boolean | number | void {
   // All sizes have to be not null and total should be 100
   if (unit === 'percent') {
     const total = sizes.reduce((_total, s) => (s !== null ? _total + s : _total), 0);
-    return sizes.every(s => s !== null) && total > 99.9 && total < 100.1;
+    return sizes.every(s => s !== null) && total && total > 99.9 && total < 100.1;
   }
 
   // A size at null is mandatory but only one.
@@ -115,10 +118,10 @@ export function getGutterSideAbsorptionCapacity(
   allAreasSizePixel: number
 ): MtxSplitSideAbsorptionCapacity {
   return sideAreas.reduce(
-    (acc, area) => {
+    (acc: any, area) => {
       const res = getAreaAbsorptionCapacity(unit, area, acc.remain, allAreasSizePixel);
       acc.list.push(res);
-      acc.remain = res.pixelRemain;
+      acc.remain = res && res.pixelRemain;
       return acc;
     },
     { remain: pixels, list: [] }
@@ -130,7 +133,7 @@ function getAreaAbsorptionCapacity(
   areaSnapshot: MtxSplitAreaSnapshot,
   pixels: number,
   allAreasSizePixel: number
-): MtxSplitAreaAbsorptionCapacity {
+): MtxSplitAreaAbsorptionCapacity | void {
   // No pain no gain
   if (pixels === 0) {
     return {
@@ -164,7 +167,7 @@ function getAreaAbsorptionCapacityPercent(
   areaSnapshot: MtxSplitAreaSnapshot,
   pixels: number,
   allAreasSizePixel: number
-): MtxSplitAreaAbsorptionCapacity {
+): MtxSplitAreaAbsorptionCapacity | void {
   const tempPixelSize = areaSnapshot.sizePixelAtStart + pixels;
   const tempPercentSize = (tempPixelSize / allAreasSizePixel) * 100;
 
@@ -228,7 +231,7 @@ function getAreaAbsorptionCapacityPixel(
   areaSnapshot: MtxSplitAreaSnapshot,
   pixels: number,
   containerSizePixel: number
-): MtxSplitAreaAbsorptionCapacity {
+): MtxSplitAreaAbsorptionCapacity | void {
   const tempPixelSize = areaSnapshot.sizePixelAtStart + pixels;
 
   // ENLARGE AREA
