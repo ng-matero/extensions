@@ -90,7 +90,7 @@
                      [arrowPosition]="col.sortProp?.arrowPosition"
                      [disableClear]="col.sortProp?.disableClear"
                      [start]="col.sortProp?.start">
-                  <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>
+                  <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
                   <span>{{col.header | toObservable | async}}</span>
                   <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>
                 </div>
@@ -137,7 +137,7 @@
           <td mat-footer-cell *matFooterCellDef
               [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
               [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
-            <span class="mtx-grid-expanison-placeholder" *ngIf="col.showExpand"></span>
+            <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
 
             <ng-template [ngIf]="_isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
               <ng-template [ngTemplateOutlet]="summaryTemplate"
@@ -175,7 +175,7 @@
         <ng-container matColumnDef="MtxGridExpansionColumnDef">
           <td mat-cell *matCellDef="let row; let dataIndex = dataIndex"
               [attr.colspan]="displayedColumns.length">
-            <div class="mtx-grid-expanison-detail"
+            <div class="mtx-grid-expansion-detail"
                  [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
               <ng-template [ngTemplateOutlet]="expansionTemplate"
                            [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex }">
@@ -184,9 +184,8 @@
           </td>
         </ng-container>
 
-        <tr mat-row [ngClass]="{'mtx-grid-expanison': true,
-                                'expanded': expansionRowStates[dataIndex].expanded,
-                                'collapsed': !expansionRowStates[dataIndex].expanded}"
+        <tr mat-row
+            [ngClass]="['mtx-grid-expansion', expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed']"
             *matRowDef="let row; columns: ['MtxGridExpansionColumnDef']; let dataIndex = dataIndex">
         </tr>
       </ng-container>
