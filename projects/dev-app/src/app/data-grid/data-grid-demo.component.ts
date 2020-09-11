@@ -88,6 +88,11 @@ export class DataGridDemoComponent {
     return item.name;
   }
 
+  toggleExpand() {
+    this.columns[0].showExpand = this.expandable;
+    this.columns = this.columns.filter(_ => true);
+  }
+
   log(e: any) {
     console.log(e);
   }
