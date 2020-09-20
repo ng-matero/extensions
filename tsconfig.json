@@ -1,29 +1,27 @@
-/*
-  This is a "Solution Style" tsconfig.json file, and is used by editors and TypeScript’s language server to improve development experience.
-  It is not intended to be used to perform a compilation.
-
-  To learn more about this file see: https://angular.io/config/solution-tsconfig.
-*/
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./projects/extensions/tsconfig.lib.json"
-    },
-    {
-      "path": "./projects/extensions/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/docs/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/docs/tsconfig.spec.json"
-    },
-    {
-      "path": "./projects/dev-app/tsconfig.app.json"
-    },
-    {
-      "path": "./projects/dev-app/tsconfig.spec.json"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "module": "es2020",
+    "moduleResolution": "node",
+    "target": "es2015",
+    "typeRoots": ["node_modules/@types"],
+    "types": ["jasmine"],
+    "lib": ["es2018", "dom"],
+    "rootDir": ".",
+    "baseUrl": "projects",
+    "paths": {
+      "@ng-matero/extensions": ["extensions"],
+      "@ng-matero/extensions/*": ["extensions/*"]
     }
-  ]
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
 }
