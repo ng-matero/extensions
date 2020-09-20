@@ -82,7 +82,7 @@ export class MtxGridCellComponent implements OnInit {
 
       options = {
         title: false,
-        footToolbar: ['zoomIn', 'zoomOut', 'rotateRight', 'rotateLeft', 'actualSize'],
+        footerToolbar: ['zoomIn', 'zoomOut', 'rotateRight', 'rotateLeft', 'actualSize'],
       };
     }
 
