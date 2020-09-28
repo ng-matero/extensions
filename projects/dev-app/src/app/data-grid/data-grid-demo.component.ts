@@ -15,6 +15,7 @@ export class DataGridDemoComponent {
       field: 'name',
       showExpand: false,
       minWidth: 200,
+      sortable: true
     },
     {
       header: this.translate.stream('weight'),

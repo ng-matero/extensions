@@ -102,7 +102,7 @@ export class MtxSelectComponent
   @Input() addTag: boolean | ((term: string) => any | Promise<any>) = false;
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
-  @Input() appendTo: string;
+  @Input() appendTo = 'body';
   @Input() bindLabel: string;
   @Input() bindValue: string;
   @Input() closeOnSelect = true;

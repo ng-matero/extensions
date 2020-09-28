@@ -19,12 +19,17 @@
           [expandable]="expandable"
           [expansionTemplate]="expansionTpl"
           (expansionChange)="log($event)"
+          [headerTemplate]="headerTpl"
           [showSummary]="showSummary"
           [summaryTemplate]="{'weight': footerTpl}">
 </mtx-grid>
 
 <ng-template #expansionTpl let-row>
   {{row.name}}
+</ng-template>
+
+<ng-template #headerTpl let-col>
+  {{col.header | async}}
 </ng-template>
 
 <ng-template #footerTpl let-data>
