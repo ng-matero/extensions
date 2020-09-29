@@ -102,7 +102,7 @@ export class MtxSelectComponent
   @Input() addTag: boolean | ((term: string) => any | Promise<any>) = false;
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
-  @Input() appendTo = 'body';
+  @Input() appendTo: string;
   @Input() bindLabel: string;
   @Input() bindValue: string;
   @Input() closeOnSelect = true;
@@ -316,9 +316,7 @@ export class MtxSelectComponent
   }
 
   /** Implemented as part of MatFormFieldControl. */
-  onContainerClick() {
-    this.open();
-  }
+  onContainerClick() {}
 
   /**
    * Sets the select's value. Part of the ControlValueAccessor interface
