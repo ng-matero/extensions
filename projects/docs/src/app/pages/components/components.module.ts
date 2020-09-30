@@ -35,6 +35,10 @@ const routes = [
         loadChildren: () => import('./dialog/dialog').then(m => m.DialogModule),
       },
       {
+        path: 'loader',
+        loadChildren: () => import('./loader/loader').then(m => m.LoaderModule),
+      },
+      {
         path: 'progress',
         loadChildren: () => import('./progress/progress').then(m => m.ProgressModule),
       },

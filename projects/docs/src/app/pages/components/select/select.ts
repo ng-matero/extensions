@@ -64,6 +64,8 @@ export class SelectApiComponent {
   ],
   declarations: [
     SelectOverviewComponent,
+    SelectApiComponent,
+
     SelectBasicComponent,
     SelectOptionComponent,
     SelectCustomLabelTemplateComponent,

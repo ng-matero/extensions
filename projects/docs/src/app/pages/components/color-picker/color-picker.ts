@@ -43,6 +43,6 @@ export class ColorPickerApiComponent {
       { path: '**', redirectTo: 'overview' },
     ]),
   ],
-  declarations: [ColorPickerOverviewComponent, ColorPickerBasicComponent],
+  declarations: [ColorPickerOverviewComponent, ColorPickerApiComponent, ColorPickerBasicComponent],
 })
 export class ColorPickerModule {}

@@ -43,6 +43,6 @@ export class SplitPaneApiComponent {
       { path: '**', redirectTo: 'overview' },
     ]),
   ],
-  declarations: [SplitPaneOverviewComponent, SplitPaneBasicComponent],
+  declarations: [SplitPaneOverviewComponent, SplitPaneApiComponent, SplitPaneBasicComponent],
 })
 export class SplitPaneModule {}

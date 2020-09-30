@@ -4,35 +4,16 @@
   "compilerOptions": {
     "baseUrl": "src",
     "outDir": "../../out-tsc/app",
-    "types": [
-      "node"
-    ],
+    "types": ["node"],
     "paths": {
-      "@shared": [
-        "app/shared"
-      ],
-      "@shared/*": [
-        "app/shared/*"
-      ],
-      "@assets": [
-        "assets"
-      ],
-      "@assets/*": [
-        "assets/*"
-      ],
-      "@ng-matero/extensions": [
-        "../../extensions"
-      ],
-      "@ng-matero/extensions/*": [
-        "../../extensions/*"
-      ]
+      "@shared": ["app/shared"],
+      "@shared/*": ["app/shared/*"],
+      "@assets": ["assets"],
+      "@assets/*": ["assets/*"],
+      "@ng-matero/extensions": ["../../extensions"],
+      "@ng-matero/extensions/*": ["../../extensions/*"]
     }
   },
-  "files": [
-    "src/main.ts",
-    "src/polyfills.ts"
-  ],
-  "include": [
-    "src/**/*.d.ts"
-  ]
+  "files": ["src/main.ts", "src/polyfills.ts"],
+  "include": ["src/**/*.d.ts"]
 }

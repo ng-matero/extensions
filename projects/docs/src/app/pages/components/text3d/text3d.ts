@@ -46,6 +46,6 @@ export class Text3dApiComponent {
       { path: '**', redirectTo: 'overview' },
     ]),
   ],
-  declarations: [Text3dOverviewComponent, Text3dConfigurableComponent],
+  declarations: [Text3dOverviewComponent, Text3dApiComponent, Text3dConfigurableComponent],
 })
 export class Text3dModule {}

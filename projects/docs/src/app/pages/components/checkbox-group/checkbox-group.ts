@@ -79,6 +79,8 @@ export class CheckboxGroupApiComponent {
   ],
   declarations: [
     CheckboxGroupOverviewComponent,
+    CheckboxGroupApiComponent,
+
     CheckboxGroupBasicComponent,
     CheckboxGroupBindLabelBindValueComponent,
     CheckboxGroupCompareWithComponent,

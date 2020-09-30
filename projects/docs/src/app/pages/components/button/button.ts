@@ -46,6 +46,6 @@ export class ButtonApiComponent {
       { path: '**', redirectTo: 'overview' },
     ]),
   ],
-  declarations: [ButtonOverviewComponent, ButtonConfigurableComponent],
+  declarations: [ButtonOverviewComponent, ButtonApiComponent, ButtonConfigurableComponent],
 })
 export class ButtonModule {}

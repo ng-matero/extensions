@@ -46,6 +46,6 @@ export class AlertApiComponent {
       { path: '**', redirectTo: 'overview' },
     ]),
   ],
-  declarations: [AlertOverviewComponent, AlertConfigurableComponent],
+  declarations: [AlertOverviewComponent, AlertApiComponent, AlertConfigurableComponent],
 })
 export class AlertModule {}

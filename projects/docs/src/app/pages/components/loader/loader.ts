@@ -5,27 +5,24 @@ import { ActivatedRoute } from '@angular/router';
 import { SharedModule } from '@shared';
 
 import {
-  ProgressConfigurableComponent,
-  progressConfigurableExampleConfig,
+  LoaderConfigurableComponent,
+  loaderConfigurableExampleConfig,
 } from './examples/configurable';
-import {
-  ProgressCustomColorComponent,
-  progressCustomColorExampleConfig,
-} from './examples/custom-color';
+import { LoaderSimpleComponent, loaderSimpleExampleConfig } from './examples/simple';
 
 @Component({
-  selector: 'app-progress-overview',
-  templateUrl: './progress-overview.html',
+  selector: 'app-loader-overview',
+  templateUrl: './loader-overview.html',
 })
-export class ProgressOverviewComponent {
+export class LoaderOverviewComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
 @Component({
-  selector: 'app-progress-api',
-  templateUrl: './progress-api.html',
+  selector: 'app-loader-api',
+  templateUrl: './loader-api.html',
 })
-export class ProgressApiComponent {
+export class LoaderApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
@@ -36,26 +33,25 @@ export class ProgressApiComponent {
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       {
         path: 'overview',
-        component: ProgressOverviewComponent,
+        component: LoaderOverviewComponent,
         pathMatch: 'full',
         data: {
-          examples: [progressConfigurableExampleConfig, progressCustomColorExampleConfig],
+          examples: [loaderConfigurableExampleConfig, loaderSimpleExampleConfig],
         },
       },
       {
         path: 'api',
-        component: ProgressApiComponent,
+        component: LoaderApiComponent,
         pathMatch: 'full',
       },
       { path: '**', redirectTo: 'overview' },
     ]),
   ],
   declarations: [
-    ProgressOverviewComponent,
-    ProgressApiComponent,
-
-    ProgressConfigurableComponent,
-    ProgressCustomColorComponent,
+    LoaderOverviewComponent,
+    LoaderApiComponent,
+    LoaderConfigurableComponent,
+    LoaderSimpleComponent,
   ],
 })
-export class ProgressModule {}
+export class LoaderModule {}

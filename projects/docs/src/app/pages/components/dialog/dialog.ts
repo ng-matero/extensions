@@ -70,6 +70,7 @@ export class DialogApiComponent {
   ],
   declarations: [
     DialogOverviewComponent,
+    DialogApiComponent,
 
     DialogBasicComponent,
     DialogOriginalComponent,
