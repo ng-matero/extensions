@@ -19,6 +19,10 @@ function copyGrid() {
   return src([`${SRC}/data-grid/*.scss`]).pipe(dest(`${DEST}/data-grid`));
 }
 
+function copyLoader() {
+  return src([`${SRC}/loader/*.scss`]).pipe(dest(`${DEST}/loader`));
+}
+
 function copyProgress() {
   return src([`${SRC}/progress/*.scss`]).pipe(dest(`${DEST}/progress`));
 }
@@ -36,6 +40,7 @@ exports.default = series(
   copyAlert,
   copyButton,
   copyGrid,
+  copyLoader,
   copyProgress,
   copySelect,
   copySplit
