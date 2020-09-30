@@ -33,6 +33,7 @@ export class DevAppLayout {
     { name: 'Checkbox Group', route: '/checkbox-group' },
     { name: 'Data Grid', route: '/data-grid' },
     { name: 'Dialog', route: '/dialog' },
+    { name: 'Loader', route: '/loader' },
     { name: 'Progress', route: '/progress' },
     { name: 'Select', route: '/select' },
     { name: 'Split Pane', route: '/split-pane' },

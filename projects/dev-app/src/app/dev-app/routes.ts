@@ -32,6 +32,10 @@ export const DEV_APP_ROUTES: Routes = [
     loadChildren: () => import('../dialog/dialog-demo.module').then(m => m.DialogDemoModule),
   },
   {
+    path: 'loader',
+    loadChildren: () => import('../loader/loader-demo.module').then(m => m.LoaderDemoModule),
+  },
+  {
     path: 'progress',
     loadChildren: () => import('../progress/progress-demo.module').then(m => m.ProgressDemoModule),
   },

@@ -1,0 +1,40 @@
+.mtx-loader {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.mtx-loader-main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .mat-spinner {
+    position: relative;
+  }
+
+  .mat-progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+
+.mtx-loader-backdrop {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  content: '';
+}
