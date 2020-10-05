@@ -2,7 +2,7 @@
   <h2 class="docs-component-category-section-title">{{ section.title }}</h2>
   <div class="docs-component-category-list">
     <a class="docs-component-category-list-item"
-       *ngFor="let item of section.children" [routerLink]="['/components/' + item.route]">
+       *ngFor="let item of section.children" [routerLink]="['/components/' + item.id]">
       <div class="docs-component-category-list-card">
         <div class="docs-component-category-list-card-title">{{ item.name }}</div>
         <div class="docs-component-category-list-card-summary">{{ item.summary }}</div>
