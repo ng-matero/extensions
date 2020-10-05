@@ -71,3 +71,9 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   <tr mat-footer-row *matFooterRowDef="displayedColumns;"></tr>
 </table>
+
+<hr>
+
+<mtx-grid [data]="list"
+          [columns]="columns2">
+</mtx-grid>
