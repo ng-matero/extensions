@@ -32,7 +32,7 @@
   "dependencies": {
     "@ng-select/ng-select": "^4.0.0",
     "ngx-color": "^5.0.0",
-    "photoviewer": "^3.4.0"
+    "photoviewer": "^3.5.0"
   },
   "peerDependencies": {
     "@angular/animations": "^9.0.0",

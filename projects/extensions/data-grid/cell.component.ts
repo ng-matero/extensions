@@ -94,7 +94,7 @@ export class MtxGridCellComponent implements OnInit, OnDestroy {
 
       options = {
         title: false,
-        footToolbar: ['zoomIn', 'zoomOut', 'rotateRight', 'rotateLeft', 'actualSize'],
+        footerToolbar: ['zoomIn', 'zoomOut', 'rotateRight', 'rotateLeft', 'actualSize'],
       };
     }
 
