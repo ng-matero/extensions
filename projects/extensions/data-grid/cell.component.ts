@@ -18,15 +18,15 @@ export class MtxGridCellComponent implements OnInit {
   /** Column definition */
   @Input() colDef: MtxGridColumn;
 
-  _colValue = '';
+  get _colValue() {
+    return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
+  }
 
   _viewer: PhotoViewer;
 
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
 
-  ngOnInit() {
-    this._colValue = this._dataGridSrv.getCellValue(this.rowData, this.colDef);
-  }
+  ngOnInit() {}
 
   _handleActionConfirm(
     event: MouseEvent,

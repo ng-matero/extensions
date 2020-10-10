@@ -9,6 +9,20 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./data-grid-demo.component.scss'],
 })
 export class DataGridDemoComponent {
+  multiSelectable = true;
+  hideRowSelectionCheckbox = false;
+  rowSelectable = true;
+  rowSelected = EXAMPLE_DATA.slice(2, 3);
+  rowSelectionFormatter: MtxGridRowSelectionFormatter = {
+    disabled: data => data.name === 'Boron',
+    hideCheckbox: data => data.name === 'John',
+  };
+  expandable = false;
+  showSummary = false;
+  columnResizable = false;
+
+  list = EXAMPLE_DATA;
+
   columns: MtxGridColumn[] = [
     {
       header: this.translate.stream('name'),
@@ -43,7 +57,7 @@ export class DataGridDemoComponent {
       field: 'operation',
       minWidth: 150,
       maxWidth: 'auto',
-      pinned: 'right',
+      // pinned: 'right',
       right: '0px',
       type: 'button',
       buttons: [
@@ -65,24 +79,6 @@ export class DataGridDemoComponent {
     },
   ];
 
-  list = EXAMPLE_DATA;
-
-  multiSelectable = true;
-  hideRowSelectionCheckbox = false;
-  rowSelectable = true;
-  rowSelected = EXAMPLE_DATA.slice(2, 3);
-  rowSelectionFormatter: MtxGridRowSelectionFormatter = {
-    disabled: data => data.name === 'Boron',
-    hideCheckbox: data => data.name === 'John',
-  };
-  expandable = false;
-  showSummary = false;
-  columnResizable = false;
-
-  // mat-table
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = EXAMPLE_DATA;
-
   columns2: MtxGridColumn[] = [
     { header: 'Position', field: 'position', width: '200px' },
     { header: 'Name', field: 'name', width: '200px', pinned: 'left' },
@@ -101,6 +97,10 @@ export class DataGridDemoComponent {
     { header: 'Status', field: 'status', type: 'boolean', width: '200px' },
   ];
 
+  // mat-table
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = EXAMPLE_DATA;
+
   constructor(public translate: TranslateService) {}
 
   trackByName(index: number, item: any) {
@@ -114,5 +114,12 @@ export class DataGridDemoComponent {
 
   log(e: any) {
     console.log(e);
+  }
+
+  updateCell() {
+    this.list = this.list.map(item => {
+      item.weight = Math.round(Math.random() * 1000) / 100;
+      return item;
+    });
   }
 }

@@ -36,9 +36,11 @@
   <div>{{data | json}}</div>
 </ng-template>
 
+<button (click)="updateCell()">Update Cell</button>
+
 <hr>
 
-<table mat-table columnResize [dataSource]="dataSource" class="mat-elevation-z8 example-table">
+<table mat-table columnResize [dataSource]="dataSource" class="mat-elevation-z2 example-table">
   <!-- Position Column -->
   <ng-container matColumnDef="position" sticky>
     <th mat-header-cell *matHeaderCellDef resizable [matResizableMaxWidthPx]="100"> No. </th>
