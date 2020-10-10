@@ -19,7 +19,9 @@ export class MtxGridCellComponent implements OnInit, OnDestroy {
   /** Column definition */
   @Input() colDef: MtxGridColumn;
 
-  _colValue = '';
+  get _colValue() {
+    return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
+  }
 
   _viewer: PhotoViewer;
 
@@ -32,9 +34,7 @@ export class MtxGridCellComponent implements OnInit, OnDestroy {
     this._destroy$.complete();
   }
 
-  ngOnInit() {
-    this._colValue = this._dataGridSrv.getCellValue(this.rowData, this.colDef);
-  }
+  ngOnInit() {}
 
   getTranslateVal(data: Observable<any>): string {
     let translateValue = '';
