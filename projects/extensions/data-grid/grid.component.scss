@@ -33,8 +33,11 @@
     width: 30px;
   }
 
+  .mat-table-wrapper {
+    flex: 1;
+  }
+
   .mat-table {
-    flex: none;
     min-width: 100%;
     border-collapse: separate;
   }
