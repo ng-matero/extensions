@@ -339,7 +339,9 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   /** Whether the number of selected elements matches the total number of rows. */
   _isAllSelected() {
     const numSelected = this.rowSelection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.dataSource.data.filter(
+      row => !(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(row))
+    ).length;
     return numSelected === numRows;
   }
 
@@ -347,7 +349,11 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   _toggleMasterCheckbox() {
     this._isAllSelected()
       ? this.rowSelection.clear()
-      : this.dataSource.data.forEach(row => this.rowSelection.select(row));
+      : this.dataSource.data.forEach(row => {
+          if (!(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(row))) {
+            this.rowSelection.select(row);
+          }
+        });
     this.rowSelectionChange.emit(this.rowSelection.selected);
   }
 
