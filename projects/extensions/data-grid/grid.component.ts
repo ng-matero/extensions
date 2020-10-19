@@ -95,7 +95,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Expandable row */
 
-  expansionRowStates = [];
+  expansionRowStates: any[] = [];
 
   @Input() expandable = false;
   @Input() expansionTemplate: TemplateRef<any>;
@@ -118,12 +118,12 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Cell selection */
 
-  cellSelection = [];
+  cellSelection: any[] = [];
 
   @Input() cellSelectable = true;
   @Output() cellSelectionChange = new EventEmitter<any[]>();
 
-  private _selectedCell: MtxGridCellSelectionDirective;
+  private _selectedCell: MtxGridCellSelectionDirective | undefined;
 
   /** Toolbar */
 
@@ -159,22 +159,25 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /** thead */
-  @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate;
+  @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
   /** tbody */
-  @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate;
+  @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
   /** tfoot */
   @Input() showSummary = false;
-  @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate;
+  @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
-  // TODO:
+  // TODO: Summary display conditions
   get _whetherShowSummary() {
     return this.showSummary;
   }
 
   /** Sidebar */
   @Input() showSidebar = false;
+
+  /** Column resizable */
+  @Input() columnResizable = false;
 
   _getColData(data: any, colDef: MtxGridColumn) {
     return data.map((item: any) => item[colDef.field]);
@@ -216,7 +219,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     this.displayedColumns = this.columns.filter(item => !item.hide).map(item => item.field);
 
     if (this.showColumnMenuButton) {
-      this.columnMenuData = this.columns.map(item => {
+      this.columnMenuData = (this.columns as any[]).map(item => {
         return {
           label: item.header,
           field: item.field,
@@ -240,7 +243,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
       });
     }
 
-    // TODO:
+    // TODO: Whether need new instance
     this.dataSource = new MatTableDataSource<any>(this.data);
 
     if (this.pageOnFront) {
@@ -336,7 +339,9 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   /** Whether the number of selected elements matches the total number of rows. */
   _isAllSelected() {
     const numSelected = this.rowSelection.selected.length;
-    const numRows = this.dataSource.data.length;
+    const numRows = this.dataSource.data.filter(
+      row => !(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(row))
+    ).length;
     return numSelected === numRows;
   }
 
@@ -344,7 +349,11 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   _toggleMasterCheckbox() {
     this._isAllSelected()
       ? this.rowSelection.clear()
-      : this.dataSource.data.forEach(row => this.rowSelection.select(row));
+      : this.dataSource.data.forEach(row => {
+          if (!(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(row))) {
+            this.rowSelection.select(row);
+          }
+        });
     this.rowSelectionChange.emit(this.rowSelection.selected);
   }
 
