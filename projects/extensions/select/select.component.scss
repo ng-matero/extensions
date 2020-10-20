@@ -18,21 +18,23 @@
     .ng-value-container {
       align-items: center;
 
-      .ng-placeholder {
-        opacity: 0;
-        transition: opacity 200ms;
-
-        .mtx-select-floating & {
-          opacity: 1;
-        }
-      }
-
       .ng-input {
         > input {
           font: inherit;
           padding: 0;
         }
       }
+    }
+  }
+
+  .ng-placeholder {
+    .mat-form-field-has-label & {
+      transition: opacity 200ms;
+      opacity: 0;
+    }
+
+    .mat-form-field-has-label .mtx-select-floating & {
+      opacity: 1;
     }
   }
 

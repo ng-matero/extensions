@@ -316,7 +316,12 @@ export class MtxSelectComponent
   }
 
   /** Implemented as part of MatFormFieldControl. */
-  onContainerClick() {}
+  onContainerClick(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    if (target.classList[0]?.includes('mat')) {
+      this.open();
+    }
+  }
 
   /**
    * Sets the select's value. Part of the ControlValueAccessor interface
