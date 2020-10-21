@@ -51,8 +51,7 @@
            (add)="addEvent.emit($event)"
            (remove)="removeEvent.emit($event)"
            (scroll)="scroll.emit($event)"
-           (scrollToEnd)="scrollToEnd.emit($event)"
-           (click)="open()">
+           (scrollToEnd)="scrollToEnd.emit($event)">
 
   <ng-container *ngIf="optionTemplate">
     <ng-template ng-option-tmp let-item="item" let-index="index" let-searchTerm="searchTerm">

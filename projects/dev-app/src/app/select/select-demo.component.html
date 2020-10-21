@@ -58,7 +58,6 @@
 <hr>
 
 <mat-form-field appearance="standard">
-  <!-- <mat-label>Select Food</mat-label> -->
 
   <mtx-select [items]="items"
               [(ngModel)]="value"
@@ -67,6 +66,7 @@
               bindValue="id"
               [disabled]="disableSelect"
               [multiple]="multipleSelect"
+              appendTo="body"
               required>
   </mtx-select>
 

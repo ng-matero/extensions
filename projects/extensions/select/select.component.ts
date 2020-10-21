@@ -318,7 +318,8 @@ export class MtxSelectComponent
   /** Implemented as part of MatFormFieldControl. */
   onContainerClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (target.classList[0]?.includes('mat')) {
+    if (/mat-form-field|mtx-select/g.test(target.parentElement.classList[0])) {
+      this.focus();
       this.open();
     }
   }
