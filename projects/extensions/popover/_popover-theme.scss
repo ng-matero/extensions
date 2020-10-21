@@ -1,0 +1,35 @@
+@import '~@angular/material/theming';
+
+@mixin mtx-popover-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  .mtx-popover-panel {
+    color: mat-color($foreground, text);
+    background-color: mat-color($background, card);
+  }
+
+  .mtx-popover-below {
+    .mtx-popover-direction-arrow {
+      &::before {
+        border-bottom-color: rgba(mat-color($foreground, divider), .2);
+      }
+
+      &::after {
+        border-bottom-color: mat-color($background, card);
+      }
+    }
+  }
+
+  .mtx-popover-above {
+    .mtx-popover-direction-arrow {
+      &::before {
+        border-top-color: rgba(mat-color($foreground, divider), .2);
+      }
+
+      &::after {
+        border-top-color: mat-color($background, card);
+      }
+    }
+  }
+}

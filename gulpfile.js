@@ -23,6 +23,10 @@ function copyLoader() {
   return src([`${SRC}/loader/*.scss`]).pipe(dest(`${DEST}/loader`));
 }
 
+function copyPopover() {
+  return src([`${SRC}/popover/*.scss`]).pipe(dest(`${DEST}/popover`));
+}
+
 function copyProgress() {
   return src([`${SRC}/progress/*.scss`]).pipe(dest(`${DEST}/progress`));
 }
@@ -41,6 +45,7 @@ exports.default = series(
   copyButton,
   copyGrid,
   copyLoader,
+  copyPopover,
   copyProgress,
   copySelect,
   copySplit
