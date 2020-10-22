@@ -40,6 +40,11 @@ export const COMPONENTS_MENU = [
         summary: 'A configurable modal to show alert and confirmation.',
       },
       {
+        id: 'popover',
+        name: 'Popover',
+        summary: 'A floating panel containing html content.',
+      },
+      {
         id: 'progress',
         name: 'Progress',
         summary: 'A linear progress indicator with Bootstrap style.',

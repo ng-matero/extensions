@@ -5,7 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { Directionality } from '@angular/cdk/bidi';
 
-import { SharedModule, AppDirectionality } from '@shared';
+import { SharedModule, AppDirectionality } from './shared';
 
 import { AppComponent } from './app.component';
 import { DOCS_APP_ROUTES } from './routes';

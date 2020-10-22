@@ -39,6 +39,10 @@ const routes = [
         loadChildren: () => import('./loader/loader').then(m => m.LoaderModule),
       },
       {
+        path: 'popover',
+        loadChildren: () => import('./popover/popover').then(m => m.PopoverModule),
+      },
+      {
         path: 'progress',
         loadChildren: () => import('./progress/progress').then(m => m.ProgressModule),
       },
