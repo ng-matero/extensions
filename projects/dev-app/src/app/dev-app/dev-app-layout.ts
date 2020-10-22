@@ -34,6 +34,7 @@ export class DevAppLayout {
     { name: 'Data Grid', route: '/data-grid' },
     { name: 'Dialog', route: '/dialog' },
     { name: 'Loader', route: '/loader' },
+    { name: 'Popover', route: '/popover' },
     { name: 'Progress', route: '/progress' },
     { name: 'Select', route: '/select' },
     { name: 'Split Pane', route: '/split-pane' },

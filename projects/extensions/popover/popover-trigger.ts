@@ -73,43 +73,12 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   @Input('mtxPopoverTriggerFor') popover: MtxPopoverPanel;
 
   /** References the popover target instance that the trigger is associated with. */
+  // tslint:disable-next-line: no-input-rename
   @Input('mtxPopoverTargetAt') targetElement: MtxTarget;
 
-  /** Position of the popover in the X axis */
-  @Input('mtxPopoverPositionX') positionX: MtxPopoverPositionX;
-
-  /** Position of the popover in the Y axis */
-  @Input('mtxPopoverPositionY') positionY: MtxPopoverPositionY;
-
   /** Popover trigger event */
+  // tslint:disable-next-line: no-input-rename
   @Input('mtxPopoverTriggerOn') triggerEvent: MtxPopoverTriggerEvent;
-
-  /** Popover delay */
-  @Input('mtxPopoverEnterDelay') enterDelay: number;
-
-  /** Popover delay */
-  @Input('mtxPopoverLeaveDelay') leaveDelay: number;
-
-  /** Popover overlap trigger */
-  @Input('mtxPopoverOverlapTrigger') overlapTrigger: boolean;
-
-  /** Popover target offset x */
-  @Input('mtxPopoverOffsetX') targetOffsetX: number;
-
-  /** Popover target offset y */
-  @Input('mtxPopoverOffsetY') targetOffsetY: number;
-
-  /** Popover arrow offset x */
-  @Input('mtxPopoverArrowOffsetX') arrowOffsetX: number;
-
-  /** Popover arrow width */
-  @Input('mtxPopoverArrowWidth') arrowWidth: number;
-
-  /** Popover container close on click */
-  @Input('mtxPopoverCloseOnClick') closeOnClick: boolean;
-
-  /** Popover backdrop close on click */
-  @Input('mtxPopoverBackdropCloseOnClick') backdropCloseOnClick = true;
 
   /** Event emitted when the associated popover is opened. */
   @Output() opened = new EventEmitter<void>();
@@ -136,48 +105,8 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   }
 
   private _setCurrentConfig() {
-    if (this.positionX === 'before' || this.positionX === 'after' || this.positionX === 'center') {
-      this.popover.positionX = this.positionX;
-    }
-
-    if (this.positionY === 'above' || this.positionY === 'below') {
-      this.popover.positionY = this.positionY;
-    }
-
     if (this.triggerEvent) {
       this.popover.triggerEvent = this.triggerEvent;
-    }
-
-    if (this.enterDelay) {
-      this.popover.enterDelay = this.enterDelay;
-    }
-
-    if (this.leaveDelay) {
-      this.popover.leaveDelay = this.leaveDelay;
-    }
-
-    if (this.overlapTrigger === true || this.overlapTrigger === false) {
-      this.popover.overlapTrigger = this.overlapTrigger;
-    }
-
-    if (this.targetOffsetX) {
-      this.popover.targetOffsetX = this.targetOffsetX;
-    }
-
-    if (this.targetOffsetY) {
-      this.popover.targetOffsetY = this.targetOffsetY;
-    }
-
-    if (this.arrowOffsetX) {
-      this.popover.arrowOffsetX = this.arrowOffsetX;
-    }
-
-    if (this.arrowWidth) {
-      this.popover.arrowWidth = this.arrowWidth;
-    }
-
-    if (this.closeOnClick === true || this.closeOnClick === false) {
-      this.popover.closeOnClick = this.closeOnClick;
     }
 
     this.popover.setCurrentStyles();
@@ -281,7 +210,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   private _subscribeToBackdrop(): void {
     if (this._overlayRef) {
       /** Only subscribe to backdrop if trigger event is click */
-      if (this.triggerEvent === 'click' && this.backdropCloseOnClick === true) {
+      if (this.triggerEvent === 'click' && this.popover.closeOnBackdropClick === true) {
         this._overlayRef
           .backdropClick()
           .pipe(takeUntil(this.popoverClosed), takeUntil(this._onDestroy))
@@ -428,8 +357,8 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       this._changeDetectorRef.markForCheck();
 
       this.popover.zone.run(() => {
-        this.popover.positionX = posisionX;
-        this.popover.positionY = posisionY;
+        this.popover.xPosition = posisionX;
+        this.popover.yPosition = posisionY;
         this.popover.setCurrentStyles();
 
         this.popover.setPositionClasses(posisionX, posisionY);
@@ -444,14 +373,14 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
    */
   private _getPosition(): FlexibleConnectedPositionStrategy {
     const [originX, origin2ndX, origin3rdX]: HorizontalConnectionPos[] =
-      this.popover.positionX === 'before'
+      this.popover.xPosition === 'before'
         ? ['end', 'start', 'center']
-        : this.popover.positionX === 'after'
+        : this.popover.xPosition === 'after'
         ? ['start', 'end', 'center']
         : ['center', 'start', 'end'];
 
     const [overlayY, overlayFallbackY]: VerticalConnectionPos[] =
-      this.popover.positionY === 'above' ? ['bottom', 'top'] : ['top', 'bottom'];
+      this.popover.yPosition === 'above' ? ['bottom', 'top'] : ['top', 'bottom'];
 
     /** Reverse overlayY and fallbackOverlayY when overlapTrigger is false */
     const originY = this.popover.overlapTrigger ? overlayY : overlayFallbackY;
@@ -460,12 +389,12 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     const overlayX = originX;
 
     const offsetX =
-      this.popover.targetOffsetX && !isNaN(Number(this.popover.targetOffsetX))
-        ? Number(this.popover.targetOffsetX)
+      this.popover.panelOffsetX && !isNaN(Number(this.popover.panelOffsetX))
+        ? Number(this.popover.panelOffsetX)
         : 0;
     const offsetY =
-      this.popover.targetOffsetY && !isNaN(Number(this.popover.targetOffsetY))
-        ? Number(this.popover.targetOffsetY)
+      this.popover.panelOffsetY && !isNaN(Number(this.popover.panelOffsetY))
+        ? Number(this.popover.panelOffsetY)
         : 0;
 
     /**

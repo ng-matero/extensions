@@ -7,39 +7,37 @@ import {
 } from './popover-types';
 
 export interface MtxPopoverPanel {
-  positionX: MtxPopoverPositionX;
-  positionY: MtxPopoverPositionY;
-  containerPositioning: boolean;
-  overlapTrigger: boolean;
   triggerEvent: MtxPopoverTriggerEvent;
-  scrollStrategy: MtxPopoverScrollStrategy;
+  xPosition: MtxPopoverPositionX;
+  yPosition: MtxPopoverPositionY;
+  overlapTrigger: boolean;
   enterDelay: number;
   leaveDelay: number;
-  targetOffsetX: number;
-  targetOffsetY: number;
+  panelOffsetX: number;
+  panelOffsetY: number;
   arrowOffsetX: number;
-  arrowWidth: number;
-  closeOnClick: boolean;
+  closeOnPanelClick: boolean;
+  closeOnBackdropClick: boolean;
+  scrollStrategy: MtxPopoverScrollStrategy;
+  containerPositioning: boolean;
   closeDisabled: boolean;
-  setCurrentStyles: () => void;
   templateRef: TemplateRef<any>;
-  close: EventEmitter<void>;
   zone: NgZone;
+  close: EventEmitter<void>;
+  setCurrentStyles: () => void;
   setPositionClasses: (x: MtxPopoverPositionX, y: MtxPopoverPositionY) => void;
   _emitCloseEvent: () => void;
 }
 
 export interface MtxPopoverConfig {
-  positionX: MtxPopoverPositionX;
-  positionY: MtxPopoverPositionY;
+  xPosition: MtxPopoverPositionX;
+  yPosition: MtxPopoverPositionY;
   overlapTrigger: boolean;
   triggerEvent: MtxPopoverTriggerEvent;
-  triggerDelay: number;
-  targetOffsetX: number;
-  targetOffsetY: number;
+  panelOffsetX: number;
+  panelOffsetY: number;
   arrowOffsetX: number;
-  arrowWidth: number;
-  closeOnClick: boolean;
+  closeOnPanelClick: boolean;
 }
 
 export interface MtxTarget {
