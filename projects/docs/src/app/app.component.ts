@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, ElementRef } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { AppThemes, themeClass } from '@shared';
+import { AppThemes, themeClass } from './shared';
 
 @Component({
   selector: 'app-root',

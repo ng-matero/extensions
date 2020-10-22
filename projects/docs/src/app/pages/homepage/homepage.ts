@@ -1,6 +1,6 @@
 import { Component, NgModule, OnInit } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '@shared';
+import { SharedModule } from '../../shared';
 import { ComponentPageTitle } from '../page-title/page-title';
 
 @Component({

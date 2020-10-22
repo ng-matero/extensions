@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AppThemes } from '@shared/themes';
+import { AppThemes } from '../themes';
 
 @Component({
   selector: 'app-navbar',
