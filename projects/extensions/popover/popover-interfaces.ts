@@ -10,12 +10,13 @@ export interface MtxPopoverPanel {
   triggerEvent: MtxPopoverTriggerEvent;
   xPosition: MtxPopoverPositionX;
   yPosition: MtxPopoverPositionY;
-  overlapTrigger: boolean;
+  xOffset: number;
+  yOffset: number;
   enterDelay: number;
   leaveDelay: number;
-  panelOffsetX: number;
-  panelOffsetY: number;
+  overlapTrigger: boolean;
   arrowOffsetX: number;
+  arrowWidth: number;
   closeOnPanelClick: boolean;
   closeOnBackdropClick: boolean;
   scrollStrategy: MtxPopoverScrollStrategy;
@@ -23,21 +24,27 @@ export interface MtxPopoverPanel {
   closeDisabled: boolean;
   templateRef: TemplateRef<any>;
   zone: NgZone;
-  close: EventEmitter<void>;
+  closed: EventEmitter<void>;
   setCurrentStyles: () => void;
   setPositionClasses: (x: MtxPopoverPositionX, y: MtxPopoverPositionY) => void;
   _emitCloseEvent: () => void;
 }
 
 export interface MtxPopoverConfig {
+  triggerEvent: MtxPopoverTriggerEvent;
   xPosition: MtxPopoverPositionX;
   yPosition: MtxPopoverPositionY;
+  xOffset: number;
+  yOffset: number;
+  enterDelay: number;
+  leaveDelay: number;
   overlapTrigger: boolean;
-  triggerEvent: MtxPopoverTriggerEvent;
-  panelOffsetX: number;
-  panelOffsetY: number;
   arrowOffsetX: number;
+  arrowWidth: number;
   closeOnPanelClick: boolean;
+  closeOnBackdropClick: boolean;
+  panelClass: string;
+  backdropClass: string;
 }
 
 export interface MtxTarget {

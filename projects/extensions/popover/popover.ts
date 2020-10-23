@@ -56,7 +56,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   private _focusTrapEnabled = true;
   private _focusTrapAutoCaptureEnabled = true;
   private _arrowOffsetX = 20;
-  private _arrowWidth = 8;
+  private _arrowWidth = 16;
 
   /** Config object to be passed into the popover's ngClass */
   _classList: { [key: string]: boolean } = {};
@@ -153,19 +153,19 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
 
   /** Popover target offset x */
   @Input()
-  get panelOffsetX(): number {
+  get xOffset(): number {
     return this._panelOffsetX;
   }
-  set panelOffsetX(value: number) {
+  set xOffset(value: number) {
     this._panelOffsetX = value;
   }
 
   /** Popover target offset y */
   @Input()
-  get panelOffsetY(): number {
+  get yOffset(): number {
     return this._panelOffsetY;
   }
-  set panelOffsetY(value: number) {
+  set yOffset(value: number) {
     this._panelOffsetY = value;
   }
 
@@ -187,10 +187,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     this._arrowWidth = value;
   }
 
-  /**
-   * Popover container close on click
-   * default: false
-   */
+  /** Popover container close on click */
   @Input()
   get closeOnPanelClick(): boolean {
     return this._panelCloseOnClick;
@@ -199,10 +196,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     this._panelCloseOnClick = coerceBooleanProperty(value);
   }
 
-  /**
-   * Popover backdrop close on click
-   * default: true
-   */
+  /** Popover backdrop close on click */
   @Input()
   get closeOnBackdropClick(): boolean {
     return this._backdropCloseOnClick;
@@ -211,10 +205,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     this._backdropCloseOnClick = coerceBooleanProperty(value);
   }
 
-  /**
-   * Disable animations of popover and all child elements
-   * default: false
-   */
+  /** Disable animations of popover and all child elements */
   @Input()
   get disableAnimation(): boolean {
     return this._disableAnimation;
@@ -223,10 +214,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     this._disableAnimation = coerceBooleanProperty(value);
   }
 
-  /**
-   * Popover focus trap using cdkTrapFocus
-   * default: true
-   */
+  /** Popover focus trap using cdkTrapFocus */
   @Input()
   get focusTrapEnabled(): boolean {
     return this._focusTrapEnabled;
@@ -235,10 +223,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     this._focusTrapEnabled = coerceBooleanProperty(value);
   }
 
-  /**
-   * Popover focus trap auto capture using cdkTrapFocusAutoCapture
-   * default: true
-   */
+  /** Popover focus trap auto capture using cdkTrapFocusAutoCapture */
   @Input()
   get focusTrapAutoCaptureEnabled(): boolean {
     return this._focusTrapAutoCaptureEnabled;
@@ -282,7 +267,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   }
 
   /** Event emitted when the popover is closed. */
-  @Output() close = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
 
   @ViewChild(TemplateRef) templateRef: TemplateRef<any>;
 
@@ -296,7 +281,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
 
   ngOnDestroy() {
     this._emitCloseEvent();
-    this.close.complete();
+    this.closed.complete();
   }
 
   /** Handle a keyboard event from the popover, delegating to the appropriate action. */
@@ -314,7 +299,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
    * trigger will close the popover.
    */
   _emitCloseEvent(): void {
-    this.close.emit();
+    this.closed.emit();
   }
 
   /** Close popover on click if closeOnPanelClick is true */
@@ -348,11 +333,11 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   setCurrentStyles() {
     const left =
       this.xPosition === 'after'
-        ? this.arrowOffsetX - this.arrowWidth + 'px'
+        ? `${this.arrowOffsetX - this.arrowWidth / 2}px`
         : this.xPosition === 'center'
-        ? `calc(50% - ${this.arrowOffsetX / 2}px)`
+        ? `calc(50% - ${this.arrowWidth / 2}px)`
         : '';
-    const right = this.xPosition === 'before' ? this.arrowOffsetX - this.arrowWidth + 'px' : '';
+    const right = this.xPosition === 'before' ? `${this.arrowOffsetX - this.arrowWidth / 2}px` : '';
 
     this.popoverArrowStyles = {
       left: this._dir.value === 'ltr' ? left : right,

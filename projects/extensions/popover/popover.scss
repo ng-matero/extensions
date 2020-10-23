@@ -34,11 +34,11 @@ $arrow-height: 8px;
   }
 
   &::before {
-    border: ($arrow-height + 1) solid transparent;
+    border: $arrow-height solid transparent;
   }
 
   &::after {
-    border: $arrow-height solid transparent;
+    border: ($arrow-height - 1) solid transparent;
     left: 1px;
 
     [dir='rtl'] & {

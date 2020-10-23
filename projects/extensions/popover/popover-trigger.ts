@@ -50,8 +50,8 @@ import { throwMtxPopoverMissingError } from './popover-errors';
 export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   @HostBinding('attr.aria-haspopup') ariaHaspopup = true;
 
-  popoverOpened = new Subject<void>();
-  popoverClosed = new Subject<void>();
+  popoverOpened$ = new Subject<void>();
+  popoverClosed$ = new Subject<void>();
 
   private _portal: TemplatePortal<any>;
   private _overlayRef: OverlayRef | null = null;
@@ -81,10 +81,10 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   @Input('mtxPopoverTriggerOn') triggerEvent: MtxPopoverTriggerEvent;
 
   /** Event emitted when the associated popover is opened. */
-  @Output() opened = new EventEmitter<void>();
+  @Output() popoverOpened = new EventEmitter<void>();
 
   /** Event emitted when the associated popover is closed. */
-  @Output() closed = new EventEmitter<void>();
+  @Output() popoverClosed = new EventEmitter<void>();
 
   constructor(
     private _overlay: Overlay,
@@ -97,7 +97,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this._checkPopover();
     this._setCurrentConfig();
-    this.popover.close.subscribe(() => this.closePopover());
+    this.popover.closed.subscribe(() => this.closePopover());
   }
 
   ngOnDestroy() {
@@ -201,6 +201,11 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     this._elementRef.nativeElement.focus();
   }
 
+  /** The text direction of the containing app. */
+  get dir(): Direction {
+    return this._dir && this._dir.value === 'rtl' ? 'rtl' : 'ltr';
+  }
+
   /**
    * This method ensures that the popover closes when the overlay backdrop is clicked.
    * We do not use first() here because doing so would not catch clicks from within
@@ -213,7 +218,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       if (this.triggerEvent === 'click' && this.popover.closeOnBackdropClick === true) {
         this._overlayRef
           .backdropClick()
-          .pipe(takeUntil(this.popoverClosed), takeUntil(this._onDestroy))
+          .pipe(takeUntil(this.popoverClosed$), takeUntil(this._onDestroy))
           .subscribe(() => {
             this.popover._emitCloseEvent();
           });
@@ -225,7 +230,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     if (this._overlayRef) {
       this._overlayRef
         .detachments()
-        .pipe(takeUntil(this.popoverClosed), takeUntil(this._onDestroy))
+        .pipe(takeUntil(this.popoverClosed$), takeUntil(this._onDestroy))
         .subscribe(() => {
           this._setPopoverClosed();
         });
@@ -260,8 +265,8 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     if (!this._popoverOpen) {
       this._popoverOpen = true;
 
-      this.popoverOpened.next();
-      this.opened.emit();
+      this.popoverOpened$.next();
+      this.popoverOpened.emit();
     }
   }
 
@@ -270,8 +275,8 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     if (this._popoverOpen) {
       this._popoverOpen = false;
 
-      this.popoverClosed.next();
-      this.closed.emit();
+      this.popoverClosed$.next();
+      this.popoverClosed.emit();
     }
   }
 
@@ -314,7 +319,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       overlayState.backdropClass = 'cdk-overlay-transparent-backdrop';
     }
 
-    overlayState.direction = this._dir.value;
+    overlayState.direction = this.dir;
     overlayState.scrollStrategy = this._getOverlayScrollStrategy(this.popover.scrollStrategy);
 
     return overlayState;
@@ -389,12 +394,12 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     const overlayX = originX;
 
     const offsetX =
-      this.popover.panelOffsetX && !isNaN(Number(this.popover.panelOffsetX))
-        ? Number(this.popover.panelOffsetX)
+      this.popover.xOffset && !isNaN(Number(this.popover.xOffset))
+        ? Number(this.popover.xOffset)
         : 0;
     const offsetY =
-      this.popover.panelOffsetY && !isNaN(Number(this.popover.panelOffsetY))
-        ? Number(this.popover.panelOffsetY)
+      this.popover.yOffset && !isNaN(Number(this.popover.yOffset))
+        ? Number(this.popover.yOffset)
         : 0;
 
     /**

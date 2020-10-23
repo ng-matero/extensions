@@ -1,19 +1,23 @@
 <button mat-raised-button color="primary"
         #popoverTrigger="mtxPopoverTrigger"
         [mtxPopoverTriggerFor]="popover"
-        [mtxPopoverTriggerOn]="'hover'">
+        [mtxPopoverTriggerOn]="'click'"
+        (popoverOpened)="log()"
+        (popoverClosed)="log()">
   Show Popover
 </button>
 
 <mtx-popover #popover="mtxPopover"
              [xPosition]="'after'"
              [yPosition]="'above'"
-             [enterDelay]="1000"
-             [leaveDelay]="1000"
+             [enterDelay]=""
+             [leaveDelay]=""
+             [arrowOffsetX]="28"
              [overlapTrigger]="false"
              [closeOnPanelClick]="true"
-             [closeOnBackdropClick]="false">
-  <mat-card>
+             [closeOnBackdropClick]="true"
+             (closed)="log()">
+  <mat-card style="max-width: 40px;">
     <mat-card-content>
       A material design popover component created using Angular with the Angular CDK.
     </mat-card-content>
@@ -23,20 +27,20 @@
 <button mat-raised-button color="accent"
         #popoverTrigger2="mtxPopoverTrigger"
         [mtxPopoverTriggerFor]="popover2"
-        [mtxPopoverTriggerOn]="'click'">
+        [mtxPopoverTriggerOn]="'hover'">
   Show Popover2
 </button>
 
 <mtx-popover #popover2="mtxPopover"
              [xPosition]="'center'"
              [yPosition]=""
+             [xOffset]="10"
+             [yOffset]="10"
              [enterDelay]=""
              [leaveDelay]=""
-             [panelOffsetX]="50"
-             [panelOffsetY]="50"
              [overlapTrigger]="false"
              [closeOnPanelClick]="false">
-  <div style="max-width: 300px;">
+  <div style="max-width: 200px;">
     A material design popover component created using Angular with the Angular CDK.
   </div>
 </mtx-popover>
