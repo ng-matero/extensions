@@ -1,8 +1,8 @@
-import { AppComponent as LoaderSimpleComponent } from './app.component';
+import { AppComponent as PopoverTargetComponent } from './app.component';
 
-const loaderSimpleExampleConfig = {
-  title: 'Simple loader',
-  component: LoaderSimpleComponent,
+const popoverTargetExampleConfig = {
+  title: 'Popover target',
+  component: PopoverTargetComponent,
   files: [
     {
       file: 'app.component.html',
@@ -22,4 +22,4 @@ const loaderSimpleExampleConfig = {
   ],
 };
 
-export { LoaderSimpleComponent, loaderSimpleExampleConfig };
+export { PopoverTargetComponent, popoverTargetExampleConfig };

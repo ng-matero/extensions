@@ -3,9 +3,9 @@
 <section>
   <label>xPosition:</label>
   <mat-radio-group [(ngModel)]="xPosition">
-    <mat-radio-button value="after">after</mat-radio-button>
-    <mat-radio-button value="center">center</mat-radio-button>
     <mat-radio-button value="before">before</mat-radio-button>
+    <mat-radio-button value="center">center</mat-radio-button>
+    <mat-radio-button value="after">after</mat-radio-button>
   </mat-radio-group>
 </section>
 
@@ -15,6 +15,17 @@
     <mat-radio-button value="above">above</mat-radio-button>
     <mat-radio-button value="below">below</mat-radio-button>
   </mat-radio-group>
+</section>
+
+<section>
+  <mat-form-field>
+    <mat-label>xOffset</mat-label>
+    <input matInput type="number" [(ngModel)]="xOffset">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>yOffset</mat-label>
+    <input matInput type="number" [(ngModel)]="yOffset">
+  </mat-form-field>
 </section>
 
 <section>
@@ -29,18 +40,11 @@
 </section>
 
 <section>
-  <mat-form-field>
-    <mat-label>panelOffsetX</mat-label>
-    <input matInput type="number" [(ngModel)]="panelOffsetX">
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>panelOffsetY</mat-label>
-    <input matInput type="number" [(ngModel)]="panelOffsetY">
-  </mat-form-field>
+  <mat-checkbox [(ngModel)]="overlapTrigger">overlapTrigger</mat-checkbox>
 </section>
 
 <section>
-  <mat-checkbox [(ngModel)]="overlapTrigger">overlapTrigger</mat-checkbox>
+  <mat-checkbox [(ngModel)]="closeOnPanelClick">closeOnPanelClick</mat-checkbox>
 </section>
 
 <h2>Result</h2>
@@ -57,10 +61,10 @@
              [yPosition]="yPosition"
              [enterDelay]="enterDelay"
              [leaveDelay]="leaveDelay"
-             [panelOffsetX]="panelOffsetX"
-             [panelOffsetY]="panelOffsetY"
+             [xOffset]="xOffset"
+             [yOffset]="yOffset"
              [overlapTrigger]="overlapTrigger"
-             [closeOnPanelClick]="true"
+             [closeOnPanelClick]="closeOnPanelClick"
              [closeOnBackdropClick]="true">
   <mat-card>
     <mat-card-content>
@@ -79,10 +83,10 @@
 <mtx-popover #popover2="mtxPopover"
              [xPosition]="xPosition"
              [yPosition]="yPosition"
-             [panelOffsetX]="panelOffsetX"
-             [panelOffsetY]="panelOffsetY"
+             [xOffset]="xOffset"
+             [yOffset]="yOffset"
              [overlapTrigger]="overlapTrigger"
-             [closeOnPanelClick]="true"
+             [closeOnPanelClick]="closeOnPanelClick"
              [closeOnBackdropClick]="true">
   <mat-card>
     <mat-card-content>

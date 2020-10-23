@@ -10,7 +10,8 @@ export class AppComponent {
   yPosition = 'below';
   enterDelay = 200;
   leaveDelay = 200;
-  panelOffsetX = 0;
-  panelOffsetY = 0;
+  xOffset = 0;
+  yOffset = 0;
   overlapTrigger = false;
+  closeOnPanelClick = false;
 }
