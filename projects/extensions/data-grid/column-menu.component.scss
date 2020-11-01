@@ -6,8 +6,23 @@
   }
 }
 
-.mtx-grid-column-menu-inner {
+.mtx-grid-column-menu-body {
   padding: 16px;
+}
+
+.mtx-grid-column-menu-header,
+.mtx-grid-column-menu-footer {
+  position: sticky;
+  z-index: 1;
+  padding: 8px 16px;
+}
+
+.mtx-grid-column-menu-header {
+  top: 0;
+}
+
+.mtx-grid-column-menu-footer {
+  bottom: 0;
 }
 
 .mtx-grid-column-menu-list {

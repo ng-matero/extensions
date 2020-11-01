@@ -42,28 +42,42 @@
 </ng-container>
 
 <mat-menu #menu="matMenu" class="mtx-grid-column-menu">
-  <div class="mtx-grid-column-menu-inner"
-       (click)="$event.stopPropagation()"
-       (keydown)="$event.stopPropagation()">
+  <div class="mtx-grid-column-menu-content"
+       (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+    <div class="mtx-grid-column-menu-header" *ngIf="showHeader">
+      <ng-template [ngIf]="headerTemplate" [ngIfElse]="defaultHeaderTpl">
+        <ng-template [ngTemplateOutlet]="headerTemplate"></ng-template>
+      </ng-template>
+      <ng-template #defaultHeaderTpl>{{headerText}}</ng-template>
+    </div>
 
-    <div class="mtx-grid-column-menu-list"
-         cdkDropList (cdkDropListDropped)="_handleDroped($event)"
-         *ngIf="sortable">
-      <div class="mtx-grid-column-menu-item" *ngFor="let col of columns"
-           cdkDrag [cdkDragDisabled]="selectedType === 'show'? !col.show : col.hide">
-        <mat-icon cdkDragHandle>drag_handle</mat-icon>
-        <ng-template [ngTemplateOutlet]="checkboxList"
-                     [ngTemplateOutletContext]="{ $implicit: col }">
-        </ng-template>
+    <div class="mtx-grid-column-menu-body">
+      <div class="mtx-grid-column-menu-list"
+           cdkDropList (cdkDropListDropped)="_handleDroped($event)"
+           *ngIf="sortable">
+        <div class="mtx-grid-column-menu-item" *ngFor="let col of columns"
+             cdkDrag [cdkDragDisabled]="selectedType === 'show'? !col.show : col.hide">
+          <mat-icon cdkDragHandle>drag_handle</mat-icon>
+          <ng-template [ngTemplateOutlet]="checkboxList"
+                       [ngTemplateOutletContext]="{ $implicit: col }">
+          </ng-template>
+        </div>
+      </div>
+
+      <div class="mtx-grid-column-menu-list" *ngIf="!sortable">
+        <div class="mtx-grid-column-menu-item" *ngFor="let col of columns">
+          <ng-template [ngTemplateOutlet]="checkboxList"
+                       [ngTemplateOutletContext]="{ $implicit: col }">
+          </ng-template>
+        </div>
       </div>
     </div>
 
-    <div class="mtx-grid-column-menu-list" *ngIf="!sortable">
-      <div class="mtx-grid-column-menu-item" *ngFor="let col of columns">
-        <ng-template [ngTemplateOutlet]="checkboxList"
-                     [ngTemplateOutletContext]="{ $implicit: col }">
-        </ng-template>
-      </div>
+    <div class="mtx-grid-column-menu-footer" *ngIf="showFooter">
+      <ng-template [ngIf]="footerTemplate" [ngIfElse]="defaultFooterTpl">
+        <ng-template [ngTemplateOutlet]="footerTemplate"></ng-template>
+      </ng-template>
+      <ng-template #defaultFooterTpl>{{footerText}}</ng-template>
     </div>
   </div>
 </mat-menu>

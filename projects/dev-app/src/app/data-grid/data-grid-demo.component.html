@@ -24,9 +24,12 @@
           [summaryTemplate]="{'weight': footerTpl}"
           [showToolbar]="true"
           [columnHidingChecked]="'show'"
-          (columnHidingChange)="log($event)"
-          (columnMovingChange)="log($event)"
-          (rowClick)="log($event)">
+          (columnChange)="log($event)"
+          [showColumnMenuHeader]="true"
+          [showColumnMenuFooter]="true"
+          [columnMenuFooterTemplate]="menuFooterTpl"
+          (rowClick)="log($event)"
+          [showSidebar]="false">
 </mtx-grid>
 
 <ng-template #expansionTpl let-row>
@@ -39,6 +42,10 @@
 
 <ng-template #footerTpl let-data>
   <div>{{data | json}}</div>
+</ng-template>
+
+<ng-template #menuFooterTpl>
+  <button>Save</button>
 </ng-template>
 
 <button (click)="updateCell()">Update Cell</button>

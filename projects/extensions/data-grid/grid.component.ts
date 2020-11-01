@@ -135,6 +135,8 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() toolbarTitle = '';
   @Input() toolbarTemplate: TemplateRef<any>;
 
+  /** Column menu */
+
   columnMenuData: MtxGridColumnSelectionItem[] = [];
 
   @Input() showColumnMenuButton = true;
@@ -146,13 +148,16 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() columnHideable = true;
   @Input() columnHidingChecked: 'show' | 'hide' = 'show';
-  @Output() columnHidingChange = new EventEmitter<string[]>();
-
   @Input() columnMovable = true;
-  @Output() columnMovingChange = new EventEmitter<string[]>();
-
   @Input() columnPinnable = true;
-  @Output() columnPinningChange = new EventEmitter<string[]>();
+  @Output() columnChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
+
+  @Input() showColumnMenuHeader = false;
+  @Input() columnMenuHeaderText = 'Columns Header';
+  @Input() columnMenuHeaderTemplate: TemplateRef<any>;
+  @Input() showColumnMenuFooter = false;
+  @Input() columnMenuFooterText = 'Columns Footer';
+  @Input() columnMenuFooterTemplate: TemplateRef<any>;
 
   /** No Result */
   @Input() noResultText = 'No records found';
@@ -375,18 +380,8 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Column change event */
 
-  _handleColumnHidingChange(columns: any[]) {
-    this.columnHidingChange.emit(columns);
-
-    this.displayedColumns = Object.assign([], this.getDisplayedColumnFields(columns));
-
-    if (this.rowSelectable && !this.hideRowSelectionCheckbox) {
-      this.displayedColumns.unshift('MtxGridCheckboxColumnDef');
-    }
-  }
-
-  _handleColumnMovingChange(columns: any[]) {
-    this.columnMovingChange.emit(columns);
+  _handleColumnChange(columns: any[]) {
+    this.columnChange.emit(columns);
 
     this.displayedColumns = Object.assign([], this.getDisplayedColumnFields(columns));
 

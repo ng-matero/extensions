@@ -20,8 +20,14 @@
                           [selectable]="columnHideable"
                           [selectedType]="columnHidingChecked"
                           [sortable]="columnMovable"
-                          (selectionChange)="_handleColumnHidingChange($event)"
-                          (sortChange)="_handleColumnMovingChange($event)">
+                          (selectionChange)="_handleColumnChange($event)"
+                          (sortChange)="_handleColumnChange($event)"
+                          [showHeader]="showColumnMenuHeader"
+                          [headerText]="columnMenuHeaderText"
+                          [headerTemplate]="columnMenuHeaderTemplate"
+                          [showFooter]="showColumnMenuFooter"
+                          [footerText]="columnMenuFooterText"
+                          [footerTemplate]="columnMenuFooterTemplate">
     </mtx-grid-column-menu>
   </div>
 </div>

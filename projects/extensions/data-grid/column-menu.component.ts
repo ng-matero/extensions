@@ -5,6 +5,7 @@ import {
   ChangeDetectionStrategy,
   Output,
   EventEmitter,
+  TemplateRef,
 } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatCheckboxChange } from '@angular/material/checkbox';
@@ -25,7 +26,8 @@ export class MtxGridColumnMenuComponent {
   @Input() sortable = true;
   @Input() dndSortable = true;
 
-  @Input() get buttonText() {
+  @Input()
+  get buttonText() {
     const defaultText = `Columns ${this.selectedType === 'show' ? 'Shown' : 'Hidden'}`;
     const text = this._buttonText ? this._buttonText : defaultText;
     return text;
@@ -39,6 +41,13 @@ export class MtxGridColumnMenuComponent {
   @Input() buttonColor: 'primary' | 'accent' | 'warn' | '' = '';
   @Input() buttonClass = '';
   @Input() buttonIcon = '';
+
+  @Input() showHeader = false;
+  @Input() headerText = 'Columns Header';
+  @Input() headerTemplate: TemplateRef<any>;
+  @Input() showFooter = false;
+  @Input() footerText = 'Columns Footer';
+  @Input() footerTemplate: TemplateRef<any>;
 
   @Output() selectionChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
   @Output() sortChange = new EventEmitter<MtxGridColumnSelectionItem[]>();

@@ -85,5 +85,19 @@
     color: mat-color($foreground, text);
   }
 
+  .mtx-grid-column-menu-header,
+  .mtx-grid-column-menu-footer {
+    color: mat-color($foreground, text);
+    background-color: mat-color($background, card);
+  }
+
+  .mtx-grid-column-menu-header {
+    border-bottom: 1px solid mat-color($foreground, divider);
+  }
+
+  .mtx-grid-column-menu-footer {
+    border-top: 1px solid mat-color($foreground, divider);
+  }
+
   @include mat-column-resize-color($theme);
 }
