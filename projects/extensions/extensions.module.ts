@@ -12,8 +12,6 @@ import { MtxProgressModule } from '@ng-matero/extensions/progress';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
 import { MtxSplitModule } from '@ng-matero/extensions/split-pane';
 
-import { MtxText3dModule } from '@ng-matero/extensions/text3d';
-
 @NgModule({
   exports: [
     MtxAlertModule,
@@ -26,7 +24,6 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
     MtxPopoverModule,
     MtxProgressModule,
     MtxSelectModule,
-    MtxText3dModule,
     MtxSplitModule,
   ],
   declarations: [],
