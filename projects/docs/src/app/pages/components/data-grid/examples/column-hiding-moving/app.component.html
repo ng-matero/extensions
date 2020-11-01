@@ -1,6 +1,12 @@
 <div>
   <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
   <mat-checkbox [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
+
+  <label>ColumnHidingChecked:</label>
+  <mat-radio-group [(ngModel)]="columnHidingChecked">
+    <mat-radio-button value="show">show</mat-radio-button>
+    <mat-radio-button value="hide">hide</mat-radio-button>
+  </mat-radio-group>
 </div>
 
 <mtx-grid [data]="list"
@@ -8,5 +14,15 @@
           [showToolbar]="true"
           [toolbarTitle]="'Data Grid'"
           [columnHideable]="columnHideable"
-          [columnMovable]="columnMovable">
+          [columnHidingChecked]="columnHidingChecked"
+          [columnMovable]="columnMovable"
+          (columnChange)="log($event)"
+          [showColumnMenuHeader]="true"
+          [columnMenuHeaderText]="'Title'"
+          [showColumnMenuFooter]="true"
+          [columnMenuFooterTemplate]="menuFooter">
 </mtx-grid>
+
+<ng-template #menuFooter>
+  <button>Save</button>
+</ng-template>

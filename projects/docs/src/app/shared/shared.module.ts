@@ -11,6 +11,7 @@ import { NgProgressRouterModule } from 'ngx-progressbar/router';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 
 import { MaterialExtensionsModule } from '@ng-matero/extensions';
+import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 
 import { HeaderLinkComponent } from './doc-heading/header-link';
 import { DocHeadingComponent } from './doc-heading/doc-heading';
@@ -28,6 +29,7 @@ import { TableOfContents } from './table-of-contents/table-of-contents';
     RouterModule,
     MaterialModule,
     MaterialExtensionsModule,
+    MtxText3dModule,
     FlexLayoutModule,
     NgProgressModule,
     NgProgressHttpModule,
@@ -41,6 +43,7 @@ import { TableOfContents } from './table-of-contents/table-of-contents';
     RouterModule,
     MaterialModule,
     MaterialExtensionsModule,
+    MtxText3dModule,
     FlexLayoutModule,
     NgProgressModule,
     NgProgressHttpModule,
