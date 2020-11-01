@@ -102,6 +102,7 @@
 
               @include rtl {
                 margin-left: -4px;
+                margin-right: auto;
               }
             }
 
@@ -110,6 +111,7 @@
 
               @include rtl {
                 margin-right: -4px;
+                margin-left: auto;
               }
             }
           }
@@ -135,6 +137,11 @@
 
 .ng-dropdown-panel {
   left: 0;
+
+  @include rtl {
+    right: 0;
+    left: unset;
+  }
 
   &.ng-select-bottom {
     top: 100%;
