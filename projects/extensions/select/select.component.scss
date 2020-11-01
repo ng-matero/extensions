@@ -140,7 +140,7 @@
 
   @include rtl {
     right: 0;
-    left: unset;
+    left: auto;
   }
 
   &.ng-select-bottom {
