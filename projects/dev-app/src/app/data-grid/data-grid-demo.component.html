@@ -21,7 +21,12 @@
           (expansionChange)="log($event)"
           [headerTemplate]="headerTpl"
           [showSummary]="showSummary"
-          [summaryTemplate]="{'weight': footerTpl}">
+          [summaryTemplate]="{'weight': footerTpl}"
+          [showToolbar]="true"
+          [columnHidingChecked]="'show'"
+          (columnHidingChange)="log($event)"
+          (columnMovingChange)="log($event)"
+          (rowClick)="log($event)">
 </mtx-grid>
 
 <ng-template #expansionTpl let-row>

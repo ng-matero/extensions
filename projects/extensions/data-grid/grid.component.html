@@ -159,7 +159,7 @@
         <tr mat-row
             *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
             [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': _isOddRow(index, dataIndex)}"
-            (click)="_selectRow($event, row)">
+            (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
         </tr>
         <ng-container *ngIf="_whetherShowSummary">
           <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
@@ -315,7 +315,7 @@
       <tr mat-row
           *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
           [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': _isOddRow(index, dataIndex)}"
-          (click)="_selectRow($event, row)">
+          (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
       </tr>
       <ng-container *ngIf="_whetherShowSummary">
         <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>

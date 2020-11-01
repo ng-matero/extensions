@@ -116,6 +116,10 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() rowClassFormatter: MtxGridRowClassFormatter = {};
   @Output() rowSelectionChange = new EventEmitter<any[]>();
 
+  /** Row event */
+
+  @Output() rowClick = new EventEmitter<any>();
+
   /** Cell selection */
 
   cellSelection: any[] = [];
@@ -220,13 +224,17 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
     if (this.showColumnMenuButton) {
       this.columnMenuData = (this.columns as any[]).map(item => {
-        return {
+        const newItem: MtxGridColumnSelectionItem = {
           label: item.header,
           field: item.field,
-          show: !item.hide,
-          hide: item.hide,
           disabled: item.disabled,
         };
+        if (this.columnHidingChecked === 'show') {
+          newItem.show = !item.hide;
+        } else {
+          newItem.hide = item.hide;
+        }
+        return newItem;
       });
     }
 
@@ -321,7 +329,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   /** Row select event */
-  _selectRow(event: MouseEvent, rowData: any) {
+  _selectRow(event: MouseEvent, rowData: any, index: number) {
     if (
       this.rowSelectable &&
       !(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(rowData)) &&
@@ -334,6 +342,8 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
       this._toggleNormalCheckbox(rowData);
     }
+
+    this.rowClick.emit({ rowData, index });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -365,24 +375,33 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   /** Column change event */
 
-  _handleColumnHidingChange(columns: string[]) {
+  _handleColumnHidingChange(columns: any[]) {
     this.columnHidingChange.emit(columns);
 
-    this.displayedColumns = Object.assign([], columns);
+    this.displayedColumns = Object.assign([], this.getDisplayedColumnFields(columns));
 
     if (this.rowSelectable && !this.hideRowSelectionCheckbox) {
       this.displayedColumns.unshift('MtxGridCheckboxColumnDef');
     }
   }
 
-  _handleColumnMovingChange(columns: string[]) {
+  _handleColumnMovingChange(columns: any[]) {
     this.columnMovingChange.emit(columns);
 
-    this.displayedColumns = Object.assign([], columns);
+    this.displayedColumns = Object.assign([], this.getDisplayedColumnFields(columns));
 
     if (this.rowSelectable && !this.hideRowSelectionCheckbox) {
       this.displayedColumns.unshift('MtxGridCheckboxColumnDef');
     }
+  }
+
+  getDisplayedColumnFields(columns: any[]): string[] {
+    const fields = columns
+      .filter((item: MtxGridColumnSelectionItem) =>
+        this.columnHidingChecked === 'show' ? item.show : !item.hide
+      )
+      .map((item: MtxGridColumnSelectionItem) => item.field);
+    return fields;
   }
 
   /** Customize expansion event */

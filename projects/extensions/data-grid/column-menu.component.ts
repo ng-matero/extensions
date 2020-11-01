@@ -1,6 +1,5 @@
 import {
   Component,
-  OnInit,
   Input,
   ViewEncapsulation,
   ChangeDetectionStrategy,
@@ -8,6 +7,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MtxGridColumnSelectionItem } from './grid.interface';
 
 @Component({
@@ -18,7 +18,7 @@ import { MtxGridColumnSelectionItem } from './grid.interface';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxGridColumnMenuComponent implements OnInit {
+export class MtxGridColumnMenuComponent {
   @Input() columns: MtxGridColumnSelectionItem[] = [];
   @Input() selectable = true;
   @Input() selectedType: 'show' | 'hide' = 'show';
@@ -40,28 +40,15 @@ export class MtxGridColumnMenuComponent implements OnInit {
   @Input() buttonClass = '';
   @Input() buttonIcon = '';
 
-  @Output() selectionChange = new EventEmitter<string[]>();
-  @Output() sortChange = new EventEmitter<string[]>();
-
-  get columnFields(): string[] {
-    const fields = this.columns
-      .filter((item: MtxGridColumnSelectionItem) =>
-        this.selectedType === 'show' ? item.show : !item.hide
-      )
-      .map((item: MtxGridColumnSelectionItem) => item.field);
-    return fields;
-  }
-
-  constructor() {}
-
-  ngOnInit() {}
+  @Output() selectionChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
+  @Output() sortChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
 
   _handleDroped(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
-    this.sortChange.emit(this.columnFields);
+    this.sortChange.emit(this.columns);
   }
 
-  _handleSelection(e: any) {
-    this.selectionChange.emit(this.columnFields);
+  _handleSelection(e: MatCheckboxChange) {
+    this.selectionChange.emit(this.columns);
   }
 }

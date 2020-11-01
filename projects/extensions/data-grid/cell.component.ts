@@ -11,7 +11,7 @@ import PhotoViewer from 'photoviewer';
   exportAs: 'mtxGridCell',
   templateUrl: './cell.component.html',
 })
-export class MtxGridCellComponent implements OnInit {
+export class MtxGridCellComponent {
   /** Row data */
   @Input() rowData = {};
 
@@ -25,8 +25,6 @@ export class MtxGridCellComponent implements OnInit {
   _viewer: PhotoViewer;
 
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
-
-  ngOnInit() {}
 
   _handleActionConfirm(
     event: MouseEvent,
