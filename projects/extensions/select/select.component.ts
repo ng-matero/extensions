@@ -211,7 +211,7 @@ export class MtxSelectComponent
   private _focused = false;
 
   get empty(): boolean {
-    return !this.value || (Array.isArray(this.value) && this.value.length === 0);
+    return this.value == null || (Array.isArray(this.value) && this.value.length === 0);
   }
 
   get shouldLabelFloat(): boolean {
