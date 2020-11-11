@@ -211,7 +211,7 @@ export class MtxSelectComponent
   private _focused = false;
 
   get empty(): boolean {
-    return !this.value || (Array.isArray(this.value) && this.value.length === 0);
+    return this.value == null || (Array.isArray(this.value) && this.value.length === 0);
   }
 
   get shouldLabelFloat(): boolean {
@@ -313,7 +313,7 @@ export class MtxSelectComponent
   /** Implemented as part of MatFormFieldControl. */
   onContainerClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (/mat-form-field|mtx-select/g.test(target.parentElement.classList[0])) {
+    if (/mat-form-field|mtx-select/g.test(target.parentElement?.classList[0] || '')) {
       this.focus();
       this.open();
     }
@@ -326,7 +326,7 @@ export class MtxSelectComponent
    * @param value New value to be written to the model.
    */
   writeValue(value: any): void {
-    this._value = value;
+    this.value = value;
     this._changeDetectorRef.markForCheck();
   }
 

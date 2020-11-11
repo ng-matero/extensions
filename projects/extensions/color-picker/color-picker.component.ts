@@ -230,7 +230,7 @@ export class MtxColorPickerComponent
    * @param value New value to be written to the model.
    */
   writeValue(value: string | null): void {
-    this._value = value || '';
+    this.value = value || '';
     this._changeDetectorRef.markForCheck();
   }
 
