@@ -331,7 +331,7 @@ export class MtxSelectComponent
    * @param value New value to be written to the model.
    */
   writeValue(value: any): void {
-    this._value = value;
+    this.value = value;
     this._changeDetectorRef.markForCheck();
   }
 
