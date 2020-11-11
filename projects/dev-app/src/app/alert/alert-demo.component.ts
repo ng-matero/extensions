@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
 export class AlertDemoComponent {
   dismissible = false;
   elevation = 0;
+  type = 'default';
 
   onClosed(e: any) {
     console.log(e);

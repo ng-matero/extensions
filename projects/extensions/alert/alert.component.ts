@@ -6,6 +6,7 @@ import {
   Output,
   EventEmitter,
   ChangeDetectorRef,
+  HostBinding,
 } from '@angular/core';
 
 @Component({
@@ -20,11 +21,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxAlertComponent {
-  /**
-   * Alert types
-   * `default`, `info`, `success`, `warning` and `danger`
-   */
-  @Input() type = 'default';
+  @HostBinding('class') get hostClassList() {
+    return `mtx-alert-${this.type}`;
+  }
+
+  /** Alert types */
+  @Input() type: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'default';
 
   /** Whether alert visible */
   @Input() isOpen = true;

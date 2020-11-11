@@ -14,11 +14,8 @@ import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxProgressComponent {
-  /**
-   * Progress types
-   * `default`, `info`, `success`, `warning` and `danger`
-   */
-  @Input() type = 'info';
+  /** Progress types */
+  @Input() type: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'info';
 
   /** The progress value */
   @Input() value = 0;

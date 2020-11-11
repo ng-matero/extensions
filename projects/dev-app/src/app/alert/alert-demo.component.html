@@ -1,4 +1,15 @@
 <section>
+  <label>Type:</label>
+  <mat-radio-group [(ngModel)]="type">
+    <mat-radio-button value="default">Default</mat-radio-button>
+    <mat-radio-button value="info">Info</mat-radio-button>
+    <mat-radio-button value="success">Success</mat-radio-button>
+    <mat-radio-button value="warning">Warning</mat-radio-button>
+    <mat-radio-button value="danger">Danger</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
   <mat-checkbox [(ngModel)]="dismissible">Dismissible</mat-checkbox>
 </section>
 
@@ -6,6 +17,11 @@
   <label>Elevation:</label>
   <mat-slider min="0" max="24" thumbLabel [(ngModel)]="elevation"></mat-slider>
 </section>
+
+<mtx-alert [type]="type" [dismissible]="dismissible" [elevation]="elevation"
+           (closed)="onClosed($event)">
+  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+</mtx-alert>
 
 <mtx-alert type="info" [dismissible]="dismissible" [elevation]="elevation"
            (closed)="onClosed($event)">
