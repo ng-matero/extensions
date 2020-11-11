@@ -56,7 +56,7 @@
            cdkDropList (cdkDropListDropped)="_handleDroped($event)"
            *ngIf="sortable">
         <div class="mtx-grid-column-menu-item" *ngFor="let col of columns"
-             cdkDrag [cdkDragDisabled]="selectedType === 'show'? !col.show : col.hide">
+             cdkDrag [cdkDragDisabled]="selectableChecked === 'show'? !col.show : col.hide">
           <mat-icon cdkDragHandle>drag_handle</mat-icon>
           <ng-template [ngTemplateOutlet]="checkboxList"
                        [ngTemplateOutletContext]="{ $implicit: col }">
@@ -85,7 +85,7 @@
 <ng-template #checkboxList let-col>
   <mat-checkbox class="mtx-grid-column-menu-item-label"
                 *ngIf="selectable"
-                [(ngModel)]="col[selectedType]"
+                [(ngModel)]="col[selectableChecked]"
                 [disabled]="col.disabled"
                 (change)="_handleSelection($event)">
     {{col.label | toObservable | async}}

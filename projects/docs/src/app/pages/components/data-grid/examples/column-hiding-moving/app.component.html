@@ -2,8 +2,8 @@
   <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
   <mat-checkbox [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
 
-  <label>ColumnHidingChecked:</label>
-  <mat-radio-group [(ngModel)]="columnHidingChecked">
+  <label>columnHideableChecked:</label>
+  <mat-radio-group [(ngModel)]="columnHideableChecked">
     <mat-radio-button value="show">show</mat-radio-button>
     <mat-radio-button value="hide">hide</mat-radio-button>
   </mat-radio-group>
@@ -14,7 +14,7 @@
           [showToolbar]="true"
           [toolbarTitle]="'Data Grid'"
           [columnHideable]="columnHideable"
-          [columnHidingChecked]="columnHidingChecked"
+          [columnHideableChecked]="columnHideableChecked"
           [columnMovable]="columnMovable"
           (columnChange)="log($event)"
           [showColumnMenuHeader]="true"

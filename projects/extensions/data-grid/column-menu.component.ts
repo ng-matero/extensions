@@ -22,13 +22,13 @@ import { MtxGridColumnSelectionItem } from './grid.interface';
 export class MtxGridColumnMenuComponent {
   @Input() columns: MtxGridColumnSelectionItem[] = [];
   @Input() selectable = true;
-  @Input() selectedType: 'show' | 'hide' = 'show';
+  @Input() selectableChecked: 'show' | 'hide' = 'show';
   @Input() sortable = true;
   @Input() dndSortable = true;
 
   @Input()
   get buttonText() {
-    const defaultText = `Columns ${this.selectedType === 'show' ? 'Shown' : 'Hidden'}`;
+    const defaultText = `Columns ${this.selectableChecked === 'show' ? 'Shown' : 'Hidden'}`;
     const text = this._buttonText ? this._buttonText : defaultText;
     return text;
   }

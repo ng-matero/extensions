@@ -147,7 +147,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   @Input() columnMenuButtonIcon = '';
 
   @Input() columnHideable = true;
-  @Input() columnHidingChecked: 'show' | 'hide' = 'show';
+  @Input() columnHideableChecked: 'show' | 'hide' = 'show';
   @Input() columnMovable = true;
   @Input() columnPinnable = true;
   @Output() columnChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
@@ -234,7 +234,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
           field: item.field,
           disabled: item.disabled,
         };
-        if (this.columnHidingChecked === 'show') {
+        if (this.columnHideableChecked === 'show') {
           newItem.show = !item.hide;
         } else {
           newItem.hide = item.hide;
@@ -393,7 +393,7 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   getDisplayedColumnFields(columns: any[]): string[] {
     const fields = columns
       .filter((item: MtxGridColumnSelectionItem) =>
-        this.columnHidingChecked === 'show' ? item.show : !item.hide
+        this.columnHideableChecked === 'show' ? item.show : !item.hide
       )
       .map((item: MtxGridColumnSelectionItem) => item.field);
     return fields;

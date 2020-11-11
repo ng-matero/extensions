@@ -20,7 +20,7 @@ export class AppComponent {
 
   columnHideable = true;
   columnMovable = true;
-  columnHidingChecked = 'show';
+  columnHideableChecked = 'show';
 
   log(e: any) {
     console.log(e);
