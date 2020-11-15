@@ -1,0 +1,98 @@
+.mtx-form-group {
+  margin-bottom: 0;
+
+  .mtx-form-field-layout {
+    display: inline-flex;
+    align-items: flex-start;
+  }
+
+  .mtx-form-label {
+    position: relative;
+    display: inline-block;
+    padding-top: calc(.375em + 1px);
+    padding-bottom: calc(.375em + 1px);
+    padding-right: 1em;
+    line-height: 1.125;
+
+    [dir='rtl'] & {
+      padding-right: unset;
+      padding-left: 1em;
+    }
+
+    &.mtx-form-label-marker::after {
+      content: '*';
+      margin-left: 4px;
+
+      [dir='rtl'] & {
+        margin-left: auto;
+        margin-right: 4px;
+      }
+    }
+  }
+}
+
+// Fluent UI: https://developer.microsoft.com/en-us/fluentui#/controls/web
+.mtx-form-field-appearance-fluent {
+  .mat-form-field {
+    margin-bottom: .25em;
+
+    .mat-form-field-suffix {
+      .mat-icon-button {
+        height: 1.5em;
+        width: 1.5em;
+      }
+
+      .mat-datepicker-toggle-default-icon {
+        width: 1em;
+      }
+    }
+  }
+
+  .mat-form-field-has-label {
+    .mat-form-field-flex {
+      margin-top: .84375em;
+    }
+  }
+
+  .mat-form-field-appearance-standard {
+    .mat-form-field-flex {
+      padding-top: 0;
+    }
+  }
+
+  .mat-form-field-flex {
+    align-items: center;
+    padding: 0 .5em;
+    border-radius: 2px;
+  }
+
+  .mat-form-field-infix {
+    border-top: 0;
+    padding: .375em 0;
+  }
+
+  .mat-form-field-prefix,
+  .mat-form-field-suffix {
+    display: inline-flex;
+
+    .mat-icon {
+      line-height: normal;
+    }
+  }
+
+  .mat-form-field-underline {
+    display: none;
+  }
+
+  .mtx-select {
+    display: block;
+    margin: 0 -8px;
+  }
+
+  .ng-select {
+    padding-top: .4375em;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: -.4375em;
+  }
+}

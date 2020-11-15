@@ -17,3 +17,9 @@
   @include mtx-select-theme($theme);
   @include mtx-split-theme($theme);
 }
+
+@import './form-group/form-group-theme';
+
+@mixin material-extensions-experimental-theme($theme) {
+  @include mtx-form-group-theme($theme);
+}
