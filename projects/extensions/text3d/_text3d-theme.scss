@@ -1,0 +1,20 @@
+@mixin mtx-text3d-theme($theme) {
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+  $is-dark-theme: map-get($theme, is-dark);
+
+  .mtx-text3d {
+    .mtx-text3d-layer {
+      text-shadow: 0 0 1px rgba(black, .54);
+
+      &:not(:first-child) {
+        text-shadow: 0 0 20px mat-color($foreground, divider);
+        color: mat-color($mat-gray, 100);
+      }
+
+      &:first-child {
+        color: mat-color($mat-gray, 900);
+      }
+    }
+  }
+}

@@ -19,7 +19,9 @@
 }
 
 @import './form-group/form-group-theme';
+@import './text3d/text3d-theme';
 
 @mixin material-extensions-experimental-theme($theme) {
   @include mtx-form-group-theme($theme);
+  @include mtx-text3d-theme($theme);
 }

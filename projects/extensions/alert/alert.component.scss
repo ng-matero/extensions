@@ -21,7 +21,7 @@
   cursor: pointer;
 
   [dir='rtl'] & {
-    right: unset;
+    right: auto;
     left: 0;
   }
 
