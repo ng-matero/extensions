@@ -1,0 +1,103 @@
+<section>
+  <label>Color:</label>
+  <mat-radio-group [(ngModel)]="color">
+    <mat-radio-button value="primary">primary</mat-radio-button>
+    <mat-radio-button value="accent">accent</mat-radio-button>
+    <mat-radio-button value="warn">warn</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-slide-toggle [(ngModel)]="showFloatLabel">showFloatLabel</mat-slide-toggle>
+</section>
+
+<p>
+  <mat-form-field [color]="color">
+    <mat-label>Legacy form field</mat-label>
+    <input matInput placeholder="Placeholder" required>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field [color]="color">
+    <mat-label>Choose a date</mat-label>
+    <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
+    <input matInput [matDatepicker]="picker2">
+    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+    <mat-datepicker #picker2></mat-datepicker>
+  </mat-form-field>
+</p>
+
+<p>
+  <mat-form-field appearance="standard" [color]="color">
+    <mat-label>Standard form field</mat-label>
+    <input matInput placeholder="Placeholder">
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" [color]="color">
+    <mat-label>Fill form field</mat-label>
+    <input matInput placeholder="Placeholder">
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" [color]="color">
+    <mat-label>Outline form field</mat-label>
+    <input matInput placeholder="Placeholder">
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</p>
+
+<!-- Fluent UI -->
+
+<mtx-form-group label="Mat Input" showRequiredMarker>
+  <mat-form-field [color]="color">
+    <mat-label *ngIf="showFloatLabel">Legacy form field</mat-label>
+    <input matInput placeholder="Placeholder" required>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</mtx-form-group>
+
+<mtx-form-group label="Mat Select">
+  <mat-form-field [color]="color">
+    <mat-label *ngIf="showFloatLabel">Favorite food</mat-label>
+    <mat-select [(ngModel)]="selectedFood" name="food" placeholder="Placeholder">
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</mtx-form-group>
+
+<mtx-form-group label="Mtx Select" showRequiredMarker>
+  <mat-form-field [color]="color">
+    <mat-label *ngIf="showFloatLabel">Favorite food</mat-label>
+    <mtx-select [items]="foods" bindLabel="viewValue" placeholder="Placeholder" required>
+    </mtx-select>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</mtx-form-group>
+
+<mtx-form-group label="Mat Textarea">
+  <mat-form-field [color]="color">
+    <mat-label *ngIf="showFloatLabel">Favorite food</mat-label>
+    <textarea matInput></textarea>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</mtx-form-group>
+
+<mtx-form-group label="Mat Datepicker">
+  <mat-form-field [color]="color">
+    <mat-label *ngIf="showFloatLabel">Choose a date</mat-label>
+    <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+</mtx-form-group>

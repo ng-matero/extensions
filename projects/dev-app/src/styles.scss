@@ -29,6 +29,7 @@ $candy-app-theme: mat-light-theme(
 // Include the default theme styles.
 @include angular-material-theme($candy-app-theme);
 @include material-extensions-theme($candy-app-theme);
+@include material-extensions-experimental-theme($candy-app-theme);
 
 // Define an alternate dark theme.
 $dark-primary: mat-palette($mat-blue-grey);
