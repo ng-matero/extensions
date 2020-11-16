@@ -15,7 +15,7 @@ function copyButton() {
   return src([`${SRC}/button/*.scss`]).pipe(dest(`${DEST}/button`));
 }
 
-function copyGrid() {
+function copyDataGrid() {
   return src([`${SRC}/data-grid/*.scss`]).pipe(dest(`${DEST}/data-grid`));
 }
 
@@ -39,14 +39,26 @@ function copySplit() {
   return src([`${SRC}/split-pane/*.scss`]).pipe(dest(`${DEST}/split-pane`));
 }
 
+function copyFormGroup() {
+  return src([`${SRC}/form-group/*.scss`]).pipe(dest(`${DEST}/form-group`));
+}
+
+function copyText3d() {
+  return src([`${SRC}/text3d/*.scss`]).pipe(dest(`${DEST}/text3d`));
+}
+
 exports.default = series(
   copyRoot,
+
   copyAlert,
   copyButton,
-  copyGrid,
+  copyDataGrid,
   copyLoader,
   copyPopover,
   copyProgress,
   copySelect,
-  copySplit
+  copySplit,
+
+  copyFormGroup,
+  copyText3d
 );

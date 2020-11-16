@@ -1,0 +1,70 @@
+<section>
+  <label>Color:</label>
+  <mat-radio-group [(ngModel)]="color">
+    <mat-radio-button value="primary">primary</mat-radio-button>
+    <mat-radio-button value="accent">accent</mat-radio-button>
+    <mat-radio-button value="warn">warn</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="required" [labelPosition]="'before'">Required</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="disabled" [labelPosition]="'before'">Disabled</mat-checkbox>
+</section>
+
+<h2>Result</h2>
+
+<mtx-form-group label="Mat Input" [showRequiredMarker]="required">
+  <mat-form-field [color]="color">
+    <input matInput [(ngModel)]="text" placeholder="Placeholder"
+           [required]="required" [disabled]="disabled">
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</mtx-form-group>
+
+<mtx-form-group label="Mat Select" [showRequiredMarker]="required">
+  <mat-form-field [color]="color">
+    <mat-select [(ngModel)]="selectedFood" name="food" placeholder="Placeholder"
+                [required]="required" [disabled]="disabled">
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</mtx-form-group>
+
+<mtx-form-group label="Mtx Select" [showRequiredMarker]="required">
+  <mat-form-field [color]="color">
+    <mtx-select [(ngModel)]="selectedFood" [items]="foods" bindLabel="viewValue" bindValue="value"
+                placeholder="Placeholder" [required]="required" [disabled]="disabled">
+    </mtx-select>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</mtx-form-group>
+
+<mtx-form-group label="Mat Textarea" [showRequiredMarker]="required">
+  <mat-form-field [color]="color">
+    <textarea matInput [(ngModel)]="text" placeholder="Placeholder"
+              [required]="required" [disabled]="disabled"></textarea>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</mtx-form-group>
+
+<mtx-form-group label="Mat Datepicker" [showRequiredMarker]="required">
+  <mat-form-field [color]="color">
+    <input matInput [(ngModel)]="date" [matDatepicker]="picker" placeholder="Choose a date"
+           [required]="required" [disabled]="disabled">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+</mtx-form-group>

@@ -55,6 +55,10 @@ const routes = [
         loadChildren: () => import('./split-pane/split-pane').then(m => m.SplitPaneModule),
       },
       {
+        path: 'form-group',
+        loadChildren: () => import('./form-group/form-group').then(m => m.FormGroupModule),
+      },
+      {
         path: 'text3d',
         loadChildren: () => import('./text3d/text3d').then(m => m.Text3dModule),
       },

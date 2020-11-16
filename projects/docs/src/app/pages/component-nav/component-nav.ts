@@ -65,6 +65,11 @@ export const COMPONENTS_MENU = [
     title: 'Experimental',
     children: [
       {
+        id: 'form-group',
+        name: 'Form Group',
+        summary: 'Material form field with Fluent UI style.',
+      },
+      {
         id: 'text3d',
         name: 'Text 3D',
         summary: 'Experimental component for 3d text.',

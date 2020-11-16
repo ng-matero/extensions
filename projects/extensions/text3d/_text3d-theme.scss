@@ -8,7 +8,7 @@
       text-shadow: 0 0 1px rgba(black, .54);
 
       &:not(:first-child) {
-        text-shadow: 0 0 20px mat-color($foreground, divider);
+        text-shadow: 0 0 20px rgba(black, .12);
         color: mat-color($mat-gray, 100);
       }
 
