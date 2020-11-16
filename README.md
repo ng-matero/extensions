@@ -23,11 +23,11 @@ $ npm install @ng-matero/extensions --save
 Once installed you need to import the main module:
 
 ```ts
-import { MaterialExtensionsModule } from '@ng-matero/extensions';
+import { MaterialExtensionsModule, MaterialExtensionsExperimentalModule } from '@ng-matero/extensions';
 
 @NgModule({
   ...
-  imports: [MaterialExtensionsModule, ...],
+  imports: [MaterialExtensionsModule, MaterialExtensionsExperimentalModule, ...],
   ...
 })
 export class YourAppModule {
@@ -57,6 +57,7 @@ After import modules, you must define a theme. [More details about theming](http
 @import '~@ng-matero/extensions/theming';
 
 @include material-extensions-theme($theme);
+@include material-extensions-experimental-theme($theme);
 ```
 
 ## Roadmap
