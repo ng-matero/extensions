@@ -7,97 +7,115 @@
   </mat-radio-group>
 
   <mat-slide-toggle [(ngModel)]="showFloatLabel">showFloatLabel</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="required">required</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="disabled">disabled</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="showPrefix">showPrefix</mat-slide-toggle>
+  <mat-slide-toggle [(ngModel)]="showSuffix">showSuffix</mat-slide-toggle>
 </section>
 
 <p>
   <mat-form-field [color]="color">
     <mat-label>Legacy form field</mat-label>
-    <input matInput placeholder="Placeholder" required>
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
 
   <mat-form-field [color]="color">
     <mat-label>Choose a date</mat-label>
-    <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
-    <input matInput [matDatepicker]="picker2">
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <input matInput [matDatepicker]="picker2" [required]="required" [disabled]="disabled">
     <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
     <mat-datepicker #picker2></mat-datepicker>
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
   </mat-form-field>
 </p>
 
 <p>
   <mat-form-field appearance="standard" [color]="color">
     <mat-label>Standard form field</mat-label>
-    <input matInput placeholder="Placeholder">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="fill" [color]="color">
     <mat-label>Fill form field</mat-label>
-    <input matInput placeholder="Placeholder">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
 
   <mat-form-field appearance="outline" [color]="color">
     <mat-label>Outline form field</mat-label>
-    <input matInput placeholder="Placeholder">
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
 </p>
 
 <!-- Fluent UI -->
 
-<mtx-form-group label="Mat Input" showRequiredMarker>
+<mtx-form-group label="Mat Input" [showRequiredMarker]="required">
   <mat-form-field [color]="color">
     <mat-label *ngIf="showFloatLabel">Legacy form field</mat-label>
-    <input matInput placeholder="Placeholder" required>
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
 </mtx-form-group>
 
-<mtx-form-group label="Mat Select">
+<mtx-form-group label="Mat Select" [showRequiredMarker]="required">
   <mat-form-field [color]="color">
     <mat-label *ngIf="showFloatLabel">Favorite food</mat-label>
-    <mat-select [(ngModel)]="selectedFood" name="food" placeholder="Placeholder">
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <mat-select [(ngModel)]="selectedFood" name="food" placeholder="Placeholder"
+                [required]="required" [disabled]="disabled">
       <mat-option *ngFor="let food of foods" [value]="food.value">
         {{food.viewValue}}
       </mat-option>
     </mat-select>
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
 </mtx-form-group>
 
-<mtx-form-group label="Mtx Select" showRequiredMarker>
+<mtx-form-group label="Mtx Select" [showRequiredMarker]="required">
   <mat-form-field [color]="color">
     <mat-label *ngIf="showFloatLabel">Favorite food</mat-label>
-    <mtx-select [items]="foods" bindLabel="viewValue" placeholder="Placeholder" required>
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <mtx-select [(ngModel)]="selectedFood" [items]="foods" bindLabel="viewValue" bindValue="value"
+                placeholder="Placeholder" [required]="required" [disabled]="disabled">
     </mtx-select>
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
 </mtx-form-group>
 
-<mtx-form-group label="Mat Textarea">
+<mtx-form-group label="Mat Textarea" [showRequiredMarker]="required">
   <mat-form-field [color]="color">
     <mat-label *ngIf="showFloatLabel">Favorite food</mat-label>
-    <textarea matInput></textarea>
-    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <textarea matInput [required]="required" [disabled]="disabled"></textarea>
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
 </mtx-form-group>
 
-<mtx-form-group label="Mat Datepicker">
+<mtx-form-group label="Mat Datepicker" [showRequiredMarker]="required">
   <mat-form-field [color]="color">
     <mat-label *ngIf="showFloatLabel">Choose a date</mat-label>
-    <mat-icon matPrefix>sentiment_very_satisfied</mat-icon>
-    <input matInput [matDatepicker]="picker">
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <input matInput [matDatepicker]="picker" [required]="required" [disabled]="disabled">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
   </mat-form-field>
 </mtx-form-group>

@@ -12,14 +12,17 @@ interface Food {
   styleUrls: ['form-group-demo.component.scss'],
 })
 export class FormGroupDemoComponent {
-  selectedFood: string;
-
   foods: Food[] = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
+  selectedFood: string;
 
   color: ThemePalette = 'primary';
+  required = false;
+  disabled = false;
   showFloatLabel = false;
+  showSuffix = false;
+  showPrefix = false;
 }

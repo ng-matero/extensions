@@ -51,8 +51,8 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   private _disableAnimation = false;
   private _panelOffsetX = 0;
   private _panelOffsetY = 0;
-  private _panelCloseOnClick = false;
-  private _backdropCloseOnClick = true;
+  private _closeOnPanelClick = false;
+  private _closeOnBackdropClick = true;
   private _focusTrapEnabled = true;
   private _focusTrapAutoCaptureEnabled = true;
   private _arrowOffsetX = 20;
@@ -187,22 +187,22 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     this._arrowWidth = value;
   }
 
-  /** Popover container close on click */
+  /** Popover close on container click */
   @Input()
   get closeOnPanelClick(): boolean {
-    return this._panelCloseOnClick;
+    return this._closeOnPanelClick;
   }
   set closeOnPanelClick(value: boolean) {
-    this._panelCloseOnClick = coerceBooleanProperty(value);
+    this._closeOnPanelClick = coerceBooleanProperty(value);
   }
 
-  /** Popover backdrop close on click */
+  /** Popover close on backdrop click */
   @Input()
   get closeOnBackdropClick(): boolean {
-    return this._backdropCloseOnClick;
+    return this._closeOnBackdropClick;
   }
   set closeOnBackdropClick(value: boolean) {
-    this._backdropCloseOnClick = coerceBooleanProperty(value);
+    this._closeOnBackdropClick = coerceBooleanProperty(value);
   }
 
   /** Disable animations of popover and all child elements */
