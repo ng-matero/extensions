@@ -24,11 +24,9 @@
     }
 
     .mat-focused {
-      &.mat-primary {
-        .mat-form-field-flex {
-          border-color: mat-color($primary);
-          box-shadow: inset 0 0 0 1px mat-color($primary);
-        }
+      .mat-form-field-flex {
+        border-color: mat-color($primary);
+        box-shadow: inset 0 0 0 1px mat-color($primary);
       }
 
       &.mat-accent {
@@ -47,7 +45,9 @@
     }
 
     .mat-form-field-invalid {
-      .mat-form-field-flex {
+      .mat-form-field-flex,
+      &.mat-accent .mat-form-field-flex,
+      &.mat-warn .mat-form-field-flex {
         border-color: mat-color($warn);
         box-shadow: inset 0 0 0 1px mat-color($warn);
       }

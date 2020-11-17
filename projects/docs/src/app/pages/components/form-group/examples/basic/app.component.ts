@@ -15,6 +15,8 @@ export class AppComponent {
   color: ThemePalette = 'primary';
   required = false;
   disabled = false;
+  showSuffix = false;
+  showPrefix = false;
 
   foods: Food[] = [
     { value: 'steak-0', viewValue: 'Steak' },

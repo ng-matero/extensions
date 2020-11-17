@@ -18,6 +18,9 @@ export class FormGroupDemoComponent {
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
   selectedFood: string;
+  selectedCar: string;
+
+  text: string;
 
   color: ThemePalette = 'primary';
   required = false;

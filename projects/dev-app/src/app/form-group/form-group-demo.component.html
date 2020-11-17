@@ -17,7 +17,22 @@
   <mat-form-field [color]="color">
     <mat-label>Legacy form field</mat-label>
     <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
-    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+    <input matInput [(ngModel)]="text" placeholder="Placeholder"
+           [required]="required" [disabled]="disabled">
+    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
+    <mat-hint>Hint</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field [color]="color">
+    <mat-label>Legacy form field</mat-label>
+    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+    <mat-select [(ngModel)]="selectedCar" [required]="required">
+      <mat-option>None</mat-option>
+      <mat-option value="volvo">Volvo</mat-option>
+      <mat-option value="saab">Saab</mat-option>
+      <mat-option value="mercedes">Mercedes</mat-option>
+      <mat-option value="audi">Audi</mat-option>
+    </mat-select>
     <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>
@@ -65,7 +80,8 @@
   <mat-form-field [color]="color">
     <mat-label *ngIf="showFloatLabel">Legacy form field</mat-label>
     <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
-    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+    <input matInput [(ngModel)]="text" placeholder="Placeholder"
+           [required]="required" [disabled]="disabled">
     <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
     <mat-hint>Hint</mat-hint>
   </mat-form-field>

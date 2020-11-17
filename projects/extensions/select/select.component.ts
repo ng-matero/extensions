@@ -51,10 +51,11 @@ let nextUniqueId = 0;
   selector: 'mtx-select',
   exportAs: 'mtxSelect',
   host: {
-    'class': 'mtx-select',
-    '[class.mtx-select-floating]': 'shouldLabelFloat',
     '[attr.id]': 'id',
     '[attr.aria-describedby]': '_ariaDescribedby || null',
+    '[class.mtx-select-floating]': 'shouldLabelFloat',
+    '[class.mtx-select-invalid]': 'errorState',
+    'class': 'mtx-select',
   },
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
