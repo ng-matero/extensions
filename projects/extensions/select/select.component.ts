@@ -45,6 +45,10 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 export type CompareWithFn = (a: any, b: any) => boolean;
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
+export function isDefined(value: any) {
+  return value !== undefined && value !== null;
+}
+
 let nextUniqueId = 0;
 
 @Component({
@@ -129,13 +133,13 @@ export class MtxSelectComponent
   @Input() readonly = false;
   @Input() searchFn = null;
   @Input() searchWhileComposing = true;
-  @Input() clearSearchOnAdd = true;
   @Input() selectOnTab = false;
   @Input() trackByFn = null;
   @Input() inputAttrs: { [key: string]: string } = {};
   @Input() tabIndex: number;
-  @Input() openOnEnter = true;
+  @Input() openOnEnter: boolean;
   @Input() minTermLength = 0;
+  @Input() editableSearchTerm = false;
   @Input() keyDownFn = (_: KeyboardEvent) => true;
   @Input() virtualScroll = false;
   @Input() typeToSearchText = 'Type to search';
@@ -152,6 +156,15 @@ export class MtxSelectComponent
   @Output('remove') removeEvent = new EventEmitter();
   @Output('scroll') scroll = new EventEmitter<{ start: number; end: number }>();
   @Output('scrollToEnd') scrollToEnd = new EventEmitter();
+
+  @Input()
+  get clearSearchOnAdd() {
+    return isDefined(this._clearSearchOnAdd) ? this._clearSearchOnAdd : this.closeOnSelect;
+  }
+  set clearSearchOnAdd(value) {
+    this._clearSearchOnAdd = value;
+  }
+  private _clearSearchOnAdd: boolean;
 
   @Input()
   get items() {
