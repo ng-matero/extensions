@@ -26,6 +26,10 @@
       .ng-arrow-wrapper {
         .ng-arrow {
           border-color: transparent transparent mat-color($foreground, secondary-text);
+
+          .mtx-select-invalid & {
+            border-color: transparent transparent mat-color($warn);
+          }
         }
       }
     }
@@ -68,6 +72,10 @@
     .ng-arrow-wrapper {
       .ng-arrow {
         border-color: mat-color($foreground, secondary-text) transparent transparent;
+
+        .mtx-select-invalid & {
+          border-color: mat-color($warn) transparent transparent;
+        }
       }
     }
   }

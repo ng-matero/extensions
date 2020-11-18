@@ -45,16 +45,21 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 export type CompareWithFn = (a: any, b: any) => boolean;
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
 
+export function isDefined(value: any) {
+  return value !== undefined && value !== null;
+}
+
 let nextUniqueId = 0;
 
 @Component({
   selector: 'mtx-select',
   exportAs: 'mtxSelect',
   host: {
-    'class': 'mtx-select',
-    '[class.mtx-select-floating]': 'shouldLabelFloat',
     '[attr.id]': 'id',
     '[attr.aria-describedby]': '_ariaDescribedby || null',
+    '[class.mtx-select-floating]': 'shouldLabelFloat',
+    '[class.mtx-select-invalid]': 'errorState',
+    'class': 'mtx-select',
   },
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
@@ -128,13 +133,13 @@ export class MtxSelectComponent
   @Input() readonly = false;
   @Input() searchFn = null;
   @Input() searchWhileComposing = true;
-  @Input() clearSearchOnAdd = true;
   @Input() selectOnTab = false;
   @Input() trackByFn = null;
   @Input() inputAttrs: { [key: string]: string } = {};
   @Input() tabIndex: number;
-  @Input() openOnEnter = true;
+  @Input() openOnEnter: boolean;
   @Input() minTermLength = 0;
+  @Input() editableSearchTerm = false;
   @Input() keyDownFn = (_: KeyboardEvent) => true;
   @Input() virtualScroll = false;
   @Input() typeToSearchText = 'Type to search';
@@ -153,6 +158,15 @@ export class MtxSelectComponent
   @Output('scrollToEnd') scrollToEnd = new EventEmitter();
 
   @Input()
+  get clearSearchOnAdd() {
+    return isDefined(this._clearSearchOnAdd) ? this._clearSearchOnAdd : this.closeOnSelect;
+  }
+  set clearSearchOnAdd(value) {
+    this._clearSearchOnAdd = value;
+  }
+  private _clearSearchOnAdd: boolean;
+
+  @Input()
   get items() {
     return this._items;
   }
@@ -160,7 +174,7 @@ export class MtxSelectComponent
     this._itemsAreUsed = true;
     this._items = value;
   }
-  private _items = [];
+  private _items: any[] = [];
   private _itemsAreUsed: boolean;
   private readonly _destroy$ = new Subject<void>();
 
@@ -288,7 +302,7 @@ export class MtxSelectComponent
 
   ngDoCheck(): void {
     if (this.ngControl) {
-      this.errorState = this.ngControl.invalid && this.ngControl.touched;
+      this.errorState = (this.ngControl.invalid && this.ngControl.touched) as boolean;
       this.stateChanges.next();
     }
   }
@@ -305,7 +319,12 @@ export class MtxSelectComponent
     this._ariaDescribedby = ids.join(' ');
   }
 
-  /** Implemented as part of MatFormFieldControl. */
+  /**
+   * Disables the select. Part of the ControlValueAccessor interface required
+   * to integrate with Angular's core forms API.
+   *
+   * @param isDisabled Sets whether the component is disabled.
+   */
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
   }
