@@ -7,6 +7,12 @@
   margin: 1rem 1rem 1rem 0;
 }
 
-.mtx-form-group {
-  display: block;
+:host ::ng-deep {
+  .mtx-form-group {
+    display: block;
+
+    .mtx-form-label {
+      width: 120px;
+    }
+  }
 }
