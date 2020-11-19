@@ -1,6 +1,7 @@
 <div>
   <mat-checkbox class="mx-3" [(ngModel)]="multipleSelect">Mulitple select</mat-checkbox>
-  <mat-checkbox [(ngModel)]="disableSelect">Disable select</mat-checkbox>
+  <mat-checkbox class="mx-3" [(ngModel)]="disableSelect">Disable select</mat-checkbox>
+  <mat-checkbox [(ngModel)]="closeOnSelect">Close on select</mat-checkbox>
 </div>
 
 <mat-form-field appearance="standard">
@@ -66,8 +67,32 @@
               bindValue="id"
               [disabled]="disableSelect"
               [multiple]="multipleSelect"
-              [closeOnSelect]="true"
+              [closeOnSelect]="closeOnSelect"
               required>
+    <!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"
+                 let-searchTerm="searchTerm">
+      <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.name}}
+    </ng-template> -->
+  </mtx-select>
+
+  <mat-hint>Choose your favorite food</mat-hint>
+  <mat-error>Please choose a food</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="standard">
+
+  <mtx-select [items]="accounts"
+              bindLabel="name"
+              bindValue="name"
+              groupBy="country"
+              [(ngModel)]="selectedAccount"
+              [disabled]="disableSelect"
+              [multiple]="multipleSelect"
+              [closeOnSelect]="closeOnSelect">
+    <!-- <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index"
+                 let-searchTerm="searchTerm">
+      {{searchTerm}}
+    </ng-template> -->
   </mtx-select>
 
   <mat-hint>Choose your favorite food</mat-hint>

@@ -55,17 +55,19 @@
            (scrollToEnd)="scrollToEnd.emit($event)">
 
   <ng-container *ngIf="optionTemplate">
-    <ng-template ng-option-tmp let-item="item" let-index="index" let-searchTerm="searchTerm">
+    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"
+                 let-searchTerm="searchTerm">
       <ng-template [ngTemplateOutlet]="optionTemplate"
-                   [ngTemplateOutletContext]="{ item: item, item$: item, index: index, searchTerm: searchTerm }">
+                   [ngTemplateOutletContext]="{ item: item, item$: item$, index: index, searchTerm: searchTerm }">
       </ng-template>
     </ng-template>
   </ng-container>
 
   <ng-container *ngIf="optgroupTemplate">
-    <ng-template ng-optgroup-tmp let-item="item" let-index="index" let-searchTerm="searchTerm">
+    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index"
+                 let-searchTerm="searchTerm">
       <ng-template [ngTemplateOutlet]="optgroupTemplate"
-                   [ngTemplateOutletContext]="{ item: item, item$: item, index: index, searchTerm: searchTerm }">
+                   [ngTemplateOutletContext]="{ item: item, item$: item$, index: index, searchTerm: searchTerm }">
       </ng-template>
     </ng-template>
   </ng-container>
