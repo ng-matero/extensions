@@ -6,6 +6,7 @@ import {
 } from '@ng-matero/extensions/data-grid';
 import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
 import { TranslateService } from '@ngx-translate/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 @Component({
   selector: 'dev-data-grid-demo',
@@ -140,5 +141,11 @@ export class DataGridDemoComponent {
 
   closeMenu() {
     this.grid.columnMenu.menuTrigger.closeMenu();
+  }
+
+  toggleSummary(e: MatCheckboxChange) {
+    if (e.checked) {
+      this.list = this.list.filter(_ => true);
+    }
   }
 }

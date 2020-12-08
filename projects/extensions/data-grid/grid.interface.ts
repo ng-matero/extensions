@@ -27,8 +27,8 @@ export interface MtxGridColumn {
   cellTemplate?: TemplateRef<any> | null;
   showExpand?: boolean;
   description?: string;
-  i18n?: string;
   summary?: ((colData: any, colDef?: any) => void) | string;
+  i18n?: string;
 }
 
 /**

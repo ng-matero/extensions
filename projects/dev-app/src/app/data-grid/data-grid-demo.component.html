@@ -2,7 +2,7 @@
 <mat-checkbox [(ngModel)]="hideRowSelectionCheckbox">hideRowSelectionCheckbox</mat-checkbox>
 <mat-checkbox [(ngModel)]="rowSelectable">rowSelectable</mat-checkbox>
 <mat-checkbox [(ngModel)]="expandable" (change)="toggleExpand()">expandable</mat-checkbox>
-<mat-checkbox [(ngModel)]="showSummary">showSummary</mat-checkbox>
+<mat-checkbox [(ngModel)]="showSummary" (change)="toggleSummary($event)">showSummary</mat-checkbox>
 <mat-checkbox [(ngModel)]="columnResizable">columnResizable</mat-checkbox>
 <mat-checkbox [(ngModel)]="sortOnFront">sortOnFront</mat-checkbox>
 <mat-checkbox [(ngModel)]="pageOnFront">pageOnFront</mat-checkbox>

@@ -11,6 +11,7 @@ import {
   TemplateRef,
   TrackByFunction,
   OnDestroy,
+  AfterViewInit,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -49,12 +50,12 @@ import { isObservable } from 'rxjs';
     ]),
   ],
 })
-export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
+export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
   @ViewChild('columnMenu') columnMenu: MtxGridColumnMenu;
 
-  dataSource: MatTableDataSource<any>;
+  dataSource: MatTableDataSource<any> = new MatTableDataSource([]);
 
   @Input() displayedColumns: string[];
 
@@ -258,19 +259,22 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
       });
     }
 
-    // TODO: Whether need new instance
-    this.dataSource = new MatTableDataSource<any>(this.data);
+    if (this.rowSelectable) {
+      this.rowSelection = new SelectionModel<any>(this.multiSelectable, this.rowSelected);
+    }
 
+    this.dataSource.data = this.data;
+    this.dataSource.paginator = this.pageOnFront ? this.paginator : null;
+    this.dataSource.sort = this.sortOnFront ? this.sort : null;
+  }
+
+  ngAfterViewInit() {
     if (this.pageOnFront) {
       this.dataSource.paginator = this.paginator;
     }
 
     if (this.sortOnFront) {
       this.dataSource.sort = this.sort;
-    }
-
-    if (this.rowSelectable) {
-      this.rowSelection = new SelectionModel<any>(this.multiSelectable, this.rowSelected);
     }
   }
 
