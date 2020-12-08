@@ -58,9 +58,10 @@
                           (change)="$event ? _toggleMasterCheckbox() : null">
             </mat-checkbox>
           </th>
-          <td mat-cell *matCellDef="let row;" class="mtx-grid-checkbox-cell">
-            <mat-checkbox *ngIf="!(rowSelectionFormatter.hideCheckbox && rowSelectionFormatter.hideCheckbox!(row))"
-                          [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled!(row)"
+          <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
+              class="mtx-grid-checkbox-cell">
+            <mat-checkbox *ngIf="!(rowSelectionFormatter.hideCheckbox && rowSelectionFormatter.hideCheckbox!(row, _getIndex(index, dataIndex)))"
+                          [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled!(row, _getIndex(index, dataIndex))"
                           [checked]="rowSelection.isSelected(row)"
                           (click)="$event.stopPropagation()"
                           (change)="$event ? _toggleNormalCheckbox(row) : null">
@@ -215,9 +216,10 @@
                         (change)="$event ? _toggleMasterCheckbox() : null">
           </mat-checkbox>
         </th>
-        <td mat-cell *matCellDef="let row;" class="mtx-grid-checkbox-cell">
-          <mat-checkbox *ngIf="!(rowSelectionFormatter.hideCheckbox && rowSelectionFormatter.hideCheckbox!(row))"
-                        [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled!(row)"
+        <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
+            class="mtx-grid-checkbox-cell">
+          <mat-checkbox *ngIf="!(rowSelectionFormatter.hideCheckbox && rowSelectionFormatter.hideCheckbox!(row, _getIndex(index, dataIndex)))"
+                        [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled!(row, _getIndex(index, dataIndex))"
                         [checked]="rowSelection.isSelected(row)"
                         (click)="$event.stopPropagation()"
                         (change)="$event ? _toggleNormalCheckbox(row) : null">

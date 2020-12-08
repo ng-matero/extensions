@@ -125,15 +125,15 @@ export interface MtxGridCellTemplate {
  * Row selection formatter
  */
 export interface MtxGridRowSelectionFormatter {
-  disabled?: (rowData: any) => boolean;
-  hideCheckbox?: (rowData: any) => boolean;
+  disabled?: (rowData: any, index?: number) => boolean;
+  hideCheckbox?: (rowData: any, index?: number) => boolean;
 }
 
 /**
  * Row class formatter
  */
 export interface MtxGridRowClassFormatter {
-  [className: string]: (rowData: any) => boolean;
+  [className: string]: (rowData: any, index?: number) => boolean;
 }
 
 /**

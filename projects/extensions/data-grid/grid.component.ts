@@ -343,8 +343,8 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   _selectRow(event: MouseEvent, rowData: any, index: number) {
     if (
       this.rowSelectable &&
-      !(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(rowData)) &&
-      !(this.rowSelectionFormatter.hideCheckbox && this.rowSelectionFormatter.hideCheckbox(rowData))
+      !this.rowSelectionFormatter.disabled?.(rowData, index) &&
+      !this.rowSelectionFormatter.hideCheckbox?.(rowData, index)
     ) {
       // metaKey -> command key
       if (!event.ctrlKey && !event.metaKey) {
@@ -361,7 +361,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   _isAllSelected() {
     const numSelected = this.rowSelection.selected.length;
     const numRows = this.dataSource.data.filter(
-      row => !(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(row))
+      (row, index) => !this.rowSelectionFormatter.disabled?.(row, index)
     ).length;
     return numSelected === numRows;
   }
@@ -370,8 +370,8 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   _toggleMasterCheckbox() {
     this._isAllSelected()
       ? this.rowSelection.clear()
-      : this.dataSource.data.forEach(row => {
-          if (!(this.rowSelectionFormatter.disabled && this.rowSelectionFormatter.disabled(row))) {
+      : this.dataSource.data.forEach((row, index) => {
+          if (!this.rowSelectionFormatter.disabled?.(row, index)) {
             this.rowSelection.select(row);
           }
         });

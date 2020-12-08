@@ -21,8 +21,8 @@ export class DataGridDemoComponent {
   rowSelectable = true;
   rowSelected = EXAMPLE_DATA.slice(2, 3);
   rowSelectionFormatter: MtxGridRowSelectionFormatter = {
-    disabled: data => data.name === 'Boron',
-    hideCheckbox: data => data.name === 'John',
+    disabled: (data, index) => data.name === 'Boron',
+    hideCheckbox: (data, index) => index === 1,
   };
   expandable = false;
   showSummary = false;
