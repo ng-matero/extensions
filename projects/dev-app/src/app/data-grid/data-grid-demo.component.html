@@ -6,6 +6,8 @@
 <mat-checkbox [(ngModel)]="columnResizable">columnResizable</mat-checkbox>
 <mat-checkbox [(ngModel)]="sortOnFront">sortOnFront</mat-checkbox>
 <mat-checkbox [(ngModel)]="pageOnFront">pageOnFront</mat-checkbox>
+<mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
+<mat-checkbox [(ngModel)]="rowStriped">Striped</mat-checkbox>
 
 <mtx-grid [data]="list" #grid
           [columns]="columns"
@@ -17,6 +19,8 @@
           [rowSelectionFormatter]="rowSelectionFormatter"
           [rowClassFormatter]="rowClassFormatter"
           (rowSelectionChange)="log($event)"
+          [rowHover]="rowHover"
+          [rowStriped]="rowStriped"
           (cellSelectionChange)="log($event)"
           [trackBy]="trackByName"
           [expandable]="expandable"

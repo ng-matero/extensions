@@ -23,7 +23,7 @@ export class DataGridDemoComponent {
   rowSelected = EXAMPLE_DATA.slice(2, 3);
   rowSelectionFormatter: MtxGridRowSelectionFormatter = {
     disabled: (data, index) => data.name === 'Boron',
-    hideCheckbox: (data, index) => index === 1,
+    hideCheckbox: (data, index) => index === 10,
   };
   rowClassFormatter: MtxGridRowClassFormatter = {
     success: (data, index) => data.name === 'Boron',
@@ -34,6 +34,8 @@ export class DataGridDemoComponent {
   columnResizable = false;
   sortOnFront = true;
   pageOnFront = true;
+  rowHover = false;
+  rowStriped = false;
 
   list = EXAMPLE_DATA;
   isNewList = false;

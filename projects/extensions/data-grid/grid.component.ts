@@ -223,7 +223,10 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   }
 
   _getRowClassList(rowData: any, index: number) {
-    const classList = {};
+    const classList = {
+      'selected': this.rowSelection.isSelected(rowData),
+      'mat-row-odd': index % 2,
+    };
     if (this.rowClassFormatter) {
       for (const key of Object.keys(this.rowClassFormatter)) {
         classList[key] = this.rowClassFormatter[key](rowData, index);
@@ -304,10 +307,6 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     pinnedRightCols.forEach((item, idx) => {
       item.right = pinnedRightCols.slice(0, idx).reduce(count, 0) + 'px';
     });
-  }
-
-  _isOddRow(index: number, dataIndex: number) {
-    return typeof index === 'undefined' ? dataIndex % 2 : index % 2;
   }
 
   _getIndex(index: number, dataIndex: number) {
