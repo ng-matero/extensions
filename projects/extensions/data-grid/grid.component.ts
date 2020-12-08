@@ -116,7 +116,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() rowSelectable = false;
   @Input() hideRowSelectionCheckbox = false;
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
-  @Input() rowClassFormatter: MtxGridRowClassFormatter = {};
+  @Input() rowClassFormatter: MtxGridRowClassFormatter;
   @Output() rowSelectionChange = new EventEmitter<any[]>();
 
   /** Row event */
@@ -220,6 +220,16 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   _isObservable(data: any) {
     return isObservable(data);
+  }
+
+  _getRowClassList(rowData: any, index: number) {
+    const classList = {};
+    if (this.rowClassFormatter) {
+      for (const key of Object.keys(this.rowClassFormatter)) {
+        classList[key] = this.rowClassFormatter[key](rowData, index);
+      }
+    }
+    return classList;
   }
 
   ngOnInit() {}

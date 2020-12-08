@@ -166,6 +166,7 @@
         <tr mat-row
             *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
             [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': _isOddRow(index, dataIndex)}"
+            [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
             (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
         </tr>
         <ng-container *ngIf="_whetherShowSummary">
@@ -323,6 +324,7 @@
       <tr mat-row
           *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
           [ngClass]="{'selected': rowSelection.isSelected(row), 'mat-row-odd': _isOddRow(index, dataIndex)}"
+          [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
           (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
       </tr>
       <ng-container *ngIf="_whetherShowSummary">

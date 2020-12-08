@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import {
   MtxGridColumn,
   MtxGridComponent,
+  MtxGridRowClassFormatter,
   MtxGridRowSelectionFormatter,
 } from '@ng-matero/extensions/data-grid';
 import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
@@ -23,6 +24,10 @@ export class DataGridDemoComponent {
   rowSelectionFormatter: MtxGridRowSelectionFormatter = {
     disabled: (data, index) => data.name === 'Boron',
     hideCheckbox: (data, index) => index === 1,
+  };
+  rowClassFormatter: MtxGridRowClassFormatter = {
+    success: (data, index) => data.name === 'Boron',
+    danger: (data, index) => index === 1,
   };
   expandable = false;
   showSummary = false;
