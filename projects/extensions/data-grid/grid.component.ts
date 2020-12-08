@@ -55,7 +55,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('columnMenu') columnMenu: MtxGridColumnMenu;
 
-  dataSource: MatTableDataSource<any> = new MatTableDataSource([]);
+  dataSource = new MatTableDataSource([]);
 
   @Input() displayedColumns: string[];
 
@@ -223,7 +223,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   }
 
   _getRowClassList(rowData: any, index: number) {
-    const classList = {
+    const classList: any = {
       'selected': this.rowSelection.isSelected(rowData),
       'mat-row-odd': index % 2,
     };
