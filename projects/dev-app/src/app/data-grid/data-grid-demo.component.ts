@@ -57,6 +57,7 @@ export class DataGridDemoComponent {
       header: this.translate.stream('gender'),
       field: 'gender',
       minWidth: 100,
+      class: 'warning',
     },
     {
       header: this.translate.stream('mobile'),

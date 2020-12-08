@@ -28,6 +28,7 @@ export interface MtxGridColumn {
   showExpand?: boolean;
   description?: string;
   summary?: ((colData: any, colDef?: any) => void) | string;
+  class?: string;
   i18n?: string;
 }
 
