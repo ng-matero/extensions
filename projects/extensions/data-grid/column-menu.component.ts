@@ -6,10 +6,12 @@ import {
   Output,
   EventEmitter,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MtxGridColumnSelectionItem } from './grid.interface';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'mtx-grid-column-menu',
@@ -20,6 +22,9 @@ import { MtxGridColumnSelectionItem } from './grid.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxGridColumnMenuComponent {
+  @ViewChild('menu', { static: true }) menuPanel: MatMenu;
+  @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
+
   @Input() columns: MtxGridColumnSelectionItem[] = [];
   @Input() selectable = true;
   @Input() selectableChecked: 'show' | 'hide' = 'show';

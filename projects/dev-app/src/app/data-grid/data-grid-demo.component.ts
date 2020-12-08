@@ -1,6 +1,10 @@
-import { Component } from '@angular/core';
-import { MtxGridColumn, MtxGridRowSelectionFormatter } from '@ng-matero/extensions/data-grid';
-import { EXAMPLE_DATA } from './data';
+import { Component, ViewChild } from '@angular/core';
+import {
+  MtxGridColumn,
+  MtxGridComponent,
+  MtxGridRowSelectionFormatter,
+} from '@ng-matero/extensions/data-grid';
+import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -9,6 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./data-grid-demo.component.scss'],
 })
 export class DataGridDemoComponent {
+  @ViewChild('grid') grid: MtxGridComponent;
+
   multiSelectable = true;
   hideRowSelectionCheckbox = false;
   rowSelectable = true;
@@ -20,8 +26,11 @@ export class DataGridDemoComponent {
   expandable = false;
   showSummary = false;
   columnResizable = false;
+  sortOnFront = true;
+  pageOnFront = true;
 
   list = EXAMPLE_DATA;
+  isNewList = false;
 
   columns: MtxGridColumn[] = [
     {
@@ -36,6 +45,7 @@ export class DataGridDemoComponent {
       field: 'weight',
       minWidth: 100,
       maxWidth: 300,
+      sortable: true,
     },
     {
       header: this.translate.stream('gender'),
@@ -57,7 +67,7 @@ export class DataGridDemoComponent {
       field: 'operation',
       minWidth: 150,
       maxWidth: 'auto',
-      // pinned: 'right',
+      pinned: 'right',
       right: '0px',
       type: 'button',
       buttons: [
@@ -121,5 +131,14 @@ export class DataGridDemoComponent {
       item.weight = Math.round(Math.random() * 1000) / 100;
       return item;
     });
+  }
+
+  updateList() {
+    this.isNewList = !this.isNewList;
+    this.list = this.isNewList ? EXAMPLE_DATA2 : EXAMPLE_DATA;
+  }
+
+  closeMenu() {
+    this.grid.columnMenu.menuTrigger.closeMenu();
   }
 }

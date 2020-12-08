@@ -1,4 +1,5 @@
 import { TemplateRef } from '@angular/core';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { Observable } from 'rxjs';
 
 /**
@@ -133,4 +134,12 @@ export interface MtxGridRowSelectionFormatter {
  */
 export interface MtxGridRowClassFormatter {
   [className: string]: (rowData: any) => boolean;
+}
+
+/**
+ * Column menu component
+ */
+export interface MtxGridColumnMenu {
+  menuPanel: MatMenu;
+  menuTrigger: MatMenuTrigger;
 }

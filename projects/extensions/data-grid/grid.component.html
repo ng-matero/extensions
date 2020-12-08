@@ -10,7 +10,7 @@
     </ng-template>
   </div>
   <div class="mtx-grid-toolbar-actions">
-    <mtx-grid-column-menu *ngIf="showColumnMenuButton"
+    <mtx-grid-column-menu *ngIf="showColumnMenuButton" #columnMenu
                           [columns]="columnMenuData"
                           [buttonText]="columnMenuButtonText"
                           [buttonType]="columnMenuButtonType"

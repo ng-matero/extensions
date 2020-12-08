@@ -24,6 +24,7 @@ import {
   MtxGridCellTemplate,
   MtxGridRowSelectionFormatter,
   MtxGridRowClassFormatter,
+  MtxGridColumnMenu,
 } from './grid.interface';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
@@ -51,6 +52,7 @@ import { isObservable } from 'rxjs';
 export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+  @ViewChild('columnMenu') columnMenu: MtxGridColumnMenu;
 
   dataSource: MatTableDataSource<any>;
 

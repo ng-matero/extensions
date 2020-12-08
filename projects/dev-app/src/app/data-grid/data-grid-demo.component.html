@@ -4,8 +4,10 @@
 <mat-checkbox [(ngModel)]="expandable" (change)="toggleExpand()">expandable</mat-checkbox>
 <mat-checkbox [(ngModel)]="showSummary">showSummary</mat-checkbox>
 <mat-checkbox [(ngModel)]="columnResizable">columnResizable</mat-checkbox>
+<mat-checkbox [(ngModel)]="sortOnFront">sortOnFront</mat-checkbox>
+<mat-checkbox [(ngModel)]="pageOnFront">pageOnFront</mat-checkbox>
 
-<mtx-grid [data]="list"
+<mtx-grid [data]="list" #grid
           [columns]="columns"
           [columnResizable]="columnResizable"
           [multiSelectable]="multiSelectable"
@@ -19,7 +21,6 @@
           [expandable]="expandable"
           [expansionTemplate]="expansionTpl"
           (expansionChange)="log($event)"
-          [headerTemplate]="headerTpl"
           [showSummary]="showSummary"
           [summaryTemplate]="{'weight': footerTpl}"
           [showToolbar]="true"
@@ -29,7 +30,11 @@
           [showColumnMenuFooter]="true"
           [columnMenuFooterTemplate]="menuFooterTpl"
           (rowClick)="log($event)"
-          [showSidebar]="false">
+          [showSidebar]="true"
+          [sortOnFront]="sortOnFront"
+          [pageOnFront]="pageOnFront"
+          [pageSize]="1"
+          [pageSizeOptions]="[1,5,10]">
 </mtx-grid>
 
 <ng-template #expansionTpl let-row>
@@ -46,9 +51,11 @@
 
 <ng-template #menuFooterTpl>
   <button>Save</button>
+  <button (click)="closeMenu()">Close</button>
 </ng-template>
 
 <button (click)="updateCell()">Update Cell</button>
+<button (click)="updateList()">Update List</button>
 
 <hr>
 
