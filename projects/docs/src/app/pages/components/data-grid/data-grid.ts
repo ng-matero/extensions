@@ -80,6 +80,10 @@ import {
   DataGridColumnResizeComponent,
   dataGridColumnResizeExampleConfig,
 } from './examples/column-resize';
+import {
+  DataGridRowColumnClassComponent,
+  dataGridRowColumnClassExampleConfig,
+} from './examples/row-column-class';
 
 @Component({
   selector: 'app-data-grid-overview',
@@ -129,6 +133,7 @@ export class DataGridApiComponent {
             dataGridCustomCellTemplateExampleConfig,
             dataGridCustomCellTemplate2ExampleConfig,
             dataGridDataFormattingExampleConfig,
+            dataGridRowColumnClassExampleConfig,
             dataGridNoResultExampleConfig,
             dataGridCustomHeaderTemplateExampleConfig,
             dataGridCustomFooterTemplateExampleConfig,
@@ -164,6 +169,7 @@ export class DataGridApiComponent {
     DataGridCustomCellTemplateComponent,
     DataGridCustomCellTemplate2Component,
     DataGridDataFormattingComponent,
+    DataGridRowColumnClassComponent,
     DataGridNoResultComponent,
     DataGridCustomHeaderTemplateComponent,
     DataGridCustomFooterTemplateComponent,

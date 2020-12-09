@@ -2,6 +2,9 @@ import { AppComponent as DataGridNoResultComponent } from './app.component';
 
 const dataGridNoResultExampleConfig = {
   title: 'No result',
+  description: `
+  <p>You can use <code>[noResultTemplate]="noResultTpl"</code> to customize it.</p>
+  `,
   component: DataGridNoResultComponent,
   files: [
     {

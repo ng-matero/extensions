@@ -1,13 +1,8 @@
-import { AppComponent as DataGridCustomCellTemplate2Component } from './app.component';
+import { AppComponent as DataGridRowColumnClassComponent } from './app.component';
 
-const dataGridCustomCellTemplate2ExampleConfig = {
-  title: 'Custom cell template 2',
-  description: `
-  <p>There has another easiest way to custom cells. You can use property
-  <code>[cellTemplate]=\"{ mobile: mobileTpl, city: cityTpl }\"</code>,
-  the key of cellTemplate is the column field.</p>
-  `,
-  component: DataGridCustomCellTemplate2Component,
+const dataGridRowColumnClassExampleConfig = {
+  title: 'Custom class for row or column',
+  component: DataGridRowColumnClassComponent,
   files: [
     {
       file: 'app.component.html',
@@ -27,4 +22,4 @@ const dataGridCustomCellTemplate2ExampleConfig = {
   ],
 };
 
-export { DataGridCustomCellTemplate2Component, dataGridCustomCellTemplate2ExampleConfig };
+export { DataGridRowColumnClassComponent, dataGridRowColumnClassExampleConfig };
