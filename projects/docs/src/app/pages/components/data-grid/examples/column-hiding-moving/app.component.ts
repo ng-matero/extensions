@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn } from '@ng-matero/extensions';
+import { MtxGridColumn, MtxGridComponent } from '@ng-matero/extensions';
 
 @Component({
   selector: 'data-grid-example',
@@ -8,6 +8,8 @@ import { MtxGridColumn } from '@ng-matero/extensions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
+  @ViewChild('grid') grid: MtxGridComponent;
+
   columns: MtxGridColumn[] = [
     { header: 'Name', field: 'name' },
     { header: 'Weight', field: 'weight' },
@@ -21,6 +23,10 @@ export class AppComponent {
   columnHideable = true;
   columnMovable = true;
   columnHideableChecked = 'show';
+
+  closeMenu() {
+    this.grid.columnMenu.menuTrigger.closeMenu();
+  }
 
   log(e: any) {
     console.log(e);

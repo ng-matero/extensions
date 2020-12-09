@@ -9,7 +9,7 @@
   </mat-radio-group>
 </div>
 
-<mtx-grid [data]="list"
+<mtx-grid [data]="list" #grid
           [columns]="columns"
           [showToolbar]="true"
           [toolbarTitle]="'Data Grid'"
@@ -25,4 +25,5 @@
 
 <ng-template #menuFooter>
   <button>Save</button>
+  <button (click)="closeMenu()">Close</button>
 </ng-template>

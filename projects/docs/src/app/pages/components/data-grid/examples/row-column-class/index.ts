@@ -1,7 +1,7 @@
 import { AppComponent as DataGridRowColumnClassComponent } from './app.component';
 
 const dataGridRowColumnClassExampleConfig = {
-  title: 'Custom class for row or column',
+  title: 'Custom class for row and column',
   component: DataGridRowColumnClassComponent,
   files: [
     {
