@@ -16,6 +16,16 @@ export class MtxGridExpansionToggleDirective {
   private _row: any;
   private _tplRef: TemplateRef<any>;
 
+  @Input()
+  get opened() {
+    return this._opened;
+  }
+  set opened(newValue: boolean) {
+    this._opened = newValue;
+    this.openedChange.emit(newValue);
+  }
+  @Output() openedChange = new EventEmitter<boolean>();
+
   @HostBinding('class.expanded')
   get expended(): boolean {
     return this._opened;
@@ -47,7 +57,7 @@ export class MtxGridExpansionToggleDirective {
   }
 
   toggle(): void {
-    this._opened = !this._opened;
+    this.opened = !this.opened;
     this.toggleChange.emit(this);
   }
 }

@@ -156,4 +156,8 @@ export class DataGridDemoComponent {
       this.list = this.list.filter(_ => true);
     }
   }
+
+  toggleExpansionRow(e: any) {
+    this.grid.toggleExpansion(e.index);
+  }
 }
