@@ -296,9 +296,6 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
     column: any,
     index: number
   ) {
-    if (this.expandable) {
-      this.expansionRowStates[index].expanded = !this.expansionRowStates[index].expanded;
-    }
     this.expansionChange.emit({ opened: expansionRef.expended, data: rowData, index, column });
   }
 
