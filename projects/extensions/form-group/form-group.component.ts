@@ -1,4 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   Component,
@@ -8,6 +7,7 @@ import {
   QueryList,
   ViewEncapsulation,
 } from '@angular/core';
+import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatFormField } from '@angular/material/form-field';
 
 @Component({

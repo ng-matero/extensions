@@ -276,7 +276,8 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
       this.rowSelection = new SelectionModel<any>(this.multiSelectable, this.rowSelected);
     }
 
-    this.dataSource.data = this.data;
+    this.dataSource = new MatTableDataSource(this.data);
+
     this.dataSource.paginator = this.pageOnFront ? this.paginator : null;
     this.dataSource.sort = this.sortOnFront ? this.sort : null;
   }
