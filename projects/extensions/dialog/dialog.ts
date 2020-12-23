@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { MtxDialogComponent } from './dialog.component';
 import { MtxDialogData } from './dialog.config';
+import { Observable } from 'rxjs';
 
 const defaults: MtxDialogData = {
   title: '',
@@ -45,7 +46,7 @@ export class MtxDialog {
     });
   }
 
-  alert(title: string, onOk = () => {}) {
+  alert(title: string | Observable<string>, onOk = () => {}) {
     this.open({
       title,
       buttons: [
@@ -59,7 +60,7 @@ export class MtxDialog {
     });
   }
 
-  confirm(title: string, onOk = () => {}, onClose = () => {}) {
+  confirm(title: string | Observable<string>, onOk = () => {}, onClose = () => {}) {
     this.open({
       title,
       buttons: [
