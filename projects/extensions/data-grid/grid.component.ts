@@ -12,6 +12,7 @@ import {
   TrackByFunction,
   OnDestroy,
   AfterViewInit,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -172,6 +173,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   /** thead */
   @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+  @Input() headerExtraTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
   /** tbody */
   @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
@@ -204,7 +206,14 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     }
   }
 
-  constructor(private _dataGridSrv: MtxGridService) {}
+  constructor(
+    private _dataGridSrv: MtxGridService,
+    private _changeDetectorRef: ChangeDetectorRef
+  ) {}
+
+  detectChanges() {
+    this._changeDetectorRef.detectChanges();
+  }
 
   _isTemplateRef(obj: any) {
     return obj instanceof TemplateRef;

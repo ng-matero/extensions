@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
   MtxGridColumn,
   MtxGridComponent,
@@ -14,8 +14,8 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
   templateUrl: './data-grid-demo.component.html',
   styleUrls: ['./data-grid-demo.component.scss'],
 })
-export class DataGridDemoComponent {
-  @ViewChild('grid') grid: MtxGridComponent;
+export class DataGridDemoComponent implements OnInit, AfterViewInit {
+  @ViewChild('grid', { static: true }) grid: MtxGridComponent;
 
   multiSelectable = true;
   hideRowSelectionCheckbox = false;
@@ -122,6 +122,14 @@ export class DataGridDemoComponent {
 
   constructor(public translate: TranslateService) {}
 
+  ngOnInit() {}
+
+  ngAfterViewInit() {
+    this.grid.rowSelection.changed.subscribe(res => {
+      console.log('rowSelection:', res.source.selected);
+    });
+  }
+
   trackByName(index: number, item: any) {
     return item.name;
   }
@@ -129,10 +137,6 @@ export class DataGridDemoComponent {
   toggleExpand() {
     this.columns[0].showExpand = this.expandable;
     this.columns = this.columns.filter(_ => true);
-  }
-
-  log(e: any) {
-    console.log(e);
   }
 
   updateCell() {
@@ -159,5 +163,14 @@ export class DataGridDemoComponent {
 
   toggleExpansionRow(e: any) {
     this.grid.toggleExpansion(e.index);
+  }
+
+  select2ndData() {
+    this.grid.rowSelection.select(this.list[1]);
+    this.grid.detectChanges();
+  }
+
+  log(e: any) {
+    console.log(e);
   }
 }

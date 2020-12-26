@@ -39,7 +39,8 @@
           [sortOnFront]="sortOnFront"
           [pageOnFront]="pageOnFront"
           [pageSize]="1"
-          [pageSizeOptions]="[1,5,10]">
+          [pageSizeOptions]="[1,5,10,50,100,500,1000]"
+          [headerExtraTemplate]="headerExtraTpl">
 </mtx-grid>
 
 <ng-template #expansionTpl let-row>
@@ -48,6 +49,10 @@
 
 <ng-template #headerTpl let-col>
   {{col.header | async}}
+</ng-template>
+
+<ng-template #headerExtraTpl let-col>
+  <mat-icon>info</mat-icon>
 </ng-template>
 
 <ng-template #footerTpl let-data>
@@ -61,6 +66,7 @@
 
 <button (click)="updateCell()">Update Cell</button>
 <button (click)="updateList()">Update List</button>
+<button (click)="select2ndData()">Select 2nd data</button>
 
 <hr>
 
