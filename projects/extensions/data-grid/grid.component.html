@@ -101,6 +101,9 @@
                     <span>{{col.header | toObservable | async}}</span>
                     <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>
                   </div>
+                  <ng-template [ngTemplateOutlet]="headerExtraTemplate"
+                               [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
+                  </ng-template>
                 </ng-template>
               </div>
             </th>
@@ -263,6 +266,9 @@
                   <span>{{col.header | toObservable | async}}</span>
                   <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>
                 </div>
+                <ng-template [ngTemplateOutlet]="headerExtraTemplate"
+                             [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
+                </ng-template>
               </ng-template>
             </div>
           </th>
