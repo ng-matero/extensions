@@ -2,6 +2,10 @@ import { AppComponent as DataGridCustomHeaderTemplateComponent } from './app.com
 
 const dataGridCustomHeaderTemplateExampleConfig = {
   title: 'Custom header template',
+  description: `
+  <p>If you just want to append something to header, you can try
+  <code>[headerExtraTemplate]</code> instead.</p>
+  `,
   component: DataGridCustomHeaderTemplateComponent,
   files: [
     {
