@@ -45,20 +45,20 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
       header: this.translate.stream('name'),
       field: 'name',
       showExpand: false,
-      minWidth: 200,
+      minWidth: 150,
       sortable: true,
     },
     {
       header: this.translate.stream('weight'),
       field: 'weight',
-      minWidth: 100,
+      minWidth: 150,
       maxWidth: 300,
       sortable: true,
     },
     {
       header: this.translate.stream('gender'),
       field: 'gender',
-      minWidth: 100,
+      minWidth: 150,
       class: 'warning',
     },
     {

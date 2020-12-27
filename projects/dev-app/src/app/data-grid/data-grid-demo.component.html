@@ -40,6 +40,7 @@
           [pageOnFront]="pageOnFront"
           [pageSize]="1"
           [pageSizeOptions]="[1,5,10,50,100,500,1000]"
+          [headerTemplate]="{operation: headerTpl}"
           [headerExtraTemplate]="headerExtraTpl">
 </mtx-grid>
 
@@ -48,7 +49,7 @@
 </ng-template>
 
 <ng-template #headerTpl let-col>
-  {{col.header | async}}
+  <mat-icon>build</mat-icon> {{col.header | async}}
 </ng-template>
 
 <ng-template #headerExtraTpl let-col>

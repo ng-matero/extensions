@@ -44,7 +44,9 @@
     .mat-header-cell,
     .mat-footer-cell,
     .mat-cell {
-      min-width: 80px;
+      &:not(.mtx-grid-checkbox-cell) {
+        min-width: 80px;
+      }
     }
   }
 
@@ -93,11 +95,6 @@
     }
   }
 
-  .mat-table-sticky-left,
-  .mat-table-sticky-right {
-    flex: none;
-  }
-
   .mtx-grid-expansion {
     height: 0;
     overflow: hidden;
@@ -123,8 +120,8 @@
 
   .mtx-grid-expansion-placeholder {
     display: inline-block;
-    width: 40px;
-    height: 40px;
+    width: 56px;
+    height: 56px;
     vertical-align: middle;
   }
 
@@ -166,12 +163,12 @@
   .mtx-grid-checkbox-cell {
     flex: none;
     justify-content: center;
-    width: 40px;
-    min-width: 40px;
+    width: 56px;
+    min-width: 56px;
 
-    // Fix checkbox height
     .mat-checkbox {
-      display: flex;
+      display: flex; // Fix checkbox height
+      margin: 0 10px;
     }
 
     // Fix RTL checkbox margin

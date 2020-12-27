@@ -67,7 +67,7 @@
                           (change)="$event ? _toggleNormalCheckbox(row) : null">
             </mat-checkbox>
           </td>
-          <td mat-footer-cell *matFooterCellDef></td>
+          <td mat-footer-cell *matFooterCellDef class="mtx-grid-checkbox-cell"></td>
         </ng-container>
 
         <ng-container *ngFor="let col of columns;">
@@ -231,7 +231,7 @@
                         (change)="$event ? _toggleNormalCheckbox(row) : null">
           </mat-checkbox>
         </td>
-        <td mat-footer-cell *matFooterCellDef></td>
+        <td mat-footer-cell *matFooterCellDef class="mtx-grid-checkbox-cell"></td>
       </ng-container>
 
       <ng-container *ngFor="let col of columns;">
