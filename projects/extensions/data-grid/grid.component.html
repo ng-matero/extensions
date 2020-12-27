@@ -1,4 +1,4 @@
-<!-- Progress Bar-->
+<!-- Progress bar-->
 <mat-progress-bar class="mtx-grid-progress" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
 
 <!-- Toolbar -->
@@ -33,7 +33,7 @@
 </div>
 
 <div class="mtx-grid-main mtx-grid-layout">
-  <!-- Table Content -->
+  <!-- Table content -->
   <div #tableContainer class="mtx-grid-content mtx-grid-layout">
     <!-- Fix table width issue: https://github.com/ng-matero/extensions/issues/39 -->
     <div #tableWrapper class="mat-table-wrapper" *ngIf="!columnResizable">
@@ -101,8 +101,8 @@
                     <span>{{col.header | toObservable | async}}</span>
                     <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>
                   </div>
-                  <ng-template [ngTemplateOutlet]="headerExtraTemplate"
-                               [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
+                  <ng-template [ngTemplateOutlet]="headerExtraTplBase"
+                               [ngTemplateOutletContext]="{ $implicit: headerExtraTemplate, colDef: col }">
                   </ng-template>
                 </ng-template>
               </div>
@@ -266,8 +266,8 @@
                   <span>{{col.header | toObservable | async}}</span>
                   <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>
                 </div>
-                <ng-template [ngTemplateOutlet]="headerExtraTemplate"
-                             [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
+                <ng-template [ngTemplateOutlet]="headerExtraTplBase"
+                             [ngTemplateOutletContext]="{ $implicit: headerExtraTemplate, colDef: col }">
                 </ng-template>
               </ng-template>
             </div>
@@ -363,7 +363,7 @@
     </table>
   </div>
 
-  <!-- Tool Sidebar -->
+  <!-- Tool sidebar -->
   <div class="mtx-grid-sidebar" *ngIf="showSidebar"></div>
 </div>
 
@@ -379,10 +379,26 @@
                [disabled]="pageDisabled">
 </mat-paginator>
 
-<!-- No Result -->
+<!-- No result -->
 <div class="mtx-grid-no-result" *ngIf="_hasNoResult">
   <ng-template [ngIf]="noResultTemplate" [ngIfElse]="defaultNoResultTpl">
     <ng-template [ngTemplateOutlet]="noResultTemplate"></ng-template>
   </ng-template>
   <ng-template #defaultNoResultTpl>{{noResultText}}</ng-template>
 </div>
+
+<!-- Header template for extra content -->
+<ng-template #headerExtraTplBase let-headerExtraTemplate let-col="colDef">
+  <ng-template [ngIf]="_isTemplateRef(headerExtraTemplate)" [ngIfElse]="headerExtraTpl">
+    <ng-template [ngTemplateOutlet]="headerExtraTemplate"
+                 [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
+    </ng-template>
+  </ng-template>
+  <ng-template #headerExtraTpl>
+    <ng-template [ngIf]="headerExtraTemplate && _isTemplateRef(headerExtraTemplate[col.field])">
+      <ng-template [ngTemplateOutlet]="headerExtraTemplate[col.field]"
+                   [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
+      </ng-template>
+    </ng-template>
+  </ng-template>
+</ng-template>
