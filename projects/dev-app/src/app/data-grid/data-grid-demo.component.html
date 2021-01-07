@@ -44,8 +44,8 @@
           [headerExtraTemplate]="{name: headerExtraTpl}">
 </mtx-grid>
 
-<ng-template #expansionTpl let-row>
-  {{row.name}}
+<ng-template #expansionTpl let-row let-expanded="expanded">
+  123{{expanded}} {{row.name}}
 </ng-template>
 
 <ng-template #headerTpl let-col>

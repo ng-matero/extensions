@@ -186,7 +186,7 @@
               <div class="mtx-grid-expansion-detail"
                    [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
                 <ng-template [ngTemplateOutlet]="expansionTemplate"
-                             [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex }">
+                             [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex, expanded: expansionRowStates[dataIndex].expanded }">
                 </ng-template>
               </div>
             </td>
@@ -349,7 +349,7 @@
             <div class="mtx-grid-expansion-detail"
                  [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
               <ng-template [ngTemplateOutlet]="expansionTemplate"
-                           [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex }">
+                           [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex, expanded: expansionRowStates[dataIndex].expanded }">
               </ng-template>
             </div>
           </td>
