@@ -334,7 +334,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     column: any,
     index: number
   ) {
-    this.expansionChange.emit({ expended: expansionRef.expended, data: rowData, index, column });
+    this.expansionChange.emit({ expanded: expansionRef.expanded, data: rowData, index, column });
   }
 
   /** Cell select event */

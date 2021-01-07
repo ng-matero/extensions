@@ -27,7 +27,7 @@ export class MtxGridExpansionToggleDirective {
   @Output() openedChange = new EventEmitter<boolean>();
 
   @HostBinding('class.expanded')
-  get expended(): boolean {
+  get expanded(): boolean {
     return this._opened;
   }
 
