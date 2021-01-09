@@ -7,6 +7,7 @@
 @import './progress/progress-theme';
 @import './select/select-theme';
 @import './split-pane/split-theme';
+@import './tooltip/tooltip-theme';
 
 @mixin material-extensions-theme($theme) {
   @include mtx-alert-theme($theme);
@@ -16,6 +17,7 @@
   @include mtx-progress-theme($theme);
   @include mtx-select-theme($theme);
   @include mtx-split-theme($theme);
+  @include mtx-tooltip-theme($theme);
 }
 
 @import './form-group/form-group-theme';

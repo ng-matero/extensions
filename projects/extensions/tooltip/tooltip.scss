@@ -1,0 +1,36 @@
+@import '~@angular/material/theming';
+
+$mtx-tooltip-horizontal-padding: 8px;
+$mtx-tooltip-max-width: 250px;
+$mtx-tooltip-margin: 14px;
+
+$mtx-tooltip-handset-horizontal-padding: 16px;
+$mtx-tooltip-handset-margin: 24px;
+
+.mtx-tooltip-panel {
+  // The overlay reference updates the pointer-events style property directly on the HTMLElement
+  // depending on the state of the overlay. For tooltips the overlay panel should never enable
+  // pointer events. To overwrite the inline CSS from the overlay reference `!important` is needed.
+  pointer-events: none !important;
+}
+
+.mtx-tooltip {
+  color: white;
+  border-radius: 4px;
+  margin: $mtx-tooltip-margin;
+  max-width: $mtx-tooltip-max-width;
+  padding-left: $mtx-tooltip-horizontal-padding;
+  padding-right: $mtx-tooltip-horizontal-padding;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  @include cdk-high-contrast(active, off) {
+    outline: solid 1px;
+  }
+}
+
+.mtx-tooltip-handset {
+  margin: $mtx-tooltip-handset-margin;
+  padding-left: $mtx-tooltip-handset-horizontal-padding;
+  padding-right: $mtx-tooltip-handset-horizontal-padding;
+}

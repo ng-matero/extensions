@@ -11,6 +11,7 @@ import { MtxPopoverModule } from '@ng-matero/extensions/popover';
 import { MtxProgressModule } from '@ng-matero/extensions/progress';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
 import { MtxSplitModule } from '@ng-matero/extensions/split-pane';
+import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
 
 @NgModule({
   exports: [
@@ -25,6 +26,7 @@ import { MtxSplitModule } from '@ng-matero/extensions/split-pane';
     MtxProgressModule,
     MtxSelectModule,
     MtxSplitModule,
+    MtxTooltipModule,
   ],
   declarations: [],
 })

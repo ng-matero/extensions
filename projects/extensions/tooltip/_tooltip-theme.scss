@@ -1,0 +1,57 @@
+@import '~@angular/material/theming';
+
+$mtx-tooltip-target-height: 22px;
+$mtx-tooltip-font-size: 10px;
+$mtx-tooltip-vertical-padding: ($mtx-tooltip-target-height - $mtx-tooltip-font-size) / 2;
+
+$mtx-tooltip-handset-target-height: 30px;
+$mtx-tooltip-handset-font-size: 14px;
+$mtx-tooltip-handset-vertical-padding:
+    ($mtx-tooltip-handset-target-height - $mtx-tooltip-handset-font-size) / 2;
+
+@mixin mtx-tooltip-color($config-or-theme) {
+  $config: mtx-get-color-config($config-or-theme);
+  $background: map-get($config, background);
+
+  .mtx-tooltip {
+    background: mtx-color($background, tooltip, .9);
+  }
+}
+
+@mixin mtx-tooltip-typography($config-or-theme) {
+  $config: mtx-get-typography-config($config-or-theme);
+
+  .mtx-tooltip {
+    font-family: mtx-font-family($config);
+    font-size: $mtx-tooltip-font-size;
+    padding-top: $mtx-tooltip-vertical-padding;
+    padding-bottom: $mtx-tooltip-vertical-padding;
+  }
+
+  .mtx-tooltip-handset {
+    font-size: $mtx-tooltip-handset-font-size;
+    padding-top: $mtx-tooltip-handset-vertical-padding;
+    padding-bottom: $mtx-tooltip-handset-vertical-padding;
+  }
+}
+
+// @mixin _mtx-tooltip-density($config-or-theme) {}
+
+@mixin mtx-tooltip-theme($theme-or-color-config) {
+  $theme: _mtx-legacy-get-theme($theme-or-color-config);
+  @include _mtx-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
+    $color: mtx-get-color-config($theme);
+    $density: mtx-get-density-config($theme);
+    $typography: mtx-get-typography-config($theme);
+
+    @if $color != null {
+      @include mtx-tooltip-color($color);
+    }
+    @if $density != null {
+      @include _mtx-tooltip-density($density);
+    }
+    @if $typography != null {
+      @include mtx-tooltip-typography($typography);
+    }
+  }
+}
