@@ -32,6 +32,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
   AfterViewInit,
+  TemplateRef,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
@@ -206,11 +207,12 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   get message() {
     return this._message;
   }
-  set message(value: string) {
-    this._ariaDescriber.removeDescription(this._elementRef.nativeElement, this._message);
+  set message(value: string | TemplateRef<any>) {
+    this._ariaDescriber.removeDescription(this._elementRef.nativeElement, this._message as string);
 
+    // TODO: If the message is a TemplateRef, it's hard to support a11y.
     // If the message is not a string (e.g. number), convert it to a string and trim it.
-    this._message = value != null ? `${value}`.trim() : '';
+    this._message = value instanceof TemplateRef ? value : value != null ? `${value}`.trim() : '';
 
     if (!this._message && this._isTooltipVisible()) {
       this.hide(0);
@@ -223,12 +225,12 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
         // has a data-bound `aria-label` or when it'll be set for the first time. We can avoid the
         // issue by deferring the description by a tick so Angular has time to set the `aria-label`.
         Promise.resolve().then(() => {
-          this._ariaDescriber.describe(this._elementRef.nativeElement, this.message);
+          this._ariaDescriber.describe(this._elementRef.nativeElement, this.message as string);
         });
       });
     }
   }
-  private _message = '';
+  private _message: string | TemplateRef<any> = '';
 
   /** Classes to be passed to the tooltip. Supports the same syntax as `ngClass`. */
   @Input('mtxTooltipClass')
@@ -327,7 +329,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
     this._destroyed.next();
     this._destroyed.complete();
 
-    this._ariaDescriber.removeDescription(nativeElement, this.message);
+    this._ariaDescriber.removeDescription(nativeElement, this.message as string);
     this._focusMonitor.stopMonitoring(nativeElement);
   }
 
@@ -695,7 +697,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
 })
 export class TooltipComponent implements OnDestroy {
   /** Message to display in the tooltip */
-  message: string;
+  message: string | TemplateRef<any>;
 
   /** Classes to be added to the tooltip. Supports the same syntax as `ngClass`. */
   tooltipClass: string | string[] | Set<string> | { [key: string]: any };
@@ -717,6 +719,10 @@ export class TooltipComponent implements OnDestroy {
 
   /** Stream that emits whether the user has a handset-sized display.  */
   _isHandset: Observable<BreakpointState> = this._breakpointObserver.observe(Breakpoints.Handset);
+
+  _isTemplateRef(obj: any) {
+    return obj instanceof TemplateRef;
+  }
 
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,

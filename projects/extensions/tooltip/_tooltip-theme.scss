@@ -20,15 +20,15 @@ $mtx-tooltip-handset-vertical-padding:
 
 @mixin mtx-tooltip-typography($config-or-theme) {
   .mtx-tooltip {
-    font-size: $mtx-tooltip-font-size;
     padding-top: $mtx-tooltip-vertical-padding;
     padding-bottom: $mtx-tooltip-vertical-padding;
+    font-size: $mtx-tooltip-font-size;
   }
 
   .mtx-tooltip-handset {
-    font-size: $mtx-tooltip-handset-font-size;
     padding-top: $mtx-tooltip-handset-vertical-padding;
     padding-bottom: $mtx-tooltip-handset-vertical-padding;
+    font-size: $mtx-tooltip-handset-font-size;
   }
 }
 

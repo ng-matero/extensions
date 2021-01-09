@@ -1,8 +1,30 @@
 <h2>Material</h2>
+<div>
+  <span> Click the following buttons to... </span>
+  <button mat-button
+          (click)="tooltip1.show()"
+          aria-label="Show tooltip on the button at the end of this section"
+          class="example-action-button">
+    show
+  </button>
+  <button mat-button
+          (click)="tooltip1.hide()"
+          aria-label="Hide tooltip on the button at the end of this section"
+          class="example-action-button">
+    hide
+  </button>
+  <button mat-button
+          (click)="tooltip1.toggle()"
+          aria-label="Show/Hide tooltip on the button at the end of this section"
+          class="example-action-button">
+    toggle show/hide
+  </button>
+</div>
 
-<button mat-raised-button
+<button mat-raised-button #tooltip1="matTooltip"
         matTooltip="我的组件库"
-        aria-label="Button that displays a tooltip when focused or hovered over">
+        matTooltipPosition="right"
+        aria-tooltip="Button that displays and hides a tooltip triggered by other buttons">
   Action
 </button>
 
@@ -28,12 +50,30 @@
           class="example-action-button">
     toggle show/hide
   </button>
+  <button mat-button (click)="update()">
+    update message
+  </button>
 </div>
 
 <button mat-raised-button #tooltip="mtxTooltip"
-        mtxTooltip="我的组件库"
+        [mtxTooltip]="tpl"
         mtxTooltipPosition="right"
         aria-tooltip="Button that displays and hides a tooltip triggered by other buttons">
   Action
 </button>
 
+<ng-template #tpl>
+  <div>我是一个模板 {{i}}</div>
+  <div>我是一个模板 {{i}}</div>
+  <div>我是一个模板 {{i}}</div>
+</ng-template>
+
+<div>
+  <button mat-raised-button
+          mtxTooltip="我是一个字符串"
+          mtxTooltipPosition="right"
+          mtxTooltipClass="example-tooltip-red"
+          aria-tooltip="Button that displays and hides a tooltip triggered by other buttons">
+    Action
+  </button>
+</div>
