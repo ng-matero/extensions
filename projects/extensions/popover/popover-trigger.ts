@@ -73,11 +73,9 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   @Input('mtxPopoverTriggerFor') popover: MtxPopoverPanel;
 
   /** References the popover target instance that the trigger is associated with. */
-  // tslint:disable-next-line: no-input-rename
   @Input('mtxPopoverTargetAt') targetElement: MtxTarget;
 
   /** Popover trigger event */
-  // tslint:disable-next-line: no-input-rename
   @Input('mtxPopoverTriggerOn') triggerEvent: MtxPopoverTriggerEvent;
 
   /** Event emitted when the associated popover is opened. */

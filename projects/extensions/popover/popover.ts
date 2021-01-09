@@ -286,7 +286,6 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
 
   /** Handle a keyboard event from the popover, delegating to the appropriate action. */
   _handleKeydown(event: KeyboardEvent) {
-    // tslint:disable-next-line: deprecation
     switch (event.keyCode) {
       case ESCAPE:
         this._emitCloseEvent();

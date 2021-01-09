@@ -458,22 +458,22 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
    * The fallback position is the inverse of the origin (e.g. `'below' -> 'above'`).
    */
   _getOrigin(): { main: OriginConnectionPosition; fallback: OriginConnectionPosition } {
-    const isLtr = !this._dir || this._dir.value == 'ltr';
+    const isLtr = !this._dir || this._dir.value === 'ltr';
     const position = this.position;
     let originPosition: OriginConnectionPosition;
 
-    if (position == 'above' || position == 'below') {
-      originPosition = { originX: 'center', originY: position == 'above' ? 'top' : 'bottom' };
+    if (position === 'above' || position === 'below') {
+      originPosition = { originX: 'center', originY: position === 'above' ? 'top' : 'bottom' };
     } else if (
-      position == 'before' ||
-      (position == 'left' && isLtr) ||
-      (position == 'right' && !isLtr)
+      position === 'before' ||
+      (position === 'left' && isLtr) ||
+      (position === 'right' && !isLtr)
     ) {
       originPosition = { originX: 'start', originY: 'center' };
     } else if (
-      position == 'after' ||
-      (position == 'right' && isLtr) ||
-      (position == 'left' && !isLtr)
+      position === 'after' ||
+      (position === 'right' && isLtr) ||
+      (position === 'left' && !isLtr)
     ) {
       originPosition = { originX: 'end', originY: 'center' };
     } else {
@@ -490,24 +490,24 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
 
   /** Returns the overlay position and a fallback position based on the user's preference */
   _getOverlayPosition(): { main: OverlayConnectionPosition; fallback: OverlayConnectionPosition } {
-    const isLtr = !this._dir || this._dir.value == 'ltr';
+    const isLtr = !this._dir || this._dir.value === 'ltr';
     const position = this.position;
     let overlayPosition: OverlayConnectionPosition;
 
-    if (position == 'above') {
+    if (position === 'above') {
       overlayPosition = { overlayX: 'center', overlayY: 'bottom' };
-    } else if (position == 'below') {
+    } else if (position === 'below') {
       overlayPosition = { overlayX: 'center', overlayY: 'top' };
     } else if (
-      position == 'before' ||
-      (position == 'left' && isLtr) ||
-      (position == 'right' && !isLtr)
+      position === 'before' ||
+      (position === 'left' && isLtr) ||
+      (position === 'right' && !isLtr)
     ) {
       overlayPosition = { overlayX: 'end', overlayY: 'center' };
     } else if (
-      position == 'after' ||
-      (position == 'right' && isLtr) ||
-      (position == 'left' && !isLtr)
+      position === 'after' ||
+      (position === 'right' && isLtr) ||
+      (position === 'left' && !isLtr)
     ) {
       overlayPosition = { overlayX: 'start', overlayY: 'center' };
     } else {
