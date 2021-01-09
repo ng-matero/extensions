@@ -61,6 +61,13 @@
     "no-redundant-jsdoc": false,
     "no-switch-case-fall-through": true,
     "no-var-requires": false,
+    "one-line": [
+      true,
+      "check-catch",
+      "check-else",
+      "check-open-brace",
+      "check-whitespace"
+    ],
     "object-literal-key-quotes": [
       true,
       "consistent-as-needed"
