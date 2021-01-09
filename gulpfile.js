@@ -39,6 +39,10 @@ function copySplit() {
   return src([`${SRC}/split-pane/*.scss`]).pipe(dest(`${DEST}/split-pane`));
 }
 
+function copyTooltip() {
+  return src([`${SRC}/tooltip/*.scss`]).pipe(dest(`${DEST}/tooltip`));
+}
+
 function copyFormGroup() {
   return src([`${SRC}/form-group/*.scss`]).pipe(dest(`${DEST}/form-group`));
 }
@@ -58,6 +62,7 @@ exports.default = series(
   copyProgress,
   copySelect,
   copySplit,
+  copyTooltip,
 
   copyFormGroup,
   copyText3d
