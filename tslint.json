@@ -90,7 +90,7 @@
     "no-inputs-metadata-property": true,
     "no-outputs-metadata-property": true,
     "no-host-metadata-property": false,
-    "no-input-rename": true,
+    "no-input-rename": false,
     "typedef-whitespace": {
       "options": [
         {
@@ -118,7 +118,8 @@
       true,
       "ban-keywords",
       "check-format",
-      "allow-leading-underscore"
+      "allow-leading-underscore",
+      "allow-snake-case"
     ],
     "whitespace": {
       "options": [
