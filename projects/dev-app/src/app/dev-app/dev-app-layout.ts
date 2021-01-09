@@ -40,6 +40,7 @@ export class DevAppLayout {
     { name: 'Select', route: '/select' },
     { name: 'Split Pane', route: '/split-pane' },
     { name: 'Text 3D', route: '/text3d' },
+    { name: 'Tooltip', route: '/tooltip' },
   ];
 
   /** Currently selected density scale based on the index. */

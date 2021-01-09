@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 
 $mtx-tooltip-target-height: 22px;
-$mtx-tooltip-font-size: 10px;
+$mtx-tooltip-font-size: 12px;
 $mtx-tooltip-vertical-padding: ($mtx-tooltip-target-height - $mtx-tooltip-font-size) / 2;
 
 $mtx-tooltip-handset-target-height: 30px;
@@ -19,10 +19,7 @@ $mtx-tooltip-handset-vertical-padding:
 }
 
 @mixin mtx-tooltip-typography($config-or-theme) {
-  $config: mat-get-typography-config($config-or-theme);
-
   .mtx-tooltip {
-    font-family: mat-font-family($config);
     font-size: $mtx-tooltip-font-size;
     padding-top: $mtx-tooltip-vertical-padding;
     padding-bottom: $mtx-tooltip-vertical-padding;
@@ -35,26 +32,11 @@ $mtx-tooltip-handset-vertical-padding:
   }
 }
 
-@mixin _mtx-tooltip-density($config-or-theme) {
-  // tooltip density
-}
-
 @mixin mtx-tooltip-theme($theme-or-color-config) {
   $theme: _mat-legacy-get-theme($theme-or-color-config);
+  $color: mat-get-color-config($theme);
+  $typography: mat-get-typography-config($theme);
 
-  @include _mat-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
-    $color: mat-get-color-config($theme);
-    $density: mat-get-density-config($theme);
-    $typography: mat-get-typography-config($theme);
-
-    @if $color != null {
-      @include mtx-tooltip-color($color);
-    }
-    @if $density != null {
-      @include _mtx-tooltip-density($density);
-    }
-    @if $typography != null {
-      @include mtx-tooltip-typography($typography);
-    }
-  }
+  @include mtx-tooltip-color($color);
+  @include mtx-tooltip-typography($typography);
 }

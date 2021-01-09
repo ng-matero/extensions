@@ -61,5 +61,10 @@ export const DEV_APP_ROUTES: Routes = [
     path: 'text3d',
     loadChildren: () => import('../text3d/text3d-demo.module').then(m => m.Text3dDemoModule),
   },
+  {
+    path: 'tooltip',
+    loadChildren: () =>
+      import('../tooltip/tooltip-demo.module').then(m => m.TooltipDemoModule),
+  },
   { path: '**', component: DevApp404 },
 ];
