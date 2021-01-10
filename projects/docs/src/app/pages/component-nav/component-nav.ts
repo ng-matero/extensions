@@ -59,6 +59,11 @@ export const COMPONENTS_MENU = [
         name: 'Split Pane',
         summary: 'An component for creating multi-view layouts.',
       },
+      {
+        id: 'tooltip',
+        name: 'Tooltip',
+        summary: 'The tooltip support rich content.',
+      },
     ],
   },
   {

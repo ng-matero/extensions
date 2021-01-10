@@ -1,0 +1,10 @@
+<p>
+  The extensions tooltip supports rich content, its APIs are exactly the same as material tooltip.
+  You should use prefix <code>mtx</code> instead of <code>mat</code>.
+</p>
+
+<ng-container *ngIf="route.data | async as data">
+  <ng-container *ngFor="let exampleData of data.examples">
+    <example-viewer [exampleData]="exampleData"></example-viewer>
+  </ng-container>
+</ng-container>
