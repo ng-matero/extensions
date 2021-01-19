@@ -13,6 +13,7 @@ const defaults: MtxDialogData = {
     {
       color: 'warn',
       text: 'OK',
+      focusInitial: true,
       onClick: () => {},
     },
     {
@@ -21,6 +22,7 @@ const defaults: MtxDialogData = {
       onClick: () => {},
     },
   ],
+  showCloseIcon: false,
   disableClose: true,
   width: '300px',
 };

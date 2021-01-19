@@ -1,12 +1,20 @@
-<h1 class="mtx-dialog-title" *ngIf="data.title">{{data.title | toObservable | async}}</h1>
+<h1 class="mtx-dialog-title" *ngIf="data.title">{{data.title | toObservable | async}}
+  <button mat-icon-button *ngIf="data.showCloseIcon" (click)="_onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</h1>
 <div class="mtx-dialog-content" *ngIf="data.description">
   <p>{{data.description | toObservable | async}}</p>
 </div>
 <div class="mtx-dialog-actions">
-  <button *ngFor="let btn of data.buttons"
-          mat-button
-          [color]="btn.color"
-          (click)="_onClick(btn.onClick)">
-    {{btn.text | toObservable | async}}
-  </button>
+  <ng-container *ngFor="let btn of data.buttons">
+    <button mat-button *ngIf="btn.focusInitial" cdkFocusInitial
+            [color]="btn.color" (click)="_onClick(btn.onClick)">
+      {{btn.text | toObservable | async}}
+    </button>
+    <button mat-button *ngIf="!btn.focusInitial"
+            [color]="btn.color" (click)="_onClick(btn.onClick)">
+      {{btn.text | toObservable | async}}
+    </button>
+  </ng-container>
 </div>

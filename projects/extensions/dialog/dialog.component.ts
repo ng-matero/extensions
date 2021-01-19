@@ -18,7 +18,9 @@ export class MtxDialogComponent {
   ) {}
 
   _onClick(fn: () => void) {
-    fn.call(this);
+    if (fn) {
+      fn.call(this);
+    }
     this._onClose();
   }
 

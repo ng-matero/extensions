@@ -57,11 +57,13 @@ export class DialogDemoComponent implements OnInit {
         {
           color: 'warn',
           text: this.translate.stream('ok'),
+          focusInitial: true,
           onClick: () => {
             this.mtxDialog.alert(`You click Ok button.`);
           },
         },
       ],
+      showCloseIcon: true,
     });
   }
 

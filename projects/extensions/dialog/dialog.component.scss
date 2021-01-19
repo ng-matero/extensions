@@ -1,5 +1,7 @@
 .mtx-dialog-title {
-  display: block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 0 20px;
   font: 500 20px/32px Roboto, Helvetica Neue, sans-serif;
   letter-spacing: normal;
