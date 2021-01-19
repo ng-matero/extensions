@@ -1,0 +1,8 @@
+{
+  "ngPackage": {
+    "lib": {
+      "flatModuleFile": "mtxColumnResize",
+      "entryFile": "public-api.ts"
+    }
+  }
+}

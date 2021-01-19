@@ -42,9 +42,9 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MatFormFieldModule,
     MatMenuModule,
     DragDropModule,
-    MatColumnResizeModule,
     MtxDialogModule,
     MtxUtilsModule,
+    MatColumnResizeModule,
   ],
   exports: [
     MtxGridComponent,
@@ -61,7 +61,6 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
   ],
-
   providers: [MtxGridService],
 })
 export class MtxGridModule {}

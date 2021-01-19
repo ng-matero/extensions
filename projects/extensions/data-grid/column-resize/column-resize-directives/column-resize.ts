@@ -12,7 +12,7 @@ import {
   ColumnResizeNotifier,
   ColumnResizeNotifierSource,
   HeaderRowEventDispatcher,
-} from '@angular/cdk-experimental/column-resize';
+} from '@ng-matero/extensions/column-resize';
 
 import { AbstractMatColumnResize, TABLE_HOST_BINDINGS, TABLE_PROVIDERS } from './common';
 

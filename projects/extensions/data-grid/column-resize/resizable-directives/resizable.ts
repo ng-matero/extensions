@@ -28,7 +28,7 @@ import {
   ColumnResizeNotifierSource,
   HeaderRowEventDispatcher,
   ResizeStrategy,
-} from '@angular/cdk-experimental/column-resize';
+} from '@ng-matero/extensions/column-resize';
 
 import { AbstractMatResizable, RESIZABLE_HOST_BINDINGS, RESIZABLE_INPUTS } from './common';
 

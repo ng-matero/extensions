@@ -27,7 +27,7 @@ import {
   HeaderRowEventDispatcher,
   ResizeOverlayHandle,
   ResizeRef,
-} from '@angular/cdk-experimental/column-resize';
+} from '@ng-matero/extensions/column-resize';
 
 import { AbstractMatColumnResize } from './column-resize-directives/common';
 

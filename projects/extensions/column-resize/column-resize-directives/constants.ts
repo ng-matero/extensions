@@ -6,15 +6,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { Provider } from '@angular/core';
-
-import {
-  ColumnResize,
-  ColumnResizeNotifier,
-  ColumnResizeNotifierSource,
-  HeaderRowEventDispatcher,
-} from '@ng-matero/extensions/column-resize';
-
+import {Provider} from '@angular/core';
+import {ColumnResizeNotifier, ColumnResizeNotifierSource} from '../column-resize-notifier';
+import {HeaderRowEventDispatcher} from '../event-dispatcher';
 import {
   TABLE_LAYOUT_FIXED_RESIZE_STRATEGY_PROVIDER,
   FLEX_RESIZE_STRATEGY_PROVIDER,
@@ -25,21 +19,9 @@ const PROVIDERS: Provider[] = [
   HeaderRowEventDispatcher,
   ColumnResizeNotifierSource,
 ];
+
 export const TABLE_PROVIDERS: Provider[] = [
   ...PROVIDERS,
   TABLE_LAYOUT_FIXED_RESIZE_STRATEGY_PROVIDER,
 ];
 export const FLEX_PROVIDERS: Provider[] = [...PROVIDERS, FLEX_RESIZE_STRATEGY_PROVIDER];
-
-export const TABLE_HOST_BINDINGS = {
-  class: 'mat-column-resize-table',
-};
-export const FLEX_HOST_BINDINGS = {
-  class: 'mat-column-resize-flex',
-};
-
-export abstract class AbstractMatColumnResize extends ColumnResize {
-  getTableHeight() {
-    return this.elementRef.nativeElement!.offsetHeight;
-  }
-}
