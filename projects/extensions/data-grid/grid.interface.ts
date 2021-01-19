@@ -95,9 +95,9 @@ export interface MtxGridColumnButton {
   pop?: boolean;
   popTitle?: string | Observable<string>;
   popDescription?: string | Observable<string>;
-  popOkType?: '' | 'primary' | 'accent' | 'warn';
+  popOkColor?: '' | 'primary' | 'accent' | 'warn';
   popOkText?: string | Observable<string>;
-  popCloseType?: '' | 'primary' | 'accent' | 'warn';
+  popCloseColor?: '' | 'primary' | 'accent' | 'warn';
   popCloseText?: string | Observable<string>;
   children?: MtxGridColumnButton[];
   iif?: (record: any) => boolean;

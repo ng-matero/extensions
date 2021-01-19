@@ -17,7 +17,7 @@ export class DialogDemoComponent implements OnInit {
   ngOnInit() {}
 
   alert() {
-    this.mtxDialog.alert(`My name is Zongbin!`, () => {
+    this.mtxDialog.alert(`My name is Zongbin!`, '', () => {
       this.mtxDialog.alert(`Glad to meet you!`);
     });
   }
@@ -25,6 +25,7 @@ export class DialogDemoComponent implements OnInit {
   confirm() {
     this.mtxDialog.confirm(
       `What's your name?`,
+      '',
       () => {
         this.mtxDialog.alert(`Hi, Zongbin!`);
       },
@@ -40,21 +41,21 @@ export class DialogDemoComponent implements OnInit {
       description: 'You can write some messages here.',
       buttons: [
         {
-          type: '',
+          color: '',
           text: this.translate.stream('close'),
           onClick: () => {
             this.mtxDialog.alert(`You click Close button.`);
           },
         },
         {
-          type: 'primary',
+          color: 'primary',
           text: this.translate.stream('view'),
           onClick: () => {
             this.mtxDialog.alert(`You click View button.`);
           },
         },
         {
-          type: 'warn',
+          color: 'warn',
           text: this.translate.stream('ok'),
           onClick: () => {
             this.mtxDialog.alert(`You click Ok button.`);

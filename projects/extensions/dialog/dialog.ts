@@ -11,16 +11,17 @@ const defaults: MtxDialogData = {
   description: '',
   buttons: [
     {
-      type: '',
-      text: 'CLOSE',
-      onClick: () => {},
-    },
-    {
-      type: 'warn',
+      color: 'warn',
       text: 'OK',
       onClick: () => {},
     },
+    {
+      color: '',
+      text: 'CLOSE',
+      onClick: () => {},
+    },
   ],
+  disableClose: true,
   width: '300px',
 };
 
@@ -46,36 +47,45 @@ export class MtxDialog {
     });
   }
 
-  alert(title: string | Observable<string>, onOk = () => {}) {
+  alert(
+    title: string | Observable<string>,
+    description: string | Observable<string> = '',
+    onOk = () => {}
+  ) {
     this.open({
       title,
+      description,
       buttons: [
         {
-          type: 'warn',
+          color: 'warn',
           text: 'OK',
           onClick: () => onOk(),
         },
       ],
-      disableClose: true,
     });
   }
 
-  confirm(title: string | Observable<string>, onOk = () => {}, onClose = () => {}) {
+  confirm(
+    title: string | Observable<string>,
+    description: string | Observable<string> = '',
+    onOk = () => {},
+    onClose = () => {}
+  ) {
     this.open({
       title,
+      description,
       buttons: [
         {
-          type: '',
-          text: 'CLOSE',
-          onClick: () => onClose(),
-        },
-        {
-          type: 'warn',
+          color: 'warn',
           text: 'OK',
           onClick: () => onOk(),
         },
+        {
+          color: '',
+          text: 'CLOSE',
+          onClick: () => onClose(),
+        },
       ],
-      disableClose: true,
     });
   }
 }

@@ -5,7 +5,7 @@
 <div class="mtx-dialog-actions">
   <button *ngFor="let btn of data.buttons"
           mat-button
-          [color]="btn.type"
+          [color]="btn.color"
           (click)="_onClick(btn.onClick)">
     {{btn.text | toObservable | async}}
   </button>

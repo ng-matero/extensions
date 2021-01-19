@@ -27,8 +27,8 @@
                     [matTooltip]="btn.tooltip | toObservable | async"
                     [disabled]="btn.disabled"
                     (click)="_handleActionConfirm($event, btn.popTitle, btn.popDescription,
-                                                          btn.popOkType, btn.popOkText,
-                                                          btn.popCloseType, btn.popCloseText,
+                                                          btn.popOkColor, btn.popOkText,
+                                                          btn.popCloseColor, btn.popCloseText,
                                                           btn.click, rowData)">
               <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text | toObservable | async}}
             </button>
@@ -39,8 +39,8 @@
                     [matTooltip]="btn.tooltip | toObservable | async"
                     [disabled]="btn.disabled"
                     (click)="_handleActionConfirm($event, btn.popTitle, btn.popDescription,
-                                                          btn.popOkType, btn.popOkText,
-                                                          btn.popCloseType, btn.popCloseText,
+                                                          btn.popOkColor, btn.popOkText,
+                                                          btn.popCloseColor, btn.popCloseText,
                                                           btn.click, rowData)">
               <mat-icon>{{btn.icon}}</mat-icon>
             </button>

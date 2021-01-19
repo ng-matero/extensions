@@ -8,7 +8,8 @@ export interface MtxDialogData extends MatDialogConfig {
 }
 
 export interface MtxDialogBtns {
-  type?: '' | 'primary' | 'accent' | 'warn';
+  type?: '' | 'raised' | 'stroked' | 'flat';
+  color?: '' | 'primary' | 'accent' | 'warn';
   text: string | Observable<string>;
   onClick: () => void;
 }
