@@ -14,7 +14,6 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-import { MatColumnResizeModule } from '@angular/material-experimental/column-resize';
 
 import { MtxUtilsModule } from '@ng-matero/extensions/utils';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
@@ -24,6 +23,7 @@ import { MtxGridColumnMenuComponent } from './column-menu.component';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridService } from './grid.service';
+import { MatColumnResizeModule } from './column-resize/column-resize-module';
 
 @NgModule({
   imports: [
@@ -61,6 +61,7 @@ import { MtxGridService } from './grid.service';
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
   ],
+
   providers: [MtxGridService],
 })
 export class MtxGridModule {}

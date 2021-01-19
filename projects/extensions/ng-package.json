@@ -7,7 +7,6 @@
   },
   "whitelistedNonPeerDependencies": [
     "@angular/cdk-experimental",
-    "@angular/material-experimental",
     "@ng-select/ng-select",
     "ngx-color",
     "photoviewer"
