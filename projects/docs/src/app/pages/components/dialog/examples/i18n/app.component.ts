@@ -19,17 +19,18 @@ export class AppComponent {
       description: this.translate.stream('description'),
       buttons: [
         {
-          type: '',
+          color: '',
           text: this.translate.stream('close'),
           onClick: () => {},
         },
         {
-          type: 'primary',
+          color: 'primary',
           text: this.translate.stream('view'),
           onClick: () => {},
         },
         {
-          type: 'warn',
+          color: 'warn',
+          focusInitial: true,
           text: this.translate.stream('ok'),
           onClick: () => {},
         },

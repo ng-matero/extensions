@@ -10,7 +10,7 @@ export class AppComponent {
   constructor(private mtxDialog: MtxDialog) {}
 
   alert() {
-    this.mtxDialog.alert(`My name is Zongbin!`, () => {
+    this.mtxDialog.alert(`My name is Zongbin!`, '', () => {
       this.mtxDialog.alert(`Glad to meet you!`);
     });
   }
@@ -18,6 +18,7 @@ export class AppComponent {
   confirm() {
     this.mtxDialog.confirm(
       `What's your name?`,
+      '',
       () => {
         this.mtxDialog.alert(`Hi, Zongbin!`);
       },
@@ -31,24 +32,26 @@ export class AppComponent {
     this.mtxDialog.open({
       title: 'This is the title',
       description: 'You can write some messages here.',
+      showCloseIcon: true,
       buttons: [
         {
-          type: '',
+          color: '',
           text: 'CLOSE',
           onClick: () => {
             this.mtxDialog.alert(`You click Close button.`);
           },
         },
         {
-          type: 'primary',
+          color: 'primary',
           text: 'VIEW',
           onClick: () => {
             this.mtxDialog.alert(`You click View button.`);
           },
         },
         {
-          type: 'warn',
+          color: 'warn',
           text: 'OK',
+          focusInitial: true,
           onClick: () => {
             this.mtxDialog.alert(`You click Ok button.`);
           },
