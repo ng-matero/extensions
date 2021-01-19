@@ -19,6 +19,12 @@ function copyDataGrid() {
   return src([`${SRC}/data-grid/*.scss`]).pipe(dest(`${DEST}/data-grid`));
 }
 
+function copyDataGridColumnResize() {
+  return src([`${SRC}/data-grid/column-resize/*.scss`]).pipe(
+    dest(`${DEST}/data-grid/column-resize`)
+  );
+}
+
 function copyLoader() {
   return src([`${SRC}/loader/*.scss`]).pipe(dest(`${DEST}/loader`));
 }
@@ -57,6 +63,7 @@ exports.default = series(
   copyAlert,
   copyButton,
   copyDataGrid,
+  copyDataGridColumnResize,
   copyLoader,
   copyPopover,
   copyProgress,
