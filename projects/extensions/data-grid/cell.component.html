@@ -20,33 +20,33 @@
       <ng-container *ngFor="let btn of colDef.buttons; index as i; last as isLast;">
         <ng-container *ngIf="!btn.iif || btn.iif(rowData)">
           <ng-container *ngIf="btn.pop; else btnDefaultTpl">
-            <button class="mat-cell-action-button"
+            <button [ngClass]="['mat-cell-action-button', btn.class||'']"
                     *ngIf="btn.type==='basic'"
                     mat-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip | toObservable | async"
                     [disabled]="btn.disabled"
                     (click)="_handleActionConfirm($event, btn.popTitle, btn.popDescription,
-                                                          btn.popCloseType, btn.popCloseText,
                                                           btn.popOkType, btn.popOkText,
+                                                          btn.popCloseType, btn.popCloseText,
                                                           btn.click, rowData)">
               <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text | toObservable | async}}
             </button>
-            <button class="mat-cell-action-button"
+            <button [ngClass]="['mat-cell-action-button', btn.class||'']"
                     *ngIf="!btn.type || btn.type==='icon'"
                     mat-icon-button
                     [color]="btn.color || 'primary'"
                     [matTooltip]="btn.tooltip | toObservable | async"
                     [disabled]="btn.disabled"
                     (click)="_handleActionConfirm($event, btn.popTitle, btn.popDescription,
-                                                          btn.popCloseType, btn.popCloseText,
                                                           btn.popOkType, btn.popOkText,
+                                                          btn.popCloseType, btn.popCloseText,
                                                           btn.click, rowData)">
               <mat-icon>{{btn.icon}}</mat-icon>
             </button>
           </ng-container>
           <ng-template #btnDefaultTpl>
-            <button class="mat-cell-action-button"
+            <button [ngClass]="['mat-cell-action-button', btn.class||'']"
                     *ngIf="btn.type==='basic'"
                     mat-button
                     [color]="btn.color || 'primary'"
@@ -55,7 +55,7 @@
                     (click)="_handleActionClick($event, btn, rowData)">
               <mat-icon *ngIf="btn.icon">{{btn.icon}}</mat-icon> {{btn.text | toObservable | async}}
             </button>
-            <button class="mat-cell-action-button"
+            <button [ngClass]="['mat-cell-action-button', btn.class||'']"
                     *ngIf="!btn.type || btn.type==='icon'"
                     mat-icon-button
                     [color]="btn.color || 'primary'"
@@ -86,7 +86,8 @@
     </ng-container>
     <!-- Currency -->
     <ng-container *ngSwitchCase="'currency'">
-      {{(_colValue | currency: colDef.typeParameter?.currencyCode : colDef.typeParameter?.display : colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)}}
+      {{(_colValue | currency: colDef.typeParameter?.currencyCode : colDef.typeParameter?.display :
+      colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)}}
     </ng-container>
     <!-- Percent -->
     <ng-container *ngSwitchCase="'percent'">
@@ -94,7 +95,8 @@
     </ng-container>
     <!-- Date -->
     <ng-container *ngSwitchCase="'date'">
-      {{(_colValue | date: colDef.typeParameter?.format : colDef.typeParameter?.timezone : colDef.typeParameter?.locale)}}
+      {{(_colValue | date: colDef.typeParameter?.format : colDef.typeParameter?.timezone :
+      colDef.typeParameter?.locale)}}
     </ng-container>
     <!-- Default -->
     <ng-container *ngSwitchDefault>

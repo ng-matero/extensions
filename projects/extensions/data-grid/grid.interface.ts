@@ -90,6 +90,7 @@ export interface MtxGridColumnButton {
   text?: string | Observable<string>;
   icon?: string;
   color?: 'primary' | 'accent' | 'warn';
+  class?: string;
   click?: (record: any) => void;
   pop?: boolean;
   popTitle?: string | Observable<string>;

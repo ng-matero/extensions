@@ -30,10 +30,10 @@ export class MtxGridCellComponent {
     event: MouseEvent,
     title: string | Observable<string>,
     description: string | Observable<string> = '',
-    closeType: '' | 'primary' | 'accent' | 'warn' = '',
-    closeText: string | Observable<string> = 'CLOSE',
     okType: '' | 'primary' | 'accent' | 'warn' = 'primary',
     okText: string | Observable<string> = 'OK',
+    closeType: '' | 'primary' | 'accent' | 'warn' = '',
+    closeText: string | Observable<string> = 'CLOSE',
     fn?: (p: any) => void,
     data?: any
   ) {
@@ -44,12 +44,12 @@ export class MtxGridCellComponent {
       title,
       description,
       buttons: [
-        { type: closeType, text: closeText, onClick: () => {} },
         {
           type: okType,
           text: okText,
           onClick: () => (fn ? fn(data) : {}),
         },
+        { type: closeType, text: closeText, onClick: () => {} },
       ],
     });
   }

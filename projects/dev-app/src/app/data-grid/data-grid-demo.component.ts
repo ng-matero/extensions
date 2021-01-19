@@ -87,6 +87,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
           tooltip: this.translate.stream('delete'),
           color: 'warn',
           pop: true,
+          class: 'custom',
           popTitle: this.translate.stream('confirm_delete'),
           popCloseText: this.translate.stream('close'),
           popOkText: this.translate.stream('ok'),
