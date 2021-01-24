@@ -8,13 +8,47 @@
 </div>
 <div class="mtx-dialog-actions">
   <ng-container *ngFor="let btn of data.buttons">
-    <button mat-button *ngIf="btn.focusInitial" cdkFocusInitial
-            [color]="btn.color" (click)="_onClick(btn.onClick)">
-      {{btn.text | toObservable | async}}
-    </button>
-    <button mat-button *ngIf="!btn.focusInitial"
-            [color]="btn.color" (click)="_onClick(btn.onClick)">
-      {{btn.text | toObservable | async}}
-    </button>
+    <ng-container [ngSwitch]="btn.type">
+      <ng-container *ngSwitchCase="'raised'">
+        <button mat-raised-button *ngIf="btn.focusInitial" cdkFocusInitial
+                [color]="btn.color" [ngClass]="btn.class" (click)="_onClick(btn.onClick)">
+          {{btn.text | toObservable | async}}
+        </button>
+        <button mat-raised-button *ngIf="!btn.focusInitial"
+                [color]="btn.color" [ngClass]="btn.class" (click)="_onClick(btn.onClick)">
+          {{btn.text | toObservable | async}}
+        </button>
+      </ng-container>
+      <ng-container *ngSwitchCase="'stroked'">
+        <button mat-stroked-button *ngIf="btn.focusInitial" cdkFocusInitial
+                [color]="btn.color" [ngClass]="btn.class" (click)="_onClick(btn.onClick)">
+          {{btn.text | toObservable | async}}
+        </button>
+        <button mat-stroked-button *ngIf="!btn.focusInitial"
+                [color]="btn.color" [ngClass]="btn.class" (click)="_onClick(btn.onClick)">
+          {{btn.text | toObservable | async}}
+        </button>
+      </ng-container>
+      <ng-container *ngSwitchCase="'flat'">
+        <button mat-flat-button *ngIf="btn.focusInitial" cdkFocusInitial
+                [color]="btn.color" [ngClass]="btn.class" (click)="_onClick(btn.onClick)">
+          {{btn.text | toObservable | async}}
+        </button>
+        <button mat-flat-button *ngIf="!btn.focusInitial"
+                [color]="btn.color" [ngClass]="btn.class" (click)="_onClick(btn.onClick)">
+          {{btn.text | toObservable | async}}
+        </button>
+      </ng-container>
+      <ng-container *ngSwitchDefault>
+        <button mat-button *ngIf="btn.focusInitial" cdkFocusInitial
+                [color]="btn.color" [ngClass]="btn.class" (click)="_onClick(btn.onClick)">
+          {{btn.text | toObservable | async}}
+        </button>
+        <button mat-button *ngIf="!btn.focusInitial"
+                [color]="btn.color" [ngClass]="btn.class" (click)="_onClick(btn.onClick)">
+          {{btn.text | toObservable | async}}
+        </button>
+      </ng-container>
+    </ng-container>
   </ng-container>
 </div>

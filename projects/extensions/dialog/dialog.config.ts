@@ -11,6 +11,7 @@ export interface MtxDialogData extends MatDialogConfig {
 export interface MtxDialogBtns {
   type?: '' | 'raised' | 'stroked' | 'flat';
   color?: '' | 'primary' | 'accent' | 'warn';
+  class?: string;
   focusInitial?: boolean;
   text: string | Observable<string>;
   onClick?: () => void;
