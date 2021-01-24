@@ -32,8 +32,7 @@ $mtx-tooltip-handset-vertical-padding:
   }
 }
 
-@mixin mtx-tooltip-theme($theme-or-color-config) {
-  $theme: _mat-legacy-get-theme($theme-or-color-config);
+@mixin mtx-tooltip-theme($theme) {
   $color: mat-get-color-config($theme);
   $typography: mat-get-typography-config($theme);
 
