@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "10.13.1",
+  "version": "10.14.0",
   "description": "Angular Material Extensions",
   "author": "nzbin<nzb329@163.com>",
   "repository": {
@@ -14,15 +14,17 @@
     "angular-material-extensions",
     "angular-admin",
     "ng-matero",
+    "data-grid",
+    "ngx-data-grid",
+    "material-data-table",
     "color-picker",
     "ngx-color",
     "ngx-color-picker",
-    "material-color-picker",
     "ng-select",
     "typeahead",
     "autocomplete",
-    "data-grid",
-    "ngx-data-grid"
+    "checkbox-group",
+    "popover"
   ],
   "license": "MIT",
   "bugs": {
@@ -36,11 +38,11 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/animations": "^10.2.0",
-    "@angular/cdk": "^10.2.0",
-    "@angular/common": "^10.2.0",
-    "@angular/core": "^10.2.0",
-    "@angular/material": "^10.2.0"
+    "@angular/animations": ">=10.2.0",
+    "@angular/cdk": ">=10.2.0",
+    "@angular/common": ">=10.2.0",
+    "@angular/core": ">=10.2.0",
+    "@angular/material": ">=10.2.0"
   },
   "sideEffects": false
 }
