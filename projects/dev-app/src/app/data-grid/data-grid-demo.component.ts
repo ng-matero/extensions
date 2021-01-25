@@ -36,9 +36,12 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   pageOnFront = true;
   rowHover = false;
   rowStriped = false;
+  showSidebar = false;
 
   list = EXAMPLE_DATA;
   isNewList = false;
+
+  list2 = [];
 
   columns: MtxGridColumn[] = [
     {
@@ -129,6 +132,11 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     this.grid.rowSelection.changed.subscribe(res => {
       console.log('rowSelection:', res.source.selected);
     });
+
+    // this.list.forEach(item => {
+    //   this.list2.push(item, item, item);
+    // });
+    // this.list2 = this.list2.filter(_ => true);
   }
 
   trackByName(index: number, item: any) {
@@ -150,6 +158,10 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   updateList() {
     this.isNewList = !this.isNewList;
     this.list = this.isNewList ? EXAMPLE_DATA2 : EXAMPLE_DATA;
+  }
+
+  updateEmptyList() {
+    this.list = this.list.length > 0 ? [] : EXAMPLE_DATA;
   }
 
   closeMenu() {

@@ -10,4 +10,19 @@
   .warning {
     background-color: #fff3cd;
   }
+
+  &.fixed-height {
+    height: 300px;
+    padding-bottom: 57px;
+
+    .mtx-grid-main {
+      height: 100%;
+    }
+
+    .mat-paginator {
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+    }
+  }
 }

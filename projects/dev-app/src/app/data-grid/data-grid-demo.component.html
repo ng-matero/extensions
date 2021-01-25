@@ -8,6 +8,7 @@
 <mat-checkbox [(ngModel)]="pageOnFront">pageOnFront</mat-checkbox>
 <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
 <mat-checkbox [(ngModel)]="rowStriped">Striped</mat-checkbox>
+<mat-checkbox [(ngModel)]="showSidebar">showSidebar</mat-checkbox>
 
 <mtx-grid [data]="list" #grid
           [columns]="columns"
@@ -35,7 +36,8 @@
           [showColumnMenuFooter]="true"
           [columnMenuFooterTemplate]="menuFooterTpl"
           (rowClick)="log($event)"
-          [showSidebar]="true"
+          [showSidebar]="showSidebar"
+          [sidebarTemplate]="sidebarTpl"
           [sortOnFront]="sortOnFront"
           [pageOnFront]="pageOnFront"
           [pageSize]="1"
@@ -65,8 +67,34 @@
   <button (click)="closeMenu()">Close</button>
 </ng-template>
 
+<ng-template #sidebarTpl>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Shiba Inu</mat-card-title>
+      <mat-card-subtitle>Dog Breed</mat-card-subtitle>
+    </mat-card-header>
+    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+         alt="Photo of a Shiba Inu">
+    <mat-card-content>
+      <p>
+        The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
+        Japan.
+        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
+        originally
+        bred for hunting.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button>LIKE</button>
+      <button mat-button>SHARE</button>
+    </mat-card-actions>
+  </mat-card>
+</ng-template>
+
 <button (click)="updateCell()">Update Cell</button>
 <button (click)="updateList()">Update List</button>
+<button (click)="updateEmptyList()">Update Empty List</button>
 <button (click)="select2ndData()">Select 2nd data</button>
 
 <hr>
@@ -107,6 +135,7 @@
 
 <hr>
 
-<mtx-grid [data]="list"
+<mtx-grid class="fixed-height"
+          [data]="list2"
           [columns]="columns2">
 </mtx-grid>

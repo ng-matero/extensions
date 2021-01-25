@@ -17,6 +17,7 @@
     align-items: center;
     min-height: 48px;
     padding: 8px;
+    box-sizing: border-box;
   }
 
   .mtx-grid-layout {
@@ -26,15 +27,20 @@
   }
 
   .mtx-grid-content {
+    flex-direction: column;
     width: 0;
   }
 
   .mtx-grid-sidebar {
-    width: auto;
+    max-width: 50%;
   }
 
   .mat-table-wrapper {
-    flex: 1;
+    overflow: auto;
+
+    &.mat-table-with-data {
+      flex: 1;
+    }
   }
 
   .mat-table:not(.mat-column-resize-table) {
@@ -181,6 +187,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    flex: 1;
     min-height: 150px;
   }
 

@@ -189,6 +189,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   /** Sidebar */
   @Input() showSidebar = false;
+  @Input() sidebarTemplate: TemplateRef<any>;
 
   /** Column resizable */
   @Input() columnResizable = false;
