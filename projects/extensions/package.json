@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "10.14.0",
+  "version": "11.0.0",
   "description": "Angular Material Extensions",
   "author": "nzbin<nzb329@163.com>",
   "repository": {
@@ -38,11 +38,11 @@
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "@angular/animations": ">=10.2.0",
-    "@angular/cdk": ">=10.2.0",
-    "@angular/common": ">=10.2.0",
-    "@angular/core": ">=10.2.0",
-    "@angular/material": ">=10.2.0"
+    "@angular/animations": ">=11.0.0",
+    "@angular/cdk": ">=11.0.0",
+    "@angular/common": ">=11.0.0",
+    "@angular/core": ">=11.0.0",
+    "@angular/material": ">=11.0.0"
   },
   "sideEffects": false
 }
