@@ -100,9 +100,4 @@
   }
 
   @include mat-column-resize-color($theme);
-
-  // Fix sticky header of dark mode: https://github.com/ng-matero/extensions/issues/40
-  .mat-table-sticky {
-    position: sticky;
-  }
 }

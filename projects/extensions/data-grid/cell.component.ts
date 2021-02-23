@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { Observable } from 'rxjs';
 
