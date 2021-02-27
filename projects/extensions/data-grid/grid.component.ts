@@ -13,6 +13,7 @@ import {
   OnDestroy,
   AfterViewInit,
   ChangeDetectorRef,
+  ElementRef,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -55,6 +56,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('columnMenu') columnMenu: MtxGridColumnMenu;
+  @ViewChild('tableContainer') tableContainer: ElementRef<HTMLDivElement>;
 
   dataSource = new MatTableDataSource([]);
 
@@ -426,5 +428,11 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     }
     this.expansionRowStates[index].expanded = !this.expansionRowStates[index].expanded;
     return this.expansionRowStates[index].expanded;
+  }
+
+  /** Scroll to top when turn to the next page */
+  _handlePage(e: PageEvent) {
+    this.tableContainer.nativeElement.scrollTop = 0;
+    this.page.emit(e);
   }
 }
