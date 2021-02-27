@@ -133,10 +133,10 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
       console.log('rowSelection:', res.source.selected);
     });
 
-    // this.list.forEach(item => {
-    //   this.list2.push(item, item, item);
-    // });
-    // this.list2 = this.list2.filter(_ => true);
+    this.list.forEach(item => {
+      this.list2.push(item, item, item, item, item, item, item, item);
+    });
+    this.list2 = this.list2.filter(_ => true);
   }
 
   trackByName(index: number, item: any) {

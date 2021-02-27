@@ -34,8 +34,9 @@
 
 <div class="mtx-grid-main mtx-grid-layout">
   <!-- Table content -->
-  <div #tableContainer class="mtx-grid-content mtx-grid-layout">
-    <div #tableWrapper class="mat-table-wrapper" [ngClass]="{'mat-table-with-data': !_hasNoResult}">
+  <div class="mtx-grid-content mtx-grid-layout">
+    <div #tableContainer class="mat-table-container"
+         [ngClass]="{'mat-table-with-data': !_hasNoResult}">
       <table mat-table *ngIf="!columnResizable"
              [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
              [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
@@ -387,7 +388,7 @@
                [pageSize]="pageSize"
                [pageSizeOptions]="pageSizeOptions"
                [hidePageSize]="hidePageSize"
-               (page)="page.emit($event)"
+               (page)="_handlePage($event)"
                [disabled]="pageDisabled">
 </mat-paginator>
 

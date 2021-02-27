@@ -13,6 +13,7 @@ import {
   OnDestroy,
   AfterViewInit,
   ChangeDetectorRef,
+  ElementRef,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -55,11 +56,11 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('columnMenu') columnMenu: MtxGridColumnMenu;
+  @ViewChild('tableContainer') tableContainer: ElementRef<HTMLDivElement>;
 
   dataSource = new MatTableDataSource([]);
 
   @Input() displayedColumns: string[];
-
   @Input() columns: MtxGridColumn[] = [];
   @Input() data = [];
   @Input() length = 0;
@@ -68,7 +69,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   // Tracking function
   @Input() trackBy: TrackByFunction<any>;
 
-  /** Whether to show tooltip on columns */
+  /** TODO: Whether to show tooltip on columns */
   @Input() tooltip = true;
 
   /** Whether to page on the front end */
@@ -92,10 +93,11 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() sortStart: 'asc' | 'desc' = 'asc';
   @Output() sortChange = new EventEmitter<Sort>();
 
-  /** Hover & Striped style */
+  /** Row */
 
   @Input() rowHover = false;
   @Input() rowStriped = false;
+  @Output() rowClick = new EventEmitter<any>();
 
   /** Expandable row */
 
@@ -119,10 +121,6 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
   @Input() rowClassFormatter: MtxGridRowClassFormatter;
   @Output() rowSelectionChange = new EventEmitter<any[]>();
-
-  /** Row event */
-
-  @Output() rowClick = new EventEmitter<any>();
 
   /** Cell selection */
 
@@ -164,6 +162,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() columnMenuFooterTemplate: TemplateRef<any>;
 
   /** No Result */
+
   @Input() noResultText = 'No records found';
   @Input() noResultTemplate: TemplateRef<any>;
 
@@ -429,5 +428,11 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     }
     this.expansionRowStates[index].expanded = !this.expansionRowStates[index].expanded;
     return this.expansionRowStates[index].expanded;
+  }
+
+  /** Scroll to top when turn to the next page */
+  _handlePage(e: PageEvent) {
+    this.tableContainer.nativeElement.scrollTop = 0;
+    this.page.emit(e);
   }
 }

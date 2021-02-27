@@ -8,7 +8,7 @@
   .mtx-grid-progress {
     position: absolute;
     top: 0;
-    z-index: 109;
+    z-index: 100;
   }
 
   .mtx-grid-toolbar {
@@ -35,7 +35,7 @@
     max-width: 50%;
   }
 
-  .mat-table-wrapper {
+  .mat-table-container {
     overflow: auto;
 
     &.mat-table-with-data {
@@ -56,23 +56,11 @@
     }
   }
 
-  .mat-footer-row,
-  .mat-header-row,
-  .mat-row {
-    align-items: stretch;
-  }
-
   .mat-header-cell,
   .mat-footer-cell,
   .mat-cell {
     padding: 4px 10px;
     box-sizing: border-box;
-  }
-
-  .mat-cell:first-of-type,
-  .mat-footer-cell:first-of-type,
-  .mat-header-cell:first-of-type {
-    padding-left: 24px;
 
     &.mtx-grid-checkbox-cell {
       padding-left: 10px;
@@ -80,9 +68,6 @@
     }
 
     [dir='rtl'] & {
-      padding-left: 4px;
-      padding-right: 24px;
-
       &.mtx-grid-checkbox-cell {
         padding-left: 10px;
         padding-right: 10px;
@@ -90,14 +75,26 @@
     }
   }
 
-  .mat-cell:last-of-type,
-  .mat-footer-cell:last-of-type,
-  .mat-header-cell:last-of-type {
-    padding-right: 24px;
+  .mat-cell {
+    .mat-cell-img {
+      width: 30px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-    [dir='rtl'] & {
-      padding-left: 24px;
-      padding-right: 4px;
+    .mat-cell-action-button {
+      .mat-icon {
+        width: 18px;
+        height: 18px;
+        font-size: 18px;
+        line-height: 18px;
+      }
+    }
+
+    .mat-icon-button.expanded {
+      .mat-icon {
+        transform: rotate(90deg);
+      }
     }
   }
 
@@ -131,34 +128,9 @@
     vertical-align: middle;
   }
 
-  .mat-row {
-    &:last-of-type {
-      .mat-cell {
-        border-bottom-width: 0;
-      }
-    }
-  }
-
-  .mat-cell {
-    .mat-cell-img {
-      width: 30px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .mat-cell-action-button {
-      .mat-icon {
-        width: 18px;
-        height: 18px;
-        font-size: 18px;
-        line-height: 18px;
-      }
-    }
-
-    .mat-icon-button.expanded {
-      .mat-icon {
-        transform: rotate(90deg);
-      }
+  .mat-row:last-of-type {
+    .mat-cell {
+      border-bottom-width: 0;
     }
   }
 
