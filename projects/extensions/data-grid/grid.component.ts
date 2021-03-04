@@ -289,6 +289,8 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
     this.dataSource.paginator = this.pageOnFront ? this.paginator : null;
     this.dataSource.sort = this.sortOnFront ? this.sort : null;
+
+    this._scrollToTop();
   }
 
   ngAfterViewInit() {
@@ -432,7 +434,13 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   /** Scroll to top when turn to the next page */
   _handlePage(e: PageEvent) {
-    this.tableContainer.nativeElement.scrollTop = 0;
+    this._scrollToTop();
     this.page.emit(e);
+  }
+
+  _scrollToTop() {
+    if (this.tableContainer) {
+      this.tableContainer.nativeElement.scrollTop = 0;
+    }
   }
 }
