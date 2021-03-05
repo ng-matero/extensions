@@ -42,6 +42,8 @@ const OVERLAY_ACTIVE_CLASS = 'cdk-resizable-overlay-thumb-active';
 @Directive()
 export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
   implements AfterViewInit, OnDestroy {
+  protected isResizable = true;
+
   protected minWidthPxInternal: number = 0;
   protected maxWidthPxInternal: number = Number.MAX_SAFE_INTEGER;
 
@@ -93,15 +95,17 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
   }
 
   ngAfterViewInit() {
-    this._listenForRowHoverEvents();
-    this._listenForResizeEvents();
-    this._appendInlineHandle();
+    if (this.isResizable) {
+      this._listenForRowHoverEvents();
+      this._listenForResizeEvents();
+      this._appendInlineHandle();
 
-    this.styleScheduler.scheduleEnd(() => {
-      this._viewInitialized = true;
-      this._applyMinWidthPx();
-      this._applyMaxWidthPx();
-    });
+      this.styleScheduler.scheduleEnd(() => {
+        this._viewInitialized = true;
+        this._applyMinWidthPx();
+        this._applyMaxWidthPx();
+      });
+    }
   }
 
   ngOnDestroy(): void {

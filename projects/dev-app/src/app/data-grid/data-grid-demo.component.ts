@@ -54,8 +54,10 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     {
       header: this.translate.stream('weight'),
       field: 'weight',
+      width: '200px',
       minWidth: 150,
       maxWidth: 300,
+      resizable: false,
       sortable: true,
     },
     {

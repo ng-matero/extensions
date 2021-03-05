@@ -14,6 +14,7 @@ import {
   NgZone,
   ViewContainerRef,
   ChangeDetectorRef,
+  Input,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Directionality } from '@angular/cdk/bidi';
@@ -41,6 +42,16 @@ import { AbstractMatResizable, RESIZABLE_HOST_BINDINGS, RESIZABLE_INPUTS } from 
   inputs: RESIZABLE_INPUTS,
 })
 export class MatResizable extends AbstractMatResizable {
+  @Input()
+  get resizable() {
+    return this.isResizable;
+  }
+  set resizable(newValue: any) {
+    this.isResizable = newValue == null || newValue === '' || newValue;
+  }
+
+  isResizable = true;
+
   protected readonly document: Document;
 
   constructor(

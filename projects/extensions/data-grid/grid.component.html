@@ -237,11 +237,11 @@
         <ng-container *ngFor="let col of columns;">
           <ng-container [matColumnDef]="col.field"
                         [sticky]="col.pinned==='left'" [stickyEnd]="col.pinned==='right'">
-            <!-- TODO: Resizable max width -->
             <th mat-header-cell *matHeaderCellDef
                 [class]="col.class"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
-                resizable [matResizableMinWidthPx]="col.minWidth">
+                [resizable]="col.resizable"
+                [matResizableMinWidthPx]="col.minWidth" [matResizableMaxWidthPx]="col.maxWidth">
               <div class="mat-header-cell-inner">
                 <ng-template [ngIf]="_isTemplateRef(headerTemplate)" [ngIfElse]="headerTpl">
                   <ng-template [ngTemplateOutlet]="headerTemplate"
