@@ -55,9 +55,8 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
       header: this.translate.stream('weight'),
       field: 'weight',
       width: '200px',
-      minWidth: 150,
       maxWidth: 300,
-      resizable: false,
+      resizable: true,
       sortable: true,
     },
     {
@@ -70,6 +69,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
       header: this.translate.stream('mobile'),
       field: 'mobile',
       minWidth: 150,
+      resizable: false,
     },
     {
       header: this.translate.stream('city'),
@@ -80,7 +80,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
       header: this.translate.stream('operation'),
       field: 'operation',
       minWidth: 150,
-      maxWidth: 'auto',
+      maxWidth: 300,
       pinned: 'right',
       right: '0px',
       type: 'button',

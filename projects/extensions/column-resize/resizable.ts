@@ -1,11 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import {
   AfterViewInit,
   Directive,
@@ -73,7 +65,9 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
     return this.minWidthPxInternal;
   }
   set minWidthPx(value: number) {
-    this.minWidthPxInternal = value;
+    if (value) {
+      this.minWidthPxInternal = value;
+    }
 
     this.columnResize.setResized();
     if (this.elementRef.nativeElement && this._viewInitialized) {
@@ -86,7 +80,9 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
     return this.maxWidthPxInternal;
   }
   set maxWidthPx(value: number) {
-    this.maxWidthPxInternal = value;
+    if (value) {
+      this.maxWidthPxInternal = value;
+    }
 
     this.columnResize.setResized();
     if (this.elementRef.nativeElement && this._viewInitialized) {

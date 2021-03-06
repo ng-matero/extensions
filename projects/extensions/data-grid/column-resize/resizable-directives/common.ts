@@ -12,7 +12,6 @@ import { MatColumnResizeOverlayHandle } from '../overlay-handle';
 
 export abstract class AbstractMatResizable extends Resizable<MatColumnResizeOverlayHandle> {
   minWidthPxInternal = 32;
-  isResizable = true;
 
   protected getInlineHandleCssClassName(): string {
     return 'mat-resizable-handle';
