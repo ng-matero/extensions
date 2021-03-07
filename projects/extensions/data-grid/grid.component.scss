@@ -76,25 +76,8 @@
   }
 
   .mat-cell {
-    .mat-cell-img {
-      width: 30px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .mat-cell-action-button {
-      .mat-icon {
-        width: 18px;
-        height: 18px;
-        font-size: 18px;
-        line-height: 18px;
-      }
-    }
-
-    .mat-icon-button.expanded {
-      .mat-icon {
-        transform: rotate(90deg);
-      }
+    .mat-icon-button.expanded .mat-icon {
+      transform: rotate(90deg);
     }
   }
 
@@ -126,16 +109,6 @@
     width: 40px;
     height: 40px;
     vertical-align: middle;
-  }
-
-  .mat-row:last-of-type {
-    .mat-cell {
-      border-bottom-width: 0;
-    }
-  }
-
-  .mat-paginator-hidden {
-    display: none;
   }
 
   .mtx-grid-checkbox-cell {
@@ -173,5 +146,15 @@
   .mat-header-cell-inner {
     display: flex;
     align-items: center;
+  }
+
+  .mat-row:last-of-type {
+    .mat-cell {
+      border-bottom-width: 0;
+    }
+  }
+
+  .mat-paginator-hidden {
+    display: none;
   }
 }

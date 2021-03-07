@@ -1,0 +1,17 @@
+@import '~photoviewer/dist/photoviewer.css';
+
+.mtx-grid-action-button {
+  .mat-icon {
+    width: 18px;
+    height: 18px;
+    font-size: 18px;
+    line-height: 18px;
+  }
+}
+
+.mtx-grid-img {
+  display: block;
+  width: 30px;
+  border-radius: 4px;
+  cursor: pointer;
+}

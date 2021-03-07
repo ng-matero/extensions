@@ -52,6 +52,11 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
       sortable: true,
     },
     {
+      header: 'Avatar',
+      field: 'avatar',
+      type: 'image'
+    },
+    {
       header: this.translate.stream('weight'),
       field: 'weight',
       width: '200px',

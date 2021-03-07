@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { Observable } from 'rxjs';
 
@@ -10,6 +10,8 @@ import PhotoViewer from 'photoviewer';
   selector: 'mtx-grid-cell',
   exportAs: 'mtxGridCell',
   templateUrl: './cell.component.html',
+  styleUrls: ['./cell.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MtxGridCellComponent {
   /** Row data */
@@ -21,8 +23,6 @@ export class MtxGridCellComponent {
   get _colValue() {
     return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
   }
-
-  _viewer: PhotoViewer;
 
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
 
@@ -63,27 +63,24 @@ export class MtxGridCellComponent {
     }
   }
 
-  /** Preview big image */
-  _onPreview(urlStr: string, multi = false) {
+  /** Preview enlarged image */
+  _onPreview(urlStr: string) {
     const imgs: PhotoViewer.Img[] = [];
 
-    let options: PhotoViewer.Options = {};
+    this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
+      imgs.push({ title: index + 1 + '', src: url });
+    });
 
-    if (multi) {
-      this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
-        imgs.push({ title: index + 1 + '', src: url });
-      });
-    } else {
-      this._dataGridSrv.str2arr(urlStr).forEach(url => {
-        imgs.push({ src: url });
-      });
+    const footerToolbar =
+      imgs.length > 1
+        ? ['zoomIn', 'zoomOut', 'prev', 'next', 'rotateRight', 'rotateLeft', 'actualSize']
+        : ['zoomIn', 'zoomOut', 'rotateRight', 'rotateLeft', 'actualSize'];
 
-      options = {
-        title: false,
-        footerToolbar: ['zoomIn', 'zoomOut', 'rotateRight', 'rotateLeft', 'actualSize'],
-      };
-    }
+    const options: PhotoViewer.Options = {
+      title: imgs.length > 1,
+      footerToolbar,
+    };
 
-    this._viewer = new PhotoViewer(imgs, options);
+    const viewer = new PhotoViewer(imgs, options);
   }
 }
