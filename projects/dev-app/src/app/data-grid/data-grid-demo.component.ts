@@ -54,7 +54,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     {
       header: 'Avatar',
       field: 'avatar',
-      type: 'image'
+      type: 'image',
     },
     {
       header: this.translate.stream('weight'),
@@ -73,7 +73,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     {
       header: this.translate.stream('mobile'),
       field: 'mobile',
-      minWidth: 150,
+      width: '150px',
       resizable: false,
     },
     {
@@ -87,7 +87,6 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
       minWidth: 150,
       maxWidth: 300,
       pinned: 'right',
-      right: '0px',
       type: 'button',
       buttons: [
         {
@@ -110,21 +109,21 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   ];
 
   columns2: MtxGridColumn[] = [
-    { header: 'Position', field: 'position', width: '200px' },
-    { header: 'Name', field: 'name', width: '200px', pinned: 'left' },
-    { header: 'tags', field: 'tag.0.value', width: '200px' },
-    { header: 'Weight', field: 'weight', width: '200px', pinned: 'left' },
-    { header: 'Symbol', field: 'symbol', width: '200px' },
-    { header: 'Gender', field: 'gender', width: '200px' },
-    { header: 'Mobile', field: 'mobile', width: '200px' },
-    { header: 'Tele', field: 'tele', width: '200px' },
-    { header: 'City', field: 'city', width: '200px' },
-    { header: 'Address', field: 'address', width: '200px' },
-    { header: 'Date', field: 'date', width: '200px' },
-    { header: 'Website', field: 'website', width: '200px' },
-    { header: 'Company', field: 'company', width: '200px' },
-    { header: 'Email', field: 'email', width: '200px', pinned: 'right' },
-    { header: 'Status', field: 'status', type: 'boolean', width: '200px' },
+    { header: 'Position', field: 'position', minWidth: 200 },
+    { header: 'Name', field: 'name', pinned: 'left' },
+    { header: 'tags', field: 'tag.0.value', width: '100px' },
+    { header: 'Weight', field: 'weight', pinned: 'left' },
+    { header: 'Symbol', field: 'symbol', width: '100px' },
+    { header: 'Gender', field: 'gender' },
+    { header: 'Mobile', field: 'mobile' },
+    { header: 'Tele', field: 'tele' },
+    { header: 'City', field: 'city' },
+    { header: 'Address', field: 'address' },
+    { header: 'Date', field: 'date' },
+    { header: 'Website', field: 'website' },
+    { header: 'Company', field: 'company' },
+    { header: 'Email', field: 'email', pinned: 'right' },
+    { header: 'Status', field: 'status', type: 'boolean' },
   ];
 
   // mat-table
