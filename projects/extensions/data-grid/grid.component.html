@@ -162,7 +162,8 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultSummaryTpl>
-                <span [innerHTML]="_formatSummary(col.summary, data, col)"></span>
+                <mtx-grid-cell [summary]="true" [data]="data" [colDef]="col">
+                </mtx-grid-cell>
               </ng-template>
             </td>
           </ng-container>
@@ -328,7 +329,8 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultSummaryTpl>
-                <span [innerHTML]="_formatSummary(col.summary, data, col)"></span>
+                <mtx-grid-cell [summary]="true" [data]="data" [colDef]="col">
+                </mtx-grid-cell>
               </ng-template>
             </td>
           </ng-container>

@@ -20,8 +20,22 @@ export class MtxGridCellComponent {
   /** Column definition */
   @Input() colDef: MtxGridColumn;
 
+  /** All data */
+  @Input() data = [];
+
+  /** Whether show summary */
+  @Input() summary = false;
+
   get _colValue() {
     return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
+  }
+
+  _isString(fn: any) {
+    return Object.prototype.toString.call(fn) === '[object String]';
+  }
+
+  _isFunction(fn: any) {
+    return Object.prototype.toString.call(fn) === '[object Function]';
   }
 
   _isEmptyValue(value: any) {
@@ -42,6 +56,17 @@ export class MtxGridCellComponent {
 
   _showFormatterTooltip(value: any) {
     return this._isContainHTML(value) || this._isEmptyValue(value) ? '' : value;
+  }
+
+  _formatSummary(data: any[], colDef: MtxGridColumn) {
+    if (this._isString(colDef.summary)) {
+      return colDef.summary;
+    } else if (this._isFunction(colDef.summary)) {
+      return (colDef.summary as (data: any[], colDef?: MtxGridColumn) => void)(
+        this._dataGridSrv.getColData(data, colDef),
+        colDef
+      );
+    }
   }
 
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}

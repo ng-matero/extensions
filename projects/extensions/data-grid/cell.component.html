@@ -1,11 +1,18 @@
+<span *ngIf="summary; else customCellFormattingTpl"
+      [title]="_showFormatterTooltip(_formatSummary(data, colDef))"
+      [innerHTML]="_showText(_formatSummary(data, colDef))">
+</span>
+
 <!-- Custom formatting -->
-<ng-container *ngIf="colDef.formatter; else defaultFormattingTpl">
-  <span [title]="_showFormatterTooltip(colDef.formatter!(rowData, colDef))"
-        [innerHTML]="_showText(colDef.formatter!(rowData, colDef))"></span>
-</ng-container>
+<ng-template #customCellFormattingTpl>
+  <span *ngIf="colDef.formatter; else defaultCellFormattingTpl"
+        [title]="_showFormatterTooltip(colDef.formatter!(rowData, colDef))"
+        [innerHTML]="_showText(colDef.formatter!(rowData, colDef))">
+  </span>
+</ng-template>
 
 <!-- Default formatting -->
-<ng-template #defaultFormattingTpl>
+<ng-template #defaultCellFormattingTpl>
   <ng-container [ngSwitch]="colDef.type">
     <!-- Tag -->
     <ng-container *ngSwitchCase="'tag'">
