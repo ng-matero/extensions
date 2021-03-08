@@ -94,7 +94,6 @@
     },
     "trailing-comma": false,
     "no-output-on-prefix": true,
-    "no-inputs-metadata-property": true,
     "no-outputs-metadata-property": true,
     "no-host-metadata-property": false,
     "no-input-rename": false,
