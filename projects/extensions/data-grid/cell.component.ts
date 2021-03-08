@@ -24,6 +24,26 @@ export class MtxGridCellComponent {
     return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
   }
 
+  _isEmptyValue(value: any) {
+    return value == null || value.toString() === '';
+  }
+
+  _isContainHTML(value: string) {
+    return /<\/?[a-z][\s\S]*>/i.test(value);
+  }
+
+  _showText(value: any) {
+    return this._isEmptyValue(value) ? '--' : value;
+  }
+
+  _showTooltip(value: any) {
+    return this._isEmptyValue(value) ? '' : value;
+  }
+
+  _showFormatterTooltip(value: any) {
+    return this._isContainHTML(value) || this._isEmptyValue(value) ? '' : value;
+  }
+
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
 
   _handleActionConfirm(

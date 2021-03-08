@@ -1,6 +1,7 @@
 <!-- Custom formatting -->
 <ng-container *ngIf="colDef.formatter; else defaultFormattingTpl">
-  <span [innerHTML]="colDef.formatter!(rowData, colDef)"></span>
+  <span [title]="_showFormatterTooltip(colDef.formatter!(rowData, colDef))"
+        [innerHTML]="_showText(colDef.formatter!(rowData, colDef))"></span>
 </ng-container>
 
 <!-- Default formatting -->
@@ -80,29 +81,35 @@
     </ng-container>
     <!-- Boolean -->
     <ng-container *ngSwitchCase="'boolean'">
-      {{_colValue}}
+      <span [title]="_showTooltip(_colValue)">{{_showText(_colValue)}}</span>
     </ng-container>
     <!-- Number -->
     <ng-container *ngSwitchCase="'number'">
-      {{_colValue | number: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale}}
+      <span [title]="_showTooltip(_colValue | number: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)">
+        {{_showText(_colValue | number: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)}}
+      </span>
     </ng-container>
     <!-- Currency -->
     <ng-container *ngSwitchCase="'currency'">
-      {{_colValue | currency: colDef.typeParameter?.currencyCode : colDef.typeParameter?.display :
-      colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale}}
+      <span [title]="_showTooltip(_colValue | currency: colDef.typeParameter?.currencyCode : colDef.typeParameter?.display : colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)">
+        {{_showText(_colValue | currency: colDef.typeParameter?.currencyCode : colDef.typeParameter?.display : colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)}}
+      </span>
     </ng-container>
     <!-- Percent -->
     <ng-container *ngSwitchCase="'percent'">
-      {{_colValue | percent: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale}}
+      <span [title]="_showTooltip(_colValue | percent: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)">
+        {{_showText(_colValue | percent: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)}}
+      </span>
     </ng-container>
     <!-- Date -->
     <ng-container *ngSwitchCase="'date'">
-      {{_colValue | date: colDef.typeParameter?.format : colDef.typeParameter?.timezone :
-      colDef.typeParameter?.locale}}
+      <span [title]="_showTooltip(_colValue | date: colDef.typeParameter?.format : colDef.typeParameter?.timezone : colDef.typeParameter?.locale)">
+        {{_showText(_colValue | date: colDef.typeParameter?.format : colDef.typeParameter?.timezone : colDef.typeParameter?.locale)}}
+      </span>
     </ng-container>
     <!-- Default -->
     <ng-container *ngSwitchDefault>
-      {{_colValue || '--'}}
+      <span [title]="_showTooltip(_colValue)">{{_showText(_colValue)}}</span>
     </ng-container>
   </ng-container>
 </ng-template>
