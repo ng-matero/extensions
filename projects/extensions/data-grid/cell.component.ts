@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { Observable } from 'rxjs';
 
@@ -10,6 +10,8 @@ import PhotoViewer from 'photoviewer';
   selector: 'mtx-grid-cell',
   exportAs: 'mtxGridCell',
   templateUrl: './cell.component.html',
+  styleUrls: ['./cell.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MtxGridCellComponent {
   /** Row data */
@@ -18,11 +20,54 @@ export class MtxGridCellComponent {
   /** Column definition */
   @Input() colDef: MtxGridColumn;
 
+  /** All data */
+  @Input() data = [];
+
+  /** Whether show summary */
+  @Input() summary = false;
+
   get _colValue() {
     return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
   }
 
-  _viewer: PhotoViewer;
+  _isString(fn: any) {
+    return Object.prototype.toString.call(fn) === '[object String]';
+  }
+
+  _isFunction(fn: any) {
+    return Object.prototype.toString.call(fn) === '[object Function]';
+  }
+
+  _isEmptyValue(value: any) {
+    return value == null || value.toString() === '';
+  }
+
+  _isContainHTML(value: string) {
+    return /<\/?[a-z][\s\S]*>/i.test(value);
+  }
+
+  _showText(value: any) {
+    return this._isEmptyValue(value) ? '--' : value;
+  }
+
+  _showTooltip(value: any) {
+    return this._isEmptyValue(value) ? '' : value;
+  }
+
+  _showFormatterTooltip(value: any) {
+    return this._isContainHTML(value) || this._isEmptyValue(value) ? '' : value;
+  }
+
+  _formatSummary(data: any[], colDef: MtxGridColumn) {
+    if (this._isString(colDef.summary)) {
+      return colDef.summary;
+    } else if (this._isFunction(colDef.summary)) {
+      return (colDef.summary as (data: any[], colDef?: MtxGridColumn) => void)(
+        this._dataGridSrv.getColData(data, colDef),
+        colDef
+      );
+    }
+  }
 
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
 
@@ -63,27 +108,24 @@ export class MtxGridCellComponent {
     }
   }
 
-  /** Preview big image */
-  _onPreview(urlStr: string, multi = false) {
+  /** Preview enlarged image */
+  _onPreview(urlStr: string) {
     const imgs: PhotoViewer.Img[] = [];
 
-    let options: PhotoViewer.Options = {};
+    this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
+      imgs.push({ title: index + 1 + '', src: url });
+    });
 
-    if (multi) {
-      this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
-        imgs.push({ title: index + 1 + '', src: url });
-      });
-    } else {
-      this._dataGridSrv.str2arr(urlStr).forEach(url => {
-        imgs.push({ src: url });
-      });
+    const footerToolbar =
+      imgs.length > 1
+        ? ['zoomIn', 'zoomOut', 'prev', 'next', 'rotateRight', 'rotateLeft', 'actualSize']
+        : ['zoomIn', 'zoomOut', 'rotateRight', 'rotateLeft', 'actualSize'];
 
-      options = {
-        title: false,
-        footerToolbar: ['zoomIn', 'zoomOut', 'rotateRight', 'rotateLeft', 'actualSize'],
-      };
-    }
+    const options: PhotoViewer.Options = {
+      title: imgs.length > 1,
+      footerToolbar,
+    };
 
-    this._viewer = new PhotoViewer(imgs, options);
+    const viewer = new PhotoViewer(imgs, options);
   }
 }

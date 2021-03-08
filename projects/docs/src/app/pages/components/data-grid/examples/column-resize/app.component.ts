@@ -13,6 +13,7 @@ export class AppComponent {
       header: 'Name',
       field: 'name',
       minWidth: 200,
+      maxWidth: 300,
     },
     {
       header: 'Weight',
@@ -22,12 +23,13 @@ export class AppComponent {
     {
       header: 'Gender',
       field: 'gender',
-      minWidth: 200,
+      width: '100px',
+      resizable: false
     },
     {
       header: 'Mobile',
       field: 'mobile',
-      minWidth: 200,
+      maxWidth: 200,
     },
     {
       header: 'City',

@@ -1,11 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import {
   Directive,
   ElementRef,
@@ -14,6 +6,8 @@ import {
   NgZone,
   ViewContainerRef,
   ChangeDetectorRef,
+  Input,
+  HostBinding,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Directionality } from '@angular/cdk/bidi';
@@ -37,10 +31,23 @@ import { AbstractMatResizable, RESIZABLE_HOST_BINDINGS, RESIZABLE_INPUTS } from 
  */
 @Directive({
   selector: 'mat-header-cell[resizable], th[mat-header-cell][resizable]',
-  host: RESIZABLE_HOST_BINDINGS,
   inputs: RESIZABLE_INPUTS,
 })
 export class MatResizable extends AbstractMatResizable {
+  isResizable = true;
+
+  @HostBinding('class') get hasResizableClass() {
+    return this.isResizable ? RESIZABLE_HOST_BINDINGS.class : '';
+  }
+
+  @Input()
+  get resizable() {
+    return this.isResizable;
+  }
+  set resizable(newValue: any) {
+    this.isResizable = newValue == null || newValue === '' || newValue;
+  }
+
   protected readonly document: Document;
 
   constructor(

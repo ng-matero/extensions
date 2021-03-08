@@ -69,9 +69,6 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   // Tracking function
   @Input() trackBy: TrackByFunction<any>;
 
-  /** TODO: Whether to show tooltip on columns */
-  @Input() tooltip = true;
-
   /** Whether to page on the front end */
   @Input() pageOnFront = true;
   @Input() showPaginator = true;
@@ -193,19 +190,6 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   /** Column resizable */
   @Input() columnResizable = false;
 
-  _getColData(data: any, colDef: MtxGridColumn) {
-    return data.map((item: any) => item[colDef.field]);
-  }
-
-  _formatSummary(summary: any, data: any, colDef: MtxGridColumn) {
-    if (this._isString(summary)) {
-      return summary;
-    } else if (this._isFunction(summary)) {
-      const colData = this._getColData(data, colDef);
-      return summary(colData, colDef);
-    }
-  }
-
   constructor(
     private _dataGridSrv: MtxGridService,
     private _changeDetectorRef: ChangeDetectorRef
@@ -219,16 +203,12 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     return obj instanceof TemplateRef;
   }
 
-  _isString(fn: any) {
-    return Object.prototype.toString.call(fn) === '[object String]';
-  }
-
-  _isFunction(fn: any) {
-    return Object.prototype.toString.call(fn) === '[object Function]';
-  }
-
   _isObservable(data: any) {
     return isObservable(data);
+  }
+
+  _getColData(data: any[], colDef: MtxGridColumn) {
+    return this._dataGridSrv.getColData(data, colDef);
   }
 
   _getRowClassList(rowData: any, index: number) {
@@ -289,6 +269,8 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
     this.dataSource.paginator = this.pageOnFront ? this.paginator : null;
     this.dataSource.sort = this.sortOnFront ? this.sort : null;
+
+    this._scrollToTop();
   }
 
   ngAfterViewInit() {
@@ -432,7 +414,13 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   /** Scroll to top when turn to the next page */
   _handlePage(e: PageEvent) {
-    this.tableContainer.nativeElement.scrollTop = 0;
+    this._scrollToTop();
     this.page.emit(e);
+  }
+
+  _scrollToTop() {
+    if (this.tableContainer) {
+      this.tableContainer.nativeElement.scrollTop = 0;
+    }
   }
 }

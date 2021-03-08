@@ -10,7 +10,7 @@ import {
 import { MtxGridComponent } from './grid.component';
 
 @Directive({
-  selector: '[mtx-selectable-cell]',
+  selector: '[mtx-grid-selectable-cell]',
 })
 export class MtxGridCellSelectionDirective {
   private _selected = false;

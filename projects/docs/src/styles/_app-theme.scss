@@ -12,8 +12,6 @@
 @import './highlightjs/material-light';
 @import './highlightjs/material-dark';
 
-@import '~photoviewer/dist/photoviewer.css';
-
 // Styles for the docs app that are based on the current theme.
 @mixin extensions-docs-app-theme($theme) {
   $is-dark-theme: map-get($theme, is-dark);

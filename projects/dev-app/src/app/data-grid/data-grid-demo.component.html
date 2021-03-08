@@ -109,7 +109,8 @@
 
   <!-- Name Column -->
   <ng-container matColumnDef="name" sticky>
-    <th mat-header-cell *matHeaderCellDef resizable [matResizableMinWidthPx]="150"> Name </th>
+    <th mat-header-cell *matHeaderCellDef resizable [matResizableMinWidthPx]="150"
+        [matResizableMaxWidthPx]="300"> Name </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
     <td mat-footer-cell *matFooterCellDef> Footer cell </td>
   </ng-container>
@@ -137,5 +138,6 @@
 
 <mtx-grid class="fixed-height"
           [data]="list2"
+          [columnResizable]="true"
           [columns]="columns2">
 </mtx-grid>

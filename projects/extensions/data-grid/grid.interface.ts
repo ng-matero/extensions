@@ -15,21 +15,20 @@ export interface MtxGridColumn {
   right?: string;
   width?: string;
   resizable?: boolean;
-  minWidth?: number | string;
-  maxWidth?: number | string;
+  minWidth?: number;
+  maxWidth?: number;
   sortable?: boolean | string;
   sortProp?: MtxGridColumnSortProp;
   type?: MtxGridColumnType;
   typeParameter?: MtxGridColumnTypeParameter;
   tag?: MtxGridColumnTag;
   buttons?: MtxGridColumnButton[];
-  formatter?: (rowData: any, colDef?: any) => void;
+  formatter?: (rowData: any, colDef?: MtxGridColumn) => void;
   cellTemplate?: TemplateRef<any> | null;
   showExpand?: boolean;
   description?: string;
-  summary?: ((colData: any, colDef?: any) => void) | string;
+  summary?: ((data: any[], colDef?: MtxGridColumn) => void) | string;
   class?: string;
-  i18n?: string;
 }
 
 /**

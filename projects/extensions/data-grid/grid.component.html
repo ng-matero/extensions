@@ -112,7 +112,7 @@
                 [class]="col.class"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
-                mtx-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
+                mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
               <ng-template [ngIf]="_isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
                 <ng-template [ngTemplateOutlet]="cellTemplate"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
@@ -133,7 +133,7 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultCellTpl>
-                <button *ngIf="col.showExpand" mat-icon-button mtx-expansion-toggle
+                <button *ngIf="col.showExpand" mat-icon-button mtx-grid-expansion-toggle
                         [(opened)]="expansionRowStates[dataIndex].expanded"
                         (toggleChange)="_handleExpansionChange($event, row, col, dataIndex);">
                   <mat-icon>keyboard_arrow_right</mat-icon>
@@ -162,7 +162,8 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultSummaryTpl>
-                <span [innerHTML]="_formatSummary(col.summary, data, col)"></span>
+                <mtx-grid-cell [summary]="true" [data]="data" [colDef]="col">
+                </mtx-grid-cell>
               </ng-template>
             </td>
           </ng-container>
@@ -237,11 +238,12 @@
         <ng-container *ngFor="let col of columns;">
           <ng-container [matColumnDef]="col.field"
                         [sticky]="col.pinned==='left'" [stickyEnd]="col.pinned==='right'">
-            <!-- TODO: Resizable max width -->
             <th mat-header-cell *matHeaderCellDef
                 [class]="col.class"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
-                resizable [matResizableMinWidthPx]="col.minWidth">
+                [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}"
+                [resizable]="col.resizable"
+                [matResizableMinWidthPx]="col.minWidth" [matResizableMaxWidthPx]="col.maxWidth">
               <div class="mat-header-cell-inner">
                 <ng-template [ngIf]="_isTemplateRef(headerTemplate)" [ngIfElse]="headerTpl">
                   <ng-template [ngTemplateOutlet]="headerTemplate"
@@ -276,7 +278,8 @@
             <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
                 [class]="col.class"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
-                mtx-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
+                [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}"
+                mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
               <ng-template [ngIf]="_isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
                 <ng-template [ngTemplateOutlet]="cellTemplate"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
@@ -297,7 +300,7 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultCellTpl>
-                <button *ngIf="col.showExpand" mat-icon-button mtx-expansion-toggle
+                <button *ngIf="col.showExpand" mat-icon-button mtx-grid-expansion-toggle
                         [(opened)]="expansionRowStates[dataIndex].expanded"
                         (toggleChange)="_handleExpansionChange($event, row, col, dataIndex);">
                   <mat-icon>keyboard_arrow_right</mat-icon>
@@ -308,7 +311,8 @@
             </td>
 
             <td mat-footer-cell *matFooterCellDef
-                [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}">
+                [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
+                [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}">
               <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
 
               <ng-template [ngIf]="_isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
@@ -325,7 +329,8 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultSummaryTpl>
-                <span [innerHTML]="_formatSummary(col.summary, data, col)"></span>
+                <mtx-grid-cell [summary]="true" [data]="data" [colDef]="col">
+                </mtx-grid-cell>
               </ng-template>
             </td>
           </ng-container>

@@ -1,11 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
 import {
   AfterViewInit,
   Directive,
@@ -42,6 +34,8 @@ const OVERLAY_ACTIVE_CLASS = 'cdk-resizable-overlay-thumb-active';
 @Directive()
 export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
   implements AfterViewInit, OnDestroy {
+  protected isResizable = true;
+
   protected minWidthPxInternal: number = 0;
   protected maxWidthPxInternal: number = Number.MAX_SAFE_INTEGER;
 
@@ -71,7 +65,9 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
     return this.minWidthPxInternal;
   }
   set minWidthPx(value: number) {
-    this.minWidthPxInternal = value;
+    if (value) {
+      this.minWidthPxInternal = value;
+    }
 
     this.columnResize.setResized();
     if (this.elementRef.nativeElement && this._viewInitialized) {
@@ -84,7 +80,9 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
     return this.maxWidthPxInternal;
   }
   set maxWidthPx(value: number) {
-    this.maxWidthPxInternal = value;
+    if (value) {
+      this.maxWidthPxInternal = value;
+    }
 
     this.columnResize.setResized();
     if (this.elementRef.nativeElement && this._viewInitialized) {
@@ -93,15 +91,17 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
   }
 
   ngAfterViewInit() {
-    this._listenForRowHoverEvents();
-    this._listenForResizeEvents();
-    this._appendInlineHandle();
+    if (this.isResizable) {
+      this._listenForRowHoverEvents();
+      this._listenForResizeEvents();
+      this._appendInlineHandle();
 
-    this.styleScheduler.scheduleEnd(() => {
-      this._viewInitialized = true;
-      this._applyMinWidthPx();
-      this._applyMaxWidthPx();
-    });
+      this.styleScheduler.scheduleEnd(() => {
+        this._viewInitialized = true;
+        this._applyMinWidthPx();
+        this._applyMaxWidthPx();
+      });
+    }
   }
 
   ngOnDestroy(): void {

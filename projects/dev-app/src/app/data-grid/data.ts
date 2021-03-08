@@ -16,6 +16,7 @@ export const EXAMPLE_DATA: any[] = [
     email: 'Boron@gmail.com',
     status: false,
     cost: 4,
+    avatar: 'https://farm5.staticflickr.com/4267/34162425794_1430f38362_z.jpg',
   },
   {
     position: 2,
