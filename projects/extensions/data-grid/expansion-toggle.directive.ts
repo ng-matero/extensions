@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 
 @Directive({
-  selector: '[mtx-expansion-toggle]',
+  selector: '[mtx-grid-expansion-toggle]',
 })
 export class MtxGridExpansionToggleDirective {
   private _opened = false;
