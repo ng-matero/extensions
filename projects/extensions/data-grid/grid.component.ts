@@ -14,6 +14,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   ElementRef,
+  SimpleChanges,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -69,7 +70,8 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   // Tracking function
   @Input() trackBy: TrackByFunction<any>;
 
-  /** Whether to page on the front end */
+  /** Page */
+
   @Input() pageOnFront = true;
   @Input() showPaginator = true;
   @Input() pageDisabled = false;
@@ -227,7 +229,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   ngOnInit() {}
 
   // Waiting for async data
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
     this._countPinnedPosition();
 
     this.displayedColumns = this.columns.filter(item => !item.hide).map(item => item.field);
@@ -270,7 +272,10 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     this.dataSource.paginator = this.pageOnFront ? this.paginator : null;
     this.dataSource.sort = this.sortOnFront ? this.sort : null;
 
-    this._scrollToTop();
+    // Only scroll top when data change
+    if (changes.data) {
+      this.scrollToTop();
+    }
   }
 
   ngAfterViewInit() {
@@ -414,12 +419,14 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   /** Scroll to top when turn to the next page */
   _handlePage(e: PageEvent) {
-    this._scrollToTop();
+    if (this.pageOnFront) {
+      this.scrollToTop();
+    }
     this.page.emit(e);
   }
 
-  _scrollToTop() {
-    if (this.tableContainer) {
+  scrollToTop() {
+    if (this.tableContainer && !this.loading) {
       this.tableContainer.nativeElement.scrollTop = 0;
     }
   }

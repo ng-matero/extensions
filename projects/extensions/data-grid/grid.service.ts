@@ -7,8 +7,8 @@ export class MtxGridService {
 
   /**
    * Get cell value from column key e.g. `a.b.c`
-   * @param rowData row data
-   * @param colDef  column definition
+   * @param rowData Row data
+   * @param colDef Column definition
    */
   getCellValue(rowData: any, colDef: MtxGridColumn): string {
     const keyArr = colDef.field ? colDef.field.split('.') : [];
@@ -27,8 +27,8 @@ export class MtxGridService {
 
   /**
    * Get all data of a col
-   * @param data    all data
-   * @param colDef  column definition
+   * @param data All data
+   * @param colDef Column definition
    */
   getColData(data: any[], colDef: MtxGridColumn): any[] {
     return data.map((rowData: any) => this.getCellValue(rowData, colDef));
