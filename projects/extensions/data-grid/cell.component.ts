@@ -46,15 +46,15 @@ export class MtxGridCellComponent {
     return /<\/?[a-z][\s\S]*>/i.test(value);
   }
 
-  _showText(value: any) {
+  _getText(value: any) {
     return this._isEmptyValue(value) ? '--' : value;
   }
 
-  _showTooltip(value: any) {
+  _getTooltip(value: any) {
     return this._isEmptyValue(value) ? '' : value;
   }
 
-  _showFormatterTooltip(value: any) {
+  _getFormatterTooltip(value: any) {
     return this._isContainHTML(value) || this._isEmptyValue(value) ? '' : value;
   }
 
