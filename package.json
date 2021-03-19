@@ -38,7 +38,7 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "ngx-color": "^6.2.0",
     "ngx-progressbar": "^6.1.0",
-    "photoviewer": "^3.5.5",
+    "photoviewer": "^3.5.7",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.3"
