@@ -18,6 +18,7 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class DataGridDemoComponent implements OnInit, AfterViewInit {
   @ViewChild('grid', { static: true }) grid: MtxGridComponent;
+  @ViewChild('grid2', { static: true }) grid2: MtxGridComponent;
 
   multiSelectable = true;
   hideRowSelectionCheckbox = false;
@@ -258,6 +259,20 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     this.query.page = e.pageIndex;
     this.query.per_page = e.pageSize;
     this.getRemoteData();
+  }
+
+  scrollTop(value?: number) {
+    if (value == null) {
+      return console.log(this.grid2.scrollTop());
+    }
+    this.grid2.scrollTop(value);
+  }
+
+  scrollLeft(value?: number) {
+    if (value == null) {
+      return console.log(this.grid2.scrollLeft());
+    }
+    this.grid2.scrollLeft(value);
   }
 
   log(e: any) {

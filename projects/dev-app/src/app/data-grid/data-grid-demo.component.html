@@ -136,11 +136,15 @@
 
 <mat-divider></mat-divider>
 
-<mtx-grid class="fixed-height"
+<mtx-grid class="fixed-height" #grid2
           [data]="list2"
           [columnResizable]="true"
           [columns]="columns2">
 </mtx-grid>
+<button (click)="scrollTop()">Get scrollTop</button>
+<button (click)="scrollTop(100)">Set scrollTop</button>
+<button (click)="scrollLeft()">Get scrollLeft</button>
+<button (click)="scrollLeft(100)">Set scrollLeft</button>
 
 <mat-divider></mat-divider>
 
