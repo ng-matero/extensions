@@ -425,7 +425,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     this.page.emit(e);
   }
 
-  scrollTop(value?: number) {
+  scrollTop(value?: number): number | void {
     if (value == null) {
       return this.tableContainer?.nativeElement.scrollTop;
     }
@@ -434,7 +434,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     }
   }
 
-  scrollLeft(value?: number) {
+  scrollLeft(value?: number): number | void {
     if (value == null) {
       return this.tableContainer?.nativeElement.scrollLeft;
     }
