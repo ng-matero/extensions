@@ -8,6 +8,8 @@ import {
 import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
 import { TranslateService } from '@ngx-translate/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { HttpClient } from '@angular/common/http';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'dev-data-grid-demo',
@@ -16,6 +18,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 })
 export class DataGridDemoComponent implements OnInit, AfterViewInit {
   @ViewChild('grid', { static: true }) grid: MtxGridComponent;
+  @ViewChild('grid2', { static: true }) grid2: MtxGridComponent;
 
   multiSelectable = true;
   hideRowSelectionCheckbox = false;
@@ -40,9 +43,6 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
 
   list = EXAMPLE_DATA;
   isNewList = false;
-
-  list2 = [];
-
   columns: MtxGridColumn[] = [
     {
       header: this.translate.stream('name'),
@@ -108,6 +108,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     },
   ];
 
+  list2 = [];
   columns2: MtxGridColumn[] = [
     { header: 'Position', field: 'position', minWidth: 200 },
     { header: 'Name', field: 'name', pinned: 'left' },
@@ -126,13 +127,59 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     { header: 'Status', field: 'status', type: 'boolean' },
   ];
 
+  columns3: MtxGridColumn[] = [
+    {
+      header: 'Name',
+      field: 'name',
+      formatter: (data: any) => `<a href="${data.html_url}" target="_blank">${data.name}</a>`,
+    },
+    { header: 'Owner', field: 'owner.login' },
+    { header: 'Owner Avatar', field: 'owner.avatar_url', type: 'image' },
+    { header: 'Description', field: 'description', width: '300px' },
+    { header: 'Stars', field: 'stargazers_count' },
+    { header: 'Forks', field: 'forks_count' },
+    { header: 'Score', field: 'score' },
+    { header: 'Issues', field: 'open_issues' },
+    { header: 'Language', field: 'language' },
+    { header: 'License', field: 'license.name' },
+    { header: 'Home Page', field: 'homepage', type: 'link' },
+    { header: 'Is forked', field: 'fork', type: 'boolean' },
+    {
+      header: 'Archived',
+      field: 'archived',
+      type: 'tag',
+      tag: {
+        true: { text: 'Yes', color: 'red-100' },
+        false: { text: 'No', color: 'green-100' },
+      },
+    },
+    { header: 'Created Date', field: 'created_at' },
+    { header: 'Updated Date', field: 'updated_at' },
+  ];
+  list3 = [];
+  total3 = 0;
+  rowSelected3 = [];
+  isLoading = true;
+  query = {
+    q: 'user:nzbin',
+    page: 0,
+    per_page: 10,
+  };
+  get params() {
+    const p = Object.assign({}, this.query);
+    p.page += 1;
+    return p;
+  }
+
   // mat-table
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = EXAMPLE_DATA;
 
-  constructor(public translate: TranslateService) {}
+  constructor(public translate: TranslateService, private http: HttpClient) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getRemoteData();
+  }
 
   ngAfterViewInit() {
     this.grid.rowSelection.changed.subscribe(res => {
@@ -187,6 +234,45 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   select2ndData() {
     this.grid.rowSelection.select(this.list[1]);
     this.grid.detectChanges();
+  }
+
+  getRemoteData() {
+    this.isLoading = true;
+    this.http
+      .get('https://api.github.com/search/repositories', { params: this.params as any })
+      .subscribe(
+        (res: any) => {
+          this.list3 = res.items;
+          this.total3 = res.total_count;
+          this.isLoading = false;
+        },
+        () => {
+          this.isLoading = false;
+        },
+        () => {
+          this.isLoading = false;
+        }
+      );
+  }
+
+  getNextPage(e: PageEvent) {
+    this.query.page = e.pageIndex;
+    this.query.per_page = e.pageSize;
+    this.getRemoteData();
+  }
+
+  scrollTop(value?: number) {
+    if (value == null) {
+      return console.log(this.grid2.scrollTop());
+    }
+    this.grid2.scrollTop(value);
+  }
+
+  scrollLeft(value?: number) {
+    if (value == null) {
+      return console.log(this.grid2.scrollLeft());
+    }
+    this.grid2.scrollLeft(value);
   }
 
   log(e: any) {

@@ -97,7 +97,7 @@
 <button (click)="updateEmptyList()">Update Empty List</button>
 <button (click)="select2ndData()">Select 2nd data</button>
 
-<hr>
+<mat-divider></mat-divider>
 
 <table mat-table columnResize [dataSource]="dataSource" class="mat-elevation-z2 example-table">
   <!-- Position Column -->
@@ -134,10 +134,31 @@
   <tr mat-footer-row *matFooterRowDef="displayedColumns;"></tr>
 </table>
 
-<hr>
+<mat-divider></mat-divider>
 
-<mtx-grid class="fixed-height"
+<mtx-grid class="fixed-height" #grid2
           [data]="list2"
           [columnResizable]="true"
           [columns]="columns2">
+</mtx-grid>
+<button (click)="scrollTop()">Get scrollTop</button>
+<button (click)="scrollTop(100)">Set scrollTop</button>
+<button (click)="scrollLeft()">Get scrollLeft</button>
+<button (click)="scrollLeft(100)">Set scrollLeft</button>
+
+<mat-divider></mat-divider>
+
+<mtx-grid class="fixed-height"
+          [data]="list3"
+          [columns]="columns3"
+          [length]="total3"
+          [loading]="isLoading"
+          [rowSelectable]="true"
+          [rowSelected]="rowSelected3"
+          [showToolbar]="true"
+          [pageOnFront]="false"
+          [pageIndex]="query.page"
+          [pageSize]="query.per_page"
+          [pageSizeOptions]="[10,20,50]"
+          (page)="getNextPage($event)">
 </mtx-grid>

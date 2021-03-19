@@ -274,7 +274,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
     // Only scroll top when data change
     if (changes.data) {
-      this.scrollToTop();
+      this.scrollTop(0);
     }
   }
 
@@ -420,14 +420,26 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   /** Scroll to top when turn to the next page */
   _handlePage(e: PageEvent) {
     if (this.pageOnFront) {
-      this.scrollToTop();
+      this.scrollTop(0);
     }
     this.page.emit(e);
   }
 
-  scrollToTop() {
+  scrollTop(value?: number) {
+    if (value == null) {
+      return this.tableContainer?.nativeElement.scrollTop;
+    }
     if (this.tableContainer && !this.loading) {
-      this.tableContainer.nativeElement.scrollTop = 0;
+      this.tableContainer.nativeElement.scrollTop = value;
+    }
+  }
+
+  scrollLeft(value?: number) {
+    if (value == null) {
+      return this.tableContainer?.nativeElement.scrollLeft;
+    }
+    if (this.tableContainer && !this.loading) {
+      this.tableContainer.nativeElement.scrollLeft = value;
     }
   }
 }
