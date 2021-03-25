@@ -40,6 +40,6 @@ export const FLEX_HOST_BINDINGS = {
 
 export abstract class AbstractMatColumnResize extends ColumnResize {
   getTableHeight() {
-    return this.elementRef.nativeElement!.offsetHeight;
+    return (this.elementRef.nativeElement!.parentNode as HTMLElement)!.offsetHeight;
   }
 }
