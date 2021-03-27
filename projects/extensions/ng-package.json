@@ -5,7 +5,7 @@
     "flatModuleFile": "extensions",
     "entryFile": "public-api.ts"
   },
-  "whitelistedNonPeerDependencies": [
+  "allowedNonPeerDependencies": [
     "@ng-select/ng-select",
     "ngx-color",
     "photoviewer"
