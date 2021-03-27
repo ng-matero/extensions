@@ -82,6 +82,8 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() hidePageSize = false;
   @Output() page = new EventEmitter<PageEvent>();
 
+  @Input() paginationTemplate: TemplateRef<any>;
+
   /** Sort */
 
   @Input() sortOnFront = true;
@@ -192,6 +194,10 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   /** Column resizable */
   @Input() columnResizable = false;
 
+  /** Status bar */
+  @Input() showStatusbar = false;
+  @Input() statusbarTemplate: TemplateRef<any>;
+
   constructor(
     private _dataGridSrv: MtxGridService,
     private _changeDetectorRef: ChangeDetectorRef
@@ -272,7 +278,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     this.dataSource.paginator = this.pageOnFront ? this.paginator : null;
     this.dataSource.sort = this.sortOnFront ? this.sort : null;
 
-    // Only scroll top when data change
+    // Only scroll top with data change
     if (changes.data) {
       this.scrollTop(0);
     }

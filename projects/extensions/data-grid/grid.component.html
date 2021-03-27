@@ -5,7 +5,7 @@
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
   <div class="mtx-grid-toolbar-title" *ngIf="toolbarTitle">{{toolbarTitle}}</div>
   <div class="mtx-grid-toolbar-template">
-    <ng-template [ngIf]="toolbarTemplate">
+    <ng-template [ngIf]="_isTemplateRef(toolbarTemplate)">
       <ng-template [ngTemplateOutlet]="toolbarTemplate"></ng-template>
     </ng-template>
   </div>
@@ -186,7 +186,7 @@
                 [attr.colspan]="displayedColumns.length">
               <div class="mtx-grid-expansion-detail"
                    [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
-                <ng-template [ngTemplateOutlet]="expansionTemplate"
+                <ng-template [ngTemplateOutlet]="_isTemplateRef(expansionTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex, expanded: expansionRowStates[dataIndex].expanded }">
                 </ng-template>
               </div>
@@ -370,7 +370,7 @@
 
     <!-- No result -->
     <div class="mtx-grid-no-result" *ngIf="_hasNoResult">
-      <ng-template [ngIf]="noResultTemplate" [ngIfElse]="defaultNoResultTpl">
+      <ng-template [ngIf]="_isTemplateRef(noResultTemplate)" [ngIfElse]="defaultNoResultTpl">
         <ng-template [ngTemplateOutlet]="noResultTemplate"></ng-template>
       </ng-template>
       <ng-template #defaultNoResultTpl>{{noResultText}}</ng-template>
@@ -379,23 +379,39 @@
 
   <!-- Tool sidebar -->
   <div class="mtx-grid-sidebar" *ngIf="showSidebar">
-    <ng-template [ngIf]="sidebarTemplate">
+    <ng-template [ngIf]="_isTemplateRef(sidebarTemplate)">
       <ng-template [ngTemplateOutlet]="sidebarTemplate"></ng-template>
     </ng-template>
   </div>
 </div>
 
-<!-- Paginator -->
-<mat-paginator [class.mat-paginator-hidden]="!showPaginator || _hasNoResult"
-               [showFirstLastButtons]="showFirstLastButtons"
-               [length]="length"
-               [pageIndex]="pageIndex"
-               [pageSize]="pageSize"
-               [pageSizeOptions]="pageSizeOptions"
-               [hidePageSize]="hidePageSize"
-               (page)="_handlePage($event)"
-               [disabled]="pageDisabled">
-</mat-paginator>
+<div class="mtx-grid-footer">
+  <!-- Status Bar -->
+  <div class="mtx-grid-statusbar" *ngIf="showStatusbar">
+    <ng-template [ngIf]="_isTemplateRef(statusbarTemplate)">
+      <ng-template [ngTemplateOutlet]="statusbarTemplate"></ng-template>
+    </ng-template>
+  </div>
+
+  <!-- Pagination -->
+  <div class="mtx-grid-pagination">
+    <ng-template [ngIf]="_isTemplateRef(paginationTemplate)" [ngIfElse]="defaultPaginationTemplate">
+      <ng-template [ngTemplateOutlet]="paginationTemplate"></ng-template>
+    </ng-template>
+    <ng-template #defaultPaginationTemplate>
+      <mat-paginator [class.mat-paginator-hidden]="!showPaginator || _hasNoResult"
+                     [showFirstLastButtons]="showFirstLastButtons"
+                     [length]="length"
+                     [pageIndex]="pageIndex"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="pageSizeOptions"
+                     [hidePageSize]="hidePageSize"
+                     (page)="_handlePage($event)"
+                     [disabled]="pageDisabled">
+      </mat-paginator>
+    </ng-template>
+  </div>
+</div>
 
 <!-- Header template for extra content -->
 <ng-template #headerExtraTplBase let-headerExtraTemplate let-col="colDef">
