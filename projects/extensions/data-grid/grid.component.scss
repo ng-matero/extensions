@@ -51,22 +51,22 @@
     }
   }
 
-  .mat-row:last-of-type {
-    .mat-cell {
-      border-bottom-width: 0;
+  .mat-row {
+    &.mtx-grid-expansion {
+      height: 0;
+      overflow: hidden;
+
+      .mat-cell {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      &.collapsed .mat-cell {
+        border-bottom-width: 0;
+      }
     }
-  }
 
-  .mtx-grid-expansion {
-    height: 0;
-    overflow: hidden;
-
-    .mat-cell {
-      padding-top: 0;
-      padding-bottom: 0;
-    }
-
-    &.collapsed .mat-cell {
+    &:last-of-type .mat-cell {
       border-bottom-width: 0;
     }
   }
@@ -165,6 +165,6 @@
   }
 
   .mat-checkbox-inner-container {
-    margin-left: 0; // Fix RTL checkbox margin
+    margin-left: 0; // Fix checkbox margin with RTL
   }
 }
