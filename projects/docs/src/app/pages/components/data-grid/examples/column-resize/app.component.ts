@@ -24,7 +24,7 @@ export class AppComponent {
       header: 'Gender',
       field: 'gender',
       width: '100px',
-      resizable: false
+      resizable: false,
     },
     {
       header: 'Mobile',
@@ -38,5 +38,5 @@ export class AppComponent {
     },
   ];
 
-  list = EXAMPLE_DATA;
+  list = [...EXAMPLE_DATA, ...EXAMPLE_DATA, ...EXAMPLE_DATA];
 }

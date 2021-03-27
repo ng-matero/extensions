@@ -1,1 +1,8 @@
-/** No CSS for this example */
+:host ::ng-deep .mtx-grid {
+  height: 256px;
+  padding-bottom: 57px;
+
+  .mtx-grid-main {
+    height: 100%;
+  }
+}
