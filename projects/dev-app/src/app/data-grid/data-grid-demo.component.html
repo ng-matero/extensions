@@ -9,9 +9,13 @@
 <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
 <mat-checkbox [(ngModel)]="rowStriped">Striped</mat-checkbox>
 <mat-checkbox [(ngModel)]="showSidebar">showSidebar</mat-checkbox>
+<mat-checkbox [(ngModel)]="showStatusbar">showStatusbar</mat-checkbox>
+<mat-checkbox [(ngModel)]="showPaginator">showPaginator</mat-checkbox>
+<mat-checkbox [(ngModel)]="loading">loading</mat-checkbox>
 
 <mtx-grid [data]="list" #grid
           [columns]="columns"
+          [loading]="loading"
           [columnResizable]="columnResizable"
           [multiSelectable]="multiSelectable"
           [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
@@ -30,8 +34,11 @@
           [showSummary]="showSummary"
           [summaryTemplate]="{'weight': summaryTpl}"
           [showToolbar]="true"
+          [toolbarTitle]="'123'"
+          [toolbarTemplate]="toolbarTpl"
           [columnHideableChecked]="'show'"
           (columnChange)="log($event)"
+          [showColumnMenuButton]="true"
           [showColumnMenuHeader]="true"
           [showColumnMenuFooter]="true"
           [columnMenuFooterTemplate]="menuFooterTpl"
@@ -39,12 +46,14 @@
           [showSidebar]="showSidebar"
           [sidebarTemplate]="sidebarTpl"
           [sortOnFront]="sortOnFront"
+          [showPaginator]="showPaginator"
           [pageOnFront]="pageOnFront"
           [pageSize]="1"
           [pageSizeOptions]="[1,5,10,50,100,500,1000]"
           [headerTemplate]="{operation: headerTpl}"
           [headerExtraTemplate]="{name: headerExtraTpl}"
-          [showStatusbar]="true">
+          [showStatusbar]="showStatusbar"
+          [statusbarTemplate]="statusbarTpl">
 </mtx-grid>
 
 <ng-template #expansionTpl let-row let-expanded="expanded">
@@ -94,12 +103,14 @@
 </ng-template>
 
 <ng-template #toolbarTpl>
+  <button>Toggle</button>
 </ng-template>
 
 <ng-template #noResultTpl>
 </ng-template>
 
 <ng-template #statusbarTpl>
+  <button>Toggle</button>
 </ng-template>
 
 <ng-template #paginationTpl>
@@ -167,7 +178,7 @@
           [data]="list3"
           [columns]="columns3"
           [length]="total3"
-          [loading]="isLoading"
+          [loading]="isLoading3"
           [rowSelectable]="true"
           [rowSelected]="rowSelected3"
           [showToolbar]="true"

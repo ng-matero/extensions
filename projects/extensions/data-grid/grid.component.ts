@@ -211,10 +211,6 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     return obj instanceof TemplateRef;
   }
 
-  _isObservable(data: any) {
-    return isObservable(data);
-  }
-
   _getColData(data: any[], colDef: MtxGridColumn) {
     return this._dataGridSrv.getColData(data, colDef);
   }

@@ -16,17 +16,11 @@
     padding-bottom: 57px;
 
     .mtx-grid-toolbar + .mtx-grid-main {
-      height: calc(100% - 53px);
+      height: calc(100% - 54px);
     }
 
     .mtx-grid-main {
       height: 100%;
-    }
-
-    .mat-paginator {
-      position: absolute;
-      width: 100%;
-      bottom: 0;
     }
   }
 }

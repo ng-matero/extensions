@@ -1,12 +1,16 @@
 <!-- Progress bar-->
-<mat-progress-bar class="mtx-grid-progress" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<div class="mtx-grid-progress">
+  <mat-progress-bar mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+</div>
 
 <!-- Toolbar -->
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
-  <div class="mtx-grid-toolbar-title" *ngIf="toolbarTitle">{{toolbarTitle}}</div>
-  <div class="mtx-grid-toolbar-template">
-    <ng-template [ngIf]="_isTemplateRef(toolbarTemplate)">
+  <div class="mtx-grid-toolbar-content">
+    <ng-template [ngIf]="_isTemplateRef(toolbarTemplate)" [ngIfElse]="defaultToolbarTemplate">
       <ng-template [ngTemplateOutlet]="toolbarTemplate"></ng-template>
+    </ng-template>
+    <ng-template #defaultToolbarTemplate>
+      <div class="mtx-grid-toolbar-title" *ngIf="toolbarTitle">{{toolbarTitle}}</div>
     </ng-template>
   </div>
   <div class="mtx-grid-toolbar-actions">
@@ -186,7 +190,7 @@
                 [attr.colspan]="displayedColumns.length">
               <div class="mtx-grid-expansion-detail"
                    [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
-                <ng-template [ngTemplateOutlet]="_isTemplateRef(expansionTemplate)"
+                <ng-template [ngTemplateOutlet]="expansionTemplate"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex, expanded: expansionRowStates[dataIndex].expanded }">
                 </ng-template>
               </div>
