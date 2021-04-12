@@ -1,12 +1,16 @@
 <!-- Progress bar-->
-<mat-progress-bar class="mtx-grid-progress" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<div class="mtx-grid-progress" *ngIf="loading">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
 
 <!-- Toolbar -->
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
-  <div class="mtx-grid-toolbar-title" *ngIf="toolbarTitle">{{toolbarTitle}}</div>
-  <div class="mtx-grid-toolbar-template">
-    <ng-template [ngIf]="toolbarTemplate">
+  <div class="mtx-grid-toolbar-content">
+    <ng-template [ngIf]="_isTemplateRef(toolbarTemplate)" [ngIfElse]="defaultToolbarTemplate">
       <ng-template [ngTemplateOutlet]="toolbarTemplate"></ng-template>
+    </ng-template>
+    <ng-template #defaultToolbarTemplate>
+      <div class="mtx-grid-toolbar-title" *ngIf="toolbarTitle">{{toolbarTitle}}</div>
     </ng-template>
   </div>
   <div class="mtx-grid-toolbar-actions">
@@ -370,7 +374,7 @@
 
     <!-- No result -->
     <div class="mtx-grid-no-result" *ngIf="_hasNoResult">
-      <ng-template [ngIf]="noResultTemplate" [ngIfElse]="defaultNoResultTpl">
+      <ng-template [ngIf]="_isTemplateRef(noResultTemplate)" [ngIfElse]="defaultNoResultTpl">
         <ng-template [ngTemplateOutlet]="noResultTemplate"></ng-template>
       </ng-template>
       <ng-template #defaultNoResultTpl>{{noResultText}}</ng-template>
@@ -379,7 +383,7 @@
 
   <!-- Tool sidebar -->
   <div class="mtx-grid-sidebar" *ngIf="showSidebar">
-    <ng-template [ngIf]="sidebarTemplate">
+    <ng-template [ngIf]="_isTemplateRef(sidebarTemplate)">
       <ng-template [ngTemplateOutlet]="sidebarTemplate"></ng-template>
     </ng-template>
   </div>

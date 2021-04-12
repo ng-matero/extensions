@@ -9,9 +9,12 @@
 <mat-checkbox [(ngModel)]="rowHover">Hover</mat-checkbox>
 <mat-checkbox [(ngModel)]="rowStriped">Striped</mat-checkbox>
 <mat-checkbox [(ngModel)]="showSidebar">showSidebar</mat-checkbox>
+<mat-checkbox [(ngModel)]="showPaginator">showPaginator</mat-checkbox>
+<mat-checkbox [(ngModel)]="loading">loading</mat-checkbox>
 
 <mtx-grid [data]="list" #grid
           [columns]="columns"
+          [loading]="loading"
           [columnResizable]="columnResizable"
           [multiSelectable]="multiSelectable"
           [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
@@ -28,10 +31,13 @@
           [expansionTemplate]="expansionTpl"
           (expansionChange)="log($event)"
           [showSummary]="showSummary"
-          [summaryTemplate]="{'weight': footerTpl}"
+          [summaryTemplate]="{'weight': summaryTpl}"
           [showToolbar]="true"
+          [toolbarTitle]="'123'"
+          [toolbarTemplate]="toolbarTpl"
           [columnHideableChecked]="'show'"
           (columnChange)="log($event)"
+          [showColumnMenuButton]="true"
           [showColumnMenuHeader]="true"
           [showColumnMenuFooter]="true"
           [columnMenuFooterTemplate]="menuFooterTpl"
@@ -39,6 +45,7 @@
           [showSidebar]="showSidebar"
           [sidebarTemplate]="sidebarTpl"
           [sortOnFront]="sortOnFront"
+          [showPaginator]="showPaginator"
           [pageOnFront]="pageOnFront"
           [pageSize]="1"
           [pageSizeOptions]="[1,5,10,50,100,500,1000]"
@@ -58,7 +65,7 @@
   <mat-icon>info</mat-icon>
 </ng-template>
 
-<ng-template #footerTpl let-data>
+<ng-template #summaryTpl let-data>
   <div>{{data | json}}</div>
 </ng-template>
 
@@ -92,6 +99,13 @@
   </mat-card>
 </ng-template>
 
+<ng-template #toolbarTpl>
+  <button>Toolbar</button>
+</ng-template>
+
+<ng-template #noResultTpl>
+</ng-template>
+
 <button (click)="updateCell()">Update Cell</button>
 <button (click)="updateList()">Update List</button>
 <button (click)="updateEmptyList()">Update Empty List</button>
@@ -99,7 +113,7 @@
 
 <mat-divider></mat-divider>
 
-<table mat-table columnResize [dataSource]="dataSource" class="mat-elevation-z2 example-table">
+<table mat-table columnResize [dataSource]="dataSource" class="example-table">
   <!-- Position Column -->
   <ng-container matColumnDef="position" sticky>
     <th mat-header-cell *matHeaderCellDef resizable [matResizableMaxWidthPx]="100"> No. </th>
@@ -152,7 +166,7 @@
           [data]="list3"
           [columns]="columns3"
           [length]="total3"
-          [loading]="isLoading"
+          [loading]="isLoading3"
           [rowSelectable]="true"
           [rowSelected]="rowSelected3"
           [showToolbar]="true"

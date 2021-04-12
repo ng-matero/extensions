@@ -40,6 +40,8 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   rowHover = false;
   rowStriped = false;
   showSidebar = false;
+  showPaginator = true;
+  loading = false;
 
   list = EXAMPLE_DATA;
   isNewList = false;
@@ -159,7 +161,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   list3 = [];
   total3 = 0;
   rowSelected3 = [];
-  isLoading = true;
+  isLoading3 = true;
   query = {
     q: 'user:nzbin',
     page: 0,
@@ -237,20 +239,20 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   }
 
   getRemoteData() {
-    this.isLoading = true;
+    this.isLoading3 = true;
     this.http
       .get('https://api.github.com/search/repositories', { params: this.params as any })
       .subscribe(
         (res: any) => {
           this.list3 = res.items;
           this.total3 = res.total_count;
-          this.isLoading = false;
+          this.isLoading3 = false;
         },
         () => {
-          this.isLoading = false;
+          this.isLoading3 = false;
         },
         () => {
-          this.isLoading = false;
+          this.isLoading3 = false;
         }
       );
   }
