@@ -1,12 +1,3 @@
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<span>some random text goes here to push it right so that we can test the styles</span>
 <button
   mat-raised-button
   color="primary"
@@ -22,7 +13,7 @@
 <mtx-popover
   #popover="mtxPopover"
   [xPosition]="'after'"
-  [yPosition]="'right'"
+  [yPosition]="'above'"
   [enterDelay]=""
   [leaveDelay]=""
   [arrowOffsetX]="28"
@@ -31,11 +22,37 @@
   [closeOnBackdropClick]="true"
   (closed)="log()"
 >
-  <mat-card style="max-width: 200px">
+  <mat-card style="max-width: 100px">
     <mat-card-content>
       A material design popover component created using Angular with the Angular CDK.
     </mat-card-content>
   </mat-card>
+</mtx-popover>
+
+<button
+  mat-raised-button
+  color="accent"
+  #popoverTrigger2="mtxPopoverTrigger"
+  [mtxPopoverTriggerFor]="popover2"
+  [mtxPopoverTriggerOn]="'hover'"
+>
+  Show Popover2
+</button>
+
+<mtx-popover
+  #popover2="mtxPopover"
+  [xPosition]="'center'"
+  [yPosition]="'right'"
+  [xOffset]="10"
+  [yOffset]="10"
+  [enterDelay]=""
+  [leaveDelay]=""
+  [overlapTrigger]="false"
+  [closeOnPanelClick]="false"
+>
+  <div style="max-width: 200px">
+    A material design popover component created using Angular with the Angular CDK.
+  </div>
 </mtx-popover>
 
 <mat-toolbar #target>popover target</mat-toolbar>
