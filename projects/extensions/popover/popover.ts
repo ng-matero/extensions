@@ -19,8 +19,8 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import { Directionality } from '@angular/cdk/bidi';
 
 import {
-  MtxPopoverPositionX,
-  MtxPopoverPositionY,
+  MtxPopoverPositionArrow,
+  MtxPopoverPosition,
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
 } from './popover-types';
@@ -41,8 +41,8 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   @HostBinding('attr.role') role = 'dialog';
 
   /** Settings for popover, view setters and getters for more detail */
-  private _xPosition: MtxPopoverPositionX = 'after';
-  private _yPosition: MtxPopoverPositionY = 'below';
+  private _xPosition: MtxPopoverPositionArrow = 'after';
+  private _yPosition: MtxPopoverPosition = 'below';
   private _triggerEvent: MtxPopoverTriggerEvent = 'hover';
   private _scrollStrategy: MtxPopoverScrollStrategy = 'reposition';
   private _enterDelay = 100;
@@ -85,7 +85,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   get xPosition() {
     return this._xPosition;
   }
-  set xPosition(value: MtxPopoverPositionX) {
+  set xPosition(value: MtxPopoverPositionArrow) {
     if (value !== 'before' && value !== 'after' && value !== 'center') {
       throwMtxPopoverInvalidPositionX();
     }
@@ -98,8 +98,8 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   get yPosition() {
     return this._yPosition;
   }
-  set yPosition(value: MtxPopoverPositionY) {
-    if (value !== 'above' && value !== 'below') {
+  set yPosition(value: MtxPopoverPosition) {
+    if (value !== 'above' && value !== 'below' && value !== 'left' && value !== 'right') {
       throwMtxPopoverInvalidPositionY();
     }
     this._yPosition = value;
@@ -330,18 +330,36 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   // TODO: If arrow left and right positioning is requested, see if flex direction can be used to work with order.
   /** Sets the current styles for the popover to allow for dynamically changing settings */
   setCurrentStyles() {
-    const left =
-      this.xPosition === 'after'
-        ? `${this.arrowOffsetX - this.arrowWidth / 2}px`
-        : this.xPosition === 'center'
-        ? `calc(50% - ${this.arrowWidth / 2}px)`
-        : '';
-    const right = this.xPosition === 'before' ? `${this.arrowOffsetX - this.arrowWidth / 2}px` : '';
+    if (this.yPosition === 'above' || this.yPosition === 'below') {
+      const left =
+        this.xPosition === 'after'
+          ? `${this.arrowOffsetX - this.arrowWidth / 2}px`
+          : this.xPosition === 'center'
+          ? `calc(50% - ${this.arrowWidth / 2}px)`
+          : '';
+      const right =
+        this.xPosition === 'before' ? `${this.arrowOffsetX - this.arrowWidth / 2}px` : '';
 
-    this.popoverArrowStyles = {
-      left: this._dir.value === 'ltr' ? left : right,
-      right: this._dir.value === 'ltr' ? right : left,
-    };
+      this.popoverArrowStyles = {
+        left: this._dir.value === 'ltr' ? left : right,
+        right: this._dir.value === 'ltr' ? right : left,
+      };
+    } else {
+      const left = this.yPosition === 'right' ? `-${this.arrowWidth / 2}px` : '';
+      const top =
+        this.xPosition === 'after'
+          ? `${this.arrowWidth / 2}px`
+          : this.xPosition === 'center'
+          ? `calc(50% - ${this.arrowWidth / 2}px)`
+          : '';
+      const bottom =
+        this.xPosition === 'before' ? `${this._arrowOffsetX - this.arrowWidth / 2}px` : '';
+      this.popoverArrowStyles = {
+        left: left,
+        top: top,
+        bottom: bottom,
+      };
+    }
   }
 
   /**
@@ -354,5 +372,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     this._classList['mtx-popover-after'] = posX === 'after';
     this._classList['mtx-popover-above'] = posY === 'above';
     this._classList['mtx-popover-below'] = posY === 'below';
+    this._classList['mtx-popover-left'] = posY === 'left';
+    this._classList['mtx-popover-right'] = posY === 'right';
   }
 }

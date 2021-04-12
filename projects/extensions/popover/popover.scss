@@ -13,9 +13,13 @@ $arrow-height: 8px;
     margin-bottom: $arrow-height + 2;
   }
 
-  // &.mtx-popover-after {}
+  &.mtx-popover-right {
+    margin-left: $arrow-height + 2;
+  }
 
-  // &.mtx-popover-before {}
+  &.mtx-popover-left {
+    margin-right: $arrow-height + 2;
+  }
 
   &.mtx-popover-overlap {
     margin: 0;
@@ -68,6 +72,32 @@ $arrow-height: 8px;
     &::after {
       top: 0;
       border-bottom-width: 0;
+    }
+  }
+}
+
+.mtx-popover-right {
+  .mtx-popover-direction-arrow {
+    &:before {
+      border: ($arrow-height - 1) solid transparent;
+    }
+    &::before,
+    &::after {
+      border-left-width: 0px;
+    }
+  }
+}
+
+.mtx-popover-left {
+  .mtx-popover-direction-arrow {
+    width: 0px;
+    right: 1px;
+    &::before,
+    &::after {
+      border-right-width: 0px;
+    }
+    &:before {
+      left: 1px;
     }
   }
 }

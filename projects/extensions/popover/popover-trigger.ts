@@ -23,6 +23,7 @@ import {
   VerticalConnectionPos,
   FlexibleConnectedPositionStrategy,
   ScrollStrategy,
+  ConnectedPosition,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 
@@ -31,8 +32,8 @@ import { takeUntil } from 'rxjs/operators';
 
 import { MtxPopoverPanel, MtxTarget } from './popover-interfaces';
 import {
-  MtxPopoverPositionX,
-  MtxPopoverPositionY,
+  MtxPopoverPositionArrow,
+  MtxPopoverPosition,
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
 } from './popover-types';
@@ -347,24 +348,37 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
    */
   private _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
     this._positionSubscription = position.positionChanges.subscribe(change => {
-      const posisionX: MtxPopoverPositionX =
-        change.connectionPair.overlayX === 'start'
-          ? 'after'
-          : change.connectionPair.overlayX === 'end'
-          ? 'before'
-          : 'center';
-      const posisionY: MtxPopoverPositionY =
-        change.connectionPair.overlayY === 'top' ? 'below' : 'above';
+      let positionY: MtxPopoverPosition = 'above';
+      let positionX: MtxPopoverPositionArrow = 'center';
+      if (change.connectionPair.originX === change.connectionPair.overlayX) {
+        positionY = change.connectionPair.overlayY === 'bottom' ? 'above' : 'below';
+        if (change.connectionPair.originX === 'start') {
+          positionX = 'after';
+        } else if (change.connectionPair.originX === 'center') {
+          positionX = 'center';
+        } else if (change.connectionPair.originX === 'end') {
+          positionX = 'before';
+        }
+      } else {
+        positionY = change.connectionPair.originX === 'start' ? 'left' : 'right';
+        if (change.connectionPair.originY === 'top') {
+          positionX = 'after';
+        } else if (change.connectionPair.originY === 'center') {
+          positionX = 'center';
+        } else if (change.connectionPair.originY === 'bottom') {
+          positionX = 'before';
+        }
+      }
 
       // required for ChangeDetectionStrategy.OnPush
       this._changeDetectorRef.markForCheck();
 
       this.popover.zone.run(() => {
-        this.popover.xPosition = posisionX;
-        this.popover.yPosition = posisionY;
+        this.popover.xPosition = positionX;
+        this.popover.yPosition = positionY;
         this.popover.setCurrentStyles();
 
-        this.popover.setPositionClasses(posisionX, posisionY);
+        this.popover.setPositionClasses(positionX, positionY);
       });
     });
   }
@@ -375,22 +389,6 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
    * @returns ConnectedPositionStrategy
    */
   private _getPosition(): FlexibleConnectedPositionStrategy {
-    const [originX, origin2ndX, origin3rdX]: HorizontalConnectionPos[] =
-      this.popover.xPosition === 'before'
-        ? ['end', 'start', 'center']
-        : this.popover.xPosition === 'after'
-        ? ['start', 'end', 'center']
-        : ['center', 'start', 'end'];
-
-    const [overlayY, overlayFallbackY]: VerticalConnectionPos[] =
-      this.popover.yPosition === 'above' ? ['bottom', 'top'] : ['top', 'bottom'];
-
-    /** Reverse overlayY and fallbackOverlayY when overlapTrigger is false */
-    const originY = this.popover.overlapTrigger ? overlayY : overlayFallbackY;
-    const originFallbackY = this.popover.overlapTrigger ? overlayFallbackY : overlayY;
-
-    const overlayX = originX;
-
     const offsetX =
       this.popover.xOffset && !isNaN(Number(this.popover.xOffset))
         ? Number(this.popover.xOffset)
@@ -399,6 +397,68 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       this.popover.yOffset && !isNaN(Number(this.popover.yOffset))
         ? Number(this.popover.yOffset)
         : 0;
+
+    let overlayY: VerticalConnectionPos = 'top';
+    let originY: VerticalConnectionPos = 'top';
+    let originX: HorizontalConnectionPos = 'center';
+    let overlayX: HorizontalConnectionPos = 'center';
+    switch (this.popover.yPosition) {
+      case 'above':
+        overlayY = 'bottom';
+        originY = 'top';
+        if (this.popover.xPosition === 'after') {
+          overlayX = 'start';
+          originX = 'start';
+        } else if (this.popover.xPosition === 'center') {
+          overlayX = 'center';
+          originX = 'center';
+        } else if (this.popover.xPosition === 'before') {
+          overlayX = 'end';
+          originX = 'end';
+        }
+        break;
+      case 'below':
+        overlayY = 'top';
+        originY = 'bottom';
+        if (this.popover.xPosition === 'after') {
+          overlayX = 'end';
+          originX = 'end';
+        } else if (this.popover.xPosition === 'center') {
+          overlayX = 'center';
+          originX = 'center';
+        } else if (this.popover.xPosition === 'before') {
+          overlayX = 'start';
+          originX = 'start';
+        }
+        break;
+      case 'left':
+        originX = 'start';
+        overlayX = 'end';
+        if (this.popover.xPosition === 'after') {
+          overlayY = 'top';
+          originY = 'top';
+        } else if (this.popover.xPosition === 'center') {
+          overlayY = 'center';
+          originY = 'center';
+        } else if (this.popover.xPosition === 'before') {
+          overlayY = 'bottom';
+          originY = 'bottom';
+        }
+        break;
+      case 'right':
+        originX = 'end';
+        overlayX = 'start';
+        if (this.popover.xPosition === 'after') {
+          overlayY = 'top';
+          originY = 'top';
+        } else if (this.popover.xPosition === 'center') {
+          overlayY = 'center';
+          originY = 'center';
+        } else if (this.popover.xPosition === 'before') {
+          overlayY = 'bottom';
+          originY = 'bottom';
+        }
+    }
 
     /**
      * For overriding position element, when mtxPopoverTargetAt has a valid element reference.
@@ -411,56 +471,115 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       element = this.targetElement._elementRef;
     }
 
+    let positions: ConnectedPosition[] = [
+      {
+        originX: originX,
+        originY: originY,
+        overlayX: overlayX,
+        overlayY: overlayY,
+        offsetY,
+      },
+    ];
+
+    positions = positions.concat(this._alternates(positions[0]));
+
     return this._overlay
       .position()
       .flexibleConnectedTo(element)
       .withLockedPosition(true)
-      .withPositions([
-        {
-          originX,
-          originY,
-          overlayX,
-          overlayY,
-          offsetY,
-        },
-        {
-          originX: origin2ndX,
-          originY,
-          overlayX: origin2ndX,
-          overlayY,
-          offsetY,
-        },
-        {
-          originX,
-          originY: originFallbackY,
-          overlayX,
-          overlayY: overlayFallbackY,
-          offsetY: -offsetY,
-        },
-        {
-          originX: origin2ndX,
-          originY: originFallbackY,
-          overlayX: origin2ndX,
-          overlayY: overlayFallbackY,
-          offsetY: -offsetY,
-        },
-        {
-          originX: origin3rdX,
-          originY,
-          overlayX: origin3rdX,
-          overlayY,
-          offsetY,
-        },
-        {
-          originX: origin3rdX,
-          originY: originFallbackY,
-          overlayX: origin3rdX,
-          overlayY: overlayFallbackY,
-          offsetY: -offsetY,
-        },
-      ])
+      .withPositions(positions)
       .withDefaultOffsetX(offsetX)
       .withDefaultOffsetY(offsetY);
+  }
+
+  private _alternates(position: ConnectedPosition) {
+    const alternates: ConnectedPosition[] = [];
+    switch (this.popover.yPosition) {
+      case 'left':
+      case 'right':
+        // First switch sides
+        alternates.push({
+          originX: position.overlayX,
+          originY: position.originY,
+          overlayX: position.originX,
+          overlayY: position.overlayY,
+          offsetY: position.offsetY,
+        });
+        // Next change arrow/overlay location
+        alternates.push({
+          originX: position.originX,
+          originY: 'top',
+          overlayX: position.overlayX,
+          overlayY: 'top',
+          offsetY: position.offsetY,
+        });
+        alternates.push({
+          originX: position.originX,
+          originY: 'bottom',
+          overlayX: position.overlayX,
+          overlayY: 'bottom',
+          offsetY: position.offsetY,
+        });
+        // Change sides and arrow location
+        alternates.push({
+          originX: position.overlayX,
+          originY: 'top',
+          overlayX: position.originX,
+          overlayY: 'top',
+          offsetY: position.offsetY,
+        });
+        alternates.push({
+          originX: position.overlayX,
+          originY: 'bottom',
+          overlayX: position.originX,
+          overlayY: 'bottom',
+          offsetY: position.offsetY,
+        });
+        break;
+      case 'above':
+      case 'below':
+        // First change sides
+        alternates.push({
+          originX: position.originX,
+          originY: position.overlayY,
+          overlayX: position.overlayX,
+          overlayY: position.originY,
+          offsetY: position.offsetY,
+        });
+        // Next change arrow/overlay location
+        alternates.push({
+          originX: 'start',
+          originY: position.originY,
+          overlayX: 'start',
+          overlayY: position.overlayY,
+          offsetY: position.offsetY,
+        });
+        alternates.push({
+          originX: 'end',
+          originY: position.originY,
+          overlayX: 'end',
+          overlayY: position.overlayY,
+          offsetY: position.offsetY,
+        });
+        // Change sides and arrow location
+        alternates.push({
+          originX: 'start',
+          originY: position.overlayY,
+          overlayX: 'start',
+          overlayY: position.originY,
+          offsetY: position.offsetY,
+        });
+        alternates.push({
+          originX: 'end',
+          originY: position.overlayY,
+          overlayX: 'end',
+          overlayY: position.originY,
+          offsetY: position.offsetY,
+        });
+        break;
+    }
+
+    return alternates;
   }
 
   private _cleanUpSubscriptions(): void {
