@@ -421,14 +421,14 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
         overlayY = 'top';
         originY = 'bottom';
         if (this.popover.xPosition === 'after') {
-          overlayX = 'end';
-          originX = 'end';
+          overlayX = 'start';
+          originX = 'start';
         } else if (this.popover.xPosition === 'center') {
           overlayX = 'center';
           originX = 'center';
         } else if (this.popover.xPosition === 'before') {
-          overlayX = 'start';
-          originX = 'start';
+          overlayX = 'end';
+          originX = 'end';
         }
         break;
       case 'left':

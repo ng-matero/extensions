@@ -353,7 +353,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
           ? `calc(50% - ${this.arrowWidth / 2}px)`
           : '';
       const bottom =
-        this.xPosition === 'before' ? `${this._arrowOffsetX - this.arrowWidth / 2}px` : '';
+        this.xPosition === 'before' ? `${10 + this._arrowOffsetX - this.arrowWidth / 2}px` : '';
       this.popoverArrowStyles = {
         left: left,
         top: top,
