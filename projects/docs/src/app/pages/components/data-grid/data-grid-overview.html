@@ -3,11 +3,6 @@
   row selectable, multiple row selectable, row expandable, column hiding, column moving and so on.
 </p>
 
-<p>
-  <a mat-raised-button color="accent"
-     href="https://nzbin.gitbook.io/material-extensions/data-grid" target="_blank">API Reference</a>
-</p>
-
 <ng-container *ngIf="route.data | async as data">
   <ng-container *ngFor="let exampleData of data.examples">
     <doc-heading [text]="exampleData.title"></doc-heading>

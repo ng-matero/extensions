@@ -1,22 +1,22 @@
 # Data Grid
 
-### API reference for Material Extensions Data Grid
+## API reference for Material Extensions Data Grid
 
 `import { MtxGridModule } from '@ng-matero/extensions/data-grid';`
 
-## Directives
+### Directives
 
-### MtxGrid
+#### `MtxGrid`
 
-Selector: `mtx-grid`
+Selector: `[mtx-grid]`
 
 Exported as: `mtxGrid`
 
-#### **Properties**
+##### Properties
 
-##### Basic
+###### Basic
 
-| **Name** | Description |
+| Name | Description |
 | :--- | :--- |
 | @Input\(\) `columns: MtxGridColumn[]` | The grid columns defination. |
 | @Input\(\) `data: any[]` | The grid data source. |
@@ -24,9 +24,9 @@ Exported as: `mtxGrid`
 | @Input\(\) `loading: boolean` | Whether the table loading is ended. Defaulted to **false**. |
 | @Input\(\)`trackBy: TrackByFunction<any>` | Tracking function that will be used to check the differences in data changes. |
 
-##### Page
+###### Page
 
-| **Name** | Description |
+| Name | Description |
 | :--- | :--- |
 | @Input\(\)`pageOnFront: boolean` | Whether paging the data just on front end. Defaulted to **true**. |
 | @Input\(\)`showPaginator: boolean` | Whether show the paginator. Defaulted to **true**. |
@@ -38,9 +38,9 @@ Exported as: `mtxGrid`
 | @Input\(\)`hidePageSize: boolean` | Whether hide the pagesize. Defaulted to **false**. |
 | @Output\(\)`page: EventEmitter<PageEvent>` | Event emitted when the paginator changes the page size or page index. |
 
-##### Sort
+###### Sort
 
-| **Name** | Description |
+| Name | Description |
 | :--- | :--- |
 | @Input\(\) `sortOnFront: boolean` | Whether sort data just on front end. Defaulted to **true**. |
 | @Input\(\) `sortActive: string` | The id of the most recently sorted MatSortable. |
@@ -50,17 +50,17 @@ Exported as: `mtxGrid`
 | @Input\(\) `sortStart: 'asc' \| 'desc'` | The direction to set when an MatSortable is initially sorted. May be overriden by the column's sort definition. Defaulted to asc. |
 | @Output\(\) `sortChange: EventEmitter<sort>` | Event emitted when the user changes either the active sort or sort direction. |
 
-##### Expansion
+###### Expansion
 
-| **Name** | Description |
+| Name | Description |
 | :--- | :--- |
 | @Input\(\) `expandable: boolean` | Whether the row can be expanded. Defaulted to **false**. |
 | @Input\(\) `expansionTemplate: TemplateRef<any>` | The template of expandable row. |
 | @Output\(\) `expansionChange: EventEmitter<any>` | Event emitted when the user toggle the expandable row. |
 
-##### Selection
+###### Selection
 
-| **Name** | Description |
+| Name | Description |
 | :--- | :--- |
 | @Input\(\) `multiSelectable: boolean` | Whether the user can selecte multiple row or cell. Defaulted to **true**. |
 | @Input\(\) `rowSelectable: boolean` | Whether the row can be selectable. Defaulted to **false**. |
@@ -71,17 +71,17 @@ Exported as: `mtxGrid`
 | @Input\(\) `cellSelectable: boolean` | Whether the cell can be selectable. Defaulted to **true**. |
 | @Output\(\) `cellSelectionChange: EventEmitter<any>` | Event emitted when the cell be selected. |
 
-##### Toolbar
+###### Toolbar
 
-| **Name** | Description |
+| Name | Description |
 | :--- | :--- |
 | @Input\(\) `showToolbar: boolean` | Whether show the grid toolbar. Defaulted to **false**. |
 | @Input\(\) `toolbarTitle: string` | The toolbar title. Defaulted to **''**. |
 | @Input\(\) `toolbarTemplate: TemplateRef<any>` | The toolbar template. |
 
-##### Column menu
+###### Column menu
 
-| **Name** | Description |
+| Name | Description |
 | :--- | :--- |
 | @Input\(\) `columnHideable: boolean` | Whether the column can be hiding. Defaulted to **true**. |
 | @Input\(\) `columnHideableChecked: 'show' \| 'hide'` | Hide or show when column hiding checkbox be checked. Defaulted to **'show'**. |
@@ -100,9 +100,9 @@ Exported as: `mtxGrid`
 | @Input\(\) `columnMenuButtonClass: string` | The column menu button class. Defaulted to **''**. |
 | @Input\(\) `columnMenuButtonIcon: string` | The column menu button icon. Defaulted to **''**. |
 
-##### Template
+###### Template
 
-| **Name** | Description |
+| Name | Description |
 | :--- | :--- |
 | @Input\(\) `noResultText: string` | The no result text. Defaulted to **'No records found'**. |
 | @Input\(\) `noResultTemplate: TemplateRef<any>` | The no result template. |
@@ -111,17 +111,17 @@ Exported as: `mtxGrid`
 | @Input\(\) `showSummary: boolean` | Whether show summary. Defaulted to **false** |
 | @Input\(\) `summaryTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The summary template. |
 
-##### Row
+###### Row
 
-| **Name** | Description |
+| Name | Description |
 | :--- | :--- |
 | @Input\(\) `rowHover = false` | Whether use hover style. |
 | @Input\(\) `rowStriped = false` | Whether use striped style. |
 | @Output\(\) `rowClick: EventEmitter<any>;` | Row click event. |
 
-## Interfaces
+### Interfaces
 
-### Column
+#### Column
 
 ```typescript
 export interface MtxGridColumn {
@@ -144,12 +144,11 @@ export interface MtxGridColumn {
   cellTemplate?: TemplateRef<any> | null;
   showExpand?: boolean;
   description?: string;
-  i18n?: string;
   summary?: ((colData: any, colDef?: any) => void) | string;
 }
 ```
 
-### Column Type
+#### Column Type
 
 ```typescript
 export declare type MtxGridColumnType =
@@ -164,7 +163,7 @@ export declare type MtxGridColumnType =
   | 'date';
 ```
 
-### Column Type Parameter
+#### Column Type Parameter
 
 ```typescript
 export interface MtxGridColumnTypeParameter {
@@ -177,7 +176,7 @@ export interface MtxGridColumnTypeParameter {
 }
 ```
 
-### Column Sort Properties
+#### Column Sort Properties
 
 ```typescript
 export interface MtxGridColumnSortProp {
@@ -188,7 +187,7 @@ export interface MtxGridColumnSortProp {
 }
 ```
 
-### Column Button
+#### Column Button
 
 ```typescript
 export interface MtxGridColumnButton {
@@ -212,18 +211,21 @@ export interface MtxGridColumnButton {
 }
 ```
 
-### Column Tag
+#### Column Tag
 
 ```typescript
 export interface MtxGridColumnTag {
+  [key: number]: MtxGridColumnTagValue;
+  [key: string]: MtxGridColumnTagValue;
 }
+
 export interface MtxGridColumnTagValue {
   text?: string;
   color?: string;
 }
 ```
 
-### Row Selection Formatter
+#### Row Selection Formatter
 
 ```typescript
 export interface MtxGridRowSelectionFormatter {

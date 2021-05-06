@@ -1,18 +1,18 @@
 # Progress
 
-### API reference for Material Extensions Progress
+## API reference for Material Extensions Progress
 
 `import { MtxProgressModule } from '@ng-matero/extensions/progress';`
 
-## Directives
+### Directives
 
-### MtxProgress
+#### `MtxProgress`
 
-Selector: `mtx-progress`
+Selector: `[mtx-progress]`
 
 Exported as: `mtxProgress`
 
-#### **Properties**
+##### Properties
 
 | **Name** | Description |
 | :--- | :--- |

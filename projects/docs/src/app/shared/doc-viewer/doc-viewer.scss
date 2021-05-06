@@ -1,4 +1,40 @@
 .docs-markdown {
+  h1,
+  h2 {
+    font-weight: 400;
+  }
+
+  h3 {
+    margin: 40px 0 20px;
+    padding-bottom: 3px;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 32px;
+    border-bottom: 1px solid rgba(0, 0, 0, .12);
+  }
+
+  h4 {
+    display: block;
+    margin-top: 28px;
+    margin-bottom: 16px;
+    font-weight: 700;
+    font-size: 20px;
+    background: none;
+
+    code {
+      padding: 0;
+      background: none;
+    }
+  }
+
+  h5 {
+    font-size: 15px;
+  }
+
+  h6 {
+    font-size: 13px;
+  }
+
   table {
     width: 100%;
     margin: 0 0 32px;
@@ -11,7 +47,7 @@
   th {
     max-width: 100px;
     padding: 13px 16px;
-    background: #f5f5f5;
+    background: rgba(0, 0, 0, .025);
     font-weight: 400;
     text-align: left;
   }

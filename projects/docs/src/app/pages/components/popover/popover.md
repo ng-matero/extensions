@@ -4,15 +4,15 @@
 
 `import { MtxPopoverModule } from '@ng-matero/extensions/popover';`
 
-## Directives
+### Directives
 
-### MtxPopover
+#### `MtxPopover`
 
 Selector: `[mtx-popover]`
 
 Exported as: `mtxPopover`
 
-#### **Properties**
+##### Properties
 
 | Name | Description |
 | :--- | :--- |
@@ -28,13 +28,13 @@ Exported as: `mtxPopover`
 | @Input\(\) `focusTrapEnabled: boolean` | Whether the popover should focus trap. Defaults to `true` |
 | @Input\(\) `focusTrapAutoCaptureEnabled: boolean` | Whether the popover should focus trap auto capture focus. Defaults to `true` |
 
-### MtxPopoverTrigger
+#### MtxPopoverTrigger
 
 Selector: `[mtxPopoverTriggerFor]`
 
 Exported as: `mtxPopoverTrigger`
 
-#### **Properties**
+##### Properties
 
 | Name | Description |
 | :--- | :--- |

@@ -4,7 +4,7 @@
 
 `import { MtxSelectModule } from '@ng-matero/extensions/select';`
 
-## API
+## APIs
 
 [ng-select](https://github.com/ng-select/ng-select#api)
 

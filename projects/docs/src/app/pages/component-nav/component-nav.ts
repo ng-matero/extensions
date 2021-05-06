@@ -30,14 +30,14 @@ export const COMPONENTS_MENU = [
         summary: 'A powerful grid for material table.',
       },
       {
-        id: 'loader',
-        name: 'Loader',
-        summary: 'An easier loading component wrap with progress bar and spinner.',
-      },
-      {
         id: 'dialog',
         name: 'Dialog',
         summary: 'A configurable modal to show alert and confirmation.',
+      },
+      {
+        id: 'loader',
+        name: 'Loader',
+        summary: 'An easier loading component wrap with progress bar and spinner.',
       },
       {
         id: 'popover',

@@ -1,14 +1,14 @@
 # Dialog
 
-### API reference for Material Extensions Dialog
+## API reference for Material Extensions Dialog
 
 `import { MtxDialogModule } from '@ng-matero/extensions/dialog';`
 
-## Services
+### Services
 
-### MtxDialog
+#### `MtxDialog`
 
-#### **Methods**
+##### Methods
 
 `alert(title: string, onOk = () => {}): void`
 
@@ -29,25 +29,29 @@
 
 `originalOpen(componentOrTemplateRef: ComponentType | TemplateRef = MtxDialogComponent, config: any)`
 
-## Interfaces
+### Interfaces
 
-### Dialog Data
+#### Dialog Data
 
 ```typescript
 export interface MtxDialogData extends MatDialogConfig {
-  title?: string;
-  description?: string;
+  title?: string | Observable<string>;
+  description?: string | Observable<string>;
   buttons?: MtxDialogBtns[];
+  showCloseIcon?: boolean;
 }
 ```
 
-### Dialog Button
+#### Dialog Button
 
 ```typescript
 export interface MtxDialogBtns {
-  type?: '' | 'primary' | 'accent' | 'warn';
-  text: string;
-  onClick: () => void;
+  type?: '' | 'raised' | 'stroked' | 'flat';
+  color?: '' | 'primary' | 'accent' | 'warn';
+  class?: string;
+  focusInitial?: boolean;
+  text: string | Observable<string>;
+  onClick?: () => void;
 }
 ```
 

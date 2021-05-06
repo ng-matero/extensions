@@ -1,18 +1,18 @@
 # loader
 
-### API reference for Material Extensions Loader
+## API reference for Material Extensions Loader
 
 `import { MtxLoaderModule } from '@ng-matero/extensions/loader';`
 
-## Directives
+### Directives
 
-### MtxLoader
+#### `MtxLoader`
 
-Selector: `mtx-loader`
+Selector: `[mtx-loader]`
 
 Exported as: `mtxLoader`
 
-#### **Properties**
+##### Properties
 
 | Name | Description |
 | :--- | :--- |
