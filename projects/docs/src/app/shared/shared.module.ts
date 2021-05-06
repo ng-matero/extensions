@@ -22,6 +22,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { CopierService } from './copier/copier.service';
 import { NavigationFocus } from './navigation-focus/navigation-focus';
 import { TableOfContents } from './table-of-contents/table-of-contents';
+import { DocViewer } from './doc-viewer/doc-viewer';
 
 @NgModule({
   imports: [
@@ -55,6 +56,7 @@ import { TableOfContents } from './table-of-contents/table-of-contents';
     HeaderLinkComponent,
     DocHeadingComponent,
     ExampleViewerComponent,
+    DocViewer,
     NavbarComponent,
     NavigationFocus,
     TableOfContents,
@@ -63,6 +65,7 @@ import { TableOfContents } from './table-of-contents/table-of-contents';
     HeaderLinkComponent,
     DocHeadingComponent,
     ExampleViewerComponent,
+    DocViewer,
     NavbarComponent,
     NavigationFocus,
     TableOfContents,

@@ -73,6 +73,9 @@ export class CheckboxGroupApiComponent {
         path: 'api',
         component: CheckboxGroupApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./checkbox-group.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

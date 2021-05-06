@@ -43,6 +43,9 @@ export class LoaderApiComponent {
         path: 'api',
         component: LoaderApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./loader.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

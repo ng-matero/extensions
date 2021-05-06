@@ -46,6 +46,9 @@ export class ProgressApiComponent {
         path: 'api',
         component: ProgressApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./progress.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

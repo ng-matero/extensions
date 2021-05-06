@@ -42,6 +42,9 @@ export class ButtonApiComponent {
         path: 'api',
         component: ButtonApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./button.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

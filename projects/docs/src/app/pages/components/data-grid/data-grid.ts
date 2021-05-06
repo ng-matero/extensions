@@ -147,6 +147,9 @@ export class DataGridApiComponent {
         path: 'api',
         component: DataGridApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./data-grid.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

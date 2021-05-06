@@ -39,6 +39,9 @@ export class ColorPickerApiComponent {
         path: 'api',
         component: ColorPickerApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./color-picker.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

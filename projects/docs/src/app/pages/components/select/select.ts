@@ -58,6 +58,9 @@ export class SelectApiComponent {
         path: 'api',
         component: SelectApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./select.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),
