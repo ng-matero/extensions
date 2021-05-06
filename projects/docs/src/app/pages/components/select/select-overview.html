@@ -1,10 +1,11 @@
 <p>
   <code>mtx-select</code> is a Material form field wrapper of <code>ng-select</code>.
-  <a href="https://ng-select.github.io/ng-select/" target="_blank">Ng-Select Demos</a>
+  <a href="https://ng-select.github.io/ng-select/" target="_blank">View ng-select demos</a>
 </p>
-<p>
-  <font color="red">Warning:</font> If you use <code>mtx-select</code>, you shouldn't import the <code>ng-select</code> styles.
-</p>
+
+<mtx-alert type="warning">
+  If you use <code>mtx-select</code>, you shouldn't import the <code>ng-select</code> styles.
+</mtx-alert>
 
 <ng-container *ngIf="route.data | async as data">
   <ng-container *ngFor="let exampleData of data.examples">

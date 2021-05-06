@@ -60,8 +60,13 @@
   }
 
   pre {
-    margin: 0 0 32px;
-    border-radius: 2px;
-    box-shadow: 0 2px 2px rgb(0 0 0 / 24%), 0 0 2px rgb(0 0 0 / 12%);
+    display: block;
+    margin: 16px auto;
+    overflow-x: auto;
+    padding: 20px;
+    border-radius: 5px;
+    white-space: pre-wrap;
+    background: rgba(0, 0, 0, .01);
+    border: .5px solid rgba(0, 0, 0, .2);
   }
 }

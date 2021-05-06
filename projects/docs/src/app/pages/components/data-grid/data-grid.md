@@ -23,6 +23,7 @@ Exported as: `mtxGrid`
 | @Input\(\) `length: number` | The length of the total number of data. Defaulted to **`0`**. |
 | @Input\(\) `loading: boolean` | Whether the table loading is ended. Defaulted to **`false`**. |
 | @Input\(\) `trackBy: TrackByFunction<any>` | Tracking function that will be used to check the differences in data changes. |
+| @Input\(\) `columnResizable: boolean` | Whether the column can be resized. Defaulted to **`false`**. |
 
 ###### Page
 
@@ -37,6 +38,7 @@ Exported as: `mtxGrid`
 | @Input\(\) `pageSizeOptions: number[]` | The set of provided page size options to display to the user. By default set to **`[10, 50, 100]`** |
 | @Input\(\) `hidePageSize: boolean` | Whether hide the pagesize. Defaulted to **`false`**. |
 | @Output\(\) `page: EventEmitter<PageEvent>` | Event emitted when the paginator changes the page size or page index. |
+| @Input\(\) `paginationTemplate: TemplateRef<any>` | The pagination template. |
 
 ###### Sort
 
@@ -67,6 +69,7 @@ Exported as: `mtxGrid`
 | @Input\(\) `rowSelected: any[]` | The row selected items default. Defaulted to **`[]`**. |
 | @Input\(\) `hideRowSelectionCheckbox: boolean` | Whether hide the row selection checkbox. Defaulted to **`false`**. |
 | @Input\(\) `rowSelectionFormatter: MtxGridRowSelectionFormatter` | The row selection formatter to set disabled and checkbox hiding. |
+| @Output\(\)`rowClassFormatter: MtxGridRowClassFormatter` | The row class formatter to set class. |
 | @Output\(\)`rowSelectionChange: EventEmitter<any>` | Event emitted when the row be selected. |
 | @Input\(\) `cellSelectable: boolean` | Whether the cell can be selectable. Defaulted to **`true`**. |
 | @Output\(\) `cellSelectionChange: EventEmitter<any>` | Event emitted when the cell be selected. |
@@ -86,6 +89,7 @@ Exported as: `mtxGrid`
 | @Input\(\) `columnHideable: boolean` | Whether the column can be hiding. Defaulted to **`true`**. |
 | @Input\(\) `columnHideableChecked: 'show' \| 'hide'` | Hide or show when column hiding checkbox be checked. Defaulted to **`'show'`**. |
 | @Input\(\) `columnMovable: boolean` | Whether the column can be moving. Defaulted to **`true`**. |
+| @Input\(\) `columnPinnable: boolean` | Whether the column can be fixed. Defaulted to **`true`**. |
 | @Output\(\) `columnChange: EventEmitter<string[]>` | Event emitted when the column be hided or be resorted. |
 | @Input\(\) `showColumnMenuHeader: boolean` | Whether show header of column menu. Defaulted to **`false`**. |
 | @Input\(\) `columnMenuHeaderText: string` | The header text of column menu. Defaulted to **`'Columns Header'`** |
@@ -100,24 +104,49 @@ Exported as: `mtxGrid`
 | @Input\(\) `columnMenuButtonClass: string` | The column menu button class. Defaulted to **`''`**. |
 | @Input\(\) `columnMenuButtonIcon: string` | The column menu button icon. Defaulted to **`''`**. |
 
-###### Template
+###### Row
+
+| Name | Description |
+| :--- | :--- |
+| @Input\(\) `rowHover: boolean` | Whether use hover style. Defaulted to **`false`** |
+| @Input\(\) `rowStriped: boolean` | Whether use striped style. Defaulted to **`false`** |
+| @Output\(\) `rowClick: EventEmitter<any>;` | Row click event. |
+
+###### Templates
+
+| Name | Description |
+| :--- | :--- |
+| @Input\(\) `headerTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid header cell template. |
+| @Input\(\) `headerExtraTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid header cell template exclude sort. |
+| @Input\(\) `cellTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid body cell template. |
+
+###### Summary
+
+| Name | Description |
+| :--- | :--- |
+| @Input\(\) `showSummary: boolean` | Whether show summary. Defaulted to **`false`** |
+| @Input\(\) `summaryTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The summary template. |
+
+###### No result
 
 | Name | Description |
 | :--- | :--- |
 | @Input\(\) `noResultText: string` | The no result text. Defaulted to **`'No records found'`**. |
 | @Input\(\) `noResultTemplate: TemplateRef<any>` | The no result template. |
-| @Input\(\) `headerTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid header cell template. |
-| @Input\(\) `cellTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid body cell template. |
-| @Input\(\) `showSummary: boolean` | Whether show summary. Defaulted to **`false`** |
-| @Input\(\) `summaryTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The summary template. |
 
-###### Row
+###### Sidebar
 
 | Name | Description |
 | :--- | :--- |
-| @Input\(\) `rowHover = false` | Whether use hover style. |
-| @Input\(\) `rowStriped = false` | Whether use striped style. |
-| @Output\(\) `rowClick: EventEmitter<any>;` | Row click event. |
+| @Input\(\) `showSidebar: boolean` | Whether show sidebar. Defaulted to **`false`** |
+| @Input\(\) `sidebarTemplate: TemplateRef<any>` | The sidebar template. |
+
+###### Status bar
+
+| Name | Description |
+| :--- | :--- |
+| @Input\(\) `showStatusbar: boolean` | Whether show status bar. Defaulted to **`false`** |
+| @Input\(\) `statusbarTemplate: TemplateRef<any>` | The status bar template. |
 
 ### Interfaces
 
@@ -231,6 +260,14 @@ export interface MtxGridColumnTagValue {
 export interface MtxGridRowSelectionFormatter {
   disabled?: (rowData: any) => boolean;
   hideCheckbox?: (rowData: any) => boolean;
+}
+```
+
+#### Row class formatter
+
+```typescript
+export interface MtxGridRowClassFormatter {
+  [className: string]: (rowData: any, index?: number) => boolean;
 }
 ```
 
