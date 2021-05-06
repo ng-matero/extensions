@@ -4,7 +4,7 @@
 
 `import { MtxSplitModule } from '@ng-matero/extensions/split-pane';`
 
-## APIs
+### APIs
 
 [angular-split](https://angular-split.github.io/#/documentation)
 

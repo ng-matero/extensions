@@ -14,7 +14,7 @@ Exported as: `mtxColorPicker`
 
 ##### Properties
 
-The color picker component is just like a `matInput`
+The color picker component is just like a `matInput`.
 
 | Name | Description |
 | :--- | :--- |
