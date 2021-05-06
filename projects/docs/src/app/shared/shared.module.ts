@@ -17,8 +17,8 @@ import {
 
 import { HeaderLinkComponent } from './doc-heading/header-link';
 import { DocHeadingComponent } from './doc-heading/doc-heading';
-import { ExampleViewerComponent } from './example-viewer/example-viewer.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { ExampleViewer } from './example-viewer/example-viewer';
+import { Navbar } from './navbar/navbar';
 import { CopierService } from './copier/copier.service';
 import { NavigationFocus } from './navigation-focus/navigation-focus';
 import { TableOfContents } from './table-of-contents/table-of-contents';
@@ -55,18 +55,18 @@ import { DocViewer } from './doc-viewer/doc-viewer';
 
     HeaderLinkComponent,
     DocHeadingComponent,
-    ExampleViewerComponent,
+    ExampleViewer,
     DocViewer,
-    NavbarComponent,
+    Navbar,
     NavigationFocus,
     TableOfContents,
   ],
   declarations: [
     HeaderLinkComponent,
     DocHeadingComponent,
-    ExampleViewerComponent,
+    ExampleViewer,
     DocViewer,
-    NavbarComponent,
+    Navbar,
     NavigationFocus,
     TableOfContents,
   ],

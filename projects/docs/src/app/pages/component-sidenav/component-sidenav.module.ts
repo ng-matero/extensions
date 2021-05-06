@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared';
 
-import { ComponentSidenav } from './component-sidenav.component';
+import { ComponentSidenav } from './component-sidenav';
 import { ComponentCategoryList } from '../component-category-list/component-category-list';
 import { ComponentNav } from '../component-nav/component-nav';
 import { ComponentPageHeader } from '../component-page-header/component-page-header';
