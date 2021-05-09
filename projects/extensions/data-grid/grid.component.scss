@@ -62,11 +62,13 @@
         padding-bottom: 0;
       }
 
+      &.collapsed,
       &.collapsed .mat-cell {
         border-bottom-width: 0;
       }
     }
 
+    &:last-of-type,
     &:last-of-type .mat-cell {
       border-bottom-width: 0;
     }

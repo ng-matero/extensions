@@ -204,7 +204,7 @@
         </ng-container>
       </table>
 
-      <!-- TODO: Use flexbox-based mat-table -->
+      <!-- Use flexbox-based mat-table -->
       <mat-table *ngIf="columnResizable"
                  columnResize
                  [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
@@ -245,7 +245,7 @@
             <mat-header-cell *matHeaderCellDef
                              [class]="col.class"
                              [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
-                             [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}"
+                             [ngStyle]="{'left': col.left, 'right': col.right}"
                              [resizable]="col.resizable"
                              [matResizableMinWidthPx]="col.minWidth"
                              [matResizableMaxWidthPx]="col.maxWidth">
@@ -283,7 +283,7 @@
             <mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
                       [class]="col.class"
                       [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
-                      [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}"
+                      [ngStyle]="{'left': col.left, 'right': col.right}"
                       mtx-grid-selectable-cell
                       (cellSelectionChange)="_selectCell($event, row, col)">
               <ng-template [ngIf]="_isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
@@ -318,7 +318,7 @@
 
             <mat-footer-cell *matFooterCellDef
                              [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
-                             [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}">
+                             [ngStyle]="{'left': col.left, 'right': col.right}">
               <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
 
               <ng-template [ngIf]="_isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
