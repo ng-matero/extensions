@@ -13,15 +13,6 @@
 
   &.fixed-height {
     height: 360px;
-    padding-bottom: 57px;
-
-    .mtx-grid-toolbar + .mtx-grid-main {
-      height: calc(100% - 54px);
-    }
-
-    .mtx-grid-main {
-      height: 100%;
-    }
   }
 }
 

@@ -3,10 +3,10 @@ import { AppThemes } from '../themes';
 
 @Component({
   selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss'],
+  templateUrl: './navbar.html',
+  styleUrls: ['./navbar.scss'],
 })
-export class NavbarComponent {
+export class Navbar {
   dark = false;
 
   constructor(private _appThemes: AppThemes) {}

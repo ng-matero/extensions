@@ -39,6 +39,9 @@ export class TooltipApiComponent {
         path: 'api',
         component: TooltipApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./tooltip.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

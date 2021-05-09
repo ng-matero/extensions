@@ -42,6 +42,9 @@ export class PopoverApiComponent {
         path: 'api',
         component: PopoverApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./popover.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

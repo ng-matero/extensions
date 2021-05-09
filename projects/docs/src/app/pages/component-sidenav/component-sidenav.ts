@@ -10,8 +10,8 @@ const SMALL_WIDTH_BREAKPOINT = 959;
 
 @Component({
   selector: 'app-component-sidenav',
-  templateUrl: 'component-sidenav.component.html',
-  styleUrls: ['component-sidenav.component.scss'],
+  templateUrl: 'component-sidenav.html',
+  styleUrls: ['component-sidenav.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class ComponentSidenav {

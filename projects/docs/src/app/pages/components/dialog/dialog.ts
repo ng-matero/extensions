@@ -64,6 +64,9 @@ export class DialogApiComponent {
         path: 'api',
         component: DialogApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./dialog.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

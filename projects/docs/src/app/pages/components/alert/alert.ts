@@ -42,6 +42,9 @@ export class AlertApiComponent {
         path: 'api',
         component: AlertApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./alert.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

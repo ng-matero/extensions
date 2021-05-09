@@ -39,6 +39,9 @@ export class SplitPaneApiComponent {
         path: 'api',
         component: SplitPaneApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./split-pane.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),
