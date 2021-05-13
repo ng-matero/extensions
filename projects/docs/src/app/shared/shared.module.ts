@@ -21,7 +21,6 @@ import { ExampleViewer } from './example-viewer/example-viewer';
 import { Navbar } from './navbar/navbar';
 import { CopierService } from './copier/copier.service';
 import { NavigationFocus } from './navigation-focus/navigation-focus';
-import { TableOfContents } from './table-of-contents/table-of-contents';
 import { DocViewer } from './doc-viewer/doc-viewer';
 
 @NgModule({
@@ -59,7 +58,6 @@ import { DocViewer } from './doc-viewer/doc-viewer';
     DocViewer,
     Navbar,
     NavigationFocus,
-    TableOfContents,
   ],
   declarations: [
     HeaderLinkComponent,
@@ -68,7 +66,6 @@ import { DocViewer } from './doc-viewer/doc-viewer';
     DocViewer,
     Navbar,
     NavigationFocus,
-    TableOfContents,
   ],
   providers: [CopierService],
 })
