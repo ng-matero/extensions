@@ -6,7 +6,7 @@
 [![Gitter](https://img.shields.io/gitter/room/ng-matero/extensions.svg)](https://gitter.im/matero-io/extensions)
 [![API docs](https://img.shields.io/badge/API%20docs-gitbook-red)](https://nzbin.gitbook.io/material-extensions/)
 
-The Ng-Matero Extensions is an extended library of Angular Material.
+The Ng-Matero Extensions is an extended component library of Angular Material.
 
 ## Installation
 
