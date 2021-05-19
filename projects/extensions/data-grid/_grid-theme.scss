@@ -10,22 +10,9 @@
   .mtx-grid {
     border: 1px solid rgba(mat-color($foreground, secondary-text), .2);
 
-    .mat-table-sticky-left {
-      border-right: 1px solid mat-color($foreground, divider);
-
-      [dir='rtl'] & {
-        border-right-width: 0;
-        border-left: 1px solid mat-color($foreground, divider);
-      }
-    }
-
+    .mat-table-sticky-left,
     .mat-table-sticky-right {
-      border-left: 1px solid mat-color($foreground, divider);
-
-      [dir='rtl'] & {
-        border-left-width: 0;
-        border-right: 1px solid mat-color($foreground, divider);
-      }
+      border-color: mat-color($foreground, divider);
     }
 
     .mat-table {
@@ -73,12 +60,7 @@
   }
 
   .mtx-grid-sidebar {
-    border-left: 1px solid rgba(mat-color($foreground, secondary-text), .2);
-
-    [dir='rtl'] & {
-      border-left-width: 0;
-      border-right: 1px solid rgba(mat-color($foreground, secondary-text), .2);
-    }
+    border-color: rgba(mat-color($foreground, secondary-text), .2);
   }
 
   .mtx-grid-statusbar {
