@@ -5,29 +5,29 @@
 
   .mtx-alert-ref {
     background-color: mat-color($background, card);
+  }
 
-    .mtx-alert-info & {
-      background-color: mat-color($mat-blue, 500);
-      border-color: mat-color($mat-blue, 500);
-      color: white;
-    }
+  .mtx-alert-info .mtx-alert-ref {
+    background-color: mat-color($mat-blue, 500);
+    border-color: mat-color($mat-blue, 500);
+    color: white;
+  }
 
-    .mtx-alert-success & {
-      background-color: mat-color($mat-green, 500);
-      border-color: mat-color($mat-green, 500);
-      color: white;
-    }
+  .mtx-alert-success .mtx-alert-ref {
+    background-color: mat-color($mat-green, 500);
+    border-color: mat-color($mat-green, 500);
+    color: white;
+  }
 
-    .mtx-alert-warning & {
-      background-color: mat-color($mat-orange, 500);
-      border-color: mat-color($mat-orange, 500);
-      color: white;
-    }
+  .mtx-alert-warning .mtx-alert-ref {
+    background-color: mat-color($mat-orange, 500);
+    border-color: mat-color($mat-orange, 500);
+    color: white;
+  }
 
-    .mtx-alert-danger & {
-      background-color: mat-color($mat-red, 500);
-      border-color: mat-color($mat-red, 500);
-      color: white;
-    }
+  .mtx-alert-danger .mtx-alert-ref {
+    background-color: mat-color($mat-red, 500);
+    border-color: mat-color($mat-red, 500);
+    color: white;
   }
 }
