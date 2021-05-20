@@ -10,35 +10,9 @@
   .mtx-grid {
     border: 1px solid rgba(mat-color($foreground, secondary-text), .2);
 
-    .mtx-grid-toolbar {
-      border-bottom: 1px solid rgba(mat-color($foreground, secondary-text), .2);
-    }
-
-    .mtx-grid-sidebar {
-      border-left: 1px solid rgba(mat-color($foreground, secondary-text), .2);
-
-      [dir='rtl'] & {
-        border-left-width: 0;
-        border-right: 1px solid rgba(mat-color($foreground, secondary-text), .2);
-      }
-    }
-
-    .mat-table-sticky-left {
-      border-right: 1px solid mat-color($foreground, divider);
-
-      [dir='rtl'] & {
-        border-right-width: 0;
-        border-left: 1px solid mat-color($foreground, divider);
-      }
-    }
-
+    .mat-table-sticky-left,
     .mat-table-sticky-right {
-      border-left: 1px solid mat-color($foreground, divider);
-
-      [dir='rtl'] & {
-        border-left-width: 0;
-        border-right: 1px solid mat-color($foreground, divider);
-      }
+      border-color: mat-color($foreground, divider);
     }
 
     .mat-table {
@@ -68,10 +42,6 @@
       }
     }
 
-    .mat-paginator {
-      border-top: 1px solid mat-color($foreground, divider);
-    }
-
     .mat-footer-row {
       .mat-footer-cell {
         border-top: 1px solid mat-color($foreground, divider);
@@ -79,6 +49,18 @@
         background-color: mat-color($background, app-bar);
       }
     }
+
+    .mat-paginator {
+      border-top: 1px solid rgba(mat-color($foreground, secondary-text), .2);
+    }
+  }
+
+  .mtx-grid-toolbar {
+    border-bottom: 1px solid rgba(mat-color($foreground, secondary-text), .2);
+  }
+
+  .mtx-grid-sidebar {
+    border-color: rgba(mat-color($foreground, secondary-text), .2);
   }
 
   .mtx-grid-column-menu-item {
