@@ -58,11 +58,11 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @ViewChild('columnMenu') columnMenu: MtxGridColumnMenu;
   @ViewChild('tableContainer') tableContainer: ElementRef<HTMLDivElement>;
 
-  dataSource = new MatTableDataSource([]);
+  dataSource = new MatTableDataSource();
 
   @Input() displayedColumns: string[];
   @Input() columns: MtxGridColumn[] = [];
-  @Input() data = [];
+  @Input() data: any[] = [];
   @Input() length = 0;
   @Input() loading = false;
 
@@ -170,14 +170,14 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     return (!this.data || this.data.length === 0) && !this.loading;
   }
 
-  // thead
+  // Cell templates
+
   @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
   @Input() headerExtraTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
-
-  // tbody
   @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
-  // tfoot
+  // Summary
+
   @Input() showSummary = false;
   @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
