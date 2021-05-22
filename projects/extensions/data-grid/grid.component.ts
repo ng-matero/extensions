@@ -100,7 +100,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() rowStriped = false;
   @Output() rowClick = new EventEmitter<any>();
 
-  /** Expandable row */
+  // Expansion
 
   expansionRowStates: any[] = [];
 
@@ -174,6 +174,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
   @Input() headerExtraTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+
   @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
   // Summary
