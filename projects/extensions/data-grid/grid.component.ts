@@ -59,18 +59,19 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @ViewChild('columnMenu') columnMenu: MtxGridColumnMenu;
   @ViewChild('tableContainer') tableContainer: ElementRef<HTMLDivElement>;
 
-  dataSource = new MatTableDataSource([]);
+  dataSource = new MatTableDataSource();
 
   @Input() displayedColumns: string[];
   @Input() columns: MtxGridColumn[] = [];
-  @Input() data = [];
+  @Input() data: any[] = [];
   @Input() length = 0;
   @Input() loading = false;
 
-  // Tracking function
   @Input() trackBy: TrackByFunction<any>;
 
-  /** Page */
+  @Input() columnResizable = false;
+
+  // Page
 
   @Input() pageOnFront = true;
   @Input() showPaginator = true;
@@ -82,7 +83,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() hidePageSize = false;
   @Output() page = new EventEmitter<PageEvent>();
 
-  /** Sort */
+  // Sort
 
   @Input() sortOnFront = true;
   @Input() sortActive: string;
@@ -92,13 +93,13 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() sortStart: 'asc' | 'desc' = 'asc';
   @Output() sortChange = new EventEmitter<Sort>();
 
-  /** Row */
+  // Row
 
   @Input() rowHover = false;
   @Input() rowStriped = false;
   @Output() rowClick = new EventEmitter<any>();
 
-  /** Expandable row */
+  // Expansion
 
   expansionRowStates: any[] = [];
 
@@ -107,10 +108,9 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Output() expansionChange = new EventEmitter<any>();
 
   /** Whether support multiple row/cell selection */
-
   @Input() multiSelectable = true;
 
-  /** Row selection */
+  // Row selection
 
   rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
@@ -121,7 +121,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() rowClassFormatter: MtxGridRowClassFormatter;
   @Output() rowSelectionChange = new EventEmitter<any[]>();
 
-  /** Cell selection */
+  // Cell selection
 
   cellSelection: any[] = [];
 
@@ -130,13 +130,13 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   private _selectedCell: MtxGridCellSelectionDirective | undefined;
 
-  /** Toolbar */
+  // Toolbar
 
   @Input() showToolbar = false;
   @Input() toolbarTitle = '';
   @Input() toolbarTemplate: TemplateRef<any>;
 
-  /** Column menu */
+  // Column menu
 
   columnMenuData: MtxGridColumnSelectionItem[] = [];
 
@@ -160,7 +160,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() columnMenuFooterText = 'Columns Footer';
   @Input() columnMenuFooterTemplate: TemplateRef<any>;
 
-  /** No Result */
+  // No Result
 
   @Input() noResultText = 'No records found';
   @Input() noResultTemplate: TemplateRef<any>;
@@ -169,14 +169,15 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     return (!this.data || this.data.length === 0) && !this.loading;
   }
 
-  /** thead */
+  // Cell templates
+
   @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
   @Input() headerExtraTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
-  /** tbody */
   @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
-  /** tfoot */
+  // Summary
+
   @Input() showSummary = false;
   @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
@@ -185,12 +186,10 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     return this.showSummary;
   }
 
-  /** Sidebar */
+  // Sidebar
+
   @Input() showSidebar = false;
   @Input() sidebarTemplate: TemplateRef<any>;
-
-  /** Column resizable */
-  @Input() columnResizable = false;
 
   constructor(
     private _dataGridSrv: MtxGridService,

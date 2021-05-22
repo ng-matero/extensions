@@ -14,7 +14,7 @@ import {
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ThemePalette } from '@angular/material/core';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MtxCheckboxGroupOption } from './checkbox-group.interface';
 
 export class MtxCheckboxBase {
@@ -204,13 +204,13 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   }
 
   /** Handle normal checkbox toggle */
-  _updateNormalCheckboxState(e: boolean, index: number): void {
+  _updateNormalCheckboxState(e: MatCheckboxChange, index: number): void {
     this._checkMasterCheckboxState();
     this._getSelectedItems(index);
   }
 
   /** Handle master checkbox toggle */
-  _updateMasterCheckboxState(e: boolean, index: number): void {
+  _updateMasterCheckboxState(e: MatCheckboxChange, index: number): void {
     this.selectAll = !this.selectAll;
     this.selectAllIndeterminate = false;
 
