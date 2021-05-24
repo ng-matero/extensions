@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
+import { MtxLoaderType } from '@ng-matero/extensions/loader';
 
 @Component({
   selector: 'dev-loader-demo',
@@ -7,8 +9,8 @@ import { Component } from '@angular/core';
 })
 export class LoaderDemoComponent {
   loading = true;
-  type = 'spinner';
-  color = 'primary';
+  type: MtxLoaderType = 'spinner';
+  color: ThemePalette = 'primary';
   hasBackdrop = true;
   strokeWidth = 4;
   diameter = 48;
