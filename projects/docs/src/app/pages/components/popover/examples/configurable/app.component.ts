@@ -1,4 +1,8 @@
 import { Component } from '@angular/core';
+import {
+  MtxPopoverPositionX,
+  MtxPopoverPositionY,
+} from '@ng-matero/extensions/popover/popover-types';
 
 @Component({
   selector: 'loader-example',
@@ -6,8 +10,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  xPosition = 'after';
-  yPosition = 'below';
+  xPosition: MtxPopoverPositionX = 'after';
+  yPosition: MtxPopoverPositionY = 'below';
   enterDelay = 200;
   leaveDelay = 200;
   xOffset = 0;

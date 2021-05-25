@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
+import { MtxLoaderType } from '@ng-matero/extensions';
 
 @Component({
   selector: 'loader-example',
@@ -8,6 +10,6 @@ import { Component } from '@angular/core';
 export class AppComponent {
   loading = true;
   hasBackdrop = true;
-  type = 'spinner';
-  color = 'primary';
+  type: MtxLoaderType = 'spinner';
+  color: ThemePalette = 'primary';
 }

@@ -22,7 +22,7 @@ export class AppComponent {
 
   columnHideable = true;
   columnMovable = true;
-  columnHideableChecked = 'show';
+  columnHideableChecked: 'show' | 'hide' = 'show';
 
   closeMenu() {
     this.grid.columnMenu.menuTrigger.closeMenu();
