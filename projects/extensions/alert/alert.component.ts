@@ -21,7 +21,7 @@ import {
 })
 export class MtxAlertComponent {
   /**
-   * Alert types
+   * Possible alert type values:
    * `default`, `info`, `success`, `warning` and `danger`
    */
   @Input() type = 'default';
@@ -32,7 +32,7 @@ export class MtxAlertComponent {
   /** Whether displays an inline "Close" button */
   @Input() dismissible: boolean;
 
-  /** Text color */
+  /** The alert text color */
   @Input() color: string;
 
   /** Material elevation */

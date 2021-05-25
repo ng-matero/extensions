@@ -15,7 +15,7 @@ import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@a
 })
 export class MtxProgressComponent {
   /**
-   * Progress types
+   * Possible progress type values:
    * `default`, `info`, `success`, `warning` and `danger`
    */
   @Input() type = 'info';

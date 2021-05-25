@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
+import { ThemePalette } from '@angular/material/core';
 import { Subject, Observable, isObservable } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -46,9 +47,9 @@ export class MtxGridCellComponent implements OnInit, OnDestroy {
     event: MouseEvent,
     title: string | Observable<any>,
     description: string | Observable<any> = '',
-    closeType: '' | 'primary' | 'accent' | 'warn' = '',
+    closeType: ThemePalette = null,
     closeText: string | Observable<any> = 'CLOSE',
-    okType: '' | 'primary' | 'accent' | 'warn' = 'primary',
+    okType: ThemePalette = 'primary',
     okText: string | Observable<any> = 'OK',
     fn?: (p: any) => void,
     data?: any

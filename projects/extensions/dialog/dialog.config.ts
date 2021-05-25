@@ -1,3 +1,4 @@
+import { ThemePalette } from '@angular/material/core';
 import { MatDialogConfig } from '@angular/material/dialog';
 
 export interface MtxDialogData extends MatDialogConfig {
@@ -7,7 +8,7 @@ export interface MtxDialogData extends MatDialogConfig {
 }
 
 export interface MtxDialogBtns {
-  type?: '' | 'primary' | 'accent' | 'warn';
+  type?: ThemePalette;
   text: string;
   onClick: () => void;
 }

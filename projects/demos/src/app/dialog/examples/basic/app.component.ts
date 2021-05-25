@@ -33,7 +33,6 @@ export class AppComponent {
       description: 'You can write some messages here.',
       buttons: [
         {
-          type: '',
           text: 'CLOSE',
           onClick: () => {
             this.mtxDialog.alert(`You click Close button.`);

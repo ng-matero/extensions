@@ -17,6 +17,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Sort, MatSort, SortDirection } from '@angular/material/sort';
+import { ThemePalette } from '@angular/material/core';
 
 import {
   MtxGridColumn,
@@ -24,6 +25,7 @@ import {
   MtxGridCellTemplate,
   MtxGridRowSelectionFormatter,
   MtxGridRowClassFormatter,
+  MtxGridButtonType,
 } from './grid.interface';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
@@ -135,8 +137,8 @@ export class MtxGridComponent implements OnInit, OnChanges, OnDestroy {
 
   @Input() showColumnMenuButton = true;
   @Input() columnMenuButtonText = '';
-  @Input() columnMenuButtonType = 'stroked';
-  @Input() columnMenuButtonColor = '';
+  @Input() columnMenuButtonType: MtxGridButtonType = 'stroked';
+  @Input() columnMenuButtonColor: ThemePalette;
   @Input() columnMenuButtonClass = '';
   @Input() columnMenuButtonIcon = '';
 

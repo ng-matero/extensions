@@ -10,7 +10,6 @@ const defaults: MtxDialogData = {
   description: '',
   buttons: [
     {
-      type: '',
       text: 'CLOSE',
       onClick: () => {},
     },
@@ -64,7 +63,6 @@ export class MtxDialog {
       title,
       buttons: [
         {
-          type: '',
           text: 'CLOSE',
           onClick: () => onClose(),
         },

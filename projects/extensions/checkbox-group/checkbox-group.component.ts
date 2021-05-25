@@ -10,6 +10,7 @@ import {
   forwardRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 import { MtxCheckboxGroupOption } from './checkbox-group.interface';
 
@@ -86,7 +87,7 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
     }
   }
 
-  _updateNormalCheckboxState(e?: boolean, index?: number): void {
+  _updateNormalCheckboxState(e?: MatCheckboxChange, index?: number): void {
     this._checkMasterCheckboxState();
 
     this.change.emit({
@@ -95,7 +96,7 @@ export class MtxCheckboxGroupComponent implements OnInit, ControlValueAccessor {
     });
   }
 
-  _updateMasterCheckboxState(e?: boolean, index?: number): void {
+  _updateMasterCheckboxState(e?: MatCheckboxChange, index?: number): void {
     this.selectAll = !this.selectAll;
     this.selectAllIndeterminate = false;
     if (this.selectAll) {

@@ -1,4 +1,5 @@
 import { TemplateRef } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -31,7 +32,6 @@ export interface MtxGridColumn {
 /**
  * Column type
  */
-
 export declare type MtxGridColumnType =
   | 'tag'
   | 'button'
@@ -73,6 +73,9 @@ export interface MtxGridColumnTag {
   [key: string]: MtxGridColumnTagValue;
 }
 
+/**
+ * Tag value
+ */
 export interface MtxGridColumnTagValue {
   text?: string;
   color?: string;
@@ -90,9 +93,9 @@ export interface MtxGridColumnButton {
   pop?: boolean;
   popTitle?: string | Observable<any>;
   popDescription?: string | Observable<any>;
-  popOkType?: '' | 'primary' | 'accent' | 'warn';
+  popOkType?: ThemePalette;
   popOkText?: string | Observable<any>;
-  popCloseType?: '' | 'primary' | 'accent' | 'warn';
+  popCloseType?: ThemePalette;
   popCloseText?: string | Observable<any>;
   children?: MtxGridColumnButton[];
   iif?: (record: any) => boolean;
@@ -132,3 +135,6 @@ export interface MtxGridRowSelectionFormatter {
 export interface MtxGridRowClassFormatter {
   [className: string]: (rowData: any) => boolean;
 }
+
+/** Possible button type values. */
+export type MtxGridButtonType = 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';

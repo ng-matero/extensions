@@ -8,7 +8,9 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MtxGridColumnSelectionItem } from './grid.interface';
+import { ThemePalette } from '@angular/material/core';
+
+import { MtxGridButtonType, MtxGridColumnSelectionItem } from './grid.interface';
 
 @Component({
   selector: 'mtx-grid-column-menu',
@@ -35,8 +37,8 @@ export class MtxGridColumnMenuComponent implements OnInit {
   }
   private _buttonText = '';
 
-  @Input() buttonType: 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab' | '' = 'stroked';
-  @Input() buttonColor: 'primary' | 'accent' | 'warn' | '' = '';
+  @Input() buttonType: MtxGridButtonType = 'stroked';
+  @Input() buttonColor: ThemePalette;
   @Input() buttonClass = '';
   @Input() buttonIcon = '';
 
