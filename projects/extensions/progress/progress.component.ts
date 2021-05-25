@@ -1,5 +1,7 @@
 import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 
+export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'danger';
+
 @Component({
   selector: 'mtx-progress',
   exportAs: 'mtxProgress',
@@ -14,8 +16,8 @@ import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@a
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxProgressComponent {
-  /** Progress types */
-  @Input() type: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'info';
+  /** The progress type */
+  @Input() type: MtxProgressType = 'info';
 
   /** The progress value */
   @Input() value = 0;

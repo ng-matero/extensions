@@ -4,13 +4,13 @@
                [color]="color"
                [strokeWidth]="strokeWidth"
                [diameter]="diameter"
-               [mode]="mode"
+               [mode]="$any(mode)"
                [value]="value">
   </mat-spinner>
 
   <mat-progress-bar *ngIf="type==='progressbar'"
                     [color]="color"
-                    [mode]="mode"
+                    [mode]="$any(mode)"
                     [value]="value"
                     [bufferValue]="bufferValue">
   </mat-progress-bar>

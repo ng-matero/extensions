@@ -10,8 +10,9 @@ import {
 } from '@angular/core';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MtxGridColumnSelectionItem } from './grid.interface';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import { ThemePalette } from '@angular/material/core';
+import { MtxGridButtonType, MtxGridColumnSelectionItem } from './grid.interface';
 
 @Component({
   selector: 'mtx-grid-column-menu',
@@ -42,8 +43,8 @@ export class MtxGridColumnMenuComponent {
   }
   private _buttonText = '';
 
-  @Input() buttonType: 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab' | '' = 'stroked';
-  @Input() buttonColor: 'primary' | 'accent' | 'warn' | '' = '';
+  @Input() buttonType: MtxGridButtonType = 'stroked';
+  @Input() buttonColor: ThemePalette;
   @Input() buttonClass = '';
   @Input() buttonIcon = '';
 

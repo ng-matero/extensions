@@ -9,6 +9,8 @@ import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
+export type MtxLoaderType = 'spinner' | 'progressbar';
+
 @Component({
   selector: 'mtx-loader',
   exportAs: 'mtxLoader',
@@ -22,7 +24,7 @@ import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxLoaderComponent {
-  @Input() type: 'spinner' | 'progressbar' = 'spinner';
+  @Input() type: MtxLoaderType = 'spinner';
   @Input() loading = true;
   @Input() color: ThemePalette = 'primary';
   @Input() mode: ProgressSpinnerMode | ProgressBarMode = 'indeterminate';

@@ -2,9 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { Observable } from 'rxjs';
 
-/**
- * Grid
- */
+/** Column definition of grid. */
 export interface MtxGridColumn {
   field: string;
   header?: string | Observable<string>;
@@ -31,10 +29,7 @@ export interface MtxGridColumn {
   class?: string;
 }
 
-/**
- * Column type
- */
-
+/** Possible column type values. */
 export declare type MtxGridColumnType =
   | 'tag'
   | 'button'
@@ -46,9 +41,7 @@ export declare type MtxGridColumnType =
   | 'percent'
   | 'date';
 
-/**
- * Column type parameter
- */
+/** Column type parameter. */
 export interface MtxGridColumnTypeParameter {
   currencyCode?: string;
   display?: string | boolean;
@@ -58,9 +51,7 @@ export interface MtxGridColumnTypeParameter {
   timezone?: string;
 }
 
-/**
- * Column sort properties
- */
+/** The properties of column sort. */
 export interface MtxGridColumnSortProp {
   arrowPosition?: 'before' | 'after';
   disableClear?: boolean;
@@ -68,22 +59,19 @@ export interface MtxGridColumnSortProp {
   start?: 'asc' | 'desc';
 }
 
-/**
- * Tag
- */
+/** Column tag of grid. */
 export interface MtxGridColumnTag {
   [key: number]: MtxGridColumnTagValue;
   [key: string]: MtxGridColumnTagValue;
 }
 
+/** The properties of column tag. */
 export interface MtxGridColumnTagValue {
   text?: string;
   color?: string;
 }
 
-/**
- * Button
- */
+/** The properties of column button. */
 export interface MtxGridColumnButton {
   type?: 'basic' | 'icon';
   text?: string | Observable<string>;
@@ -104,9 +92,7 @@ export interface MtxGridColumnButton {
   disabled?: boolean;
 }
 
-/**
- * Column selection
- */
+/** The properties of column selection item. */
 export interface MtxGridColumnSelectionItem {
   label: string | Observable<string>;
   field: string;
@@ -115,32 +101,27 @@ export interface MtxGridColumnSelectionItem {
   disabled?: boolean;
 }
 
-/**
- * Cell template
- */
+/** Cell template. */
 export interface MtxGridCellTemplate {
   [key: string]: TemplateRef<any>;
 }
 
-/**
- * Row selection formatter
- */
+/** Row selection formatter. */
 export interface MtxGridRowSelectionFormatter {
   disabled?: (rowData: any, index?: number) => boolean;
   hideCheckbox?: (rowData: any, index?: number) => boolean;
 }
 
-/**
- * Row class formatter
- */
+/** Row class formatter. */
 export interface MtxGridRowClassFormatter {
   [className: string]: (rowData: any, index?: number) => boolean;
 }
 
-/**
- * Column menu component
- */
+/** Column menu component. */
 export interface MtxGridColumnMenu {
   menuPanel: MatMenu;
   menuTrigger: MatMenuTrigger;
 }
+
+/** Possible button type values. */
+export type MtxGridButtonType = 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';

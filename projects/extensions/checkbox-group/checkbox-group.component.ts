@@ -44,18 +44,18 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   _checkboxes: QueryList<MatCheckbox>;
 
   @Input()
-  get items(): MtxCheckboxGroupOption[] {
+  get items() {
     return this._items;
   }
-  set items(value) {
+  set items(value: any[]) {
     // TODO: Deep clone
     this._originalItems = JSON.parse(JSON.stringify(value));
     this._items = value.map(option => {
       return option instanceof Object ? option : new MtxCheckboxBase(option, option);
     });
   }
-  private _items: MtxCheckboxGroupOption[] = [];
-  private _originalItems: MtxCheckboxGroupOption[] = [];
+  private _items = [];
+  private _originalItems = [];
 
   @Input() bindLabel = 'label';
   @Input() bindValue = 'value';
@@ -106,7 +106,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
    * @returns Option that has the corresponding value.
    */
   private _selectValue(value: MtxCheckboxGroupOption) {
-    const correspondingOption = this.items.find((option: MtxCheckboxGroupOption) => {
+    const correspondingOption = (this.items as MtxCheckboxGroupOption[]).find(option => {
       try {
         const compareValue = option[this.bindValue] === value;
         return this._compareWith ? this._compareWith(option, value) : compareValue;
@@ -169,14 +169,14 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
 
   private _checkMasterCheckboxState() {
     if (
-      this.items
+      (this.items as MtxCheckboxGroupOption[])
         .filter(option => option.checked || !option.disabled)
         .every(option => !option.checked)
     ) {
       this.selectAll = false;
       this.selectAllIndeterminate = false;
     } else if (
-      this.items
+      (this.items as MtxCheckboxGroupOption[])
         .filter(option => option.checked || !option.disabled)
         .every(option => option.checked)
     ) {
@@ -188,10 +188,10 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   }
 
   private _getSelectedItems(index: number) {
-    this.selectedItems = this.items.filter(option => option.checked);
+    this.selectedItems = (this.items as MtxCheckboxGroupOption[]).filter(option => option.checked);
 
     if (this._compareWith) {
-      this.selectedItems = this._originalItems.filter(option =>
+      this.selectedItems = (this._originalItems as MtxCheckboxGroupOption[]).filter(option =>
         this.selectedItems.find(selectedOption => this._compareWith(option, selectedOption))
       );
     } else {
@@ -215,11 +215,11 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
     this.selectAllIndeterminate = false;
 
     if (this.selectAll) {
-      this.items
+      (this.items as MtxCheckboxGroupOption[])
         .filter(option => option.checked || !option.disabled)
         .forEach(option => (option.checked = true));
     } else {
-      this.items
+      (this.items as MtxCheckboxGroupOption[])
         .filter(option => option.checked || !option.disabled)
         .forEach(option => (option.checked = !!option.disabled));
     }
