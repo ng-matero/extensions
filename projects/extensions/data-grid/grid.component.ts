@@ -110,10 +110,10 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() expansionTemplate: TemplateRef<any>;
   @Output() expansionChange = new EventEmitter<any>();
 
+  // Row selection
+
   /** Whether support multiple row/cell selection */
   @Input() multiSelectable = true;
-
-  // Row selection
 
   rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
 

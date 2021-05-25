@@ -1,4 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { Observable } from 'rxjs';
 
@@ -75,9 +76,9 @@ export class MtxGridCellComponent {
     event: MouseEvent,
     title: string | Observable<string>,
     description: string | Observable<string> = '',
-    okColor: '' | 'primary' | 'accent' | 'warn' = 'primary',
+    okColor: ThemePalette = 'primary',
     okText: string | Observable<string> = 'OK',
-    closeColor: '' | 'primary' | 'accent' | 'warn' = '',
+    closeColor: ThemePalette = null,
     closeText: string | Observable<string> = 'CLOSE',
     fn?: (p: any) => void,
     data?: any

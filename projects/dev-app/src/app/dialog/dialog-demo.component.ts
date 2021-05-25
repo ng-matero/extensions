@@ -41,7 +41,6 @@ export class DialogDemoComponent implements OnInit {
       description: 'You can write some messages here.',
       buttons: [
         {
-          color: '',
           text: this.translate.stream('close'),
           onClick: () => {
             this.mtxDialog.alert(`You click Close button.`);

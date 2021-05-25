@@ -55,14 +55,30 @@
     padding: 4px 10px;
     box-sizing: border-box;
 
-    &.mtx-grid-checkbox-cell {
-      padding-left: 10px;
-      padding-right: 10px;
-    }
+    &:first-of-type:not(:only-of-type) {
+      padding-left: 24px;
 
-    [dir='rtl'] & {
       &.mtx-grid-checkbox-cell {
         padding-left: 10px;
+        padding-right: 10px;
+      }
+
+      [dir='rtl'] & {
+        padding-left: 10px;
+        padding-right: 24px;
+
+        &.mtx-grid-checkbox-cell {
+          padding-left: 10px;
+          padding-right: 10px;
+        }
+      }
+    }
+
+    &:last-of-type:not(:only-of-type) {
+      padding-right: 24px;
+
+      [dir='rtl'] & {
+        padding-left: 24px;
         padding-right: 10px;
       }
     }
