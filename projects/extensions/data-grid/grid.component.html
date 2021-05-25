@@ -1,5 +1,7 @@
-<!-- Progress Bar-->
-<mat-progress-bar class="mtx-grid-progress" mode="indeterminate" *ngIf="loading"></mat-progress-bar>
+<!-- Progress bar-->
+<div class="mtx-grid-progress" *ngIf="loading">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
 
 <!-- Toolbar -->
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
