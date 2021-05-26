@@ -19,7 +19,6 @@ export class AppComponent {
       description: this.translate.stream('description'),
       buttons: [
         {
-          color: '',
           text: this.translate.stream('close'),
           onClick: () => {},
         },

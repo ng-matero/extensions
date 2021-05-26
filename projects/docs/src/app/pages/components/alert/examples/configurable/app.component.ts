@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MtxAlertType } from '@ng-matero/extensions';
 
 @Component({
   selector: 'alert-example',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  type = 'info';
+  type: MtxAlertType = 'info';
   dismissible = false;
   elevation = 3;
 

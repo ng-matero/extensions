@@ -35,7 +35,6 @@ export class AppComponent {
       showCloseIcon: true,
       buttons: [
         {
-          color: '',
           text: 'CLOSE',
           onClick: () => {
             this.mtxDialog.alert(`You click Close button.`);
