@@ -1,4 +1,5 @@
 import { TemplateRef } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { Observable } from 'rxjs';
 
@@ -76,15 +77,15 @@ export interface MtxGridColumnButton {
   type?: 'basic' | 'icon';
   text?: string | Observable<string>;
   icon?: string;
-  color?: 'primary' | 'accent' | 'warn';
+  color?: ThemePalette;
   class?: string;
   click?: (record: any) => void;
   pop?: boolean;
   popTitle?: string | Observable<string>;
   popDescription?: string | Observable<string>;
-  popOkColor?: '' | 'primary' | 'accent' | 'warn';
+  popOkColor?: ThemePalette;
   popOkText?: string | Observable<string>;
-  popCloseColor?: '' | 'primary' | 'accent' | 'warn';
+  popCloseColor?: ThemePalette;
   popCloseText?: string | Observable<string>;
   children?: MtxGridColumnButton[];
   iif?: (record: any) => boolean;
