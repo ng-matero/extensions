@@ -29,11 +29,13 @@ import {
   MtxGridRowSelectionFormatter,
   MtxGridRowClassFormatter,
   MtxGridColumnMenu,
+  MtxGridButtonType,
 } from './grid.interface';
 import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
 import { isObservable } from 'rxjs';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'mtx-grid',
@@ -142,8 +144,8 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   @Input() showColumnMenuButton = true;
   @Input() columnMenuButtonText = '';
-  @Input() columnMenuButtonType = 'stroked';
-  @Input() columnMenuButtonColor = '';
+  @Input() columnMenuButtonType: MtxGridButtonType = 'stroked';
+  @Input() columnMenuButtonColor: ThemePalette;
   @Input() columnMenuButtonClass = '';
   @Input() columnMenuButtonIcon = '';
 

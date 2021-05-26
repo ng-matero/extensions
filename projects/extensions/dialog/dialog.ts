@@ -17,7 +17,6 @@ const defaults: MtxDialogData = {
       onClick: () => {},
     },
     {
-      color: '',
       text: 'CLOSE',
       onClick: () => {},
     },
@@ -83,7 +82,6 @@ export class MtxDialog {
           onClick: () => onOk(),
         },
         {
-          color: '',
           text: 'CLOSE',
           onClick: () => onClose(),
         },

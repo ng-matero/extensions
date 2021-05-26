@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { MtxGridColumn, MtxGridColumnButton } from './grid.interface';
 import { MtxGridService } from './grid.service';
 import PhotoViewer from 'photoviewer';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'mtx-grid-cell',
@@ -75,9 +76,9 @@ export class MtxGridCellComponent {
     event: MouseEvent,
     title: string | Observable<string>,
     description: string | Observable<string> = '',
-    okColor: '' | 'primary' | 'accent' | 'warn' = 'primary',
+    okColor: ThemePalette = 'primary',
     okText: string | Observable<string> = 'OK',
-    closeColor: '' | 'primary' | 'accent' | 'warn' = '',
+    closeColor: ThemePalette = null,
     closeText: string | Observable<string> = 'CLOSE',
     fn?: (p: any) => void,
     data?: any

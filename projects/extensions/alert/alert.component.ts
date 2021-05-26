@@ -9,6 +9,8 @@ import {
   HostBinding,
 } from '@angular/core';
 
+export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger';
+
 @Component({
   selector: 'mtx-alert',
   exportAs: 'mtxAlert',
@@ -25,8 +27,8 @@ export class MtxAlertComponent {
     return `mtx-alert-${this.type}`;
   }
 
-  /** Alert types */
-  @Input() type: 'default' | 'info' | 'success' | 'warning' | 'danger' = 'default';
+  /** The alert type */
+  @Input() type: MtxAlertType = 'default';
 
   /** Whether alert visible */
   @Input() isOpen = true;
@@ -34,7 +36,7 @@ export class MtxAlertComponent {
   /** Whether displays an inline "Close" button */
   @Input() dismissible: boolean;
 
-  /** Text color */
+  /** The alert text color */
   @Input() color: string;
 
   /** Material elevation */

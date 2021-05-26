@@ -20,14 +20,14 @@ import {
 import { DOCUMENT } from '@angular/common';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { _supportsShadowDom } from '@angular/cdk/platform';
 import { MatFormFieldControl, MatFormField } from '@angular/material/form-field';
 import { MatMenuTrigger } from '@angular/material/menu';
 import { Subject, Observable, merge, fromEvent, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
-import { Color } from 'ngx-color';
+import { ColorEvent } from 'ngx-color';
 
 let nextUniqueId = 0;
 
@@ -131,7 +131,7 @@ export class MtxColorPickerComponent
   _onTouched = () => {};
 
   /** Event emitted when the color changed */
-  @Output() readonly colorChange = new EventEmitter<{ color: Color; $event: MouseEvent }>();
+  @Output() readonly colorChange = new EventEmitter<ColorEvent>();
 
   @ViewChild(MatMenuTrigger, { static: true }) trigger: MatMenuTrigger;
 
@@ -288,9 +288,9 @@ export class MtxColorPickerComponent
   }
 
   /** The callback of color changed. */
-  _onColorChanged(model: { color: Color; $event: MouseEvent }) {
+  _onColorChanged(model: ColorEvent) {
     this.value = model.color.hex;
-    this.colorChange.emit({ color: model.color, $event: model.$event });
+    this.colorChange.emit(model);
   }
 
   /** Stream of clicks outside of the color picker panel. */
@@ -314,4 +314,7 @@ export class MtxColorPickerComponent
       })
     );
   }
+
+  static ngAcceptInputType_required: BooleanInput;
+  static ngAcceptInputType_disabled: BooleanInput;
 }

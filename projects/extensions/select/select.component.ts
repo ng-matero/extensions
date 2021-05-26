@@ -21,7 +21,7 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatFormFieldControl } from '@angular/material/form-field';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { Subject, merge } from 'rxjs';
 import { takeUntil, startWith } from 'rxjs/operators';
@@ -116,7 +116,7 @@ export class MtxSelectComponent
   @Input() clearOnBackspace = true;
   @Input() compareWith: CompareWithFn;
   @Input() dropdownPosition: 'bottom' | 'top' | 'auto' = 'auto';
-  @Input() groupBy: () => void | string;
+  @Input() groupBy: string | (() => void);
   @Input() groupValue: GroupValueFn;
   @Input() selectableGroup = false;
   @Input() selectableGroupAsModel = true;
@@ -422,4 +422,7 @@ export class MtxSelectComponent
   blur() {
     this.ngSelect.blur();
   }
+
+  static ngAcceptInputType_required: BooleanInput;
+  static ngAcceptInputType_disabled: BooleanInput;
 }

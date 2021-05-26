@@ -1,3 +1,4 @@
+import { ThemePalette } from '@angular/material/core';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
@@ -9,8 +10,8 @@ export interface MtxDialogData extends MatDialogConfig {
 }
 
 export interface MtxDialogBtns {
-  type?: '' | 'raised' | 'stroked' | 'flat';
-  color?: '' | 'primary' | 'accent' | 'warn';
+  type?: 'raised' | 'stroked' | 'flat';
+  color?: ThemePalette;
   class?: string;
   focusInitial?: boolean;
   text: string | Observable<string>;

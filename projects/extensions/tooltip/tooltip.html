@@ -5,7 +5,7 @@
      (@state.start)="_animationStart()"
      (@state.done)="_animationDone($event)">
   <ng-template [ngIf]="_isTemplateRef(message)" [ngIfElse]="msgStrTpl">
-    <ng-template [ngTemplateOutlet]="message"></ng-template>
+    <ng-template [ngTemplateOutlet]="$any(message)"></ng-template>
   </ng-template>
   <ng-template #msgStrTpl>{{message}}</ng-template>
 </div>
