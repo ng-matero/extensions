@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ThemePalette } from '@angular/material/core';
 
 @Component({
   selector: 'dev-button-demo',
@@ -6,6 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['button-demo.component.scss'],
 })
 export class ButtonDemoComponent {
-  color = 'primary';
+  color: ThemePalette = 'primary';
   loading = true;
 }

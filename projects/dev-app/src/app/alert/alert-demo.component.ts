@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MtxAlertType } from '@ng-matero/extensions';
 
 @Component({
   selector: 'dev-alert-demo',
@@ -8,7 +9,7 @@ import { Component } from '@angular/core';
 export class AlertDemoComponent {
   dismissible = false;
   elevation = 0;
-  type = 'default';
+  type: MtxAlertType = 'default';
 
   onClosed(e: any) {
     console.log(e);
