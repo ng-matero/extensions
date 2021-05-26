@@ -78,7 +78,7 @@ export class MtxGridCellComponent {
     description: string | Observable<string> = '',
     okColor: ThemePalette = 'primary',
     okText: string | Observable<string> = 'OK',
-    closeColor: ThemePalette = null,
+    closeColor: ThemePalette,
     closeText: string | Observable<string> = 'CLOSE',
     fn?: (p: any) => void,
     data?: any

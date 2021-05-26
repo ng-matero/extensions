@@ -54,8 +54,8 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
       return option instanceof Object ? option : new MtxCheckboxBase(option, option);
     });
   }
-  private _items = [];
-  private _originalItems = [];
+  private _items: any[] = [];
+  private _originalItems: any[] = [];
 
   @Input() bindLabel = 'label';
   @Input() bindValue = 'value';
