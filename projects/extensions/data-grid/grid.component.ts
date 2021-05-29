@@ -72,7 +72,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   @Input() columnResizable = false;
 
-  // Page
+  // ===== Page =====
 
   @Input() pageOnFront = true;
   @Input() showPaginator = true;
@@ -86,7 +86,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   @Input() paginationTemplate: TemplateRef<any>;
 
-  // Sort
+  // ===== Sort =====
 
   @Input() sortOnFront = true;
   @Input() sortActive: string;
@@ -96,13 +96,13 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() sortStart: 'asc' | 'desc' = 'asc';
   @Output() sortChange = new EventEmitter<Sort>();
 
-  // Row
+  // ===== Row =====
 
   @Input() rowHover = false;
   @Input() rowStriped = false;
   @Output() rowClick = new EventEmitter<any>();
 
-  // Expansion
+  // ===== Expandable Row =====
 
   expansionRowStates: any[] = [];
 
@@ -110,9 +110,9 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() expansionTemplate: TemplateRef<any>;
   @Output() expansionChange = new EventEmitter<any>();
 
-  // Row selection
+  // ===== Row Selection =====
 
-  /** Whether support multiple row/cell selection */
+  /** Whether support multiple row/cell selection. */
   @Input() multiSelectable = true;
 
   rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
@@ -124,7 +124,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() rowClassFormatter: MtxGridRowClassFormatter;
   @Output() rowSelectionChange = new EventEmitter<any[]>();
 
-  // Cell selection
+  // ===== Cell Selection =====
 
   cellSelection: any[] = [];
 
@@ -133,13 +133,13 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   private _selectedCell: MtxGridCellSelectionDirective | undefined;
 
-  // Toolbar
+  // ===== Toolbar =====
 
   @Input() showToolbar = false;
   @Input() toolbarTitle = '';
   @Input() toolbarTemplate: TemplateRef<any>;
 
-  // Column menu
+  // ===== Column Menu =====
 
   columnMenuData: MtxGridColumnSelectionItem[] = [];
 
@@ -163,7 +163,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() columnMenuFooterText = 'Columns Footer';
   @Input() columnMenuFooterTemplate: TemplateRef<any>;
 
-  // No Result
+  // ===== No Result =====
 
   @Input() noResultText = 'No records found';
   @Input() noResultTemplate: TemplateRef<any>;
@@ -172,14 +172,14 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     return (!this.data || this.data.length === 0) && !this.loading;
   }
 
-  // Cell templates
+  // ===== Cell Templates =====
 
   @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
   @Input() headerExtraTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
   @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
-  // Summary
+  // ===== Summary =====
 
   @Input() showSummary = false;
   @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
@@ -189,12 +189,12 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     return this.showSummary;
   }
 
-  // Sidebar
+  // ===== Side Bar =====
 
   @Input() showSidebar = false;
   @Input() sidebarTemplate: TemplateRef<any>;
 
-  // Status bar
+  // ===== Status Bar =====
 
   @Input() showStatusbar = false;
   @Input() statusbarTemplate: TemplateRef<any>;
@@ -419,7 +419,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
     return this.expansionRowStates[index].expanded;
   }
 
-  /** Scroll to top when turn to the next page */
+  /** Scroll to top when turn to the next page. */
   _handlePage(e: PageEvent) {
     if (this.pageOnFront) {
       this.scrollTop(0);
