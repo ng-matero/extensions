@@ -2,12 +2,12 @@
 
 $mtx-tooltip-target-height: 22px;
 $mtx-tooltip-font-size: 12px;
-$mtx-tooltip-vertical-padding: ($mtx-tooltip-target-height - $mtx-tooltip-font-size) / 2;
+$mtx-tooltip-vertical-padding: ($mtx-tooltip-target-height - $mtx-tooltip-font-size) * .5;
 
 $mtx-tooltip-handset-target-height: 30px;
 $mtx-tooltip-handset-font-size: 14px;
 $mtx-tooltip-handset-vertical-padding:
-    ($mtx-tooltip-handset-target-height - $mtx-tooltip-handset-font-size) / 2;
+    ($mtx-tooltip-handset-target-height - $mtx-tooltip-handset-font-size) * .5;
 
 @mixin mtx-tooltip-color($config-or-theme) {
   $config: mat-get-color-config($config-or-theme);

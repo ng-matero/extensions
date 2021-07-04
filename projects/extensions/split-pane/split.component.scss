@@ -1,5 +1,5 @@
 $handle-size: 11px;
-$handle-offset: ($handle-size - 1px)/2;
+$handle-offset: ($handle-size - 1px) *.5;
 
 .mtx-split {
   display: flex;
