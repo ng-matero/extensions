@@ -1,6 +1,5 @@
 @use '~@angular/material' as mat;
-@import '~@angular/material/theming';
-@import './column-resize/column-resize';
+@use './column-resize/column-resize';
 
 @mixin mtx-grid-theme($theme) {
   $is-dark-theme: map-get($theme, is-dark);
@@ -86,5 +85,5 @@
     border-top: 1px solid mat.get-color-from-palette($foreground, divider);
   }
 
-  @include mat-column-resize-color($theme);
+  @include column-resize.color($theme);
 }

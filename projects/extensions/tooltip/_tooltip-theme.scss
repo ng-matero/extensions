@@ -10,7 +10,7 @@ $mtx-tooltip-handset-vertical-padding:
     ($mtx-tooltip-handset-target-height - $mtx-tooltip-handset-font-size) * .5;
 
 @mixin mtx-tooltip-color($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
   $background: map-get($config, background);
 
   .mtx-tooltip {
@@ -33,8 +33,8 @@ $mtx-tooltip-handset-vertical-padding:
 }
 
 @mixin mtx-tooltip-theme($theme) {
-  $color: mat-get-color-config($theme);
-  $typography: mat-get-typography-config($theme);
+  $color: mat.get-color-config($theme);
+  $typography: mat.get-typography-config($theme);
 
   @include mtx-tooltip-color($color);
   @include mtx-tooltip-typography($typography);

@@ -1,4 +1,5 @@
 @use '~@angular/material' as mat;
+@use '~@angular/material/core/density/private/all-density' as private-all-density;
 
 @import '../../extensions/theming.scss';
 
@@ -68,8 +69,8 @@ $dark-theme: mat.define-dark-theme(
 // The classes are applied conditionally based on the selected density in the dev-app layout
 // component.
 $density-scales: (-1, -2, minimum, maximum);
-@each $density in$density-scales {
+@each $density in $density-scales {
   .demo-density-#{$density} {
-    @include angular-material-density($density);
+    @include private-all-density.all-component-densities($density);
   }
 }

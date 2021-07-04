@@ -1,7 +1,7 @@
 @use '~@angular/material' as mat;
 
-@mixin mat-column-resize-color($config-or-theme) {
-  $config: mat-get-color-config($config-or-theme);
+@mixin color($config-or-theme) {
+  $config: mat.get-color-config($config-or-theme);
   $primary: map-get($config, primary);
   $foreground: map-get($config, foreground);
 
@@ -38,7 +38,7 @@
     right: 0;
     width: 1px;
     background: transparent;
-    transition: background 300ms cubic-bezier(0.55, 0, 0.55, 0.2);
+    transition: background 300ms cubic-bezier(.55, 0, .55, .2);
   }
 
   .mat-header-cell:not(.mat-resizable)::after {
@@ -76,9 +76,8 @@
     background: transparent;
     cursor: col-resize;
     height: 100%;
-    transition: background 300ms cubic-bezier(0.55, 0, 0.55, 0.2);
-    @include user-select(none);
-
+    transition: background 300ms cubic-bezier(.55, 0, .55, .2);
+    user-select: none;
     width: 100%;
 
     &:active {
@@ -97,25 +96,29 @@
   }
 }
 
-@mixin mat-column-resize-typography($config-or-theme) { /**   */ }
+@mixin typography($config-or-theme) {
+  /**   */
+}
 
-@mixin mat-column-resize-density($config-or-theme) { /**   */ }
+@mixin density($config-or-theme) {
+  /**   */
+}
 
-@mixin mat-column-resize-theme($theme-or-color-config) {
-  $theme: _mat-legacy-get-theme($theme-or-color-config);
-  @include _mat-check-duplicate-theme-styles($theme, 'mat-column-resize') {
-    $color: mat-get-color-config($theme);
-    $density: mat-get-density-config($theme);
-    $typography: mat-get-typography-config($theme);
+@mixin theme($theme-or-color-config) {
+  $theme: mat.private-legacy-get-theme($theme-or-color-config);
+  @include mat.private-check-duplicate-theme-styles($theme, 'mat-column-resize') {
+    $color: mat.get-color-config($theme);
+    $density: mat.get-density-config($theme);
+    $typography: mat.get-typography-config($theme);
 
     @if $color != null {
-      @include mat-column-resize-color($color);
+      @include color($color);
     }
     @if $density != null {
-      @include mat-column-resize-density($density);
+      @include density($density);
     }
     @if $typography != null {
-      @include mat-column-resize-typography($typography);
+      @include typography($typography);
     }
   }
 }
