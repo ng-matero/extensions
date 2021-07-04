@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin component-viewer-nav-theme($theme) {
   $primary: map-get($theme, primary);
@@ -9,7 +9,7 @@
   $nav-background-focus-opacity: if($is-dark-theme, .25, .08);
 
   .docs-component-viewer-nav-content {
-    border-right: 1px solid mat-color($foreground, divider);
+    border-right: 1px solid mat.get-color-from-palette($foreground, divider);
 
     &::-webkit-scrollbar-thumb {
       background: rgba(0, 0, 0, .26);
@@ -19,25 +19,25 @@
       color: map-get($foreground, secondary-text);
 
       &:hover {
-        color: mat-color($foreground, text);
+        color: mat.get-color-from-palette($foreground, text);
       }
 
       &.docs-component-viewer-sidenav-item-selected {
-        background: rgba(mat-color($primary, default), .15);
-        color: lighten(mat-color($primary, default), if($is-dark-theme, 25%, 0));
+        background: rgba(mat.get-color-from-palette($primary, default), .15);
+        color: lighten(mat.get-color-from-palette($primary, default), if($is-dark-theme, 25%, 0));
       }
 
       &.docs-component-viewer-sidenav-item-selected:hover {
-        background: rgba(mat-color($primary, default), .3);
+        background: rgba(mat.get-color-from-palette($primary, default), .3);
       }
     }
 
     .mat-list-item {
-      color: rgba(mat-color($foreground, secondary-text), .65);
+      color: rgba(mat.get-color-from-palette($foreground, secondary-text), .65);
     }
   }
 
   .nav-item-title {
-    color: rgba(mat-color($foreground, secondary-text), .35);
+    color: rgba(mat.get-color-from-palette($foreground, secondary-text), .35);
   }
 }

@@ -6,7 +6,7 @@ app-component-viewer {
   // spacing for the component viewer
   padding: 20px 50px;
 
-  @media ($mat-xsmall) {
+  @media (max-width: 599px) {
     padding-left: $content-padding-side-xs;
     padding-right: $content-padding-side-xs;
   }

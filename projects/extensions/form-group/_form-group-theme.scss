@@ -1,3 +1,5 @@
+@use '~@angular/material' as mat;
+
 @mixin mtx-form-group-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -9,37 +11,37 @@
   .mtx-form-group {
     .mtx-form-label {
       &.mtx-form-label-marker::after {
-        color: mat-color($warn);
+        color: mat.get-color-from-palette($warn);
       }
     }
   }
 
   .mtx-form-field-appearance-fluent {
     .mat-form-field-flex {
-      border: 1px solid rgba(mat-color($foreground, divider), .54);
+      border: 1px solid rgba(mat.get-color-from-palette($foreground, divider), .54);
 
       &:hover {
-        border: 1px solid rgba(mat-color($foreground, divider), .78);
+        border: 1px solid rgba(mat.get-color-from-palette($foreground, divider), .78);
       }
     }
 
     .mat-focused {
       .mat-form-field-flex {
-        border-color: mat-color($primary);
-        box-shadow: inset 0 0 0 1px mat-color($primary);
+        border-color: mat.get-color-from-palette($primary);
+        box-shadow: inset 0 0 0 1px mat.get-color-from-palette($primary);
       }
 
       &.mat-accent {
         .mat-form-field-flex {
-          border-color: mat-color($accent);
-          box-shadow: inset 0 0 0 1px mat-color($accent);
+          border-color: mat.get-color-from-palette($accent);
+          box-shadow: inset 0 0 0 1px mat.get-color-from-palette($accent);
         }
       }
 
       &.mat-warn {
         .mat-form-field-flex {
-          border-color: mat-color($warn);
-          box-shadow: inset 0 0 0 1px mat-color($warn);
+          border-color: mat.get-color-from-palette($warn);
+          box-shadow: inset 0 0 0 1px mat.get-color-from-palette($warn);
         }
       }
     }
@@ -48,21 +50,21 @@
       .mat-form-field-flex,
       &.mat-accent .mat-form-field-flex,
       &.mat-warn .mat-form-field-flex {
-        border-color: mat-color($warn);
-        box-shadow: inset 0 0 0 1px mat-color($warn);
+        border-color: mat.get-color-from-palette($warn);
+        box-shadow: inset 0 0 0 1px mat.get-color-from-palette($warn);
       }
     }
 
     .mat-form-field-disabled {
       .mat-form-field-flex {
-        background-color: mat-color($background, disabled-button);
-        border-color: mat-color($foreground, divider);
+        background-color: mat.get-color-from-palette($background, disabled-button);
+        border-color: mat.get-color-from-palette($foreground, divider);
       }
     }
 
     .mat-form-field-label,
     .mat-hint {
-      color: mat-color($foreground, secondary-text);
+      color: mat.get-color-from-palette($foreground, secondary-text);
     }
   }
 }

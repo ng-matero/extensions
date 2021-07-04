@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin mtx-select-theme($theme) {
   $warn: map-get($theme, warn);
@@ -7,16 +7,16 @@
 
   .ng-select {
     .ng-select-container {
-      color: mat-color($foreground, text);
+      color: mat.get-color-from-palette($foreground, text);
 
       .ng-value-container {
         .ng-placeholder {
-          color: mat-color($foreground, hint-text);
+          color: mat.get-color-from-palette($foreground, hint-text);
         }
 
         .ng-input {
           > input {
-            color: mat-color($foreground, text);
+            color: mat.get-color-from-palette($foreground, text);
           }
         }
       }
@@ -24,7 +24,7 @@
 
     &.ng-select-disabled {
       .ng-value {
-        color: mat-color($foreground, hint-text);
+        color: mat.get-color-from-palette($foreground, hint-text);
       }
     }
 
@@ -32,8 +32,8 @@
       .ng-select-container {
         .ng-value-container {
           .ng-value {
-            color: mat-color($foreground, text);
-            background-color: mat-color($background, unselected-chip);
+            color: mat.get-color-from-palette($foreground, text);
+            background-color: mat.get-color-from-palette($background, unselected-chip);
 
             &.ng-value-disabled {
               opacity: .4;
@@ -41,7 +41,7 @@
 
             .ng-value-icon {
               &:hover {
-                background-color: mat-color($foreground, divider);
+                background-color: mat.get-color-from-palette($foreground, divider);
               }
             }
           }
@@ -50,89 +50,89 @@
     }
 
     .ng-clear-wrapper {
-      color: mat-color($foreground, secondary-text);
+      color: mat.get-color-from-palette($foreground, secondary-text);
 
       &:hover .ng-clear {
-        color: mat-color($warn);
+        color: mat.get-color-from-palette($warn);
       }
     }
 
     .ng-arrow-wrapper .ng-arrow {
-      border-color: mat-color($foreground, secondary-text) transparent transparent;
+      border-color: mat.get-color-from-palette($foreground, secondary-text) transparent transparent;
     }
 
     &.ng-select-invalid {
       .ng-arrow-wrapper .ng-arrow {
-        border-color: mat-color($warn) transparent transparent;
+        border-color: mat.get-color-from-palette($warn) transparent transparent;
       }
     }
 
     &.ng-select-opened {
       .ng-arrow-wrapper .ng-arrow {
-        border-color: transparent transparent mat-color($foreground, secondary-text);
+        border-color: transparent transparent mat.get-color-from-palette($foreground, secondary-text);
       }
     }
 
     &.ng-select-opened.ng-select-invalid {
       .ng-arrow-wrapper .ng-arrow {
-        border-color: transparent transparent mat-color($warn);
+        border-color: transparent transparent mat.get-color-from-palette($warn);
       }
     }
   }
 
   .ng-dropdown-panel {
-    background-color: mat-color($background, card);
+    background-color: mat.get-color-from-palette($background, card);
 
     &.multiple {
       .ng-option {
         &.selected {
-          background: mat-color($foreground, divider);
+          background: mat.get-color-from-palette($foreground, divider);
         }
 
         &.marked {
-          background: mat-color($background, hover);
+          background: mat.get-color-from-palette($background, hover);
         }
       }
     }
 
     .ng-dropdown-header {
-      border-bottom: 1px solid mat-color($foreground, divider);
+      border-bottom: 1px solid mat.get-color-from-palette($foreground, divider);
     }
 
     .ng-dropdown-footer {
-      border-top: 1px solid mat-color($foreground, divider);
+      border-top: 1px solid mat.get-color-from-palette($foreground, divider);
     }
 
     .ng-dropdown-panel-items {
       .ng-optgroup {
-        color: mat-color($foreground, secondary-text);
+        color: mat.get-color-from-palette($foreground, secondary-text);
 
         &.ng-option-marked {
-          background: mat-color($background, hover);
+          background: mat.get-color-from-palette($background, hover);
         }
 
         &.ng-option-selected {
-          background: mat-color($foreground, divider);
+          background: mat.get-color-from-palette($foreground, divider);
         }
       }
 
       .ng-option {
-        color: mat-color($foreground, text);
+        color: mat.get-color-from-palette($foreground, text);
 
         &.ng-option-marked {
-          background: mat-color($background, hover);
+          background: mat.get-color-from-palette($background, hover);
         }
 
         &.ng-option-selected {
-          background: mat-color($foreground, divider);
+          background: mat.get-color-from-palette($foreground, divider);
         }
 
         &.ng-option-disabled {
-          color: mat-color($foreground, hint-text);
+          color: mat.get-color-from-palette($foreground, hint-text);
         }
 
         .ng-tag-label {
-          color: mat-color($foreground, hint-text);
+          color: mat.get-color-from-palette($foreground, hint-text);
         }
       }
     }

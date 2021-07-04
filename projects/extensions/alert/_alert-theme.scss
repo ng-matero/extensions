@@ -1,33 +1,33 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin mtx-alert-theme($theme) {
   $background: map-get($theme, background);
 
   .mtx-alert-ref {
-    background-color: mat-color($background, card);
+    background-color: mat.get-color-from-palette($background, card);
   }
 
   .mtx-alert-info .mtx-alert-ref {
-    background-color: mat-color($mat-blue, 500);
-    border-color: mat-color($mat-blue, 500);
+    background-color: mat.get-color-from-palette(mat.$blue-palette, 500);
+    border-color: mat.get-color-from-palette(mat.$blue-palette, 500);
     color: white;
   }
 
   .mtx-alert-success .mtx-alert-ref {
-    background-color: mat-color($mat-green, 500);
-    border-color: mat-color($mat-green, 500);
+    background-color: mat.get-color-from-palette(mat.$green-palette, 500);
+    border-color: mat.get-color-from-palette(mat.$green-palette, 500);
     color: white;
   }
 
   .mtx-alert-warning .mtx-alert-ref {
-    background-color: mat-color($mat-orange, 500);
-    border-color: mat-color($mat-orange, 500);
+    background-color: mat.get-color-from-palette(mat.$orange-palette, 500);
+    border-color: mat.get-color-from-palette(mat.$orange-palette, 500);
     color: white;
   }
 
   .mtx-alert-danger .mtx-alert-ref {
-    background-color: mat-color($mat-red, 500);
-    border-color: mat-color($mat-red, 500);
+    background-color: mat.get-color-from-palette(mat.$red-palette, 500);
+    border-color: mat.get-color-from-palette(mat.$red-palette, 500);
     color: white;
   }
 }

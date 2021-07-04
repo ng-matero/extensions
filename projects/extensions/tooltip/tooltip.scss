@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/cdk' as cdk;
 
 $mtx-tooltip-horizontal-padding: 8px;
 $mtx-tooltip-max-width: 250px;
@@ -24,7 +24,7 @@ $mtx-tooltip-handset-margin: 24px;
   overflow: hidden;
   text-overflow: ellipsis;
 
-  @include cdk-high-contrast(active, off) {
+  @include cdk.high-contrast(active, off) {
     outline: solid 1px;
   }
 }

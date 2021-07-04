@@ -1,3 +1,5 @@
+@use '~@angular/material' as mat;
+
 @mixin home-page-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -7,19 +9,19 @@
 
   app-homepage {
     .docs-header-background {
-      background: mat-color($primary);
+      background: mat.get-color-from-palette($primary);
     }
 
     .docs-header-headline {
-      color: mat-color($primary, default-contrast);
+      color: mat.get-color-from-palette($primary, default-contrast);
     }
 
     .docs-header-start {
-      color: mat-color($primary);
+      color: mat.get-color-from-palette($primary);
     }
 
     .docs-homepage-row {
-      color: mat-color($foreground, secondary-text);
+      color: mat.get-color-from-palette($foreground, secondary-text);
     }
   }
 }

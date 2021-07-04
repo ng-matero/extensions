@@ -1,13 +1,13 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin mat-column-resize-color($config-or-theme) {
   $config: mat-get-color-config($config-or-theme);
   $primary: map-get($config, primary);
   $foreground: map-get($config, foreground);
 
-  $non-resizable-hover-divider: mat-color($foreground, divider);
-  $resizable-hover-divider: mat-color($primary, 200);
-  $resizable-active-divider: mat-color($primary, 500);
+  $non-resizable-hover-divider: mat.get-color-from-palette($foreground, divider);
+  $resizable-hover-divider: mat.get-color-from-palette($primary, 200);
+  $resizable-active-divider: mat.get-color-from-palette($primary, 500);
 
   // Required for resizing to work properly.
   .mat-column-resize-table.cdk-column-resize-with-resized-column {
@@ -38,7 +38,7 @@
     right: 0;
     width: 1px;
     background: transparent;
-    transition: background $swift-ease-in-duration $swift-ease-in-timing-function;
+    transition: background 300ms cubic-bezier(0.55, 0, 0.55, 0.2);
   }
 
   .mat-header-cell:not(.mat-resizable)::after {
@@ -76,7 +76,7 @@
     background: transparent;
     cursor: col-resize;
     height: 100%;
-    transition: background $swift-ease-in-duration $swift-ease-in-timing-function;
+    transition: background 300ms cubic-bezier(0.55, 0, 0.55, 0.2);
     @include user-select(none);
 
     width: 100%;

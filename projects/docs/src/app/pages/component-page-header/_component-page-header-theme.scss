@@ -1,3 +1,5 @@
+@use '~@angular/material' as mat;
+
 @mixin component-page-header-theme($theme) {
   $primary: map-get($theme, primary);
   $accent: map-get($theme, accent);
@@ -7,6 +9,6 @@
   $is-dark-theme: map-get($theme, is-dark);
 
   .component-page-header {
-    background-color: mat-color($primary, default);
+    background-color: mat.get-color-from-palette($primary, default);
   }
 }

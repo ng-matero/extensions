@@ -1,3 +1,4 @@
+@use '~@angular/material' as mat;
 @import '~@angular/material/theming';
 @import './column-resize/column-resize';
 
@@ -8,11 +9,11 @@
   $foreground: map-get($theme, foreground);
 
   .mtx-grid {
-    border: 1px solid rgba(mat-color($foreground, secondary-text), .2);
+    border: 1px solid rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
 
     .mat-table-sticky-left,
     .mat-table-sticky-right {
-      border-color: mat-color($foreground, divider);
+      border-color: mat.get-color-from-palette($foreground, divider);
     }
 
     .mat-table {
@@ -38,51 +39,51 @@
 
     .mat-cell {
       &.selected {
-        box-shadow: inset 0 0 0 1px mat-color($accent);
+        box-shadow: inset 0 0 0 1px mat.get-color-from-palette($accent);
       }
     }
 
     .mat-footer-row {
       .mat-footer-cell {
-        border-top: 1px solid mat-color($foreground, divider);
+        border-top: 1px solid mat.get-color-from-palette($foreground, divider);
         border-bottom-width: 0;
-        background-color: mat-color($background, app-bar);
+        background-color: mat.get-color-from-palette($background, app-bar);
       }
     }
 
     .mat-paginator {
-      border-top: 1px solid rgba(mat-color($foreground, secondary-text), .2);
+      border-top: 1px solid rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
     }
   }
 
   .mtx-grid-toolbar {
-    border-bottom: 1px solid rgba(mat-color($foreground, secondary-text), .2);
+    border-bottom: 1px solid rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
   }
 
   .mtx-grid-sidebar {
-    border-color: rgba(mat-color($foreground, secondary-text), .2);
+    border-color: rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
   }
 
   .mtx-grid-statusbar {
-    border-top: 1px solid rgba(mat-color($foreground, secondary-text), .2);
+    border-top: 1px solid rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
   }
 
   .mtx-grid-column-menu-item {
-    color: mat-color($foreground, text);
+    color: mat.get-color-from-palette($foreground, text);
   }
 
   .mtx-grid-column-menu-header,
   .mtx-grid-column-menu-footer {
-    color: mat-color($foreground, text);
-    background-color: mat-color($background, card);
+    color: mat.get-color-from-palette($foreground, text);
+    background-color: mat.get-color-from-palette($background, card);
   }
 
   .mtx-grid-column-menu-header {
-    border-bottom: 1px solid mat-color($foreground, divider);
+    border-bottom: 1px solid mat.get-color-from-palette($foreground, divider);
   }
 
   .mtx-grid-column-menu-footer {
-    border-top: 1px solid mat-color($foreground, divider);
+    border-top: 1px solid mat.get-color-from-palette($foreground, divider);
   }
 
   @include mat-column-resize-color($theme);

@@ -1,3 +1,5 @@
+@use '~@angular/material' as mat;
+
 @mixin mtx-text3d-theme($theme) {
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
@@ -9,11 +11,11 @@
 
       &:not(:first-child) {
         text-shadow: 0 0 20px rgba(black, .12);
-        color: mat-color($mat-gray, 100);
+        color: mat.get-color-from-palette(mat.$gray-palette, 100);
       }
 
       &:first-child {
-        color: mat-color($mat-gray, 900);
+        color: mat.get-color-from-palette(mat.$gray-palette, 900);
       }
     }
   }

@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 $mtx-tooltip-target-height: 22px;
 $mtx-tooltip-font-size: 12px;
@@ -14,7 +14,7 @@ $mtx-tooltip-handset-vertical-padding:
   $background: map-get($config, background);
 
   .mtx-tooltip {
-    background: mat-color($background, tooltip, .9);
+    background: mat.get-color-from-palette($background, tooltip, .9);
   }
 }
 

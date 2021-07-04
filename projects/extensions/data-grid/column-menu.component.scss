@@ -1,4 +1,4 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 .mtx-grid-column-menu {
   .mat-menu-content {
@@ -60,7 +60,7 @@
   }
 
   &.cdk-drag-preview {
-    @include mat-elevation(2);
+    @include mat.elevation(2);
   }
 
   &.cdk-drag-placeholder {

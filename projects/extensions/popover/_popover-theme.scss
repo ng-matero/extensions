@@ -1,22 +1,22 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 @mixin mtx-popover-theme($theme) {
   $background: map-get($theme, background);
   $foreground: map-get($theme, foreground);
 
   .mtx-popover-panel {
-    color: mat-color($foreground, text);
-    background-color: mat-color($background, card);
+    color: mat.get-color-from-palette($foreground, text);
+    background-color: mat.get-color-from-palette($background, card);
   }
 
   .mtx-popover-below {
     .mtx-popover-direction-arrow {
       &::before {
-        border-bottom-color: rgba(mat-color($foreground, divider), .2);
+        border-bottom-color: rgba(mat.get-color-from-palette($foreground, divider), .2);
       }
 
       &::after {
-        border-bottom-color: mat-color($background, card);
+        border-bottom-color: mat.get-color-from-palette($background, card);
       }
     }
   }
@@ -24,11 +24,11 @@
   .mtx-popover-above {
     .mtx-popover-direction-arrow {
       &::before {
-        border-top-color: rgba(mat-color($foreground, divider), .2);
+        border-top-color: rgba(mat.get-color-from-palette($foreground, divider), .2);
       }
 
       &::after {
-        border-top-color: mat-color($background, card);
+        border-top-color: mat.get-color-from-palette($background, card);
       }
     }
   }
