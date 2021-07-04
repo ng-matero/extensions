@@ -61,7 +61,6 @@
             "main": "projects/docs/src/main.ts",
             "polyfills": "projects/docs/src/polyfills.ts",
             "tsConfig": "projects/docs/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/docs/src/favicon.ico",
               "projects/docs/src/assets"
@@ -69,7 +68,13 @@
             "styles": [
               "projects/docs/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -83,7 +88,6 @@
               "outputHashing": "all",
               "sourceMap": false,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -100,7 +104,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -182,7 +187,6 @@
             "main": "projects/dev-app/src/main.ts",
             "polyfills": "projects/dev-app/src/polyfills.ts",
             "tsConfig": "projects/dev-app/tsconfig.app.json",
-            "aot": true,
             "assets": [
               "projects/dev-app/src/favicon.ico",
               "projects/dev-app/src/assets"
@@ -190,7 +194,13 @@
             "styles": [
               "projects/dev-app/src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -220,7 +230,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",

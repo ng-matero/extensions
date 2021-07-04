@@ -11,10 +11,10 @@
     "postinstall": "ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "serve:dev-app": "ng serve --project=dev-app",
     "serve:docs": "ng serve --project=docs",
-    "build:docs": "ng build docs --prod --baseHref=/extensions/",
+    "build:docs": "ng build docs --configuration production --baseHref=/extensions/",
     "deploy:docs": "angular-cli-ghpages --no-silent --dir=dist/docs",
     "release": "npm run build:docs && npm run deploy:docs",
-    "build:lib": "ng build extensions --prod",
+    "build:lib": "ng build extensions --configuration production",
     "copy:scss": "gulp --gulpfile gulpfile.js",
     "publish": "npm run build:lib && npm run copy:scss && cd dist/extensions && npm publish --access public"
   },
@@ -44,8 +44,8 @@
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.1102.13",
-    "@angular/cli": "~11.2.13",
+    "@angular-devkit/build-angular": "~12.1.1",
+    "@angular/cli": "~12.1.1",
     "@angular/compiler-cli": "~12.1.1",
     "@angular/language-service": "~12.1.1",
     "@types/jasmine": "~3.7.7",
@@ -64,7 +64,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.6.0",
     "markdown-loader": "^6.0.0",
-    "ng-packagr": "^11.2.4",
+    "ng-packagr": "^12.1.0",
     "prettier": "^2.3.2",
     "protractor": "~7.0.0",
     "raw-loader": "^4.0.2",
