@@ -1,6 +1,6 @@
-export type MtxPopoverPositionX = 'before' | 'after' | 'center';
+export type MtxPopoverPositionArrow = 'before' | 'after' | 'center';
 
-export type MtxPopoverPositionY = 'above' | 'below';
+export type MtxPopoverPosition = 'above' | 'below' | 'left' | 'right';
 
 export type MtxPopoverTriggerEvent = 'click' | 'hover' | 'none';
 

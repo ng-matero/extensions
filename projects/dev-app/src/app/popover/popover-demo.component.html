@@ -1,46 +1,56 @@
-<button mat-raised-button color="primary"
-        #popoverTrigger="mtxPopoverTrigger"
-        [mtxPopoverTriggerFor]="popover"
-        [mtxPopoverTriggerOn]="'click'"
-        (popoverOpened)="log()"
-        (popoverClosed)="log()">
+<button
+  mat-raised-button
+  color="primary"
+  #popoverTrigger="mtxPopoverTrigger"
+  [mtxPopoverTriggerFor]="popover"
+  [mtxPopoverTriggerOn]="'click'"
+  (popoverOpened)="log()"
+  (popoverClosed)="log()"
+>
   Show Popover
 </button>
 
-<mtx-popover #popover="mtxPopover"
-             [xPosition]="'after'"
-             [yPosition]="'above'"
-             [enterDelay]=""
-             [leaveDelay]=""
-             [arrowOffsetX]="28"
-             [overlapTrigger]="false"
-             [closeOnPanelClick]="true"
-             [closeOnBackdropClick]="true"
-             (closed)="log()">
-  <mat-card style="max-width: 100px;">
+<mtx-popover
+  #popover="mtxPopover"
+  [xPosition]="'after'"
+  [yPosition]="'above'"
+  [enterDelay]=""
+  [leaveDelay]=""
+  [arrowOffsetX]="28"
+  [overlapTrigger]="false"
+  [closeOnPanelClick]="true"
+  [closeOnBackdropClick]="true"
+  (closed)="log()"
+>
+  <mat-card style="max-width: 100px">
     <mat-card-content>
       A material design popover component created using Angular with the Angular CDK.
     </mat-card-content>
   </mat-card>
 </mtx-popover>
 
-<button mat-raised-button color="accent"
-        #popoverTrigger2="mtxPopoverTrigger"
-        [mtxPopoverTriggerFor]="popover2"
-        [mtxPopoverTriggerOn]="'hover'">
+<button
+  mat-raised-button
+  color="accent"
+  #popoverTrigger2="mtxPopoverTrigger"
+  [mtxPopoverTriggerFor]="popover2"
+  [mtxPopoverTriggerOn]="'hover'"
+>
   Show Popover2
 </button>
 
-<mtx-popover #popover2="mtxPopover"
-             [xPosition]="'center'"
-             [yPosition]=""
-             [xOffset]="10"
-             [yOffset]="10"
-             [enterDelay]=""
-             [leaveDelay]=""
-             [overlapTrigger]="false"
-             [closeOnPanelClick]="false">
-  <div style="max-width: 200px;">
+<mtx-popover
+  #popover2="mtxPopover"
+  [xPosition]="'center'"
+  [yPosition]="'right'"
+  [xOffset]="10"
+  [yOffset]="10"
+  [enterDelay]=""
+  [leaveDelay]=""
+  [overlapTrigger]="false"
+  [closeOnPanelClick]="false"
+>
+  <div style="max-width: 200px">
     A material design popover component created using Angular with the Angular CDK.
   </div>
 </mtx-popover>

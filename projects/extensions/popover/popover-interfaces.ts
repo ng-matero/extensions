@@ -1,15 +1,15 @@
 import { ElementRef, EventEmitter, NgZone, TemplateRef } from '@angular/core';
 import {
-  MtxPopoverPositionX,
-  MtxPopoverPositionY,
+  MtxPopoverPositionArrow,
+  MtxPopoverPosition,
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
 } from './popover-types';
 
 export interface MtxPopoverPanel {
   triggerEvent: MtxPopoverTriggerEvent;
-  xPosition: MtxPopoverPositionX;
-  yPosition: MtxPopoverPositionY;
+  xPosition: MtxPopoverPositionArrow;
+  yPosition: MtxPopoverPosition;
   xOffset: number;
   yOffset: number;
   enterDelay: number;
@@ -26,14 +26,14 @@ export interface MtxPopoverPanel {
   zone: NgZone;
   closed: EventEmitter<void>;
   setCurrentStyles: () => void;
-  setPositionClasses: (x: MtxPopoverPositionX, y: MtxPopoverPositionY) => void;
+  setPositionClasses: (x: MtxPopoverPositionArrow, y: MtxPopoverPosition) => void;
   _emitCloseEvent: () => void;
 }
 
 export interface MtxPopoverConfig {
   triggerEvent: MtxPopoverTriggerEvent;
-  xPosition: MtxPopoverPositionX;
-  yPosition: MtxPopoverPositionY;
+  xPosition: MtxPopoverPositionArrow;
+  yPosition: MtxPopoverPosition;
   xOffset: number;
   yOffset: number;
   enterDelay: number;

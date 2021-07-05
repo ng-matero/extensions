@@ -12,7 +12,7 @@
   .mtx-popover-below {
     .mtx-popover-direction-arrow {
       &::before {
-        border-bottom-color: rgba(mat-color($foreground, divider), .2);
+        border-bottom-color: rgba(mat-color($foreground, divider), 0.2);
       }
 
       &::after {
@@ -24,11 +24,35 @@
   .mtx-popover-above {
     .mtx-popover-direction-arrow {
       &::before {
-        border-top-color: rgba(mat-color($foreground, divider), .2);
+        border-top-color: rgba(mat-color($foreground, divider), 0.2);
       }
 
       &::after {
         border-top-color: mat-color($background, card);
+      }
+    }
+  }
+
+  .mtx-popover-right {
+    .mtx-popover-direction-arrow {
+      &::before {
+        border-right-color: rgba(mat-color($foreground, divider), 0.2);
+      }
+
+      &::after {
+        border-right-color: mat-color($background, card);
+      }
+    }
+  }
+
+  .mtx-popover-left {
+    .mtx-popover-direction-arrow {
+      &::before {
+        border-left-color: rgba(mat-color($foreground, divider), 0.2);
+      }
+
+      &::after {
+        border-left-color: mat-color($background, card);
       }
     }
   }

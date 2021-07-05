@@ -14,28 +14,30 @@
   <mat-radio-group [(ngModel)]="yPosition">
     <mat-radio-button value="above">above</mat-radio-button>
     <mat-radio-button value="below">below</mat-radio-button>
+    <mat-radio-button value="left">left</mat-radio-button>
+    <mat-radio-button value="right">right</mat-radio-button>
   </mat-radio-group>
 </section>
 
 <section>
   <mat-form-field>
     <mat-label>xOffset</mat-label>
-    <input matInput type="number" [(ngModel)]="xOffset">
+    <input matInput type="number" [(ngModel)]="xOffset" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>yOffset</mat-label>
-    <input matInput type="number" [(ngModel)]="yOffset">
+    <input matInput type="number" [(ngModel)]="yOffset" />
   </mat-form-field>
 </section>
 
 <section>
   <mat-form-field>
     <mat-label>enterDelay</mat-label>
-    <input matInput type="number" [(ngModel)]="enterDelay">
+    <input matInput type="number" [(ngModel)]="enterDelay" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>leaveDelay</mat-label>
-    <input matInput type="number" [(ngModel)]="leaveDelay">
+    <input matInput type="number" [(ngModel)]="leaveDelay" />
   </mat-form-field>
 </section>
 
@@ -49,23 +51,28 @@
 
 <h2>Result</h2>
 
-<button mat-raised-button color="primary"
-        #popoverTrigger="mtxPopoverTrigger"
-        [mtxPopoverTriggerFor]="popover"
-        mtxPopoverTriggerOn="hover">
+<button
+  mat-raised-button
+  color="primary"
+  #popoverTrigger="mtxPopoverTrigger"
+  [mtxPopoverTriggerFor]="popover"
+  mtxPopoverTriggerOn="hover"
+>
   Show Popover With Hover
 </button>
 
-<mtx-popover #popover="mtxPopover"
-             [xPosition]="xPosition"
-             [yPosition]="yPosition"
-             [enterDelay]="enterDelay"
-             [leaveDelay]="leaveDelay"
-             [xOffset]="xOffset"
-             [yOffset]="yOffset"
-             [overlapTrigger]="overlapTrigger"
-             [closeOnPanelClick]="closeOnPanelClick"
-             [closeOnBackdropClick]="true">
+<mtx-popover
+  #popover="mtxPopover"
+  [xPosition]="xPosition"
+  [yPosition]="yPosition"
+  [enterDelay]="enterDelay"
+  [leaveDelay]="leaveDelay"
+  [xOffset]="xOffset"
+  [yOffset]="yOffset"
+  [overlapTrigger]="overlapTrigger"
+  [closeOnPanelClick]="closeOnPanelClick"
+  [closeOnBackdropClick]="true"
+>
   <mat-card>
     <mat-card-content>
       A material design popover component created using Angular with the Angular CDK.
@@ -73,21 +80,26 @@
   </mat-card>
 </mtx-popover>
 
-<button mat-raised-button color="accent"
-        #popoverTrigger2="mtxPopoverTrigger"
-        [mtxPopoverTriggerFor]="popover2"
-        mtxPopoverTriggerOn="click">
+<button
+  mat-raised-button
+  color="accent"
+  #popoverTrigger2="mtxPopoverTrigger"
+  [mtxPopoverTriggerFor]="popover2"
+  mtxPopoverTriggerOn="click"
+>
   Show Popover With Click
 </button>
 
-<mtx-popover #popover2="mtxPopover"
-             [xPosition]="xPosition"
-             [yPosition]="yPosition"
-             [xOffset]="xOffset"
-             [yOffset]="yOffset"
-             [overlapTrigger]="overlapTrigger"
-             [closeOnPanelClick]="closeOnPanelClick"
-             [closeOnBackdropClick]="true">
+<mtx-popover
+  #popover2="mtxPopover"
+  [xPosition]="xPosition"
+  [yPosition]="yPosition"
+  [xOffset]="xOffset"
+  [yOffset]="yOffset"
+  [overlapTrigger]="overlapTrigger"
+  [closeOnPanelClick]="closeOnPanelClick"
+  [closeOnBackdropClick]="true"
+>
   <mat-card>
     <mat-card-content>
       A material design popover component created using Angular with the Angular CDK.
