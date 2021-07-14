@@ -1,41 +1,41 @@
+@use 'sass:map';
 @use '~@angular/material' as mat;
 
-$mtx-tooltip-target-height: 22px;
-$mtx-tooltip-font-size: 12px;
-$mtx-tooltip-vertical-padding: ($mtx-tooltip-target-height - $mtx-tooltip-font-size) * .5;
+$target-height: 22px;
+$font-size: 12px;
+$vertical-padding: ($target-height - $font-size) * .5;
 
-$mtx-tooltip-handset-target-height: 30px;
-$mtx-tooltip-handset-font-size: 14px;
-$mtx-tooltip-handset-vertical-padding:
-    ($mtx-tooltip-handset-target-height - $mtx-tooltip-handset-font-size) * .5;
+$handset-target-height: 30px;
+$handset-font-size: 14px;
+$handset-vertical-padding: ($handset-target-height - $handset-font-size) * .5;
 
-@mixin mtx-tooltip-color($config-or-theme) {
+@mixin color($config-or-theme) {
   $config: mat.get-color-config($config-or-theme);
-  $background: map-get($config, background);
+  $background: map.get($config, background);
 
   .mtx-tooltip {
     background: mat.get-color-from-palette($background, tooltip, .9);
   }
 }
 
-@mixin mtx-tooltip-typography($config-or-theme) {
+@mixin typography($config-or-theme) {
   .mtx-tooltip {
-    padding-top: $mtx-tooltip-vertical-padding;
-    padding-bottom: $mtx-tooltip-vertical-padding;
-    font-size: $mtx-tooltip-font-size;
+    padding-top: $vertical-padding;
+    padding-bottom: $vertical-padding;
+    font-size: $font-size;
   }
 
   .mtx-tooltip-handset {
-    padding-top: $mtx-tooltip-handset-vertical-padding;
-    padding-bottom: $mtx-tooltip-handset-vertical-padding;
-    font-size: $mtx-tooltip-handset-font-size;
+    padding-top: $handset-vertical-padding;
+    padding-bottom: $handset-vertical-padding;
+    font-size: $handset-font-size;
   }
 }
 
-@mixin mtx-tooltip-theme($theme) {
+@mixin theme($theme) {
   $color: mat.get-color-config($theme);
   $typography: mat.get-typography-config($theme);
 
-  @include mtx-tooltip-color($color);
-  @include mtx-tooltip-typography($typography);
+  @include color($color);
+  @include typography($typography);
 }

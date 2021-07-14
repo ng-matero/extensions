@@ -1,8 +1,9 @@
+@use 'sass:map';
 @use '~@angular/material' as mat;
 
-@mixin mtx-popover-theme($theme) {
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
+@mixin theme($theme) {
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
 
   .mtx-popover-panel {
     color: mat.get-color-from-palette($foreground, text);

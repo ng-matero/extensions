@@ -1,11 +1,12 @@
+@use 'sass:map';
 @use '~@angular/material' as mat;
 @use './column-resize/column-resize';
 
-@mixin mtx-grid-theme($theme) {
-  $is-dark-theme: map-get($theme, is-dark);
-  $accent: map-get($theme, accent);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
+@mixin theme($theme) {
+  $is-dark-theme: map.get($theme, is-dark);
+  $accent: map.get($theme, accent);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
 
   .mtx-grid {
     border: 1px solid rgba(mat.get-color-from-palette($foreground, secondary-text), .2);

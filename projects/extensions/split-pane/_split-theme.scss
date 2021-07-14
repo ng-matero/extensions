@@ -1,8 +1,9 @@
+@use 'sass:map';
 @use '~@angular/material' as mat;
 
-@mixin mtx-split-theme($theme) {
-  $accent: map-get($theme, accent);
-  $foreground: map-get($theme, foreground);
+@mixin theme($theme) {
+  $accent: map.get($theme, accent);
+  $foreground: map.get($theme, foreground);
 
   .mtx-split {
     > .mtx-split-gutter {

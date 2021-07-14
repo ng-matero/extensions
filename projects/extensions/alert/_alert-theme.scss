@@ -1,7 +1,8 @@
+@use 'sass:map';
 @use '~@angular/material' as mat;
 
-@mixin mtx-alert-theme($theme) {
-  $background: map-get($theme, background);
+@mixin theme($theme) {
+  $background: map.get($theme, background);
 
   .mtx-alert-ref {
     background-color: mat.get-color-from-palette($background, card);

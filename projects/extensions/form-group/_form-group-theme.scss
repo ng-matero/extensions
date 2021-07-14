@@ -1,12 +1,13 @@
+@use 'sass:map';
 @use '~@angular/material' as mat;
 
-@mixin mtx-form-group-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
-  $is-dark-theme: map-get($theme, is-dark);
+@mixin theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
+  $is-dark-theme: map.get($theme, is-dark);
 
   .mtx-form-group {
     .mtx-form-label {

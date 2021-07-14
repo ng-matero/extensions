@@ -1,7 +1,8 @@
+@use 'sass:map';
 @use '~@angular/material' as mat;
 
-@mixin mtx-progress-theme($theme) {
-  $background: map-get($theme, background);
+@mixin theme($theme) {
+  $background: map.get($theme, background);
 
   .mtx-progress {
     background-color: mat.get-color-from-palette($background, hover);
