@@ -1,30 +1,27 @@
-@import '../../../extensions/theming';
+@use '../app/pages/component-category-list/component-category-list-theme';
+@use '../app/pages/component-page-header/component-page-header-theme';
+@use '../app/pages/component-nav/component-nav-theme';
+@use '../app/pages/component-sidenav/component-sidenav-theme';
+@use '../app/pages/component-viewer/component-viewer-theme';
+@use '../app/pages/homepage/homepage-theme';
+@use '../app/shared/example-viewer/example-viewer-theme';
+@use '../app/shared/table-of-contents/table-of-contents-theme';
 
-@import '../app/pages/component-category-list/component-category-list-theme';
-@import '../app/pages/component-page-header/component-page-header-theme';
-@import '../app/pages/component-nav/component-nav-theme';
-@import '../app/pages/component-sidenav/component-sidenav-theme';
-@import '../app/pages/homepage/homepage-theme';
-@import '../app/shared/example-viewer/example-viewer-theme';
-@import '../app/shared/table-of-contents/table-of-contents-theme';
-
-@import './highlightjs/material-light';
-@import './highlightjs/material-dark';
+@use './highlightjs/material-light' as *;
+@use './highlightjs/material-dark' as *;
 
 // Styles for the docs app that are based on the current theme.
-@mixin extensions-docs-app-theme($theme) {
+@mixin theme($theme) {
   $is-dark-theme: map-get($theme, is-dark);
 
-  @include material-extensions-theme($theme);
-  @include material-extensions-experimental-theme($theme);
-
-  @include component-category-list-theme($theme);
-  @include component-page-header-theme($theme);
-  @include component-viewer-nav-theme($theme);
-  @include component-viewer-sidenav-theme($theme);
-  @include home-page-theme($theme);
-  @include example-viewer-theme($theme);
-  @include table-of-contents-theme($theme);
+  @include component-category-list-theme.theme($theme);
+  @include component-page-header-theme.theme($theme);
+  @include component-nav-theme.theme($theme);
+  @include component-sidenav-theme.theme($theme);
+  @include component-viewer-theme.theme($theme);
+  @include homepage-theme.theme($theme);
+  @include example-viewer-theme.theme($theme);
+  @include table-of-contents-theme.theme($theme);
 
   @if $is-dark-theme {
     @include highlightjs-material-dark();

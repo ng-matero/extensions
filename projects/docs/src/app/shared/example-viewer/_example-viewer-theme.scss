@@ -1,11 +1,12 @@
+@use 'sass:map';
 @use '~@angular/material' as mat;
 
-@mixin example-viewer-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
+@mixin theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
 
   example-viewer {
     .docs-example-viewer-wrapper {

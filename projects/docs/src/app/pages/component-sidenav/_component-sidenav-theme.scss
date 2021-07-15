@@ -1,8 +1,10 @@
-@mixin component-viewer-sidenav-theme($theme) {
-  $primary: map-get($theme, primary);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
-  $is-dark-theme: map-get($theme, is-dark);
+@use 'sass:map';
+
+@mixin theme($theme) {
+  $primary: map.get($theme, primary);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
+  $is-dark-theme: map.get($theme, is-dark);
   $nav-background-opacity: if($is-dark-theme, .2, .03);
   $nav-background-focus-opacity: if($is-dark-theme, .25, .08);
 }
