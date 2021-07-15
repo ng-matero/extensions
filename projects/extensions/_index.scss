@@ -1,6 +1,6 @@
 @forward '~photoviewer/dist/photoviewer';
-@forward './button/button-loading';
 
+@forward './button/button-loading';
 @forward './alert/alert-theme' as alert-* show alert-theme;
 @forward './data-grid/grid-theme' as grid-* show grid-theme;
 @forward './loader/loader-theme' as loader-* show loader-theme;

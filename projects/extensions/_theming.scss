@@ -1,31 +1,15 @@
-@import '~photoviewer/dist/photoviewer';
+@forward '~photoviewer/dist/photoviewer';
 
-@import './button/button-loading';
+@forward './button/button-loading';
+@forward './alert/alert-theme.import';
+@forward './data-grid/grid-theme.import';
+@forward './loader/loader-theme.import';
+@forward './popover/popover-theme.import';
+@forward './progress/progress-theme.import';
+@forward './select/select-theme.import';
+@forward './split-pane/split-theme.import';
+@forward './tooltip/tooltip-theme.import';
+@forward './form-group/form-group-theme.import';
+@forward './text3d/text3d-theme.import';
 
-@import './alert/alert-theme';
-@import './data-grid/grid-theme';
-@import './loader/loader-theme';
-@import './popover/popover-theme';
-@import './progress/progress-theme';
-@import './select/select-theme';
-@import './split-pane/split-theme';
-@import './tooltip/tooltip-theme';
-
-@mixin material-extensions-theme($theme) {
-  @include mtx-alert-theme($theme);
-  @include mtx-grid-theme($theme);
-  @include mtx-loader-theme($theme);
-  @include mtx-popover-theme($theme);
-  @include mtx-progress-theme($theme);
-  @include mtx-select-theme($theme);
-  @include mtx-split-theme($theme);
-  @include mtx-tooltip-theme($theme);
-}
-
-@import './form-group/form-group-theme';
-@import './text3d/text3d-theme';
-
-@mixin material-extensions-experimental-theme($theme) {
-  @include mtx-form-group-theme($theme);
-  @include mtx-text3d-theme($theme);
-}
+@forward './all-theme' show material-extensions-theme, material-extensions-experimental-theme;
