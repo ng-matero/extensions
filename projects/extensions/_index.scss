@@ -1,9 +1,14 @@
 @forward '~photoviewer/dist/photoviewer';
 @forward './button/button-loading';
-@forward './alert/alert-theme' as mtx-alert-* show mtx-alert-theme;
-@forward './data-grid/grid-theme' as mtx-grid-* show mtx-grid-theme;
-@forward './loader/loader-theme' as mtx-loader-* show mtx-loader-theme;
-@forward './popover/popover-theme' as mtx-popover-* show mtx-popover-theme;
-@forward './progress/progress-theme' as mtx-progress-* show mtx-progress-theme;
-@forward './split-pane/split-theme' as mtx-split-* show mtx-split-theme;
-@forward './tooltip/tooltip-theme' as mtx-tooltip-* show mtx-tooltip-theme;
+
+@forward './alert/alert-theme' as alert-* show alert-theme;
+@forward './data-grid/grid-theme' as grid-* show grid-theme;
+@forward './loader/loader-theme' as loader-* show loader-theme;
+@forward './popover/popover-theme' as popover-* show popover-theme;
+@forward './progress/progress-theme' as progress-* show progress-theme;
+@forward './split-pane/split-theme' as split-* show split-theme;
+@forward './tooltip/tooltip-theme' as tooltip-* show tooltip-theme;
+@forward './form-group/form-group-theme' as form-group-* show form-group-theme;
+@forward './text3d/text3d-theme' as text3d-* show text3d-theme;
+
+@forward './all-theme' show all-component-themes, all-experimental-component-themes;
