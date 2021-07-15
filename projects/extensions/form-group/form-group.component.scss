@@ -38,6 +38,10 @@
     margin-bottom: .25em;
 
     .mat-form-field-suffix {
+      .mat-datepicker-toggle {
+        display: flex;
+      }
+
       .mat-icon-button {
         height: 1.5em;
         width: 1.5em;
