@@ -29,7 +29,7 @@
     "@angular/forms": "~12.1.2",
     "@angular/localize": "~12.1.2",
     "@angular/material": "~12.1.2",
-    "@angular/platform-browser": "~12.1.1",
+    "@angular/platform-browser": "^12.1.2",
     "@angular/platform-browser-dynamic": "~12.1.2",
     "@angular/router": "~12.1.2",
     "@ng-select/ng-option-highlight": "0.0.6",
