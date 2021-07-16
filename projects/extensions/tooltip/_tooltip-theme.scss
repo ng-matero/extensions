@@ -32,10 +32,14 @@ $handset-vertical-padding: ($handset-target-height - $handset-font-size) * .5;
   }
 }
 
+@mixin density($config-or-theme) {}
+
 @mixin theme($theme) {
   $color: mat.get-color-config($theme);
+  $density: mat.get-density-config($theme);
   $typography: mat.get-typography-config($theme);
 
   @include color($color);
+  @include density($density);
   @include typography($typography);
 }

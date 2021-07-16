@@ -1,3 +1,3 @@
 @forward 'tooltip-theme' hide $target-height, $font-size, $vertical-padding,
   $handset-target-height, $handset-font-size, $handset-vertical-padding, theme;
-@forward 'tooltip-theme' as mtx-tooltip-*;
+@forward 'tooltip-theme' as mtx-tooltip-* hide mtx-tooltip-density;
