@@ -1,7 +1,13 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "rootDir": ".",
+    "baseUrl": "projects",
     "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -13,15 +19,15 @@
     "typeRoots": ["node_modules/@types"],
     "types": ["jasmine"],
     "lib": ["es2018", "dom"],
-    "rootDir": ".",
-    "baseUrl": "projects",
     "paths": {
       "@ng-matero/extensions": ["extensions"],
       "@ng-matero/extensions/*": ["extensions/*"]
     }
   },
   "angularCompilerOptions": {
-    "fullTemplateTypeCheck": true,
-    "strictInjectionParameters": true
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
   }
 }
