@@ -21,7 +21,7 @@ export class HeaderLinkComponent implements OnInit {
    * Id of the anchor element. Note that is uses "example" because we instantiate the
    * header link components through the ComponentPortal.
    */
-  @Input() example: string;
+  @Input() example!: string;
 
   private _text = '';
 

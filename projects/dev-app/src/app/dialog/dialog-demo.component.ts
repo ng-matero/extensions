@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./dialog-demo.component.scss'],
 })
 export class DialogDemoComponent implements OnInit {
-  animal: string;
+  animal!: string;
 
   constructor(private mtxDialog: MtxDialog, public translate: TranslateService) {}
 

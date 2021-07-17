@@ -41,7 +41,7 @@ interface Link {
   templateUrl: './table-of-contents.html',
 })
 export class TableOfContents implements OnInit, AfterViewInit, OnDestroy {
-  @Input() container: string;
+  @Input() container!: string;
 
   _linkSections: LinkSection[] = [];
   _links: Link[] = [];
@@ -69,7 +69,7 @@ export class TableOfContents implements OnInit, AfterViewInit, OnDestroy {
 
     this.subscriptions.add(
       this._route.fragment.subscribe(fragment => {
-        this._urlFragment = fragment;
+        this._urlFragment = fragment as string;
 
         const target = document.getElementById(this._urlFragment);
         if (target) {

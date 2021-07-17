@@ -30,11 +30,11 @@ export interface ExampleType {
   styleUrls: ['./example-viewer.scss'],
 })
 export class ExampleViewer implements OnInit, OnDestroy {
-  @Input() type: string;
-  @Input() exampleData: ExampleType;
+  @Input() type!: string;
+  @Input() exampleData!: ExampleType;
 
-  @ViewChild('demo', { read: ViewContainerRef, static: true }) demoRef: ViewContainerRef;
-  demoComponentRef: ComponentRef<any>;
+  @ViewChild('demo', { read: ViewContainerRef, static: true }) demoRef!: ViewContainerRef;
+  demoComponentRef!: ComponentRef<any>;
 
   /** Whether the source for the example is being displayed. */
   showSource = false;

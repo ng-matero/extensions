@@ -10,8 +10,8 @@ import { ComponentPageTitle } from '../page-title/page-title';
   styleUrls: ['./component-category-list.scss'],
 })
 export class ComponentCategoryList implements OnInit, OnDestroy {
-  params: Observable<Params>;
-  routeParamSubscription: Subscription;
+  params!: Observable<Params>;
+  routeParamSubscription!: Subscription;
 
   list = COMPONENTS_MENU;
 

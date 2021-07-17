@@ -8,7 +8,7 @@ import { MtxGridColumn } from '@ng-matero/extensions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  @ViewChild('statusTpl', { static: true }) statusTpl: TemplateRef<any>;
+  @ViewChild('statusTpl', { static: true }) statusTpl!: TemplateRef<any>;
 
   columns: MtxGridColumn[] = [];
 

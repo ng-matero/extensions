@@ -8,7 +8,7 @@ import { MtxGridColumn, MtxGridComponent } from '@ng-matero/extensions';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @ViewChild('grid') grid: MtxGridComponent;
+  @ViewChild('grid') grid!: MtxGridComponent;
 
   columns: MtxGridColumn[] = [
     { header: 'Name', field: 'name' },

@@ -17,8 +17,8 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./data-grid-demo.component.scss'],
 })
 export class DataGridDemoComponent implements OnInit, AfterViewInit {
-  @ViewChild('grid', { static: true }) grid: MtxGridComponent;
-  @ViewChild('grid2', { static: true }) grid2: MtxGridComponent;
+  @ViewChild('grid', { static: true }) grid!: MtxGridComponent;
+  @ViewChild('grid2', { static: true }) grid2!: MtxGridComponent;
 
   multiSelectable = true;
   hideRowSelectionCheckbox = false;
@@ -111,7 +111,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  list2 = [];
+  list2: any[] = [];
   columns2: MtxGridColumn[] = [
     { header: 'Position', field: 'position', minWidth: 200 },
     { header: 'Name', field: 'name', pinned: 'left' },

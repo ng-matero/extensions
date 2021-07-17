@@ -10,7 +10,7 @@ export class NavigationFocusService implements OnDestroy {
   private subscriptions = new Subscription();
   private navigationFocusRequests: HTMLElement[] = [];
   private skipLinkFocusRequests: HTMLElement[] = [];
-  private skipLinkHref: string|null;
+  private skipLinkHref!: string|null;
 
   readonly navigationEndEvents = this.router.events
     .pipe(filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd));

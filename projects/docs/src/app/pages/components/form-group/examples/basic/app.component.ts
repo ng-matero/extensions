@@ -24,9 +24,9 @@ export class AppComponent {
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
 
-  selectedFood: string;
+  selectedFood!: string;
 
-  text: string;
+  text!: string;
 
-  date: string;
+  date!: string;
 }
