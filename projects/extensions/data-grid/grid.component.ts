@@ -55,20 +55,20 @@ import { MtxGridService } from './grid.service';
   ],
 })
 export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDestroy {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('columnMenu') columnMenu: MtxGridColumnMenu;
-  @ViewChild('tableContainer') tableContainer: ElementRef<HTMLDivElement>;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild('columnMenu') columnMenu!: MtxGridColumnMenu;
+  @ViewChild('tableContainer') tableContainer!: ElementRef<HTMLDivElement>;
 
   dataSource = new MatTableDataSource();
 
-  @Input() displayedColumns: string[];
+  @Input() displayedColumns!: string[];
   @Input() columns: MtxGridColumn[] = [];
   @Input() data: any[] = [];
   @Input() length = 0;
   @Input() loading = false;
 
-  @Input() trackBy: TrackByFunction<any>;
+  @Input() trackBy!: TrackByFunction<any>;
 
   @Input() columnResizable = false;
 
@@ -84,13 +84,13 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() hidePageSize = false;
   @Output() page = new EventEmitter<PageEvent>();
 
-  @Input() paginationTemplate: TemplateRef<any>;
+  @Input() paginationTemplate!: TemplateRef<any>;
 
   // ===== Sort =====
 
   @Input() sortOnFront = true;
-  @Input() sortActive: string;
-  @Input() sortDirection: SortDirection;
+  @Input() sortActive!: string;
+  @Input() sortDirection!: SortDirection;
   @Input() sortDisableClear: boolean = false;
   @Input() sortDisabled: boolean = false;
   @Input() sortStart: 'asc' | 'desc' = 'asc';
@@ -107,7 +107,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   expansionRowStates: any[] = [];
 
   @Input() expandable = false;
-  @Input() expansionTemplate: TemplateRef<any>;
+  @Input() expansionTemplate!: TemplateRef<any>;
   @Output() expansionChange = new EventEmitter<any>();
 
   // ===== Row Selection =====
@@ -121,7 +121,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   @Input() rowSelectable = false;
   @Input() hideRowSelectionCheckbox = false;
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
-  @Input() rowClassFormatter: MtxGridRowClassFormatter;
+  @Input() rowClassFormatter!: MtxGridRowClassFormatter;
   @Output() rowSelectionChange = new EventEmitter<any[]>();
 
   // ===== Cell Selection =====
@@ -137,7 +137,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   @Input() showToolbar = false;
   @Input() toolbarTitle = '';
-  @Input() toolbarTemplate: TemplateRef<any>;
+  @Input() toolbarTemplate!: TemplateRef<any>;
 
   // ===== Column Menu =====
 
@@ -158,15 +158,15 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   @Input() showColumnMenuHeader = false;
   @Input() columnMenuHeaderText = 'Columns Header';
-  @Input() columnMenuHeaderTemplate: TemplateRef<any>;
+  @Input() columnMenuHeaderTemplate!: TemplateRef<any>;
   @Input() showColumnMenuFooter = false;
   @Input() columnMenuFooterText = 'Columns Footer';
-  @Input() columnMenuFooterTemplate: TemplateRef<any>;
+  @Input() columnMenuFooterTemplate!: TemplateRef<any>;
 
   // ===== No Result =====
 
   @Input() noResultText = 'No records found';
-  @Input() noResultTemplate: TemplateRef<any>;
+  @Input() noResultTemplate!: TemplateRef<any>;
 
   get _hasNoResult() {
     return (!this.data || this.data.length === 0) && !this.loading;
@@ -192,12 +192,12 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
   // ===== Side Bar =====
 
   @Input() showSidebar = false;
-  @Input() sidebarTemplate: TemplateRef<any>;
+  @Input() sidebarTemplate!: TemplateRef<any>;
 
   // ===== Status Bar =====
 
   @Input() showStatusbar = false;
-  @Input() statusbarTemplate: TemplateRef<any>;
+  @Input() statusbarTemplate!: TemplateRef<any>;
 
   constructor(
     private _dataGridSrv: MtxGridService,

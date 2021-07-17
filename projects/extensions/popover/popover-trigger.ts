@@ -53,13 +53,13 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   popoverOpened$ = new Subject<void>();
   popoverClosed$ = new Subject<void>();
 
-  private _portal: TemplatePortal<any>;
+  private _portal!: TemplatePortal<any>;
   private _overlayRef: OverlayRef | null = null;
   private _popoverOpen = false;
   private _halt = false;
-  private _backdropSubscription: Subscription;
-  private _positionSubscription: Subscription;
-  private _detachmentsSubscription: Subscription;
+  private _backdropSubscription!: Subscription;
+  private _positionSubscription!: Subscription;
+  private _detachmentsSubscription!: Subscription;
 
   private _mouseoverTimer: any;
 
@@ -70,13 +70,13 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   private _onDestroy = new Subject<void>();
 
   /** References the popover instance that the trigger is associated with. */
-  @Input('mtxPopoverTriggerFor') popover: MtxPopoverPanel;
+  @Input('mtxPopoverTriggerFor') popover!: MtxPopoverPanel;
 
   /** References the popover target instance that the trigger is associated with. */
-  @Input('mtxPopoverTargetAt') targetElement: MtxTarget;
+  @Input('mtxPopoverTargetAt') targetElement!: MtxTarget;
 
   /** Popover trigger event */
-  @Input('mtxPopoverTriggerOn') triggerEvent: MtxPopoverTriggerEvent;
+  @Input('mtxPopoverTriggerOn') triggerEvent!: MtxPopoverTriggerEvent;
 
   /** Event emitted when the associated popover is opened. */
   @Output() popoverOpened = new EventEmitter<void>();

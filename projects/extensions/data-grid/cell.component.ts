@@ -19,10 +19,10 @@ export class MtxGridCellComponent {
   @Input() rowData = {};
 
   /** Column definition */
-  @Input() colDef: MtxGridColumn;
+  @Input() colDef!: MtxGridColumn;
 
   /** All data */
-  @Input() data = [];
+  @Input() data: any[] = [];
 
   /** Whether show summary */
   @Input() summary = false;

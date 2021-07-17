@@ -24,13 +24,13 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 })
 export class MatButtonLoadingDirective implements OnChanges {
   private spinnerFactory: ComponentFactory<MatProgressSpinner>;
-  private spinner: ComponentRef<MatProgressSpinner> | null;
+  private spinner!: ComponentRef<MatProgressSpinner> | null;
 
   @Input()
-  loading: boolean;
+  loading!: boolean;
 
   @Input()
-  disabled: boolean;
+  disabled!: boolean;
 
   @Input()
   color: ThemePalette;

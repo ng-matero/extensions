@@ -23,8 +23,8 @@ import { MtxGridButtonType, MtxGridColumnSelectionItem } from './grid.interface'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxGridColumnMenuComponent {
-  @ViewChild('menu', { static: true }) menuPanel: MatMenu;
-  @ViewChild(MatMenuTrigger) menuTrigger: MatMenuTrigger;
+  @ViewChild('menu', { static: true }) menuPanel!: MatMenu;
+  @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
 
   @Input() columns: MtxGridColumnSelectionItem[] = [];
   @Input() selectable = true;
@@ -50,10 +50,10 @@ export class MtxGridColumnMenuComponent {
 
   @Input() showHeader = false;
   @Input() headerText = 'Columns Header';
-  @Input() headerTemplate: TemplateRef<any>;
+  @Input() headerTemplate!: TemplateRef<any>;
   @Input() showFooter = false;
   @Input() footerText = 'Columns Footer';
-  @Input() footerTemplate: TemplateRef<any>;
+  @Input() footerTemplate!: TemplateRef<any>;
 
   @Output() selectionChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
   @Output() sortChange = new EventEmitter<MtxGridColumnSelectionItem[]>();

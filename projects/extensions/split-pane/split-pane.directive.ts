@@ -98,7 +98,7 @@ export class MtxSplitPaneDirective implements OnInit, OnDestroy {
 
   ////
 
-  private transitionListener: () => void;
+  private transitionListener!: () => void;
   private readonly lockListeners: Array<() => void> = [];
 
   constructor(

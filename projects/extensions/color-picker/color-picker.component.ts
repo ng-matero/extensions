@@ -69,7 +69,7 @@ export class MtxColorPickerComponent
     this._id = value || this._uid;
     this.stateChanges.next();
   }
-  private _id: string;
+  private _id!: string;
 
   /** Placeholder to be shown if value is empty. */
   @Input()
@@ -80,7 +80,7 @@ export class MtxColorPickerComponent
     this._placeholder = value;
     this.stateChanges.next();
   }
-  private _placeholder: string;
+  private _placeholder!: string;
 
   /** Whether the input is focused. */
   get focused(): boolean {
@@ -122,7 +122,7 @@ export class MtxColorPickerComponent
   controlType = 'mtx-color-picker';
 
   /** The aria-describedby attribute on the color picker for improved a11y. */
-  _ariaDescribedby: string;
+  _ariaDescribedby!: string;
 
   /** `View -> model callback called when value changes` */
   _onChange: (value: any) => void = () => {};
@@ -133,16 +133,16 @@ export class MtxColorPickerComponent
   /** Event emitted when the color changed */
   @Output() readonly colorChange = new EventEmitter<ColorEvent>();
 
-  @ViewChild(MatMenuTrigger, { static: true }) trigger: MatMenuTrigger;
+  @ViewChild(MatMenuTrigger, { static: true }) trigger!: MatMenuTrigger;
 
   /** Whether or not the overlay panel is open. */
   _panelOpen = false;
 
   /** The subscription for closing actions (some are bound to document). */
-  private _closingActionsSubscription: Subscription;
+  private _closingActionsSubscription!: Subscription;
 
   /** Whether the element is inside of a ShadowRoot component. */
-  private _isInsideShadowRoot: boolean;
+  private _isInsideShadowRoot!: boolean;
 
   /**
    * Whether the color picker can open the next time it is focused. Used to prevent a focused,

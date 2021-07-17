@@ -132,13 +132,13 @@ export function MTX_TOOLTIP_DEFAULT_OPTIONS_FACTORY(): MtxTooltipDefaultOptions 
   },
 })
 export class MtxTooltip implements OnDestroy, AfterViewInit {
-  _overlayRef: OverlayRef | null;
-  _tooltipInstance: TooltipComponent | null;
+  _overlayRef!: OverlayRef | null;
+  _tooltipInstance!: TooltipComponent | null;
 
-  private _portal: ComponentPortal<TooltipComponent>;
+  private _portal!: ComponentPortal<TooltipComponent>;
   private _position: TooltipPosition = 'below';
   private _disabled: boolean = false;
-  private _tooltipClass: string | string[] | Set<string> | { [key: string]: any };
+  private _tooltipClass!: string | string[] | Set<string> | { [key: string]: any };
   private _scrollStrategy: () => ScrollStrategy;
   private _viewInitialized = false;
   private _pointerExitEventsInitialized = false;
@@ -251,7 +251,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   ])[] = [];
 
   /** Timer started at the last `touchstart` event. */
-  private _touchstartTimeout: number;
+  private _touchstartTimeout!: number;
 
   /** Emits when the component is destroyed. */
   private readonly _destroyed = new Subject<void>();
@@ -697,16 +697,16 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
 })
 export class TooltipComponent implements OnDestroy {
   /** Message to display in the tooltip */
-  message: string | TemplateRef<any>;
+  message!: string | TemplateRef<any>;
 
   /** Classes to be added to the tooltip. Supports the same syntax as `ngClass`. */
-  tooltipClass: string | string[] | Set<string> | { [key: string]: any };
+  tooltipClass!: string | string[] | Set<string> | { [key: string]: any };
 
   /** The timeout ID of any current timer set to show the tooltip */
-  _showTimeoutId: number | null;
+  _showTimeoutId!: number | null;
 
   /** The timeout ID of any current timer set to hide the tooltip */
-  _hideTimeoutId: number | null;
+  _hideTimeoutId!: number | null;
 
   /** Property watched by the animation framework to show or hide the tooltip */
   _visibility: TooltipVisibility = 'initial';

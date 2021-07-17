@@ -225,7 +225,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
   @Output() gutterClick = new EventEmitter<MtxSplitOutputData>(false);
   @Output() gutterDblClick = new EventEmitter<MtxSplitOutputData>(false);
 
-  private transitionEndSubscriber: Subscriber<MtxSplitOutputAreaSizes>;
+  private transitionEndSubscriber!: Subscriber<MtxSplitOutputAreaSizes>;
   @Output() get transitionEnd(): Observable<MtxSplitOutputAreaSizes> {
     return new Observable(subscriber => (this.transitionEndSubscriber = subscriber)).pipe(
       debounceTime<any>(20)
@@ -246,7 +246,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
   public readonly displayedAreas: Array<MtxSplitArea> = [];
   private readonly hidedAreas: Array<MtxSplitArea> = [];
 
-  @ViewChildren('gutterEls') private gutterEls: QueryList<ElementRef>;
+  @ViewChildren('gutterEls') private gutterEls!: QueryList<ElementRef>;
 
   constructor(
     private ngZone: NgZone,

@@ -34,10 +34,10 @@ export class MtxAlertComponent {
   @Input() isOpen = true;
 
   /** Whether displays an inline "Close" button */
-  @Input() dismissible: boolean;
+  @Input() dismissible!: boolean;
 
   /** The alert text color */
-  @Input() color: string;
+  @Input() color!: string;
 
   /** Material elevation */
   @Input() elevation = 0;

@@ -20,7 +20,7 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxText3dComponent {
-  @ContentChild(TemplateRef, { static: false }) template: TemplateRef<any>;
+  @ContentChild(TemplateRef, { static: false }) template!: TemplateRef<any>;
 
   @Input() text = '';
 

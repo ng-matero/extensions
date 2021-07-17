@@ -14,7 +14,7 @@ import {
 export class MtxGridExpansionToggleDirective {
   private _opened = false;
   private _row: any;
-  private _tplRef: TemplateRef<any>;
+  private _tplRef!: TemplateRef<any>;
 
   @Input()
   get opened() {

@@ -75,58 +75,58 @@ export class MtxSelectComponent
     AfterViewInit,
     ControlValueAccessor,
     MatFormFieldControl<any> {
-  @ViewChild('ngSelect', { static: true }) ngSelect: NgSelectComponent;
+  @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelectComponent;
 
   // MtxSelect custom templates
   @ContentChild(MtxSelectOptionTemplateDirective, { read: TemplateRef })
-  optionTemplate: TemplateRef<any>;
+  optionTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectOptgroupTemplateDirective, { read: TemplateRef })
-  optgroupTemplate: TemplateRef<any>;
+  optgroupTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectLabelTemplateDirective, { read: TemplateRef })
-  labelTemplate: TemplateRef<any>;
+  labelTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectMultiLabelTemplateDirective, { read: TemplateRef })
-  multiLabelTemplate: TemplateRef<any>;
+  multiLabelTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectHeaderTemplateDirective, { read: TemplateRef })
-  headerTemplate: TemplateRef<any>;
+  headerTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectFooterTemplateDirective, { read: TemplateRef })
-  footerTemplate: TemplateRef<any>;
+  footerTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectNotFoundTemplateDirective, { read: TemplateRef })
-  notFoundTemplate: TemplateRef<any>;
+  notFoundTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectTypeToSearchTemplateDirective, { read: TemplateRef })
-  typeToSearchTemplate: TemplateRef<any>;
+  typeToSearchTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectLoadingTextTemplateDirective, { read: TemplateRef })
-  loadingTextTemplate: TemplateRef<any>;
-  @ContentChild(MtxSelectTagTemplateDirective, { read: TemplateRef }) tagTemplate: TemplateRef<any>;
+  loadingTextTemplate!: TemplateRef<any>;
+  @ContentChild(MtxSelectTagTemplateDirective, { read: TemplateRef }) tagTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectLoadingSpinnerTemplateDirective, { read: TemplateRef })
-  loadingSpinnerTemplate: TemplateRef<any>;
+  loadingSpinnerTemplate!: TemplateRef<any>;
 
   @ContentChildren(MtxOptionComponent, { descendants: true })
-  mtxOptions: QueryList<MtxOptionComponent>;
+  mtxOptions!: QueryList<MtxOptionComponent>;
 
   /** MtxSelect options */
   @Input() addTag: boolean | ((term: string) => any | Promise<any>) = false;
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
-  @Input() appendTo: string;
-  @Input() bindLabel: string;
-  @Input() bindValue: string;
+  @Input() appendTo!: string;
+  @Input() bindLabel!: string;
+  @Input() bindValue!: string;
   @Input() closeOnSelect = true;
   @Input() clearAllText = 'Clear all';
   @Input() clearable = true;
   @Input() clearOnBackspace = true;
-  @Input() compareWith: CompareWithFn;
+  @Input() compareWith!: CompareWithFn;
   @Input() dropdownPosition: 'bottom' | 'top' | 'auto' = 'auto';
-  @Input() groupBy: string | (() => void);
-  @Input() groupValue: GroupValueFn;
+  @Input() groupBy!: string | (() => void);
+  @Input() groupValue!: GroupValueFn;
   @Input() selectableGroup = false;
   @Input() selectableGroupAsModel = true;
   @Input() hideSelected = false;
-  @Input() isOpen: boolean;
+  @Input() isOpen!: boolean;
   @Input() loading = false;
   @Input() loadingText = 'Loading...';
   @Input() labelForId = null;
   @Input() markFirst = true;
-  @Input() maxSelectedItems: number;
+  @Input() maxSelectedItems!: number;
   @Input() multiple = false;
   @Input() notFoundText = 'No items found';
   @Input() searchable = true;
@@ -136,14 +136,14 @@ export class MtxSelectComponent
   @Input() selectOnTab = false;
   @Input() trackByFn = null;
   @Input() inputAttrs: { [key: string]: string } = {};
-  @Input() tabIndex: number;
-  @Input() openOnEnter: boolean;
+  @Input() tabIndex!: number;
+  @Input() openOnEnter!: boolean;
   @Input() minTermLength = 0;
   @Input() editableSearchTerm = false;
   @Input() keyDownFn = (_: KeyboardEvent) => true;
   @Input() virtualScroll = false;
   @Input() typeToSearchText = 'Type to search';
-  @Input() typeahead: Subject<string>;
+  @Input() typeahead!: Subject<string>;
 
   @Output('blur') blurEvent = new EventEmitter();
   @Output('focus') focusEvent = new EventEmitter();
@@ -164,7 +164,7 @@ export class MtxSelectComponent
   set clearSearchOnAdd(value) {
     this._clearSearchOnAdd = value;
   }
-  private _clearSearchOnAdd: boolean;
+  private _clearSearchOnAdd!: boolean;
 
   @Input()
   get items() {
@@ -175,7 +175,7 @@ export class MtxSelectComponent
     this._items = value;
   }
   private _items: any[] = [];
-  private _itemsAreUsed: boolean;
+  private _itemsAreUsed!: boolean;
   private readonly _destroy$ = new Subject<void>();
 
   /** Value of the select control. */
@@ -202,7 +202,7 @@ export class MtxSelectComponent
     this._id = value || this._uid;
     this.stateChanges.next();
   }
-  private _id: string;
+  private _id!: string;
 
   /** Unique id for this input. */
   private _uid = `mtx-select-${nextUniqueId++}`;
@@ -216,7 +216,7 @@ export class MtxSelectComponent
     this._placeholder = value;
     this.stateChanges.next();
   }
-  private _placeholder: string;
+  private _placeholder!: string;
 
   /** Whether the input is focused. */
   get focused(): boolean {
@@ -259,7 +259,7 @@ export class MtxSelectComponent
   controlType = 'mtx-select';
 
   /** The aria-describedby attribute on the select for improved a11y. */
-  _ariaDescribedby: string;
+  _ariaDescribedby!: string;
 
   /** `View -> model callback called when value changes` */
   _onChange: (value: any) => void = () => {};

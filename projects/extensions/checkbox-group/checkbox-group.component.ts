@@ -41,7 +41,7 @@ export class MtxCheckboxBase {
 })
 export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAccessor {
   @ContentChildren(forwardRef(() => MatCheckbox), { descendants: true })
-  _checkboxes: QueryList<MatCheckbox>;
+  _checkboxes!: QueryList<MatCheckbox>;
 
   @Input()
   get items() {
@@ -74,7 +74,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
       this._compareWith = fn;
     }
   }
-  private _compareWith: (o1: any, o2: any) => boolean;
+  private _compareWith!: (o1: any, o2: any) => boolean;
 
   @Input()
   get disabled(): boolean {

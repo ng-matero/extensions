@@ -22,7 +22,7 @@ import { MatFormField } from '@angular/material/form-field';
 export class MtxFormGroupComponent implements OnInit, AfterContentInit {
   @ContentChildren(MatFormField) formFields!: QueryList<MatFormField>;
 
-  @Input() label: string;
+  @Input() label!: string;
   @Input()
   get showRequiredMarker() {
     return this._showRequiredMarker;

@@ -29,7 +29,7 @@ export class MtxOptionComponent implements OnChanges, AfterViewChecked, OnDestro
   readonly stateChange$ = new Subject<{ value: any; disabled: boolean; label?: string }>();
 
   private _disabled = false;
-  private _previousLabel: string;
+  private _previousLabel!: string;
 
   constructor(public elementRef: ElementRef<HTMLElement>) {}
 

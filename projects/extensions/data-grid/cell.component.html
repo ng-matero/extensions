@@ -6,8 +6,8 @@
 <!-- Custom formatting -->
 <ng-template #customCellFormattingTpl>
   <span *ngIf="colDef.formatter; else defaultCellFormattingTpl"
-        [title]="_getFormatterTooltip(colDef.formatter!(rowData, colDef))"
-        [innerHTML]="_getText(colDef.formatter!(rowData, colDef))">
+        [title]="_getFormatterTooltip(colDef.formatter(rowData, colDef))"
+        [innerHTML]="_getText(colDef.formatter(rowData, colDef))">
   </span>
 </ng-template>
 
@@ -34,7 +34,7 @@
                     [color]="btn.color || 'primary'"
                     [disabled]="btn.disabled"
                     [matTooltip]="btn.tooltip | toObservable | async"
-                    (click)="_handleActionConfirm($event, btn.popTitle, btn.popDescription,
+                    (click)="_handleActionConfirm($event, btn.popTitle!, btn.popDescription,
                                                           btn.popOkColor, btn.popOkText,
                                                           btn.popCloseColor, btn.popCloseText,
                                                           btn.click, rowData)">
@@ -47,7 +47,7 @@
                     [color]="btn.color || 'primary'"
                     [disabled]="btn.disabled"
                     [matTooltip]="btn.tooltip | toObservable | async"
-                    (click)="_handleActionConfirm($event, btn.popTitle, btn.popDescription,
+                    (click)="_handleActionConfirm($event, btn.popTitle!, btn.popDescription,
                                                           btn.popOkColor, btn.popOkText,
                                                           btn.popCloseColor, btn.popCloseText,
                                                           btn.click, rowData)">
