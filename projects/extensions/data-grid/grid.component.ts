@@ -117,7 +117,7 @@ export class MtxGridComponent implements OnInit, OnChanges, AfterViewInit, OnDes
 
   rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
-  @Input() rowSelected = [];
+  @Input() rowSelected: any[] = [];
   @Input() rowSelectable = false;
   @Input() hideRowSelectionCheckbox = false;
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
