@@ -54,11 +54,13 @@ export class YourAppModule {
 After import modules, you must define a theme. [More details about theming](https://material.angular.io/guide/theming).
 
 ```scss
-@import '~@ng-matero/extensions/theming';
+@import '~@ng-matero/extensions' as mtx;
 
-@include material-extensions-theme($theme);
-@include material-extensions-experimental-theme($theme);
+@include mtx.all-component-themes($theme);
+@include mtx.all-experimental-component-themes($theme);
 ```
+
+The @use-based Sass API only available in the version `12.0.0` or above.
 
 ## Roadmap
 
