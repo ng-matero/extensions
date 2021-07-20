@@ -54,7 +54,7 @@ export class YourAppModule {
 After import modules, you must define a theme. [More details about theming](https://material.angular.io/guide/theming).
 
 ```scss
-@import '~@ng-matero/extensions' as mtx;
+@use '~@ng-matero/extensions' as mtx;
 
 @include mtx.all-component-themes($theme);
 @include mtx.all-experimental-component-themes($theme);
