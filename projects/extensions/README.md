@@ -4,9 +4,12 @@
 [![GitHub Release Date](https://img.shields.io/github/release-date/ng-matero/extensions)](https://github.com/ng-matero/extensions/releases)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ng-matero/extensions/blob/dev/LICENSE)
 [![Gitter](https://img.shields.io/gitter/room/ng-matero/extensions.svg)](https://gitter.im/matero-io/extensions)
-[![API docs](https://img.shields.io/badge/API%20docs-gitbook-red)](https://nzbin.gitbook.io/material-extensions/)
 
 The Ng-Matero Extensions is an extended component library of Angular Material.
+
+## Documentation
+
+Check out the [demos and APIs](https://ng-matero.github.io/extensions/).
 
 ## Installation
 
@@ -60,7 +63,7 @@ After import modules, you must define a theme. [More details about theming](http
 @include mtx.all-experimental-component-themes($theme);
 ```
 
-The @use-based Sass API only available in the version `12.0.0` or above.
+The @use-based Sass API is only available in the version `12.0.0` or above.
 
 ## Roadmap
 
