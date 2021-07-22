@@ -65,10 +65,6 @@ After import modules, you must define a theme. [More details about theming](http
 
 The @use-based Sass API is only available in the version `12.0.0` or above.
 
-## Roadmap
-
-Check [projects](https://github.com/ng-matero/extensions/projects) to know the develop plans.
-
 ## License
 
 MIT
