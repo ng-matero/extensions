@@ -292,6 +292,8 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
     if (!!this.rowDef && this.useContentRowTemplate) {
       this.table.addRowDef(this.rowDef);
+      (this.table as any)._cacheRowDefs();
+      this.table.renderRows();
     }
   }
 
