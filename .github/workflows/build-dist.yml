@@ -27,11 +27,11 @@ jobs:
     steps:
       - name: Create base repo
         if: success()
-        working-directory: ./dist/extensions
+        working-directory: dist/extensions
         run: git init && git checkout -b dist
       - name: Add remote
-        working-directory: ./dist/extensions
+        working-directory: dist/extensions
         run: git remote add origin https://github.com/${{github.repository}}
       - name: Push
-        working-directory: ./dist/extensions
+        working-directory: dist/extensions
         run: git push origin dist
