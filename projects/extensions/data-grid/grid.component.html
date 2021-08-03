@@ -45,6 +45,7 @@
              [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
              [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
              matSort
+             #table
              [matSortActive]="sortActive"
              [matSortDirection]="sortDirection"
              [matSortDisableClear]="sortDisableClear"
@@ -174,11 +175,17 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row
-            *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
-            [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
-            (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
-        </tr>
+
+        <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl">
+        </ng-template>
+        <ng-template #defaultRowTpl>
+          <tr mat-row
+              *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
+              [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
+              (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
+          </tr>
+        </ng-template>
+
         <ng-container *ngIf="_whetherShowSummary">
           <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
         </ng-container>
@@ -210,6 +217,7 @@
              [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
              [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
              matSort
+             #table
              [matSortActive]="sortActive"
              [matSortDirection]="sortDirection"
              [matSortDisableClear]="sortDisableClear"
@@ -341,11 +349,17 @@
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-        <tr mat-row
-            *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
-            [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
-            (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
-        </tr>
+
+        <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl">
+        </ng-template>
+        <ng-template #defaultRowTpl>
+          <tr mat-row
+              *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
+              [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
+              (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
+          </tr>
+        </ng-template>
+
         <ng-container *ngIf="_whetherShowSummary">
           <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
         </ng-container>
