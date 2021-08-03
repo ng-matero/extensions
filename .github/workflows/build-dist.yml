@@ -20,11 +20,6 @@ jobs:
         run: npm i
       - name: Build Library
         run: npm run build:lib
-  publish:
-    name: Publish to GitHub
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
       - name: Create base repo
         if: success()
         working-directory: dist/extensions
