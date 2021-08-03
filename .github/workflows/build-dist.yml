@@ -24,6 +24,9 @@ jobs:
         if: success()
         working-directory: dist/extensions
         run: git init && git checkout -b dist
+      - name: Set config
+        working-directory: dist/extensions
+        run: git config user.email "github@github.com" && git config user.name "${{github.repository_owner}}"
       - name: Add remote
         working-directory: dist/extensions
         run: git remote add origin https://github.com/${{github.repository}}
