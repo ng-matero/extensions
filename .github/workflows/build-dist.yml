@@ -38,4 +38,4 @@ jobs:
         run: git commit -m "${{github.job}}"
       - name: Push
         working-directory: dist/extensions
-        run: git push origin dist
+        run: git push origin dist --force
