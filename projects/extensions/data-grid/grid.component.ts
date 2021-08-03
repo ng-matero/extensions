@@ -59,7 +59,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('columnMenu') columnMenu!: MtxGridColumnMenu;
   @ViewChild('table') table!: MatTable<any>;
   @ViewChild('tableContainer') tableContainer!: ElementRef<HTMLDivElement>;
-  @ContentChild(MatRowDef, {read: MatRowDef}) rowDef: MatRowDef<any> | any;
+  @ContentChild(MatRowDef, {read: MatRowDef, static: false}) rowDef: MatRowDef<any> | any;
 
   dataSource = new MatTableDataSource();
 
@@ -292,8 +292,6 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
     if (!!this.rowDef && this.useContentRowTemplate) {
       this.table.addRowDef(this.rowDef);
-      (this.table as any)._cacheRowDefs();
-      this.table.renderRows();
     }
   }
 
