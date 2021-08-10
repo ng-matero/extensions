@@ -53,7 +53,11 @@
           [headerTemplate]="{operation: headerTpl}"
           [headerExtraTemplate]="{name: headerExtraTpl}"
           [showStatusbar]="showStatusbar"
+          [useContentRowTemplate]="true"
           [statusbarTemplate]="statusbarTpl">
+  <ng-template matRowDef [matRowDefColumns]="getColumnKeys(columns)" >
+    <tr mat-row class="custom-row-template" (contextmenu)="log($event)"></tr>
+  </ng-template>
 </mtx-grid>
 
 <ng-template #expansionTpl let-row let-expanded="expanded">
