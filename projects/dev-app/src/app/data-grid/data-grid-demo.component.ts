@@ -1,15 +1,15 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
   MtxGridColumn,
   MtxGridComponent,
   MtxGridRowClassFormatter,
   MtxGridRowSelectionFormatter,
 } from '@ng-matero/extensions/data-grid';
-import {EXAMPLE_DATA, EXAMPLE_DATA2} from './data';
-import {TranslateService} from '@ngx-translate/core';
-import {MatCheckboxChange} from '@angular/material/checkbox';
-import {HttpClient} from '@angular/common/http';
-import {PageEvent} from '@angular/material/paginator';
+import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
+import { TranslateService } from '@ngx-translate/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { HttpClient } from '@angular/common/http';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'dev-data-grid-demo',
@@ -17,8 +17,8 @@ import {PageEvent} from '@angular/material/paginator';
   styleUrls: ['./data-grid-demo.component.scss'],
 })
 export class DataGridDemoComponent implements OnInit, AfterViewInit {
-  @ViewChild('grid', {static: true}) grid!: MtxGridComponent;
-  @ViewChild('grid2', {static: true}) grid2!: MtxGridComponent;
+  @ViewChild('grid', { static: true }) grid!: MtxGridComponent;
+  @ViewChild('grid2', { static: true }) grid2!: MtxGridComponent;
 
   multiSelectable = true;
   hideRowSelectionCheckbox = false;
@@ -113,21 +113,21 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
 
   list2: any[] = [];
   columns2: MtxGridColumn[] = [
-    {header: 'Position', field: 'position', minWidth: 200},
-    {header: 'Name', field: 'name', pinned: 'left'},
-    {header: 'tags', field: 'tag.0.value', width: '100px'},
-    {header: 'Weight', field: 'weight', pinned: 'left'},
-    {header: 'Symbol', field: 'symbol', width: '100px'},
-    {header: 'Gender', field: 'gender'},
-    {header: 'Mobile', field: 'mobile'},
-    {header: 'Tele', field: 'tele'},
-    {header: 'City', field: 'city'},
-    {header: 'Address', field: 'address'},
-    {header: 'Date', field: 'date'},
-    {header: 'Website', field: 'website'},
-    {header: 'Company', field: 'company'},
-    {header: 'Email', field: 'email', pinned: 'right'},
-    {header: 'Status', field: 'status', type: 'boolean'},
+    { header: 'Position', field: 'position', minWidth: 200 },
+    { header: 'Name', field: 'name', pinned: 'left' },
+    { header: 'tags', field: 'tag.0.value', width: '100px' },
+    { header: 'Weight', field: 'weight', pinned: 'left' },
+    { header: 'Symbol', field: 'symbol', width: '100px' },
+    { header: 'Gender', field: 'gender' },
+    { header: 'Mobile', field: 'mobile' },
+    { header: 'Tele', field: 'tele' },
+    { header: 'City', field: 'city' },
+    { header: 'Address', field: 'address' },
+    { header: 'Date', field: 'date' },
+    { header: 'Website', field: 'website' },
+    { header: 'Company', field: 'company' },
+    { header: 'Email', field: 'email', pinned: 'right' },
+    { header: 'Status', field: 'status', type: 'boolean' },
   ];
 
   columns3: MtxGridColumn[] = [
@@ -136,28 +136,28 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
       field: 'name',
       formatter: (data: any) => `<a href="${data.html_url}" target="_blank">${data.name}</a>`,
     },
-    {header: 'Owner', field: 'owner.login'},
-    {header: 'Owner Avatar', field: 'owner.avatar_url', type: 'image'},
-    {header: 'Description', field: 'description', width: '300px'},
-    {header: 'Stars', field: 'stargazers_count'},
-    {header: 'Forks', field: 'forks_count'},
-    {header: 'Score', field: 'score'},
-    {header: 'Issues', field: 'open_issues'},
-    {header: 'Language', field: 'language'},
-    {header: 'License', field: 'license.name'},
-    {header: 'Home Page', field: 'homepage', type: 'link'},
-    {header: 'Is forked', field: 'fork', type: 'boolean'},
+    { header: 'Owner', field: 'owner.login' },
+    { header: 'Owner Avatar', field: 'owner.avatar_url', type: 'image' },
+    { header: 'Description', field: 'description', width: '300px' },
+    { header: 'Stars', field: 'stargazers_count' },
+    { header: 'Forks', field: 'forks_count' },
+    { header: 'Score', field: 'score' },
+    { header: 'Issues', field: 'open_issues' },
+    { header: 'Language', field: 'language' },
+    { header: 'License', field: 'license.name' },
+    { header: 'Home Page', field: 'homepage', type: 'link' },
+    { header: 'Is forked', field: 'fork', type: 'boolean' },
     {
       header: 'Archived',
       field: 'archived',
       type: 'tag',
       tag: {
-        true: {text: 'Yes', color: 'red-100'},
-        false: {text: 'No', color: 'green-100'},
+        true: { text: 'Yes', color: 'red-100' },
+        false: { text: 'No', color: 'green-100' },
       },
     },
-    {header: 'Created Date', field: 'created_at'},
-    {header: 'Updated Date', field: 'updated_at'},
+    { header: 'Created Date', field: 'created_at' },
+    { header: 'Updated Date', field: 'updated_at' },
   ];
   list3 = [];
   total3 = 0;
@@ -179,8 +179,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = EXAMPLE_DATA;
 
-  constructor(public translate: TranslateService, private http: HttpClient) {
-  }
+  constructor(public translate: TranslateService, private http: HttpClient) {}
 
   ngOnInit() {
     this.getRemoteData();
@@ -244,7 +243,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   getRemoteData() {
     this.isLoading3 = true;
     this.http
-      .get('https://api.github.com/search/repositories', {params: this.params as any})
+      .get('https://api.github.com/search/repositories', { params: this.params as any })
       .subscribe(
         (res: any) => {
           this.list3 = res.items;

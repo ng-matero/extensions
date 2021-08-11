@@ -45,7 +45,6 @@
              [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
              [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
              matSort
-             #table
              [matSortActive]="sortActive"
              [matSortDirection]="sortDirection"
              [matSortDisableClear]="sortDisableClear"
@@ -176,8 +175,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 
-        <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl">
-        </ng-template>
+        <ng-template [ngIf]="useCustomRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>
           <tr mat-row
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
@@ -217,7 +215,6 @@
              [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
              [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
              matSort
-             #table
              [matSortActive]="sortActive"
              [matSortDirection]="sortDirection"
              [matSortDisableClear]="sortDisableClear"
@@ -350,8 +347,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
 
-        <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl">
-        </ng-template>
+        <ng-template [ngIf]="useCustomRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>
           <tr mat-row
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"

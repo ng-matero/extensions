@@ -13,14 +13,15 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   ElementRef,
-  SimpleChanges, ContentChild
+  SimpleChanges,
+  ContentChild,
 } from '@angular/core';
-import {trigger, state, style, transition, animate} from '@angular/animations';
-import {SelectionModel} from '@angular/cdk/collections';
-import {MatRowDef, MatTable, MatTableDataSource} from '@angular/material/table';
-import {MatPaginator, PageEvent} from '@angular/material/paginator';
-import {Sort, MatSort, SortDirection} from '@angular/material/sort';
-import {ThemePalette} from '@angular/material/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { SelectionModel } from '@angular/cdk/collections';
+import { MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Sort, MatSort, SortDirection } from '@angular/material/sort';
+import { ThemePalette } from '@angular/material/core';
 
 import {
   MtxGridColumn,
@@ -31,9 +32,9 @@ import {
   MtxGridColumnMenu,
   MtxGridButtonType,
 } from './grid.interface';
-import {MtxGridCellSelectionDirective} from './cell-selection.directive';
-import {MtxGridExpansionToggleDirective} from './expansion-toggle.directive';
-import {MtxGridService} from './grid.service';
+import { MtxGridCellSelectionDirective } from './cell-selection.directive';
+import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
+import { MtxGridService } from './grid.service';
 
 @Component({
   selector: 'mtx-grid',
@@ -47,19 +48,19 @@ import {MtxGridService} from './grid.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('expansion', [
-      state('collapsed', style({height: '0', minHeight: '0', visibility: 'hidden'})),
-      state('expanded', style({height: '*', visibility: 'visible'})),
+      state('collapsed', style({ height: '0', minHeight: '0', visibility: 'hidden' })),
+      state('expanded', style({ height: '*', visibility: 'visible' })),
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
 })
 export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
+  @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild('columnMenu') columnMenu!: MtxGridColumnMenu;
-  @ViewChild('table') table!: MatTable<any>;
   @ViewChild('tableContainer') tableContainer!: ElementRef<HTMLDivElement>;
-  @ContentChild(MatRowDef, {read: MatRowDef, static: false}) rowDef: MatRowDef<any> | any;
+  @ContentChild(MatRowDef, { read: MatRowDef, static: false }) rowDef: MatRowDef<any> | any;
 
   dataSource = new MatTableDataSource();
 
@@ -177,8 +178,8 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
   @Input() headerExtraTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
-  @Input() useContentRowTemplate = false;
   @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+  @Input() useCustomRowTemplate = false;
 
   // ===== Summary =====
 
@@ -203,8 +204,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   constructor(
     private _dataGridSrv: MtxGridService,
     private _changeDetectorRef: ChangeDetectorRef
-  ) {
-  }
+  ) {}
 
   detectChanges() {
     this._changeDetectorRef.detectChanges();
@@ -262,7 +262,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.expansionRowStates = []; // reset
 
       this.data?.forEach(_ => {
-        this.expansionRowStates.push({expanded: false});
+        this.expansionRowStates.push({ expanded: false });
       });
     }
 
@@ -290,13 +290,12 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.dataSource.sort = this.sort;
     }
 
-    if (!!this.rowDef && this.useContentRowTemplate) {
+    if (!!this.rowDef && this.useCustomRowTemplate) {
       this.table.addRowDef(this.rowDef);
     }
   }
 
-  ngOnDestroy() {
-  }
+  ngOnDestroy() {}
 
   _countPinnedPosition() {
     const count = (acc: number, cur: MtxGridColumn) => acc + parseFloat(cur.width || '80px');
@@ -329,7 +328,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     column: any,
     index: number
   ) {
-    this.expansionChange.emit({expanded: expansionRef.expanded, data: rowData, index, column});
+    this.expansionChange.emit({ expanded: expansionRef.expanded, data: rowData, index, column });
   }
 
   /** Cell select event */
@@ -338,7 +337,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (this._selectedCell !== cellRef) {
       const colValue = this._dataGridSrv.getCellValue(rowData, colDef);
       this.cellSelection = []; // reset
-      this.cellSelection.push({cellData: colValue, rowData, colDef});
+      this.cellSelection.push({ cellData: colValue, rowData, colDef });
 
       this.cellSelectionChange.emit(this.cellSelection);
 
@@ -365,13 +364,12 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this._toggleNormalCheckbox(rowData);
     }
 
-    this.rowClick.emit({rowData, index});
+    this.rowClick.emit({ rowData, index });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
   _isAllSelected() {
     const numSelected = this.rowSelection.selected.length;
-    // @ts-ignore
     const numRows = this.dataSource.data.filter(
       (row, index) => !this.rowSelectionFormatter.disabled?.(row, index)
     ).length;
@@ -383,10 +381,10 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     this._isAllSelected()
       ? this.rowSelection.clear()
       : this.dataSource.data.forEach((row, index) => {
-        if (!this.rowSelectionFormatter.disabled?.(row, index)) {
-          this.rowSelection.select(row);
-        }
-      });
+          if (!this.rowSelectionFormatter.disabled?.(row, index)) {
+            this.rowSelection.select(row);
+          }
+        });
     this.rowSelectionChange.emit(this.rowSelection.selected);
   }
 
