@@ -8,9 +8,7 @@
 
 /** IE 11 compatible matches implementation. */
 export function matches(element: Element, selector: string): boolean {
-  return element.matches
-    ? element.matches(selector)
-    : (element as any)['msMatchesSelector'](selector);
+  return element.matches ? element.matches(selector) : (element as any).msMatchesSelector(selector);
 }
 
 /** IE 11 compatible closest implementation that is able to start from non-Element Nodes. */
