@@ -53,8 +53,14 @@
           [headerTemplate]="{operation: headerTpl}"
           [headerExtraTemplate]="{name: headerExtraTpl}"
           [showStatusbar]="showStatusbar"
-          [useCustomRowTemplate]="true"
+          [useCustomHeaderRowTemplate]="true"
+          [useCustomRowTemplate]="false"
+          [useCustomFooterRowTemplate]="false"
           [statusbarTemplate]="statusbarTpl">
+
+  <ng-template [matHeaderRowDef]="getColumnKeys(columns)">
+    <tr mat-header-row (contextmenu)="log($event)"></tr>
+  </ng-template>
 
   <ng-template matRowDef [matRowDefColumns]="getColumnKeys(columns)">
     <tr mat-row class="custom-row-template" (contextmenu)="log($event)"></tr>
@@ -166,11 +172,11 @@
 
 <mat-divider></mat-divider>
 
-<mtx-grid class="fixed-height" #grid2
+<!-- <mtx-grid class="fixed-height" #grid2
           [data]="list2"
           [columnResizable]="true"
           [columns]="columns2">
-</mtx-grid>
+</mtx-grid> -->
 <button (click)="scrollTop()">Get scrollTop</button>
 <button (click)="scrollTop(100)">Set scrollTop</button>
 <button (click)="scrollLeft()">Get scrollLeft</button>
@@ -178,7 +184,7 @@
 
 <mat-divider></mat-divider>
 
-<mtx-grid class="fixed-height"
+<!-- <mtx-grid class="fixed-height"
           [data]="list3"
           [columns]="columns3"
           [length]="total3"
@@ -191,4 +197,4 @@
           [pageSize]="query.per_page"
           [pageSizeOptions]="[10,20,50]"
           (page)="getNextPage($event)">
-</mtx-grid>
+</mtx-grid> -->

@@ -14,11 +14,19 @@ import {
   ChangeDetectorRef,
   ElementRef,
   SimpleChanges,
-  ContentChild,
+  QueryList,
+  ContentChildren,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
+import {
+  MatFooterRow,
+  MatFooterRowDef,
+  MatHeaderRowDef,
+  MatRowDef,
+  MatTable,
+  MatTableDataSource,
+} from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Sort, MatSort, SortDirection } from '@angular/material/sort';
 import { ThemePalette } from '@angular/material/core';
@@ -58,9 +66,11 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @ContentChildren(MatRowDef) rowDefs!: QueryList<MatRowDef<any>>;
+  @ContentChildren(MatHeaderRowDef) headerRowDefs!: QueryList<MatHeaderRowDef>;
+  @ContentChildren(MatFooterRow) footerRowDefs!: QueryList<MatFooterRowDef>;
   @ViewChild('columnMenu') columnMenu!: MtxGridColumnMenu;
   @ViewChild('tableContainer') tableContainer!: ElementRef<HTMLDivElement>;
-  @ContentChild(MatRowDef, { read: MatRowDef, static: false }) rowDef: MatRowDef<any> | any;
 
   dataSource = new MatTableDataSource();
 
@@ -179,7 +189,14 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
   @Input() headerExtraTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
   @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+
+  // ===== Row Templates =====
+
   @Input() useCustomRowTemplate = false;
+  // TODO: It can't use together with `useCustomRowTemplate`
+  @Input() useCustomHeaderRowTemplate = false;
+  // TODO: It's not working
+  @Input() useCustomFooterRowTemplate = false;
 
   // ===== Summary =====
 
@@ -290,8 +307,14 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.dataSource.sort = this.sort;
     }
 
-    if (!!this.rowDef && this.useCustomRowTemplate) {
-      this.table.addRowDef(this.rowDef);
+    if (this.rowDefs?.length > 0 && this.useCustomRowTemplate) {
+      this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
+    }
+    if (this.headerRowDefs?.length > 0 && this.useCustomHeaderRowTemplate) {
+      this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
+    }
+    if (this.footerRowDefs?.length > 0 && this.useCustomFooterRowTemplate) {
+      this.footerRowDefs.forEach(footerRowDef => this.table.addFooterRowDef(footerRowDef));
     }
   }
 

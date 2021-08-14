@@ -173,7 +173,11 @@
           </ng-container>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <ng-template [ngIf]="useCustomHeaderRowTemplate" [ngIfElse]="defaultHeaderRowTpl">
+        </ng-template>
+        <ng-template #defaultHeaderRowTpl>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        </ng-template>
 
         <ng-template [ngIf]="useCustomRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>
@@ -184,9 +188,10 @@
           </tr>
         </ng-template>
 
-        <ng-container *ngIf="_whetherShowSummary">
+        <ng-template [ngIf]="_whetherShowSummary">
           <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
-        </ng-container>
+        </ng-template>
+        <ng-template [ngIf]="useCustomFooterRowTemplate"></ng-template>
 
         <ng-container *ngIf="expandable">
           <!-- Expanded Content Column - The expandable row is made up of this one column that spans across all columns -->
@@ -345,7 +350,11 @@
           </ng-container>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        <ng-template [ngIf]="useCustomHeaderRowTemplate" [ngIfElse]="defaultHeaderRowTpl">
+        </ng-template>
+        <ng-template #defaultHeaderRowTpl>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+        </ng-template>
 
         <ng-template [ngIf]="useCustomRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>
@@ -356,9 +365,10 @@
           </tr>
         </ng-template>
 
-        <ng-container *ngIf="_whetherShowSummary">
+        <ng-template [ngIf]="_whetherShowSummary">
           <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
-        </ng-container>
+        </ng-template>
+        <ng-template [ngIf]="useCustomFooterRowTemplate"></ng-template>
 
         <ng-container *ngIf="expandable">
           <!-- Expanded Content Column - The expandable row is made up of this one column that spans across all columns -->
