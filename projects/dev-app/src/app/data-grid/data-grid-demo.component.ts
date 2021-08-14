@@ -21,7 +21,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
   @ViewChild('grid2', { static: true }) grid2!: MtxGridComponent;
 
   multiSelectable = true;
-  multiSelectableWithClick = false;
+  multiSelectionWithClick = false;
   hideRowSelectionCheckbox = false;
   rowSelectable = true;
   rowSelected = EXAMPLE_DATA.slice(2, 3);

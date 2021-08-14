@@ -64,7 +64,8 @@ Exported as: `mtxGrid`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `multiSelectable: boolean` | Whether the user can selecte multiple row or cell. Defaulted to **`true`**. |
+| @Input() `multiSelectable: boolean` | Whether the user can selecte multiple row. Defaulted to **`true`**. |
+| @Input() `multiSelectionWithClick: boolean` | Whether the user can selecte multiple row with clicks. Defaulted to **`false`**. |
 | @Input() `rowSelectable: boolean` | Whether the row can be selectable. Defaulted to **`false`**. |
 | @Input() `rowSelected: any[]` | The row selected items default. Defaulted to **`[]`**. |
 | @Input() `hideRowSelectionCheckbox: boolean` | Whether hide the row selection checkbox. Defaulted to **`false`**. |
@@ -112,13 +113,15 @@ Exported as: `mtxGrid`
 | @Input() `rowStriped: boolean` | Whether use striped style. Defaulted to **`false`** |
 | @Output() `rowClick: EventEmitter<any>;` | Row click event. |
 
-###### Cell templates
+###### Row and cell templates
 
 | Name | Description |
 | :--- | :--- |
 | @Input() `headerTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid header cell template. |
 | @Input() `headerExtraTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid header cell template exclude sort. |
 | @Input() `cellTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid body cell template. |
+| @Input() `useContentRowTemplate: boolean` | Whether use custom row template. If true, you should define a `matRowDef`. Defaulted to **`false`** |
+| @Input() `useContentHeaderRowTemplate: boolean` | Whether use custom header row template. If true, you should define a `matHeaderRowDef`. Defaulted to **`false`** |
 
 ###### Summary
 
