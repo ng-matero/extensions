@@ -194,11 +194,11 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   // ===== Row Templates =====
 
-  @Input() useCustomRowTemplate = false;
-  // TODO: It can't use together with `useCustomRowTemplate`
-  @Input() useCustomHeaderRowTemplate = false;
+  @Input() useContentRowTemplate = false;
+  // TODO: It can't use together with `useContentRowTemplate`
+  @Input() useContentHeaderRowTemplate = false;
   // TODO: It's not working
-  @Input() useCustomFooterRowTemplate = false;
+  @Input() useContentFooterRowTemplate = false;
 
   // ===== Summary =====
 
@@ -309,13 +309,13 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.dataSource.sort = this.sort;
     }
 
-    if (this.rowDefs?.length > 0 && this.useCustomRowTemplate) {
+    if (this.rowDefs?.length > 0 && this.useContentRowTemplate) {
       this.rowDefs.forEach(rowDef => this.table.addRowDef(rowDef));
     }
-    if (this.headerRowDefs?.length > 0 && this.useCustomHeaderRowTemplate) {
+    if (this.headerRowDefs?.length > 0 && this.useContentHeaderRowTemplate) {
       this.headerRowDefs.forEach(headerRowDef => this.table.addHeaderRowDef(headerRowDef));
     }
-    if (this.footerRowDefs?.length > 0 && this.useCustomFooterRowTemplate) {
+    if (this.footerRowDefs?.length > 0 && this.useContentFooterRowTemplate) {
       this.footerRowDefs.forEach(footerRowDef => this.table.addFooterRowDef(footerRowDef));
     }
   }

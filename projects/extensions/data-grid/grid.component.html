@@ -173,13 +173,13 @@
           </ng-container>
         </ng-container>
 
-        <ng-template [ngIf]="useCustomHeaderRowTemplate" [ngIfElse]="defaultHeaderRowTpl">
+        <ng-template [ngIf]="useContentHeaderRowTemplate" [ngIfElse]="defaultHeaderRowTpl">
         </ng-template>
         <ng-template #defaultHeaderRowTpl>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         </ng-template>
 
-        <ng-template [ngIf]="useCustomRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
+        <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>
           <tr mat-row
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
@@ -191,7 +191,7 @@
         <ng-template [ngIf]="_whetherShowSummary">
           <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
         </ng-template>
-        <ng-template [ngIf]="useCustomFooterRowTemplate"></ng-template>
+        <ng-template [ngIf]="useContentFooterRowTemplate"></ng-template>
 
         <ng-container *ngIf="expandable">
           <!-- Expanded Content Column - The expandable row is made up of this one column that spans across all columns -->
@@ -350,13 +350,13 @@
           </ng-container>
         </ng-container>
 
-        <ng-template [ngIf]="useCustomHeaderRowTemplate" [ngIfElse]="defaultHeaderRowTpl">
+        <ng-template [ngIf]="useContentHeaderRowTemplate" [ngIfElse]="defaultHeaderRowTpl">
         </ng-template>
         <ng-template #defaultHeaderRowTpl>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         </ng-template>
 
-        <ng-template [ngIf]="useCustomRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
+        <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>
           <tr mat-row
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
@@ -368,7 +368,7 @@
         <ng-template [ngIf]="_whetherShowSummary">
           <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
         </ng-template>
-        <ng-template [ngIf]="useCustomFooterRowTemplate"></ng-template>
+        <ng-template [ngIf]="useContentFooterRowTemplate"></ng-template>
 
         <ng-container *ngIf="expandable">
           <!-- Expanded Content Column - The expandable row is made up of this one column that spans across all columns -->

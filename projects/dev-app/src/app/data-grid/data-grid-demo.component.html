@@ -55,9 +55,9 @@
           [headerTemplate]="{operation: headerTpl}"
           [headerExtraTemplate]="{name: headerExtraTpl}"
           [showStatusbar]="showStatusbar"
-          [useCustomHeaderRowTemplate]="true"
-          [useCustomRowTemplate]="false"
-          [useCustomFooterRowTemplate]="false"
+          [useContentHeaderRowTemplate]="true"
+          [useContentRowTemplate]="false"
+          [useContentFooterRowTemplate]="false"
           [statusbarTemplate]="statusbarTpl">
 
   <ng-template [matHeaderRowDef]="getColumnKeys(columns)">
