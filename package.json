@@ -16,7 +16,8 @@
     "release": "npm run build:docs && npm run deploy:docs",
     "build:lib": "ng build extensions --configuration production",
     "copy:scss": "gulp --gulpfile gulpfile.js",
-    "publish": "npm run build:lib && npm run copy:scss && cd dist/extensions && npm publish --access public"
+    "publish": "npm run build:lib && npm run copy:scss && cd dist/extensions && npm publish",
+    "prepare": "husky install"
   },
   "private": true,
   "dependencies": {
