@@ -127,6 +127,8 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   /** Whether support multiple row/cell selection. */
   @Input() multiSelectable = true;
 
+  @Input() multiSelectableWithClick = false;
+
   rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
   @Input() rowSelected: any[] = [];
@@ -380,7 +382,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       !this.rowSelectionFormatter.hideCheckbox?.(rowData, index)
     ) {
       // metaKey -> command key
-      if (!event.ctrlKey && !event.metaKey) {
+      if (!this.multiSelectableWithClick && !event.ctrlKey && !event.metaKey) {
         this.rowSelection.clear();
       }
 
