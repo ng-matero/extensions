@@ -18,6 +18,7 @@
     "selector-type-no-unknown": null,
     "value-keyword-case": null,
     "at-rule-empty-line-before": null,
-    "block-no-empty": null
+    "block-no-empty": null,
+    "no-duplicate-selectors": false
   }
 }
