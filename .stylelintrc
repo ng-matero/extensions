@@ -19,6 +19,6 @@
     "value-keyword-case": null,
     "at-rule-empty-line-before": null,
     "block-no-empty": null,
-    "no-duplicate-selectors": false
+    "no-duplicate-selectors": null
   }
 }
