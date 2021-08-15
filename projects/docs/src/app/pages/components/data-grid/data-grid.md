@@ -112,16 +112,15 @@ Exported as: `mtxGrid`
 | @Input() `rowHover: boolean` | Whether use hover style. Defaulted to **`false`** |
 | @Input() `rowStriped: boolean` | Whether use striped style. Defaulted to **`false`** |
 | @Output() `rowClick: EventEmitter<any>;` | Row click event. |
+| @Input() `useContentRowTemplate: boolean` | Whether use custom row template. If true, you should define a `matRowDef`. Defaulted to **`false`** |
 
-###### Row and cell templates
+###### Cell templates
 
 | Name | Description |
 | :--- | :--- |
 | @Input() `headerTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid header cell template. |
 | @Input() `headerExtraTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid header cell template exclude sort. |
 | @Input() `cellTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The grid body cell template. |
-| @Input() `useContentRowTemplate: boolean` | Whether use custom row template. If true, you should define a `matRowDef`. Defaulted to **`false`** |
-| @Input() `useContentHeaderRowTemplate: boolean` | Whether use custom header row template. If true, you should define a `matHeaderRowDef`. Defaulted to **`false`** |
 
 ###### Summary
 
