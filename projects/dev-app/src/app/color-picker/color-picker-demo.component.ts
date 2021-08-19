@@ -13,6 +13,8 @@ export class ColorPickerDemoComponent {
 
   color2 = new FormControl({ value: '#3f51b5', disabled: true });
 
+  color3 = new FormControl({ value: '#3f51b5', disabled: false });
+
   onColorChange(e: any) {
     console.log(e);
   }
