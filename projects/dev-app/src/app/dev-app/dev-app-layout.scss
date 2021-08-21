@@ -68,6 +68,16 @@ body {
 }
 
 // Override Material styles
+
 .mat-divider {
   margin: 24px 0 !important;
+}
+
+.mat-radio-button {
+  margin: 0 8px;
+}
+
+.mat-slide-toggle,
+.mat-checkbox {
+  margin-right: 8px;
 }

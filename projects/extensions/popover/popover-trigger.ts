@@ -347,24 +347,24 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
    */
   private _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
     this._positionSubscription = position.positionChanges.subscribe(change => {
-      const posisionX: MtxPopoverPositionX =
+      const posX: MtxPopoverPositionX =
         change.connectionPair.overlayX === 'start'
           ? 'after'
           : change.connectionPair.overlayX === 'end'
           ? 'before'
           : 'center';
-      const posisionY: MtxPopoverPositionY =
+      const posY: MtxPopoverPositionY =
         change.connectionPair.overlayY === 'top' ? 'below' : 'above';
 
       // required for ChangeDetectionStrategy.OnPush
       this._changeDetectorRef.markForCheck();
 
       this.popover.zone.run(() => {
-        this.popover.xPosition = posisionX;
-        this.popover.yPosition = posisionY;
+        this.popover.xPosition = posX;
+        this.popover.yPosition = posY;
         this.popover.setCurrentStyles();
 
-        this.popover.setPositionClasses(posisionX, posisionY);
+        this.popover.setPositionClasses(posX, posY);
       });
     });
   }
