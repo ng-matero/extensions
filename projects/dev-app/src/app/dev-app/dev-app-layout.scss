@@ -73,8 +73,16 @@ body {
   margin: 24px 0 !important;
 }
 
-.mat-radio-button {
+.mat-slider {
   margin: 0 8px;
+}
+
+.mat-radio-group {
+  padding: 0 4px;
+
+  .mat-radio-button {
+    margin: 0 4px;
+  }
 }
 
 .mat-slide-toggle,

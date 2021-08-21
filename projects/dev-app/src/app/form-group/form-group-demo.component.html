@@ -5,7 +5,8 @@
     <mat-radio-button value="accent">accent</mat-radio-button>
     <mat-radio-button value="warn">warn</mat-radio-button>
   </mat-radio-group>
-
+</section>
+<section>
   <mat-slide-toggle [(ngModel)]="showFloatLabel">showFloatLabel</mat-slide-toggle>
   <mat-slide-toggle [(ngModel)]="required">required</mat-slide-toggle>
   <mat-slide-toggle [(ngModel)]="disabled">disabled</mat-slide-toggle>
@@ -13,68 +14,69 @@
   <mat-slide-toggle [(ngModel)]="showSuffix">showSuffix</mat-slide-toggle>
 </section>
 
-<p>
-  <mat-form-field [color]="color">
-    <mat-label>Legacy form field</mat-label>
-    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
-    <input matInput [(ngModel)]="text" placeholder="Placeholder"
-           [required]="required" [disabled]="disabled">
-    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
-  </mat-form-field>
+<h2>Material UI</h2>
 
-  <mat-form-field [color]="color">
-    <mat-label>Legacy form field</mat-label>
-    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
-    <mat-select [(ngModel)]="selectedCar" [required]="required">
-      <mat-option>None</mat-option>
-      <mat-option value="volvo">Volvo</mat-option>
-      <mat-option value="saab">Saab</mat-option>
-      <mat-option value="mercedes">Mercedes</mat-option>
-      <mat-option value="audi">Audi</mat-option>
-    </mat-select>
-    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
-  </mat-form-field>
+<mat-form-field [color]="color">
+  <mat-label>Legacy form field</mat-label>
+  <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+  <input matInput [(ngModel)]="text" placeholder="Placeholder"
+         [required]="required" [disabled]="disabled">
+  <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
+  <mat-hint>Hint</mat-hint>
+</mat-form-field>
 
-  <mat-form-field [color]="color">
-    <mat-label>Choose a date</mat-label>
-    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
-    <input matInput [matDatepicker]="picker2" [required]="required" [disabled]="disabled">
-    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-    <mat-datepicker #picker2></mat-datepicker>
-    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
-  </mat-form-field>
-</p>
+<mat-form-field [color]="color">
+  <mat-label>Legacy form field</mat-label>
+  <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+  <mat-select [(ngModel)]="selectedCar" [required]="required">
+    <mat-option>None</mat-option>
+    <mat-option value="volvo">Volvo</mat-option>
+    <mat-option value="saab">Saab</mat-option>
+    <mat-option value="mercedes">Mercedes</mat-option>
+    <mat-option value="audi">Audi</mat-option>
+  </mat-select>
+  <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
+  <mat-hint>Hint</mat-hint>
+</mat-form-field>
 
-<p>
-  <mat-form-field appearance="standard" [color]="color">
-    <mat-label>Standard form field</mat-label>
-    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
-    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
-    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
-  </mat-form-field>
+<mat-form-field [color]="color">
+  <mat-label>Choose a date</mat-label>
+  <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+  <input matInput [matDatepicker]="picker2" [required]="required" [disabled]="disabled">
+  <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+  <mat-datepicker #picker2></mat-datepicker>
+  <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
+  <mat-hint>Hint</mat-hint>
+</mat-form-field>
 
-  <mat-form-field appearance="fill" [color]="color">
-    <mat-label>Fill form field</mat-label>
-    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
-    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
-    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
-  </mat-form-field>
+<mat-divider></mat-divider>
 
-  <mat-form-field appearance="outline" [color]="color">
-    <mat-label>Outline form field</mat-label>
-    <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
-    <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
-    <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
-    <mat-hint>Hint</mat-hint>
-  </mat-form-field>
-</p>
+<mat-form-field appearance="standard" [color]="color">
+  <mat-label>Standard form field</mat-label>
+  <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+  <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+  <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
+  <mat-hint>Hint</mat-hint>
+</mat-form-field>
 
-<!-- Fluent UI -->
+<mat-form-field appearance="fill" [color]="color">
+  <mat-label>Fill form field</mat-label>
+  <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+  <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+  <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
+  <mat-hint>Hint</mat-hint>
+</mat-form-field>
+
+<mat-form-field appearance="outline" [color]="color">
+  <mat-label>Outline form field</mat-label>
+  <mat-icon matPrefix *ngIf="showPrefix">sentiment_satisfied_alt</mat-icon>
+  <input matInput placeholder="Placeholder" [required]="required" [disabled]="disabled">
+  <mat-icon matSuffix *ngIf="showSuffix">sentiment_very_satisfied</mat-icon>
+  <mat-hint>Hint</mat-hint>
+</mat-form-field>
+
+
+<h2>Fluent UI</h2>
 
 <mtx-form-group label="Mat Input" [showRequiredMarker]="required">
   <mat-form-field [color]="color">

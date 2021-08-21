@@ -5,13 +5,13 @@
 }
 
 .loader-demo-wrap {
-  height: 200px;
+  position: relative;
   padding: 0 16px;
   margin: 16px 0;
   border: 1px solid;
-}
 
-span {
-  margin: 0 8px;
-  vertical-align: middle;
+  .mtx-loader {
+    position: absolute;
+    left: 0;
+  }
 }
