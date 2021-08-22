@@ -10,26 +10,14 @@
     background-color: mat.get-color-from-palette($background, card);
   }
 
-  .mtx-popover-below {
+  [class*='mtx-popover'] {
     .mtx-popover-direction-arrow {
       &::before {
-        border-bottom-color: rgba(mat.get-color-from-palette($foreground, divider), .2);
+        border-color: rgba(mat.get-color-from-palette($foreground, divider), .2);
       }
 
       &::after {
-        border-bottom-color: mat.get-color-from-palette($background, card);
-      }
-    }
-  }
-
-  .mtx-popover-above {
-    .mtx-popover-direction-arrow {
-      &::before {
-        border-top-color: rgba(mat.get-color-from-palette($foreground, divider), .2);
-      }
-
-      &::after {
-        border-top-color: mat.get-color-from-palette($background, card);
+        border-color: mat.get-color-from-palette($background, card);
       }
     }
   }
