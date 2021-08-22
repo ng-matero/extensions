@@ -359,7 +359,6 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
           };
   }
 
-  // TODO: Refactor
   /**
    * It's necessary to set position-based classes to ensure the popover panel animation
    * folds out from the correct direction.

@@ -415,7 +415,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
 
     const offsetX =
       this.popover.xOffset && !isNaN(Number(this.popover.xOffset))
-        ? Number(this.popover.xOffset)
+        ? Number(this.dir === 'ltr' ? this.popover.xOffset : -this.popover.xOffset)
         : 0;
     const offsetY =
       this.popover.yOffset && !isNaN(Number(this.popover.yOffset))
