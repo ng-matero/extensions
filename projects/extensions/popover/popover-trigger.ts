@@ -32,11 +32,10 @@ import { takeUntil } from 'rxjs/operators';
 
 import { MtxPopoverPanel, MtxTarget } from './popover-interfaces';
 import {
-  MtxPopoverPositionX,
-  MtxPopoverPositionY,
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
   MtxPopoverPosition,
+  MtxPopoverPositionStart,
 } from './popover-types';
 import { throwMtxPopoverMissingError } from './popover-errors';
 
@@ -364,8 +363,8 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
 
       const pos: MtxPopoverPosition =
         this.popover.position[0] === 'above' || this.popover.position[0] === 'below'
-          ? [posY, posX]
-          : [posX, posY];
+          ? [posY as MtxPopoverPositionStart, posX]
+          : [posX as MtxPopoverPositionStart, posY];
 
       // required for ChangeDetectionStrategy.OnPush
       this._changeDetectorRef.markForCheck();

@@ -30,10 +30,6 @@ $arrow-size: 8px;
       margin-right: $arrow-size + 2;
     }
   }
-
-  &.mtx-popover-overlap {
-    margin: 0;
-  }
 }
 
 .mtx-popover-direction-arrow {
@@ -60,12 +56,6 @@ $arrow-size: 8px;
 [class*='mtx-popover-below'],
 [class*='mtx-popover-above'] {
   .mtx-popover-direction-arrow {
-    &::before,
-    &::after {
-      border-left-color: transparent;
-      border-right-color: transparent;
-    }
-
     &::after {
       left: 1px;
 
@@ -106,12 +96,6 @@ $arrow-size: 8px;
 [class*='mtx-popover-before'],
 [class*='mtx-popover-after'] {
   .mtx-popover-direction-arrow {
-    &::before,
-    &::after {
-      border-top-color: transparent;
-      border-bottom-color: transparent;
-    }
-
     &::after {
       top: 1px;
     }

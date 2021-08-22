@@ -19,13 +19,14 @@ import { ESCAPE } from '@angular/cdk/keycodes';
 import { Directionality } from '@angular/cdk/bidi';
 
 import {
-  MtxPopoverPositionX,
-  MtxPopoverPositionY,
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
   MtxPopoverPosition,
 } from './popover-types';
-import { throwMtxPopoverInvalidPositionX, throwMtxPopoverInvalidPositionY } from './popover-errors';
+import {
+  throwMtxPopoverInvalidPositionStart,
+  throwMtxPopoverInvalidPositionEnd,
+} from './popover-errors';
 import { MtxPopoverPanel } from './popover-interfaces';
 import { transformPopover } from './popover-animations';
 
@@ -43,13 +44,10 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
 
   /** Settings for popover, view setters and getters for more detail */
   private _position: MtxPopoverPosition = ['below', 'after'];
-  private _xPosition: MtxPopoverPositionX = 'after';
-  private _yPosition: MtxPopoverPositionY = 'below';
   private _triggerEvent: MtxPopoverTriggerEvent = 'hover';
   private _scrollStrategy: MtxPopoverScrollStrategy = 'reposition';
   private _enterDelay = 100;
   private _leaveDelay = 100;
-  private _overlapTrigger = false;
   private _disableAnimation = false;
   private _panelOffsetX = 0;
   private _panelOffsetY = 0;
@@ -84,38 +82,18 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   /** Emits the current animation state whenever it changes. */
   _onAnimationStateChange = new EventEmitter<AnimationEvent>();
 
-  /** @deprecated Position of the popover in the X axis. */
-  @Input()
-  get xPosition() {
-    return this._xPosition;
-  }
-  set xPosition(value: MtxPopoverPositionX) {
-    if (value !== 'before' && value !== 'after' && value !== 'center') {
-      throwMtxPopoverInvalidPositionX();
-    }
-    this._xPosition = value;
-    this.setPositionClasses();
-  }
-
-  /** @deprecated Position of the popover in the Y axis. */
-  @Input()
-  get yPosition() {
-    return this._yPosition;
-  }
-  set yPosition(value: MtxPopoverPositionY) {
-    if (value !== 'above' && value !== 'below') {
-      throwMtxPopoverInvalidPositionY();
-    }
-    this._yPosition = value;
-    this.setPositionClasses();
-  }
-
-  /** TODO: Position of the popover. */
+  /** Position of the popover. */
   @Input()
   get position() {
     return this._position;
   }
   set position(value: MtxPopoverPosition) {
+    if (!['before', 'after', 'above', 'below'].includes(value[0])) {
+      throwMtxPopoverInvalidPositionStart();
+    }
+    if (!['before', 'after', 'above', 'below', 'center'].includes(value[1])) {
+      throwMtxPopoverInvalidPositionEnd();
+    }
     this._position = value;
     this.setPositionClasses();
   }
@@ -154,15 +132,6 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   }
   set leaveDelay(value: number) {
     this._leaveDelay = value;
-  }
-
-  /** @deprecated Popover overlap trigger */
-  @Input()
-  get overlapTrigger(): boolean {
-    return this._overlapTrigger;
-  }
-  set overlapTrigger(value: boolean) {
-    this._overlapTrigger = value;
   }
 
   /** Popover target offset x */

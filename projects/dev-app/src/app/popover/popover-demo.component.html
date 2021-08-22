@@ -8,10 +8,8 @@
 </button>
 
 <mtx-popover #popover="mtxPopover"
-             xPosition="after"
-             yPosition="above"
+             [position]="['above', 'after']"
              [arrowOffsetX]="28"
-             [overlapTrigger]="false"
              [closeOnPanelClick]="true"
              [closeOnBackdropClick]="true"
              (closed)="log()">
@@ -30,11 +28,9 @@
 </button>
 
 <mtx-popover #popover2="mtxPopover"
-             yPosition="below"
-             xPosition="center"
+             [position]="['below', 'center']"
              [xOffset]="10"
              [yOffset]="10"
-             [overlapTrigger]="false"
              [closeOnPanelClick]="false">
   <div style="max-width: 200px;">
     A material design popover component created using Angular with the Angular CDK.
@@ -59,8 +55,8 @@
 <mtx-popover #popover3="mtxPopover"
              [position]="['after', 'below']"
              [xOffset]="20"
+             [yOffset]="20"
              [arrowOffsetY]="16"
-             [overlapTrigger]="false"
              [closeOnPanelClick]="false">
   <div style="max-width: 200px;">
     A material design popover component created using Angular with the Angular CDK.

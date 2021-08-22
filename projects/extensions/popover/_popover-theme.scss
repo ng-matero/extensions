@@ -21,4 +21,26 @@
       }
     }
   }
+
+  [class*='mtx-popover-below'],
+  [class*='mtx-popover-above'] {
+    .mtx-popover-direction-arrow {
+      &::before,
+      &::after {
+        border-left-color: transparent;
+        border-right-color: transparent;
+      }
+    }
+  }
+
+  [class*='mtx-popover-before'],
+  [class*='mtx-popover-after'] {
+    .mtx-popover-direction-arrow {
+      &::before,
+      &::after {
+        border-top-color: transparent;
+        border-bottom-color: transparent;
+      }
+    }
+  }
 }

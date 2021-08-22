@@ -1,7 +1,5 @@
 import { ElementRef, EventEmitter, NgZone, TemplateRef } from '@angular/core';
 import {
-  MtxPopoverPositionX,
-  MtxPopoverPositionY,
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
   MtxPopoverPosition,
@@ -10,16 +8,10 @@ import {
 export interface MtxPopoverPanel {
   triggerEvent: MtxPopoverTriggerEvent;
   position: MtxPopoverPosition;
-  /** @deprecated */
-  xPosition: MtxPopoverPositionX;
-  /** @deprecated */
-  yPosition: MtxPopoverPositionY;
   xOffset: number;
   yOffset: number;
   enterDelay: number;
   leaveDelay: number;
-  /** @deprecated */
-  overlapTrigger: boolean;
   arrowOffsetX: number;
   arrowOffsetY: number;
   arrowWidth: number;
@@ -40,16 +32,10 @@ export interface MtxPopoverPanel {
 export interface MtxPopoverConfig {
   triggerEvent: MtxPopoverTriggerEvent;
   position: MtxPopoverPosition;
-  /** @deprecated */
-  xPosition: MtxPopoverPositionX;
-  /** @deprecated */
-  yPosition: MtxPopoverPositionY;
   xOffset: number;
   yOffset: number;
   enterDelay: number;
   leaveDelay: number;
-  /** @deprecated */
-  overlapTrigger: boolean;
   arrowOffsetX: number;
   arrowOffsetY: number;
   arrowWidth: number;
