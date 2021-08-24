@@ -14,7 +14,7 @@ import {
   Optional,
 } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ESCAPE } from '@angular/cdk/keycodes';
 import { Directionality } from '@angular/cdk/bidi';
 
@@ -48,11 +48,11 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   private _scrollStrategy: MtxPopoverScrollStrategy = 'reposition';
   private _enterDelay = 100;
   private _leaveDelay = 100;
-  private _disableAnimation = false;
   private _panelOffsetX = 0;
   private _panelOffsetY = 0;
   private _closeOnPanelClick = false;
   private _closeOnBackdropClick = true;
+  private _disableAnimation = false;
   private _focusTrapEnabled = true;
   private _focusTrapAutoCaptureEnabled = true;
   private _arrowOffsetX = 20;
@@ -63,8 +63,7 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   /** Config object to be passed into the popover's ngClass */
   _classList: { [key: string]: boolean } = {};
 
-  // TODO: Write comment description
-  /** */
+  /** Whether popover's `targetElement` is defined */
   public containerPositioning = false;
 
   /** Closing disabled on popover */
@@ -377,4 +376,10 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     this._classList['mtx-popover-below-center'] = pos[0] === 'below' && pos[1] === 'center';
     this._classList['mtx-popover-below-after'] = pos[0] === 'below' && pos[1] === 'after';
   }
+
+  static ngAcceptInputType_closeOnPanelClick: BooleanInput;
+  static ngAcceptInputType_closeOnBackdropClick: BooleanInput;
+  static ngAcceptInputType_disableAnimation: BooleanInput;
+  static ngAcceptInputType_focusTrapEnabled: BooleanInput;
+  static ngAcceptInputType_focusTrapAutoCaptureEnabled: BooleanInput;
 }

@@ -318,7 +318,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       overlayState.backdropClass = 'cdk-overlay-transparent-backdrop';
     }
 
-    overlayState.direction = this.dir;
+    overlayState.direction = this._dir;
     overlayState.scrollStrategy = this._getOverlayScrollStrategy(this.popover.scrollStrategy);
 
     return overlayState;
@@ -463,6 +463,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
         },
       ];
     }
+
     if (this.popover.position[0] === 'before' || this.popover.position[0] === 'after') {
       positions = [
         { originX, originY, overlayX, overlayY, offsetX },
