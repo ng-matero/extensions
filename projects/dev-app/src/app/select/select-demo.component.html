@@ -56,6 +56,17 @@
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 
+<h2>Material Select</h2>
+
+<mat-form-field>
+  <mat-label>Choose an option</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let food of items" [value]="food.id">
+      {{food.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
 <h2>Test Templates</h2>
 
 <mat-form-field appearance="standard">
