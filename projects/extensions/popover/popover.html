@@ -1,6 +1,5 @@
 <ng-template>
   <div class="mtx-popover-panel mat-elevation-z8" role="dialog"
-       [class.mtx-popover-overlap]="overlapTrigger"
        [ngClass]="_classList"
        [ngStyle]="popoverPanelStyles"
        (keydown)="_handleKeydown($event)"
@@ -9,8 +8,7 @@
        (mouseleave)="onMouseLeave()"
        [@.disabled]="disableAnimation"
        [@transformPopover]="'enter'">
-    <div class="mtx-popover-direction-arrow" [ngStyle]="popoverArrowStyles" *ngIf="!overlapTrigger">
-    </div>
+    <div class="mtx-popover-direction-arrow" [ngStyle]="popoverArrowStyles"></div>
     <div class="mtx-popover-content"
          [ngStyle]="popoverContentStyles"
          [cdkTrapFocus]="focusTrapEnabled"

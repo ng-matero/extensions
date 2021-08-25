@@ -10,19 +10,19 @@ export function throwMtxPopoverMissingError() {
 }
 
 /**
- * Throws an exception for the case when popover's mtxPopoverPositionX value isn't valid.
- * In other words, it doesn't match 'before' or 'after'.
+ * Throws an exception for the case when popover's mtxPopoverPosition[0] value isn't valid.
+ * In other words, it doesn't match 'above', 'below', 'before' or 'after'.
  */
-export function throwMtxPopoverInvalidPositionX() {
-  throw Error(`mtxPopoverPositionX value must be either 'before', 'center' or after'.
-      Example: <mtx-popover mtxPopoverPositionX="before" #popover="mtxPopover"></mtx-popover>`);
+export function throwMtxPopoverInvalidPositionStart() {
+  throw Error(`mtxPopoverPosition[0] value must be either 'above', 'below', 'before' or 'after'.
+    Example: <mtx-popover [position]="['below', 'after']" #popover="mtxPopover"></mtx-popover>`);
 }
 
 /**
- * Throws an exception for the case when popover's mtxPopoverPositionY value isn't valid.
- * In other words, it doesn't match 'above' or 'below'.
+ * Throws an exception for the case when popover's mtxPopoverPosition[1] value isn't valid.
+ * In other words, it doesn't match 'above', 'below', 'before', 'after' or 'center'.
  */
-export function throwMtxPopoverInvalidPositionY() {
-  throw Error(`mtxPopoverPositionY value must be either 'above' or below'.
-      Example: <mtx-popover mtxPopoverPositionY="above" #popover="mtxPopover"></mtx-popover>`);
+export function throwMtxPopoverInvalidPositionEnd() {
+  throw Error(`mtxPopoverPosition[1] value must be either 'above', 'below', 'before', 'after' or 'center'.
+    Example: <mtx-popover [position]="['below', 'after']" #popover="mtxPopover"></mtx-popover>`);
 }

@@ -23,6 +23,7 @@ import {
   VerticalConnectionPos,
   FlexibleConnectedPositionStrategy,
   ScrollStrategy,
+  ConnectedPosition,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 
@@ -31,10 +32,10 @@ import { takeUntil } from 'rxjs/operators';
 
 import { MtxPopoverPanel, MtxTarget } from './popover-interfaces';
 import {
-  MtxPopoverPositionX,
-  MtxPopoverPositionY,
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
+  MtxPopoverPosition,
+  MtxPopoverPositionStart,
 } from './popover-types';
 import { throwMtxPopoverMissingError } from './popover-errors';
 
@@ -317,7 +318,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       overlayState.backdropClass = 'cdk-overlay-transparent-backdrop';
     }
 
-    overlayState.direction = this.dir;
+    overlayState.direction = this._dir;
     overlayState.scrollStrategy = this._getOverlayScrollStrategy(this.popover.scrollStrategy);
 
     return overlayState;
@@ -347,24 +348,30 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
    */
   private _subscribeToPositions(position: FlexibleConnectedPositionStrategy): void {
     this._positionSubscription = position.positionChanges.subscribe(change => {
-      const posisionX: MtxPopoverPositionX =
+      const posX =
         change.connectionPair.overlayX === 'start'
           ? 'after'
           : change.connectionPair.overlayX === 'end'
           ? 'before'
           : 'center';
-      const posisionY: MtxPopoverPositionY =
-        change.connectionPair.overlayY === 'top' ? 'below' : 'above';
+      const posY =
+        change.connectionPair.overlayY === 'top'
+          ? 'below'
+          : change.connectionPair.overlayY === 'bottom'
+          ? 'above'
+          : 'center';
+
+      const pos: MtxPopoverPosition =
+        this.popover.position[0] === 'above' || this.popover.position[0] === 'below'
+          ? [posY as MtxPopoverPositionStart, posX]
+          : [posX as MtxPopoverPositionStart, posY];
 
       // required for ChangeDetectionStrategy.OnPush
       this._changeDetectorRef.markForCheck();
 
       this.popover.zone.run(() => {
-        this.popover.xPosition = posisionX;
-        this.popover.yPosition = posisionY;
-        this.popover.setCurrentStyles();
-
-        this.popover.setPositionClasses(posisionX, posisionY);
+        this.popover.setCurrentStyles(pos);
+        this.popover.setPositionClasses(pos);
       });
     });
   }
@@ -376,24 +383,39 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
    */
   private _getPosition(): FlexibleConnectedPositionStrategy {
     const [originX, origin2ndX, origin3rdX]: HorizontalConnectionPos[] =
-      this.popover.xPosition === 'before'
-        ? ['end', 'start', 'center']
-        : this.popover.xPosition === 'after'
-        ? ['start', 'end', 'center']
+      this.popover.position[0] === 'before' || this.popover.position[1] === 'after'
+        ? ['start', 'center', 'end']
+        : this.popover.position[0] === 'after' || this.popover.position[1] === 'before'
+        ? ['end', 'center', 'start']
         : ['center', 'start', 'end'];
 
+    const [originY, origin2ndY, origin3rdY]: VerticalConnectionPos[] =
+      this.popover.position[0] === 'above' || this.popover.position[1] === 'below'
+        ? ['top', 'center', 'bottom']
+        : this.popover.position[0] === 'below' || this.popover.position[1] === 'above'
+        ? ['bottom', 'center', 'top']
+        : ['center', 'top', 'bottom'];
+
+    const [overlayX, overlayFallbackX]: HorizontalConnectionPos[] =
+      this.popover.position[0] === 'below' || this.popover.position[0] === 'above'
+        ? [originX, originX]
+        : this.popover.position[0] === 'before'
+        ? ['end', 'start']
+        : ['start', 'end'];
+
     const [overlayY, overlayFallbackY]: VerticalConnectionPos[] =
-      this.popover.yPosition === 'above' ? ['bottom', 'top'] : ['top', 'bottom'];
+      this.popover.position[0] === 'before' || this.popover.position[0] === 'after'
+        ? [originY, originY]
+        : this.popover.position[0] === 'below'
+        ? ['top', 'bottom']
+        : ['bottom', 'top'];
 
-    /** Reverse overlayY and fallbackOverlayY when overlapTrigger is false */
-    const originY = this.popover.overlapTrigger ? overlayY : overlayFallbackY;
-    const originFallbackY = this.popover.overlapTrigger ? overlayFallbackY : overlayY;
-
-    const overlayX = originX;
+    const originFallbackX = overlayX;
+    const originFallbackY = overlayY;
 
     const offsetX =
       this.popover.xOffset && !isNaN(Number(this.popover.xOffset))
-        ? Number(this.popover.xOffset)
+        ? Number(this.dir === 'ltr' ? this.popover.xOffset : -this.popover.xOffset)
         : 0;
     const offsetY =
       this.popover.yOffset && !isNaN(Number(this.popover.yOffset))
@@ -401,7 +423,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
         : 0;
 
     /**
-     * For overriding position element, when mtxPopoverTargetAt has a valid element reference.
+     * For overriding position element, when `mtxPopoverTargetAt` has a valid element reference.
      * Useful for sticking popover to parent element and offsetting arrow to trigger element.
      * If undefined defaults to the trigger element reference.
      */
@@ -411,54 +433,71 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       element = this.targetElement._elementRef;
     }
 
+    let positions: ConnectedPosition[] = [{ originX, originY, overlayX, overlayY }];
+
+    if (this.popover.position[0] === 'above' || this.popover.position[0] === 'below') {
+      positions = [
+        { originX, originY, overlayX, overlayY, offsetY },
+        { originX: origin2ndX, originY, overlayX: origin2ndX, overlayY, offsetY },
+        { originX: origin3rdX, originY, overlayX: origin3rdX, overlayY, offsetY },
+        {
+          originX,
+          originY: originFallbackY,
+          overlayX,
+          overlayY: overlayFallbackY,
+          offsetY: -offsetY,
+        },
+        {
+          originX: origin2ndX,
+          originY: originFallbackY,
+          overlayX: origin2ndX,
+          overlayY: overlayFallbackY,
+          offsetY: -offsetY,
+        },
+        {
+          originX: origin3rdX,
+          originY: originFallbackY,
+          overlayX: origin3rdX,
+          overlayY: overlayFallbackY,
+          offsetY: -offsetY,
+        },
+      ];
+    }
+
+    if (this.popover.position[0] === 'before' || this.popover.position[0] === 'after') {
+      positions = [
+        { originX, originY, overlayX, overlayY, offsetX },
+        { originX, originY: origin2ndY, overlayX, overlayY: origin2ndY, offsetX },
+        { originX, originY: origin3rdY, overlayX, overlayY: origin3rdY, offsetX },
+        {
+          originX: originFallbackX,
+          originY,
+          overlayX: overlayFallbackX,
+          overlayY,
+          offsetX: -offsetX,
+        },
+        {
+          originX: originFallbackX,
+          originY: origin2ndY,
+          overlayX: overlayFallbackX,
+          overlayY: origin2ndY,
+          offsetX: -offsetX,
+        },
+        {
+          originX: originFallbackX,
+          originY: origin3rdY,
+          overlayX: overlayFallbackX,
+          overlayY: origin3rdY,
+          offsetX: -offsetX,
+        },
+      ];
+    }
+
     return this._overlay
       .position()
       .flexibleConnectedTo(element)
-      .withLockedPosition(true)
-      .withPositions([
-        {
-          originX,
-          originY,
-          overlayX,
-          overlayY,
-          offsetY,
-        },
-        {
-          originX: origin2ndX,
-          originY,
-          overlayX: origin2ndX,
-          overlayY,
-          offsetY,
-        },
-        {
-          originX,
-          originY: originFallbackY,
-          overlayX,
-          overlayY: overlayFallbackY,
-          offsetY: -offsetY,
-        },
-        {
-          originX: origin2ndX,
-          originY: originFallbackY,
-          overlayX: origin2ndX,
-          overlayY: overlayFallbackY,
-          offsetY: -offsetY,
-        },
-        {
-          originX: origin3rdX,
-          originY,
-          overlayX: origin3rdX,
-          overlayY,
-          offsetY,
-        },
-        {
-          originX: origin3rdX,
-          originY: originFallbackY,
-          overlayX: origin3rdX,
-          overlayY: overlayFallbackY,
-          offsetY: -offsetY,
-        },
-      ])
+      .withLockedPosition()
+      .withPositions(positions)
       .withDefaultOffsetX(offsetX)
       .withDefaultOffsetY(offsetY);
   }

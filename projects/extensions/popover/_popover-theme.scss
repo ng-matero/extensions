@@ -9,26 +9,36 @@
     background-color: mat-color($background, card);
   }
 
-  .mtx-popover-below {
+  [class*='mtx-popover'] {
     .mtx-popover-direction-arrow {
       &::before {
-        border-bottom-color: rgba(mat-color($foreground, divider), .2);
+        border-color: rgba(mat-color($foreground, divider), .2);
       }
 
       &::after {
-        border-bottom-color: mat-color($background, card);
+        border-color: mat-color($background, card);
       }
     }
   }
 
-  .mtx-popover-above {
+  [class*='mtx-popover-below'],
+  [class*='mtx-popover-above'] {
     .mtx-popover-direction-arrow {
-      &::before {
-        border-top-color: rgba(mat-color($foreground, divider), .2);
-      }
-
+      &::before,
       &::after {
-        border-top-color: mat-color($background, card);
+        border-left-color: transparent;
+        border-right-color: transparent;
+      }
+    }
+  }
+
+  [class*='mtx-popover-before'],
+  [class*='mtx-popover-after'] {
+    .mtx-popover-direction-arrow {
+      &::before,
+      &::after {
+        border-top-color: transparent;
+        border-bottom-color: transparent;
       }
     }
   }

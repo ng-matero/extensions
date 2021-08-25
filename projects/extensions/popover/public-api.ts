@@ -4,3 +4,4 @@ export * from './popover-trigger';
 export * from './popover-target';
 export * from './popover-animations';
 export * from './popover-interfaces';
+export * from './popover-types';
