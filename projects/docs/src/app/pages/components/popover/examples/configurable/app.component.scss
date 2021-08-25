@@ -11,6 +11,18 @@
   margin: 0 .5em 5em;
 }
 
+.mat-form-field {
+  margin-right: 1rem;
+}
+
 .mat-card {
   max-width: 300px;
+}
+
+.popover-position {
+  .mat-form-field {
+    width: 80px;
+    margin: 0;
+    font-size: 14px;
+  }
 }

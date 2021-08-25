@@ -1,20 +1,22 @@
 <h2>Popover configuration</h2>
 
-<section>
-  <label>xPosition:</label>
-  <mat-radio-group [(ngModel)]="xPosition">
-    <mat-radio-button value="before">before</mat-radio-button>
-    <mat-radio-button value="center">center</mat-radio-button>
-    <mat-radio-button value="after">after</mat-radio-button>
-  </mat-radio-group>
-</section>
-
-<section>
-  <label>yPosition:</label>
-  <mat-radio-group [(ngModel)]="yPosition">
-    <mat-radio-button value="above">above</mat-radio-button>
-    <mat-radio-button value="below">below</mat-radio-button>
-  </mat-radio-group>
+<section class="popover-position">
+  <label>position:</label>
+  [
+  <mat-form-field floatLabel="never">
+    <mat-label>Start</mat-label>
+    <mat-select [(ngModel)]="positionStart" (ngModelChange)="onPositionStartChange()">
+      <mat-option *ngFor="let item of positionStartOptions" [value]="item">{{item}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  ,
+  <mat-form-field floatLabel="never">
+    <mat-label>End</mat-label>
+    <mat-select [(ngModel)]="positionEnd">
+      <mat-option *ngFor="let item of positionEndOptions" [value]="item">{{item}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  ]
 </section>
 
 <section>
@@ -40,16 +42,12 @@
 </section>
 
 <section>
-  <mat-checkbox [(ngModel)]="overlapTrigger">overlapTrigger</mat-checkbox>
-</section>
-
-<section>
   <mat-checkbox [(ngModel)]="closeOnPanelClick">closeOnPanelClick</mat-checkbox>
 </section>
 
 <h2>Result</h2>
 
-<button mat-raised-button color="primary"
+<button mat-raised-button color="primary" cdkDrag
         #popoverTrigger="mtxPopoverTrigger"
         [mtxPopoverTriggerFor]="popover"
         mtxPopoverTriggerOn="hover">
@@ -57,13 +55,11 @@
 </button>
 
 <mtx-popover #popover="mtxPopover"
-             [xPosition]="xPosition"
-             [yPosition]="yPosition"
+             [position]="[positionStart, positionEnd]"
              [enterDelay]="enterDelay"
              [leaveDelay]="leaveDelay"
              [xOffset]="xOffset"
              [yOffset]="yOffset"
-             [overlapTrigger]="overlapTrigger"
              [closeOnPanelClick]="closeOnPanelClick"
              [closeOnBackdropClick]="true">
   <mat-card>
@@ -73,7 +69,7 @@
   </mat-card>
 </mtx-popover>
 
-<button mat-raised-button color="accent"
+<button mat-raised-button color="accent" cdkDrag
         #popoverTrigger2="mtxPopoverTrigger"
         [mtxPopoverTriggerFor]="popover2"
         mtxPopoverTriggerOn="click">
@@ -81,11 +77,9 @@
 </button>
 
 <mtx-popover #popover2="mtxPopover"
-             [xPosition]="xPosition"
-             [yPosition]="yPosition"
+             [position]="[positionStart, positionEnd]"
              [xOffset]="xOffset"
              [yOffset]="yOffset"
-             [overlapTrigger]="overlapTrigger"
              [closeOnPanelClick]="closeOnPanelClick"
              [closeOnBackdropClick]="true">
   <mat-card>
