@@ -1,0 +1,25 @@
+<mat-radio-group [(ngModel)]="target">
+  <mat-radio-button [value]="target1">Target 1</mat-radio-button>
+  <mat-radio-button [value]="target2">Target 2</mat-radio-button>
+  <mat-radio-button [value]="target3">Target 3</mat-radio-button>
+</mat-radio-group>
+
+<button cdkDrag mat-raised-button color="primary"
+        #popoverTrigger="mtxPopoverTrigger"
+        [mtxPopoverTriggerFor]="popover"
+        [mtxPopoverTargetAt]="target"
+        mtxPopoverTriggerOn="click">
+  Show Popover
+</button>
+
+<mtx-popover #popover="mtxPopover">
+  <div style="max-width: 300px;">
+    A material design popover component created using Angular with the Angular CDK.
+  </div>
+</mtx-popover>
+
+<mat-toolbar #target1>target</mat-toolbar>
+
+<div mtxPopoverTarget #target2="mtxPopoverTarget">popover target directive</div>
+
+<mtx-popover-target #target3="mtxPopoverTarget">popover target component</mtx-popover-target>

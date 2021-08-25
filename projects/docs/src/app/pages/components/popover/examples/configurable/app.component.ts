@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   xOffset = 0;
   yOffset = 0;
   closeOnPanelClick = false;
+  triggerOn: 'hover' | 'click' = 'hover';
 
   positionXOptions = ['before', 'after'];
   positionYOptions = ['above', 'below'];
@@ -23,8 +24,8 @@ export class AppComponent implements OnInit {
   positionStartOptions = [...this.positionYOptions, ...this.positionXOptions];
   positionEndOptions: any[] = [];
 
-  positionStart: MtxPopoverPositionStart = 'after';
-  positionEnd: MtxPopoverPositionEnd = 'below';
+  positionStart: MtxPopoverPositionStart = 'below';
+  positionEnd: MtxPopoverPositionEnd = 'after';
 
   onPositionStartChange(value?: string) {
     if (this.positionXOptions.includes(this.positionStart)) {

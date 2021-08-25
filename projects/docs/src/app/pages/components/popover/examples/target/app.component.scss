@@ -1,0 +1,24 @@
+[mtxPopoverTarget],
+mtx-popover-target {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  padding: 0 1em;
+  margin-top: 1em;
+  background: whitesmoke;
+  color: rgba(0, 0, 0, .87);
+  font: 500 20px / 32px Roboto, 'Helvetica Neue', sans-serif;
+}
+
+.mat-toolbar {
+  margin-top: 1em;
+}
+
+.mat-radio-group {
+  display: block;
+  margin-bottom: 1em;
+}
+
+.mat-radio-button {
+  margin: 0 .5em;
+}

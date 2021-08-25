@@ -8,6 +8,7 @@ import {
   PopoverConfigurableComponent,
   popoverConfigurableExampleConfig,
 } from './examples/configurable';
+import { PopoverTargetComponent, popoverTargetExampleConfig } from './examples/target';
 
 @Component({
   selector: 'app-popover-overview',
@@ -35,7 +36,7 @@ export class PopoverApiComponent {
         component: PopoverOverviewComponent,
         pathMatch: 'full',
         data: {
-          examples: [popoverConfigurableExampleConfig],
+          examples: [popoverConfigurableExampleConfig, popoverTargetExampleConfig],
         },
       },
       {
@@ -53,6 +54,7 @@ export class PopoverApiComponent {
     PopoverOverviewComponent,
     PopoverApiComponent,
     PopoverConfigurableComponent,
+    PopoverTargetComponent,
   ],
 })
 export class PopoverModule {}
