@@ -116,6 +116,16 @@ export class MtxColorPickerComponent
   }
   private _disabled = false;
 
+  /** Whether the element is readonly. */
+  @Input()
+  get readonly(): boolean {
+    return this._readonly;
+  }
+  set readonly(value: boolean) {
+    this._readonly = coerceBooleanProperty(value);
+  }
+  private _readonly = false;
+
   errorState = false;
 
   /** A name for this control that can be used by `mat-form-field`. */
@@ -316,5 +326,6 @@ export class MtxColorPickerComponent
   }
 
   static ngAcceptInputType_required: BooleanInput;
+  static ngAcceptInputType_readonly: BooleanInput;
   static ngAcceptInputType_disabled: BooleanInput;
 }
