@@ -1,27 +1,42 @@
-<div>
-  <mat-form-field>
-    <mat-label>Color picker</mat-label>
-    <mtx-color-picker [(ngModel)]="color" (colorChange)="onColorChange($event)" required
-                      [disabled]="disabled">
-    </mtx-color-picker>
-    <mat-icon matSuffix>palette</mat-icon>
-    <mat-hint>Choose your favorite color</mat-hint>
-    <mat-error>Please enter the color</mat-error>
-  </mat-form-field>
+<mat-form-field>
+  <mat-label>Color picker</mat-label>
+  <mtx-color-picker [(ngModel)]="color" (colorChange)="onColorChange($event)" required
+                    [disabled]="disabled">
+  </mtx-color-picker>
+  <mat-icon matSuffix>palette</mat-icon>
+  <mat-hint>Choose your favorite color</mat-hint>
+  <mat-error>Please enter the color</mat-error>
+</mat-form-field>
+&nbsp;
+<mat-slide-toggle [(ngModel)]="disabled">Disabled</mat-slide-toggle>
 
-  <mat-slide-toggle [(ngModel)]="disabled">Disabled</mat-slide-toggle>
-</div>
+<h2>Test Reactive Form</h2>
 
-<div>
-  <mat-form-field>
-    <mat-label>Color picker</mat-label>
-    <mtx-color-picker [formControl]="color2" (colorChange)="onColorChange($event)" required>
-    </mtx-color-picker>
-    <mat-icon matSuffix>palette</mat-icon>
-    <mat-hint>Choose your favorite color</mat-hint>
-    <mat-error>Please enter the color</mat-error>
-  </mat-form-field>
+<mat-form-field>
+  <mat-label>Color picker</mat-label>
+  <mtx-color-picker [formControl]="color2" (colorChange)="onColorChange($event)" required>
+  </mtx-color-picker>
+  <mat-icon matSuffix>palette</mat-icon>
+  <mat-hint>Choose your favorite color</mat-hint>
+  <mat-error>Please enter the color</mat-error>
+</mat-form-field>
+&nbsp;
+<mat-slide-toggle (change)="toggleDisabled($event)" [checked]="color2.disabled">Disabled
+</mat-slide-toggle>
 
-  <mat-slide-toggle (change)="toggleDisabled($event)" [checked]="color2.disabled">Disabled
-  </mat-slide-toggle>
-</div>
+<h2>Test Readonly</h2>
+
+<mat-form-field>
+  <mat-label>Color picker</mat-label>
+  <input matInput type="color" value="#ff0000" readonly>
+  <mat-hint>Choose your favorite color</mat-hint>
+  <mat-error>Please enter the color</mat-error>
+</mat-form-field>
+&nbsp;
+<mat-form-field>
+  <mat-label>Color picker</mat-label>
+  <mtx-color-picker [formControl]="color3" (colorChange)="onColorChange($event)" readonly>
+  </mtx-color-picker>
+  <mat-hint>Choose your favorite color</mat-hint>
+  <mat-error>Please enter the color</mat-error>
+</mat-form-field>

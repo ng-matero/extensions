@@ -111,7 +111,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     },
   ];
 
-  list2 = [];
+  list2: any[] = [];
   columns2: MtxGridColumn[] = [
     { header: 'Position', field: 'position', minWidth: 200 },
     { header: 'Name', field: 'name', pinned: 'left' },
@@ -168,6 +168,7 @@ export class DataGridDemoComponent implements OnInit, AfterViewInit {
     page: 0,
     per_page: 10,
   };
+
   get params() {
     const p = Object.assign({}, this.query);
     p.page += 1;

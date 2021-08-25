@@ -66,3 +66,26 @@ body {
   width: 100%;
   height: 100%;
 }
+
+// Override Material styles
+
+.mat-divider {
+  margin: 24px 0 !important;
+}
+
+.mat-slider {
+  margin: 0 8px;
+}
+
+.mat-radio-group {
+  padding: 0 4px;
+
+  .mat-radio-button {
+    margin: 0 4px;
+  }
+}
+
+.mat-slide-toggle,
+.mat-checkbox {
+  margin-right: 8px;
+}

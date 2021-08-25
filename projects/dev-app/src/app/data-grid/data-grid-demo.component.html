@@ -121,7 +121,7 @@
 <button (click)="updateEmptyList()">Update Empty List</button>
 <button (click)="select2ndData()">Select 2nd data</button>
 
-<mat-divider></mat-divider>
+<h2>Original Material Table</h2>
 
 <table mat-table columnResize [dataSource]="dataSource" class="example-table">
   <!-- Position Column -->
@@ -158,7 +158,7 @@
   <tr mat-footer-row *matFooterRowDef="displayedColumns;"></tr>
 </table>
 
-<mat-divider></mat-divider>
+<h2>Test Scrolling</h2>
 
 <mtx-grid class="fixed-height" #grid2
           [data]="list2"
@@ -170,7 +170,7 @@
 <button (click)="scrollLeft()">Get scrollLeft</button>
 <button (click)="scrollLeft(100)">Set scrollLeft</button>
 
-<mat-divider></mat-divider>
+<h2>Test Remote API</h2>
 
 <mtx-grid class="fixed-height"
           [data]="list3"
