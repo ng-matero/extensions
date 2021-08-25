@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "11.3.4",
+  "version": "11.4.0",
   "description": "Angular Material Extensions",
   "author": "nzbin<nzb329@163.com>",
   "repository": {
@@ -34,7 +34,7 @@
   "dependencies": {
     "@ng-select/ng-select": "^6.0.0",
     "ngx-color": "^6.0.0",
-    "photoviewer": "^3.5.0",
+    "photoviewer": "^3.6.0",
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
