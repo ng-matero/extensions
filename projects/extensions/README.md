@@ -5,7 +5,7 @@
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ng-matero/extensions/blob/dev/LICENSE)
 [![Gitter](https://img.shields.io/gitter/room/ng-matero/extensions.svg)](https://gitter.im/matero-io/extensions)
 
-The Ng-Matero Extensions is an extended component library of Angular Material.
+The Ng-Matero Extensions is an extended component library for Angular Material.
 
 ## Documentation
 
