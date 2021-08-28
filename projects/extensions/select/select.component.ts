@@ -42,8 +42,12 @@ import {
 import { MtxOptionComponent } from './option.component';
 import { NgSelectComponent } from '@ng-select/ng-select';
 
+export type DropdownPosition = 'bottom' | 'top' | 'auto';
+export type AddTagFn = (term: string) => any | Promise<any>;
 export type CompareWithFn = (a: any, b: any) => boolean;
 export type GroupValueFn = (key: string | object, children: any[]) => string | object;
+export type SearchFn = (term: string, item: any) => boolean;
+export type TrackByFn = (item: any) => any;
 
 export function isDefined(value: any) {
   return value !== undefined && value !== null;
@@ -104,7 +108,7 @@ export class MtxSelectComponent
   mtxOptions: QueryList<MtxOptionComponent>;
 
   /** MtxSelect options */
-  @Input() addTag: boolean | ((term: string) => any | Promise<any>) = false;
+  @Input() addTag: boolean | AddTagFn = false;
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
   @Input() appendTo: string;
@@ -115,7 +119,7 @@ export class MtxSelectComponent
   @Input() clearable = true;
   @Input() clearOnBackspace = true;
   @Input() compareWith: CompareWithFn;
-  @Input() dropdownPosition: 'bottom' | 'top' | 'auto' = 'auto';
+  @Input() dropdownPosition: DropdownPosition = 'auto';
   @Input() groupBy: string | (() => void);
   @Input() groupValue: GroupValueFn;
   @Input() selectableGroup = false;
@@ -124,17 +128,17 @@ export class MtxSelectComponent
   @Input() isOpen: boolean;
   @Input() loading = false;
   @Input() loadingText = 'Loading...';
-  @Input() labelForId = null;
+  @Input() labelForId: string | null = null;
   @Input() markFirst = true;
   @Input() maxSelectedItems: number;
   @Input() multiple = false;
   @Input() notFoundText = 'No items found';
   @Input() searchable = true;
   @Input() readonly = false;
-  @Input() searchFn = null;
+  @Input() searchFn: SearchFn | null = null;
   @Input() searchWhileComposing = true;
   @Input() selectOnTab = false;
-  @Input() trackByFn = null;
+  @Input() trackByFn: TrackByFn | null = null;
   @Input() inputAttrs: { [key: string]: string } = {};
   @Input() tabIndex: number;
   @Input() openOnEnter: boolean;
