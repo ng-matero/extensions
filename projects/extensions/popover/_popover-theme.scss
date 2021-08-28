@@ -13,7 +13,7 @@
   [class*='mtx-popover'] {
     .mtx-popover-direction-arrow {
       &::before {
-        border-color: rgba(mat.get-color-from-palette($foreground, divider), .2);
+        border-color: mat.get-color-from-palette($foreground, divider);
       }
 
       &::after {
