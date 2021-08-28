@@ -2,12 +2,6 @@ import { AppComponent as ColorPickerBasicComponent } from './app.component';
 
 const colorPickerBasicExampleConfig = {
   title: 'Basic',
-  description: `
-  <p>
-    <code>mtx-color-picker</code> has used Chrome picker style of <code>ngx-color</code>, it can't
-    change the picker style now.
-  </p>
-  `,
   component: ColorPickerBasicComponent,
   files: [
     {
@@ -24,7 +18,7 @@ const colorPickerBasicExampleConfig = {
       file: 'app.component.scss',
       content: require('!!highlight-loader?raw=true&lang=scss!./app.component.scss'),
       filecontent: require('!!raw-loader!./app.component.scss'),
-    }
+    },
   ],
 };
 
