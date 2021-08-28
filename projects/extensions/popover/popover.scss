@@ -1,53 +1,52 @@
-$arrow-size: 8px;
+$arrow-size: 1em;
 
 .mtx-popover-panel {
   max-height: calc(100vh - 48px);
   padding: 8px;
   border-radius: 4px;
+  font-size: 16px; // It can change the arrow size
 
   &[class*='mtx-popover-below'] {
-    margin-top: $arrow-size + 2;
+    margin-top: calc(#{$arrow-size * .5} + 2px);
   }
 
   &[class*='mtx-popover-above'] {
-    margin-bottom: $arrow-size + 2;
+    margin-bottom: calc(#{$arrow-size * .5} + 2px);
   }
 
   &[class*='mtx-popover-before'] {
-    margin-right: $arrow-size + 2;
+    margin-right: calc(#{$arrow-size * .5} + 2px);
 
     [dir='rtl'] & {
       margin-right: auto;
-      margin-left: $arrow-size + 2;
+      margin-left: calc(#{$arrow-size * .5} + 2px);
     }
   }
 
   &[class*='mtx-popover-after'] {
-    margin-left: $arrow-size + 2;
+    margin-left: calc(#{$arrow-size * .5} + 2px);
 
     [dir='rtl'] & {
       margin-left: auto;
-      margin-right: $arrow-size + 2;
+      margin-right: calc(#{$arrow-size * .5} + 2px);
     }
   }
 }
 
 .mtx-popover-direction-arrow {
   position: absolute;
-  width: $arrow-size * 2;
-  height: $arrow-size * 2;
 
   &::before,
   &::after {
     position: absolute;
     display: inline-block;
     content: '';
-    border-width: $arrow-size;
+    border-width: $arrow-size * .5;
     border-style: solid;
   }
 
   &::after {
-    border-width: $arrow-size - 1;
+    border-width: calc(#{$arrow-size * .5} - 1px);
   }
 }
 
@@ -69,7 +68,7 @@ $arrow-size: 8px;
 
 [class*='mtx-popover-below'] {
   .mtx-popover-direction-arrow {
-    top: -$arrow-size * 2;
+    top: 0;
 
     &::before,
     &::after {
@@ -81,7 +80,7 @@ $arrow-size: 8px;
 
 [class*='mtx-popover-above'] {
   .mtx-popover-direction-arrow {
-    bottom: -$arrow-size * 2;
+    bottom: 0;
 
     &::before,
     &::after {
@@ -104,7 +103,7 @@ $arrow-size: 8px;
 
 [class*='mtx-popover-before'] {
   .mtx-popover-direction-arrow {
-    right: -$arrow-size * 2;
+    right: 0;
 
     &::before,
     &::after {
@@ -114,20 +113,21 @@ $arrow-size: 8px;
 
     [dir='rtl'] & {
       right: auto;
-      left: -$arrow-size * 2;
+      left: 0;
 
       &::before,
       &::after {
+        left: auto;
         right: 0;
         border-left-width: 0;
       }
 
       &::before {
-        border-right-width: $arrow-size;
+        border-right-width: $arrow-size * .5;
       }
 
       &::after {
-        border-right-width: $arrow-size - 1;
+        border-right-width: calc(#{$arrow-size * .5} - 1px);
       }
     }
   }
@@ -135,7 +135,7 @@ $arrow-size: 8px;
 
 [class*='mtx-popover-after'] {
   .mtx-popover-direction-arrow {
-    left: -$arrow-size * 2;
+    left: 0;
 
     &::before,
     &::after {
@@ -145,20 +145,21 @@ $arrow-size: 8px;
 
     [dir='rtl'] & {
       left: auto;
-      right: -$arrow-size * 2;
+      right: 0;
 
       &::before,
       &::after {
+        right: auto;
         left: 0;
         border-right-width: 0;
       }
 
       &::before {
-        border-left-width: $arrow-size;
+        border-left-width: $arrow-size * .5;
       }
 
       &::after {
-        border-left-width: $arrow-size - 1;
+        border-left-width: calc(#{$arrow-size * .5} - 1px);
       }
     }
   }
