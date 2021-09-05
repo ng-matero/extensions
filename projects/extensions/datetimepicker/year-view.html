@@ -1,0 +1,15 @@
+﻿<table class="mat-datetimepicker-calendar-table">
+  <thead class="mat-datetimepicker-calendar-table-header"></thead>
+  <tbody (@slideCalendar.done)="_calendarStateDone()"
+         (selectedValueChange)="_monthSelected($event)"
+         [@slideCalendar]="_calendarState"
+         [activeCell]="_adapter.getMonth(activeDate)"
+         [labelMinRequiredCells]="2"
+         [label]="_yearLabel"
+         [rows]="_months"
+         [selectedValue]="_selectedMonth"
+         [todayValue]="_todayMonth"
+         allowDisabledSelection="true"
+         mat-datetimepicker-calendar-body
+         role="grid"></tbody>
+</table>

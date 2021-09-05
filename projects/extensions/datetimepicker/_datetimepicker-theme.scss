@@ -1,0 +1,52 @@
+@import '~@angular/material/theming';
+
+$mat-datetimepicker-selected-today-box-shadow-width: 1px;
+
+@mixin mat-datetimepicker-theme($theme) {
+  $primary: map-get($theme, primary);
+
+  .mat-datetimepicker-calendar-header {
+    background-color: mat-color($primary);
+  }
+
+  .mat-datetimepicker-calendar-body-cell-content {
+    &.mat-datetimepicker-calendar-body-selected {
+      background-color: mat-color($primary);
+      color: white;
+    }
+
+    &.mat-datetimepicker-calendar-body-disabled > .mat-datetimepicker-calendar-body-selected {
+      background-color: rgba(mat-color($primary), .4);
+    }
+
+    &.mat-datetimepicker-calendar-body-today {
+      &:not(.mat-datetimepicker-calendar-body-selected) {
+        border-color: mat-color($primary);
+      }
+
+      &.mat-datetimepicker-calendar-body-selected {
+        box-shadow:
+          inset 0 0 0 $mat-datetimepicker-selected-today-box-shadow-width
+          mat-color($primary, default-contrast);
+      }
+    }
+  }
+
+  .mat-datetimepicker-clock-center {
+    background-color: mat-color($primary);
+  }
+
+  .mat-datetimepicker-clock-hand {
+    background-color: mat-color($primary);
+
+    &::before {
+      background-color: mat-color($primary);
+    }
+  }
+
+  .mat-datetimepicker-clock-cell {
+    &.mat-datetimepicker-clock-cell-selected {
+      background-color: lighten(mat-color($primary), 5);
+    }
+  }
+}

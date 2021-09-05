@@ -1,0 +1,21 @@
+﻿<div class="mat-datetimepicker-clock">
+  <div class="mat-datetimepicker-clock-center"></div>
+  <div [ngStyle]="_hand" class="mat-datetimepicker-clock-hand"></div>
+  <div [class.active]="_hourView" class="mat-datetimepicker-clock-hours">
+    <div *ngFor="let item of _hours"
+         [class.mat-datetimepicker-clock-cell-disabled]="!item.enabled"
+         [class.mat-datetimepicker-clock-cell-selected]="_selectedHour == item.value"
+         [style.fontSize]="item.fontSize"
+         [style.left]="item.left+'%'"
+         [style.top]="item.top+'%'"
+         class="mat-datetimepicker-clock-cell">{{ item.displayValue }}</div>
+  </div>
+  <div [class.active]="!_hourView" class="mat-datetimepicker-clock-minutes">
+    <div *ngFor="let item of _minutes"
+         [class.mat-datetimepicker-clock-cell-disabled]="!item.enabled"
+         [class.mat-datetimepicker-clock-cell-selected]="_selectedMinute == item.value"
+         [style.left]="item.left+'%'"
+         [style.top]="item.top+'%'"
+         class="mat-datetimepicker-clock-cell">{{ item.displayValue }}</div>
+  </div>
+</div>

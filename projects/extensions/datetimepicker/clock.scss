@@ -1,0 +1,109 @@
+@import '~@angular/material/theming';
+
+$mat-clock-min-size: 224px !default;
+$mat-clock-margin: 8px !default;
+$mat-clock-font-size: 14px !default;
+$mat-clock-cell-size: 14.1666% !default;
+
+:host {
+  position: relative;
+  display: block;
+  min-width: $mat-clock-min-size;
+  margin: $mat-clock-margin;
+  font-size: $mat-clock-font-size;
+  box-sizing: border-box;
+  user-select: none;
+}
+
+.mat-datetimepicker-clock {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 100%;
+  background-color: darken(white, 12);
+  border-radius: 50%;
+}
+
+.mat-datetimepicker-clock-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2%;
+  height: 2%;
+  margin: -1%;
+  border-radius: 50%;
+}
+
+.mat-datetimepicker-clock-hand {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 1px;
+
+  /* height: $mat-clock-hand-size; */
+  margin: 0 auto;
+  transform-origin: bottom;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+}
+
+.mat-datetimepicker-clock-hours,
+.mat-datetimepicker-clock-minutes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: 350ms;
+  transform: scale(1.2);
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1);
+  }
+}
+
+.mat-datetimepicker-clock-minutes {
+  transform: scale(.8);
+}
+
+.mat-datetimepicker-clock-cell {
+  position: absolute;
+  display: flex;
+  width: $mat-clock-cell-size;
+  height: $mat-clock-cell-size;
+  color: rgba(black, .87);
+  justify-content: center;
+  box-sizing: border-box;
+  border-radius: 50%;
+  align-items: center;
+  cursor: pointer;
+
+  &:not(.mat-datetimepicker-clock-cell-selected) {
+    &:not(.mat-datetimepicker-clock-cell-disabled):hover {
+      background-color: rgba(black, .1);
+    }
+  }
+
+  &.mat-datetimepicker-clock-cell-disabled {
+    color: rgba(black, .38);
+    pointer-events: none;
+  }
+
+  &.mat-datetimepicker-clock-cell-selected {
+    color: white;
+  }
+}
