@@ -42,6 +42,45 @@
         }
       }
     },
+    "extensions-moment-adapter": {
+      "projectType": "library",
+      "root": "projects/extensions-moment-adapter",
+      "prefix": "mtx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/extensions-moment-adapter/tsconfig.lib.json",
+            "project": "projects/extensions-moment-adapter/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/extensions-moment-adapter/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/extensions-moment-adapter/test.ts",
+            "tsConfig": "projects/extensions-moment-adapter/tsconfig.spec.json",
+            "karmaConfig": "projects/extensions-moment-adapter/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/extensions-moment-adapter/tsconfig.lib.json",
+              "projects/extensions-moment-adapter/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
     "docs": {
       "projectType": "application",
       "schematics": {

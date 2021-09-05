@@ -1,0 +1,7 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/extensions-moment-adapter",
+  "lib": {
+    "entryFile": "public_api.ts"
+  }
+}
