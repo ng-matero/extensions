@@ -96,6 +96,7 @@
     "no-outputs-metadata-property": true,
     "no-host-metadata-property": false,
     "no-input-rename": false,
+    "no-string-literal": false,
     "typedef-whitespace": {
       "options": [
         {
