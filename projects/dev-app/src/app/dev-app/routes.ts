@@ -28,6 +28,11 @@ export const DEV_APP_ROUTES: Routes = [
       import('../data-grid/data-grid-demo.module').then(m => m.DataGridDemoModule),
   },
   {
+    path: 'datetimepicker',
+    loadChildren: () =>
+      import('../datetimepicker/datetimepicker-demo.module').then(m => m.DatetimepickerDemoModule),
+  },
+  {
     path: 'dialog',
     loadChildren: () => import('../dialog/dialog-demo.module').then(m => m.DialogDemoModule),
   },
@@ -63,8 +68,7 @@ export const DEV_APP_ROUTES: Routes = [
   },
   {
     path: 'tooltip',
-    loadChildren: () =>
-      import('../tooltip/tooltip-demo.module').then(m => m.TooltipDemoModule),
+    loadChildren: () => import('../tooltip/tooltip-demo.module').then(m => m.TooltipDemoModule),
   },
   { path: '**', component: DevApp404 },
 ];
