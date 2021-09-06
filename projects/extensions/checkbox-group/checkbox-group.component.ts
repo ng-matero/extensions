@@ -10,12 +10,14 @@ import {
   AfterViewInit,
   ContentChildren,
   QueryList,
+  ElementRef,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ThemePalette } from '@angular/material/core';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MtxCheckboxGroupOption } from './checkbox-group.interface';
+import { FocusMonitor } from '@angular/cdk/a11y';
 
 export class MtxCheckboxBase {
   constructor(public label?: any, public value?: any) {}
@@ -58,9 +60,20 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   private _originalItems: any[] = [];
 
   @Input() bindLabel = 'label';
+
   @Input() bindValue = 'value';
-  @Input() showSelectAll = false;
+
+  @Input()
+  get showSelectAll(): boolean {
+    return this._showSelectAll;
+  }
+  set showSelectAll(value: boolean) {
+    this._showSelectAll = coerceBooleanProperty(value);
+  }
+  private _showSelectAll = false;
+
   @Input() selectAllLabel = 'Select All';
+
   @Input()
   get compareWith() {
     return this._compareWith;
@@ -97,9 +110,27 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   _onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
   _onTouched: () => void = () => null;
 
-  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _focusMonitor: FocusMonitor,
+    private _elementRef: ElementRef<HTMLElement>
+  ) {}
 
-  ngAfterViewInit() {}
+  ngAfterViewInit() {
+    this._focusMonitor.monitor(this._elementRef, true).subscribe(focusOrigin => {
+      if (!focusOrigin) {
+        // When a focused element becomes disabled, the browser *immediately* fires a blur event.
+        // Angular does not expect events to be raised during change detection, so any state change
+        // (such as a form control's 'ng-touched') will cause a changed-after-checked error.
+        // See https://github.com/angular/angular/issues/17793. To work around this, we defer
+        // telling the form control it has been touched until the next tick.
+        Promise.resolve().then(() => {
+          this._onTouched();
+          this._changeDetectorRef.markForCheck();
+        });
+      }
+    });
+  }
 
   /**
    * Finds and selects and option based on its value.
@@ -226,4 +257,6 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
 
     this._getSelectedItems(index);
   }
+
+  static ngAcceptInputType_showSelectAll: BooleanInput;
 }

@@ -1,2 +1,18 @@
-<mtx-checkbox-group [items]="foods" [(ngModel)]="selectedFoods"></mtx-checkbox-group>
+<mtx-checkbox-group [items]="foods" [(ngModel)]="selectedFoods" showSelectAll></mtx-checkbox-group>
 <p>{{selectedFoods|json}}</p>
+
+<h2>Test touched</h2>
+
+<mtx-checkbox-group [items]="cars" [formControl]="f1" required showSelectAll></mtx-checkbox-group>
+
+<pre>
+  valid: {{ f1.valid }}
+  touched: {{ f1.touched }}
+</pre>
+
+<mat-checkbox [formControl]="f2" required>Checked</mat-checkbox>
+
+<pre>
+  valid: {{ f2.valid }}
+  touched: {{ f2.touched }}
+</pre>
