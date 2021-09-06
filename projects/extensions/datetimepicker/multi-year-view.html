@@ -6,9 +6,9 @@
          [activeCell]="_getActiveCell()"
          [numCols]="4"
          [rows]="_years"
-         [selectedValue]="_selectedYear"
+         [selectedValue]="_selectedYear!"
          [todayValue]="_todayYear"
-         allowDisabledSelection="true"
+         [allowDisabledSelection]="true"
          mat-datetimepicker-calendar-body
          role="grid"></tbody>
 </table>

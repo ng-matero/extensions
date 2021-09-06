@@ -6,6 +6,7 @@ import {
   EventEmitter,
   Input,
   Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MatDatetimepickerFilterType } from './datetimepicker-filtertype';
@@ -26,9 +27,11 @@ export type MatClockView = 'hour' | 'minute';
   templateUrl: 'clock.html',
   styleUrls: ['clock.scss'],
   host: {
+    '[class.mat-datetimepicker-clock]': 'true',
     'role': 'clock',
     '(mousedown)': '_handleMousedown($event)',
   },
+  encapsulation: ViewEncapsulation.None,
 })
 export class MatDatetimepickerClock<D> implements AfterContentInit {
   @Output() _userSelection = new EventEmitter<void>();
@@ -40,8 +43,8 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
   @Output() selectedChange = new EventEmitter<D>();
   @Output() activeDateChange = new EventEmitter<D>();
   /** Hours and Minutes representing the clock view. */
-  _hours: Array<Object> = [];
-  _minutes: Array<Object> = [];
+  _hours: any[] = [];
+  _minutes: any[] = [];
   /** Whether the clock is in hour view. */
   _hourView: boolean = true;
   _selectedHour!: number;

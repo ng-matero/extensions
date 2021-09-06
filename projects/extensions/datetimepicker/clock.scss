@@ -5,7 +5,7 @@ $mat-clock-margin: 8px !default;
 $mat-clock-font-size: 14px !default;
 $mat-clock-cell-size: 14.1666% !default;
 
-:host {
+.mat-datetimepicker-clock {
   position: relative;
   display: block;
   min-width: $mat-clock-min-size;
@@ -15,7 +15,7 @@ $mat-clock-cell-size: 14.1666% !default;
   user-select: none;
 }
 
-.mat-datetimepicker-clock {
+.mat-datetimepicker-clock-wrapper {
   position: relative;
   width: 100%;
   height: 0;
@@ -41,8 +41,6 @@ $mat-clock-cell-size: 14.1666% !default;
   bottom: 0;
   left: 0;
   width: 1px;
-
-  /* height: $mat-clock-hand-size; */
   margin: 0 auto;
   transform-origin: bottom;
 

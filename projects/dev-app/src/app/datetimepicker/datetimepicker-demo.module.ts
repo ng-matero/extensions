@@ -10,8 +10,8 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
-import { MomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter';
-import { DatetimeAdapter, MAT_DATETIME_FORMATS } from '@ng-matero/extensions';
+import { MomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter/adapter';
+import { DatetimeAdapter, MAT_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 
 @NgModule({
   imports: [

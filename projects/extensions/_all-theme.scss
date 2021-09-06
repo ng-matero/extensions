@@ -10,6 +10,9 @@
 @use './form-group/form-group-theme';
 @use './text3d/text3d-theme';
 
+// TODO: @use
+@import './datetimepicker/datetimepicker-theme';
+
 // Create a theme.
 @mixin all-component-themes($theme) {
   @include alert-theme.theme($theme);
@@ -20,6 +23,9 @@
   @include select-theme.theme($theme);
   @include split-theme.theme($theme);
   @include tooltip-theme.theme($theme);
+
+  // TODO: @use
+  @include mat-datetimepicker-theme($theme);
 }
 
 // @deprecated Use `all-component-themes`.

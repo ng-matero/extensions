@@ -9,8 +9,8 @@
          [@slideCalendar]="_calendarState"
          [activeCell]="_adapter.getDate(activeDate) - 1"
          [rows]="_weeks"
-         [selectedValue]="_selectedDate"
-         [todayValue]="_todayDate"
+         [selectedValue]="_selectedDate!"
+         [todayValue]="_todayDate!"
          mat-datetimepicker-calendar-body
          role="grid"></tbody>
 </table>

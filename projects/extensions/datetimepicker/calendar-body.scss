@@ -21,8 +21,8 @@ $mat-calendar-body-cell-content-size: 100% - $mat-calendar-body-cell-content-mar
 
 .mat-datetimepicker-calendar-body-label {
   padding:
-    $mat-calendar-body-cell-padding 0 $mat-calendar-body-cell-padding
-    $mat-calendar-body-cell-padding;
+    $mat-calendar-body-cell-padding 0
+    $mat-calendar-body-cell-padding $mat-calendar-body-cell-padding;
   height: 0;
   line-height: 0;
   color: rgba(black, .54);

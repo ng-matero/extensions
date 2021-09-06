@@ -70,7 +70,7 @@
                                  *ngSwitchCase="'month'"
                                  [activeDate]="_activeDate"
                                  [dateFilter]="_dateFilterForViews"
-                                 [selected]="selected"
+                                 [selected]="selected!"
                                  [type]="type">
   </mat-datetimepicker-month-view>
   <mat-datetimepicker-year-view (_userSelection)="_userSelected()"
@@ -78,7 +78,7 @@
                                 *ngSwitchCase="'year'"
                                 [activeDate]="_activeDate"
                                 [dateFilter]="_dateFilterForViews"
-                                [selected]="selected"
+                                [selected]="selected!"
                                 [type]="type">
   </mat-datetimepicker-year-view>
   <mat-datetimepicker-multi-year-view (_userSelection)="_userSelected()"
@@ -88,7 +88,7 @@
                                       [dateFilter]="_dateFilterForViews"
                                       [maxDate]="maxDate"
                                       [minDate]="minDate"
-                                      [selected]="selected"
+                                      [selected]="selected!"
                                       [type]="type">
   </mat-datetimepicker-multi-year-view>
   <mat-datetimepicker-clock (_userSelection)="_userSelected()"
