@@ -20,10 +20,10 @@
     "types": ["jasmine"],
     "lib": ["es2018", "dom"],
     "paths": {
-      "@ng-matero/extensions": ["dist/extensions"],
-      "@ng-matero/extensions/*": ["dist/extensions/*"],
-      "@ng-matero/extensions-moment-adapter": ["dist/extensions-moment-adapter"],
-      "@ng-matero/extensions-moment-adapter/*": ["dist/extensions-moment-adapter/*"]
+      "@ng-matero/extensions": ["projects/extensions"],
+      "@ng-matero/extensions/*": ["projects/extensions/*"],
+      "@ng-matero/extensions-moment-adapter": ["projects/extensions-moment-adapter"],
+      "@ng-matero/extensions-moment-adapter/*": ["projects/extensions-moment-adapter/*"]
     }
   },
   "angularCompilerOptions": {
