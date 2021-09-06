@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 import { MtxCheckboxGroupOption } from '@ng-matero/extensions/checkbox-group';
 import { TranslateService } from '@ngx-translate/core';
@@ -10,11 +11,15 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class CheckboxGroupDemoComponent {
   foods: MtxCheckboxGroupOption[] = [
-    { label: this.translate.stream('steak'), value: 'steak', color: 'primary' },
+    { label: this.translate.stream('steak'), value: 'steak', color: 'primary', disabled: true },
     { label: this.translate.stream('pizza'), value: 'pizza', color: 'accent' },
     { label: this.translate.stream('tacos'), value: 'tacos', color: 'warn' },
   ];
   selectedFoods = ['steak', 'pizza'];
+
+  cars = ['Ford', 'Chevrolet', 'Dodge'];
+  f1 = new FormControl(['Chevrolet'], Validators.required);
+  f2 = new FormControl(true, Validators.required);
 
   constructor(public translate: TranslateService) {}
 }
