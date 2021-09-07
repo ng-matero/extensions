@@ -1,4 +1,3 @@
-/* tslint:disable */
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -73,7 +72,7 @@ export class MatDatetimepickerYearView<D> implements AfterContentInit {
   }
 
   set activeDate(value: D) {
-    let oldActiveDate = this._activeDate;
+    const oldActiveDate = this._activeDate;
     this._activeDate = value || this._adapter.today();
     if (
       oldActiveDate &&
@@ -143,7 +142,7 @@ export class MatDatetimepickerYearView<D> implements AfterContentInit {
     this._todayMonth = this._getMonthInCurrentYear(this._adapter.today());
     this._yearLabel = this._adapter.getYearName(this.activeDate);
 
-    let monthNames = this._adapter.getMonthNames('short');
+    const monthNames = this._adapter.getMonthNames('short');
     // First row of months only contains 5 elements so we can fit the year label on the same row.
     this._months = [
       [0, 1, 2, 3, 4],
@@ -161,7 +160,7 @@ export class MatDatetimepickerYearView<D> implements AfterContentInit {
 
   /** Creates an MdCalendarCell for the given month. */
   private _createCellForMonth(month: number, monthName: string) {
-    let ariaLabel = this._adapter.format(
+    const ariaLabel = this._adapter.format(
       this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         month,
@@ -189,7 +188,7 @@ export class MatDatetimepickerYearView<D> implements AfterContentInit {
       return true;
     }
 
-    let firstOfMonth = this._adapter.createDatetime(
+    const firstOfMonth = this._adapter.createDatetime(
       this._adapter.getYear(this.activeDate),
       month,
       1,
@@ -200,7 +199,7 @@ export class MatDatetimepickerYearView<D> implements AfterContentInit {
     // If any date in the month is enabled count the month as enabled.
     for (
       let date = firstOfMonth;
-      this._adapter.getMonth(date) == month;
+      this._adapter.getMonth(date) === month;
       date = this._adapter.addCalendarDays(date, 1)
     ) {
       if (this.dateFilter(date)) {

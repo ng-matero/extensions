@@ -21,13 +21,19 @@ $mat-calendar-body-cell-content-size: 100% - $mat-calendar-body-cell-content-mar
 
 .mat-datetimepicker-calendar-body-label {
   padding:
-    $mat-calendar-body-cell-padding 0
-    $mat-calendar-body-cell-padding $mat-calendar-body-cell-padding;
+    $mat-calendar-body-cell-padding 0 $mat-calendar-body-cell-padding
+    $mat-calendar-body-cell-padding;
   height: 0;
   line-height: 0;
   color: rgba(black, .54);
   transform: translateX($mat-calendar-body-label-translation);
   text-align: left;
+
+  [dir='rtl'] & {
+    padding: 0 $mat-calendar-body-cell-padding 0 0;
+    transform: translateX(-$mat-calendar-body-label-translation);
+    text-align: right;
+  }
 }
 
 .mat-datetimepicker-calendar-body-cell {
@@ -74,12 +80,4 @@ $mat-calendar-body-cell-content-size: 100% - $mat-calendar-body-cell-content-mar
 
 .mat-datetimepicker-calendar-body-disabled > .mat-datetimepicker-calendar-body-today:not(.mat-datetimepicker-calendar-body-selected) {
   border-color: rgba(black, .18);
-}
-
-[dir='rtl'] {
-  .mat-datetimepicker-calendar-body-label {
-    padding: 0 $mat-calendar-body-cell-padding 0 0;
-    transform: translateX(-$mat-calendar-body-label-translation);
-    text-align: right;
-  }
 }

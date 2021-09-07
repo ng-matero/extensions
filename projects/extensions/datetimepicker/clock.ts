@@ -1,4 +1,3 @@
-/* tslint:disable */
 import {
   AfterContentInit,
   Component,
@@ -73,7 +72,7 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
   }
 
   set activeDate(value: D) {
-    let oldActiveDate = this._activeDate;
+    const oldActiveDate = this._activeDate;
     this._activeDate = this._adapter.clampDate(value, this.minDate, this.maxDate);
     if (!this._adapter.sameMinute(oldActiveDate, this._activeDate)) {
       this._init();
@@ -122,7 +121,7 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
   /** Whether the clock should be started in hour or minute view. */
   @Input()
   set startView(value: MatClockView) {
-    this._hourView = value != 'minute';
+    this._hourView = value !== 'minute';
   }
 
   get _hand(): any {
@@ -139,7 +138,7 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
     let deg = 0;
     let radius = CLOCK_OUTER_RADIUS;
     if (this._hourView) {
-      let outer = this._selectedHour > 0 && this._selectedHour < 13;
+      const outer = this._selectedHour > 0 && this._selectedHour < 13;
       radius = outer ? CLOCK_OUTER_RADIUS : CLOCK_INNER_RADIUS;
       if (this.twelvehour) {
         radius = CLOCK_OUTER_RADIUS;
@@ -193,13 +192,13 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
     this._hours.length = 0;
     this._minutes.length = 0;
 
-    let hourNames = this._adapter.getHourNames();
-    let minuteNames = this._adapter.getMinuteNames();
+    const hourNames = this._adapter.getHourNames();
+    const minuteNames = this._adapter.getMinuteNames();
 
     if (this.twelvehour) {
       for (let i = 1; i < hourNames.length / 2 + 1; i++) {
-        let radian = (i / 6) * Math.PI;
-        let radius = CLOCK_OUTER_RADIUS;
+        const radian = (i / 6) * Math.PI;
+        const radius = CLOCK_OUTER_RADIUS;
         const date = this._adapter.createDatetime(
           this._adapter.getYear(this.activeDate),
           this._adapter.getMonth(this.activeDate),
@@ -207,22 +206,22 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
           i + 1,
           0
         );
-        let enabled =
+        const enabled =
           (!this.minDate || this._adapter.compareDatetime(date, this.minDate) >= 0) &&
           (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate) <= 0);
         this._hours.push({
           value: i,
           displayValue: i === 0 ? '00' : hourNames[i],
-          enabled: enabled,
+          enabled,
           top: CLOCK_RADIUS - Math.cos(radian) * radius - CLOCK_TICK_RADIUS,
           left: CLOCK_RADIUS + Math.sin(radian) * radius - CLOCK_TICK_RADIUS,
         });
       }
     } else {
       for (let i = 0; i < hourNames.length; i++) {
-        let radian = (i / 6) * Math.PI;
-        let outer = i > 0 && i < 13,
-          radius = outer ? CLOCK_OUTER_RADIUS : CLOCK_INNER_RADIUS;
+        const radian = (i / 6) * Math.PI;
+        const outer = i > 0 && i < 13;
+        const radius = outer ? CLOCK_OUTER_RADIUS : CLOCK_INNER_RADIUS;
         const date = this._adapter.createDatetime(
           this._adapter.getYear(this.activeDate),
           this._adapter.getMonth(this.activeDate),
@@ -230,14 +229,14 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
           i,
           0
         );
-        let enabled =
+        const enabled =
           (!this.minDate || this._adapter.compareDatetime(date, this.minDate, false) >= 0) &&
           (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate, false) <= 0) &&
           (!this.dateFilter || this.dateFilter(date, MatDatetimepickerFilterType.HOUR));
         this._hours.push({
           value: i,
           displayValue: i === 0 ? '00' : hourNames[i],
-          enabled: enabled,
+          enabled,
           top: CLOCK_RADIUS - Math.cos(radian) * radius - CLOCK_TICK_RADIUS,
           left: CLOCK_RADIUS + Math.sin(radian) * radius - CLOCK_TICK_RADIUS,
           fontSize: i > 0 && i < 13 ? '' : '80%',
@@ -246,7 +245,7 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
     }
 
     for (let i = 0; i < minuteNames.length; i += 5) {
-      let radian = (i / 30) * Math.PI;
+      const radian = (i / 30) * Math.PI;
       const date = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
@@ -254,14 +253,14 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
         this._adapter.getHour(this.activeDate),
         i
       );
-      let enabled =
+      const enabled =
         (!this.minDate || this._adapter.compareDatetime(date, this.minDate) >= 0) &&
         (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate) <= 0) &&
         (!this.dateFilter || this.dateFilter(date, MatDatetimepickerFilterType.MINUTE));
       this._minutes.push({
         value: i,
         displayValue: i === 0 ? '00' : minuteNames[i],
-        enabled: enabled,
+        enabled,
         top: CLOCK_RADIUS - Math.cos(radian) * CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS,
         left: CLOCK_RADIUS + Math.sin(radian) * CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS,
       });
@@ -273,18 +272,18 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
    * @param event
    */
   private setTime(event: any) {
-    let trigger = this._element.nativeElement;
-    let triggerRect = trigger.getBoundingClientRect();
-    let width = trigger.offsetWidth;
-    let height = trigger.offsetHeight;
-    let pageX = event.pageX !== undefined ? event.pageX : event.touches[0].pageX;
-    let pageY = event.pageY !== undefined ? event.pageY : event.touches[0].pageY;
-    let x = width / 2 - (pageX - triggerRect.left - window.pageXOffset);
-    let y = height / 2 - (pageY - triggerRect.top - window.pageYOffset);
+    const trigger = this._element.nativeElement;
+    const triggerRect = trigger.getBoundingClientRect();
+    const width = trigger.offsetWidth;
+    const height = trigger.offsetHeight;
+    const pageX = event.pageX !== undefined ? event.pageX : event.touches[0].pageX;
+    const pageY = event.pageY !== undefined ? event.pageY : event.touches[0].pageY;
+    const x = width / 2 - (pageX - triggerRect.left - window.pageXOffset);
+    const y = height / 2 - (pageY - triggerRect.top - window.pageYOffset);
     let radian = Math.atan2(-x, y);
-    let unit = Math.PI / (this._hourView ? 6 : this.interval ? 30 / this.interval : 30);
-    let z = Math.sqrt(x * x + y * y);
-    let outer =
+    const unit = Math.PI / (this._hourView ? 6 : this.interval ? 30 / this.interval : 30);
+    const z = Math.sqrt(x * x + y * y);
+    const outer =
       this._hourView &&
       z > (width * (CLOCK_OUTER_RADIUS / 100) + width * (CLOCK_INNER_RADIUS / 100)) / 2;
 

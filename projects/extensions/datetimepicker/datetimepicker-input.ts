@@ -31,8 +31,6 @@ import { MatDatetimepicker } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MatDatetimepickerFilterType } from './datetimepicker-filtertype';
 
-// tslint:disable no-use-before-declare
-
 export const MAT_DATETIMEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
   useExisting: forwardRef(() => MatDatetimepickerInput),
@@ -202,7 +200,6 @@ export class MatDatetimepickerInput<D>
 
   ngAfterContentInit() {
     if (this._datepicker) {
-      // tslint:disable-next-line deprecation
       this._datepickerSubscription = this._datepicker.selectedChanged.subscribe((selected: D) => {
         this.value = selected;
         this._cvaOnChange(selected);
@@ -257,7 +254,6 @@ export class MatDatetimepickerInput<D>
   }
 
   _onKeydown(event: KeyboardEvent) {
-    // tslint:disable-next-line:deprecation
     if (event.altKey && event.keyCode === DOWN_ARROW) {
       this._datepicker.open();
       event.preventDefault();

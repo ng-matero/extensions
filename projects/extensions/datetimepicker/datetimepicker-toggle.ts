@@ -27,7 +27,6 @@ import { MatDatetimepicker } from './datetimepicker';
 })
 export class MatDatetimepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {
   /** Datepicker instance that the button will toggle. */
-  // tslint:disable-next-line:no-input-rename
   @Input('for') datetimepicker!: MatDatetimepicker<D>;
   private _stateChanges = Subscription.EMPTY;
 

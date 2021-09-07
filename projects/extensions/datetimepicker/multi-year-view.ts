@@ -1,4 +1,3 @@
-/* tslint:disable */
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -70,14 +69,14 @@ export class MatDatetimepickerMultiYearView<D> implements AfterContentInit {
 
   private _activeDate: D;
 
-  /** The date to display in this multi year view*/
+  /** The date to display in this multi year view */
   @Input()
   get activeDate(): D {
     return this._activeDate;
   }
 
   set activeDate(value: D) {
-    let oldActiveDate = this._activeDate;
+    const oldActiveDate = this._activeDate;
     this._activeDate = value || this._adapter.today();
     if (
       oldActiveDate &&
@@ -179,7 +178,7 @@ export class MatDatetimepickerMultiYearView<D> implements AfterContentInit {
     this._years = [];
     for (let i = 0, row: number[] = []; i < yearsPerPage; i++) {
       row.push(minYearOfPage + i);
-      if (row.length == yearsPerRow) {
+      if (row.length === yearsPerRow) {
         this._years.push(row.map(year => this._createCellForYear(year)));
         row = [];
       }
@@ -188,7 +187,7 @@ export class MatDatetimepickerMultiYearView<D> implements AfterContentInit {
 
   /** Creates an MatDatetimepickerCalendarCell for the given year. */
   private _createCellForYear(year: number) {
-    let yearName = this._adapter.getYearName(this._adapter.createDate(year, 0, 1));
+    const yearName = this._adapter.getYearName(this._adapter.createDate(year, 0, 1));
     return new MatDatetimepickerCalendarCell(
       year,
       yearName,
@@ -219,7 +218,7 @@ export class MatDatetimepickerMultiYearView<D> implements AfterContentInit {
     // If any date in the year is enabled count the year as enabled.
     for (
       let date = firstOfYear;
-      this._adapter.getYear(date) == year;
+      this._adapter.getYear(date) === year;
       date = this._adapter.addCalendarDays(date, 1)
     ) {
       if (this.dateFilter(date)) {

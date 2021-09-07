@@ -74,7 +74,6 @@ export class MatDatetimepickerContent<D> implements AfterContentInit {
    * @param event The event.
    */
   _handleKeydown(event: KeyboardEvent): void {
-    // tslint:disable-next-line:deprecation
     if (event.keyCode === ESCAPE) {
       this.datetimepicker.close();
       event.preventDefault();
@@ -114,10 +113,8 @@ export class MatDatetimepicker<D> implements OnDestroy {
   /** Classes to be passed to the date picker panel. Supports the same syntax as `ngClass`. */
   @Input() panelClass!: string | string[];
   /** Emits when the datepicker has been opened. */
-  // tslint:disable-next-line:no-output-rename
   @Output('opened') openedStream: EventEmitter<void> = new EventEmitter<void>();
   /** Emits when the datepicker has been closed. */
-  // tslint:disable-next-line:no-output-rename
   @Output('closed') closedStream: EventEmitter<void> = new EventEmitter<void>();
   /** Emits when the view has been changed. */
   @Output() viewChanged: EventEmitter<MatCalendarView> = new EventEmitter<MatCalendarView>();
@@ -273,7 +270,6 @@ export class MatDatetimepicker<D> implements OnDestroy {
     const oldValue = this._selected;
     this._selected = date;
     if (!this._dateAdapter.sameDatetime(oldValue, this._selected)) {
-      // tslint:disable-next-line deprecation
       this.selectedChanged.emit(date);
     }
   }

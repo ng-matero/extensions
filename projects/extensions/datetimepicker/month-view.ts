@@ -1,4 +1,3 @@
-/* tslint:disable */
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -70,7 +69,7 @@ export class MatDatetimepickerMonthView<D> implements AfterContentInit {
     const longWeekdays = this._adapter.getDayOfWeekNames('long');
 
     // Rotate the labels for days of the week based on the configured first day of the week.
-    let weekdays = longWeekdays.map((long, i) => {
+    const weekdays = longWeekdays.map((long, i) => {
       return { long, narrow: narrowWeekdays[i] };
     });
     this._weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
@@ -89,7 +88,7 @@ export class MatDatetimepickerMonthView<D> implements AfterContentInit {
   }
 
   set activeDate(value: D) {
-    let oldActiveDate = this._activeDate;
+    const oldActiveDate = this._activeDate;
     this._activeDate = value || this._adapter.today();
     if (
       oldActiveDate &&
@@ -147,7 +146,7 @@ export class MatDatetimepickerMonthView<D> implements AfterContentInit {
     this._selectedDate = this._getDateInCurrentMonth(this.selected);
     this._todayDate = this._getDateInCurrentMonth(this._adapter.today());
 
-    let firstOfMonth = this._adapter.createDatetime(
+    const firstOfMonth = this._adapter.createDatetime(
       this._adapter.getYear(this.activeDate),
       this._adapter.getMonth(this.activeDate),
       1,
@@ -165,23 +164,23 @@ export class MatDatetimepickerMonthView<D> implements AfterContentInit {
 
   /** Creates MdCalendarCells for the dates in this month. */
   private _createWeekCells() {
-    let daysInMonth = this._adapter.getNumDaysInMonth(this.activeDate);
-    let dateNames = this._adapter.getDateNames();
+    const daysInMonth = this._adapter.getNumDaysInMonth(this.activeDate);
+    const dateNames = this._adapter.getDateNames();
     this._weeks = [[]];
     for (let i = 0, cell = this._firstWeekOffset; i < daysInMonth; i++, cell++) {
-      if (cell == DAYS_PER_WEEK) {
+      if (cell === DAYS_PER_WEEK) {
         this._weeks.push([]);
         cell = 0;
       }
-      let date = this._adapter.createDatetime(
+      const date = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
         i + 1,
         this._adapter.getHour(this.activeDate),
         this._adapter.getMinute(this.activeDate)
       );
-      let enabled = !this.dateFilter || this.dateFilter(date);
-      let ariaLabel = this._adapter.format(date, this._dateFormats.display.dateA11yLabel);
+      const enabled = !this.dateFilter || this.dateFilter(date);
+      const ariaLabel = this._adapter.format(date, this._dateFormats.display.dateA11yLabel);
       this._weeks[this._weeks.length - 1].push(
         new MatDatetimepickerCalendarCell(i + 1, dateNames[i], ariaLabel, enabled)
       );
