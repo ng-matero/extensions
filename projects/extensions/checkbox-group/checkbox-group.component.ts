@@ -11,6 +11,7 @@ import {
   ContentChildren,
   QueryList,
   ElementRef,
+  OnDestroy,
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
@@ -41,7 +42,7 @@ export class MtxCheckboxBase {
     },
   ],
 })
-export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAccessor {
+export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
   @ContentChildren(forwardRef(() => MatCheckbox), { descendants: true })
   _checkboxes!: QueryList<MatCheckbox>;
 
@@ -130,6 +131,10 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
         });
       }
     });
+  }
+
+  ngOnDestroy() {
+    this._focusMonitor.stopMonitoring(this._elementRef);
   }
 
   /**
@@ -259,4 +264,5 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, ControlValueAcc
   }
 
   static ngAcceptInputType_showSelectAll: BooleanInput;
+  static ngAcceptInputType_disabled: BooleanInput;
 }
