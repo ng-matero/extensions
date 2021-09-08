@@ -4,13 +4,13 @@
       <th *ngFor="let day of _weekdays" [attr.aria-label]="day.long">{{day.narrow}}</th>
     </tr>
   </thead>
-  <tbody (@slideCalendar.done)="_calendarStateDone()"
-         (selectedValueChange)="_dateSelected($event)"
+  <tbody mat-datetimepicker-calendar-body
+         (@slideCalendar.done)="_calendarStateDone()"
          [@slideCalendar]="_calendarState"
-         [activeCell]="_adapter.getDate(activeDate) - 1"
          [rows]="_weeks"
-         [selectedValue]="_selectedDate!"
          [todayValue]="_todayDate!"
-         mat-datetimepicker-calendar-body
+         [activeCell]="_adapter.getDate(activeDate) - 1"
+         [selectedValue]="_selectedDate!"
+         (selectedValueChange)="_dateSelected($event)"
          role="grid"></tbody>
 </table>

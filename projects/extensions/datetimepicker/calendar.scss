@@ -1,20 +1,15 @@
-@import '~@angular/material/theming';
-
-$mat-calendar-padding: 8px !default;
-$mat-calendar-weekday-table-font-size: 11px !default;
+$calendar-padding: 8px !default;
+$calendar-weekday-table-font-size: 11px !default;
 
 // Values chosen to approximate https://material.io/icons/#ic_navigate_before and
 // https://material.io/icons/#ic_navigate_next as closely as possible.
-$mat-calendar-prev-next-icon-border-width: 2px;
-$mat-calendar-prev-next-icon-margin: 15.5px;
-$mat-calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
-$mat-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
+$calendar-prev-next-icon-border-width: 2px;
+$calendar-prev-next-icon-margin: 15.5px;
+$calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
+$calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 .mat-datetimepicker-calendar {
-  @include user-select(none);
-
   display: block;
-  outline: none;
 
   &[mode='landscape'] {
     display: flex;
@@ -22,9 +17,8 @@ $mat-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 }
 
 .mat-datetimepicker-calendar-header {
-  padding: $mat-calendar-padding * 2;
+  padding: $calendar-padding * 2;
   font-size: 14px;
-  color: white;
   box-sizing: border-box;
 
   [mode='landscape'] & {
@@ -99,13 +93,13 @@ $mat-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 .mat-datetimepicker-calendar-content {
   width: 100%;
-  padding: 0 $mat-calendar-padding $mat-calendar-padding $mat-calendar-padding;
+  padding: 0 $calendar-padding $calendar-padding $calendar-padding;
   outline: none;
   box-sizing: border-box;
   overflow: hidden;
 
   [mode='landscape'] & {
-    padding-top: $mat-calendar-padding;
+    padding-top: $calendar-padding;
   }
 }
 
@@ -117,7 +111,7 @@ $mat-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 .mat-datetimepicker-calendar-period-button {
   display: inline-block;
   height: 48px;
-  padding: 12px;
+  line-height: 48px;
   outline: none;
   border: 0;
   background: transparent;
@@ -137,7 +131,6 @@ $mat-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   box-sizing: border-box;
 
   &.disabled {
-    color: rgba(black, .38);
     pointer-events: none;
   }
 
@@ -154,12 +147,11 @@ $mat-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 }
 
 .mat-datetimepicker-calendar-table-header {
-  color: rgba(black, .38);
-
   th {
     text-align: center;
-    font-size: $mat-calendar-weekday-table-font-size;
-    padding: 0 0 $mat-calendar-padding 0;
+    font-size: $calendar-weekday-table-font-size;
+    font-weight: 400;
+    padding: 0 0 $calendar-padding 0;
   }
 }
 
@@ -183,7 +175,7 @@ $mat-calendar-next-icon-transform: translateX(-2px) rotate(45deg);
     }
 
     .mat-datetimepicker-calendar-content {
-      padding-top: $mat-calendar-padding;
+      padding-top: $calendar-padding;
     }
   }
 }

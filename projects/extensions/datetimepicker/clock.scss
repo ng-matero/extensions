@@ -1,16 +1,14 @@
-@import '~@angular/material/theming';
-
-$mat-clock-min-size: 224px !default;
-$mat-clock-margin: 8px !default;
-$mat-clock-font-size: 14px !default;
-$mat-clock-cell-size: 14.1666% !default;
+$clock-min-size: 224px !default;
+$clock-margin: 8px !default;
+$clock-font-size: 14px !default;
+$clock-cell-size: 14.1666% !default;
 
 .mat-datetimepicker-clock {
   position: relative;
   display: block;
-  min-width: $mat-clock-min-size;
-  margin: $mat-clock-margin;
-  font-size: $mat-clock-font-size;
+  min-width: $clock-min-size;
+  margin: $clock-margin;
+  font-size: $clock-font-size;
   box-sizing: border-box;
   user-select: none;
 }
@@ -20,7 +18,6 @@ $mat-clock-cell-size: 14.1666% !default;
   width: 100%;
   height: 0;
   padding-top: 100%;
-  background-color: darken(white, 12);
   border-radius: 50%;
 }
 
@@ -81,27 +78,15 @@ $mat-clock-cell-size: 14.1666% !default;
 .mat-datetimepicker-clock-cell {
   position: absolute;
   display: flex;
-  width: $mat-clock-cell-size;
-  height: $mat-clock-cell-size;
-  color: rgba(black, .87);
+  width: $clock-cell-size;
+  height: $clock-cell-size;
   justify-content: center;
   box-sizing: border-box;
   border-radius: 50%;
   align-items: center;
   cursor: pointer;
 
-  &:not(.mat-datetimepicker-clock-cell-selected) {
-    &:not(.mat-datetimepicker-clock-cell-disabled):hover {
-      background-color: rgba(black, .1);
-    }
-  }
-
   &.mat-datetimepicker-clock-cell-disabled {
-    color: rgba(black, .38);
     pointer-events: none;
-  }
-
-  &.mat-datetimepicker-clock-cell-selected {
-    color: white;
   }
 }

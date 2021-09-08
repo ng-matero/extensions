@@ -1,47 +1,40 @@
 @import '~@angular/material/theming';
 
-$mat-datetimepicker-calendar-padding: 8px;
-$mat-datetimepicker-calendar-cell-size: 40px;
-$mat-datetimepicker-calendar-portrait-width: $mat-datetimepicker-calendar-cell-size * 7 +
-  $mat-datetimepicker-calendar-padding * 2;
-$mat-datetimepicker-calendar-landscape-width: 446px;
-$mat-datetimepicker-calendar-portrait-height: 405px;
-$mat-datetimepicker-calendar-landscape-height: 328px;
+$datetimepicker-calendar-padding: 8px;
+$datetimepicker-calendar-cell-size: 40px;
+$datetimepicker-calendar-portrait-width: $datetimepicker-calendar-cell-size * 7 +
+  $datetimepicker-calendar-padding * 2;
+$datetimepicker-calendar-landscape-width: 446px;
+$datetimepicker-calendar-portrait-height: 405px;
+$datetimepicker-calendar-landscape-height: 328px;
 
 .mat-datetimepicker-content {
   @include mat-elevation(8);
 
   display: block;
-  background-color: white;
   border-radius: 4px;
   overflow: hidden;
 }
 
 .mat-datetimepicker-calendar {
-  width: $mat-datetimepicker-calendar-portrait-width;
-  height: $mat-datetimepicker-calendar-portrait-height;
+  width: $datetimepicker-calendar-portrait-width;
+  height: $datetimepicker-calendar-portrait-height;
 
   &[mode='landscape'] {
-    width: $mat-datetimepicker-calendar-landscape-width;
-    height: $mat-datetimepicker-calendar-landscape-height;
+    width: $datetimepicker-calendar-landscape-width;
+    height: $datetimepicker-calendar-landscape-height;
   }
 }
 
 @media (min-width: 480px) {
   .mat-datetimepicker-calendar[mode='auto'] {
-    width: $mat-datetimepicker-calendar-landscape-width;
-    height: $mat-datetimepicker-calendar-landscape-height;
+    width: $datetimepicker-calendar-landscape-width;
+    height: $datetimepicker-calendar-landscape-height;
   }
 }
 
 .mat-datetimepicker-content-touch {
-  @include mat-elevation(0);
-
   display: block;
-  box-shadow:
-    0 11px 15px -7px rgba(black, .2),
-    0 24px 38px 3px rgba(black, .14),
-    0 9px 46px 8px rgba(black, .12);
 }
 
 .mat-datetimepicker-dialog .mat-dialog-container {

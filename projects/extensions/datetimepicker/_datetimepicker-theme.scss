@@ -1,52 +1,116 @@
-@import '~@angular/material/theming';
+@use 'sass:map';
+@use '~@angular/material' as mat;
 
-$mat-datetimepicker-selected-today-box-shadow-width: 1px;
+$selected-today-box-shadow-width: 1px;
 
-@mixin mat-datetimepicker-theme($theme) {
-  $primary: map-get($theme, primary);
+@mixin theme($theme) {
+  $is-dark-theme: map.get($theme, is-dark);
+  $primary: map.get($theme, primary);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
+  $disabled-color: mat.get-color-from-palette($foreground, disabled-text);
+
+  .mat-datetimepicker-content {
+    background-color: mat.get-color-from-palette($background, card);
+    color: mat.get-color-from-palette($foreground, text);
+  }
 
   .mat-datetimepicker-calendar-header {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
+    color: white;
+  }
+
+  .mat-datetimepicker-calendar-body-label {
+    color: mat.get-color-from-palette($foreground, secondary-text);
+  }
+
+  .mat-datetimepicker-calendar-table-header {
+    color: mat.get-color-from-palette($foreground, hint-text);
+  }
+
+  .mat-datetimepicker-calendar-table-header-divider::after {
+    background: mat.get-color-from-palette($foreground, divider);
   }
 
   .mat-datetimepicker-calendar-body-cell-content {
-    &.mat-datetimepicker-calendar-body-selected {
-      background-color: mat-color($primary);
-      color: white;
-    }
+    color: mat.get-color-from-palette($foreground, text);
 
-    &.mat-datetimepicker-calendar-body-disabled > .mat-datetimepicker-calendar-body-selected {
-      background-color: rgba(mat-color($primary), .4);
+    &.mat-datetimepicker-calendar-body-selected {
+      background-color: mat.get-color-from-palette($primary);
+      color: white;
     }
 
     &.mat-datetimepicker-calendar-body-today {
       &:not(.mat-datetimepicker-calendar-body-selected) {
-        border-color: mat-color($primary);
+        border-color: mat.get-color-from-palette($foreground, hint-text);
       }
 
       &.mat-datetimepicker-calendar-body-selected {
         box-shadow:
-          inset 0 0 0 $mat-datetimepicker-selected-today-box-shadow-width
-          mat-color($primary, default-contrast);
+          inset 0 0 0 $selected-today-box-shadow-width
+          mat.get-color-from-palette($primary, default-contrast);
       }
     }
   }
 
+  :not(.mat-datetimepicker-calendar-body-disabled):hover,
+  .mat-datetimepicker-calendar-body-active {
+    > .mat-datetimepicker-calendar-body-cell-content:not(.mat-datetimepicker-calendar-body-selected) {
+      background-color: mat.get-color-from-palette($primary, .3);
+    }
+  }
+
+  .mat-datetimepicker-calendar-body-disabled {
+    > .mat-datetimepicker-calendar-body-cell-content:not(.mat-datetimepicker-calendar-body-selected) {
+      color: $disabled-color;
+    }
+
+    > .mat-datetimepicker-calendar-body-today:not(.mat-datetimepicker-calendar-body-selected) {
+      border-color: $disabled-color;
+    }
+
+    > .mat-datetimepicker-calendar-body-selected {
+      background-color: mat.get-color-from-palette($primary, .4);
+    }
+  }
+
+  .mat-datetimepicker-calendar-previous-button,
+  .mat-datetimepicker-calendar-next-button {
+    &.disabled {
+      color: $disabled-color;
+    }
+  }
+
+  .mat-datetimepicker-clock-wrapper {
+    background-color: mat.get-color-from-palette($foreground, divider);
+  }
+
   .mat-datetimepicker-clock-center {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
   }
 
   .mat-datetimepicker-clock-hand {
-    background-color: mat-color($primary);
+    background-color: mat.get-color-from-palette($primary);
 
     &::before {
-      background-color: mat-color($primary);
+      background-color: mat.get-color-from-palette($primary);
     }
   }
 
   .mat-datetimepicker-clock-cell {
+    color: mat.get-color-from-palette($foreground, text);
+
     &.mat-datetimepicker-clock-cell-selected {
-      background-color: lighten(mat-color($primary), 5);
+      background-color: mat.get-color-from-palette($primary);
+      color: white;
+    }
+
+    &:not(.mat-datetimepicker-clock-cell-selected):not(.mat-datetimepicker-clock-cell-disabled):hover {
+      background-color: mat.get-color-from-palette($background, hover);
+    }
+
+    &.mat-datetimepicker-clock-cell-disabled {
+      color: $disabled-color;
     }
   }
 }
