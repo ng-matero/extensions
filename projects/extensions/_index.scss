@@ -3,6 +3,7 @@
 @forward './button/button-loading';
 @forward './alert/alert-theme' as alert-* show alert-theme;
 @forward './data-grid/grid-theme' as grid-* show grid-theme;
+@forward './datetimepicker/datetimepicker-theme' as datetimepicker-* show datetimepicker-theme;
 @forward './loader/loader-theme' as loader-* show loader-theme;
 @forward './popover/popover-theme' as popover-* show popover-theme;
 @forward './progress/progress-theme' as progress-* show progress-theme;
