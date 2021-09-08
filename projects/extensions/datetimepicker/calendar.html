@@ -23,8 +23,7 @@
             class="mtx-calendar-header-minutes"
             role="button">{{ _minutesLabel }}</span>
       <br />
-      <span *ngIf="twelvehour"
-            class="mtx-calendar-header-ampm-container">
+      <span *ngIf="twelvehour" class="mtx-calendar-header-ampm-container">
         <span (click)="_ampmClicked('AM')"
               [class.active]="_AMPM === 'AM'"
               class="mtx-calendar-header-ampm">AM</span>/<span
@@ -39,30 +38,28 @@
   <div *ngIf="currentView === 'month' || currentView === 'year' || currentView === 'multi-year'"
        class="mtx-month-content">
     <div class="mtx-calendar-controls">
-      <div (click)="_previousClicked()"
-           [attr.aria-disabled]="!_previousEnabled()"
-           [attr.aria-label]="_ariaLabelPrev"
-           [class.disabled]="!_previousEnabled()"
-           class="mtx-calendar-previous-button"
-           role="button">
+      <button mat-icon-button type="button" (click)="_previousClicked()"
+              [attr.aria-disabled]="!_previousEnabled()"
+              [attr.aria-label]="_ariaLabelPrev"
+              [class.disabled]="!_previousEnabled()"
+              class="mtx-calendar-previous-button">
         <svg height="24" viewBox="0 0 24 24" width="24">
           <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
         </svg>
-      </div>
+      </button>
       <div (@slideCalendar.done)="_calendarStateDone()" [@slideCalendar]="_calendarState"
            class="mtx-calendar-period-button">
         <strong>{{ _monthYearLabel }}</strong>
       </div>
-      <div (click)="_nextClicked()"
-           [attr.aria-disabled]="!_nextEnabled()"
-           [attr.aria-label]="_ariaLabelNext"
-           [class.disabled]="!_nextEnabled()"
-           class="mtx-calendar-next-button"
-           role="button">
+      <button mat-icon-button type="button" (click)="_nextClicked()"
+              [attr.aria-disabled]="!_nextEnabled()"
+              [attr.aria-label]="_ariaLabelNext"
+              [class.disabled]="!_nextEnabled()"
+              class="mtx-calendar-next-button">
         <svg height="24" viewBox="0 0 24 24" width="24">
           <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
         </svg>
-      </div>
+      </button>
     </div>
   </div>
   <mtx-month-view (_userSelection)="_userSelected()"

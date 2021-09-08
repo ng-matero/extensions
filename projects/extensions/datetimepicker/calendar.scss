@@ -1,6 +1,11 @@
 $calendar-padding: 8px !default;
 $calendar-weekday-table-font-size: 11px !default;
 
+// We use the same padding as the month / year label, but subtract 16px since there is padding
+// between the edge of the button and the text. This ensures that the button text lines up with
+// the month / year label text.
+$calendar-controls-side-margin: calc(33% / 7 - 16px);
+
 // Values chosen to approximate https://material.io/icons/#ic_navigate_before and
 // https://material.io/icons/#ic_navigate_next as closely as possible.
 $calendar-prev-next-icon-border-width: 2px;
@@ -35,10 +40,12 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 }
 
 .mtx-calendar-header-year {
+  height: 32px;
+  line-height: 32px;
   font-size: 16px;
 
-  mat-icon {
-    transform: translateY(5px);
+  .mat-icon {
+    vertical-align: middle;
   }
 }
 
@@ -72,6 +79,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 }
 
 .mtx-calendar-header-time {
+  display: inline-block;
   padding-left: 8px;
 
   &:not(.active) {
@@ -88,6 +96,10 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   [mode='landscape'] & {
     display: block;
     padding-left: 0;
+  }
+
+  [dir='rtl'] & {
+    padding-right: 8px;
   }
 }
 
@@ -106,12 +118,17 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 .mtx-calendar-controls {
   display: flex;
   justify-content: space-between;
+  margin: 0 $calendar-controls-side-margin;
+
+  .mat-icon-button:hover .mat-button-focus-overlay {
+    opacity: .04;
+  }
 }
 
 .mtx-calendar-period-button {
   display: inline-block;
-  height: 48px;
-  line-height: 48px;
+  height: 40px;
+  line-height: 40px;
   outline: none;
   border: 0;
   background: transparent;
@@ -120,16 +137,6 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 .mtx-calendar-previous-button,
 .mtx-calendar-next-button {
-  display: inline-block;
-  width: 48px;
-  height: 48px;
-  padding: 12px;
-  outline: none;
-  border: 0;
-  cursor: pointer;
-  background: transparent;
-  box-sizing: border-box;
-
   &.disabled {
     pointer-events: none;
   }
@@ -137,6 +144,10 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   svg {
     fill: currentColor;
     vertical-align: top;
+
+    [dir='rtl'] & {
+      transform: rotate(180deg);
+    }
   }
 }
 
@@ -151,7 +162,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
     text-align: center;
     font-size: $calendar-weekday-table-font-size;
     font-weight: 400;
-    padding: 0 0 $calendar-padding 0;
+    padding: $calendar-padding 0;
   }
 }
 

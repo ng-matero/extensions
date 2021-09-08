@@ -1,35 +1,34 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
-$datetimepicker-calendar-padding: 8px;
-$datetimepicker-calendar-cell-size: 40px;
-$datetimepicker-calendar-portrait-width: $datetimepicker-calendar-cell-size * 7 +
-  $datetimepicker-calendar-padding * 2;
-$datetimepicker-calendar-landscape-width: 446px;
-$datetimepicker-calendar-portrait-height: 405px;
-$datetimepicker-calendar-landscape-height: 328px;
+$calendar-padding: 8px;
+$non-touch-calendar-cell-size: 40px;
+$non-touch-calendar-portrait-width: $non-touch-calendar-cell-size * 7 + $calendar-padding * 2;
+$non-touch-calendar-portrait-height: 405px;
+$non-touch-calendar-landscape-width: 446px;
+$non-touch-calendar-landscape-height: 328px;
 
 .mtx-datetimepicker-content {
-  @include mat-elevation(8);
-
   display: block;
   border-radius: 4px;
   overflow: hidden;
+
+  @include mat.elevation(8);
 }
 
 .mtx-calendar {
-  width: $datetimepicker-calendar-portrait-width;
-  height: $datetimepicker-calendar-portrait-height;
+  width: $non-touch-calendar-portrait-width;
+  height: $non-touch-calendar-portrait-height;
 
   &[mode='landscape'] {
-    width: $datetimepicker-calendar-landscape-width;
-    height: $datetimepicker-calendar-landscape-height;
+    width: $non-touch-calendar-landscape-width;
+    height: $non-touch-calendar-landscape-height;
   }
 }
 
 @media (min-width: 480px) {
   .mtx-calendar[mode='auto'] {
-    width: $datetimepicker-calendar-landscape-width;
-    height: $datetimepicker-calendar-landscape-height;
+    width: $non-touch-calendar-landscape-width;
+    height: $non-touch-calendar-landscape-height;
   }
 }
 
