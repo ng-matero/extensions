@@ -1,10 +1,10 @@
-<table class="mat-datetimepicker-calendar-table">
-  <thead class="mat-datetimepicker-calendar-table-header">
+<table class="mtx-calendar-table">
+  <thead class="mtx-calendar-table-header">
     <tr>
       <th *ngFor="let day of _weekdays" [attr.aria-label]="day.long">{{day.narrow}}</th>
     </tr>
   </thead>
-  <tbody mat-datetimepicker-calendar-body
+  <tbody mtx-calendar-body
          (@slideCalendar.done)="_calendarStateDone()"
          [@slideCalendar]="_calendarState"
          [rows]="_weeks"

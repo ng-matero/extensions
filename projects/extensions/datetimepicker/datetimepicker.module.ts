@@ -5,15 +5,15 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { MatDatetimepickerCalendar } from './calendar';
-import { MatDatetimepickerCalendarBody } from './calendar-body';
-import { MatDatetimepickerClock } from './clock';
-import { MatDatetimepicker, MatDatetimepickerContent } from './datetimepicker';
-import { MatDatetimepickerInput } from './datetimepicker-input';
-import { MatDatetimepickerToggle } from './datetimepicker-toggle';
-import { MatDatetimepickerMonthView } from './month-view';
-import { MatDatetimepickerYearView } from './year-view';
-import { MatDatetimepickerMultiYearView } from './multi-year-view';
+import { MtxCalendar } from './calendar';
+import { MtxCalendarBody } from './calendar-body';
+import { MtxClock } from './clock';
+import { MtxDatetimepicker, MtxDatetimepickerContent } from './datetimepicker';
+import { MtxDatetimepickerInput } from './datetimepicker-input';
+import { MtxDatetimepickerToggle } from './datetimepicker-toggle';
+import { MtxMonthView } from './month-view';
+import { MtxYearView } from './year-view';
+import { MtxMultiYearView } from './multi-year-view';
 
 @NgModule({
   imports: [
@@ -24,30 +24,30 @@ import { MatDatetimepickerMultiYearView } from './multi-year-view';
     OverlayModule,
     A11yModule,
   ],
-  entryComponents: [MatDatetimepickerContent],
+  entryComponents: [MtxDatetimepickerContent],
   declarations: [
-    MatDatetimepickerCalendar,
-    MatDatetimepickerCalendarBody,
-    MatDatetimepickerClock,
-    MatDatetimepicker,
-    MatDatetimepickerToggle,
-    MatDatetimepickerInput,
-    MatDatetimepickerContent,
-    MatDatetimepickerMonthView,
-    MatDatetimepickerYearView,
-    MatDatetimepickerMultiYearView,
+    MtxCalendar,
+    MtxCalendarBody,
+    MtxClock,
+    MtxDatetimepicker,
+    MtxDatetimepickerToggle,
+    MtxDatetimepickerInput,
+    MtxDatetimepickerContent,
+    MtxMonthView,
+    MtxYearView,
+    MtxMultiYearView,
   ],
   exports: [
-    MatDatetimepickerCalendar,
-    MatDatetimepickerCalendarBody,
-    MatDatetimepickerClock,
-    MatDatetimepicker,
-    MatDatetimepickerToggle,
-    MatDatetimepickerInput,
-    MatDatetimepickerContent,
-    MatDatetimepickerMonthView,
-    MatDatetimepickerYearView,
-    MatDatetimepickerMultiYearView,
+    MtxCalendar,
+    MtxCalendarBody,
+    MtxClock,
+    MtxDatetimepicker,
+    MtxDatetimepickerToggle,
+    MtxDatetimepickerInput,
+    MtxDatetimepickerContent,
+    MtxMonthView,
+    MtxYearView,
+    MtxMultiYearView,
   ],
 })
-export class MatDatetimepickerModule {}
+export class MtxDatetimepickerModule {}

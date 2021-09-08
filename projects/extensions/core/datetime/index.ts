@@ -1,5 +1,5 @@
-export { NativeDatetimeModule, MatNativeDatetimeModule } from './datetime.module';
+export { NativeDatetimeModule, MtxNativeDatetimeModule } from './datetime.module';
 export { DatetimeAdapter } from './datetime-adapter';
-export { MatDatetimeFormats, MAT_DATETIME_FORMATS } from './datetime-formats';
+export { MtxDatetimeFormats, MTX_DATETIME_FORMATS } from './datetime-formats';
 export { NativeDatetimeAdapter } from './native-datetime-adapter';
-export { MAT_NATIVE_DATETIME_FORMATS } from './native-datetime-formats';
+export { MTX_NATIVE_DATETIME_FORMATS } from './native-datetime-formats';

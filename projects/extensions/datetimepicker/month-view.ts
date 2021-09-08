@@ -9,10 +9,10 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { MAT_DATETIME_FORMATS, MatDatetimeFormats } from '@ng-matero/extensions/core';
+import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
-import { MatDatetimepickerCalendarCell } from './calendar-body';
-import { MatDatetimepickerType } from './datetimepicker';
+import { MtxCalendarCell } from './calendar-body';
+import { MtxDatetimepickerType } from './datetimepicker';
 import { slideCalendar } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 
@@ -23,14 +23,14 @@ const DAYS_PER_WEEK = 7;
  * @docs-private
  */
 @Component({
-  selector: 'mat-datetimepicker-month-view',
+  selector: 'mtx-month-view',
   templateUrl: 'month-view.html',
   animations: [slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatDatetimepickerMonthView<D> implements AfterContentInit {
-  @Input() type: MatDatetimepickerType = 'date';
+export class MtxMonthView<D> implements AfterContentInit {
+  @Input() type: MtxDatetimepickerType = 'date';
 
   @Output() _userSelection = new EventEmitter<void>();
   /** A function used to filter which dates are selectable. */
@@ -38,7 +38,7 @@ export class MatDatetimepickerMonthView<D> implements AfterContentInit {
   /** Emits when a new date is selected. */
   @Output() selectedChange = new EventEmitter<D>();
   /** Grid of calendar cells representing the dates of the month. */
-  _weeks!: MatDatetimepickerCalendarCell[][];
+  _weeks!: MtxCalendarCell[][];
   /** The number of blank cells in the first row before the 1st of the month. */
   _firstWeekOffset!: number;
   /**
@@ -54,14 +54,14 @@ export class MatDatetimepickerMonthView<D> implements AfterContentInit {
 
   constructor(
     @Optional() public _adapter: DatetimeAdapter<D>,
-    @Optional() @Inject(MAT_DATETIME_FORMATS) private _dateFormats: MatDatetimeFormats
+    @Optional() @Inject(MTX_DATETIME_FORMATS) private _dateFormats: MtxDatetimeFormats
   ) {
     if (!this._adapter) {
       throw createMissingDateImplError('DatetimeAdapter');
     }
 
     if (!this._dateFormats) {
-      throw createMissingDateImplError('MAT_DATETIME_FORMATS');
+      throw createMissingDateImplError('MTX_DATETIME_FORMATS');
     }
 
     const firstDayOfWeek = this._adapter.getFirstDayOfWeek();
@@ -182,7 +182,7 @@ export class MatDatetimepickerMonthView<D> implements AfterContentInit {
       const enabled = !this.dateFilter || this.dateFilter(date);
       const ariaLabel = this._adapter.format(date, this._dateFormats.display.dateA11yLabel);
       this._weeks[this._weeks.length - 1].push(
-        new MatDatetimepickerCalendarCell(i + 1, dateNames[i], ariaLabel, enabled)
+        new MtxCalendarCell(i + 1, dateNames[i], ariaLabel, enabled)
       );
     }
   }

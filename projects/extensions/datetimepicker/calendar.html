@@ -1,63 +1,63 @@
-<div class="mat-datetimepicker-calendar-header">
+<div class="mtx-calendar-header">
   <div (click)="_yearClicked()"
        *ngIf="type !== 'time'"
        [class.active]="currentView === 'year' || currentView === 'multi-year'"
-       class="mat-datetimepicker-calendar-header-year"
+       class="mtx-calendar-header-year"
        role="button">{{ _yearLabel }}
     <mat-icon *ngIf="multiYearSelector || type === 'year'">arrow_drop_down</mat-icon>
   </div>
-  <div class="mat-datetimepicker-calendar-header-date-time">
+  <div class="mtx-calendar-header-date-time">
     <span (click)="_dateClicked()" *ngIf="type !== 'time' && type !== 'year'"
           [class.active]="currentView === 'month'"
           [class.not-clickable]="type === 'month'"
-          class="mat-datetimepicker-calendar-header-date"
+          class="mtx-calendar-header-date"
           role="button">{{ _dateLabel }}</span>
     <span *ngIf="type.endsWith('time')"
           [class.active]="currentView === 'clock'"
-          class="mat-datetimepicker-calendar-header-time">
+          class="mtx-calendar-header-time">
       <span (click)="_hoursClicked()"
             [class.active]="_clockView == 'hour'"
-            class="mat-datetimepicker-calendar-header-hours"
+            class="mtx-calendar-header-hours"
             role="button">{{ _hoursLabel }}</span>:<span (click)="_minutesClicked()"
             [class.active]="_clockView == 'minute'"
-            class="mat-datetimepicker-calendar-header-minutes"
+            class="mtx-calendar-header-minutes"
             role="button">{{ _minutesLabel }}</span>
       <br />
       <span *ngIf="twelvehour"
-            class="mat-datetimepicker-calendar-header-ampm-container">
+            class="mtx-calendar-header-ampm-container">
         <span (click)="_ampmClicked('AM')"
               [class.active]="_AMPM === 'AM'"
-              class="mat-datetimepicker-calendar-header-ampm">AM</span>/<span
+              class="mtx-calendar-header-ampm">AM</span>/<span
               (click)="_ampmClicked('PM')"
               [class.active]="_AMPM === 'PM'"
-              class="mat-datetimepicker-calendar-header-ampm">PM</span>
+              class="mtx-calendar-header-ampm">PM</span>
       </span>
     </span>
   </div>
 </div>
-<div [ngSwitch]="currentView" class="mat-datetimepicker-calendar-content">
+<div [ngSwitch]="currentView" class="mtx-calendar-content">
   <div *ngIf="currentView === 'month' || currentView === 'year' || currentView === 'multi-year'"
-       class="mat-month-content">
-    <div class="mat-datetimepicker-calendar-controls">
+       class="mtx-month-content">
+    <div class="mtx-calendar-controls">
       <div (click)="_previousClicked()"
            [attr.aria-disabled]="!_previousEnabled()"
            [attr.aria-label]="_ariaLabelPrev"
            [class.disabled]="!_previousEnabled()"
-           class="mat-datetimepicker-calendar-previous-button"
+           class="mtx-calendar-previous-button"
            role="button">
         <svg height="24" viewBox="0 0 24 24" width="24">
           <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
         </svg>
       </div>
       <div (@slideCalendar.done)="_calendarStateDone()" [@slideCalendar]="_calendarState"
-           class="mat-datetimepicker-calendar-period-button">
+           class="mtx-calendar-period-button">
         <strong>{{ _monthYearLabel }}</strong>
       </div>
       <div (click)="_nextClicked()"
            [attr.aria-disabled]="!_nextEnabled()"
            [attr.aria-label]="_ariaLabelNext"
            [class.disabled]="!_nextEnabled()"
-           class="mat-datetimepicker-calendar-next-button"
+           class="mtx-calendar-next-button"
            role="button">
         <svg height="24" viewBox="0 0 24 24" width="24">
           <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
@@ -65,42 +65,42 @@
       </div>
     </div>
   </div>
-  <mat-datetimepicker-month-view (_userSelection)="_userSelected()"
-                                 (selectedChange)="_dateSelected($event)"
-                                 *ngSwitchCase="'month'"
-                                 [activeDate]="_activeDate"
-                                 [dateFilter]="_dateFilterForViews"
-                                 [selected]="selected!"
-                                 [type]="type">
-  </mat-datetimepicker-month-view>
-  <mat-datetimepicker-year-view (_userSelection)="_userSelected()"
-                                (selectedChange)="_monthSelected($event)"
-                                *ngSwitchCase="'year'"
-                                [activeDate]="_activeDate"
-                                [dateFilter]="_dateFilterForViews"
-                                [selected]="selected!"
-                                [type]="type">
-  </mat-datetimepicker-year-view>
-  <mat-datetimepicker-multi-year-view (_userSelection)="_userSelected()"
-                                      (selectedChange)="_yearSelected($event)"
-                                      *ngSwitchCase="'multi-year'"
-                                      [activeDate]="_activeDate"
-                                      [dateFilter]="_dateFilterForViews"
-                                      [maxDate]="maxDate"
-                                      [minDate]="minDate"
-                                      [selected]="selected!"
-                                      [type]="type">
-  </mat-datetimepicker-multi-year-view>
-  <mat-datetimepicker-clock (_userSelection)="_userSelected()"
-                            (activeDateChange)="_onActiveDateChange($event)"
-                            (selectedChange)="_timeSelected($event)"
-                            *ngSwitchDefault
-                            [dateFilter]="dateFilter"
-                            [interval]="timeInterval"
-                            [maxDate]="maxDate"
-                            [minDate]="minDate"
-                            [selected]="_activeDate"
-                            [startView]="_clockView"
-                            [twelvehour]="twelvehour">
-  </mat-datetimepicker-clock>
+  <mtx-month-view (_userSelection)="_userSelected()"
+                  (selectedChange)="_dateSelected($event)"
+                  *ngSwitchCase="'month'"
+                  [activeDate]="_activeDate"
+                  [dateFilter]="_dateFilterForViews"
+                  [selected]="selected!"
+                  [type]="type">
+  </mtx-month-view>
+  <mtx-year-view (_userSelection)="_userSelected()"
+                 (selectedChange)="_monthSelected($event)"
+                 *ngSwitchCase="'year'"
+                 [activeDate]="_activeDate"
+                 [dateFilter]="_dateFilterForViews"
+                 [selected]="selected!"
+                 [type]="type">
+  </mtx-year-view>
+  <mtx-multi-year-view (_userSelection)="_userSelected()"
+                       (selectedChange)="_yearSelected($event)"
+                       *ngSwitchCase="'multi-year'"
+                       [activeDate]="_activeDate"
+                       [dateFilter]="_dateFilterForViews"
+                       [maxDate]="maxDate"
+                       [minDate]="minDate"
+                       [selected]="selected!"
+                       [type]="type">
+  </mtx-multi-year-view>
+  <mtx-clock (_userSelection)="_userSelected()"
+             (activeDateChange)="_onActiveDateChange($event)"
+             (selectedChange)="_timeSelected($event)"
+             *ngSwitchDefault
+             [dateFilter]="dateFilter"
+             [interval]="timeInterval"
+             [maxDate]="maxDate"
+             [minDate]="minDate"
+             [selected]="_activeDate"
+             [startView]="_clockView"
+             [twelvehour]="twelvehour">
+  </mtx-clock>
 </div>

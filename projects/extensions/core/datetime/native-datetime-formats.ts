@@ -1,6 +1,6 @@
-import { MatDatetimeFormats } from './datetime-formats';
+import { MtxDatetimeFormats } from './datetime-formats';
 
-export const MAT_NATIVE_DATETIME_FORMATS: MatDatetimeFormats = {
+export const MTX_NATIVE_DATETIME_FORMATS: MtxDatetimeFormats = {
   parse: {},
   display: {
     dateInput: { year: 'numeric', month: '2-digit', day: '2-digit' },

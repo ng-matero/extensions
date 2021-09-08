@@ -25,13 +25,13 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Subject, Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
-import { MatCalendarView, MatDatetimepickerCalendar } from './calendar';
+import { MtxCalendarView, MtxCalendar } from './calendar';
 import { createMissingDateImplError } from './datetimepicker-errors';
-import { MatDatetimepickerFilterType } from './datetimepicker-filtertype';
-import { MatDatetimepickerInput } from './datetimepicker-input';
+import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
+import { MtxDatetimepickerInput } from './datetimepicker-input';
 
-export type MatDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'datetime';
-export type MatDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
+export type MtxDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'datetime';
+export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
 
 /** Used to generate a unique ID for each datepicker instance. */
 let datetimepickerUid = 0;
@@ -44,21 +44,21 @@ let datetimepickerUid = 0;
  * @docs-private
  */
 @Component({
-  selector: 'mat-datetimepicker-content',
+  selector: 'mtx-datetimepicker-content',
   templateUrl: 'datetimepicker-content.html',
   styleUrls: ['datetimepicker-content.scss'],
   host: {
-    'class': 'mat-datetimepicker-content',
-    '[class.mat-datetimepicker-content-touch]': 'datetimepicker?.touchUi',
+    'class': 'mtx-datetimepicker-content',
+    '[class.mtx-datetimepicker-content-touch]': 'datetimepicker?.touchUi',
     '(keydown)': '_handleKeydown($event)',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatDatetimepickerContent<D> implements AfterContentInit {
-  datetimepicker!: MatDatetimepicker<D>;
+export class MtxDatetimepickerContent<D> implements AfterContentInit {
+  datetimepicker!: MtxDatetimepicker<D>;
 
-  @ViewChild(MatDatetimepickerCalendar, { static: true }) _calendar!: MatDatetimepickerCalendar<D>;
+  @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
 
   ngAfterContentInit() {
     this._calendar._focusActiveCell();
@@ -83,21 +83,21 @@ export class MatDatetimepickerContent<D> implements AfterContentInit {
 }
 
 @Component({
-  selector: 'mat-datetimepicker',
-  exportAs: 'matDatetimepicker',
+  selector: 'mtx-datetimepicker',
+  exportAs: 'mtxDatetimepicker',
   template: '',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
 })
-export class MatDatetimepicker<D> implements OnDestroy {
+export class MtxDatetimepicker<D> implements OnDestroy {
   /** Active multi year view when click on year. */
   @Input() multiYearSelector: boolean = false;
   /** if true change the clock to 12 hour format. */
   @Input() twelvehour: boolean = false;
   /** The view that the calendar should start in. */
-  @Input() startView: MatCalendarView = 'month';
-  @Input() mode: MatDatetimepickerMode = 'auto';
+  @Input() startView: MtxCalendarView = 'month';
+  @Input() mode: MtxDatetimepickerMode = 'auto';
   @Input() timeInterval: number = 1;
   @Input() ariaNextMonthLabel = 'Next month';
   @Input() ariaPrevMonthLabel = 'Previous month';
@@ -117,13 +117,13 @@ export class MatDatetimepicker<D> implements OnDestroy {
   /** Emits when the datepicker has been closed. */
   @Output('closed') closedStream: EventEmitter<void> = new EventEmitter<void>();
   /** Emits when the view has been changed. */
-  @Output() viewChanged: EventEmitter<MatCalendarView> = new EventEmitter<MatCalendarView>();
+  @Output() viewChanged: EventEmitter<MtxCalendarView> = new EventEmitter<MtxCalendarView>();
   /** Whether the calendar is open. */
   opened = false;
   /** The id for the datepicker calendar. */
-  id = `mat-datetimepicker-${datetimepickerUid++}`;
+  id = `mtx-datetimepicker-${datetimepickerUid++}`;
   /** The input element this datepicker is associated with. */
-  _datepickerInput!: MatDatetimepickerInput<D>;
+  _datepickerInput!: MtxDatetimepickerInput<D>;
   /** Emits when the datepicker is disabled. */
   _disabledChange = new Subject<boolean>();
   private _validSelected: D | null = null;
@@ -132,7 +132,7 @@ export class MatDatetimepicker<D> implements OnDestroy {
   /** A reference to the dialog when the calendar is opened as a dialog. */
   private _dialogRef!: MatDialogRef<any> | null;
   /** A portal containing the calendar for this datepicker. */
-  private _calendarPortal!: ComponentPortal<MatDatetimepickerContent<D>>;
+  private _calendarPortal!: ComponentPortal<MtxDatetimepickerContent<D>>;
   /** The element that was focused before the datepicker was opened. */
   private _focusedElementBeforeOpen: HTMLElement | null = null;
   private _inputSubscription = Subscription.EMPTY;
@@ -177,14 +177,14 @@ export class MatDatetimepicker<D> implements OnDestroy {
     this._openOnFocus = coerceBooleanProperty(value);
   }
 
-  private _type: MatDatetimepickerType = 'date';
+  private _type: MtxDatetimepickerType = 'date';
 
   @Input()
   get type() {
     return this._type;
   }
 
-  set type(value: MatDatetimepickerType) {
+  set type(value: MtxDatetimepickerType) {
     this._type = value || 'date';
   }
 
@@ -241,7 +241,7 @@ export class MatDatetimepicker<D> implements OnDestroy {
     return this._datepickerInput && this._datepickerInput.max;
   }
 
-  get _dateFilter(): (date: D | null, type: MatDatetimepickerFilterType) => boolean {
+  get _dateFilter(): (date: D | null, type: MtxDatetimepickerFilterType) => boolean {
     return this._datepickerInput && this._datepickerInput._dateFilter;
   }
 
@@ -251,7 +251,7 @@ export class MatDatetimepicker<D> implements OnDestroy {
     }
   }
 
-  _viewChanged(type: MatCalendarView): void {
+  _viewChanged(type: MtxCalendarView): void {
     this.viewChanged.emit(type);
   }
 
@@ -278,7 +278,7 @@ export class MatDatetimepicker<D> implements OnDestroy {
    * Register an input with this datepicker.
    * @param input The datepicker input to register with this datepicker.
    */
-  _registerInput(input: MatDatetimepickerInput<D>): void {
+  _registerInput(input: MtxDatetimepickerInput<D>): void {
     if (this._datepickerInput) {
       throw Error('A MatDatepicker can only be associated with a single input.');
     }
@@ -349,10 +349,10 @@ export class MatDatetimepicker<D> implements OnDestroy {
 
   /** Open the calendar as a dialog. */
   private _openAsDialog(): void {
-    this._dialogRef = this._dialog.open(MatDatetimepickerContent, {
+    this._dialogRef = this._dialog.open(MtxDatetimepickerContent, {
       direction: this._dir ? this._dir.value : 'ltr',
       viewContainerRef: this._viewContainerRef,
-      panelClass: 'mat-datetimepicker-dialog',
+      panelClass: 'mtx-datetimepicker-dialog',
     });
     this._dialogRef.afterClosed().subscribe(() => this.close());
     this._dialogRef.componentInstance.datetimepicker = this;
@@ -361,8 +361,8 @@ export class MatDatetimepicker<D> implements OnDestroy {
   /** Open the calendar as a popup. */
   private _openAsPopup(): void {
     if (!this._calendarPortal) {
-      this._calendarPortal = new ComponentPortal<MatDatetimepickerContent<D>>(
-        MatDatetimepickerContent,
+      this._calendarPortal = new ComponentPortal<MtxDatetimepickerContent<D>>(
+        MtxDatetimepickerContent,
         this._viewContainerRef
       );
     }
@@ -372,7 +372,7 @@ export class MatDatetimepicker<D> implements OnDestroy {
     }
 
     if (!this._popupRef.hasAttached()) {
-      const componentRef: ComponentRef<MatDatetimepickerContent<D>> = this._popupRef.attach(
+      const componentRef: ComponentRef<MtxDatetimepickerContent<D>> = this._popupRef.attach(
         this._calendarPortal
       );
       componentRef.instance.datetimepicker = this;
@@ -394,10 +394,10 @@ export class MatDatetimepicker<D> implements OnDestroy {
     const overlayConfig = new OverlayConfig({
       positionStrategy: this._createPopupPositionStrategy(),
       hasBackdrop: true,
-      backdropClass: 'mat-overlay-transparent-backdrop',
+      backdropClass: 'cdk-overlay-transparent-backdrop',
       direction: this._dir ? this._dir.value : 'ltr',
       scrollStrategy: this._scrollStrategy(),
-      panelClass: 'mat-datetimepicker-popup',
+      panelClass: 'mtx-datetimepicker-popup',
     });
 
     this._popupRef = this._overlay.create(overlayConfig);
@@ -408,7 +408,7 @@ export class MatDatetimepicker<D> implements OnDestroy {
     return this._overlay
       .position()
       .flexibleConnectedTo(this._datepickerInput.getConnectedOverlayOrigin())
-      .withTransformOriginOn('.mat-datetimepicker-content')
+      .withTransformOriginOn('.mtx-datetimepicker-content')
       .withFlexibleDimensions(false)
       .withViewportMargin(8)
       .withLockedPosition()

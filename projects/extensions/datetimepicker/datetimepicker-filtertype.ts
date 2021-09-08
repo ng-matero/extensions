@@ -1,4 +1,4 @@
-export enum MatDatetimepickerFilterType {
+export enum MtxDatetimepickerFilterType {
   DATE,
   HOUR,
   MINUTE,

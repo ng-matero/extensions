@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared.module';
 
-import { MatDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 
 import { DatetimepickerDemoComponent } from './datetimepicker-demo.component';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
@@ -11,13 +11,13 @@ import {
   MomentDateAdapter,
 } from '@angular/material-moment-adapter';
 import { MomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter/adapter';
-import { DatetimeAdapter, MAT_DATETIME_FORMATS } from '@ng-matero/extensions/core';
+import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 
 @NgModule({
   imports: [
     SharedModule,
     RouterModule.forChild([{ path: '', component: DatetimepickerDemoComponent }]),
-    MatDatetimepickerModule,
+    MtxDatetimepickerModule,
   ],
   declarations: [DatetimepickerDemoComponent],
   providers: [
@@ -31,7 +31,7 @@ import { DatetimeAdapter, MAT_DATETIME_FORMATS } from '@ng-matero/extensions/cor
       useClass: MomentDatetimeAdapter,
     },
     {
-      provide: MAT_DATETIME_FORMATS,
+      provide: MTX_DATETIME_FORMATS,
       useValue: {
         parse: {
           dateInput: 'YYYY-MM-DD HH:mm',

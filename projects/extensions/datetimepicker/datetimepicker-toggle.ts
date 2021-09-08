@@ -12,22 +12,22 @@ import {
 } from '@angular/core';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { merge, of as observableOf, Subscription } from 'rxjs';
-import { MatDatetimepicker } from './datetimepicker';
+import { MtxDatetimepicker } from './datetimepicker';
 
 @Component({
-  selector: 'mat-datetimepicker-toggle',
+  selector: 'mtx-datetimepicker-toggle',
   templateUrl: 'datetimepicker-toggle.html',
   host: {
-    class: 'mat-datetimepicker-toggle',
+    class: 'mtx-datetimepicker-toggle',
   },
-  exportAs: 'matDatetimepickerToggle',
+  exportAs: 'mtxDatetimepickerToggle',
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatDatetimepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {
+export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {
   /** Datepicker instance that the button will toggle. */
-  @Input('for') datetimepicker!: MatDatetimepicker<D>;
+  @Input('for') datetimepicker!: MtxDatetimepicker<D>;
   private _stateChanges = Subscription.EMPTY;
 
   constructor(public _intl: MatDatepickerIntl, private _changeDetectorRef: ChangeDetectorRef) {}

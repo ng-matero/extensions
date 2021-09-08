@@ -11,7 +11,7 @@ import {
  * An internal class that represents the data corresponding to a single calendar cell.
  * @docs-private
  */
-export class MatDatetimepickerCalendarCell {
+export class MtxCalendarCell {
   constructor(
     public value: number,
     public displayValue: string,
@@ -25,21 +25,21 @@ export class MatDatetimepickerCalendarCell {
  * @docs-private
  */
 @Component({
-  selector: '[mat-datetimepicker-calendar-body]',
+  selector: '[mtx-calendar-body]',
   templateUrl: 'calendar-body.html',
   styleUrls: ['calendar-body.scss'],
   host: {
-    class: 'mat-datetimepicker-calendar-body',
+    class: 'mtx-calendar-body',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatDatetimepickerCalendarBody {
+export class MtxCalendarBody {
   /** The label for the table. (e.g. "Jan 2017"). */
   @Input() label!: string;
 
   /** The cells to display in the table. */
-  @Input() rows!: MatDatetimepickerCalendarCell[][];
+  @Input() rows!: MtxCalendarCell[][];
 
   /** The value in the table that corresponds to today. */
   @Input() todayValue!: number;
@@ -69,7 +69,7 @@ export class MatDatetimepickerCalendarBody {
       : 0;
   }
 
-  _cellClicked(cell: MatDatetimepickerCalendarCell): void {
+  _cellClicked(cell: MtxCalendarCell): void {
     if (!this.allowDisabledSelection && !cell.enabled) {
       return;
     }

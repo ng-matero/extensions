@@ -4,7 +4,7 @@ import { DateAdapter } from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
-import { MatDatetimepickerFilterType } from '@ng-matero/extensions/datetimepicker';
+import { MtxDatetimepickerFilterType } from '@ng-matero/extensions/datetimepicker';
 
 @Component({
   selector: 'dev-datetimepicker-demo',
@@ -20,7 +20,7 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
   min: moment.Moment;
   max: moment.Moment;
   start: moment.Moment;
-  filter: (date: moment.Moment | null, type: MatDatetimepickerFilterType) => boolean;
+  filter: (date: moment.Moment | null, type: MtxDatetimepickerFilterType) => boolean;
 
   translateSubscription!: Subscription;
 
@@ -34,16 +34,16 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
     this.min = this.today.clone().year(2018).month(10).date(3).hour(11).minute(10);
     this.max = this.min.clone().date(4).minute(45);
     this.start = this.today.clone().year(1930).month(9).date(28);
-    this.filter = (date: moment.Moment | null, type: MatDatetimepickerFilterType) => {
+    this.filter = (date: moment.Moment | null, type: MtxDatetimepickerFilterType) => {
       if (date === null) {
         return true;
       }
       switch (type) {
-        case MatDatetimepickerFilterType.DATE:
+        case MtxDatetimepickerFilterType.DATE:
           return date.year() % 2 === 0 && date.month() % 2 === 0 && date.date() % 2 === 0;
-        case MatDatetimepickerFilterType.HOUR:
+        case MtxDatetimepickerFilterType.HOUR:
           return date.hour() % 2 === 0;
-        case MatDatetimepickerFilterType.MINUTE:
+        case MtxDatetimepickerFilterType.MINUTE:
           return date.minute() % 2 === 0;
       }
     };

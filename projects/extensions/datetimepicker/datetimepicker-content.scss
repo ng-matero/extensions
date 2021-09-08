@@ -8,7 +8,7 @@ $datetimepicker-calendar-landscape-width: 446px;
 $datetimepicker-calendar-portrait-height: 405px;
 $datetimepicker-calendar-landscape-height: 328px;
 
-.mat-datetimepicker-content {
+.mtx-datetimepicker-content {
   @include mat-elevation(8);
 
   display: block;
@@ -16,7 +16,7 @@ $datetimepicker-calendar-landscape-height: 328px;
   overflow: hidden;
 }
 
-.mat-datetimepicker-calendar {
+.mtx-calendar {
   width: $datetimepicker-calendar-portrait-width;
   height: $datetimepicker-calendar-portrait-height;
 
@@ -27,16 +27,16 @@ $datetimepicker-calendar-landscape-height: 328px;
 }
 
 @media (min-width: 480px) {
-  .mat-datetimepicker-calendar[mode='auto'] {
+  .mtx-calendar[mode='auto'] {
     width: $datetimepicker-calendar-landscape-width;
     height: $datetimepicker-calendar-landscape-height;
   }
 }
 
-.mat-datetimepicker-content-touch {
+.mtx-datetimepicker-content-touch {
   display: block;
 }
 
-.mat-datetimepicker-dialog .mat-dialog-container {
+.mtx-datetimepicker-dialog .mat-dialog-container {
   padding: 0;
 }

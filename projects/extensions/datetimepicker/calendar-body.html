@@ -3,7 +3,7 @@
   aria-hidden because we don't want it to be read out as one of the weeks in the month.
 -->
 <tr *ngIf="_firstRowOffset < labelMinRequiredCells" aria-hidden="true">
-  <td [attr.colspan]="numCols" class="mat-datetimepicker-calendar-body-label">{{ label }}</td>
+  <td [attr.colspan]="numCols" class="mtx-calendar-body-label">{{ label }}</td>
 </tr>
 
 <!-- Create the first row separately so we can include a special spacer cell. -->
@@ -14,21 +14,21 @@
   <td *ngIf="rowIndex === 0 && _firstRowOffset"
       [attr.colspan]="_firstRowOffset"
       aria-hidden="true"
-      class="mat-datetimepicker-calendar-body-label">
+      class="mtx-calendar-body-label">
     {{ _firstRowOffset >= labelMinRequiredCells ? label : '' }}
   </td>
   <td (click)="_cellClicked(item)"
       *ngFor="let item of row; let colIndex = index"
       [attr.aria-disabled]="!item.enabled || null"
       [attr.aria-label]="item.ariaLabel"
-      [class.mat-datetimepicker-calendar-body-active]="_isActiveCell(rowIndex, colIndex)"
-      [class.mat-datetimepicker-calendar-body-disabled]="!item.enabled"
-      class="mat-datetimepicker-calendar-body-cell"
+      [class.mtx-calendar-body-active]="_isActiveCell(rowIndex, colIndex)"
+      [class.mtx-calendar-body-disabled]="!item.enabled"
+      class="mtx-calendar-body-cell"
       role="button">
     <div [attr.aria-selected]="selectedValue === item.value"
-         [class.mat-datetimepicker-calendar-body-selected]="selectedValue === item.value"
-         [class.mat-datetimepicker-calendar-body-today]="todayValue === item.value"
-         class="mat-datetimepicker-calendar-body-cell-content">
+         [class.mtx-calendar-body-selected]="selectedValue === item.value"
+         [class.mtx-calendar-body-today]="todayValue === item.value"
+         class="mtx-calendar-body-cell-content">
       {{ item.displayValue }}
     </div>
   </td>

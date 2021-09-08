@@ -9,11 +9,11 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { MatDatetimepickerType } from './datetimepicker';
+import { MtxDatetimepickerType } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
-import { MatDatetimepickerCalendarCell } from './calendar-body';
+import { MtxCalendarCell } from './calendar-body';
 import { slideCalendar } from './datetimepicker-animations';
-import { MAT_DATETIME_FORMATS, MatDatetimeFormats } from '@ng-matero/extensions/core';
+import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 
 /**
@@ -21,22 +21,22 @@ import { DatetimeAdapter } from '@ng-matero/extensions/core';
  * @docs-private
  */
 @Component({
-  selector: 'mat-datetimepicker-year-view',
+  selector: 'mtx-year-view',
   templateUrl: 'year-view.html',
   animations: [slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatDatetimepickerYearView<D> implements AfterContentInit {
+export class MtxYearView<D> implements AfterContentInit {
   @Output() _userSelection = new EventEmitter<void>();
 
-  @Input() type: MatDatetimepickerType = 'date';
+  @Input() type: MtxDatetimepickerType = 'date';
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
   /** Emits when a new month is selected. */
   @Output() selectedChange = new EventEmitter<D>();
   /** Grid of calendar cells representing the months of the year. */
-  _months!: MatDatetimepickerCalendarCell[][];
+  _months!: MtxCalendarCell[][];
   /** The label for this year (e.g. "2017"). */
   _yearLabel!: string;
   /** The month in this year that today falls on. Null if today is in a different year. */
@@ -50,14 +50,14 @@ export class MatDatetimepickerYearView<D> implements AfterContentInit {
 
   constructor(
     @Optional() public _adapter: DatetimeAdapter<D>,
-    @Optional() @Inject(MAT_DATETIME_FORMATS) private _dateFormats: MatDatetimeFormats
+    @Optional() @Inject(MTX_DATETIME_FORMATS) private _dateFormats: MtxDatetimeFormats
   ) {
     if (!this._adapter) {
       throw createMissingDateImplError('DatetimeAdapter');
     }
 
     if (!this._dateFormats) {
-      throw createMissingDateImplError('MAT_DATETIME_FORMATS');
+      throw createMissingDateImplError('MTX_DATETIME_FORMATS');
     }
 
     this._activeDate = this._adapter.today();
@@ -171,7 +171,7 @@ export class MatDatetimepickerYearView<D> implements AfterContentInit {
       ),
       this._dateFormats.display.monthYearA11yLabel
     );
-    return new MatDatetimepickerCalendarCell(
+    return new MtxCalendarCell(
       month,
       monthName.toLocaleUpperCase(),
       ariaLabel,

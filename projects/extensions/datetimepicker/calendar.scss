@@ -8,7 +8,7 @@ $calendar-prev-next-icon-margin: 15.5px;
 $calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
 $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
-.mat-datetimepicker-calendar {
+.mtx-calendar {
   display: block;
 
   &[mode='landscape'] {
@@ -16,7 +16,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-.mat-datetimepicker-calendar-header {
+.mtx-calendar-header {
   padding: $calendar-padding * 2;
   font-size: 14px;
   box-sizing: border-box;
@@ -27,14 +27,14 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-.mat-datetimepicker-calendar-header-year,
-.mat-datetimepicker-calendar-header-date-time {
+.mtx-calendar-header-year,
+.mtx-calendar-header-date-time {
   width: 100%;
   font-weight: 500;
   white-space: nowrap;
 }
 
-.mat-datetimepicker-calendar-header-year {
+.mtx-calendar-header-year {
   font-size: 16px;
 
   mat-icon {
@@ -42,7 +42,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-.mat-datetimepicker-calendar-header-date-time {
+.mtx-calendar-header-date-time {
   font-size: 30px;
   line-height: 34px;
 
@@ -52,15 +52,15 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-.mat-datetimepicker-calendar-header-ampm-container {
+.mtx-calendar-header-ampm-container {
   font-size: .77em;
 }
 
-.mat-datetimepicker-calendar-header-year,
-.mat-datetimepicker-calendar-header-date,
-.mat-datetimepicker-calendar-header-hours,
-.mat-datetimepicker-calendar-header-minutes,
-.mat-datetimepicker-calendar-header-ampm {
+.mtx-calendar-header-year,
+.mtx-calendar-header-date,
+.mtx-calendar-header-hours,
+.mtx-calendar-header-minutes,
+.mtx-calendar-header-ampm {
   &:not(.active) {
     cursor: pointer;
     opacity: .6;
@@ -71,15 +71,15 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-.mat-datetimepicker-calendar-header-time {
+.mtx-calendar-header-time {
   padding-left: 8px;
 
   &:not(.active) {
     opacity: .6;
 
-    .mat-datetimepicker-calendar-header-hours,
-    .mat-datetimepicker-calendar-header-minutes,
-    .mat-datetimepicker-calendar-header-ampm {
+    .mtx-calendar-header-hours,
+    .mtx-calendar-header-minutes,
+    .mtx-calendar-header-ampm {
       cursor: pointer;
       opacity: 1;
     }
@@ -91,7 +91,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-.mat-datetimepicker-calendar-content {
+.mtx-calendar-content {
   width: 100%;
   padding: 0 $calendar-padding $calendar-padding $calendar-padding;
   outline: none;
@@ -103,12 +103,12 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-.mat-datetimepicker-calendar-controls {
+.mtx-calendar-controls {
   display: flex;
   justify-content: space-between;
 }
 
-.mat-datetimepicker-calendar-period-button {
+.mtx-calendar-period-button {
   display: inline-block;
   height: 48px;
   line-height: 48px;
@@ -118,8 +118,8 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   box-sizing: border-box;
 }
 
-.mat-datetimepicker-calendar-previous-button,
-.mat-datetimepicker-calendar-next-button {
+.mtx-calendar-previous-button,
+.mtx-calendar-next-button {
   display: inline-block;
   width: 48px;
   height: 48px;
@@ -140,13 +140,13 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-.mat-datetimepicker-calendar-table {
+.mtx-calendar-table {
   border-spacing: 0;
   border-collapse: collapse;
   width: 100%;
 }
 
-.mat-datetimepicker-calendar-table-header {
+.mtx-calendar-table-header {
   th {
     text-align: center;
     font-size: $calendar-weekday-table-font-size;
@@ -156,25 +156,25 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 }
 
 @media (min-width: 480px) {
-  .mat-datetimepicker-calendar[mode='auto'] {
+  .mtx-calendar[mode='auto'] {
     display: flex;
 
-    .mat-datetimepicker-calendar-header {
+    .mtx-calendar-header {
       width: 150px;
       min-width: 150px;
     }
 
-    .mat-datetimepicker-calendar-header-date-time {
+    .mtx-calendar-header-date-time {
       white-space: normal;
       word-wrap: break-word;
     }
 
-    .mat-datetimepicker-calendar-header-time {
+    .mtx-calendar-header-time {
       display: block;
       padding-left: 0;
     }
 
-    .mat-datetimepicker-calendar-content {
+    .mtx-calendar-content {
       padding-top: $calendar-padding;
     }
   }

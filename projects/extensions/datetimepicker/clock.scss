@@ -3,7 +3,7 @@ $clock-margin: 8px !default;
 $clock-font-size: 14px !default;
 $clock-cell-size: 14.1666% !default;
 
-.mat-datetimepicker-clock {
+.mtx-clock {
   position: relative;
   display: block;
   min-width: $clock-min-size;
@@ -13,7 +13,7 @@ $clock-cell-size: 14.1666% !default;
   user-select: none;
 }
 
-.mat-datetimepicker-clock-wrapper {
+.mtx-clock-wrapper {
   position: relative;
   width: 100%;
   height: 0;
@@ -21,7 +21,7 @@ $clock-cell-size: 14.1666% !default;
   border-radius: 50%;
 }
 
-.mat-datetimepicker-clock-center {
+.mtx-clock-center {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -31,7 +31,7 @@ $clock-cell-size: 14.1666% !default;
   border-radius: 50%;
 }
 
-.mat-datetimepicker-clock-hand {
+.mtx-clock-hand {
   position: absolute;
   top: 0;
   right: 0;
@@ -52,8 +52,8 @@ $clock-cell-size: 14.1666% !default;
   }
 }
 
-.mat-datetimepicker-clock-hours,
-.mat-datetimepicker-clock-minutes {
+.mtx-clock-hours,
+.mtx-clock-minutes {
   position: absolute;
   top: 0;
   left: 0;
@@ -71,11 +71,11 @@ $clock-cell-size: 14.1666% !default;
   }
 }
 
-.mat-datetimepicker-clock-minutes {
+.mtx-clock-minutes {
   transform: scale(.8);
 }
 
-.mat-datetimepicker-clock-cell {
+.mtx-clock-cell {
   position: absolute;
   display: flex;
   width: $clock-cell-size;
@@ -86,7 +86,7 @@ $clock-cell-size: 14.1666% !default;
   align-items: center;
   cursor: pointer;
 
-  &.mat-datetimepicker-clock-cell-disabled {
+  &.mtx-clock-cell-disabled {
     pointer-events: none;
   }
 }

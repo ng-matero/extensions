@@ -26,20 +26,20 @@ import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { MatFormField } from '@angular/material/form-field';
 import { Subscription } from 'rxjs';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
-import { MAT_DATETIME_FORMATS, MatDatetimeFormats } from '@ng-matero/extensions/core';
-import { MatDatetimepicker } from './datetimepicker';
+import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/core';
+import { MtxDatetimepicker } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
-import { MatDatetimepickerFilterType } from './datetimepicker-filtertype';
+import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 
 export const MAT_DATETIMEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
-  useExisting: forwardRef(() => MatDatetimepickerInput),
+  useExisting: forwardRef(() => MtxDatetimepickerInput),
   multi: true,
 };
 
 export const MAT_DATETIMEPICKER_VALIDATORS: any = {
   provide: NG_VALIDATORS,
-  useExisting: forwardRef(() => MatDatetimepickerInput),
+  useExisting: forwardRef(() => MtxDatetimepickerInput),
   multi: true,
 };
 
@@ -48,22 +48,22 @@ export const MAT_DATETIMEPICKER_VALIDATORS: any = {
  * input or change event because the event may have been triggered by the user clicking on the
  * calendar popup. For consistency, we always use MatDatepickerInputEvent instead.
  */
-export class MatDatetimepickerInputEvent<D> {
+export class MtxDatetimepickerInputEvent<D> {
   /** The new value for the target datepicker input. */
   value: D | null;
 
-  constructor(public target: MatDatetimepickerInput<D>, public targetElement: HTMLElement) {
+  constructor(public target: MtxDatetimepickerInput<D>, public targetElement: HTMLElement) {
     this.value = this.target.value;
   }
 }
 
 /** Directive used to connect an input to a MatDatepicker. */
 @Directive({
-  selector: 'input[matDatetimepicker]',
+  selector: 'input[mtxDatetimepicker]',
   providers: [
     MAT_DATETIMEPICKER_VALUE_ACCESSOR,
     MAT_DATETIMEPICKER_VALIDATORS,
-    { provide: MAT_INPUT_VALUE_ACCESSOR, useExisting: MatDatetimepickerInput },
+    { provide: MAT_INPUT_VALUE_ACCESSOR, useExisting: MtxDatetimepickerInput },
   ],
   host: {
     '[attr.aria-haspopup]': 'true',
@@ -79,15 +79,15 @@ export class MatDatetimepickerInputEvent<D> {
   },
   exportAs: 'matDatepickerInput',
 })
-export class MatDatetimepickerInput<D>
+export class MtxDatetimepickerInput<D>
   implements AfterContentInit, ControlValueAccessor, OnDestroy, Validator
 {
-  _datepicker!: MatDatetimepicker<D>;
-  _dateFilter!: (date: D | null, type: MatDatetimepickerFilterType) => boolean;
+  _datepicker!: MtxDatetimepicker<D>;
+  _dateFilter!: (date: D | null, type: MtxDatetimepickerFilterType) => boolean;
   /** Emits when a `change` event is fired on this `<input>`. */
-  @Output() dateChange = new EventEmitter<MatDatetimepickerInputEvent<D>>();
+  @Output() dateChange = new EventEmitter<MtxDatetimepickerInputEvent<D>>();
   /** Emits when an `input` event is fired on this `<input>`. */
-  @Output() dateInput = new EventEmitter<MatDatetimepickerInputEvent<D>>();
+  @Output() dateInput = new EventEmitter<MtxDatetimepickerInputEvent<D>>();
   /** Emits when the value changes (either due to user input or programmatic change). */
   _valueChange = new EventEmitter<D | null>();
   /** Emits when the disabled state has changed */
@@ -100,14 +100,14 @@ export class MatDatetimepickerInput<D>
   constructor(
     private _elementRef: ElementRef,
     @Optional() public _dateAdapter: DatetimeAdapter<D>,
-    @Optional() @Inject(MAT_DATETIME_FORMATS) private _dateFormats: MatDatetimeFormats,
+    @Optional() @Inject(MTX_DATETIME_FORMATS) private _dateFormats: MtxDatetimeFormats,
     @Optional() private _formField: MatFormField
   ) {
     if (!this._dateAdapter) {
       throw createMissingDateImplError('DatetimeAdapter');
     }
     if (!this._dateFormats) {
-      throw createMissingDateImplError('MAT_DATETIME_FORMATS');
+      throw createMissingDateImplError('MTX_DATETIME_FORMATS');
     }
 
     // Update the displayed date when the locale changes.
@@ -118,12 +118,12 @@ export class MatDatetimepickerInput<D>
 
   /** The datepicker that this input is associated with. */
   @Input()
-  set matDatetimepicker(value: MatDatetimepicker<D>) {
+  set mtxDatetimepicker(value: MtxDatetimepicker<D>) {
     this.registerDatepicker(value);
   }
 
   @Input() set matDatepickerFilter(
-    filter: (date: D | null, type: MatDatetimepickerFilterType) => boolean
+    filter: (date: D | null, type: MtxDatetimepickerFilterType) => boolean
   ) {
     this._dateFilter = filter;
     this._validatorOnChange();
@@ -204,8 +204,8 @@ export class MatDatetimepickerInput<D>
         this.value = selected;
         this._cvaOnChange(selected);
         this._onTouched();
-        this.dateInput.emit(new MatDatetimepickerInputEvent(this, this._elementRef.nativeElement));
-        this.dateChange.emit(new MatDatetimepickerInputEvent(this, this._elementRef.nativeElement));
+        this.dateInput.emit(new MtxDatetimepickerInputEvent(this, this._elementRef.nativeElement));
+        this.dateChange.emit(new MtxDatetimepickerInputEvent(this, this._elementRef.nativeElement));
       });
     }
   }
@@ -267,11 +267,11 @@ export class MatDatetimepickerInput<D>
     this._value = date;
     this._cvaOnChange(date);
     this._valueChange.emit(date);
-    this.dateInput.emit(new MatDatetimepickerInputEvent(this, this._elementRef.nativeElement));
+    this.dateInput.emit(new MtxDatetimepickerInputEvent(this, this._elementRef.nativeElement));
   }
 
   _onChange() {
-    this.dateChange.emit(new MatDatetimepickerInputEvent(this, this._elementRef.nativeElement));
+    this.dateChange.emit(new MtxDatetimepickerInputEvent(this, this._elementRef.nativeElement));
   }
 
   /** Handles blur events on the input. */
@@ -284,7 +284,7 @@ export class MatDatetimepickerInput<D>
     this._onTouched();
   }
 
-  private registerDatepicker(value: MatDatetimepicker<D>) {
+  private registerDatepicker(value: MtxDatetimepicker<D>) {
     if (value) {
       this._datepicker = value;
       this._datepicker._registerInput(this);
@@ -370,7 +370,7 @@ export class MatDatetimepickerInput<D>
     );
     return !this._dateFilter ||
       !controlValue ||
-      this._dateFilter(controlValue, MatDatetimepickerFilterType.DATE)
+      this._dateFilter(controlValue, MtxDatetimepickerFilterType.DATE)
       ? null
       : { matDatepickerFilter: true };
   };

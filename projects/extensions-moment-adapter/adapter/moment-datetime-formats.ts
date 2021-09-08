@@ -1,6 +1,6 @@
-import { MatDatetimeFormats } from '@ng-matero/extensions/core';
+import { MtxDatetimeFormats } from '@ng-matero/extensions/core';
 
-export const MAT_MOMENT_DATETIME_FORMATS: MatDatetimeFormats = {
+export const MTX_MOMENT_DATETIME_FORMATS: MtxDatetimeFormats = {
   parse: {
     dateInput: 'L',
     monthInput: 'MMMM',

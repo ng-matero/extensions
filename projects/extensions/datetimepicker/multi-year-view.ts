@@ -9,11 +9,11 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { MatDatetimepickerType } from './datetimepicker';
+import { MtxDatetimepickerType } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
-import { MatDatetimepickerCalendarCell } from './calendar-body';
+import { MtxCalendarCell } from './calendar-body';
 import { slideCalendar } from './datetimepicker-animations';
-import { MAT_DATETIME_FORMATS, MatDatetimeFormats } from '@ng-matero/extensions/core';
+import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 
 export const yearsPerPage = 24;
@@ -25,22 +25,22 @@ export const yearsPerRow = 4;
  * @docs-private
  */
 @Component({
-  selector: 'mat-datetimepicker-multi-year-view',
+  selector: 'mtx-multi-year-view',
   templateUrl: 'multi-year-view.html',
   animations: [slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MatDatetimepickerMultiYearView<D> implements AfterContentInit {
+export class MtxMultiYearView<D> implements AfterContentInit {
   @Output() _userSelection = new EventEmitter<void>();
 
-  @Input() type: MatDatetimepickerType = 'date';
+  @Input() type: MtxDatetimepickerType = 'date';
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
   /** Emits when a new month is selected. */
   @Output() selectedChange = new EventEmitter<D>();
   /** Grid of calendar cells representing the years in the range. */
-  _years!: MatDatetimepickerCalendarCell[][];
+  _years!: MtxCalendarCell[][];
   /** The label for this year range (e.g. "2000-2020"). */
   _yearLabel!: string;
   /** The year in this range that today falls on. Null if today is in a different range. */
@@ -54,14 +54,14 @@ export class MatDatetimepickerMultiYearView<D> implements AfterContentInit {
 
   constructor(
     @Optional() public _adapter: DatetimeAdapter<D>,
-    @Optional() @Inject(MAT_DATETIME_FORMATS) private _dateFormats: MatDatetimeFormats
+    @Optional() @Inject(MTX_DATETIME_FORMATS) private _dateFormats: MtxDatetimeFormats
   ) {
     if (!this._adapter) {
       throw createMissingDateImplError('DatetimeAdapter');
     }
 
     if (!this._dateFormats) {
-      throw createMissingDateImplError('MAT_DATETIME_FORMATS');
+      throw createMissingDateImplError('MTX_DATETIME_FORMATS');
     }
 
     this._activeDate = this._adapter.today();
@@ -185,15 +185,10 @@ export class MatDatetimepickerMultiYearView<D> implements AfterContentInit {
     }
   }
 
-  /** Creates an MatDatetimepickerCalendarCell for the given year. */
+  /** Creates an MtxCalendarCell for the given year. */
   private _createCellForYear(year: number) {
     const yearName = this._adapter.getYearName(this._adapter.createDate(year, 0, 1));
-    return new MatDatetimepickerCalendarCell(
-      year,
-      yearName,
-      yearName,
-      this._shouldEnableYear(year)
-    );
+    return new MtxCalendarCell(year, yearName, yearName, this._shouldEnableYear(year));
   }
 
   /** Whether the given year is enabled. */

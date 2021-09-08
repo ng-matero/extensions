@@ -8,34 +8,34 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
-import { MatDatetimepickerFilterType } from './datetimepicker-filtertype';
+import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 
 export const CLOCK_RADIUS = 50;
 export const CLOCK_INNER_RADIUS = 27.5;
 export const CLOCK_OUTER_RADIUS = 41.25;
 export const CLOCK_TICK_RADIUS = 7.0833;
 
-export type MatClockView = 'hour' | 'minute';
+export type MtxClockView = 'hour' | 'minute';
 
 /**
  * A clock that is used as part of the datepicker.
  * @docs-private
  */
 @Component({
-  selector: 'mat-datetimepicker-clock',
+  selector: 'mtx-clock',
   templateUrl: 'clock.html',
   styleUrls: ['clock.scss'],
   host: {
-    '[class.mat-datetimepicker-clock]': 'true',
+    '[class.mtx-clock]': 'true',
     'role': 'clock',
     '(mousedown)': '_handleMousedown($event)',
   },
   encapsulation: ViewEncapsulation.None,
 })
-export class MatDatetimepickerClock<D> implements AfterContentInit {
+export class MtxClock<D> implements AfterContentInit {
   @Output() _userSelection = new EventEmitter<void>();
   /** A function used to filter which dates are selectable. */
-  @Input() dateFilter!: (date: D, type: MatDatetimepickerFilterType) => boolean;
+  @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
   @Input() interval: number = 1;
   @Input() twelvehour: boolean = false;
   /** Emits when the currently selected date changes. */
@@ -120,7 +120,7 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
 
   /** Whether the clock should be started in hour or minute view. */
   @Input()
-  set startView(value: MatClockView) {
+  set startView(value: MtxClockView) {
     this._hourView = value !== 'minute';
   }
 
@@ -232,7 +232,7 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
         const enabled =
           (!this.minDate || this._adapter.compareDatetime(date, this.minDate, false) >= 0) &&
           (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate, false) <= 0) &&
-          (!this.dateFilter || this.dateFilter(date, MatDatetimepickerFilterType.HOUR));
+          (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.HOUR));
         this._hours.push({
           value: i,
           displayValue: i === 0 ? '00' : hourNames[i],
@@ -256,7 +256,7 @@ export class MatDatetimepickerClock<D> implements AfterContentInit {
       const enabled =
         (!this.minDate || this._adapter.compareDatetime(date, this.minDate) >= 0) &&
         (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate) <= 0) &&
-        (!this.dateFilter || this.dateFilter(date, MatDatetimepickerFilterType.MINUTE));
+        (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.MINUTE));
       this._minutes.push({
         value: i,
         displayValue: i === 0 ? '00' : minuteNames[i],

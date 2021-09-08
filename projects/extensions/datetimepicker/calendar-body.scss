@@ -14,12 +14,12 @@ $calendar-body-cell-radius: 999px !default;
 $calendar-body-min-size: 7 * $calendar-body-cell-min-size !default;
 $calendar-body-cell-content-size: 100% - $calendar-body-cell-content-margin * 2 !default;
 
-.mat-datetimepicker-calendar-body {
+.mtx-calendar-body {
   font-size: $calendar-body-font-size;
   min-width: $calendar-body-min-size;
 }
 
-.mat-datetimepicker-calendar-body-label {
+.mtx-calendar-body-label {
   height: 0;
   line-height: 0;
   text-align: left;
@@ -30,7 +30,7 @@ $calendar-body-cell-content-size: 100% - $calendar-body-cell-content-margin * 2 
   }
 }
 
-.mat-datetimepicker-calendar-body-cell {
+.mtx-calendar-body-cell {
   position: relative;
   width: $calendar-body-cell-size;
   height: 0;
@@ -41,12 +41,12 @@ $calendar-body-cell-content-size: 100% - $calendar-body-cell-content-margin * 2 
   cursor: pointer;
 }
 
-.mat-datetimepicker-calendar-body-disabled {
+.mtx-calendar-body-disabled {
   cursor: default;
   pointer-events: none;
 }
 
-.mat-datetimepicker-calendar-body-cell-content {
+.mtx-calendar-body-cell-content {
   position: absolute;
   top: $calendar-body-cell-content-margin;
   left: $calendar-body-cell-content-margin;
