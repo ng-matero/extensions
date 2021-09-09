@@ -70,8 +70,8 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
       ? this.datetimepicker._disabledChange
       : observableOf();
     const inputDisabled =
-      this.datetimepicker && this.datetimepicker._datepickerInput
-        ? this.datetimepicker._datepickerInput._disabledChange
+      this.datetimepicker && this.datetimepicker._datetimepickerInput
+        ? this.datetimepicker._datetimepickerInput._disabledChange
         : observableOf();
 
     this._stateChanges.unsubscribe();

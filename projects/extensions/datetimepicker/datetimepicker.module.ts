@@ -3,7 +3,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MtxCalendar } from './calendar';
 import { MtxCalendarBody } from './calendar-body';
@@ -16,14 +15,7 @@ import { MtxYearView } from './year-view';
 import { MtxMultiYearView } from './multi-year-view';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatButtonModule,
-    MatDialogModule,
-    MatIconModule,
-    OverlayModule,
-    A11yModule,
-  ],
+  imports: [CommonModule, MatButtonModule, MatIconModule, OverlayModule, A11yModule],
   entryComponents: [MtxDatetimepickerContent],
   declarations: [
     MtxCalendar,

@@ -1,9 +1,13 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ESCAPE } from '@angular/cdk/keycodes';
-import { Overlay, OverlayConfig, OverlayRef, PositionStrategy } from '@angular/cdk/overlay';
+import { ESCAPE, hasModifierKey, UP_ARROW } from '@angular/cdk/keycodes';
+import {
+  FlexibleConnectedPositionStrategy,
+  Overlay,
+  OverlayConfig,
+  OverlayRef,
+} from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -21,25 +25,25 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MAT_DATEPICKER_SCROLL_STRATEGY } from '@angular/material/datepicker';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Subject, Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { merge, Subject, Subscription } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxCalendarView, MtxCalendar } from './calendar';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
+import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 
 export type MtxDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'datetime';
 export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
 
-/** Used to generate a unique ID for each datepicker instance. */
+/** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
 
 /**
- * Component used as the content for the datepicker dialog and popup. We use this instead of using
- * MatCalendar directly as the content so we can control the initial focus. This also gives us a
- * place to put additional features of the popup that are not part of the calendar itself in the
+ * Component used as the content for the datetimepicker dialog and popup. We use this instead of
+ * using MtxCalendar directly as the content so we can control the initial focus. This also gives us
+ * a place to put additional features of the popup that are not part of the calendar itself in the
  * future. (e.g. confirmation buttons).
  * @docs-private
  */
@@ -50,7 +54,6 @@ let datetimepickerUid = 0;
   host: {
     'class': 'mtx-datetimepicker-content',
     '[class.mtx-datetimepicker-content-touch]': 'datetimepicker?.touchUi',
-    '(keydown)': '_handleKeydown($event)',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -67,18 +70,6 @@ export class MtxDatetimepickerContent<D> implements AfterContentInit {
   onSelectionChange(date: D) {
     this.datetimepicker._select(date);
     this.datetimepicker.close();
-  }
-
-  /**
-   * Handles keydown event on datepicker content.
-   * @param event The event.
-   */
-  _handleKeydown(event: KeyboardEvent): void {
-    if (event.keyCode === ESCAPE) {
-      this.datetimepicker.close();
-      event.preventDefault();
-      event.stopPropagation();
-    }
   }
 }
 
@@ -112,40 +103,39 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   @Output() selectedChanged = new EventEmitter<D>();
   /** Classes to be passed to the date picker panel. Supports the same syntax as `ngClass`. */
   @Input() panelClass!: string | string[];
-  /** Emits when the datepicker has been opened. */
+  /** Emits when the datetimepicker has been opened. */
   @Output('opened') openedStream: EventEmitter<void> = new EventEmitter<void>();
-  /** Emits when the datepicker has been closed. */
+  /** Emits when the datetimepicker has been closed. */
   @Output('closed') closedStream: EventEmitter<void> = new EventEmitter<void>();
   /** Emits when the view has been changed. */
   @Output() viewChanged: EventEmitter<MtxCalendarView> = new EventEmitter<MtxCalendarView>();
   /** Whether the calendar is open. */
   opened = false;
-  /** The id for the datepicker calendar. */
+  /** The id for the datetimepicker calendar. */
   id = `mtx-datetimepicker-${datetimepickerUid++}`;
-  /** The input element this datepicker is associated with. */
-  _datepickerInput!: MtxDatetimepickerInput<D>;
-  /** Emits when the datepicker is disabled. */
+  /** The input element this datetimepicker is associated with. */
+  _datetimepickerInput!: MtxDatetimepickerInput<D>;
+  /** Emits when the datetimepicker is disabled. */
   _disabledChange = new Subject<boolean>();
   private _validSelected: D | null = null;
-  /** A reference to the overlay when the calendar is opened as a popup. */
-  private _popupRef!: OverlayRef;
-  /** A reference to the dialog when the calendar is opened as a dialog. */
-  private _dialogRef!: MatDialogRef<any> | null;
-  /** A portal containing the calendar for this datepicker. */
-  private _calendarPortal!: ComponentPortal<MtxDatetimepickerContent<D>>;
-  /** The element that was focused before the datepicker was opened. */
+  /** A reference to the overlay into which we've rendered the calendar. */
+  private _overlayRef!: OverlayRef | null;
+  /** Reference to the component instance rendered in the overlay. */
+  private _componentRef!: ComponentRef<MtxDatetimepickerContent<D>> | null;
+  /** The element that was focused before the datetimepicker was opened. */
   private _focusedElementBeforeOpen: HTMLElement | null = null;
-  private _inputSubscription = Subscription.EMPTY;
+  /** Unique class that will be added to the backdrop so that the test harnesses can look it up. */
+  private _backdropHarnessClass = `${this.id}-backdrop`;
+
+  private _inputStateChanges = Subscription.EMPTY;
 
   constructor(
-    private _dialog: MatDialog,
     private _overlay: Overlay,
     private _ngZone: NgZone,
     private _viewContainerRef: ViewContainerRef,
     @Inject(MAT_DATEPICKER_SCROLL_STRATEGY) private _scrollStrategy: any,
     @Optional() private _dateAdapter: DatetimeAdapter<D>,
-    @Optional() private _dir: Directionality,
-    @Optional() @Inject(DOCUMENT) private _document: any
+    @Optional() private _dir: Directionality
   ) {
     if (!this._dateAdapter) {
       throw createMissingDateImplError('DateAdapter');
@@ -159,7 +149,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   get startAt(): D | null {
     // If an explicit startAt is set we start there, otherwise we start at whatever the currently
     // selected value is.
-    return this._startAt || (this._datepickerInput ? this._datepickerInput.value : null);
+    return this._startAt || (this._datetimepickerInput ? this._datetimepickerInput.value : null);
   }
 
   set startAt(date: D | null) {
@@ -205,11 +195,11 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   private _disabled!: boolean;
 
-  /** Whether the datepicker pop-up should be disabled. */
+  /** Whether the datetimepicker pop-up should be disabled. */
   @Input()
   get disabled(): boolean {
-    return this._disabled === undefined && this._datepickerInput
-      ? this._datepickerInput.disabled
+    return this._disabled === undefined && this._datetimepickerInput
+      ? this._datetimepickerInput.disabled
       : !!this._disabled;
   }
 
@@ -233,16 +223,16 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   /** The minimum selectable date. */
   get _minDate(): D | null {
-    return this._datepickerInput && this._datepickerInput.min;
+    return this._datetimepickerInput && this._datetimepickerInput.min;
   }
 
   /** The maximum selectable date. */
   get _maxDate(): D | null {
-    return this._datepickerInput && this._datepickerInput.max;
+    return this._datetimepickerInput && this._datetimepickerInput.max;
   }
 
   get _dateFilter(): (date: D | null, type: MtxDatetimepickerFilterType) => boolean {
-    return this._datepickerInput && this._datepickerInput._dateFilter;
+    return this._datetimepickerInput && this._datetimepickerInput._dateFilter;
   }
 
   _handleFocus() {
@@ -256,16 +246,16 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   ngOnDestroy() {
+    this._destroyOverlay();
     this.close();
-    this._inputSubscription.unsubscribe();
+    this._inputStateChanges.unsubscribe();
     this._disabledChange.complete();
-
-    if (this._popupRef) {
-      this._popupRef.dispose();
-    }
   }
 
-  /** Selects the given date */
+  /**
+   * TODO: use model
+   * Selects the given date
+   */
   _select(date: D): void {
     const oldValue = this._selected;
     this._selected = date;
@@ -275,15 +265,15 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   /**
-   * Register an input with this datepicker.
-   * @param input The datepicker input to register with this datepicker.
+   * Register an input with this datetimepicker.
+   * @param input The datetimepicker input to register with this datetimepicker.
    */
   _registerInput(input: MtxDatetimepickerInput<D>): void {
-    if (this._datepickerInput) {
+    if (this._datetimepickerInput) {
       throw Error('A MatDatepicker can only be associated with a single input.');
     }
-    this._datepickerInput = input;
-    this._inputSubscription = this._datepickerInput._valueChange.subscribe(
+    this._datetimepickerInput = input;
+    this._inputStateChanges = this._datetimepickerInput._valueChange.subscribe(
       (value: D | null) => (this._selected = value)
     );
   }
@@ -293,14 +283,12 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     if (this.opened || this.disabled) {
       return;
     }
-    if (!this._datepickerInput) {
+    if (!this._datetimepickerInput) {
       throw Error('Attempted to open an MatDatepicker with no associated input.');
     }
-    if (this._document) {
-      this._focusedElementBeforeOpen = this._document.activeElement;
-    }
 
-    this.touchUi ? this._openAsDialog() : this._openAsPopup();
+    this._focusedElementBeforeOpen = _getFocusedElementPierceShadowDom();
+    this._openOverlay();
     this.opened = true;
     this.openedStream.emit();
   }
@@ -310,15 +298,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     if (!this.opened) {
       return;
     }
-    if (this._popupRef && this._popupRef.hasAttached()) {
-      this._popupRef.detach();
-    }
-    if (this._dialogRef) {
-      this._dialogRef.close();
-      this._dialogRef = null;
-    }
-    if (this._calendarPortal && this._calendarPortal.isAttached) {
-      this._calendarPortal.detach();
+
+    if (this._componentRef) {
+      this._destroyOverlay();
     }
 
     const completeClose = () => {
@@ -336,10 +318,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       typeof this._focusedElementBeforeOpen.focus === 'function'
     ) {
       // Because IE moves focus asynchronously, we can't count on it being restored before we've
-      // marked the datepicker as closed. If the event fires out of sequence and the element that
-      // we're refocusing opens the datepicker on focus, the user could be stuck with not being
-      // able to close the calendar at all. We work around it by making the logic, that marks
-      // the datepicker as closed, async as well.
+      // marked the datetimepicker as closed. If the event fires out of sequence and the element
+      // that we're refocusing opens the datetimepicker on focus, the user could be stuck with not
+      // being able to close the calendar at all. We work around it by making the logic, that marks
+      // the datetimepicker as closed, async as well.
       this._focusedElementBeforeOpen.focus();
       setTimeout(completeClose);
     } else {
@@ -347,96 +329,130 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     }
   }
 
-  /** Open the calendar as a dialog. */
-  private _openAsDialog(): void {
-    this._dialogRef = this._dialog.open(MtxDatetimepickerContent, {
-      direction: this._dir ? this._dir.value : 'ltr',
-      viewContainerRef: this._viewContainerRef,
-      panelClass: 'mtx-datetimepicker-dialog',
-    });
-    this._dialogRef.afterClosed().subscribe(() => this.close());
-    this._dialogRef.componentInstance.datetimepicker = this;
+  /**
+   * TODO: datetimepicker color
+   * Forwards relevant values from the datetimepicker to the
+   * datetimepicker content inside the overlay.
+   */
+  protected _forwardContentValues(instance: MtxDatetimepickerContent<D>) {
+    instance.datetimepicker = this;
   }
 
-  /** Open the calendar as a popup. */
-  private _openAsPopup(): void {
-    if (!this._calendarPortal) {
-      this._calendarPortal = new ComponentPortal<MtxDatetimepickerContent<D>>(
-        MtxDatetimepickerContent,
-        this._viewContainerRef
-      );
-    }
+  /** Opens the overlay with the calendar. */
+  private _openOverlay(): void {
+    this._destroyOverlay();
 
-    if (!this._popupRef) {
-      this._createPopup();
-    }
+    const isDialog = this.touchUi;
 
-    if (!this._popupRef.hasAttached()) {
-      const componentRef: ComponentRef<MtxDatetimepickerContent<D>> = this._popupRef.attach(
-        this._calendarPortal
-      );
-      componentRef.instance.datetimepicker = this;
+    const portal = new ComponentPortal<MtxDatetimepickerContent<D>>(
+      MtxDatetimepickerContent,
+      this._viewContainerRef
+    );
+    const overlayRef = (this._overlayRef = this._overlay.create(
+      new OverlayConfig({
+        positionStrategy: isDialog ? this._getDialogStrategy() : this._getDropdownStrategy(),
+        hasBackdrop: true,
+        backdropClass: [
+          isDialog ? 'cdk-overlay-dark-backdrop' : 'mat-overlay-transparent-backdrop',
+          this._backdropHarnessClass,
+        ],
+        direction: this._dir,
+        scrollStrategy: isDialog ? this._overlay.scrollStrategies.block() : this._scrollStrategy(),
+        panelClass: `mtx-datetimepicker-${isDialog ? 'dialog' : 'popup'}`,
+      })
+    ));
 
-      // Update the position once the calendar has rendered.
-      this._ngZone.onStable
-        .asObservable()
-        .pipe(first())
-        .subscribe(() => {
-          this._popupRef.updatePosition();
-        });
-    }
-
-    this._popupRef.backdropClick().subscribe(() => this.close());
-  }
-
-  /** Create the popup. */
-  private _createPopup(): void {
-    const overlayConfig = new OverlayConfig({
-      positionStrategy: this._createPopupPositionStrategy(),
-      hasBackdrop: true,
-      backdropClass: 'cdk-overlay-transparent-backdrop',
-      direction: this._dir ? this._dir.value : 'ltr',
-      scrollStrategy: this._scrollStrategy(),
-      panelClass: 'mtx-datetimepicker-popup',
+    this._getCloseStream(overlayRef).subscribe(event => {
+      if (event) {
+        event.preventDefault();
+      }
+      this.close();
     });
 
-    this._popupRef = this._overlay.create(overlayConfig);
+    this._componentRef = overlayRef.attach(portal);
+    this._forwardContentValues(this._componentRef.instance);
+
+    // Update the position once the calendar has rendered. Only relevant in dropdown mode.
+    if (!isDialog) {
+      this._ngZone.onStable.pipe(take(1)).subscribe(() => overlayRef.updatePosition());
+    }
   }
 
-  /** Create the popup PositionStrategy. */
-  private _createPopupPositionStrategy(): PositionStrategy {
-    return this._overlay
+  /** Destroys the current overlay. */
+  private _destroyOverlay() {
+    if (this._overlayRef) {
+      this._overlayRef.dispose();
+      this._overlayRef = this._componentRef = null;
+    }
+  }
+
+  /** Gets a position strategy that will open the calendar as a dropdown. */
+  private _getDialogStrategy() {
+    return this._overlay.position().global().centerHorizontally().centerVertically();
+  }
+
+  /** Gets a position strategy that will open the calendar as a dropdown. */
+  private _getDropdownStrategy() {
+    const strategy = this._overlay
       .position()
-      .flexibleConnectedTo(this._datepickerInput.getConnectedOverlayOrigin())
+      .flexibleConnectedTo(this._datetimepickerInput.getConnectedOverlayOrigin())
       .withTransformOriginOn('.mtx-datetimepicker-content')
       .withFlexibleDimensions(false)
       .withViewportMargin(8)
-      .withLockedPosition()
-      .withPositions([
-        {
-          originX: 'start',
-          originY: 'bottom',
-          overlayX: 'start',
-          overlayY: 'top',
-        },
-        {
-          originX: 'start',
-          originY: 'top',
-          overlayX: 'start',
-          overlayY: 'bottom',
-        },
-        {
-          originX: 'end',
-          originY: 'bottom',
-          overlayX: 'end',
-          overlayY: 'top',
-        },
-        {
-          originX: 'end',
-          originY: 'top',
-          overlayX: 'end',
-          overlayY: 'bottom',
-        },
-      ]);
+      .withLockedPosition();
+
+    return this._setConnectedPositions(strategy);
+  }
+
+  /**
+   * TODO: `xPosition` and `yPosition`
+   * Sets the positions of the datetimepicker in dropdown mode based on the current configuration.
+   */
+  private _setConnectedPositions(strategy: FlexibleConnectedPositionStrategy) {
+    return strategy.withPositions([
+      {
+        originX: 'start',
+        originY: 'bottom',
+        overlayX: 'start',
+        overlayY: 'top',
+      },
+      {
+        originX: 'start',
+        originY: 'top',
+        overlayX: 'start',
+        overlayY: 'bottom',
+      },
+      {
+        originX: 'end',
+        originY: 'bottom',
+        overlayX: 'end',
+        overlayY: 'top',
+      },
+      {
+        originX: 'end',
+        originY: 'top',
+        overlayX: 'end',
+        overlayY: 'bottom',
+      },
+    ]);
+  }
+
+  /** Gets an observable that will emit when the overlay is supposed to be closed. */
+  private _getCloseStream(overlayRef: OverlayRef) {
+    return merge(
+      overlayRef.backdropClick(),
+      overlayRef.detachments(),
+      overlayRef.keydownEvents().pipe(
+        filter(event => {
+          // Closing on alt + up is only valid when there's an input associated with the datetimepicker.
+          return (
+            (event.keyCode === ESCAPE && !hasModifierKey(event)) ||
+            (this._datetimepickerInput &&
+              hasModifierKey(event, 'altKey') &&
+              event.keyCode === UP_ARROW)
+          );
+        })
+      )
+    );
   }
 }
