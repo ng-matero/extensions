@@ -25,17 +25,23 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   padding: $calendar-padding * 2;
   font-size: 14px;
   box-sizing: border-box;
+  border-radius: 4px 4px 0 0;
 
   [mode='landscape'] & {
     width: 150px;
     min-width: 150px;
+    border-radius: 4px 0 0 4px;
+
+    [dir='rtl'] & {
+      border-radius: 0 4px 4px 0;
+    }
   }
 }
 
 .mtx-calendar-header-year,
 .mtx-calendar-header-date-time {
   width: 100%;
-  font-weight: 500;
+  font-weight: 400;
   white-space: nowrap;
 }
 
@@ -93,26 +99,22 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
     }
   }
 
-  [mode='landscape'] & {
-    display: block;
-    padding-left: 0;
-  }
-
   [dir='rtl'] & {
     padding-right: 8px;
+  }
+
+  [mode='landscape'] & {
+    display: block;
+    padding: 0;
   }
 }
 
 .mtx-calendar-content {
   width: 100%;
-  padding: 0 $calendar-padding $calendar-padding $calendar-padding;
+  padding: $calendar-padding;
   outline: none;
   box-sizing: border-box;
   overflow: hidden;
-
-  [mode='landscape'] & {
-    padding-top: $calendar-padding;
-  }
 }
 
 .mtx-calendar-controls {
@@ -129,6 +131,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   display: inline-block;
   height: 40px;
   line-height: 40px;
+  font-size: 14px;
   outline: none;
   border: 0;
   background: transparent;
@@ -166,13 +169,18 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-@media (min-width: 480px) {
+@media all and (orientation: landscape) {
   .mtx-calendar[mode='auto'] {
     display: flex;
 
     .mtx-calendar-header {
       width: 150px;
       min-width: 150px;
+      border-radius: 4px 0 0 4px;
+
+      [dir='rtl'] & {
+        border-radius: 0 4px 4px 0;
+      }
     }
 
     .mtx-calendar-header-date-time {
@@ -182,7 +190,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
     .mtx-calendar-header-time {
       display: block;
-      padding-left: 0;
+      padding: 0;
     }
 
     .mtx-calendar-content {

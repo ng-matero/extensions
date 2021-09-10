@@ -54,6 +54,7 @@ let datetimepickerUid = 0;
   host: {
     'class': 'mtx-datetimepicker-content',
     '[class.mtx-datetimepicker-content-touch]': 'datetimepicker?.touchUi',
+    '[attr.mode]': 'datetimepicker.mode',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

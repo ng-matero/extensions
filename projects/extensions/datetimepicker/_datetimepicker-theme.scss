@@ -13,6 +13,8 @@ $selected-today-box-shadow-width: 1px;
   .mtx-datetimepicker-content {
     background-color: mat.get-color-from-palette($background, card);
     color: mat.get-color-from-palette($foreground, text);
+
+    @include mat.elevation(8);
   }
 
   .mtx-calendar-header {

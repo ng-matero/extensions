@@ -1,18 +1,40 @@
-@use '~@angular/material' as mat;
-
 $calendar-padding: 8px;
 $non-touch-calendar-cell-size: 40px;
 $non-touch-calendar-portrait-width: $non-touch-calendar-cell-size * 7 + $calendar-padding * 2;
-$non-touch-calendar-portrait-height: 405px;
+$non-touch-calendar-portrait-height: 404px;
 $non-touch-calendar-landscape-width: 446px;
 $non-touch-calendar-landscape-height: 328px;
+
+// Ideally the calendar would have a constant aspect ratio, no matter its size, and we would base
+// these measurements off the aspect ratio. Unfortunately, the aspect ratio does change a little as
+// the calendar grows, since some of the elements have pixel-based sizes. These numbers have been
+// chosen to minimize extra whitespace at larger sizes, while still ensuring we won't need
+// scrollbars at smaller sizes.
+$touch-landscape-mode-landscape-width: 120vh;
+$touch-landscape-mode-landscape-height: 80vh;
+$touch-landscape-mode-portrait-width: 90vw;
+$touch-landscape-mode-portrait-height: 64vw;
+$touch-portrait-mode-landscape-width: 64vh;
+$touch-portrait-mode-landscape-height: 90vh;
+$touch-portrait-mode-portrait-width: 80vw;
+$touch-portrait-mode-portrait-height: 120vw;
+$touch-portrait-mode-portrait-height-with-actions: 135vw;
+$touch-min-width: 250px;
+$touch-min-height: 300px;
+$touch-max-width: 750px;
+$touch-max-height: 850px;
 
 .mtx-datetimepicker-content {
   display: block;
   border-radius: 4px;
-  overflow: hidden;
+}
 
-  @include mat.elevation(8);
+.mtx-datetimepicker-content-container {
+  display: flex;
+  flex-direction: column;
+
+  // TODO: Ensures that `mtx-datepicker-actions` is pushed to the bottom of the popup.
+  justify-content: space-between;
 }
 
 .mtx-calendar {
@@ -25,7 +47,7 @@ $non-touch-calendar-landscape-height: 328px;
   }
 }
 
-@media (min-width: 480px) {
+@media all and (orientation: landscape) {
   .mtx-calendar[mode='auto'] {
     width: $non-touch-calendar-landscape-width;
     height: $non-touch-calendar-landscape-height;
@@ -34,6 +56,81 @@ $non-touch-calendar-landscape-height: 328px;
 
 .mtx-datetimepicker-content-touch {
   display: block;
+  max-height: 80vh;
+
+  // Allows for the screen reader close button to be seen in touch UI mode.
+  position: relative;
+
+  // Prevents the content from jumping around on Windows while the animation is running.
+  overflow: visible;
+
+  .mtx-datetimepicker-content-container {
+    min-height: $touch-min-height;
+    max-height: $touch-max-height;
+    min-width: $touch-min-width;
+    max-width: $touch-max-width;
+  }
+
+  .mtx-calendar {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media all and (orientation: landscape) {
+  .mtx-datetimepicker-content-touch {
+    .mtx-datetimepicker-content-container[mode='auto'],
+    .mtx-datetimepicker-content-container[mode='landscape'] {
+      width: $touch-landscape-mode-landscape-width;
+      height: $touch-landscape-mode-landscape-height;
+
+      .mtx-calendar {
+        width: auto;
+        height: 100%;
+      }
+    }
+
+    .mtx-datetimepicker-content-container[mode='portrait'] {
+      width: $touch-portrait-mode-landscape-width;
+      height: $touch-portrait-mode-landscape-height;
+
+      .mtx-calendar {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+@media all and (orientation: portrait) {
+  .mtx-datetimepicker-content-touch {
+    .mtx-datetimepicker-content-container[mode='auto'],
+    .mtx-datetimepicker-content-container[mode='portrait'] {
+      width: $touch-portrait-mode-portrait-width;
+      height: $touch-portrait-mode-portrait-height;
+
+      .mtx-calendar {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .mtx-datetimepicker-content-container[mode='landscape'] {
+      width: $touch-landscape-mode-portrait-width;
+      height: $touch-landscape-mode-portrait-height;
+
+      .mtx-calendar {
+        width: auto;
+        height: 100%;
+      }
+    }
+
+    // The content needs to be a bit taller when actions have
+    // been projected so that it doesn't have to scroll.
+    .mtx-datetimepicker-content-container-with-actions {
+      height: $touch-portrait-mode-portrait-height-with-actions;
+    }
+  }
 }
 
 .mtx-datetimepicker-dialog .mat-dialog-container {
