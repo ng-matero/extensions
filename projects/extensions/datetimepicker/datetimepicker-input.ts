@@ -67,11 +67,10 @@ export class MtxDatetimepickerInputEvent<D> {
   ],
   host: {
     '[attr.aria-haspopup]': 'true',
-    '[attr.aria-owns]': '(_datepicker?.opened && _datepicker.id) || null',
+    '[attr.aria-owns]': '(_datetimepicker?.opened && _datetimepicker.id) || null',
     '[attr.min]': 'min ? _dateAdapter.toIso8601(min) : null',
     '[attr.max]': 'max ? _dateAdapter.toIso8601(max) : null',
     '[disabled]': 'disabled',
-    '(focus)': '_datepicker._handleFocus()',
     '(input)': '_onInput($event.target.value)',
     '(change)': '_onChange()',
     '(blur)': '_onBlur()',
@@ -82,7 +81,7 @@ export class MtxDatetimepickerInputEvent<D> {
 export class MtxDatetimepickerInput<D>
   implements AfterContentInit, ControlValueAccessor, OnDestroy, Validator
 {
-  _datepicker!: MtxDatetimepicker<D>;
+  _datetimepicker!: MtxDatetimepicker<D>;
   _dateFilter!: (date: D | null, type: MtxDatetimepickerFilterType) => boolean;
   /** Emits when a `change` event is fired on this `<input>`. */
   @Output() dateChange = new EventEmitter<MtxDatetimepickerInputEvent<D>>();
@@ -92,7 +91,7 @@ export class MtxDatetimepickerInput<D>
   _valueChange = new EventEmitter<D | null>();
   /** Emits when the disabled state has changed */
   _disabledChange = new EventEmitter<boolean>();
-  private _datepickerSubscription = Subscription.EMPTY;
+  private _datetimepickerSubscription = Subscription.EMPTY;
   private _localeSubscription = Subscription.EMPTY;
   /** Whether the last value set on the input was valid. */
   private _lastValueValid = false;
@@ -199,19 +198,25 @@ export class MtxDatetimepickerInput<D>
   _onTouched = () => {};
 
   ngAfterContentInit() {
-    if (this._datepicker) {
-      this._datepickerSubscription = this._datepicker.selectedChanged.subscribe((selected: D) => {
-        this.value = selected;
-        this._cvaOnChange(selected);
-        this._onTouched();
-        this.dateInput.emit(new MtxDatetimepickerInputEvent(this, this._elementRef.nativeElement));
-        this.dateChange.emit(new MtxDatetimepickerInputEvent(this, this._elementRef.nativeElement));
-      });
+    if (this._datetimepicker) {
+      this._datetimepickerSubscription = this._datetimepicker.selectedChanged.subscribe(
+        (selected: D) => {
+          this.value = selected;
+          this._cvaOnChange(selected);
+          this._onTouched();
+          this.dateInput.emit(
+            new MtxDatetimepickerInputEvent(this, this._elementRef.nativeElement)
+          );
+          this.dateChange.emit(
+            new MtxDatetimepickerInputEvent(this, this._elementRef.nativeElement)
+          );
+        }
+      );
     }
   }
 
   ngOnDestroy() {
-    this._datepickerSubscription.unsubscribe();
+    this._datetimepickerSubscription.unsubscribe();
     this._localeSubscription.unsubscribe();
     this._valueChange.complete();
     this._disabledChange.complete();
@@ -231,6 +236,15 @@ export class MtxDatetimepickerInput<D>
    */
   getConnectedOverlayOrigin(): ElementRef {
     return this._formField ? this._formField.getConnectedOverlayOrigin() : this._elementRef;
+  }
+
+  /** Gets the ID of an element that should be used a description for the calendar overlay. */
+  getOverlayLabelId(): string | null {
+    if (this._formField) {
+      return this._formField.getLabelId();
+    }
+
+    return this._elementRef.nativeElement.getAttribute('aria-labelledby');
   }
 
   // Implemented as part of ControlValueAccessor
@@ -255,7 +269,7 @@ export class MtxDatetimepickerInput<D>
 
   _onKeydown(event: KeyboardEvent) {
     if (event.altKey && event.keyCode === DOWN_ARROW) {
-      this._datepicker.open();
+      this._datetimepicker.open();
       event.preventDefault();
     }
   }
@@ -286,13 +300,13 @@ export class MtxDatetimepickerInput<D>
 
   private registerDatepicker(value: MtxDatetimepicker<D>) {
     if (value) {
-      this._datepicker = value;
-      this._datepicker._registerInput(this);
+      this._datetimepicker = value;
+      this._datetimepicker._registerInput(this);
     }
   }
 
   private getDisplayFormat() {
-    switch (this._datepicker.type) {
+    switch (this._datetimepicker.type) {
       case 'date':
         return this._dateFormats.display.dateInput;
       case 'datetime':
@@ -307,7 +321,7 @@ export class MtxDatetimepickerInput<D>
   private getParseFormat() {
     let parseFormat;
 
-    switch (this._datepicker.type) {
+    switch (this._datetimepicker.type) {
       case 'date':
         parseFormat = this._dateFormats.parse.dateInput;
         break;

@@ -236,12 +236,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     return this._datetimepickerInput && this._datetimepickerInput._dateFilter;
   }
 
-  _handleFocus() {
-    if (!this.opened && this.openOnFocus) {
-      this.open();
-    }
-  }
-
   _viewChanged(type: MtxCalendarView): void {
     this.viewChanged.emit(type);
   }
@@ -344,6 +338,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     this._destroyOverlay();
 
     const isDialog = this.touchUi;
+    const labelId = this._datetimepickerInput.getOverlayLabelId();
 
     const portal = new ComponentPortal<MtxDatetimepickerContent<D>>(
       MtxDatetimepickerContent,
@@ -362,6 +357,17 @@ export class MtxDatetimepicker<D> implements OnDestroy {
         panelClass: `mtx-datetimepicker-${isDialog ? 'dialog' : 'popup'}`,
       })
     ));
+
+    const overlayElement = overlayRef.overlayElement;
+    overlayElement.setAttribute('role', 'dialog');
+
+    if (labelId) {
+      overlayElement.setAttribute('aria-labelledby', labelId);
+    }
+
+    if (isDialog) {
+      overlayElement.setAttribute('aria-modal', 'true');
+    }
 
     this._getCloseStream(overlayRef).subscribe(event => {
       if (event) {
