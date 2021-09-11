@@ -15,6 +15,10 @@ function copyButton() {
   return src([`${SRC}/button/*.scss`]).pipe(dest(`${DEST}/button`));
 }
 
+function copyDatetimepicker() {
+  return src([`${SRC}/datetimepicker/*.scss`]).pipe(dest(`${DEST}/datetimepicker`));
+}
+
 function copyDataGrid() {
   return src([`${SRC}/data-grid/*.scss`]).pipe(dest(`${DEST}/data-grid`));
 }
@@ -62,6 +66,7 @@ exports.default = series(
 
   copyAlert,
   copyButton,
+  copyDatetimepicker,
   copyDataGrid,
   copyDataGridColumnResize,
   copyLoader,
