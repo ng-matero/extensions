@@ -32,7 +32,7 @@ export const COMPONENTS_MENU = [
       {
         id: 'data-grid',
         name: 'Data Grid',
-        summary: 'A powerful grid for material table.',
+        summary: 'A powerful grid for Material table.',
       },
       {
         id: 'dialog',

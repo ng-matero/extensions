@@ -6,6 +6,7 @@
 @use '../app/pages/homepage/homepage-theme';
 @use '../app/shared/example-viewer/example-viewer-theme';
 @use '../app/shared/table-of-contents/table-of-contents-theme';
+@use '../app/shared/navbar/navbar-theme';
 
 @use './highlightjs/material-light' as *;
 @use './highlightjs/material-dark' as *;
@@ -22,6 +23,7 @@
   @include homepage-theme.theme($theme);
   @include example-viewer-theme.theme($theme);
   @include table-of-contents-theme.theme($theme);
+  @include navbar-theme.theme($theme);
 
   @if $is-dark-theme {
     @include highlightjs-material-dark();

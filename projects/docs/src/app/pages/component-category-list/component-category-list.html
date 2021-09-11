@@ -1,3 +1,8 @@
+<div class="docs-component-category-list-summary"
+     id="category-summary"
+     focusOnNavigation>
+  <div [innerHTML]="_categoryListSummary"></div>
+</div>
 <div class="docs-component-category-section" *ngFor="let section of list">
   <h2 class="docs-component-category-section-title">{{ section.title }}</h2>
   <div class="docs-component-category-list">

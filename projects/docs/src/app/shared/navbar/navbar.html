@@ -1,13 +1,22 @@
 <ng-progress color="white"></ng-progress>
 
 <mat-toolbar class="docs-navbar-header" color="primary">
+  <div class="skip-link-wrapper" [class.cdk-visually-hidden]="skipLinkHidden" *ngIf="skipLinkHref">
+    <a mat-raised-button [href]="skipLinkHref" (focus)="skipLinkHidden = false"
+       (blur)="skipLinkHidden = true" color="accent">
+      Skip to main content
+    </a>
+  </div>
+
   <a mat-button class="docs-button" routerLink="/" aria-label="Angular Material">
     <img class="docs-angular-logo" src="assets/img/angular-white-transparent.svg" alt="angular">
     <span>Material Extensions</span>
   </a>
 
-  <a mat-button class="docs-navbar-link" routerLink="components" fxHide.lt-sm>Components</a>
-  <a mat-button class="docs-navbar-link" routerLink="guides" fxHide.lt-sm>Guides</a>
+  <a mat-button class="docs-navbar-link" routerLink="components"
+     routerLinkActive="docs-navbar-header-item-selected" fxHide.lt-sm>Components</a>
+  <a mat-button class="docs-navbar-link" routerLink="guides"
+     routerLinkActive="docs-navbar-header-item-selected" fxHide.lt-sm>Guides</a>
 
   <button mat-icon-button [matMenuTriggerFor]="menu" fxHide.gt-xs>
     <mat-icon>more_vert</mat-icon>

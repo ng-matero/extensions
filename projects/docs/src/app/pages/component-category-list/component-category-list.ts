@@ -12,6 +12,7 @@ import { ComponentPageTitle } from '../page-title/page-title';
 export class ComponentCategoryList implements OnInit, OnDestroy {
   params!: Observable<Params>;
   routeParamSubscription!: Subscription;
+  _categoryListSummary: string | undefined;
 
   list = COMPONENTS_MENU;
 
