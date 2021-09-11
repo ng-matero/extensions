@@ -18,7 +18,7 @@ export const CLOCK_TICK_RADIUS = 7.0833;
 export type MtxClockView = 'hour' | 'minute';
 
 /**
- * A clock that is used as part of the datepicker.
+ * A clock that is used as part of the datetimepicker.
  * @docs-private
  */
 @Component({
@@ -159,7 +159,10 @@ export class MtxClock<D> implements AfterContentInit {
     this._init();
   }
 
-  /** Handles mousedown events on the clock body. */
+  /**
+   * TODO: use `fromEvent` of rxjs.
+   * Handles mousedown events on the clock body.
+   */
   _handleMousedown(event: any) {
     this._timeChanged = false;
     this.setTime(event);

@@ -39,7 +39,7 @@ import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from 
 export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
 
 /**
- * A calendar that is used as part of the datepicker.
+ * A calendar that is used as part of the datetimepicker.
  * @docs-private
  */
 @Component({
@@ -59,31 +59,51 @@ export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
 })
 export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   @Output() _userSelection = new EventEmitter<void>();
+
   /** Active multi year view when click on year. */
   @Input() multiYearSelector: boolean = false;
+
   /** Whether the calendar should be started in month or year view. */
   @Input() startView: MtxCalendarView = 'month';
+
   @Input() twelvehour: boolean = false;
+
   @Input() timeInterval: number = 1;
+
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
+
   @Input() ariaLabel = 'Use arrow keys to navigate';
+
   @Input() ariaNextMonthLabel = 'Next month';
+
   @Input() ariaPrevMonthLabel = 'Previous month';
+
   @Input() ariaNextYearLabel = 'Next year';
+
   @Input() ariaPrevYearLabel = 'Previous year';
+
   @Input() ariaNextMultiYearLabel = 'Next year range';
+
   @Input() ariaPrevMultiYearLabel = 'Previous year range';
+
   /** Prevent user to select same date time */
   @Input() preventSameDateTimeSelection = false;
+
   /** Emits when the currently selected date changes. */
   @Output() selectedChange: EventEmitter<D> = new EventEmitter<D>();
+
   /** Emits when the view has been changed. */
   @Output() viewChanged: EventEmitter<MtxCalendarView> = new EventEmitter<MtxCalendarView>();
+
   _AMPM!: string;
+
   _clockView: MtxClockView = 'hour';
+
   _calendarState!: string;
+
   private _intlChanges: Subscription;
+
   private _clampedActiveDate!: D;
 
   constructor(
@@ -105,67 +125,57 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     this._intlChanges = _intl.changes.subscribe(() => changeDetectorRef.markForCheck());
   }
 
-  private _type: MtxDatetimepickerType = 'date';
-
   @Input()
   get type(): MtxDatetimepickerType {
     return this._type;
   }
-
   set type(value: MtxDatetimepickerType) {
     this._type = value || 'date';
     if (this.type === 'year') {
       this.multiYearSelector = true;
     }
   }
-
-  private _startAt!: D | null;
+  private _type: MtxDatetimepickerType = 'date';
 
   /** A date representing the period (month or year) to start the calendar in. */
   @Input()
   get startAt(): D | null {
     return this._startAt;
   }
-
   set startAt(value: D | null) {
     this._startAt = this._adapter.getValidDateOrNull(value);
   }
-
-  private _selected!: D | null;
+  private _startAt!: D | null;
 
   /** The currently selected date. */
   @Input()
   get selected(): D | null {
     return this._selected;
   }
-
   set selected(value: D | null) {
     this._selected = this._adapter.getValidDateOrNull(value);
   }
-
-  private _minDate!: D | null;
+  private _selected!: D | null;
 
   /** The minimum selectable date. */
   @Input()
   get minDate(): D | null {
     return this._minDate;
   }
-
   set minDate(value: D | null) {
     this._minDate = this._adapter.getValidDateOrNull(value);
   }
-
-  private _maxDate!: D | null;
+  private _minDate!: D | null;
 
   /** The maximum selectable date. */
   @Input()
   get maxDate(): D | null {
     return this._maxDate;
   }
-
   set maxDate(value: D | null) {
     this._maxDate = this._adapter.getValidDateOrNull(value);
   }
+  private _maxDate!: D | null;
 
   /**
    * The current active date. This determines which time period is shown and which date is
@@ -193,16 +203,14 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   /** Whether the calendar is in month view. */
-  _currentView!: MtxCalendarView;
-
   get currentView(): MtxCalendarView {
     return this._currentView;
   }
-
   set currentView(view: MtxCalendarView) {
     this._currentView = view;
     this.viewChanged.emit(view);
   }
+  _currentView!: MtxCalendarView;
 
   /** The label for the current calendar view. */
   get _yearLabel(): string {

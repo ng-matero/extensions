@@ -19,7 +19,7 @@ import { createMissingDateImplError } from './datetimepicker-errors';
 const DAYS_PER_WEEK = 7;
 
 /**
- * An internal component used to display a single month in the datepicker.
+ * An internal component used to display a single month in the datetimepicker.
  * @docs-private
  */
 @Component({
@@ -33,23 +33,31 @@ export class MtxMonthView<D> implements AfterContentInit {
   @Input() type: MtxDatetimepickerType = 'date';
 
   @Output() _userSelection = new EventEmitter<void>();
+
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
+
   /** Emits when a new date is selected. */
   @Output() selectedChange = new EventEmitter<D>();
+
   /** Grid of calendar cells representing the dates of the month. */
   _weeks!: MtxCalendarCell[][];
+
   /** The number of blank cells in the first row before the 1st of the month. */
   _firstWeekOffset!: number;
+
   /**
    * The date of the month that the currently selected Date falls on.
    * Null if the currently selected Date is in another month.
    */
   _selectedDate!: number | null;
+
   /** The date of the month that today falls on. Null if today is in another month. */
   _todayDate!: number | null;
+
   /** The names of the weekdays. */
   _weekdays: { long: string; narrow: string }[];
+
   _calendarState!: string;
 
   constructor(
@@ -104,18 +112,16 @@ export class MtxMonthView<D> implements AfterContentInit {
     }
   }
 
-  private _selected!: D;
-
   /** The currently selected date. */
   @Input()
   get selected(): D {
     return this._selected;
   }
-
   set selected(value: D) {
     this._selected = value;
     this._selectedDate = this._getDateInCurrentMonth(this.selected);
   }
+  private _selected!: D;
 
   ngAfterContentInit(): void {
     this._init();

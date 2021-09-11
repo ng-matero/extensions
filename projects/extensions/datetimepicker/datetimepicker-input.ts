@@ -44,12 +44,12 @@ export const MAT_DATETIMEPICKER_VALIDATORS: any = {
 };
 
 /**
- * An event used for datepicker input and change events. We don't always have access to a native
+ * An event used for datetimepicker input and change events. We don't always have access to a native
  * input or change event because the event may have been triggered by the user clicking on the
- * calendar popup. For consistency, we always use MatDatepickerInputEvent instead.
+ * calendar popup. For consistency, we always use MtxDatetimepickerInputEvent instead.
  */
 export class MtxDatetimepickerInputEvent<D> {
-  /** The new value for the target datepicker input. */
+  /** The new value for the target datetimepicker input. */
   value: D | null;
 
   constructor(public target: MtxDatetimepickerInput<D>, public targetElement: HTMLElement) {
@@ -57,7 +57,7 @@ export class MtxDatetimepickerInputEvent<D> {
   }
 }
 
-/** Directive used to connect an input to a MatDatepicker. */
+/** Directive used to connect an input to a MtxDatetimepicker. */
 @Directive({
   selector: 'input[mtxDatetimepicker]',
   providers: [
@@ -76,23 +76,31 @@ export class MtxDatetimepickerInputEvent<D> {
     '(blur)': '_onBlur()',
     '(keydown)': '_onKeydown($event)',
   },
-  exportAs: 'matDatepickerInput',
+  exportAs: 'mtxDatetimepickerInput',
 })
 export class MtxDatetimepickerInput<D>
   implements AfterContentInit, ControlValueAccessor, OnDestroy, Validator
 {
   _datetimepicker!: MtxDatetimepicker<D>;
+
   _dateFilter!: (date: D | null, type: MtxDatetimepickerFilterType) => boolean;
+
   /** Emits when a `change` event is fired on this `<input>`. */
   @Output() dateChange = new EventEmitter<MtxDatetimepickerInputEvent<D>>();
+
   /** Emits when an `input` event is fired on this `<input>`. */
   @Output() dateInput = new EventEmitter<MtxDatetimepickerInputEvent<D>>();
+
   /** Emits when the value changes (either due to user input or programmatic change). */
   _valueChange = new EventEmitter<D | null>();
+
   /** Emits when the disabled state has changed */
   _disabledChange = new EventEmitter<boolean>();
+
   private _datetimepickerSubscription = Subscription.EMPTY;
+
   private _localeSubscription = Subscription.EMPTY;
+
   /** Whether the last value set on the input was valid. */
   private _lastValueValid = false;
 
@@ -115,13 +123,13 @@ export class MtxDatetimepickerInput<D>
     });
   }
 
-  /** The datepicker that this input is associated with. */
+  /** The datetimepicker that this input is associated with. */
   @Input()
   set mtxDatetimepicker(value: MtxDatetimepicker<D>) {
-    this.registerDatepicker(value);
+    this.registerDatetimepicker(value);
   }
 
-  @Input() set matDatepickerFilter(
+  @Input() set mtxDatetimepickerFilter(
     filter: (date: D | null, type: MtxDatetimepickerFilterType) => boolean
   ) {
     this._dateFilter = filter;
@@ -152,40 +160,33 @@ export class MtxDatetimepickerInput<D>
     });
   }
 
-  private _min!: D | null;
-
   /** The minimum valid date. */
   @Input()
   get min(): D | null {
     return this._min;
   }
-
   set min(value: D | null) {
     this._min = this._dateAdapter.getValidDateOrNull(this._dateAdapter.deserialize(value));
     this._validatorOnChange();
   }
-
-  private _max!: D | null;
+  private _min!: D | null;
 
   /** The maximum valid date. */
   @Input()
   get max(): D | null {
     return this._max;
   }
-
   set max(value: D | null) {
     this._max = this._dateAdapter.getValidDateOrNull(this._dateAdapter.deserialize(value));
     this._validatorOnChange();
   }
+  private _max!: D | null;
 
-  private _disabled!: boolean;
-
-  /** Whether the datepicker-input is disabled. */
+  /** Whether the datetimepicker-input is disabled. */
   @Input()
   get disabled() {
     return !!this._disabled;
   }
-
   set disabled(value: any) {
     const newValue = coerceBooleanProperty(value);
 
@@ -194,6 +195,7 @@ export class MtxDatetimepickerInput<D>
       this._disabledChange.emit(newValue);
     }
   }
+  private _disabled!: boolean;
 
   _onTouched = () => {};
 
@@ -231,7 +233,7 @@ export class MtxDatetimepickerInput<D>
   }
 
   /**
-   * Gets the element that the datepicker popup should be connected to.
+   * Gets the element that the datetimepicker popup should be connected to.
    * @return The element to connect the popup to.
    */
   getConnectedOverlayOrigin(): ElementRef {
@@ -298,7 +300,7 @@ export class MtxDatetimepickerInput<D>
     this._onTouched();
   }
 
-  private registerDatepicker(value: MtxDatetimepicker<D>) {
+  private registerDatetimepicker(value: MtxDatetimepicker<D>) {
     if (value) {
       this._datetimepicker = value;
       this._datetimepicker._registerInput(this);
@@ -350,7 +352,7 @@ export class MtxDatetimepickerInput<D>
   private _parseValidator: ValidatorFn = (): ValidationErrors | null => {
     return this._lastValueValid
       ? null
-      : { matDatepickerParse: { text: this._elementRef.nativeElement.value } };
+      : { mtxDatetimepickerParse: { text: this._elementRef.nativeElement.value } };
   };
 
   /** The form control validator for the min date. */
@@ -362,7 +364,7 @@ export class MtxDatetimepickerInput<D>
       !controlValue ||
       this._dateAdapter.compareDatetime(this.min, controlValue) <= 0
       ? null
-      : { matDatepickerMin: { min: this.min, actual: controlValue } };
+      : { mtxDatetimepickerMin: { min: this.min, actual: controlValue } };
   };
 
   /** The form control validator for the max date. */
@@ -374,7 +376,7 @@ export class MtxDatetimepickerInput<D>
       !controlValue ||
       this._dateAdapter.compareDatetime(this.max, controlValue) >= 0
       ? null
-      : { matDatepickerMax: { max: this.max, actual: controlValue } };
+      : { mtxDatetimepickerMax: { max: this.max, actual: controlValue } };
   };
 
   /** The form control validator for the date filter. */
@@ -386,7 +388,7 @@ export class MtxDatetimepickerInput<D>
       !controlValue ||
       this._dateFilter(controlValue, MtxDatetimepickerFilterType.DATE)
       ? null
-      : { matDatepickerFilter: true };
+      : { mtxDatetimepickerFilter: true };
   };
 
   /** The combined form control validator for this input. */

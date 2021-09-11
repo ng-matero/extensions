@@ -17,7 +17,7 @@ import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 
 /**
- * An internal component used to display a single year in the datepicker.
+ * An internal component used to display a single year in the datetimepicker.
  * @docs-private
  */
 @Component({
@@ -31,21 +31,28 @@ export class MtxYearView<D> implements AfterContentInit {
   @Output() _userSelection = new EventEmitter<void>();
 
   @Input() type: MtxDatetimepickerType = 'date';
+
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
+
   /** Emits when a new month is selected. */
   @Output() selectedChange = new EventEmitter<D>();
+
   /** Grid of calendar cells representing the months of the year. */
   _months!: MtxCalendarCell[][];
+
   /** The label for this year (e.g. "2017"). */
   _yearLabel!: string;
+
   /** The month in this year that today falls on. Null if today is in a different year. */
   _todayMonth!: number | null;
+
   /**
    * The month in this year that the selected Date falls on.
    * Null if the selected Date is in a different year.
    */
   _selectedMonth!: number | null;
+
   _calendarState!: string;
 
   constructor(

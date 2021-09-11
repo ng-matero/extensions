@@ -7,8 +7,8 @@
     <input [mtxDatetimepicker]="datetimePicker" [max]="tomorrow" [min]="today"
            autocomplete="false" formControlName="dateTime" matInput required>
     <mat-error *ngIf="group.get('dateTime')?.errors?.required">required</mat-error>
-    <mat-error *ngIf="group.get('dateTime')?.errors?.matDatepickerMin">min</mat-error>
-    <mat-error *ngIf="group.get('dateTime')?.errors?.matDatepickerMax">max</mat-error>
+    <mat-error *ngIf="group.get('dateTime')?.errors?.mtxDatetimepickerMin">min</mat-error>
+    <mat-error *ngIf="group.get('dateTime')?.errors?.mtxDatetimepickerMax">max</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -19,8 +19,8 @@
     <input [mtxDatetimepicker]="datetimeYearPicker" [max]="tomorrow" [min]="today"
            autocomplete="false" formControlName="dateTimeYear" matInput required>
     <mat-error *ngIf="group.get('dateTimeYear')?.errors?.required">required</mat-error>
-    <mat-error *ngIf="group.get('dateTimeYear')?.errors?.matDatepickerMin">min</mat-error>
-    <mat-error *ngIf="group.get('dateTimeYear')?.errors?.matDatepickerMax">max</mat-error>
+    <mat-error *ngIf="group.get('dateTimeYear')?.errors?.mtxDatetimepickerMin">min</mat-error>
+    <mat-error *ngIf="group.get('dateTimeYear')?.errors?.mtxDatetimepickerMax">max</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -74,19 +74,19 @@
     <mtx-datetimepicker #minTestPicker mode="landscape" [openOnFocus]="true" [timeInterval]="5"
                         type="datetime"></mtx-datetimepicker>
     <mat-error *ngIf="group.get('mintest')?.errors?.required">required</mat-error>
-    <mat-error *ngIf="group.get('mintest')?.errors?.matDatepickerMin">min</mat-error>
-    <mat-error *ngIf="group.get('mintest')?.errors?.matDatepickerMax">max</mat-error>
+    <mat-error *ngIf="group.get('mintest')?.errors?.mtxDatetimepickerMin">min</mat-error>
+    <mat-error *ngIf="group.get('mintest')?.errors?.mtxDatetimepickerMax">max</mat-error>
   </mat-form-field>
 
   <mat-form-field>
     <mat-placeholder>Filter Test</mat-placeholder>
-    <input [matDatepickerFilter]="filter" [mtxDatetimepicker]="filterTestPicker"
+    <input [mtxDatetimepickerFilter]="filter" [mtxDatetimepicker]="filterTestPicker"
            formControlName="filtertest" matInput required>
     <mtx-datetimepicker-toggle [for]="filterTestPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #filterTestPicker mode="landscape" [openOnFocus]="true" [timeInterval]="5"
                         type="datetime"></mtx-datetimepicker>
     <mat-error *ngIf="group.get('filtertest')?.errors?.required">required</mat-error>
-    <mat-error *ngIf="group.get('filtertest')?.errors?.matDatepickerFilter">filter</mat-error>
+    <mat-error *ngIf="group.get('filtertest')?.errors?.mtxDatetimepickerFilter">filter</mat-error>
   </mat-form-field>
 
   <mat-form-field>
@@ -95,6 +95,7 @@
     <mtx-datetimepicker-toggle [for]="touch" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #touch mode="portrait" [openOnFocus]="true" [timeInterval]="5"
                         [touchUi]="true" type="datetime"></mtx-datetimepicker>
+    <mat-error *ngIf="group.get('touch')?.errors?.required">required</mat-error>
   </mat-form-field>
 
   <button mat-button>Submit</button>

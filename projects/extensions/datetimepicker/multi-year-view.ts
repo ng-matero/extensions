@@ -21,7 +21,7 @@ export const yearsPerPage = 24;
 export const yearsPerRow = 4;
 
 /**
- * An internal component used to display multiple years in the datepicker.
+ * An internal component used to display multiple years in the datetimepicker.
  * @docs-private
  */
 @Component({
@@ -35,21 +35,28 @@ export class MtxMultiYearView<D> implements AfterContentInit {
   @Output() _userSelection = new EventEmitter<void>();
 
   @Input() type: MtxDatetimepickerType = 'date';
+
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
+
   /** Emits when a new month is selected. */
   @Output() selectedChange = new EventEmitter<D>();
+
   /** Grid of calendar cells representing the years in the range. */
   _years!: MtxCalendarCell[][];
+
   /** The label for this year range (e.g. "2000-2020"). */
   _yearLabel!: string;
+
   /** The year in this range that today falls on. Null if today is in a different range. */
   _todayYear!: number;
+
   /**
    * The year in this range that the selected Date falls on.
    * Null if the selected Date is in a different range.
    */
   _selectedYear!: number | null;
+
   _calendarState!: string;
 
   constructor(
@@ -67,14 +74,11 @@ export class MtxMultiYearView<D> implements AfterContentInit {
     this._activeDate = this._adapter.today();
   }
 
-  private _activeDate: D;
-
   /** The date to display in this multi year view */
   @Input()
   get activeDate(): D {
     return this._activeDate;
   }
-
   set activeDate(value: D) {
     const oldActiveDate = this._activeDate;
     this._activeDate = value || this._adapter.today();
@@ -92,43 +96,38 @@ export class MtxMultiYearView<D> implements AfterContentInit {
       this._init();
     }
   }
-
-  private _selected!: D;
+  private _activeDate: D;
 
   /** The currently selected date. */
   @Input()
   get selected(): D {
     return this._selected;
   }
-
   set selected(value: D) {
     this._selected = value;
     this._selectedYear = this._selected && this._adapter.getYear(this._selected);
   }
-
-  private _minDate!: D | null;
+  private _selected!: D;
 
   /** The minimum selectable date. */
   @Input()
   get minDate(): D | null {
     return this._minDate;
   }
-
   set minDate(value: D | null) {
     this._minDate = this._getValidDateOrNull(this._adapter.deserialize(value));
   }
-
-  private _maxDate!: D | null;
+  private _minDate!: D | null;
 
   /** The maximum selectable date. */
   @Input()
   get maxDate(): D | null {
     return this._maxDate;
   }
-
   set maxDate(value: D | null) {
     this._maxDate = this._getValidDateOrNull(this._adapter.deserialize(value));
   }
+  private _maxDate!: D | null;
 
   ngAfterContentInit() {
     this._init();

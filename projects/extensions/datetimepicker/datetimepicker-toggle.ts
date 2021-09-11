@@ -26,13 +26,12 @@ import { MtxDatetimepicker } from './datetimepicker';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {
-  /** Datepicker instance that the button will toggle. */
+  /** Datetimepicker instance that the button will toggle. */
   @Input('for') datetimepicker!: MtxDatetimepicker<D>;
+
   private _stateChanges = Subscription.EMPTY;
 
   constructor(public _intl: MatDatepickerIntl, private _changeDetectorRef: ChangeDetectorRef) {}
-
-  private _disabled!: boolean;
 
   /** Whether the toggle button is disabled. */
   @Input()
@@ -43,9 +42,10 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   set disabled(value: boolean) {
     this._disabled = coerceBooleanProperty(value);
   }
+  private _disabled!: boolean;
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.datepicker) {
+    if (changes.datetimepicker) {
       this._watchStateChanges();
     }
   }
@@ -66,7 +66,7 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   }
 
   private _watchStateChanges() {
-    const datepickerDisabled = this.datetimepicker
+    const datetimepickerDisabled = this.datetimepicker
       ? this.datetimepicker._disabledChange
       : observableOf();
     const inputDisabled =
@@ -75,8 +75,10 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
         : observableOf();
 
     this._stateChanges.unsubscribe();
-    this._stateChanges = merge([this._intl.changes, datepickerDisabled, inputDisabled]).subscribe(
-      () => this._changeDetectorRef.markForCheck()
-    );
+    this._stateChanges = merge([
+      this._intl.changes,
+      datetimepickerDisabled,
+      inputDisabled,
+    ]).subscribe(() => this._changeDetectorRef.markForCheck());
   }
 }

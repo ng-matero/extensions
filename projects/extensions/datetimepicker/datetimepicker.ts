@@ -85,46 +85,69 @@ export class MtxDatetimepickerContent<D> implements AfterContentInit {
 export class MtxDatetimepicker<D> implements OnDestroy {
   /** Active multi year view when click on year. */
   @Input() multiYearSelector: boolean = false;
+
   /** if true change the clock to 12 hour format. */
   @Input() twelvehour: boolean = false;
+
   /** The view that the calendar should start in. */
   @Input() startView: MtxCalendarView = 'month';
+
   @Input() mode: MtxDatetimepickerMode = 'auto';
+
   @Input() timeInterval: number = 1;
+
   @Input() ariaNextMonthLabel = 'Next month';
+
   @Input() ariaPrevMonthLabel = 'Previous month';
+
   @Input() ariaNextYearLabel = 'Next year';
+
   @Input() ariaPrevYearLabel = 'Previous year';
+
   /** Prevent user to select same date time */
   @Input() preventSameDateTimeSelection = false;
+
   /**
    * Emits new selected date when selected date changes.
    * @deprecated Switch to the `dateChange` and `dateInput` binding on the input element.
    */
   @Output() selectedChanged = new EventEmitter<D>();
+
   /** Classes to be passed to the date picker panel. Supports the same syntax as `ngClass`. */
   @Input() panelClass!: string | string[];
+
   /** Emits when the datetimepicker has been opened. */
   @Output('opened') openedStream: EventEmitter<void> = new EventEmitter<void>();
+
   /** Emits when the datetimepicker has been closed. */
   @Output('closed') closedStream: EventEmitter<void> = new EventEmitter<void>();
+
   /** Emits when the view has been changed. */
   @Output() viewChanged: EventEmitter<MtxCalendarView> = new EventEmitter<MtxCalendarView>();
+
   /** Whether the calendar is open. */
   opened = false;
+
   /** The id for the datetimepicker calendar. */
   id = `mtx-datetimepicker-${datetimepickerUid++}`;
+
   /** The input element this datetimepicker is associated with. */
   _datetimepickerInput!: MtxDatetimepickerInput<D>;
+
   /** Emits when the datetimepicker is disabled. */
   _disabledChange = new Subject<boolean>();
+
   private _validSelected: D | null = null;
+
   /** A reference to the overlay into which we've rendered the calendar. */
   private _overlayRef!: OverlayRef | null;
+
   /** Reference to the component instance rendered in the overlay. */
   private _componentRef!: ComponentRef<MtxDatetimepickerContent<D>> | null;
+
   /** The element that was focused before the datetimepicker was opened. */
   private _focusedElementBeforeOpen: HTMLElement | null = null;
+
   /** Unique class that will be added to the backdrop so that the test harnesses can look it up. */
   private _backdropHarnessClass = `${this.id}-backdrop`;
 
@@ -143,8 +166,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     }
   }
 
-  private _startAt!: D | null;
-
   /** The date to open the calendar to initially. */
   @Input()
   get startAt(): D | null {
@@ -152,34 +173,28 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     // selected value is.
     return this._startAt || (this._datetimepickerInput ? this._datetimepickerInput.value : null);
   }
-
   set startAt(date: D | null) {
     this._startAt = this._dateAdapter.getValidDateOrNull(date);
   }
-
-  private _openOnFocus!: boolean;
+  private _startAt!: D | null;
 
   @Input()
   get openOnFocus(): boolean {
     return this._openOnFocus;
   }
-
   set openOnFocus(value: boolean) {
     this._openOnFocus = coerceBooleanProperty(value);
   }
-
-  private _type: MtxDatetimepickerType = 'date';
+  private _openOnFocus!: boolean;
 
   @Input()
   get type() {
     return this._type;
   }
-
   set type(value: MtxDatetimepickerType) {
     this._type = value || 'date';
   }
-
-  private _touchUi = false;
+  private _type: MtxDatetimepickerType = 'date';
 
   /**
    * Whether the calendar UI is in touch mode. In touch mode the calendar opens in a dialog rather
@@ -189,12 +204,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   get touchUi(): boolean {
     return this._touchUi;
   }
-
   set touchUi(value: boolean) {
     this._touchUi = coerceBooleanProperty(value);
   }
-
-  private _disabled!: boolean;
+  private _touchUi = false;
 
   /** Whether the datetimepicker pop-up should be disabled. */
   @Input()
@@ -203,7 +216,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       ? this._datetimepickerInput.disabled
       : !!this._disabled;
   }
-
   set disabled(value: boolean) {
     const newValue = coerceBooleanProperty(value);
 
@@ -212,6 +224,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       this._disabledChange.next(newValue);
     }
   }
+  private _disabled!: boolean;
 
   /** The currently selected date. */
   get _selected(): D | null {
@@ -265,7 +278,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
    */
   _registerInput(input: MtxDatetimepickerInput<D>): void {
     if (this._datetimepickerInput) {
-      throw Error('A MatDatepicker can only be associated with a single input.');
+      throw Error('A MtxDatetimepicker can only be associated with a single input.');
     }
     this._datetimepickerInput = input;
     this._inputStateChanges = this._datetimepickerInput._valueChange.subscribe(
@@ -279,7 +292,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       return;
     }
     if (!this._datetimepickerInput) {
-      throw Error('Attempted to open an MatDatepicker with no associated input.');
+      throw Error('Attempted to open an MtxDatetimepicker with no associated input.');
     }
 
     this._focusedElementBeforeOpen = _getFocusedElementPierceShadowDom();
@@ -325,7 +338,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   /**
-   * TODO: datetimepicker color
+   * TODO: add datetimepicker color
    * Forwards relevant values from the datetimepicker to the
    * datetimepicker content inside the overlay.
    */
