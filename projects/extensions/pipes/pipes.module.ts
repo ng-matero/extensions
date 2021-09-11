@@ -8,4 +8,4 @@ import { MtxToObservablePipe } from './to-observable.pipe';
   exports: [MtxToObservablePipe],
   declarations: [MtxToObservablePipe],
 })
-export class MtxUtilsModule {}
+export class MtxPipesModule {}

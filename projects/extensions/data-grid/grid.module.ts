@@ -15,7 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
-import { MtxUtilsModule } from '@ng-matero/extensions/utils';
+import { MtxPipesModule } from '@ng-matero/extensions/pipes';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxGridComponent } from './grid.component';
 import { MtxGridCellComponent } from './cell.component';
@@ -43,7 +43,7 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MatMenuModule,
     DragDropModule,
     MtxDialogModule,
-    MtxUtilsModule,
+    MtxPipesModule,
     MatColumnResizeModule,
   ],
   exports: [

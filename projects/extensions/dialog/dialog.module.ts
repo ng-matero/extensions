@@ -4,12 +4,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
-import { MtxUtilsModule } from '@ng-matero/extensions/utils';
+import { MtxPipesModule } from '@ng-matero/extensions/pipes';
 import { MtxDialogComponent } from './dialog.component';
 import { MtxDialog } from './dialog';
 
 @NgModule({
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule, MtxUtilsModule],
+  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule, MtxPipesModule],
   exports: [MtxDialogComponent],
   declarations: [MtxDialogComponent],
   providers: [MtxDialog],
