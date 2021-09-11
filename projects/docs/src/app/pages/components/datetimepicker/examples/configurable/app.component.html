@@ -1,0 +1,69 @@
+<h2>Datetimepicker configuration</h2>
+
+<section>
+  <label>type:</label>
+  <mat-radio-group [(ngModel)]="type">
+    <mat-radio-button value="datetime">datetime</mat-radio-button>
+    <mat-radio-button value="date">date</mat-radio-button>
+    <mat-radio-button value="time">time</mat-radio-button>
+    <mat-radio-button value="month">month</mat-radio-button>
+    <mat-radio-button value="year">year</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <label>mode:</label>
+  <mat-radio-group [(ngModel)]="mode">
+    <mat-radio-button value="auto">auto</mat-radio-button>
+    <mat-radio-button value="landscape">landscape</mat-radio-button>
+    <mat-radio-button value="portrait">portrait</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <label>startView:</label>
+  <mat-radio-group [(ngModel)]="startView">
+    <mat-radio-button value="month">month</mat-radio-button>
+    <mat-radio-button value="year">year</mat-radio-button>
+    <mat-radio-button value="multi-year">multi-year</mat-radio-button>
+    <mat-radio-button value="clock">clock</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="multiYearSelector">multiYearSelector</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="twelvehour">twelvehour</mat-checkbox>
+</section>
+
+<section>
+  <label>timeInterval:</label>
+  <mat-slider min="1" max="30" thumbLabel [(ngModel)]="timeInterval"></mat-slider>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="touchUi">touchUi</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="openOnFocus">openOnFocus</mat-checkbox>
+</section>
+
+<h2>Result</h2>
+
+<mat-form-field>
+  <mat-placeholder>Date</mat-placeholder>
+  <input [mtxDatetimepicker]="datetimePicker" [formControl]="datetime" matInput required>
+  <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
+  <mtx-datetimepicker #datetimePicker
+                      [type]="type"
+                      [mode]="mode"
+                      [multiYearSelector]="multiYearSelector"
+                      [startView]="startView"
+                      [twelvehour]="twelvehour"
+                      [timeInterval]="timeInterval"
+                      [touchUi]="touchUi"
+                      [openOnFocus]="openOnFocus"></mtx-datetimepicker>
+</mat-form-field>

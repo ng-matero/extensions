@@ -21,8 +21,13 @@ export const COMPONENTS_MENU = [
       },
       {
         id: 'color-picker',
-        name: 'Color Picker',
+        name: 'Colorpicker',
         summary: 'An extra input to select color enhanced by the ngx-color.',
+      },
+      {
+        id: 'datetimepicker',
+        name: 'Datetimepicker',
+        summary: 'Allows the user to choose both dates and times.',
       },
       {
         id: 'data-grid',
@@ -52,12 +57,12 @@ export const COMPONENTS_MENU = [
       {
         id: 'select',
         name: 'Select',
-        summary: 'An ng-select wrapper to be used in the form field.',
+        summary: 'A ng-select wrapper to be used in the form field.',
       },
       {
         id: 'split-pane',
         name: 'Split Pane',
-        summary: 'An component for creating multi-view layouts.',
+        summary: 'A component for creating multi-view layouts.',
       },
       {
         id: 'tooltip',

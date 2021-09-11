@@ -27,6 +27,11 @@ const routes = [
         loadChildren: () => import('./color-picker/color-picker').then(m => m.ColorPickerModule),
       },
       {
+        path: 'datetimepicker',
+        loadChildren: () =>
+          import('./datetimepicker/datetimepicker').then(m => m.DatetimepickerModule),
+      },
+      {
         path: 'data-grid',
         loadChildren: () => import('./data-grid/data-grid').then(m => m.DataGridModule),
       },

@@ -11,7 +11,9 @@
       "@assets": ["assets"],
       "@assets/*": ["assets/*"],
       "@ng-matero/extensions": ["../../extensions"],
-      "@ng-matero/extensions/*": ["../../extensions/*"]
+      "@ng-matero/extensions/*": ["../../extensions/*"],
+      "@ng-matero/extensions-moment-adapter": ["../../extensions-moment-adapter"],
+      "@ng-matero/extensions-moment-adapter/*": ["../../extensions-moment-adapter/*"]
     }
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
