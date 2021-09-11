@@ -16,7 +16,9 @@
     "build:docs": "ng build docs --baseHref=/extensions/",
     "predeploy": "npm run build:docs",
     "deploy": "angular-cli-ghpages --no-silent --dir=dist/docs",
-    "build:lib": "ng build extensions --configuration production",
+    "build:extensions": "ng build extensions --configuration production",
+    "build:extensions-moment-adapter": "ng build extensions-moment-adapter --configuration production",
+    "build:lib": "npm run build:extensions",
     "copy:scss": "gulp --gulpfile gulpfile.js",
     "publish": "npm run build:lib && npm run copy:scss && cd dist/extensions && npm publish",
     "prepare": "husky install"

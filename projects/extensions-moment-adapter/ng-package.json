@@ -2,6 +2,11 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/extensions-moment-adapter",
   "lib": {
-    "entryFile": "public_api.ts"
+    "flatModuleFile": "extensions-moment-adapter",
+    "entryFile": "public_api.ts",
+    "umdModuleIds": {
+      "@ng-matero/extensions/core": "@ng-matero/extensions/core",
+      "moment": "moment"
+    }
   }
 }
