@@ -1,4 +1,4 @@
-# loader
+# Loader
 
 ## API reference for Material Extensions Loader
 

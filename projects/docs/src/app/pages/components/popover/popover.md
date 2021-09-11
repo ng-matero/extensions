@@ -1,4 +1,4 @@
-# popover
+# Popover
 
 ## API reference for Material Extensions Popover
 
