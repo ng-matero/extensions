@@ -51,9 +51,9 @@ $selected-today-box-shadow-width: 1px;
     }
   }
 
-  :not(.mtx-calendar-body-disabled):hover,
+  .mtx-calendar-body-cell:not(.mtx-calendar-body-disabled):hover,
   .mtx-calendar-body-active {
-    > .mtx-calendar-body-cell-content:not(.mtx-calendar-body-selected) {
+    & > .mtx-calendar-body-cell-content:not(.mtx-calendar-body-selected) {
       background-color: mat.get-color-from-palette($primary, .3);
     }
   }

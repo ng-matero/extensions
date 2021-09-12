@@ -3,7 +3,8 @@
        *ngIf="type !== 'time'"
        [class.active]="currentView === 'year' || currentView === 'multi-year'"
        class="mtx-calendar-header-year"
-       role="button">{{ _yearLabel }}
+       role="button">
+    <span>{{ _yearLabel }}</span>
     <mat-icon *ngIf="multiYearSelector || type === 'year'">arrow_drop_down</mat-icon>
   </div>
   <div class="mtx-calendar-header-date-time">
@@ -34,7 +35,7 @@
     </span>
   </div>
 </div>
-<div [ngSwitch]="currentView" class="mtx-calendar-content">
+<div class="mtx-calendar-content" [ngSwitch]="currentView">
   <div *ngIf="currentView === 'month' || currentView === 'year' || currentView === 'multi-year'"
        class="mtx-month-content">
     <div class="mtx-calendar-controls">

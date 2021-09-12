@@ -1,4 +1,4 @@
-﻿<table class="mtx-calendar-table">
+﻿<table class="mtx-calendar-table" role="grid">
   <thead class="mtx-calendar-table-header"></thead>
   <tbody mtx-calendar-body
          (@slideCalendar.done)="_calendarStateDone()"
@@ -11,6 +11,5 @@
          [activeCell]="_adapter.getMonth(activeDate)"
          [selectedValue]="_selectedMonth!"
          (selectedValueChange)="_monthSelected($event)"
-         [allowDisabledSelection]="true"
-         role="grid"></tbody>
+         [allowDisabledSelection]="true"></tbody>
 </table>

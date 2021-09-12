@@ -47,9 +47,8 @@ export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
   templateUrl: 'calendar.html',
   styleUrls: ['calendar.scss'],
   host: {
-    '[class.mtx-calendar]': 'true',
+    'class': 'mtx-calendar',
     '[attr.aria-label]': 'ariaLabel',
-    'role': 'dialog',
     'tabindex': '0',
     '(keydown)': '_handleCalendarBodyKeydown($event)',
   },
@@ -306,7 +305,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   ngAfterContentInit() {
     this._activeDate = this.startAt || this._adapter.today();
     this._selectAMPM(this._activeDate);
-    this._focusActiveCell();
+
     if (this.type === 'year') {
       this.currentView = 'multi-year';
     } else if (this.type === 'month') {

@@ -15,6 +15,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 .mtx-calendar {
   display: block;
+  outline: none;
 
   &[mode='landscape'] {
     display: flex;
@@ -50,7 +51,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   line-height: 32px;
   font-size: 16px;
 
-  .mat-icon {
+  > * {
     vertical-align: middle;
   }
 }
@@ -191,10 +192,6 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
     .mtx-calendar-header-time {
       display: block;
       padding: 0;
-    }
-
-    .mtx-calendar-content {
-      padding-top: $calendar-padding;
     }
   }
 }

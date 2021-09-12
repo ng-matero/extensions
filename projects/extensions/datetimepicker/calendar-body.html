@@ -17,14 +17,17 @@
       class="mtx-calendar-body-label">
     {{ _firstRowOffset >= labelMinRequiredCells ? label : '' }}
   </td>
-  <td (click)="_cellClicked(item)"
-      *ngFor="let item of row; let colIndex = index"
-      [attr.aria-disabled]="!item.enabled || null"
+  <td *ngFor="let item of row; let colIndex = index"
+      role="gridcell"
+      class="mtx-calendar-body-cell"
+      [tabindex]="_isActiveCell(rowIndex, colIndex) ? 0 : -1"
+      [attr.data-mat-row]="rowIndex"
+      [attr.data-mat-col]="colIndex"
       [attr.aria-label]="item.ariaLabel"
+      [attr.aria-disabled]="!item.enabled || null"
       [class.mtx-calendar-body-active]="_isActiveCell(rowIndex, colIndex)"
       [class.mtx-calendar-body-disabled]="!item.enabled"
-      class="mtx-calendar-body-cell"
-      role="button">
+      (click)="_cellClicked(item)">
     <div [attr.aria-selected]="selectedValue === item.value"
          [class.mtx-calendar-body-selected]="selectedValue === item.value"
          [class.mtx-calendar-body-today]="todayValue === item.value"
