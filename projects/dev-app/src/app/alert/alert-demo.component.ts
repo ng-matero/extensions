@@ -12,6 +12,7 @@ export class AlertDemoComponent {
   type: MtxAlertType = 'default';
 
   onClosed(e: any) {
+    alert('closed event!');
     console.log(e);
   }
 }

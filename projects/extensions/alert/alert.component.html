@@ -1,14 +1,6 @@
-<ng-template [ngIf]="isOpen">
-  <div [ngClass]="['mtx-alert-ref',
-                   'mtx-alert-ref-' + type,
-                   'mat-elevation-z' + elevation,
-                    dismissible ? 'mtx-alert-dismissible' : '']"
-       role="alert">
-    <ng-content></ng-content>
-    <ng-template [ngIf]="dismissible">
-      <button type="button" class="mtx-alert-close" aria-label="Close" (click)="_onClosed()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </ng-template>
-  </div>
+<ng-content></ng-content>
+<ng-template [ngIf]="dismissible">
+  <button type="button" class="mtx-alert-close" aria-label="Close" (click)="_onClosed()">
+    <span aria-hidden="true">&times;</span>
+  </button>
 </ng-template>

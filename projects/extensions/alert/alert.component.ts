@@ -15,7 +15,9 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
   selector: 'mtx-alert',
   exportAs: 'mtxAlert',
   host: {
-    class: 'mtx-alert',
+    '[class.mtx-alert]': 'true',
+    '[class.mtx-alert-dismissible]': 'dismissible',
+    'role': 'alert',
   },
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
@@ -24,14 +26,11 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
 })
 export class MtxAlertComponent {
   @HostBinding('class') get hostClassList() {
-    return `mtx-alert-${this.type}`;
+    return `mtx-alert-${this.type} mat-elevation-z${this.elevation}`;
   }
 
   /** The alert type */
   @Input() type: MtxAlertType = 'default';
-
-  /** Whether alert visible */
-  @Input() isOpen = true;
 
   /** Whether displays an inline "Close" button */
   @Input() dismissible!: boolean;
@@ -48,7 +47,6 @@ export class MtxAlertComponent {
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
   _onClosed(): void {
-    this.isOpen = false;
     this._changeDetectorRef.markForCheck();
     this.closed.emit(this);
   }
