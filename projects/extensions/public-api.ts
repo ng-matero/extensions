@@ -14,7 +14,7 @@ export * from '@ng-matero/extensions/loader';
 export * from '@ng-matero/extensions/popover';
 export * from '@ng-matero/extensions/progress';
 export * from '@ng-matero/extensions/select';
-export * from '@ng-matero/extensions/split-pane';
+export * from '@ng-matero/extensions/split';
 export * from '@ng-matero/extensions/tooltip';
 
 export * from '@ng-matero/extensions/form-group';

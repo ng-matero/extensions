@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { MtxSplitModule } from '@ng-matero/extensions/split-pane';
+import { MtxSplitModule } from '@ng-matero/extensions/split';
 
 import { SplitPaneDemoComponent } from './split-pane-demo.component';
 

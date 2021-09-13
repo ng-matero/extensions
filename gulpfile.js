@@ -46,7 +46,7 @@ function copySelect() {
 }
 
 function copySplit() {
-  return src([`${SRC}/split-pane/*.scss`]).pipe(dest(`${DEST}/split-pane`));
+  return src([`${SRC}/split/*.scss`]).pipe(dest(`${DEST}/split`));
 }
 
 function copyTooltip() {
