@@ -16,7 +16,6 @@ export class AppComponent {
   mode: MtxDatetimepickerMode = 'auto';
   startView: MtxCalendarView = 'month';
   multiYearSelector = false;
-  openOnFocus = false;
   touchUi = false;
   twelvehour = false;
   timeInterval = 1;
