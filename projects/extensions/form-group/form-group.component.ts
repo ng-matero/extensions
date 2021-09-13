@@ -7,7 +7,7 @@ import {
   QueryList,
   ViewEncapsulation,
 } from '@angular/core';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatFormField } from '@angular/material/form-field';
 
 @Component({
@@ -24,7 +24,7 @@ export class MtxFormGroupComponent implements OnInit, AfterContentInit {
 
   @Input() label!: string;
   @Input()
-  get showRequiredMarker() {
+  get showRequiredMarker(): boolean {
     return this._showRequiredMarker;
   }
   set showRequiredMarker(value: boolean) {
@@ -41,4 +41,6 @@ export class MtxFormGroupComponent implements OnInit, AfterContentInit {
       item.appearance = 'standard';
     });
   }
+
+  static ngAcceptInputType_showRequiredMarker: BooleanInput;
 }
