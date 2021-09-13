@@ -20,12 +20,12 @@ function copyDatetimepicker() {
 }
 
 function copyDataGrid() {
-  return src([`${SRC}/data-grid/*.scss`]).pipe(dest(`${DEST}/data-grid`));
+  return src([`${SRC}/grid/*.scss`]).pipe(dest(`${DEST}/grid`));
 }
 
 function copyDataGridColumnResize() {
-  return src([`${SRC}/data-grid/column-resize/*.scss`]).pipe(
-    dest(`${DEST}/data-grid/column-resize`)
+  return src([`${SRC}/grid/column-resize/*.scss`]).pipe(
+    dest(`${DEST}/grid/column-resize`)
   );
 }
 

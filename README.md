@@ -40,7 +40,7 @@ export class YourAppModule {
 Alternatively you could only import modules you need, e.g. data-grid and select.
 
 ```ts
-import { MtxGridModule } from '@ng-matero/extensions/data-grid';
+import { MtxGridModule } from '@ng-matero/extensions/grid';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
 
 @NgModule({
