@@ -8,6 +8,7 @@ import {
   ChangeDetectorRef,
   HostBinding,
 } from '@angular/core';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger';
 
@@ -32,8 +33,15 @@ export class MtxAlertComponent {
   /** The alert type */
   @Input() type: MtxAlertType = 'default';
 
-  /** Whether displays an inline "Close" button */
-  @Input() dismissible!: boolean;
+  /** Whether displays an inline `Close` button */
+  @Input()
+  get dismissible(): boolean {
+    return this._dismissible;
+  }
+  set dismissible(value: boolean) {
+    this._dismissible = coerceBooleanProperty(value);
+  }
+  private _dismissible = false;
 
   /** The alert text color */
   @Input() color!: string;
@@ -50,4 +58,6 @@ export class MtxAlertComponent {
     this._changeDetectorRef.markForCheck();
     this.closed.emit(this);
   }
+
+  static ngAcceptInputType_dismissible: BooleanInput;
 }
