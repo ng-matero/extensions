@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "12.3.1",
+  "version": "12.4.0",
   "description": "Angular Material Extensions",
   "publishConfig": {
     "access": "public"
@@ -15,7 +15,6 @@
     "angular-material",
     "angular-components",
     "angular-material-extensions",
-    "angular-admin",
     "ng-matero",
     "data-grid",
     "ngx-data-grid",
@@ -27,7 +26,8 @@
     "typeahead",
     "autocomplete",
     "checkbox-group",
-    "popover"
+    "popover",
+    "datetimepicker"
   ],
   "license": "MIT",
   "bugs": {
