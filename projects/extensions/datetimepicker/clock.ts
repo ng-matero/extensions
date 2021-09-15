@@ -36,20 +36,32 @@ export class MtxClock<D> implements AfterContentInit {
   @Output() _userSelection = new EventEmitter<void>();
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
+
   @Input() interval: number = 1;
+
   @Input() twelvehour: boolean = false;
+
   /** Emits when the currently selected date changes. */
   @Output() selectedChange = new EventEmitter<D>();
+
   @Output() activeDateChange = new EventEmitter<D>();
+
   /** Hours and Minutes representing the clock view. */
   _hours: any[] = [];
+
   _minutes: any[] = [];
+
   /** Whether the clock is in hour view. */
   _hourView: boolean = true;
+
   _selectedHour!: number;
+
   _selectedMinute!: number;
+
   private _timeChanged = false;
+
   private mouseMoveListener: any;
+
   private mouseUpListener: any;
 
   constructor(private _element: ElementRef, private _adapter: DatetimeAdapter<D>) {

@@ -1,18 +1,9 @@
-import { Directionality } from '@angular/cdk/bidi';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ESCAPE, hasModifierKey, UP_ARROW } from '@angular/cdk/keycodes';
-import {
-  FlexibleConnectedPositionStrategy,
-  Overlay,
-  OverlayConfig,
-  OverlayRef,
-} from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   ComponentRef,
+  ElementRef,
   EventEmitter,
   Inject,
   Input,
@@ -24,8 +15,18 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
+import { Directionality } from '@angular/cdk/bidi';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ESCAPE, hasModifierKey, UP_ARROW } from '@angular/cdk/keycodes';
+import {
+  FlexibleConnectedPositionStrategy,
+  Overlay,
+  OverlayConfig,
+  OverlayRef,
+} from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 import { MAT_DATEPICKER_SCROLL_STRATEGY } from '@angular/material/datepicker';
-import { merge, Subject, Subscription } from 'rxjs';
+import { merge, Observable, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxCalendarView, MtxCalendar } from './calendar';
@@ -84,10 +85,24 @@ export class MtxDatetimepickerContent<D> implements AfterContentInit {
 })
 export class MtxDatetimepicker<D> implements OnDestroy {
   /** Active multi year view when click on year. */
-  @Input() multiYearSelector: boolean = false;
+  @Input()
+  get multiYearSelector(): boolean {
+    return this._multiYearSelector;
+  }
+  set multiYearSelector(value: boolean) {
+    this._multiYearSelector = coerceBooleanProperty(value);
+  }
+  private _multiYearSelector = false;
 
   /** if true change the clock to 12 hour format. */
-  @Input() twelvehour: boolean = false;
+  @Input()
+  get twelvehour(): boolean {
+    return this._twelvehour;
+  }
+  set twelvehour(value: boolean) {
+    this._twelvehour = coerceBooleanProperty(value);
+  }
+  private _twelvehour = false;
 
   /** The view that the calendar should start in. */
   @Input() startView: MtxCalendarView = 'month';
@@ -475,4 +490,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       )
     );
   }
+
+  static ngAcceptInputType_multiYearSelector: BooleanInput;
+  static ngAcceptInputType_twelvehour: BooleanInput;
+  static ngAcceptInputType_touchUi: BooleanInput;
+  static ngAcceptInputType_disabled: BooleanInput;
+  static ngAcceptInputType_openOnFocus: BooleanInput;
 }

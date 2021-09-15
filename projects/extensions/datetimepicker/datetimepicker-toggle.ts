@@ -1,4 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -10,6 +9,7 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { merge, of as observableOf, Subscription } from 'rxjs';
 import { MtxDatetimepicker } from './datetimepicker';
@@ -38,7 +38,6 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   get disabled(): boolean {
     return this._disabled === undefined ? this.datetimepicker.disabled : !!this._disabled;
   }
-
   set disabled(value: boolean) {
     this._disabled = coerceBooleanProperty(value);
   }
@@ -81,4 +80,6 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
       inputDisabled,
     ]).subscribe(() => this._changeDetectorRef.markForCheck());
   }
+
+  static ngAcceptInputType_disabled: BooleanInput;
 }

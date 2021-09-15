@@ -37,7 +37,7 @@ $touch-max-height: 850px;
   justify-content: space-between;
 }
 
-.mtx-calendar {
+.mtx-datetimepicker-content .mtx-calendar {
   width: $non-touch-calendar-portrait-width;
   height: $non-touch-calendar-portrait-height;
 
@@ -48,7 +48,7 @@ $touch-max-height: 850px;
 }
 
 @media all and (orientation: landscape) {
-  .mtx-calendar[mode='auto'] {
+  .mtx-datetimepicker-content .mtx-calendar[mode='auto'] {
     width: $non-touch-calendar-landscape-width;
     height: $non-touch-calendar-landscape-height;
   }

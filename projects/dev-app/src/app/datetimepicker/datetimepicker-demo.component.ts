@@ -62,6 +62,9 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
     });
   }
 
+  selectedDate!: Date | null;
+  selectedTime!: Date | null;
+
   ngOnInit() {
     this.translateSubscription = this.translate.onLangChange.subscribe((res: { lang: any }) => {
       this.dateAdapter.setLocale(res.lang);

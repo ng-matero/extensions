@@ -1,15 +1,4 @@
 import {
-  DOWN_ARROW,
-  END,
-  ENTER,
-  HOME,
-  LEFT_ARROW,
-  PAGE_DOWN,
-  PAGE_UP,
-  RIGHT_ARROW,
-  UP_ARROW,
-} from '@angular/cdk/keycodes';
-import {
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -24,6 +13,18 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
+import {
+  DOWN_ARROW,
+  END,
+  ENTER,
+  HOME,
+  LEFT_ARROW,
+  PAGE_DOWN,
+  PAGE_UP,
+  RIGHT_ARROW,
+  UP_ARROW,
+} from '@angular/cdk/keycodes';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
@@ -59,13 +60,27 @@ export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
 export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   @Output() _userSelection = new EventEmitter<void>();
 
-  /** Active multi year view when click on year. */
-  @Input() multiYearSelector: boolean = false;
+  @Input()
+  get multiYearSelector(): boolean {
+    return this._multiYearSelector;
+  }
+  set multiYearSelector(value: boolean) {
+    this._multiYearSelector = coerceBooleanProperty(value);
+  }
+  private _multiYearSelector = false;
+
+  /** if true change the clock to 12 hour format. */
+  @Input()
+  get twelvehour(): boolean {
+    return this._twelvehour;
+  }
+  set twelvehour(value: boolean) {
+    this._twelvehour = coerceBooleanProperty(value);
+  }
+  private _twelvehour = false;
 
   /** Whether the calendar should be started in month or year view. */
   @Input() startView: MtxCalendarView = 'month';
-
-  @Input() twelvehour: boolean = false;
 
   @Input() timeInterval: number = 1;
 
@@ -732,4 +747,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   private _2digit(n: number) {
     return ('00' + n).slice(-2);
   }
+
+  static ngAcceptInputType_multiYearSelector: BooleanInput;
+  static ngAcceptInputType_twelvehour: BooleanInput;
 }

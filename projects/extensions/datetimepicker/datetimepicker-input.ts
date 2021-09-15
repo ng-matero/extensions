@@ -1,5 +1,3 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import {
   AfterContentInit,
   Directive,
@@ -22,6 +20,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { MatFormField } from '@angular/material/form-field';
 import { Subscription } from 'rxjs';
@@ -129,21 +129,19 @@ export class MtxDatetimepickerInput<D>
     this.registerDatetimepicker(value);
   }
 
-  @Input() set mtxDatetimepickerFilter(
+  @Input()
+  set mtxDatetimepickerFilter(
     filter: (date: D | null, type: MtxDatetimepickerFilterType) => boolean
   ) {
     this._dateFilter = filter;
     this._validatorOnChange();
   }
 
-  private _value!: D | null;
-
   /** The value of the input. */
   @Input()
   get value(): D | null {
     return this._value;
   }
-
   set value(value: D | null) {
     value = this._dateAdapter.deserialize(value);
     this._lastValueValid = !value || this._dateAdapter.isValid(value);
@@ -159,6 +157,7 @@ export class MtxDatetimepickerInput<D>
       }
     });
   }
+  private _value!: D | null;
 
   /** The minimum valid date. */
   @Input()
@@ -184,10 +183,10 @@ export class MtxDatetimepickerInput<D>
 
   /** Whether the datetimepicker-input is disabled. */
   @Input()
-  get disabled() {
+  get disabled(): boolean {
     return !!this._disabled;
   }
-  set disabled(value: any) {
+  set disabled(value: boolean) {
     const newValue = coerceBooleanProperty(value);
 
     if (this._disabled !== newValue) {
@@ -405,4 +404,6 @@ export class MtxDatetimepickerInput<D>
       ? this._dateAdapter.format(value, this.getDisplayFormat())
       : '';
   }
+
+  static ngAcceptInputType_disabled: BooleanInput;
 }
