@@ -1,4 +1,4 @@
-$arrow-size: 1em;
+$arrow-size: 1em; // 16px default
 
 .mtx-popover-panel {
   max-height: calc(100vh - 48px);
@@ -55,6 +55,8 @@ $arrow-size: 1em;
 [class*='mtx-popover-below'],
 [class*='mtx-popover-above'] {
   .mtx-popover-direction-arrow {
+    width: $arrow-size;
+
     &::after {
       left: 1px;
 
@@ -95,6 +97,8 @@ $arrow-size: 1em;
 [class*='mtx-popover-before'],
 [class*='mtx-popover-after'] {
   .mtx-popover-direction-arrow {
+    height: $arrow-size;
+
     &::after {
       top: 1px;
     }
