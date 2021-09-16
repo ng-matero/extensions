@@ -2,7 +2,7 @@
 
 ## API reference for Material Extensions data-grid
 
-`import { MtxGridModule } from '@ng-matero/extensions/data-grid';`
+`import { MtxGridModule } from '@ng-matero/extensions/grid';`
 
 ### Directives
 

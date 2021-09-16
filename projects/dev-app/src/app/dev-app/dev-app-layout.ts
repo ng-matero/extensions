@@ -32,7 +32,7 @@ export class DevAppLayout {
     { name: 'Color Picker', route: '/color-picker' },
     { name: 'Checkbox Group', route: '/checkbox-group' },
     { name: 'Data Grid', route: '/data-grid' },
-    { name: 'Date Time Picker', route: '/datetimepicker' },
+    { name: 'Datetimepicker', route: '/datetimepicker' },
     { name: 'Form Group', route: '/form-group' },
     { name: 'Dialog', route: '/dialog' },
     { name: 'Loader', route: '/loader' },

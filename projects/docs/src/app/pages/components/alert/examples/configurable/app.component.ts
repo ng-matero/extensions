@@ -12,6 +12,7 @@ export class AppComponent {
   elevation = 3;
 
   onClosed(e: any) {
+    alert('closed event!');
     console.log(e);
   }
 }
