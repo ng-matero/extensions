@@ -5,6 +5,7 @@ import {
   Input,
   ChangeDetectorRef,
 } from '@angular/core';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
@@ -25,14 +26,32 @@ export type MtxLoaderType = 'spinner' | 'progressbar';
 })
 export class MtxLoaderComponent {
   @Input() type: MtxLoaderType = 'spinner';
-  @Input() loading = true;
   @Input() color: ThemePalette = 'primary';
   @Input() mode: ProgressSpinnerMode | ProgressBarMode = 'indeterminate';
   @Input() value = 0;
   @Input() strokeWidth = 4; // only support spinner
   @Input() diameter = 48; // only support spinner
   @Input() bufferValue = 0; // only support progresbar
-  @Input() hasBackdrop = true;
+  @Input()
+  get loading(): boolean {
+    return this._loading;
+  }
+  set loading(value: boolean) {
+    this._loading = coerceBooleanProperty(value);
+  }
+  private _loading = true;
+
+  @Input()
+  get hasBackdrop(): boolean {
+    return this._hasBackdrop;
+  }
+  set hasBackdrop(value: boolean) {
+    this._hasBackdrop = coerceBooleanProperty(value);
+  }
+  private _hasBackdrop = true;
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+
+  static ngAcceptInputType_loading: BooleanInput;
+  static ngAcceptInputType_hasBackdrop: BooleanInput;
 }
