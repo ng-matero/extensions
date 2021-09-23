@@ -60,7 +60,7 @@ export const COMPONENTS_MENU = [
         summary: 'A ng-select wrapper to be used in the form field.',
       },
       {
-        id: 'split-pane',
+        id: 'split',
         name: 'Split Pane',
         summary: 'A component for creating multi-view layouts.',
       },

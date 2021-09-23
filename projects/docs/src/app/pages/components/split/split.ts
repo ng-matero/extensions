@@ -4,21 +4,21 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedModule } from '../../../shared';
 
-import { SplitPaneBasicComponent, splitPaneBasicExampleConfig } from './examples/basic';
+import { SplitBasicComponent, splitBasicExampleConfig } from './examples/basic';
 
 @Component({
-  selector: 'app-split-pane-overview',
-  templateUrl: './split-pane-overview.html',
+  selector: 'app-split-overview',
+  templateUrl: './split-overview.html',
 })
-export class SplitPaneOverviewComponent {
+export class SplitOverviewComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
 @Component({
-  selector: 'app-split-pane-api',
-  templateUrl: './split-pane-api.html',
+  selector: 'app-split-api',
+  templateUrl: './split-api.html',
 })
-export class SplitPaneApiComponent {
+export class SplitApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
@@ -29,23 +29,23 @@ export class SplitPaneApiComponent {
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
       {
         path: 'overview',
-        component: SplitPaneOverviewComponent,
+        component: SplitOverviewComponent,
         pathMatch: 'full',
         data: {
-          examples: [splitPaneBasicExampleConfig],
+          examples: [splitBasicExampleConfig],
         },
       },
       {
         path: 'api',
-        component: SplitPaneApiComponent,
+        component: SplitApiComponent,
         pathMatch: 'full',
         data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./split-pane.md'),
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./split.md'),
         },
       },
       { path: '**', redirectTo: 'overview' },
     ]),
   ],
-  declarations: [SplitPaneOverviewComponent, SplitPaneApiComponent, SplitPaneBasicComponent],
+  declarations: [SplitOverviewComponent, SplitApiComponent, SplitBasicComponent],
 })
-export class SplitPaneModule {}
+export class SplitModule {}

@@ -56,8 +56,8 @@ const routes = [
         loadChildren: () => import('./select/select').then(m => m.SelectModule),
       },
       {
-        path: 'split-pane',
-        loadChildren: () => import('./split-pane/split-pane').then(m => m.SplitPaneModule),
+        path: 'split',
+        loadChildren: () => import('./split/split').then(m => m.SplitModule),
       },
       {
         path: 'tooltip',

@@ -1,8 +1,8 @@
-import { AppComponent as SplitPaneBasicComponent } from './app.component';
+import { AppComponent as SplitBasicComponent } from './app.component';
 
-const splitPaneBasicExampleConfig = {
+const splitBasicExampleConfig = {
   title: 'Basic',
-  component: SplitPaneBasicComponent,
+  component: SplitBasicComponent,
   files: [
     {
       file: 'app.component.html',
@@ -22,4 +22,4 @@ const splitPaneBasicExampleConfig = {
   ],
 };
 
-export { SplitPaneBasicComponent, splitPaneBasicExampleConfig };
+export { SplitBasicComponent, splitBasicExampleConfig };
