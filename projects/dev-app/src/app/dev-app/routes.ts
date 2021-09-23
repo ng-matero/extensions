@@ -57,9 +57,8 @@ export const DEV_APP_ROUTES: Routes = [
     loadChildren: () => import('../select/select-demo.module').then(m => m.SelectDemoModule),
   },
   {
-    path: 'split-pane',
-    loadChildren: () =>
-      import('../split-pane/split-pane-demo.module').then(m => m.SplitPaneDemoModule),
+    path: 'split',
+    loadChildren: () => import('../split/split-demo.module').then(m => m.SplitDemoModule),
   },
   {
     path: 'text3d',

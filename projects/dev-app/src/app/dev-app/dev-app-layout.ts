@@ -39,7 +39,7 @@ export class DevAppLayout {
     { name: 'Popover', route: '/popover' },
     { name: 'Progress', route: '/progress' },
     { name: 'Select', route: '/select' },
-    { name: 'Split Pane', route: '/split-pane' },
+    { name: 'Split Pane', route: '/split' },
     { name: 'Text 3D', route: '/text3d' },
     { name: 'Tooltip', route: '/tooltip' },
   ];
