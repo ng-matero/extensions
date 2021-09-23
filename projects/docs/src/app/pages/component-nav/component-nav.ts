@@ -25,14 +25,14 @@ export const COMPONENTS_MENU = [
         summary: 'An extra input to select color enhanced by the ngx-color.',
       },
       {
+        id: 'grid',
+        name: 'Data Grid',
+        summary: 'A powerful data grid for Material table.',
+      },
+      {
         id: 'datetimepicker',
         name: 'Datetimepicker',
         summary: 'Allows the user to choose both dates and times.',
-      },
-      {
-        id: 'data-grid',
-        name: 'Data Grid',
-        summary: 'A powerful grid for Material table.',
       },
       {
         id: 'dialog',

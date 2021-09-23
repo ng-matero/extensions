@@ -32,12 +32,12 @@ const routes = [
           import('./datetimepicker/datetimepicker').then(m => m.DatetimepickerModule),
       },
       {
-        path: 'data-grid',
-        loadChildren: () => import('./data-grid/data-grid').then(m => m.DataGridModule),
-      },
-      {
         path: 'dialog',
         loadChildren: () => import('./dialog/dialog').then(m => m.DialogModule),
+      },
+      {
+        path: 'grid',
+        loadChildren: () => import('./grid/grid').then(m => m.GridModule),
       },
       {
         path: 'loader',
