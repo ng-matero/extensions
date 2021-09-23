@@ -12,11 +12,11 @@ import { HttpClient } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
 
 @Component({
-  selector: 'dev-data-grid-demo',
-  templateUrl: './data-grid-demo.component.html',
-  styleUrls: ['./data-grid-demo.component.scss'],
+  selector: 'dev-grid-demo',
+  templateUrl: './grid-demo.component.html',
+  styleUrls: ['./grid-demo.component.scss'],
 })
-export class DataGridDemoComponent implements OnInit, AfterViewInit {
+export class GridDemoComponent implements OnInit, AfterViewInit {
   @ViewChild('grid', { static: true }) grid!: MtxGridComponent;
   @ViewChild('grid2', { static: true }) grid2!: MtxGridComponent;
 

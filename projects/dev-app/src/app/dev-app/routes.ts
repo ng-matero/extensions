@@ -23,11 +23,6 @@ export const DEV_APP_ROUTES: Routes = [
       import('../color-picker/color-picker-demo.module').then(m => m.ColorPickerDemoModule),
   },
   {
-    path: 'data-grid',
-    loadChildren: () =>
-      import('../data-grid/data-grid-demo.module').then(m => m.DataGridDemoModule),
-  },
-  {
     path: 'datetimepicker',
     loadChildren: () =>
       import('../datetimepicker/datetimepicker-demo.module').then(m => m.DatetimepickerDemoModule),
@@ -40,6 +35,10 @@ export const DEV_APP_ROUTES: Routes = [
     path: 'form-group',
     loadChildren: () =>
       import('../form-group/form-group-demo.module').then(m => m.FormGroupDemoModule),
+  },
+  {
+    path: 'grid',
+    loadChildren: () => import('../grid/grid-demo.module').then(m => m.GridDemoModule),
   },
   {
     path: 'loader',

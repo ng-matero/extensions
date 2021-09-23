@@ -4,14 +4,14 @@ import { SharedModule } from '../shared.module';
 
 import { MtxGridModule } from '@ng-matero/extensions/grid';
 
-import { DataGridDemoComponent } from './data-grid-demo.component';
+import { GridDemoComponent } from './grid-demo.component';
 
 @NgModule({
   imports: [
     SharedModule,
-    RouterModule.forChild([{ path: '', component: DataGridDemoComponent }]),
+    RouterModule.forChild([{ path: '', component: GridDemoComponent }]),
     MtxGridModule,
   ],
-  declarations: [DataGridDemoComponent],
+  declarations: [GridDemoComponent],
 })
-export class DataGridDemoModule {}
+export class GridDemoModule {}
