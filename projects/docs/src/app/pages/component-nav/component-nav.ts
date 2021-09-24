@@ -21,7 +21,7 @@ export const COMPONENTS_MENU = [
       },
       {
         id: 'color-picker',
-        name: 'Colorpicker',
+        name: 'Color Picker',
         summary: 'An extra input to select color enhanced by the ngx-color.',
       },
       {

@@ -5,11 +5,8 @@ import { SharedModule } from '../shared.module';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 
 import { DatetimepickerDemoComponent } from './datetimepicker-demo.component';
-import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
-import {
-  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
-  MomentDateAdapter,
-} from '@angular/material-moment-adapter';
+import { DateAdapter } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { MomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter/adapter';
 import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 
@@ -24,7 +21,6 @@ import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/cor
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
-      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
     },
     {
       provide: DatetimeAdapter,
@@ -34,16 +30,16 @@ import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/cor
       provide: MTX_DATETIME_FORMATS,
       useValue: {
         parse: {
-          dateInput: 'YYYY-MM-DD HH:mm',
+          dateInput: 'YYYY-MM-DD',
           monthInput: 'MMMM',
           timeInput: 'HH:mm',
           datetimeInput: 'YYYY-MM-DD HH:mm',
         },
         display: {
-          dateInput: 'YYYY-MM-DD HH:mm',
+          dateInput: 'YYYY-MM-DD',
           monthInput: 'MMMM',
-          datetimeInput: 'YYYY-MM-DD HH:mm',
           timeInput: 'HH:mm',
+          datetimeInput: 'YYYY-MM-DD HH:mm',
           monthYearLabel: 'YYYY MMMM',
           dateA11yLabel: 'LL',
           monthYearA11yLabel: 'MMMM YYYY',
