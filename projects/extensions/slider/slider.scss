@@ -1,0 +1,506 @@
+@import '~@angular/material/theming';
+
+// This refers to the thickness of the slider. On a horizontal slider this is the height, on a
+// vertical slider this is the width.
+$slider-thickness: 48px !default;
+$slider-min-size: 128px !default;
+$slider-padding: 8px !default;
+
+$slider-track-thickness: 2px !default;
+$slider-thumb-size: 20px !default;
+$slider-thumb-border-width: 3px !default;
+$slider-thumb-border-width-active: 2px !default;
+$slider-thumb-border-width-disabled: 4px !default;
+
+$slider-thumb-default-scale: .7 !default;
+$slider-thumb-focus-scale: 1 !default;
+$slider-thumb-disabled-scale: .5 !default;
+
+$slider-thumb-arrow-gap: 12px !default;
+
+$slider-thumb-label-size: 28px !default;
+
+$slider-tick-size: 2px !default;
+
+$slider-focus-ring-size: 30px !default;
+
+.mtx-slider {
+  display: inline-block;
+  position: relative;
+  box-sizing: border-box;
+  padding: $slider-padding;
+  outline: none;
+  vertical-align: middle;
+}
+
+.mtx-slider-wrapper {
+  position: absolute;
+}
+
+.mtx-slider-track-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.mtx-slider-track-fill {
+  position: absolute;
+  transform-origin: 0 0;
+  transition:
+    transform $swift-ease-out-duration $swift-ease-out-timing-function,
+    background-color $swift-ease-out-duration $swift-ease-out-timing-function;
+}
+
+.mtx-slider-track-background-left {
+  position: absolute;
+  transform-origin: 0 0;
+  transition:
+    transform $swift-ease-out-duration $swift-ease-out-timing-function,
+    background-color $swift-ease-out-duration $swift-ease-out-timing-function;
+}
+
+.mtx-slider-track-background-right {
+  position: absolute;
+  transform-origin: 100% 100%;
+  transition:
+    transform $swift-ease-out-duration $swift-ease-out-timing-function,
+    background-color $swift-ease-out-duration $swift-ease-out-timing-function;
+}
+
+.mtx-slider-ticks-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+}
+
+.mtx-slider-ticks {
+  background-repeat: repeat;
+  background-clip: content-box;
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity $swift-ease-out-duration $swift-ease-out-timing-function;
+}
+
+.mtx-slider-thumb-container {
+  position: absolute;
+  z-index: 1;
+  transition: transform $swift-ease-out-duration $swift-ease-out-timing-function;
+}
+
+.mtx-slider-focus-ring {
+  position: absolute;
+  width: $slider-focus-ring-size;
+  height: $slider-focus-ring-size;
+  border-radius: 50%;
+  transform: scale(0);
+  opacity: 0;
+  transition:
+    transform $swift-ease-out-duration $swift-ease-out-timing-function,
+    background-color $swift-ease-out-duration $swift-ease-out-timing-function,
+    opacity $swift-ease-out-duration $swift-ease-out-timing-function;
+
+  .cdk-keyboard-focused &,
+  .cdk-program-focused & {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+%_mat-slider-cursor {
+  .mtx-slider:not(.mtx-slider-disabled) & {
+    @include cursor-grab;
+  }
+
+  .mtx-slider:not(.mtx-slider-disabled) &:active,
+  .mtx-slider-sliding:not(.mtx-slider-disabled) & {
+    @include cursor-grabbing;
+  }
+}
+
+.mtx-slider-thumb {
+  @extend %_mat-slider-cursor;
+
+  position: absolute;
+  right: -$slider-thumb-size / 2;
+  bottom: -$slider-thumb-size / 2;
+  box-sizing: border-box;
+  width: $slider-thumb-size;
+  height: $slider-thumb-size;
+  border: $slider-thumb-border-width solid transparent;
+  border-radius: 50%;
+  transform: scale($slider-thumb-default-scale);
+  transition:
+    transform $swift-ease-out-duration $swift-ease-out-timing-function,
+    background-color $swift-ease-out-duration $swift-ease-out-timing-function,
+    border-color $swift-ease-out-duration $swift-ease-out-timing-function;
+}
+
+.mtx-slider-thumb-label {
+  @extend %_mat-slider-cursor;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: $slider-thumb-label-size;
+  height: $slider-thumb-label-size;
+  border-radius: 50%;
+  transition:
+    transform $swift-ease-out-duration $swift-ease-out-timing-function,
+    border-radius  $swift-ease-out-duration $swift-ease-out-timing-function,
+    background-color  $swift-ease-out-duration $swift-ease-out-timing-function;
+
+  @include cdk-high-contrast {
+    outline: solid 1px;
+  }
+}
+
+.mtx-slider-thumb-label-text {
+  z-index: 1;
+  opacity: 0;
+  transition: opacity $swift-ease-out-duration $swift-ease-out-timing-function;
+}
+
+// Slider sliding state.
+.mtx-slider-sliding {
+  .mtx-slider-track-fill,
+  .mtx-slider-track-background-left,
+  .mtx-slider-track-background-right,
+  .mtx-slider-thumb-container {
+    // Must use `transition-duration: 0ms` to disable animation rather than `transition: none`.
+    // On Mobile Safari `transition: none` causes the slider thumb to appear stuck.
+    transition-duration: 0ms;
+  }
+}
+
+// Slider with ticks when not disabled.
+.mtx-slider-has-ticks {
+  .mtx-slider-wrapper::after {
+    content: '';
+    position: absolute;
+    border-width: 0;
+    border-style: solid;
+    opacity: 0;
+    transition: opacity $swift-ease-out-duration $swift-ease-out-timing-function;
+  }
+
+  &.cdk-focused,
+  &:hover {
+    &:not(.mtx-slider-hide-last-tick) {
+      .mtx-slider-wrapper::after {
+        opacity: 1;
+      }
+    }
+
+    &:not(.mtx-slider-disabled) .mtx-slider-ticks {
+      opacity: 1;
+    }
+  }
+}
+
+// Slider with thumb label.
+.mtx-slider-thumb-label-showing {
+  .mtx-slider-focus-ring {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  .mtx-slider-thumb-label {
+    display: flex;
+  }
+}
+
+// Inverted slider.
+.mtx-slider-axis-inverted {
+  .mtx-slider-track-fill {
+    transform-origin: 100% 100%;
+  }
+
+  .mtx-slider-track-fill.mtx-range-slider-fill {
+    transform-origin: 0 0;
+  }
+
+  .mtx-slider-track-background-left {
+    transform-origin: 100% 100%;
+  }
+
+  .mtx-slider-track-background-right {
+    transform-origin: 0 0;
+  }
+}
+
+// Active slider.
+.mtx-slider:not(.mtx-slider-disabled) {
+  &.cdk-focused {
+    &.mtx-slider-thumb-label-showing .mtx-slider-thumb {
+      transform: scale(0);
+    }
+
+    .mtx-slider-thumb-label {
+      border-radius: 50% 50% 0;
+    }
+
+    .mtx-slider-thumb-label-text {
+      opacity: 1;
+    }
+  }
+
+  &.cdk-mouse-focused,
+  &.cdk-touch-focused,
+  &.cdk-program-focused {
+    .mtx-slider-thumb {
+      border-width: $slider-thumb-border-width-active;
+      transform: scale($slider-thumb-focus-scale);
+    }
+  }
+}
+
+// Disabled slider.
+.mtx-slider-disabled {
+  .mtx-slider-focus-ring {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  .mtx-slider-thumb {
+    border-width: $slider-thumb-border-width-disabled;
+    transform: scale($slider-thumb-disabled-scale);
+  }
+
+  .mtx-slider-thumb-label {
+    display: none;
+  }
+}
+
+// Horizontal slider.
+.mtx-slider-horizontal {
+  height: $slider-thickness;
+  min-width: $slider-min-size;
+
+  .mtx-slider-wrapper {
+    height: $slider-track-thickness;
+    top: ($slider-thickness - $slider-track-thickness) / 2;
+    left: $slider-padding;
+    right: $slider-padding;
+  }
+
+  .mtx-slider-wrapper::after {
+    height: $slider-track-thickness;
+    border-left-width: $slider-tick-size;
+    right: 0;
+    top: 0;
+  }
+
+  .mtx-slider-track-wrapper {
+    height: $slider-track-thickness;
+    width: 100%;
+  }
+
+  .mtx-slider-track-fill {
+    height: $slider-track-thickness;
+    width: 100%;
+    transform: scaleX(0);
+  }
+
+  .mtx-slider-track-background-left,
+  .mtx-slider-track-background-right {
+    height: $slider-track-thickness;
+    width: 100%;
+    transform: scaleX(1);
+  }
+
+  .mtx-slider-ticks-container {
+    height: $slider-track-thickness;
+    width: 100%;
+
+    @include cdk-high-contrast {
+      height: 0;
+      outline: solid $slider-track-thickness;
+      top: $slider-track-thickness / 2;
+    }
+  }
+
+  .mtx-slider-ticks {
+    height: $slider-track-thickness;
+    width: 100%;
+  }
+
+  .mtx-slider-thumb-container {
+    width: 100%;
+    height: 0;
+    top: 50%;
+  }
+
+  .mtx-slider-focus-ring {
+    top: -$slider-focus-ring-size / 2;
+    right: -$slider-focus-ring-size / 2;
+  }
+
+  .mtx-slider-thumb-label {
+    right: -$slider-thumb-label-size / 2;
+    top: -($slider-thumb-label-size + $slider-thumb-arrow-gap);
+    transform:
+      translateY($slider-thumb-label-size / 2 + $slider-thumb-arrow-gap)
+      scale(.01)
+      rotate(45deg);
+  }
+
+  .mtx-slider-thumb-label-text {
+    transform: rotate(-45deg);
+  }
+
+  &.cdk-focused {
+    .mtx-slider-thumb-label {
+      transform: rotate(45deg);
+    }
+
+    @include cdk-high-contrast {
+      .mtx-slider-thumb-label,
+      .mtx-slider-thumb-label-text {
+        transform: none;
+      }
+    }
+  }
+}
+
+// Vertical slider.
+.mtx-slider-vertical {
+  width: $slider-thickness;
+  min-height: $slider-min-size;
+
+  .mtx-slider-wrapper {
+    width: $slider-track-thickness;
+    top: $slider-padding;
+    bottom: $slider-padding;
+    left: ($slider-thickness - $slider-track-thickness) / 2;
+  }
+
+  .mtx-slider-wrapper::after {
+    width: $slider-track-thickness;
+    border-top-width: $slider-tick-size;
+    bottom: 0;
+    left: 0;
+  }
+
+  .mtx-slider-track-wrapper {
+    height: 100%;
+    width: $slider-track-thickness;
+  }
+
+  .mtx-slider-track-fill {
+    height: 100%;
+    width: $slider-track-thickness;
+    transform: scaleY(0);
+  }
+
+  .mtx-slider-track-background-left,
+  .mtx-slider-track-background-right {
+    height: 100%;
+    width: $slider-track-thickness;
+    transform: scaleY(1);
+  }
+
+  .mtx-slider-ticks-container {
+    width: $slider-track-thickness;
+    height: 100%;
+
+    @include cdk-high-contrast {
+      width: 0;
+      outline: solid $slider-track-thickness;
+      left: $slider-track-thickness / 2;
+    }
+  }
+
+  .mtx-slider-focus-ring {
+    bottom: -$slider-focus-ring-size / 2;
+    left: -$slider-focus-ring-size / 2;
+  }
+
+  .mtx-slider-ticks {
+    width: $slider-track-thickness;
+    height: 100%;
+  }
+
+  .mtx-slider-thumb-container {
+    height: 100%;
+    width: 0;
+    left: 50%;
+  }
+
+  .mtx-slider-thumb {
+    @include backface-visibility(hidden);
+  }
+
+  .mtx-slider-thumb-label {
+    bottom: -$slider-thumb-label-size / 2;
+    left: -($slider-thumb-label-size + $slider-thumb-arrow-gap);
+    transform:
+      translateX($slider-thumb-label-size / 2 + $slider-thumb-arrow-gap)
+      scale(.01)
+      rotate(-45deg);
+  }
+
+  .mtx-slider-thumb-label-text {
+    transform: rotate(45deg);
+  }
+
+  &.cdk-focused {
+    .mtx-slider-thumb-label {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+// Slider in RTL languages.
+[dir='rtl'] {
+  .mtx-slider-wrapper::after {
+    left: 0;
+    right: auto;
+  }
+
+  .mtx-slider-horizontal {
+    .mtx-slider-track-fill {
+      transform-origin: 100% 100%;
+    }
+
+    .mtx-slider-track-background-left {
+      transform-origin: 0 0;
+    }
+
+    .mtx-slider-track-background-right {
+      transform-origin: 100% 100%;
+    }
+
+    &.mtx-slider-axis-inverted {
+      .mtx-slider-track-fill {
+        transform-origin: 0 0;
+      }
+
+      .mtx-slider-track-background-left {
+        transform-origin: 100% 100%;
+      }
+
+      .mtx-slider-track-background-right {
+        transform-origin: 0 0;
+      }
+    }
+  }
+}
+
+// Slider inside a component with disabled animations.
+.mtx-slider._mtx-animation-noopable {
+  .mtx-slider-track-fill,
+  .mtx-slider-track-background-left,
+  .mtx-slider-track-background-right,
+  .mtx-slider-ticks,
+  .mtx-slider-thumb-container,
+  .mtx-slider-focus-ring,
+  .mtx-slider-thumb,
+  .mtx-slider-thumb-label,
+  .mtx-slider-thumb-label-text,
+  .mtx-slider-has-ticks .mtx-slider-wrapper::after {
+    transition: none;
+  }
+}
