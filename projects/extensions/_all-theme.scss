@@ -6,6 +6,7 @@
 @use './popover/popover-theme';
 @use './progress/progress-theme';
 @use './select/select-theme';
+@use './slider/slider-theme';
 @use './split/split-theme';
 @use './tooltip/tooltip-theme';
 @use './form-group/form-group-theme';
@@ -20,6 +21,7 @@
   @include popover-theme.theme($theme);
   @include progress-theme.theme($theme);
   @include select-theme.theme($theme);
+  @include slider-theme.theme($theme);
   @include split-theme.theme($theme);
   @include tooltip-theme.theme($theme);
 }

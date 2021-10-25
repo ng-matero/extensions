@@ -1,32 +1,51 @@
-@import '~@angular/material/theming';
+@use 'sass:map';
+@use 'sass:meta';
+@use '~@angular/material/core/theming/theming';
+@use '~@angular/material/core/typography/typography';
+@use '~@angular/material/core/typography/typography-utils';
 
-@mixin _mtx-slider-inner-content-theme($palette) {
+@mixin _inner-content-theme($palette) {
   .mtx-slider-track-fill,
   .mtx-slider-thumb,
   .mtx-slider-thumb-label {
-    background-color: mat-color($palette);
+    background-color: theming.get-color-from-palette($palette);
   }
 
   .mtx-slider-thumb-label-text {
-    color: mat-color($palette, default-contrast);
+    color: theming.get-color-from-palette($palette, default-contrast);
+  }
+
+  .mtx-slider-focus-ring {
+    $opacity: .2;
+    $color: theming.get-color-from-palette($palette, default, $opacity);
+
+    background-color: $color;
+
+    // `mat-color` uses `rgba` for the opacity which won't work with
+    // CSS variables so we need to use `opacity` as a fallback.
+    @if (meta.type-of($color) != color) {
+      opacity: $opacity;
+    }
   }
 }
 
-@mixin mtx-slider-theme($theme) {
-  $primary: map-get($theme, primary);
-  $accent: map-get($theme, accent);
-  $warn: map-get($theme, warn);
-  $background: map-get($theme, background);
-  $foreground: map-get($theme, foreground);
+@mixin color($config-or-theme) {
+  $config: theming.get-color-config($config-or-theme);
+  $primary: map.get($config, primary);
+  $accent: map.get($config, accent);
+  $warn: map.get($config, warn);
+  $background: map.get($config, background);
+  $foreground: map.get($config, foreground);
 
-  $slider-off-color: mat-color($foreground, slider-off);
-  $slider-off-focused-color: mat-color($foreground, slider-off-active);
-  $slider-disabled-color: mat-color($foreground, slider-off);
-  $slider-labeled-min-value-thumb-color: mat-color($foreground, slider-min);
-  $slider-labeled-min-value-thumb-label-color: mat-color($foreground, slider-off);
-  $slider-focus-ring-color: mat-color($accent, default, .2);
-  $slider-focus-ring-min-value-color: mat-color($foreground, base, .12);
-  $slider-tick-color: mat-color($foreground, base, .7);
+  $slider-off-color: theming.get-color-from-palette($foreground, slider-off);
+  $slider-off-focused-color: theming.get-color-from-palette($foreground, slider-off-active);
+  $slider-disabled-color: theming.get-color-from-palette($foreground, slider-off);
+  $slider-labeled-min-value-thumb-color: theming.get-color-from-palette($foreground, slider-min);
+  $slider-labeled-min-value-thumb-label-color: theming.get-color-from-palette($foreground, slider-off);
+  $slider-focus-ring-color: theming.get-color-from-palette($accent, default, .2);
+  $slider-focus-ring-min-value-color: theming.get-color-from-palette($foreground, base, .12);
+  $slider-tick-opacity: .7;
+  $slider-tick-color: theming.get-color-from-palette($foreground, base, $slider-tick-opacity);
   $slider-tick-size: 2px;
 
   .mtx-slider-track-background {
@@ -34,23 +53,19 @@
   }
 
   .mat-primary {
-    @include _mtx-slider-inner-content-theme($primary);
+    @include _inner-content-theme($primary);
   }
 
   .mat-accent {
-    @include _mtx-slider-inner-content-theme($accent);
+    @include _inner-content-theme($accent);
   }
 
   .mat-warn {
-    @include _mtx-slider-inner-content-theme($warn);
-  }
-
-  .mat-slider-focus-ring {
-    background-color: $slider-focus-ring-color;
+    @include _inner-content-theme($warn);
   }
 
   .mtx-slider:hover,
-  .cdk-focused {
+  .mtx-slider.cdk-focused {
     .mtx-slider-track-background {
       background-color: $slider-off-focused-color;
     }
@@ -72,7 +87,16 @@
 
   .mtx-slider-min-value {
     .mtx-slider-focus-ring {
-      background-color: $slider-focus-ring-min-value-color;
+      $opacity: .12;
+      $color: theming.get-color-from-palette($foreground, base, $opacity);
+
+      background-color: $color;
+
+      // `mat-color` uses `rgba` for the opacity which won't work with
+      // CSS variables so we need to use `opacity` as a fallback.
+      @if (meta.type-of($color) != color) {
+        opacity: $opacity;
+      }
     }
 
     &.mtx-slider-thumb-label-showing:not(.mtx-range-slider) {
@@ -110,6 +134,12 @@
 
   .mtx-slider-has-ticks .mtx-slider-wrapper::after {
     border-color: $slider-tick-color;
+
+    // `mat-color` uses `rgba` for the opacity which won't work with
+    // CSS variables so we need to use `opacity` as a fallback.
+    @if (meta.type-of($slider-tick-color) != color) {
+      opacity: $slider-tick-opacity;
+    }
   }
 
   .mtx-slider-horizontal .mtx-slider-ticks {
@@ -131,6 +161,12 @@
         transparent 0,
         transparent
       );
+
+    // `mat-color` uses `rgba` for the opacity which won't work with
+    // CSS variables so we need to use `opacity` as a fallback.
+    @if (meta.type-of($slider-tick-color) != color) {
+      opacity: $slider-tick-opacity;
+    }
   }
 
   .mtx-slider-vertical .mtx-slider-ticks {
@@ -142,15 +178,38 @@
         transparent 0,
         transparent
       );
+
+    // `mat-color` uses `rgba` for the opacity which won't work with
+    // CSS variables so we need to use `opacity` as a fallback.
+    @if (meta.type-of($slider-tick-color) != color) {
+      opacity: $slider-tick-opacity;
+    }
   }
 }
 
-@mixin mtx-slider-typography($config) {
+@mixin typography($config-or-theme) {
+  $config: typography.private-typography-to-2014-config(
+    theming.get-typography-config($config-or-theme)
+  );
+
   .mtx-slider-thumb-label-text {
     font: {
-      family: mat-font-family($config);
-      size: mat-font-size($config, caption);
-      weight: mat-font-weight($config, body-2);
+      family: Roboto,Helvetica Neue,sans-serif;
+      size: 12px;
+      weight: 500;
     }
   }
+}
+
+@mixin _density($config-or-theme) {}
+
+@mixin theme($theme-or-color-config) {
+  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  $color: theming.get-color-config($theme);
+  $density: theming.get-density-config($theme);
+  $typography: theming.get-typography-config($theme);
+
+  @include color($color);
+  @include _density($density);
+  @include typography($typography);
 }

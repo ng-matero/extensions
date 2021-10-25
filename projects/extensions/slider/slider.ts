@@ -469,10 +469,10 @@ export class MtxSlider
     } else {
       scale = this.vertical ? `1, ${1 - this.percent}, 1` : `${1 - this.percent}, 1, 1`;
     }
-    const sign = this._shouldInvertMouseCoords() ? '' : '-';
+    const sign = this._shouldInvertMouseCoords() ? '-' : '';
     return {
       // scale3d avoids some rendering issues in Chrome. See #12071.
-      transform: `translate${axis}(${sign}0px) scale3d(${scale})`,
+      transform: `translate${axis}(${sign}${this._thumbGap}px) scale3d(${scale})`,
     };
   }
 
