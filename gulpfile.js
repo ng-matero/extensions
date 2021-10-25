@@ -45,6 +45,10 @@ function copySelect() {
   return src([`${SRC}/select/*.scss`]).pipe(dest(`${DEST}/select`));
 }
 
+function copySlider() {
+  return src([`${SRC}/slider/*.scss`]).pipe(dest(`${DEST}/slider`));
+}
+
 function copySplit() {
   return src([`${SRC}/split/*.scss`]).pipe(dest(`${DEST}/split`));
 }
@@ -73,6 +77,7 @@ exports.default = series(
   copyPopover,
   copyProgress,
   copySelect,
+  copySlider,
   copySplit,
   copyTooltip,
 
