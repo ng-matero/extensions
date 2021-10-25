@@ -453,7 +453,7 @@ export class MtxSlider
     } else {
       scale = this.vertical ? `1, ${this.percent}, 1` : `${this.percent}, 1, 1`;
     }
-    const sign = this._shouldInvertMouseCoords() ? '-' : '';
+    const sign = this._shouldInvertMouseCoords() ? '' : '-';
 
     return {
       // scale3d avoids some rendering issues in Chrome. See #12071.
