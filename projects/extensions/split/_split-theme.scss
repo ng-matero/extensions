@@ -1,17 +1,41 @@
 @use 'sass:map';
-@use '~@angular/material' as mat;
+@use '~@angular/material/core/theming/theming';
 
-@mixin theme($theme) {
-  $accent: map.get($theme, accent);
-  $foreground: map.get($theme, foreground);
+@mixin color($config-or-theme) {
+  $config: theming.get-color-config($config-or-theme);
+  $accent: map.get($config, accent);
+  $foreground: map.get($config, foreground);
 
   .mtx-split {
     > .mtx-split-gutter {
-      background-color: rgba(mat.get-color-from-palette($foreground, divider), .24);
+      background-color: rgba(theming.get-color-from-palette($foreground, divider), .24);
 
       &:hover {
-        background-color: mat.get-color-from-palette($accent);
+        background-color: theming.get-color-from-palette($accent);
       }
+    }
+  }
+}
+
+@mixin typography($config-or-theme) {}
+
+@mixin _density($config-or-theme) {}
+
+@mixin theme($theme-or-color-config) {
+  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-split') {
+    $color: theming.get-color-config($theme);
+    $density: theming.get-density-config($theme);
+    $typography: theming.get-typography-config($theme);
+
+    @if $color != null {
+      @include color($color);
+    }
+    @if $density != null {
+      @include _density($density);
+    }
+    @if $typography != null {
+      @include typography($typography);
     }
   }
 }

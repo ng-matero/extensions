@@ -1,19 +1,20 @@
 @use 'sass:map';
-@use '~@angular/material' as mat;
+@use '~@angular/material/core/theming/theming';
 @use './column-resize/column-resize';
 
-@mixin theme($theme) {
-  $is-dark-theme: map.get($theme, is-dark);
-  $accent: map.get($theme, accent);
-  $background: map.get($theme, background);
-  $foreground: map.get($theme, foreground);
+@mixin color($config-or-theme) {
+  $config: theming.get-color-config($config-or-theme);
+  $is-dark-theme: map.get($config, is-dark);
+  $accent: map.get($config, accent);
+  $background: map.get($config, background);
+  $foreground: map.get($config, foreground);
 
   .mtx-grid {
-    border: 1px solid rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
+    border: 1px solid rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
 
     .mat-table-sticky-left,
     .mat-table-sticky-right {
-      border-color: mat.get-color-from-palette($foreground, divider);
+      border-color: theming.get-color-from-palette($foreground, divider);
     }
 
     .mat-table {
@@ -39,52 +40,75 @@
 
     .mat-cell {
       &.selected {
-        box-shadow: inset 0 0 0 1px mat.get-color-from-palette($accent);
+        box-shadow: inset 0 0 0 1px theming.get-color-from-palette($accent);
       }
     }
 
     .mat-footer-row {
       .mat-footer-cell {
-        border-top: 1px solid mat.get-color-from-palette($foreground, divider);
+        border-top: 1px solid theming.get-color-from-palette($foreground, divider);
         border-bottom-width: 0;
-        background-color: mat.get-color-from-palette($background, app-bar);
+        background-color: theming.get-color-from-palette($background, app-bar);
       }
     }
 
     .mat-paginator {
-      border-top: 1px solid rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
+      border-top: 1px solid rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
     }
   }
 
   .mtx-grid-toolbar {
-    border-bottom: 1px solid rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
+    border-bottom: 1px solid rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
   }
 
   .mtx-grid-sidebar {
-    border-color: rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
+    border-color: rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
   }
 
   .mtx-grid-statusbar {
-    border-top: 1px solid rgba(mat.get-color-from-palette($foreground, secondary-text), .2);
+    border-top: 1px solid rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
   }
 
   .mtx-grid-column-menu-item {
-    color: mat.get-color-from-palette($foreground, text);
+    color: theming.get-color-from-palette($foreground, text);
   }
 
   .mtx-grid-column-menu-header,
   .mtx-grid-column-menu-footer {
-    color: mat.get-color-from-palette($foreground, text);
-    background-color: mat.get-color-from-palette($background, card);
+    color: theming.get-color-from-palette($foreground, text);
+    background-color: theming.get-color-from-palette($background, card);
   }
 
   .mtx-grid-column-menu-header {
-    border-bottom: 1px solid mat.get-color-from-palette($foreground, divider);
+    border-bottom: 1px solid theming.get-color-from-palette($foreground, divider);
   }
 
   .mtx-grid-column-menu-footer {
-    border-top: 1px solid mat.get-color-from-palette($foreground, divider);
+    border-top: 1px solid theming.get-color-from-palette($foreground, divider);
   }
 
-  @include column-resize.color($theme);
+  @include column-resize.color($config-or-theme);
+}
+
+@mixin typography($config-or-theme) {}
+
+@mixin _density($config-or-theme) {}
+
+@mixin theme($theme-or-color-config) {
+  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-grid') {
+    $color: theming.get-color-config($theme);
+    $density: theming.get-density-config($theme);
+    $typography: theming.get-typography-config($theme);
+
+    @if $color != null {
+      @include color($color);
+    }
+    @if $density != null {
+      @include _density($density);
+    }
+    @if $typography != null {
+      @include typography($typography);
+    }
+  }
 }

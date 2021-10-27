@@ -1,2 +1,2 @@
-@forward 'grid-theme' hide theme;
-@forward 'grid-theme' as mtx-grid-*;
+@forward 'grid-theme' hide color, theme, typography;
+@forward 'grid-theme' as mtx-grid-* hide mtx-grid-density;

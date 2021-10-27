@@ -1,2 +1,2 @@
-@forward 'form-group-theme' hide theme;
-@forward 'form-group-theme' as mtx-form-group-*;
+@forward 'form-group-theme' hide color, theme, typography;
+@forward 'form-group-theme' as mtx-form-group-* hide mtx-form-group-density;

@@ -1,2 +1,2 @@
-@forward 'text3d-theme' hide theme;
-@forward 'text3d-theme' as mtx-text3d-*;
+@forward 'text3d-theme' hide color, theme, typography;
+@forward 'text3d-theme' as mtx-text3d-* hide mtx-text3d-density;

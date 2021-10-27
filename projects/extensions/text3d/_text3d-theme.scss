@@ -1,10 +1,12 @@
 @use 'sass:map';
-@use '~@angular/material' as mat;
+@use '~@angular/material/core/theming/theming';
+@use '~@angular/material/core/theming/palette';
 
-@mixin theme($theme) {
-  $background: map.get($theme, background);
-  $foreground: map.get($theme, foreground);
-  $is-dark-theme: map.get($theme, is-dark);
+@mixin color($config-or-theme) {
+  $config: theming.get-color-config($config-or-theme);
+  $background: map.get($config, background);
+  $foreground: map.get($config, foreground);
+  $is-dark-theme: map.get($config, is-dark);
 
   .mtx-text3d {
     .mtx-text3d-layer {
@@ -12,12 +14,35 @@
 
       &:not(:first-child) {
         text-shadow: 0 0 20px rgba(black, .12);
-        color: mat.get-color-from-palette(mat.$gray-palette, 100);
+        color: theming.get-color-from-palette(palette.$gray-palette, 100);
       }
 
       &:first-child {
-        color: mat.get-color-from-palette(mat.$gray-palette, 900);
+        color: theming.get-color-from-palette(palette.$gray-palette, 900);
       }
+    }
+  }
+}
+
+@mixin typography($config-or-theme) {}
+
+@mixin _density($config-or-theme) {}
+
+@mixin theme($theme-or-color-config) {
+  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-text3d') {
+    $color: theming.get-color-config($theme);
+    $density: theming.get-density-config($theme);
+    $typography: theming.get-typography-config($theme);
+
+    @if $color != null {
+      @include color($color);
+    }
+    @if $density != null {
+      @include _density($density);
+    }
+    @if $typography != null {
+      @include typography($typography);
     }
   }
 }

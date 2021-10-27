@@ -1,2 +1,2 @@
-@forward 'datetimepicker-theme' hide theme;
-@forward 'datetimepicker-theme' as mtx-datetimepicker-*;
+@forward 'datetimepicker-theme' hide $selected-today-box-shadow-width, color, theme, typography;
+@forward 'datetimepicker-theme' as mtx-datetimepicker-* hide mtx-datetimepicker-density;

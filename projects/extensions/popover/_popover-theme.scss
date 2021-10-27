@@ -1,23 +1,24 @@
 @use 'sass:map';
-@use '~@angular/material' as mat;
+@use '~@angular/material/core/theming/theming';
 
-@mixin theme($theme) {
-  $background: map.get($theme, background);
-  $foreground: map.get($theme, foreground);
+@mixin color($config-or-theme) {
+  $config: theming.get-color-config($config-or-theme);
+  $background: map.get($config, background);
+  $foreground: map.get($config, foreground);
 
   .mtx-popover-panel {
-    color: mat.get-color-from-palette($foreground, text);
-    background-color: mat.get-color-from-palette($background, card);
+    color: theming.get-color-from-palette($foreground, text);
+    background-color: theming.get-color-from-palette($background, card);
   }
 
   [class*='mtx-popover'] {
     .mtx-popover-direction-arrow {
       &::before {
-        border-color: mat.get-color-from-palette($foreground, divider);
+        border-color: theming.get-color-from-palette($foreground, divider);
       }
 
       &::after {
-        border-color: mat.get-color-from-palette($background, card);
+        border-color: theming.get-color-from-palette($background, card);
       }
     }
   }
@@ -41,6 +42,29 @@
         border-top-color: transparent;
         border-bottom-color: transparent;
       }
+    }
+  }
+}
+
+@mixin typography($config-or-theme) {}
+
+@mixin _density($config-or-theme) {}
+
+@mixin theme($theme-or-color-config) {
+  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-popover') {
+    $color: theming.get-color-config($theme);
+    $density: theming.get-density-config($theme);
+    $typography: theming.get-typography-config($theme);
+
+    @if $color != null {
+      @include color($color);
+    }
+    @if $density != null {
+      @include _density($density);
+    }
+    @if $typography != null {
+      @include typography($typography);
     }
   }
 }

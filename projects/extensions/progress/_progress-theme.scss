@@ -1,30 +1,55 @@
 @use 'sass:map';
-@use '~@angular/material' as mat;
+@use '~@angular/material/core/theming/theming';
+@use '~@angular/material/core/theming/palette';
 
-@mixin theme($theme) {
-  $background: map.get($theme, background);
+@mixin color($config-or-theme) {
+  $config: theming.get-color-config($config-or-theme);
+  $background: map.get($config, background);
 
   .mtx-progress {
-    background-color: mat.get-color-from-palette($background, hover);
+    background-color: theming.get-color-from-palette($background, hover);
   }
 
   .mtx-progress-fill-info {
-    background-color: mat.get-color-from-palette(mat.$blue-palette, 500);
+    background-color: theming.get-color-from-palette(palette.$blue-palette, 500);
     color: white;
   }
 
   .mtx-progress-fill-success {
-    background-color: mat.get-color-from-palette(mat.$green-palette, 500);
+    background-color: theming.get-color-from-palette(palette.$green-palette, 500);
     color: white;
   }
 
   .mtx-progress-fill-warning {
-    background-color: mat.get-color-from-palette(mat.$orange-palette, 500);
+    background-color: theming.get-color-from-palette(palette.$orange-palette, 500);
     color: white;
   }
 
   .mtx-progress-fill-danger {
-    background-color: mat.get-color-from-palette(mat.$red-palette, 500);
+    background-color: theming.get-color-from-palette(palette.$red-palette, 500);
     color: white;
+  }
+}
+
+@mixin typography($config-or-theme) {}
+
+@mixin _density($config-or-theme) {}
+
+@mixin theme($theme-or-color-config) {
+  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-progress') {
+    $color: theming.get-color-config($theme);
+    $density: theming.get-density-config($theme);
+    $typography: theming.get-typography-config($theme);
+
+    @if $color != null {
+      @include color($color);
+    }
+    @if $density != null {
+      @include _density($density);
+    }
+    @if $typography != null {
+      @include typography($typography);
+    }
   }
 }

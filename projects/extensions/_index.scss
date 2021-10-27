@@ -15,3 +15,4 @@
 @forward './text3d/text3d-theme' as text3d-* show text3d-theme;
 
 @forward './all-theme' show all-component-themes, all-experimental-component-themes;
+@forward './all-color' show all-component-colors, all-experimental-component-colors;

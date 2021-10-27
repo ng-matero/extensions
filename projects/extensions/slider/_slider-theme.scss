@@ -192,11 +192,11 @@
     theming.get-typography-config($config-or-theme)
   );
 
-  .mtx-slider-thumb-label-text {
+  .mat-slider-thumb-label-text {
     font: {
-      family: Roboto,Helvetica Neue,sans-serif;
-      size: 12px;
-      weight: 500;
+      family: typography-utils.font-family($config);
+      size: typography-utils.font-size($config, caption);
+      weight: typography-utils.font-weight($config, body-2);
     }
   }
 }
@@ -205,11 +205,19 @@
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
-  $color: theming.get-color-config($theme);
-  $density: theming.get-density-config($theme);
-  $typography: theming.get-typography-config($theme);
+  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-slider') {
+    $color: theming.get-color-config($theme);
+    $density: theming.get-density-config($theme);
+    $typography: theming.get-typography-config($theme);
 
-  @include color($color);
-  @include _density($density);
-  @include typography($typography);
+    @if $color != null {
+      @include color($color);
+    }
+    @if $density != null {
+      @include _density($density);
+    }
+    @if $typography != null {
+      @include typography($typography);
+    }
+  }
 }

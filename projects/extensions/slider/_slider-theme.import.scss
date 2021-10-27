@@ -1,2 +1,2 @@
-@forward 'slider-theme' hide theme;
-@forward 'slider-theme' as mtx-slider-*;
+@forward 'slider-theme' hide color, theme, typography;
+@forward 'slider-theme' as mtx-slider-* hide mtx-slider-density, mtx-slider-inner-content-theme;

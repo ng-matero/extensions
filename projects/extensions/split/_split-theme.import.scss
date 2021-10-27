@@ -1,2 +1,2 @@
-@forward 'split-theme' hide theme;
-@forward 'split-theme' as mtx-split-*;
+@forward 'split-theme' hide color, theme, typography;
+@forward 'split-theme' as mtx-split-* hide mtx-split-density;

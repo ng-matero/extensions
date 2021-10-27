@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '~@angular/material' as mat;
+@use '~@angular/material/core/theming/theming';
 
 $target-height: 22px;
 $font-size: 12px;
@@ -10,36 +10,50 @@ $handset-font-size: 14px;
 $handset-vertical-padding: ($handset-target-height - $handset-font-size) * .5;
 
 @mixin color($config-or-theme) {
-  $config: mat.get-color-config($config-or-theme);
+  $config: theming.get-color-config($config-or-theme);
   $background: map.get($config, background);
 
   .mtx-tooltip {
-    background: mat.get-color-from-palette($background, tooltip, .9);
+    background: theming.get-color-from-palette($background, tooltip, .9);
   }
 }
 
 @mixin typography($config-or-theme) {
+  $config: typography.private-typography-to-2014-config(
+    theming.get-typography-config($config-or-theme)
+  );
+
   .mtx-tooltip {
+    font-family: typography-utils.font-family($config);
+    font-size: $font-size;
     padding-top: $vertical-padding;
     padding-bottom: $vertical-padding;
-    font-size: $font-size;
   }
 
   .mtx-tooltip-handset {
+    font-size: $handset-font-size;
     padding-top: $handset-vertical-padding;
     padding-bottom: $handset-vertical-padding;
-    font-size: $handset-font-size;
   }
 }
 
-@mixin density($config-or-theme) {}
+@mixin _density($config-or-theme) {}
 
-@mixin theme($theme) {
-  $color: mat.get-color-config($theme);
-  $density: mat.get-density-config($theme);
-  $typography: mat.get-typography-config($theme);
+@mixin theme($theme-or-color-config) {
+  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
+    $color: theming.get-color-config($theme);
+    $density: theming.get-density-config($theme);
+    $typography: theming.get-typography-config($theme);
 
-  @include color($color);
-  @include density($density);
-  @include typography($typography);
+    @if $color != null {
+      @include color($color);
+    }
+    @if $density != null {
+      @include _density($density);
+    }
+    @if $typography != null {
+      @include typography($typography);
+    }
+  }
 }
