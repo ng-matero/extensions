@@ -15,8 +15,8 @@
 // Create a theme.
 @mixin all-component-themes($theme) {
   @include alert-theme.theme($theme);
-  @include grid-theme.theme($theme);
   @include datetimepicker-theme.theme($theme);
+  @include grid-theme.theme($theme);
   @include loader-theme.theme($theme);
   @include popover-theme.theme($theme);
   @include progress-theme.theme($theme);

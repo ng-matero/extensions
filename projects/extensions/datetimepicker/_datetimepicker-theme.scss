@@ -2,8 +2,14 @@
 @use '~@angular/material/core/theming/theming';
 @use '~@angular/material/core/theming/palette';
 @use '~@angular/material/core/style/private';
+@use '~@angular/material/core/typography/typography';
+@use '~@angular/material/core/typography/typography-utils';
 
 $selected-today-box-shadow-width: 1px;
+$calendar-body-font-size: 13px !default;
+$calendar-weekday-table-font-size: 11px !default;
+$calendar-header-font-size: 30px !default;
+$clock-font-size: 14px !default;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
@@ -116,7 +122,46 @@ $selected-today-box-shadow-width: 1px;
   }
 }
 
-@mixin typography($config-or-theme) {}
+@mixin typography($config-or-theme) {
+  $config: typography.private-typography-to-2014-config(
+    theming.get-typography-config($config-or-theme)
+  );
+
+  .mtx-calendar {
+    font-family: typography-utils.font-family($config);
+  }
+
+  .mtx-calendar-body {
+    font-size: $calendar-body-font-size;
+  }
+
+  .mtx-calendar-body-label,
+  .mtx-calendar-period-button {
+    font: {
+      size: typography-utils.font-size($config, button);
+      weight: typography-utils.font-weight($config, button);
+    }
+  }
+
+  .mtx-calendar-table-header th {
+    font: {
+      size: $calendar-weekday-table-font-size;
+      weight: typography-utils.font-weight($config, body-1);
+    }
+  }
+
+  .mtx-calendar-header-date-time {
+    font-size: $calendar-header-font-size;
+  }
+
+  .mtx-calendar-header-ampm-container {
+    font-size: .75em;
+  }
+
+  .mtx-clock {
+    font-size: $clock-font-size;
+  }
+}
 
 @mixin _density($config-or-theme) {}
 

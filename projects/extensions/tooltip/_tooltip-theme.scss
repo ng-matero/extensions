@@ -1,5 +1,7 @@
 @use 'sass:map';
 @use '~@angular/material/core/theming/theming';
+@use '~@angular/material/core/typography/typography';
+@use '~@angular/material/core/typography/typography-utils';
 
 $target-height: 22px;
 $font-size: 12px;
@@ -44,7 +46,8 @@ $handset-vertical-padding: ($handset-target-height - $handset-font-size) * .5;
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
-    $typography: theming.get-typography-config($theme);
+    $typography-default: typography.define-typography-config();
+    $typography: theming.get-typography-config($theme, $typography-default);
 
     @if $color != null {
       @include color($color);

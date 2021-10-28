@@ -1,7 +1,5 @@
 @use '~@angular/material/core/style/private';
 
-$calendar-body-font-size: 13px !default;
-$calendar-body-header-font-size: 14px !default;
 $calendar-body-label-padding-start: 5% !default;
 $calendar-body-label-side-padding: private.private-div(33%, 7) !default;
 $calendar-body-cell-min-size: 32px !default;
@@ -15,7 +13,6 @@ $calendar-body-min-size: 7 * $calendar-body-cell-min-size !default;
 $calendar-body-cell-content-size: 100% - $calendar-body-cell-content-margin * 2 !default;
 
 .mtx-calendar-body {
-  font-size: $calendar-body-font-size;
   min-width: $calendar-body-min-size;
 }
 

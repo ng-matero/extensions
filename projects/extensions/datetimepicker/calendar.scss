@@ -1,5 +1,4 @@
 $calendar-padding: 8px !default;
-$calendar-weekday-table-font-size: 11px !default;
 
 // We use the same padding as the month / year label, but subtract 16px since there is padding
 // between the edge of the button and the text. This ensures that the button text lines up with
@@ -24,7 +23,6 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 .mtx-calendar-header {
   padding: $calendar-padding * 2;
-  font-size: 14px;
   box-sizing: border-box;
   border-radius: 4px 4px 0 0;
 
@@ -42,14 +40,12 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 .mtx-calendar-header-year,
 .mtx-calendar-header-date-time {
   width: 100%;
-  font-weight: 400;
   white-space: nowrap;
 }
 
 .mtx-calendar-header-year {
   height: 32px;
   line-height: 32px;
-  font-size: 16px;
 
   > * {
     vertical-align: middle;
@@ -57,17 +53,12 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 }
 
 .mtx-calendar-header-date-time {
-  font-size: 30px;
   line-height: 34px;
 
   [mode='landscape'] & {
     white-space: normal;
     word-wrap: break-word;
   }
-}
-
-.mtx-calendar-header-ampm-container {
-  font-size: .77em;
 }
 
 .mtx-calendar-header-year,
@@ -132,7 +123,6 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   display: inline-block;
   height: 40px;
   line-height: 40px;
-  font-size: 14px;
   outline: none;
   border: 0;
   background: transparent;
@@ -161,13 +151,9 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   width: 100%;
 }
 
-.mtx-calendar-table-header {
-  th {
-    text-align: center;
-    font-size: $calendar-weekday-table-font-size;
-    font-weight: 400;
-    padding: $calendar-padding 0;
-  }
+.mtx-calendar-table-header th {
+  text-align: center;
+  padding: $calendar-padding 0;
 }
 
 @media all and (orientation: landscape) {

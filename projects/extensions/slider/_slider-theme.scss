@@ -192,7 +192,7 @@
     theming.get-typography-config($config-or-theme)
   );
 
-  .mat-slider-thumb-label-text {
+  .mtx-slider-thumb-label-text {
     font: {
       family: typography-utils.font-family($config);
       size: typography-utils.font-size($config, caption);
@@ -208,7 +208,8 @@
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-slider') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
-    $typography: theming.get-typography-config($theme);
+    $typography-default: typography.define-typography-config();
+    $typography: theming.get-typography-config($theme, $typography-default);
 
     @if $color != null {
       @include color($color);

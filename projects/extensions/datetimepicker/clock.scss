@@ -1,6 +1,5 @@
 $clock-min-size: 224px !default;
 $clock-margin: 8px !default;
-$clock-font-size: 14px !default;
 $clock-cell-size: 14.1666% !default;
 
 .mtx-clock {
@@ -8,7 +7,6 @@ $clock-cell-size: 14.1666% !default;
   display: block;
   min-width: $clock-min-size;
   margin: $clock-margin;
-  font-size: $clock-font-size;
   box-sizing: border-box;
   user-select: none;
 }
