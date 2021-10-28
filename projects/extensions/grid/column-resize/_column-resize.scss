@@ -1,14 +1,16 @@
 @use 'sass:map';
-@use '~@angular/material' as mat;
+@use '~@angular/material/core/style/variables';
+@use '~@angular/material/core/style/vendor-prefixes';
+@use '~@angular/material/core/theming/theming';
 
 @mixin color($config-or-theme) {
-  $config: mat.get-color-config($config-or-theme);
+  $config: theming.get-color-config($config-or-theme);
   $primary: map.get($config, primary);
   $foreground: map.get($config, foreground);
 
-  $non-resizable-hover-divider: mat.get-color-from-palette($foreground, divider);
-  $resizable-hover-divider: mat.get-color-from-palette($primary, 200);
-  $resizable-active-divider: mat.get-color-from-palette($primary, 500);
+  $non-resizable-hover-divider: theming.get-color-from-palette($foreground, divider);
+  $resizable-hover-divider: theming.get-color-from-palette($primary, 200);
+  $resizable-active-divider: theming.get-color-from-palette($primary, 500);
 
   // Required for resizing to work properly.
   .mat-column-resize-table.cdk-column-resize-with-resized-column {
@@ -39,7 +41,9 @@
     right: 0;
     width: 1px;
     background: transparent;
-    transition: background 300ms cubic-bezier(.55, 0, .55, .2);
+    transition:
+      background variables.$swift-ease-in-duration
+      variables.$swift-ease-in-timing-function;
   }
 
   .mat-header-cell:not(.mat-resizable)::after {
@@ -77,9 +81,11 @@
     background: transparent;
     cursor: col-resize;
     height: 100%;
-    transition: background 300ms cubic-bezier(.55, 0, .55, .2);
-    user-select: none;
+    transition:
+      background variables.$swift-ease-in-duration
+      variables.$swift-ease-in-timing-function;
     width: 100%;
+    @include vendor-prefixes.user-select(none);
 
     &:active {
       background:
@@ -102,11 +108,11 @@
 @mixin density($config-or-theme) {}
 
 @mixin theme($theme-or-color-config) {
-  $theme: mat.private-legacy-get-theme($theme-or-color-config);
-  @include mat.private-check-duplicate-theme-styles($theme, 'mat-column-resize') {
-    $color: mat.get-color-config($theme);
-    $density: mat.get-density-config($theme);
-    $typography: mat.get-typography-config($theme);
+  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  @include theming.private-check-duplicate-theme-styles($theme, 'mat-column-resize') {
+    $color: theming.get-color-config($theme);
+    $density: theming.get-density-config($theme);
+    $typography: theming.get-typography-config($theme);
 
     @if $color != null {
       @include color($color);
