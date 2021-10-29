@@ -17,10 +17,10 @@ export class FormGroupDemoComponent {
     { value: 'pizza-1', viewValue: 'Pizza' },
     { value: 'tacos-2', viewValue: 'Tacos' },
   ];
-  selectedFood!: string;
-  selectedCar!: string;
+  selectedFood?: string;
+  selectedCar?: string;
 
-  text!: string;
+  text?: string;
 
   color: ThemePalette = 'primary';
   required = false;

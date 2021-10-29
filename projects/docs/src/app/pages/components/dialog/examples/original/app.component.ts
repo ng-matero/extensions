@@ -8,7 +8,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  animal!: string;
+  animal?: string;
 
   constructor(private mtxDialog: MtxDialog) {}
 

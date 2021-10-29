@@ -43,9 +43,6 @@ export class MtxAlertComponent {
   }
   private _dismissible = false;
 
-  /** The alert text color */
-  @Input() color!: string;
-
   /** Material elevation */
   @Input() elevation = 0;
 
