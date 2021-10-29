@@ -1,5 +1,6 @@
-$handle-size: 11px;
-$handle-offset: ($handle-size - 1px) *.5;
+$gutter-size: 4px;
+$handle-size: 8px;
+$handle-offset: ($handle-size - $gutter-size) * .5;
 
 .mtx-split {
   display: flex;
