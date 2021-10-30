@@ -1,6 +1,11 @@
 import { FocusMonitor, FocusOrigin } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
-import { coerceBooleanProperty, coerceNumberProperty } from '@angular/cdk/coercion';
+import {
+  BooleanInput,
+  coerceBooleanProperty,
+  coerceNumberProperty,
+  NumberInput,
+} from '@angular/cdk/coercion';
 import {
   DOWN_ARROW,
   END,
@@ -1274,6 +1279,17 @@ export class MtxSlider
       this._currentSliderDir = 'r';
     }
   }
+
+  static ngAcceptInputType_invert: BooleanInput;
+  static ngAcceptInputType_max: NumberInput;
+  static ngAcceptInputType_min: NumberInput;
+  static ngAcceptInputType_step: NumberInput;
+  static ngAcceptInputType_thumbLabel: BooleanInput;
+  static ngAcceptInputType_tickInterval: NumberInput;
+  static ngAcceptInputType_value: NumberInput;
+  static ngAcceptInputType_vertical: BooleanInput;
+  static ngAcceptInputType_disabled: BooleanInput;
+  static ngAcceptInputType_tabIndex: NumberInput;
 }
 
 /** Returns whether an event is a touch event. */

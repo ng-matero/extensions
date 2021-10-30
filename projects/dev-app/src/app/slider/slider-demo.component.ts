@@ -35,4 +35,8 @@ export class SliderDemoComponent {
       this.value = 0;
     }
   }
+
+  onRangeInput() {
+    this.value = (this.value as number[]).filter(_ => true);
+  }
 }
