@@ -57,35 +57,39 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.getData();
+    this.getList();
   }
 
-  getData() {
+  getList() {
     this.isLoading = true;
-    this.http
-      .get('https://api.github.com/search/repositories', { params: this.params as any })
-      .subscribe(
-        (res: any) => {
-          this.list = res.items;
-          this.total = res.total_count;
-          this.isLoading = false;
-        },
-        () => {
-          this.isLoading = false;
-        },
-        () => {
-          this.isLoading = false;
-        }
-      );
+    this.http.get('https://api.github.com/search/repositories', { params: this.params }).subscribe(
+      (res: any) => {
+        this.list = res.items;
+        this.total = res.total_count;
+        this.isLoading = false;
+      },
+      () => {
+        this.isLoading = false;
+      },
+      () => {
+        this.isLoading = false;
+      }
+    );
   }
 
   getNextPage(e: PageEvent) {
     this.query.page = e.pageIndex;
     this.query.per_page = e.pageSize;
-    this.getData();
+    this.getList();
   }
 
   refresh() {
-    this.getData();
+    this.getList();
+  }
+
+  reset() {
+    this.query.page = 0;
+    this.query.per_page = 5;
+    this.getList();
   }
 }
