@@ -56,7 +56,7 @@ const activeEventOptions = normalizePassiveListenerOptions({ passive: false });
 const MIN_AUTO_TICK_SEPARATION = 30;
 
 /** The thumb gap size for a disabled slider. */
-const DISABLED_THUMB_GAP = 7;
+const DISABLED_THUMB_GAP = 0;
 
 /** The thumb gap size for a non-active slider at its minimum value. */
 const MIN_VALUE_NONACTIVE_THUMB_GAP = 7;

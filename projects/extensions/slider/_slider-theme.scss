@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use '~@angular/material/core/theming/theming';
+@use '~@angular/material/core/style/private';
 @use '~@angular/material/core/typography/typography';
 @use '~@angular/material/core/typography/typography-utils';
 
@@ -37,9 +38,10 @@
   $background: map.get($config, background);
   $foreground: map.get($config, foreground);
 
-  $slider-off-color: theming.get-color-from-palette($foreground, slider-off);
+  $slider-off-color: rgb(189, 189, 189);
   $slider-off-focused-color: theming.get-color-from-palette($foreground, slider-off-active);
-  $slider-disabled-color: theming.get-color-from-palette($foreground, slider-off);
+  $slider-disabled-color: $slider-off-color;
+  $slider-track-disabled-color: rgba($slider-off-color, .54);
   $slider-labeled-min-value-thumb-color: theming.get-color-from-palette($foreground, slider-min);
   $slider-labeled-min-value-thumb-label-color: theming.get-color-from-palette($foreground, slider-off);
   $slider-focus-ring-color: theming.get-color-from-palette($accent, default, .2);
@@ -47,6 +49,10 @@
   $slider-tick-opacity: .7;
   $slider-tick-color: theming.get-color-from-palette($foreground, base, $slider-tick-opacity);
   $slider-tick-size: 2px;
+
+  .mtx-slider-thumb {
+    @include private.private-theme-elevation(2, $config);
+  }
 
   .mtx-slider-track-background {
     background-color: $slider-off-color;
@@ -72,15 +78,19 @@
   }
 
   .mtx-slider-disabled {
-    .mtx-slider-track-background,
+    .mtx-slider-track-background {
+      background-color: $slider-track-disabled-color;
+    }
+
     .mtx-slider-track-fill,
     .mtx-slider-thumb {
       background-color: $slider-disabled-color;
     }
 
-    &:hover {
+    &:hover,
+    &.cdk-focused {
       .mtx-slider-track-background {
-        background-color: $slider-disabled-color;
+        background-color: $slider-track-disabled-color;
       }
     }
   }
@@ -115,14 +125,13 @@
 
     &:not(.mtx-slider-thumb-label-showing):not(.mtx-range-slider) {
       .mtx-slider-thumb {
-        border-color: $slider-off-color;
-        background-color: transparent;
+        background-color: $slider-off-color;
       }
 
       &:hover,
       &.cdk-focused {
         .mtx-slider-thumb {
-          border-color: $slider-off-focused-color;
+          background-color: $slider-off-focused-color;
         }
 
         &.mtx-slider-disabled .mtx-slider-thumb {
