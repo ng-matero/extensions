@@ -12,7 +12,7 @@ export const COMPONENTS_MENU = [
       {
         id: 'button',
         name: 'Button',
-        summary: 'Provide a material button loading directive.',
+        summary: 'Provide a button loading directive for Material.',
       },
       {
         id: 'checkbox-group',
@@ -58,6 +58,11 @@ export const COMPONENTS_MENU = [
         id: 'select',
         name: 'Select',
         summary: 'A ng-select wrapper to be used in the form field.',
+      },
+      {
+        id: 'slider',
+        name: 'Slider',
+        summary: 'Provide a range slider for Material',
       },
       {
         id: 'split',

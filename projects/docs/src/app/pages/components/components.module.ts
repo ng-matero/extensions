@@ -56,6 +56,10 @@ const routes = [
         loadChildren: () => import('./select/select').then(m => m.SelectModule),
       },
       {
+        path: 'slider',
+        loadChildren: () => import('./slider/slider').then(m => m.SliderModule),
+      },
+      {
         path: 'split',
         loadChildren: () => import('./split/split').then(m => m.SplitModule),
       },
