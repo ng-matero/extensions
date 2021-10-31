@@ -1286,7 +1286,7 @@ export class MtxSlider
   static ngAcceptInputType_step: NumberInput;
   static ngAcceptInputType_thumbLabel: BooleanInput;
   static ngAcceptInputType_tickInterval: NumberInput;
-  static ngAcceptInputType_value: NumberInput;
+  static ngAcceptInputType_value: NumberInput | NumberInput[];
   static ngAcceptInputType_vertical: BooleanInput;
   static ngAcceptInputType_disabled: BooleanInput;
   static ngAcceptInputType_tabIndex: NumberInput;
