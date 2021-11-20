@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 @use '../app/pages/component-category-list/component-category-list-theme';
 @use '../app/pages/component-page-header/component-page-header-theme';
 @use '../app/pages/component-nav/component-nav-theme';
@@ -13,7 +15,7 @@
 
 // Styles for the docs app that are based on the current theme.
 @mixin theme($theme) {
-  $is-dark-theme: map-get($theme, is-dark);
+  $is-dark-theme: map.get($theme, is-dark);
 
   @include component-category-list-theme.theme($theme);
   @include component-page-header-theme.theme($theme);

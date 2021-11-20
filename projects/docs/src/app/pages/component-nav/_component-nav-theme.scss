@@ -1,4 +1,5 @@
 @use 'sass:map';
+@use 'sass:color';
 @use '~@angular/material' as mat;
 
 @mixin theme($theme) {
@@ -25,7 +26,7 @@
 
       &.docs-component-viewer-sidenav-item-selected {
         background: rgba(mat.get-color-from-palette($primary, default), .15);
-        color: lighten(mat.get-color-from-palette($primary, default), if($is-dark-theme, 25%, 0));
+        color: color.adjust(mat.get-color-from-palette($primary, default), $lightness: if($is-dark-theme, 25%, 0%));
       }
 
       &.docs-component-viewer-sidenav-item-selected:hover {

@@ -163,7 +163,7 @@
     // Firefox doesn't draw the gradient correctly with 'to right'
     // (see https://bugzilla.mozilla.org/show_bug.cgi?id=1314319).
     background-image:
-      -moz-repeating-linear-gradient(
+      repeating-linear-gradient(
         .0001deg,
         $slider-tick-color,
         $slider-tick-color $slider-tick-size,

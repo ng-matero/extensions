@@ -497,6 +497,7 @@ $focus-ring-size: 30px !default;
 }
 
 // Slider inside a component with disabled animations.
+/* stylelint-disable-next-line selector-class-pattern */
 .mtx-slider._mtx-animation-noopable {
   .mtx-slider-track-fill,
   .mtx-slider-track-background-left,

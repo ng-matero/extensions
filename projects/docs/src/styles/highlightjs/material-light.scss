@@ -1,4 +1,6 @@
-/** Adapted from https://github.com/atom-material/atom-material-syntax-light */
+/* stylelint-disable selector-class-pattern */
+
+// Adapted from https://github.com/atom-material/atom-material-syntax-light
 
 @mixin highlightjs-material-light() {
   .hljs {
@@ -9,7 +11,7 @@
     color: #37474f;
     -webkit-font-smoothing: antialiased;
     text-size-adjust: 100%;
-    font: 300 100%/1 Roboto Mono, monospace;
+    font: 300 100%/1 'Roboto Mono', monospace;
     font-size: 14px;
   }
 

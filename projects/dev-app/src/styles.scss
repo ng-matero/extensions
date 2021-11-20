@@ -47,6 +47,7 @@ $dark-theme: mat.define-dark-theme(
 );
 
 // Include the default theme for focus indicators.
+/* stylelint-disable-next-line no-duplicate-selectors */
 .demo-strong-focus {
   @include mat.strong-focus-indicators-theme($candy-app-theme);
 }

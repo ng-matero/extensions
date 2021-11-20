@@ -1,24 +1,34 @@
 {
+  "ignoreFiles": [
+    "dist/**"
+  ],
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-recommended-scss",
+    "stylelint-config-recommended-scss"
   ],
   "rules": {
-    "no-descending-specificity": null,
-    "no-empty-source": null,
-    "number-leading-zero": "never",
-    "selector-pseudo-element-no-unknown": [
-        true,
-        {
-            "ignorePseudoElements": [
-                "ng-deep"
-            ]
-        }
-    ],
-    "selector-type-no-unknown": null,
-    "value-keyword-case": null,
+    "alpha-value-notation": null,
     "at-rule-empty-line-before": null,
     "block-no-empty": null,
-    "no-duplicate-selectors": null
+    "color-function-notation": "legacy",
+    "no-descending-specificity": null,
+    "no-empty-source": null,
+    "number-max-precision": null,
+    "number-leading-zero": "never",
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": [
+          "ng-deep"
+        ]
+      }
+    ],
+    "selector-type-no-unknown": null,
+    "string-quotes": "single",
+    "value-keyword-case": null,
+    "scss/at-extend-no-missing-placeholder": null,
+    "scss/at-if-no-null": null,
+    "scss/comment-no-empty": null,
+    "scss/operator-no-unspaced": null
   }
 }
