@@ -119,7 +119,7 @@ export class MtxDatetimepickerInput<D>
 
     // Update the displayed date when the locale changes.
     this._localeSubscription = _dateAdapter.localeChanges.subscribe(() => {
-      this.value = this.value;
+      this.value = this._dateAdapter.deserialize(this.value);
     });
   }
 

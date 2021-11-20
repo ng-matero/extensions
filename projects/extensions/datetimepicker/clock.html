@@ -4,7 +4,7 @@
   <div [class.active]="_hourView" class="mtx-clock-hours">
     <div *ngFor="let item of _hours"
          [class.mtx-clock-cell-disabled]="!item.enabled"
-         [class.mtx-clock-cell-selected]="_selectedHour == item.value"
+         [class.mtx-clock-cell-selected]="_selectedHour === item.value"
          [style.fontSize]="item.fontSize"
          [style.left]="item.left+'%'"
          [style.top]="item.top+'%'"
@@ -13,7 +13,7 @@
   <div [class.active]="!_hourView" class="mtx-clock-minutes">
     <div *ngFor="let item of _minutes"
          [class.mtx-clock-cell-disabled]="!item.enabled"
-         [class.mtx-clock-cell-selected]="_selectedMinute == item.value"
+         [class.mtx-clock-cell-selected]="_selectedMinute === item.value"
          [style.left]="item.left+'%'"
          [style.top]="item.top+'%'"
          class="mtx-clock-cell">{{ item.displayValue }}</div>

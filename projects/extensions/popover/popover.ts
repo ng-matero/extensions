@@ -70,13 +70,13 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   public closeDisabled = false;
 
   /** Config object to be passed into the popover's arrow ngStyle */
-  public popoverPanelStyles!: {};
+  public popoverPanelStyles!: Record<string, unknown>;
 
   /** Config object to be passed into the popover's arrow ngStyle */
-  public popoverArrowStyles!: {};
+  public popoverArrowStyles!: Record<string, unknown>;
 
   /** Config object to be passed into the popover's content ngStyle */
-  public popoverContentStyles!: {};
+  public popoverContentStyles!: Record<string, unknown>;
 
   /** Emits the current animation state whenever it changes. */
   _onAnimationStateChange = new EventEmitter<AnimationEvent>();

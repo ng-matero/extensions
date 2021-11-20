@@ -45,7 +45,10 @@ import { NgSelectComponent } from '@ng-select/ng-select';
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = (term: string) => any | Promise<any>;
 export type CompareWithFn = (a: any, b: any) => boolean;
-export type GroupValueFn = (key: string | object, children: any[]) => string | object;
+export type GroupValueFn = (
+  key: string | Record<string, any>,
+  children: any[]
+) => string | Record<string, any>;
 export type SearchFn = (term: string, item: any) => boolean;
 export type TrackByFn = (item: any) => any;
 
@@ -78,7 +81,8 @@ export class MtxSelectComponent
     DoCheck,
     AfterViewInit,
     ControlValueAccessor,
-    MatFormFieldControl<any> {
+    MatFormFieldControl<any>
+{
   @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelectComponent;
 
   // MtxSelect custom templates
@@ -100,7 +104,8 @@ export class MtxSelectComponent
   typeToSearchTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectLoadingTextTemplateDirective, { read: TemplateRef })
   loadingTextTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectTagTemplateDirective, { read: TemplateRef }) tagTemplate!: TemplateRef<any>;
+  @ContentChild(MtxSelectTagTemplateDirective, { read: TemplateRef })
+  tagTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectLoadingSpinnerTemplateDirective, { read: TemplateRef })
   loadingSpinnerTemplate!: TemplateRef<any>;
 

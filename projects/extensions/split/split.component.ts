@@ -353,6 +353,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
       return false;
     }
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     this.displayedAreas.forEach((area, i) => (area.component._size = formatedSizes[i]));
 
@@ -418,7 +419,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
               });
             }
             // More than one wildcard area > Need to keep only one arbitrarly > first
-            // tslint:disable-next-line: one-line
+            // eslint-disable-next-line brace-style
             else if (wildcardSizeAreas.length > 1) {
               let alreadyGotOne = false;
               this.displayedAreas.forEach(area => {
@@ -459,7 +460,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
         this.displayedAreas[0].component.setStyleFlex(0, 0, `100%`, false, false);
       }
       // Multiple areas > use each percent basis
-      // tslint:disable-next-line: one-line
+      // eslint-disable-next-line brace-style
       else {
         const sumGutterSize = this.getNbGutters() * this.gutterSize;
 
@@ -476,7 +477,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     }
     ///////////////////////////////////////////
     // PIXEL MODE
-    // tslint:disable-next-line: one-line
+    // eslint-disable-next-line brace-style
     else if (this.unit === 'pixel') {
       this.displayedAreas.forEach(area => {
         // Area with wildcard size
@@ -488,14 +489,14 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
           }
         }
         // Area with pixel size
-        // tslint:disable-next-line: one-line
+        // eslint-disable-next-line brace-style
         else {
           // Only one area > flex-basis 100%
           if (this.displayedAreas.length === 1) {
             area.component.setStyleFlex(0, 0, `100%`, false, false);
           }
           // Multiple areas > use each pixel basis
-          // tslint:disable-next-line: one-line
+          // eslint-disable-next-line brace-style
           else {
             area.component.setStyleFlex(
               0,
@@ -525,7 +526,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
         this.stopDragging();
       }
       // Else start timeout to call clickEvent at end
-      // tslint:disable-next-line: one-line
+      // eslint-disable-next-line brace-style
       else {
         this._clickTimeout = window.setTimeout(() => {
           this._clickTimeout = null;
@@ -679,6 +680,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     // Each gutter side areas can't absorb all offset
     if (areasBefore.remain !== 0 && areasAfter.remain !== 0) {
       if (Math.abs(areasBefore.remain) === Math.abs(areasAfter.remain)) {
+        /** */
       } else if (Math.abs(areasBefore.remain) > Math.abs(areasAfter.remain)) {
         areasAfter = getGutterSideAbsorptionCapacity(
           this.unit,
@@ -696,7 +698,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
       }
     }
     // Areas before gutter can't absorbs all offset > need to recalculate sizes for areas after gutter.
-    // tslint:disable-next-line: one-line
+    // eslint-disable-next-line brace-style
     else if (areasBefore.remain !== 0) {
       areasAfter = getGutterSideAbsorptionCapacity(
         this.unit,
@@ -706,7 +708,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
       );
     }
     // Areas after gutter can't absorbs all offset > need to recalculate sizes for areas before gutter.
-    // tslint:disable-next-line: one-line
+    // eslint-disable-next-line brace-style
     else if (areasAfter.remain !== 0) {
       areasBefore = getGutterSideAbsorptionCapacity(
         this.unit,

@@ -17,10 +17,10 @@
           [class.active]="currentView === 'clock'"
           class="mtx-calendar-header-time">
       <span (click)="_hoursClicked()"
-            [class.active]="_clockView == 'hour'"
+            [class.active]="_clockView === 'hour'"
             class="mtx-calendar-header-hours"
             role="button">{{ _hoursLabel }}</span>:<span (click)="_minutesClicked()"
-            [class.active]="_clockView == 'minute'"
+            [class.active]="_clockView === 'minute'"
             class="mtx-calendar-header-minutes"
             role="button">{{ _minutesLabel }}</span>
       <br />

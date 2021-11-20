@@ -29,14 +29,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/extensions/tsconfig.lib.json",
-              "projects/extensions/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/extensions/**/*.ts",
+              "projects/extensions/**/*.html"
             ]
           }
         }
@@ -68,14 +65,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/extensions-moment-adapter/tsconfig.lib.json",
-              "projects/extensions-moment-adapter/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/extensions-moment-adapter/**/*.ts",
+              "projects/extensions-moment-adapter/**/*.html"
             ]
           }
         }
@@ -181,15 +175,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/docs/tsconfig.app.json",
-              "projects/docs/tsconfig.spec.json",
-              "projects/docs/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/docs/**/*.ts",
+              "projects/docs/**/*.html"
             ]
           }
         },
@@ -307,15 +297,11 @@
           }
         },
         "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+          "builder": "@angular-eslint/builder:lint",
           "options": {
-            "tsConfig": [
-              "projects/dev-app/tsconfig.app.json",
-              "projects/dev-app/tsconfig.spec.json",
-              "projects/dev-app/e2e/tsconfig.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
+            "lintFilePatterns": [
+              "projects/dev-app/**/*.ts",
+              "projects/dev-app/**/*.html"
             ]
           }
         },
@@ -336,6 +322,7 @@
   },
   "defaultProject": "extensions",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "defaultCollection": "@angular-eslint/schematics"
   }
 }

@@ -1,13 +1,8 @@
 module.exports = {
-  '**/*.ts?(x)': [
-    filenames =>
-      filenames.length > 10
-        ? 'ng lint'
-        : `tslint --format verbose --project ./tsconfig.json --config ./tslint.json ${filenames.join(
-            ' '
-          )}`,
-    'prettier --write',
+  '*.ts': filenames => [
+    `eslint --fix ${filenames.join(' ')}`,
+    `prettier --write ${filenames.join(' ')}`,
   ],
-  'src/*.scss': filenames => `stylelint --syntax scss ${filenames.join(' ')}`,
-  '*.{html,js,json,md,yml}': filenames => `git add ${filenames.join(' ')}`,
+  '*.scss': filenames => `stylelint --fix ${filenames.join(' ')}`,
+  '*.{html,css,js,json,md,yml}': filenames => `git add ${filenames.join(' ')}`,
 };

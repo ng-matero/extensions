@@ -67,7 +67,7 @@ export class NavigationFocusService implements OnDestroy {
   }
 
   isNavigationWithinComponentView(previousUrl: string, newUrl: string) {
-    const componentViewExpression = /(components|cdk)\/([^\/]+)/;
+    const componentViewExpression = /(components|cdk)\/([^/]+)/;
 
     const previousUrlMatch = previousUrl.match(componentViewExpression);
     const newUrlMatch = newUrl.match(componentViewExpression);

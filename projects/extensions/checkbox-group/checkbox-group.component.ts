@@ -182,7 +182,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, Cont
    * Implemented as part of ControlValueAccessor.
    * @param fn Callback to be registered.
    */
-  registerOnChange(fn: (value: MtxCheckboxGroupOption[]) => {}): void {
+  registerOnChange(fn: (value: MtxCheckboxGroupOption[]) => Record<string, unknown>): void {
     this._onChange = fn;
   }
 
@@ -191,7 +191,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, Cont
    * Implemented as part of ControlValueAccessor.
    * @param fn Callback to be registered.
    */
-  registerOnTouched(fn: () => {}): void {
+  registerOnTouched(fn: () => Record<string, unknown>): void {
     this._onTouched = fn;
   }
 

@@ -56,10 +56,8 @@ export class HeaderRowEventDispatcher {
     share()
   );
 
-  private readonly _headerRowHoveredOrActiveDistinctReenterZone = this.headerRowHoveredOrActiveDistinct.pipe(
-    this._enterZone(),
-    share()
-  );
+  private readonly _headerRowHoveredOrActiveDistinctReenterZone =
+    this.headerRowHoveredOrActiveDistinct.pipe(this._enterZone(), share());
 
   // Optimization: Share row events observable with subsequent callers.
   // At startup, calls will be sequential by row (and typically there's only one).

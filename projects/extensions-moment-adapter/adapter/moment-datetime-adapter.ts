@@ -9,7 +9,7 @@ import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import * as _moment from 'moment';
 import { Moment } from 'moment';
 
-const moment = 'default' in _moment ? (_moment as any)['default'] : _moment;
+const moment = 'default' in _moment ? (_moment as any).default : _moment;
 
 function range<T>(length: number, valueFunction: (index: number) => T): T[] {
   const valuesArray = Array(length);
