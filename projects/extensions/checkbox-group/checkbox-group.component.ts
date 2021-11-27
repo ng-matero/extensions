@@ -15,7 +15,6 @@ import {
 } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ThemePalette } from '@angular/material/core';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MtxCheckboxGroupOption } from './checkbox-group.interface';
 import { FocusMonitor } from '@angular/cdk/a11y';
@@ -103,8 +102,6 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, Cont
 
   selectAll = false;
   selectAllIndeterminate = false;
-
-  color: ThemePalette = 'accent';
 
   selectedItems: MtxCheckboxGroupOption[] = [];
 
