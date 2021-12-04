@@ -3,7 +3,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   ComponentRef,
-  ElementRef,
   EventEmitter,
   Inject,
   Input,
@@ -25,15 +24,15 @@ import {
   OverlayRef,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 import { MAT_DATEPICKER_SCROLL_STRATEGY } from '@angular/material/datepicker';
-import { merge, Observable, Subject, Subscription } from 'rxjs';
+import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxCalendarView, MtxCalendar } from './calendar';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
-import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 
 export type MtxDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'datetime';
 export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
