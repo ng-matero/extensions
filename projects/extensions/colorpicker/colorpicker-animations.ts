@@ -26,16 +26,6 @@ export const mtxColorpickerAnimations: {
         ])
       )
     ),
-    transition(
-      'void => enter-dialog',
-      animate(
-        '150ms cubic-bezier(0, 0, 0.2, 1)',
-        keyframes([
-          style({ opacity: 0, transform: 'scale(0.7)' }),
-          style({ transform: 'none', opacity: 1 }),
-        ])
-      )
-    ),
     transition('* => void', animate('100ms linear', style({ opacity: 0 }))),
   ]),
 };

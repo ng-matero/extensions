@@ -1,3 +1,8 @@
-<color-chrome [color]="picker._selected"
-              (onChangeComplete)="picker.select($event.color.hex)">
-</color-chrome>
+<ng-template [ngIf]="picker.content" [ngIfElse]="default"
+             [ngTemplateOutlet]="picker.content">
+</ng-template>
+<ng-template #default>
+  <color-chrome [color]="picker.selected"
+                (onChangeComplete)="picker.select($event.color.hex)">
+  </color-chrome>
+</ng-template>

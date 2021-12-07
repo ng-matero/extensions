@@ -25,6 +25,7 @@ import {
   OnDestroy,
   Optional,
   Output,
+  TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
@@ -87,8 +88,6 @@ export class MtxColorpickerContent
 {
   picker!: MtxColorpicker;
 
-  _isAbove!: boolean;
-
   /** Current state of the animation. */
   _animationState: 'enter-dropdown' | 'void' = 'enter-dropdown';
 
@@ -119,6 +118,9 @@ export class MtxColorpickerContent
 export class MtxColorpicker implements OnChanges, OnDestroy {
   private _scrollStrategy: () => ScrollStrategy;
   private _inputStateChanges = Subscription.EMPTY;
+
+  /** Custom colorpicker content set by the consumer. */
+  @Input() content!: TemplateRef<any>;
 
   /** Emits when the colorpicker has been opened. */
   @Output('opened') openedStream: EventEmitter<void> = new EventEmitter<void>();
@@ -187,10 +189,10 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
   private _color: ThemePalette;
 
   /** The currently selected color. */
-  get _selected(): string {
+  get selected(): string {
     return this._validSelected;
   }
-  set _selected(value: string) {
+  set selected(value: string) {
     this._validSelected = value;
   }
   private _validSelected!: string;
@@ -238,9 +240,10 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
 
   /** Selects the given color */
   select(nextVal: string): void {
-    const oldValue = this._selected;
-    this._selected = nextVal;
+    const oldValue = this.selected;
+    this.selected = nextVal;
 
+    // TODO: `nextVal` should compare with `oldValue`
     this._selectedChanged.next(nextVal);
   }
 
@@ -254,7 +257,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     }
     this.pickerInput = input;
     this._inputStateChanges = input._valueChange.subscribe(
-      (value: string) => (this._selected = value)
+      (value: string) => (this.selected = value)
     );
   }
 

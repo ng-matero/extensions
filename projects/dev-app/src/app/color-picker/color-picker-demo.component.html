@@ -1,23 +1,25 @@
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [(ngModel)]="color">
-  <mat-icon matSuffix>palette</mat-icon>
+  <input matInput [(ngModel)]="color" [mtxColorpicker]="picker" [disabled]="disabled">
+  <mtx-colorpicker-toggle matSuffix [for]="picker"></mtx-colorpicker-toggle>
+  <mtx-colorpicker #picker [disabled]="false"></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
-</mat-form-field>
-&nbsp;
+</mat-form-field> &nbsp;
+
 <mat-slide-toggle [(ngModel)]="disabled">Disabled</mat-slide-toggle>
 
 <h2>Test Reactive Form</h2>
 
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [formControl]="color2">
-  <mat-icon matSuffix>palette</mat-icon>
+  <input matInput [formControl]="color2" [mtxColorpicker]="picker2">
+  <mtx-colorpicker-toggle matSuffix [for]="picker2"></mtx-colorpicker-toggle>
+  <mtx-colorpicker #picker2></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
-</mat-form-field>
-&nbsp;
+</mat-form-field> &nbsp;
+
 <mat-slide-toggle (change)="toggleDisabled($event)" [checked]="color2.disabled">Disabled
 </mat-slide-toggle>
 
@@ -28,8 +30,8 @@
   <input matInput type="color" value="#ff0000" readonly>
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
-</mat-form-field>
-&nbsp;
+</mat-form-field> &nbsp;
+
 <mat-form-field>
   <mat-label>Color picker</mat-label>
   <input matInput [formControl]="color3" [mtxColorpicker]="picker3">
@@ -38,3 +40,22 @@
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
 </mat-form-field>
+
+<h2>Custom</h2>
+
+<mat-form-field>
+  <mat-label>Color picker</mat-label>
+  <input matInput [formControl]="color3" [mtxColorpicker]="customPicker">
+  <mtx-colorpicker-toggle matSuffix [for]="customPicker"></mtx-colorpicker-toggle>
+  <mtx-colorpicker #customPicker [content]="customPickerContent"></mtx-colorpicker>
+  <mat-hint>Choose your favorite color</mat-hint>
+  <mat-error>Please enter the color</mat-error>
+</mat-form-field>
+
+<ng-template #customPickerContent>
+  <div [style.width.px]="240">
+    <color-sketch [color]="customPicker.selected"
+                  (onChangeComplete)="customPicker.select($event.color.hex)">
+    </color-sketch>
+  </div>
+</ng-template>
