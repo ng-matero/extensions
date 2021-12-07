@@ -1,7 +1,7 @@
 {
   "ngPackage": {
     "lib": {
-      "flatModuleFile": "mtxColorPicker",
+      "flatModuleFile": "mtxColorpicker",
       "entryFile": "public-api.ts",
       "umdModuleIds": {
         "ngx-color/chrome": "ngx-color-chrome"
