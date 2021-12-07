@@ -1,5 +1,5 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ESCAPE, hasModifierKey, UP_ARROW } from '@angular/cdk/keycodes';
 import {
   ScrollStrategy,
@@ -434,4 +434,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
       )
     );
   }
+
+  static ngAcceptInputType_disabled: BooleanInput;
+  static ngAcceptInputType_restoreFocus: BooleanInput;
 }

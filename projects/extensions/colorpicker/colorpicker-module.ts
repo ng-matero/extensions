@@ -5,7 +5,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { PortalModule } from '@angular/cdk/portal';
 import { MatButtonModule } from '@angular/material/button';
 import { MtxColorpickerInput } from './colorpicker-input';
-import { MtxColorpickerToggle } from './colorpicker-toggle';
+import { MtxColorpickerToggle, MtxColorpickerToggleIcon } from './colorpicker-toggle';
 import {
   MtxColorpicker,
   MtxColorpickerContent,
@@ -23,8 +23,20 @@ import { ColorChromeModule } from 'ngx-color/chrome';
     MatButtonModule,
     ColorChromeModule,
   ],
-  exports: [MtxColorpicker, MtxColorpickerContent, MtxColorpickerInput, MtxColorpickerToggle],
-  declarations: [MtxColorpicker, MtxColorpickerContent, MtxColorpickerInput, MtxColorpickerToggle],
+  exports: [
+    MtxColorpicker,
+    MtxColorpickerContent,
+    MtxColorpickerInput,
+    MtxColorpickerToggle,
+    MtxColorpickerToggleIcon,
+  ],
+  declarations: [
+    MtxColorpicker,
+    MtxColorpickerContent,
+    MtxColorpickerInput,
+    MtxColorpickerToggle,
+    MtxColorpickerToggleIcon,
+  ],
   providers: [MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER],
 })
 export class MtxColorpickerModule {}

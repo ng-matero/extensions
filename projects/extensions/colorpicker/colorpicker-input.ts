@@ -1,4 +1,4 @@
-import { coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
@@ -274,4 +274,6 @@ export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit,
   private _formatValue(value: string | null) {
     this._elementRef.nativeElement.value = value ? value : '';
   }
+
+  static ngAcceptInputType_disabled: BooleanInput;
 }
