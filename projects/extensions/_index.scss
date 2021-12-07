@@ -2,6 +2,7 @@
 
 @forward './button/button-loading';
 @forward './alert/alert-theme' as alert-* show alert-theme;
+@forward './colorpicker/colorpicker-theme' as colorpicker-* show colorpicker-theme;
 @forward './datetimepicker/datetimepicker-theme' as datetimepicker-* show datetimepicker-theme;
 @forward './grid/grid-theme' as grid-* show grid-theme;
 @forward './loader/loader-theme' as loader-* show loader-theme;
