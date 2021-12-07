@@ -1,8 +1,6 @@
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <mtx-color-picker [(ngModel)]="color" (colorChange)="onColorChange($event)" required
-                    [disabled]="disabled">
-  </mtx-color-picker>
+  <input matInput [(ngModel)]="color">
   <mat-icon matSuffix>palette</mat-icon>
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
@@ -14,8 +12,7 @@
 
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <mtx-color-picker [formControl]="color2" (colorChange)="onColorChange($event)" required>
-  </mtx-color-picker>
+  <input matInput [formControl]="color2">
   <mat-icon matSuffix>palette</mat-icon>
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
@@ -35,8 +32,9 @@
 &nbsp;
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <mtx-color-picker [formControl]="color3" (colorChange)="onColorChange($event)" readonly>
-  </mtx-color-picker>
+  <input matInput [formControl]="color3" [mtxColorpicker]="picker3">
+  <mtx-colorpicker-toggle matSuffix [for]="picker3"></mtx-colorpicker-toggle>
+  <mtx-colorpicker #picker3></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
 </mat-form-field>

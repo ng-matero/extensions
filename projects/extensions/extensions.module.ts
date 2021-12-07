@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { MtxAlertModule } from '@ng-matero/extensions/alert';
 import { MtxButtonModule } from '@ng-matero/extensions/button';
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
-import { MtxColorPickerModule } from '@ng-matero/extensions/color-picker';
+import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
 import { MtxGridModule } from '@ng-matero/extensions/grid';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
@@ -20,7 +20,7 @@ import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
     MtxAlertModule,
     MtxButtonModule,
     MtxCheckboxGroupModule,
-    MtxColorPickerModule,
+    MtxColorpickerModule,
     MtxGridModule,
     MtxDatetimepickerModule,
     MtxDialogModule,
