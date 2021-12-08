@@ -30,6 +30,7 @@ import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/
 import { MtxDatetimepicker } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
+import { ThemePalette } from '@angular/material/core';
 
 export const MAT_DATETIMEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,
@@ -403,6 +404,11 @@ export class MtxDatetimepickerInput<D>
     this._elementRef.nativeElement.value = value
       ? this._dateAdapter.format(value, this.getDisplayFormat())
       : '';
+  }
+
+  /** Returns the palette used by the input's form field, if any. */
+  getThemePalette(): ThemePalette {
+    return this._formField ? this._formField.color : undefined;
   }
 
   static ngAcceptInputType_disabled: BooleanInput;

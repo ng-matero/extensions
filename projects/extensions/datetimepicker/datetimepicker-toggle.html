@@ -5,12 +5,13 @@
         [attr.tabindex]="disabled ? -1 : tabIndex"
         [disabled]="disabled"
         (click)="_open($event)">
-  <mat-icon [ngSwitch]="datetimepicker.type">
+
+  <ng-container *ngIf="!_customIcon" [ngSwitch]="datetimepicker.type">
     <svg *ngSwitchCase="'time'"
+         class="mtx-datetimepicker-toggle-default-icon"
          viewBox="0 0 24 24"
-         width="100%"
-         height="100%"
-         style="vertical-align: top;"
+         width="24px"
+         height="24px"
          fill="currentColor"
          focusable="false">
       <path
@@ -18,10 +19,10 @@
       </path>
     </svg>
     <svg *ngSwitchCase="'datetime'"
+         class="mtx-datetimepicker-toggle-default-icon"
          viewBox="0 0 24 24"
-         width="100%"
-         height="100%"
-         style="vertical-align: top;"
+         width="24px"
+         height="24px"
          fill="currentColor"
          focusable="false">
       <path
@@ -29,15 +30,17 @@
       </path>
     </svg>
     <svg *ngSwitchDefault
+         class="mtx-datetimepicker-toggle-default-icon"
          viewBox="0 0 24 24"
-         width="100%"
-         height="100%"
-         style="vertical-align: top;"
+         width="24px"
+         height="24px"
          fill="currentColor"
          focusable="false">
       <path d="M0 0h24v24H0z" fill="none" />
       <path
             d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
     </svg>
-  </mat-icon>
+  </ng-container>
+
+  <ng-content select="[mtxDatetimepickerToggleIcon]"></ng-content>
 </button>

@@ -120,6 +120,18 @@ $clock-font-size: 14px !default;
       color: $disabled-color;
     }
   }
+
+  .mtx-datetimepicker-toggle-active {
+    color: theming.get-color-from-palette(map.get($config, primary), text);
+
+    &.mat-accent {
+      color: theming.get-color-from-palette(map.get($config, accent), text);
+    }
+
+    &.mat-warn {
+      color: theming.get-color-from-palette(map.get($config, warn), text);
+    }
+  }
 }
 
 @mixin typography($config-or-theme) {

@@ -91,17 +91,11 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
 
   @Input() ariaLabel = 'Use arrow keys to navigate';
-
   @Input() ariaNextMonthLabel = 'Next month';
-
   @Input() ariaPrevMonthLabel = 'Previous month';
-
   @Input() ariaNextYearLabel = 'Next year';
-
   @Input() ariaPrevYearLabel = 'Previous year';
-
   @Input() ariaNextMultiYearLabel = 'Next year range';
-
   @Input() ariaPrevMultiYearLabel = 'Previous year range';
 
   /** Prevent user to select same date time */

@@ -28,7 +28,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
-import { CanColor, mixinColor } from '@angular/material/core';
+import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
 import { MAT_DATEPICKER_SCROLL_STRATEGY } from '@angular/material/datepicker';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
@@ -156,11 +156,8 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   @Input() timeInterval: number = 1;
 
   @Input() ariaNextMonthLabel = 'Next month';
-
   @Input() ariaPrevMonthLabel = 'Previous month';
-
   @Input() ariaNextYearLabel = 'Next year';
-
   @Input() ariaPrevYearLabel = 'Previous year';
 
   /** Prevent user to select same date time */
@@ -190,8 +187,21 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   /** The id for the datetimepicker calendar. */
   id = `mtx-datetimepicker-${datetimepickerUid++}`;
 
+  /** Color palette to use on the datetimepicker's calendar. */
+  @Input()
+  get color(): ThemePalette {
+    return (
+      this._color ||
+      (this.datetimepickerInput ? this.datetimepickerInput.getThemePalette() : undefined)
+    );
+  }
+  set color(value: ThemePalette) {
+    this._color = value;
+  }
+  private _color: ThemePalette;
+
   /** The input element this datetimepicker is associated with. */
-  _datetimepickerInput!: MtxDatetimepickerInput<D>;
+  datetimepickerInput!: MtxDatetimepickerInput<D>;
 
   /** Emits when the datetimepicker is disabled. */
   _disabledChange = new Subject<boolean>();
@@ -230,7 +240,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   get startAt(): D | null {
     // If an explicit startAt is set we start there, otherwise we start at whatever the currently
     // selected value is.
-    return this._startAt || (this._datetimepickerInput ? this._datetimepickerInput.value : null);
+    return this._startAt || (this.datetimepickerInput ? this.datetimepickerInput.value : null);
   }
   set startAt(date: D | null) {
     this._startAt = this._dateAdapter.getValidDateOrNull(date);
@@ -271,8 +281,8 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   /** Whether the datetimepicker pop-up should be disabled. */
   @Input()
   get disabled(): boolean {
-    return this._disabled === undefined && this._datetimepickerInput
-      ? this._datetimepickerInput.disabled
+    return this._disabled === undefined && this.datetimepickerInput
+      ? this.datetimepickerInput.disabled
       : !!this._disabled;
   }
   set disabled(value: boolean) {
@@ -296,16 +306,16 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   /** The minimum selectable date. */
   get _minDate(): D | null {
-    return this._datetimepickerInput && this._datetimepickerInput.min;
+    return this.datetimepickerInput && this.datetimepickerInput.min;
   }
 
   /** The maximum selectable date. */
   get _maxDate(): D | null {
-    return this._datetimepickerInput && this._datetimepickerInput.max;
+    return this.datetimepickerInput && this.datetimepickerInput.max;
   }
 
   get _dateFilter(): (date: D | null, type: MtxDatetimepickerFilterType) => boolean {
-    return this._datetimepickerInput && this._datetimepickerInput._dateFilter;
+    return this.datetimepickerInput && this.datetimepickerInput._dateFilter;
   }
 
   _viewChanged(type: MtxCalendarView): void {
@@ -336,11 +346,11 @@ export class MtxDatetimepicker<D> implements OnDestroy {
    * @param input The datetimepicker input to register with this datetimepicker.
    */
   _registerInput(input: MtxDatetimepickerInput<D>): void {
-    if (this._datetimepickerInput) {
+    if (this.datetimepickerInput) {
       throw Error('A MtxDatetimepicker can only be associated with a single input.');
     }
-    this._datetimepickerInput = input;
-    this._inputStateChanges = this._datetimepickerInput._valueChange.subscribe(
+    this.datetimepickerInput = input;
+    this._inputStateChanges = this.datetimepickerInput._valueChange.subscribe(
       (value: D | null) => (this._selected = value)
     );
   }
@@ -350,7 +360,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     if (this.opened || this.disabled) {
       return;
     }
-    if (!this._datetimepickerInput) {
+    if (!this.datetimepickerInput) {
       throw Error('Attempted to open an MtxDatetimepicker with no associated input.');
     }
 
@@ -410,7 +420,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     this._destroyOverlay();
 
     const isDialog = this.touchUi;
-    const labelId = this._datetimepickerInput.getOverlayLabelId();
+    const labelId = this.datetimepickerInput.getOverlayLabelId();
 
     const portal = new ComponentPortal<MtxDatetimepickerContent<D>>(
       MtxDatetimepickerContent,
@@ -474,7 +484,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   private _getDropdownStrategy() {
     const strategy = this._overlay
       .position()
-      .flexibleConnectedTo(this._datetimepickerInput.getConnectedOverlayOrigin())
+      .flexibleConnectedTo(this.datetimepickerInput.getConnectedOverlayOrigin())
       .withTransformOriginOn('.mtx-datetimepicker-content')
       .withFlexibleDimensions(false)
       .withViewportMargin(8)
@@ -526,7 +536,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
           // Closing on alt + up is only valid when there's an input associated with the datetimepicker.
           return (
             (event.keyCode === ESCAPE && !hasModifierKey(event)) ||
-            (this._datetimepickerInput &&
+            (this.datetimepickerInput &&
               hasModifierKey(event, 'altKey') &&
               event.keyCode === UP_ARROW)
           );
