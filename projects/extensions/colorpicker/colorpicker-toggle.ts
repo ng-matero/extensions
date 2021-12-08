@@ -76,11 +76,7 @@ export class MtxColorpickerToggle implements OnInit, AfterContentInit, OnChanges
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
-  ngOnInit() {
-    setTimeout(() => {
-      console.log(this._customIcon);
-    }, 3000);
-  }
+  ngOnInit() {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.picker) {

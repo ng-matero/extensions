@@ -30,10 +30,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
+import { ColorEvent } from 'ngx-color';
 import { Subject, Subscription, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { mtxColorpickerAnimations } from './colorpicker-animations';
 import { MtxColorpickerInput } from './colorpicker-input';
+
+import { TinyColor } from '@ctrl/tinycolor';
 
 /** Used to generate a unique ID for each colorpicker instance. */
 let colorpickerUid = 0;
@@ -105,6 +108,11 @@ export class MtxColorpickerContent
 
   ngOnDestroy() {
     this._animationDone.complete();
+  }
+
+  // https://github.com/scttcper/ngx-color/issues/292
+  getHex8(e: ColorEvent): string {
+    return new TinyColor(e.color.rgb).toHex8String();
   }
 }
 
