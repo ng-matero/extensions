@@ -46,7 +46,7 @@ export type MtxDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'dateti
 
 export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
 
-// Boilerplate for applying mixins to MtxColorpickerContent.
+// Boilerplate for applying mixins to MtxDatetimepickerContent.
 /** @docs-private */
 const _MtxDatetimepickerContentBase = mixinColor(
   class {
@@ -154,11 +154,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   @Input() mode: MtxDatetimepickerMode = 'auto';
 
   @Input() timeInterval: number = 1;
-
-  @Input() ariaNextMonthLabel = 'Next month';
-  @Input() ariaPrevMonthLabel = 'Previous month';
-  @Input() ariaNextYearLabel = 'Next year';
-  @Input() ariaPrevYearLabel = 'Previous year';
 
   /** Prevent user to select same date time */
   @Input() preventSameDateTimeSelection = false;

@@ -52,7 +52,6 @@ export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
   styleUrls: ['calendar.scss'],
   host: {
     'class': 'mtx-calendar',
-    '[attr.aria-label]': 'ariaLabel',
     'tabindex': '0',
     '(keydown)': '_handleCalendarBodyKeydown($event)',
   },
@@ -89,14 +88,6 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
-
-  @Input() ariaLabel = 'Use arrow keys to navigate';
-  @Input() ariaNextMonthLabel = 'Next month';
-  @Input() ariaPrevMonthLabel = 'Previous month';
-  @Input() ariaNextYearLabel = 'Next year';
-  @Input() ariaPrevYearLabel = 'Previous year';
-  @Input() ariaNextMultiYearLabel = 'Next year range';
-  @Input() ariaPrevMultiYearLabel = 'Previous year range';
 
   /** Prevent user to select same date time */
   @Input() preventSameDateTimeSelection = false;
@@ -277,11 +268,11 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   get _ariaLabelNext(): string {
     switch (this._currentView) {
       case 'month':
-        return this.ariaNextMonthLabel;
+        return this._intl.nextMonthLabel;
       case 'year':
-        return this.ariaNextYearLabel;
+        return this._intl.nextYearLabel;
       case 'multi-year':
-        return this.ariaNextMultiYearLabel;
+        return this._intl.nextMultiYearLabel;
       default:
         return '';
     }
@@ -290,11 +281,11 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   get _ariaLabelPrev(): string {
     switch (this._currentView) {
       case 'month':
-        return this.ariaPrevMonthLabel;
+        return this._intl.prevMonthLabel;
       case 'year':
-        return this.ariaPrevYearLabel;
+        return this._intl.prevYearLabel;
       case 'multi-year':
-        return this.ariaPrevMultiYearLabel;
+        return this._intl.prevMultiYearLabel;
       default:
         return '';
     }
