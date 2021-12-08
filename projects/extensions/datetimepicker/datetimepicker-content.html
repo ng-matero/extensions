@@ -2,7 +2,7 @@
      class="mtx-datetimepicker-content-container"
      [attr.mode]="datetimepicker.mode">
   <mtx-calendar (_userSelection)="datetimepicker.close()"
-                (selectedChange)="onSelectionChange($event)"
+                (selectedChange)="datetimepicker._select($event)"
                 (viewChanged)="datetimepicker._viewChanged($event)"
                 [ariaNextMonthLabel]="datetimepicker.ariaNextMonthLabel"
                 [ariaNextYearLabel]="datetimepicker.ariaNextYearLabel"
@@ -20,6 +20,7 @@
                 [startView]="datetimepicker.startView"
                 [timeInterval]="datetimepicker.timeInterval"
                 [twelvehour]="datetimepicker.twelvehour"
-                [type]="datetimepicker.type">
+                [type]="datetimepicker.type"
+                [@fadeInCalendar]="'enter'">
   </mtx-calendar>
 </div>

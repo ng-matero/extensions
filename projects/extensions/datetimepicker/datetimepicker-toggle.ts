@@ -26,10 +26,13 @@ import { MtxDatetimepicker } from './datetimepicker';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {
+  private _stateChanges = Subscription.EMPTY;
+
   /** Datetimepicker instance that the button will toggle. */
   @Input('for') datetimepicker!: MtxDatetimepicker<D>;
 
-  private _stateChanges = Subscription.EMPTY;
+  /** Tabindex for the toggle. */
+  @Input() tabIndex!: number;
 
   constructor(public _intl: MatDatepickerIntl, private _changeDetectorRef: ChangeDetectorRef) {}
 

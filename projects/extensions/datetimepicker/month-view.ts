@@ -9,11 +9,14 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/core';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import {
+  MTX_DATETIME_FORMATS,
+  MtxDatetimeFormats,
+  DatetimeAdapter,
+} from '@ng-matero/extensions/core';
 import { MtxCalendarCell } from './calendar-body';
 import { MtxDatetimepickerType } from './datetimepicker';
-import { slideCalendar } from './datetimepicker-animations';
+import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 
 const DAYS_PER_WEEK = 7;
@@ -25,7 +28,7 @@ const DAYS_PER_WEEK = 7;
 @Component({
   selector: 'mtx-month-view',
   templateUrl: 'month-view.html',
-  animations: [slideCalendar],
+  animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

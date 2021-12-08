@@ -12,9 +12,12 @@ import {
 import { MtxDatetimepickerType } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxCalendarCell } from './calendar-body';
-import { slideCalendar } from './datetimepicker-animations';
-import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/core';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
+import {
+  MTX_DATETIME_FORMATS,
+  MtxDatetimeFormats,
+  DatetimeAdapter,
+} from '@ng-matero/extensions/core';
 
 export const yearsPerPage = 24;
 
@@ -27,7 +30,7 @@ export const yearsPerRow = 4;
 @Component({
   selector: 'mtx-multi-year-view',
   templateUrl: 'multi-year-view.html',
-  animations: [slideCalendar],
+  animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

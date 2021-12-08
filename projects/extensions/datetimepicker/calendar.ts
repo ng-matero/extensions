@@ -28,11 +28,14 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
-import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/core';
+import {
+  DatetimeAdapter,
+  MTX_DATETIME_FORMATS,
+  MtxDatetimeFormats,
+} from '@ng-matero/extensions/core';
 import { MtxClockView } from './clock';
 import { MtxDatetimepickerType } from './datetimepicker';
-import { slideCalendar } from './datetimepicker-animations';
+import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
@@ -53,7 +56,7 @@ export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
     'tabindex': '0',
     '(keydown)': '_handleCalendarBodyKeydown($event)',
   },
-  animations: [slideCalendar],
+  animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

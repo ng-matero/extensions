@@ -1,13 +1,16 @@
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ComponentRef,
+  ElementRef,
   EventEmitter,
   Inject,
   Input,
   NgZone,
   OnDestroy,
+  OnInit,
   Optional,
   Output,
   ViewChild,
@@ -25,6 +28,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
+import { mixinColor } from '@angular/material/core';
 import { MAT_DATEPICKER_SCROLL_STRATEGY } from '@angular/material/datepicker';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
@@ -33,12 +37,21 @@ import { MtxCalendarView, MtxCalendar } from './calendar';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
+import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 
 export type MtxDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'datetime';
 export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
+
+// Boilerplate for applying mixins to MtxColorpickerContent.
+/** @docs-private */
+const _MtxDatetimepickerContentBase = mixinColor(
+  class {
+    constructor(public _elementRef: ElementRef) {}
+  }
+);
 
 /**
  * Component used as the content for the datetimepicker dialog and popup. We use this instead of
@@ -55,22 +68,53 @@ let datetimepickerUid = 0;
     'class': 'mtx-datetimepicker-content',
     '[class.mtx-datetimepicker-content-touch]': 'datetimepicker?.touchUi',
     '[attr.mode]': 'datetimepicker.mode',
+    '[@transformPanel]': '_animationState',
+    '(@transformPanel.done)': '_animationDone.next()',
   },
+  animations: [
+    mtxDatetimepickerAnimations.transformPanel,
+    mtxDatetimepickerAnimations.fadeInCalendar,
+  ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  inputs: ['color'],
 })
-export class MtxDatetimepickerContent<D> implements AfterContentInit {
+export class MtxDatetimepickerContent<D>
+  extends _MtxDatetimepickerContentBase
+  implements OnInit, AfterContentInit, OnDestroy
+{
+  @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
+
   datetimepicker!: MtxDatetimepicker<D>;
 
-  @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
+  /** Whether the datetimepicker is above or below the input. */
+  _isAbove!: boolean;
+
+  /** Current state of the animation. */
+  _animationState!: 'enter-dropdown' | 'enter-dialog' | 'void';
+
+  /** Emits when an animation has finished. */
+  readonly _animationDone = new Subject<void>();
+
+  constructor(elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
+    super(elementRef);
+  }
+
+  ngOnInit() {
+    this._animationState = this.datetimepicker.touchUi ? 'enter-dialog' : 'enter-dropdown';
+  }
 
   ngAfterContentInit() {
     this._calendar._focusActiveCell();
   }
 
-  onSelectionChange(date: D) {
-    this.datetimepicker._select(date);
-    this.datetimepicker.close();
+  _startExitAnimation() {
+    this._animationState = 'void';
+    this._changeDetectorRef.markForCheck();
+  }
+
+  ngOnDestroy() {
+    this._animationDone.complete();
   }
 }
 
