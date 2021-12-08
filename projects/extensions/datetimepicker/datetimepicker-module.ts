@@ -7,7 +7,11 @@ import { MatButtonModule } from '@angular/material/button';
 import { MtxCalendar } from './calendar';
 import { MtxCalendarBody } from './calendar-body';
 import { MtxClock } from './clock';
-import { MtxDatetimepicker, MtxDatetimepickerContent } from './datetimepicker';
+import {
+  MtxDatetimepicker,
+  MtxDatetimepickerContent,
+  MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
+} from './datetimepicker';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { MtxDatetimepickerToggle, MtxDatetimepickerToggleIcon } from './datetimepicker-toggle';
 import { MtxMonthView } from './month-view';
@@ -16,7 +20,6 @@ import { MtxMultiYearView } from './multi-year-view';
 
 @NgModule({
   imports: [CommonModule, MatButtonModule, OverlayModule, A11yModule, PortalModule],
-  entryComponents: [MtxDatetimepickerContent],
   declarations: [
     MtxCalendar,
     MtxCalendarBody,
@@ -43,5 +46,7 @@ import { MtxMultiYearView } from './multi-year-view';
     MtxYearView,
     MtxMultiYearView,
   ],
+  providers: [MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER],
+  entryComponents: [MtxDatetimepickerContent],
 })
 export class MtxDatetimepickerModule {}

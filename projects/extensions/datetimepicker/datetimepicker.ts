@@ -7,6 +7,7 @@ import {
   ElementRef,
   EventEmitter,
   Inject,
+  InjectionToken,
   Input,
   NgZone,
   OnDestroy,
@@ -25,11 +26,11 @@ import {
   Overlay,
   OverlayConfig,
   OverlayRef,
+  ScrollStrategy,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
-import { MAT_DATEPICKER_SCROLL_STRATEGY } from '@angular/material/datepicker';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
@@ -45,6 +46,27 @@ let datetimepickerUid = 0;
 export type MtxDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'datetime';
 
 export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
+
+/** Possible positions for the colorpicker dropdown along the X axis. */
+export type DatetimepickerDropdownPositionX = 'start' | 'end';
+
+/** Possible positions for the colorpicker dropdown along the Y axis. */
+export type DatetimepickerDropdownPositionY = 'above' | 'below';
+
+/** Injection token that determines the scroll handling while the calendar is open. */
+export const MTX_DATETIMEPICKER_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrategy>(
+  'mtx-datetimepicker-scroll-strategy'
+);
+
+export function MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {
+  return () => overlay.scrollStrategies.reposition();
+}
+
+export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
+  provide: MTX_DATETIMEPICKER_SCROLL_STRATEGY,
+  deps: [Overlay],
+  useFactory: MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY,
+};
 
 // Boilerplate for applying mixins to MtxDatetimepickerContent.
 /** @docs-private */
@@ -221,7 +243,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     private _overlay: Overlay,
     private _ngZone: NgZone,
     private _viewContainerRef: ViewContainerRef,
-    @Inject(MAT_DATEPICKER_SCROLL_STRATEGY) private _scrollStrategy: any,
+    @Inject(MTX_DATETIMEPICKER_SCROLL_STRATEGY) private _scrollStrategy: any,
     @Optional() private _dateAdapter: DatetimeAdapter<D>,
     @Optional() private _dir: Directionality
   ) {
