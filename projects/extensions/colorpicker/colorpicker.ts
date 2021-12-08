@@ -436,5 +436,4 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
   }
 
   static ngAcceptInputType_disabled: BooleanInput;
-  static ngAcceptInputType_restoreFocus: BooleanInput;
 }
