@@ -112,7 +112,8 @@ export class MtxColorpickerContent
 
   // https://github.com/scttcper/ngx-color/issues/292
   getHex8(e: ColorEvent): string {
-    return new TinyColor(e.color.rgb).toHex8String();
+    const alpha = e.color.rgb.a;
+    return alpha === 1 ? e.color.hex : new TinyColor(e.color.rgb).toHex8String();
   }
 }
 
