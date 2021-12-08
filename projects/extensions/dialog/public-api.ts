@@ -1,4 +1,4 @@
 export * from './dialog.module';
 export * from './dialog.component';
-export * from './dialog';
-export * from './dialog.config';
+export * from './dialog-config';
+export { MtxDialog } from './dialog';

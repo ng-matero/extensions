@@ -14,3 +14,4 @@ export {
   MtxColorpickerInput,
 } from './colorpicker-input';
 export * from './colorpicker-toggle';
+export * from './colorpicker-animations';

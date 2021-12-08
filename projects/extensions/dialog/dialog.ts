@@ -3,7 +3,7 @@ import { ComponentType } from '@angular/cdk/portal';
 import { MatDialog } from '@angular/material/dialog';
 
 import { MtxDialogComponent } from './dialog.component';
-import { MtxDialogData } from './dialog.config';
+import { MtxDialogData } from './dialog-config';
 import { Observable } from 'rxjs';
 
 const defaults: MtxDialogData = {
