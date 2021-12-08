@@ -28,7 +28,7 @@ import {
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
-import { mixinColor } from '@angular/material/core';
+import { CanColor, mixinColor } from '@angular/material/core';
 import { MAT_DATEPICKER_SCROLL_STRATEGY } from '@angular/material/datepicker';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
@@ -39,11 +39,12 @@ import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 
-export type MtxDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'datetime';
-export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
-
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
+
+export type MtxDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'datetime';
+
+export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
 
 // Boilerplate for applying mixins to MtxColorpickerContent.
 /** @docs-private */
@@ -81,7 +82,7 @@ const _MtxDatetimepickerContentBase = mixinColor(
 })
 export class MtxDatetimepickerContent<D>
   extends _MtxDatetimepickerContentBase
-  implements OnInit, AfterContentInit, OnDestroy
+  implements OnInit, AfterContentInit, OnDestroy, CanColor
 {
   @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
 
