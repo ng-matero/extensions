@@ -46,7 +46,9 @@
 <mat-form-field>
   <mat-label>Color picker</mat-label>
   <input matInput [formControl]="color3" [mtxColorpicker]="customPicker">
-  <mtx-colorpicker-toggle matSuffix [for]="customPicker"></mtx-colorpicker-toggle>
+  <mtx-colorpicker-toggle matSuffix [for]="customPicker">
+    <mat-icon mtxColorpickerToggleIcon>keyboard_arrow_down</mat-icon>
+  </mtx-colorpicker-toggle>
   <mtx-colorpicker #customPicker [content]="customPickerContent"></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
