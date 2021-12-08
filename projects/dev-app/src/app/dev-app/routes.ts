@@ -18,9 +18,9 @@ export const DEV_APP_ROUTES: Routes = [
       import('../checkbox-group/checkbox-group-demo.module').then(m => m.CheckboxGroupDemoModule),
   },
   {
-    path: 'color-picker',
+    path: 'colorpicker',
     loadChildren: () =>
-      import('../color-picker/color-picker-demo.module').then(m => m.ColorPickerDemoModule),
+      import('../colorpicker/colorpicker-demo.module').then(m => m.ColorPickerDemoModule),
   },
   {
     path: 'datetimepicker',

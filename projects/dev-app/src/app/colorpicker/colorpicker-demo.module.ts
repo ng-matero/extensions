@@ -4,7 +4,7 @@ import { SharedModule } from '../shared.module';
 
 import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
 
-import { ColorPickerDemoComponent } from './color-picker-demo.component';
+import { ColorPickerDemoComponent } from './colorpicker-demo.component';
 
 import { ColorSketchModule } from 'ngx-color/sketch';
 

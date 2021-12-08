@@ -3,9 +3,9 @@ import { FormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
-  selector: 'dev-color-picker-demo',
-  templateUrl: './color-picker-demo.component.html',
-  styleUrls: ['./color-picker-demo.component.scss'],
+  selector: 'dev-colorpicker-demo',
+  templateUrl: './colorpicker-demo.component.html',
+  styleUrls: ['./colorpicker-demo.component.scss'],
 })
 export class ColorPickerDemoComponent {
   color = '#3f51b5';

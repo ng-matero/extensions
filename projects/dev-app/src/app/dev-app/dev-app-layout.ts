@@ -21,7 +21,7 @@ export class DevAppLayout {
   navItems = [
     { name: 'Alert', route: '/alert' },
     { name: 'Button', route: '/button' },
-    { name: 'Color Picker', route: '/color-picker' },
+    { name: 'Color Picker', route: '/colorpicker' },
     { name: 'Checkbox Group', route: '/checkbox-group' },
     { name: 'Data Grid', route: '/grid' },
     { name: 'Datetimepicker', route: '/datetimepicker' },
