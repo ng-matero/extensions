@@ -1,9 +1,9 @@
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChildren,
   Input,
-  OnInit,
   QueryList,
   ViewEncapsulation,
 } from '@angular/core';
@@ -19,8 +19,9 @@ import { MatFormField } from '@angular/material/form-field';
   styleUrls: ['./form-group.component.scss'],
   exportAs: 'mtxFormGroup',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxFormGroupComponent implements OnInit, AfterContentInit {
+export class MtxFormGroupComponent implements AfterContentInit {
   @ContentChildren(MatFormField) formFields!: QueryList<MatFormField>;
 
   @Input() label!: string;
@@ -32,10 +33,6 @@ export class MtxFormGroupComponent implements OnInit, AfterContentInit {
     this._showRequiredMarker = coerceBooleanProperty(value);
   }
   private _showRequiredMarker = false;
-
-  constructor() {}
-
-  ngOnInit(): void {}
 
   ngAfterContentInit() {
     this.formFields.forEach(item => {

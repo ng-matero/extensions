@@ -20,7 +20,6 @@ export function getPointFromEvent(event: MouseEvent | TouchEvent): MtxSplitPoint
     };
   }
   // MouseEvent
-  // eslint-disable-next-line brace-style
   else if (
     (event as MouseEvent).clientX !== undefined &&
     (event as MouseEvent).clientY !== undefined
@@ -194,7 +193,6 @@ function getAreaAbsorptionCapacityPercent(
   }
 
   // REDUCE AREA
-  // eslint-disable-next-line brace-style
   else if (pixels < 0) {
     // If minSize & newSize smaller than it > absorb to min and return remaining pixels
     if (areaSnapshot.area.minSize !== null && tempPercentSize < areaSnapshot.area.minSize) {
@@ -208,7 +206,6 @@ function getAreaAbsorptionCapacityPercent(
       };
     }
     // If reduced under zero > return remaining pixels
-    // eslint-disable-next-line brace-style
     else if (tempPercentSize < 0) {
       // Use 0 as newPercentSize and return calculate pixels remaining
       return {
@@ -255,7 +252,6 @@ function getAreaAbsorptionCapacityPixel(
   }
 
   // REDUCE AREA
-  // eslint-disable-next-line brace-style
   else if (pixels < 0) {
     // If minSize & newSize smaller than it > absorb to min and return remaining pixels
     if (areaSnapshot.area.minSize !== null && tempPixelSize < areaSnapshot.area.minSize) {
@@ -267,7 +263,6 @@ function getAreaAbsorptionCapacityPixel(
       };
     }
     // If reduced under zero > return remaining pixels
-    // eslint-disable-next-line brace-style
     else if (tempPixelSize < 0) {
       return {
         areaSnapshot,

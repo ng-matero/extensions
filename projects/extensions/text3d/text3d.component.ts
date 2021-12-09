@@ -41,6 +41,4 @@ export class MtxText3dComponent {
     }
     return tmpArr;
   }
-
-  constructor() {}
 }

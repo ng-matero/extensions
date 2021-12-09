@@ -22,15 +22,18 @@ import {
 } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
+import { ThemePalette } from '@angular/material/core';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { MatFormField } from '@angular/material/form-field';
 import { Subscription } from 'rxjs';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
-import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from '@ng-matero/extensions/core';
+import {
+  DatetimeAdapter,
+  MTX_DATETIME_FORMATS,
+  MtxDatetimeFormats,
+} from '@ng-matero/extensions/core';
 import { MtxDatetimepicker } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
-import { ThemePalette } from '@angular/material/core';
 
 export const MAT_DATETIMEPICKER_VALUE_ACCESSOR: any = {
   provide: NG_VALUE_ACCESSOR,

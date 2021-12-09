@@ -1,10 +1,10 @@
 import { Injectable, TemplateRef } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 
 import { MtxDialogComponent } from './dialog.component';
 import { MtxDialogData } from './dialog-config';
-import { Observable } from 'rxjs';
 
 const defaults: MtxDialogData = {
   title: '',

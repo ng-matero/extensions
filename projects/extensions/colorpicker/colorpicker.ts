@@ -30,11 +30,12 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
-import { ColorEvent } from 'ngx-color';
 import { Subject, Subscription, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { mtxColorpickerAnimations } from './colorpicker-animations';
 import { MtxColorpickerInput } from './colorpicker-input';
+
+import { ColorEvent } from 'ngx-color';
 
 import { TinyColor } from '@ctrl/tinycolor';
 

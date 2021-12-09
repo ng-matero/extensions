@@ -668,6 +668,8 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
       }
 
       style.touchAction = 'none';
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       style.webkitTapHighlightColor = 'transparent';
     }
   }
