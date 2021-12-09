@@ -23,8 +23,8 @@ const routes = [
           import('./checkbox-group/checkbox-group').then(m => m.CheckboxGroupModule),
       },
       {
-        path: 'color-picker',
-        loadChildren: () => import('./color-picker/color-picker').then(m => m.ColorPickerModule),
+        path: 'colorpicker',
+        loadChildren: () => import('./colorpicker/colorpicker').then(m => m.ColorPickerModule),
       },
       {
         path: 'datetimepicker',

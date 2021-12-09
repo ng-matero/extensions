@@ -7,8 +7,4 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   color = '#3f51b5';
-
-  changeColor(e: any) {
-    console.log(e);
-  }
 }

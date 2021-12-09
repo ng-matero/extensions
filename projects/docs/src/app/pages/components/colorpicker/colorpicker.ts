@@ -7,16 +7,16 @@ import { SharedModule } from '../../../shared';
 import { ColorPickerBasicComponent, colorPickerBasicExampleConfig } from './examples/basic';
 
 @Component({
-  selector: 'app-color-picker-overview',
-  templateUrl: './color-picker-overview.html',
+  selector: 'app-colorpicker-overview',
+  templateUrl: './colorpicker-overview.html',
 })
 export class ColorPickerOverviewComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
 @Component({
-  selector: 'app-color-picker-api',
-  templateUrl: './color-picker-api.html',
+  selector: 'app-colorpicker-api',
+  templateUrl: './colorpicker-api.html',
 })
 export class ColorPickerApiComponent {
   constructor(public route: ActivatedRoute) {}
@@ -40,7 +40,7 @@ export class ColorPickerApiComponent {
         component: ColorPickerApiComponent,
         pathMatch: 'full',
         data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./color-picker.md'),
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./colorpicker.md'),
         },
       },
       { path: '**', redirectTo: 'overview' },

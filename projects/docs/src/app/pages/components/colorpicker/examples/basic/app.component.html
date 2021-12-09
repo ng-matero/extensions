@@ -1,0 +1,8 @@
+<mat-form-field>
+  <mat-label>Color picker</mat-label>
+  <input matInput [(ngModel)]="color" [mtxColorpicker]="picker">
+  <mtx-colorpicker-toggle matSuffix [for]="picker"></mtx-colorpicker-toggle>
+  <mtx-colorpicker #picker></mtx-colorpicker>
+  <mat-hint>Choose your favorite color</mat-hint>
+  <mat-error>Please enter the color</mat-error>
+</mat-form-field>

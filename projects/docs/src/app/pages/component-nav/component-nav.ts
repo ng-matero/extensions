@@ -20,7 +20,7 @@ export const COMPONENTS_MENU = [
         summary: 'Allows the user to create a set of checkbox with select all.',
       },
       {
-        id: 'color-picker',
+        id: 'colorpicker',
         name: 'Color Picker',
         summary: 'An extra input to select color enhanced by the ngx-color.',
       },
