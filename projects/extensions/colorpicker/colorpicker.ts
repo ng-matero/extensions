@@ -91,6 +91,9 @@ export class MtxColorpickerContent
 {
   picker!: MtxColorpicker;
 
+  /** The default color value of ngx-color */
+  _defaultColorValue = '#000';
+
   /** Current state of the animation. */
   _animationState: 'enter-dropdown' | 'void' = 'enter-dropdown';
 

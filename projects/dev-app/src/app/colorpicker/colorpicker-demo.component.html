@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [(ngModel)]="color" [mtxColorpicker]="picker" [disabled]="disabled">
+  <input matInput [mtxColorpicker]="picker" [disabled]="disabled">
   <mtx-colorpicker-toggle matSuffix [for]="picker"></mtx-colorpicker-toggle>
   <mtx-colorpicker #picker [disabled]="false"></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>

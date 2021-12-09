@@ -2,7 +2,7 @@
              [ngTemplateOutlet]="picker.content">
 </ng-template>
 <ng-template #default>
-  <color-chrome [color]="picker.selected"
+  <color-chrome [color]="picker.selected || _defaultColorValue"
                 (onChangeComplete)="picker.select(getHex8($event))">
   </color-chrome>
 </ng-template>
