@@ -265,15 +265,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   private _startAt!: D | null;
 
   @Input()
-  get openOnFocus(): boolean {
-    return this._openOnFocus;
-  }
-  set openOnFocus(value: boolean) {
-    this._openOnFocus = coerceBooleanProperty(value);
-  }
-  private _openOnFocus!: boolean;
-
-  @Input()
   get type() {
     return this._type;
   }
@@ -311,6 +302,28 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     }
   }
   private _disabled!: boolean;
+
+  /** Preferred position of the datetimepicker in the X axis. */
+  @Input()
+  xPosition: DatetimepickerDropdownPositionX = 'start';
+
+  /** Preferred position of the datetimepicker in the Y axis. */
+  @Input()
+  yPosition: DatetimepickerDropdownPositionY = 'below';
+
+  /**
+   * Whether to restore focus to the previously-focused element when the panel is closed.
+   * Note that automatic focus restoration is an accessibility feature and it is recommended that
+   * you provide your own equivalent, if you decide to turn it off.
+   */
+  @Input()
+  get restoreFocus(): boolean {
+    return this._restoreFocus;
+  }
+  set restoreFocus(value: boolean) {
+    this._restoreFocus = coerceBooleanProperty(value);
+  }
+  private _restoreFocus = true;
 
   /** The currently selected date. */
   get _selected(): D | null {
@@ -408,6 +421,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     };
 
     if (
+      this._restoreFocus &&
       this._focusedElementBeforeOpen &&
       typeof this._focusedElementBeforeOpen.focus === 'function'
     ) {
@@ -424,12 +438,12 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   /**
-   * TODO: add datetimepicker color
    * Forwards relevant values from the datetimepicker to the
    * datetimepicker content inside the overlay.
    */
   protected _forwardContentValues(instance: MtxDatetimepickerContent<D>) {
     instance.datetimepicker = this;
+    instance.color = this.color;
   }
 
   /** Opens the overlay with the calendar. */
@@ -511,34 +525,38 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   /**
-   * TODO: `xPosition` and `yPosition`
    * Sets the positions of the datetimepicker in dropdown mode based on the current configuration.
    */
   private _setConnectedPositions(strategy: FlexibleConnectedPositionStrategy) {
+    const primaryX = this.xPosition === 'end' ? 'end' : 'start';
+    const secondaryX = primaryX === 'start' ? 'end' : 'start';
+    const primaryY = this.yPosition === 'above' ? 'bottom' : 'top';
+    const secondaryY = primaryY === 'top' ? 'bottom' : 'top';
+
     return strategy.withPositions([
       {
-        originX: 'start',
-        originY: 'bottom',
-        overlayX: 'start',
-        overlayY: 'top',
+        originX: primaryX,
+        originY: secondaryY,
+        overlayX: primaryX,
+        overlayY: primaryY,
       },
       {
-        originX: 'start',
-        originY: 'top',
-        overlayX: 'start',
-        overlayY: 'bottom',
+        originX: primaryX,
+        originY: primaryY,
+        overlayX: primaryX,
+        overlayY: secondaryY,
       },
       {
-        originX: 'end',
-        originY: 'bottom',
-        overlayX: 'end',
-        overlayY: 'top',
+        originX: secondaryX,
+        originY: secondaryY,
+        overlayX: secondaryX,
+        overlayY: primaryY,
       },
       {
-        originX: 'end',
-        originY: 'top',
-        overlayX: 'end',
-        overlayY: 'bottom',
+        originX: secondaryX,
+        originY: primaryY,
+        overlayX: secondaryX,
+        overlayY: secondaryY,
       },
     ]);
   }
@@ -566,5 +584,5 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   static ngAcceptInputType_twelvehour: BooleanInput;
   static ngAcceptInputType_touchUi: BooleanInput;
   static ngAcceptInputType_disabled: BooleanInput;
-  static ngAcceptInputType_openOnFocus: BooleanInput;
+  static ngAcceptInputType_restoreFocus: BooleanInput;
 }
