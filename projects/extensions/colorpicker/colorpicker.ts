@@ -91,9 +91,6 @@ export class MtxColorpickerContent
 {
   picker!: MtxColorpicker;
 
-  /** The default color value of ngx-color */
-  _defaultColorValue = '#000';
-
   /** Current state of the animation. */
   _animationState: 'enter-dropdown' | 'void' = 'enter-dropdown';
 
@@ -207,7 +204,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
   set selected(value: string) {
     this._validSelected = value;
   }
-  private _validSelected!: string;
+  private _validSelected: string = '';
 
   /** A reference to the overlay when the picker is opened as a popup. */
   private _overlayRef!: OverlayRef | null;
