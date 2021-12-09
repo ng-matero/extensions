@@ -31,6 +31,7 @@ export type MtxClockView = 'hour' | 'minute';
     'role': 'clock',
     '(mousedown)': '_handleMousedown($event)',
   },
+  exportAs: 'mtxClock',
   encapsulation: ViewEncapsulation.None,
 })
 export class MtxClock<D> implements AfterContentInit {

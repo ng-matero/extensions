@@ -31,6 +31,7 @@ export class MtxCalendarCell {
   host: {
     class: 'mtx-calendar-body',
   },
+  exportAs: 'mtxCalendarBody',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

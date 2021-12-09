@@ -17,6 +17,7 @@ import { MatFormField } from '@angular/material/form-field';
   },
   templateUrl: './form-group.component.html',
   styleUrls: ['./form-group.component.scss'],
+  exportAs: 'mtxFormGroup',
   encapsulation: ViewEncapsulation.None,
 })
 export class MtxFormGroupComponent implements OnInit, AfterContentInit {

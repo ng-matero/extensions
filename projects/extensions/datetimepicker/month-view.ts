@@ -28,6 +28,7 @@ const DAYS_PER_WEEK = 7;
 @Component({
   selector: 'mtx-month-view',
   templateUrl: 'month-view.html',
+  exportAs: 'mtxMonthView',
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

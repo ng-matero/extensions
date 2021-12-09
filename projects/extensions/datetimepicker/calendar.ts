@@ -55,6 +55,7 @@ export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
     'tabindex': '0',
     '(keydown)': '_handleCalendarBodyKeydown($event)',
   },
+  exportAs: 'mtxCalendar',
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

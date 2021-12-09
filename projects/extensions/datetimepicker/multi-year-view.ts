@@ -30,6 +30,7 @@ export const yearsPerRow = 4;
 @Component({
   selector: 'mtx-multi-year-view',
   templateUrl: 'multi-year-view.html',
+  exportAs: 'mtxMultiYearView',
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,

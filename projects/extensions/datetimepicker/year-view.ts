@@ -26,6 +26,7 @@ import {
 @Component({
   selector: 'mtx-year-view',
   templateUrl: 'year-view.html',
+  exportAs: 'mtxYearView',
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
