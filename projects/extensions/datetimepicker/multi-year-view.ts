@@ -35,8 +35,6 @@ export const yearsPerRow = 4;
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxMultiYearView<D> implements AfterContentInit {
-  @Output() _userSelection = new EventEmitter<void>();
-
   @Input() type: MtxDatetimepickerType = 'date';
 
   /** A function used to filter which dates are selectable. */
@@ -44,6 +42,9 @@ export class MtxMultiYearView<D> implements AfterContentInit {
 
   /** Emits when a new month is selected. */
   @Output() selectedChange = new EventEmitter<D>();
+
+  /** Emits when any date is selected. */
+  @Output() readonly _userSelection = new EventEmitter<void>();
 
   /** Grid of calendar cells representing the years in the range. */
   _years!: MtxCalendarCell[][];

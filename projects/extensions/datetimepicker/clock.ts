@@ -1,3 +1,4 @@
+import { BooleanInput } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   Component,
@@ -33,7 +34,6 @@ export type MtxClockView = 'hour' | 'minute';
   encapsulation: ViewEncapsulation.None,
 })
 export class MtxClock<D> implements AfterContentInit {
-  @Output() _userSelection = new EventEmitter<void>();
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
 
@@ -44,7 +44,11 @@ export class MtxClock<D> implements AfterContentInit {
   /** Emits when the currently selected date changes. */
   @Output() selectedChange = new EventEmitter<D>();
 
+  /** Emits when any date is activated. */
   @Output() activeDateChange = new EventEmitter<D>();
+
+  /** Emits when any date is selected. */
+  @Output() readonly _userSelection = new EventEmitter<void>();
 
   /** Hours and Minutes representing the clock view. */
   _hours: any[] = [];
@@ -73,8 +77,6 @@ export class MtxClock<D> implements AfterContentInit {
     };
   }
 
-  private _activeDate!: D;
-
   /**
    * The date to display in this clock view.
    */
@@ -82,7 +84,6 @@ export class MtxClock<D> implements AfterContentInit {
   get activeDate(): D {
     return this._activeDate;
   }
-
   set activeDate(value: D) {
     const oldActiveDate = this._activeDate;
     this._activeDate = this._adapter.clampDate(value, this.minDate, this.maxDate);
@@ -90,23 +91,20 @@ export class MtxClock<D> implements AfterContentInit {
       this._init();
     }
   }
-
-  private _selected!: D | null;
+  private _activeDate!: D;
 
   /** The currently selected date. */
   @Input()
   get selected(): D | null {
     return this._selected;
   }
-
   set selected(value: D | null) {
     this._selected = this._adapter.getValidDateOrNull(this._adapter.deserialize(value));
     if (this._selected) {
       this.activeDate = this._selected;
     }
   }
-
-  private _minDate!: D | null;
+  private _selected!: D | null;
 
   /** The minimum selectable date. */
   @Input()
@@ -117,18 +115,17 @@ export class MtxClock<D> implements AfterContentInit {
   set minDate(value: D | null) {
     this._minDate = this._adapter.getValidDateOrNull(this._adapter.deserialize(value));
   }
-
-  private _maxDate!: D | null;
+  private _minDate!: D | null;
 
   /** The maximum selectable date. */
   @Input()
   get maxDate(): D | null {
     return this._maxDate;
   }
-
   set maxDate(value: D | null) {
     this._maxDate = this._adapter.getValidDateOrNull(this._adapter.deserialize(value));
   }
+  private _maxDate!: D | null;
 
   /** Whether the clock should be started in hour or minute view. */
   @Input()
@@ -171,10 +168,7 @@ export class MtxClock<D> implements AfterContentInit {
     this._init();
   }
 
-  /**
-   * TODO: use `fromEvent` of rxjs.
-   * Handles mousedown events on the clock body.
-   */
+  /** Handles mousedown events on the clock body. */
   _handleMousedown(event: any) {
     this._timeChanged = false;
     this.setTime(event);
@@ -344,4 +338,6 @@ export class MtxClock<D> implements AfterContentInit {
     this.activeDate = date;
     this.activeDateChange.emit(this.activeDate);
   }
+
+  static ngAcceptInputType_twelvehour: BooleanInput;
 }

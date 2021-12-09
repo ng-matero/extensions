@@ -19,7 +19,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { Directionality } from '@angular/cdk/bidi';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { BooleanInput, coerceBooleanProperty, coerceStringArray } from '@angular/cdk/coercion';
 import { ESCAPE, hasModifierKey, UP_ARROW } from '@angular/cdk/keycodes';
 import {
   FlexibleConnectedPositionStrategy,
@@ -186,9 +186,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
    */
   @Output() selectedChanged = new EventEmitter<D>();
 
-  /** Classes to be passed to the date picker panel. Supports the same syntax as `ngClass`. */
-  @Input() panelClass!: string | string[];
-
   /** Emits when the datetimepicker has been opened. */
   @Output('opened') openedStream: EventEmitter<void> = new EventEmitter<void>();
 
@@ -198,8 +195,28 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   /** Emits when the view has been changed. */
   @Output() viewChanged: EventEmitter<MtxCalendarView> = new EventEmitter<MtxCalendarView>();
 
+  /**
+   * Classes to be passed to the date picker panel.
+   * Supports string and string array values, similar to `ngClass`.
+   */
+  @Input()
+  get panelClass(): string | string[] {
+    return this._panelClass;
+  }
+  set panelClass(value: string | string[]) {
+    this._panelClass = coerceStringArray(value);
+  }
+  private _panelClass!: string[];
+
   /** Whether the calendar is open. */
-  opened = false;
+  @Input()
+  get opened(): boolean {
+    return this._opened;
+  }
+  set opened(value: boolean) {
+    coerceBooleanProperty(value) ? this.open() : this.close();
+  }
+  private _opened = false;
 
   /** The id for the datetimepicker calendar. */
   id = `mtx-datetimepicker-${datetimepickerUid++}`;
@@ -359,10 +376,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     this._disabledChange.complete();
   }
 
-  /**
-   * TODO: use model
-   * Selects the given date
-   */
+  /** Selects the given date */
   _select(date: D): void {
     const oldValue = this._selected;
     this._selected = date;
@@ -387,7 +401,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   /** Open the calendar. */
   open(): void {
-    if (this.opened || this.disabled) {
+    if (this._opened || this.disabled) {
       return;
     }
     if (!this.datetimepickerInput) {
@@ -396,13 +410,13 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
     this._focusedElementBeforeOpen = _getFocusedElementPierceShadowDom();
     this._openOverlay();
-    this.opened = true;
+    this._opened = true;
     this.openedStream.emit();
   }
 
   /** Close the calendar. */
   close(): void {
-    if (!this.opened) {
+    if (!this._opened) {
       return;
     }
 
@@ -413,8 +427,8 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     const completeClose = () => {
       // The `_opened` could've been reset already if
       // we got two events in quick succession.
-      if (this.opened) {
-        this.opened = false;
+      if (this._opened) {
+        this._opened = false;
         this.closedStream.emit();
         this._focusedElementBeforeOpen = null;
       }
@@ -582,7 +596,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   static ngAcceptInputType_multiYearSelector: BooleanInput;
   static ngAcceptInputType_twelvehour: BooleanInput;
-  static ngAcceptInputType_touchUi: BooleanInput;
+  static ngAcceptInputType_preventSameDateTimeSelection: BooleanInput;
   static ngAcceptInputType_disabled: BooleanInput;
+  static ngAcceptInputType_opened: BooleanInput;
+  static ngAcceptInputType_touchUi: BooleanInput;
   static ngAcceptInputType_restoreFocus: BooleanInput;
 }

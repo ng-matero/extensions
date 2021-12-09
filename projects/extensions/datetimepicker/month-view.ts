@@ -35,13 +35,14 @@ const DAYS_PER_WEEK = 7;
 export class MtxMonthView<D> implements AfterContentInit {
   @Input() type: MtxDatetimepickerType = 'date';
 
-  @Output() _userSelection = new EventEmitter<void>();
-
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
 
   /** Emits when a new date is selected. */
   @Output() selectedChange = new EventEmitter<D>();
+
+  /** Emits when any date is selected. */
+  @Output() readonly _userSelection = new EventEmitter<void>();
 
   /** Grid of calendar cells representing the dates of the month. */
   _weeks!: MtxCalendarCell[][];

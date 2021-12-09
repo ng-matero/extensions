@@ -31,8 +31,6 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxYearView<D> implements AfterContentInit {
-  @Output() _userSelection = new EventEmitter<void>();
-
   @Input() type: MtxDatetimepickerType = 'date';
 
   /** A function used to filter which dates are selectable. */
@@ -40,6 +38,9 @@ export class MtxYearView<D> implements AfterContentInit {
 
   /** Emits when a new month is selected. */
   @Output() selectedChange = new EventEmitter<D>();
+
+  /** Emits when any date is selected. */
+  @Output() readonly _userSelection = new EventEmitter<void>();
 
   /** Grid of calendar cells representing the months of the year. */
   _months!: MtxCalendarCell[][];

@@ -52,8 +52,6 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   /** Tabindex for the toggle. */
   @Input() tabIndex!: number;
 
-  constructor(public _intl: MatDatepickerIntl, private _changeDetectorRef: ChangeDetectorRef) {}
-
   /** Whether the toggle button is disabled. */
   @Input()
   get disabled(): boolean {
@@ -72,6 +70,8 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
 
   /** Underlying button element. */
   @ViewChild('button') _button!: MatButton;
+
+  constructor(public _intl: MatDatepickerIntl, private _changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.datetimepicker) {

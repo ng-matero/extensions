@@ -1,22 +1,23 @@
 <div cdkTrapFocus
      class="mtx-datetimepicker-content-container"
      [attr.mode]="datetimepicker.mode">
-  <mtx-calendar (_userSelection)="datetimepicker.close()"
-                (selectedChange)="datetimepicker._select($event)"
-                (viewChanged)="datetimepicker._viewChanged($event)"
-                [preventSameDateTimeSelection]="datetimepicker.preventSameDateTimeSelection"
+  <mtx-calendar [id]="datetimepicker.id"
+                [ngClass]="datetimepicker.panelClass"
                 [attr.mode]="datetimepicker.mode"
-                [id]="datetimepicker.id"
+                [type]="datetimepicker.type"
+                [startAt]="datetimepicker.startAt"
+                [startView]="datetimepicker.startView"
                 [maxDate]="datetimepicker._maxDate"
                 [minDate]="datetimepicker._minDate"
                 [dateFilter]="datetimepicker._dateFilter"
-                [selected]="datetimepicker._selected"
                 [multiYearSelector]="datetimepicker.multiYearSelector"
-                [startAt]="datetimepicker.startAt"
-                [startView]="datetimepicker.startView"
+                [preventSameDateTimeSelection]="datetimepicker.preventSameDateTimeSelection"
                 [timeInterval]="datetimepicker.timeInterval"
                 [twelvehour]="datetimepicker.twelvehour"
-                [type]="datetimepicker.type"
-                [@fadeInCalendar]="'enter'">
+                [selected]="datetimepicker._selected"
+                [@fadeInCalendar]="'enter'"
+                (selectedChange)="datetimepicker._select($event)"
+                (viewChanged)="datetimepicker._viewChanged($event)"
+                (_userSelection)="datetimepicker.close()">
   </mtx-calendar>
 </div>

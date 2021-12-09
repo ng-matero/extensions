@@ -60,8 +60,6 @@ export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
-  @Output() _userSelection = new EventEmitter<void>();
-
   @Input()
   get multiYearSelector(): boolean {
     return this._multiYearSelector;
@@ -97,6 +95,8 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   /** Emits when the view has been changed. */
   @Output() viewChanged: EventEmitter<MtxCalendarView> = new EventEmitter<MtxCalendarView>();
+
+  @Output() _userSelection = new EventEmitter<void>();
 
   _AMPM!: string;
 
