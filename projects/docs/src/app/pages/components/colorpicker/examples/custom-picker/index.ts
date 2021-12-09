@@ -1,8 +1,8 @@
-import { AppComponent as ColorpickerBasicComponent } from './app.component';
+import { AppComponent as ColorpickerCustomPickerComponent } from './app.component';
 
-const colorpickerBasicExampleConfig = {
-  title: 'Basic',
-  component: ColorpickerBasicComponent,
+const colorpickerCustomPickerExampleConfig = {
+  title: 'Custom Picker',
+  component: ColorpickerCustomPickerComponent,
   files: [
     {
       file: 'app.component.html',
@@ -22,4 +22,4 @@ const colorpickerBasicExampleConfig = {
   ],
 };
 
-export { ColorpickerBasicComponent, colorpickerBasicExampleConfig };
+export { ColorpickerCustomPickerComponent, colorpickerCustomPickerExampleConfig };

@@ -4,7 +4,21 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SharedModule } from '../../../shared';
 
-import { ColorPickerBasicComponent, colorPickerBasicExampleConfig } from './examples/basic';
+import { ColorpickerBasicComponent, colorpickerBasicExampleConfig } from './examples/basic';
+import {
+  ColorpickerDisabledComponent,
+  colorpickerDisabledExampleConfig,
+} from './examples/disabled';
+import {
+  ColorpickerCustomIconComponent,
+  colorpickerCustomIconExampleConfig,
+} from './examples/custom-icon';
+import {
+  ColorpickerCustomPickerComponent,
+  colorpickerCustomPickerExampleConfig,
+} from './examples/custom-picker';
+
+import { ColorSketchModule } from 'ngx-color/sketch';
 
 @Component({
   selector: 'app-colorpicker-overview',
@@ -32,7 +46,12 @@ export class ColorPickerApiComponent {
         component: ColorPickerOverviewComponent,
         pathMatch: 'full',
         data: {
-          examples: [colorPickerBasicExampleConfig],
+          examples: [
+            colorpickerBasicExampleConfig,
+            colorpickerCustomPickerExampleConfig,
+            colorpickerCustomIconExampleConfig,
+            colorpickerDisabledExampleConfig,
+          ],
         },
       },
       {
@@ -45,7 +64,16 @@ export class ColorPickerApiComponent {
       },
       { path: '**', redirectTo: 'overview' },
     ]),
+    ColorSketchModule,
   ],
-  declarations: [ColorPickerOverviewComponent, ColorPickerApiComponent, ColorPickerBasicComponent],
+  declarations: [
+    ColorPickerOverviewComponent,
+    ColorPickerApiComponent,
+
+    ColorpickerBasicComponent,
+    ColorpickerCustomPickerComponent,
+    ColorpickerCustomIconComponent,
+    ColorpickerDisabledComponent,
+  ],
 })
 export class ColorPickerModule {}
