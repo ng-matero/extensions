@@ -41,7 +41,8 @@ let nextUniqueId = 0;
   providers: [{ provide: MatFormFieldControl, useExisting: MtxColorPickerComponent }],
 })
 export class MtxColorPickerComponent
-  implements OnDestroy, DoCheck, AfterViewInit, ControlValueAccessor, MatFormFieldControl<any> {
+  implements OnDestroy, DoCheck, AfterViewInit, ControlValueAccessor, MatFormFieldControl<any>
+{
   /** Value of the color picker control. */
   @Input()
   get value(): string | null {
@@ -115,6 +116,16 @@ export class MtxColorPickerComponent
     this.stateChanges.next();
   }
   private _disabled = false;
+
+  /** Whether the element is readonly. */
+  @Input()
+  get readonly(): boolean {
+    return this._readonly;
+  }
+  set readonly(value: boolean) {
+    this._readonly = coerceBooleanProperty(value);
+  }
+  private _readonly = false;
 
   errorState = false;
 
@@ -302,9 +313,9 @@ export class MtxColorPickerComponent
       filter(event => {
         // If we're in the Shadow DOM, the event target will be the shadow root, so we have to
         // fall back to check the first element in the path of the click event.
-        const clickTarget = (this._isInsideShadowRoot && event.composedPath
-          ? event.composedPath()[0]
-          : event.target) as HTMLElement;
+        const clickTarget = (
+          this._isInsideShadowRoot && event.composedPath ? event.composedPath()[0] : event.target
+        ) as HTMLElement;
         const formField = this._formField ? this._formField._elementRef.nativeElement : null;
 
         return (
