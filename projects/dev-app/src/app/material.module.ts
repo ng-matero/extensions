@@ -13,7 +13,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatCheckboxModule, MAT_CHECKBOX_DEFAULT_OPTIONS } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -41,10 +41,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-// import {
-//   MatColumnResizeModule,
-//   MatDefaultEnabledColumnResizeModule,
-// } from '@angular/material-experimental/column-resize';
 
 @NgModule({
   exports: [
@@ -90,8 +86,14 @@ import { MatTreeModule } from '@angular/material/tree';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    // MatColumnResizeModule,
-    // MatDefaultEnabledColumnResizeModule
+  ],
+  providers: [
+    {
+      provide: MAT_CHECKBOX_DEFAULT_OPTIONS,
+      useValue: {
+        color: 'primary',
+      },
+    },
   ],
 })
 export class MaterialModule {}
