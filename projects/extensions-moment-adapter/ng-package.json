@@ -3,10 +3,6 @@
   "dest": "../../dist/extensions-moment-adapter",
   "lib": {
     "flatModuleFile": "extensions-moment-adapter",
-    "entryFile": "public_api.ts",
-    "umdModuleIds": {
-      "@ng-matero/extensions/core": "@ng-matero/extensions/core",
-      "moment": "moment"
-    }
+    "entryFile": "public_api.ts"
   }
 }
