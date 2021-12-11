@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   Component,
   ContentChildren,
   Input,
@@ -12,12 +13,14 @@ import { MatFormField } from '@angular/material/form-field';
 
 @Component({
   selector: 'mtx-form-group',
+  exportAs: 'mtxFormGroup',
   host: {
     class: 'mtx-form-group',
   },
   templateUrl: './form-group.component.html',
   styleUrls: ['./form-group.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxFormGroupComponent implements OnInit, AfterContentInit {
   @ContentChildren(MatFormField) formFields!: QueryList<MatFormField>;
