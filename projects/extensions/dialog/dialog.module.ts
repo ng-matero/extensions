@@ -13,6 +13,5 @@ import { MtxDialog } from './dialog';
   exports: [MtxDialogComponent],
   declarations: [MtxDialogComponent],
   providers: [MtxDialog],
-  entryComponents: [MtxDialogComponent],
 })
 export class MtxDialogModule {}

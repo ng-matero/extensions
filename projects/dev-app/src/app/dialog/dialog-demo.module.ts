@@ -14,6 +14,5 @@ import { DialogOverviewComponent } from './dialog-demo.component';
     MtxDialogModule,
   ],
   declarations: [DialogDemoComponent, DialogOverviewComponent],
-  entryComponents: [DialogOverviewComponent],
 })
 export class DialogDemoModule {}

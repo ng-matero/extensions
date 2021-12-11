@@ -47,6 +47,5 @@ import { MtxMultiYearView } from './multi-year-view';
     MtxMultiYearView,
   ],
   providers: [MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER],
-  entryComponents: [MtxDatetimepickerContent],
 })
 export class MtxDatetimepickerModule {}

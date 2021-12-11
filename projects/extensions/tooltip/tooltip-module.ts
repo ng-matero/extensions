@@ -14,7 +14,6 @@ import {
   imports: [A11yModule, CommonModule, OverlayModule, MatCommonModule],
   exports: [MtxTooltip, TooltipComponent, MatCommonModule, CdkScrollableModule],
   declarations: [MtxTooltip, TooltipComponent],
-  entryComponents: [TooltipComponent],
   providers: [MTX_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
 })
 export class MtxTooltipModule {}

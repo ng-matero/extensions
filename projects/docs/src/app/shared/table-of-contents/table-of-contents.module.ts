@@ -7,6 +7,5 @@ import { RouterModule } from '@angular/router';
   imports: [CommonModule, RouterModule],
   declarations: [TableOfContents],
   exports: [TableOfContents],
-  entryComponents: [TableOfContents],
 })
 export class TableOfContentsModule {}
