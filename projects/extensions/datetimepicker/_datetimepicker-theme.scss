@@ -1,9 +1,9 @@
 @use 'sass:map';
-@use '~@angular/material/core/theming/theming';
-@use '~@angular/material/core/theming/palette';
-@use '~@angular/material/core/style/private';
-@use '~@angular/material/core/typography/typography';
-@use '~@angular/material/core/typography/typography-utils';
+@use '@angular/material/core/theming/theming';
+@use '@angular/material/core/theming/palette';
+@use '@angular/material/core/style/private';
+@use '@angular/material/core/typography/typography';
+@use '@angular/material/core/typography/typography-utils';
 
 $selected-today-box-shadow-width: 1px;
 $calendar-body-font-size: 13px !default;

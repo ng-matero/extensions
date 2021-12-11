@@ -1,7 +1,7 @@
 @use 'sass:math';
-@use '~@angular/material/core/style/variables';
-@use '~@angular/material/core/style/vendor-prefixes';
-@use '~@angular/cdk/a11y';
+@use '@angular/material/core/style/variables';
+@use '@angular/material/core/style/vendor-prefixes';
+@use '@angular/cdk/a11y';
 
 // This refers to the thickness of the slider. On a horizontal slider this is the height, on a
 // vertical slider this is the width.

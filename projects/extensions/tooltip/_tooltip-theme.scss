@@ -1,7 +1,7 @@
 @use 'sass:map';
-@use '~@angular/material/core/theming/theming';
-@use '~@angular/material/core/typography/typography';
-@use '~@angular/material/core/typography/typography-utils';
+@use '@angular/material/core/theming/theming';
+@use '@angular/material/core/typography/typography';
+@use '@angular/material/core/typography/typography-utils';
 
 $target-height: 22px;
 $font-size: 12px;
