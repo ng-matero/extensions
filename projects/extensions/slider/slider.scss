@@ -1,7 +1,7 @@
 @use 'sass:math';
-@use '@angular/material/core/style/variables';
-@use '@angular/material/core/style/vendor-prefixes';
-@use '@angular/cdk/a11y';
+@use '../core/style/variables';
+@use '../core/style/vendor-prefixes';
+@use '@angular/cdk' as cdk;
 
 // This refers to the thickness of the slider. On a horizontal slider this is the height, on a
 // vertical slider this is the width.
@@ -160,7 +160,7 @@ $focus-ring-size: 30px !default;
     border-radius  variables.$swift-ease-out-duration variables.$swift-ease-out-timing-function,
     background-color  variables.$swift-ease-out-duration variables.$swift-ease-out-timing-function;
 
-  @include a11y.high-contrast(active, off) {
+  @include cdk.high-contrast(active, off) {
     outline: solid 1px;
   }
 }
@@ -322,7 +322,7 @@ $focus-ring-size: 30px !default;
     height: $track-thickness;
     width: 100%;
 
-    @include a11y.high-contrast(active, off) {
+    @include cdk.high-contrast(active, off) {
       height: 0;
       outline: solid $track-thickness;
       top: $track-thickness * .5;
@@ -363,7 +363,7 @@ $focus-ring-size: 30px !default;
       transform: rotate(45deg);
     }
 
-    @include a11y.high-contrast(active, off) {
+    @include cdk.high-contrast(active, off) {
       .mtx-slider-thumb-label,
       .mtx-slider-thumb-label-text {
         transform: none;
@@ -413,7 +413,7 @@ $focus-ring-size: 30px !default;
     width: $track-thickness;
     height: 100%;
 
-    @include a11y.high-contrast(active, off) {
+    @include cdk.high-contrast(active, off) {
       width: 0;
       outline: solid $track-thickness;
       left: $track-thickness * .5;

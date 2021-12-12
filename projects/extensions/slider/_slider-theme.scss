@@ -1,9 +1,9 @@
 @use 'sass:map';
 @use 'sass:meta';
-@use '@angular/material/core/theming/theming';
-@use '@angular/material/core/style/private';
-@use '@angular/material/core/typography/typography';
-@use '@angular/material/core/typography/typography-utils';
+@use '../core/theming/theming';
+@use '../core/style/private';
+@use '../core/typography/typography';
+@use '../core/typography/typography-utils';
 
 @mixin _inner-content-theme($palette) {
   .mtx-slider-track-fill,

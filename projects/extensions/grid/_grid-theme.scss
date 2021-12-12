@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '@angular/material/core/theming/theming';
+@use '../core/theming/theming';
 @use './column-resize/column-resize';
 
 @mixin color($config-or-theme) {

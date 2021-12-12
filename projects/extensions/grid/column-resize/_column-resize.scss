@@ -1,7 +1,7 @@
 @use 'sass:map';
-@use '@angular/material/core/style/variables';
-@use '@angular/material/core/style/vendor-prefixes';
-@use '@angular/material/core/theming/theming';
+@use '../../core/style/variables';
+@use '../../core/style/vendor-prefixes';
+@use '../../core/theming/theming';
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);

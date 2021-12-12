@@ -1,10 +1,11 @@
-@use '@angular/material/core/style/private';
+@use 'sass:math';
+@use '../core/style/private';
 
 $calendar-body-label-padding-start: 5% !default;
-$calendar-body-label-side-padding: private.private-div(33%, 7) !default;
+$calendar-body-label-side-padding: math.div(33%, 7) !default;
 $calendar-body-cell-min-size: 32px !default;
-$calendar-body-cell-size: private.private-div(100%, 7) !default;
-$calendar-body-cell-padding: private.private-div($calendar-body-cell-size, 2) !default;
+$calendar-body-cell-size: math.div(100%, 7) !default;
+$calendar-body-cell-padding: math.div($calendar-body-cell-size, 2) !default;
 $calendar-body-cell-content-margin: 5% !default;
 $calendar-body-cell-content-border-width: 1px !default;
 $calendar-body-cell-radius: 999px !default;
