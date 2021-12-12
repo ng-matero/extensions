@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { ColorFormat } from '@ng-matero/extensions/colorpicker/colorpicker-input';
 
 @Component({
   selector: 'dev-colorpicker-demo',
@@ -14,6 +15,8 @@ export class ColorPickerDemoComponent {
   color2 = new FormControl({ value: '#3f51b5', disabled: true });
 
   color3 = new FormControl({ value: '#3f51b5', disabled: false });
+
+  format: ColorFormat = 'hex';
 
   onColorChange(e: any) {
     console.log(e);

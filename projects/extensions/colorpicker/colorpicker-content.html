@@ -3,6 +3,6 @@
 </ng-template>
 <ng-template #default>
   <color-chrome [color]="picker.selected"
-                (onChangeComplete)="picker.select(getHex8($event))">
+                (onChangeComplete)="picker.select(getColorString($event))">
   </color-chrome>
 </ng-template>

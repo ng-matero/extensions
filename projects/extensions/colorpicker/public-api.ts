@@ -12,6 +12,7 @@ export {
   MTX_COLORPICKER_VALUE_ACCESSOR,
   MTX_COLORPICKER_VALIDATORS,
   MtxColorpickerInput,
+  ColorFormat,
 } from './colorpicker-input';
 export * from './colorpicker-toggle';
 export * from './colorpicker-animations';

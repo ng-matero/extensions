@@ -26,12 +26,22 @@ export type MtxLoaderType = 'spinner' | 'progressbar';
 })
 export class MtxLoaderComponent {
   @Input() type: MtxLoaderType = 'spinner';
+
   @Input() color: ThemePalette = 'primary';
+
   @Input() mode: ProgressSpinnerMode | ProgressBarMode = 'indeterminate';
+
+  /** Only support `spinner` type */
+  @Input() strokeWidth = 4;
+
+  /** Only support `spinner` type */
+  @Input() diameter = 48;
+
+  /** Only support `progresbar` type */
+  @Input() bufferValue = 0;
+
   @Input() value = 0;
-  @Input() strokeWidth = 4; // only support spinner
-  @Input() diameter = 48; // only support spinner
-  @Input() bufferValue = 0; // only support progresbar
+
   @Input()
   get loading(): boolean {
     return this._loading;

@@ -52,6 +52,8 @@ export const MTX_COLORPICKER_VALIDATORS: any = {
   multi: true,
 };
 
+export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsv';
+
 @Directive({
   selector: 'input[mtxColorpicker]',
   providers: [
@@ -135,6 +137,9 @@ export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit,
     this._valueChange.emit(value);
   }
   private _value!: string | null;
+
+  /** The input and output color format. */
+  @Input() format: ColorFormat = 'hex';
 
   /** Emits when a `change` event is fired on this `<input>`. */
   @Output() readonly colorChange: EventEmitter<MtxColorPickerInputEvent> =

@@ -42,7 +42,7 @@ export class MtxColorpickerToggleIcon {}
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxColorpickerToggle implements OnInit, AfterContentInit, OnChanges, OnDestroy {
+export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDestroy {
   private _stateChanges = Subscription.EMPTY;
 
   /** Colorpicker instance that the button will toggle. */
@@ -76,8 +76,6 @@ export class MtxColorpickerToggle implements OnInit, AfterContentInit, OnChanges
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
-  ngOnInit() {}
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.picker) {
       this._watchStateChanges();
@@ -108,7 +106,7 @@ export class MtxColorpickerToggle implements OnInit, AfterContentInit, OnChanges
       : of();
 
     this._stateChanges.unsubscribe();
-    this._stateChanges = merge(pickerDisabled, inputDisabled, datepickerToggled).subscribe(() =>
+    this._stateChanges = merge([pickerDisabled, inputDisabled, datepickerToggled]).subscribe(() =>
       this._changeDetectorRef.markForCheck()
     );
   }

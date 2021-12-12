@@ -5,4 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './split-demo.component.html',
   styleUrls: ['./split-demo.component.scss'],
 })
-export class SplitDemoComponent {}
+export class SplitDemoComponent {
+  color = 'primary';
+}

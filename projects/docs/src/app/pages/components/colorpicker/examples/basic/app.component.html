@@ -1,6 +1,16 @@
+<div>
+  <label>Color Format</label>
+  <mat-radio-group [(ngModel)]="format">
+    <mat-radio-button value="hex">hex</mat-radio-button>
+    <mat-radio-button value="rgb">rgb</mat-radio-button>
+    <mat-radio-button value="hsl">hsl</mat-radio-button>
+    <mat-radio-button value="hsv">hsv</mat-radio-button>
+  </mat-radio-group>
+</div>
+
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [(ngModel)]="color" [mtxColorpicker]="picker">
+  <input matInput [(ngModel)]="color" [mtxColorpicker]="picker" [format]="format">
   <mtx-colorpicker-toggle matSuffix [for]="picker"></mtx-colorpicker-toggle>
   <mtx-colorpicker #picker></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>

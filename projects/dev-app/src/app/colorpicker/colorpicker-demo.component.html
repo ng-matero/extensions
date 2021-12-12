@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [mtxColorpicker]="picker" [disabled]="disabled">
+  <input matInput [(ngModel)]="color" [mtxColorpicker]="picker" [disabled]="disabled">
   <mtx-colorpicker-toggle matSuffix [for]="picker"></mtx-colorpicker-toggle>
   <mtx-colorpicker #picker [disabled]="false"></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>
@@ -45,19 +45,34 @@
 
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [formControl]="color3" [mtxColorpicker]="customPicker">
-  <mtx-colorpicker-toggle matSuffix [for]="customPicker">
+  <input matInput [formControl]="color3" [mtxColorpicker]="picker4">
+  <mtx-colorpicker-toggle matSuffix [for]="picker4">
     <mat-icon mtxColorpickerToggleIcon>keyboard_arrow_down</mat-icon>
   </mtx-colorpicker-toggle>
-  <mtx-colorpicker #customPicker [content]="customPickerContent"></mtx-colorpicker>
+  <mtx-colorpicker #picker4 [content]="customPickerContent"></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
 </mat-form-field>
 
 <ng-template #customPickerContent>
   <div [style.width.px]="240">
-    <color-sketch [color]="customPicker.selected"
-                  (onChangeComplete)="customPicker.select($event.color.hex)">
+    <color-sketch [color]="picker4.selected"
+                  (onChangeComplete)="picker4.select($event.color.hex)">
     </color-sketch>
   </div>
 </ng-template>
+
+<h2>Format</h2>
+<mat-radio-group [(ngModel)]="format">
+  <mat-radio-button value="hex">hex</mat-radio-button>
+  <mat-radio-button value="rgb">rgb</mat-radio-button>
+  <mat-radio-button value="hsl">hsl</mat-radio-button>
+  <mat-radio-button value="hsv">hsv</mat-radio-button>
+</mat-radio-group>
+
+<mat-form-field>
+  <mat-label>Color picker</mat-label>
+  <input matInput [mtxColorpicker]="picker5" [format]="format">
+  <mtx-colorpicker-toggle matSuffix [for]="picker5"></mtx-colorpicker-toggle>
+  <mtx-colorpicker #picker5></mtx-colorpicker>
+</mat-form-field>
