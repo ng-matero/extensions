@@ -1,5 +1,11 @@
+<mat-radio-group [(ngModel)]="color">
+  <mat-radio-button value="primary">primary</mat-radio-button>
+  <mat-radio-button value="accent">accent</mat-radio-button>
+  <mat-radio-button value="warn">warn</mat-radio-button>
+</mat-radio-group>
+
 <div class="split-demo">
-  <mtx-split direction="horizontal" [restrictMove]="true" [useTransition]="true">
+  <mtx-split direction="horizontal" [restrictMove]="true" [useTransition]="true" [color]="color">
     <mtx-split-pane [size]="40">
       <mtx-split direction="vertical" [restrictMove]="true">
         <mtx-split-pane>

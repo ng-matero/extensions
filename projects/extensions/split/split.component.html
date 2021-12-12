@@ -1,6 +1,6 @@
 <ng-content></ng-content>
 <ng-template ngFor [ngForOf]="displayedAreas" let-index="index" let-last="last">
-  <div #gutterEls class="mtx-split-gutter"
+  <div #gutterEls class="mtx-split-gutter" [ngClass]="['mat-' + color]"
        *ngIf="last === false"
        [style.flex-basis.px]="gutterSize"
        [style.order]="index * 2 + 1"

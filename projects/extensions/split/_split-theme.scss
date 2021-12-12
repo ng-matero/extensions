@@ -3,7 +3,6 @@
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $accent: map.get($config, accent);
   $foreground: map.get($config, foreground);
 
   .mtx-split {
@@ -11,7 +10,15 @@
       background-color: rgba(theming.get-color-from-palette($foreground, divider), .12);
 
       &:hover {
-        background-color: theming.get-color-from-palette($accent);
+        background-color: theming.get-color-from-palette(map.get($config, primary), text);
+      }
+
+      &.mat-accent:hover {
+        background-color: theming.get-color-from-palette(map.get($config, accent), text);
+      }
+
+      &.mat-warn:hover {
+        background-color: theming.get-color-from-palette(map.get($config, warn), text);
       }
     }
   }

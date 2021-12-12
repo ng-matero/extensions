@@ -14,6 +14,7 @@ import {
   EventEmitter,
   ViewEncapsulation,
 } from '@angular/core';
+import { CanColor, mixinColor } from '@angular/material/core';
 import { Observable, Subscriber, Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -37,6 +38,14 @@ import {
   getGutterSideAbsorptionCapacity,
   updateAreaSize,
 } from './utils';
+
+// Boilerplate for applying mixins to _MtxSplitComponentBase.
+/** @docs-private */
+const _MtxSplitComponentBase = mixinColor(
+  class {
+    constructor(public _elementRef: ElementRef) {}
+  }
+);
 
 /**
  * mtx-split
@@ -78,8 +87,12 @@ import {
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: [`./split.component.scss`],
   templateUrl: './split.component.html',
+  inputs: ['color'],
 })
-export class MtxSplitComponent implements AfterViewInit, OnDestroy {
+export class MtxSplitComponent
+  extends _MtxSplitComponentBase
+  implements AfterViewInit, OnDestroy, CanColor
+{
   private _direction: 'horizontal' | 'vertical' = 'horizontal';
 
   @Input() set direction(v: 'horizontal' | 'vertical') {
@@ -254,6 +267,7 @@ export class MtxSplitComponent implements AfterViewInit, OnDestroy {
     private cdRef: ChangeDetectorRef,
     private renderer: Renderer2
   ) {
+    super(elRef);
     // To force adding default class, could be override by user @Input() or not
     this.direction = this._direction;
   }
