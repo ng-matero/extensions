@@ -1,6 +1,4 @@
 @use '@angular/material' as mat;
-@use '@angular/material/core/density/private/all-density' as private-all-density;
-
 @use '../../extensions' as mtx;
 
 // Plus imports for other components in your app.
@@ -72,7 +70,5 @@ $dark-theme: mat.define-dark-theme(
 // component.
 $density-scales: (-1, -2, minimum, maximum);
 @each $density in $density-scales {
-  .demo-density-#{$density} {
-    @include private-all-density.all-component-densities($density);
-  }
+  .demo-density-#{$density} {}
 }
