@@ -1,9 +1,11 @@
 <button #button
         mat-icon-button
         type="button"
+        [attr.aria-haspopup]="datetimepicker ? 'dialog' : null"
         [attr.aria-label]="_intl.openCalendarLabel"
         [attr.tabindex]="disabled ? -1 : tabIndex"
         [disabled]="disabled"
+        [disableRipple]="disableRipple"
         (click)="_open($event)">
 
   <ng-container *ngIf="!_customIcon" [ngSwitch]="datetimepicker.type">
