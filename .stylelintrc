@@ -29,6 +29,7 @@
     "scss/at-extend-no-missing-placeholder": null,
     "scss/at-if-no-null": null,
     "scss/comment-no-empty": null,
-    "scss/operator-no-unspaced": null
+    "scss/operator-no-unspaced": null,
+    "scss/operator-no-newline-after": null
   }
 }
