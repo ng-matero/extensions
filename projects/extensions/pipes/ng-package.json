@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxPipes",
+    "entryFile": "public-api.ts"
+  }
+}

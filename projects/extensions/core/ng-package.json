@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxCore",
+    "entryFile": "public-api.ts"
+  }
+}

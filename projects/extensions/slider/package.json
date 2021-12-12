@@ -1,8 +1,0 @@
-{
-  "ngPackage": {
-    "lib": {
-      "flatModuleFile": "mtxSlider",
-      "entryFile": "public-api.ts"
-    }
-  }
-}

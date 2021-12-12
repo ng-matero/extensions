@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxCheckboxGroup",
+    "entryFile": "public-api.ts"
+  }
+}

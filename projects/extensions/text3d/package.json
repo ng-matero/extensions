@@ -1,8 +1,0 @@
-{
-  "ngPackage": {
-    "lib": {
-      "flatModuleFile": "mtxText3d",
-      "entryFile": "public-api.ts"
-    }
-  }
-}

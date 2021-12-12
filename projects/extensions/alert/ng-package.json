@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxAlert",
+    "entryFile": "public-api.ts"
+  }
+}

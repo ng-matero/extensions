@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxTooltip",
+    "entryFile": "public-api.ts"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxColorpicker",
+    "entryFile": "public-api.ts"
+  }
+}

@@ -1,8 +1,0 @@
-{
-  "ngPackage": {
-    "lib": {
-      "flatModuleFile": "mtxDatetimepicker",
-      "entryFile": "public-api.ts"
-    }
-  }
-}

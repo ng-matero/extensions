@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxButton",
+    "entryFile": "public-api.ts"
+  }
+}

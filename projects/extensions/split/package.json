@@ -1,8 +1,0 @@
-{
-  "ngPackage": {
-    "lib": {
-      "flatModuleFile": "mtxSplit",
-      "entryFile": "public-api.ts"
-    }
-  }
-}

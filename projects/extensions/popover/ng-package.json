@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxPopover",
+    "entryFile": "public-api.ts"
+  }
+}
