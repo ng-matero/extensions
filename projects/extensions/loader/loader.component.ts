@@ -4,22 +4,13 @@ import {
   ViewEncapsulation,
   Input,
   ChangeDetectorRef,
-  ElementRef,
 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { CanColor, mixinColor } from '@angular/material/core';
+import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 export type MtxLoaderType = 'spinner' | 'progressbar';
-
-// Boilerplate for applying mixins to _MtxLoaderComponentBase.
-/** @docs-private */
-const _MtxLoaderComponentBase = mixinColor(
-  class {
-    constructor(public _elementRef: ElementRef) {}
-  }
-);
 
 @Component({
   selector: 'mtx-loader',
@@ -32,10 +23,11 @@ const _MtxLoaderComponentBase = mixinColor(
   styleUrls: ['./loader.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  inputs: ['color'],
 })
-export class MtxLoaderComponent extends _MtxLoaderComponentBase implements CanColor {
+export class MtxLoaderComponent {
   @Input() type: MtxLoaderType = 'spinner';
+
+  @Input() color: ThemePalette = 'primary';
 
   @Input() mode: ProgressSpinnerMode | ProgressBarMode = 'indeterminate';
 
@@ -68,9 +60,7 @@ export class MtxLoaderComponent extends _MtxLoaderComponentBase implements CanCo
   }
   private _hasBackdrop = true;
 
-  constructor(elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
-    super(elementRef);
-  }
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
   static ngAcceptInputType_loading: BooleanInput;
   static ngAcceptInputType_hasBackdrop: BooleanInput;
