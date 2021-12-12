@@ -33,7 +33,7 @@ import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
 import { Subject, Subscription, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { mtxColorpickerAnimations } from './colorpicker-animations';
-import { MtxColorpickerInput } from './colorpicker-input';
+import { ColorFormat, MtxColorpickerInput } from './colorpicker-input';
 
 import { ColorEvent } from 'ngx-color';
 
@@ -111,10 +111,13 @@ export class MtxColorpickerContent
     this._animationDone.complete();
   }
 
-  // https://github.com/scttcper/ngx-color/issues/292
-  getHex8(e: ColorEvent): string {
-    const alpha = e.color.rgb.a;
-    return alpha === 1 ? e.color.hex : new TinyColor(e.color.rgb).toHex8String();
+  getColorString(e: ColorEvent): string {
+    return {
+      hex: e.color.rgb.a === 1 ? e.color.hex : new TinyColor(e.color.rgb).toHex8String(),
+      rgb: new TinyColor(e.color.rgb).toRgbString(),
+      hsl: new TinyColor(e.color.hsl).toHslString(),
+      hsv: new TinyColor(e.color.hsv).toHsvString(),
+    }[this.picker.format];
   }
 }
 
@@ -197,6 +200,16 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     this._color = value;
   }
   private _color: ThemePalette;
+
+  /** The input and output color format. */
+  @Input()
+  get format(): ColorFormat {
+    return this._format || this.pickerInput.format;
+  }
+  set format(value: ColorFormat) {
+    this._format = value;
+  }
+  _format!: ColorFormat;
 
   /** The currently selected color. */
   get selected(): string {
