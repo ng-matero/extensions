@@ -29,21 +29,16 @@
 <section>
   <mat-form-field>
     <mat-label>Foreground color</mat-label>
-    <mtx-color-picker [(ngModel)]="foreground">
-    </mtx-color-picker>
-    <button mat-button *ngIf="foreground" matSuffix mat-icon-button aria-label="Clear"
-            (click)="foreground=''">
-      <mat-icon>close</mat-icon>
-    </button>
+    <input matInput [(ngModel)]="foreground" [mtxColorpicker]="cp1">
+    <mtx-colorpicker-toggle matSuffix [for]="cp1"></mtx-colorpicker-toggle>
+    <mtx-colorpicker #cp1></mtx-colorpicker>
   </mat-form-field>
+
   <mat-form-field>
     <mat-label>Background color</mat-label>
-    <mtx-color-picker [(ngModel)]="background">
-    </mtx-color-picker>
-    <button mat-button *ngIf="background" matSuffix mat-icon-button aria-label="Clear"
-            (click)="background=''">
-      <mat-icon>close</mat-icon>
-    </button>
+    <input matInput [(ngModel)]="background" [mtxColorpicker]="cp2">
+    <mtx-colorpicker-toggle matSuffix [for]="cp2"></mtx-colorpicker-toggle>
+    <mtx-colorpicker #cp2></mtx-colorpicker>
   </mat-form-field>
 </section>
 
