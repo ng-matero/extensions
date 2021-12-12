@@ -15,9 +15,9 @@ import {
   DatetimeAdapter,
 } from '@ng-matero/extensions/core';
 import { MtxCalendarCell } from './calendar-body';
-import { MtxDatetimepickerType } from './datetimepicker';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
+import { MtxDatetimepickerType } from './datetimepicker-types';
 
 const DAYS_PER_WEEK = 7;
 

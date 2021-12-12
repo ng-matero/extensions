@@ -5,7 +5,6 @@ export * from './grid.component';
 export * from './cell.component';
 export * from './column-menu.component';
 export * from './expansion-toggle.directive';
-export * from './cell-selection.directive';
 export {
   TABLE_PROVIDERS as MAT_TABLE_PROVIDERS,
   FLEX_PROVIDERS as MAT_FLEX_PROVIDERS,

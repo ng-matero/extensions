@@ -9,7 +9,6 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { MtxDatetimepickerType } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxCalendarCell } from './calendar-body';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
@@ -18,6 +17,7 @@ import {
   MtxDatetimeFormats,
   DatetimeAdapter,
 } from '@ng-matero/extensions/core';
+import { MtxDatetimepickerType } from './datetimepicker-types';
 
 export const yearsPerPage = 24;
 

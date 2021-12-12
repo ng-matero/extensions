@@ -39,11 +39,10 @@ import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
+import { MtxDatetimepickerType } from './datetimepicker-types';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
-
-export type MtxDatetimepickerType = 'date' | 'time' | 'month' | 'year' | 'datetime';
 
 export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
 

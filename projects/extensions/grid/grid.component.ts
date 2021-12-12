@@ -16,6 +16,9 @@ import {
   SimpleChanges,
   QueryList,
   ContentChildren,
+  Directive,
+  HostBinding,
+  HostListener,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -40,7 +43,6 @@ import {
   MtxGridColumnMenu,
   MtxGridButtonType,
 } from './grid.interface';
-import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
 
@@ -472,5 +474,57 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (this.tableContainer && !this.loading) {
       this.tableContainer.nativeElement.scrollLeft = value;
     }
+  }
+}
+
+@Directive({
+  selector: '[mtx-grid-selectable-cell]',
+})
+export class MtxGridCellSelectionDirective {
+  private _selected = false;
+  private _rowData: any;
+
+  ctrlKeyPressed = false;
+  shiftKeyPressed = false;
+
+  @HostBinding('class.selected')
+  get selected(): boolean {
+    return this._selected;
+  }
+
+  @Input()
+  set mtxSelectableRowData(value: any) {
+    if (value !== this._rowData) {
+      this._rowData = value;
+    }
+  }
+
+  @Output() cellSelectionChange = new EventEmitter<MtxGridCellSelectionDirective>();
+
+  constructor(private _dataGrid: MtxGridComponent) {}
+
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent): void {
+    this.ctrlKeyPressed = event.ctrlKey;
+    this.shiftKeyPressed = event.shiftKey;
+
+    if (this._dataGrid.cellSelectable) {
+      this.select();
+    }
+  }
+
+  select(): void {
+    this._selected = true;
+    this.cellSelectionChange.emit(this);
+  }
+
+  deselect(): void {
+    this._selected = false;
+    this.cellSelectionChange.emit(this);
+  }
+
+  toggle(): void {
+    this._selected = !this._selected;
+    this.cellSelectionChange.emit(this);
   }
 }

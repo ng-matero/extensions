@@ -34,11 +34,11 @@ import {
   MtxDatetimeFormats,
 } from '@ng-matero/extensions/core';
 import { MtxClockView } from './clock';
-import { MtxDatetimepickerType } from './datetimepicker';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
+import { MtxDatetimepickerType } from './datetimepicker-types';
 
 export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
 

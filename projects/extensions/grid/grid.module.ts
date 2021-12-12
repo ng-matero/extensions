@@ -17,11 +17,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { MtxPipesModule } from '@ng-matero/extensions/pipes';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
-import { MtxGridComponent } from './grid.component';
+import { MtxGridCellSelectionDirective, MtxGridComponent } from './grid.component';
 import { MtxGridCellComponent } from './cell.component';
 import { MtxGridColumnMenuComponent } from './column-menu.component';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
-import { MtxGridCellSelectionDirective } from './cell-selection.directive';
 import { MtxGridService } from './grid.service';
 import { MatColumnResizeModule } from './column-resize/column-resize-module';
 
