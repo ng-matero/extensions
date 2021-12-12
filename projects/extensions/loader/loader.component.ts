@@ -4,13 +4,22 @@ import {
   ViewEncapsulation,
   Input,
   ChangeDetectorRef,
+  ElementRef,
 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ThemePalette } from '@angular/material/core';
+import { CanColor, mixinColor } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 export type MtxLoaderType = 'spinner' | 'progressbar';
+
+// Boilerplate for applying mixins to _MtxLoaderComponentBase.
+/** @docs-private */
+const _MtxLoaderComponentBase = mixinColor(
+  class {
+    constructor(public _elementRef: ElementRef) {}
+  }
+);
 
 @Component({
   selector: 'mtx-loader',
@@ -23,15 +32,24 @@ export type MtxLoaderType = 'spinner' | 'progressbar';
   styleUrls: ['./loader.component.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  inputs: ['color'],
 })
-export class MtxLoaderComponent {
+export class MtxLoaderComponent extends _MtxLoaderComponentBase implements CanColor {
   @Input() type: MtxLoaderType = 'spinner';
-  @Input() color: ThemePalette = 'primary';
+
   @Input() mode: ProgressSpinnerMode | ProgressBarMode = 'indeterminate';
+
+  /** Only support `spinner` type */
+  @Input() strokeWidth = 4;
+
+  /** Only support `spinner` type */
+  @Input() diameter = 48;
+
+  /** Only support `progresbar` type */
+  @Input() bufferValue = 0;
+
   @Input() value = 0;
-  @Input() strokeWidth = 4; // only support spinner
-  @Input() diameter = 48; // only support spinner
-  @Input() bufferValue = 0; // only support progresbar
+
   @Input()
   get loading(): boolean {
     return this._loading;
@@ -50,7 +68,9 @@ export class MtxLoaderComponent {
   }
   private _hasBackdrop = true;
 
-  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+  constructor(elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
+    super(elementRef);
+  }
 
   static ngAcceptInputType_loading: BooleanInput;
   static ngAcceptInputType_hasBackdrop: BooleanInput;
