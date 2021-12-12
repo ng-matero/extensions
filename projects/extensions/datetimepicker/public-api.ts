@@ -10,3 +10,4 @@ export * from './month-view';
 export * from './year-view';
 export * from './multi-year-view';
 export * from './datetimepicker-animations';
+export * from './datetimepicker-types';
