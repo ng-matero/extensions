@@ -1,9 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  MtxPopoverPosition,
-  MtxPopoverPositionEnd,
-  MtxPopoverPositionStart,
-} from '@ng-matero/extensions/popover';
+import { MtxPopoverPositionEnd, MtxPopoverPositionStart } from '@ng-matero/extensions/popover';
 
 @Component({
   selector: 'popover-example',

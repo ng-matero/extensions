@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxCheckboxGroupOption } from '@ng-matero/extensions';
+import { MtxCheckboxGroupOption } from '@ng-matero/extensions/checkbox-group';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

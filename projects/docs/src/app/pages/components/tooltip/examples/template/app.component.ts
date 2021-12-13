@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { TooltipPosition } from '@ng-matero/extensions';
+import { TooltipPosition } from '@ng-matero/extensions/tooltip';
 
 @Component({
   selector: 'tooltip-example',

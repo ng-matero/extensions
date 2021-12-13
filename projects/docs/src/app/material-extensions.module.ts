@@ -15,6 +15,9 @@ import { MtxSliderModule } from '@ng-matero/extensions/slider';
 import { MtxSplitModule } from '@ng-matero/extensions/split';
 import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
 
+import { MtxFormGroupModule } from '@ng-matero/extensions/form-group';
+import { MtxText3dModule } from '@ng-matero/extensions/text3d';
+
 @NgModule({
   exports: [
     MtxAlertModule,
@@ -31,6 +34,8 @@ import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
     MtxSliderModule,
     MtxSplitModule,
     MtxTooltipModule,
+    MtxFormGroupModule,
+    MtxText3dModule,
   ],
   declarations: [],
 })

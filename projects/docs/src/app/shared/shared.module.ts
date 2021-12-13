@@ -5,15 +5,12 @@ import { RouterModule } from '@angular/router';
 import { MaterialModule } from '../material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
+import { MaterialExtensionsModule } from '../material-extensions.module';
+
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { NgProgressRouterModule } from 'ngx-progressbar/router';
 import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
-
-import {
-  MaterialExtensionsModule,
-  MaterialExtensionsExperimentalModule,
-} from '@ng-matero/extensions';
 
 import { HeaderLinkComponent } from './doc-heading/header-link';
 import { DocHeadingComponent } from './doc-heading/doc-heading';
@@ -39,7 +36,6 @@ import {
     RouterModule,
     MaterialModule,
     MaterialExtensionsModule,
-    MaterialExtensionsExperimentalModule,
     FlexLayoutModule,
     NgProgressModule,
     NgProgressHttpModule,
@@ -53,7 +49,6 @@ import {
     RouterModule,
     MaterialModule,
     MaterialExtensionsModule,
-    MaterialExtensionsExperimentalModule,
     FlexLayoutModule,
     NgProgressModule,
     NgProgressHttpModule,

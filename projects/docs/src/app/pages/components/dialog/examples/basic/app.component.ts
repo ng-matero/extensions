@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxDialog } from '@ng-matero/extensions';
+import { MtxDialog } from '@ng-matero/extensions/dialog';
 
 @Component({
   selector: 'dialog-example',

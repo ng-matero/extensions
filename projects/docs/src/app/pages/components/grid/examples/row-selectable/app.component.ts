@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn, MtxGridRowSelectionFormatter } from '@ng-matero/extensions';
+import { MtxGridColumn, MtxGridRowSelectionFormatter } from '@ng-matero/extensions/grid';
 
 @Component({
   selector: 'data-grid-example',

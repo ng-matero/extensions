@@ -2,7 +2,6 @@
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
   "dest": "../../dist/extensions",
   "lib": {
-    "flatModuleFile": "extensions",
     "entryFile": "public-api.ts"
   },
   "allowedNonPeerDependencies": [

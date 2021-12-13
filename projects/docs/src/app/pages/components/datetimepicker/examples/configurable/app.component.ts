@@ -4,7 +4,7 @@ import {
   MtxCalendarView,
   MtxDatetimepickerMode,
   MtxDatetimepickerType,
-} from '@ng-matero/extensions';
+} from '@ng-matero/extensions/datetimepicker';
 import { MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MtxDialog } from '@ng-matero/extensions';
+import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { ColorFormat } from '@ng-matero/extensions/colorpicker/colorpicker-input';
+import { ColorFormat } from '@ng-matero/extensions/colorpicker';
 
 @Component({
   selector: 'dev-colorpicker-demo',

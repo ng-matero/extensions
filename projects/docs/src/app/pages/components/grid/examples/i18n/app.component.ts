@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn } from '@ng-matero/extensions';
+import { MtxGridColumn } from '@ng-matero/extensions/grid';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

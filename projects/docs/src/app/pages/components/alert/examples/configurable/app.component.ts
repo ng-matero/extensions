@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxAlertType } from '@ng-matero/extensions';
+import { MtxAlertType } from '@ng-matero/extensions/alert';
 
 @Component({
   selector: 'alert-example',
