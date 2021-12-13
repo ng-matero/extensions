@@ -3,6 +3,6 @@
   "dest": "../../dist/extensions-moment-adapter",
   "lib": {
     "flatModuleFile": "extensions-moment-adapter",
-    "entryFile": "public_api.ts"
+    "entryFile": "public-api.ts"
   }
 }
