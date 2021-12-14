@@ -7,6 +7,22 @@ function copyRoot() {
   return src([`${SRC}/*.scss`]).pipe(dest(`${DEST}`));
 }
 
+function copyCoreDensity() {
+  return src([`${SRC}/core/density/**`]).pipe(dest(`${DEST}/core/density`));
+}
+
+function copyCoreStyle() {
+  return src([`${SRC}/core/style/**`]).pipe(dest(`${DEST}/core/style`));
+}
+
+function copyCoreTheming() {
+  return src([`${SRC}/core/theming/**`]).pipe(dest(`${DEST}/core/theming`));
+}
+
+function copyCoreTypography() {
+  return src([`${SRC}/core/typography/**`]).pipe(dest(`${DEST}/core/typography`));
+}
+
 function copyAlert() {
   return src([`${SRC}/alert/*.scss`]).pipe(dest(`${DEST}/alert`));
 }
@@ -69,6 +85,11 @@ function copyText3d() {
 
 exports.default = series(
   copyRoot,
+
+  copyCoreDensity,
+  copyCoreStyle,
+  copyCoreTheming,
+  copyCoreTypography,
 
   copyAlert,
   copyButton,
