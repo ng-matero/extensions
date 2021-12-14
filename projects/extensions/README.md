@@ -23,21 +23,7 @@ $ npm install @ng-matero/extensions --save
 
 ## Setup
 
-Once installed you need to import the main module:
-
-```ts
-import { MaterialExtensionsModule, MaterialExtensionsExperimentalModule } from '@ng-matero/extensions';
-
-@NgModule({
-  ...
-  imports: [MaterialExtensionsModule, MaterialExtensionsExperimentalModule, ...],
-  ...
-})
-export class YourAppModule {
-}
-```
-
-Alternatively you could only import modules you need, e.g. data-grid and select.
+Import the modules you need, e.g. data-grid and select.
 
 ```ts
 import { MtxGridModule } from '@ng-matero/extensions/grid';
@@ -57,7 +43,7 @@ export class YourAppModule {
 After import modules, you must define a theme. [More details about theming](https://material.angular.io/guide/theming).
 
 ```scss
-@use '~@ng-matero/extensions' as mtx;
+@use '@ng-matero/extensions' as mtx;
 
 @include mtx.all-component-themes($theme);
 @include mtx.all-experimental-component-themes($theme);
