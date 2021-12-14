@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "12.7.0",
+  "version": "13.0.0",
   "description": "Angular Material Extensions",
   "publishConfig": {
     "access": "public"
@@ -35,17 +35,17 @@
   },
   "homepage": "https://ng-matero.github.io/extensions/",
   "dependencies": {
-    "@ng-select/ng-select": "^7.0.0",
-    "ngx-color": "~7.2.0",
+    "@ng-select/ng-select": "^8.0.0",
+    "ngx-color": "^7.3.0",
     "photoviewer": "^3.6.0",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
-    "@angular/animations": ">=12.0.0",
-    "@angular/cdk": ">=12.0.0",
-    "@angular/common": ">=12.0.0",
-    "@angular/core": ">=12.0.0",
-    "@angular/material": ">=12.0.0"
+    "@angular/animations": ">=13.0.0",
+    "@angular/cdk": ">=13.0.0",
+    "@angular/common": ">=13.0.0",
+    "@angular/core": ">=13.0.0",
+    "@angular/material": ">=13.0.0"
   },
   "sideEffects": false
 }

@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions-moment-adapter",
-  "version": "12.0.0",
+  "version": "13.0.0",
   "description": "Angular Material Extensions Moment Adapter",
   "publishConfig": {
     "access": "public"
@@ -12,10 +12,10 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": ">=12.0.0",
-    "@angular/material": ">=12.0.0",
-    "@angular/material-moment-adapter": ">=12.0.0",
-    "@ng-matero/extensions": ">=12.0.0",
+    "@angular/core": ">=13.0.0",
+    "@angular/material": ">=13.0.0",
+    "@angular/material-moment-adapter": ">=13.0.0",
+    "@ng-matero/extensions": ">=13.0.0",
     "moment": "^2.29.1"
   },
   "dependencies": {
