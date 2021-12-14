@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "13.0.0",
+  "version": "13.0.1",
   "description": "Angular Material Extensions",
   "publishConfig": {
     "access": "public"
@@ -34,6 +34,17 @@
     "url": "https://github.com/ng-matero/extensions/issues"
   },
   "homepage": "https://ng-matero.github.io/extensions/",
+  "exports": {
+    ".": {
+      "sass": "./_index.scss"
+    },
+    "./theming": {
+      "sass": "./_theming.scss"
+    },
+    "./_theming": {
+      "sass": "./_theming.scss"
+    }
+  },
   "dependencies": {
     "@ng-select/ng-select": "^8.0.0",
     "ngx-color": "^7.3.0",
