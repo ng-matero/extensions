@@ -381,8 +381,7 @@ export class MtxSelectComponent
     this._onTouched = fn;
   }
 
-  /**   : _setItemsFromNgOptions */
-
+  /** NgSelect: _setItemsFromNgOptions */
   private _setItemsFromMtxOptions() {
     const mapMtxOptions = (options: QueryList<MtxOptionComponent>) => {
       this.items = options.map(option => ({
