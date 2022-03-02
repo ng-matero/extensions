@@ -259,6 +259,7 @@ export class MtxSelectComponent
     this._disabled = coerceBooleanProperty(value);
     this.readonly = this._disabled;
     this.stateChanges.next();
+    this._changeDetectorRef.markForCheck();
   }
   private _disabled = false;
 
@@ -381,7 +382,6 @@ export class MtxSelectComponent
   }
 
   /** NgSelect: _setItemsFromNgOptions */
-
   private _setItemsFromMtxOptions() {
     const mapMtxOptions = (options: QueryList<MtxOptionComponent>) => {
       this.items = options.map(option => ({
