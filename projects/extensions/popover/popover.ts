@@ -308,26 +308,23 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     }
   }
 
-  /**
-   * TODO: Refactor when @angular/cdk includes feature I mentioned on github see link below.
-   * https://github.com/angular/material2/pull/5493#issuecomment-313085323
-   */
   /** Disables close of popover when leaving trigger element and mouse over the popover */
   onMouseOver() {
     if (this.triggerEvent === 'hover') {
       this.closeDisabled = true;
     }
   }
+
   /** Enables close of popover when mouse leaving popover element */
   onMouseLeave() {
     if (this.triggerEvent === 'hover') {
-      this.closeDisabled = false;
-      this._emitCloseEvent();
+      setTimeout(() => {
+        this.closeDisabled = false;
+        this._emitCloseEvent();
+      }, this.leaveDelay);
     }
   }
 
-  // TODO: Refactor how styles are set and updated on the component, use best practices.
-  // TODO: If arrow left and right positioning is requested, see if flex direction can be used to work with order.
   /** Sets the current styles for the popover to allow for dynamically changing settings */
   setCurrentStyles(pos = this.position) {
     const left =

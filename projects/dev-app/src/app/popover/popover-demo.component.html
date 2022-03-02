@@ -62,3 +62,19 @@
     A material design popover component created using Angular with the Angular CDK.
   </div>
 </mtx-popover>
+
+<h2>Test Popover Delay</h2>
+
+<button mat-raised-button color="primary"
+        #popoverTrigger="mtxPopoverTrigger"
+        [mtxPopoverTriggerFor]="popover4">
+  Show Popover Delay
+</button>
+
+<mtx-popover #popover4="mtxPopover"
+             [enterDelay]="1000"
+             [leaveDelay]="1000">
+  <div style="max-width: 200px;">
+    A material design popover component created using Angular with the Angular CDK.
+  </div>
+</mtx-popover>
