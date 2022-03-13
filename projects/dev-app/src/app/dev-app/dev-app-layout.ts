@@ -26,6 +26,7 @@ export class DevAppLayout {
     { name: 'Data Grid', route: '/grid' },
     { name: 'Datetimepicker', route: '/datetimepicker' },
     { name: 'Dialog', route: '/dialog' },
+    { name: 'Drawer', route: '/drawer' },
     { name: 'Form Group', route: '/form-group' },
     { name: 'Loader', route: '/loader' },
     { name: 'Popover', route: '/popover' },

@@ -32,6 +32,10 @@ export const DEV_APP_ROUTES: Routes = [
     loadChildren: () => import('../dialog/dialog-demo.module').then(m => m.DialogDemoModule),
   },
   {
+    path: 'drawer',
+    loadChildren: () => import('../drawer/drawer-demo.module').then(m => m.DrawerDemoModule),
+  },
+  {
     path: 'form-group',
     loadChildren: () =>
       import('../form-group/form-group-demo.module').then(m => m.FormGroupDemoModule),
