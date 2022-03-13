@@ -2,6 +2,7 @@
 @use './alert/alert-theme';
 @use './colorpicker/colorpicker-theme';
 @use './datetimepicker/datetimepicker-theme';
+@use './drawer/drawer-theme';
 @use './grid/grid-theme';
 @use './loader/loader-theme';
 @use './popover/popover-theme';
@@ -18,6 +19,7 @@
   @include alert-theme.theme($theme);
   @include colorpicker-theme.theme($theme);
   @include datetimepicker-theme.theme($theme);
+  @include drawer-theme.theme($theme);
   @include grid-theme.theme($theme);
   @include loader-theme.theme($theme);
   @include popover-theme.theme($theme);
