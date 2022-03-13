@@ -43,15 +43,12 @@ export class MtxDrawerConfig<D = any> {
    */
   closeOnNavigation?: boolean = true;
 
-  // Note that this is set to 'dialog' by default, because while the a11y recommendations
-  // are to focus the first focusable element, doing so prevents screen readers from reading out the
-  // rest of the drawer content.
   /**
    * Where the drawer should focus on open.
    * @breaking-change 14.0.0 Remove boolean option from autoFocus. Use string or
    * AutoFocusTarget instead.
    */
-  autoFocus?: AutoFocusTarget | string | boolean = 'dialog';
+  autoFocus?: AutoFocusTarget | string | boolean = 'first-tabbable';
 
   /**
    * Whether the drawer should restore focus to the
