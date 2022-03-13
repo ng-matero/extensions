@@ -1,0 +1,31 @@
+.mtx-drawer-container {
+  display: block;
+  background: rgb(66, 66, 66);
+  outline: 0;
+  box-shadow:
+    rgba(0, 0, 0, .2) 0 8px 10px -5px,
+    rgba(0, 0, 0, .14) 0 16px 24px 2px,
+    rgba(0, 0, 0, .12) 0 6px 30px 5px;
+}
+
+.mtx-drawer-content {
+  box-sizing: border-box;
+  padding: 8px 16px;
+  overflow: auto;
+}
+
+.mtx-drawer-right {
+  transform: translateX(100%);
+}
+
+.mtx-drawer-left {
+  transform: translateX(-100%);
+}
+
+.mtx-drawer-bottom {
+  transform: translateY(100%);
+}
+
+.mtx-drawer-top {
+  transform: translateY(-100%);
+}
