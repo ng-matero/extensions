@@ -6,7 +6,6 @@ import {
   trigger,
   AnimationTriggerMetadata,
 } from '@angular/animations';
-import { AnimationCurves, AnimationDurations } from '@angular/material/core';
 
 /** Animations used by the drawer. */
 export const mtxDrawerAnimations: {

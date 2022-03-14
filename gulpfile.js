@@ -31,6 +31,10 @@ function copyDataGridColumnResize() {
   return src([`${SRC}/grid/column-resize/*.scss`]).pipe(dest(`${DEST}/grid/column-resize`));
 }
 
+function copyDrawer() {
+  return src([`${SRC}/drawer/*.scss`]).pipe(dest(`${DEST}/drawer`));
+}
+
 function copyLoader() {
   return src([`${SRC}/loader/*.scss`]).pipe(dest(`${DEST}/loader`));
 }
@@ -76,6 +80,7 @@ exports.default = series(
   copyDatetimepicker,
   copyDataGrid,
   copyDataGridColumnResize,
+  copyDrawer,
   copyLoader,
   copyPopover,
   copyProgress,
