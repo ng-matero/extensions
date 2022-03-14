@@ -13,8 +13,8 @@ import {
 })
 export class DrawerDemoComponent {
   position: DrawerPosition = 'right';
-  width = 300;
-  height = 300;
+  width = '300px';
+  height = '300px';
   hasBackdrop = true;
   disableClose = false;
   closeOnNavigation = true;
@@ -27,8 +27,8 @@ export class DrawerDemoComponent {
   open() {
     const drawerRef = this.drawer.open(DrawerOverviewComponent, {
       position: this.position,
-      width: this.width + 'px',
-      height: this.height + 'px',
+      width: this.width,
+      height: this.height,
       hasBackdrop: this.hasBackdrop,
       disableClose: this.disableClose,
       closeOnNavigation: this.closeOnNavigation,
