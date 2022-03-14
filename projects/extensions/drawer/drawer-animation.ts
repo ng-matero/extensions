@@ -30,11 +30,8 @@ export const mtxDrawerAnimations: {
     ),
     transition(
       'visible => void, visible => hidden',
-      animate(`${AnimationDurations.COMPLEX} ${AnimationCurves.ACCELERATION_CURVE}`)
+      animate('400ms cubic-bezier(0.25, 0.8, 0.25, 1)')
     ),
-    transition(
-      'void => visible',
-      animate(`${AnimationDurations.EXITING} ${AnimationCurves.DECELERATION_CURVE}`)
-    ),
+    transition('void => visible', animate('150ms cubic-bezier(0, 0, 0.2, 1)')),
   ]),
 };
