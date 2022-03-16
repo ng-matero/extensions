@@ -40,6 +40,11 @@ export const COMPONENTS_MENU = [
         summary: 'A configurable modal to show alert and confirmation.',
       },
       {
+        id: 'drawer',
+        name: 'Drawer',
+        summary: 'A large interactive panel that displays dynamic content.',
+      },
+      {
         id: 'loader',
         name: 'Loader',
         summary: 'An easier loading component wrap with progress bar and spinner.',

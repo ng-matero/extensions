@@ -36,6 +36,10 @@ const routes = [
         loadChildren: () => import('./dialog/dialog').then(m => m.DialogModule),
       },
       {
+        path: 'drawer',
+        loadChildren: () => import('./drawer/drawer').then(m => m.DrawerModule),
+      },
+      {
         path: 'grid',
         loadChildren: () => import('./grid/grid').then(m => m.GridModule),
       },

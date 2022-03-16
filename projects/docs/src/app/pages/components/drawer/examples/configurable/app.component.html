@@ -1,0 +1,39 @@
+<h2>Drawer configuration</h2>
+
+<section>
+  <label>Position:</label>
+  <mat-radio-group [(ngModel)]="position">
+    <mat-radio-button value="top">Top</mat-radio-button>
+    <mat-radio-button value="right">Right</mat-radio-button>
+    <mat-radio-button value="bottom">Bottom</mat-radio-button>
+    <mat-radio-button value="left">Left</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <mat-form-field>
+    <mat-label>width</mat-label>
+    <input matInput [(ngModel)]="width" type="text">
+  </mat-form-field>
+  &nbsp;
+  <mat-form-field>
+    <mat-label>height</mat-label>
+    <input matInput [(ngModel)]="height" type="text">
+  </mat-form-field>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="hasBackdrop">hasBackdrop</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="disableClose">disableClose</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="closeOnNavigation">closeOnNavigation</mat-checkbox>
+</section>
+
+<h2>Result</h2>
+
+<button mat-raised-button color="primary" (click)="open()">Open</button>
