@@ -42,6 +42,9 @@ export class Text3dApiComponent {
         path: 'api',
         component: Text3dApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./text3d.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

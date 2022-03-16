@@ -39,6 +39,9 @@ export class FormGroupApiComponent {
         path: 'api',
         component: FormGroupApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./form-group.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),

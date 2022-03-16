@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private mtxDialog: MtxDialog) {}
 
   openOriginal() {
-    const dialogRef = this.mtxDialog.originalOpen(DialogOverviewExampleComponent, {
+    const dialogRef = this.mtxDialog.originalOpen(DialogOriginalOverviewComponent, {
       width: '550px',
       data: { name: 'nzbin', animal: 'panda' },
     });
@@ -29,9 +29,9 @@ export class AppComponent {
   selector: 'dialog-overview',
   templateUrl: './dialog.html',
 })
-export class DialogOverviewExampleComponent {
+export class DialogOriginalOverviewComponent {
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleComponent>,
+    public dialogRef: MatDialogRef<DialogOriginalOverviewComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 

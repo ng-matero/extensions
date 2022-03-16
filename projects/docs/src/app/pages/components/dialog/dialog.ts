@@ -16,7 +16,7 @@ import { DialogBasicComponent, dialogBasicExampleConfig } from './examples/basic
 import {
   DialogOriginalComponent,
   dialogOriginalExampleConfig,
-  DialogOverviewExampleComponent,
+  DialogOriginalOverviewComponent,
 } from './examples/original';
 import { DialogI18nComponent, dialogI18nExampleConfig } from './examples/i18n';
 
@@ -77,7 +77,7 @@ export class DialogApiComponent {
 
     DialogBasicComponent,
     DialogOriginalComponent,
-    DialogOverviewExampleComponent,
+    DialogOriginalOverviewComponent,
     DialogI18nComponent,
   ],
 })

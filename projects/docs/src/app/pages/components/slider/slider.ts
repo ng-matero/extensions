@@ -43,6 +43,9 @@ export class SliderApiComponent {
         path: 'api',
         component: SliderApiComponent,
         pathMatch: 'full',
+        data: {
+          content: require('!!raw-loader!!highlight-loader!markdown-loader!./slider.md'),
+        },
       },
       { path: '**', redirectTo: 'overview' },
     ]),
