@@ -110,7 +110,7 @@ export class MtxGridCellComponent {
   }
 
   /** Preview enlarged image */
-  _onPreview(urlStr: string) {
+  _handleImagePreview(urlStr: string) {
     const imgs: PhotoViewer.Img[] = [];
 
     this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
