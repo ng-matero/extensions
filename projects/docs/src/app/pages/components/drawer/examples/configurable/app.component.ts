@@ -36,13 +36,13 @@ export class AppComponent {
 @Component({
   selector: 'drawer-overview',
   template: `
-    <h2 fxLayoutAlign=" center">
+    <h1 class="mat-h1" fxLayoutAlign=" center">
       <span>Title</span>
       <span fxFlex></span>
       <button mat-icon-button (click)="onClose()">
         <mat-icon>close</mat-icon>
       </button>
-    </h2>
+    </h1>
     <p>
       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tiam, quis nostrud
       exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in

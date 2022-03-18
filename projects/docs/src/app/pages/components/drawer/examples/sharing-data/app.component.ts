@@ -28,10 +28,17 @@ export class AppComponent {
 @Component({
   selector: 'drawer-overview',
   template: `
-    <h2>Hi, {{ data.name }}</h2>
+    <h1 class="mat-h1" fxLayoutAlign=" center">
+      Hi, {{ data.name }}
+      <span fxFlex></span>
+      <button mat-icon-button (click)="onNoClick()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </h1>
     <div>
       <p>What's your favorite animal?</p>
       <mat-form-field>
+        <mat-label>Favorite Animal</mat-label>
         <input matInput [(ngModel)]="data.animal" />
       </mat-form-field>
     </div>
