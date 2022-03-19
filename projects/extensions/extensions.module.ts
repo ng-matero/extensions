@@ -4,9 +4,10 @@ import { MtxAlertModule } from '@ng-matero/extensions/alert';
 import { MtxButtonModule } from '@ng-matero/extensions/button';
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
 import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
-import { MtxGridModule } from '@ng-matero/extensions/grid';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
+import { MtxDrawerModule } from '@ng-matero/extensions/drawer';
+import { MtxGridModule } from '@ng-matero/extensions/grid';
 import { MtxLoaderModule } from '@ng-matero/extensions/loader';
 import { MtxPopoverModule } from '@ng-matero/extensions/popover';
 import { MtxProgressModule } from '@ng-matero/extensions/progress';
@@ -21,9 +22,10 @@ import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
     MtxButtonModule,
     MtxCheckboxGroupModule,
     MtxColorpickerModule,
-    MtxGridModule,
     MtxDatetimepickerModule,
     MtxDialogModule,
+    MtxDrawerModule,
+    MtxGridModule,
     MtxLoaderModule,
     MtxPopoverModule,
     MtxProgressModule,

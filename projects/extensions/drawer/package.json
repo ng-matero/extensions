@@ -1,0 +1,8 @@
+{
+  "ngPackage": {
+    "lib": {
+      "flatModuleFile": "mtxDrawer",
+      "entryFile": "public-api.ts"
+    }
+  }
+}

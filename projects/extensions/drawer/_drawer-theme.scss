@@ -1,7 +1,7 @@
 @use 'sass:map';
-@use '../core/theming/theming';
-@use '../core/theming/palette';
-@use '../core/style/private';
+@use '~@angular/material/core/theming/theming';
+@use '~@angular/material/core/theming/palette';
+@use '~@angular/material/core/style/private';
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
