@@ -39,16 +39,16 @@ function copyDatetimepicker() {
   return src([`${SRC}/datetimepicker/*.scss`]).pipe(dest(`${DEST}/datetimepicker`));
 }
 
-function copyDataGrid() {
+function copyDrawer() {
+  return src([`${SRC}/drawer/*.scss`]).pipe(dest(`${DEST}/drawer`));
+}
+
+function copyGrid() {
   return src([`${SRC}/grid/*.scss`]).pipe(dest(`${DEST}/grid`));
 }
 
-function copyDataGridColumnResize() {
+function copyGridColumnResize() {
   return src([`${SRC}/grid/column-resize/*.scss`]).pipe(dest(`${DEST}/grid/column-resize`));
-}
-
-function copyDrawer() {
-  return src([`${SRC}/drawer/*.scss`]).pipe(dest(`${DEST}/drawer`));
 }
 
 function copyLoader() {
@@ -99,9 +99,9 @@ exports.default = series(
   copyButton,
   copyColorpicker,
   copyDatetimepicker,
-  copyDataGrid,
-  copyDataGridColumnResize,
   copyDrawer,
+  copyGrid,
+  copyGridColumnResize,
   copyLoader,
   copyPopover,
   copyProgress,
