@@ -42,7 +42,7 @@
     "@ng-select/ng-select": "^8.1.1",
     "@ngx-translate/core": "^14.0.0",
     "@ngx-translate/http-loader": "^7.0.0",
-    "moment": "^2.29.1",
+    "moment": "^2.29.2",
     "ngx-color": "^7.3.3",
     "ngx-progressbar": "^8.0.0",
     "photoviewer": "^3.6.2",
