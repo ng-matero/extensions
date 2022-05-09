@@ -19,8 +19,7 @@
     "build:extensions": "ng build extensions --configuration production",
     "build:extensions-moment-adapter": "ng build extensions-moment-adapter --configuration production",
     "build:lib": "npm run build:extensions",
-    "copy:scss": "gulp --gulpfile gulpfile.js",
-    "publish": "npm run build:lib && npm run copy:scss && cd dist/extensions && npm publish",
+    "publish": "npm run build:lib && cd dist/extensions && npm publish",
     "prepare": "husky install"
   },
   "private": true,
