@@ -24,7 +24,6 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
              button[mat-mini-fab][loading]`,
 })
 export class MatButtonLoadingDirective implements OnChanges {
-  private spinnerFactory: ComponentFactory<MatProgressSpinner>;
   private spinner!: ComponentRef<MatProgressSpinner> | null;
 
   @Input()
@@ -50,12 +49,9 @@ export class MatButtonLoadingDirective implements OnChanges {
 
   constructor(
     private matButton: MatButton,
-    private componentFactoryResolver: ComponentFactoryResolver,
     private viewContainerRef: ViewContainerRef,
     private renderer: Renderer2
-  ) {
-    this.spinnerFactory = this.componentFactoryResolver.resolveComponentFactory(MatProgressSpinner);
-  }
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (!changes.loading) {
@@ -75,7 +71,7 @@ export class MatButtonLoadingDirective implements OnChanges {
 
   private createSpinner(): void {
     if (!this.spinner) {
-      this.spinner = this.viewContainerRef.createComponent(this.spinnerFactory);
+      this.spinner = this.viewContainerRef.createComponent(MatProgressSpinner);
       this.spinner.instance.color = this.color;
       this.spinner.instance.diameter = 20;
       this.spinner.instance.mode = 'indeterminate';
