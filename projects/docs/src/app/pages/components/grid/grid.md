@@ -89,7 +89,7 @@ Exported as: `mtxGrid`
 | :--- | :--- |
 | @Input() `columnHideable: boolean` | Whether the column can be hiding. Defaulted to **`true`**. |
 | @Input() `columnHideableChecked: 'show' \| 'hide'` | Hide or show when column hiding checkbox be checked. Defaulted to **`'show'`**. |
-| @Input() `columnMovable: boolean` | Whether the column can be moving. Defaulted to **`true`**. |
+| @Input() `columnSortable: boolean` | Whether the column can be sorting. Defaulted to **`true`**. |
 | @Input() `columnPinnable: boolean` | Whether the column can be fixed. Defaulted to **`true`**. |
 | @Output() `columnChange: EventEmitter<string[]>` | Event emitted when the column be hided or be resorted. |
 | @Input() `showColumnMenuHeader: boolean` | Whether show header of column menu. Defaulted to **`false`**. |

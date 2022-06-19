@@ -1,6 +1,6 @@
 <div>
   <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
-  <mat-checkbox [(ngModel)]="columnMovable">Column Moving</mat-checkbox>
+  <mat-checkbox [(ngModel)]="columnSortable">Column Sorting</mat-checkbox>
 
   <label>columnHideableChecked:</label>
   <mat-radio-group [(ngModel)]="columnHideableChecked">
@@ -15,7 +15,7 @@
           [toolbarTitle]="'Data Grid'"
           [columnHideable]="columnHideable"
           [columnHideableChecked]="columnHideableChecked"
-          [columnMovable]="columnMovable"
+          [columnSortable]="columnSortable"
           (columnChange)="log($event)"
           [showColumnMenuHeader]="true"
           [columnMenuHeaderText]="'Title'"

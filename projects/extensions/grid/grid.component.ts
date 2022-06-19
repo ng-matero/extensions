@@ -168,7 +168,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @Input() columnHideable = true;
   @Input() columnHideableChecked: 'show' | 'hide' = 'show';
-  @Input() columnMovable = true;
+  @Input() columnSortable = true;
   @Input() columnPinnable = true;
   @Output() columnChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
 
