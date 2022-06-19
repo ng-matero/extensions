@@ -21,7 +21,7 @@ export class AppComponent {
   list = EXAMPLE_DATA;
 
   columnHideable = true;
-  columnMovable = true;
+  columnSortable = true;
   columnHideableChecked: 'show' | 'hide' = 'show';
 
   closeMenu() {
