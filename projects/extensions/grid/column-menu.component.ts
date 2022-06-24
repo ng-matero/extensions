@@ -12,7 +12,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { ThemePalette } from '@angular/material/core';
-import { MtxGridButtonType, MtxGridColumnSelectionItem } from './grid.interface';
+import { MtxGridButtonType, MtxGridColumn, MtxGridColumnPinValue } from './grid.interface';
 
 @Component({
   selector: 'mtx-grid-column-menu',
@@ -26,17 +26,16 @@ export class MtxGridColumnMenuComponent {
   @ViewChild('menu', { static: true }) menuPanel!: MatMenu;
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
 
-  @Input() columns: MtxGridColumnSelectionItem[] = [];
+  @Input() columns: MtxGridColumn[] = [];
   @Input() selectable = true;
   @Input() selectableChecked: 'show' | 'hide' = 'show';
   @Input() sortable = true;
-  @Input() dndSortable = true;
+  @Input() pinnable = true;
 
   @Input()
   get buttonText() {
     const defaultText = `Columns ${this.selectableChecked === 'show' ? 'Shown' : 'Hidden'}`;
-    const text = this._buttonText ? this._buttonText : defaultText;
-    return text;
+    return this._buttonText ? this._buttonText : defaultText;
   }
   set buttonText(value: string) {
     this._buttonText = value;
@@ -55,8 +54,15 @@ export class MtxGridColumnMenuComponent {
   @Input() footerText = 'Columns Footer';
   @Input() footerTemplate!: TemplateRef<any>;
 
-  @Output() selectionChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
-  @Output() sortChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
+  @Output() selectionChange = new EventEmitter<MtxGridColumn[]>();
+  @Output() sortChange = new EventEmitter<MtxGridColumn[]>();
+  @Output() pinChange = new EventEmitter<MtxGridColumn[]>();
+
+  pinOptions: { label: string; value: MtxGridColumnPinValue }[] = [
+    { label: 'Pin Left', value: 'left' },
+    { label: 'Pin Right', value: 'right' },
+    { label: 'No Pin', value: null },
+  ];
 
   _handleDroped(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
@@ -65,5 +71,12 @@ export class MtxGridColumnMenuComponent {
 
   _handleSelection(e: MatCheckboxChange) {
     this.selectionChange.emit(this.columns);
+  }
+
+  _handlePinSelect(col: MtxGridColumn, val: MtxGridColumnPinValue) {
+    if (col.pinned != val) {
+      col.pinned = val;
+      this.pinChange.emit(this.columns);
+    }
   }
 }

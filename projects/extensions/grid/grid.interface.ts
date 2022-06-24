@@ -8,8 +8,9 @@ export interface MtxGridColumn {
   field: string;
   header?: string | Observable<string>;
   hide?: boolean;
+  show?: boolean;
   disabled?: boolean;
-  pinned?: 'left' | 'right';
+  pinned?: MtxGridColumnPinValue;
   left?: string;
   right?: string;
   width?: string;
@@ -17,7 +18,7 @@ export interface MtxGridColumn {
   minWidth?: number;
   maxWidth?: number;
   sortable?: boolean | string;
-  sortProp?: MtxGridColumnSortProp;
+  sortProp?: MtxGridSortProp;
   type?: MtxGridColumnType;
   typeParameter?: MtxGridColumnTypeParameter;
   tag?: MtxGridColumnTag;
@@ -29,6 +30,9 @@ export interface MtxGridColumn {
   summary?: ((data: any[], colDef?: MtxGridColumn) => void) | string;
   class?: string;
 }
+
+/** Possible column pin options.  */
+export declare type MtxGridColumnPinValue = 'left' | 'right' | null;
 
 /** Possible column type values. */
 export declare type MtxGridColumnType =
@@ -52,8 +56,8 @@ export interface MtxGridColumnTypeParameter {
   timezone?: string;
 }
 
-/** The properties of column sort. */
-export interface MtxGridColumnSortProp {
+/** The properties of data sort. */
+export interface MtxGridSortProp {
   arrowPosition?: 'before' | 'after';
   disableClear?: boolean;
   id?: string;
@@ -90,15 +94,6 @@ export interface MtxGridColumnButton {
   children?: MtxGridColumnButton[];
   iif?: (record: any) => boolean;
   tooltip?: string | Observable<string>;
-  disabled?: boolean;
-}
-
-/** The properties of column selection item. */
-export interface MtxGridColumnSelectionItem {
-  label: string | Observable<string>;
-  field: string;
-  show?: boolean;
-  hide?: boolean;
   disabled?: boolean;
 }
 

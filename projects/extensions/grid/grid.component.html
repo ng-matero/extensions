@@ -15,7 +15,7 @@
   </div>
   <div class="mtx-grid-toolbar-actions">
     <mtx-grid-column-menu *ngIf="showColumnMenuButton" #columnMenu
-                          [columns]="columnMenuData"
+                          [columns]="columns"
                           [buttonText]="columnMenuButtonText"
                           [buttonType]="columnMenuButtonType"
                           [buttonColor]="columnMenuButtonColor"
@@ -23,9 +23,11 @@
                           [buttonIcon]="columnMenuButtonIcon"
                           [selectable]="columnHideable"
                           [selectableChecked]="columnHideableChecked"
-                          [sortable]="columnSortable"
                           (selectionChange)="_handleColumnChange($event)"
+                          [sortable]="columnSortable"
                           (sortChange)="_handleColumnChange($event)"
+                          [pinnable]="columnPinnable"
+                          (pinChange)="_handleColumnChange($event)"
                           [showHeader]="showColumnMenuHeader"
                           [headerText]="columnMenuHeaderText"
                           [headerTemplate]="columnMenuHeaderTemplate"

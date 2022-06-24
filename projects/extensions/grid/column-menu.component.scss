@@ -71,3 +71,34 @@
     transition: transform 250ms cubic-bezier(0, 0, .2, 1);
   }
 }
+
+.mtx-grid-column-drag-handle-icon,
+.mtx-grid-column-pin-icon,
+.mtx-grid-column-pin-off-icon,
+.mtx-grid-column-check-icon {
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.mtx-grid-column-pin-button {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+}
+
+.mtx-grid-column-pin-option {
+  display: flex;
+  align-items: center;
+}
+
+.mtx-grid-column-pin-option-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+
+.mtx-grid-column-pin-option-text {
+  padding: 0 8px;
+}
