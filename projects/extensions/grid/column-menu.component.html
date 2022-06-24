@@ -52,12 +52,14 @@
     </div>
 
     <div class="mtx-grid-column-menu-body">
-      <div class="mtx-grid-column-menu-list"
-           cdkDropList (cdkDropListDropped)="_handleDroped($event)"
-           *ngIf="sortable">
+      <div class="mtx-grid-column-menu-list" *ngIf="sortable"
+           cdkDropList (cdkDropListDropped)="_handleDroped($event)">
         <div class="mtx-grid-column-menu-item" *ngFor="let col of columns"
              cdkDrag [cdkDragDisabled]="selectableChecked === 'show'? !col.show : col.hide">
-          <mat-icon cdkDragHandle>drag_handle</mat-icon>
+          <svg class="mtx-grid-column-drag-handle-icon"
+               viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor" focusable="false">
+            <path d="M21 11H3V9H21V11M21 13H3V15H21V13Z"></path>
+          </svg>
           <ng-template [ngTemplateOutlet]="checkboxList"
                        [ngTemplateOutletContext]="{ $implicit: col }">
           </ng-template>
@@ -83,14 +85,37 @@
 </mat-menu>
 
 <ng-template #checkboxList let-col>
-  <mat-checkbox class="mtx-grid-column-menu-item-label"
-                *ngIf="selectable"
-                [(ngModel)]="col[selectableChecked]"
-                [disabled]="col.disabled"
+  <button class="mtx-grid-column-pin-button" mat-icon-button [matMenuTriggerFor]="pinList">
+    <svg class="mtx-grid-column-pin-icon" *ngIf="col.pinned"
+         viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor" focusable="false">
+      <path d="M16,12V4H17V2H7V4H8V12L6,14V16H11.2V22H12.8V16H18V14L16,12Z" />
+    </svg>
+    <svg class="mtx-grid-column-pin-off-icon" *ngIf="!col.pinned"
+         viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor" focusable="false">
+      <path
+            d="M2,5.27L3.28,4L20,20.72L18.73,22L12.8,16.07V22H11.2V16H6V14L8,12V11.27L2,5.27M16,12L18,14V16H17.82L8,6.18V4H7V2H17V4H16V12Z" />
+    </svg>
+  </button>
+  <mat-menu #pinList="matMenu" class="mtx-grid-column-pin-list">
+    <button class="mtx-grid-column-pin-option" *ngFor="let item of pinOptions" mat-menu-item
+            (click)="_handlePinSelect(col, item.value)">
+      <span class="mtx-grid-column-pin-option-icon">
+        <!-- eslint-disable-next-line @angular-eslint/template/eqeqeq -->
+        <svg class="mtx-grid-column-check-icon" *ngIf="col.pinned==item.value"
+             viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor" focusable="false">
+          <path d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" />
+        </svg>
+      </span>
+      <span class="mtx-grid-column-pin-option-text">{{item.label}}</span>
+    </button>
+  </mat-menu>
+
+  <mat-checkbox class="mtx-grid-column-menu-item-label" *ngIf="selectable"
+                [(ngModel)]="col[selectableChecked]" [disabled]="col.disabled"
                 (change)="_handleSelection($event)">
-    {{col.label | toObservable | async}}
+    {{col.header | toObservable | async}}
   </mat-checkbox>
   <span class="mtx-grid-column-menu-item-label" *ngIf="!selectable">
-    {{col.label | toObservable | async}}
+    {{col.header | toObservable | async}}
   </span>
 </ng-template>

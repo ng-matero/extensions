@@ -33,7 +33,6 @@ import { ThemePalette } from '@angular/material/core';
 
 import {
   MtxGridColumn,
-  MtxGridColumnSelectionItem,
   MtxGridCellTemplate,
   MtxGridRowSelectionFormatter,
   MtxGridRowClassFormatter,
@@ -155,8 +154,6 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   // ===== Column Menu =====
 
-  columnMenuData: MtxGridColumnSelectionItem[] = [];
-
   @Input() showColumnMenuButton = true;
   @Input() columnMenuButtonText = '';
   @Input() columnMenuButtonType: MtxGridButtonType = 'stroked';
@@ -168,7 +165,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() columnHideableChecked: 'show' | 'hide' = 'show';
   @Input() columnSortable = true;
   @Input() columnPinnable = true;
-  @Output() columnChange = new EventEmitter<MtxGridColumnSelectionItem[]>();
+  @Output() columnChange = new EventEmitter<MtxGridColumn[]>();
 
   @Input() showColumnMenuHeader = false;
   @Input() columnMenuHeaderText = 'Columns Header';
@@ -257,18 +254,12 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.displayedColumns = this.columns.filter(item => !item.hide).map(item => item.field);
 
     if (this.showColumnMenuButton) {
-      this.columnMenuData = (this.columns as any[]).map(item => {
-        const newItem: MtxGridColumnSelectionItem = {
-          label: item.header,
-          field: item.field,
-          disabled: item.disabled,
-        };
+      this.columns.forEach(item => {
         if (this.columnHideableChecked === 'show') {
-          newItem.show = !item.hide;
+          item.show = !item.hide;
         } else {
-          newItem.hide = item.hide;
+          item.hide = !!item.hide;
         }
-        return newItem;
       });
     }
 
@@ -430,12 +421,10 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
-  getDisplayedColumnFields(columns: any[]): string[] {
+  getDisplayedColumnFields(columns: MtxGridColumn[]): string[] {
     const fields = columns
-      .filter((item: MtxGridColumnSelectionItem) =>
-        this.columnHideableChecked === 'show' ? item.show : !item.hide
-      )
-      .map((item: MtxGridColumnSelectionItem) => item.field);
+      .filter(item => (this.columnHideableChecked === 'show' ? item.show : !item.hide))
+      .map(item => item.field);
     return fields;
   }
 

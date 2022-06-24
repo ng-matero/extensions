@@ -166,7 +166,7 @@ export interface MtxGridColumn {
   width?: string;
   resizable?: boolean;
   sortable?: boolean | string;
-  sortProp?: MtxGridColumnSortProp;
+  sortProp?: MtxGridSortProp;
   type?: MtxGridColumnType;
   typeParameter?: MtxGridColumnTypeParameter;
   tag?: MtxGridColumnTag;
@@ -210,7 +210,7 @@ export interface MtxGridColumnTypeParameter {
 #### Column Sort Properties
 
 ```typescript
-export interface MtxGridColumnSortProp {
+export interface MtxGridSortProp {
   arrowPosition?: 'before' | 'after';
   disableClear?: boolean;
   id?: string;
