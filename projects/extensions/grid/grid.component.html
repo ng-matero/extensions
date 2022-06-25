@@ -105,7 +105,8 @@
                        [start]="col.sortProp?.start!">
                     <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
                     <span>{{col.header | toObservable | async}}</span>
-                    <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>
+                    <mat-icon class="mtx-grid-icon mat-sort-header-icon" *ngIf="col.sortable">sort
+                    </mat-icon>
                   </div>
                   <ng-template [ngTemplateOutlet]="headerExtraTplBase"
                                [ngTemplateOutletContext]="{ $implicit: headerExtraTemplate, colDef: col }">
@@ -139,10 +140,14 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultCellTpl>
-                <button *ngIf="col.showExpand" mat-icon-button mtx-grid-expansion-toggle
+                <button class="mtx-grid-row-expand-button" *ngIf="col.showExpand"
+                        mat-icon-button mtx-grid-expansion-toggle
                         [(opened)]="expansionRowStates[dataIndex].expanded"
                         (toggleChange)="_handleExpansionChange($event, row, col, dataIndex);">
-                  <mat-icon>keyboard_arrow_right</mat-icon>
+                  <svg class="mtx-grid-icon mtx-grid-row-expand-icon" viewBox="0 0 24 24"
+                       width="24px" height="24px" fill="currentColor" focusable="false">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                  </svg>
                 </button>
 
                 <mtx-grid-cell [rowData]="row" [colDef]="col"></mtx-grid-cell>
@@ -282,7 +287,8 @@
                        [start]="col.sortProp?.start!">
                     <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
                     <span>{{col.header | toObservable | async}}</span>
-                    <mat-icon class="mat-sort-header-icon" *ngIf="col.sortable">sort</mat-icon>
+                    <mat-icon class="mtx-grid-icon mat-sort-header-icon" *ngIf="col.sortable">sort
+                    </mat-icon>
                   </div>
                   <ng-template [ngTemplateOutlet]="headerExtraTplBase"
                                [ngTemplateOutletContext]="{ $implicit: headerExtraTemplate, colDef: col }">
@@ -316,10 +322,14 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultCellTpl>
-                <button *ngIf="col.showExpand" mat-icon-button mtx-grid-expansion-toggle
+                <button class="mtx-grid-row-expand-button" *ngIf="col.showExpand"
+                        mat-icon-button mtx-grid-expansion-toggle
                         [(opened)]="expansionRowStates[dataIndex].expanded"
                         (toggleChange)="_handleExpansionChange($event, row, col, dataIndex);">
-                  <mat-icon>keyboard_arrow_right</mat-icon>
+                  <svg class="mtx-grid-icon mtx-grid-row-expand-icon" viewBox="0 0 24 24"
+                       width="24px" height="24px" fill="currentColor" focusable="false">
+                    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+                  </svg>
                 </button>
 
                 <mtx-grid-cell [rowData]="row" [colDef]="col"></mtx-grid-cell>
