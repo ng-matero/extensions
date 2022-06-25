@@ -1,6 +1,7 @@
 <div>
   <mat-checkbox [(ngModel)]="columnHideable">Column Hiding</mat-checkbox>
   <mat-checkbox [(ngModel)]="columnSortable">Column Sorting</mat-checkbox>
+  <mat-checkbox [(ngModel)]="columnPinnable">Column Pinning</mat-checkbox>
 
   <label>columnHideableChecked:</label>
   <mat-radio-group [(ngModel)]="columnHideableChecked">
@@ -16,6 +17,7 @@
           [columnHideable]="columnHideable"
           [columnHideableChecked]="columnHideableChecked"
           [columnSortable]="columnSortable"
+          [columnPinnable]="columnPinnable"
           (columnChange)="log($event)"
           [showColumnMenuHeader]="true"
           [columnMenuHeaderText]="'Title'"

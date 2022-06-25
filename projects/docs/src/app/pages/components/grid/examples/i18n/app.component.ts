@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn } from '@ng-matero/extensions';
+import { MtxGridColumn, MtxGridColumnPinOption } from '@ng-matero/extensions/grid';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -57,6 +57,12 @@ export class AppComponent {
   ];
 
   list = EXAMPLE_DATA;
+
+  columnPinOptions: MtxGridColumnPinOption[] = [
+    { label: this.translate.stream('pin_left'), value: 'left' },
+    { label: this.translate.stream('pin_right'), value: 'right' },
+    { label: this.translate.stream('no_pin'), value: null },
+  ];
 
   langs = [
     { label: '中文简体', value: 'zh-CN' },
