@@ -106,8 +106,11 @@
                        [start]="col.sortProp?.start!">
                     <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
                     <span>{{col.header | toObservable | async}}</span>
-                    <mat-icon class="mtx-grid-icon mat-sort-header-icon" *ngIf="col.sortable">sort
-                    </mat-icon>
+                    <svg class="mtx-grid-icon mat-sort-header-icon" *ngIf="col.sortable"
+                         viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor"
+                         focusable="false">
+                      <path d="M3,13H15V11H3M3,6V8H21V6M3,18H9V16H3V18Z"></path>
+                    </svg>
                   </div>
                   <ng-template [ngTemplateOutlet]="headerExtraTplBase"
                                [ngTemplateOutletContext]="{ $implicit: headerExtraTemplate, colDef: col }">
@@ -288,8 +291,11 @@
                        [start]="col.sortProp?.start!">
                     <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
                     <span>{{col.header | toObservable | async}}</span>
-                    <mat-icon class="mtx-grid-icon mat-sort-header-icon" *ngIf="col.sortable">sort
-                    </mat-icon>
+                    <svg class="mtx-grid-icon mat-sort-header-icon" *ngIf="col.sortable"
+                         viewBox="0 0 24 24" width="24px" height="24px" fill="currentColor"
+                         focusable="false">
+                      <path d="M3,13H15V11H3M3,6V8H21V6M3,18H9V16H3V18Z"></path>
+                    </svg>
                   </div>
                   <ng-template [ngTemplateOutlet]="headerExtraTplBase"
                                [ngTemplateOutletContext]="{ $implicit: headerExtraTemplate, colDef: col }">
