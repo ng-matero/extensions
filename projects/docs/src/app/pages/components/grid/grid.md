@@ -104,6 +104,7 @@ Exported as: `mtxGrid`
 | @Input() `columnMenuButtonColor: string` | The column menu button color. Defaulted to **`''`**. |
 | @Input() `columnMenuButtonClass: string` | The column menu button class. Defaulted to **`''`**. |
 | @Input() `columnMenuButtonIcon: string` | The column menu button icon. Defaulted to **`''`**. |
+| @Input() `columnPinOptions: MtxGridColumnPinOption[]` | The column pin options. |
 
 ###### Row
 
@@ -160,7 +161,7 @@ export interface MtxGridColumn {
   header?: string;
   hide?: boolean;
   disabled?: boolean;
-  pinned?: 'left' | 'right';
+  pinned?: MtxGridColumnPinOption;
   left?: string;
   right?: string;
   width?: string;
@@ -178,6 +179,17 @@ export interface MtxGridColumn {
   summary?: ((colData: any, colDef?: MtxGridColumn) => void) | string;
 }
 ```
+
+#### Column Pin Option
+```typescript
+export interface MtxGridColumnPinOption {
+  label: string | Observable<string>;
+  value: MtxGridColumnPinValue;
+}
+
+export declare type MtxGridColumnPinValue = 'left' | 'right' | null;
+```
+
 
 #### Column Type
 

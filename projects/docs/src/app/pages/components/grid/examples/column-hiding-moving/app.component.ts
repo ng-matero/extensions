@@ -20,8 +20,9 @@ export class AppComponent {
 
   list = EXAMPLE_DATA;
 
-  columnHideable = true;
+  columnPinnable = false;
   columnSortable = true;
+  columnHideable = true;
   columnHideableChecked: 'show' | 'hide' = 'show';
 
   closeMenu() {

@@ -8,5 +8,8 @@
   "delete": "Delete",
   "confirm_delete": "Confirm delete?",
   "close": "CLOSE",
-  "ok": "OK"
+  "ok": "OK",
+  "pin_left": "Pin Left",
+  "pin_right": "Pin Right",
+  "no_pin": "No Pin"
 }
