@@ -12,5 +12,8 @@
   "steak": "牛排",
   "pizza": "披萨",
   "tacos": "玉米卷",
-  "view": "查看"
+  "view": "查看",
+  "pin_left": "固定在左侧",
+  "pin_right": "固定在右侧",
+  "no_pin": "取消固定"
 }

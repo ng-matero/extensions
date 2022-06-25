@@ -31,8 +31,14 @@ export interface MtxGridColumn {
   class?: string;
 }
 
-/** Possible column pin options.  */
+/** Possible column pin values.  */
 export declare type MtxGridColumnPinValue = 'left' | 'right' | null;
+
+/** Column pin option  */
+export interface MtxGridColumnPinOption {
+  label: string | Observable<string>;
+  value: MtxGridColumnPinValue;
+}
 
 /** Possible column type values. */
 export declare type MtxGridColumnType =

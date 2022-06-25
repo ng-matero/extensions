@@ -41,6 +41,7 @@ import {
   MtxGridRowClassFormatter,
   MtxGridColumnMenu,
   MtxGridButtonType,
+  MtxGridColumnPinOption,
 } from './grid.interface';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
@@ -175,6 +176,8 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() showColumnMenuFooter = false;
   @Input() columnMenuFooterText = 'Columns Footer';
   @Input() columnMenuFooterTemplate!: TemplateRef<any>;
+
+  @Input() columnPinOptions: MtxGridColumnPinOption[] = [];
 
   // ===== No Result =====
 
