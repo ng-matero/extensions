@@ -7,7 +7,7 @@
 }
 
 .mtx-grid-column-menu-body {
-  padding: 8px;
+  padding: 8px 16px;
 }
 
 .mtx-grid-column-menu-header,
@@ -46,7 +46,6 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 4px 8px;
 
   &.cdk-drag-disabled {
     .cdk-drag-handle {
@@ -81,6 +80,7 @@
 .mtx-grid-column-pin-option {
   display: flex;
   align-items: center;
+  height: 32px;
 }
 
 .mtx-grid-column-pin-option-placeholder {
