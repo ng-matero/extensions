@@ -12,5 +12,8 @@
   "steak": "Steak",
   "pizza": "Pizza",
   "tacos": "Tacos",
-  "view": "VIEW"
+  "view": "VIEW",
+  "pin_left": "Pin Left",
+  "pin_right": "Pin Right",
+  "no_pin": "No Pin"
 }

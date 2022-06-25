@@ -12,7 +12,12 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { ThemePalette } from '@angular/material/core';
-import { MtxGridButtonType, MtxGridColumn, MtxGridColumnPinValue } from './grid.interface';
+import {
+  MtxGridButtonType,
+  MtxGridColumn,
+  MtxGridColumnPinOption,
+  MtxGridColumnPinValue,
+} from './grid.interface';
 
 @Component({
   selector: 'mtx-grid-column-menu',
@@ -58,7 +63,16 @@ export class MtxGridColumnMenuComponent {
   @Output() sortChange = new EventEmitter<MtxGridColumn[]>();
   @Output() pinChange = new EventEmitter<MtxGridColumn[]>();
 
-  pinOptions: { label: string; value: MtxGridColumnPinValue }[] = [
+  @Input()
+  get pinOptions() {
+    return this._pinOptions;
+  }
+  set pinOptions(value: MtxGridColumnPinOption[]) {
+    if (value.length > 0) {
+      this._pinOptions = value;
+    }
+  }
+  private _pinOptions: MtxGridColumnPinOption[] = [
     { label: 'Pin Left', value: 'left' },
     { label: 'Pin Right', value: 'right' },
     { label: 'No Pin', value: null },

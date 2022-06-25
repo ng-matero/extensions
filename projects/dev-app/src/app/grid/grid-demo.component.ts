@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
   MtxGridColumn,
+  MtxGridColumnPinOption,
   MtxGridComponent,
   MtxGridRowClassFormatter,
   MtxGridRowSelectionFormatter,
@@ -110,6 +111,12 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
         },
       ],
     },
+  ];
+
+  columnPinOptions: MtxGridColumnPinOption[] = [
+    { label: this.translate.stream('pin_left'), value: 'left' },
+    { label: this.translate.stream('pin_right'), value: 'right' },
+    { label: this.translate.stream('no_pin'), value: null },
   ];
 
   list2: any[] = [];
