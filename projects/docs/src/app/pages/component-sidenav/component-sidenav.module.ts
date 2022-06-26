@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared';
 
 import { ComponentSidenav } from './component-sidenav';
@@ -8,7 +8,7 @@ import { ComponentNav } from '../component-nav/component-nav';
 import { ComponentPageHeader } from '../component-page-header/component-page-header';
 import { ComponentViewer } from '../component-viewer/component-viewer';
 
-const routes = [
+const routes: Routes = [
   {
     path: '',
     component: ComponentSidenav,
