@@ -122,7 +122,7 @@ $focus-ring-size: 30px !default;
 }
 
 %_mtx-slider-cursor {
-  .mtx-slider:not(.mtx-slider-disabled):not(.mtx-slider-sliding) & {
+  .mtx-slider:not(.mtx-slider-disabled, .mtx-slider-sliding) & {
     @include vendor-prefixes.cursor-grab;
   }
 }
