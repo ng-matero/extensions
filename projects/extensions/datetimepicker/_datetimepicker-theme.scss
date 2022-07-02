@@ -8,7 +8,7 @@
 $selected-today-box-shadow-width: 1px;
 $calendar-body-font-size: 13px !default;
 $calendar-weekday-table-font-size: 11px !default;
-$calendar-header-font-size: 30px !default;
+$calendar-header-font-size: 28px !default;
 $clock-font-size: 14px !default;
 
 @mixin color($config-or-theme) {
@@ -167,7 +167,7 @@ $clock-font-size: 14px !default;
   }
 
   .mtx-calendar-header-ampm-container {
-    font-size: .75em;
+    font-size: .65em;
   }
 
   .mtx-clock {
