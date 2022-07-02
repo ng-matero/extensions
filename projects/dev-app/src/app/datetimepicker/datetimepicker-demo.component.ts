@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { DateAdapter } from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
@@ -14,7 +14,7 @@ import { MtxDatetimepickerFilterType } from '@ng-matero/extensions/datetimepicke
 export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
   type = 'moment';
 
-  group: FormGroup;
+  group: UntypedFormGroup;
   today: moment.Moment;
   tomorrow: moment.Moment;
   min: moment.Moment;
@@ -25,7 +25,7 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
   translateSubscription!: Subscription;
 
   constructor(
-    fb: FormBuilder,
+    fb: UntypedFormBuilder,
     private dateAdapter: DateAdapter<any>,
     private translate: TranslateService
   ) {

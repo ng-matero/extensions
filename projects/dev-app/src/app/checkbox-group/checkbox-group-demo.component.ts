@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
+import { UntypedFormControl, Validators } from '@angular/forms';
 
 import { MtxCheckboxGroupOption } from '@ng-matero/extensions/checkbox-group';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,8 +18,8 @@ export class CheckboxGroupDemoComponent {
   selectedFoods = ['steak', 'pizza'];
 
   cars = ['Ford', 'Chevrolet', 'Dodge'];
-  f1 = new FormControl(['Chevrolet'], Validators.required);
-  f2 = new FormControl(true, Validators.required);
+  f1 = new UntypedFormControl(['Chevrolet'], Validators.required);
+  f2 = new UntypedFormControl(true, Validators.required);
 
   constructor(public translate: TranslateService) {}
 }

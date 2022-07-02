@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import {
   MtxCalendarView,
   MtxDatetimepickerMode,
@@ -44,5 +44,5 @@ export class AppComponent {
   twelvehour = false;
   timeInterval = 1;
 
-  datetime = new FormControl();
+  datetime = new UntypedFormControl();
 }

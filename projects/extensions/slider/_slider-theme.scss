@@ -123,7 +123,7 @@
       }
     }
 
-    &:not(.mtx-slider-thumb-label-showing):not(.mtx-range-slider) {
+    &:not(.mtx-slider-thumb-label-showing, .mtx-range-slider) {
       .mtx-slider-thumb {
         background-color: $slider-off-color;
       }

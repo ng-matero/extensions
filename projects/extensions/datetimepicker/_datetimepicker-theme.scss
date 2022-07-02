@@ -112,7 +112,7 @@ $clock-font-size: 14px !default;
       color: white;
     }
 
-    &:not(.mtx-clock-cell-selected):not(.mtx-clock-cell-disabled):hover {
+    &:not(.mtx-clock-cell-selected, .mtx-clock-cell-disabled):hover {
       background-color: theming.get-color-from-palette($background, hover);
     }
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ColorFormat } from '@ng-matero/extensions/colorpicker';
 
@@ -12,9 +12,9 @@ export class ColorPickerDemoComponent {
   color = '#3f51b5';
   disabled = false;
 
-  color2 = new FormControl({ value: '#3f51b5', disabled: true });
+  color2 = new UntypedFormControl({ value: '#3f51b5', disabled: true });
 
-  color3 = new FormControl({ value: '#3f51b5', disabled: false });
+  color3 = new UntypedFormControl({ value: '#3f51b5', disabled: false });
 
   format: ColorFormat = 'hex';
 

@@ -12,6 +12,7 @@
     "block-no-empty": null,
     "color-function-notation": "legacy",
     "function-no-unknown": null,
+    "import-notation": null,
     "no-descending-specificity": null,
     "no-empty-source": null,
     "number-max-precision": null,
