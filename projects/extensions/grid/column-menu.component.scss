@@ -71,13 +71,13 @@
   }
 }
 
-.mtx-grid-column-pin-button {
+.mtx-grid-column-pin-button.mat-icon-button {
   width: 32px;
   height: 32px;
   line-height: 32px;
 }
 
-.mtx-grid-column-pin-option {
+.mtx-grid-column-pin-option.mat-menu-item {
   display: flex;
   align-items: center;
   height: 32px;
