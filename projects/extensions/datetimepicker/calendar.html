@@ -1,9 +1,7 @@
 <div class="mtx-calendar-header">
-  <div (click)="_yearClicked()"
-       *ngIf="type !== 'time'"
+  <div (click)="_yearClicked()" *ngIf="type !== 'time'"
        [class.active]="currentView === 'year' || currentView === 'multi-year'"
-       class="mtx-calendar-header-year"
-       role="button">
+       class="mtx-calendar-header-year" role="button">
     <span>{{ _yearLabel }}</span>
     <svg *ngIf="multiYearSelector || type === 'year'"
          class="mtx-calendar-header-year-dropdown"
@@ -20,21 +18,24 @@
     <span *ngIf="type.endsWith('time')"
           [class.active]="currentView === 'clock'"
           class="mtx-calendar-header-time">
-      <span (click)="_hoursClicked()"
-            [class.active]="_clockView === 'hour'"
-            class="mtx-calendar-header-hours"
-            role="button">{{ _hoursLabel }}</span>:<span (click)="_minutesClicked()"
-            [class.active]="_clockView === 'minute'"
-            class="mtx-calendar-header-minutes"
-            role="button">{{ _minutesLabel }}</span>
-      <br />
+      <span class="mtx-calendar-header-hour-minute-container">
+        <span (click)="_hoursClicked()"
+              [class.active]="_clockView === 'hour'"
+              class="mtx-calendar-header-hours"
+              role="button">{{ _hoursLabel }}</span>
+        <span class="mtx-calendar-header-hour-minute-separator">:</span>
+        <span (click)="_minutesClicked()"
+              [class.active]="_clockView === 'minute'"
+              class="mtx-calendar-header-minutes"
+              role="button">{{ _minutesLabel }}</span>
+      </span>
       <span *ngIf="twelvehour" class="mtx-calendar-header-ampm-container">
         <span (click)="_ampmClicked('AM')"
               [class.active]="_AMPM === 'AM'"
-              class="mtx-calendar-header-ampm">AM</span>/<span
-              (click)="_ampmClicked('PM')"
+              class="mtx-calendar-header-ampm" role="button">AM</span>
+        <span (click)="_ampmClicked('PM')"
               [class.active]="_AMPM === 'PM'"
-              class="mtx-calendar-header-ampm">PM</span>
+              class="mtx-calendar-header-ampm" role="button">PM</span>
       </span>
     </span>
   </div>
