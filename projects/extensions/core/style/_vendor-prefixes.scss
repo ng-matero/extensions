@@ -50,7 +50,7 @@
 
 @mixin private-color-adjust($value) {
   -webkit-print-color-adjust: $value;
-  color-adjust: $value;
+  print-color-adjust: $value;
 }
 
 @mixin private-background-clip($value) {
