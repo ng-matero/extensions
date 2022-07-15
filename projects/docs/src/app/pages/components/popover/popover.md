@@ -23,7 +23,7 @@ Exported as: `mtxPopover`
 | @Input() `yOffset: number` | Popover target offset Y. Defaults to **`0`** |
 | @Input() `closeOnPanelClick: boolean` | Whether close popover when click the panel. Defaults to **`false`** |
 | @Input() `closeOnBackdropClick: boolean` | Whether close popover when click the backdrop. Defaults to **`true`** |
-| @Input() `disableAnimation: boolean` | Whether overlap trigger. Defaults to **`false`** |
+| @Input() `disableAnimation: boolean` | Whether the popover animations are disabled. Defaults to **`false`** |
 | @Input() `focusTrapEnabled: boolean` | Whether the popover should focus trap. Defaults to **`true`** |
 | @Input() `focusTrapAutoCaptureEnabled: boolean` | Whether the popover should focus trap auto capture focus. Defaults to **`true`** |
 
