@@ -158,14 +158,17 @@ Exported as: `mtxGrid`
 ```typescript
 export interface MtxGridColumn {
   field: string;
-  header?: string;
+  header?: string | Observable<string>;
   hide?: boolean;
+  show?: boolean;
   disabled?: boolean;
-  pinned?: MtxGridColumnPinOption;
+  pinned?: MtxGridColumnPinValue;
   left?: string;
   right?: string;
   width?: string;
   resizable?: boolean;
+  minWidth?: number;
+  maxWidth?: number;
   sortable?: boolean | string;
   sortProp?: MtxGridSortProp;
   type?: MtxGridColumnType;
@@ -176,7 +179,8 @@ export interface MtxGridColumn {
   cellTemplate?: TemplateRef<any> | null;
   showExpand?: boolean;
   description?: string;
-  summary?: ((colData: any, colDef?: MtxGridColumn) => void) | string;
+  summary?: ((data: any[], colDef?: MtxGridColumn) => void) | string;
+  class?: string;
 }
 ```
 
@@ -237,15 +241,15 @@ export interface MtxGridColumnButton {
   type?: 'basic' | 'icon';
   text?: string | Observable<string>;
   icon?: string;
-  color?: 'primary' | 'accent' | 'warn';
+  color?: ThemePalette;
   class?: string;
   click?: (record: any) => void;
   pop?: boolean;
   popTitle?: string | Observable<string>;
   popDescription?: string | Observable<string>;
-  popOkColor?: '' | 'primary' | 'accent' | 'warn';
+  popOkColor?: ThemePalette;
   popOkText?: string | Observable<string>;
-  popCloseColor?: '' | 'primary' | 'accent' | 'warn';
+  popCloseColor?: ThemePalette;
   popCloseText?: string | Observable<string>;
   children?: MtxGridColumnButton[];
   iif?: (record: any) => boolean;
