@@ -6,6 +6,7 @@
 @use '../app/pages/component-sidenav/component-sidenav-theme';
 @use '../app/pages/component-viewer/component-viewer-theme';
 @use '../app/pages/homepage/homepage-theme';
+@use '../app/shared/doc-viewer/doc-viewer-theme';
 @use '../app/shared/example-viewer/example-viewer-theme';
 @use '../app/shared/table-of-contents/table-of-contents-theme';
 @use '../app/shared/navbar/navbar-theme';
@@ -23,6 +24,7 @@
   @include component-sidenav-theme.theme($theme);
   @include component-viewer-theme.theme($theme);
   @include homepage-theme.theme($theme);
+  @include doc-viewer-theme.theme($theme);
   @include example-viewer-theme.theme($theme);
   @include table-of-contents-theme.theme($theme);
   @include navbar-theme.theme($theme);

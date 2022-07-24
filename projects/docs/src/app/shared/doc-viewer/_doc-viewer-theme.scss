@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+
+@mixin theme($theme) {
+  $primary: map.get($theme, primary);
+  $accent: map.get($theme, accent);
+  $warn: map.get($theme, warn);
+  $background: map.get($theme, background);
+  $foreground: map.get($theme, foreground);
+
+  .docs-markdown {
+    h3 {
+      border-bottom: 1px solid mat.get-color-from-palette($foreground, divider);
+    }
+
+    th {
+      background-color: rgba(mat.get-color-from-palette($foreground, secondary-text), .025);
+    }
+
+    td {
+      border: 1px solid mat.get-color-from-palette($foreground, divider);
+    }
+  }
+}

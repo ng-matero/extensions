@@ -10,7 +10,6 @@
     font-weight: 300;
     font-size: 24px;
     line-height: 32px;
-    border-bottom: 1px solid rgba(0, 0, 0, .12);
   }
 
   h4 {
@@ -41,20 +40,17 @@
     border-collapse: collapse;
     border-radius: 2px;
     border-spacing: 0;
-    box-shadow: 0 2px 2px rgba(0, 0, 0, .24), 0 0 2px rgba(0, 0, 0, .12);
   }
 
   th {
     max-width: 100px;
     padding: 13px 16px;
-    background: rgba(0, 0, 0, .025);
     font-weight: 400;
     text-align: left;
   }
 
   td {
     padding: 8px 16px;
-    border: 1px solid rgba(0, 0, 0, .03);
     font-weight: 400;
     font-size: 14px;
   }
@@ -63,7 +59,6 @@
     display: block;
     margin: 16px auto;
     overflow-x: auto;
-    padding: 20px;
     border-radius: 5px;
     white-space: pre-wrap;
     background: rgba(0, 0, 0, .01);
