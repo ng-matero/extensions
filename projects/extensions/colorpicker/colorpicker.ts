@@ -261,7 +261,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     this._disabledChange.complete();
   }
 
-  /** Selects the given color */
+  /** Selects the given color. */
   select(nextVal: string): void {
     const oldValue = this.selected;
     this.selected = nextVal;
@@ -284,6 +284,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     );
   }
 
+  /** Open the panel. */
   open(): void {
     if (this._opened || this.disabled) {
       return;
@@ -386,6 +387,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     this._ngZone.onStable.pipe(take(1)).subscribe(() => overlayRef.updatePosition());
   }
 
+  /** Destroys the current overlay. */
   private _destroyOverlay() {
     if (this._overlayRef) {
       this._overlayRef.dispose();
