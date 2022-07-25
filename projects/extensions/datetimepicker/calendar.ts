@@ -40,6 +40,7 @@ import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
 import { MtxDatetimepickerType } from './datetimepicker-types';
 
+/** Possible views for datetimepicker calendar. */
 export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
 
 /**
@@ -61,6 +62,7 @@ export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
+  /** Whether to show multi-year view. */
   @Input()
   get multiYearSelector(): boolean {
     return this._multiYearSelector;
@@ -70,7 +72,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
   private _multiYearSelector = false;
 
-  /** if true change the clock to 12 hour format. */
+  /** Whether the clock uses 12 hour format. */
   @Input()
   get twelvehour(): boolean {
     return this._twelvehour;
@@ -83,6 +85,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Whether the calendar should be started in month or year view. */
   @Input() startView: MtxCalendarView = 'month';
 
+  /** Step over minutes. */
   @Input() timeInterval: number = 1;
 
   /** A function used to filter which dates are selectable. */
@@ -128,6 +131,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     this._intlChanges = _intl.changes.subscribe(() => changeDetectorRef.markForCheck());
   }
 
+  /** The display type of datetimepicker. */
   @Input()
   get type(): MtxDatetimepickerType {
     return this._type;

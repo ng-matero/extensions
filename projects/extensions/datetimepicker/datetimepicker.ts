@@ -44,12 +44,13 @@ import { MtxDatetimepickerType } from './datetimepicker-types';
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
 
+/** Possible modes for datetimepicker dropdown display. */
 export type MtxDatetimepickerMode = 'auto' | 'portrait' | 'landscape';
 
-/** Possible positions for the colorpicker dropdown along the X axis. */
+/** Possible positions for the datetimepicker dropdown along the X axis. */
 export type DatetimepickerDropdownPositionX = 'start' | 'end';
 
-/** Possible positions for the colorpicker dropdown along the Y axis. */
+/** Possible positions for the datetimepicker dropdown along the Y axis. */
 export type DatetimepickerDropdownPositionY = 'above' | 'below';
 
 /** Injection token that determines the scroll handling while the calendar is open. */
@@ -149,7 +150,7 @@ export class MtxDatetimepickerContent<D>
   preserveWhitespaces: false,
 })
 export class MtxDatetimepicker<D> implements OnDestroy {
-  /** Active multi year view when click on year. */
+  /** Whether to show multi-year view. */
   @Input()
   get multiYearSelector(): boolean {
     return this._multiYearSelector;
@@ -159,7 +160,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
   private _multiYearSelector = false;
 
-  /** if true change the clock to 12 hour format. */
+  /** Whether the clock uses 12 hour format. */
   @Input()
   get twelvehour(): boolean {
     return this._twelvehour;
@@ -172,8 +173,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   /** The view that the calendar should start in. */
   @Input() startView: MtxCalendarView = 'month';
 
+  /** The display mode of datetimepicker. */
   @Input() mode: MtxDatetimepickerMode = 'auto';
 
+  /** Step over minutes. */
   @Input() timeInterval: number = 1;
 
   /** Prevent user to select same date time */
@@ -280,6 +283,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
   private _startAt!: D | null;
 
+  /** The display type of datetimepicker. */
   @Input()
   get type() {
     return this._type;

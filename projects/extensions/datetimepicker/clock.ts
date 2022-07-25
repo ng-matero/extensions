@@ -16,6 +16,7 @@ export const CLOCK_INNER_RADIUS = 27.5;
 export const CLOCK_OUTER_RADIUS = 41.25;
 export const CLOCK_TICK_RADIUS = 7.0833;
 
+/** Possible views for datetimepicker clock. */
 export type MtxClockView = 'hour' | 'minute';
 
 /**
@@ -38,8 +39,10 @@ export class MtxClock<D> implements AfterContentInit {
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
 
+  /** Step over minutes. */
   @Input() interval: number = 1;
 
+  /** Whether the clock uses 12 hour format. */
   @Input() twelvehour: boolean = false;
 
   /** Emits when the currently selected date changes. */
