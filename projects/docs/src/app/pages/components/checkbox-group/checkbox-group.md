@@ -17,19 +17,19 @@ Exported as: `mtxCheckboxGroup`
 | Name | Description |
 | :--- | :--- |
 | @Input() `items: any[]` | Items array. |
-| @Input() `bindLabel: string` | Object property to use for label. Defaulted to **`'label'`** |
-| @Input() `bindValue: string` | Object property to use for selected model. By default binds to whole object. Defaulted to **`'value'`** |
+| @Input() `bindLabel: string` | Object property to use for label. Default is `'label'` |
+| @Input() `bindValue: string` | Object property to use for selected model. By default binds to whole object. Default is `'value'` |
 | @Input() `compareWith: (a: any, b: any) => boolean` | A function to compare the option values with the selected values. The first argument is a value from an option. The second is a value from the selection(model). A boolean should be returned. |
-| @Input() `showSelectAll: boolean` | Whether show select all. Defaulted to **`true`**. |
-| @Input() `selectAllLabel: string` | The lable of select all. Defaulted to **`'Select All'`**. |
+| @Input() `showSelectAll: boolean` | Whether show select all. Default is `true`. |
+| @Input() `selectAllLabel: string` | The lable of select all. Default is `'Select All'`. |
 | @Output() `change: EventEmitter<{  model: MtxCheckboxGroupOption[];  index: number; }>()` | Event emitted when the selection changed. |
 
 ### Interfaces
 
-#### Checkbox Group Option
+#### `MtxCheckboxGroupOption`
 
 ```typescript
-export interface MtxCheckboxGroupOption {
+interface MtxCheckboxGroupOption {
   ariaDescribedby?: string;
   ariaLabel?: string;
   ariaLabelledby?: string;

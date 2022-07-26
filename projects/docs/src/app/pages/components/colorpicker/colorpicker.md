@@ -8,6 +8,8 @@
 
 #### `MtxColorpickerInput`
 
+Directive used to connect an input to a MtxColorpickerInput.
+
 Selector: `input[mtxColorpicker]`
 
 Exported as: `mtxColorpickerInput`
@@ -19,7 +21,7 @@ Exported as: `mtxColorpickerInput`
 | @Input() `disabled: boolean` | Whether the colorpicker-input is disabled. |
 | @Input() `mtxColorpicker: MtxColorpicker` | The colorpicker that this input is associated with. |
 | @Input() `value: string \| null` | The value of the input. |
-| @Input() `format: ColorFormat` | The color format. Can be `'hex'`, `'rgb'`, `'hsl'`, `'hsv'`. Defaults to `'hex'` |
+| @Input() `format: ColorFormat` | The color format. Can be `'hex'`, `'rgb'`, `'hsl'`, `'hsv'`. Default is `'hex'`. |
 | @Output() `colorChange: EventEmitter<MtxColorPickerInputEvent>` | Emits when a change event is fired on this `<input>`. |
 | @Output() `colorInput: EventEmitter<MtxColorPickerInputEvent>` | Emits when an input event is fired on this `<input>`. |
 
@@ -33,6 +35,8 @@ Exported as: `mtxColorpickerInput`
 
 #### `MtxColorpicker`
 
+Component responsible for managing the colorpicker popup/dialog.
+
 Selector: `mtx-colorpicker`
 
 Exported as: `mtxColorpicker`
@@ -42,7 +46,7 @@ Exported as: `mtxColorpicker`
 | Name | Description |
 | :--- | :--- |
 | @Input() `disabled: boolean` | Whether the colorpicker pop-up should be disabled. |
-| @Input() `format: ColorFormat` | The color format. Can be `'hex'`, `'rgb'`, `'hsl'`, `'hsv'`. Defaults to `'hex'` |
+| @Input() `format: ColorFormat` | The color format. Can be `'hex'`, `'rgb'`, `'hsl'`, `'hsv'`. Default is `'hex'`. |
 | @Input() `opened: boolean` | Whether the color palette is open. |
 | @Input() `restoreFocus: boolean` | Whether to restore focus to the previously-focused element when the color palette is closed. Note that automatic focus restoration is an accessibility feature and it is recommended that you provide your own equivalent, if you decide to turn it off. |
 | @Input() `xPosition: ColorpickerDropdownPositionX`| Preferred position of the colorpicker in the X axis. |

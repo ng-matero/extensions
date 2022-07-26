@@ -20,23 +20,23 @@ Exported as: `mtxGrid`
 | :--- | :--- |
 | @Input() `columns: MtxGridColumn[]` | The grid columns defination. |
 | @Input() `data: any[]` | The grid data source. |
-| @Input() `length: number` | The length of the total number of data. Defaulted to **`0`**. |
-| @Input() `loading: boolean` | Whether the table loading is ended. Defaulted to **`false`**. |
+| @Input() `length: number` | The length of the total number of data. Default is **`0`**. |
+| @Input() `loading: boolean` | Whether the table loading is ended. Default is **`false`**. |
 | @Input() `trackBy: TrackByFunction<any>` | Tracking function that will be used to check the differences in data changes. |
-| @Input() `columnResizable: boolean` | Whether the column can be resized. Defaulted to **`false`**. |
+| @Input() `columnResizable: boolean` | Whether the column can be resized. Default is **`false`**. |
 
 ###### Page
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `pageOnFront: boolean` | Whether paging the data just on front end. Defaulted to **`true`**. |
-| @Input() `showPaginator: boolean` | Whether show the paginator. Defaulted to **`true`**. |
-| @Input() `pageDisabled: boolean` | Whether the paginator is disabled. Defaulted to **`false`**. |
-| @Input() `showFirstLastButtons: boolean` | Whether to show the first/last buttons UI to the user. Defaulted to **`true`**. |
-| @Input() `pageIndex: number` | The zero-based page index of the displayed list of items. Defaulted to **`0`**. |
-| @Input() `pageSize: number` | Number of items to display on a page. By default set to **`10`**. |
-| @Input() `pageSizeOptions: number[]` | The set of provided page size options to display to the user. By default set to **`[10, 50, 100]`** |
-| @Input() `hidePageSize: boolean` | Whether hide the pagesize. Defaulted to **`false`**. |
+| @Input() `pageOnFront: boolean` | Whether paging the data just on front end. Default is **`true`**. |
+| @Input() `showPaginator: boolean` | Whether show the paginator. Default is **`true`**. |
+| @Input() `pageDisabled: boolean` | Whether the paginator is disabled. Default is **`false`**. |
+| @Input() `showFirstLastButtons: boolean` | Whether to show the first/last buttons UI to the user. Default is **`true`**. |
+| @Input() `pageIndex: number` | The zero-based page index of the displayed list of items. Default is **`0`**. |
+| @Input() `pageSize: number` | Number of items to display on a page. Default is **`10`**. |
+| @Input() `pageSizeOptions: number[]` | The set of provided page size options to display to the user. Default is **`[10, 50, 100]`** |
+| @Input() `hidePageSize: boolean` | Whether hide the pagesize. Default is **`false`**. |
 | @Output() `page: EventEmitter<PageEvent>` | Event emitted when the paginator changes the page size or page index. |
 | @Input() `paginationTemplate: TemplateRef<any>` | The pagination template. |
 
@@ -44,19 +44,19 @@ Exported as: `mtxGrid`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `sortOnFront: boolean` | Whether sort data just on front end. Defaulted to **`true`**. |
+| @Input() `sortOnFront: boolean` | Whether sort data just on front end. Default is **`true`**. |
 | @Input() `sortActive: string` | The id of the most recently sorted MatSortable. |
 | @Input() `sortDirection: SortDirection` | The sort direction of the currently active MatSortable. |
-| @Input() `sortDisableClear: boolean` | Whether to disable the user from clearing the sort by finishing the sort direction cycle. May be overriden by the column's disable clear definition. Defaulted to **`false`**. |
-| @Input() `sortDisabled: boolean` | Whether the grid sort is disabled. Defaulted to **`false`**. |
-| @Input() `sortStart: 'asc' \| 'desc'` | The direction to set when an MatSortable is initially sorted. May be overriden by the column's sort definition. Defaulted to **`asc`**. |
+| @Input() `sortDisableClear: boolean` | Whether to disable the user from clearing the sort by finishing the sort direction cycle. May be overriden by the column's disable clear definition. Default is **`false`**. |
+| @Input() `sortDisabled: boolean` | Whether the grid sort is disabled. Default is **`false`**. |
+| @Input() `sortStart: 'asc' \| 'desc'` | The direction to set when an MatSortable is initially sorted. May be overriden by the column's sort definition. Default is **`asc`**. |
 | @Output() `sortChange: EventEmitter<sort>` | Event emitted when the user changes either the active sort or sort direction. |
 
 ###### Expansion
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `expandable: boolean` | Whether the row can be expanded. Defaulted to **`false`**. |
+| @Input() `expandable: boolean` | Whether the row can be expanded. Default is **`false`**. |
 | @Input() `expansionTemplate: TemplateRef<any>` | The template of expandable row. |
 | @Output() `expansionChange: EventEmitter<any>` | Event emitted when the user toggle the expandable row. |
 
@@ -64,56 +64,56 @@ Exported as: `mtxGrid`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `multiSelectable: boolean` | Whether the user can selecte multiple row. Defaulted to **`true`**. |
-| @Input() `multiSelectionWithClick: boolean` | Whether the user can selecte multiple row with clicks. Defaulted to **`false`**. |
-| @Input() `rowSelectable: boolean` | Whether the row can be selectable. Defaulted to **`false`**. |
-| @Input() `rowSelected: any[]` | The row selected items default. Defaulted to **`[]`**. |
-| @Input() `hideRowSelectionCheckbox: boolean` | Whether hide the row selection checkbox. Defaulted to **`false`**. |
+| @Input() `multiSelectable: boolean` | Whether the user can selecte multiple row. Default is **`true`**. |
+| @Input() `multiSelectionWithClick: boolean` | Whether the user can selecte multiple row with clicks. Default is **`false`**. |
+| @Input() `rowSelectable: boolean` | Whether the row can be selectable. Default is **`false`**. |
+| @Input() `rowSelected: any[]` | The row selected items default. Default is **`[]`**. |
+| @Input() `hideRowSelectionCheckbox: boolean` | Whether hide the row selection checkbox. Default is **`false`**. |
 | @Input() `rowSelectionFormatter: MtxGridRowSelectionFormatter` | The row selection formatter to set disabled and checkbox hiding. |
 | @Output()`rowClassFormatter: MtxGridRowClassFormatter` | The row class formatter to set class. |
 | @Output()`rowSelectionChange: EventEmitter<any>` | Event emitted when the row be selected. |
-| @Input() `cellSelectable: boolean` | Whether the cell can be selectable. Defaulted to **`true`**. |
+| @Input() `cellSelectable: boolean` | Whether the cell can be selectable. Default is **`true`**. |
 | @Output() `cellSelectionChange: EventEmitter<any>` | Event emitted when the cell be selected. |
 
 ###### Toolbar
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `showToolbar: boolean` | Whether show the grid toolbar. Defaulted to **`false`**. |
-| @Input() `toolbarTitle: string` | The toolbar title. Defaulted to **`''`**. |
+| @Input() `showToolbar: boolean` | Whether show the grid toolbar. Default is **`false`**. |
+| @Input() `toolbarTitle: string` | The toolbar title. Default is **`''`**. |
 | @Input() `toolbarTemplate: TemplateRef<any>` | The toolbar template. |
 
 ###### Column menu
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `columnHideable: boolean` | Whether the column can be hiding. Defaulted to **`true`**. |
-| @Input() `columnHideableChecked: 'show' \| 'hide'` | Hide or show when column hiding checkbox be checked. Defaulted to **`'show'`**. |
-| @Input() `columnSortable: boolean` | Whether the column can be sorting. Defaulted to **`true`**. |
-| @Input() `columnPinnable: boolean` | Whether the column can be fixed. Defaulted to **`true`**. |
+| @Input() `columnHideable: boolean` | Whether the column can be hiding. Default is **`true`**. |
+| @Input() `columnHideableChecked: 'show' \| 'hide'` | Hide or show when column hiding checkbox be checked. Default is **`'show'`**. |
+| @Input() `columnSortable: boolean` | Whether the column can be sorting. Default is **`true`**. |
+| @Input() `columnPinnable: boolean` | Whether the column can be fixed. Default is **`true`**. |
 | @Output() `columnChange: EventEmitter<string[]>` | Event emitted when the column be hided or be resorted. |
-| @Input() `showColumnMenuHeader: boolean` | Whether show header of column menu. Defaulted to **`false`**. |
-| @Input() `columnMenuHeaderText: string` | The header text of column menu. Defaulted to **`'Columns Header'`** |
+| @Input() `showColumnMenuHeader: boolean` | Whether show header of column menu. Default is **`false`**. |
+| @Input() `columnMenuHeaderText: string` | The header text of column menu. Default is **`'Columns Header'`** |
 | @Input() `columnMenuHeaderTemplate: TemplateRef<any>` | The header template of column menu. |
-| @Input() `showColumnMenuFooter: boolean` | Whether show footer of column menu. Defaulted to **`false`** |
-| @Input() `columnMenuFooterText: string` | The header text of column menu. Defaulted to **`'Columns Footer'`** |
+| @Input() `showColumnMenuFooter: boolean` | Whether show footer of column menu. Default is **`false`** |
+| @Input() `columnMenuFooterText: string` | The header text of column menu. Default is **`'Columns Footer'`** |
 | @Input() `columnMenuFooterTemplate: TemplateRef<any>` | The footer template of column menu. |
-| @Input() `showColumnMenuButton: boolean` | Whether show column menu button. Defaulted to **`true`**. |
-| @Input() `columnMenuButtonText: string` | The column menu button text. Defaulted to **`''`**. |
-| @Input() `columnMenuButtonType: 'raised' \| 'stroked' \| 'flat' \| 'icon' \| 'fab' \| 'mini-fab' \| ''` | The column menu button type. Defaulted to **`'stroked'`**. |
-| @Input() `columnMenuButtonColor: string` | The column menu button color. Defaulted to **`''`**. |
-| @Input() `columnMenuButtonClass: string` | The column menu button class. Defaulted to **`''`**. |
-| @Input() `columnMenuButtonIcon: string` | The column menu button icon. Defaulted to **`''`**. |
+| @Input() `showColumnMenuButton: boolean` | Whether show column menu button. Default is **`true`**. |
+| @Input() `columnMenuButtonText: string` | The column menu button text. Default is **`''`**. |
+| @Input() `columnMenuButtonType: 'raised' \| 'stroked' \| 'flat' \| 'icon' \| 'fab' \| 'mini-fab' \| ''` | The column menu button type. Default is **`'stroked'`**. |
+| @Input() `columnMenuButtonColor: string` | The column menu button color. Default is **`''`**. |
+| @Input() `columnMenuButtonClass: string` | The column menu button class. Default is **`''`**. |
+| @Input() `columnMenuButtonIcon: string` | The column menu button icon. Default is **`''`**. |
 | @Input() `columnPinOptions: MtxGridColumnPinOption[]` | The column pin options. |
 
 ###### Row
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `rowHover: boolean` | Whether use hover style. Defaulted to **`false`** |
-| @Input() `rowStriped: boolean` | Whether use striped style. Defaulted to **`false`** |
+| @Input() `rowHover: boolean` | Whether use hover style. Default is **`false`**. |
+| @Input() `rowStriped: boolean` | Whether use striped style. Default is **`false`**. |
 | @Output() `rowClick: EventEmitter<any>;` | Row click event. |
-| @Input() `useContentRowTemplate: boolean` | Whether use custom row template. If true, you should define a `matRowDef`. Defaulted to **`false`** |
+| @Input() `useContentRowTemplate: boolean` | Whether use custom row template. If true, you should define a `matRowDef`. Default is **`false`**. |
 
 ###### Cell templates
 
@@ -127,36 +127,36 @@ Exported as: `mtxGrid`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `showSummary: boolean` | Whether show summary. Defaulted to **`false`** |
+| @Input() `showSummary: boolean` | Whether show summary. Default is **`false`**. |
 | @Input() `summaryTemplate: TemplateRef<any> \| MtxGridCellTemplate` | The summary template. |
 
 ###### No result
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `noResultText: string` | The no result text. Defaulted to **`'No records found'`**. |
+| @Input() `noResultText: string` | The no result text. Default is **`'No records found'`**. |
 | @Input() `noResultTemplate: TemplateRef<any>` | The no result template. |
 
 ###### Sidebar
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `showSidebar: boolean` | Whether show sidebar. Defaulted to **`false`** |
+| @Input() `showSidebar: boolean` | Whether show sidebar. Default is **`false`**. |
 | @Input() `sidebarTemplate: TemplateRef<any>` | The sidebar template. |
 
 ###### Status bar
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `showStatusbar: boolean` | Whether show status bar. Defaulted to **`false`** |
+| @Input() `showStatusbar: boolean` | Whether show status bar. Default is **`false`**. |
 | @Input() `statusbarTemplate: TemplateRef<any>` | The status bar template. |
 
 ### Interfaces
 
-#### Column
+#### `MtxGridColumn`
 
 ```typescript
-export interface MtxGridColumn {
+interface MtxGridColumn {
   field: string;
   header?: string | Observable<string>;
   hide?: boolean;
@@ -184,36 +184,18 @@ export interface MtxGridColumn {
 }
 ```
 
-#### Column Pin Option
+#### `MtxGridColumnPinOption`
 ```typescript
-export interface MtxGridColumnPinOption {
+interface MtxGridColumnPinOption {
   label: string | Observable<string>;
   value: MtxGridColumnPinValue;
 }
-
-export declare type MtxGridColumnPinValue = 'left' | 'right' | null;
 ```
 
-
-#### Column Type
-
-```typescript
-export declare type MtxGridColumnType =
-  | 'tag'
-  | 'button'
-  | 'link'
-  | 'image'
-  | 'boolean'
-  | 'number'
-  | 'currency'
-  | 'percent'
-  | 'date';
-```
-
-#### Column Type Parameter
+#### `MtxGridColumnTypeParameter`
 
 ```typescript
-export interface MtxGridColumnTypeParameter {
+interface MtxGridColumnTypeParameter {
   currencyCode?: string;
   display?: string | boolean;
   digitsInfo?: string;
@@ -223,10 +205,10 @@ export interface MtxGridColumnTypeParameter {
 }
 ```
 
-#### Column Sort Properties
+#### `MtxGridSortProp`
 
 ```typescript
-export interface MtxGridSortProp {
+interface MtxGridSortProp {
   arrowPosition?: 'before' | 'after';
   disableClear?: boolean;
   id?: string;
@@ -234,10 +216,10 @@ export interface MtxGridSortProp {
 }
 ```
 
-#### Column Button
+#### `MtxGridColumnButton`
 
 ```typescript
-export interface MtxGridColumnButton {
+interface MtxGridColumnButton {
   type?: 'basic' | 'icon';
   text?: string | Observable<string>;
   icon?: string;
@@ -258,34 +240,51 @@ export interface MtxGridColumnButton {
 }
 ```
 
-#### Column Tag
+#### `MtxGridColumnTag`
 
 ```typescript
-export interface MtxGridColumnTag {
+interface MtxGridColumnTag {
   [key: number]: MtxGridColumnTagValue;
   [key: string]: MtxGridColumnTagValue;
 }
+```
 
-export interface MtxGridColumnTagValue {
+#### `MtxGridColumnTagValue`
+
+```ts
+interface MtxGridColumnTagValue {
   text?: string;
   color?: string;
 }
 ```
 
-#### Row Selection Formatter
+#### `MtxGridRowSelectionFormatter`
 
 ```typescript
-export interface MtxGridRowSelectionFormatter {
+interface MtxGridRowSelectionFormatter {
   disabled?: (rowData: any) => boolean;
   hideCheckbox?: (rowData: any) => boolean;
 }
 ```
 
-#### Row class formatter
+#### `MtxGridRowClassFormatter`
 
 ```typescript
-export interface MtxGridRowClassFormatter {
+interface MtxGridRowClassFormatter {
   [className: string]: (rowData: any, index?: number) => boolean;
 }
 ```
 
+### Type aliases
+
+#### `MtxGridColumnType`
+
+```typescript
+type MtxGridColumnType = 'tag' | 'button' | 'link' | 'image' | 'boolean' | 'number' | 'currency' | 'percent' | 'date';
+```
+
+#### `MtxGridColumnPinValue`
+
+```ts
+type MtxGridColumnPinValue = 'left' | 'right' | null;
+```

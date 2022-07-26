@@ -16,9 +16,16 @@ Exported as: `mtxAlert`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `type: 'default' \| 'info' \| 'success' \| 'warning' \| 'danger'` | The alert types. Defaulted to **`default`**. |
-| @Input() `isOpen: boolean` | Whether alert visible. Defaulted to **`true`**. |
+| @Input() `type: MtxAlertType` | The alert types. Default is `'default'`. |
+| @Input() `isOpen: boolean` | Whether alert visible. Default is `true`. |
 | @Input() `dismissible: boolean` | Whether displays an inline close button. |
-| @Input() `elevation: number` | The material elevation for alert. Defaulted to **`0`**. |
+| @Input() `elevation: number` | The material elevation for alert. Default is `0`. |
 | @Output() `closed: EventEmitter<MtxAlertComponent>` | This event fires when alert closed. |
 
+### Type aliases
+
+#### `MtxAlertType`
+
+```ts
+type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger';
+```

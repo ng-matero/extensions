@@ -10,40 +10,48 @@
 
 ##### Methods
 
-`alert`
+| Name | Description |
+| :--- | :--- |
+| `alert(title: string \| Observable<string>, description: string \| Observable<string> = '', onOk = () => {})` | A simple alert dialog with a single button. |
 
-| Parameter | Description |
+| Parameters | Description |
 | :--- | :--- |
 | `title: string \| Observable<string>` | The dialog title. |
-| `description: string \| Observable<string>` | The dialog description. Defaulted to **`''`**  |
-| `onOk: () => void` | The ok callback function. Defaulted to **`() => {}`** |
+| `description: string \| Observable<string>` | The dialog description.  |
+| `onOk: () => void` | The ok callback function. |
 
-`confirm`
+| Name | Description |
+| :--- | :--- |
+| `confirm(title: string \| Observable<string>, description: string \| Observable<string> = '', onOk = () => {}, onClose = () => {})` | A confirm dialog with a cancel and a confirm button. |
 
-| Parameter | Description |
+| Parameters | Description |
 | :--- | :--- |
 | `title: string \| Observable<string>` | The dialog title. |
-| `description: string \| Observable<string>` | The dialog description. Defaulted to **`''`** |
-| `onOk: () => void` | The ok callback function. Defaulted to **`() => {}`** |
-| `onClose: () => void` | The close callback function. Defaulted to **`() => {}`** |
+| `description: string \| Observable<string>` | The dialog description. |
+| `onOk: () => void` | The ok callback function. |
+| `onClose: () => void` | The close callback function. |
 
-`open`
+| Name | Description |
+| :--- | :--- |
+| `open(config: MtxDialogData, componentOrTemplateRef: ComponentType<any> \| TemplateRef<any> = MtxDialogComponent)` | Opens a modal dialog containing the given template. |
 
-| Parameter | Description |
+| Parameters | Description |
 | :--- | :--- |
 | `config: MtxDialogData` | The dialog description. |
-| `componentOrTemplateRef: ComponentType<T>` | The component to load into the dialog. Defaulted to **`MtxDialogComponent`** |
+| `componentOrTemplateRef: ComponentType<T> \| TemplateRef<any>` | The component to load into the dialog. |
 
-`originalOpen`
-
-| Parameter | Description |
+| Name | Description |
 | :--- | :--- |
-| `componentOrTemplateRef: ComponentType<T>` | The component to load into the dialog. Defaulted to **`MtxDialogComponent`** |
+| `originalOpen(componentOrTemplateRef: ComponentType<any> \| TemplateRef<any> = MtxDialogComponent, config: any)` | The original `matDialog` open method. |
+
+| Parameters | Description |
+| :--- | :--- |
+| `componentOrTemplateRef: ComponentType<T> \| TemplateRef<any>` | The component to load into the dialog. |
 | `config?: MatDialogConfig<D>` | The dialog description. |
 
 ### Interfaces
 
-#### Dialog Data
+#### `MtxDialogData`
 
 ```typescript
 export interface MtxDialogData extends MatDialogConfig {
@@ -54,7 +62,7 @@ export interface MtxDialogData extends MatDialogConfig {
 }
 ```
 
-#### Dialog Button
+#### `MtxDialogBtns`
 
 ```typescript
 export interface MtxDialogBtns {
@@ -66,4 +74,3 @@ export interface MtxDialogBtns {
   onClick?: () => void;
 }
 ```
-
