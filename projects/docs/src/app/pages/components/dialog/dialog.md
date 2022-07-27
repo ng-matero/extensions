@@ -54,7 +54,7 @@
 #### `MtxDialogData`
 
 ```typescript
-export interface MtxDialogData extends MatDialogConfig {
+interface MtxDialogData extends MatDialogConfig {
   title?: string | Observable<string>;
   description?: string | Observable<string>;
   buttons?: MtxDialogBtns[];
@@ -65,7 +65,7 @@ export interface MtxDialogData extends MatDialogConfig {
 #### `MtxDialogBtns`
 
 ```typescript
-export interface MtxDialogBtns {
+interface MtxDialogBtns {
   type?: '' | 'raised' | 'stroked' | 'flat';
   color?: '' | 'primary' | 'accent' | 'warn';
   class?: string;

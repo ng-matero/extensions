@@ -40,6 +40,11 @@
     border-collapse: collapse;
     border-radius: 2px;
     border-spacing: 0;
+
+    code {
+      padding: 0;
+      background-color: transparent;
+    }
   }
 
   th {
