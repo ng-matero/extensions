@@ -1,19 +1,28 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MtxGridColumn, MtxGridColumnPinOption, MtxGridComponent, MtxGridRowClassFormatter, MtxGridRowSelectionFormatter } from '@ng-matero/extensions/grid';
+import {
+  MtxGridColumn,
+  MtxGridColumnPinOption,
+  MtxGridComponent,
+  MtxGridRowClassFormatter,
+  MtxGridRowSelectionFormatter,
+} from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
 import { TranslateService } from '@ngx-translate/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { HttpClient } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
+import { from, groupBy, mergeMap, Observable, of, toArray } from 'rxjs';
+// import { each, groupBy, keyBy, pick } from 'lodash-es';
+// import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'dev-grid-demo',
   templateUrl: './grid-demo.component.html',
-  styleUrls: ['./grid-demo.component.scss']
+  styleUrls: ['./grid-demo.component.scss'],
 })
 export class GridDemoComponent implements OnInit, AfterViewInit {
-  @ViewChild('grid', {static: true}) grid!: MtxGridComponent;
-  @ViewChild('grid2', {static: true}) grid2!: MtxGridComponent;
+  @ViewChild('grid', { static: true }) grid!: MtxGridComponent;
+  @ViewChild('grid2', { static: true }) grid2!: MtxGridComponent;
 
   multiSelectable = true;
   multiSelectionWithClick = false;
@@ -22,11 +31,11 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   rowSelected = EXAMPLE_DATA.slice(2, 3);
   rowSelectionFormatter: MtxGridRowSelectionFormatter = {
     disabled: (data, index) => data.name === 'Boron',
-    hideCheckbox: (data, index) => index === 10
+    hideCheckbox: (data, index) => index === 10,
   };
   rowClassFormatter: MtxGridRowClassFormatter = {
     success: (data, index) => data.name === 'Boron',
-    danger: (data, index) => index === 1
+    danger: (data, index) => index === 1,
   };
   expandable = false;
   showSummary = false;
@@ -41,20 +50,19 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   loading = false;
 
   list = EXAMPLE_DATA;
+  ds: Observable<any[]>;
   isNewList = false;
   rowGroupColumns: MtxGridColumn[] = [
     {
-      header: this.translate.stream('name'),
-      field: 'name',
-      sortable: true,
-      show: true
+      header: 'Weight',
+      field: 'weight',
+      show: true,
     },
     {
-      header: 'Avatar',
-      field: 'avatar',
-      sortable: true,
-      show: true
-    }
+      header: 'Gender',
+      field: 'gender',
+      show: true,
+    },
   ];
   columns: MtxGridColumn[] = [
     {
@@ -62,12 +70,12 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       field: 'name',
       showExpand: false,
       minWidth: 150,
-      sortable: true
+      sortable: true,
     },
     {
       header: 'Avatar',
       field: 'avatar',
-      type: 'image'
+      type: 'image',
     },
     {
       header: this.translate.stream('weight'),
@@ -75,24 +83,24 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       width: '200px',
       maxWidth: 300,
       resizable: true,
-      sortable: true
+      sortable: true,
     },
     {
       header: this.translate.stream('gender'),
       field: 'gender',
       minWidth: 150,
-      class: 'warning'
+      class: 'warning',
     },
     {
       header: this.translate.stream('mobile'),
       field: 'mobile',
       width: '150px',
-      resizable: false
+      resizable: false,
     },
     {
       header: this.translate.stream('city'),
       field: 'city',
-      minWidth: 150
+      minWidth: 150,
     },
     {
       header: this.translate.stream('operation'),
@@ -115,25 +123,25 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
           popOkText: this.translate.stream('ok'),
           click: () => {
             alert('delete');
-          }
-        }
-      ]
-    }
+          },
+        },
+      ],
+    },
   ];
 
   columnPinOptions: MtxGridColumnPinOption[] = [
     {
       label: this.translate.stream('pin_left'),
-      value: 'left'
+      value: 'left',
     },
     {
       label: this.translate.stream('pin_right'),
-      value: 'right'
+      value: 'right',
     },
     {
       label: this.translate.stream('no_pin'),
-      value: null
-    }
+      value: null,
+    },
   ];
 
   list2: any[] = [];
@@ -141,125 +149,125 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
     {
       header: 'Position',
       field: 'position',
-      minWidth: 200
+      minWidth: 200,
     },
     {
       header: 'Name',
       field: 'name',
-      pinned: 'left'
+      pinned: 'left',
     },
     {
       header: 'tags',
       field: 'tag.0.value',
-      width: '100px'
+      width: '100px',
     },
     {
       header: 'Weight',
       field: 'weight',
-      pinned: 'left'
+      pinned: 'left',
     },
     {
       header: 'Symbol',
       field: 'symbol',
-      width: '100px'
+      width: '100px',
     },
     {
       header: 'Gender',
-      field: 'gender'
+      field: 'gender',
     },
     {
       header: 'Mobile',
-      field: 'mobile'
+      field: 'mobile',
     },
     {
       header: 'Tele',
-      field: 'tele'
+      field: 'tele',
     },
     {
       header: 'City',
-      field: 'city'
+      field: 'city',
     },
     {
       header: 'Address',
-      field: 'address'
+      field: 'address',
     },
     {
       header: 'Date',
-      field: 'date'
+      field: 'date',
     },
     {
       header: 'Website',
-      field: 'website'
+      field: 'website',
     },
     {
       header: 'Company',
-      field: 'company'
+      field: 'company',
     },
     {
       header: 'Email',
       field: 'email',
-      pinned: 'right'
+      pinned: 'right',
     },
     {
       header: 'Status',
       field: 'status',
-      type: 'boolean'
-    }
+      type: 'boolean',
+    },
   ];
 
   columns3: MtxGridColumn[] = [
     {
       header: 'Name',
       field: 'name',
-      formatter: (data: any) => `<a href="${ data.html_url }" target="_blank">${ data.name }</a>`
+      formatter: (data: any) => `<a href="${data.html_url}" target="_blank">${data.name}</a>`,
     },
     {
       header: 'Owner',
-      field: 'owner.login'
+      field: 'owner.login',
     },
     {
       header: 'Owner Avatar',
       field: 'owner.avatar_url',
-      type: 'image'
+      type: 'image',
     },
     {
       header: 'Description',
       field: 'description',
-      width: '300px'
+      width: '300px',
     },
     {
       header: 'Stars',
-      field: 'stargazers_count'
+      field: 'stargazers_count',
     },
     {
       header: 'Forks',
-      field: 'forks_count'
+      field: 'forks_count',
     },
     {
       header: 'Score',
-      field: 'score'
+      field: 'score',
     },
     {
       header: 'Issues',
-      field: 'open_issues'
+      field: 'open_issues',
     },
     {
       header: 'Language',
-      field: 'language'
+      field: 'language',
     },
     {
       header: 'License',
-      field: 'license.name'
+      field: 'license.name',
     },
     {
       header: 'Home Page',
       field: 'homepage',
-      type: 'link'
+      type: 'link',
     },
     {
       header: 'Is forked',
       field: 'fork',
-      type: 'boolean'
+      type: 'boolean',
     },
     {
       header: 'Archived',
@@ -268,22 +276,22 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       tag: {
         true: {
           text: 'Yes',
-          color: 'red-100'
+          color: 'red-100',
         },
         false: {
           text: 'No',
-          color: 'green-100'
-        }
-      }
+          color: 'green-100',
+        },
+      },
     },
     {
       header: 'Created Date',
-      field: 'created_at'
+      field: 'created_at',
     },
     {
       header: 'Updated Date',
-      field: 'updated_at'
-    }
+      field: 'updated_at',
+    },
   ];
   list3 = [];
   total3 = 0;
@@ -292,7 +300,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   query = {
     q: 'user:nzbin',
     page: 0,
-    per_page: 10
+    per_page: 10,
   };
 
   get params() {
@@ -308,11 +316,24 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   showColumns: MtxGridColumn[] = [];
 
   constructor(public translate: TranslateService, private http: HttpClient) {
+    this.ds = from(EXAMPLE_DATA).pipe(
+      groupBy((d: any) => d.gender),
+      mergeMap(group => group.pipe(toArray()))
+    );
   }
 
   ngOnInit() {
     this.getRemoteData();
     this.rowGroupChanged(this.rowGroupColumns);
+    /*from(EXAMPLE_DATA)
+     .pipe(
+     groupBy((d: any) => d.gender),
+     mergeMap(group => group.pipe(toArray()))
+     )
+     .subscribe((d: any[]) => {
+     console.log(d);
+     this.ds.push(...d);
+     });*/
   }
 
   ngAfterViewInit() {
@@ -373,20 +394,20 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   getRemoteData() {
     this.isLoading3 = true;
     this.http
-    .get('https://api.github.com/search/repositories', {params: this.params as any})
-    .subscribe(
-      (res: any) => {
-        this.list3 = res.items;
-        this.total3 = res.total_count;
-        this.isLoading3 = false;
-      },
-      () => {
-        this.isLoading3 = false;
-      },
-      () => {
-        this.isLoading3 = false;
-      }
-    );
+      .get('https://api.github.com/search/repositories', { params: this.params as any })
+      .subscribe(
+        (res: any) => {
+          this.list3 = res.items;
+          this.total3 = res.total_count;
+          this.isLoading3 = false;
+        },
+        () => {
+          this.isLoading3 = false;
+        },
+        () => {
+          this.isLoading3 = false;
+        }
+      );
   }
 
   getNextPage(e: PageEvent) {

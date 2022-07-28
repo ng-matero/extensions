@@ -14,7 +14,8 @@
 <mat-checkbox [(ngModel)]="showPaginator">showPaginator</mat-checkbox>
 <mat-checkbox [(ngModel)]="loading">loading</mat-checkbox>
 
-<mtx-grid [data]="list" #grid
+<mtx-grid [data]="(ds | async) ||  []"
+          #grid
           [columns]="columns"
           [rowGroupColumns]="rowGroupColumns"
           [loading]="loading"
@@ -77,16 +78,20 @@
 
 </mtx-grid>
 
-<ng-template #expansionTpl let-row let-expanded="expanded">
-  {{expanded}} {{row.name}}
-</ng-template>
-
-<ng-template #rowGroupTpl>
+<ng-template #rowGroupTpl let-row>
   <span *ngFor="let c of showColumns;">
-    {{c.header | toObservable | async}} :  Value
+    <span class="group-text">
+      <span class="group-item">{{c.header | toObservable | async}}:
+        <span class="group-item-value">{{ row[c.field] }}  </span>
+      </span>
+    </span>
   </span>
 </ng-template>
 
+
+<ng-template #expansionTpl let-row let-expanded="expanded">
+  {{expanded}} {{row.name}}
+</ng-template>
 <ng-template #headerTpl let-col>
   <mat-icon>build</mat-icon>
   {{col.header | async}}
