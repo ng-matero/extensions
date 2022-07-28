@@ -16,13 +16,13 @@ Exported as: `mtxCheckboxGroup`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `items: any[]` | Items array. |
-| @Input() `bindLabel: string` | Object property to use for label. Default is `'label'` |
-| @Input() `bindValue: string` | Object property to use for selected model. By default binds to whole object. Default is `'value'` |
-| @Input() `compareWith: (a: any, b: any) => boolean` | A function to compare the option values with the selected values. The first argument is a value from an option. The second is a value from the selection(model). A boolean should be returned. |
-| @Input() `showSelectAll: boolean` | Whether show select all. Default is `true`. |
-| @Input() `selectAllLabel: string` | The lable of select all. Default is `'Select All'`. |
-| @Output() `change: EventEmitter<{  model: MtxCheckboxGroupOption[];  index: number; }>()` | Event emitted when the selection changed. |
+| `@Input()`<br>`items: any[]` | Items array. |
+| `@Input()`<br>`bindLabel: string` | Object property to use for label. Default is **`'label'`**. |
+| `@Input()`<br>`bindValue: string` | Object property to use for selected model. By default binds to whole object. Default is **`'value'`**. |
+| `@Input()`<br>`compareWith: (a: any, b: any) => boolean` | A function to compare the option values with the selected values. The first argument is a value from an option. The second is a value from the selection(model). A boolean should be returned. |
+| `@Input()`<br>`showSelectAll: boolean` | Whether show select all. Default is **`true`**. |
+| `@Input()`<br>`selectAllLabel: string` | The lable of select all. Default is **`'Select All'`**. |
+| `@Output()`<br>`change: EventEmitter<{  model: MtxCheckboxGroupOption[];  index: number; }>()` | Event emitted when the selection changed. |
 
 ### Interfaces
 

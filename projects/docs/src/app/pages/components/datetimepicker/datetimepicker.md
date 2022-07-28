@@ -18,14 +18,14 @@ Exported as: `mtxDatetimepickerInput`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `mtxDatetimepickerFilter: (date: D \| null, type: MtxDatetimepickerFilterType) => boolean` | Function that can be used to filter out dates within the datetimepicker. |
-| @Input() `disabled: boolean` | Whether the datetimepicker-input is disabled. |
-| @Input() `mtxDatetimepicker: MtxDatetimepicker<D>` | The datetimepicker that this input is associated with. |
-| @Input() `max: D \| null` | The maximum valid date. |
-| @Input() `min: D \| null` | The minimum valid date. | 
-| @Input() `value: D \| null` | The value of the input. |
-| @Output() `dateChange: EventEmitter<MtxDatetimepickerInputEvent<D>>` | Emits when a `change` event is fired on this `<input>`. |
-| @Output() `dateInput: EventEmitter<MtxDatetimepickerInputEvent<D>>` | Emits when an `input` event is fired on this `<input>`. |
+| `@Input()`<br>`mtxDatetimepickerFilter: (date: D \| null, type: MtxDatetimepickerFilterType) => boolean` | Function that can be used to filter out dates within the datetimepicker. |
+| `@Input()`<br>`disabled: boolean` | Whether the datetimepicker-input is disabled. |
+| `@Input()`<br>`mtxDatetimepicker: MtxDatetimepicker<D>` | The datetimepicker that this input is associated with. |
+| `@Input()`<br>`max: D \| null` | The maximum valid date. |
+| `@Input()`<br>`min: D \| null` | The minimum valid date. | 
+| `@Input()`<br>`value: D \| null` | The value of the input. |
+| `@Output()`<br>`dateChange: EventEmitter<MtxDatetimepickerInputEvent<D>>` | Emits when a `change` event is fired on this `<input>`. |
+| `@Output()`<br>`dateInput: EventEmitter<MtxDatetimepickerInputEvent<D>>` | Emits when an `input` event is fired on this `<input>`. |
 
 ##### Methods
 
@@ -47,18 +47,18 @@ Exported as: `mtxCalendar`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `dateFilter: (date: D, type: MtxDatetimepickerFilterType) => boolean` | Function used to filter which dates are selectable. |
-| @Input() `type: MtxDatetimepickerType` | The type of datetimepicker. Default is `'date'`. |
-| @Input() `multiYearSelector: boolean` | Whether to show multi-year view. Default is `false`. |
-| @Input() `twelvehour: boolean` | Whether the clock uses 12 hour format. Default is `false`. |
-| @Input() `timeInterval: number` | Step over minutes. Default is `1`. |
-| @Input() `maxDate: D \| null` | The maximum selectable date. |
-| @Input() `minDate: D \| null` | The minimum selectable date. |
-| @Input() `selected: D \| null` | The currently selected datetime. |
-| @Input() `startAt: D \| null` | A date representing the period (month or year) to start the calendar in. |
-| @Input() `startView: MtxCalendarView` | The calendar started view. Default is `'month'`. |
-| @Output() `selectedChange: EventEmitter<D \| null>` | Emits when the currently selected datetime changes. |
-| @Output() `viewChanged: EventEmitter<MtxCalendarView>` | Emits when the current view changes. |
+| `@Input()`<br>`dateFilter: (date: D, type: MtxDatetimepickerFilterType) => boolean` | Function used to filter which dates are selectable. |
+| `@Input()`<br>`type: MtxDatetimepickerType` | The type of datetimepicker. Default is **`'date'`**. |
+| `@Input()`<br>`multiYearSelector: boolean` | Whether to show multi-year view. Default is **`false`**. |
+| `@Input()`<br>`twelvehour: boolean` | Whether the clock uses 12 hour format. Default is **`false`**. |
+| `@Input()`<br>`timeInterval: number` | Step over minutes. Default is **`1`**. |
+| `@Input()`<br>`maxDate: D \| null` | The maximum selectable date. |
+| `@Input()`<br>`minDate: D \| null` | The minimum selectable date. |
+| `@Input()`<br>`selected: D \| null` | The currently selected datetime. |
+| `@Input()`<br>`startAt: D \| null` | A date representing the period (month or year) to start the calendar in. |
+| `@Input()`<br>`startView: MtxCalendarView` | The calendar started view. Default is **`'month'`**. |
+| `@Output()`<br>`selectedChange: EventEmitter<D \| null>` | Emits when the currently selected datetime changes. |
+| `@Output()`<br>`viewChanged: EventEmitter<MtxCalendarView>` | Emits when the current view changes. |
 
 #### `MtxDatetimepicker`
 
@@ -72,28 +72,28 @@ Exported as: `mtxDatetimepicker`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `color: ThemePalette` | Color palette to use on the datetimepicker's calendar. |
-| @Input() `disabled: boolean` | Whether the datetimepicker pop-up should be disabled. |
-| @Input() `opened: boolean` | Whether the calendar is open. |
-| @Input() `panelClass: string \| string[]` | Classes to be passed to the date picker panel. Supports string and string array values, similar to ngClass. |
-| @Input() `restoreFocus: boolean` | Whether to restore focus to the previously-focused element when the calendar is closed. Note that automatic focus restoration is an accessibility feature and it is recommended that you provide your own equivalent, if you decide to turn it off. |
-| @Input() `touchUi: boolean` | Whether the calendar UI is in touch mode. In touch mode the calendar opens in a dialog rather than a dropdown and elements have more padding to allow for bigger touch targets. |
-| @Input() `xPosition: DatetimepickerDropdownPositionX`| Preferred position of the datetimepicker in the X axis. |
-| @Input() `yPosition: DatetimepickerDropdownPositionY`| Preferred position of the datetimepicker in the Y axis. |
-| @Input() `mode: MtxDatetimepickerMode` | The display mode of datetimepicker pop-up. Default is `'auto'`. |
-| @Input() `type: MtxDatetimepickerType` | The type of datetimepicker. Default is `'date'`. |
-| @Input() `multiYearSelector: boolean` | Whether to show multi-year view. Default is `false`. |
-| @Input() `twelvehour: boolean` | Whether the clock uses 12 hour format. Default is `false`. |
-| @Input() `timeInterval: number` | Step over minutes. Default is `1`. |
-| @Input() `maxDate: D \| null` | The maximum selectable date. |
-| @Input() `minDate: D \| null` | The minimum selectable date. |
-| @Input() `selected: D \| null` | The currently selected datetime. |
-| @Input() `startAt: D \| null` | A date representing the period (month or year) to start the calendar in. |
-| @Input() `startView: MtxCalendarView` | The calendar started view. Default is `'month'`. |
-| @Output(`'opened'`) `openedStream: EventEmitter<void>`| Emits when the datetimepicker has been opened. |
-| @Output(`'closed'`) `closedStream: EventEmitter<void>`| Emits when the datetimepicker has been closed. |
-| @Output() `viewChanged: EventEmitter<MtxCalendarView>` | Emits when the current view changes. |
-| @Output() `selectedChanged: EventEmitter<D>` | Emits new selected date when selected date changes. |
+| `@Input()`<br>`color: ThemePalette` | Color palette to use on the datetimepicker's calendar. |
+| `@Input()`<br>`disabled: boolean` | Whether the datetimepicker pop-up should be disabled. |
+| `@Input()`<br>`opened: boolean` | Whether the calendar is open. |
+| `@Input()`<br>`panelClass: string \| string[]` | Classes to be passed to the date picker panel. Supports string and string array values, similar to ngClass. |
+| `@Input()`<br>`restoreFocus: boolean` | Whether to restore focus to the previously-focused element when the calendar is closed. Note that automatic focus restoration is an accessibility feature and it is recommended that you provide your own equivalent, if you decide to turn it off. |
+| `@Input()`<br>`touchUi: boolean` | Whether the calendar UI is in touch mode. In touch mode the calendar opens in a dialog rather than a dropdown and elements have more padding to allow for bigger touch targets. |
+| `@Input()`<br>`xPosition: DatetimepickerDropdownPositionX`| Preferred position of the datetimepicker in the X axis. |
+| `@Input()`<br>`yPosition: DatetimepickerDropdownPositionY`| Preferred position of the datetimepicker in the Y axis. |
+| `@Input()`<br>`mode: MtxDatetimepickerMode` | The display mode of datetimepicker pop-up. Default is **`'auto'`**. |
+| `@Input()`<br>`type: MtxDatetimepickerType` | The type of datetimepicker. Default is **`'date'`**. |
+| `@Input()`<br>`multiYearSelector: boolean` | Whether to show multi-year view. Default is **`false`**. |
+| `@Input()`<br>`twelvehour: boolean` | Whether the clock uses 12 hour format. Default is **`false`**. |
+| `@Input()`<br>`timeInterval: number` | Step over minutes. Default is **`1`**. |
+| `@Input()`<br>`maxDate: D \| null` | The maximum selectable date. |
+| `@Input()`<br>`minDate: D \| null` | The minimum selectable date. |
+| `@Input()`<br>`selected: D \| null` | The currently selected datetime. |
+| `@Input()`<br>`startAt: D \| null` | A date representing the period (month or year) to start the calendar in. |
+| `@Input()`<br>`startView: MtxCalendarView` | The calendar started view. Default is **`'month'`**. |
+| `@Output('opened')`<br>`openedStream: EventEmitter<void>`| Emits when the datetimepicker has been opened. |
+| `@Output('closed')`<br>`closedStream: EventEmitter<void>`| Emits when the datetimepicker has been closed. |
+| `@Output()`<br>`viewChanged: EventEmitter<MtxCalendarView>` | Emits when the current view changes. |
+| `@Output()`<br>`selectedChanged: EventEmitter<D>` | Emits new selected date when selected date changes. |
 
 ##### Methods
 
@@ -118,9 +118,9 @@ Exported as: `mtxDatetimepickerToggle`
 
 | Name | Description |
 | :--- | :--- |
-| @Input(`'for'`) `datetimepicker: MtxDatetimepicker<D>` | Datetimepicker instance that the button will toggle. |
-| @Input() `disableRipple: boolean` | Whether ripples on the toggle should be disabled. |
-| @Input() `disabled: boolean` | Whether the toggle button is disabled. |
+| `@Input('for')`<br>`datetimepicker: MtxDatetimepicker<D>` | Datetimepicker instance that the button will toggle. |
+| `@Input()`<br>`disableRipple: boolean` | Whether ripples on the toggle should be disabled. |
+| `@Input()`<br>`disabled: boolean` | Whether the toggle button is disabled. |
 
 #### `MtxClock`
 
@@ -134,15 +134,15 @@ Exported as: `mtxClock`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `dateFilter: (date: D, type: MtxDatetimepickerFilterType) => boolean` | Function used to filter which dates are selectable. |
-| @Input() `interval: number` | Step over minutes. Default is `1`. |
-| @Input() `twelvehour: boolean` | Whether the clock uses 12 hour format. Default is `false`. |
-| @Input() `maxDate: D \| null` | The maximum selectable date. |
-| @Input() `minDate: D \| null` | The minimum selectable date. |
-| @Input() `selected: D \| null` | The currently selected datetime. |
-| @Input() `startView: MtxCalendarView` | The calendar started view. Default is `'month'`. |
-| @Output() `selectedChanged: EventEmitter<D>` | Emits new selected date when selected date changes. |
-| @Output() `activeDateChange: EventEmitter<D>` | Emits when any date is activated. |
+| `@Input()`<br>`dateFilter: (date: D, type: MtxDatetimepickerFilterType) => boolean` | Function used to filter which dates are selectable. |
+| `@Input()`<br>`interval: number` | Step over minutes. Default is `1`. |
+| `@Input()`<br>`twelvehour: boolean` | Whether the clock uses 12 hour format. Default is `false`. |
+| `@Input()`<br>`maxDate: D \| null` | The maximum selectable date. |
+| `@Input()`<br>`minDate: D \| null` | The minimum selectable date. |
+| `@Input()`<br>`selected: D \| null` | The currently selected datetime. |
+| `@Input()`<br>`startView: MtxCalendarView` | The calendar started view. Default is `'month'`. |
+| `@Output()`<br>`selectedChanged: EventEmitter<D>` | Emits new selected date when selected date changes. |
+| `@Output()`<br>`activeDateChange: EventEmitter<D>` | Emits when any date is activated. |
 
 ### Classes
 

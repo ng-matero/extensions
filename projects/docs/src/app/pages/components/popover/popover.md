@@ -16,16 +16,16 @@ Exported as: `mtxPopover`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `position: MtxPopoverPosition` | Position of the popover. Default is **`['below', 'after']`**. |
-| @Input() `enterDelay: number` | Popover enter delay. Only support hover event. Default is **`100`**. |
-| @Input() `leaveDelay: number` | Popover enter delay. Only support hover event. Default is **`100`**. |
-| @Input() `xOffset: number` | Popover target offset X. Default is **`0`**. |
-| @Input() `yOffset: number` | Popover target offset Y. Default is **`0`**. |
-| @Input() `closeOnPanelClick: boolean` | Whether close popover when click the panel. Default is **`false`**. |
-| @Input() `closeOnBackdropClick: boolean` | Whether close popover when click the backdrop. Default is **`true`**. |
-| @Input() `disableAnimation: boolean` | Whether the popover animations are disabled. Default is **`false`**. |
-| @Input() `focusTrapEnabled: boolean` | Whether the popover should focus trap. Default is **`true`**. |
-| @Input() `focusTrapAutoCaptureEnabled: boolean` | Whether the popover should focus trap auto capture focus. Default is **`true`**. |
+| `@Input()`<br>`position: MtxPopoverPosition` | Position of the popover. Default is **`['below', 'after']`**. |
+| `@Input()`<br>`enterDelay: number` | Popover enter delay. Only support hover event. Default is **`100`**. |
+| `@Input()`<br>`leaveDelay: number` | Popover enter delay. Only support hover event. Default is **`100`**. |
+| `@Input()`<br>`xOffset: number` | Popover target offset X. Default is **`0`**. |
+| `@Input()`<br>`yOffset: number` | Popover target offset Y. Default is **`0`**. |
+| `@Input()`<br>`closeOnPanelClick: boolean` | Whether close popover when click the panel. Default is **`false`**. |
+| `@Input()`<br>`closeOnBackdropClick: boolean` | Whether close popover when click the backdrop. Default is **`true`**. |
+| `@Input()`<br>`disableAnimation: boolean` | Whether the popover animations are disabled. Default is **`false`**. |
+| `@Input()`<br>`focusTrapEnabled: boolean` | Whether the popover should focus trap. Default is **`true`**. |
+| `@Input()`<br>`focusTrapAutoCaptureEnabled: boolean` | Whether the popover should focus trap auto capture focus. Default is **`true`**. |
 
 #### `MtxPopoverTrigger`
 
@@ -37,9 +37,9 @@ Exported as: `mtxPopoverTrigger`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `mtxPopoverTriggerFor: MtxPopoverPanel` | References the popover instance that the trigger is associated with. |
-| @Input() `mtxPopoverTriggerOn: MtxPopoverTriggerEvent` | Event for triggering popover click, hover and none. Default is **`'hover'`**. |
-| @Input() `mtxPopoverTargetAt: MtxTarget` | References the popover target instance that the popover positioning is associated with. |
+| `@Input()`<br>`mtxPopoverTriggerFor: MtxPopoverPanel` | References the popover instance that the trigger is associated with. |
+| `@Input()`<br>`mtxPopoverTriggerOn: MtxPopoverTriggerEvent` | Event for triggering popover click, hover and none. Default is **`'hover'`**. |
+| `@Input()`<br>`mtxPopoverTargetAt: MtxTarget` | References the popover target instance that the popover positioning is associated with. |
 
 #### `MtxPopoverTarget`
 

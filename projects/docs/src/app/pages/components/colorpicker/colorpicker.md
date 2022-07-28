@@ -18,12 +18,12 @@ Exported as: `mtxColorpickerInput`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `disabled: boolean` | Whether the colorpicker-input is disabled. |
-| @Input() `mtxColorpicker: MtxColorpicker` | The colorpicker that this input is associated with. |
-| @Input() `value: string \| null` | The value of the input. |
-| @Input() `format: ColorFormat` | The color format. Can be `'hex'`, `'rgb'`, `'hsl'`, `'hsv'`. Default is `'hex'`. |
-| @Output() `colorChange: EventEmitter<MtxColorPickerInputEvent>` | Emits when a change event is fired on this `<input>`. |
-| @Output() `colorInput: EventEmitter<MtxColorPickerInputEvent>` | Emits when an input event is fired on this `<input>`. |
+| `@Input()`<br>`disabled: boolean` | Whether the colorpicker-input is disabled. |
+| `@Input()`<br>`mtxColorpicker: MtxColorpicker` | The colorpicker that this input is associated with. |
+| `@Input()`<br>`value: string \| null` | The value of the input. |
+| `@Input()`<br>`format: ColorFormat` | The color format. Can be `'hex'`, `'rgb'`, `'hsl'`, `'hsv'`. Default is **`'hex'`**. |
+| `@Output()`<br>`colorChange: EventEmitter<MtxColorPickerInputEvent>` | Emits when a change event is fired on this `<input>`. |
+| `@Output()`<br>`colorInput: EventEmitter<MtxColorPickerInputEvent>` | Emits when an input event is fired on this `<input>`. |
 
 ##### Methods
 
@@ -45,14 +45,14 @@ Exported as: `mtxColorpicker`
 
 | Name | Description |
 | :--- | :--- |
-| @Input() `disabled: boolean` | Whether the colorpicker pop-up should be disabled. |
-| @Input() `format: ColorFormat` | The color format. Can be `'hex'`, `'rgb'`, `'hsl'`, `'hsv'`. Default is `'hex'`. |
-| @Input() `opened: boolean` | Whether the color palette is open. |
-| @Input() `restoreFocus: boolean` | Whether to restore focus to the previously-focused element when the color palette is closed. Note that automatic focus restoration is an accessibility feature and it is recommended that you provide your own equivalent, if you decide to turn it off. |
-| @Input() `xPosition: ColorpickerDropdownPositionX`| Preferred position of the colorpicker in the X axis. |
-| @Input() `yPosition: ColorpickerDropdownPositionY`| Preferred position of the colorpicker in the Y axis. |
-| @Output(`'opened'`) `openedStream: EventEmitter<void>`| Emits when the colorpicker has been opened. |
-| @Output(`'closed'`) `closedStream: EventEmitter<void>`| Emits when the colorpicker has been closed. |
+| `@Input()`<br>`disabled: boolean` | Whether the colorpicker pop-up should be disabled. |
+| `@Input()`<br>`format: ColorFormat` | The color format. Can be `'hex'`, `'rgb'`, `'hsl'`, `'hsv'`. Default is **`'hex'`**. |
+| `@Input()`<br>`opened: boolean` | Whether the color palette is open. |
+| `@Input()`<br>`restoreFocus: boolean` | Whether to restore focus to the previously-focused element when the color palette is closed. Note that automatic focus restoration is an accessibility feature and it is recommended that you provide your own equivalent, if you decide to turn it off. |
+| `@Input()`<br>`xPosition: ColorpickerDropdownPositionX`| Preferred position of the colorpicker in the X axis. |
+| `@Input()`<br>`yPosition: ColorpickerDropdownPositionY`| Preferred position of the colorpicker in the Y axis. |
+| `@Output('opened')`<br>`openedStream: EventEmitter<void>`| Emits when the colorpicker has been opened. |
+| `@Output('closed')`<br>`closedStream: EventEmitter<void>`| Emits when the colorpicker has been closed. |
 | `selected: string` | The currently selected color. |
 
 ##### Methods
@@ -80,9 +80,9 @@ Exported as: `mtxColorpickerToggle`
 
 | Name | Description |
 | :--- | :--- |
-| @Input(`'for'`) `picker: MtxColorpicker` | Colorpicker instance that the button will toggle. |
-| @Input() `disableRipple: boolean` | Whether ripples on the toggle should be disabled. |
-| @Input() `disabled: boolean` | Whether the toggle button is disabled. |
+| `@Input('for')`<br>`picker: MtxColorpicker` | Colorpicker instance that the button will toggle. |
+| `@Input()`<br>`disableRipple: boolean` | Whether ripples on the toggle should be disabled. |
+| `@Input()`<br>`disabled: boolean` | Whether the toggle button is disabled. |
 
 ### Classes
 
