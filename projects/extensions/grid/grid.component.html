@@ -14,6 +14,24 @@
     </ng-template>
   </div>
   <div class="mtx-grid-toolbar-actions">
+    <mtx-grid-row-group *ngIf="showRowGroupButton"
+                        [columns]="rowGroupColumns"
+                        [buttonText]="rowGroupButtonText"
+                        [buttonType]="rowGroupButtonType"
+                        [buttonColor]="rowGroupButtonColor"
+                        [buttonClass]="rowGroupButtonClass"
+                        [buttonIcon]="rowGroupButtonIcon"
+                        [selectableChecked]="rowHideableChecked"
+                        (selectionChange)="_handleRowChange($event)"
+                        [sortable]="rowSortable"
+                        (sortChange)="_handleRowChange($event)"
+                        [showHeader]="showRowGroupHeader"
+                        [headerText]="rowGroupHeaderText"
+                        [headerTemplate]="rowGroupHeaderTemplate"
+                        [showFooter]="showRowGroupFooter"
+                        [footerText]="rowGroupFooterText"
+                        [footerTemplate]="rowGroupFooterTemplate">
+    </mtx-grid-row-group>
     <mtx-grid-column-menu *ngIf="showColumnMenuButton" #columnMenu
                           [columns]="columns"
                           [buttonText]="columnMenuButtonText"
@@ -46,7 +64,8 @@
          [ngClass]="{'mat-table-with-data': !_hasNoResult}">
       <table mat-table *ngIf="!columnResizable"
              [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
-             [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
+             [dataSource]="dataSource"
+             [multiTemplateDataRows]="expandable || rowGroup"
              matSort
              [matSortActive]="sortActive"
              [matSortDirection]="sortDirection"
@@ -67,11 +86,12 @@
           </th>
           <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
               class="mtx-grid-checkbox-cell">
-            <mat-checkbox *ngIf="!(rowSelectionFormatter.hideCheckbox && rowSelectionFormatter.hideCheckbox(row, _getIndex(index, dataIndex)))"
-                          [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled(row, _getIndex(index, dataIndex))"
-                          [checked]="rowSelection.isSelected(row)"
-                          (click)="$event.stopPropagation()"
-                          (change)="$event ? _toggleNormalCheckbox(row) : null">
+            <mat-checkbox
+              *ngIf="!(rowSelectionFormatter.hideCheckbox && rowSelectionFormatter.hideCheckbox(row, _getIndex(index, dataIndex)))"
+              [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled(row, _getIndex(index, dataIndex))"
+              [checked]="rowSelection.isSelected(row)"
+              (click)="$event.stopPropagation()"
+              (change)="$event ? _toggleNormalCheckbox(row) : null">
             </mat-checkbox>
           </td>
           <td mat-footer-cell *matFooterCellDef class="mtx-grid-checkbox-cell"></td>
@@ -190,6 +210,15 @@
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         </ng-template>
 
+        <ng-container *ngIf="rowGroup">
+          <ng-container matColumnDef="MtxGridRowGroupDef">
+            <td mat-cell *matCellDef="let row; let dataIndex = dataIndex" [attr.colspan]="displayedColumns.length">
+              <ng-template [ngTemplateOutlet]="rowGroupTemplate"></ng-template>
+            </td>
+          </ng-container>
+          <tr mat-row *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: ['MtxGridRowGroupDef'];"></tr>
+        </ng-container>
+
         <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>
           <tr mat-row
@@ -229,7 +258,8 @@
       <table mat-table *ngIf="columnResizable"
              columnResize
              [ngClass]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
-             [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
+             [dataSource]="dataSource"
+             [multiTemplateDataRows]="expandable || rowGroup"
              matSort
              [matSortActive]="sortActive"
              [matSortDirection]="sortDirection"
@@ -250,11 +280,12 @@
           </th>
           <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
               class="mtx-grid-checkbox-cell">
-            <mat-checkbox *ngIf="!(rowSelectionFormatter.hideCheckbox && rowSelectionFormatter.hideCheckbox(row, _getIndex(index, dataIndex)))"
-                          [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled(row, _getIndex(index, dataIndex))"
-                          [checked]="rowSelection.isSelected(row)"
-                          (click)="$event.stopPropagation()"
-                          (change)="$event ? _toggleNormalCheckbox(row) : null">
+            <mat-checkbox
+              *ngIf="!(rowSelectionFormatter.hideCheckbox && rowSelectionFormatter.hideCheckbox(row, _getIndex(index, dataIndex)))"
+              [disabled]="rowSelectionFormatter.disabled && rowSelectionFormatter.disabled(row, _getIndex(index, dataIndex))"
+              [checked]="rowSelection.isSelected(row)"
+              (click)="$event.stopPropagation()"
+              (change)="$event ? _toggleNormalCheckbox(row) : null">
             </mat-checkbox>
           </td>
           <td mat-footer-cell *matFooterCellDef class="mtx-grid-checkbox-cell"></td>
@@ -374,6 +405,15 @@
         <ng-template #defaultHeaderRowTpl>
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         </ng-template>
+
+        <ng-container *ngIf="rowGroup">
+          <ng-container matColumnDef="MtxGridRowGroupDef">
+            <td mat-cell *matCellDef="let row; let dataIndex = dataIndex" [attr.colspan]="displayedColumns.length">
+              <ng-template [ngTemplateOutlet]="rowGroupTemplate"></ng-template>
+            </td>
+          </ng-container>
+          <tr mat-row *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: ['MtxGridRowGroupDef'];"></tr>
+        </ng-container>
 
         <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>

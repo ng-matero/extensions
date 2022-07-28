@@ -18,7 +18,7 @@ import {
   ContentChildren,
   Directive,
   HostBinding,
-  HostListener,
+  HostListener
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -28,7 +28,7 @@ import {
   MatHeaderRowDef,
   MatRowDef,
   MatTable,
-  MatTableDataSource,
+  MatTableDataSource
 } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Sort, MatSort, SortDirection } from '@angular/material/sort';
@@ -41,7 +41,7 @@ import {
   MtxGridRowClassFormatter,
   MtxGridColumnMenu,
   MtxGridButtonType,
-  MtxGridColumnPinOption,
+  MtxGridColumnPinOption
 } from './grid.interface';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
@@ -52,17 +52,24 @@ import { MtxGridService } from './grid.service';
   templateUrl: './grid.component.html',
   styleUrls: ['./grid.component.scss'],
   host: {
-    class: 'mtx-grid',
+    class: 'mtx-grid'
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   animations: [
     trigger('expansion', [
-      state('collapsed', style({ height: '0', minHeight: '0', visibility: 'hidden' })),
-      state('expanded', style({ height: '*', visibility: 'visible' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+      state('collapsed', style({
+        height: '0',
+        minHeight: '0',
+        visibility: 'hidden'
+      })),
+      state('expanded', style({
+        height: '*',
+        visibility: 'visible'
+      })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)'))
+    ])
+  ]
 })
 export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild(MatTable) table!: MatTable<any>;
@@ -78,6 +85,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @Input() displayedColumns!: string[];
   @Input() columns: MtxGridColumn[] = [];
+  @Input() rowGroupColumns: MtxGridColumn[] = [];
   @Input() data: any[] = [];
   @Input() length = 0;
   @Input() loading = false;
@@ -123,6 +131,10 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() expandable = false;
   @Input() expansionTemplate!: TemplateRef<any>;
   @Output() expansionChange = new EventEmitter<any>();
+
+  // ==== Row Group ===
+  @Input() rowGroup = false;
+  @Input() rowGroupTemplate!: TemplateRef<any>;
 
   // ===== Row Selection =====
 
@@ -179,6 +191,26 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @Input() columnPinOptions: MtxGridColumnPinOption[] = [];
 
+  // ===== Row Group =====
+  @Input() showRowGroupButton = true;
+  @Input() rowGroupButtonText = '';
+  @Input() rowGroupButtonType: MtxGridButtonType = 'stroked';
+  @Input() rowGroupButtonColor: ThemePalette;
+  @Input() rowGroupButtonClass = '';
+  @Input() rowGroupButtonIcon = '';
+
+  @Input() rowHideable = true;
+  @Input() rowHideableChecked: 'show' | 'hide' = 'show';
+  @Input() rowSortable = true;
+  @Output() rowGroupChange = new EventEmitter<MtxGridColumn[]>();
+
+  @Input() showRowGroupHeader = false;
+  @Input() rowGroupHeaderText = 'Row Group Header';
+  @Input() rowGroupHeaderTemplate!: TemplateRef<any>;
+  @Input() showRowGroupFooter = false;
+  @Input() rowGroupFooterText = 'Row Group Footer';
+  @Input() rowGroupFooterTemplate!: TemplateRef<any>;
+
   // ===== No Result =====
 
   @Input() noResultText = 'No records found';
@@ -225,7 +257,8 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   constructor(
     private _dataGridSrv: MtxGridService,
     private _changeDetectorRef: ChangeDetectorRef
-  ) {}
+  ) {
+  }
 
   detectChanges() {
     this._changeDetectorRef.detectChanges();
@@ -242,7 +275,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   _getRowClassList(rowData: any, index: number) {
     const classList: any = {
       'selected': this.rowSelection.isSelected(rowData),
-      'mat-row-odd': index % 2,
+      'mat-row-odd': index % 2
     };
     if (this.rowClassFormatter) {
       for (const key of Object.keys(this.rowClassFormatter)) {
@@ -267,6 +300,15 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
         }
       });
     }
+    if (this.showRowGroupButton) {
+      this.rowGroupColumns.forEach(item => {
+        if (this.columnHideableChecked === 'show') {
+          item.show = !item.hide;
+        } else {
+          item.hide = !!item.hide;
+        }
+      });
+    }
 
     if (this.rowSelectable && !this.hideRowSelectionCheckbox) {
       this.displayedColumns.unshift('MtxGridCheckboxColumnDef');
@@ -277,7 +319,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.expansionRowStates = []; // reset
 
       this.data?.forEach(_ => {
-        this.expansionRowStates.push({ expanded: false });
+        this.expansionRowStates.push({expanded: false});
       });
     }
 
@@ -316,21 +358,24 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+  }
 
   _countPinnedPosition() {
     const count = (acc: number, cur: MtxGridColumn) => acc + parseFloat(cur.width || '80px');
 
     const pinnedLeftCols = this.columns.filter(col => col.pinned && col.pinned === 'left');
     pinnedLeftCols.forEach((item, idx) => {
-      item.left = pinnedLeftCols.slice(0, idx).reduce(count, 0) + 'px';
+      item.left = pinnedLeftCols.slice(0, idx)
+      .reduce(count, 0) + 'px';
     });
 
     const pinnedRightCols = this.columns
-      .filter(col => col.pinned && col.pinned === 'right')
-      .reverse();
+    .filter(col => col.pinned && col.pinned === 'right')
+    .reverse();
     pinnedRightCols.forEach((item, idx) => {
-      item.right = pinnedRightCols.slice(0, idx).reduce(count, 0) + 'px';
+      item.right = pinnedRightCols.slice(0, idx)
+      .reduce(count, 0) + 'px';
     });
   }
 
@@ -349,7 +394,12 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     column: any,
     index: number
   ) {
-    this.expansionChange.emit({ expanded: expansionRef.expanded, data: rowData, index, column });
+    this.expansionChange.emit({
+      expanded: expansionRef.expanded,
+      data: rowData,
+      index,
+      column
+    });
   }
 
   /** Cell select event */
@@ -358,7 +408,11 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (this._selectedCell !== cellRef) {
       const colValue = this._dataGridSrv.getCellValue(rowData, colDef);
       this.cellSelection = []; // reset
-      this.cellSelection.push({ cellData: colValue, rowData, colDef });
+      this.cellSelection.push({
+        cellData: colValue,
+        rowData,
+        colDef
+      });
 
       this.cellSelectionChange.emit(this.cellSelection);
 
@@ -385,7 +439,10 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this._toggleNormalCheckbox(rowData);
     }
 
-    this.rowClick.emit({ rowData, index });
+    this.rowClick.emit({
+      rowData,
+      index
+    });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -402,10 +459,10 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     this._isAllSelected()
       ? this.rowSelection.clear()
       : this.dataSource.data.forEach((row, index) => {
-          if (!this.rowSelectionFormatter.disabled?.(row, index)) {
-            this.rowSelection.select(row);
-          }
-        });
+        if (!this.rowSelectionFormatter.disabled?.(row, index)) {
+          this.rowSelection.select(row);
+        }
+      });
     this.rowSelectionChange.emit(this.rowSelection.selected);
   }
 
@@ -426,10 +483,15 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
+  /** Row Group change event */
+  _handleRowChange(columns: any[]) {
+    this.rowGroupChange.emit(columns);
+  }
+
   getDisplayedColumnFields(columns: MtxGridColumn[]): string[] {
     const fields = columns
-      .filter(item => (this.columnHideableChecked === 'show' ? item.show : !item.hide))
-      .map(item => item.field);
+    .filter(item => (this.columnHideableChecked === 'show' ? item.show : !item.hide))
+    .map(item => item.field);
     return fields;
   }
 
@@ -470,7 +532,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 }
 
 @Directive({
-  selector: '[mtx-grid-selectable-cell]',
+  selector: '[mtx-grid-selectable-cell]'
 })
 export class MtxGridCellSelectionDirective {
   private _selected = false;
@@ -493,7 +555,8 @@ export class MtxGridCellSelectionDirective {
 
   @Output() cellSelectionChange = new EventEmitter<MtxGridCellSelectionDirective>();
 
-  constructor(private _dataGrid: MtxGridComponent) {}
+  constructor(private _dataGrid: MtxGridComponent) {
+  }
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {

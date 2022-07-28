@@ -23,6 +23,7 @@ import { MtxGridColumnMenuComponent } from './column-menu.component';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
 import { MatColumnResizeModule } from './column-resize/column-resize-module';
+import { MtxGridRowGroupComponent } from '@ng-matero/extensions/grid/row-group.component';
 
 @NgModule({
   imports: [
@@ -49,6 +50,7 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MtxGridComponent,
     MtxGridCellComponent,
     MtxGridColumnMenuComponent,
+    MtxGridRowGroupComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
     MatColumnResizeModule,
@@ -57,6 +59,7 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MtxGridComponent,
     MtxGridCellComponent,
     MtxGridColumnMenuComponent,
+    MtxGridRowGroupComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
   ],

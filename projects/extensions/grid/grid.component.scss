@@ -97,6 +97,12 @@
       }
     }
 
+    &.mtx-grid-row-group {
+      height: 25px;
+      text-align: center;
+      font-weight: 500;
+    }
+
     &:last-of-type .mat-cell {
       border-bottom-width: 0;
     }
