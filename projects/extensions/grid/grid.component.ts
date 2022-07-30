@@ -621,9 +621,9 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     return rows;
   }
 
-  uniqueBy(a: any[], key: any) {
+  uniqueBy(items: any[], key: any) {
     const seen: any = {};
-    return a.filter((item) => {
+    return items.filter((item) => {
       const k = key(item);
       return seen.hasOwnProperty(k) ? false : (seen[k] = true);
     });
