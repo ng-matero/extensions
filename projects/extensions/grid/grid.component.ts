@@ -1,47 +1,41 @@
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ViewChild,
-  OnChanges,
-  TemplateRef,
-  TrackByFunction,
-  OnDestroy,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
-  ElementRef,
-  SimpleChanges,
-  QueryList,
+  Component,
   ContentChildren,
   Directive,
+  ElementRef,
+  EventEmitter,
   HostBinding,
-  HostListener
+  HostListener,
+  Input,
+  OnChanges,
+  OnDestroy,
+  Output,
+  QueryList,
+  SimpleChanges,
+  TemplateRef,
+  TrackByFunction,
+  ViewChild,
+  ViewEncapsulation
 } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
-import {
-  MatFooterRow,
-  MatFooterRowDef,
-  MatHeaderRowDef,
-  MatRowDef,
-  MatTable,
-  MatTableDataSource
-} from '@angular/material/table';
+import { MatFooterRow, MatFooterRowDef, MatHeaderRowDef, MatRowDef, MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Sort, MatSort, SortDirection } from '@angular/material/sort';
+import { MatSort, Sort, SortDirection } from '@angular/material/sort';
 import { ThemePalette } from '@angular/material/core';
 
 import {
-  MtxGridColumn,
-  MtxGridCellTemplate,
-  MtxGridRowSelectionFormatter,
-  MtxGridRowClassFormatter,
-  MtxGridColumnMenu,
   MtxGridButtonType,
-  MtxGridColumnPinOption, RowGroup
+  MtxGridCellTemplate,
+  MtxGridColumn,
+  MtxGridColumnMenu,
+  MtxGridColumnPinOption,
+  MtxGridRowClassFormatter,
+  MtxGridRowSelectionFormatter,
+  RowGroup
 } from './grid.interface';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
@@ -540,14 +534,14 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   groupRows() {
-    this.dataSource.data = this.addGroups(this.data, this.rowColumnFields);
+    this.dataSource.data = this.createRows(this.data, this.rowColumnFields);
     this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
     // this.dataSource.filter = performance.now().toString();
   }
 
   refreshRowGroup(column: MtxGridColumn) {
     this.checkGroupByColumn(column.field, !!column.show);
-    this.dataSource.data = this.addGroups(this.data, this.rowColumnFields);
+    this.dataSource.data = this.createRows(this.data, this.rowColumnFields);
     // this.dataSource.filter = performance.now().toString();
   }
 
@@ -602,33 +596,29 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     // this.dataSource.filter = performance.now().toString();  // bug here need to fix
   }
 
-  addGroups(data: any[], groupByColumns: string[]): any[] {
+  createRows(data: any[], groupByColumns: string[]): any[] {
     const rootGroup = new RowGroup();
     rootGroup.expanded = true;
-    return this.getSublevel(data, groupByColumns, rootGroup);
-  }
-
-  getSublevel(data: any[], groupByColumns: string[], parent: RowGroup): any[] {
-    const groups = this.uniqueBy(data.map(row => {
+    const groups = this.uniqueBy(data.map((row: any) => {
         const result = new RowGroup();
-        result.parent = parent;
+        result.parent = rootGroup;
         groupByColumns.forEach((c: string) => result[c] = row[c]);
         return result;
       }
     ), JSON.stringify);
 
-    let subGroups: any[] = [];
+    let rows: any[] = [];
     groups.forEach((group) => {
       const rowsInGroup = data.filter((row: any | RowGroup) => {
         const matched = groupByColumns.filter((c: string) => group[c] === row[c]);
         return matched?.length === groupByColumns?.length;
       });
       group.totalCounts = rowsInGroup.length;
-      const subGroup = [...rowsInGroup];
-      subGroup.unshift(group);
-      subGroups = subGroups.concat(subGroup);
+      const groupedRows = [...rowsInGroup];
+      groupedRows.unshift(group);
+      rows = rows.concat(groupedRows);
     });
-    return subGroups;
+    return rows;
   }
 
   uniqueBy(a: any[], key: any) {
