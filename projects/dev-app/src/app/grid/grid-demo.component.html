@@ -14,19 +14,15 @@
 <mat-checkbox [(ngModel)]="showPaginator">showPaginator</mat-checkbox>
 <mat-checkbox [(ngModel)]="loading">loading</mat-checkbox>
 
-<mtx-grid [data]="(ds | async) ||  []"
+<mtx-grid [data]="list"
           #grid
           [columns]="columns"
-          [rowGroupColumns]="rowGroupColumns"
           [loading]="loading"
           [columnResizable]="columnResizable"
           [multiSelectable]="multiSelectable"
           [multiSelectionWithClick]="multiSelectionWithClick"
           [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
           [rowSelectable]="rowSelectable"
-          [rowSelected]="rowSelected"
-          [rowSelectionFormatter]="rowSelectionFormatter"
-          [rowClassFormatter]="rowClassFormatter"
           (rowSelectionChange)="log($event)"
           [rowHover]="rowHover"
           [rowStriped]="rowStriped"
@@ -42,11 +38,6 @@
           [toolbarTemplate]="toolbarTpl"
           [columnHideableChecked]="'show'"
           (columnChange)="log($event)"
-          [rowGroup]="true"
-          [showRowGroupHeader]="true"
-          [showRowGroupFooter]="true"
-          [rowGroupTemplate]="rowGroupTpl"
-          (rowGroupChange)="rowGroupChanged($event)"
           [showColumnMenuButton]="true"
           [showColumnMenuHeader]="true"
           [showColumnMenuFooter]="true"
@@ -66,7 +57,14 @@
           [useContentRowTemplate]="false"
           [useContentFooterRowTemplate]="false"
           [statusbarTemplate]="statusbarTpl"
-          [columnPinOptions]="columnPinOptions">
+          [columnPinOptions]="columnPinOptions"
+
+          [rowGroupColumns]="rowGroupColumns"
+          [rowGroup]="true"
+          [showRowGroupHeader]="true"
+          [showRowGroupFooter]="true"
+          [rowGroupTemplate]="rowGroupTpl"
+          (rowGroupChange)="rowGroupChanged($event)">
 
   <ng-template [matHeaderRowDef]="getColumnKeys(columns)">
     <tr mat-header-row (contextmenu)="log($event)"></tr>
@@ -80,11 +78,13 @@
 
 <ng-template #rowGroupTpl let-row>
   <span *ngFor="let c of showColumns;">
-    <span class="group-text">
-      <span class="group-item">{{c.header | toObservable | async}}:
-        <span class="group-item-value">{{ row[c.field] }}  </span>
+    <ng-container *ngIf="c.show">
+      <span class="group-text">
+        <span class="group-item">{{c.header | toObservable | async}}:
+          <span class="group-item-value">{{row[ c.field ]}}  </span>
+        </span>
       </span>
-    </span>
+      </ng-container>
   </span>
 </ng-template>
 

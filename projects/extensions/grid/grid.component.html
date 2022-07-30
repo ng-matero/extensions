@@ -212,18 +212,20 @@
 
         <ng-container *ngIf="rowGroup">
           <ng-container matColumnDef="MtxGridRowGroupDef">
-            <td mat-cell *matCellDef="let row; let dataIndex = dataIndex" [attr.colspan]="displayedColumns.length">
+            <td mat-cell *matCellDef="let group; let dataIndex = dataIndex" [attr.colspan]="displayedColumns.length">
               <ng-template [ngTemplateOutlet]="rowGroupTemplate"
-                           [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex }"></ng-template>
+                           [ngTemplateOutletContext]="{ $implicit: group, rowData: group, index: dataIndex }">
+              </ng-template>
             </td>
+
           </ng-container>
-          <tr mat-row *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: ['MtxGridRowGroupDef'];"></tr>
+          <tr mat-row *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: ['MtxGridRowGroupDef']; when: isGroup"></tr>
         </ng-container>
 
         <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>
           <tr mat-row
-              *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
+              *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;  when: isRecordRow"
               [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
               (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
           </tr>
@@ -414,13 +416,13 @@
                            [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex }"></ng-template>
             </td>
           </ng-container>
-          <tr mat-row *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: ['MtxGridRowGroupDef'];"></tr>
+          <tr mat-row *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: ['MtxGridRowGroupDef']; when: isGroup"></tr>
         </ng-container>
 
         <ng-template [ngIf]="useContentRowTemplate" [ngIfElse]="defaultRowTpl"></ng-template>
         <ng-template #defaultRowTpl>
           <tr mat-row
-              *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
+              *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns; when: isRecordRow"
               [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
               (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
           </tr>

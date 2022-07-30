@@ -1,19 +1,11 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import {
-  MtxGridColumn,
-  MtxGridColumnPinOption,
-  MtxGridComponent,
-  MtxGridRowClassFormatter,
-  MtxGridRowSelectionFormatter,
-} from '@ng-matero/extensions/grid';
+import { MtxGridColumn, MtxGridColumnPinOption, MtxGridComponent, MtxGridRowClassFormatter, MtxGridRowSelectionFormatter } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
 import { TranslateService } from '@ngx-translate/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { HttpClient } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
-import { from, groupBy, mergeMap, Observable, of, toArray } from 'rxjs';
-// import { each, groupBy, keyBy, pick } from 'lodash-es';
-// import { map } from 'rxjs/operators';
+import { from, Observable } from 'rxjs';
 
 @Component({
   selector: 'dev-grid-demo',
@@ -28,15 +20,15 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   multiSelectionWithClick = false;
   hideRowSelectionCheckbox = false;
   rowSelectable = true;
-  rowSelected = EXAMPLE_DATA.slice(2, 3);
-  rowSelectionFormatter: MtxGridRowSelectionFormatter = {
+  // rowSelected = EXAMPLE_DATA.slice(2, 3);
+  /*rowSelectionFormatter: MtxGridRowSelectionFormatter = {
     disabled: (data, index) => data.name === 'Boron',
     hideCheckbox: (data, index) => index === 10,
   };
   rowClassFormatter: MtxGridRowClassFormatter = {
     success: (data, index) => data.name === 'Boron',
     danger: (data, index) => index === 1,
-  };
+  };*/
   expandable = false;
   showSummary = false;
   columnResizable = false;
@@ -89,7 +81,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       header: this.translate.stream('gender'),
       field: 'gender',
       minWidth: 150,
-      class: 'warning',
+      // class: 'warning',
     },
     {
       header: this.translate.stream('mobile'),
@@ -316,10 +308,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   showColumns: MtxGridColumn[] = [];
 
   constructor(public translate: TranslateService, private http: HttpClient) {
-    this.ds = from(EXAMPLE_DATA).pipe(
-      groupBy((d: any) => d.gender),
-      mergeMap(group => group.pipe(toArray()))
-    );
+    this.ds = from(EXAMPLE_DATA);
   }
 
   ngOnInit() {

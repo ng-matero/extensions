@@ -73,6 +73,7 @@ export interface MtxGridSortProp {
 /** Column tag of grid. */
 export interface MtxGridColumnTag {
   [key: number]: MtxGridColumnTagValue;
+
   [key: string]: MtxGridColumnTagValue;
 }
 
@@ -127,3 +128,16 @@ export interface MtxGridColumnMenu {
 
 /** Possible button type values. */
 export type MtxGridButtonType = 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';
+
+/** Possible button type values. */
+export class RowGroup {
+  [key: string]: any;
+
+  // parent: RowGroup | undefined;
+  expanded = true;
+  totalCounts = 0;
+
+  get visible(): boolean {
+    return !this.parent || (this.parent.visible && this.parent.expanded);
+  }
+}

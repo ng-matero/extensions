@@ -41,7 +41,7 @@ import {
   MtxGridRowClassFormatter,
   MtxGridColumnMenu,
   MtxGridButtonType,
-  MtxGridColumnPinOption
+  MtxGridColumnPinOption, RowGroup
 } from './grid.interface';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
@@ -81,7 +81,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild('columnMenu') columnMenu!: MtxGridColumnMenu;
   @ViewChild('tableContainer') tableContainer!: ElementRef<HTMLDivElement>;
 
-  dataSource = new MatTableDataSource();
+  dataSource = new MatTableDataSource<any | RowGroup>();
 
   @Input() displayedColumns!: string[];
   @Input() columns: MtxGridColumn[] = [];
@@ -132,7 +132,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() expansionTemplate!: TemplateRef<any>;
   @Output() expansionChange = new EventEmitter<any>();
 
-  // ==== Row Group ===
+  // ==== Row RowGroup ===
   @Input() rowGroup = false;
   @Input() rowGroupTemplate!: TemplateRef<any>;
 
@@ -191,7 +191,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   @Input() columnPinOptions: MtxGridColumnPinOption[] = [];
 
-  // ===== Row Group =====
+  // ===== Row RowGroup =====
   @Input() showRowGroupButton = true;
   @Input() rowGroupButtonText = '';
   @Input() rowGroupButtonType: MtxGridButtonType = 'stroked';
@@ -205,10 +205,10 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Output() rowGroupChange = new EventEmitter<MtxGridColumn[]>();
 
   @Input() showRowGroupHeader = false;
-  @Input() rowGroupHeaderText = 'Row Group Header';
+  @Input() rowGroupHeaderText = 'Row RowGroup Header';
   @Input() rowGroupHeaderTemplate!: TemplateRef<any>;
   @Input() showRowGroupFooter = false;
-  @Input() rowGroupFooterText = 'Row Group Footer';
+  @Input() rowGroupFooterText = 'Row RowGroup Footer';
   @Input() rowGroupFooterTemplate!: TemplateRef<any>;
 
   // ===== No Result =====
@@ -254,6 +254,8 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() showStatusbar = false;
   @Input() statusbarTemplate!: TemplateRef<any>;
 
+  rowColumnFields: string[] = [];
+
   constructor(
     private _dataGridSrv: MtxGridService,
     private _changeDetectorRef: ChangeDetectorRef
@@ -289,7 +291,8 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   ngOnChanges(changes: SimpleChanges) {
     this._countPinnedPosition();
 
-    this.displayedColumns = this.columns.filter(item => !item.hide).map(item => item.field);
+    this.displayedColumns = this.columns.filter(item => !item.hide)
+    .map(item => item.field);
 
     if (this.showColumnMenuButton) {
       this.columns.forEach(item => {
@@ -327,7 +330,12 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.rowSelection = new SelectionModel<any>(this.multiSelectable, this.rowSelected);
     }
 
-    this.dataSource = new MatTableDataSource(this.data);
+    if (this.rowGroup) {
+      this.rowColumnFields = this.rowGroupColumns.map((column: MtxGridColumn) => column.field);
+      this.groupRows();
+    } else {
+      this.dataSource = new MatTableDataSource(this.data);
+    }
 
     this.dataSource.paginator = this.pageOnFront ? this.paginator : null;
     this.dataSource.sort = this.sortOnFront ? this.sort : null;
@@ -483,8 +491,9 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
-  /** Row Group change event */
-  _handleRowChange(columns: any[]) {
+  /** Row RowGroup change event */
+  _handleRowChange(columns: MtxGridColumn[]) {
+    columns.forEach((column: MtxGridColumn) => this.refreshRowGroup(column));
     this.rowGroupChange.emit(columns);
   }
 
@@ -528,6 +537,114 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (this.tableContainer && !this.loading) {
       this.tableContainer.nativeElement.scrollLeft = value;
     }
+  }
+
+  groupRows() {
+    this.dataSource.data = this.addGroups(this.data, this.rowColumnFields);
+    this.dataSource.filterPredicate = this.customFilterPredicate.bind(this);
+    // this.dataSource.filter = performance.now().toString();
+  }
+
+  refreshRowGroup(column: MtxGridColumn) {
+    this.checkGroupByColumn(column.field, !!column.show);
+    this.dataSource.data = this.addGroups(this.data, this.rowColumnFields);
+    // this.dataSource.filter = performance.now().toString();
+  }
+
+  checkGroupByColumn(field: string, add: boolean) {
+    let found = null;
+    for (const column of this.rowColumnFields) {
+      if (column === field) {
+        found = this.rowColumnFields.indexOf(column, 0);
+      }
+    }
+    if (found != null && found >= 0) {
+      if (!add) {
+        this.rowColumnFields.splice(found, 1);
+      }
+    } else {
+      if (add) {
+        this.rowColumnFields.push(field);
+      }
+    }
+  }
+
+  // below is for grid row grouping
+  customFilterPredicate(data: any | RowGroup, filter: string): boolean {
+    return (data instanceof RowGroup) ? data.visible : this.dataRowVisible(data);
+  }
+
+  dataRowVisible(data: any): boolean {
+    const groupRows = this.dataSource.data.filter((row: any | RowGroup) => {
+        if (!(row instanceof RowGroup)) {
+          return false;
+        }
+        let match = true;
+        this.rowColumnFields.forEach((column: any) => {
+          const field = (row as any)[column] as any;
+          if (!field || !data[column] || field !== data[column]) {
+            match = false;
+          }
+        });
+        return match;
+      }
+    );
+
+    if (groupRows.length === 0) {
+      return true;
+    }
+    const parent = groupRows[0] as RowGroup;
+    return parent.visible && parent.expanded;
+  }
+
+  groupRowClick(row: RowGroup) {
+    row.expanded = !row.expanded;
+    // this.dataSource.filter = performance.now().toString();  // bug here need to fix
+  }
+
+  addGroups(data: any[], groupByColumns: string[]): any[] {
+    const rootGroup = new RowGroup();
+    rootGroup.expanded = true;
+    return this.getSublevel(data, groupByColumns, rootGroup);
+  }
+
+  getSublevel(data: any[], groupByColumns: string[], parent: RowGroup): any[] {
+    const groups = this.uniqueBy(data.map(row => {
+        const result = new RowGroup();
+        result.parent = parent;
+        groupByColumns.forEach((c: string) => result[c] = row[c]);
+        return result;
+      }
+    ), JSON.stringify);
+
+    let subGroups: any[] = [];
+    groups.forEach((group) => {
+      const rowsInGroup = data.filter((row: any | RowGroup) => {
+        const matched = groupByColumns.filter((c: string) => group[c] === row[c]);
+        return matched?.length === groupByColumns?.length;
+      });
+      group.totalCounts = rowsInGroup.length;
+      const subGroup = [...rowsInGroup];
+      subGroup.unshift(group);
+      subGroups = subGroups.concat(subGroup);
+    });
+    return subGroups;
+  }
+
+  uniqueBy(a: any[], key: any) {
+    const seen: any = {};
+    return a.filter((item) => {
+      const k = key(item);
+      return seen.hasOwnProperty(k) ? false : (seen[k] = true);
+    });
+  }
+
+  isGroup(index: number, item: any): boolean {
+    return item instanceof RowGroup;
+  }
+
+  isRecordRow(index: number, item: any): boolean {
+    return !(item instanceof RowGroup);
   }
 }
 
