@@ -1,5 +1,6 @@
 # Ng-Matero Extensions
 
+[![CodeFactor](https://www.codefactor.io/repository/github/ng-matero/extensions/badge)](https://www.codefactor.io/repository/github/ng-matero/extensions)
 [![npm](https://img.shields.io/npm/v/@ng-matero/extensions.svg)](https://www.npmjs.com/package/@ng-matero/extensions)
 [![GitHub Release Date](https://img.shields.io/github/release-date/ng-matero/extensions)](https://github.com/ng-matero/extensions/releases)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/ng-matero/extensions/blob/dev/LICENSE)
