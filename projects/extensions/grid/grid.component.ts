@@ -316,7 +316,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this.expansionRowStates = []; // reset
 
       this.data?.forEach(_ => {
-        this.expansionRowStates.push({expanded: false});
+        this.expansionRowStates.push({ expanded: false });
       });
     }
 
@@ -597,20 +597,26 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   createRows(data: any[], groupByColumns: string[]): any[] {
+    if(!groupByColumns.length) {
+      return data;
+    }
     const rootGroup = new RowGroup();
     rootGroup.expanded = true;
     const groups = this.uniqueBy(data.map((row: any) => {
-        const result = new RowGroup();
-        result.parent = rootGroup;
-        groupByColumns.forEach((c: string) => result[c] = row[c]);
-        return result;
-      }
-    ), JSON.stringify);
+      const result = new RowGroup();
+      result.parent = rootGroup;
+      groupByColumns.forEach((c: string) => {
+        result[c] = this.fieldValue(row, c);
+      });
+      return result;
+    }), JSON.stringify);
 
     let rows: any[] = [];
     groups.forEach((group) => {
       const rowsInGroup = data.filter((row: any | RowGroup) => {
-        const matched = groupByColumns.filter((c: string) => group[c] === row[c]);
+        const matched = groupByColumns.filter((c: string) => {
+          return group[c] === this.fieldValue(row, c);
+        });
         return matched?.length === groupByColumns?.length;
       });
       group.totalCounts = rowsInGroup.length;
@@ -619,6 +625,21 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       rows = rows.concat(groupedRows);
     });
     return rows;
+  }
+
+  fieldValue(rowData: any, field: string): string {
+    const keyArr = field ? field.split('.') : [];
+
+    let tmp: any = '';
+
+    keyArr.forEach((key: string, i: number) => {
+      if (i === 0) {
+        tmp = rowData[key];
+      } else {
+        tmp = tmp && tmp[key];
+      }
+    });
+    return tmp;
   }
 
   uniqueBy(items: any[], key: any): any[] {

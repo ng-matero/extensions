@@ -46,13 +46,13 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   isNewList = false;
   rowGroupColumns: MtxGridColumn[] = [
     {
-      header: 'Weight',
-      field: 'weight',
+      header: 'Product',
+      field: 'product.name',
       show: true,
     },
     {
-      header: 'Gender',
-      field: 'gender',
+      header: 'Location',
+      field: 'location.name',
       show: true,
     },
   ];

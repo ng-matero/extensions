@@ -17,6 +17,12 @@ export const EXAMPLE_DATA: any[] = [
     status: false,
     cost: 4,
     avatar: 'https://farm5.staticflickr.com/4267/34162425794_1430f38362_z.jpg',
+    product: {
+      name: 'Product Name1'
+    },
+    location: {
+      name: 'location 1'
+    }
   },
   {
     position: 2,
@@ -35,6 +41,12 @@ export const EXAMPLE_DATA: any[] = [
     email: 'Helium@gmail.com',
     status: true,
     cost: 5,
+    product: {
+      name: 'Product Name2'
+    },
+    location: {
+      name: 'location 1'
+    }
   },
   {
     position: 3,
@@ -53,6 +65,12 @@ export const EXAMPLE_DATA: any[] = [
     email: 'Nitrogen@gmail.com',
     status: true,
     cost: 2,
+    product: {
+      name: 'Product Name2'
+    },
+    location: {
+      name: 'location 1'
+    }
   },
   {
     position: 4,
@@ -71,6 +89,12 @@ export const EXAMPLE_DATA: any[] = [
     email: 'Nitrogen@gmail.com',
     status: true,
     cost: 2,
+    product: {
+      name: 'Product Name3'
+    },
+    location: {
+      name: 'location 1'
+    }
   },
   {
     position: 5,
@@ -89,6 +113,12 @@ export const EXAMPLE_DATA: any[] = [
     email: 'Nitrogen@gmail.com',
     status: true,
     cost: 2,
+    product: {
+      name: 'Product Name3'
+    },
+    location: {
+      name: 'location 1'
+    }
   },
 ];
 
