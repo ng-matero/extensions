@@ -8,6 +8,7 @@
   ],
   "rules": {
     "alpha-value-notation": null,
+    "annotation-no-unknown": null,
     "at-rule-empty-line-before": null,
     "block-no-empty": null,
     "color-function-notation": "legacy",
