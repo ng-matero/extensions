@@ -1,6 +1,7 @@
 import { TemplateRef } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import { TooltipPosition, TooltipTouchGestures } from '@angular/material/tooltip';
 import { Observable } from 'rxjs';
 
 /** Column definition of grid. */
@@ -93,7 +94,7 @@ export interface MtxGridColumnButton {
   click?: (rowData: any) => void;
   iif?: (rowData: any) => boolean;
   pop?: MtxGridColumnButtonPop;
-  tooltip?: string | Observable<string>;
+  tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
 }
 
 /** The properties of column button pop. */
@@ -104,6 +105,16 @@ export interface MtxGridColumnButtonPop {
   okText?: string | Observable<string>;
   closeColor?: ThemePalette;
   closeText?: string | Observable<string>;
+}
+
+/** The properties of column button tooltip. */
+export interface MtxGridColumnButtonTooltip {
+  message: string | Observable<string>;
+  position?: TooltipPosition;
+  class?: any;
+  hideDelay?: number;
+  showDelay?: number;
+  touchGestures?: TooltipTouchGestures;
 }
 
 /** Cell template. */

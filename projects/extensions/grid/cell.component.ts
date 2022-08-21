@@ -1,5 +1,6 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
+import { isObservable } from 'rxjs';
 
 import { MtxGridColumn, MtxGridColumnButton } from './grid.interface';
 import { MtxGridService } from './grid.service';
@@ -29,14 +30,6 @@ export class MtxGridCellComponent {
     return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
   }
 
-  _isString(fn: any) {
-    return Object.prototype.toString.call(fn) === '[object String]';
-  }
-
-  _isFunction(fn: any) {
-    return Object.prototype.toString.call(fn) === '[object Function]';
-  }
-
   _isEmptyValue(value: any) {
     return value == null || value.toString() === '';
   }
@@ -58,9 +51,9 @@ export class MtxGridCellComponent {
   }
 
   _formatSummary(data: any[], colDef: MtxGridColumn) {
-    if (this._isString(colDef.summary)) {
+    if (typeof colDef.summary === 'string') {
       return colDef.summary;
-    } else if (this._isFunction(colDef.summary)) {
+    } else if (typeof colDef.summary === 'function') {
       return (colDef.summary as (data: any[], colDef?: MtxGridColumn) => void)(
         this._dataGridSrv.getColData(data, colDef),
         colDef
@@ -93,6 +86,16 @@ export class MtxGridCellComponent {
       });
     } else {
       btn.click?.(rowData);
+    }
+  }
+
+  _getActionTooltip(btn: MtxGridColumnButton) {
+    if (typeof btn.tooltip === 'string' || isObservable(btn.tooltip)) {
+      return {
+        message: btn.tooltip,
+      };
+    } else {
+      return btn.tooltip;
     }
   }
 

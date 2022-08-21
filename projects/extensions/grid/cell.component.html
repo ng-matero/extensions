@@ -31,7 +31,12 @@
                   [ngClass]="['mtx-grid-action-button', btn.class||'']"
                   mat-button [color]="btn.color || 'primary'"
                   [disabled]="btn.disabled"
-                  [matTooltip]="btn.tooltip | toObservable | async"
+                  [matTooltip]="_getActionTooltip(btn)?.message | toObservable | async"
+                  [matTooltipClass]="_getActionTooltip(btn)?.class"
+                  [matTooltipHideDelay]="_getActionTooltip(btn)?.hideDelay"
+                  [matTooltipShowDelay]="_getActionTooltip(btn)?.showDelay"
+                  [matTooltipPosition]="_getActionTooltip(btn)?.position || 'below'"
+                  [matTooltipTouchGestures]="_getActionTooltip(btn)?.touchGestures || 'auto'"
                   (click)="_onActionClick($event, btn, rowData)">
             <mat-icon class="mtx-grid-icon" *ngIf="btn.icon">{{btn.icon}}</mat-icon>
             <span>{{btn.text | toObservable | async}}</span>
@@ -40,7 +45,12 @@
                   [ngClass]="['mtx-grid-action-button', btn.class||'']"
                   mat-icon-button [color]="btn.color || 'primary'"
                   [disabled]="btn.disabled"
-                  [matTooltip]="btn.tooltip | toObservable | async"
+                  [matTooltip]="_getActionTooltip(btn)?.message | toObservable | async"
+                  [matTooltipClass]="_getActionTooltip(btn)?.class"
+                  [matTooltipHideDelay]="_getActionTooltip(btn)?.hideDelay"
+                  [matTooltipShowDelay]="_getActionTooltip(btn)?.showDelay"
+                  [matTooltipPosition]="_getActionTooltip(btn)?.position || 'below'"
+                  [matTooltipTouchGestures]="_getActionTooltip(btn)?.touchGestures || 'auto'"
                   (click)="_onActionClick($event, btn, rowData)">
             <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
           </button>
