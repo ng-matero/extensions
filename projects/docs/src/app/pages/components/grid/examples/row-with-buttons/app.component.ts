@@ -28,18 +28,14 @@ export class AppComponent {
           icon: 'file_copy',
           tooltip: 'copy',
           disabled: true,
-          click: () => {
-            alert('copy');
-          },
+          click: () => alert('copy'),
         },
         {
           type: 'icon',
           text: 'edit',
           icon: 'edit',
           tooltip: 'Edit',
-          click: () => {
-            alert('edit');
-          },
+          click: () => alert('edit'),
         },
         {
           type: 'icon',
@@ -47,11 +43,10 @@ export class AppComponent {
           icon: 'delete',
           tooltip: 'Delete',
           color: 'warn',
-          pop: true,
-          popTitle: 'Confirm delete?',
-          click: () => {
-            alert('delete');
+          pop: {
+            title: 'Confirm delete?',
           },
+          click: () => alert('delete'),
         },
       ],
     },

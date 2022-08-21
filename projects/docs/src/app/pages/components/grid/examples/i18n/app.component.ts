@@ -44,13 +44,12 @@ export class AppComponent {
           icon: 'delete',
           tooltip: this.translate.stream('delete'),
           color: 'warn',
-          pop: true,
-          popTitle: this.translate.stream('confirm_delete'),
-          popCloseText: this.translate.stream('close'),
-          popOkText: this.translate.stream('ok'),
-          click: () => {
-            alert('delete');
+          pop: {
+            title: this.translate.stream('confirm_delete'),
+            closeText: this.translate.stream('close'),
+            okText: this.translate.stream('ok'),
           },
+          click: () => alert('delete'),
         },
       ],
     },
