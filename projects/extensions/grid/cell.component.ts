@@ -1,7 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
-import { Observable } from 'rxjs';
 
 import { MtxGridColumn, MtxGridColumnButton } from './grid.interface';
 import { MtxGridService } from './grid.service';
@@ -72,45 +70,34 @@ export class MtxGridCellComponent {
 
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
 
-  _handleActionConfirm(
-    event: MouseEvent,
-    title: string | Observable<string>,
-    description: string | Observable<string> = '',
-    okColor: ThemePalette = 'primary',
-    okText: string | Observable<string> = 'OK',
-    closeColor: ThemePalette,
-    closeText: string | Observable<string> = 'CLOSE',
-    fn?: (p: any) => void,
-    data?: any
-  ) {
+  _onActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: any) {
     event.preventDefault();
     event.stopPropagation();
 
-    this._dialog.open({
-      title,
-      description,
-      buttons: [
-        {
-          color: okColor,
-          text: okText,
-          onClick: () => (fn ? fn(data) : {}),
-        },
-        { color: closeColor, text: closeText, onClick: () => {} },
-      ],
-    });
-  }
-
-  _handleActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: any) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (btn.click) {
-      btn.click(rowData);
+    if (btn.pop) {
+      this._dialog.open({
+        title: btn.pop?.title,
+        description: btn.pop?.description,
+        buttons: [
+          {
+            color: btn.pop?.okColor || 'primary',
+            text: btn.pop?.okText || 'OK',
+            onClick: () => btn.click?.(rowData) || {},
+          },
+          {
+            color: btn.pop?.closeColor,
+            text: btn.pop?.closeText || 'CLOSE',
+            onClick: () => {},
+          },
+        ],
+      });
+    } else {
+      btn.click?.(rowData);
     }
   }
 
   /** Preview enlarged image */
-  _handleImagePreview(urlStr: string) {
+  _onImagePreview(urlStr: string) {
     const imgs: PhotoViewer.Img[] = [];
 
     this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
@@ -127,6 +114,6 @@ export class MtxGridCellComponent {
       footerToolbar,
     };
 
-    const viewer = new PhotoViewer(imgs, options);
+    const photoviewer = new PhotoViewer(imgs, options);
   }
 }

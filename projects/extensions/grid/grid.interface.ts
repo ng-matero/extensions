@@ -89,18 +89,21 @@ export interface MtxGridColumnButton {
   icon?: string;
   color?: ThemePalette;
   class?: string;
-  click?: (record: any) => void;
-  pop?: boolean;
-  popTitle?: string | Observable<string>;
-  popDescription?: string | Observable<string>;
-  popOkColor?: ThemePalette;
-  popOkText?: string | Observable<string>;
-  popCloseColor?: ThemePalette;
-  popCloseText?: string | Observable<string>;
-  children?: MtxGridColumnButton[];
-  iif?: (record: any) => boolean;
-  tooltip?: string | Observable<string>;
   disabled?: boolean;
+  click?: (rowData: any) => void;
+  iif?: (rowData: any) => boolean;
+  pop?: MtxGridColumnButtonPop;
+  tooltip?: string | Observable<string>;
+}
+
+/** The properties of column button pop. */
+export interface MtxGridColumnButtonPop {
+  title: string | Observable<string>;
+  description?: string | Observable<string>;
+  okColor?: ThemePalette;
+  okText?: string | Observable<string>;
+  closeColor?: ThemePalette;
+  closeText?: string | Observable<string>;
 }
 
 /** Cell template. */
