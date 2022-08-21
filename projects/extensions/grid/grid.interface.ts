@@ -90,7 +90,7 @@ export interface MtxGridColumnButton {
   icon?: string;
   color?: ThemePalette;
   class?: string;
-  disabled?: boolean;
+  disabled?: boolean | ((rowData: any) => boolean);
   click?: (rowData: any) => void;
   iif?: (rowData: any) => boolean;
   pop?: MtxGridColumnButtonPop;

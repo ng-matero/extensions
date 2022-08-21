@@ -99,6 +99,16 @@ export class MtxGridCellComponent {
     }
   }
 
+  _isActionDisabled(btn: MtxGridColumnButton, rowData: any) {
+    if (typeof btn.disabled === 'boolean') {
+      return btn.disabled;
+    } else if (typeof btn.disabled === 'function') {
+      return btn.disabled(rowData);
+    } else {
+      return false;
+    }
+  }
+
   /** Preview enlarged image */
   _onImagePreview(urlStr: string) {
     const imgs: PhotoViewer.Img[] = [];
