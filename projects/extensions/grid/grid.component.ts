@@ -386,7 +386,35 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   _handleSortChange(sort: Sort) {
+    const index = this.data.findIndex(x => x['level'] == 1);
+    if (sort.active && sort.direction !== '') {
+      if (index > -1) {
+        this.data.splice(index, 1);
+      }
+
+      this.data = this.data.sort((a: any, b: any) => {
+        const isAsc = sort.direction === 'asc';
+        switch (sort.active) {
+          case 'id':
+            return this.compare(a.id, b.id, isAsc);
+          case 'vin':
+            return this.compare(a.vin, b.vin, isAsc);
+          case 'brand':
+            return this.compare(a.brand, b.brand, isAsc);
+          case 'year':
+            return this.compare(a.year, b.year, isAsc);
+          case 'color':
+            return this.compare(a.color, b.color, isAsc);
+          default:
+            return 0;
+        }
+      });
+    }
     this.sortChange.emit(sort);
+  }
+
+  private compare(a: any, b: any, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   /** Expansion change event */
