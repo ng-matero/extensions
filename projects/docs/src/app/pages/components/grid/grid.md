@@ -70,8 +70,8 @@ Exported as: `mtxGrid`
 | `@Input()`<br>`rowSelected: any[]` | The row selected items default. Default is **`[]`**. |
 | `@Input()`<br>`hideRowSelectionCheckbox: boolean` | Whether hide the row selection checkbox. Default is **`false`**. |
 | `@Input()`<br>`rowSelectionFormatter: MtxGridRowSelectionFormatter` | The row selection formatter to set disabled and checkbox hiding. |
-| @Output()`rowClassFormatter: MtxGridRowClassFormatter` | The row class formatter to set class. |
-| @Output()`rowSelectionChange: EventEmitter<any>` | Event emitted when the row be selected. |
+| `@Output()`<br>`rowClassFormatter: MtxGridRowClassFormatter` | The row class formatter to set class. |
+| `@Output()`<br>`rowSelectionChange: EventEmitter<any>` | Event emitted when the row be selected. |
 | `@Input()`<br>`cellSelectable: boolean` | Whether the cell can be selectable. Default is **`true`**. |
 | `@Output()`<br>`cellSelectionChange: EventEmitter<any>` | Event emitted when the cell be selected. |
 
@@ -155,7 +155,7 @@ Exported as: `mtxGrid`
 
 #### `MtxGridColumn`
 
-```typescript
+```ts
 interface MtxGridColumn {
   field: string;
   header?: string | Observable<string>;
@@ -185,7 +185,7 @@ interface MtxGridColumn {
 ```
 
 #### `MtxGridColumnPinOption`
-```typescript
+```ts
 interface MtxGridColumnPinOption {
   label: string | Observable<string>;
   value: MtxGridColumnPinValue;
@@ -194,7 +194,7 @@ interface MtxGridColumnPinOption {
 
 #### `MtxGridColumnTypeParameter`
 
-```typescript
+```ts
 interface MtxGridColumnTypeParameter {
   currencyCode?: string;
   display?: string | boolean;
@@ -207,7 +207,7 @@ interface MtxGridColumnTypeParameter {
 
 #### `MtxGridSortProp`
 
-```typescript
+```ts
 interface MtxGridSortProp {
   arrowPosition?: 'before' | 'after';
   disableClear?: boolean;
@@ -218,7 +218,7 @@ interface MtxGridSortProp {
 
 #### `MtxGridColumnButton`
 
-```typescript
+```ts
 interface MtxGridColumnButton {
   type?: 'basic' | 'icon';
   text?: string | Observable<string>;
@@ -235,7 +235,7 @@ interface MtxGridColumnButton {
 
 #### `MtxGridColumnButtonPop`
 
-```typescript
+```ts
 export interface MtxGridColumnButtonPop {
   title: string | Observable<string>;
   description?: string | Observable<string>;
@@ -248,7 +248,7 @@ export interface MtxGridColumnButtonPop {
 
 #### `MtxGridColumnButtonTooltip`
 
-```typescript
+```ts
 export interface MtxGridColumnButtonTooltip {
   message: string | Observable<string>;
   position?: TooltipPosition;
@@ -261,7 +261,7 @@ export interface MtxGridColumnButtonTooltip {
 
 #### `MtxGridColumnTag`
 
-```typescript
+```ts
 interface MtxGridColumnTag {
   [key: number]: MtxGridColumnTagValue;
   [key: string]: MtxGridColumnTagValue;
@@ -279,7 +279,7 @@ interface MtxGridColumnTagValue {
 
 #### `MtxGridRowSelectionFormatter`
 
-```typescript
+```ts
 interface MtxGridRowSelectionFormatter {
   disabled?: (rowData: any) => boolean;
   hideCheckbox?: (rowData: any) => boolean;
@@ -288,7 +288,7 @@ interface MtxGridRowSelectionFormatter {
 
 #### `MtxGridRowClassFormatter`
 
-```typescript
+```ts
 interface MtxGridRowClassFormatter {
   [className: string]: (rowData: any, index?: number) => boolean;
 }
@@ -298,7 +298,7 @@ interface MtxGridRowClassFormatter {
 
 #### `MtxGridColumnType`
 
-```typescript
+```ts
 type MtxGridColumnType = 'tag' | 'button' | 'link' | 'image' | 'boolean' | 'number' | 'currency' | 'percent' | 'date';
 ```
 

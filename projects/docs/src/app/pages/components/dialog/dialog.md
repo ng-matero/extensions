@@ -53,7 +53,7 @@
 
 #### `MtxDialogData`
 
-```typescript
+```ts
 interface MtxDialogData extends MatDialogConfig {
   title?: string | Observable<string>;
   description?: string | Observable<string>;
@@ -64,7 +64,7 @@ interface MtxDialogData extends MatDialogConfig {
 
 #### `MtxDialogBtns`
 
-```typescript
+```ts
 interface MtxDialogBtns {
   type?: '' | 'raised' | 'stroked' | 'flat';
   color?: '' | 'primary' | 'accent' | 'warn';

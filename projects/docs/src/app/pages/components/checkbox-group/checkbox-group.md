@@ -28,7 +28,7 @@ Exported as: `mtxCheckboxGroup`
 
 #### `MtxCheckboxGroupOption`
 
-```typescript
+```ts
 interface MtxCheckboxGroupOption {
   ariaDescribedby?: string;
   ariaLabel?: string;
