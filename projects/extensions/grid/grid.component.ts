@@ -387,6 +387,17 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   _handleSortChange(sort: Sort) {
     this.sortChange.emit(sort);
+    if (sort.active && sort.direction !== '') {
+      this.data = this.data.sort((a: any, b: any) => {
+        return this.compare(a[sort.active], b[sort.active], sort.direction === 'asc');
+      });
+    }
+
+    this.dataSource.data = this.createRows(this.data, this.rowColumnFields);
+  }
+
+  private compare(a: any, b: any, isAsc: boolean) {
+    return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
   }
 
   /** Expansion change event */
