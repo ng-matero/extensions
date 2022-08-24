@@ -314,15 +314,6 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.getRemoteData();
     this.rowGroupChanged(this.rowGroupColumns);
-    /*from(EXAMPLE_DATA)
-     .pipe(
-     groupBy((d: any) => d.gender),
-     mergeMap(group => group.pipe(toArray()))
-     )
-     .subscribe((d: any[]) => {
-     console.log(d);
-     this.ds.push(...d);
-     });*/
   }
 
   ngAfterViewInit() {
