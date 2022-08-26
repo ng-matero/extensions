@@ -71,34 +71,39 @@
     </ng-container>
     <!-- Number -->
     <ng-container *ngSwitchCase="'number'">
-      <span
-            [title]="_getTooltip(_colValue | number: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)">
+      <span [title]="_getTooltip(_colValue | number: colDef.typeParameter?.digitsInfo :
+      colDef.typeParameter?.locale)">
         {{_getText(_colValue | number: colDef.typeParameter?.digitsInfo :
         colDef.typeParameter?.locale)}}
       </span>
     </ng-container>
     <!-- Currency -->
     <ng-container *ngSwitchCase="'currency'">
-      <span
-            [title]="_getTooltip(_colValue | currency: colDef.typeParameter?.currencyCode : colDef.typeParameter?.display : colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)">
+      <span [title]="_getTooltip(_colValue | currency: colDef.typeParameter?.currencyCode :
+      colDef.typeParameter?.display :
+      colDef.typeParameter?.digitsInfo :
+      colDef.typeParameter?.locale)">
         {{_getText(_colValue | currency: colDef.typeParameter?.currencyCode :
-        colDef.typeParameter?.display : colDef.typeParameter?.digitsInfo :
+        colDef.typeParameter?.display :
+        colDef.typeParameter?.digitsInfo :
         colDef.typeParameter?.locale)}}
       </span>
     </ng-container>
     <!-- Percent -->
     <ng-container *ngSwitchCase="'percent'">
-      <span
-            [title]="_getTooltip(_colValue | percent: colDef.typeParameter?.digitsInfo : colDef.typeParameter?.locale)">
+      <span [title]="_getTooltip(_colValue | percent: colDef.typeParameter?.digitsInfo :
+      colDef.typeParameter?.locale)">
         {{_getText(_colValue | percent: colDef.typeParameter?.digitsInfo :
         colDef.typeParameter?.locale)}}
       </span>
     </ng-container>
     <!-- Date -->
     <ng-container *ngSwitchCase="'date'">
-      <span
-            [title]="_getTooltip(_colValue | date: colDef.typeParameter?.format : colDef.typeParameter?.timezone : colDef.typeParameter?.locale)">
-        {{_getText(_colValue | date: colDef.typeParameter?.format : colDef.typeParameter?.timezone :
+      <span [title]="_getTooltip(_colValue | date: colDef.typeParameter?.format :
+      colDef.typeParameter?.timezone :
+      colDef.typeParameter?.locale)">
+        {{_getText(_colValue | date: colDef.typeParameter?.format :
+        colDef.typeParameter?.timezone :
         colDef.typeParameter?.locale)}}
       </span>
     </ng-container>

@@ -76,7 +76,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   dataSource = new MatTableDataSource();
 
-  @Input() displayedColumns!: string[];
+  @Input() displayedColumns: string[] = [];
   @Input() columns: MtxGridColumn[] = [];
   @Input() data: any[] = [];
   @Input() length = 0;
@@ -85,6 +85,9 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() trackBy!: TrackByFunction<any>;
 
   @Input() columnResizable = false;
+
+  /** Placeholder for the empty value (`null`, `''`, `[]`) */
+  @Input() emptyValuePlaceholder: string = '--';
 
   // ===== Page =====
 
@@ -338,12 +341,12 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     return typeof index === 'undefined' ? dataIndex : index;
   }
 
-  _handleSortChange(sort: Sort) {
+  _onSortChange(sort: Sort) {
     this.sortChange.emit(sort);
   }
 
   /** Expansion change event */
-  _handleExpansionChange(
+  _onExpansionChange(
     expansionRef: MtxGridExpansionToggleDirective,
     rowData: any,
     column: any,
@@ -416,7 +419,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   /** Column change event */
-  _handleColumnChange(columns: any[]) {
+  _onColumnChange(columns: any[]) {
     this.columnChange.emit(columns);
 
     this.displayedColumns = Object.assign([], this.getDisplayedColumnFields(columns));
@@ -443,7 +446,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   /** Scroll to top when turn to the next page. */
-  _handlePage(e: PageEvent) {
+  _onPage(e: PageEvent) {
     if (this.pageOnFront) {
       this.scrollTop(0);
     }
