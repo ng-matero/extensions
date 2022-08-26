@@ -23,11 +23,11 @@
                           [buttonIcon]="columnMenuButtonIcon"
                           [selectable]="columnHideable"
                           [selectableChecked]="columnHideableChecked"
-                          (selectionChange)="_handleColumnChange($event)"
+                          (selectionChange)="_onColumnChange($event)"
                           [sortable]="columnSortable"
-                          (sortChange)="_handleColumnChange($event)"
+                          (sortChange)="_onColumnChange($event)"
                           [pinnable]="columnPinnable"
-                          (pinChange)="_handleColumnChange($event)"
+                          (pinChange)="_onColumnChange($event)"
                           [showHeader]="showColumnMenuHeader"
                           [headerText]="columnMenuHeaderText"
                           [headerTemplate]="columnMenuHeaderTemplate"
@@ -53,7 +53,7 @@
              [matSortDisableClear]="sortDisableClear"
              [matSortDisabled]="sortDisabled"
              [matSortStart]="sortStart"
-             (matSortChange)="_handleSortChange($event)"
+             (matSortChange)="_onSortChange($event)"
              [trackBy]="trackBy">
 
         <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"
@@ -147,14 +147,15 @@
                 <button class="mtx-grid-row-expand-button" *ngIf="col.showExpand"
                         mat-icon-button mtx-grid-expansion-toggle
                         [(opened)]="expansionRowStates[dataIndex].expanded"
-                        (toggleChange)="_handleExpansionChange($event, row, col, dataIndex);">
+                        (toggleChange)="_onExpansionChange($event, row, col, dataIndex);">
                   <svg class="mtx-grid-icon mtx-grid-row-expand-icon" viewBox="0 0 24 24"
                        width="24px" height="24px" fill="currentColor" focusable="false">
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                   </svg>
                 </button>
 
-                <mtx-grid-cell [rowData]="row" [colDef]="col"></mtx-grid-cell>
+                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder">
+                </mtx-grid-cell>
               </ng-template>
             </td>
 
@@ -177,7 +178,8 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultSummaryTpl>
-                <mtx-grid-cell [summary]="true" [data]="data" [colDef]="col">
+                <mtx-grid-cell [summary]="true" [data]="data" [colDef]="col"
+                               [placeholder]="emptyValuePlaceholder">
                 </mtx-grid-cell>
               </ng-template>
             </td>
@@ -236,7 +238,7 @@
              [matSortDisableClear]="sortDisableClear"
              [matSortDisabled]="sortDisabled"
              [matSortStart]="sortStart"
-             (matSortChange)="_handleSortChange($event)"
+             (matSortChange)="_onSortChange($event)"
              [trackBy]="trackBy">
 
         <ng-container *ngIf="rowSelectable && !hideRowSelectionCheckbox"
@@ -332,14 +334,15 @@
                 <button class="mtx-grid-row-expand-button" *ngIf="col.showExpand"
                         mat-icon-button mtx-grid-expansion-toggle
                         [(opened)]="expansionRowStates[dataIndex].expanded"
-                        (toggleChange)="_handleExpansionChange($event, row, col, dataIndex);">
+                        (toggleChange)="_onExpansionChange($event, row, col, dataIndex);">
                   <svg class="mtx-grid-icon mtx-grid-row-expand-icon" viewBox="0 0 24 24"
                        width="24px" height="24px" fill="currentColor" focusable="false">
                     <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
                   </svg>
                 </button>
 
-                <mtx-grid-cell [rowData]="row" [colDef]="col"></mtx-grid-cell>
+                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder">
+                </mtx-grid-cell>
               </ng-template>
             </td>
 
@@ -362,7 +365,8 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultSummaryTpl>
-                <mtx-grid-cell [summary]="true" [data]="data" [colDef]="col">
+                <mtx-grid-cell [summary]="true" [data]="data" [colDef]="col"
+                               [placeholder]="emptyValuePlaceholder">
                 </mtx-grid-cell>
               </ng-template>
             </td>
@@ -449,7 +453,7 @@
                      [pageSize]="pageSize"
                      [pageSizeOptions]="pageSizeOptions"
                      [hidePageSize]="hidePageSize"
-                     (page)="_handlePage($event)"
+                     (page)="_onPage($event)"
                      [disabled]="pageDisabled">
       </mat-paginator>
     </ng-template>

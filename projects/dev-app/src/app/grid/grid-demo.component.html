@@ -59,7 +59,8 @@
           [useContentRowTemplate]="false"
           [useContentFooterRowTemplate]="false"
           [statusbarTemplate]="statusbarTpl"
-          [columnPinOptions]="columnPinOptions">
+          [columnPinOptions]="columnPinOptions"
+          [emptyValuePlaceholder]="'**'">
 
   <ng-template [matHeaderRowDef]="getColumnKeys(columns)">
     <tr mat-header-row (contextmenu)="log($event)"></tr>
