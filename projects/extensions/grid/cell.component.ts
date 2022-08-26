@@ -14,16 +14,19 @@ import PhotoViewer from 'photoviewer';
 })
 export class MtxGridCellComponent {
   /** Row data */
-  @Input() rowData = {};
+  @Input() rowData: any = {};
 
   /** Column definition */
   @Input() colDef!: MtxGridColumn;
 
-  /** All data */
+  /** Table data */
   @Input() data: any[] = [];
 
   /** Whether show summary */
   @Input() summary = false;
+
+  /** Placeholder for the empty value (`null`, `''`, `[]`) */
+  @Input() placeholder: string = '--';
 
   get _colValue() {
     return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
@@ -38,7 +41,7 @@ export class MtxGridCellComponent {
   }
 
   _getText(value: any) {
-    return value === undefined ? '' : this._isEmptyValue(value) ? '--' : value;
+    return value === undefined ? '' : this._isEmptyValue(value) ? this.placeholder : value;
   }
 
   _getTooltip(value: any) {
