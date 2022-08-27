@@ -1,6 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { FocusTrap, FocusTrapFactory, InteractivityChecker } from '@angular/cdk/a11y';
-import { coerceArray } from '@angular/cdk/coercion';
+import { coerceArray, coerceCssPixelValue } from '@angular/cdk/coercion';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 import {
@@ -46,7 +46,7 @@ import { MtxDrawerConfig } from './drawer-config';
   animations: [mtxDrawerAnimations.drawerState],
   host: {
     'class': 'mtx-drawer-container',
-    '[class]': 'drawerPosition',
+    '[class]': '_drawerPosition',
     'tabindex': '-1',
     'role': 'dialog',
     'aria-modal': 'true',
@@ -80,20 +80,31 @@ export class MtxDrawerContainer extends BasePortalOutlet implements OnDestroy {
   /** Whether the component has been destroyed. */
   private _destroyed!: boolean;
 
-  get drawerPosition() {
+  get _drawerPosition() {
     return `mtx-drawer-${this.drawerConfig.position}`;
   }
 
-  get drawerWidth() {
+  get _drawerWidth() {
     return this.drawerConfig.position === 'left' || this.drawerConfig.position === 'right'
-      ? this.drawerConfig.width
+      ? coerceCssPixelValue(this.drawerConfig.width)
       : '100vw';
   }
 
-  get drawerHeight() {
+  get _drawerHeight() {
     return this.drawerConfig.position === 'top' || this.drawerConfig.position === 'bottom'
-      ? this.drawerConfig.height
+      ? coerceCssPixelValue(this.drawerConfig.height)
       : '100vh';
+  }
+
+  _getDrawerSize() {
+    return {
+      width: this._drawerWidth,
+      height: this._drawerHeight,
+      minWidth: coerceCssPixelValue(this.drawerConfig.minWidth),
+      minHeight: coerceCssPixelValue(this.drawerConfig.minHeight),
+      maxWidth: coerceCssPixelValue(this.drawerConfig.maxWidth),
+      maxHeight: coerceCssPixelValue(this.drawerConfig.maxHeight),
+    };
   }
 
   constructor(
