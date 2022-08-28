@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "14.1.0",
+  "version": "14.2.0",
   "description": "Angular Material Extensions",
   "publishConfig": {
     "access": "public"
@@ -48,7 +48,7 @@
   "dependencies": {
     "@ng-select/ng-select": "^9.0.0",
     "ngx-color": "^8.0.0",
-    "photoviewer": "^3.6.4",
+    "photoviewer": "^3.6.0",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
