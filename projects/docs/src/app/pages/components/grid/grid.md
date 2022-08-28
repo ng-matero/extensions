@@ -24,6 +24,7 @@ Exported as: `mtxGrid`
 | `@Input()`<br>`loading: boolean` | Whether the table loading is ended. Default is **`false`**. |
 | `@Input()`<br>`trackBy: TrackByFunction<any>` | Tracking function that will be used to check the differences in data changes. |
 | `@Input()`<br>`columnResizable: boolean` | Whether the column can be resized. Default is **`false`**. |
+| `@Input()`<br>`emptyValuePlaceholder: string` | Placeholder for the empty value (`null`, `''`, `[]`). Default is **`--`**. |
 
 ###### Page
 
@@ -185,6 +186,7 @@ interface MtxGridColumn {
 ```
 
 #### `MtxGridColumnPinOption`
+
 ```ts
 interface MtxGridColumnPinOption {
   label: string | Observable<string>;
