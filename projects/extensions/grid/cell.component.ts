@@ -1,7 +1,5 @@
 import { Component, Input, ViewEncapsulation } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
-import { Observable } from 'rxjs';
 
 import { MtxGridColumn, MtxGridColumnButton } from './grid.interface';
 import { MtxGridService } from './grid.service';
@@ -31,14 +29,6 @@ export class MtxGridCellComponent {
     return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
   }
 
-  _isString(fn: any) {
-    return Object.prototype.toString.call(fn) === '[object String]';
-  }
-
-  _isFunction(fn: any) {
-    return Object.prototype.toString.call(fn) === '[object Function]';
-  }
-
   _isEmptyValue(value: any) {
     return value == null || value.toString() === '';
   }
@@ -48,7 +38,7 @@ export class MtxGridCellComponent {
   }
 
   _getText(value: any) {
-    return this._isEmptyValue(value) ? '--' : value;
+    return value === undefined ? '' : this._isEmptyValue(value) ? '--' : value;
   }
 
   _getTooltip(value: any) {
@@ -60,9 +50,9 @@ export class MtxGridCellComponent {
   }
 
   _formatSummary(data: any[], colDef: MtxGridColumn) {
-    if (this._isString(colDef.summary)) {
+    if (typeof colDef.summary === 'string') {
       return colDef.summary;
-    } else if (this._isFunction(colDef.summary)) {
+    } else if (typeof colDef.summary === 'function') {
       return (colDef.summary as (data: any[], colDef?: MtxGridColumn) => void)(
         this._dataGridSrv.getColData(data, colDef),
         colDef
@@ -72,40 +62,29 @@ export class MtxGridCellComponent {
 
   constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
 
-  _handleActionConfirm(
-    event: MouseEvent,
-    title: string | Observable<string>,
-    description: string | Observable<string> = '',
-    okColor: ThemePalette = 'primary',
-    okText: string | Observable<string> = 'OK',
-    closeColor: ThemePalette,
-    closeText: string | Observable<string> = 'CLOSE',
-    fn?: (p: any) => void,
-    data?: any
-  ) {
-    event.preventDefault();
-    event.stopPropagation();
-
-    this._dialog.open({
-      title,
-      description,
-      buttons: [
-        {
-          color: okColor,
-          text: okText,
-          onClick: () => (fn ? fn(data) : {}),
-        },
-        { color: closeColor, text: closeText, onClick: () => {} },
-      ],
-    });
-  }
-
   _handleActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: any) {
     event.preventDefault();
     event.stopPropagation();
 
-    if (btn.click) {
-      btn.click(rowData);
+    if (btn.pop) {
+      this._dialog.open({
+        title: btn.popTitle,
+        description: btn.popDescription,
+        buttons: [
+          {
+            color: btn.popOkColor || 'primary',
+            text: btn.popOkText || 'OK',
+            onClick: () => btn.click?.(rowData) || {},
+          },
+          {
+            color: btn.popCloseColor,
+            text: btn.popCloseText || 'CLOSE',
+            onClick: () => {},
+          },
+        ],
+      });
+    } else {
+      btn.click?.(rowData);
     }
   }
 
@@ -127,6 +106,6 @@ export class MtxGridCellComponent {
       footerToolbar,
     };
 
-    const viewer = new PhotoViewer(imgs, options);
+    const photoviewer = new PhotoViewer(imgs, options);
   }
 }
