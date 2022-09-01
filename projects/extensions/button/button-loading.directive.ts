@@ -1,6 +1,4 @@
 import {
-  ComponentFactory,
-  ComponentFactoryResolver,
   ComponentRef,
   Directive,
   Input,
