@@ -26,7 +26,8 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxAlertComponent {
-  @HostBinding('class') get hostClassList() {
+  @HostBinding('class')
+  get _hostClassList() {
     return `mtx-alert-${this.type} mat-elevation-z${this.elevation}`;
   }
 

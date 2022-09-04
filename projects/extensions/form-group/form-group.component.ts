@@ -25,6 +25,7 @@ export class MtxFormGroupComponent implements AfterContentInit {
   @ContentChildren(MatFormField) formFields!: QueryList<MatFormField>;
 
   @Input() label!: string;
+
   @Input()
   get showRequiredMarker(): boolean {
     return this._showRequiredMarker;
