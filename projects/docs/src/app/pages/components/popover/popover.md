@@ -24,8 +24,8 @@ Exported as: `mtxPopover`
 | `@Input()`<br>`closeOnPanelClick: boolean` | Whether close popover when click the panel. Default is **`false`**. |
 | `@Input()`<br>`closeOnBackdropClick: boolean` | Whether close popover when click the backdrop. Default is **`true`**. |
 | `@Input()`<br>`disableAnimation: boolean` | Whether the popover animations are disabled. Default is **`false`**. |
-| `@Input()`<br>`focusTrapEnabled: boolean` | Whether the popover should focus trap. Default is **`true`**. |
-| `@Input()`<br>`focusTrapAutoCaptureEnabled: boolean` | Whether the popover should focus trap auto capture focus. Default is **`true`**. |
+| `@Input()`<br>`focusTrapEnabled: boolean` | Whether the popover should focus trap. Default is **`false`**. |
+| `@Input()`<br>`focusTrapAutoCaptureEnabled: boolean` | Whether the popover should focus trap auto capture focus. Default is **`false`**. |
 
 #### `MtxPopoverTrigger`
 
