@@ -42,7 +42,7 @@ import { transformPopover } from './popover-animations';
 export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   @HostBinding('attr.role') role = 'dialog';
 
-  /** Settings for popover, view setters and getters for more detail */
+  // Settings for popover, view setters and getters for more detail
   private _position: MtxPopoverPosition = ['below', 'after'];
   private _triggerEvent: MtxPopoverTriggerEvent = 'hover';
   private _scrollStrategy: MtxPopoverScrollStrategy = 'reposition';
@@ -53,8 +53,8 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   private _closeOnPanelClick = false;
   private _closeOnBackdropClick = true;
   private _disableAnimation = false;
-  private _focusTrapEnabled = true;
-  private _focusTrapAutoCaptureEnabled = true;
+  private _focusTrapEnabled = false;
+  private _focusTrapAutoCaptureEnabled = false;
   private _arrowOffsetX = 20;
   private _arrowOffsetY = 20;
   private _arrowWidth = 16;
