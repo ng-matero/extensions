@@ -9,15 +9,15 @@ import {
   ViewEncapsulation,
   ElementRef,
   ChangeDetectionStrategy,
-  HostBinding,
   NgZone,
   Optional,
+  ContentChild,
+  OnInit,
 } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ESCAPE } from '@angular/cdk/keycodes';
+import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import { Directionality } from '@angular/cdk/bidi';
-
 import {
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
@@ -27,8 +27,12 @@ import {
   throwMtxPopoverInvalidPositionStart,
   throwMtxPopoverInvalidPositionEnd,
 } from './popover-errors';
-import { MtxPopoverPanel } from './popover-interfaces';
+import { MtxPopoverPanel, PopoverCloseReason } from './popover-interfaces';
 import { transformPopover } from './popover-animations';
+import { MtxPopoverContent, MTX_POPOVER_CONTENT } from './popover-content';
+import { Subject } from 'rxjs';
+
+let popoverPanelUid = 0;
 
 @Component({
   selector: 'mtx-popover',
@@ -39,10 +43,7 @@ import { transformPopover } from './popover-animations';
   animations: [transformPopover],
   exportAs: 'mtxPopover',
 })
-export class MtxPopover implements MtxPopoverPanel, OnDestroy {
-  @HostBinding('attr.role') role = 'dialog';
-
-  /** Settings for popover, view setters and getters for more detail */
+export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _position: MtxPopoverPosition = ['below', 'after'];
   private _triggerEvent: MtxPopoverTriggerEvent = 'hover';
   private _scrollStrategy: MtxPopoverScrollStrategy = 'reposition';
@@ -63,23 +64,20 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   /** Config object to be passed into the popover's ngClass */
   _classList: { [key: string]: boolean } = {};
 
-  /** Whether popover's `targetElement` is defined */
-  public containerPositioning = false;
+  /** Current state of the panel animation. */
+  _panelAnimationState: 'void' | 'enter' = 'void';
+
+  /** Emits whenever an animation on the menu completes. */
+  readonly _animationDone = new Subject<AnimationEvent>();
+
+  /** Whether the menu is animating. */
+  _isAnimating = false;
 
   /** Closing disabled on popover */
-  public closeDisabled = false;
+  closeDisabled = false;
 
   /** Config object to be passed into the popover's arrow ngStyle */
-  public popoverPanelStyles!: Record<string, unknown>;
-
-  /** Config object to be passed into the popover's arrow ngStyle */
-  public popoverArrowStyles!: Record<string, unknown>;
-
-  /** Config object to be passed into the popover's content ngStyle */
-  public popoverContentStyles!: Record<string, unknown>;
-
-  /** Emits the current animation state whenever it changes. */
-  _onAnimationStateChange = new EventEmitter<AnimationEvent>();
+  arrowStyles!: Record<string, unknown>;
 
   /** Position of the popover. */
   @Input()
@@ -267,20 +265,30 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   }
 
   /** Event emitted when the popover is closed. */
-  @Output() closed = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<PopoverCloseReason>();
 
+  /** @docs-private */
   @ViewChild(TemplateRef) templateRef!: TemplateRef<any>;
+
+  /**
+   * Popover content that will be rendered lazily.
+   * @docs-private
+   */
+  @ContentChild(MTX_POPOVER_CONTENT) lazyContent?: MtxPopoverContent;
+
+  readonly panelId = `mtx-popover-panel-${popoverPanelUid++}`;
 
   constructor(
     @Optional() private _dir: Directionality,
     private _elementRef: ElementRef,
-    public zone: NgZone
-  ) {
+    private _ngZone: NgZone
+  ) {}
+
+  ngOnInit() {
     this.setPositionClasses();
   }
 
   ngOnDestroy() {
-    this._emitCloseEvent();
     this.closed.complete();
   }
 
@@ -288,39 +296,34 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   _handleKeydown(event: KeyboardEvent) {
     switch (event.keyCode) {
       case ESCAPE:
-        this._emitCloseEvent();
+        if (!hasModifierKey(event)) {
+          event.preventDefault();
+          this.closed.emit('keydown');
+        }
         return;
     }
   }
 
-  /**
-   * This emits a close event to which the trigger is subscribed. When emitted, the
-   * trigger will close the popover.
-   */
-  _emitCloseEvent(): void {
-    this.closed.emit();
-  }
-
   /** Close popover on click if closeOnPanelClick is true */
-  onClick() {
+  _handleClick() {
     if (this.closeOnPanelClick) {
-      this._emitCloseEvent();
+      this.closed.emit('click');
     }
   }
 
   /** Disables close of popover when leaving trigger element and mouse over the popover */
-  onMouseOver() {
+  _handleMouseOver() {
     if (this.triggerEvent === 'hover') {
       this.closeDisabled = true;
     }
   }
 
   /** Enables close of popover when mouse leaving popover element */
-  onMouseLeave() {
+  _handleMouseLeave() {
     if (this.triggerEvent === 'hover') {
       setTimeout(() => {
         this.closeDisabled = false;
-        this._emitCloseEvent();
+        this.closed.emit();
       }, this.leaveDelay);
     }
   }
@@ -343,16 +346,13 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
         : '';
     const top = pos[1] === 'below' ? `${this.arrowOffsetY - this.arrowHeight / 2}px` : '';
 
-    this.popoverArrowStyles =
+    this.arrowStyles =
       pos[0] === 'above' || pos[0] === 'below'
         ? {
             left: this._dir.value === 'ltr' ? left : right,
             right: this._dir.value === 'ltr' ? right : left,
           }
-        : {
-            top,
-            bottom,
-          };
+        : { top, bottom };
   }
 
   /**
@@ -372,6 +372,28 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
     this._classList['mtx-popover-below-before'] = pos[0] === 'below' && pos[1] === 'before';
     this._classList['mtx-popover-below-center'] = pos[0] === 'below' && pos[1] === 'center';
     this._classList['mtx-popover-below-after'] = pos[0] === 'below' && pos[1] === 'after';
+  }
+
+  /** Starts the enter animation. */
+  _startAnimation() {
+    // @breaking-change 8.0.0 Combine with _resetAnimation.
+    this._panelAnimationState = 'enter';
+  }
+
+  /** Resets the panel animation to its initial state. */
+  _resetAnimation() {
+    // @breaking-change 8.0.0 Combine with _startAnimation.
+    this._panelAnimationState = 'void';
+  }
+
+  /** Callback that is invoked when the panel animation completes. */
+  _onAnimationDone(event: AnimationEvent) {
+    this._animationDone.next(event);
+    this._isAnimating = false;
+  }
+
+  _onAnimationStart(event: AnimationEvent) {
+    this._isAnimating = true;
   }
 
   static ngAcceptInputType_closeOnPanelClick: BooleanInput;

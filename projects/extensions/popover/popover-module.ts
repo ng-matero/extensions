@@ -7,10 +7,11 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { MtxPopover } from './popover';
 import { MtxPopoverTrigger } from './popover-trigger';
 import { MtxPopoverTarget } from './popover-target';
+import { MtxPopoverContent } from './popover-content';
 
 @NgModule({
-  imports: [OverlayModule, CommonModule, A11yModule],
-  exports: [MtxPopover, MtxPopoverTrigger, MtxPopoverTarget],
-  declarations: [MtxPopover, MtxPopoverTrigger, MtxPopoverTarget],
+  imports: [CommonModule, OverlayModule, A11yModule],
+  exports: [MtxPopover, MtxPopoverTrigger, MtxPopoverTarget, MtxPopoverContent],
+  declarations: [MtxPopover, MtxPopoverTrigger, MtxPopoverTarget, MtxPopoverContent],
 })
 export class MtxPopoverModule {}
