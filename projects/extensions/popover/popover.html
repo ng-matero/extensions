@@ -1,19 +1,21 @@
 <ng-template>
-  <div class="mtx-popover-panel mat-elevation-z8" role="dialog"
+  <div class="mtx-popover-panel mat-elevation-z8"
+       role="dialog"
+       [id]="panelId"
        [ngClass]="_classList"
-       [ngStyle]="popoverPanelStyles"
        (keydown)="_handleKeydown($event)"
-       (click)="onClick()"
-       (mouseover)="onMouseOver()"
-       (mouseleave)="onMouseLeave()"
+       (click)="_handleClick()"
+       (mouseover)="_handleMouseOver()"
+       (mouseleave)="_handleMouseLeave()"
        [@.disabled]="disableAnimation"
-       [@transformPopover]="'enter'">
-    <div class="mtx-popover-direction-arrow" [ngStyle]="popoverArrowStyles"></div>
+       [@transformPopover]="_panelAnimationState"
+       (@transformPopover.start)="_onAnimationStart($event)"
+       (@transformPopover.done)="_onAnimationDone($event)">
     <div class="mtx-popover-content"
-         [ngStyle]="popoverContentStyles"
          [cdkTrapFocus]="focusTrapEnabled"
          [cdkTrapFocusAutoCapture]="focusTrapAutoCaptureEnabled">
       <ng-content></ng-content>
     </div>
+    <div class="mtx-popover-direction-arrow" [ngStyle]="arrowStyles"></div>
   </div>
 </ng-template>

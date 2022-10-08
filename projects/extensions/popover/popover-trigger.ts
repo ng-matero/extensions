@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Directive,
   ElementRef,
   EventEmitter,
@@ -8,11 +7,9 @@ import {
   Optional,
   Output,
   ViewContainerRef,
-  HostListener,
-  HostBinding,
   ChangeDetectorRef,
+  AfterContentInit,
 } from '@angular/core';
-
 import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import {
@@ -26,11 +23,9 @@ import {
   ConnectedPosition,
 } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-
-import { Subscription, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-
-import { MtxPopoverPanel, MtxTarget } from './popover-interfaces';
+import { Subscription, merge, of as observableOf } from 'rxjs';
+import { filter, take, takeUntil } from 'rxjs/operators';
+import { MtxPopoverPanel, MtxTarget, PopoverCloseReason } from './popover-interfaces';
 import {
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
@@ -38,46 +33,70 @@ import {
   MtxPopoverPositionStart,
 } from './popover-types';
 import { throwMtxPopoverMissingError } from './popover-errors';
+import { MtxPopover } from './popover';
 
 /**
- * This directive is intended to be used in conjunction with an mtx-popover tag. It is
+ * This directive is intended to be used in conjunction with an `mtx-popover` tag. It is
  * responsible for toggling the display of the provided popover instance.
  */
-
 @Directive({
-  selector: '[mtxPopoverTriggerFor]',
+  selector: '[mtx-popover-trigger-for], [mtxPopoverTriggerFor]',
   exportAs: 'mtxPopoverTrigger',
+  host: {
+    'aria-haspopup': 'true',
+    '[attr.aria-expanded]': 'popoverOpen || null',
+    '[attr.aria-controls]': 'popoverOpen ? popover.panelId : null',
+    '(click)': '_handleClick($event)',
+    '(mouseenter)': '_handleMouseEnter($event)',
+    '(mouseleave)': '_handleMouseLeave($event)',
+    '(mousedown)': '_handleMousedown($event)',
+  },
 })
-export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
-  @HostBinding('attr.aria-haspopup') ariaHaspopup = true;
-
-  popoverOpened$ = new Subject<void>();
-  popoverClosed$ = new Subject<void>();
-
-  private _portal!: TemplatePortal<any>;
+export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
+  private _portal?: TemplatePortal;
   private _overlayRef: OverlayRef | null = null;
   private _popoverOpen = false;
   private _halt = false;
-  private _backdropSubscription!: Subscription;
-  private _positionSubscription!: Subscription;
-  private _detachmentsSubscription!: Subscription;
+
+  private _positionSubscription = Subscription.EMPTY;
+  private _popoverCloseSubscription = Subscription.EMPTY;
+  private _closingActionsSubscription = Subscription.EMPTY;
 
   private _mouseoverTimer: any;
 
-  // tracking input type is necessary so it's possible to only auto-focus
+  // TODO: Tracking input type is necessary so it's possible to only auto-focus
   // the first item of the list when the popover is opened via the keyboard
-  private _openedByMouse = false;
-
-  private _onDestroy = new Subject<void>();
+  _openedByMouse = false;
 
   /** References the popover instance that the trigger is associated with. */
-  @Input('mtxPopoverTriggerFor') popover!: MtxPopoverPanel;
+  @Input('mtxPopoverTriggerFor')
+  get popover() {
+    return this._popover;
+  }
+  set popover(popover: MtxPopoverPanel) {
+    if (popover === this._popover) {
+      return;
+    }
+
+    this._popover = popover;
+    this._popoverCloseSubscription.unsubscribe();
+
+    if (popover) {
+      this._popoverCloseSubscription = popover.closed.subscribe((reason: PopoverCloseReason) => {
+        this._destroyPopover();
+      });
+    }
+  }
+  private _popover!: MtxPopoverPanel;
+
+  /** Data to be passed along to any lazily-rendered content. */
+  @Input('mtxPopoverTriggerData') popoverData: any;
 
   /** References the popover target instance that the trigger is associated with. */
-  @Input('mtxPopoverTargetAt') targetElement!: MtxTarget;
+  @Input('mtxPopoverTargetAt') targetElement?: MtxTarget;
 
   /** Popover trigger event */
-  @Input('mtxPopoverTriggerOn') triggerEvent!: MtxPopoverTriggerEvent;
+  @Input('mtxPopoverTriggerOn') triggerEvent?: MtxPopoverTriggerEvent;
 
   /** Event emitted when the associated popover is opened. */
   @Output() popoverOpened = new EventEmitter<void>();
@@ -87,20 +106,26 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
 
   constructor(
     private _overlay: Overlay,
-    public _elementRef: ElementRef,
+    private _elementRef: ElementRef<HTMLElement>,
     private _viewContainerRef: ViewContainerRef,
     @Optional() private _dir: Directionality,
     private _changeDetectorRef: ChangeDetectorRef
   ) {}
 
-  ngAfterViewInit() {
+  ngAfterContentInit() {
     this._checkPopover();
     this._setCurrentConfig();
-    this.popover.closed.subscribe(() => this.closePopover());
   }
 
   ngOnDestroy() {
-    this.destroyPopover();
+    if (this._overlayRef) {
+      this._overlayRef.dispose();
+      this._overlayRef = null;
+    }
+
+    this._positionSubscription.unsubscribe();
+    this._popoverCloseSubscription.unsubscribe();
+    this._closingActionsSubscription.unsubscribe();
   }
 
   private _setCurrentConfig() {
@@ -116,16 +141,15 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     return this._popoverOpen;
   }
 
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent): void {
+  _handleClick(event: MouseEvent): void {
     if (this.popover.triggerEvent === 'click') {
       this.togglePopover();
     }
   }
 
-  @HostListener('mouseenter', ['$event'])
-  onMouseEnter(event: MouseEvent): void {
+  _handleMouseEnter(event: MouseEvent): void {
     this._halt = false;
+
     if (this.popover.triggerEvent === 'hover') {
       this._mouseoverTimer = setTimeout(() => {
         this.openPopover();
@@ -133,13 +157,13 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     }
   }
 
-  @HostListener('mouseleave', ['$event'])
-  onMouseLeave(event: MouseEvent): void {
+  _handleMouseLeave(event: MouseEvent): void {
     if (this.popover.triggerEvent === 'hover') {
       if (this._mouseoverTimer) {
         clearTimeout(this._mouseoverTimer);
         this._mouseoverTimer = null;
       }
+
       if (this._popoverOpen) {
         setTimeout(() => {
           if (!this.popover.closeDisabled) {
@@ -152,6 +176,14 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     }
   }
 
+  _handleMousedown(event: MouseEvent): void {
+    if (!isFakeMousedownFromScreenReader(event)) {
+      // Since right or middle button clicks won't trigger the `click` event,
+      // we shouldn't consider the popover as opened by mouse in those cases.
+      this._openedByMouse = true;
+    }
+  }
+
   /** Toggles the popover between the open and closed states. */
   togglePopover(): void {
     return this._popoverOpen ? this.closePopover() : this.openPopover();
@@ -159,40 +191,79 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
 
   /** Opens the popover. */
   openPopover(): void {
-    if (!this._popoverOpen && !this._halt) {
-      this._createOverlay().attach(this._portal);
+    if (this._popoverOpen || this._halt) {
+      return;
+    }
 
-      this._subscribeToBackdrop();
-      this._subscribeToDetachments();
+    this._checkPopover();
 
-      this._initPopover();
+    const overlayRef = this._createOverlay();
+    const overlayConfig = overlayRef.getConfig();
+
+    overlayRef.attach(this._getPortal());
+
+    if (this.popover.lazyContent) {
+      this.popover.lazyContent.attach(this.popoverData);
+    }
+
+    this._closingActionsSubscription = this._popoverClosingActions().subscribe(() =>
+      this.closePopover()
+    );
+    this._initPopover();
+
+    if (this.popover instanceof MtxPopover) {
+      this.popover._startAnimation();
     }
   }
 
   /** Closes the popover. */
   closePopover(): void {
-    if (this._overlayRef) {
-      this._overlayRef.detach();
-      this._resetPopover();
-    }
-
-    this.destroyPopover();
+    this.popover.closed.emit();
   }
 
   /** Removes the popover from the DOM. */
-  destroyPopover(): void {
+  private _destroyPopover(reason: PopoverCloseReason) {
+    if (!this._overlayRef || !this.popoverOpen) {
+      return;
+    }
+
+    // Clear the timeout for hover event.
     if (this._mouseoverTimer) {
       clearTimeout(this._mouseoverTimer);
       this._mouseoverTimer = null;
     }
-    if (this._overlayRef) {
-      this._overlayRef.dispose();
-      this._overlayRef = null;
-      this._cleanUpSubscriptions();
-    }
 
-    this._onDestroy.next();
-    this._onDestroy.complete();
+    const popover = this.popover;
+    this._closingActionsSubscription.unsubscribe();
+    this._overlayRef.detach();
+
+    if (popover instanceof MtxPopover) {
+      popover._resetAnimation();
+
+      if (popover.lazyContent) {
+        // Wait for the exit animation to finish before detaching the content.
+        popover._animationDone
+          .pipe(
+            filter(event => event.toState === 'void'),
+            take(1),
+            // Interrupt if the content got re-attached.
+            takeUntil(popover.lazyContent._attached)
+          )
+          .subscribe({
+            next: () => popover.lazyContent!.detach(),
+            // No matter whether the content got re-attached, reset the menu.
+            complete: () => this._setIsPopoverOpen(false),
+          });
+      } else {
+        this._setIsPopoverOpen(false);
+      }
+    } else {
+      this._setIsPopoverOpen(false);
+
+      if (popover.lazyContent) {
+        popover.lazyContent.detach();
+      }
+    }
   }
 
   /** Focuses the popover trigger. */
@@ -206,82 +277,22 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
   }
 
   /**
-   * This method ensures that the popover closes when the overlay backdrop is clicked.
-   * We do not use first() here because doing so would not catch clicks from within
-   * the popover, and it would fail to unsubscribe properly. Instead, we unsubscribe
-   * explicitly when the popover is closed or destroyed.
-   */
-  private _subscribeToBackdrop(): void {
-    if (this._overlayRef) {
-      /** Only subscribe to backdrop if trigger event is click */
-      if (this.triggerEvent === 'click' && this.popover.closeOnBackdropClick === true) {
-        this._overlayRef
-          .backdropClick()
-          .pipe(takeUntil(this.popoverClosed$), takeUntil(this._onDestroy))
-          .subscribe(() => {
-            this.popover._emitCloseEvent();
-          });
-      }
-    }
-  }
-
-  private _subscribeToDetachments(): void {
-    if (this._overlayRef) {
-      this._overlayRef
-        .detachments()
-        .pipe(takeUntil(this.popoverClosed$), takeUntil(this._onDestroy))
-        .subscribe(() => {
-          this._setPopoverClosed();
-        });
-    }
-  }
-
-  /**
    * This method sets the popover state to open and focuses the first item if
    * the popover was opened via the keyboard.
    */
   private _initPopover(): void {
-    this._setPopoverOpened();
+    this._setIsPopoverOpen(true);
   }
 
-  /**
-   * This method resets the popover when it's closed, most importantly restoring
-   * focus to the popover trigger if the popover was opened via the keyboard.
-   */
-  private _resetPopover(): void {
-    this._setPopoverClosed();
-
-    // Focus only needs to be reset to the host element if the popover was opened
-    // by the keyboard and manually shifted to the first popover item.
-    if (!this._openedByMouse) {
-      this.focus();
-    }
-    this._openedByMouse = false;
-  }
-
-  /** set state rather than toggle to support triggers sharing a popover */
-  private _setPopoverOpened(): void {
-    if (!this._popoverOpen) {
-      this._popoverOpen = true;
-
-      this.popoverOpened$.next();
-      this.popoverOpened.emit();
-    }
-  }
-
-  /** set state rather than toggle to support triggers sharing a popover */
-  private _setPopoverClosed(): void {
-    if (this._popoverOpen) {
-      this._popoverOpen = false;
-
-      this.popoverClosed$.next();
-      this.popoverClosed.emit();
-    }
+  // set state rather than toggle to support triggers sharing a popover
+  private _setIsPopoverOpen(isOpen: boolean): void {
+    this._popoverOpen = isOpen;
+    this._popoverOpen ? this.popoverOpened.emit() : this.popoverClosed.emit();
   }
 
   /**
    *  This method checks that a valid instance of MdPopover has been passed into
-   *  mdPopoverTriggerFor. If not, an exception is thrown.
+   *  `mtxPopoverTriggerFor`. If not, an exception is thrown.
    */
   private _checkPopover() {
     if (!this.popover) {
@@ -295,7 +306,6 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
    */
   private _createOverlay(): OverlayRef {
     if (!this._overlayRef) {
-      this._portal = new TemplatePortal(this.popover.templateRef, this._viewContainerRef);
       const config = this._getOverlayConfig();
       this._subscribeToPositions(config.positionStrategy as FlexibleConnectedPositionStrategy);
       this._overlayRef = this._overlay.create(config);
@@ -312,7 +322,7 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
     const overlayState = new OverlayConfig();
     overlayState.positionStrategy = this._getPosition();
 
-    /** Display overlay backdrop if trigger event is click */
+    // Display overlay backdrop if trigger event is click
     if (this.triggerEvent === 'click') {
       overlayState.hasBackdrop = true;
       overlayState.backdropClass = 'cdk-overlay-transparent-backdrop';
@@ -369,10 +379,8 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       // required for ChangeDetectionStrategy.OnPush
       this._changeDetectorRef.markForCheck();
 
-      this.popover.zone.run(() => {
-        this.popover.setCurrentStyles(pos);
-        this.popover.setPositionClasses(pos);
-      });
+      this.popover.setCurrentStyles(pos);
+      this.popover.setPositionClasses(pos);
     });
   }
 
@@ -429,7 +437,6 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
      */
     let element = this._elementRef;
     if (typeof this.targetElement !== 'undefined') {
-      this.popover.containerPositioning = true;
       element = this.targetElement._elementRef;
     }
 
@@ -502,21 +509,25 @@ export class MtxPopoverTrigger implements AfterViewInit, OnDestroy {
       .withDefaultOffsetY(offsetY);
   }
 
-  private _cleanUpSubscriptions(): void {
-    if (this._backdropSubscription) {
-      this._backdropSubscription.unsubscribe();
-    }
-    if (this._positionSubscription) {
-      this._positionSubscription.unsubscribe();
-    }
-    if (this._detachmentsSubscription) {
-      this._detachmentsSubscription.unsubscribe();
-    }
+  /** Returns a stream that emits whenever an action that should close the popover occurs. */
+  private _popoverClosingActions() {
+    const backdrop =
+      this.triggerEvent === 'click' && this.popover.closeOnBackdropClick === true
+        ? this._overlayRef!.backdropClick()
+        : observableOf();
+    const detachments = this._overlayRef!.detachments();
+    return merge(backdrop, detachments);
   }
 
-  @HostListener('mousedown', ['$event']) _handleMousedown(event: MouseEvent): void {
-    if (event && !isFakeMousedownFromScreenReader(event)) {
-      this._openedByMouse = true;
+  /** Gets the portal that should be attached to the overlay. */
+  private _getPortal(): TemplatePortal {
+    // Note that we can avoid this check by keeping the portal on the popover panel.
+    // While it would be cleaner, we'd have to introduce another required method on
+    // `MtxPopoverPanel`, making it harder to consume.
+    if (!this._portal || this._portal.templateRef !== this.popover.templateRef) {
+      this._portal = new TemplatePortal(this.popover.templateRef, this._viewContainerRef);
     }
+
+    return this._portal;
   }
 }

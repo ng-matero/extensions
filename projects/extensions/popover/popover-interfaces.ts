@@ -1,4 +1,4 @@
-import { ElementRef, EventEmitter, NgZone, TemplateRef } from '@angular/core';
+import { ElementRef, EventEmitter, TemplateRef } from '@angular/core';
 import {
   MtxPopoverTriggerEvent,
   MtxPopoverScrollStrategy,
@@ -19,14 +19,13 @@ export interface MtxPopoverPanel {
   closeOnPanelClick: boolean;
   closeOnBackdropClick: boolean;
   scrollStrategy: MtxPopoverScrollStrategy;
-  containerPositioning: boolean;
   closeDisabled: boolean;
   templateRef: TemplateRef<any>;
-  zone: NgZone;
-  closed: EventEmitter<void>;
+  lazyContent?: any;
+  readonly closed: EventEmitter<PopoverCloseReason>;
+  readonly panelId?: string;
   setCurrentStyles: (pos?: MtxPopoverPosition) => void;
   setPositionClasses: (pos?: MtxPopoverPosition) => void;
-  _emitCloseEvent: () => void;
 }
 
 export interface MtxPopoverConfig {
@@ -49,3 +48,6 @@ export interface MtxPopoverConfig {
 export interface MtxTarget {
   _elementRef: ElementRef;
 }
+
+/** Reason why the popover was closed. */
+export type PopoverCloseReason = void | 'click' | 'keydown' | 'tab';
