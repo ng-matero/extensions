@@ -1,6 +1,7 @@
 $arrow-size: 1em; // 16px default
 
 .mtx-popover-panel {
+  position: relative;
   max-height: calc(100vh - 48px);
   padding: 8px;
   border-radius: 4px;

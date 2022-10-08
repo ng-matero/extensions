@@ -8,7 +8,7 @@ import {
 } from '@angular/animations';
 
 /**
- * Below are all the animations for the md-popover component.
+ * Below are all the animations for the mtx-popover component.
  * Animation duration and timing values are based on AngularJS Material.
  */
 
@@ -23,18 +23,21 @@ import {
 
 export const transformPopover: AnimationTriggerMetadata = trigger('transformPopover', [
   state(
-    'enter',
-    style({
-      opacity: 1,
-      transform: `scale(1)`,
-    })
-  ),
-  transition('void => *', [
+    'void',
     style({
       opacity: 0,
-      transform: `scale(0)`,
-    }),
-    animate(`200ms cubic-bezier(0.25, 0.8, 0.25, 1)`),
-  ]),
-  transition('* => void', [animate('50ms 100ms linear', style({ opacity: 0 }))]),
+      transform: 'scale(0.8)',
+    })
+  ),
+  transition(
+    'void => enter',
+    animate(
+      '120ms cubic-bezier(0, 0, 0.2, 1)',
+      style({
+        opacity: 1,
+        transform: 'scale(1)',
+      })
+    )
+  ),
+  transition('* => void', animate('100ms 25ms linear', style({ opacity: 0 }))),
 ]);
