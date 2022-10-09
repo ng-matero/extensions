@@ -6,7 +6,6 @@
        (click)="_handleClick()"
        (mouseover)="_handleMouseOver()"
        (mouseleave)="_handleMouseLeave()"
-       [@.disabled]="disableAnimation"
        [@transformPopover]="_panelAnimationState"
        (@transformPopover.start)="_onAnimationStart($event)"
        (@transformPopover.done)="_onAnimationDone($event)"
