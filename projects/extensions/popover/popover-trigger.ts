@@ -27,11 +27,12 @@ import {
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription, merge, of as observableOf } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
-import { MtxPopoverPanel, PopoverCloseReason } from './popover-interfaces';
+import { MtxPopoverPanel } from './popover-interfaces';
 import {
   MtxPopoverTriggerEvent,
   MtxPopoverPosition,
   MtxPopoverPositionStart,
+  PopoverCloseReason,
 } from './popover-types';
 import { throwMtxPopoverMissingError } from './popover-errors';
 import { MtxPopover } from './popover';
@@ -327,11 +328,11 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   }
 
   /**
-   * This method sets the popover state to open and focuses the first item if
-   * the popover was opened via the keyboard.
+   * This method sets the popover state to open.
    */
   private _initPopover(): void {
     this.popover.direction = this.dir;
+    this.popover.setElevation();
     this._setIsPopoverOpen(true);
   }
 
