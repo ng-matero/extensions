@@ -1,9 +1,5 @@
 import { ElementRef, EventEmitter, TemplateRef } from '@angular/core';
-import {
-  MtxPopoverTriggerEvent,
-  MtxPopoverScrollStrategy,
-  MtxPopoverPosition,
-} from './popover-types';
+import { MtxPopoverTriggerEvent, MtxPopoverPosition } from './popover-types';
 
 export interface MtxPopoverPanel {
   triggerEvent: MtxPopoverTriggerEvent;
@@ -18,7 +14,6 @@ export interface MtxPopoverPanel {
   arrowHeight: number;
   closeOnPanelClick: boolean;
   closeOnBackdropClick: boolean;
-  scrollStrategy: MtxPopoverScrollStrategy;
   closeDisabled: boolean;
   templateRef: TemplateRef<any>;
   lazyContent?: any;
