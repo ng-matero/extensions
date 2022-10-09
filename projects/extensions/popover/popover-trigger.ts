@@ -9,8 +9,10 @@ import {
   ViewContainerRef,
   ChangeDetectorRef,
   AfterContentInit,
+  InjectionToken,
+  Inject,
 } from '@angular/core';
-import { isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
+import { FocusMonitor, FocusOrigin, isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import {
   Overlay,
@@ -28,12 +30,29 @@ import { filter, take, takeUntil } from 'rxjs/operators';
 import { MtxPopoverPanel, MtxTarget, PopoverCloseReason } from './popover-interfaces';
 import {
   MtxPopoverTriggerEvent,
-  MtxPopoverScrollStrategy,
   MtxPopoverPosition,
   MtxPopoverPositionStart,
 } from './popover-types';
 import { throwMtxPopoverMissingError } from './popover-errors';
 import { MtxPopover } from './popover';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
+
+/** Injection token that determines the scroll handling while the popover is open. */
+export const MTX_POPOVER_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrategy>(
+  'mtx-popover-scroll-strategy'
+);
+
+/** @docs-private */
+export function MTX_POPOVER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {
+  return () => overlay.scrollStrategies.reposition();
+}
+
+/** @docs-private */
+export const MTX_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
+  provide: MTX_POPOVER_SCROLL_STRATEGY,
+  deps: [Overlay],
+  useFactory: MTX_POPOVER_SCROLL_STRATEGY_FACTORY,
+};
 
 /**
  * This directive is intended to be used in conjunction with an `mtx-popover` tag. It is
@@ -50,6 +69,7 @@ import { MtxPopover } from './popover';
     '(mouseenter)': '_handleMouseEnter($event)',
     '(mouseleave)': '_handleMouseLeave($event)',
     '(mousedown)': '_handleMousedown($event)',
+    '(keydown)': '_handleKeydown($event)',
   },
 })
 export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
@@ -57,16 +77,15 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   private _overlayRef: OverlayRef | null = null;
   private _popoverOpen = false;
   private _halt = false;
-
   private _positionSubscription = Subscription.EMPTY;
   private _popoverCloseSubscription = Subscription.EMPTY;
   private _closingActionsSubscription = Subscription.EMPTY;
-
+  private _scrollStrategy!: () => ScrollStrategy;
   private _mouseoverTimer: any;
 
-  // TODO: Tracking input type is necessary so it's possible to only auto-focus
+  // Tracking input type is necessary so it's possible to only auto-focus
   // the first item of the list when the popover is opened via the keyboard
-  _openedByMouse = false;
+  _openedBy: Exclude<FocusOrigin, 'program' | null> | undefined = undefined;
 
   /** References the popover instance that the trigger is associated with. */
   @Input('mtxPopoverTriggerFor')
@@ -108,9 +127,13 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
     private _overlay: Overlay,
     private _elementRef: ElementRef<HTMLElement>,
     private _viewContainerRef: ViewContainerRef,
+    @Inject(MTX_POPOVER_SCROLL_STRATEGY) scrollStrategy: any,
     @Optional() private _dir: Directionality,
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {}
+    private _changeDetectorRef: ChangeDetectorRef,
+    private _focusMonitor?: FocusMonitor
+  ) {
+    this._scrollStrategy = scrollStrategy;
+  }
 
   ngAfterContentInit() {
     this._checkPopover();
@@ -141,12 +164,19 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
     return this._popoverOpen;
   }
 
+  /** The text direction of the containing app. */
+  get dir(): Direction {
+    return this._dir && this._dir.value === 'rtl' ? 'rtl' : 'ltr';
+  }
+
+  /** Handles mouse click on the trigger. */
   _handleClick(event: MouseEvent): void {
     if (this.popover.triggerEvent === 'click') {
       this.togglePopover();
     }
   }
 
+  /** Handles mouse enter on the trigger. */
   _handleMouseEnter(event: MouseEvent): void {
     this._halt = false;
 
@@ -157,6 +187,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
     }
   }
 
+  /** Handles mouse leave on the trigger. */
   _handleMouseLeave(event: MouseEvent): void {
     if (this.popover.triggerEvent === 'hover') {
       if (this._mouseoverTimer) {
@@ -176,11 +207,22 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
     }
   }
 
+  /** Handles mouse presses on the trigger. */
   _handleMousedown(event: MouseEvent): void {
     if (!isFakeMousedownFromScreenReader(event)) {
       // Since right or middle button clicks won't trigger the `click` event,
       // we shouldn't consider the popover as opened by mouse in those cases.
-      this._openedByMouse = true;
+      this._openedBy = event.button === 0 ? 'mouse' : undefined;
+    }
+  }
+
+  /** Handles key presses on the trigger. */
+  _handleKeydown(event: KeyboardEvent): void {
+    const keyCode = event.keyCode;
+
+    // Pressing enter on the trigger will trigger the click handler later.
+    if (keyCode === ENTER || keyCode === SPACE) {
+      this._openedBy = 'keyboard';
     }
   }
 
@@ -200,6 +242,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
     const overlayRef = this._createOverlay();
     const overlayConfig = overlayRef.getConfig();
 
+    this._setPosition(overlayConfig.positionStrategy as FlexibleConnectedPositionStrategy);
     overlayRef.attach(this._getPortal());
 
     if (this.popover.lazyContent) {
@@ -221,6 +264,18 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
     this.popover.closed.emit();
   }
 
+  /**
+   * Focuses the popover trigger.
+   * @param origin Source of the popover trigger's focus.
+   */
+  focus(origin?: FocusOrigin, options?: FocusOptions) {
+    if (this._focusMonitor && origin) {
+      this._focusMonitor.focusVia(this._elementRef, origin, options);
+    } else {
+      this._elementRef.nativeElement.focus(options);
+    }
+  }
+
   /** Removes the popover from the DOM. */
   private _destroyPopover(reason: PopoverCloseReason) {
     if (!this._overlayRef || !this.popoverOpen) {
@@ -237,6 +292,8 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
     this._closingActionsSubscription.unsubscribe();
     this._overlayRef.detach();
 
+    this._openedBy = undefined;
+
     if (popover instanceof MtxPopover) {
       popover._resetAnimation();
 
@@ -251,7 +308,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
           )
           .subscribe({
             next: () => popover.lazyContent!.detach(),
-            // No matter whether the content got re-attached, reset the menu.
+            // No matter whether the content got re-attached, reset the popover.
             complete: () => this._setIsPopoverOpen(false),
           });
       } else {
@@ -264,16 +321,6 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
         popover.lazyContent.detach();
       }
     }
-  }
-
-  /** Focuses the popover trigger. */
-  focus() {
-    this._elementRef.nativeElement.focus();
-  }
-
-  /** The text direction of the containing app. */
-  get dir(): Direction {
-    return this._dir && this._dir.value === 'rtl' ? 'rtl' : 'ltr';
   }
 
   /**
@@ -319,36 +366,29 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
    * @returns OverlayConfig
    */
   private _getOverlayConfig(): OverlayConfig {
-    const overlayState = new OverlayConfig();
-    overlayState.positionStrategy = this._getPosition();
-
-    // Display overlay backdrop if trigger event is click
-    if (this.triggerEvent === 'click') {
-      overlayState.hasBackdrop = true;
-      overlayState.backdropClass = 'cdk-overlay-transparent-backdrop';
+    /**
+     * For overriding position element, when `mtxPopoverTargetAt` has a valid element reference.
+     * Useful for sticking popover to parent element and offsetting arrow to trigger element.
+     * If undefined defaults to the trigger element reference.
+     */
+    let element = this._elementRef;
+    if (typeof this.targetElement !== 'undefined') {
+      element = this.targetElement._elementRef;
     }
 
-    overlayState.direction = this._dir;
-    overlayState.scrollStrategy = this._getOverlayScrollStrategy(this.popover.scrollStrategy);
-
-    return overlayState;
-  }
-
-  /**
-   * This method returns the scroll strategy used by the cdk/overlay.
-   */
-  private _getOverlayScrollStrategy(strategy: MtxPopoverScrollStrategy): ScrollStrategy {
-    switch (strategy) {
-      case 'noop':
-        return this._overlay.scrollStrategies.noop();
-      case 'close':
-        return this._overlay.scrollStrategies.close();
-      case 'block':
-        return this._overlay.scrollStrategies.block();
-      case 'reposition':
-      default:
-        return this._overlay.scrollStrategies.reposition();
-    }
+    return new OverlayConfig({
+      positionStrategy: this._overlay
+        .position()
+        .flexibleConnectedTo(element)
+        .withLockedPosition()
+        .withGrowAfterOpen()
+        .withTransformOriginOn('.mtx-popover-panel'),
+      hasBackdrop: this.popover.triggerEvent === 'click',
+      backdropClass: 'cdk-overlay-transparent-backdrop',
+      panelClass: [],
+      scrollStrategy: this._scrollStrategy(),
+      direction: this._dir,
+    });
   }
 
   /**
@@ -385,11 +425,11 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   }
 
   /**
-   * This method builds the position strategy for the overlay, so the popover is properly connected
-   * to the trigger.
-   * @returns ConnectedPositionStrategy
+   * Sets the appropriate positions on a position strategy
+   * so the overlay connects with the trigger correctly.
+   * @param positionStrategy Strategy whose position to update.
    */
-  private _getPosition(): FlexibleConnectedPositionStrategy {
+  private _setPosition(positionStrategy: FlexibleConnectedPositionStrategy) {
     const [originX, origin2ndX, origin3rdX]: HorizontalConnectionPos[] =
       this.popover.position[0] === 'before' || this.popover.position[1] === 'after'
         ? ['start', 'center', 'end']
@@ -429,16 +469,6 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
       this.popover.yOffset && !isNaN(Number(this.popover.yOffset))
         ? Number(this.popover.yOffset)
         : 0;
-
-    /**
-     * For overriding position element, when `mtxPopoverTargetAt` has a valid element reference.
-     * Useful for sticking popover to parent element and offsetting arrow to trigger element.
-     * If undefined defaults to the trigger element reference.
-     */
-    let element = this._elementRef;
-    if (typeof this.targetElement !== 'undefined') {
-      element = this.targetElement._elementRef;
-    }
 
     let positions: ConnectedPosition[] = [{ originX, originY, overlayX, overlayY }];
 
@@ -500,10 +530,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
       ];
     }
 
-    return this._overlay
-      .position()
-      .flexibleConnectedTo(element)
-      .withLockedPosition()
+    positionStrategy
       .withPositions(positions)
       .withDefaultOffsetX(offsetX)
       .withDefaultOffsetY(offsetY);
