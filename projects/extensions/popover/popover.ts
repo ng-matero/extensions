@@ -10,23 +10,44 @@ import {
   ElementRef,
   ChangeDetectionStrategy,
   NgZone,
-  Optional,
   ContentChild,
   OnInit,
+  InjectionToken,
+  Inject,
 } from '@angular/core';
 import { AnimationEvent } from '@angular/animations';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
-import { Directionality } from '@angular/cdk/bidi';
+import { Direction } from '@angular/cdk/bidi';
 import { MtxPopoverTriggerEvent, MtxPopoverPosition } from './popover-types';
 import {
   throwMtxPopoverInvalidPositionStart,
   throwMtxPopoverInvalidPositionEnd,
 } from './popover-errors';
-import { MtxPopoverPanel, PopoverCloseReason } from './popover-interfaces';
+import {
+  MtxPopoverDefaultOptions,
+  MtxPopoverPanel,
+  PopoverCloseReason,
+} from './popover-interfaces';
 import { transformPopover } from './popover-animations';
 import { MtxPopoverContent, MTX_POPOVER_CONTENT } from './popover-content';
 import { Subject } from 'rxjs';
+
+/** Injection token to be used to override the default options for `mtx-popover`. */
+export const MTX_POPOVER_DEFAULT_OPTIONS = new InjectionToken<MtxPopoverDefaultOptions>(
+  'mtx-popover-default-options',
+  {
+    providedIn: 'root',
+    factory: MTX_POPOVER_DEFAULT_OPTIONS_FACTORY,
+  }
+);
+
+/** @docs-private */
+export function MTX_POPOVER_DEFAULT_OPTIONS_FACTORY(): MtxPopoverDefaultOptions {
+  return {
+    backdropClass: 'cdk-overlay-transparent-backdrop',
+  };
+}
 
 let popoverPanelUid = 0;
 
@@ -40,23 +61,23 @@ let popoverPanelUid = 0;
   exportAs: 'mtxPopover',
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
-  private _position: MtxPopoverPosition = ['below', 'after'];
-  private _triggerEvent: MtxPopoverTriggerEvent = 'hover';
-  private _enterDelay = 100;
-  private _leaveDelay = 100;
-  private _panelOffsetX = 0;
-  private _panelOffsetY = 0;
-  private _closeOnPanelClick = false;
-  private _closeOnBackdropClick = true;
-  private _disableAnimation = false;
+  private _triggerEvent = this._defaultOptions.triggerEvent ?? 'hover';
+  private _enterDelay = this._defaultOptions.enterDelay ?? 100;
+  private _leaveDelay = this._defaultOptions.leaveDelay ?? 100;
+  private _position = this._defaultOptions.position ?? ['below', 'after'];
+  private _panelOffsetX = this._defaultOptions.xOffset ?? 0;
+  private _panelOffsetY = this._defaultOptions.yOffset ?? 0;
+  private _arrowWidth = this._defaultOptions.arrowWidth ?? 16;
+  private _arrowHeight = this._defaultOptions.arrowHeight ?? 16;
+  private _arrowOffsetX = this._defaultOptions.arrowOffsetX ?? 20;
+  private _arrowOffsetY = this._defaultOptions.arrowOffsetY ?? 20;
+  private _closeOnPanelClick = this._defaultOptions.closeOnPanelClick ?? false;
+  private _closeOnBackdropClick = this._defaultOptions.closeOnBackdropClick ?? true;
+  private _hasBackdrop = this._defaultOptions.hasBackdrop;
   private _focusTrapEnabled = false;
   private _focusTrapAutoCaptureEnabled = false;
-  private _arrowOffsetX = 20;
-  private _arrowOffsetY = 20;
-  private _arrowWidth = 16;
-  private _arrowHeight = 16;
 
-  /** Config object to be passed into the popover's ngClass */
+  /** Config object to be passed into the popover's ngClass. */
   _classList: { [key: string]: boolean } = {};
 
   /** Current state of the panel animation. */
@@ -74,6 +95,15 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   /** Config object to be passed into the popover's arrow ngStyle */
   arrowStyles!: Record<string, unknown>;
 
+  /** Layout direction of the popover. */
+  direction?: Direction;
+
+  /** Class or list of classes to be added to the overlay panel. */
+  overlayPanelClass: string | string[] = this._defaultOptions.overlayPanelClass || '';
+
+  /** Class to be added to the backdrop element. */
+  @Input() backdropClass = this._defaultOptions.backdropClass;
+
   /** aria-label for the popover panel. */
   @Input('aria-label') ariaLabel?: string;
 
@@ -83,7 +113,34 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   /** aria-describedby for the popover panel. */
   @Input('aria-describedby') ariaDescribedby?: string;
 
-  /** Position of the popover. */
+  /** Popover's trigger event. */
+  @Input()
+  get triggerEvent(): MtxPopoverTriggerEvent {
+    return this._triggerEvent;
+  }
+  set triggerEvent(value: MtxPopoverTriggerEvent) {
+    this._triggerEvent = value;
+  }
+
+  /** Popover's enter delay. */
+  @Input()
+  get enterDelay(): number {
+    return this._enterDelay;
+  }
+  set enterDelay(value: number) {
+    this._enterDelay = value;
+  }
+
+  /** Popover's leave delay. */
+  @Input()
+  get leaveDelay(): number {
+    return this._leaveDelay;
+  }
+  set leaveDelay(value: number) {
+    this._leaveDelay = value;
+  }
+
+  /** Popover's position. */
   @Input()
   get position() {
     return this._position;
@@ -99,34 +156,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this.setPositionClasses();
   }
 
-  /** Popover trigger event */
-  @Input()
-  get triggerEvent(): MtxPopoverTriggerEvent {
-    return this._triggerEvent;
-  }
-  set triggerEvent(value: MtxPopoverTriggerEvent) {
-    this._triggerEvent = value;
-  }
-
-  /** Popover enter delay */
-  @Input()
-  get enterDelay(): number {
-    return this._enterDelay;
-  }
-  set enterDelay(value: number) {
-    this._enterDelay = value;
-  }
-
-  /** Popover leave delay */
-  @Input()
-  get leaveDelay(): number {
-    return this._leaveDelay;
-  }
-  set leaveDelay(value: number) {
-    this._leaveDelay = value;
-  }
-
-  /** Popover target offset x */
+  /** Popover-panel's X offset. */
   @Input()
   get xOffset(): number {
     return this._panelOffsetX;
@@ -135,7 +165,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._panelOffsetX = value;
   }
 
-  /** Popover target offset y */
+  /** Popover-panel's Y offset. */
   @Input()
   get yOffset(): number {
     return this._panelOffsetY;
@@ -144,25 +174,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._panelOffsetY = value;
   }
 
-  /** Popover arrow offset x */
-  @Input()
-  get arrowOffsetX(): number {
-    return this._arrowOffsetX;
-  }
-  set arrowOffsetX(value: number) {
-    this._arrowOffsetX = value;
-  }
-
-  /** Popover arrow offset y */
-  @Input()
-  get arrowOffsetY(): number {
-    return this._arrowOffsetY;
-  }
-  set arrowOffsetY(value: number) {
-    this._arrowOffsetY = value;
-  }
-
-  /** Popover arrow width */
+  /** Popover-arrow's width. */
   @Input()
   get arrowWidth(): number {
     return this._arrowWidth;
@@ -171,7 +183,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._arrowWidth = value;
   }
 
-  /** Popover arrow height */
+  /** Popover-arrow's height. */
   @Input()
   get arrowHeight(): number {
     return this._arrowHeight;
@@ -180,7 +192,25 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._arrowHeight = value;
   }
 
-  /** Popover close on container click */
+  /** Popover-arrow's X offset. */
+  @Input()
+  get arrowOffsetX(): number {
+    return this._arrowOffsetX;
+  }
+  set arrowOffsetX(value: number) {
+    this._arrowOffsetX = value;
+  }
+
+  /** Popover-arrow's Y offset. */
+  @Input()
+  get arrowOffsetY(): number {
+    return this._arrowOffsetY;
+  }
+  set arrowOffsetY(value: number) {
+    this._arrowOffsetY = value;
+  }
+
+  /** Whether popover can be closed when click the popover-panel. */
   @Input()
   get closeOnPanelClick(): boolean {
     return this._closeOnPanelClick;
@@ -189,7 +219,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._closeOnPanelClick = coerceBooleanProperty(value);
   }
 
-  /** Popover close on backdrop click */
+  /** Whether popover can be closed when click the backdrop. */
   @Input()
   get closeOnBackdropClick(): boolean {
     return this._closeOnBackdropClick;
@@ -198,16 +228,16 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._closeOnBackdropClick = coerceBooleanProperty(value);
   }
 
-  /** Disable animations of popover and all child elements */
+  /** Whether the popover has a backdrop. It will always be false if the trigger event is hover. */
   @Input()
-  get disableAnimation(): boolean {
-    return this._disableAnimation;
+  get hasBackdrop(): boolean | undefined {
+    return this._hasBackdrop;
   }
-  set disableAnimation(value: boolean) {
-    this._disableAnimation = coerceBooleanProperty(value);
+  set hasBackdrop(value: boolean | undefined) {
+    this._hasBackdrop = coerceBooleanProperty(value);
   }
 
-  /** Popover focus trap using cdkTrapFocus */
+  /** Whether enable focus trap using cdkTrapFocus. */
   @Input()
   get focusTrapEnabled(): boolean {
     return this._focusTrapEnabled;
@@ -216,7 +246,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._focusTrapEnabled = coerceBooleanProperty(value);
   }
 
-  /** Popover focus trap auto capture using cdkTrapFocusAutoCapture */
+  /** Whether enable focus trap auto capture using cdkTrapFocusAutoCapture. */
   @Input()
   get focusTrapAutoCaptureEnabled(): boolean {
     return this._focusTrapAutoCaptureEnabled;
@@ -274,9 +304,9 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   readonly panelId = `mtx-popover-panel-${popoverPanelUid++}`;
 
   constructor(
-    @Optional() private _dir: Directionality,
     private _elementRef: ElementRef,
-    private _ngZone: NgZone
+    private _ngZone: NgZone,
+    @Inject(MTX_POPOVER_DEFAULT_OPTIONS) private _defaultOptions: MtxPopoverDefaultOptions
   ) {}
 
   ngOnInit() {
@@ -301,21 +331,21 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     }
   }
 
-  /** Close popover on click if closeOnPanelClick is true */
+  /** Close popover on click if `closeOnPanelClick` is true. */
   _handleClick() {
     if (this.closeOnPanelClick) {
       this.closed.emit('click');
     }
   }
 
-  /** Disables close of popover when leaving trigger element and mouse over the popover */
+  /** Disables close of popover when leaving trigger element and mouse over the popover. */
   _handleMouseOver() {
     if (this.triggerEvent === 'hover') {
       this.closeDisabled = true;
     }
   }
 
-  /** Enables close of popover when mouse leaving popover element */
+  /** Enables close of popover when mouse leaving popover element. */
   _handleMouseLeave() {
     if (this.triggerEvent === 'hover') {
       setTimeout(() => {
@@ -325,7 +355,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     }
   }
 
-  /** Sets the current styles for the popover to allow for dynamically changing settings */
+  /** Sets the current styles for the popover to allow for dynamically changing settings. */
   setCurrentStyles(pos = this.position) {
     const left =
       pos[1] === 'after'
@@ -346,8 +376,8 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this.arrowStyles =
       pos[0] === 'above' || pos[0] === 'below'
         ? {
-            left: this._dir.value === 'ltr' ? left : right,
-            right: this._dir.value === 'ltr' ? right : left,
+            left: this.direction === 'ltr' ? left : right,
+            right: this.direction === 'ltr' ? right : left,
           }
         : { top, bottom };
   }
@@ -395,7 +425,6 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
 
   static ngAcceptInputType_closeOnPanelClick: BooleanInput;
   static ngAcceptInputType_closeOnBackdropClick: BooleanInput;
-  static ngAcceptInputType_disableAnimation: BooleanInput;
   static ngAcceptInputType_focusTrapEnabled: BooleanInput;
   static ngAcceptInputType_focusTrapAutoCaptureEnabled: BooleanInput;
 }

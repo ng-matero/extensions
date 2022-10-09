@@ -27,7 +27,7 @@ import {
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription, merge, of as observableOf } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
-import { MtxPopoverPanel, MtxTarget, PopoverCloseReason } from './popover-interfaces';
+import { MtxPopoverPanel, PopoverCloseReason } from './popover-interfaces';
 import {
   MtxPopoverTriggerEvent,
   MtxPopoverPosition,
@@ -112,7 +112,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   @Input('mtxPopoverTriggerData') popoverData: any;
 
   /** References the popover target instance that the trigger is associated with. */
-  @Input('mtxPopoverTargetAt') targetElement?: MtxTarget;
+  @Input('mtxPopoverTargetAt') targetElement?: { _elementRef: ElementRef };
 
   /** Popover trigger event */
   @Input('mtxPopoverTriggerOn') triggerEvent?: MtxPopoverTriggerEvent;
@@ -243,6 +243,9 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
     const overlayConfig = overlayRef.getConfig();
 
     this._setPosition(overlayConfig.positionStrategy as FlexibleConnectedPositionStrategy);
+    if (this.popover.triggerEvent === 'click') {
+      overlayConfig.hasBackdrop = this.popover.hasBackdrop ?? true;
+    }
     overlayRef.attach(this._getPortal());
 
     if (this.popover.lazyContent) {
@@ -328,6 +331,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
    * the popover was opened via the keyboard.
    */
   private _initPopover(): void {
+    this.popover.direction = this.dir;
     this._setIsPopoverOpen(true);
   }
 
@@ -338,8 +342,8 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   }
 
   /**
-   *  This method checks that a valid instance of MdPopover has been passed into
-   *  `mtxPopoverTriggerFor`. If not, an exception is thrown.
+   * This method checks that a valid instance of MdPopover has been passed into
+   * `mtxPopoverTriggerFor`. If not, an exception is thrown.
    */
   private _checkPopover() {
     if (!this.popover) {
@@ -348,8 +352,8 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   }
 
   /**
-   *  This method creates the overlay from the provided popover's template and saves its
-   *  OverlayRef so that it can be attached to the DOM when openPopover is called.
+   * This method creates the overlay from the provided popover's template and saves its
+   * OverlayRef so that it can be attached to the DOM when openPopover is called.
    */
   private _createOverlay(): OverlayRef {
     if (!this._overlayRef) {
@@ -366,11 +370,9 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
    * @returns OverlayConfig
    */
   private _getOverlayConfig(): OverlayConfig {
-    /**
-     * For overriding position element, when `mtxPopoverTargetAt` has a valid element reference.
-     * Useful for sticking popover to parent element and offsetting arrow to trigger element.
-     * If undefined defaults to the trigger element reference.
-     */
+    // For overriding position element, when `mtxPopoverTargetAt` has a valid element reference.
+    // Useful for sticking popover to parent element and offsetting arrow to trigger element.
+    // If undefined defaults to the trigger element reference.
     let element = this._elementRef;
     if (typeof this.targetElement !== 'undefined') {
       element = this.targetElement._elementRef;
@@ -383,9 +385,8 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
         .withLockedPosition()
         .withGrowAfterOpen()
         .withTransformOriginOn('.mtx-popover-panel'),
-      hasBackdrop: this.popover.triggerEvent === 'click',
-      backdropClass: 'cdk-overlay-transparent-backdrop',
-      panelClass: [],
+      backdropClass: this.popover.backdropClass || 'cdk-overlay-transparent-backdrop',
+      panelClass: this.popover.overlayPanelClass,
       scrollStrategy: this._scrollStrategy(),
       direction: this._dir,
     });
