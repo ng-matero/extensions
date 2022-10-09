@@ -1,6 +1,6 @@
 import { Direction } from '@angular/cdk/bidi';
 import { EventEmitter, TemplateRef } from '@angular/core';
-import { MtxPopoverTriggerEvent, MtxPopoverPosition } from './popover-types';
+import { MtxPopoverTriggerEvent, MtxPopoverPosition, PopoverCloseReason } from './popover-types';
 
 /**
  * Interface for a custom popover panel that can be used with `mtxPopoverTriggerFor`.
@@ -13,10 +13,6 @@ export interface MtxPopoverPanel {
   position: MtxPopoverPosition;
   xOffset: number;
   yOffset: number;
-  arrowWidth: number;
-  arrowHeight: number;
-  arrowOffsetX: number;
-  arrowOffsetY: number;
   closeOnPanelClick: boolean;
   closeOnBackdropClick: boolean;
   closeDisabled: boolean;
@@ -30,6 +26,7 @@ export interface MtxPopoverPanel {
   readonly closed: EventEmitter<PopoverCloseReason>;
   setCurrentStyles: (pos?: MtxPopoverPosition) => void;
   setPositionClasses: (pos?: MtxPopoverPosition) => void;
+  setElevation: () => void;
 }
 
 /** Default `mtx-popover` options that can be overridden. */
@@ -49,7 +46,7 @@ export interface MtxPopoverDefaultOptions {
   overlayPanelClass?: string;
   backdropClass?: string;
   hasBackdrop?: boolean;
+  focusTrapEnabled?: boolean;
+  focusTrapAutoCaptureEnabled?: boolean;
+  elevation?: number;
 }
-
-/** Reason why the popover was closed. */
-export type PopoverCloseReason = void | 'click' | 'keydown' | 'tab';

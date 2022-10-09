@@ -19,16 +19,12 @@ import { AnimationEvent } from '@angular/animations';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import { Direction } from '@angular/cdk/bidi';
-import { MtxPopoverTriggerEvent, MtxPopoverPosition } from './popover-types';
+import { MtxPopoverTriggerEvent, MtxPopoverPosition, PopoverCloseReason } from './popover-types';
 import {
   throwMtxPopoverInvalidPositionStart,
   throwMtxPopoverInvalidPositionEnd,
 } from './popover-errors';
-import {
-  MtxPopoverDefaultOptions,
-  MtxPopoverPanel,
-  PopoverCloseReason,
-} from './popover-interfaces';
+import { MtxPopoverDefaultOptions, MtxPopoverPanel } from './popover-interfaces';
 import { transformPopover } from './popover-animations';
 import { MtxPopoverContent, MTX_POPOVER_CONTENT } from './popover-content';
 import { Subject } from 'rxjs';
@@ -73,9 +69,13 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _arrowOffsetY = this._defaultOptions.arrowOffsetY ?? 20;
   private _closeOnPanelClick = this._defaultOptions.closeOnPanelClick ?? false;
   private _closeOnBackdropClick = this._defaultOptions.closeOnBackdropClick ?? true;
+  private _focusTrapEnabled = this._defaultOptions.focusTrapEnabled ?? false;
+  private _focusTrapAutoCaptureEnabled = this._defaultOptions.focusTrapAutoCaptureEnabled ?? false;
   private _hasBackdrop = this._defaultOptions.hasBackdrop;
-  private _focusTrapEnabled = false;
-  private _focusTrapAutoCaptureEnabled = false;
+  private _elevation = this._defaultOptions.elevation ?? 8;
+
+  private _previousElevation?: string;
+  private _elevationPrefix = 'mat-elevation-z';
 
   /** Config object to be passed into the popover's ngClass. */
   _classList: { [key: string]: boolean } = {};
@@ -93,7 +93,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   closeDisabled = false;
 
   /** Config object to be passed into the popover's arrow ngStyle */
-  arrowStyles!: Record<string, unknown>;
+  arrowStyles?: Record<string, unknown>;
 
   /** Layout direction of the popover. */
   direction?: Direction;
@@ -228,6 +228,24 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._closeOnBackdropClick = coerceBooleanProperty(value);
   }
 
+  /** Whether enable focus trap using `cdkTrapFocus`. */
+  @Input()
+  get focusTrapEnabled(): boolean {
+    return this._focusTrapEnabled;
+  }
+  set focusTrapEnabled(value: boolean) {
+    this._focusTrapEnabled = coerceBooleanProperty(value);
+  }
+
+  /** Whether enable focus trap auto capture using `cdkTrapFocusAutoCapture`. */
+  @Input()
+  get focusTrapAutoCaptureEnabled(): boolean {
+    return this._focusTrapAutoCaptureEnabled;
+  }
+  set focusTrapAutoCaptureEnabled(value: boolean) {
+    this._focusTrapAutoCaptureEnabled = coerceBooleanProperty(value);
+  }
+
   /** Whether the popover has a backdrop. It will always be false if the trigger event is hover. */
   @Input()
   get hasBackdrop(): boolean | undefined {
@@ -237,27 +255,18 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._hasBackdrop = coerceBooleanProperty(value);
   }
 
-  /** Whether enable focus trap using cdkTrapFocus. */
+  /** Popover-panel's elevation (0~24). */
   @Input()
-  get focusTrapEnabled(): boolean {
-    return this._focusTrapEnabled;
+  get elevation(): number {
+    return Math.max(0, Math.min(Math.round(this._elevation), 24));
   }
-  set focusTrapEnabled(value: boolean) {
-    this._focusTrapEnabled = coerceBooleanProperty(value);
-  }
-
-  /** Whether enable focus trap auto capture using cdkTrapFocusAutoCapture. */
-  @Input()
-  get focusTrapAutoCaptureEnabled(): boolean {
-    return this._focusTrapAutoCaptureEnabled;
-  }
-  set focusTrapAutoCaptureEnabled(value: boolean) {
-    this._focusTrapAutoCaptureEnabled = coerceBooleanProperty(value);
+  set elevation(value: number) {
+    this._elevation = value;
   }
 
   /**
    * This method takes classes set on the host md-popover element and applies them on the
-   * popover template that displays in the overlay container.  Otherwise, it's difficult
+   * popover template that displays in the overlay container. Otherwise, it's difficult
    * to style the containing popover from outside the component.
    * @param classes list of class names
    */
@@ -276,7 +285,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
 
   /**
    * This method takes classes set on the host md-popover element and applies them on the
-   * popover template that displays in the overlay container.  Otherwise, it's difficult
+   * popover template that displays in the overlay container. Otherwise, it's difficult
    * to style the containing popover from outside the component.
    * @deprecated Use `panelClass` instead.
    * @breaking-change 8.0.0
@@ -401,6 +410,18 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._classList['mtx-popover-below-after'] = pos[0] === 'below' && pos[1] === 'after';
   }
 
+  /** Sets the popover-panel's elevation. */
+  setElevation(): void {
+    const newElevation = `${this._elevationPrefix}${this.elevation}`;
+
+    if (this._previousElevation) {
+      this._classList[this._previousElevation] = false;
+    }
+
+    this._classList[newElevation] = true;
+    this._previousElevation = newElevation;
+  }
+
   /** Starts the enter animation. */
   _startAnimation() {
     // @breaking-change 8.0.0 Combine with _resetAnimation.
@@ -427,4 +448,5 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   static ngAcceptInputType_closeOnBackdropClick: BooleanInput;
   static ngAcceptInputType_focusTrapEnabled: BooleanInput;
   static ngAcceptInputType_focusTrapAutoCaptureEnabled: BooleanInput;
+  static ngAcceptInputType_hasBackdrop: BooleanInput;
 }
