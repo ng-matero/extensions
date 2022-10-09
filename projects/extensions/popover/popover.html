@@ -1,6 +1,5 @@
 <ng-template>
   <div class="mtx-popover-panel mat-elevation-z8"
-       role="dialog"
        [id]="panelId"
        [ngClass]="_classList"
        (keydown)="_handleKeydown($event)"
@@ -10,7 +9,12 @@
        [@.disabled]="disableAnimation"
        [@transformPopover]="_panelAnimationState"
        (@transformPopover.start)="_onAnimationStart($event)"
-       (@transformPopover.done)="_onAnimationDone($event)">
+       (@transformPopover.done)="_onAnimationDone($event)"
+       tabindex="-1"
+       role="dialog"
+       [attr.aria-label]="ariaLabel || null"
+       [attr.aria-labelledby]="ariaLabelledby || null"
+       [attr.aria-describedby]="ariaDescribedby || null">
     <div class="mtx-popover-content"
          [cdkTrapFocus]="focusTrapEnabled"
          [cdkTrapFocusAutoCapture]="focusTrapAutoCaptureEnabled">

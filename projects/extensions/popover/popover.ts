@@ -18,11 +18,7 @@ import { AnimationEvent } from '@angular/animations';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import { Directionality } from '@angular/cdk/bidi';
-import {
-  MtxPopoverTriggerEvent,
-  MtxPopoverScrollStrategy,
-  MtxPopoverPosition,
-} from './popover-types';
+import { MtxPopoverTriggerEvent, MtxPopoverPosition } from './popover-types';
 import {
   throwMtxPopoverInvalidPositionStart,
   throwMtxPopoverInvalidPositionEnd,
@@ -46,7 +42,6 @@ let popoverPanelUid = 0;
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _position: MtxPopoverPosition = ['below', 'after'];
   private _triggerEvent: MtxPopoverTriggerEvent = 'hover';
-  private _scrollStrategy: MtxPopoverScrollStrategy = 'reposition';
   private _enterDelay = 100;
   private _leaveDelay = 100;
   private _panelOffsetX = 0;
@@ -67,10 +62,10 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   /** Current state of the panel animation. */
   _panelAnimationState: 'void' | 'enter' = 'void';
 
-  /** Emits whenever an animation on the menu completes. */
+  /** Emits whenever an animation on the popover completes. */
   readonly _animationDone = new Subject<AnimationEvent>();
 
-  /** Whether the menu is animating. */
+  /** Whether the popover is animating. */
   _isAnimating = false;
 
   /** Closing disabled on popover */
@@ -78,6 +73,15 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
 
   /** Config object to be passed into the popover's arrow ngStyle */
   arrowStyles!: Record<string, unknown>;
+
+  /** aria-label for the popover panel. */
+  @Input('aria-label') ariaLabel?: string;
+
+  /** aria-labelledby for the popover panel. */
+  @Input('aria-labelledby') ariaLabelledby?: string;
+
+  /** aria-describedby for the popover panel. */
+  @Input('aria-describedby') ariaDescribedby?: string;
 
   /** Position of the popover. */
   @Input()
@@ -102,15 +106,6 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   }
   set triggerEvent(value: MtxPopoverTriggerEvent) {
     this._triggerEvent = value;
-  }
-
-  /** Popover scroll strategy */
-  @Input()
-  get scrollStrategy(): MtxPopoverScrollStrategy {
-    return this._scrollStrategy;
-  }
-  set scrollStrategy(value: MtxPopoverScrollStrategy) {
-    this._scrollStrategy = value;
   }
 
   /** Popover enter delay */
@@ -294,13 +289,15 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
 
   /** Handle a keyboard event from the popover, delegating to the appropriate action. */
   _handleKeydown(event: KeyboardEvent) {
-    switch (event.keyCode) {
+    const keyCode = event.keyCode;
+
+    switch (keyCode) {
       case ESCAPE:
         if (!hasModifierKey(event)) {
           event.preventDefault();
           this.closed.emit('keydown');
         }
-        return;
+        break;
     }
   }
 
