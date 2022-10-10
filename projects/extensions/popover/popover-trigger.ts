@@ -1,42 +1,43 @@
+import { FocusMonitor, FocusOrigin, isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
+import { Direction, Directionality } from '@angular/cdk/bidi';
+import { ENTER, SPACE } from '@angular/cdk/keycodes';
 import {
+  ConnectedPosition,
+  FlexibleConnectedPositionStrategy,
+  HorizontalConnectionPos,
+  Overlay,
+  OverlayConfig,
+  OverlayRef,
+  ScrollStrategy,
+  VerticalConnectionPos,
+} from '@angular/cdk/overlay';
+import { TemplatePortal } from '@angular/cdk/portal';
+import {
+  AfterContentInit,
+  ChangeDetectorRef,
   Directive,
   ElementRef,
   EventEmitter,
+  Inject,
+  InjectionToken,
   Input,
   OnDestroy,
   Optional,
   Output,
   ViewContainerRef,
-  ChangeDetectorRef,
-  AfterContentInit,
-  InjectionToken,
-  Inject,
 } from '@angular/core';
-import { FocusMonitor, FocusOrigin, isFakeMousedownFromScreenReader } from '@angular/cdk/a11y';
-import { Direction, Directionality } from '@angular/cdk/bidi';
-import {
-  Overlay,
-  OverlayRef,
-  OverlayConfig,
-  HorizontalConnectionPos,
-  VerticalConnectionPos,
-  FlexibleConnectedPositionStrategy,
-  ScrollStrategy,
-  ConnectedPosition,
-} from '@angular/cdk/overlay';
-import { TemplatePortal } from '@angular/cdk/portal';
-import { Subscription, merge, of as observableOf } from 'rxjs';
+import { merge, of as observableOf, Subscription } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
+import { MtxPopover } from './popover';
+import { throwMtxPopoverMissingError } from './popover-errors';
 import { MtxPopoverPanel } from './popover-interfaces';
+import { MtxPopoverTarget } from './popover-target';
 import {
-  MtxPopoverTriggerEvent,
   MtxPopoverPosition,
   MtxPopoverPositionStart,
+  MtxPopoverTriggerEvent,
   PopoverCloseReason,
 } from './popover-types';
-import { throwMtxPopoverMissingError } from './popover-errors';
-import { MtxPopover } from './popover';
-import { ENTER, SPACE } from '@angular/cdk/keycodes';
 
 /** Injection token that determines the scroll handling while the popover is open. */
 export const MTX_POPOVER_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrategy>(
@@ -113,7 +114,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   @Input('mtxPopoverTriggerData') popoverData: any;
 
   /** References the popover target instance that the trigger is associated with. */
-  @Input('mtxPopoverTargetAt') targetElement?: { _elementRef: ElementRef };
+  @Input('mtxPopoverTargetAt') targetElement?: MtxPopoverTarget;
 
   /** Popover trigger event */
   @Input('mtxPopoverTriggerOn') triggerEvent?: MtxPopoverTriggerEvent;
@@ -361,6 +362,10 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
       const config = this._getOverlayConfig();
       this._subscribeToPositions(config.positionStrategy as FlexibleConnectedPositionStrategy);
       this._overlayRef = this._overlay.create(config);
+    } else {
+      const overlayConfig = this._overlayRef.getConfig();
+      const positionStrategy = overlayConfig.positionStrategy as FlexibleConnectedPositionStrategy;
+      positionStrategy.setOrigin(this._getTargetElement());
     }
 
     return this._overlayRef;
@@ -371,18 +376,10 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
    * @returns OverlayConfig
    */
   private _getOverlayConfig(): OverlayConfig {
-    // For overriding position element, when `mtxPopoverTargetAt` has a valid element reference.
-    // Useful for sticking popover to parent element and offsetting arrow to trigger element.
-    // If undefined defaults to the trigger element reference.
-    let element = this._elementRef;
-    if (typeof this.targetElement !== 'undefined') {
-      element = this.targetElement._elementRef;
-    }
-
     return new OverlayConfig({
       positionStrategy: this._overlay
         .position()
-        .flexibleConnectedTo(element)
+        .flexibleConnectedTo(this._getTargetElement())
         .withLockedPosition()
         .withGrowAfterOpen()
         .withTransformOriginOn('.mtx-popover-panel'),
@@ -391,6 +388,14 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
       scrollStrategy: this._scrollStrategy(),
       direction: this._dir,
     });
+  }
+
+  private _getTargetElement(): ElementRef<HTMLElement> {
+    if (this.targetElement) {
+      return this.targetElement.elementRef;
+    }
+
+    return this._elementRef;
   }
 
   /**
