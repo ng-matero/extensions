@@ -546,7 +546,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   /** Returns a stream that emits whenever an action that should close the popover occurs. */
   private _popoverClosingActions() {
     const backdrop =
-      this.triggerEvent === 'click' && this.popover.closeOnBackdropClick === true
+      this.popover.triggerEvent === 'click' && this.popover.closeOnBackdropClick === true
         ? this._overlayRef!.backdropClick()
         : observableOf();
     const detachments = this._overlayRef!.detachments();
