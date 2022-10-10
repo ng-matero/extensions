@@ -5,5 +5,5 @@ import { Directive, ElementRef } from '@angular/core';
   exportAs: 'mtxPopoverTarget',
 })
 export class MtxPopoverTarget {
-  constructor(public _elementRef: ElementRef) {}
+  constructor(public elementRef: ElementRef) {}
 }
