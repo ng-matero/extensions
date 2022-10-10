@@ -23,18 +23,16 @@
                           [buttonIcon]="columnMenuButtonIcon"
                           [selectable]="columnHideable"
                           [selectableChecked]="columnHideableChecked"
-                          (selectionChange)="_onColumnChange($event)"
                           [sortable]="columnSortable"
-                          (sortChange)="_onColumnChange($event)"
                           [pinnable]="columnPinnable"
-                          (pinChange)="_onColumnChange($event)"
                           [showHeader]="showColumnMenuHeader"
                           [headerText]="columnMenuHeaderText"
                           [headerTemplate]="columnMenuHeaderTemplate"
                           [showFooter]="showColumnMenuFooter"
                           [footerText]="columnMenuFooterText"
                           [footerTemplate]="columnMenuFooterTemplate"
-                          [pinOptions]="columnPinOptions">
+                          [pinOptions]="columnPinOptions"
+                          (columnChange)="_onColumnChange($event)">
     </mtx-grid-column-menu>
   </div>
 </div>
