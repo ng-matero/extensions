@@ -1,33 +1,33 @@
+import { AnimationEvent } from '@angular/animations';
+import { Direction } from '@angular/cdk/bidi';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import {
+  ChangeDetectionStrategy,
   Component,
+  ContentChild,
+  ElementRef,
   EventEmitter,
+  Inject,
+  InjectionToken,
   Input,
+  NgZone,
   OnDestroy,
+  OnInit,
   Output,
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
-  ElementRef,
-  ChangeDetectionStrategy,
-  NgZone,
-  ContentChild,
-  OnInit,
-  InjectionToken,
-  Inject,
 } from '@angular/core';
-import { AnimationEvent } from '@angular/animations';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
-import { Direction } from '@angular/cdk/bidi';
-import { MtxPopoverTriggerEvent, MtxPopoverPosition, PopoverCloseReason } from './popover-types';
-import {
-  throwMtxPopoverInvalidPositionStart,
-  throwMtxPopoverInvalidPositionEnd,
-} from './popover-errors';
-import { MtxPopoverDefaultOptions, MtxPopoverPanel } from './popover-interfaces';
+import { Subject } from 'rxjs';
 import { transformPopover } from './popover-animations';
 import { MtxPopoverContent, MTX_POPOVER_CONTENT } from './popover-content';
-import { Subject } from 'rxjs';
+import {
+  throwMtxPopoverInvalidPositionEnd,
+  throwMtxPopoverInvalidPositionStart,
+} from './popover-errors';
+import { MtxPopoverDefaultOptions, MtxPopoverPanel } from './popover-interfaces';
+import { MtxPopoverPosition, MtxPopoverTriggerEvent, PopoverCloseReason } from './popover-types';
 
 /** Injection token to be used to override the default options for `mtx-popover`. */
 export const MTX_POPOVER_DEFAULT_OPTIONS = new InjectionToken<MtxPopoverDefaultOptions>(
