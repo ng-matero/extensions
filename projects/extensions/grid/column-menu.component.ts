@@ -59,9 +59,7 @@ export class MtxGridColumnMenuComponent {
   @Input() footerText = 'Columns Footer';
   @Input() footerTemplate!: TemplateRef<any>;
 
-  @Output() selectionChange = new EventEmitter<MtxGridColumn[]>();
-  @Output() sortChange = new EventEmitter<MtxGridColumn[]>();
-  @Output() pinChange = new EventEmitter<MtxGridColumn[]>();
+  @Output() columnChange = new EventEmitter<MtxGridColumn[]>();
 
   @Input()
   get pinOptions() {
@@ -78,19 +76,19 @@ export class MtxGridColumnMenuComponent {
     { label: 'No Pin', value: null },
   ];
 
-  _handleDroped(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.columns, event.previousIndex, event.currentIndex);
-    this.sortChange.emit(this.columns);
+  _handleDroped(e: CdkDragDrop<string[]>) {
+    moveItemInArray(this.columns, e.previousIndex, e.currentIndex);
+    this.columnChange.emit(this.columns);
   }
 
-  _handleSelection(e: MatCheckboxChange) {
-    this.selectionChange.emit(this.columns);
+  _handleChecked(e: MatCheckboxChange) {
+    this.columnChange.emit(this.columns);
   }
 
   _handlePinSelect(col: MtxGridColumn, val: MtxGridColumnPinValue) {
     if (col.pinned != val) {
       col.pinned = val;
-      this.pinChange.emit(this.columns);
+      this.columnChange.emit(this.columns);
     }
   }
 }
