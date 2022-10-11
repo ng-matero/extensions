@@ -1,14 +1,12 @@
 <mat-radio-group [(ngModel)]="target">
   <mat-radio-button [value]="target1">Target 1</mat-radio-button>
   <mat-radio-button [value]="target2">Target 2</mat-radio-button>
-  <mat-radio-button [value]="target3">Target 3</mat-radio-button>
 </mat-radio-group>
 
 <button cdkDrag mat-raised-button color="primary"
         #popoverTrigger="mtxPopoverTrigger"
         [mtxPopoverTriggerFor]="popover"
-        [mtxPopoverTargetAt]="target"
-        mtxPopoverTriggerOn="click">
+        [mtxPopoverTargetAt]="target">
   Show Popover
 </button>
 
@@ -18,8 +16,6 @@
   </div>
 </mtx-popover>
 
-<mat-toolbar #target1>popover target</mat-toolbar>
+<div mtxPopoverTarget #target1="mtxPopoverTarget">popover target directive</div>
 
-<div mtxPopoverTarget #target2="mtxPopoverTarget">popover target directive</div>
-
-<mtx-popover-target #target3="mtxPopoverTarget">popover target component</mtx-popover-target>
+<mtx-popover-target #target2="mtxPopoverTarget">popover target component</mtx-popover-target>

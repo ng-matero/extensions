@@ -9,6 +9,10 @@ import {
   popoverConfigurableExampleConfig,
 } from './examples/configurable';
 import { PopoverTargetComponent, popoverTargetExampleConfig } from './examples/target';
+import {
+  PopoverLazyRenderingComponent,
+  popoverLazyRenderingExampleConfig,
+} from './examples/lazy-rendering';
 
 @Component({
   selector: 'app-popover-overview',
@@ -36,7 +40,11 @@ export class PopoverApiComponent {
         component: PopoverOverviewComponent,
         pathMatch: 'full',
         data: {
-          examples: [popoverConfigurableExampleConfig, popoverTargetExampleConfig],
+          examples: [
+            popoverConfigurableExampleConfig,
+            popoverTargetExampleConfig,
+            popoverLazyRenderingExampleConfig,
+          ],
         },
       },
       {
@@ -55,6 +63,7 @@ export class PopoverApiComponent {
     PopoverApiComponent,
     PopoverConfigurableComponent,
     PopoverTargetComponent,
+    PopoverLazyRenderingComponent,
   ],
 })
 export class PopoverModule {}

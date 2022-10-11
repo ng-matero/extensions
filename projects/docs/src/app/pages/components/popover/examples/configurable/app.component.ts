@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MtxPopoverPositionEnd, MtxPopoverPositionStart } from '@ng-matero/extensions/popover';
+import {
+  MtxPopoverPositionEnd,
+  MtxPopoverPositionStart,
+  MtxPopoverTriggerEvent,
+} from '@ng-matero/extensions/popover';
 
 @Component({
   selector: 'popover-example',
@@ -7,12 +11,14 @@ import { MtxPopoverPositionEnd, MtxPopoverPositionStart } from '@ng-matero/exten
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  enterDelay = 200;
-  leaveDelay = 200;
+  triggerEvent: MtxPopoverTriggerEvent = 'hover';
+  enterDelay = 100;
+  leaveDelay = 100;
   xOffset = 0;
   yOffset = 0;
   closeOnPanelClick = false;
-  triggerOn: 'hover' | 'click' = 'hover';
+  hasBackdrop = true;
+  elevation = 8;
 
   positionXOptions = ['before', 'after'];
   positionYOptions = ['above', 'below'];

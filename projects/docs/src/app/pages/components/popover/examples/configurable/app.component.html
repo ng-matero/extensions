@@ -31,6 +31,14 @@
 </section>
 
 <section>
+  <label>triggerEvent:</label>
+  <mat-radio-group [(ngModel)]="triggerEvent">
+    <mat-radio-button value="hover">hover</mat-radio-button>
+    <mat-radio-button value="click">click</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section *ngIf="triggerEvent==='hover'">
   <mat-form-field>
     <mat-label>enterDelay</mat-label>
     <input matInput type="number" [(ngModel)]="enterDelay">
@@ -42,27 +50,30 @@
 </section>
 
 <section>
-  <label>triggerOn:</label>
-  <mat-radio-group [(ngModel)]="triggerOn">
-    <mat-radio-button value="hover">hover</mat-radio-button>
-    <mat-radio-button value="click">click</mat-radio-button>
-  </mat-radio-group>
+  <mat-checkbox [(ngModel)]="closeOnPanelClick">closeOnPanelClick</mat-checkbox>
+</section>
+
+<section *ngIf="triggerEvent==='click'">
+  <mat-checkbox [(ngModel)]="hasBackdrop">hasBackdrop</mat-checkbox>
 </section>
 
 <section>
-  <mat-checkbox [(ngModel)]="closeOnPanelClick">closeOnPanelClick</mat-checkbox>
+  <label>elevation:</label>
+  <mat-slider min="0" max="24" thumbLabel [(ngModel)]="elevation"></mat-slider>
 </section>
 
 <h2>Result</h2>
 
-<button *ngIf="triggerOn==='hover'" mat-raised-button color="primary" cdkDrag
+<button *ngIf="triggerEvent==='hover'" cdkDrag
+        mat-raised-button color="primary"
         #popoverTrigger="mtxPopoverTrigger"
         [mtxPopoverTriggerFor]="popover"
         mtxPopoverTriggerOn="hover">
   Show Popover With Hover
 </button>
 
-<button *ngIf="triggerOn==='click'" mat-raised-button color="primary" cdkDrag
+<button *ngIf="triggerEvent==='click'" cdkDrag
+        mat-raised-button color="primary"
         #popoverTrigger2="mtxPopoverTrigger"
         [mtxPopoverTriggerFor]="popover"
         mtxPopoverTriggerOn="click">
@@ -70,16 +81,16 @@
 </button>
 
 <mtx-popover #popover="mtxPopover"
-             [position]="[positionStart, positionEnd]"
              [enterDelay]="enterDelay"
              [leaveDelay]="leaveDelay"
+             [position]="[positionStart, positionEnd]"
              [xOffset]="xOffset"
              [yOffset]="yOffset"
              [closeOnPanelClick]="closeOnPanelClick"
-             [closeOnBackdropClick]="true">
-  <mat-card>
-    <mat-card-content>
-      A material design popover component created using Angular with the Angular CDK.
-    </mat-card-content>
-  </mat-card>
+             [closeOnBackdropClick]="true"
+             [hasBackdrop]="hasBackdrop"
+             [elevation]="elevation">
+  <div style="max-width: 300px;">
+    A material design popover component created using Angular with the Angular CDK.
+  </div>
 </mtx-popover>
