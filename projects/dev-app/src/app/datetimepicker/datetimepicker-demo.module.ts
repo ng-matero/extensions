@@ -32,12 +32,14 @@ import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/cor
         parse: {
           dateInput: 'YYYY-MM-DD',
           monthInput: 'MMMM',
+          yearInput: 'YYYY',
           timeInput: 'HH:mm',
           datetimeInput: 'YYYY-MM-DD HH:mm',
         },
         display: {
           dateInput: 'YYYY-MM-DD',
           monthInput: 'MMMM',
+          yearInput: 'YYYY',
           timeInput: 'HH:mm',
           datetimeInput: 'YYYY-MM-DD HH:mm',
           monthYearLabel: 'YYYY MMMM',
