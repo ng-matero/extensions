@@ -4,12 +4,14 @@ export interface MtxDatetimeFormats {
   parse: {
     dateInput?: any;
     monthInput?: any;
+    yearInput?: any;
     timeInput?: any;
     datetimeInput?: any;
   };
   display: {
     dateInput: any;
     monthInput: any;
+    yearInput?: any;
     timeInput: any;
     datetimeInput: any;
     monthYearLabel: any;

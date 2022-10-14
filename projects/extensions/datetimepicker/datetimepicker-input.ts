@@ -320,6 +320,8 @@ export class MtxDatetimepickerInput<D>
         return this._dateFormats.display.timeInput;
       case 'month':
         return this._dateFormats.display.monthInput;
+      case 'year':
+        return this._dateFormats.display.yearInput;
     }
   }
 
@@ -338,6 +340,9 @@ export class MtxDatetimepickerInput<D>
         break;
       case 'month':
         parseFormat = this._dateFormats.parse.monthInput;
+        break;
+      case 'year':
+        parseFormat = this._dateFormats.parse.yearInput;
         break;
     }
     if (!parseFormat) {
