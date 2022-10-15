@@ -18,12 +18,14 @@ import { MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
         parse: {
           dateInput: 'YYYY-MM-DD',
           monthInput: 'MMMM',
+          yearInput: 'YYYY',
           timeInput: 'HH:mm',
           datetimeInput: 'YYYY-MM-DD HH:mm',
         },
         display: {
           dateInput: 'YYYY-MM-DD',
           monthInput: 'MMMM',
+          yearInput: 'YYYY',
           timeInput: 'HH:mm',
           datetimeInput: 'YYYY-MM-DD HH:mm',
           monthYearLabel: 'YYYY MMMM',
