@@ -23,7 +23,9 @@
       "@ng-matero/extensions": ["projects/extensions"],
       "@ng-matero/extensions/*": ["projects/extensions/*"],
       "@ng-matero/extensions-moment-adapter": ["projects/extensions-moment-adapter"],
-      "@ng-matero/extensions-moment-adapter/*": ["projects/extensions-moment-adapter/*"]
+      "@ng-matero/extensions-moment-adapter/*": ["projects/extensions-moment-adapter/*"],
+      "@ng-matero/extensions-luxon-adapter": ["projects/extensions-luxon-adapter"],
+      "@ng-matero/extensions-luxon-adapter/*": ["projects/extensions-luxon-adapter/*"]
     }
   },
   "angularCompilerOptions": {

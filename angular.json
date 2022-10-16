@@ -75,6 +75,42 @@
         }
       }
     },
+    "extensions-luxon-adapter": {
+      "projectType": "library",
+      "root": "projects/extensions-luxon-adapter",
+      "prefix": "mtx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/extensions-luxon-adapter/tsconfig.lib.json",
+            "project": "projects/extensions-luxon-adapter/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/extensions-luxon-adapter/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/extensions-luxon-adapter/test.ts",
+            "tsConfig": "projects/extensions-luxon-adapter/tsconfig.spec.json",
+            "karmaConfig": "projects/extensions-luxon-adapter/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/extensions-luxon-adapter/**/*.ts",
+              "projects/extensions-luxon-adapter/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "docs": {
       "projectType": "application",
       "schematics": {
