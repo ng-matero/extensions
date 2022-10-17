@@ -1,7 +1,7 @@
 {
-  "name": "@ng-matero/extensions-moment-adapter",
+  "name": "@ng-matero/extensions-luxon-adapter",
   "version": "14.0.0",
-  "description": "Angular Material Extensions Moment Adapter",
+  "description": "Angular Material Extensions Luxon Adapter",
   "publishConfig": {
     "access": "public"
   },

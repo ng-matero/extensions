@@ -18,6 +18,7 @@
     "deploy": "angular-cli-ghpages --no-silent --dir=dist/docs",
     "build:extensions": "ng build extensions --configuration production",
     "build:extensions-moment-adapter": "ng build extensions-moment-adapter --configuration production",
+    "build:extensions-luxon-adapter": "ng build extensions-luxon-adapter --configuration production",
     "build:lib": "npm run build:extensions",
     "publish": "npm run build:lib && cd dist/extensions && npm publish",
     "prepare": "husky install"
@@ -65,8 +66,8 @@
     "@commitlint/config-conventional": "^17.1.0",
     "@types/jasmine": "~4.0.0",
     "@types/jasminewd2": "~2.0.10",
-    "@types/node": "^18.0.0",
     "@types/luxon": "^3.0.1",
+    "@types/node": "^18.0.0",
     "@typescript-eslint/eslint-plugin": "^5.36.0",
     "@typescript-eslint/parser": "^5.36.0",
     "angular-cli-ghpages": "^1.0.0",
