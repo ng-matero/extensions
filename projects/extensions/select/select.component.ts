@@ -1,46 +1,47 @@
+import { FocusMonitor } from '@angular/cdk/a11y';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
-  Component,
-  OnInit,
-  OnDestroy,
-  DoCheck,
-  ViewEncapsulation,
+  AfterViewInit,
   ChangeDetectionStrategy,
-  Input,
-  ElementRef,
   ChangeDetectorRef,
-  Optional,
-  Self,
-  Output,
-  EventEmitter,
-  TemplateRef,
+  Component,
   ContentChild,
   ContentChildren,
+  DoCheck,
+  ElementRef,
+  EventEmitter,
+  Inject,
+  Input,
+  OnDestroy,
+  OnInit,
+  Optional,
+  Output,
   QueryList,
-  AfterViewInit,
+  Self,
+  TemplateRef,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { ControlValueAccessor, NgControl } from '@angular/forms';
-import { MatFormFieldControl } from '@angular/material/form-field';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { FocusMonitor } from '@angular/cdk/a11y';
-import { Subject, merge } from 'rxjs';
-import { takeUntil, startWith } from 'rxjs/operators';
-
+import { ErrorStateMatcher, mixinErrorState } from '@angular/material/core';
+import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/material/form-field';
+import { merge, Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
+import { NgSelectComponent } from '@ng-select/ng-select';
+import { MtxOptionComponent } from './option.component';
 import {
-  MtxSelectOptionTemplateDirective,
-  MtxSelectLabelTemplateDirective,
-  MtxSelectHeaderTemplateDirective,
   MtxSelectFooterTemplateDirective,
-  MtxSelectOptgroupTemplateDirective,
-  MtxSelectNotFoundTemplateDirective,
-  MtxSelectTypeToSearchTemplateDirective,
+  MtxSelectHeaderTemplateDirective,
+  MtxSelectLabelTemplateDirective,
+  MtxSelectLoadingSpinnerTemplateDirective,
   MtxSelectLoadingTextTemplateDirective,
   MtxSelectMultiLabelTemplateDirective,
+  MtxSelectNotFoundTemplateDirective,
+  MtxSelectOptgroupTemplateDirective,
+  MtxSelectOptionTemplateDirective,
   MtxSelectTagTemplateDirective,
-  MtxSelectLoadingSpinnerTemplateDirective,
+  MtxSelectTypeToSearchTemplateDirective,
 } from './templates.directive';
-import { MtxOptionComponent } from './option.component';
-import { NgSelectComponent } from '@ng-select/ng-select';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = (term: string) => any | Promise<any>;
@@ -52,20 +53,53 @@ export type GroupValueFn = (
 export type SearchFn = (term: string, item: any) => boolean;
 export type TrackByFn = (item: any) => any;
 
-export function isDefined(value: any) {
-  return value !== undefined && value !== null;
-}
-
 let nextUniqueId = 0;
+
+// Boilerplate for applying mixins to MtxSelect.
+/** @docs-private */
+const _MtxSelectMixinBase = mixinErrorState(
+  class {
+    /**
+     * Emits whenever the component state changes and should cause the parent
+     * form-field to update. Implemented as part of `MatFormFieldControl`.
+     * @docs-private
+     */
+    readonly stateChanges = new Subject<void>();
+
+    constructor(
+      public _defaultErrorStateMatcher: ErrorStateMatcher,
+      public _parentForm: NgForm,
+      public _parentFormGroup: FormGroupDirective,
+      /**
+       * Form control bound to the component.
+       * Implemented as part of `MatFormFieldControl`.
+       * @docs-private
+       */
+      public ngControl: NgControl
+    ) {}
+  }
+);
 
 @Component({
   selector: 'mtx-select',
   exportAs: 'mtxSelect',
   host: {
+    'role': 'combobox',
+    'aria-autocomplete': 'none',
     '[attr.id]': 'id',
+    '[attr.aria-expanded]': 'panelOpen',
+    '[attr.aria-label]': 'ariaLabel || null',
+    '[attr.aria-labelledby]': '_getAriaLabelledby()',
     '[attr.aria-describedby]': '_ariaDescribedby || null',
+    '[attr.aria-required]': 'required.toString()',
+    '[attr.aria-disabled]': 'disabled.toString()',
+    '[attr.aria-invalid]': 'errorState',
     '[class.mtx-select-floating]': 'shouldLabelFloat',
+    '[class.mtx-select-disabled]': 'disabled',
     '[class.mtx-select-invalid]': 'errorState',
+    '[class.mtx-select-required]': 'required',
+    '[class.mtx-select-empty]': 'empty',
+    '[class.mtx-select-multiple]': 'multiple',
     'class': 'mtx-select',
   },
   templateUrl: './select.component.html',
@@ -75,6 +109,7 @@ let nextUniqueId = 0;
   providers: [{ provide: MatFormFieldControl, useExisting: MtxSelectComponent }],
 })
 export class MtxSelectComponent
+  extends _MtxSelectMixinBase
   implements
     OnInit,
     OnDestroy,
@@ -85,7 +120,6 @@ export class MtxSelectComponent
 {
   @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelectComponent;
 
-  // MtxSelect custom templates
   @ContentChild(MtxSelectOptionTemplateDirective, { read: TemplateRef })
   optionTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectOptgroupTemplateDirective, { read: TemplateRef })
@@ -112,7 +146,6 @@ export class MtxSelectComponent
   @ContentChildren(MtxOptionComponent, { descendants: true })
   mtxOptions!: QueryList<MtxOptionComponent>;
 
-  /** MtxSelect options */
   @Input() addTag: boolean | AddTagFn = false;
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
@@ -168,12 +201,12 @@ export class MtxSelectComponent
 
   @Input()
   get clearSearchOnAdd() {
-    return isDefined(this._clearSearchOnAdd) ? this._clearSearchOnAdd : this.closeOnSelect;
+    return this._clearSearchOnAdd ?? this.closeOnSelect;
   }
   set clearSearchOnAdd(value) {
     this._clearSearchOnAdd = value;
   }
-  private _clearSearchOnAdd!: boolean;
+  private _clearSearchOnAdd?: boolean;
 
   @Input()
   get items() {
@@ -184,7 +217,9 @@ export class MtxSelectComponent
     this._items = value;
   }
   private _items: any[] = [];
-  private _itemsAreUsed!: boolean;
+  private _itemsAreUsed = false;
+
+  /** Emits whenever the component is destroyed. */
   private readonly _destroy$ = new Subject<void>();
 
   /** Value of the select control. */
@@ -213,7 +248,7 @@ export class MtxSelectComponent
   }
   private _id!: string;
 
-  /** Unique id for this input. */
+  /** Unique id for this select. */
   private _uid = `mtx-select-${nextUniqueId++}`;
 
   /** Placeholder to be shown if value is empty. */
@@ -227,20 +262,26 @@ export class MtxSelectComponent
   }
   private _placeholder!: string;
 
-  /** Whether the input is focused. */
+  /** Whether the select is focused. */
   get focused(): boolean {
     return this._focused;
   }
   private _focused = false;
 
+  /** Whether the select has a value. */
   get empty(): boolean {
     return this.value == null || (Array.isArray(this.value) && this.value.length === 0);
   }
 
+  /**
+   * Implemented as part of MatFormFieldControl.
+   * @docs-private
+   */
   get shouldLabelFloat(): boolean {
     return this.focused || !this.empty;
   }
 
+  /** Whether the component is required. */
   @Input()
   get required(): boolean {
     return this._required;
@@ -251,6 +292,7 @@ export class MtxSelectComponent
   }
   private _required = false;
 
+  /** Whether the select is disabled. */
   @Input()
   get disabled(): boolean {
     return this._disabled;
@@ -263,13 +305,20 @@ export class MtxSelectComponent
   }
   private _disabled = false;
 
-  errorState = false;
+  /** Object used to control when error messages are shown. */
+  @Input() override errorStateMatcher!: ErrorStateMatcher;
+
+  /** Aria label of the select. */
+  @Input('aria-label') ariaLabel: string = '';
+
+  /** Input that can be used to specify the `aria-labelledby` attribute. */
+  @Input('aria-labelledby') ariaLabelledby: string | null = null;
+
+  /** The aria-describedby attribute on the select for improved a11y. */
+  _ariaDescribedby: string | null = null;
 
   /** A name for this control that can be used by `mat-form-field`. */
   controlType = 'mtx-select';
-
-  /** The aria-describedby attribute on the select for improved a11y. */
-  _ariaDescribedby!: string;
 
   /** `View -> model callback called when value changes` */
   _onChange: (value: any) => void = () => {};
@@ -277,13 +326,27 @@ export class MtxSelectComponent
   /** `View -> model callback called when select has been touched` */
   _onTouched = () => {};
 
+  /** ID for the DOM node containing the select's value. */
+  _valueId = `mtx-select-value-${nextUniqueId++}`;
+
+  /** Whether or not the overlay panel is open. */
+  get panelOpen(): boolean {
+    return !!this.ngSelect.isOpen;
+  }
+
   constructor(
-    private _focusMonitor: FocusMonitor,
-    private _elementRef: ElementRef<HTMLElement>,
-    private _changeDetectorRef: ChangeDetectorRef,
-    @Optional() @Self() public ngControl: NgControl
+    protected _changeDetectorRef: ChangeDetectorRef,
+    protected _elementRef: ElementRef,
+    protected _focusMonitor: FocusMonitor,
+    _defaultErrorStateMatcher: ErrorStateMatcher,
+    @Optional() _parentForm: NgForm,
+    @Optional() _parentFormGroup: FormGroupDirective,
+    @Optional() @Self() ngControl: NgControl,
+    @Optional() @Inject(MAT_FORM_FIELD) private _parentFormField?: MatFormField
   ) {
-    _focusMonitor.monitor(_elementRef, true).subscribe(origin => {
+    super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
+
+    _focusMonitor.monitor(this._elementRef, true).subscribe(origin => {
       if (this._focused && !origin) {
         this._onTouched();
       }
@@ -292,8 +355,14 @@ export class MtxSelectComponent
     });
 
     if (this.ngControl != null) {
+      // Note: we provide the value accessor through here, instead of
+      // the `providers` to avoid running into a circular import.
       this.ngControl.valueAccessor = this;
     }
+
+    // Force setter to be called in case id was not specified.
+    // eslint-disable-next-line no-self-assign
+    this.id = this.id;
   }
 
   ngOnInit() {
@@ -312,8 +381,10 @@ export class MtxSelectComponent
 
   ngDoCheck(): void {
     if (this.ngControl) {
-      this.errorState = (this.ngControl.invalid && this.ngControl.touched) as boolean;
-      this.stateChanges.next();
+      // We need to re-evaluate this on every change detection cycle, because there are some
+      // error triggers that we can't subscribe to (e.g. parent form submissions). This means
+      // that whatever logic is in here has to be super lean or we risk destroying the performance.
+      this.updateErrorState();
     }
   }
 
@@ -324,9 +395,25 @@ export class MtxSelectComponent
     this._focusMonitor.stopMonitoring(this._elementRef);
   }
 
+  /** Gets the value for the `aria-labelledby` attribute of the inputs. */
+  _getAriaLabelledby() {
+    if (this.ariaLabel) {
+      return null;
+    }
+
+    const labelId = this._parentFormField?.getLabelId();
+    let value = (labelId ? labelId + ' ' : '') + this._valueId;
+
+    if (this.ariaLabelledby) {
+      value += ' ' + this.ariaLabelledby;
+    }
+
+    return value;
+  }
+
   /** Implemented as part of MatFormFieldControl. */
   setDescribedByIds(ids: string[]) {
-    this._ariaDescribedby = ids.join(' ');
+    this._ariaDescribedby = ids.length ? ids.join(' ') : null;
   }
 
   /**
@@ -381,7 +468,7 @@ export class MtxSelectComponent
     this._onTouched = fn;
   }
 
-  /** NgSelect: _setItemsFromNgOptions */
+  /** NgSelect's `_setItemsFromNgOptions` */
   private _setItemsFromMtxOptions() {
     const mapMtxOptions = (options: QueryList<MtxOptionComponent>) => {
       this.items = options.map(option => ({
