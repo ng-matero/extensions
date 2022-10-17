@@ -1,3 +1,4 @@
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
@@ -18,24 +19,28 @@ import { Subject } from 'rxjs';
 })
 export class MtxOptionComponent implements OnChanges, AfterViewChecked, OnDestroy {
   @Input() value: any;
+
   @Input()
   get disabled() {
     return this._disabled;
   }
-  set disabled(value: any) {
-    this._disabled = this._isDisabled(value);
+  set disabled(value: boolean) {
+    this._disabled = coerceBooleanProperty(value);
   }
-
-  readonly stateChange$ = new Subject<{ value: any; disabled: boolean; label?: string }>();
-
   private _disabled = false;
-  private _previousLabel!: string;
 
-  constructor(public elementRef: ElementRef<HTMLElement>) {}
-
-  get label(): string {
+  get label() {
     return (this.elementRef.nativeElement.textContent || '').trim();
   }
+  private _previousLabel?: string;
+
+  readonly stateChange$ = new Subject<{
+    value: any;
+    disabled: boolean;
+    label?: string;
+  }>();
+
+  constructor(public elementRef: ElementRef<HTMLElement>) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.disabled) {
@@ -61,7 +66,5 @@ export class MtxOptionComponent implements OnChanges, AfterViewChecked, OnDestro
     this.stateChange$.complete();
   }
 
-  private _isDisabled(value: null) {
-    return value != null && `${value}` !== 'false';
-  }
+  static ngAcceptInputType_disabled: BooleanInput;
 }
