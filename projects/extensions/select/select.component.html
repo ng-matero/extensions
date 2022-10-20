@@ -1,5 +1,6 @@
 <ng-select #ngSelect [class.ng-select-invalid]="errorState"
            [(ngModel)]="value"
+           [ngModelOptions]="{standalone: true}"
            [placeholder]="placeholder"
            [items]="items"
            [addTag]="addTag"
