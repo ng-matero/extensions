@@ -1,8 +1,8 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/extensions-luxon-adapter",
+  "dest": "../../dist/extensions-date-fns-adapter",
   "lib": {
-    "flatModuleFile": "extensions-luxon-adapter",
+    "flatModuleFile": "extensions-date-fns-adapter",
     "entryFile": "public-api.ts"
   }
 }

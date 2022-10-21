@@ -1,7 +1,7 @@
 {
-  "name": "@ng-matero/extensions-luxon-adapter",
+  "name": "@ng-matero/extensions-date-fns-adapter",
   "version": "14.0.0",
-  "description": "Angular Material Extensions Luxon Adapter",
+  "description": "Angular Material Extensions date-fns Adapter",
   "publishConfig": {
     "access": "public"
   },
@@ -16,7 +16,7 @@
     "@angular/material": ">=14.0.0",
     "@angular/material-date-fns-adapter": ">=14.0.0",
     "@ng-matero/extensions": ">=14.0.0",
-    "luxon": "^3.0.4"
+    "date-fns": "^2.29.3"
   },
   "dependencies": {
     "tslib": "^2.3.0"
