@@ -1,0 +1,24 @@
+{
+  "name": "@ng-matero/extensions-luxon-adapter",
+  "version": "14.0.0",
+  "description": "Angular Material Extensions Luxon Adapter",
+  "publishConfig": {
+    "access": "public"
+  },
+  "author": "Jelle Bruisten <jelle_bruisten@hotmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ng-matero/extensions.git"
+  },
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/core": ">=14.0.0",
+    "@angular/material": ">=14.0.0",
+    "@angular/material-date-fns-adapter": ">=14.0.0",
+    "@ng-matero/extensions": ">=14.0.0",
+    "luxon": "^3.0.4"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  }
+}
