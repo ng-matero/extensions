@@ -111,6 +111,42 @@
         }
       }
     },
+    "extensions-date-fns-adapter": {
+      "projectType": "library",
+      "root": "projects/extensions-date-fns-adapter",
+      "prefix": "mtx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/extensions-date-fns-adapter/tsconfig.lib.json",
+            "project": "projects/extensions-date-fns-adapter/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/extensions-date-fns-adapter/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/extensions-date-fns-adapter/test.ts",
+            "tsConfig": "projects/extensions-date-fns-adapter/tsconfig.spec.json",
+            "karmaConfig": "projects/extensions-date-fns-adapter/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/extensions-date-fns-adapter/**/*.ts",
+              "projects/extensions-date-fns-adapter/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "docs": {
       "projectType": "application",
       "schematics": {
