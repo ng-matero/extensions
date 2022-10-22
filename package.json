@@ -19,6 +19,7 @@
     "build:extensions": "ng build extensions --configuration production",
     "build:extensions-moment-adapter": "ng build extensions-moment-adapter --configuration production",
     "build:extensions-luxon-adapter": "ng build extensions-luxon-adapter --configuration production",
+    "build:extensions-date-fns-adapter": "ng build extensions-date-fns-adapter --configuration production",
     "build:lib": "npm run build:extensions",
     "publish": "npm run build:lib && cd dist/extensions && npm publish",
     "prepare": "husky install"
