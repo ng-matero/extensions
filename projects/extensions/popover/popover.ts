@@ -93,7 +93,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   closeDisabled = false;
 
   /** Config object to be passed into the popover's arrow ngStyle */
-  arrowStyles?: Record<string, unknown>;
+  arrowStyles: Record<string, unknown> | null = null;
 
   /** Layout direction of the popover. */
   direction?: Direction;
