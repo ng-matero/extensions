@@ -5,8 +5,8 @@ export const MTX_MOMENT_DATETIME_FORMATS: MtxDatetimeFormats = {
     dateInput: 'L',
     monthInput: 'MMMM',
     yearInput: 'YYYY',
-    timeInput: 'LT',
     datetimeInput: 'L LT',
+    timeInput: 'LT',
   },
   display: {
     dateInput: 'L',

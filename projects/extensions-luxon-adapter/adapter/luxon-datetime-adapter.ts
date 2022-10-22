@@ -23,12 +23,12 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
     @Optional() @Inject(MAT_DATE_LOCALE) matDateLocale: string,
     @Optional()
     @Inject(MAT_LUXON_DATE_ADAPTER_OPTIONS)
-    matMomentAdapterOptions: MatLuxonDateAdapterOptions,
+    matLuxonAdapterOptions: MatLuxonDateAdapterOptions,
     _delegate: DateAdapter<DateTime>
   ) {
     super(_delegate);
     this.setLocale(matDateLocale || DateTime.now().locale);
-    this._useUtc = matMomentAdapterOptions.useUtc!;
+    this._useUtc = matLuxonAdapterOptions.useUtc!;
   }
 
   setLocale(locale: string) {
@@ -49,8 +49,6 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
   }
 
   createDatetime(year: number, month: number, day: number, hour: number, minute: number): DateTime {
-    // Check for invalid month and date (except upper bound on date which we have to check after
-    // creating the Date).
     if (month < 0 || month > 11) {
       throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
     }
@@ -67,13 +65,12 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
       throw Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
     }
 
-    // const result = moment({year, month, date, hour, minute}).locale(this.locale);
+    // Luxon uses 1-indexed months so we need to add one to the month.
     let result = DateTime.fromObject({ year, month: month + 1, day, hour, minute });
     if (this._useUtc) {
       result = result.toUTC();
     }
 
-    // If the result isn't valid, the date must have been out of bounds for this month.
     if (!result.isValid) {
       throw Error(`Invalid date "${day}" for month with index "${month}".`);
     }

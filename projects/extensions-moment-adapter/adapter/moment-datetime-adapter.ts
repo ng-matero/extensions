@@ -96,7 +96,6 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
       throw Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
     }
 
-    // const result = moment({year, month, date, hour, minute}).locale(this.locale);
     let result = moment({ year, month, date, hour, minute });
     if (this._useUtc) {
       result = result.utc();

@@ -19,7 +19,12 @@ export * from './moment-datetime-formats';
 export class MomentDatetimeModule {}
 
 @NgModule({
-  imports: [MomentDatetimeModule, MatMomentDateModule],
+  imports: [MatMomentDateModule, MomentDatetimeModule],
   providers: [{ provide: MTX_DATETIME_FORMATS, useValue: MTX_MOMENT_DATETIME_FORMATS }],
 })
-export class MatMomentDatetimeModule {}
+export class MtxMomentDatetimeModule {}
+
+/**
+ * @deprecated Use `MtxMomentDatetimeModule` instead.
+ */
+export const MatMomentDatetimeModule = MtxMomentDatetimeModule;

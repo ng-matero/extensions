@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { MatLuxonDateModule, LuxonDateModule } from '@angular/material-luxon-adapter';
+import { LuxonDateModule, MatLuxonDateModule } from '@angular/material-luxon-adapter';
 import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 import { LuxonDatetimeAdapter } from './luxon-datetime-adapter';
 import { MTX_LUXON_DATETIME_FORMATS } from './luxon-datetime-formats';
@@ -22,4 +22,9 @@ export class LuxonDatetimeModule {}
   imports: [LuxonDatetimeModule, MatLuxonDateModule],
   providers: [{ provide: MTX_DATETIME_FORMATS, useValue: MTX_LUXON_DATETIME_FORMATS }],
 })
-export class MatLuxonDatetimeModule {}
+export class MtxLuxonDatetimeModule {}
+
+/**
+ * @deprecated Use `MtxLuxonDatetimeModule` instead.
+ */
+export const MatLuxonDatetimeModule = MtxLuxonDatetimeModule;

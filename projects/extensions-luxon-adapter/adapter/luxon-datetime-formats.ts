@@ -5,8 +5,8 @@ export const MTX_LUXON_DATETIME_FORMATS: MtxDatetimeFormats = {
     dateInput: 'D',
     monthInput: 'LLLL',
     yearInput: 'yyyy',
-    timeInput: 't',
     datetimeInput: 'f',
+    timeInput: 't',
   },
   display: {
     dateInput: 'D',

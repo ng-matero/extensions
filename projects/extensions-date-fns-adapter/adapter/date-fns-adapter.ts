@@ -47,8 +47,6 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
   }
 
   createDatetime(year: number, month: number, day: number, hour: number, minute: number): Date {
-    // Check for invalid month and date (except upper bound on date which we have to check after
-    // creating the Date).
     if (month < 0 || month > 11) {
       throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
     }
@@ -65,7 +63,6 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
       throw Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
     }
 
-    // const result = moment({year, month, date, hour, minute}).locale(this.locale);
     const result = new Date(year, month, day, hour, minute);
 
     if (!isValid(result)) {
