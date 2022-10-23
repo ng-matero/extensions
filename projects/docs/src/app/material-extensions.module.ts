@@ -19,6 +19,8 @@ import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
 import { MtxFormGroupModule } from '@ng-matero/extensions/form-group';
 import { MtxText3dModule } from '@ng-matero/extensions/text3d';
 
+import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
+
 @NgModule({
   exports: [
     MtxAlertModule,
@@ -38,6 +40,7 @@ import { MtxText3dModule } from '@ng-matero/extensions/text3d';
     MtxTooltipModule,
     MtxFormGroupModule,
     MtxText3dModule,
+    MtxMomentDatetimeModule,
   ],
   declarations: [],
 })
