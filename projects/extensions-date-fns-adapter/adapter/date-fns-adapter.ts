@@ -77,7 +77,7 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
   }
 
   getHourNames(): string[] {
-    return range(23, i => i.toLocaleString(this.locale));
+    return range(24, i => i.toLocaleString(this.locale));
   }
 
   getMinuteNames(): string[] {
