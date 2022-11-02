@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions-date-fns-adapter",
-  "version": "14.0.0",
+  "version": "14.0.1",
   "description": "Angular Material Extensions date-fns Adapter",
   "publishConfig": {
     "access": "public"
