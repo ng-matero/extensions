@@ -77,115 +77,176 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   dataSource = new MatTableDataSource();
 
+  /** The grid's displayed columns. */
   @Input() displayedColumns: string[] = [];
+  /** The grid's columns. */
   @Input() columns: MtxGridColumn[] = [];
+  /** The grid's data. */
   @Input() data: any[] = [];
+  /** The total number of the data. */
   @Input() length = 0;
+  /** Whether the grid is loading. */
   @Input() loading = false;
-
+  /** Tracking function that will be used to check the differences in data changes. */
   @Input() trackBy!: TrackByFunction<any>;
-
+  /** Whether the column is resizable. */
   @Input() columnResizable = false;
-
-  /** Placeholder for the empty value (`null`, `''`, `[]`) */
+  /** Placeholder for the empty value (`null`, `''`, `[]`). */
   @Input() emptyValuePlaceholder: string = '--';
 
   // ===== Page =====
 
+  /** Whether to paginate the data on front end. */
   @Input() pageOnFront = true;
+  /** Whether to show the paginator. */
   @Input() showPaginator = true;
+  /** Whether the paginator is disabled. */
   @Input() pageDisabled = false;
+  /** Whether to show the first/last buttons UI to the user. */
   @Input() showFirstLastButtons = true;
+  /** The zero-based page index of the displayed list of items. */
   @Input() pageIndex = 0;
+  /** Number of items to display on a page. */
   @Input() pageSize = 10;
+  /** The set of provided page size options to display to the user. */
   @Input() pageSizeOptions = [10, 50, 100];
+  /** Whether to hide the page size selection UI from the user. */
   @Input() hidePageSize = false;
+  /** Event emitted when the paginator changes the page size or page index. */
   @Output() page = new EventEmitter<PageEvent>();
-
+  /** The template for the pagination. */
   @Input() paginationTemplate!: TemplateRef<any>;
 
   // ===== Sort =====
 
+  /** Whether to sort the data on front end. */
   @Input() sortOnFront = true;
+  /** The id of the most recently sorted MatSortable. */
   @Input() sortActive!: string;
+  /** The sort direction of the currently active MatSortable. */
   @Input() sortDirection!: SortDirection;
+  /**
+   * Whether to disable the user from clearing the sort by finishing the sort direction cycle.
+   * May be overriden by the column's `disableClear` in `sortProp`.
+   */
   @Input() sortDisableClear: boolean = false;
+  /** Whether the sort is disabled. */
   @Input() sortDisabled: boolean = false;
+  /**
+   * The direction to set when an MatSortable is initially sorted.
+   * May be overriden by the column's `start` in `sortProp`.
+   */
   @Input() sortStart: 'asc' | 'desc' = 'asc';
+  /** Event emitted when the user changes either the active sort or sort direction. */
   @Output() sortChange = new EventEmitter<Sort>();
 
   // ===== Row =====
 
+  /** Whether to use the row hover style. */
   @Input() rowHover = false;
+  /** Whether to use the row striped style. */
   @Input() rowStriped = false;
+  /** Event emitted when the user click the row. */
   @Output() rowClick = new EventEmitter<any>();
 
   // ===== Expandable Row =====
 
   expansionRowStates: any[] = [];
 
+  /** Whether the row is expandable. */
   @Input() expandable = false;
+  /** The template for the expandable row. */
   @Input() expansionTemplate!: TemplateRef<any>;
+  /** Event emitted when the user toggles the expandable row. */
   @Output() expansionChange = new EventEmitter<any>();
 
   // ===== Row Selection =====
 
-  /** Whether support multiple row/cell selection. */
-  @Input() multiSelectable = true;
-
-  @Input() multiSelectionWithClick = false;
-
   rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
+  /** Whether to support multiple row/cell selection. */
+  @Input() multiSelectable = true;
+  /** Whether the user can select multiple rows with click. */
+  @Input() multiSelectionWithClick = false;
+  /** The selected row items. */
   @Input() rowSelected: any[] = [];
+  /** Whether the row is selectable. */
   @Input() rowSelectable = false;
+  /** Whether to hide the row selection checkbox. */
   @Input() hideRowSelectionCheckbox = false;
+  /** The formatter to disable the row selection or hide the row's checkbox. */
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
+  /** The formatter to set the row's class. */
   @Input() rowClassFormatter!: MtxGridRowClassFormatter;
+  /** Event emitted when the row is selected. */
   @Output() rowSelectionChange = new EventEmitter<any[]>();
 
   // ===== Cell Selection =====
 
   cellSelection: any[] = [];
 
+  /** Whether the cell is selectable. */
   @Input() cellSelectable = true;
+  /** Event emitted when the cell is selected. */
   @Output() cellSelectionChange = new EventEmitter<any[]>();
 
-  private _selectedCell: MtxGridCellSelectionDirective | undefined;
+  private _selectedCell?: MtxGridCellSelectionDirective;
 
   // ===== Toolbar =====
 
+  /** Whether to show the toolbar. */
   @Input() showToolbar = false;
+  /** The text for the toolbar's title. */
   @Input() toolbarTitle = '';
+  /** The template for the toolbar. */
   @Input() toolbarTemplate!: TemplateRef<any>;
 
   // ===== Column Menu =====
 
+  /** Whether the column is hideable. */
+  @Input() columnHideable = true;
+  /** Hide or show when the column hiding checkbox is checked. */
+  @Input() columnHideableChecked: 'show' | 'hide' = 'show';
+  /** Whether the column is sortable. */
+  @Input() columnSortable = true;
+  /** Whether the column is pinnable. */
+  @Input() columnPinnable = true;
+  /** Event emitted when the column is hided or is sorted. */
+  @Output() columnChange = new EventEmitter<MtxGridColumn[]>();
+  /** The options for the column pin list. */
+  @Input() columnPinOptions: MtxGridColumnPinOption[] = [];
+
+  /** Whether to show the column-menu's button. */
   @Input() showColumnMenuButton = true;
+  /** The text for the column-menu's button. */
   @Input() columnMenuButtonText = '';
+  /** The type for the column-menu's button. */
   @Input() columnMenuButtonType: MtxGridButtonType = 'stroked';
+  /** The color for the column-menu's button. */
   @Input() columnMenuButtonColor: ThemePalette;
+  /** The class for the column-menu's button. */
   @Input() columnMenuButtonClass = '';
+  /** The icon for the column-menu's button. */
   @Input() columnMenuButtonIcon = '';
 
-  @Input() columnHideable = true;
-  @Input() columnHideableChecked: 'show' | 'hide' = 'show';
-  @Input() columnSortable = true;
-  @Input() columnPinnable = true;
-  @Output() columnChange = new EventEmitter<MtxGridColumn[]>();
-
+  /** Whether to show the column-menu's header. */
   @Input() showColumnMenuHeader = false;
+  /** The text for the column-menu's header. */
   @Input() columnMenuHeaderText = 'Columns Header';
+  /** The template for the column-menu's header. */
   @Input() columnMenuHeaderTemplate!: TemplateRef<any>;
+  /** Whether to show the the column-menu's footer. */
   @Input() showColumnMenuFooter = false;
+  /** The text for the column-menu's footer. */
   @Input() columnMenuFooterText = 'Columns Footer';
+  /** The template for the column-menu's footer. */
   @Input() columnMenuFooterTemplate!: TemplateRef<any>;
-
-  @Input() columnPinOptions: MtxGridColumnPinOption[] = [];
 
   // ===== No Result =====
 
+  /** The displayed text for the empty data. */
   @Input() noResultText = 'No records found';
+  /** The template for the empty data. */
   @Input() noResultTemplate!: TemplateRef<any>;
 
   get _hasNoResult() {
@@ -194,12 +255,16 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   // ===== Cell Templates =====
 
+  /** The header's cell template for the grid. */
   @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+  /** The header's cell template for the grid exclude sort. */
   @Input() headerExtraTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+  /** The cell template for the grid. */
   @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
   // ===== Row Templates =====
 
+  /** Whether to use custom row template. If true, you should define a matRowDef. */
   @Input() useContentRowTemplate = false;
   // TODO: It can't use together with `useContentRowTemplate`
   @Input() useContentHeaderRowTemplate = false;
@@ -208,7 +273,9 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   // ===== Summary =====
 
+  /** Whether to show the summary. */
   @Input() showSummary = false;
+  /** The template for the summary. */
   @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
 
   // TODO: Summary display conditions
@@ -218,12 +285,16 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   // ===== Side Bar =====
 
+  /** Whether to show the sidebar. */
   @Input() showSidebar = false;
+  /** The template for the sidebar. */
   @Input() sidebarTemplate!: TemplateRef<any>;
 
   // ===== Status Bar =====
 
+  /** Whether to show the status bar. */
   @Input() showStatusbar = false;
+  /** The template for the status bar. */
   @Input() statusbarTemplate!: TemplateRef<any>;
 
   constructor(
