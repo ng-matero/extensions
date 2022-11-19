@@ -31,10 +31,10 @@ export class MtxAlertComponent {
     return `mtx-alert-${this.type} mat-elevation-z${this.elevation}`;
   }
 
-  /** The alert type */
+  /** The alert's type. Can be `default`, `info`, `success`, `warning` or `danger`. */
   @Input() type: MtxAlertType = 'default';
 
-  /** Whether displays an inline `Close` button */
+  /** Whether to display an inline close button. */
   @Input()
   get dismissible(): boolean {
     return this._dismissible;
@@ -44,10 +44,10 @@ export class MtxAlertComponent {
   }
   private _dismissible = false;
 
-  /** Material elevation */
+  /** The alert's elevation (0~24). */
   @Input() elevation = 0;
 
-  /** This event fires when alert closed, $event is an instance of Alert component */
+  /** Event emitted when the alert closed. */
   @Output() closed = new EventEmitter<MtxAlertComponent>();
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}

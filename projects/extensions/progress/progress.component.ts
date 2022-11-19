@@ -17,25 +17,25 @@ export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'dang
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxProgressComponent {
-  /** The progress type */
+  /** The progress's type. Can be `default`, `info`, `success`, `warning` or `danger`. */
   @Input() type: MtxProgressType = 'info';
 
-  /** The progress value */
+  /** The value of the progress. */
   @Input() value = 0;
 
-  /** The progress height */
+  /** The height of the progress. */
   @Input() height!: string;
 
-  /** The progress text color */
+  /** The text color for the progress. */
   @Input() color!: string;
 
-  /** The progress bar color */
+  /** The bar color for the progress. */
   @Input() foreground!: string;
 
-  /** The progress track color */
+  /** The track color for the progress. */
   @Input() background!: string;
 
-  /** Whether applies striped class */
+  /** Whether to apply the striped class. */
   @Input()
   get striped(): boolean {
     return this._striped;
@@ -45,7 +45,7 @@ export class MtxProgressComponent {
   }
   private _striped = false;
 
-  /** Whether applies animated class */
+  /** Whether to apply the animated class. */
   @Input()
   get animate(): boolean {
     return this._animate;

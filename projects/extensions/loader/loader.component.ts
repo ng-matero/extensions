@@ -25,23 +25,28 @@ export type MtxLoaderType = 'spinner' | 'progressbar';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxLoaderComponent {
+  /** The loader's type. Can be `spinner` or `progressbar` */
   @Input() type: MtxLoaderType = 'spinner';
 
+  /** Theme color palette for the component. */
   @Input() color: ThemePalette = 'primary';
 
+  /** Mode of the progress circle or the progress bar. */
   @Input() mode: ProgressSpinnerMode | ProgressBarMode = 'indeterminate';
 
-  /** Only support `spinner` type */
+  /** Stroke width of the spinner loader. */
   @Input() strokeWidth = 4;
 
-  /** Only support `spinner` type */
+  /** The diameter of the spinner loader (will set width and height of svg). */
   @Input() diameter = 48;
 
-  /** Only support `progresbar` type */
+  /** Buffer value of the progressbar loader. */
   @Input() bufferValue = 0;
 
+  /** Value of the progress circle or the progress bar. */
   @Input() value = 0;
 
+  /** Whether the loader is loading. */
   @Input()
   get loading(): boolean {
     return this._loading;
@@ -51,6 +56,7 @@ export class MtxLoaderComponent {
   }
   private _loading = true;
 
+  /** Whether the loader has a backdrop. */
   @Input()
   get hasBackdrop(): boolean {
     return this._hasBackdrop;
