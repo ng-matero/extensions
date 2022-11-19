@@ -30,6 +30,7 @@ export interface MtxGridColumn {
   description?: string;
   summary?: ((data: any[], colDef?: MtxGridColumn) => void) | string;
   class?: string;
+  id?: string;
 }
 
 /** Possible column pin values.  */
