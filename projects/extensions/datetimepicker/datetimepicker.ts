@@ -6,6 +6,7 @@ import {
   ComponentRef,
   ElementRef,
   EventEmitter,
+  inject,
   Inject,
   InjectionToken,
   Input,
@@ -40,6 +41,7 @@ import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { MtxDatetimepickerType } from './datetimepicker-types';
+import { DOCUMENT } from '@angular/common';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
@@ -150,6 +152,8 @@ export class MtxDatetimepickerContent<D>
   preserveWhitespaces: false,
 })
 export class MtxDatetimepicker<D> implements OnDestroy {
+  private _document = inject(DOCUMENT);
+
   /** Whether to show multi-year view. */
   @Input()
   get multiYearSelector(): boolean {
@@ -423,9 +427,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       return;
     }
 
-    if (this._componentRef) {
-      this._destroyOverlay();
-    }
+    const canRestoreFocus =
+      this._restoreFocus &&
+      this._focusedElementBeforeOpen &&
+      typeof this._focusedElementBeforeOpen.focus === 'function';
 
     const completeClose = () => {
       // The `_opened` could've been reset already if
@@ -433,21 +438,37 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       if (this._opened) {
         this._opened = false;
         this.closedStream.emit();
-        this._focusedElementBeforeOpen = null;
       }
     };
 
-    if (
-      this._restoreFocus &&
-      this._focusedElementBeforeOpen &&
-      typeof this._focusedElementBeforeOpen.focus === 'function'
-    ) {
+    if (this._componentRef) {
+      const { instance, location } = this._componentRef;
+      instance._startExitAnimation();
+      instance._animationDone.pipe(take(1)).subscribe(() => {
+        const activeElement = this._document.activeElement;
+
+        // Since we restore focus after the exit animation, we have to check that
+        // the user didn't move focus themselves inside the `close` handler.
+        if (
+          canRestoreFocus &&
+          (!activeElement ||
+            activeElement === this._document.activeElement ||
+            location.nativeElement.contains(activeElement))
+        ) {
+          this._focusedElementBeforeOpen!.focus();
+        }
+
+        this._focusedElementBeforeOpen = null;
+        this._destroyOverlay();
+      });
+    }
+
+    if (canRestoreFocus) {
       // Because IE moves focus asynchronously, we can't count on it being restored before we've
-      // marked the datetimepicker as closed. If the event fires out of sequence and the element
-      // that we're refocusing opens the datetimepicker on focus, the user could be stuck with not
-      // being able to close the calendar at all. We work around it by making the logic, that marks
-      // the datetimepicker as closed, async as well.
-      this._focusedElementBeforeOpen.focus();
+      // marked the datepicker as closed. If the event fires out of sequence and the element that
+      // we're refocusing opens the datepicker on focus, the user could be stuck with not being
+      // able to close the calendar at all. We work around it by making the logic, that marks
+      // the datepicker as closed, async as well.
       setTimeout(completeClose);
     } else {
       completeClose();
