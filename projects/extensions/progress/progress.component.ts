@@ -26,13 +26,13 @@ export class MtxProgressComponent {
   /** The height of the progress. */
   @Input() height!: string;
 
-  /** The text color for the progress. */
+  /** The text color of the progress. */
   @Input() color!: string;
 
-  /** The bar color for the progress. */
+  /** The bar color of the progress. */
   @Input() foreground!: string;
 
-  /** The track color for the progress. */
+  /** The track color of the progress. */
   @Input() background!: string;
 
   /** Whether to apply the striped class. */

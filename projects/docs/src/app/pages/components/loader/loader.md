@@ -16,15 +16,15 @@ Exported as: `mtxLoader`
 
 | Name | Description |
 | :--- | :--- |
-| `@Input()`<br>`type: MtxLoaderType` | The loader type. Default is **`'spinner'`**. |
-| `@Input()`<br>`loading: boolean` | The loading status. |
+| `@Input()`<br>`type: MtxLoaderType` | The loader's type. Default is **`'spinner'`**. |
+| `@Input()`<br>`loading: boolean` | Whether the loader is loading. |
 | `@Input()`<br>`color: ThemePalette` | Theme color palette for the component. |
-| `@Input()`<br>`mode：ProgressSpinnerMode \| ProgressBarMode` | Mode of the progress. |
-| `@Input()`<br>`value: number` | Value of the progress circle or progress bar. |
-| `@Input()`<br>`strokeWidth: number` | Stroke width of the progress spinner. Default is **`4`**. |
-| `@Input()`<br>`diameter: number` | The diameter of the progress spinner (will set width and height of svg). Default is **`48`**. |
-| `@Input()`<br>`bufferValue: number` | Buffer value of the progress bar. Default is **`0`**. |
-| `@Input()`<br>`hasBackdrop: boolean` | Whether show loader backdrop. Default is **`true`**. |
+| `@Input()`<br>`mode：ProgressSpinnerMode \| ProgressBarMode` | Mode of the progress circle or the progress bar. |
+| `@Input()`<br>`value: number` | Value of the progress circle or the progress bar. |
+| `@Input()`<br>`strokeWidth: number` | Stroke width of the spinner loader. Default is **`4`**. |
+| `@Input()`<br>`diameter: number` | The diameter of the spinner loader (will set width and height of svg). Default is **`48`**. |
+| `@Input()`<br>`bufferValue: number` | Buffer value of the progressbar loader. Default is **`0`**. |
+| `@Input()`<br>`hasBackdrop: boolean` | Whether the loader has a backdrop. Default is **`true`**. |
 
 
 ### Type aliases

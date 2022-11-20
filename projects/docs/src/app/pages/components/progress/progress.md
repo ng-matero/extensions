@@ -16,14 +16,14 @@ Exported as: `mtxProgress`
 
 | **Name** | Description |
 | :--- | :--- |
-| `@Input()`<br>`type: MtxProgressType` | The progress types. Default is **`'info'`**. |
-| `@Input()`<br>`value: number` | The progress value. Default is **`0`**. |
-| `@Input()`<br>`height: number` | The progress height. |
-| `@Input()`<br>`color: string` | The progress text color. |
-| `@Input()`<br>`foreground: string` | The progress bar color. |
-| `@Input()`<br>`background: string` | The progress track color. |
-| `@Input()`<br>`striped: boolean` | Whether applies striped class. |
-| `@Input()`<br>`animate: boolean` | Whether applies animated class. |
+| `@Input()`<br>`type: MtxProgressType` | The progress's type. Default is **`'info'`**. |
+| `@Input()`<br>`value: number` | The value of the progress. Default is **`0`**. |
+| `@Input()`<br>`height: number` | The height of the progress. |
+| `@Input()`<br>`color: string` | The text color of the progress. |
+| `@Input()`<br>`foreground: string` | The bar color of the progress. |
+| `@Input()`<br>`background: string` | The track color of the progress. |
+| `@Input()`<br>`striped: boolean` | Whether to apply the striped class. |
+| `@Input()`<br>`animate: boolean` | Whether to apply the animated class. |
 
 ### Type aliases
 

@@ -57,7 +57,7 @@ export class MtxGridCellComponent {
     if (typeof colDef.summary === 'string') {
       return colDef.summary;
     } else if (typeof colDef.summary === 'function') {
-      return (colDef.summary as (data: any[], colDef?: MtxGridColumn) => void)(
+      return (colDef.summary as (data: any[], colDef?: MtxGridColumn) => any)(
         this._dataGridSrv.getColData(data, colDef),
         colDef
       );

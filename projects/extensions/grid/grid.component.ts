@@ -146,7 +146,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() rowHover = false;
   /** Whether to use the row striped style. */
   @Input() rowStriped = false;
-  /** Event emitted when the user click the row. */
+  /** Event emitted when the user clicks the row. */
   @Output() rowClick = new EventEmitter<any>();
 
   // ===== Expandable Row =====
@@ -196,7 +196,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   /** Whether to show the toolbar. */
   @Input() showToolbar = false;
-  /** The text for the toolbar's title. */
+  /** The text of the toolbar's title. */
   @Input() toolbarTitle = '';
   /** The template for the toolbar. */
   @Input() toolbarTemplate!: TemplateRef<any>;
@@ -205,7 +205,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   /** Whether the column is hideable. */
   @Input() columnHideable = true;
-  /** Hide or show when the column hiding checkbox is checked. */
+  /** Hide or show when the column's checkbox is checked. */
   @Input() columnHideableChecked: 'show' | 'hide' = 'show';
   /** Whether the column is sortable. */
   @Input() columnSortable = true;
@@ -216,17 +216,17 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   /** The options for the column pin list. */
   @Input() columnPinOptions: MtxGridColumnPinOption[] = [];
 
-  /** Whether to show the column-menu's button. */
+  /** Whether to show the column menu button. */
   @Input() showColumnMenuButton = true;
-  /** The text for the column-menu's button. */
+  /** The text for the column menu button. */
   @Input() columnMenuButtonText = '';
-  /** The type for the column-menu's button. */
+  /** The type for the column menu button. */
   @Input() columnMenuButtonType: MtxGridButtonType = 'stroked';
-  /** The color for the column-menu's button. */
+  /** The color for the column menu button. */
   @Input() columnMenuButtonColor: ThemePalette;
-  /** The class for the column-menu's button. */
+  /** The class for the column menu button. */
   @Input() columnMenuButtonClass = '';
-  /** The icon for the column-menu's button. */
+  /** The icon for the column menu button. */
   @Input() columnMenuButtonIcon = '';
 
   /** Whether to show the column-menu's header. */
