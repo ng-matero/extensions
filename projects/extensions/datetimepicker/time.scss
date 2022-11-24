@@ -1,0 +1,61 @@
+.mtx-time {
+  display: block;
+  outline: none;
+  user-select: none;
+}
+
+.mtx-time .input-row {
+  display: inline-flex;
+}
+
+.mtx-time input[type='number'] {
+  height: 60px;
+  width: 60px;
+  appearance: textfield;
+  outline: none;
+}
+
+.mtx-time input[type='number']::-webkit-outer-spin-button,
+.mtx-time input[type='number']::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.mtx-time .ampm {
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.mtx-time .am,
+.mtx-time .pm {
+  height: 30px;
+  width: 42px;
+  display: inline-flex;
+  place-items: center;
+  place-content: center;
+  text-align: center;
+}
+
+.mtx-time .am {
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  border: 1px solid grey;
+  border-bottom: none;
+  background-color: lightcoral;
+}
+
+.mtx-time .pm {
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  border: 1px solid grey;
+  background-color: lightcoral;
+}
+
+.mtx-time .btn-row {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+.mtx-time .btn-row button[mat-button]:not(:first-child) {
+  margin-right: 4px;
+}

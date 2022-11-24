@@ -1,6 +1,7 @@
 import { BooleanInput } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -72,7 +73,11 @@ export class MtxClock<D> implements AfterContentInit {
 
   private mouseUpListener: any;
 
-  constructor(private _element: ElementRef, private _adapter: DatetimeAdapter<D>) {
+  constructor(
+    private _element: ElementRef,
+    private _adapter: DatetimeAdapter<D>,
+    private _cdr: ChangeDetectorRef
+  ) {
     this.mouseMoveListener = (event: any) => {
       this._handleMousemove(event);
     };
@@ -178,8 +183,12 @@ export class MtxClock<D> implements AfterContentInit {
     this.setTime(event);
     document.addEventListener('mousemove', this.mouseMoveListener);
     document.addEventListener('touchmove', this.mouseMoveListener);
-    document.addEventListener('mouseup', this.mouseUpListener);
-    document.addEventListener('touchend', this.mouseUpListener);
+    document.addEventListener('mouseup', this.mouseUpListener, {
+      passive: true,
+    });
+    document.addEventListener('touchend', this.mouseUpListener, {
+      passive: true,
+    });
   }
 
   _handleMousemove(event: any) {
@@ -340,6 +349,7 @@ export class MtxClock<D> implements AfterContentInit {
 
     this._timeChanged = true;
     this.activeDate = date;
+    this._cdr.markForCheck();
     this.activeDateChange.emit(this.activeDate);
   }
 

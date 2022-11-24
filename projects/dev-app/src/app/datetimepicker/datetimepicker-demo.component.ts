@@ -50,6 +50,7 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
 
     this.group = fb.group({
       dateTime: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
+      dateTimeManual: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
       dateTimeYear: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
       date: [null, Validators.required],
       time: [null, Validators.required],

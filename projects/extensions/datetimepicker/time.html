@@ -1,0 +1,29 @@
+<div class="input-row">
+  <input #hourInput type="number" (focus)="clockView = 'hour'" />
+  <span>:</span>
+  <input #minuteInput type="number" (focus)="clockView = 'minute'"/>
+
+  <div *ngIf="twelvehour" class="ampm">
+    <div class="am" (click)="ampmChange.emit('AM')">AM</div>
+    <div class="pm" (click)="ampmChange.emit('AM')">PM</div>
+  </div>
+
+</div>
+
+<mtx-clock 
+  (selectedChange)="_timeSelected($event)"
+  (activeDateChange)="_onActiveDateChange($event)"
+  [dateFilter]="dateFilter"
+  [interval]="interval"
+  [maxDate]="maxDate"
+  [minDate]="minDate"
+  [selected]="selected"
+  [startView]="clockView"
+  [twelvehour]="twelvehour"
+  >
+</mtx-clock>
+ 
+<div class="btn-row">
+  <button mat-button (click)="confirm()"> {{ i18nLabels.confirmBtn }}</button>
+  <button mat-button (click)="cancel()">{{ i18nLabels.cancelBtn }}</button> 
+</div>

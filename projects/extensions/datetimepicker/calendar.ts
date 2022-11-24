@@ -43,6 +43,8 @@ import { MtxDatetimepickerType } from './datetimepicker-types';
 /** Possible views for datetimepicker calendar. */
 export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
 
+export type MtxAmPM = 'AM' | 'PM';
+
 /**
  * A calendar that is used as part of the datetimepicker.
  * @docs-private
@@ -102,7 +104,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   @Output() _userSelection = new EventEmitter<void>();
 
-  _AMPM!: string;
+  _AMPM!: MtxAmPM;
 
   _clockView: MtxClockView = 'hour';
 
@@ -153,6 +155,20 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     this._startAt = this._adapter.getValidDateOrNull(value);
   }
   private _startAt!: D | null;
+
+  /**
+   * Whether the calendar is in time mode. In time mode the calendar clock gets time input elements rather then just clock
+   *
+   * When touchUi is enabled this will be disabled
+   */
+  @Input()
+  get timeInput(): boolean {
+    return this._timeInput;
+  }
+  set timeInput(value: boolean) {
+    this._timeInput = coerceBooleanProperty(value);
+  }
+  private _timeInput = false;
 
   /** The currently selected date. */
   @Input()
@@ -376,6 +392,12 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     }
   }
 
+  _timeSelected2(date: D) {
+    if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
+      this.selectedChange.emit(date);
+    }
+  }
+
   _timeSelected(date: D): void {
     if (this._clockView !== 'minute') {
       this._activeDate = this._updateDate(date);
@@ -413,7 +435,8 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     }
   }
 
-  _ampmClicked(source: string): void {
+  _ampmClicked(source: MtxAmPM): void {
+    console.log(source);
     if (source === this._AMPM) {
       return;
     }
@@ -685,6 +708,12 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Handles keydown events on the calendar body when calendar is in month view. */
   private _handleCalendarBodyKeydownInClockView(event: KeyboardEvent): void {
     switch (event.keyCode) {
+      case LEFT_ARROW:
+        this._clockView = 'hour';
+        break;
+      case RIGHT_ARROW:
+        this._clockView = 'minute';
+        break;
       case UP_ARROW:
         this._activeDate =
           this._clockView === 'hour'
@@ -743,4 +772,5 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   static ngAcceptInputType_multiYearSelector: BooleanInput;
   static ngAcceptInputType_twelvehour: BooleanInput;
+  static ngAcceptInputType_timeInput: BooleanInput;
 }

@@ -50,7 +50,7 @@ $touch-max-height: 850px;
 @media all and (orientation: landscape) {
   .mtx-datetimepicker-content .mtx-calendar[mode='auto'] {
     width: $non-touch-calendar-landscape-width;
-    height: $non-touch-calendar-landscape-height;
+    height: 388px;//$non-touch-calendar-landscape-height;
   }
 }
 

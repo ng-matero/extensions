@@ -310,6 +310,21 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
   private _touchUi = false;
 
+  /**
+   * Whether the calendar is in time mode. In time mode the calendar clock gets time input elements rather then just clock
+   *
+   * When touchUi is enabled this will be disabled
+   */
+  @Input()
+  get timeInput(): boolean {
+    return this._timeInput && !this.touchUi;
+  }
+  set timeInput(value: boolean) {
+    this._timeInput = coerceBooleanProperty(value);
+    console.log(this);
+  }
+  private _timeInput = false;
+
   /** Whether the datetimepicker pop-up should be disabled. */
   @Input()
   get disabled(): boolean {
@@ -624,5 +639,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   static ngAcceptInputType_disabled: BooleanInput;
   static ngAcceptInputType_opened: BooleanInput;
   static ngAcceptInputType_touchUi: BooleanInput;
+  static ngAcceptInputType_timeInput: BooleanInput;
   static ngAcceptInputType_restoreFocus: BooleanInput;
 }
