@@ -55,6 +55,7 @@ export type MtxAmPM = 'AM' | 'PM';
   styleUrls: ['calendar.scss'],
   host: {
     'class': 'mtx-calendar',
+    '[class.mtx-time-input-calendar]': 'timeInput',
     'tabindex': '0',
     '(keydown)': '_handleCalendarBodyKeydown($event)',
   },
@@ -708,23 +709,17 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Handles keydown events on the calendar body when calendar is in month view. */
   private _handleCalendarBodyKeydownInClockView(event: KeyboardEvent): void {
     switch (event.keyCode) {
-      case LEFT_ARROW:
-        this._clockView = 'hour';
-        break;
-      case RIGHT_ARROW:
-        this._clockView = 'minute';
-        break;
       case UP_ARROW:
         this._activeDate =
           this._clockView === 'hour'
             ? this._adapter.addCalendarHours(this._activeDate, 1)
-            : this._adapter.addCalendarMinutes(this._activeDate, 1);
+            : this._adapter.addCalendarMinutes(this._activeDate, this.timeInterval);
         break;
       case DOWN_ARROW:
         this._activeDate =
           this._clockView === 'hour'
             ? this._adapter.addCalendarHours(this._activeDate, -1)
-            : this._adapter.addCalendarMinutes(this._activeDate, -1);
+            : this._adapter.addCalendarMinutes(this._activeDate, -this.timeInterval);
         break;
       case ENTER:
         this._timeSelected(this._activeDate);

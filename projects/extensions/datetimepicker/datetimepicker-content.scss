@@ -4,6 +4,7 @@ $non-touch-calendar-portrait-width: $non-touch-calendar-cell-size * 7 + $calenda
 $non-touch-calendar-portrait-height: 424px;
 $non-touch-calendar-landscape-width: 446px;
 $non-touch-calendar-landscape-height: 328px;
+$non-touch-calendar-landscape-time-height: 412px;
 
 // Ideally the calendar would have a constant aspect ratio, no matter its size, and we would base
 // these measurements off the aspect ratio. Unfortunately, the aspect ratio does change a little as
@@ -47,10 +48,25 @@ $touch-max-height: 850px;
   }
 }
 
+.mtx-datetimepicker-content .mtx-calendar.mtx-time-input-calendar {
+  width: $non-touch-calendar-portrait-width;
+  height: $non-touch-calendar-portrait-height;
+
+  &[mode='landscape'] {
+    width: $non-touch-calendar-landscape-width;
+    height: $non-touch-calendar-landscape-time-height;
+  }
+}
+
 @media all and (orientation: landscape) {
   .mtx-datetimepicker-content .mtx-calendar[mode='auto'] {
     width: $non-touch-calendar-landscape-width;
     height: 388px;//$non-touch-calendar-landscape-height;
+  }
+
+  .mtx-datetimepicker-content .mtx-calendar.mtx-time-input-calendar[mode='auto'] {
+    width: $non-touch-calendar-landscape-width;
+    height: $non-touch-calendar-landscape-time-height;
   }
 }
 

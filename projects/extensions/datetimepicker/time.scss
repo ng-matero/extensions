@@ -4,29 +4,51 @@
   user-select: none;
 }
 
-.mtx-time .input-row {
+$time-font-size: 40px;
+
+.mtx-time-row {
   display: inline-flex;
+  padding: 10px 24px;
+  justify-content: space-evenly;
 }
 
-.mtx-time input[type='number'] {
-  height: 60px;
-  width: 60px;
-  appearance: textfield;
-  outline: none;
+.mtx-time-input {
+  width: 80px;
+  height: 64px;
+  line-height: 80px;
+  vertical-align: middle;
+  font-size: $time-font-size;
+  text-align: center;
+  border-radius: 8px;
 }
 
-.mtx-time input[type='number']::-webkit-outer-spin-button,
-.mtx-time input[type='number']::-webkit-inner-spin-button {
+.mtx-time-input::placeholder {
+  text-align: center;
+}
+
+.mtx-time-input::-webkit-outer-spin-button,
+.mtx-time-input::-webkit-inner-spin-button {
   appearance: none;
 }
 
-.mtx-time .ampm {
+.mtx-time-seperator {
+  height: 64px;
+  font-size: $time-font-size;
+  text-align: center;
+  margin-left: 4px;
+  margin-right: 4px;
+  display: grid;
+  place-items: center;
+}
+
+// AM/PM buttons
+.mtx-time-ampm {
   display: inline-flex;
   flex-direction: column;
 }
 
-.mtx-time .am,
-.mtx-time .pm {
+.mtx-time-am,
+.mtx-time-input-pm {
   height: 30px;
   width: 42px;
   display: inline-flex;
@@ -35,7 +57,7 @@
   text-align: center;
 }
 
-.mtx-time .am {
+.mtx-time-am {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
   border: 1px solid grey;
@@ -43,19 +65,20 @@
   background-color: lightcoral;
 }
 
-.mtx-time .pm {
+.mtx-time-pm {
   border-bottom-left-radius: 12px;
   border-bottom-right-radius: 12px;
   border: 1px solid grey;
   background-color: lightcoral;
 }
 
-.mtx-time .btn-row {
+// buttons
+.mtx-time-btn-row {
   width: 100%;
   display: inline-flex;
   flex-direction: row-reverse;
 }
 
-.mtx-time .btn-row button[mat-button]:not(:first-child) {
+.mtx-time-btn-row button[mat-button]:not(:first-child) {
   margin-right: 4px;
 }

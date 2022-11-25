@@ -1,11 +1,42 @@
-<div class="input-row">
-  <input #hourInput type="number" (focus)="clockView = 'hour'" />
-  <span>:</span>
-  <input #minuteInput type="number" (focus)="clockView = 'minute'"/>
+<div class="mtx-time-row">
+  <input 
+    class="mtx-time-input" 
+    [class.mtx-time-input-active]="clockView === 'hour'" 
+    [class.mtx-time-input-warning]="!hourInput.valid"
+    #hourInput="mtxTimeInput" 
+    type="text" 
+    inputmode="numeric" 
+    min="0" 
+    [max]="twelvehour ? 11 : 23" 
+    maxlength="2"
+    (mtxValueChanged)="handleHourInputChange($event)"
+    [mtxValue]="hour"
+    (focus)="clockView = 'hour'; clockViewChange.emit(clockView)"
+  />
 
-  <div *ngIf="twelvehour" class="ampm">
-    <div class="am" (click)="ampmChange.emit('AM')">AM</div>
-    <div class="pm" (click)="ampmChange.emit('AM')">PM</div>
+  <div class="mtx-time-seperator">
+    <span>:</span>
+  </div>
+
+  <input 
+    class="mtx-time-input" 
+    [class.mtx-time-input-active]="clockView === 'minute'" 
+    [class.mtx-time-input-warning]="!minuteInput.valid"
+    #minuteInput="mtxTimeInput" 
+    type="text" 
+    inputmode="numeric" 
+    min="0" 
+    max="59" 
+    maxlength="2"
+    (mtxValueChanged)="handleMinuteInputChange($event)"
+    [mtxValue]="minute"
+    [mtxInterval]="interval"
+    (focus)="clockView = 'minute'; clockViewChange.emit(clockView)"
+  />
+
+  <div *ngIf="twelvehour" class="mtx-time-ampm">
+    <div class="mtx-time-am" (click)="ampmChange.emit('AM')">AM</div>
+    <div class="mtx-time-pm" (click)="ampmChange.emit('AM')">PM</div>
   </div>
 
 </div>
@@ -23,7 +54,7 @@
   >
 </mtx-clock>
  
-<div class="btn-row">
-  <button mat-button (click)="confirm()"> {{ i18nLabels.confirmBtn }}</button>
-  <button mat-button (click)="cancel()">{{ i18nLabels.cancelBtn }}</button> 
+<div class="mtx-time-btn-row">
+  <button class="mtx-time-cancel" [disabled]="!minuteInputDirective?.valid || !hourInputDirective?.valid" mat-button (click)="confirm()"> {{ i18nLabels.confirmBtn }}</button>
+  <button class="mtx-time-confirm" mat-button (click)="cancel()">{{ i18nLabels.cancelBtn }}</button> 
 </div>
