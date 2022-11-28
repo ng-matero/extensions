@@ -1,44 +1,45 @@
-<div class="mtx-time-row">
-  <input 
-    class="mtx-time-input" 
-    [class.mtx-time-input-active]="clockView === 'hour'" 
-    [class.mtx-time-input-warning]="!hourInput.valid"
-    #hourInput="mtxTimeInput" 
-    type="text" 
-    inputmode="numeric" 
-    maxlength="2"
-    (mtxValueChanged)="handleHourInputChange($event)"
-    [mtxValue]="hour"
-    [mtxMin]="twelvehour ? 1 : 0"
-    [mtxMax]="twelvehour ? 12 : 23"
-    (focus)="clockView = 'hour'; clockViewChange.emit(clockView)"
-  />
+<div class="mtx-time-row-wrapper">
+  <div class="mtx-time-row">
+    <input 
+      class="mtx-time-input" 
+      [class.mtx-time-input-active]="clockView === 'hour'" 
+      [class.mtx-time-input-warning]="!hourInput.valid"
+      #hourInput="mtxTimeInput" 
+      type="text" 
+      inputmode="numeric" 
+      maxlength="2"
+      (mtxValueChanged)="handleHourInputChange($event)"
+      [mtxValue]="hour"
+      [mtxMin]="twelvehour ? 1 : 0"
+      [mtxMax]="twelvehour ? 12 : 23"
+      (focus)="clockView = 'hour'; clockViewChange.emit(clockView)"
+    />
 
-  <div class="mtx-time-seperator">
-    <span>:</span>
+    <div class="mtx-time-seperator">
+      <span>:</span>
+    </div>
+
+    <input 
+      class="mtx-time-input" 
+      [class.mtx-time-input-active]="clockView === 'minute'" 
+      [class.mtx-time-input-warning]="!minuteInput.valid"
+      #minuteInput="mtxTimeInput" 
+      type="text" 
+      inputmode="numeric" 
+      [mtxMin]="0" 
+      [mtxMax]="59" 
+      maxlength="2"
+      (mtxValueChanged)="handleMinuteInputChange($event)"
+      [mtxValue]="minute"
+      [mtxInterval]="interval"
+      (focus)="clockView = 'minute'; clockViewChange.emit(clockView)"
+    />
+
+    <div *ngIf="twelvehour" class="mtx-time-ampm">
+      <button class="mtx-time-am" (keydown)="$event.stopPropagation()" [class.mtx-time-ampm-active]="AMPM === 'AM'" (click)="ampmChange.emit('AM')">AM</button>
+      <button class="mtx-time-pm" (keydown)="$event.stopPropagation()" [class.mtx-time-ampm-active]="AMPM === 'PM'" (click)="ampmChange.emit('PM')">PM</button>
+    </div>
   </div>
-
-  <input 
-    class="mtx-time-input" 
-    [class.mtx-time-input-active]="clockView === 'minute'" 
-    [class.mtx-time-input-warning]="!minuteInput.valid"
-    #minuteInput="mtxTimeInput" 
-    type="text" 
-    inputmode="numeric" 
-    [mtxMin]="0" 
-    [mtxMax]="59" 
-    maxlength="2"
-    (mtxValueChanged)="handleMinuteInputChange($event)"
-    [mtxValue]="minute"
-    [mtxInterval]="interval"
-    (focus)="clockView = 'minute'; clockViewChange.emit(clockView)"
-  />
-
-  <div *ngIf="twelvehour" class="mtx-time-ampm">
-    <button class="mtx-time-am" (keydown)="$event.stopPropagation()" [class.mtx-time-ampm-active]="AMPM === 'AM'" (click)="ampmChange.emit('AM')">AM</button>
-    <button class="mtx-time-pm" (keydown)="$event.stopPropagation()" [class.mtx-time-ampm-active]="AMPM === 'PM'" (click)="ampmChange.emit('PM')">PM</button>
-  </div>
-
 </div>
 
 <mtx-clock 

@@ -7,6 +7,12 @@
 $time-font-size: 40px;
 $time-border-radius: 8px;
 
+.mtx-time-row-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .mtx-time-row {
   display: inline-flex;
   padding: 10px 24px;
