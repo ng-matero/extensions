@@ -35,8 +35,8 @@
   />
 
   <div *ngIf="twelvehour" class="mtx-time-ampm">
-    <button class="mtx-time-am" [class.mtx-time-ampm-active]="AMPM === 'AM'" (click)="ampmChange.emit('AM')">AM</button>
-    <button class="mtx-time-pm" [class.mtx-time-ampm-active]="AMPM === 'PM'" (click)="ampmChange.emit('PM')">PM</button>
+    <button class="mtx-time-am" (keydown)="$event.stopPropagation()" [class.mtx-time-ampm-active]="AMPM === 'AM'" (click)="ampmChange.emit('AM')">AM</button>
+    <button class="mtx-time-pm" (keydown)="$event.stopPropagation()" [class.mtx-time-ampm-active]="AMPM === 'PM'" (click)="ampmChange.emit('PM')">PM</button>
   </div>
 
 </div>

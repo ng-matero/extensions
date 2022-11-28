@@ -734,17 +734,21 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
           this._clockView === 'hour'
             ? this._adapter.addCalendarHours(this._activeDate, 1)
             : this._adapter.addCalendarMinutes(this._activeDate, this.timeInterval);
+
+        // if the hours changed the am/pm we should update the AM/PM
+        this._selectAMPM(this._activeDate);
         break;
       case DOWN_ARROW:
         this._activeDate =
           this._clockView === 'hour'
             ? this._adapter.addCalendarHours(this._activeDate, -1)
             : this._adapter.addCalendarMinutes(this._activeDate, -this.timeInterval);
+
+        // if the hours changed the am/pm we should update the AM/PM
+        this._selectAMPM(this._activeDate);
         break;
       case ENTER:
-        if (!this.timeInput) {
-          this._timeSelected(this._activeDate);
-        }
+        this._timeSelected(this._activeDate);
         return;
       default:
         // Don't prevent default or focus active cell on keys that we don't explicitly handle.
