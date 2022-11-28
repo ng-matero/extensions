@@ -394,6 +394,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   _timeSelected2(date: D) {
+    this._activeDate = this._updateDate(date);
     if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
       this.selectedChange.emit(date);
     }
@@ -429,24 +430,43 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   _selectAMPM(date: D) {
-    if (this._adapter.getHour(date) > 11) {
-      this._AMPM = 'PM';
-    } else {
+    // 12 hour clock goes from 1 to 12, so
+    // 01:00 - 12:59 = AM
+    // 13:00 - 00:59 = PM
+    const hour = this._adapter.getHour(date);
+    if (hour >= 1 && hour <= 11) {
       this._AMPM = 'AM';
+    } else {
+      this._AMPM = 'PM';
     }
   }
 
   _ampmClicked(source: MtxAmPM): void {
-    console.log(source);
+    this._currentView = 'clock';
+
     if (source === this._AMPM) {
       return;
     }
     this._AMPM = source;
+
+    // if AMPM changed from PM to AM substract 12 hours
+    const currentHour = this._adapter.getHour(this._activeDate);
+    let newHourValue;
     if (this._AMPM === 'AM') {
-      this._activeDate = this._adapter.addCalendarHours(this._activeDate, -12);
-    } else {
-      this._activeDate = this._adapter.addCalendarHours(this._activeDate, 12);
+      newHourValue = currentHour > 12 ? this._adapter.getHour(this._activeDate) - 12 : 12;
     }
+    // otherwise add 12 hours
+    else {
+      newHourValue = currentHour + 12;
+    }
+
+    this._activeDate = this._adapter.createDatetime(
+      this._adapter.getYear(this._activeDate),
+      this._adapter.getMonth(this._activeDate),
+      this._adapter.getDate(this._activeDate),
+      newHourValue,
+      this._adapter.getMinute(this._activeDate)
+    );
   }
 
   _yearClicked(): void {
@@ -722,7 +742,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
             : this._adapter.addCalendarMinutes(this._activeDate, -this.timeInterval);
         break;
       case ENTER:
-        this._timeSelected(this._activeDate);
+        if (!this.timeInput) {
+          this._timeSelected(this._activeDate);
+        }
         return;
       default:
         // Don't prevent default or focus active cell on keys that we don't explicitly handle.

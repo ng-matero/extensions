@@ -5,6 +5,7 @@
 }
 
 $time-font-size: 40px;
+$time-border-radius: 8px;
 
 .mtx-time-row {
   display: inline-flex;
@@ -19,7 +20,7 @@ $time-font-size: 40px;
   vertical-align: middle;
   font-size: $time-font-size;
   text-align: center;
-  border-radius: 8px;
+  border-radius: $time-border-radius;
 }
 
 .mtx-time-input::placeholder {
@@ -45,10 +46,11 @@ $time-font-size: 40px;
 .mtx-time-ampm {
   display: inline-flex;
   flex-direction: column;
+  margin-left: 8px;
 }
 
 .mtx-time-am,
-.mtx-time-input-pm {
+.mtx-time-pm {
   height: 30px;
   width: 42px;
   display: inline-flex;
@@ -58,16 +60,16 @@ $time-font-size: 40px;
 }
 
 .mtx-time-am {
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-left-radius: $time-border-radius;
+  border-top-right-radius: $time-border-radius;
   border: 1px solid grey;
   border-bottom: none;
   background-color: lightcoral;
 }
 
 .mtx-time-pm {
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: $time-border-radius;
+  border-bottom-right-radius: $time-border-radius;
   border: 1px solid grey;
   background-color: lightcoral;
 }

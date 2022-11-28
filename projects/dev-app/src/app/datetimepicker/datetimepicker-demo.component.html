@@ -54,6 +54,18 @@
   </mat-form-field>
 
   <mat-form-field>
+    <mat-placeholder>Time AM/PM with manual input</mat-placeholder>
+    <mtx-datetimepicker-toggle [for]="timeAMPMPickerManual" matSuffix></mtx-datetimepicker-toggle>
+    <mtx-datetimepicker #timeAMPMPickerManual startView="month" [timeInterval]="5"
+                        type="datetime" [timeInput]="true" [twelvehour]="true"></mtx-datetimepicker>
+    <input [mtxDatetimepicker]="timeAMPMPickerManual"
+           autocomplete="false" formControlName="timeAMPMManual" matInput required>
+    <mat-error *ngIf="group.get('timeAMPMManual')?.errors?.required">required</mat-error>
+    <mat-error *ngIf="group.get('timeAMPMManual')?.errors?.mtxDatetimepickerMin">min</mat-error>
+    <mat-error *ngIf="group.get('timeAMPMManual')?.errors?.mtxDatetimepickerMax">max</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
     <mat-placeholder>Date</mat-placeholder>
     <mtx-datetimepicker-toggle [for]="datePicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datePicker type="date"></mtx-datetimepicker>

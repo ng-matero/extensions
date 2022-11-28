@@ -6,7 +6,6 @@ import {
 } from '@angular/cdk/coercion';
 import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
-  AfterViewChecked,
   AfterViewInit,
   ChangeDetectorRef,
   Component,
@@ -94,6 +93,10 @@ export class MtxTimeInput implements OnDestroy {
       }
     }
     return true;
+  }
+
+  get invalid() {
+    return !this.valid;
   }
 
   @Input('mtxValue')
@@ -322,21 +325,20 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
   }
 
   get hour() {
-    let hourValue: string;
-    if (this.activeDate) {
-      let hour = Number(this._adapter.getHour(this.activeDate));
-
-      if (this.twelvehour) {
-        if (hour === 0) {
-          hour = 24;
-        }
-        hourValue = this.prefixWithZero(hour > 12 ? hour - 12 : hour);
-      }
-      hourValue = this.prefixWithZero(hour);
-    } else {
-      hourValue = '00';
+    if (!this.activeDate) {
+      return '00';
     }
-    return hourValue;
+
+    const hour = Number(this._adapter.getHour(this.activeDate));
+    if (!this.twelvehour) {
+      return this.prefixWithZero(hour);
+    }
+
+    if (hour === 0) {
+      return '12';
+    } else {
+      return this.prefixWithZero(hour > 12 ? hour - 12 : hour);
+    }
   }
 
   get minute() {
