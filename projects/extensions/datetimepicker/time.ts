@@ -4,7 +4,7 @@ import {
   coerceNumberProperty,
   NumberInput,
 } from '@angular/cdk/coercion';
-import { DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { BACKSPACE, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -45,6 +45,18 @@ export class MtxTimeInput implements OnDestroy {
   @Input('mtxInterval')
   set mtxInterval(value: NumberInput) {
     this._interval = coerceNumberProperty(value);
+  }
+
+  _min = 0;
+  @Input('mtxMin')
+  set mtxMin(value: NumberInput) {
+    this._min = coerceNumberProperty(value);
+  }
+
+  _max = Infinity;
+  @Input('mtxMax')
+  set mtxMax(value: NumberInput) {
+    this._max = coerceNumberProperty(value);
   }
 
   @Output()
@@ -174,11 +186,12 @@ export class MtxTimeInput implements OnDestroy {
   }
 
   clampInputValue() {
-    const max = coerceNumberProperty(this.inputElement?.max ?? Infinity);
-    const min = coerceNumberProperty(this.inputElement?.min ?? 0);
-    const value = coerceNumberProperty(this.inputElement?.value ?? null);
+    if (this.inputElement?.value === '') {
+      return;
+    }
 
-    const clampedValue = Math.min(Math.max(value, min), max);
+    const value = coerceNumberProperty(this.inputElement?.value ?? null);
+    const clampedValue = Math.min(Math.max(value, this._min), this._max);
     if (clampedValue !== value) {
       this.writeValue(clampedValue);
       this.writePlaceholder(clampedValue);
@@ -408,16 +421,25 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
   }
 
   updateHourForAmPm(value: number) {
-    if (this.twelvehour && this.AMPM === 'PM') {
-      const newValue = value + 12;
-
-      if (newValue > 23) {
-        return 0;
-      }
-      return newValue;
+    if (!this.twelvehour) {
+      return value;
     }
 
-    return value;
+    // value should be between 1-12
+    if (this.AMPM !== 'AM') {
+      // -1 makes the range between 0-11
+      // % 12 makes sure we are between 0-11
+      // if our value was 12 it is now 11, we should add one to correct it
+      return ((value - 1) % 12) + 1;
+    }
+
+    if (value === 0) {
+      return value;
+    }
+
+    // other cases, we should add 12 to the value aka 3:00 PM = 3 + 12 = 15:00
+    // incase the value currently is 12 + 12 = 24 would be a invalid hour modulo 24 to make sure we flip to 0
+    return (value + 12) % 24;
   }
 
   handleMinuteInputChange(value: NumberInput) {
@@ -445,10 +467,8 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
   _timeSelected(date: D): void {
     if (this.clockView === 'hour') {
       this.clockView = 'minute';
-    } else {
-      // this.clockView = 'hour';
     }
-    this.selected = date;
+    this._activeDate = this.selected = date;
   }
 
   _onActiveDateChange(date: D) {

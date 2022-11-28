@@ -434,10 +434,10 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     // 01:00 - 12:59 = AM
     // 13:00 - 00:59 = PM
     const hour = this._adapter.getHour(date);
-    if (hour >= 1 && hour <= 11) {
-      this._AMPM = 'AM';
-    } else {
+    if (hour >= 12) {
       this._AMPM = 'PM';
+    } else {
+      this._AMPM = 'AM';
     }
   }
 
@@ -453,11 +453,11 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     const currentHour = this._adapter.getHour(this._activeDate);
     let newHourValue;
     if (this._AMPM === 'AM') {
-      newHourValue = currentHour > 12 ? this._adapter.getHour(this._activeDate) - 12 : 12;
+      newHourValue = currentHour >= 12 ? this._adapter.getHour(this._activeDate) - 12 : 12;
     }
     // otherwise add 12 hours
     else {
-      newHourValue = currentHour + 12;
+      newHourValue = (currentHour + 12) % 24;
     }
 
     this._activeDate = this._adapter.createDatetime(
@@ -748,7 +748,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
         this._selectAMPM(this._activeDate);
         break;
       case ENTER:
-        this._timeSelected(this._activeDate);
+        if (!this.timeInput) {
+          this._timeSelected(this._activeDate);
+        }
         return;
       default:
         // Don't prevent default or focus active cell on keys that we don't explicitly handle.
