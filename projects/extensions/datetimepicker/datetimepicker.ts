@@ -42,6 +42,7 @@ import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { MtxDatetimepickerType } from './datetimepicker-types';
 import { DOCUMENT } from '@angular/common';
+import { MtxTimeI18nLabels } from './time';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
@@ -153,6 +154,11 @@ export class MtxDatetimepickerContent<D>
 })
 export class MtxDatetimepicker<D> implements OnDestroy {
   private _document = inject(DOCUMENT);
+
+  @Input() i18nLabels: MtxTimeI18nLabels = {
+    cancelButtonLabel: 'Cancel',
+    confirmButtonLabel: 'Ok',
+  };
 
   /** Whether to show multi-year view. */
   @Input()

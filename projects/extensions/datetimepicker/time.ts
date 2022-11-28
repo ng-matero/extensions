@@ -4,7 +4,7 @@ import {
   coerceNumberProperty,
   NumberInput,
 } from '@angular/cdk/coercion';
-import { BACKSPACE, DOWN_ARROW, LEFT_ARROW, RIGHT_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -26,9 +26,9 @@ import { MtxAmPM } from './calendar';
 import { MtxClockView } from './clock';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 
-type TimeI18nLabels = {
-  confirmBtn: string;
-  cancelBtn: string;
+export type MtxTimeI18nLabels = {
+  confirmButtonLabel: string;
+  cancelButtonLabel: string;
 };
 
 @Directive({
@@ -241,9 +241,9 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
   /** Step over minutes. */
   @Input() interval: number = 1;
 
-  @Input() i18nLabels: TimeI18nLabels = {
-    cancelBtn: 'Cancel',
-    confirmBtn: 'Ok',
+  @Input() i18nLabels: MtxTimeI18nLabels = {
+    cancelButtonLabel: 'Cancel',
+    confirmButtonLabel: 'Ok',
   };
 
   @ViewChild('hourInput', { read: ElementRef<HTMLInputElement> })
