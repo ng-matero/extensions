@@ -430,11 +430,8 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   _selectAMPM(date: D) {
-    // 12 hour clock goes from 1 to 12, so
-    // 01:00 - 12:59 = AM
-    // 13:00 - 00:59 = PM
     const hour = this._adapter.getHour(date);
-    if (hour >= 12) {
+    if (hour > 11) {
       this._AMPM = 'PM';
     } else {
       this._AMPM = 'AM';
