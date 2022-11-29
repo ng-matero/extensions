@@ -413,6 +413,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
   handleHourInputChange(value: NumberInput) {
     const hour = coerceNumberProperty(value);
     if (hour || hour === 0) {
+      console.log(hour, this.updateHourForAmPm(hour), this.AMPM);
       const newValue = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
@@ -439,20 +440,21 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
     }
 
     // value should be between 1-12
-    if (this.AMPM !== 'AM') {
-      // -1 makes the range between 0-11
-      // % 12 makes sure we are between 0-11
-      // if our value was 12 it is now 11, we should add one to correct it
-      return ((value - 1) % 12) + 1;
-    }
-
-    if (value === 0) {
+    if (this.AMPM === 'AM') {
+      if (value === 0 || value === 12) {
+        return 0;
+      }
       return value;
     }
+    // PM
+    else {
+      if (value === 0 || value === 12) {
+        return 12;
+      }
 
-    // other cases, we should add 12 to the value aka 3:00 PM = 3 + 12 = 15:00
-    // incase the value currently is 12 + 12 = 24 would be a invalid hour modulo 24 to make sure we flip to 0
-    return (value + 12) % 24;
+      // other cases, we should add 12 to the value aka 3:00 PM = 3 + 12 = 15:00
+      return value + 12;
+    }
   }
 
   handleMinuteInputChange(value: NumberInput) {
