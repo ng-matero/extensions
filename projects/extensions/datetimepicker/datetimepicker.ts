@@ -35,14 +35,13 @@ import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
-import { MtxCalendarView, MtxCalendar } from './calendar';
+import { MtxCalendar } from './calendar';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
-import { MtxDatetimepickerType } from './datetimepicker-types';
+import { MtxCalendarView, MtxDatetimepickerType, MtxTimeI18nLabels } from './datetimepicker-types';
 import { DOCUMENT } from '@angular/common';
-import { MtxTimeI18nLabels } from './time';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;

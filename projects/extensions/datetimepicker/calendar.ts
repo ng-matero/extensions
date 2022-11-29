@@ -38,13 +38,12 @@ import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
-import { MtxDatetimepickerType } from './datetimepicker-types';
-import { MtxTimeI18nLabels } from './time';
-
-/** Possible views for datetimepicker calendar. */
-export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
-
-export type MtxAmPM = 'AM' | 'PM';
+import {
+  MtxAmPM,
+  MtxCalendarView,
+  MtxDatetimepickerType,
+  MtxTimeI18nLabels,
+} from './datetimepicker-types';
 
 /**
  * A calendar that is used as part of the datetimepicker.

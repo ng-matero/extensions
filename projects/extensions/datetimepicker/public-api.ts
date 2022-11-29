@@ -1,5 +1,6 @@
 export * from './datetimepicker-module';
 export * from './clock';
+export * from './time';
 export * from './calendar';
 export * from './calendar-body';
 export * from './datetimepicker';

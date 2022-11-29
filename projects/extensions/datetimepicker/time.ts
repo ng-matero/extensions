@@ -22,14 +22,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
-import { MtxAmPM } from './calendar';
 import { MtxClockView } from './clock';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
-
-export type MtxTimeI18nLabels = {
-  confirmButtonLabel: string;
-  cancelButtonLabel: string;
-};
+import { MtxAmPM, MtxTimeI18nLabels } from './datetimepicker-types';
 
 @Directive({
   selector: 'input.mtx-time-input',
