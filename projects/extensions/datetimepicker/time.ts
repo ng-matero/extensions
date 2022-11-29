@@ -26,10 +26,15 @@ import { MtxClockView } from './clock';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxAmPM, MtxTimeI18nLabels } from './datetimepicker-types';
 
+function pad(num: NumberInput, size: number) {
+  num = String(num);
+  while (num.length < size) num = '0' + num;
+  return num;
+}
+
 @Directive({
   selector: 'input.mtx-time-input',
   host: {
-    '[placeholder]': '_value',
     '(blur)': 'blur($event)',
     '(focus)': 'focus($event)',
   },
@@ -63,7 +68,7 @@ export class MtxTimeInput implements OnDestroy {
   private keyPressListener = this.keyPressHandler.bind(this);
   private inputEventListener = this.inputChangedHandler.bind(this);
 
-  constructor(private element: ElementRef, private zone: NgZone) {
+  constructor(private element: ElementRef, private cdr: ChangeDetectorRef) {
     this.inputElement.addEventListener('keydown', this.keyDownListener, {
       passive: true,
     });
@@ -94,9 +99,9 @@ export class MtxTimeInput implements OnDestroy {
       // it can be that currentValue is empty due to we removing the value on focus,
       // if that is the case we should check previous value which should be in the placeholder
       if (currentValue.length) {
-        return String(this._value) === this.inputElement.value;
+        return this._value == this.inputElement.value;
       } else {
-        return String(this._value) === this.inputElement.placeholder;
+        return this._value == this.inputElement.placeholder;
       }
     }
     return true;
@@ -130,7 +135,12 @@ export class MtxTimeInput implements OnDestroy {
    * @param value NumberInput
    */
   writeValue(value: NumberInput) {
-    this.inputElement.value = String(value);
+    if (value !== '') {
+      this.inputElement.value = pad(value, 2);
+    } else {
+      this.inputElement.value = '';
+    }
+    this.cdr.markForCheck();
   }
 
   /**
@@ -138,7 +148,8 @@ export class MtxTimeInput implements OnDestroy {
    * @param value NumberInput
    */
   writePlaceholder(value: NumberInput) {
-    this.inputElement.placeholder = String(value);
+    this.inputElement.placeholder = pad(value, 2);
+    this.cdr.markForCheck();
   }
 
   keyDownHandler(event: KeyboardEvent) {
@@ -186,12 +197,15 @@ export class MtxTimeInput implements OnDestroy {
     }
 
     const value = coerceNumberProperty(this.inputElement?.value ?? null);
-    const clampedValue = Math.min(Math.max(value, this._min), this._max);
-    if (clampedValue !== value) {
-      this.writeValue(clampedValue);
-      this.writePlaceholder(clampedValue);
+
+    if (value) {
+      const clampedValue = Math.min(Math.max(value, this._min), this._max);
+      if (clampedValue !== value) {
+        this.writeValue(clampedValue);
+        this.writePlaceholder(clampedValue);
+      }
+      this._value = clampedValue;
     }
-    this._value = clampedValue;
   }
 
   /**
