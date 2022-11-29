@@ -348,7 +348,11 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
 
   get hour() {
     if (!this.activeDate) {
-      return '00';
+      if (this.twelvehour) {
+        return '12';
+      } else {
+        return '00';
+      }
     }
 
     const hour = Number(this._adapter.getHour(this.activeDate));
