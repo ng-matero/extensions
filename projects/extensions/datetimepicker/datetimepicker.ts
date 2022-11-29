@@ -326,7 +326,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
   set timeInput(value: boolean) {
     this._timeInput = coerceBooleanProperty(value);
-    console.log(this);
   }
   private _timeInput = false;
 
