@@ -40,7 +40,7 @@ import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
-import { MtxCalendarView, MtxDatetimepickerType, MtxTimeI18nLabels } from './datetimepicker-types';
+import { MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
 import { DOCUMENT } from '@angular/common';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
@@ -153,11 +153,6 @@ export class MtxDatetimepickerContent<D>
 })
 export class MtxDatetimepicker<D> implements OnDestroy {
   private _document = inject(DOCUMENT);
-
-  @Input() i18nLabels: MtxTimeI18nLabels = {
-    cancelButtonLabel: 'Cancel',
-    confirmButtonLabel: 'Ok',
-  };
 
   /** Whether to show multi-year view. */
   @Input()

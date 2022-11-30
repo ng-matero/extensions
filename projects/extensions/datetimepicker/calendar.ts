@@ -38,12 +38,7 @@ import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
-import {
-  MtxAmPM,
-  MtxCalendarView,
-  MtxDatetimepickerType,
-  MtxTimeI18nLabels,
-} from './datetimepicker-types';
+import { MtxAmPM, MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
 
 /**
  * A calendar that is used as part of the datetimepicker.
@@ -90,11 +85,6 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   /** Step over minutes. */
   @Input() timeInterval: number = 1;
-
-  @Input() i18nLabels: MtxTimeI18nLabels = {
-    cancelButtonLabel: 'Cancel',
-    confirmButtonLabel: 'Ok',
-  };
 
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
