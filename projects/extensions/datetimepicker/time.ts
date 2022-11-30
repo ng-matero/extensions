@@ -197,8 +197,7 @@ export class MtxTimeInput implements OnDestroy {
     }
 
     const value = coerceNumberProperty(this.inputElement?.value ?? null);
-
-    if (value) {
+    if (value || value === 0) {
       const clampedValue = Math.min(Math.max(value, this._min), this._max);
       if (clampedValue !== value) {
         this.writeValue(clampedValue);
@@ -413,7 +412,6 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
   handleHourInputChange(value: NumberInput) {
     const hour = coerceNumberProperty(value);
     if (hour || hour === 0) {
-      console.log(hour, this.updateHourForAmPm(hour), this.AMPM);
       const newValue = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
