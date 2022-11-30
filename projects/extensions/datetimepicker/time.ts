@@ -24,7 +24,8 @@ import {
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxClockView } from './clock';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
-import { MtxAmPM, MtxTimeI18nLabels } from './datetimepicker-types';
+import { MtxDatetimepickerIntl } from './datetimepicker-intl';
+import { MtxAmPM } from './datetimepicker-types';
 
 function pad(num: NumberInput, size: number) {
   num = String(num);
@@ -42,25 +43,25 @@ function pad(num: NumberInput, size: number) {
 })
 export class MtxTimeInput implements OnDestroy {
   _interval: number = 1;
-  @Input('mtxInterval')
-  set mtxInterval(value: NumberInput) {
+  @Input('timeInterval')
+  set timeInterval(value: NumberInput) {
     this._interval = coerceNumberProperty(value);
   }
 
   _min = 0;
-  @Input('mtxMin')
-  set mtxMin(value: NumberInput) {
+  @Input('timeMin')
+  set timeMin(value: NumberInput) {
     this._min = coerceNumberProperty(value);
   }
 
   _max = Infinity;
-  @Input('mtxMax')
-  set mtxMax(value: NumberInput) {
+  @Input('timeMax')
+  set timeMax(value: NumberInput) {
     this._max = coerceNumberProperty(value);
   }
 
   @Output()
-  mtxValueChanged = new EventEmitter<NumberInput>();
+  timeValueChanged = new EventEmitter<NumberInput>();
 
   private _value: NumberInput;
 
@@ -111,8 +112,8 @@ export class MtxTimeInput implements OnDestroy {
     return !this.valid;
   }
 
-  @Input('mtxValue')
-  set mtxValue(value: NumberInput) {
+  @Input('timeValue')
+  set timeValue(value: NumberInput) {
     this._value = coerceNumberProperty(value);
     if (!this.hasFocus) {
       this.writeValue(this._value);
@@ -123,7 +124,7 @@ export class MtxTimeInput implements OnDestroy {
   blur() {
     this.writeValue(this._value);
     this.writePlaceholder(this._value);
-    this.mtxValueChanged.emit(this._value);
+    this.timeValueChanged.emit(this._value);
   }
 
   focus() {
@@ -170,7 +171,7 @@ export class MtxTimeInput implements OnDestroy {
         this.writeValue(value);
         this.writePlaceholder(value);
         this.clampInputValue();
-        this.mtxValueChanged.emit(this._value);
+        this.timeValueChanged.emit(this._value);
       }
     }
   }
@@ -188,7 +189,7 @@ export class MtxTimeInput implements OnDestroy {
 
   inputChangedHandler() {
     this.clampInputValue();
-    this.mtxValueChanged.emit(this._value);
+    this.timeValueChanged.emit(this._value);
   }
 
   clampInputValue() {
@@ -248,11 +249,6 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
 
   /** Step over minutes. */
   @Input() interval: number = 1;
-
-  @Input() i18nLabels: MtxTimeI18nLabels = {
-    cancelButtonLabel: 'Cancel',
-    confirmButtonLabel: 'Ok',
-  };
 
   @ViewChild('hourInput', { read: ElementRef<HTMLInputElement> })
   protected hourInputElement: ElementRef<HTMLInputElement> | undefined;
@@ -382,7 +378,10 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
     return String(value);
   }
 
-  constructor(private _adapter: DatetimeAdapter<D>, private cdr: ChangeDetectorRef) {}
+  constructor(
+    private _adapter: DatetimeAdapter<D>,
+    protected _datepickerIntl: MtxDatetimepickerIntl
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     // when clockView changes by input we should focus the correct input
@@ -427,7 +426,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
       // then the hourInputDirective will not have been updated since "13" === "13" same reference so no change detected
       // by directly setting it within this handler, we handle this usecase
       if (this.hourInputDirective) {
-        this.hourInputDirective.mtxValue = this.hour;
+        this.hourInputDirective.timeValue = this.hour;
       }
     }
   }
@@ -472,9 +471,14 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
       // then the minuteInputDirective will not have been updated since "40" === "40" same reference so no change detected
       // by directly setting it within this handler, we handle this usecase
       if (this.minuteInputDirective) {
-        this.minuteInputDirective.mtxValue = this.minute;
+        this.minuteInputDirective.timeValue = this.minute;
       }
     }
+  }
+
+  handleFocus(clockView: MtxClockView) {
+    this.clockView = clockView;
+    this.clockViewChange.emit(clockView);
   }
 
   _timeSelected(date: D): void {
