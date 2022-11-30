@@ -22,6 +22,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { SubscriptionLike } from 'rxjs';
 import { MtxClockView } from './clock';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
@@ -228,7 +229,7 @@ export class MtxTimeInput implements OnDestroy {
     '[class.mtx-time]': 'true',
   },
 })
-export class MtxTime<D> implements OnChanges, AfterViewInit {
+export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   /** Emits when the currently selected date changes. */
   @Output() readonly selectedChange = new EventEmitter<D>();
 
@@ -261,6 +262,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
 
   @ViewChild('minuteInput', { read: MtxTimeInput })
   protected minuteInputDirective: MtxTimeInput | undefined;
+  datepickerIntlChangesSubscription: SubscriptionLike;
 
   /** Whether the clock uses 12 hour format. */
   @Input()
@@ -380,8 +382,13 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
 
   constructor(
     private _adapter: DatetimeAdapter<D>,
-    protected _datepickerIntl: MtxDatetimepickerIntl
-  ) {}
+    protected _datepickerIntl: MtxDatetimepickerIntl,
+    private _changedetector: ChangeDetectorRef
+  ) {
+    this.datepickerIntlChangesSubscription = this._datepickerIntl.changes.subscribe(() => {
+      this._changedetector.detectChanges();
+    });
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     // when clockView changes by input we should focus the correct input
@@ -502,6 +509,12 @@ export class MtxTime<D> implements OnChanges, AfterViewInit {
 
   cancel() {
     this._userSelection.emit();
+  }
+
+  ngOnDestroy(): void {
+    if (this.datepickerIntlChangesSubscription) {
+      this.datepickerIntlChangesSubscription.unsubscribe();
+    }
   }
 
   static ngAcceptInputType_twelvehour: BooleanInput;
