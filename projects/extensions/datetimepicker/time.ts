@@ -197,7 +197,7 @@ export class MtxTimeInput implements OnDestroy {
     }
 
     const value = coerceNumberProperty(this.inputElement?.value ?? null);
-    if (value || value === 0) {
+    if (value) {
       const clampedValue = Math.min(Math.max(value, this._min), this._max);
       if (clampedValue !== value) {
         this.writeValue(clampedValue);
