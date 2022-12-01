@@ -26,7 +26,7 @@ import { SubscriptionLike } from 'rxjs';
 import { MtxClockView } from './clock';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
-import { MtxAmPM } from './datetimepicker-types';
+import { MtxAMPM } from './datetimepicker-types';
 
 function pad(num: NumberInput, size: number) {
   num = String(num);
@@ -240,7 +240,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   @Output() readonly _userSelection = new EventEmitter<void>();
 
   /** Emits when AM/PM button are clicked. */
-  @Output() readonly ampmChange = new EventEmitter<MtxAmPM>();
+  @Output() readonly ampmChange = new EventEmitter<MtxAMPM>();
 
   /** Emits when AM/PM button are clicked. */
   @Output() readonly clockViewChange = new EventEmitter<MtxClockView>();
@@ -276,7 +276,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
 
   /** Whether the time is now in AM or PM. */
   @Input()
-  AMPM: MtxAmPM = 'AM';
+  AMPM: MtxAMPM = 'AM';
 
   /**
    * The date to display in this clock view.

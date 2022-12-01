@@ -38,7 +38,7 @@ import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
-import { MtxAmPM, MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
+import { MtxAMPM, MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
 
 /**
  * A calendar that is used as part of the datetimepicker.
@@ -100,7 +100,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   @Output() _userSelection = new EventEmitter<void>();
 
-  _AMPM!: MtxAmPM;
+  _AMPM!: MtxAMPM;
 
   _clockView: MtxClockView = 'hour';
 
@@ -433,7 +433,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     }
   }
 
-  _ampmClicked(source: MtxAmPM): void {
+  _ampmClicked(source: MtxAMPM): void {
     this._currentView = 'clock';
 
     if (source === this._AMPM) {
