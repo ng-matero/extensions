@@ -38,10 +38,7 @@ import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
-import { MtxDatetimepickerType } from './datetimepicker-types';
-
-/** Possible views for datetimepicker calendar. */
-export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
+import { MtxAMPM, MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
 
 /**
  * A calendar that is used as part of the datetimepicker.
@@ -53,6 +50,7 @@ export type MtxCalendarView = 'clock' | 'month' | 'year' | 'multi-year';
   styleUrls: ['calendar.scss'],
   host: {
     'class': 'mtx-calendar',
+    '[class.mtx-time-input-calendar]': 'timeInput',
     'tabindex': '0',
     '(keydown)': '_handleCalendarBodyKeydown($event)',
   },
@@ -102,7 +100,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   @Output() _userSelection = new EventEmitter<void>();
 
-  _AMPM!: string;
+  _AMPM!: MtxAMPM;
 
   _clockView: MtxClockView = 'hour';
 
@@ -153,6 +151,20 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     this._startAt = this._adapter.getValidDateOrNull(value);
   }
   private _startAt!: D | null;
+
+  /**
+   * Whether the calendar is in time mode. In time mode the calendar clock gets time input elements rather then just clock
+   *
+   * When touchUi is enabled this will be disabled
+   */
+  @Input()
+  get timeInput(): boolean {
+    return this._timeInput;
+  }
+  set timeInput(value: boolean) {
+    this._timeInput = coerceBooleanProperty(value);
+  }
+  private _timeInput = false;
 
   /** The currently selected date. */
   @Input()
@@ -376,6 +388,13 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     }
   }
 
+  _timeSelected2(date: D) {
+    this._activeDate = this._updateDate(date);
+    if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
+      this.selectedChange.emit(date);
+    }
+  }
+
   _timeSelected(date: D): void {
     if (this._clockView !== 'minute') {
       this._activeDate = this._updateDate(date);
@@ -406,23 +425,40 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   _selectAMPM(date: D) {
-    if (this._adapter.getHour(date) > 11) {
+    const hour = this._adapter.getHour(date);
+    if (hour > 11) {
       this._AMPM = 'PM';
     } else {
       this._AMPM = 'AM';
     }
   }
 
-  _ampmClicked(source: string): void {
+  _ampmClicked(source: MtxAMPM): void {
+    this._currentView = 'clock';
+
     if (source === this._AMPM) {
       return;
     }
     this._AMPM = source;
+
+    // if AMPM changed from PM to AM substract 12 hours
+    const currentHour = this._adapter.getHour(this._activeDate);
+    let newHourValue;
     if (this._AMPM === 'AM') {
-      this._activeDate = this._adapter.addCalendarHours(this._activeDate, -12);
-    } else {
-      this._activeDate = this._adapter.addCalendarHours(this._activeDate, 12);
+      newHourValue = currentHour >= 12 ? this._adapter.getHour(this._activeDate) - 12 : 12;
     }
+    // otherwise add 12 hours
+    else {
+      newHourValue = (currentHour + 12) % 24;
+    }
+
+    this._activeDate = this._adapter.createDatetime(
+      this._adapter.getYear(this._activeDate),
+      this._adapter.getMonth(this._activeDate),
+      this._adapter.getDate(this._activeDate),
+      newHourValue,
+      this._adapter.getMinute(this._activeDate)
+    );
   }
 
   _yearClicked(): void {
@@ -689,16 +725,24 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
         this._activeDate =
           this._clockView === 'hour'
             ? this._adapter.addCalendarHours(this._activeDate, 1)
-            : this._adapter.addCalendarMinutes(this._activeDate, 1);
+            : this._adapter.addCalendarMinutes(this._activeDate, this.timeInterval);
+
+        // if the hours changed the am/pm we should update the AM/PM
+        this._selectAMPM(this._activeDate);
         break;
       case DOWN_ARROW:
         this._activeDate =
           this._clockView === 'hour'
             ? this._adapter.addCalendarHours(this._activeDate, -1)
-            : this._adapter.addCalendarMinutes(this._activeDate, -1);
+            : this._adapter.addCalendarMinutes(this._activeDate, -this.timeInterval);
+
+        // if the hours changed the am/pm we should update the AM/PM
+        this._selectAMPM(this._activeDate);
         break;
       case ENTER:
-        this._timeSelected(this._activeDate);
+        if (!this.timeInput) {
+          this._timeSelected(this._activeDate);
+        }
         return;
       default:
         // Don't prevent default or focus active cell on keys that we don't explicitly handle.
@@ -743,4 +787,5 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   static ngAcceptInputType_multiYearSelector: BooleanInput;
   static ngAcceptInputType_twelvehour: BooleanInput;
+  static ngAcceptInputType_timeInput: BooleanInput;
 }

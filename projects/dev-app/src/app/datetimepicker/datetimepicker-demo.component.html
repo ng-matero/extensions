@@ -12,6 +12,18 @@
   </mat-form-field>
 
   <mat-form-field>
+    <mat-placeholder>DateTime with manual input</mat-placeholder>
+    <mtx-datetimepicker-toggle [for]="datetimePickerManual" matSuffix></mtx-datetimepicker-toggle>
+    <mtx-datetimepicker #datetimePickerManual startView="month" [timeInterval]="5"
+                        type="datetime" [timeInput]="true"></mtx-datetimepicker>
+    <input [mtxDatetimepicker]="datetimePickerManual" [max]="tomorrow" [min]="today"
+           autocomplete="false" formControlName="dateTimeManual" matInput required>
+    <mat-error *ngIf="group.get('dateTimeManual')?.errors?.required">required</mat-error>
+    <mat-error *ngIf="group.get('dateTimeManual')?.errors?.mtxDatetimepickerMin">min</mat-error>
+    <mat-error *ngIf="group.get('dateTimeManual')?.errors?.mtxDatetimepickerMax">max</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
     <mat-placeholder>DateTime Year selector</mat-placeholder>
     <mtx-datetimepicker-toggle [for]="datetimeYearPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datetimeYearPicker [multiYearSelector]="true" startView="month"
@@ -39,6 +51,18 @@
                         [twelvehour]="true" type="time"></mtx-datetimepicker>
     <input [mtxDatetimepicker]="timeAMPMPicker" formControlName="timeAMPM" matInput required>
     <mat-error *ngIf="group.get('timeAMPM')?.errors?.required">required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-placeholder>Time AM/PM with manual input</mat-placeholder>
+    <mtx-datetimepicker-toggle [for]="timeAMPMPickerManual" matSuffix></mtx-datetimepicker-toggle>
+    <mtx-datetimepicker #timeAMPMPickerManual startView="month" [timeInterval]="5"
+                        type="datetime" [timeInput]="true" [twelvehour]="true"></mtx-datetimepicker>
+    <input [mtxDatetimepicker]="timeAMPMPickerManual"
+           autocomplete="false" formControlName="timeAMPMManual" matInput required>
+    <mat-error *ngIf="group.get('timeAMPMManual')?.errors?.required">required</mat-error>
+    <mat-error *ngIf="group.get('timeAMPMManual')?.errors?.mtxDatetimepickerMin">min</mat-error>
+    <mat-error *ngIf="group.get('timeAMPMManual')?.errors?.mtxDatetimepickerMax">max</mat-error>
   </mat-form-field>
 
   <mat-form-field>

@@ -35,12 +35,12 @@ import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
-import { MtxCalendarView, MtxCalendar } from './calendar';
+import { MtxCalendar } from './calendar';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
-import { MtxDatetimepickerType } from './datetimepicker-types';
+import { MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
 import { DOCUMENT } from '@angular/common';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
@@ -309,6 +309,20 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     this._touchUi = coerceBooleanProperty(value);
   }
   private _touchUi = false;
+
+  /**
+   * Whether the calendar is in time mode. In time mode the calendar clock gets time input elements rather then just clock
+   *
+   * When touchUi is enabled this will be disabled
+   */
+  @Input()
+  get timeInput(): boolean {
+    return this._timeInput && !this.touchUi;
+  }
+  set timeInput(value: boolean) {
+    this._timeInput = coerceBooleanProperty(value);
+  }
+  private _timeInput = false;
 
   /** Whether the datetimepicker pop-up should be disabled. */
   @Input()
@@ -624,5 +638,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   static ngAcceptInputType_disabled: BooleanInput;
   static ngAcceptInputType_opened: BooleanInput;
   static ngAcceptInputType_touchUi: BooleanInput;
+  static ngAcceptInputType_timeInput: BooleanInput;
   static ngAcceptInputType_restoreFocus: BooleanInput;
 }

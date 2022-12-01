@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MtxCalendar } from './calendar';
 import { MtxCalendarBody } from './calendar-body';
 import { MtxClock } from './clock';
+import { MtxTime, MtxTimeInput } from './time';
 import {
   MtxDatetimepicker,
   MtxDatetimepickerContent,
@@ -24,6 +25,8 @@ import { MtxMultiYearView } from './multi-year-view';
     MtxCalendar,
     MtxCalendarBody,
     MtxClock,
+    MtxTime,
+    MtxTimeInput,
     MtxDatetimepicker,
     MtxDatetimepickerToggle,
     MtxDatetimepickerToggleIcon,
@@ -37,6 +40,8 @@ import { MtxMultiYearView } from './multi-year-view';
     MtxCalendar,
     MtxCalendarBody,
     MtxClock,
+    MtxTime,
+    // MtxTimeInputValue,
     MtxDatetimepicker,
     MtxDatetimepickerToggle,
     MtxDatetimepickerToggleIcon,

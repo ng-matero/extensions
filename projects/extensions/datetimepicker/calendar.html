@@ -95,16 +95,40 @@
                        [selected]="selected!"
                        [type]="type">
   </mtx-multi-year-view>
-  <mtx-clock (_userSelection)="_userSelected()"
-             (activeDateChange)="_onActiveDateChange($event)"
-             (selectedChange)="_timeSelected($event)"
-             *ngSwitchDefault
-             [dateFilter]="dateFilter"
-             [interval]="timeInterval"
-             [maxDate]="maxDate"
-             [minDate]="minDate"
-             [selected]="_activeDate"
-             [startView]="_clockView"
-             [twelvehour]="twelvehour">
-  </mtx-clock>
+
+  <ng-container *ngSwitchDefault>
+    
+    <mtx-time *ngIf="timeInput; else clock" 
+      (_userSelection)="_userSelected()"
+      (activeDateChange)="_onActiveDateChange($event)"
+      (selectedChange)="_timeSelected2($event)"
+      (ampmChange)="_ampmClicked($event)"
+      [AMPM]="_AMPM"
+      (clockViewChange)="_clockView = $event"
+      [twelvehour]="twelvehour"
+      [clockView]="_clockView"
+      [dateFilter]="dateFilter"
+      [interval]="timeInterval"
+      [maxDate]="maxDate"
+      [minDate]="minDate"
+      [selected]="_activeDate"
+    >
+    </mtx-time>
+
+    <ng-template #clock>
+      <mtx-clock 
+        (_userSelection)="_userSelected()"
+        (activeDateChange)="_onActiveDateChange($event)"
+        (selectedChange)="_timeSelected($event)"
+        [dateFilter]="dateFilter"
+        [interval]="timeInterval"
+        [maxDate]="maxDate"
+        [minDate]="minDate"
+        [selected]="_activeDate"
+        [startView]="_clockView"
+        [twelvehour]="twelvehour"
+      >
+      </mtx-clock>
+    </ng-template>
+  </ng-container>
 </div>

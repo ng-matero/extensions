@@ -1,0 +1,65 @@
+<div class="mtx-time-row-wrapper">
+  <div class="mtx-time-row">
+    <input 
+      class="mtx-time-input" 
+      [class.mtx-time-input-active]="clockView === 'hour'" 
+      [class.mtx-time-input-warning]="!hourInput.valid"
+      #hourInput="mtxTimeInput" 
+      type="text" 
+      inputmode="numeric" 
+      maxlength="2"
+      (timeValueChanged)="handleHourInputChange($event)"
+      [timeValue]="hour"
+      [timeMin]="twelvehour ? 1 : 0"
+      [timeMax]="twelvehour ? 12 : 23"
+      (focus)="handleFocus('hour')"
+    />
+
+    <div class="mtx-time-seperator">
+      <span>:</span>
+    </div>
+
+    <input 
+      class="mtx-time-input" 
+      [class.mtx-time-input-active]="clockView === 'minute'" 
+      [class.mtx-time-input-warning]="!minuteInput.valid"
+      #minuteInput="mtxTimeInput" 
+      type="text" 
+      inputmode="numeric" 
+      [timeMin]="0" 
+      [timeMax]="59" 
+      maxlength="2"
+      (timeValueChanged)="handleMinuteInputChange($event)"
+      [timeValue]="minute"
+      [timeInterval]="interval"
+      (focus)="handleFocus('minute')"
+    />
+
+    <div *ngIf="twelvehour" class="mtx-time-ampm">
+      <button class="mtx-time-am" (keydown)="$event.stopPropagation()" [class.mtx-time-ampm-active]="AMPM === 'AM'" (click)="ampmChange.emit('AM')">AM</button>
+      <button class="mtx-time-pm" (keydown)="$event.stopPropagation()" [class.mtx-time-ampm-active]="AMPM === 'PM'" (click)="ampmChange.emit('PM')">PM</button>
+    </div>
+  </div>
+</div>
+
+<mtx-clock 
+  (selectedChange)="_timeSelected($event)"
+  (activeDateChange)="_onActiveDateChange($event)"
+  [dateFilter]="dateFilter"
+  [interval]="interval"
+  [maxDate]="maxDate"
+  [minDate]="minDate"
+  [selected]="selected"
+  [startView]="clockView"
+  [twelvehour]="twelvehour"
+  >
+</mtx-clock>
+ 
+<div class="mtx-time-btn-row">
+  <button class="mtx-time-cancel" [disabled]="minuteInputDirective?.invalid || hourInputDirective?.invalid" mat-button (click)="confirm()">
+    {{ _datepickerIntl.okLabel }}
+  </button>
+  <button class="mtx-time-confirm" mat-button (click)="cancel()">
+    {{ _datepickerIntl.cancelLabel }}
+  </button> 
+</div>

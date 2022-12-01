@@ -1,0 +1,93 @@
+.mtx-time {
+  display: block;
+  outline: none;
+  user-select: none;
+}
+
+$time-font-size: 40px;
+$time-border-radius: 8px;
+
+.mtx-time-row-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mtx-time-row {
+  display: inline-flex;
+  padding: 10px 24px;
+  justify-content: space-evenly;
+}
+
+.mtx-time-input {
+  width: 80px;
+  height: 64px;
+  line-height: 80px;
+  vertical-align: middle;
+  font-size: $time-font-size;
+  text-align: center;
+  border-radius: $time-border-radius;
+}
+
+.mtx-time-input::placeholder {
+  text-align: center;
+}
+
+.mtx-time-input::-webkit-outer-spin-button,
+.mtx-time-input::-webkit-inner-spin-button {
+  appearance: none;
+}
+
+.mtx-time-seperator {
+  height: 64px;
+  font-size: $time-font-size;
+  text-align: center;
+  margin-left: 4px;
+  margin-right: 4px;
+  display: grid;
+  place-items: center;
+}
+
+// AM/PM buttons
+.mtx-time-ampm {
+  display: inline-flex;
+  flex-direction: column;
+  margin-left: 8px;
+}
+
+.mtx-time-am,
+.mtx-time-pm {
+  height: 30px;
+  width: 42px;
+  display: inline-flex;
+  place-items: center;
+  place-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.mtx-time-am {
+  border-top-left-radius: $time-border-radius;
+  border-top-right-radius: $time-border-radius;
+  border: 1px solid grey;
+  border-bottom: none;
+  background-color: lightcoral;
+}
+
+.mtx-time-pm {
+  border-bottom-left-radius: $time-border-radius;
+  border-bottom-right-radius: $time-border-radius;
+  border: 1px solid grey;
+  background-color: lightcoral;
+}
+
+// buttons
+.mtx-time-btn-row {
+  width: 100%;
+  display: inline-flex;
+  flex-direction: row-reverse;
+}
+
+.mtx-time-btn-row button[mat-button]:not(:first-child) {
+  margin-right: 4px;
+}

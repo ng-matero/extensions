@@ -16,6 +16,7 @@
                 [twelvehour]="datetimepicker.twelvehour"
                 [selected]="datetimepicker._selected"
                 [@fadeInCalendar]="'enter'"
+                [timeInput]="datetimepicker.timeInput"
                 (selectedChange)="datetimepicker._select($event)"
                 (viewChanged)="datetimepicker._viewChanged($event)"
                 (_userSelection)="datetimepicker.close()">

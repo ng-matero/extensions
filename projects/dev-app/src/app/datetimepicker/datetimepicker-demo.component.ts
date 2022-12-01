@@ -17,6 +17,7 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
   group: UntypedFormGroup;
   today: moment.Moment;
   tomorrow: moment.Moment;
+  yesterday: moment.Moment;
   min: moment.Moment;
   max: moment.Moment;
   start: moment.Moment;
@@ -31,6 +32,7 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
   ) {
     this.today = moment.utc();
     this.tomorrow = moment.utc().date(moment.utc().date() + 1);
+    this.yesterday = moment.utc().date(moment.utc().date() - 1);
     this.min = this.today.clone().year(2018).month(10).date(3).hour(11).minute(10);
     this.max = this.min.clone().date(4).minute(45);
     this.start = this.today.clone().year(1930).month(9).date(28);
@@ -50,10 +52,12 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
 
     this.group = fb.group({
       dateTime: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
+      dateTimeManual: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
       dateTimeYear: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
       date: [null, Validators.required],
       time: [null, Validators.required],
       timeAMPM: [null, Validators.required],
+      timeAMPMManual: [null, Validators.required],
       month: [null, Validators.required],
       year: [null, Validators.required],
       mintest: [this.today, Validators.required],
