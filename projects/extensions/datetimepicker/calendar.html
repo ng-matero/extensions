@@ -1,7 +1,8 @@
 <div class="mtx-calendar-header">
-  <div (click)="_yearClicked()" *ngIf="type !== 'time'"
+  <div *ngIf="type !== 'time'"
+       class="mtx-calendar-header-year"
        [class.active]="currentView === 'year' || currentView === 'multi-year'"
-       class="mtx-calendar-header-year" role="button">
+       role="button" (click)="_yearClicked()">
     <span>{{ _yearLabel }}</span>
     <svg *ngIf="multiYearSelector || type === 'year'"
          class="mtx-calendar-header-year-dropdown"
@@ -10,32 +11,25 @@
     </svg>
   </div>
   <div class="mtx-calendar-header-date-time">
-    <span (click)="_dateClicked()" *ngIf="type !== 'time' && type !== 'year'"
+    <span *ngIf="type !== 'time' && type !== 'year'"
+          class="mtx-calendar-header-date"
           [class.active]="currentView === 'month'"
           [class.not-clickable]="type === 'month'"
-          class="mtx-calendar-header-date"
-          role="button">{{ _dateLabel }}</span>
-    <span *ngIf="type.endsWith('time')"
-          [class.active]="currentView === 'clock'"
-          class="mtx-calendar-header-time">
+          role="button" (click)="_dateClicked()">{{ _dateLabel }}</span>
+    <span *ngIf="type.endsWith('time')" class="mtx-calendar-header-time"
+          [class.active]="currentView === 'clock'">
       <span class="mtx-calendar-header-hour-minute-container">
-        <span (click)="_hoursClicked()"
-              [class.active]="_clockView === 'hour'"
-              class="mtx-calendar-header-hours"
-              role="button">{{ _hoursLabel }}</span>
+        <span class="mtx-calendar-header-hours" [class.active]="_clockView === 'hour'"
+              role="button" (click)="_hoursClicked()">{{ _hoursLabel }}</span>
         <span class="mtx-calendar-header-hour-minute-separator">:</span>
-        <span (click)="_minutesClicked()"
-              [class.active]="_clockView === 'minute'"
-              class="mtx-calendar-header-minutes"
-              role="button">{{ _minutesLabel }}</span>
+        <span class="mtx-calendar-header-minutes" [class.active]="_clockView === 'minute'"
+              role="button" (click)="_minutesClicked()">{{ _minutesLabel }}</span>
       </span>
       <span *ngIf="twelvehour" class="mtx-calendar-header-ampm-container">
-        <span (click)="_ampmClicked('AM')"
-              [class.active]="_AMPM === 'AM'"
-              class="mtx-calendar-header-ampm" role="button">AM</span>
-        <span (click)="_ampmClicked('PM')"
-              [class.active]="_AMPM === 'PM'"
-              class="mtx-calendar-header-ampm" role="button">PM</span>
+        <span class="mtx-calendar-header-ampm" [class.active]="_AMPM === 'AM'" role="button"
+              (click)="_ampmClicked('AM')">AM</span>
+        <span class="mtx-calendar-header-ampm" [class.active]="_AMPM === 'PM'" role="button"
+              (click)="_ampmClicked('PM')">PM</span>
       </span>
     </span>
   </div>
@@ -44,50 +38,52 @@
   <div *ngIf="currentView === 'month' || currentView === 'year' || currentView === 'multi-year'"
        class="mtx-month-content">
     <div class="mtx-calendar-controls">
-      <button mat-icon-button type="button" (click)="_previousClicked()"
+      <button mat-icon-button type="button"
+              class="mtx-calendar-previous-button"
+              [class.disabled]="!_previousEnabled()"
               [attr.aria-disabled]="!_previousEnabled()"
               [attr.aria-label]="_ariaLabelPrev"
-              [class.disabled]="!_previousEnabled()"
-              class="mtx-calendar-previous-button">
+              (click)="_previousClicked()">
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
         </svg>
       </button>
-      <div [@slideCalendar]="_calendarState"
-           (@slideCalendar.done)="_calendarStateDone()"
-           class="mtx-calendar-period-button">
+      <div class="mtx-calendar-period-button"
+           [@slideCalendar]="_calendarState"
+           (@slideCalendar.done)="_calendarStateDone()">
         <strong>{{ _monthYearLabel }}</strong>
       </div>
-      <button mat-icon-button type="button" (click)="_nextClicked()"
+      <button mat-icon-button type="button"
+              class="mtx-calendar-next-button"
+              [class.disabled]="!_nextEnabled()"
               [attr.aria-disabled]="!_nextEnabled()"
               [attr.aria-label]="_ariaLabelNext"
-              [class.disabled]="!_nextEnabled()"
-              class="mtx-calendar-next-button">
+              (click)="_nextClicked()">
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
         </svg>
       </button>
     </div>
   </div>
-  <mtx-month-view (_userSelection)="_userSelected()"
+  <mtx-month-view *ngSwitchCase="'month'"
+                  (_userSelection)="_userSelected()"
                   (selectedChange)="_dateSelected($event)"
-                  *ngSwitchCase="'month'"
                   [activeDate]="_activeDate"
                   [dateFilter]="_dateFilterForViews"
                   [selected]="selected!"
                   [type]="type">
   </mtx-month-view>
-  <mtx-year-view (_userSelection)="_userSelected()"
+  <mtx-year-view *ngSwitchCase="'year'"
+                 (_userSelection)="_userSelected()"
                  (selectedChange)="_monthSelected($event)"
-                 *ngSwitchCase="'year'"
                  [activeDate]="_activeDate"
                  [dateFilter]="_dateFilterForViews"
                  [selected]="selected!"
                  [type]="type">
   </mtx-year-view>
-  <mtx-multi-year-view (_userSelection)="_userSelected()"
+  <mtx-multi-year-view *ngSwitchCase="'multi-year'"
+                       (_userSelection)="_userSelected()"
                        (selectedChange)="_yearSelected($event)"
-                       *ngSwitchCase="'multi-year'"
                        [activeDate]="_activeDate"
                        [dateFilter]="_dateFilterForViews"
                        [maxDate]="maxDate"
@@ -97,7 +93,6 @@
   </mtx-multi-year-view>
 
   <ng-container *ngSwitchDefault>
-
     <mtx-time *ngIf="timeInput; else clock"
               (_userSelection)="_userSelected()"
               (activeDateChange)="_onActiveDateChange($event)"

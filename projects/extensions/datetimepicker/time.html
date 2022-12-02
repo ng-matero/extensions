@@ -57,9 +57,8 @@
   <button class="mtx-time-cancel-button" mat-button (click)="handleCancel()">
     {{ _datetimepickerIntl.cancelLabel }}
   </button>
-  <button class="mtx-time-ok-button"
-          [disabled]="minuteInputDirective?.invalid || hourInputDirective?.invalid"
-          mat-button (click)="handleOk()">
+  <button class="mtx-time-ok-button" mat-button (click)="handleOk()"
+          [disabled]="minuteInputDirective?.invalid || hourInputDirective?.invalid">
     {{ _datetimepickerIntl.okLabel }}
   </button>
 </div>

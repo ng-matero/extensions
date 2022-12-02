@@ -1,6 +1,4 @@
-<div cdkTrapFocus
-     class="mtx-datetimepicker-content-container"
-     [attr.mode]="datetimepicker.mode">
+<div class="mtx-datetimepicker-content-container" [attr.mode]="datetimepicker.mode" cdkTrapFocus>
   <mtx-calendar [id]="datetimepicker.id"
                 [ngClass]="datetimepicker.panelClass"
                 [attr.mode]="datetimepicker.mode"
@@ -15,10 +13,10 @@
                 [timeInterval]="datetimepicker.timeInterval"
                 [twelvehour]="datetimepicker.twelvehour"
                 [selected]="datetimepicker._selected"
-                [@fadeInCalendar]="'enter'"
                 [timeInput]="datetimepicker.timeInput"
                 (selectedChange)="datetimepicker._select($event)"
                 (viewChanged)="datetimepicker._viewChanged($event)"
-                (_userSelection)="datetimepicker.close()">
+                (_userSelection)="datetimepicker.close()"
+                [@fadeInCalendar]="'enter'">
   </mtx-calendar>
 </div>
