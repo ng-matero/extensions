@@ -13,7 +13,6 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  NgZone,
   OnChanges,
   OnDestroy,
   Output,
@@ -43,26 +42,34 @@ function pad(num: NumberInput, size: number) {
   exportAs: 'mtxTimeInput',
 })
 export class MtxTimeInput implements OnDestroy {
-  _interval: number = 1;
   @Input('timeInterval')
   set timeInterval(value: NumberInput) {
     this._interval = coerceNumberProperty(value);
   }
+  private _interval: number = 1;
 
-  _min = 0;
   @Input('timeMin')
   set timeMin(value: NumberInput) {
     this._min = coerceNumberProperty(value);
   }
+  private _min = 0;
 
-  _max = Infinity;
   @Input('timeMax')
   set timeMax(value: NumberInput) {
     this._max = coerceNumberProperty(value);
   }
+  private _max = Infinity;
 
-  @Output()
-  timeValueChanged = new EventEmitter<NumberInput>();
+  @Input('timeValue')
+  set timeValue(value: NumberInput) {
+    this._value = coerceNumberProperty(value);
+    if (!this.hasFocus) {
+      this.writeValue(this._value);
+    }
+    this.writePlaceholder(this._value);
+  }
+
+  @Output() timeValueChanged = new EventEmitter<NumberInput>();
 
   private _value: NumberInput;
 
@@ -75,7 +82,7 @@ export class MtxTimeInput implements OnDestroy {
       passive: true,
     });
 
-    // not passive since we want to be able to preventDefault()
+    // Do not passive since we want to be able to preventDefault()
     this.inputElement.addEventListener('keypress', this.keyPressListener);
     this.inputElement.addEventListener('input', this.inputEventListener, {
       passive: true,
@@ -90,15 +97,15 @@ export class MtxTimeInput implements OnDestroy {
     return this.element.nativeElement as HTMLInputElement;
   }
 
-  // we look here at the placeholder value, because we write '' into the value on focus
+  // We look here at the placeholder value, because we write '' into the value on focus
   // placeholder should always be up to date with "currentValue"
   get valid() {
-    // at the start _value is undefined therefore this would result in not valid and make a ugly warning border
-    // afterwards we can safely check
+    // At the start _value is undefined therefore this would result in not valid and
+    // make a ugly warning border afterwards we can safely check
     if (this._value) {
       const currentValue = String(this.inputElement.value);
 
-      // it can be that currentValue is empty due to we removing the value on focus,
+      // It can be that currentValue is empty due to we removing the value on focus,
       // if that is the case we should check previous value which should be in the placeholder
       if (currentValue.length) {
         return this._value == this.inputElement.value;
@@ -111,15 +118,6 @@ export class MtxTimeInput implements OnDestroy {
 
   get invalid() {
     return !this.valid;
-  }
-
-  @Input('timeValue')
-  set timeValue(value: NumberInput) {
-    this._value = coerceNumberProperty(value);
-    if (!this.hasFocus) {
-      this.writeValue(this._value);
-    }
-    this.writePlaceholder(this._value);
   }
 
   blur() {
@@ -179,7 +177,7 @@ export class MtxTimeInput implements OnDestroy {
 
   /**
    * Prevent non number inputs in the inputElement with the exception of Enter/BackSpace
-   * @param e KeyboardEvent
+   * @param event KeyboardEvent
    */
   keyPressHandler(event: KeyboardEvent) {
     const key = event?.key ?? null;
@@ -262,7 +260,8 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
 
   @ViewChild('minuteInput', { read: MtxTimeInput })
   protected minuteInputDirective: MtxTimeInput | undefined;
-  datepickerIntlChangesSubscription: SubscriptionLike;
+
+  datetimepickerIntlChangesSubscription: SubscriptionLike;
 
   /** Whether the clock uses 12 hour format. */
   @Input()
@@ -275,8 +274,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   private _twelvehour = false;
 
   /** Whether the time is now in AM or PM. */
-  @Input()
-  AMPM: MtxAMPM = 'AM';
+  @Input() AMPM: MtxAMPM = 'AM';
 
   /**
    * The date to display in this clock view.
@@ -382,11 +380,11 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
 
   constructor(
     private _adapter: DatetimeAdapter<D>,
-    protected _datepickerIntl: MtxDatetimepickerIntl,
-    private _changedetector: ChangeDetectorRef
+    private _changeDetectorRef: ChangeDetectorRef,
+    protected _datetimepickerIntl: MtxDatetimepickerIntl
   ) {
-    this.datepickerIntlChangesSubscription = this._datepickerIntl.changes.subscribe(() => {
-      this._changedetector.detectChanges();
+    this.datetimepickerIntlChangesSubscription = this._datetimepickerIntl.changes.subscribe(() => {
+      this._changeDetectorRef.detectChanges();
     });
   }
 
@@ -500,20 +498,20 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
     this.activeDateChange.emit(date);
   }
 
-  confirm() {
+  handleOk() {
     if (this._selected) {
       this.selectedChange.emit(this._selected);
     }
     this._userSelection.emit();
   }
 
-  cancel() {
+  handleCancel() {
     this._userSelection.emit();
   }
 
   ngOnDestroy(): void {
-    if (this.datepickerIntlChangesSubscription) {
-      this.datepickerIntlChangesSubscription.unsubscribe();
+    if (this.datetimepickerIntlChangesSubscription) {
+      this.datetimepickerIntlChangesSubscription.unsubscribe();
     }
   }
 

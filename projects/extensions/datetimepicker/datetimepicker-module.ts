@@ -41,7 +41,6 @@ import { MtxMultiYearView } from './multi-year-view';
     MtxCalendarBody,
     MtxClock,
     MtxTime,
-    // MtxTimeInputValue,
     MtxDatetimepicker,
     MtxDatetimepickerToggle,
     MtxDatetimepickerToggleIcon,
