@@ -388,14 +388,14 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     }
   }
 
-  _timeSelected2(date: D) {
+  _timeSelected(date: D) {
     this._activeDate = this._updateDate(date);
     if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
       this.selectedChange.emit(date);
     }
   }
 
-  _timeSelected(date: D): void {
+  _dialTimeSelected(date: D): void {
     if (this._clockView !== 'minute') {
       this._activeDate = this._updateDate(date);
       this._clockView = 'minute';
@@ -741,7 +741,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
         break;
       case ENTER:
         if (!this.timeInput) {
-          this._timeSelected(this._activeDate);
+          this._dialTimeSelected(this._activeDate);
         }
         return;
       default:

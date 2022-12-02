@@ -7,6 +7,7 @@ import {
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Directive,
@@ -222,10 +223,11 @@ export class MtxTimeInput implements OnDestroy {
   templateUrl: 'time.html',
   styleUrls: ['time.scss'],
   exportAs: 'mtxTime',
-  encapsulation: ViewEncapsulation.None,
   host: {
     class: 'mtx-time',
   },
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   /** Emits when the currently selected date changes. */
