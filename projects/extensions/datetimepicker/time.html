@@ -1,5 +1,5 @@
-<div class="mtx-time-row-wrapper">
-  <div class="mtx-time-row">
+<div class="mtx-time-input-wrapper">
+  <div class="mtx-time-input-inner">
     <input class="mtx-time-input"
            [class.mtx-time-input-active]="clockView === 'hour'"
            [class.mtx-time-input-warning]="!hourInput.valid"
@@ -53,7 +53,7 @@
            [twelvehour]="twelvehour">
 </mtx-clock>
 
-<div class="mtx-time-btn-row">
+<div class="mtx-time-button-wrapper">
   <button class="mtx-time-cancel-button" mat-button (click)="handleCancel()">
     {{ _datetimepickerIntl.cancelLabel }}
   </button>

@@ -224,7 +224,7 @@ export class MtxTimeInput implements OnDestroy {
   exportAs: 'mtxTime',
   encapsulation: ViewEncapsulation.None,
   host: {
-    '[class.mtx-time]': 'true',
+    class: 'mtx-time',
   },
 })
 export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {

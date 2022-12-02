@@ -1,93 +1,79 @@
+$time-font-size: 36px;
+$time-border-radius: 8px;
+$time-input-width: 72px;
+$time-input-height: 56px;
+$time-seperator-width: 24px;
+$time-ampm-width: 40px;
+
 .mtx-time {
   display: block;
   outline: none;
   user-select: none;
 }
 
-$time-font-size: 40px;
-$time-border-radius: 8px;
-
-.mtx-time-row-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.mtx-time-input-wrapper {
+  padding: 8px 0;
+  text-align: center;
 }
 
-.mtx-time-row {
+.mtx-time-input-inner {
   display: inline-flex;
-  padding: 10px 24px;
-  justify-content: space-evenly;
+  height: $time-input-height;
 }
 
 .mtx-time-input {
-  width: 80px;
-  height: 64px;
-  line-height: 80px;
-  vertical-align: middle;
+  width: $time-input-width;
   font-size: $time-font-size;
   text-align: center;
   border-radius: $time-border-radius;
-}
-
-.mtx-time-input::placeholder {
-  text-align: center;
-}
-
-.mtx-time-input::-webkit-outer-spin-button,
-.mtx-time-input::-webkit-inner-spin-button {
+  border: 2px solid transparent;
   appearance: none;
+  outline: none;
 }
 
 .mtx-time-seperator {
-  height: 64px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: $time-seperator-width;
   font-size: $time-font-size;
-  text-align: center;
-  margin-left: 4px;
-  margin-right: 4px;
-  display: grid;
-  place-items: center;
 }
 
 // AM/PM buttons
 .mtx-time-ampm {
   display: inline-flex;
   flex-direction: column;
-  margin-left: 8px;
+  margin-left: 12px;
+
+  [dir='rtl'] & {
+    margin-left: auto;
+    margin-right: 12px;
+  }
 }
 
 .mtx-time-am,
 .mtx-time-pm {
-  height: 30px;
-  width: 42px;
-  display: inline-flex;
-  place-items: center;
-  place-content: center;
-  text-align: center;
+  flex: 1;
+  width: $time-ampm-width;
+  border-width: 1px;
+  border-style: solid;
+  background-color: transparent;
   cursor: pointer;
 }
 
 .mtx-time-am {
   border-top-left-radius: $time-border-radius;
   border-top-right-radius: $time-border-radius;
-  border: 1px solid grey;
-  border-bottom: none;
-  background-color: lightcoral;
 }
 
 .mtx-time-pm {
   border-bottom-left-radius: $time-border-radius;
   border-bottom-right-radius: $time-border-radius;
-  border: 1px solid grey;
-  background-color: lightcoral;
+  border-top: none;
 }
 
-// buttons
-.mtx-time-btn-row {
-  width: 100%;
-  display: inline-flex;
-  flex-direction: row-reverse;
-}
-
-.mtx-time-btn-row button[mat-button]:not(:first-child) {
-  margin-right: 4px;
+.mtx-time-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8px;
 }

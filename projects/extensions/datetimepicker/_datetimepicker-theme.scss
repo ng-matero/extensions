@@ -15,10 +15,10 @@ $clock-font-size: 14px !default;
   $config: theming.get-color-config($config-or-theme);
   $is-dark-theme: map.get($config, is-dark);
   $primary: map.get($config, primary);
+  $accent: map.get($config, accent);
+  $warn: map.get($config, warn);
   $background: map.get($config, background);
   $foreground: map.get($config, foreground);
-
-  $warn: map.get($config, warn);
   $disabled-color: theming.get-color-from-palette($foreground, disabled-text);
 
   .mtx-datetimepicker-content {
@@ -124,65 +124,51 @@ $clock-font-size: 14px !default;
   }
 
   .mtx-datetimepicker-toggle-active {
-    color: theming.get-color-from-palette(map.get($config, primary), text);
+    color: theming.get-color-from-palette($primary);
 
     &.mat-accent {
-      color: theming.get-color-from-palette(map.get($config, accent), text);
+      color: theming.get-color-from-palette($accent);
     }
 
     &.mat-warn {
-      color: theming.get-color-from-palette(map.get($config, warn), text);
+      color: theming.get-color-from-palette($warn);
     }
   }
 
   .mtx-time-input {
     color: theming.get-color-from-palette($foreground, text);
     background-color: theming.get-color-from-palette($background, disabled-button);
-    outline-color: theming.get-color-from-palette($foreground, text);
-    border: none;
 
     &.mtx-time-input-active {
-      color: theming.get-color-from-palette($primary, text);
-      outline-color: theming.get-color-from-palette($primary, text);
-      caret-color: theming.get-color-from-palette($primary, text);
+      color: theming.get-color-from-palette($primary);
       background-color: theming.get-color-from-palette($primary, .2);
-    }
 
-    &.mtx-time-input-active:focus {
-      background-color: theming.get-color-from-palette($background, background);
-      color: theming.get-color-from-palette($primary, text);
-      outline-color: theming.get-color-from-palette($primary, text);
-    }
+      &:focus {
+        border-color: theming.get-color-from-palette($primary);
+        background-color: theming.get-color-from-palette($background, background);
 
-    &.mtx-time-input-active:focus::placeholder {
-      color: theming.get-color-from-palette($primary, .6);
-      outline-color: theming.get-color-from-palette($primary, .6);
+        &::placeholder {
+          color: theming.get-color-from-palette($primary, .6);
+        }
+      }
     }
 
     &.mtx-time-input-warning {
-      outline-color: theming.get-color-from-palette($warn, text);
-
-      &.mtx-time-input-active,
-      &.mtx-time-input-active:focus {
-        outline-color: theming.get-color-from-palette($warn, text);
-      }
+      border-color: theming.get-color-from-palette($warn);
     }
   }
 
-  .mtx-time-ampm {
-    border-color: theming.get-color-from-palette($primary, text);
+  .mtx-time-am,
+  .mtx-time-pm {
+    color: theming.get-color-from-palette($foreground, text);
+    border-color: theming.get-color-from-palette($foreground, hint-text);
 
-    :is(.mtx-time-am, .mtx-time-pm) {
-      background-color: theming.get-color-from-palette($background, card);
-      color: theming.get-color-from-palette($primary, text);
+    &.mtx-time-ampm-active {
+      background-color: theming.get-color-from-palette($accent, .2);
+    }
 
-      &.mtx-time-ampm-active {
-        background-color: theming.get-color-from-palette($primary, .2);
-      }
-
-      &:focus {
-        outline-color: theming.get-color-from-palette($primary, text);
-      }
+    &:focus {
+      outline-color: theming.get-color-from-palette($primary);
     }
   }
 }
