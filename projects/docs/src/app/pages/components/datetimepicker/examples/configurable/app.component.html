@@ -35,6 +35,10 @@
 </section>
 
 <section>
+  <mat-checkbox [(ngModel)]="timeInput">timeInput</mat-checkbox>
+</section>
+
+<section>
   <mat-checkbox [(ngModel)]="twelvehour">twelvehour</mat-checkbox>
 </section>
 
@@ -50,7 +54,7 @@
 <h2>Result</h2>
 
 <mat-form-field>
-  <mat-placeholder>Date</mat-placeholder>
+  <mat-placeholder>{{type}}</mat-placeholder>
   <mtx-datetimepicker #datetimePicker
                       [type]="type"
                       [mode]="mode"
@@ -58,7 +62,8 @@
                       [startView]="startView"
                       [twelvehour]="twelvehour"
                       [timeInterval]="timeInterval"
-                      [touchUi]="touchUi"></mtx-datetimepicker>
+                      [touchUi]="touchUi"
+                      [timeInput]="timeInput"></mtx-datetimepicker>
   <input [mtxDatetimepicker]="datetimePicker" [formControl]="datetime" matInput required>
   <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
 </mat-form-field>

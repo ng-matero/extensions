@@ -182,7 +182,6 @@ interface MtxGridColumn {
   description?: string;
   summary?: ((data: any[], colDef?: MtxGridColumn) => any) | string;
   class?: string;
-  id?: string;
 }
 ```
 

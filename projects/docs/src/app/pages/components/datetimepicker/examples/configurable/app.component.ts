@@ -45,6 +45,7 @@ export class AppComponent {
   touchUi = false;
   twelvehour = false;
   timeInterval = 1;
+  timeInput = true;
 
   datetime = new UntypedFormControl();
 }

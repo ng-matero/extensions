@@ -90,6 +90,7 @@ Exported as: `mtxDatetimepicker`
 | `@Input()`<br>`selected: D \| null` | The currently selected datetime. |
 | `@Input()`<br>`startAt: D \| null` | A date representing the period (month or year) to start the calendar in. |
 | `@Input()`<br>`startView: MtxCalendarView` | The calendar started view. Default is **`'month'`**. |
+| `@Input()`<br>`timeInput: boolean` | Whether to show the time input in time mode. When the `touchUi` is enabled it will be disabled. Default is **`false`**. |
 | `@Output('opened')`<br>`openedStream: EventEmitter<void>`| Emits when the datetimepicker has been opened. |
 | `@Output('closed')`<br>`closedStream: EventEmitter<void>`| Emits when the datetimepicker has been closed. |
 | `@Output()`<br>`viewChanged: EventEmitter<MtxCalendarView>` | Emits when the current view changes. |
