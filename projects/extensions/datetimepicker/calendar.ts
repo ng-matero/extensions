@@ -50,7 +50,7 @@ import { MtxDatetimepickerIntl } from './datetimepicker-intl';
   styleUrls: ['calendar.scss'],
   host: {
     'class': 'mtx-calendar',
-    '[class.mtx-time-input-calendar]': 'timeInput',
+    '[class.mtx-calendar-with-time-input]': 'timeInput',
     'tabindex': '0',
     '(keydown)': '_handleCalendarBodyKeydown($event)',
   },

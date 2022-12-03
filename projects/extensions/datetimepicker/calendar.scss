@@ -12,44 +12,51 @@ $calendar-prev-next-icon-margin: 15.5px;
 $calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
 $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
-@mixin landscape-calendar {
-  display: flex;
-
-  .mtx-calendar-header {
-    width: 150px;
-    min-width: 150px;
-    padding: 12px 8px;
-    border-radius: 4px 0 0 4px;
-
-    [dir='rtl'] & {
-      border-radius: 0 4px 4px 0;
-    }
-  }
-
-  .mtx-calendar-header-date-time {
-    font-size: 28px;
-  }
-
-  .mtx-calendar-header-time {
+@mixin landscape-calendar-header {
+  .mtx-calendar {
     display: flex;
-    flex-direction: column;
 
-    .mat-button {
-      width: 40px;
-      text-align: center;
+    .mtx-calendar-header {
+      width: 150px;
+      min-width: 150px;
+      padding: 16px 8px;
+      border-radius: 4px 0 0 4px;
+
+      [dir='rtl'] & {
+        border-radius: 0 4px 4px 0;
+      }
     }
-  }
 
-  .mtx-calendar-header-ampm-container {
-    flex-direction: row;
-    font-size: 20px;
-  }
+    .mtx-calendar-header-year + .mtx-calendar-header-date-time,
+    .mtx-calendar-header-date + .mtx-calendar-header-time {
+      margin-top: 4px;
+    }
 
-  .mtx-calendar-header-ampm {
-    padding: 4px;
+    .mtx-calendar-header-date-time {
+      font-size: 28px;
+    }
 
-    + .mtx-calendar-header-ampm {
-      margin: 0 8px;
+    .mtx-calendar-header-time {
+      display: flex;
+      flex-direction: column;
+
+      .mat-button {
+        width: 40px;
+        text-align: center;
+      }
+    }
+
+    .mtx-calendar-header-ampm-container {
+      flex-direction: row;
+      font-size: 20px;
+    }
+
+    .mtx-calendar-header-ampm {
+      padding: 4px;
+
+      + .mtx-calendar-header-ampm {
+        margin: 0 8px;
+      }
     }
   }
 }
@@ -76,14 +83,8 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   }
 }
 
-.mtx-calendar-header-year {
-  &.mat-button {
-    line-height: 24px;
-  }
-
-  + .mtx-calendar-header-date-time {
-    margin-top: 4px;
-  }
+.mtx-calendar-header-year.mat-button {
+  line-height: 24px;
 }
 
 .mtx-calendar-header-date-time {
@@ -132,13 +133,13 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   font-size: 12px;
 }
 
-.mtx-calendar[mode='landscape'] {
-  @include landscape-calendar;
+[mode='landscape'] {
+  @include landscape-calendar-header;
 }
 
 @media all and (orientation: landscape) {
-  .mtx-calendar[mode='auto'] {
-    @include landscape-calendar;
+  [mode='auto'] {
+    @include landscape-calendar-header;
   }
 }
 

@@ -121,6 +121,9 @@ export class MtxDatetimepickerContent<D>
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
 
+  /** Id of the label for the `role="dialog"` element. */
+  _dialogLabelId: string | null = null;
+
   constructor(elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
     super(elementRef);
   }
@@ -495,6 +498,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   protected _forwardContentValues(instance: MtxDatetimepickerContent<D>) {
     instance.datetimepicker = this;
     instance.color = this.color;
+    instance._dialogLabelId = this.datetimepickerInput.getOverlayLabelId();
   }
 
   /** Opens the overlay with the calendar. */

@@ -1,4 +1,9 @@
-<div class="mtx-datetimepicker-content-container" [attr.mode]="datetimepicker.mode" cdkTrapFocus>
+<div cdkTrapFocus
+     role="dialog"
+     [attr.aria-modal]="true"
+     [attr.aria-labelledby]="_dialogLabelId ?? undefined"
+     [attr.mode]="datetimepicker.mode"
+     class="mtx-datetimepicker-content-container">
   <mtx-calendar [id]="datetimepicker.id"
                 [ngClass]="datetimepicker.panelClass"
                 [attr.mode]="datetimepicker.mode"

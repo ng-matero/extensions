@@ -4,9 +4,8 @@ $non-touch-calendar-portrait-width: $non-touch-calendar-cell-size * 7 + $calenda
 $non-touch-calendar-portrait-height: 424px;
 $non-touch-calendar-landscape-width: 446px;
 $non-touch-calendar-landscape-height: 328px;
-
-$non-touch-calendar-time-portrait-height: 510px;
-$non-touch-calendar-time-landscape-height: 412px;
+$non-touch-calendar-with-time-input-portrait-height: 490px;
+$non-touch-calendar-with-time-input-landscape-height: 412px;
 
 // Ideally the calendar would have a constant aspect ratio, no matter its size, and we would base
 // these measurements off the aspect ratio. Unfortunately, the aspect ratio does change a little as
@@ -27,6 +26,17 @@ $touch-min-height: 300px;
 $touch-max-width: 750px;
 $touch-max-height: 850px;
 
+@mixin landscape-calendar-size {
+  .mtx-calendar {
+    width: $non-touch-calendar-landscape-width;
+    height: $non-touch-calendar-landscape-height;
+
+    &.mtx-calendar-with-time-input {
+      height: $non-touch-calendar-with-time-input-landscape-height;
+    }
+  }
+}
+
 .mtx-datetimepicker-content {
   display: block;
   border-radius: 4px;
@@ -44,28 +54,18 @@ $touch-max-height: 850px;
   width: $non-touch-calendar-portrait-width;
   height: $non-touch-calendar-portrait-height;
 
-  &[mode='landscape'] {
-    width: $non-touch-calendar-landscape-width;
-    height: $non-touch-calendar-landscape-height;
+  &.mtx-calendar-with-time-input {
+    height: $non-touch-calendar-with-time-input-portrait-height;
   }
 }
 
-.mtx-datetimepicker-content .mtx-calendar.mtx-time-input-calendar {
-  height: $non-touch-calendar-time-portrait-height;
-
-  &[mode='landscape'] {
-    height: $non-touch-calendar-time-landscape-height;
-  }
+.mtx-datetimepicker-content[mode='landscape'] {
+  @include landscape-calendar-size;
 }
 
 @media all and (orientation: landscape) {
-  .mtx-datetimepicker-content .mtx-calendar[mode='auto'] {
-    width: $non-touch-calendar-landscape-width;
-    height: $non-touch-calendar-landscape-height;
-  }
-
-  .mtx-datetimepicker-content .mtx-calendar.mtx-time-input-calendar[mode='auto'] {
-    height: $non-touch-calendar-time-landscape-height;
+  .mtx-datetimepicker-content[mode='auto'] {
+    @include landscape-calendar-size;
   }
 }
 
