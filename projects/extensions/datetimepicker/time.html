@@ -13,9 +13,7 @@
            (timeValueChanged)="handleHourInputChange($event)"
            (focus)="handleFocus('hour')" />
 
-    <div class="mtx-time-seperator">
-      <span>:</span>
-    </div>
+    <div class="mtx-time-seperator">:</div>
 
     <input class="mtx-time-input"
            [class.mtx-time-input-active]="clockView === 'minute'"
@@ -33,11 +31,11 @@
 
     <div *ngIf="twelvehour" class="mtx-time-ampm">
       <button mat-button type="button" class="mtx-time-am"
-              [class.mtx-time-ampm-active]="AMPM === 'AM'"
+              [class.mtx-time-ampm-active]="AMPM === 'AM'" aria-label="AM"
               (keydown)="$event.stopPropagation()"
               (click)="ampmChange.emit('AM')">AM</button>
       <button mat-button type="button" class="mtx-time-pm"
-              [class.mtx-time-ampm-active]="AMPM === 'PM'"
+              [class.mtx-time-ampm-active]="AMPM === 'PM'" aria-label="PM"
               (keydown)="$event.stopPropagation()"
               (click)="ampmChange.emit('PM')">PM</button>
     </div>

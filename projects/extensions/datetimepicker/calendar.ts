@@ -25,7 +25,6 @@ import {
   UP_ARROW,
 } from '@angular/cdk/keycodes';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
 import {
@@ -39,6 +38,7 @@ import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
 import { MtxAMPM, MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
+import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 
 /**
  * A calendar that is used as part of the datetimepicker.
@@ -112,11 +112,11 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   constructor(
     private _elementRef: ElementRef,
-    private _intl: MatDatepickerIntl,
+    private _intl: MtxDatetimepickerIntl,
     private _ngZone: NgZone,
     @Optional() private _adapter: DatetimeAdapter<D>,
     @Optional() @Inject(MTX_DATETIME_FORMATS) private _dateFormats: MtxDatetimeFormats,
-    changeDetectorRef: ChangeDetectorRef
+    _changeDetectorRef: ChangeDetectorRef
   ) {
     if (!this._adapter) {
       throw createMissingDateImplError('DatetimeAdapter');
@@ -126,7 +126,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
       throw createMissingDateImplError('MTX_DATETIME_FORMATS');
     }
 
-    this._intlChanges = _intl.changes.subscribe(() => changeDetectorRef.markForCheck());
+    this._intlChanges = _intl.changes.subscribe(() => _changeDetectorRef.markForCheck());
   }
 
   /** The display type of datetimepicker. */
@@ -229,14 +229,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     this._currentView = view;
     this.viewChanged.emit(view);
   }
-  _currentView!: MtxCalendarView;
+  private _currentView!: MtxCalendarView;
 
-  /** The label for the current calendar view. */
-  get _yearLabel(): string {
-    return this._adapter.getYearName(this._activeDate);
-  }
-
-  get _monthYearLabel(): string {
+  get _yearPeriodText(): string {
     if (this.currentView === 'multi-year') {
       // The offset from the active year to the "slot" for the starting year is the
       // *actual* first rendered year in the multi-year view, and the last year is
@@ -255,7 +250,17 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
       : this._adapter.getYearName(this._activeDate);
   }
 
-  get _dateLabel(): string {
+  get _yearButtonText(): string {
+    return this._adapter.getYearName(this._activeDate);
+  }
+
+  get _yearButtonLabel(): string {
+    return this.multiYearSelector
+      ? this._intl.switchToMultiYearViewLabel
+      : this._intl.switchToYearViewLabel;
+  }
+
+  get _dateButtonText(): string {
     switch (this.type) {
       case 'month':
         return this._adapter.getMonthNames('long')[this._adapter.getMonth(this._activeDate)];
@@ -267,7 +272,11 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     }
   }
 
-  get _hoursLabel(): string {
+  get _dateButtonLabel(): string {
+    return this._intl.switchToMonthViewLabel;
+  }
+
+  get _hoursButtonText(): string {
     let hour = this._adapter.getHour(this._activeDate);
     if (this.twelvehour) {
       if (hour === 0) {
@@ -278,24 +287,19 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     return this._2digit(hour);
   }
 
-  get _minutesLabel(): string {
+  get _hourButtonLabel(): string {
+    return this._intl.switchToClockHourViewLabel;
+  }
+
+  get _minutesButtonText(): string {
     return this._2digit(this._adapter.getMinute(this._activeDate));
   }
 
-  get _ariaLabelNext(): string {
-    switch (this._currentView) {
-      case 'month':
-        return this._intl.nextMonthLabel;
-      case 'year':
-        return this._intl.nextYearLabel;
-      case 'multi-year':
-        return this._intl.nextMultiYearLabel;
-      default:
-        return '';
-    }
+  get _minuteButtonLabel(): string {
+    return this._intl.switchToClockMinuteViewLabel;
   }
 
-  get _ariaLabelPrev(): string {
+  get _prevButtonLabel(): string {
     switch (this._currentView) {
       case 'month':
         return this._intl.prevMonthLabel;
@@ -303,6 +307,19 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
         return this._intl.prevYearLabel;
       case 'multi-year':
         return this._intl.prevMultiYearLabel;
+      default:
+        return '';
+    }
+  }
+
+  get _nextButtonLabel(): string {
+    switch (this._currentView) {
+      case 'month':
+        return this._intl.nextMonthLabel;
+      case 'year':
+        return this._intl.nextYearLabel;
+      case 'multi-year':
+        return this._intl.nextMultiYearLabel;
       default:
         return '';
     }

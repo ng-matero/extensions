@@ -14,9 +14,9 @@ import {
 } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatButton } from '@angular/material/button';
-import { MatDatepickerIntl } from '@angular/material/datepicker';
 import { merge, of as observableOf, Subscription } from 'rxjs';
 import { MtxDatetimepicker } from './datetimepicker';
+import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 
 /** Can be used to override the icon of a `mtxDatetimepickerToggle`. */
 @Directive({
@@ -52,6 +52,9 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   /** Tabindex for the toggle. */
   @Input() tabIndex!: number;
 
+  /** Screen-reader label for the button. */
+  @Input('aria-label') ariaLabel?: string;
+
   /** Whether the toggle button is disabled. */
   @Input()
   get disabled(): boolean {
@@ -71,7 +74,7 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   /** Underlying button element. */
   @ViewChild('button') _button!: MatButton;
 
-  constructor(public _intl: MatDatepickerIntl, private _changeDetectorRef: ChangeDetectorRef) {}
+  constructor(public _intl: MtxDatetimepickerIntl, private _changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.datetimepicker) {
