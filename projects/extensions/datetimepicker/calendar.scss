@@ -12,42 +12,73 @@ $calendar-prev-next-icon-margin: 15.5px;
 $calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
 $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
-.mtx-calendar {
-  display: block;
-  outline: none;
+@mixin landscape-calendar {
+  display: flex;
 
-  &[mode='landscape'] {
-    display: flex;
-  }
-}
-
-.mtx-calendar-header {
-  padding: $calendar-padding * 2;
-  box-sizing: border-box;
-  border-radius: 4px 4px 0 0;
-
-  [mode='landscape'] & {
+  .mtx-calendar-header {
     width: 150px;
     min-width: 150px;
+    padding: 12px 8px;
     border-radius: 4px 0 0 4px;
 
     [dir='rtl'] & {
       border-radius: 0 4px 4px 0;
     }
   }
+
+  .mtx-calendar-header-date-time {
+    font-size: 28px;
+  }
+
+  .mtx-calendar-header-time {
+    display: flex;
+    flex-direction: column;
+
+    .mat-button {
+      width: 40px;
+      text-align: center;
+    }
+  }
+
+  .mtx-calendar-header-ampm-container {
+    flex-direction: row;
+    font-size: 20px;
+  }
+
+  .mtx-calendar-header-ampm {
+    padding: 4px;
+
+    + .mtx-calendar-header-ampm {
+      margin: 0 8px;
+    }
+  }
 }
 
-.mtx-calendar-header-year,
-.mtx-calendar-header-date-time {
-  width: 100%;
-  white-space: nowrap;
+.mtx-calendar {
+  display: block;
+  outline: none;
+}
+
+.mtx-calendar-header {
+  box-sizing: border-box;
+  padding: 8px;
+  border-radius: 4px 4px 0 0;
+
+  .mat-button {
+    min-width: auto;
+    padding: 0 4px;
+    text-align: inherit;
+    line-height: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    white-space: normal;
+    word-break: break-word;
+  }
 }
 
 .mtx-calendar-header-year {
-  line-height: 24px;
-
-  > * {
-    vertical-align: middle;
+  &.mat-button {
+    line-height: 24px;
   }
 
   + .mtx-calendar-header-date-time {
@@ -56,12 +87,8 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 }
 
 .mtx-calendar-header-date-time {
+  font-size: 24px;
   line-height: 36px;
-
-  [mode='landscape'] & {
-    white-space: normal;
-    word-wrap: break-word;
-  }
 }
 
 .mtx-calendar-header-year,
@@ -70,7 +97,6 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 .mtx-calendar-header-minutes,
 .mtx-calendar-header-ampm {
   &:not(.active) {
-    cursor: pointer;
     opacity: .6;
   }
 
@@ -88,22 +114,8 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
     .mtx-calendar-header-hours,
     .mtx-calendar-header-minutes,
     .mtx-calendar-header-ampm {
-      cursor: pointer;
       opacity: 1;
     }
-  }
-
-  [mode='landscape'] & {
-    display: flex;
-    flex-direction: column;
-  }
-}
-
-.mtx-calendar-header-hour-minute-container {
-  padding: 0 8px;
-
-  [mode='landscape'] & {
-    padding: 0;
   }
 }
 
@@ -117,15 +129,16 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   display: inline-flex;
   flex-direction: column;
   line-height: 18px;
-
-  [mode='landscape'] & {
-    flex-direction: row;
-  }
+  font-size: 12px;
 }
 
-.mtx-calendar-header-ampm {
-  [mode='landscape'] & {
-    padding: 4px;
+.mtx-calendar[mode='landscape'] {
+  @include landscape-calendar;
+}
+
+@media all and (orientation: landscape) {
+  .mtx-calendar[mode='auto'] {
+    @include landscape-calendar;
   }
 }
 
@@ -182,42 +195,4 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 .mtx-calendar-table-header th {
   text-align: center;
   padding: $calendar-padding 0;
-}
-
-@media all and (orientation: landscape) {
-  .mtx-calendar[mode='auto'] {
-    display: flex;
-
-    .mtx-calendar-header {
-      width: 150px;
-      min-width: 150px;
-      border-radius: 4px 0 0 4px;
-
-      [dir='rtl'] & {
-        border-radius: 0 4px 4px 0;
-      }
-    }
-
-    .mtx-calendar-header-date-time {
-      white-space: normal;
-      word-wrap: break-word;
-    }
-
-    .mtx-calendar-header-time {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .mtx-calendar-header-hour-minute-container {
-      padding: 0;
-    }
-
-    .mtx-calendar-header-ampm-container {
-      flex-direction: row;
-    }
-
-    .mtx-calendar-header-ampm {
-      padding: 4px;
-    }
-  }
 }

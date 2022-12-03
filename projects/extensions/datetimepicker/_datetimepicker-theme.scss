@@ -8,7 +8,6 @@
 $selected-today-box-shadow-width: 1px;
 $calendar-body-font-size: 13px !default;
 $calendar-weekday-table-font-size: 11px !default;
-$calendar-header-font-size: 28px !default;
 $clock-font-size: 14px !default;
 
 @mixin color($config-or-theme) {
@@ -158,17 +157,13 @@ $clock-font-size: 14px !default;
     }
   }
 
-  .mtx-time-am,
-  .mtx-time-pm {
+  .mtx-time-am.mat-button,
+  .mtx-time-pm.mat-button {
     color: theming.get-color-from-palette($foreground, text);
     border-color: theming.get-color-from-palette($foreground, hint-text);
 
     &.mtx-time-ampm-active {
       background-color: theming.get-color-from-palette($accent, .2);
-    }
-
-    &:focus {
-      outline-color: theming.get-color-from-palette($primary);
     }
   }
 }
@@ -199,14 +194,6 @@ $clock-font-size: 14px !default;
       size: $calendar-weekday-table-font-size;
       weight: typography-utils.font-weight($config, body-1);
     }
-  }
-
-  .mtx-calendar-header-date-time {
-    font-size: $calendar-header-font-size;
-  }
-
-  .mtx-calendar-header-ampm-container {
-    font-size: .65em;
   }
 
   .mtx-clock {

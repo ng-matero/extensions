@@ -1,35 +1,39 @@
 <div class="mtx-calendar-header">
-  <div *ngIf="type !== 'time'"
-       class="mtx-calendar-header-year"
-       [class.active]="currentView === 'year' || currentView === 'multi-year'"
-       role="button" (click)="_yearClicked()">
+  <button *ngIf="type !== 'time'"
+          mat-button type="button" class="mtx-calendar-header-year"
+          [class.active]="currentView === 'year' || currentView === 'multi-year'"
+          (click)="_yearClicked()">
     <span>{{ _yearLabel }}</span>
     <svg *ngIf="multiYearSelector || type === 'year'"
          class="mtx-calendar-header-year-dropdown"
          width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
       <path d="M7,10L12,15L17,10H7Z"></path>
     </svg>
-  </div>
-  <div class="mtx-calendar-header-date-time">
-    <span *ngIf="type !== 'time' && type !== 'year'"
-          class="mtx-calendar-header-date"
-          [class.active]="currentView === 'month'"
-          [class.not-clickable]="type === 'month'"
-          role="button" (click)="_dateClicked()">{{ _dateLabel }}</span>
+  </button>
+  <div *ngIf="type !== 'year'" class="mtx-calendar-header-date-time">
+    <button *ngIf="type !== 'time'"
+            mat-button type="button" class="mtx-calendar-header-date"
+            [class.active]="currentView === 'month'"
+            [class.not-clickable]="type === 'month'"
+            (click)="_dateClicked()">{{ _dateLabel }}</button>
     <span *ngIf="type.endsWith('time')" class="mtx-calendar-header-time"
           [class.active]="currentView === 'clock'">
       <span class="mtx-calendar-header-hour-minute-container">
-        <span class="mtx-calendar-header-hours" [class.active]="_clockView === 'hour'"
-              role="button" (click)="_hoursClicked()">{{ _hoursLabel }}</span>
+        <button mat-button type="button" class="mtx-calendar-header-hours"
+                [class.active]="_clockView === 'hour'"
+                (click)="_hoursClicked()">{{ _hoursLabel }}</button>
         <span class="mtx-calendar-header-hour-minute-separator">:</span>
-        <span class="mtx-calendar-header-minutes" [class.active]="_clockView === 'minute'"
-              role="button" (click)="_minutesClicked()">{{ _minutesLabel }}</span>
+        <button mat-button type="button" class="mtx-calendar-header-minutes"
+                [class.active]="_clockView === 'minute'"
+                (click)="_minutesClicked()">{{ _minutesLabel }}</button>
       </span>
       <span *ngIf="twelvehour" class="mtx-calendar-header-ampm-container">
-        <span class="mtx-calendar-header-ampm" [class.active]="_AMPM === 'AM'" role="button"
-              (click)="_ampmClicked('AM')">AM</span>
-        <span class="mtx-calendar-header-ampm" [class.active]="_AMPM === 'PM'" role="button"
-              (click)="_ampmClicked('PM')">PM</span>
+        <button mat-button type="button" class="mtx-calendar-header-ampm"
+                [class.active]="_AMPM === 'AM'"
+                (click)="_ampmClicked('AM')">AM</button>
+        <button mat-button type="button" class="mtx-calendar-header-ampm"
+                [class.active]="_AMPM === 'PM'"
+                (click)="_ampmClicked('PM')">PM</button>
       </span>
     </span>
   </div>

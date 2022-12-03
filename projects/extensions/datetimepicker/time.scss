@@ -51,24 +51,23 @@ $time-ampm-width: 40px;
   }
 }
 
-.mtx-time-am,
-.mtx-time-pm {
+.mtx-time-am.mat-button,
+.mtx-time-pm.mat-button {
   flex: 1;
   width: $time-ampm-width;
+  min-width: auto;
+  padding: 0;
+  line-height: normal;
   border-width: 1px;
   border-style: solid;
-  background-color: transparent;
-  cursor: pointer;
 }
 
-.mtx-time-am {
-  border-top-left-radius: $time-border-radius;
-  border-top-right-radius: $time-border-radius;
+.mtx-time-am.mat-button {
+  border-radius: $time-border-radius $time-border-radius 0 0;
 }
 
-.mtx-time-pm {
-  border-bottom-left-radius: $time-border-radius;
-  border-bottom-right-radius: $time-border-radius;
+.mtx-time-pm.mat-button {
+  border-radius: 0 0 $time-border-radius $time-border-radius;
   border-top: none;
 }
 
