@@ -10,7 +10,7 @@
          [style.left]="item.left+'%'"
          [style.top]="item.top+'%'">{{ item.displayValue }}</div>
   </div>
-  <div [class.active]="!_hourView" class="mtx-clock-minutes">
+  <div class="mtx-clock-minutes" [class.active]="!_hourView">
     <div *ngFor="let item of _minutes"
          class="mtx-clock-cell"
          [class.mtx-clock-cell-disabled]="!item.enabled"

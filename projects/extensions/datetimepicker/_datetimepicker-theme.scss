@@ -157,13 +157,15 @@ $clock-font-size: 14px !default;
     }
   }
 
-  .mtx-time-am.mat-button,
-  .mtx-time-pm.mat-button {
-    color: theming.get-color-from-palette($foreground, text);
-    border-color: theming.get-color-from-palette($foreground, hint-text);
+  .mtx-time-ampm {
+    .mtx-time-am,
+    .mtx-time-pm {
+      color: theming.get-color-from-palette($foreground, text);
+      border-color: theming.get-color-from-palette($foreground, hint-text);
 
-    &.mtx-time-ampm-active {
-      background-color: theming.get-color-from-palette($accent, .2);
+      &.mtx-time-ampm-active {
+        background-color: theming.get-color-from-palette($accent, .2);
+      }
     }
   }
 }

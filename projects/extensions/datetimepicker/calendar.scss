@@ -40,7 +40,9 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
       display: flex;
       flex-direction: column;
 
-      .mat-button {
+      .mtx-calendar-header-hours,
+      .mtx-calendar-header-minutes,
+      .mtx-calendar-header-ampm {
         width: 40px;
         text-align: center;
       }
@@ -71,7 +73,11 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   padding: 8px;
   border-radius: 4px 4px 0 0;
 
-  .mat-button {
+  .mtx-calendar-header-year,
+  .mtx-calendar-header-date,
+  .mtx-calendar-header-hours,
+  .mtx-calendar-header-minutes,
+  .mtx-calendar-header-ampm {
     min-width: auto;
     padding: 0 4px;
     text-align: inherit;
@@ -81,10 +87,10 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
     white-space: normal;
     word-break: break-word;
   }
-}
 
-.mtx-calendar-header-year.mat-button {
-  line-height: 24px;
+  .mtx-calendar-header-year {
+    line-height: 24px;
+  }
 }
 
 .mtx-calendar-header-date-time {
