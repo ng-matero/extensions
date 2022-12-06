@@ -1,16 +1,23 @@
 import { BooleanInput } from '@angular/cdk/coercion';
+import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
+  Inject,
   Input,
+  OnDestroy,
   Output,
   ViewEncapsulation,
 } from '@angular/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
+
+const activeEventOptions = normalizePassiveListenerOptions({ passive: false });
 
 export const CLOCK_RADIUS = 50;
 export const CLOCK_INNER_RADIUS = 27.5;
@@ -29,14 +36,16 @@ export type MtxClockView = 'hour' | 'minute';
   templateUrl: 'clock.html',
   styleUrls: ['clock.scss'],
   host: {
-    '[class.mtx-clock]': 'true',
     'role': 'clock',
-    '(mousedown)': '_handleMousedown($event)',
+    'class': 'mtx-clock',
+    '(mousedown)': '_pointerDown($event)',
+    '(touchstart)': '_pointerDown($event)',
   },
   exportAs: 'mtxClock',
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxClock<D> implements AfterContentInit {
+export class MtxClock<D> implements AfterContentInit, OnDestroy {
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
 
@@ -55,13 +64,12 @@ export class MtxClock<D> implements AfterContentInit {
   /** Emits when any date is selected. */
   @Output() readonly _userSelection = new EventEmitter<void>();
 
-  /** Hours and Minutes representing the clock view. */
+  /** Whether the clock is in hour view. */
+  _hourView: boolean = true;
+
   _hours: any[] = [];
 
   _minutes: any[] = [];
-
-  /** Whether the clock is in hour view. */
-  _hourView: boolean = true;
 
   _selectedHour!: number;
 
@@ -69,22 +77,12 @@ export class MtxClock<D> implements AfterContentInit {
 
   private _timeChanged = false;
 
-  private mouseMoveListener: any;
-
-  private mouseUpListener: any;
-
   constructor(
-    private _element: ElementRef,
+    private _elementRef: ElementRef,
     private _adapter: DatetimeAdapter<D>,
-    private _cdr: ChangeDetectorRef
-  ) {
-    this.mouseMoveListener = (event: any) => {
-      this._handleMousemove(event);
-    };
-    this.mouseUpListener = () => {
-      this._handleMouseup();
-    };
-  }
+    private _changeDetectorRef: ChangeDetectorRef,
+    @Inject(DOCUMENT) private _document: any
+  ) {}
 
   /**
    * The date to display in this clock view.
@@ -120,7 +118,6 @@ export class MtxClock<D> implements AfterContentInit {
   get minDate(): D | null {
     return this._minDate;
   }
-
   set minDate(value: D | null) {
     this._minDate = this._adapter.getValidDateOrNull(this._adapter.deserialize(value));
   }
@@ -142,7 +139,7 @@ export class MtxClock<D> implements AfterContentInit {
     this._hourView = value !== 'minute';
   }
 
-  get _hand(): any {
+  get _hand() {
     let hour = this._adapter.getHour(this.activeDate);
     if (this.twelvehour) {
       if (hour === 0) {
@@ -166,9 +163,9 @@ export class MtxClock<D> implements AfterContentInit {
       deg = Math.round(this._selectedMinute * (360 / 60));
     }
     return {
-      'transform': `rotate(${deg}deg)`,
-      'height': `${radius}%`,
-      'margin-top': `${50 - radius}%`,
+      height: `${radius}%`,
+      marginTop: `${50 - radius}%`,
+      transform: `rotate(${deg}deg)`,
     };
   }
 
@@ -177,36 +174,67 @@ export class MtxClock<D> implements AfterContentInit {
     this._init();
   }
 
-  /** Handles mousedown events on the clock body. */
-  _handleMousedown(event: any) {
+  ngOnDestroy() {
+    this._removeGlobalEvents();
+  }
+
+  /** Called when the user has put their pointer down on the clock. */
+  private _pointerDown = (event: TouchEvent | MouseEvent) => {
     this._timeChanged = false;
     this.setTime(event);
-    document.addEventListener('mousemove', this.mouseMoveListener);
-    document.addEventListener('touchmove', this.mouseMoveListener);
-    document.addEventListener('mouseup', this.mouseUpListener, {
-      passive: true,
-    });
-    document.addEventListener('touchend', this.mouseUpListener, {
-      passive: true,
-    });
-  }
+    this._bindGlobalEvents(event);
+  };
 
-  _handleMousemove(event: any) {
-    event.preventDefault();
+  /**
+   * Called when the user has moved their pointer after
+   * starting to drag. Bound on the document level.
+   */
+  private _pointerMove = (event: TouchEvent | MouseEvent) => {
+    if (event.cancelable) {
+      event.preventDefault();
+    }
     this.setTime(event);
-  }
+  };
 
-  _handleMouseup() {
-    document.removeEventListener('mousemove', this.mouseMoveListener);
-    document.removeEventListener('touchmove', this.mouseMoveListener);
-    document.removeEventListener('mouseup', this.mouseUpListener);
-    document.removeEventListener('touchend', this.mouseUpListener);
+  /** Called when the user has lifted their pointer. Bound on the document level. */
+  private _pointerUp = (event: TouchEvent | MouseEvent) => {
+    if (event.cancelable) {
+      event.preventDefault();
+    }
+    this._removeGlobalEvents();
+
     if (this._timeChanged) {
       this.selectedChange.emit(this.activeDate);
       if (!this._hourView) {
         this._userSelection.emit();
       }
     }
+  };
+
+  /** Binds our global move and end events. */
+  private _bindGlobalEvents(triggerEvent: TouchEvent | MouseEvent) {
+    // Note that we bind the events to the `document`, because it allows us to capture
+    // drag cancel events where the user's pointer is outside the browser window.
+    const document = this._document;
+    const isTouch = isTouchEvent(triggerEvent);
+    const moveEventName = isTouch ? 'touchmove' : 'mousemove';
+    const endEventName = isTouch ? 'touchend' : 'mouseup';
+    document.addEventListener(moveEventName, this._pointerMove, activeEventOptions);
+    document.addEventListener(endEventName, this._pointerUp, activeEventOptions);
+
+    if (isTouch) {
+      document.addEventListener('touchcancel', this._pointerUp, activeEventOptions);
+    }
+  }
+
+  /** Removes any global event listeners that we may have added. */
+  private _removeGlobalEvents() {
+    const document = this._document;
+    document.removeEventListener('mousemove', this._pointerMove, activeEventOptions);
+    document.removeEventListener('mouseup', this._pointerUp, activeEventOptions);
+    document.removeEventListener('touchmove', this._pointerMove, activeEventOptions);
+    document.removeEventListener('touchend', this._pointerUp, activeEventOptions);
+    document.removeEventListener('touchcancel', this._pointerUp, activeEventOptions);
   }
 
   /** Initializes this clock view. */
@@ -293,15 +321,15 @@ export class MtxClock<D> implements AfterContentInit {
    * Set Time
    * @param event
    */
-  private setTime(event: any) {
-    const trigger = this._element.nativeElement;
+  private setTime(event: TouchEvent | MouseEvent) {
+    const trigger = this._elementRef.nativeElement;
     const triggerRect = trigger.getBoundingClientRect();
     const width = trigger.offsetWidth;
     const height = trigger.offsetHeight;
-    const pageX = event.pageX !== undefined ? event.pageX : event.touches[0].pageX;
-    const pageY = event.pageY !== undefined ? event.pageY : event.touches[0].pageY;
+    const { pageX, pageY } = getPointerPositionOnPage(event);
     const x = width / 2 - (pageX - triggerRect.left - window.pageXOffset);
     const y = height / 2 - (pageY - triggerRect.top - window.pageYOffset);
+
     let radian = Math.atan2(-x, y);
     const unit = Math.PI / (this._hourView ? 6 : this.interval ? 30 / this.interval : 30);
     const z = Math.sqrt(x * x + y * y);
@@ -349,9 +377,31 @@ export class MtxClock<D> implements AfterContentInit {
 
     this._timeChanged = true;
     this.activeDate = date;
-    this._cdr.markForCheck();
+    this._changeDetectorRef.markForCheck();
     this.activeDateChange.emit(this.activeDate);
   }
 
   static ngAcceptInputType_twelvehour: BooleanInput;
+}
+
+/** Returns whether an event is a touch event. */
+function isTouchEvent(event: MouseEvent | TouchEvent): event is TouchEvent {
+  // This function is called for every pixel that the user has dragged so we need it to be
+  // as fast as possible. Since we only bind mouse events and touch events, we can assume
+  // that if the event's name starts with `t`, it's a touch event.
+  return event.type[0] === 't';
+}
+
+/** Gets the coordinates of a touch or mouse event relative to the document. */
+function getPointerPositionOnPage(event: MouseEvent | TouchEvent) {
+  let point: { pageX: number; pageY: number };
+
+  if (isTouchEvent(event)) {
+    // `touches` will be empty for start/end events so we have to fall back to `changedTouches`.
+    point = event.touches[0] || event.changedTouches[0];
+  } else {
+    point = event;
+  }
+
+  return point;
 }

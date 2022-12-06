@@ -9,6 +9,7 @@ $clock-cell-size: 14.1666% !default;
   margin: $clock-margin;
   box-sizing: border-box;
   user-select: none;
+  touch-action: none;
 }
 
 .mtx-clock-wrapper {
