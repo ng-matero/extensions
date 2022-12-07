@@ -11,7 +11,9 @@
   <mat-checkbox [(ngModel)]="dismissible">Dismissible</mat-checkbox>
 
   <label>Elevation:</label>
-  <mat-slider min="0" max="24" thumbLabel [(ngModel)]="elevation"></mat-slider>
+  <mat-slider min="0" max="24">
+    <input matSliderThumb [(ngModel)]="elevation">
+  </mat-slider>
 </section>
 
 <mtx-alert [type]="type" [dismissible]="dismissible" [elevation]="elevation"

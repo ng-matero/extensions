@@ -15,9 +15,13 @@
 </mat-radio-group>
 
 <label>StrokeWidth:</label>
-<mat-slider [(ngModel)]="strokeWidth" [max]="10" [min]="1" [thumbLabel]="true"></mat-slider>
+<mat-slider [max]="10" [min]="1">
+  <input matSliderThumb [(ngModel)]="strokeWidth">
+</mat-slider>
 <label>Diameter:</label>
-<mat-slider [(ngModel)]="diameter" [max]="100" [min]="10" [thumbLabel]="true"></mat-slider>
+<mat-slider [max]="100" [min]="10">
+  <input matSliderThumb [(ngModel)]="diameter">
+</mat-slider>
 
 <mtx-loader [loading]="loading" [type]="type" [color]="color" [hasBackdrop]="hasBackdrop"
             [strokeWidth]="strokeWidth" [diameter]="diameter">

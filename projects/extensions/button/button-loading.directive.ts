@@ -20,6 +20,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
              button[mat-icon-button][loading],
              button[mat-fab][loading],
              button[mat-mini-fab][loading]`,
+  providers: [MatButton],
 })
 export class MatButtonLoadingDirective implements OnChanges {
   private spinner!: ComponentRef<MatProgressSpinner> | null;
@@ -71,7 +72,7 @@ export class MatButtonLoadingDirective implements OnChanges {
     if (!this.spinner) {
       this.spinner = this.viewContainerRef.createComponent(MatProgressSpinner);
       this.spinner.instance.color = this.color;
-      this.spinner.instance.diameter = 20;
+      this.spinner.instance.diameter = 24;
       this.spinner.instance.mode = 'indeterminate';
       this.renderer.appendChild(
         this.matButton._elementRef.nativeElement,

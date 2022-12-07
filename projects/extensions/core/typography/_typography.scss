@@ -178,25 +178,25 @@
 @mixin typography-hierarchy($config-or-theme, $selector: '.mat-typography') {
   $config: private-typography-to-2014-config(theming.get-typography-config($config-or-theme));
 
-  .mat-h1, .mat-headline, #{$selector} h1 {
+  .mat-h1, .mat-headline-5, #{$selector} h1 {
     @include typography-utils.typography-level($config, headline);
 
     margin: 0 0 16px;
   }
 
-  .mat-h2, .mat-title, #{$selector} h2 {
+  .mat-h2, .mat-headline-6, #{$selector} h2 {
     @include typography-utils.typography-level($config, title);
 
     margin: 0 0 16px;
   }
 
-  .mat-h3, .mat-subheading-2, #{$selector} h3 {
+  .mat-h3, .mat-subtitle-1, #{$selector} h3 {
     @include typography-utils.typography-level($config, subheading-2);
 
     margin: 0 0 16px;
   }
 
-  .mat-h4, .mat-subheading-1, #{$selector} h4 {
+  .mat-h4, .mat-body-1, #{$selector} h4 {
     @include typography-utils.typography-level($config, subheading-1);
 
     margin: 0 0 16px;
@@ -230,11 +230,11 @@
   }
 
   .mat-body-strong,
-  .mat-body-2 {
+  .mat-subtitle-2 {
     @include typography-utils.typography-level($config, body-2);
   }
 
-  .mat-body, .mat-body-1, #{$selector} {
+  .mat-body, .mat-body-2, #{$selector} {
     @include typography-utils.typography-level($config, body-1);
 
     p {
@@ -247,25 +247,25 @@
     @include typography-utils.typography-level($config, caption);
   }
 
-  .mat-display-4, #{$selector} .mat-display-4 {
+  .mat-headline-1, #{$selector} .mat-display-4 {
     @include typography-utils.typography-level($config, display-4);
 
     margin: 0 0 56px;
   }
 
-  .mat-display-3, #{$selector} .mat-display-3 {
+  .mat-headline-2, #{$selector} .mat-display-3 {
     @include typography-utils.typography-level($config, display-3);
 
     margin: 0 0 64px;
   }
 
-  .mat-display-2, #{$selector} .mat-display-2 {
+  .mat-headline-3, #{$selector} .mat-display-2 {
     @include typography-utils.typography-level($config, display-2);
 
     margin: 0 0 64px;
   }
 
-  .mat-display-1, #{$selector} .mat-display-1 {
+  .mat-headline-4, #{$selector} .mat-display-1 {
     @include typography-utils.typography-level($config, display-1);
 
     margin: 0 0 64px;

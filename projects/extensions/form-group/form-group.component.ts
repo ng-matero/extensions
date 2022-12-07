@@ -37,7 +37,7 @@ export class MtxFormGroupComponent implements AfterContentInit {
 
   ngAfterContentInit() {
     this.formFields.forEach(item => {
-      item.appearance = 'standard';
+      item.appearance = 'fill';
     });
   }
 
