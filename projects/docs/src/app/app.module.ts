@@ -18,7 +18,6 @@ import { DOCS_APP_ROUTES } from './routes';
     RouterModule.forRoot(DOCS_APP_ROUTES, {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
-      relativeLinkResolution: 'corrected',
     }),
     SharedModule,
   ],

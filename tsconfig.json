@@ -15,7 +15,7 @@
     "importHelpers": true,
     "module": "es2020",
     "moduleResolution": "node",
-    "target": "es2020",
+    "target": "ES2022",
     "typeRoots": ["node_modules/@types"],
     "types": ["jasmine"],
     "lib": ["es2018", "dom"],
@@ -28,7 +28,8 @@
       "@ng-matero/extensions-luxon-adapter/*": ["projects/extensions-luxon-adapter/*"],
       "@ng-matero/extensions-date-fns-adapter": ["projects/extensions-date-fns-adapter"],
       "@ng-matero/extensions-date-fns-adapter/*": ["projects/extensions-date-fns-adapter/*"]
-    }
+    },
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

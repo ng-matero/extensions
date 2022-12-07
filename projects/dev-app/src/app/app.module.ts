@@ -25,7 +25,7 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
     BrowserAnimationsModule,
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(DEV_APP_ROUTES, { relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(DEV_APP_ROUTES, {}),
     DevAppModule,
     TranslateModule.forRoot({
       loader: {
