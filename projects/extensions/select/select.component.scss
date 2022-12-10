@@ -7,10 +7,16 @@
 }
 
 .ng-select {
-  padding-top: calc(.4375em + .84375em);
-  margin-top: calc(-.4375em - .84375em);
-  padding-bottom: .4375em;
-  margin-bottom: -.4375em;
+  padding: 24px 16px 8px;
+  margin: -24px -16px -8px;
+
+  .mdc-text-field--no-label &,
+  .mdc-text-field--outlined & {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    margin-top: -16px;
+    margin-bottom: -16px;
+  }
 
   .ng-select-container {
     align-items: center;
@@ -80,10 +86,15 @@
         margin: -4px 0;
 
         .ng-value {
-          margin: 4px;
+          margin-right: 4px;
           border-radius: 16px;
           font-size: .875em;
           line-height: 18px;
+
+          @include rtl {
+            margin-right: auto;
+            margin-left: 4px;
+          }
 
           .ng-value-label {
             display: inline-block;
@@ -121,7 +132,6 @@
   }
 
   .ng-clear-wrapper {
-    height: 18px;
     text-align: center;
   }
 

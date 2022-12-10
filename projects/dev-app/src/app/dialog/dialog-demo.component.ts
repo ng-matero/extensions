@@ -17,7 +17,7 @@ export class DialogDemoComponent implements OnInit {
   ngOnInit() {}
 
   alert() {
-    this.mtxDialog.alert(`My name is Zongbin!`, '', () => {
+    this.mtxDialog.alert(`My name is Zongbin!`, 'This is my name.', () => {
       this.mtxDialog.alert(`Glad to meet you!`);
     });
   }
@@ -25,7 +25,7 @@ export class DialogDemoComponent implements OnInit {
   confirm() {
     this.mtxDialog.confirm(
       `What's your name?`,
-      '',
+      'This is my name.',
       () => {
         this.mtxDialog.alert(`Hi, Zongbin!`);
       },

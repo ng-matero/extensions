@@ -46,8 +46,7 @@ $handset-vertical-padding: ($handset-target-height - $handset-font-size) * .5;
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
-    $typography-default: typography.define-typography-config();
-    $typography: theming.get-typography-config($theme, $typography-default);
+    $typography: theming.get-typography-config($theme);
 
     @if $color != null {
       @include color($color);

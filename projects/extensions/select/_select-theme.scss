@@ -36,6 +36,7 @@
           .ng-value {
             color: theming.get-color-from-palette($foreground, text);
             background-color: theming.get-color-from-palette($background, unselected-chip);
+            border: 1px solid theming.get-color-from-palette($foreground, divider);
 
             &.ng-value-disabled {
               opacity: .4;

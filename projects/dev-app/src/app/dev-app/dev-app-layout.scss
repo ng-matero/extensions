@@ -1,9 +1,3 @@
-*,
-::after,
-::before {
-  box-sizing: border-box;
-}
-
 html,
 body {
   width: 100%;
@@ -25,7 +19,7 @@ body {
     min-width: 15vw;
     position: fixed;
 
-    .mat-button {
+    .mat-mdc-button {
       width: 100%;
       position: relative;
       bottom: 0;
@@ -48,6 +42,9 @@ body {
       justify-content: space-between;
       align-items: center;
       width: 100%;
+
+      // Avoids horizontal scrollbars on smaller screens.
+      overflow: hidden;
     }
   }
 
@@ -60,26 +57,21 @@ body {
 .demo-content {
   width: 100%;
   height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
 }
 
 .demo-container {
-  width: 100%;
-  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
 }
 
-// Override Material styles
-
-.mat-divider {
-  margin: 24px 0 !important;
+.demo-main {
+  // Removes extra space on top of toolbar on IE.
+  display: block;
 }
 
-.mat-checkbox,
-.mat-radio-button,
-.mat-slide-toggle {
-  margin-right: 8px;
-
-  [dir='rtl'] & {
-    margin-right: auto;
-    margin-left: 8px;
-  }
+.demo-config-buttons {
+  display: flex;
+  align-items: center;
 }

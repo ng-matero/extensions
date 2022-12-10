@@ -149,7 +149,7 @@ export class MtxSelectComponent
   @Input() addTag: boolean | AddTagFn = false;
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
-  @Input() appendTo!: string;
+  @Input() appendTo = 'body';
   @Input() bindLabel!: string;
   @Input() bindValue!: string;
   @Input() closeOnSelect = true;
@@ -429,7 +429,7 @@ export class MtxSelectComponent
   /** Implemented as part of MatFormFieldControl. */
   onContainerClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (/mat-form-field|mtx-select/g.test(target.parentElement?.classList[0] || '')) {
+    if (/mat-mdc-form-field|mtx-select/g.test(target.parentElement?.classList[0] || '')) {
       this.focus();
       this.open();
     }

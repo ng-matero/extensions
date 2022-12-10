@@ -18,14 +18,14 @@
   }
 
   .mat-column-resize-flex {
-    .mat-header-cell,
-    .mat-cell {
+    .mat-mdc-header-cell,
+    .mat-mdc-cell {
       box-sizing: border-box;
       min-width: 32px;
     }
   }
 
-  .mat-header-cell {
+  .mat-mdc-header-cell {
     position: relative;
   }
 
@@ -33,7 +33,7 @@
     box-sizing: border-box;
   }
 
-  .mat-header-cell:not(.mat-resizable)::after,
+  .mat-mdc-header-cell:not(.mat-resizable)::after,
   .mat-resizable-handle {
     position: absolute;
     bottom: 0;
@@ -46,18 +46,18 @@
       variables.$swift-ease-in-timing-function;
   }
 
-  .mat-header-cell:not(.mat-resizable)::after {
+  .mat-mdc-header-cell:not(.mat-resizable)::after {
     content: '';
   }
 
-  [dir='rtl'] .mat-header-cell:not(.mat-resizable)::after,
+  [dir='rtl'] .mat-mdc-header-cell:not(.mat-resizable)::after,
   [dir='rtl'] .mat-resizable-handle {
     left: 0;
     right: auto;
   }
 
-  .mat-header-row.cdk-column-resize-hover-or-active {
-    .mat-header-cell:not(.mat-resizable)::after {
+  .mat-mdc-header-row.cdk-column-resize-hover-or-active {
+    .mat-mdc-header-cell:not(.mat-resizable)::after {
       background: $non-resizable-hover-divider;
     }
 
@@ -72,7 +72,7 @@
   }
 
   .mat-resizable-handle:focus,
-  .mat-header-row.cdk-column-resize-hover-or-active .mat-resizable-handle:focus {
+  .mat-mdc-header-row.cdk-column-resize-hover-or-active .mat-resizable-handle:focus {
     background: $resizable-active-divider;
     outline: none;
   }

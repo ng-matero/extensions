@@ -12,6 +12,7 @@ import { DevAppModule } from './dev-app/dev-app-module';
 import { DEV_APP_ROUTES } from './dev-app/routes';
 import { DevAppRippleOptions } from './dev-app/ripple-options';
 import { DevAppDirectionality } from './dev-app/dev-app-directionality';
+import { ANIMATIONS_STORAGE_KEY } from './dev-app/dev-app-layout';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -22,7 +23,9 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
   imports: [
-    BrowserAnimationsModule,
+    BrowserAnimationsModule.withConfig({
+      disableAnimations: localStorage.getItem(ANIMATIONS_STORAGE_KEY) === 'true',
+    }),
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(DEV_APP_ROUTES, {}),
