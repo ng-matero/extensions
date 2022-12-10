@@ -17,11 +17,11 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { MtxPipesModule } from '@ng-matero/extensions/core';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
-import { MtxGridCellSelectionDirective, MtxGridComponent } from './grid.component';
-import { MtxGridCellComponent } from './cell.component';
-import { MtxGridColumnMenuComponent } from './column-menu.component';
-import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
-import { MtxGridService } from './grid.service';
+import { MtxGridCellSelection, MtxGrid } from './grid';
+import { MtxGridCell } from './cell';
+import { MtxGridColumnMenu } from './column-menu';
+import { MtxGridExpansionToggle } from './expansion-toggle';
+import { MtxGridUtils } from './grid-utils';
 import { MatColumnResizeModule } from './column-resize/column-resize-module';
 
 @NgModule({
@@ -46,20 +46,20 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MatColumnResizeModule,
   ],
   exports: [
-    MtxGridComponent,
-    MtxGridCellComponent,
-    MtxGridColumnMenuComponent,
-    MtxGridExpansionToggleDirective,
-    MtxGridCellSelectionDirective,
+    MtxGrid,
+    MtxGridCell,
+    MtxGridColumnMenu,
+    MtxGridExpansionToggle,
+    MtxGridCellSelection,
     MatColumnResizeModule,
   ],
   declarations: [
-    MtxGridComponent,
-    MtxGridCellComponent,
-    MtxGridColumnMenuComponent,
-    MtxGridExpansionToggleDirective,
-    MtxGridCellSelectionDirective,
+    MtxGrid,
+    MtxGridCell,
+    MtxGridColumnMenu,
+    MtxGridExpansionToggle,
+    MtxGridCellSelection,
   ],
-  providers: [MtxGridService],
+  providers: [MtxGridUtils],
 })
 export class MtxGridModule {}

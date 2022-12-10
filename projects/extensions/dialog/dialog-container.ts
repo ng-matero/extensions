@@ -6,14 +6,14 @@ import { MtxDialogData } from './dialog-config';
 @Component({
   selector: 'mtx-dialog',
   exportAs: 'mtxDialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss'],
+  templateUrl: './dialog-container.html',
+  styleUrls: ['./dialog-container.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxDialogComponent {
+export class MtxDialogContainer {
   constructor(
-    public dialogRef: MatDialogRef<MtxDialogComponent>,
+    public dialogRef: MatDialogRef<MtxDialogContainer>,
     @Inject(MAT_DIALOG_DATA) public data: MtxDialogData
   ) {}
 

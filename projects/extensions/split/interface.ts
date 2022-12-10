@@ -1,4 +1,4 @@
-import { MtxSplitPaneDirective } from './split-pane.directive';
+import { MtxSplitPane } from './split-pane';
 
 export interface MtxSplitPoint {
   x: number;
@@ -6,7 +6,7 @@ export interface MtxSplitPoint {
 }
 
 export interface MtxSplitArea {
-  component: MtxSplitPaneDirective;
+  component: MtxSplitPane;
   order: number;
   size: number | null;
   minSize: number | null;

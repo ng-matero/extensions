@@ -2,18 +2,18 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { isObservable } from 'rxjs';
 
-import { MtxGridColumn, MtxGridColumnButton } from './grid.interface';
-import { MtxGridService } from './grid.service';
+import { MtxGridColumn, MtxGridColumnButton } from './interface';
+import { MtxGridUtils } from './grid-utils';
 import PhotoViewer from 'photoviewer';
 
 @Component({
   selector: 'mtx-grid-cell',
   exportAs: 'mtxGridCell',
-  templateUrl: './cell.component.html',
-  styleUrls: ['./cell.component.scss'],
+  templateUrl: './cell.html',
+  styleUrls: ['./cell.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class MtxGridCellComponent {
+export class MtxGridCell {
   /** Row data */
   @Input() rowData: any = {};
 
@@ -30,7 +30,7 @@ export class MtxGridCellComponent {
   @Input() placeholder: string = '--';
 
   get _colValue() {
-    return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
+    return this._utils.getCellValue(this.rowData, this.colDef);
   }
 
   _isEmptyValue(value: any) {
@@ -58,13 +58,13 @@ export class MtxGridCellComponent {
       return colDef.summary;
     } else if (typeof colDef.summary === 'function') {
       return (colDef.summary as (data: any[], colDef?: MtxGridColumn) => any)(
-        this._dataGridSrv.getColData(data, colDef),
+        this._utils.getColData(data, colDef),
         colDef
       );
     }
   }
 
-  constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
+  constructor(private _dialog: MtxDialog, private _utils: MtxGridUtils) {}
 
   _onActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: any) {
     event.preventDefault();
@@ -116,7 +116,7 @@ export class MtxGridCellComponent {
   _onImagePreview(urlStr: string) {
     const imgs: PhotoViewer.Img[] = [];
 
-    this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
+    this._utils.str2arr(urlStr).forEach((url, index) => {
       imgs.push({ title: index + 1 + '', src: url });
     });
 

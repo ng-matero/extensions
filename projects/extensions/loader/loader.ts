@@ -19,12 +19,12 @@ export type MtxLoaderType = 'spinner' | 'progressbar';
     'class': 'mtx-loader',
     '[class.mtx-loader-loading]': 'loading',
   },
-  templateUrl: './loader.component.html',
-  styleUrls: ['./loader.component.scss'],
+  templateUrl: './loader.html',
+  styleUrls: ['./loader.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxLoaderComponent {
+export class MtxLoader {
   /** The loader's type. Can be `spinner` or `progressbar` */
   @Input() type: MtxLoaderType = 'spinner';
 

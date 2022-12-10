@@ -28,7 +28,7 @@ import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/mate
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { MtxOptionComponent } from './option.component';
+import { MtxOption } from './option';
 import {
   MtxSelectFooterTemplateDirective,
   MtxSelectHeaderTemplateDirective,
@@ -41,7 +41,7 @@ import {
   MtxSelectOptionTemplateDirective,
   MtxSelectTagTemplateDirective,
   MtxSelectTypeToSearchTemplateDirective,
-} from './templates.directive';
+} from './templates';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = (term: string) => any | Promise<any>;
@@ -102,13 +102,13 @@ const _MtxSelectMixinBase = mixinErrorState(
     '[class.mtx-select-multiple]': 'multiple',
     'class': 'mtx-select',
   },
-  templateUrl: './select.component.html',
-  styleUrls: ['./select.component.scss'],
+  templateUrl: './select.html',
+  styleUrls: ['./select.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [{ provide: MatFormFieldControl, useExisting: MtxSelectComponent }],
+  providers: [{ provide: MatFormFieldControl, useExisting: MtxSelect }],
 })
-export class MtxSelectComponent
+export class MtxSelect
   extends _MtxSelectMixinBase
   implements
     OnInit,
@@ -143,8 +143,8 @@ export class MtxSelectComponent
   @ContentChild(MtxSelectLoadingSpinnerTemplateDirective, { read: TemplateRef })
   loadingSpinnerTemplate!: TemplateRef<any>;
 
-  @ContentChildren(MtxOptionComponent, { descendants: true })
-  mtxOptions!: QueryList<MtxOptionComponent>;
+  @ContentChildren(MtxOption, { descendants: true })
+  mtxOptions!: QueryList<MtxOption>;
 
   @Input() addTag: boolean | AddTagFn = false;
   @Input() addTagText = 'Add item';
@@ -470,7 +470,7 @@ export class MtxSelectComponent
 
   /** NgSelect's `_setItemsFromNgOptions` */
   private _setItemsFromMtxOptions() {
-    const mapMtxOptions = (options: QueryList<MtxOptionComponent>) => {
+    const mapMtxOptions = (options: QueryList<MtxOption>) => {
       this.items = options.map(option => ({
         $ngOptionValue: option.value,
         $ngOptionLabel: option.elementRef.nativeElement.innerHTML,

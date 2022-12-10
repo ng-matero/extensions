@@ -133,11 +133,5 @@ export interface MtxGridRowClassFormatter {
   [className: string]: (rowData: any, index?: number) => boolean;
 }
 
-/** Column menu component. */
-export interface MtxGridColumnMenu {
-  menuPanel: MatMenu;
-  menuTrigger: MatMenuTrigger;
-}
-
 /** Possible button type values. */
 export type MtxGridButtonType = 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';

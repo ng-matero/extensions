@@ -1,13 +1,13 @@
 import { Directive, Input, ElementRef, Renderer2, OnInit, OnDestroy, NgZone } from '@angular/core';
 
-import { MtxSplitComponent } from './split.component';
+import { MtxSplit } from './split';
 import { getInputPositiveNumber, getInputBoolean } from './utils';
 
 @Directive({
   selector: 'mtx-split-pane, [mtx-split-pane]',
   exportAs: 'mtxSplitPane',
 })
-export class MtxSplitPaneDirective implements OnInit, OnDestroy {
+export class MtxSplitPane implements OnInit, OnDestroy {
   private _order: number | null = null;
 
   @Input() set order(v: number | null) {
@@ -105,7 +105,7 @@ export class MtxSplitPaneDirective implements OnInit, OnDestroy {
     private ngZone: NgZone,
     public elRef: ElementRef,
     private renderer: Renderer2,
-    private split: MtxSplitComponent
+    private split: MtxSplit
   ) {
     this.renderer.addClass(this.elRef.nativeElement, 'mtx-split-pane');
   }

@@ -20,12 +20,12 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
     '[class.mtx-alert-dismissible]': 'dismissible',
     'role': 'alert',
   },
-  templateUrl: './alert.component.html',
-  styleUrls: ['./alert.component.scss'],
+  templateUrl: './alert.html',
+  styleUrls: ['./alert.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxAlertComponent {
+export class MtxAlert {
   @HostBinding('class')
   get _hostClassList() {
     return `mtx-alert-${this.type} mat-elevation-z${this.elevation}`;
@@ -48,7 +48,7 @@ export class MtxAlertComponent {
   @Input() elevation = 0;
 
   /** Event emitted when the alert closed. */
-  @Output() closed = new EventEmitter<MtxAlertComponent>();
+  @Output() closed = new EventEmitter<MtxAlert>();
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 

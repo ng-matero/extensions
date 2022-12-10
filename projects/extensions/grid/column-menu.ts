@@ -17,17 +17,17 @@ import {
   MtxGridColumn,
   MtxGridColumnPinOption,
   MtxGridColumnPinValue,
-} from './grid.interface';
+} from './interface';
 
 @Component({
   selector: 'mtx-grid-column-menu',
   exportAs: 'mtxGridColumnMenu',
-  templateUrl: './column-menu.component.html',
-  styleUrls: ['./column-menu.component.scss'],
+  templateUrl: './column-menu.html',
+  styleUrls: ['./column-menu.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxGridColumnMenuComponent {
+export class MtxGridColumnMenu {
   @ViewChild('menu', { static: true }) menuPanel!: MatMenu;
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
 

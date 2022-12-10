@@ -1,10 +1,10 @@
-export * from './grid.module';
-export * from './grid.interface';
-export * from './grid.service';
-export * from './grid.component';
-export * from './cell.component';
-export * from './column-menu.component';
-export * from './expansion-toggle.directive';
+export * from './grid-module';
+export * from './grid-utils';
+export * from './grid';
+export * from './cell';
+export * from './column-menu';
+export * from './expansion-toggle';
+export * from './interface';
 export {
   TABLE_PROVIDERS as MAT_TABLE_PROVIDERS,
   FLEX_PROVIDERS as MAT_FLEX_PROVIDERS,

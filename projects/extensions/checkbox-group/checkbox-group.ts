@@ -16,7 +16,7 @@ import {
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
-import { MtxCheckboxGroupOption } from './checkbox-group.interface';
+import { MtxCheckboxGroupOption } from './interface';
 import { FocusMonitor } from '@angular/cdk/a11y';
 
 export class MtxCheckboxBase {
@@ -29,19 +29,19 @@ export class MtxCheckboxBase {
   host: {
     class: 'mtx-checkbox-group',
   },
-  templateUrl: './checkbox-group.component.html',
-  styleUrls: ['./checkbox-group.component.scss'],
+  templateUrl: './checkbox-group.html',
+  styleUrls: ['./checkbox-group.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MtxCheckboxGroupComponent),
+      useExisting: forwardRef(() => MtxCheckboxGroup),
       multi: true,
     },
   ],
 })
-export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, ControlValueAccessor {
+export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueAccessor {
   @ContentChildren(forwardRef(() => MatCheckbox), { descendants: true })
   _checkboxes!: QueryList<MatCheckbox>;
 

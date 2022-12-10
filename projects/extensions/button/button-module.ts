@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatButtonLoadingDirective } from './button-loading.directive';
+import { MatButtonLoading } from './button-loading';
 
 @NgModule({
   imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule],
-  exports: [MatButtonLoadingDirective],
-  declarations: [MatButtonLoadingDirective],
+  exports: [MatButtonLoading],
+  declarations: [MatButtonLoading],
 })
 export class MtxButtonModule {}

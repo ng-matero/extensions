@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { NgSelectModule } from '@ng-select/ng-select';
 
-import { MtxSelectComponent } from './select.component';
+import { MtxSelect } from './select';
 import {
   MtxSelectFooterTemplateDirective,
   MtxSelectHeaderTemplateDirective,
@@ -17,14 +17,14 @@ import {
   MtxSelectOptionTemplateDirective,
   MtxSelectTagTemplateDirective,
   MtxSelectTypeToSearchTemplateDirective,
-} from './templates.directive';
-import { MtxOptionComponent } from './option.component';
+} from './templates';
+import { MtxOption } from './option';
 
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule],
   exports: [
-    MtxSelectComponent,
-    MtxOptionComponent,
+    MtxSelect,
+    MtxOption,
     MtxSelectOptgroupTemplateDirective,
     MtxSelectOptionTemplateDirective,
     MtxSelectLabelTemplateDirective,
@@ -38,8 +38,8 @@ import { MtxOptionComponent } from './option.component';
     MtxSelectLoadingSpinnerTemplateDirective,
   ],
   declarations: [
-    MtxSelectComponent,
-    MtxOptionComponent,
+    MtxSelect,
+    MtxOption,
     MtxSelectOptgroupTemplateDirective,
     MtxSelectOptionTemplateDirective,
     MtxSelectLabelTemplateDirective,

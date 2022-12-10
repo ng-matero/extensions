@@ -3,8 +3,8 @@ import { waitForAsync, TestBed } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { By } from '@angular/platform-browser';
-import { MatButtonLoadingDirective } from './button-loading.directive';
-import { MtxButtonModule } from './button.module';
+import { MatButtonLoading } from './button-loading';
+import { MtxButtonModule } from './button-module';
 
 @Component({
   selector: 'test-app',
@@ -14,11 +14,11 @@ class TestApp {
   public loading: boolean = false;
 }
 
-describe('ButtonLoadingDirective', () => {
+describe('ButtonLoading', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       imports: [MatButtonModule, MtxButtonModule],
-      declarations: [MatButtonLoadingDirective, TestApp],
+      declarations: [MatButtonLoading, TestApp],
     });
 
     TestBed.compileComponents();

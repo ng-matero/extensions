@@ -22,7 +22,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
              button[mat-mini-fab][loading]`,
   providers: [MatButton],
 })
-export class MatButtonLoadingDirective implements OnChanges {
+export class MatButtonLoading implements OnChanges {
   private spinner!: ComponentRef<MatProgressSpinner> | null;
 
   @Input()

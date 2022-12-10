@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MtxAlertComponent } from './alert.component';
+import { MtxAlert } from './alert';
 
 @NgModule({
   imports: [CommonModule],
-  exports: [MtxAlertComponent],
-  declarations: [MtxAlertComponent],
+  exports: [MtxAlert],
+  declarations: [MtxAlert],
 })
 export class MtxAlertModule {}

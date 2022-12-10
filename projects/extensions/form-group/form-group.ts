@@ -15,13 +15,13 @@ import { MatFormField } from '@angular/material/form-field';
   host: {
     class: 'mtx-form-group',
   },
-  templateUrl: './form-group.component.html',
-  styleUrls: ['./form-group.component.scss'],
+  templateUrl: './form-group.html',
+  styleUrls: ['./form-group.scss'],
   exportAs: 'mtxFormGroup',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxFormGroupComponent implements AfterContentInit {
+export class MtxFormGroup implements AfterContentInit {
   @ContentChildren(MatFormField) formFields!: QueryList<MatFormField>;
 
   @Input() label!: string;

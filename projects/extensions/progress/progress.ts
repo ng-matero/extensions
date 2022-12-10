@@ -11,12 +11,12 @@ export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'dang
     '[style.height]': 'height',
     '[style.backgroundColor]': 'background',
   },
-  templateUrl: './progress.component.html',
-  styleUrls: ['./progress.component.scss'],
+  templateUrl: './progress.html',
+  styleUrls: ['./progress.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxProgressComponent {
+export class MtxProgress {
   /** The progress's type. Can be `default`, `info`, `success`, `warning` or `danger`. */
   @Input() type: MtxProgressType = 'info';
 

@@ -11,7 +11,7 @@ import {
 @Directive({
   selector: '[mtx-grid-expansion-toggle]',
 })
-export class MtxGridExpansionToggleDirective {
+export class MtxGridExpansionToggle {
   private _opened = false;
   private _row: any;
   private _tplRef!: TemplateRef<any>;
@@ -45,7 +45,7 @@ export class MtxGridExpansionToggleDirective {
     }
   }
 
-  @Output() toggleChange = new EventEmitter<MtxGridExpansionToggleDirective>();
+  @Output() toggleChange = new EventEmitter<MtxGridExpansionToggle>();
 
   constructor() {}
 

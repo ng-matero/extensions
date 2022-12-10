@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { MtxFormGroupComponent } from './form-group.component';
+import { MtxFormGroup } from './form-group';
 
 @NgModule({
   imports: [CommonModule],
-  exports: [MtxFormGroupComponent],
-  declarations: [MtxFormGroupComponent],
+  exports: [MtxFormGroup],
+  declarations: [MtxFormGroup],
 })
 export class MtxFormGroupModule {}

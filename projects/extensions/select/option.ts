@@ -17,7 +17,7 @@ import { Subject } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `<ng-content></ng-content>`,
 })
-export class MtxOptionComponent implements OnChanges, AfterViewChecked, OnDestroy {
+export class MtxOption implements OnChanges, AfterViewChecked, OnDestroy {
   @Input() value: any;
 
   @Input()

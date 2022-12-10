@@ -26,7 +26,7 @@ import {
   MtxSplitOutputData,
   MtxSplitOutputAreaSizes,
 } from './interface';
-import { MtxSplitPaneDirective } from './split-pane.directive';
+import { MtxSplitPane } from './split-pane';
 import {
   getInputPositiveNumber,
   getInputBoolean,
@@ -39,9 +39,9 @@ import {
   updateAreaSize,
 } from './utils';
 
-// Boilerplate for applying mixins to _MtxSplitComponentBase.
+// Boilerplate for applying mixins to _MtxSplitBase.
 /** @docs-private */
-const _MtxSplitComponentBase = mixinColor(
+const _MtxSplitBase = mixinColor(
   class {
     constructor(public _elementRef: ElementRef) {}
   }
@@ -85,14 +85,11 @@ const _MtxSplitComponentBase = mixinColor(
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: [`./split.component.scss`],
-  templateUrl: './split.component.html',
+  styleUrls: [`./split.scss`],
+  templateUrl: './split.html',
   inputs: ['color'],
 })
-export class MtxSplitComponent
-  extends _MtxSplitComponentBase
-  implements AfterViewInit, OnDestroy, CanColor
-{
+export class MtxSplit extends _MtxSplitBase implements AfterViewInit, OnDestroy, CanColor {
   private _direction: 'horizontal' | 'vertical' = 'horizontal';
 
   @Input() set direction(v: 'horizontal' | 'vertical') {
@@ -283,7 +280,7 @@ export class MtxSplitComponent
     return this.displayedAreas.length === 0 ? 0 : this.displayedAreas.length - 1;
   }
 
-  public addArea(component: MtxSplitPaneDirective): void {
+  public addArea(component: MtxSplitPane): void {
     const newArea: MtxSplitArea = {
       component,
       order: 0,
@@ -301,7 +298,7 @@ export class MtxSplitComponent
     }
   }
 
-  public removeArea(component: MtxSplitPaneDirective): void {
+  public removeArea(component: MtxSplitPane): void {
     if (this.displayedAreas.some(a => a.component === component)) {
       const area = this.displayedAreas.find(a => a.component === component) as MtxSplitArea;
       this.displayedAreas.splice(this.displayedAreas.indexOf(area), 1);
@@ -313,17 +310,13 @@ export class MtxSplitComponent
     }
   }
 
-  public updateArea(
-    component: MtxSplitPaneDirective,
-    resetOrders: boolean,
-    resetSizes: boolean
-  ): void {
+  public updateArea(component: MtxSplitPane, resetOrders: boolean, resetSizes: boolean): void {
     if (component.visible === true) {
       this.build(resetOrders, resetSizes);
     }
   }
 
-  public showArea(component: MtxSplitPaneDirective): void {
+  public showArea(component: MtxSplitPane): void {
     const area = this.hidedAreas.find(a => a.component === component);
     if (area === undefined) {
       return;
@@ -335,7 +328,7 @@ export class MtxSplitComponent
     this.build(true, true);
   }
 
-  public hideArea(comp: MtxSplitPaneDirective): void {
+  public hideArea(comp: MtxSplitPane): void {
     const area = this.displayedAreas.find(a => a.component === comp);
     if (area === undefined) {
       return;

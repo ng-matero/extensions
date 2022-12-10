@@ -39,18 +39,18 @@ import {
   MtxGridCellTemplate,
   MtxGridRowSelectionFormatter,
   MtxGridRowClassFormatter,
-  MtxGridColumnMenu,
   MtxGridButtonType,
   MtxGridColumnPinOption,
-} from './grid.interface';
-import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
-import { MtxGridService } from './grid.service';
+} from './interface';
+import { MtxGridExpansionToggle } from './expansion-toggle';
+import { MtxGridUtils } from './grid-utils';
+import { MtxGridColumnMenu } from './column-menu';
 
 @Component({
   selector: 'mtx-grid',
   exportAs: 'mtxGrid',
-  templateUrl: './grid.component.html',
-  styleUrls: ['./grid.component.scss'],
+  templateUrl: './grid.html',
+  styleUrls: ['./grid.scss'],
   host: {
     class: 'mtx-grid',
   },
@@ -65,7 +65,7 @@ import { MtxGridService } from './grid.service';
     ]),
   ],
 })
-export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
+export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -190,7 +190,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   /** Event emitted when the cell is selected. */
   @Output() cellSelectionChange = new EventEmitter<any[]>();
 
-  private _selectedCell?: MtxGridCellSelectionDirective;
+  private _selectedCell?: MtxGridCellSelection;
 
   // ===== Toolbar =====
 
@@ -297,10 +297,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   /** The template for the status bar. */
   @Input() statusbarTemplate!: TemplateRef<any>;
 
-  constructor(
-    private _dataGridSrv: MtxGridService,
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {}
+  constructor(private _utils: MtxGridUtils, private _changeDetectorRef: ChangeDetectorRef) {}
 
   detectChanges() {
     this._changeDetectorRef.detectChanges();
@@ -311,7 +308,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   _getColData(data: any[], colDef: MtxGridColumn) {
-    return this._dataGridSrv.getColData(data, colDef);
+    return this._utils.getColData(data, colDef);
   }
 
   _getRowClassList(rowData: any, index: number) {
@@ -419,7 +416,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 
   /** Expansion change event */
   _onExpansionChange(
-    expansionRef: MtxGridExpansionToggleDirective,
+    expansionRef: MtxGridExpansionToggle,
     rowData: any,
     column: any,
     index: number
@@ -428,10 +425,10 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   /** Cell select event */
-  _selectCell(cellRef: MtxGridCellSelectionDirective, rowData: any, colDef: any): void {
+  _selectCell(cellRef: MtxGridCellSelection, rowData: any, colDef: any): void {
     // If not the same cell
     if (this._selectedCell !== cellRef) {
-      const colValue = this._dataGridSrv.getCellValue(rowData, colDef);
+      const colValue = this._utils.getCellValue(rowData, colDef);
       this.cellSelection = []; // reset
       this.cellSelection.push({ cellData: colValue, rowData, colDef });
 
@@ -547,7 +544,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
 @Directive({
   selector: '[mtx-grid-selectable-cell]',
 })
-export class MtxGridCellSelectionDirective {
+export class MtxGridCellSelection {
   private _selected = false;
   private _rowData: any;
 
@@ -566,16 +563,16 @@ export class MtxGridCellSelectionDirective {
     }
   }
 
-  @Output() cellSelectionChange = new EventEmitter<MtxGridCellSelectionDirective>();
+  @Output() cellSelectionChange = new EventEmitter<MtxGridCellSelection>();
 
-  constructor(private _dataGrid: MtxGridComponent) {}
+  constructor(private _grid: MtxGrid) {}
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
     this.ctrlKeyPressed = event.ctrlKey;
     this.shiftKeyPressed = event.shiftKey;
 
-    if (this._dataGrid.cellSelectable) {
+    if (this._grid.cellSelectable) {
       this.select();
     }
   }

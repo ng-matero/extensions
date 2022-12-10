@@ -14,12 +14,12 @@ import {
     'class': 'mtx-text3d',
     '[style.transform]': 'transform',
   },
-  templateUrl: './text3d.component.html',
-  styleUrls: ['./text3d.component.scss'],
+  templateUrl: './text3d.html',
+  styleUrls: ['./text3d.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxText3dComponent {
+export class MtxText3d {
   @ContentChild(TemplateRef, { static: false }) template!: TemplateRef<any>;
 
   @Input() text = '';
