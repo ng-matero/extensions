@@ -12,6 +12,16 @@
   padding-bottom: .4375em;
   margin-bottom: -.4375em;
 
+  .mat-form-field-appearance-fill & {
+    padding: .25em .75em .75em;
+    margin: -.25em -.75em -.75em;
+  }
+
+  .mat-form-field-appearance-outline & {
+    padding: 1em .75em;
+    margin: -1em -.75em;
+  }
+
   .ng-select-container {
     align-items: center;
 
