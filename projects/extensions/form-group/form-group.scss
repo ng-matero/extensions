@@ -32,72 +32,59 @@
   }
 }
 
-// Fluent UI: https://developer.microsoft.com/en-us/fluentui#/controls/web
+// Fluent UI: https://developer.microsoft.com/en-us/fluentui#/controls/web/textfield
 .mtx-form-field-appearance-fluent {
-  .mat-form-field {
-    margin-bottom: .25em;
+  .mat-mdc-form-field-infix {
+    min-height: 30px;
+  }
 
-    .mat-form-field-suffix {
-      .mat-datepicker-toggle {
-        display: flex;
+  .mat-mdc-text-field-wrapper.mdc-text-field--outlined .mat-mdc-form-field-infix {
+    padding: 4px 8px;
+  }
+
+  .mdc-text-field {
+    padding: 0;
+  }
+
+  .mdc-text-field--outlined .mdc-notched-outline {
+    .mdc-notched-outline__leading {
+      border-radius: 2px 0 0 2px;
+
+      [dir='rtl'] & {
+        border-radius: 0 2px  2px 0;
       }
+    }
 
-      .mat-icon-button {
-        height: 1.5em;
-        width: 1.5em;
+    .mdc-notched-outline__trailing {
+      border-radius: 0 2px  2px 0;
 
-        .mat-datepicker-toggle-default-icon {
-          width: 1em;
-        }
+      [dir='rtl'] & {
+        border-radius: 2px 0 0 2px;
       }
     }
   }
 
-  .mat-form-field-has-label {
-    .mat-form-field-flex {
-      margin-top: .84375em;
-    }
+  .mdc-text-field--no-label .ng-select,
+  .mdc-text-field--outlined .ng-select {
+    padding: 4px 8px;
+    margin: -4px -8px;
   }
 
-  .mat-form-field-appearance-standard {
-    .mat-form-field-flex {
-      padding-top: 0;
-    }
+  .mat-mdc-form-field-hint-wrapper,
+  .mat-mdc-form-field-error-wrapper,
+  .mat-mdc-form-field-icon-prefix > .mat-icon,
+  .mat-mdc-form-field-icon-suffix > .mat-icon {
+    padding: 0;
   }
 
-  .mat-form-field-flex {
-    align-items: center;
-    padding: 0 .5em;
-    border-radius: 2px;
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    width: 30px;
+    height: 30px;
+    padding: 3px;
   }
 
-  .mat-form-field-infix {
-    border-top: 0;
-    padding: .375em 0;
-  }
-
-  .mat-form-field-prefix,
-  .mat-form-field-suffix {
-    display: inline-flex;
-
-    .mat-icon {
-      line-height: normal;
-    }
-  }
-
-  .mat-form-field-underline {
-    display: none;
-  }
-
-  .mtx-select {
-    display: block;
-    margin: 0 -8px;
-  }
-
-  .ng-select {
-    padding-top: .4375em;
-    padding-left: 8px;
-    padding-right: 8px;
-    margin-top: -.4375em;
+  .mat-mdc-form-field-icon-prefix,
+  .mat-mdc-form-field-icon-suffix, {
+    padding: 0 4px;
   }
 }

@@ -1,8 +1,8 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import {
+  MtxGrid,
   MtxGridColumn,
   MtxGridColumnPinOption,
-  MtxGridComponent,
   MtxGridRowClassFormatter,
   MtxGridRowSelectionFormatter,
 } from '@ng-matero/extensions/grid';
@@ -18,8 +18,8 @@ import { PageEvent } from '@angular/material/paginator';
   styleUrls: ['./grid-demo.component.scss'],
 })
 export class GridDemoComponent implements OnInit, AfterViewInit {
-  @ViewChild('grid', { static: true }) grid!: MtxGridComponent;
-  @ViewChild('grid2', { static: true }) grid2!: MtxGridComponent;
+  @ViewChild('grid', { static: true }) grid!: MtxGrid;
+  @ViewChild('grid2', { static: true }) grid2!: MtxGrid;
 
   multiSelectable = true;
   multiSelectionWithClick = false;

@@ -2,18 +2,31 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 0 20px;
-  font: 500 20px/32px Roboto, 'Helvetica Neue', sans-serif;
-  letter-spacing: normal;
+  padding: 8px 24px;
+  margin: 0;
+  line-height: 48px;
+  font-weight: 500;
+
+  .mat-mdc-button-base {
+    margin-right: -16px;
+
+    [dir='rtl'] & {
+      margin-right: unset;
+      margin-left: -16px;
+    }
+  }
 }
 
 .mtx-dialog-content {
   display: block;
   max-height: 65vh;
   padding: 0 24px;
-  margin: 0 -24px;
   overflow: auto;
   -webkit-overflow-scrolling: touch;
+
+  p {
+    margin-top: 0;
+  }
 }
 
 .mtx-dialog-actions {
@@ -21,6 +34,14 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: flex-end;
-  min-height: 52px;
-  padding: 8px 0;
+  padding: 8px;
+
+  .mat-mdc-button-base {
+    margin-left: 8px;
+
+    [dir='rtl'] & {
+      margin-left: unset;
+      margin-right: 8px;
+    }
+  }
 }

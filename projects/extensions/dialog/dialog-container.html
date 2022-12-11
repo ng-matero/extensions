@@ -1,4 +1,5 @@
-<h1 class="mtx-dialog-title" *ngIf="data.title">{{data.title | toObservable | async}}
+<h1 class="mtx-dialog-title" *ngIf="data.title">
+  <span>{{data.title | toObservable | async}}</span>
   <button mat-icon-button *ngIf="data.showCloseIcon" (click)="_onClose()">
     <mat-icon>close</mat-icon>
   </button>

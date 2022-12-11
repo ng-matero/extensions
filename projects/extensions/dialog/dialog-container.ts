@@ -4,10 +4,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MtxDialogData } from './dialog-config';
 
 @Component({
-  selector: 'mtx-dialog',
-  exportAs: 'mtxDialog',
+  selector: 'mtx-dialog-container',
+  exportAs: 'mtxDialogContainer',
   templateUrl: './dialog-container.html',
   styleUrls: ['./dialog-container.scss'],
+  host: {
+    class: 'mtx-dialog-container',
+  },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
