@@ -1,15 +1,44 @@
-<mat-checkbox [(ngModel)]="loading">Loading</mat-checkbox>
+<mat-checkbox [(ngModel)]="loading">loading</mat-checkbox>
 
-<button mat-button [loading]="loading" [color]="color">Button</button>
-<button mat-raised-button [loading]="loading" [color]="color">Button</button>
-<button mat-stroked-button [loading]="loading" [color]="color">Button</button>
-<button mat-flat-button [loading]="loading" [color]="color">Button</button>
-<button mat-icon-button [loading]="loading" [color]="color">
-  <mat-icon>more_vert</mat-icon>
-</button>
-<button mat-fab [loading]="loading" [color]="color">
-  <mat-icon>delete</mat-icon>
-</button>
-<button mat-mini-fab [loading]="loading" [color]="color">
-  <mat-icon>menu</mat-icon>
-</button>
+<mat-checkbox [(ngModel)]="disabled">disabled</mat-checkbox>
+
+<mat-radio-group [(ngModel)]="color">
+  <mat-radio-button value="basic">basic</mat-radio-button>
+  <mat-radio-button value="primary">primary</mat-radio-button>
+  <mat-radio-button value="accent">accent</mat-radio-button>
+  <mat-radio-button value="warn">warn</mat-radio-button>
+</mat-radio-group>
+
+<div>
+  <button mat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+  <button mat-raised-button [loading]="loading" [color]="color"
+          [disabled]="disabled">Button</button>
+  <button mat-stroked-button [loading]="loading" [color]="color"
+          [disabled]="disabled">Button</button>
+  <button mat-flat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+  <button mat-icon-button [loading]="loading" [color]="color" [disabled]="disabled">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <button mat-fab [loading]="loading" [color]="color" [disabled]="disabled">
+    <mat-icon>delete</mat-icon>
+  </button>
+  <button mat-mini-fab [loading]="loading" [color]="color" [disabled]="disabled">
+    <mat-icon>menu</mat-icon>
+  </button>
+</div>
+
+<div>
+  <a mat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</a>
+  <a mat-raised-button [loading]="loading" [color]="color" [disabled]="disabled">Button</a>
+  <a mat-stroked-button [loading]="loading" [color]="color" [disabled]="disabled">Button</a>
+  <a mat-flat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</a>
+  <a mat-icon-button [loading]="loading" [color]="color" [disabled]="disabled">
+    <mat-icon>more_vert</mat-icon>
+  </a>
+  <a mat-fab [loading]="loading" [color]="color" [disabled]="disabled">
+    <mat-icon>delete</mat-icon>
+  </a>
+  <a mat-mini-fab [loading]="loading" [color]="color" [disabled]="disabled">
+    <mat-icon>menu</mat-icon>
+  </a>
+</div>
