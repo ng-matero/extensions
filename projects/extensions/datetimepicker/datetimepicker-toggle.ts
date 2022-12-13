@@ -1,5 +1,6 @@
 import {
   AfterContentInit,
+  Attribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -15,7 +16,7 @@ import {
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatButton } from '@angular/material/button';
 import { MatDatepickerIntl } from '@angular/material/datepicker';
-import { merge, of as observableOf, Subscription } from 'rxjs';
+import { merge, of as observableOf, Subscription, Observable } from 'rxjs';
 import { MtxDatetimepicker } from './datetimepicker';
 
 /** Can be used to override the icon of a `mtxDatetimepickerToggle`. */
@@ -30,13 +31,16 @@ export class MtxDatetimepickerToggleIcon {}
   styleUrls: ['./datetimepicker-toggle.scss'],
   host: {
     'class': 'mtx-datetimepicker-toggle',
-    // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the
-    // consumer may have provided, while still being able to receive focus.
-    '[attr.tabindex]': 'disabled ? null : -1',
+    '[attr.tabindex]': 'null',
     '[class.mtx-datetimepicker-toggle-active]': 'datetimepicker && datetimepicker.opened',
     '[class.mat-accent]': 'datetimepicker && datetimepicker.color === "accent"',
     '[class.mat-warn]': 'datetimepicker && datetimepicker.color === "warn"',
-    '(focus)': '_button.focus()',
+    // Used by the test harness to tie this toggle to its datetimepicker.
+    '[attr.data-mtx-calendar]': 'datetimepicker ? datetimepicker.id : null',
+    // Bind the `click` on the host, rather than the inner `button`, so that we can call
+    // `stopPropagation` on it without affecting the user's `click` handlers. We need to stop
+    // it so that the input doesn't get focused automatically by the form field (See #21836).
+    '(click)': '_open($event)',
   },
   exportAs: 'mtxDatetimepickerToggle',
   encapsulation: ViewEncapsulation.None,
@@ -50,7 +54,7 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   @Input('for') datetimepicker!: MtxDatetimepicker<D>;
 
   /** Tabindex for the toggle. */
-  @Input() tabIndex!: number;
+  @Input() tabIndex: number | null;
 
   /** Whether the toggle button is disabled. */
   @Input()
@@ -71,7 +75,14 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   /** Underlying button element. */
   @ViewChild('button') _button!: MatButton;
 
-  constructor(public _intl: MatDatepickerIntl, private _changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    public _intl: MatDatepickerIntl,
+    private _changeDetectorRef: ChangeDetectorRef,
+    @Attribute('tabindex') defaultTabIndex: string
+  ) {
+    const parsedTabIndex = Number(defaultTabIndex);
+    this.tabIndex = parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.datetimepicker) {
@@ -102,13 +113,17 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
       this.datetimepicker && this.datetimepicker.datetimepickerInput
         ? this.datetimepicker.datetimepickerInput._disabledChange
         : observableOf();
+    const datetimepickerToggled = this.datetimepicker
+      ? merge(this.datetimepicker.openedStream, this.datetimepicker.closedStream)
+      : observableOf();
 
     this._stateChanges.unsubscribe();
-    this._stateChanges = merge([
+    this._stateChanges = merge(
       this._intl.changes,
-      datetimepickerDisabled,
-      inputDisabled,
-    ]).subscribe(() => this._changeDetectorRef.markForCheck());
+      datetimepickerDisabled as Observable<void>,
+      inputDisabled as Observable<void>,
+      datetimepickerToggled
+    ).subscribe(() => this._changeDetectorRef.markForCheck());
   }
 
   static ngAcceptInputType_disabled: BooleanInput;

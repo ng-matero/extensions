@@ -1,6 +1,7 @@
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
+  Attribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -9,13 +10,12 @@ import {
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { Subscription, of, merge } from 'rxjs';
+import { Subscription, of as observableOf, merge, Observable } from 'rxjs';
 import { MtxColorpicker } from './colorpicker';
 
 /** Can be used to override the icon of a `mtxColorpickerToggle`. */
@@ -30,13 +30,14 @@ export class MtxColorpickerToggleIcon {}
   styleUrls: ['./colorpicker-toggle.scss'],
   host: {
     'class': 'mtx-colorpicker-toggle',
-    // Always set the tabindex to -1 so that it doesn't overlap with any custom tabindex the
-    // consumer may have provided, while still being able to receive focus.
-    '[attr.tabindex]': 'disabled ? null : -1',
+    '[attr.tabindex]': 'null',
     '[class.mtx-colorpicker-toggle-active]': 'picker && picker.opened',
     '[class.mat-accent]': 'picker && picker.color === "accent"',
     '[class.mat-warn]': 'picker && picker.color === "warn"',
-    '(focus)': '_button.focus()',
+    // Bind the `click` on the host, rather than the inner `button`, so that we can call
+    // `stopPropagation` on it without affecting the user's `click` handlers. We need to stop
+    // it so that the input doesn't get focused automatically by the form field (See #21836).
+    '(click)': '_open($event)',
   },
   exportAs: 'mtxColorpickerToggle',
   encapsulation: ViewEncapsulation.None,
@@ -49,7 +50,10 @@ export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDest
   @Input('for') picker!: MtxColorpicker;
 
   /** Tabindex for the toggle. */
-  @Input() tabIndex!: number;
+  @Input() tabIndex: number | null;
+
+  /** Screen-reader label for the button. */
+  @Input('aria-label') ariaLabel!: string;
 
   /** Whether the toggle button is disabled. */
   @Input()
@@ -74,7 +78,13 @@ export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDest
   /** Underlying button element. */
   @ViewChild('button') _button!: MatButton;
 
-  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private _changeDetectorRef: ChangeDetectorRef,
+    @Attribute('tabindex') defaultTabIndex: string
+  ) {
+    const parsedTabIndex = Number(defaultTabIndex);
+    this.tabIndex = parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.picker) {
@@ -90,7 +100,7 @@ export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDest
     this._watchStateChanges();
   }
 
-  open(event: Event): void {
+  _open(event: Event): void {
     if (this.picker && !this.disabled) {
       this.picker.open();
       event.stopPropagation();
@@ -98,17 +108,21 @@ export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDest
   }
 
   private _watchStateChanges() {
-    const pickerDisabled = this.picker ? this.picker._disabledChange : of();
+    const pickerDisabled = this.picker ? this.picker._disabledChange : observableOf();
     const inputDisabled =
-      this.picker && this.picker.pickerInput ? this.picker.pickerInput._disabledChange : of();
-    const datepickerToggled = this.picker
+      this.picker && this.picker.pickerInput
+        ? this.picker.pickerInput._disabledChange
+        : observableOf();
+    const pickerToggled = this.picker
       ? merge(this.picker.openedStream, this.picker.closedStream)
-      : of();
+      : observableOf();
 
     this._stateChanges.unsubscribe();
-    this._stateChanges = merge([pickerDisabled, inputDisabled, datepickerToggled]).subscribe(() =>
-      this._changeDetectorRef.markForCheck()
-    );
+    this._stateChanges = merge(
+      pickerDisabled as Observable<void>,
+      inputDisabled as Observable<void>,
+      pickerToggled
+    ).subscribe(() => this._changeDetectorRef.markForCheck());
   }
 
   static ngAcceptInputType_disabled: BooleanInput;
