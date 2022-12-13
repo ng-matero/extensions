@@ -285,9 +285,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     return this._type;
   }
   set type(value: MtxDatetimepickerType) {
-    this._type = value || 'date';
+    this._type = value || 'datetime';
   }
-  private _type: MtxDatetimepickerType = 'date';
+  private _type: MtxDatetimepickerType = 'datetime';
 
   /**
    * Whether the calendar UI is in touch mode. In touch mode the calendar opens in a dialog rather
