@@ -420,7 +420,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     }
 
     if (this._componentRef) {
-      this._destroyOverlay();
+      const instance = this._componentRef.instance;
+      instance._startExitAnimation();
+      instance._animationDone.pipe(take(1)).subscribe(() => this._destroyOverlay());
     }
 
     const completeClose = () => {
