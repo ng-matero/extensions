@@ -2,10 +2,10 @@
         mat-icon-button
         type="button"
         [attr.aria-haspopup]="picker ? 'dialog' : null"
+        [attr.aria-label]="ariaLabel"
         [attr.tabindex]="disabled ? -1 : tabIndex"
         [disabled]="disabled"
-        [disableRipple]="disableRipple"
-        (click)="open($event)">
+        [disableRipple]="disableRipple">
 
   <svg *ngIf="!_customIcon"
        class="mtx-colorpicker-toggle-default-icon"
