@@ -78,4 +78,13 @@ $time-ampm-width: 40px;
   display: flex;
   justify-content: flex-end;
   padding-top: 8px;
+
+  .mat-button-base + .mat-button-base {
+    margin-left: 8px;
+
+    [dir='rtl'] & {
+      margin-left: 0;
+      margin-right: 8px;
+    }
+  }
 }
