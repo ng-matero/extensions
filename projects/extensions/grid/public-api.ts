@@ -4,7 +4,7 @@ export * from './grid';
 export * from './cell';
 export * from './column-menu';
 export * from './expansion-toggle';
-export * from './interface';
+export * from './interfaces';
 export {
   TABLE_PROVIDERS as MAT_TABLE_PROVIDERS,
   FLEX_PROVIDERS as MAT_FLEX_PROVIDERS,

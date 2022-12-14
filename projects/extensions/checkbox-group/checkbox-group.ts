@@ -16,8 +16,8 @@ import {
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
-import { MtxCheckboxGroupOption } from './interface';
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { MtxCheckboxGroupOption } from './interfaces';
 
 export class MtxCheckboxBase {
   constructor(public label?: any, public value?: any) {}

@@ -6,7 +6,7 @@ import {
   MtxSplitAreaSnapshot,
   MtxSplitSideAbsorptionCapacity,
   MtxSplitAreaAbsorptionCapacity,
-} from './interface';
+} from './interfaces';
 
 export function getPointFromEvent(event: MouseEvent | TouchEvent): MtxSplitPoint | null {
   // TouchEvent
@@ -127,7 +127,7 @@ export function getGutterSideAbsorptionCapacity(
   );
 }
 
-function getAreaAbsorptionCapacity(
+export function getAreaAbsorptionCapacity(
   unit: 'percent' | 'pixel',
   areaSnapshot: MtxSplitAreaSnapshot,
   pixels: number,
@@ -162,7 +162,7 @@ function getAreaAbsorptionCapacity(
   }
 }
 
-function getAreaAbsorptionCapacityPercent(
+export function getAreaAbsorptionCapacityPercent(
   areaSnapshot: MtxSplitAreaSnapshot,
   pixels: number,
   allAreasSizePixel: number
@@ -224,7 +224,7 @@ function getAreaAbsorptionCapacityPercent(
   }
 }
 
-function getAreaAbsorptionCapacityPixel(
+export function getAreaAbsorptionCapacityPixel(
   areaSnapshot: MtxSplitAreaSnapshot,
   pixels: number,
   containerSizePixel: number

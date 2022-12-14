@@ -41,7 +41,7 @@ import {
   MtxGridRowClassFormatter,
   MtxGridButtonType,
   MtxGridColumnPinOption,
-} from './interface';
+} from './interfaces';
 import { MtxGridExpansionToggle } from './expansion-toggle';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumnMenu } from './column-menu';

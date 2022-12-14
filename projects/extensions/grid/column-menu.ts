@@ -17,7 +17,7 @@ import {
   MtxGridColumn,
   MtxGridColumnPinOption,
   MtxGridColumnPinValue,
-} from './interface';
+} from './interfaces';
 
 @Component({
   selector: 'mtx-grid-column-menu',

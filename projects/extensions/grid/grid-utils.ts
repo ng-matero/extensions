@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MtxGridColumn } from './interface';
+import { MtxGridColumn } from './interfaces';
 
 @Injectable()
 export class MtxGridUtils {

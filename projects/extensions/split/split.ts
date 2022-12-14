@@ -25,7 +25,7 @@ import {
   MtxSplitAreaSnapshot,
   MtxSplitOutputData,
   MtxSplitOutputAreaSizes,
-} from './interface';
+} from './interfaces';
 import { MtxSplitPane } from './split-pane';
 import {
   getInputPositiveNumber,

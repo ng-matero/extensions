@@ -1,3 +1,3 @@
 export * from './checkbox-group-module';
 export * from './checkbox-group';
-export * from './interface';
+export * from './interfaces';

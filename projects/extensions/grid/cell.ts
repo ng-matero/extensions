@@ -2,7 +2,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { isObservable } from 'rxjs';
 
-import { MtxGridColumn, MtxGridColumnButton } from './interface';
+import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
 import { MtxGridUtils } from './grid-utils';
 import PhotoViewer from 'photoviewer';
 
