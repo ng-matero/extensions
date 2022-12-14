@@ -79,7 +79,7 @@ $time-ampm-width: 40px;
   justify-content: flex-end;
   padding-top: 8px;
 
-  .mat-button-base + .mat-button-base {
+  .mat-mdc-button-base + .mat-mdc-button-base {
     margin-left: 8px;
 
     [dir='rtl'] & {
