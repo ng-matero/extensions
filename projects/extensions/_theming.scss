@@ -15,5 +15,6 @@
 @forward './split/split-theme.import';
 @forward './tooltip/tooltip-theme.import';
 
-@forward './all-theme' show material-extensions-theme;
-@forward './all-color' show material-extensions-color;
+@forward './core/theming/all-theme' show material-extensions-theme;
+@forward './core/color/all-color' show material-extensions-color;
+@forward './core/density/all-density' show material-extensions-density;

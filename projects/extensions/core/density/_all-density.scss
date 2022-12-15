@@ -1,8 +1,8 @@
-@use './core/theming/theming';
-@use './select/select-theme';
+@use '../theming/theming';
+@use '../../select/select-theme';
 
 // Includes all of the density styles.
-@mixin all-component-densities($config-or-theme, $experimental: false) {
+@mixin all-component-densities($config-or-theme) {
   // In case a theme object has been passed instead of a configuration for
   // the color system, extract the color config from the theme object.
   $config: if(

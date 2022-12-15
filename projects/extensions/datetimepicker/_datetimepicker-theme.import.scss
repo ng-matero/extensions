@@ -1,4 +1,4 @@
 @forward 'datetimepicker-theme' hide $selected-today-box-shadow-width, $calendar-body-font-size,
   $calendar-weekday-table-font-size, $calendar-header-font-size, $clock-font-size,
   color, theme, typography;
-@forward 'datetimepicker-theme' as mtx-datetimepicker-* hide mtx-datetimepicker-density;
+@forward 'datetimepicker-theme' as mtx-datetimepicker-*;

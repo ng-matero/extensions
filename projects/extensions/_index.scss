@@ -15,6 +15,6 @@
 @forward './split/split-theme' as split-* show split-theme;
 @forward './tooltip/tooltip-theme' as tooltip-* show tooltip-theme;
 
-@forward './all-theme' show all-component-themes;
-@forward './all-color' show all-component-colors;
-@forward './all-density' show all-component-densities;
+@forward './core/theming/all-theme' show all-component-themes;
+@forward './core/color/all-color' show all-component-colors;
+@forward './core/density/all-density' show all-component-densities;
