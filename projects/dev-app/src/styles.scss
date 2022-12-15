@@ -80,5 +80,6 @@ $density-scales: (-1, -2, minimum, maximum);
   .demo-density-#{$density} {
     @include mat.all-component-densities($density);
     @include mat.private-all-legacy-component-densities($density);
+    @include mtx.all-component-densities($density);
   }
 }

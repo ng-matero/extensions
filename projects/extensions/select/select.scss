@@ -7,16 +7,10 @@
 }
 
 .ng-select {
-  padding: 24px 16px 8px;
-  margin: -24px -16px -8px;
-
-  .mdc-text-field--no-label &,
-  .mdc-text-field--outlined & {
-    padding-top: 16px;
-    padding-bottom: 16px;
-    margin-top: -16px;
-    margin-bottom: -16px;
-  }
+  padding-right: 16px;
+  padding-left: 16px;
+  margin-right: -16px;
+  margin-left: -16px;
 
   .ng-select-container {
     align-items: center;
@@ -34,13 +28,11 @@
   }
 
   .ng-placeholder {
-    .mat-form-field-has-label & {
-      transition: opacity 200ms;
-      opacity: 0;
-    }
+    transition: opacity 200ms;
+    opacity: 1;
 
-    .mat-form-field-has-label .mtx-select-floating & {
-      opacity: 1;
+    .mat-form-field-hide-placeholder & {
+      opacity: 0;
     }
   }
 
