@@ -22,13 +22,3 @@
 @mixin material-extensions-density($config-or-theme) {
   @include all-component-densities($config-or-theme);
 }
-
-// Includes all of the experimental density styles.
-@mixin all-experimental-component-densities($config-or-theme) {
-  @include all-component-densities($config-or-theme, $experimental: true);
-}
-
-// @deprecated Use `all-experimental-component-densities`.
-@mixin material-extensions-experimental-density($config-or-theme) {
-  @include all-experimental-component-densities($config-or-theme);
-}

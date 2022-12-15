@@ -1,6 +1,0 @@
-{
-  "lib": {
-    "flatModuleFile": "mtxFormGroup",
-    "entryFile": "public-api.ts"
-  }
-}

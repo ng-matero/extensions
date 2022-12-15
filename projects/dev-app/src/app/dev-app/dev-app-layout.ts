@@ -29,14 +29,12 @@ export class DevAppLayout {
     { name: 'Datetimepicker', route: '/datetimepicker' },
     { name: 'Dialog', route: '/dialog' },
     { name: 'Drawer', route: '/drawer' },
-    { name: 'Form Group', route: '/form-group' },
     { name: 'Loader', route: '/loader' },
     { name: 'Popover', route: '/popover' },
     { name: 'Progress', route: '/progress' },
     { name: 'Select', route: '/select' },
     { name: 'Slider', route: '/slider' },
     { name: 'Split Pane', route: '/split' },
-    { name: 'Text 3D', route: '/text3d' },
     { name: 'Tooltip', route: '/tooltip' },
   ];
 

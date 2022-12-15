@@ -14,8 +14,6 @@
 @forward './slider/slider-theme.import';
 @forward './split/split-theme.import';
 @forward './tooltip/tooltip-theme.import';
-@forward './form-group/form-group-theme.import';
-@forward './text3d/text3d-theme.import';
 
-@forward './all-theme' show material-extensions-theme, material-extensions-experimental-theme;
-@forward './all-color' show material-extensions-color, material-extensions-experimental-color;
+@forward './all-theme' show material-extensions-theme;
+@forward './all-color' show material-extensions-color;

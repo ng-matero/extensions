@@ -11,8 +11,6 @@
 @use './slider/slider-theme';
 @use './split/split-theme';
 @use './tooltip/tooltip-theme';
-@use './form-group/form-group-theme';
-@use './text3d/text3d-theme';
 
 // Create a theme.
 @mixin all-component-themes($theme) {
@@ -33,15 +31,4 @@
 // @deprecated Use `all-component-themes`.
 @mixin material-extensions-theme($theme) {
   @include all-component-themes($theme);
-}
-
-// Create a experimental theme.
-@mixin all-experimental-component-themes($theme) {
-  @include form-group-theme.theme($theme);
-  @include text3d-theme.theme($theme);
-}
-
-// @deprecated Use `all-experimental-component-themes`.
-@mixin material-extensions-experimental-theme($theme) {
-  @include all-experimental-component-themes($theme);
 }
