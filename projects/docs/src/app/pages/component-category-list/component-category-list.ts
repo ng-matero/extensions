@@ -25,11 +25,14 @@ export class ComponentCategoryList implements OnInit, OnDestroy {
       Object.assign
     );
 
-    // TODO: title on topbar navigation
     this.routeParamSubscription = this.params.subscribe(params => {
       this._componentPageTitle.title = 'components';
     });
   }
 
-  ngOnDestroy() {}
+  ngOnDestroy() {
+    if (this.routeParamSubscription) {
+      this.routeParamSubscription.unsubscribe();
+    }
+  }
 }

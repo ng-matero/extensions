@@ -3,14 +3,14 @@
 <section class="popover-position">
   <label>position:</label>
   [
-  <mat-form-field floatLabel="never">
+  <mat-form-field>
     <mat-label>Start</mat-label>
     <mat-select [(ngModel)]="positionStart" (ngModelChange)="onPositionStartChange()">
       <mat-option *ngFor="let item of positionStartOptions" [value]="item">{{item}}</mat-option>
     </mat-select>
   </mat-form-field>
   ,
-  <mat-form-field floatLabel="never">
+  <mat-form-field>
     <mat-label>End</mat-label>
     <mat-select [(ngModel)]="positionEnd">
       <mat-option *ngFor="let item of positionEndOptions" [value]="item">{{item}}</mat-option>

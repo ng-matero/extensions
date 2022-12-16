@@ -11,7 +11,7 @@
   $nav-background-opacity: if($is-dark-theme, .2, .03);
 
   .docs-component-category-list-summary a {
-    color: mat.get-color-from-palette($primary, default);
+    color: mat.get-color-from-palette($primary, if($is-dark-theme, 200, default));
   }
 
   .docs-component-category-list-card-summary {
@@ -22,13 +22,17 @@
     border: 1px solid mat.get-color-from-palette($foreground, divider);
     border-radius: 4px;
     background: mat.get-color-from-palette($background, card);
+  }
 
-    &:hover {
-      background: rgba(0, 0, 0, $nav-background-opacity);
-    }
+  .docs-component-category-list-card:hover {
+    background: rgba(0, 0, 0, $nav-background-opacity);
   }
 
   .docs-component-category-list-card-title {
     color: mat.get-color-from-palette($foreground, text);
+  }
+
+  .docs-component-category-list-card-image-wrapper {
+    border-bottom: 1px solid mat.get-color-from-palette($foreground, divider);
   }
 }

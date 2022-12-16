@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router, NavigationEnd, NavigationStart } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd, NavigationStart, Scroll } from '@angular/router';
 import { Subject } from 'rxjs';
 import { ComponentPageTitle } from '../page-title/page-title';
 
@@ -25,10 +25,16 @@ export class ComponentViewer implements OnDestroy {
       routeAndParentParams.push(_route.parent.params);
     }
 
+    // TODO: NavigationEnd not working if reload page
     this.router.events.subscribe(s => {
       if (s instanceof NavigationEnd) {
         this.componentId = s.url.split('/')[2];
         this._componentPageTitle.title = this.componentId;
+      } else if (s instanceof Scroll) {
+        this.componentId = s.routerEvent.url.split('/')[2];
+        if (this.componentId) {
+          this._componentPageTitle.title = this.componentId;
+        }
       }
     });
   }

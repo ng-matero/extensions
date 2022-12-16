@@ -1,6 +1,6 @@
 <ng-progress color="white"></ng-progress>
 
-<mat-toolbar class="docs-navbar-header" color="primary">
+<nav class="docs-navbar-header" aria-label="Top Toolbar">
   <div class="skip-link-wrapper" [class.cdk-visually-hidden]="skipLinkHidden" *ngIf="skipLinkHref">
     <a mat-raised-button [href]="skipLinkHref" (focus)="skipLinkHidden = false"
        (blur)="skipLinkHidden = true" color="accent">
@@ -9,31 +9,39 @@
   </div>
 
   <a mat-button class="docs-button" routerLink="/" aria-label="Angular Material">
-    <img class="docs-angular-logo" src="assets/img/angular-white-transparent.svg" alt="angular">
+    <img class="logo" matButtonIcon src="assets/img/angular-white-transparent.svg" alt="angular"
+         aria-hidden="true">
     <span>Material Extensions</span>
   </a>
 
-  <a mat-button class="docs-navbar-link" routerLink="components"
-     routerLinkActive="docs-navbar-header-item-selected" fxHide.lt-sm>Components</a>
-  <a mat-button class="docs-navbar-link" routerLink="guides"
-     routerLinkActive="docs-navbar-header-item-selected" fxHide.lt-sm>Guides</a>
+  <a mat-button class="docs-navbar-hide-small docs-button" routerLink="components"
+     routerLinkActive="docs-navbar-header-item-selected">Components</a>
+  <a mat-button class="docs-navbar-hide-small docs-button" routerLink="guides"
+     routerLinkActive="docs-navbar-header-item-selected">Guides</a>
 
-  <button mat-icon-button [matMenuTriggerFor]="menu" fxHide.gt-xs>
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item routerLink="components">Components</button>
-    <button mat-menu-item routerLink="guides">Guides</button>
-  </mat-menu>
+  <div class="flex-spacer"></div>
 
-  <span fxFlex></span>
-
-  <button mat-icon-button (click)="toggleTheme()"
-          matTooltip="Toggle the theme">
+  <button mat-icon-button matTooltip="Toggle the theme" (click)="toggleTheme()">
     <mat-icon>{{dark ? 'brightness_3' : 'wb_sunny'}}</mat-icon>
   </button>
 
-  <a mat-icon-button href="https://github.com/ng-matero/extensions" target="_blank">
-    <img alt="angular" src="assets/img/github-circle-white-transparent.svg">
+  <a mat-button class="docs-button docs-navbar-hide-small"
+     href="https://github.com/ng-matero/extensions" target="_blank"
+     aria-label="GitHub Repository">
+    <img class="logo" matButtonIcon
+         src="assets/img/github-circle-white-transparent.svg"
+         alt="angular" aria-hidden="true">
+    GitHub
   </a>
-</mat-toolbar>
+  <a mat-icon-button class="docs-button docs-navbar-show-small"
+     href="https://github.com/ng-matero/extensions" target="_blank"
+     aria-label="GitHub Repository">
+    <img class="logo docs-navbar--github-logo" matButtonIcon
+         src="assets/img/github-circle-white-transparent.svg"
+         alt="angular" aria-hidden="true">
+  </a>
+</nav>
+<nav class="docs-navbar docs-navbar-show-small" aria-label="Section Nav Bar">
+  <a mat-button class="docs-navbar-link" routerLink="components">Components</a>
+  <a mat-button class="docs-navbar-link" routerLink="guides">Guides</a>
+</nav>

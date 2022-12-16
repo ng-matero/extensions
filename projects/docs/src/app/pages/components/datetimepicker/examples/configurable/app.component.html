@@ -44,7 +44,9 @@
 
 <section>
   <label>timeInterval:</label>
-  <mat-slider min="1" max="30" thumbLabel [(ngModel)]="timeInterval"></mat-slider>
+  <mat-slider min="1" max="30" discrete>
+    <input matSliderThumb [(ngModel)]="timeInterval">
+  </mat-slider>
 </section>
 
 <section>
@@ -54,7 +56,7 @@
 <h2>Result</h2>
 
 <mat-form-field>
-  <mat-placeholder>{{type}}</mat-placeholder>
+  <mat-label>{{type}}</mat-label>
   <mtx-datetimepicker #datetimePicker
                       [type]="type"
                       [mode]="mode"

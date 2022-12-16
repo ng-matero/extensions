@@ -4,13 +4,14 @@
 
     <div class="docs-example-viewer-title-spacer"></div>
 
-    <button mat-icon-button type="button" (click)="toggleSourceView()" [matTooltip]="'View source'">
+    <button mat-icon-button type="button" (click)="toggleSourceView()" [matTooltip]="'View source'"
+            aria-label="View source">
       <mat-icon>code</mat-icon>
     </button>
   </div>
 
   <div class="docs-example-viewer-source" *ngIf="showSource">
-    <mat-tab-group>
+    <mat-tab-group animationDuration="0ms" mat-stretch-tabs="false">
       <mat-tab *ngFor="let f of exampleData.files" [label]="f.file">
         <div class="docs-example-source-wrapper">
           <div class="button-bar">

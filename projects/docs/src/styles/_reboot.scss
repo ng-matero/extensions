@@ -1,21 +1,53 @@
 html,
 body {
-  width: 100%;
-  height: 100%;
+  height: 100vh;
 }
 
 body {
-  margin: 0;
   font-family: Roboto, 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;
-  text-align: unset;
+  margin: 0;
+}
+
+.docs-button[md-button],
+.docs-button[md-raised-button] {
+  text-transform: uppercase;
+}
+
+h1,
+h2 {
+  font-weight: 400;
+}
+
+.docs-primary-header {
+  padding-left: 20px;
+
+  h1 {
+    font-weight: 300;
+    margin: 0;
+    padding: 28px 8px;
+    font-size: 20px;
+  }
+}
+
+// These styles are for controlling SVGs without using the ::ng-deep selector
+
+.docs-component-category-list-card-image svg {
+  width: 100%;
+}
+
+.docs-footer-angular-logo svg {
+  height: 50px;
+}
+
+.docs-angular-logo svg {
+  height: 26px;
+  margin: 0 4px 3px 0;
+  vertical-align: middle;
 }
 
 code,
-kbd,
-pre,
-samp {
-  font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace;
-  font-size: 1em;
+pre {
+  font-family: 'Roboto Mono', monospace;
 }
 
 code {
@@ -23,6 +55,10 @@ code {
   font-size: 90%;
   background-color: rgba(0, 0, 0, .06);
   word-wrap: break-word;
+}
+
+pre {
+  font-size: 14px;
 }
 
 kbd {

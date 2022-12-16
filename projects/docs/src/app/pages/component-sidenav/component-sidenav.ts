@@ -1,9 +1,10 @@
-import { Component, ViewEncapsulation } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatSidenav, MatDrawerToggleResult } from '@angular/material/sidenav';
-import { Observable } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { NavigationFocusService } from '../../shared/navigation-focus/navigation-focus.service';
 
 const EXTRA_SMALL_WIDTH_BREAKPOINT = 720;
 const SMALL_WIDTH_BREAKPOINT = 959;
@@ -14,33 +15,46 @@ const SMALL_WIDTH_BREAKPOINT = 959;
   styleUrls: ['component-sidenav.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ComponentSidenav {
+export class ComponentSidenav implements OnInit, OnDestroy {
+  @ViewChild(MatSidenav) sidenav!: MatSidenav;
+  params: Observable<Params> | undefined;
   isExtraScreenSmall: Observable<boolean>;
   isScreenSmall: Observable<boolean>;
+  private subscriptions = new Subscription();
 
-  constructor(private _router: Router, breakpoints: BreakpointObserver) {
+  constructor(
+    private _route: ActivatedRoute,
+    private _navigationFocusService: NavigationFocusService,
+    breakpoints: BreakpointObserver
+  ) {
     this.isExtraScreenSmall = breakpoints
       .observe(`(max-width: ${EXTRA_SMALL_WIDTH_BREAKPOINT}px)`)
       .pipe(map(breakpoint => breakpoint.matches));
-
     this.isScreenSmall = breakpoints
       .observe(`(max-width: ${SMALL_WIDTH_BREAKPOINT}px)`)
       .pipe(map(breakpoint => breakpoint.matches));
+  }
 
-    this._router.events.subscribe(s => {
-      if (s instanceof NavigationEnd) {
-        const urlTree = this._router.parseUrl(this._router.url);
-        if (urlTree.fragment) {
-          // TODO: Scroll to anchor element
-          setTimeout(() => {
-            const element = document.querySelector('#' + urlTree.fragment);
-            if (element) {
-              element.scrollIntoView(true);
-            }
-          });
-        }
-      }
-    });
+  ngOnInit() {
+    // Combine params from all of the path into a single object.
+    this.params = combineLatest(
+      this._route.pathFromRoot.map(route => route.params),
+      Object.assign
+    );
+
+    this.subscriptions.add(
+      this._navigationFocusService.navigationEndEvents
+        .pipe(map(() => this.isScreenSmall))
+        .subscribe(shouldCloseSideNav => {
+          if (shouldCloseSideNav && this.sidenav) {
+            this.sidenav.close();
+          }
+        })
+    );
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
   }
 
   toggleSidenav(sidenav: MatSidenav): Promise<MatDrawerToggleResult> {
