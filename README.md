@@ -47,7 +47,6 @@ After import modules, you must define a theme. [More details about theming](http
 @use '@ng-matero/extensions' as mtx;
 
 @include mtx.all-component-themes($theme);
-@include mtx.all-experimental-component-themes($theme);
 ```
 
 The @use-based Sass API is only available in the version `12.0.0` or above.
