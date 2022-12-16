@@ -1,8 +1,9 @@
 @use '../../../styles/constants';
 
 app-component-viewer {
-  font-weight: 400;
   width: calc(100% - #{constants.$sidenav-width + 1} - #{constants.$content-padding-sidenav * 2});
+  font-weight: 400;
+  line-height: 1.5;
 
   // spacing for the component viewer
   padding: 20px constants.$content-padding-sidenav;

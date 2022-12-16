@@ -1,56 +1,56 @@
 <h2>Datetimepicker configuration</h2>
 
 <section>
-  <label>type:</label>
+  <label>Type:</label>
   <mat-radio-group [(ngModel)]="type">
-    <mat-radio-button value="datetime">datetime</mat-radio-button>
-    <mat-radio-button value="date">date</mat-radio-button>
-    <mat-radio-button value="time">time</mat-radio-button>
-    <mat-radio-button value="month">month</mat-radio-button>
-    <mat-radio-button value="year">year</mat-radio-button>
+    <mat-radio-button value="datetime">Datetime</mat-radio-button>
+    <mat-radio-button value="date">Date</mat-radio-button>
+    <mat-radio-button value="time">Time</mat-radio-button>
+    <mat-radio-button value="month">Month</mat-radio-button>
+    <mat-radio-button value="year">Year</mat-radio-button>
   </mat-radio-group>
 </section>
 
 <section>
-  <label>mode:</label>
+  <label>Mode:</label>
   <mat-radio-group [(ngModel)]="mode">
-    <mat-radio-button value="auto">auto</mat-radio-button>
-    <mat-radio-button value="landscape">landscape</mat-radio-button>
-    <mat-radio-button value="portrait">portrait</mat-radio-button>
+    <mat-radio-button value="auto">Auto</mat-radio-button>
+    <mat-radio-button value="landscape">Landscape</mat-radio-button>
+    <mat-radio-button value="portrait">Portrait</mat-radio-button>
   </mat-radio-group>
 </section>
 
 <section>
-  <label>startView:</label>
+  <label>StartView:</label>
   <mat-radio-group [(ngModel)]="startView">
-    <mat-radio-button value="month">month</mat-radio-button>
-    <mat-radio-button value="year">year</mat-radio-button>
-    <mat-radio-button value="multi-year">multi-year</mat-radio-button>
-    <mat-radio-button value="clock">clock</mat-radio-button>
+    <mat-radio-button value="month">Month</mat-radio-button>
+    <mat-radio-button value="year">Year</mat-radio-button>
+    <mat-radio-button value="multi-year">Multi-Year</mat-radio-button>
+    <mat-radio-button value="clock">Clock</mat-radio-button>
   </mat-radio-group>
 </section>
 
 <section>
-  <mat-checkbox [(ngModel)]="multiYearSelector">multiYearSelector</mat-checkbox>
+  <mat-checkbox [(ngModel)]="multiYearSelector">MultiYearSelector</mat-checkbox>
 </section>
 
 <section>
-  <mat-checkbox [(ngModel)]="timeInput">timeInput</mat-checkbox>
+  <mat-checkbox [(ngModel)]="timeInput">TimeInput</mat-checkbox>
 </section>
 
 <section>
-  <mat-checkbox [(ngModel)]="twelvehour">twelvehour</mat-checkbox>
+  <mat-checkbox [(ngModel)]="twelvehour">Twelvehour</mat-checkbox>
 </section>
 
 <section>
-  <label>timeInterval:</label>
+  <label>TimeInterval:</label>
   <mat-slider min="1" max="30" discrete>
     <input matSliderThumb [(ngModel)]="timeInterval">
   </mat-slider>
 </section>
 
 <section>
-  <mat-checkbox [(ngModel)]="touchUi">touchUi</mat-checkbox>
+  <mat-checkbox [(ngModel)]="touchUi">TouchUi</mat-checkbox>
 </section>
 
 <h2>Result</h2>

@@ -17,7 +17,7 @@ export class AppComponent {
     {
       header: 'Operation',
       field: 'operation',
-      width: '160px',
+      width: '180px',
       pinned: 'right',
       right: '0px',
       type: 'button',
