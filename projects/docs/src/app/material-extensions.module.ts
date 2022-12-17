@@ -15,10 +15,6 @@ import { MtxSelectModule } from '@ng-matero/extensions/select';
 import { MtxSliderModule } from '@ng-matero/extensions/slider';
 import { MtxSplitModule } from '@ng-matero/extensions/split';
 import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
-
-import { MtxFormGroupModule } from '@ng-matero/extensions/form-group';
-import { MtxText3dModule } from '@ng-matero/extensions/text3d';
-
 import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
 
 @NgModule({
@@ -38,8 +34,6 @@ import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
     MtxSliderModule,
     MtxSplitModule,
     MtxTooltipModule,
-    MtxFormGroupModule,
-    MtxText3dModule,
     MtxMomentDatetimeModule,
   ],
   declarations: [],

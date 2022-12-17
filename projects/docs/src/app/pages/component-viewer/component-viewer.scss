@@ -1,19 +1,27 @@
-@import '../../../styles/constants';
+@use '../../../styles/constants';
 
 app-component-viewer {
+  width: calc(100% - #{constants.$sidenav-width + 1} - #{constants.$content-padding-sidenav * 2});
   font-weight: 400;
+  line-height: 1.5;
 
   // spacing for the component viewer
-  padding: 20px 50px;
+  padding: 20px constants.$content-padding-sidenav;
 
-  @media (max-width: 599px) {
-    padding-left: $content-padding-side-xs;
-    padding-right: $content-padding-side-xs;
+  // Sidenav is hidden
+  @media (max-width: constants.$small-breakpoint-width) {
+    width: calc(100% - #{constants.$content-padding-sidenav * 2});
   }
-}
+  @media (max-width: 599px) {
+    width: calc(100% - #{constants.$content-padding-side-xs * 2});
+    padding-left: constants.$content-padding-side-xs;
+    padding-right: constants.$content-padding-side-xs;
+  }
 
-.docs-component-viewer-section-tab {
-  text-transform: uppercase;
+  .docs-component-viewer-section-tab {
+    min-width: 160px;
+    text-transform: uppercase;
+  }
 }
 
 .docs-component-viewer-tabbed-content {
@@ -30,8 +38,9 @@ app-component-viewer {
   component-api {
     display: flex;
     align-items: flex-start;
+    overflow: visible;
 
-    @media (max-width: $small-breakpoint-width) {
+    @media (max-width: constants.$small-breakpoint-width) {
       flex-direction: column;
     }
   }
@@ -42,7 +51,7 @@ app-component-viewer {
 
     // Reposition on top of content on small screens and remove
     // sticky positioning
-    @media (max-width: $small-breakpoint-width) {
+    @media (max-width: constants.$small-breakpoint-width) {
       order: -1;
       position: inherit;
       width: auto;
@@ -59,9 +68,8 @@ app-component-viewer {
 .docs-component-api,
 .docs-component-overview {
   width: 80%;
-  display: inline-flex;
 
-  @media (max-width: $small-breakpoint-width) {
+  @media (max-width: constants.$small-breakpoint-width) {
     width: 100%;
     margin-right: 0;
   }

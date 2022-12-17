@@ -1,16 +1,16 @@
 <h2>Popover configuration</h2>
 
 <section class="popover-position">
-  <label>position:</label>
+  <label>Position:</label>
   [
-  <mat-form-field floatLabel="never">
+  <mat-form-field>
     <mat-label>Start</mat-label>
     <mat-select [(ngModel)]="positionStart" (ngModelChange)="onPositionStartChange()">
       <mat-option *ngFor="let item of positionStartOptions" [value]="item">{{item}}</mat-option>
     </mat-select>
   </mat-form-field>
   ,
-  <mat-form-field floatLabel="never">
+  <mat-form-field>
     <mat-label>End</mat-label>
     <mat-select [(ngModel)]="positionEnd">
       <mat-option *ngFor="let item of positionEndOptions" [value]="item">{{item}}</mat-option>
@@ -21,45 +21,47 @@
 
 <section>
   <mat-form-field>
-    <mat-label>xOffset</mat-label>
+    <mat-label>XOffset</mat-label>
     <input matInput type="number" [(ngModel)]="xOffset">
   </mat-form-field>
   <mat-form-field>
-    <mat-label>yOffset</mat-label>
+    <mat-label>YOffset</mat-label>
     <input matInput type="number" [(ngModel)]="yOffset">
   </mat-form-field>
 </section>
 
 <section>
-  <label>triggerEvent:</label>
+  <label>TriggerEvent:</label>
   <mat-radio-group [(ngModel)]="triggerEvent">
-    <mat-radio-button value="hover">hover</mat-radio-button>
-    <mat-radio-button value="click">click</mat-radio-button>
+    <mat-radio-button value="hover">Hover</mat-radio-button>
+    <mat-radio-button value="click">Click</mat-radio-button>
   </mat-radio-group>
 </section>
 
 <section *ngIf="triggerEvent==='hover'">
   <mat-form-field>
-    <mat-label>enterDelay</mat-label>
+    <mat-label>EnterDelay</mat-label>
     <input matInput type="number" [(ngModel)]="enterDelay">
   </mat-form-field>
   <mat-form-field>
-    <mat-label>leaveDelay</mat-label>
+    <mat-label>LeaveDelay</mat-label>
     <input matInput type="number" [(ngModel)]="leaveDelay">
   </mat-form-field>
 </section>
 
 <section>
-  <mat-checkbox [(ngModel)]="closeOnPanelClick">closeOnPanelClick</mat-checkbox>
+  <mat-checkbox [(ngModel)]="closeOnPanelClick">CloseOnPanelClick</mat-checkbox>
 </section>
 
 <section *ngIf="triggerEvent==='click'">
-  <mat-checkbox [(ngModel)]="hasBackdrop">hasBackdrop</mat-checkbox>
+  <mat-checkbox [(ngModel)]="hasBackdrop">HasBackdrop</mat-checkbox>
 </section>
 
 <section>
-  <label>elevation:</label>
-  <mat-slider min="0" max="24" thumbLabel [(ngModel)]="elevation"></mat-slider>
+  <label>Elevation:</label>
+  <mat-slider min="0" max="24" discrete>
+    <input matSliderThumb [(ngModel)]="elevation">
+  </mat-slider>
 </section>
 
 <h2>Result</h2>

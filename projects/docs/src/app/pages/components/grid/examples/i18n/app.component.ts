@@ -33,7 +33,7 @@ export class AppComponent {
     {
       header: this.translate.stream('operation'),
       field: 'operation',
-      width: '40px',
+      width: '80px',
       pinned: 'right',
       right: '0px',
       type: 'button',

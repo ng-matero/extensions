@@ -1,11 +1,12 @@
 .mat-button-loading {
-  .mat-button-wrapper {
+  .mdc-button__label,
+  .mat-icon {
     visibility: hidden;
   }
 
-  .mat-progress-spinner {
+  .mat-mdc-progress-spinner {
     position: absolute;
-    top: calc(50% - 10px);
-    left: calc(50% - 10px);
+    top: calc(50% - 12px);
+    left: calc(50% - 12px);
   }
 }

@@ -78,12 +78,15 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
   .mtx-calendar-header-hours,
   .mtx-calendar-header-minutes,
   .mtx-calendar-header-ampm {
+    height: auto;
     min-width: auto;
     padding: 0 4px;
     text-align: inherit;
     line-height: inherit;
+    color: inherit;
     font-size: inherit;
     font-weight: inherit;
+    letter-spacing: normal;
     white-space: normal;
     word-break: break-word;
   }

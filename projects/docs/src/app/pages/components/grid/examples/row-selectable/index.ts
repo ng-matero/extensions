@@ -3,8 +3,8 @@ import { AppComponent as GridRowSelectableComponent } from './app.component';
 const gridRowSelectableExampleConfig = {
   title: 'Row selectable',
   description: `
-  <p>If you choose multiple option, you can press <kbd>ctrl</kbd>/<kbd>command</kbd> +
-  click or select checkboxs to choose multiple row.</p>
+  <p>If you choose the multiple option, you can press <kbd>ctrl</kbd>/<kbd>command</kbd> +
+  click or select checkboxs to choose multiple rows.</p>
   `,
   component: GridRowSelectableComponent,
   files: [

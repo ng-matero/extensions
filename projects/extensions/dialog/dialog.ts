@@ -3,7 +3,7 @@ import { ComponentType } from '@angular/cdk/portal';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
-import { MtxDialogComponent } from './dialog.component';
+import { MtxDialogContainer } from './dialog-container';
 import { MtxDialogData } from './dialog-config';
 
 const defaults: MtxDialogData = {
@@ -31,7 +31,7 @@ export class MtxDialog {
   constructor(public dialog: MatDialog) {}
 
   originalOpen(
-    componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogComponent,
+    componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogContainer,
     config: any
   ) {
     return this.dialog.open(componentOrTemplateRef, config);
@@ -39,7 +39,7 @@ export class MtxDialog {
 
   open(
     config: MtxDialogData,
-    componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogComponent
+    componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogContainer
   ) {
     const data = Object.assign({}, defaults, config);
     return this.dialog.open(componentOrTemplateRef, {

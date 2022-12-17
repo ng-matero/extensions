@@ -1,0 +1,68 @@
+@use 'sass:map';
+@use 'sass:math';
+@use '@material/density' as mdc-density;
+@use '@material/textfield' as mdc-textfield;
+@use '../core/theming/theming';
+
+@mixin _infix-vertical-spacing-filled($with-label-padding, $no-label-padding) {
+  .ng-select {
+    padding-top: map.get($with-label-padding, top);
+    padding-bottom: map.get($with-label-padding, bottom);
+    margin-top: - map.get($with-label-padding, top);
+    margin-bottom: - map.get($with-label-padding, bottom);
+  }
+
+  .mdc-text-field--no-label .ng-select {
+    padding-top: map.get($no-label-padding, top);
+    padding-bottom: map.get($no-label-padding, bottom);
+    margin-top: - map.get($no-label-padding, top);
+    margin-bottom: - map.get($no-label-padding, bottom);
+  }
+}
+
+@mixin _infix-vertical-spacing-outlined($padding) {
+  .mdc-text-field--outlined .ng-select {
+    padding-top: map.get($padding, top);
+    padding-bottom: map.get($padding, bottom);
+    margin-top: - map.get($padding, top);
+    margin-bottom: - map.get($padding, bottom);
+  }
+}
+
+@mixin private-select-density($config-or-theme) {
+  $density-scale: theming.get-density-config($config-or-theme);
+  // Height of the form field that is based on the current density scale.
+  $height: mdc-density.prop-value(
+    $density-config: mdc-textfield.$density-config,
+    $density-scale: $density-scale,
+    $property-name: height,
+  );
+  // Whether floating labels for filled form fields should be hidden. MDC hides the label in
+  // their density styles when the height decreases too much. We match their density styles.
+  $hide-filled-floating-label: $height < mdc-textfield.$minimum-height-for-filled-label;
+  // We computed the desired height of the form-field using the density configuration. The
+  // spec only describes vertical spacing/alignment in non-dense mode. This means that we
+  // cannot update the spacing to explicit numbers based on the density scale. Instead, we
+  // determine the height reduction and equally subtract it from the default `top` and `bottom`
+  // padding that is provided by the Material Design specification.
+  $vertical-deduction: math.div(mdc-textfield.$height - $height, 2);
+  // Map that describes the padding for form-fields with label.
+  $with-label-padding: (
+    top: 24px - $vertical-deduction,
+    bottom: 8px - $vertical-deduction,
+  );
+  // Map that describes the padding for form-fields without label.
+  $no-label-padding: (
+    top: 16px - $vertical-deduction,
+    bottom: 16px - $vertical-deduction,
+  );
+
+  @include _infix-vertical-spacing-outlined($no-label-padding);
+
+  @if $hide-filled-floating-label {
+    @include _infix-vertical-spacing-filled($no-label-padding, $no-label-padding);
+  }
+  @else {
+    @include _infix-vertical-spacing-filled($with-label-padding, $no-label-padding);
+  }
+}

@@ -5,7 +5,9 @@ import { DevAppDirectionality } from './dev-app-directionality';
 import { DOCUMENT } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 
-const isDarkThemeKey = 'ANGULAR_COMPONENTS_DEV_APP_DARK_THEME';
+const isDarkThemeKey = 'MATERIAL_EXTENSIONS_DEV_APP_DARK_THEME';
+
+export const ANIMATIONS_STORAGE_KEY = 'MATERIAL_EXTENSIONS_ANIMATIONS_DISABLED';
 
 /** Root component for the dev-app demos. */
 @Component({
@@ -27,14 +29,12 @@ export class DevAppLayout {
     { name: 'Datetimepicker', route: '/datetimepicker' },
     { name: 'Dialog', route: '/dialog' },
     { name: 'Drawer', route: '/drawer' },
-    { name: 'Form Group', route: '/form-group' },
     { name: 'Loader', route: '/loader' },
     { name: 'Popover', route: '/popover' },
     { name: 'Progress', route: '/progress' },
     { name: 'Select', route: '/select' },
     { name: 'Slider', route: '/slider' },
     { name: 'Split Pane', route: '/split' },
-    { name: 'Text 3D', route: '/text3d' },
     { name: 'Tooltip', route: '/tooltip' },
   ];
 
@@ -43,6 +43,9 @@ export class DevAppLayout {
 
   /** List of possible global density scale values. */
   densityScales = [0, -1, -2, 'minimum', 'maximum'];
+
+  /** Whether animations are disabled. */
+  animationsDisabled = localStorage.getItem(ANIMATIONS_STORAGE_KEY) === 'true';
 
   langs = [
     { label: 'English', value: 'en-US' },
@@ -59,7 +62,6 @@ export class DevAppLayout {
     public translate: TranslateService
   ) {
     dir.change.subscribe(() => cdr.markForCheck());
-    this.updateDensityClasses();
     try {
       const isDark = localStorage.getItem(isDarkThemeKey);
       if (isDark != null) {
@@ -128,6 +130,11 @@ export class DevAppLayout {
     }
   }
 
+  toggleAnimations() {
+    localStorage.setItem(ANIMATIONS_STORAGE_KEY, !this.animationsDisabled + '');
+    location.reload();
+  }
+
   /** Gets the index of the next density scale that can be selected. */
   getNextDensityIndex() {
     return (this.currentDensityIndex + 1) % this.densityScales.length;
@@ -136,22 +143,13 @@ export class DevAppLayout {
   /** Selects the next possible density scale. */
   selectNextDensity() {
     this.currentDensityIndex = this.getNextDensityIndex();
-    this.updateDensityClasses();
   }
-
   /**
    * Updates the density classes on the host element. Applies a unique class for
    * a given density scale, so that the density styles are conditionally applied.
    */
-  updateDensityClasses() {
-    for (let i = 0; i < this.densityScales.length; i++) {
-      const className = `demo-density-${this.densityScales[i]}`;
-      if (i === this.currentDensityIndex) {
-        this._document.body.classList.add(className);
-      } else {
-        this._document.body.classList.remove(className);
-      }
-    }
+  getDensityClass() {
+    return `demo-density-${this.densityScales[this.currentDensityIndex]}`;
   }
 
   useLanguage(language: string) {

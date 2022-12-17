@@ -1,0 +1,95 @@
+@use '@angular/material' as mat;
+
+.mtx-grid-column-menu {
+  .mat-menu-content {
+    padding: 0;
+  }
+}
+
+.mtx-grid-column-menu-body {
+  padding: 8px 16px;
+}
+
+.mtx-grid-column-menu-header,
+.mtx-grid-column-menu-footer {
+  position: sticky;
+  z-index: 1;
+  padding: 8px 16px;
+}
+
+.mtx-grid-column-menu-header {
+  top: 0;
+}
+
+.mtx-grid-column-menu-footer {
+  bottom: 0;
+}
+
+.mtx-grid-column-menu-list {
+  display: block;
+  max-width: 100%;
+
+  &.cdk-drop-list-dragging {
+    .mtx-grid-column-menu-item:not(.cdk-drag-placeholder) {
+      transition: transform 250ms cubic-bezier(0, 0, .2, 1);
+    }
+  }
+}
+
+.mtx-grid-column-menu-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  &.cdk-drag-disabled {
+    .cdk-drag-handle {
+      opacity: .35;
+      cursor: no-drop;
+    }
+  }
+
+  .cdk-drag-handle {
+    cursor: move;
+  }
+
+  &.cdk-drag-preview {
+    @include mat.elevation(2);
+  }
+
+  &.cdk-drag-placeholder {
+    opacity: 0;
+  }
+
+  &.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, .2, 1);
+  }
+}
+
+.mtx-grid-column-pin-button.mat-mdc-icon-button {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+}
+
+.mtx-grid-column-pin-option.mat-menu-item {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+
+.mtx-grid-column-pin-option-placeholder {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  vertical-align: middle;
+}
+
+.mtx-grid-column-pin-option-text {
+  padding: 0 8px;
+  vertical-align: middle;
+}
+
+.mtx-grid-column-drag-handle-icon:hover {
+  cursor: move;
+}

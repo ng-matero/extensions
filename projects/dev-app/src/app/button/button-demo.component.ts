@@ -9,4 +9,5 @@ import { ThemePalette } from '@angular/material/core';
 export class ButtonDemoComponent {
   color: ThemePalette = 'primary';
   loading = true;
+  disabled = false;
 }

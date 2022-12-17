@@ -1,13 +1,9 @@
-@import '../styles/constants';
+@use '../styles/constants';
 
 app-root {
   display: flex;
   flex-direction: column;
-  position: absolute;
-  top: 56px;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  height: 100vh;
 }
 
 app-navbar {
@@ -16,4 +12,23 @@ app-navbar {
   left: 0;
   right: 0;
   z-index: 2;
+}
+
+app-root > app-component-sidenav {
+  flex: 1;
+}
+
+app-root > router-outlet + .main-content,
+app-root > router-outlet + app-component-sidenav {
+  margin-top: 56px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: constants.$extra-small-breakpoint-width) {
+  app-root > router-outlet + .main-content,
+  app-root > router-outlet + app-component-sidenav {
+    margin-top: 92px;
+    overflow-y: visible;
+  }
 }

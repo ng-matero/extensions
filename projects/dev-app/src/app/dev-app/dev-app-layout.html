@@ -1,29 +1,35 @@
 <mat-sidenav-container class="demo-container">
-  <mat-sidenav #start role="navigation">
+  <mat-sidenav #navigation role="navigation">
     <mat-nav-list>
       <a *ngFor="let navItem of navItems"
          mat-list-item
-         (click)="start.close()"
+         (click)="navigation.close()"
          routerLinkActive
          #routerLinkActiveInstance="routerLinkActive"
          [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
          [routerLink]="[navItem.route]">
         {{navItem.name}}
       </a>
-
-      <hr>
     </mat-nav-list>
-    <button mat-button tabindex="-1" (click)="start.close()">CLOSE</button>
+    <button mat-button tabindex="-1" (click)="navigation.close()">CLOSE</button>
   </mat-sidenav>
-  <main>
-    <mat-toolbar color="primary">
-      <button mat-icon-button (click)="start.open('mouse')">
+  <!--
+    Note that the setup with the directionality and density is a little convoluted, but it's
+    organized this way so that we can test MDC's density styles in both LTR and RTL. Their mixins
+    output styles in the form of `[dir='rtl'] .density-min .foo` which means that the `dir` has to
+    be one level above the density class in the DOM. At the same time, we want the density to apply
+    to the toolbar while always keeping it in LTR at the same time.
+   -->
+  <main [attr.dir]="dir.value" [ngClass]="getDensityClass()" class="demo-main">
+    <!-- The toolbar should always be in the LTR direction -->
+    <mat-toolbar color="primary" dir="ltr">
+      <button mat-icon-button (click)="navigation.open('mouse')">
         <mat-icon>menu</mat-icon>
       </button>
       <div class="demo-toolbar">
-        <h1>Angular Material Demos</h1>
-        <div>
-          <button mat-icon-button class="matero-toolbar-button" [matMenuTriggerFor]="menu">
+        <h1>Material Extensions</h1>
+        <div class="demo-config-buttons">
+          <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>translate</mat-icon>
           </button>
 
@@ -35,6 +41,9 @@
 
           <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
             <mat-icon>fullscreen</mat-icon>
+          </button>
+          <button mat-button (click)="toggleAnimations()">
+            {{animationsDisabled ? 'Enable' : 'Disable'}} animations
           </button>
           <button mat-button (click)="isDark = !isDark">
             {{isDark ? 'Light' : 'Dark'}} theme
@@ -57,7 +66,7 @@
       </div>
     </mat-toolbar>
 
-    <div [attr.dir]="dir.value" class="demo-content mat-app-background">
+    <div [ngClass]="getDensityClass()" class="demo-content mat-app-background">
       <ng-content></ng-content>
     </div>
   </main>

@@ -39,21 +39,20 @@ $handset-vertical-padding: ($handset-target-height - $handset-font-size) * .5;
   }
 }
 
-@mixin _density($config-or-theme) {}
+@mixin density($config-or-theme) {}
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
-    $typography-default: typography.define-typography-config();
-    $typography: theming.get-typography-config($theme, $typography-default);
+    $typography: theming.get-typography-config($theme);
 
     @if $color != null {
       @include color($color);
     }
     @if $density != null {
-      @include _density($density);
+      @include density($density);
     }
     @if $typography != null {
       @include typography($typography);

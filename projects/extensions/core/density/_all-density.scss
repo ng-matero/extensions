@@ -1,0 +1,24 @@
+@use '../theming/theming';
+@use '../../select/select-theme';
+
+// Includes all of the density styles.
+@mixin all-component-densities($config-or-theme) {
+  // In case a theme object has been passed instead of a configuration for
+  // the color system, extract the color config from the theme object.
+  $config: if(
+    theming.private-is-theme-object($config-or-theme),
+    theming.get-color-config($config-or-theme),
+    $config-or-theme
+  );
+
+  @if $config == null {
+    @error 'No density configuration specified.';
+  }
+
+  @include select-theme.density($config);
+}
+
+// @deprecated Use `all-component-densities`.
+@mixin material-extensions-density($config-or-theme) {
+  @include all-component-densities($config-or-theme);
+}

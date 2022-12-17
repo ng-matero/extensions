@@ -1,11 +1,9 @@
-@import '../../../styles/constants';
+@use '../../../styles/constants';
 
 app-component-sidenav {
   display: flex;
   flex-direction: column;
-  flex: 1;
   overflow: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .docs-component-viewer-sidenav-container {
@@ -24,6 +22,36 @@ app-component-sidenav {
   }
 }
 
+.docs-component-viewer-nav {
+  position: sticky;
+  top: 0;
+
+  .docs-component-viewer-nav-content {
+    width: constants.$sidenav-width;
+    height: calc(100vh - 56px);
+    overflow: auto;
+
+    &::-webkit-scrollbar {
+      height: 4px;
+      width: 4px;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0 0 5px;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    li {
+      font-size: 13px;
+      line-height: 16px;
+      margin: 0;
+      padding: 5px 15px 5px 20px;
+    }
+  }
+}
+
 .docs-component-sidenav-content {
   display: flex;
   flex-direction: column;
@@ -34,12 +62,6 @@ app-component-sidenav {
   display: flex;
   flex-direction: column;
   flex: 1;
-
-  // The rule will match the element following the router-outlet which will be the routed component.
-  router-outlet + * {
-    flex-grow: 1;
-    overflow: auto;
-  }
 }
 
 .docs-component-sidenav-body-content {
@@ -47,15 +69,17 @@ app-component-sidenav {
   flex: 1 1 auto;
 }
 
-.mat-list-base {
+div .mat-mdc-list-base {
   padding-top: 0;
 }
 
-.docs-component-viewer-nav-content .mat-nav-list .mat-list-item .mat-list-item-content {
+/* TODO(mdc-migration): The following rule targets internal classes of list that may no longer
+ * apply for the MDC version. */
+div.docs-component-viewer-nav-content .mat-nav-list .mat-mdc-list-item .mat-list-item-content {
   padding-left: 25px;
 }
 
-@media (max-width: $small-breakpoint-width) {
+@media (max-width: constants.$small-breakpoint-width) {
   // Add specific rule to prevent default rule conflict
   .docs-component-viewer-sidenav-container .docs-component-viewer-sidenav {
     // position right above the content
@@ -74,7 +98,7 @@ app-component-sidenav {
   }
 }
 
-@media (max-width: $extra-small-breakpoint-width) {
+@media (max-width: 720px) {
   .docs-component-viewer-sidenav-container {
     flex: 1 0 auto;
   }

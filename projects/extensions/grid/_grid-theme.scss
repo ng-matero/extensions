@@ -17,7 +17,7 @@
       border-color: theming.get-color-from-palette($foreground, divider);
     }
 
-    .mat-table {
+    .mat-mdc-table {
       &.mat-table-striped {
         .mat-row-odd {
           background-color: if($is-dark-theme, #3a3a3a, #f5f5f5);
@@ -25,34 +25,34 @@
       }
 
       &.mat-table-hover {
-        .mat-row:hover {
+        .mat-mdc-row:hover {
           background-color: if($is-dark-theme, #2a2a2a, #e5e5e5);
+        }
+      }
+
+      .mat-mdc-row {
+        &.selected,
+        &.mat-row-odd.selected {
+          background-color: if($is-dark-theme, #2a2a2a, #e5e5e5);
+        }
+      }
+
+      .mat-mdc-cell {
+        &.selected {
+          box-shadow: inset 0 0 0 1px theming.get-color-from-palette($accent);
         }
       }
     }
 
-    .mat-row {
-      &.selected,
-      &.mat-row-odd.selected {
-        background-color: if($is-dark-theme, #2a2a2a, #e5e5e5);
-      }
-    }
-
-    .mat-cell {
-      &.selected {
-        box-shadow: inset 0 0 0 1px theming.get-color-from-palette($accent);
-      }
-    }
-
-    .mat-footer-row {
-      .mat-footer-cell {
+    .mat-mdc-footer-row {
+      .mat-mdc-footer-cell {
         border-top: 1px solid theming.get-color-from-palette($foreground, divider);
         border-bottom-width: 0;
         background-color: theming.get-color-from-palette($background, app-bar);
       }
     }
 
-    .mat-paginator {
+    .mat-mdc-paginator {
       border-top: 1px solid rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
     }
   }
@@ -92,7 +92,7 @@
 
 @mixin typography($config-or-theme) {}
 
-@mixin _density($config-or-theme) {}
+@mixin density($config-or-theme) {}
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
@@ -105,7 +105,7 @@
       @include color($color);
     }
     @if $density != null {
-      @include _density($density);
+      @include density($density);
     }
     @if $typography != null {
       @include typography($typography);

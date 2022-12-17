@@ -1,2 +1,3 @@
 @forward 'select-theme' hide color, theme, typography;
-@forward 'select-theme' as mtx-select-* hide mtx-select-density;
+@forward 'select-theme' as mtx-select-*;
+@forward 'select-density' as mtx-*;

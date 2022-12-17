@@ -1,0 +1,38 @@
+// Import all the theming functionality.
+@use '../../alert/alert-theme';
+@use '../../colorpicker/colorpicker-theme';
+@use '../../datetimepicker/datetimepicker-theme';
+@use '../../drawer/drawer-theme';
+@use '../../grid/grid-theme';
+@use '../../loader/loader-theme';
+@use '../../popover/popover-theme';
+@use '../../progress/progress-theme';
+@use '../../select/select-theme';
+@use '../../slider/slider-theme';
+@use '../../split/split-theme';
+@use '../../tooltip/tooltip-theme';
+@use './theming';
+
+// Create a theme.
+@mixin all-component-themes($theme-or-color-config) {
+  $dedupe-key: 'angular-material-extensions-theme';
+  @include theming.private-check-duplicate-theme-styles($theme-or-color-config, $dedupe-key) {
+    @include alert-theme.theme($theme-or-color-config);
+    @include colorpicker-theme.theme($theme-or-color-config);
+    @include datetimepicker-theme.theme($theme-or-color-config);
+    @include drawer-theme.theme($theme-or-color-config);
+    @include grid-theme.theme($theme-or-color-config);
+    @include loader-theme.theme($theme-or-color-config);
+    @include popover-theme.theme($theme-or-color-config);
+    @include progress-theme.theme($theme-or-color-config);
+    @include select-theme.theme($theme-or-color-config);
+    @include slider-theme.theme($theme-or-color-config);
+    @include split-theme.theme($theme-or-color-config);
+    @include tooltip-theme.theme($theme-or-color-config);
+  }
+}
+
+// @deprecated Use `all-component-themes`.
+@mixin material-extensions-theme($theme-or-color-config) {
+  @include all-component-themes($theme-or-color-config);
+}

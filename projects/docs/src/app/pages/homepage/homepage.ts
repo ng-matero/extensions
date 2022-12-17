@@ -1,4 +1,4 @@
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component, HostBinding, NgModule, OnInit } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared';
 import { ComponentPageTitle } from '../page-title/page-title';
@@ -9,6 +9,8 @@ import { ComponentPageTitle } from '../page-title/page-title';
   styleUrls: ['./homepage.scss'],
 })
 export class Homepage implements OnInit {
+  @HostBinding('class.main-content') readonly mainContentClass = true;
+
   constructor(public _componentPageTitle: ComponentPageTitle) {}
 
   ngOnInit(): void {

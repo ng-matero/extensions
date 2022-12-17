@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn, MtxGridComponent } from '@ng-matero/extensions/grid';
+import { MtxGridColumn, MtxGrid } from '@ng-matero/extensions/grid';
 
 @Component({
   selector: 'data-grid-example',
@@ -8,7 +8,7 @@ import { MtxGridColumn, MtxGridComponent } from '@ng-matero/extensions/grid';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  @ViewChild('grid') grid!: MtxGridComponent;
+  @ViewChild('grid') grid!: MtxGrid;
 
   columns: MtxGridColumn[] = [
     { header: 'Name', field: 'name' },

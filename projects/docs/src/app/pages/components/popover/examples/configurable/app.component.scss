@@ -1,20 +1,15 @@
-.mat-radio-button {
-  margin: 1rem;
-}
-
-.mat-checkbox {
-  display: inline-block;
-  margin: 1rem 1rem 1rem 0;
-}
-
-.mat-form-field {
+.mat-mdc-form-field {
   margin-right: 1rem;
 }
 
 .popover-position {
-  .mat-form-field {
-    width: 80px;
+  .mat-mdc-form-field {
+    width: 120px;
     margin: 0;
     font-size: 14px;
   }
+}
+
+label {
+  padding: 0 8px;
 }

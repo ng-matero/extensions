@@ -12,18 +12,21 @@
 
 <section>
   <label>Progress:</label>
-  <mat-slider min="0" max="100" thumbLabel [(ngModel)]="value"></mat-slider>
+  <mat-slider min="0" max="100" discrete>
+    <input matSliderThumb [(ngModel)]="value">
+  </mat-slider>
 </section>
 
 <section>
-  <mat-checkbox [(ngModel)]="striped" [labelPosition]="'before'">Striped</mat-checkbox>
-  <mat-checkbox *ngIf="striped" [(ngModel)]="animate" [labelPosition]="'before'">Animate
-  </mat-checkbox>
+  <mat-checkbox [(ngModel)]="striped">Striped</mat-checkbox>
+  <mat-checkbox *ngIf="striped" [(ngModel)]="animate">Animate</mat-checkbox>
 </section>
 
 <section>
   <label>Height:</label>
-  <mat-slider min="1" max="16" thumbLabel [(ngModel)]="height"></mat-slider>
+  <mat-slider min="1" max="16" discrete>
+    <input matSliderThumb [(ngModel)]="height">
+  </mat-slider>
 </section>
 
 <section>

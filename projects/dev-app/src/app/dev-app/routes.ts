@@ -36,11 +36,6 @@ export const DEV_APP_ROUTES: Routes = [
     loadChildren: () => import('../drawer/drawer-demo.module').then(m => m.DrawerDemoModule),
   },
   {
-    path: 'form-group',
-    loadChildren: () =>
-      import('../form-group/form-group-demo.module').then(m => m.FormGroupDemoModule),
-  },
-  {
     path: 'grid',
     loadChildren: () => import('../grid/grid-demo.module').then(m => m.GridDemoModule),
   },
@@ -67,10 +62,6 @@ export const DEV_APP_ROUTES: Routes = [
   {
     path: 'split',
     loadChildren: () => import('../split/split-demo.module').then(m => m.SplitDemoModule),
-  },
-  {
-    path: 'text3d',
-    loadChildren: () => import('../text3d/text3d-demo.module').then(m => m.Text3dDemoModule),
   },
   {
     path: 'tooltip',

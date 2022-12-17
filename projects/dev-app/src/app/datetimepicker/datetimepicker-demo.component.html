@@ -1,6 +1,6 @@
 <form [formGroup]="group">
   <mat-form-field>
-    <mat-placeholder>DateTime</mat-placeholder>
+    <mat-label>DateTime</mat-label>
     <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datetimePicker startView="month" [timeInterval]="5"></mtx-datetimepicker>
     <input [mtxDatetimepicker]="datetimePicker" [max]="tomorrow" [min]="today"
@@ -11,7 +11,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>DateTime with manual input</mat-placeholder>
+    <mat-label>DateTime with manual input</mat-label>
     <mtx-datetimepicker-toggle [for]="datetimePickerManual" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datetimePickerManual startView="month" [timeInterval]="5"
                         [timeInput]="true"></mtx-datetimepicker>
@@ -23,7 +23,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>DateTime Year selector</mat-placeholder>
+    <mat-label>DateTime Year selector</mat-label>
     <mtx-datetimepicker-toggle [for]="datetimeYearPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datetimeYearPicker [multiYearSelector]="true" startView="month"
                         [timeInterval]="5"></mtx-datetimepicker>
@@ -35,7 +35,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>Time</mat-placeholder>
+    <mat-label>Time</mat-label>
     <mtx-datetimepicker-toggle [for]="timePicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #timePicker [timeInterval]="5" type="time"></mtx-datetimepicker>
     <input [mtxDatetimepicker]="timePicker" formControlName="time" matInput required>
@@ -43,7 +43,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>Time AM/PM</mat-placeholder>
+    <mat-label>Time AM/PM</mat-label>
     <mtx-datetimepicker-toggle [for]="timeAMPMPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #timeAMPMPicker [timeInterval]="5"
                         [twelvehour]="true" type="time"></mtx-datetimepicker>
@@ -52,7 +52,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>DateTime AM/PM with manual input</mat-placeholder>
+    <mat-label>DateTime AM/PM with manual input</mat-label>
     <mtx-datetimepicker-toggle [for]="timeAMPMPickerManual" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #timeAMPMPickerManual startView="month" [timeInterval]="5"
                         [timeInput]="true" [twelvehour]="true"></mtx-datetimepicker>
@@ -64,7 +64,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>Date</mat-placeholder>
+    <mat-label>Date</mat-label>
     <mtx-datetimepicker-toggle [for]="datePicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datePicker type="date"></mtx-datetimepicker>
     <input [mtxDatetimepicker]="datePicker" formControlName="date" matInput required>
@@ -72,7 +72,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>Month</mat-placeholder>
+    <mat-label>Month</mat-label>
     <mtx-datetimepicker-toggle [for]="monthPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #monthPicker mode="portrait" type="month">
     </mtx-datetimepicker>
@@ -81,7 +81,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>Year</mat-placeholder>
+    <mat-label>Year</mat-label>
     <mtx-datetimepicker-toggle [for]="yearPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #yearPicker type="year"></mtx-datetimepicker>
     <input [mtxDatetimepicker]="yearPicker" formControlName="year" matInput required>
@@ -89,7 +89,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>Min/Max Test</mat-placeholder>
+    <mat-label>Min/Max Test</mat-label>
     <input [mtxDatetimepicker]="minTestPicker" [max]="max" [min]="min" formControlName="mintest"
            matInput required>
     <mtx-datetimepicker-toggle [for]="minTestPicker" matSuffix></mtx-datetimepicker-toggle>
@@ -100,7 +100,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>Filter Test</mat-placeholder>
+    <mat-label>Filter Test</mat-label>
     <input [mtxDatetimepickerFilter]="filter" [mtxDatetimepicker]="filterTestPicker"
            formControlName="filtertest" matInput required>
     <mtx-datetimepicker-toggle [for]="filterTestPicker" matSuffix></mtx-datetimepicker-toggle>
@@ -110,7 +110,7 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-placeholder>TouchUi</mat-placeholder>
+    <mat-label>TouchUi</mat-label>
     <input [mtxDatetimepicker]="touch" [min]="min" formControlName="touch" matInput required>
     <mtx-datetimepicker-toggle [for]="touch" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #touch mode="portrait" [timeInterval]="5" [touchUi]="true">

@@ -4,7 +4,7 @@
   <mat-checkbox [(ngModel)]="closeOnSelect">Close on select</mat-checkbox>
 </div>
 
-<mat-form-field appearance="standard">
+<mat-form-field>
   <mat-label>Select Food</mat-label>
 
   <mtx-select [items]="items"
@@ -34,6 +34,7 @@
               required>
   </mtx-select>
 
+  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   <mat-hint>Choose your favorite food</mat-hint>
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
@@ -67,9 +68,18 @@
   </mat-select>
 </mat-form-field>
 
+<mat-form-field appearance="outline">
+  <mat-label>Choose an option</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let food of items" [value]="food.id">
+      {{food.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
 <h2>Test Templates</h2>
 
-<mat-form-field appearance="standard">
+<mat-form-field>
 
   <mtx-select [items]="items"
               [(ngModel)]="value"
@@ -90,7 +100,7 @@
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 &nbsp;
-<mat-form-field appearance="standard">
+<mat-form-field>
 
   <mtx-select [items]="accounts"
               bindLabel="name"

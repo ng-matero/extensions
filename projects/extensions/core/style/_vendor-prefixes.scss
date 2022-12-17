@@ -1,10 +1,8 @@
-/* stylelint-disable value-no-vendor-prefix */
-/* stylelint-disable selector-no-vendor-prefix */
 /* stylelint-disable property-no-vendor-prefix */
+/* stylelint-disable selector-no-vendor-prefix */
 // stylelint-disable material/no-prefixes
 @mixin user-select($value) {
   -webkit-user-select: $value;
-  -moz-user-select: $value;
   user-select: $value;
 }
 
@@ -28,33 +26,22 @@
   }
 }
 
-@mixin cursor-grab {
-  cursor: -webkit-grab;
-  cursor: grab;
-}
-
-@mixin cursor-grabbing {
-  cursor: -webkit-grabbing;
-  cursor: grabbing;
-}
-
 @mixin backface-visibility($value) {
   -webkit-backface-visibility: $value;
   backface-visibility: $value;
 }
 
-@mixin position-sticky($important: false) {
-  position: -webkit-sticky #{if($important, '!important', '')};
-  position: sticky #{if($important, '!important', '')};
-}
-
-@mixin private-color-adjust($value) {
+@mixin color-adjust($value) {
   -webkit-print-color-adjust: $value;
-  print-color-adjust: $value;
+  color-adjust: $value;
 }
 
 @mixin private-background-clip($value) {
   -webkit-background-clip: $value;
   background-clip: $value;
 }
-// stylelint-enable
+
+@mixin clip-path($value) {
+  -webkit-clip-path: $value;
+  clip-path: $value;
+}
