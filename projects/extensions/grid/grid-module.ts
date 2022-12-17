@@ -17,7 +17,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { MtxPipesModule } from '@ng-matero/extensions/core';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
-import { MtxGridCellSelection, MtxGrid } from './grid';
+import { MtxGrid, MtxGridSelectableCell } from './grid';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
 import { MtxGridExpansionToggle } from './expansion-toggle';
@@ -50,7 +50,7 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MtxGridCell,
     MtxGridColumnMenu,
     MtxGridExpansionToggle,
-    MtxGridCellSelection,
+    MtxGridSelectableCell,
     MatColumnResizeModule,
   ],
   declarations: [
@@ -58,7 +58,7 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MtxGridCell,
     MtxGridColumnMenu,
     MtxGridExpansionToggle,
-    MtxGridCellSelection,
+    MtxGridSelectableCell,
   ],
   providers: [MtxGridUtils],
 })

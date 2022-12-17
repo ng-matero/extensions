@@ -30,17 +30,17 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import { NgSelectComponent } from '@ng-select/ng-select';
 import { MtxOption } from './option';
 import {
-  MtxSelectFooterTemplateDirective,
-  MtxSelectHeaderTemplateDirective,
-  MtxSelectLabelTemplateDirective,
-  MtxSelectLoadingSpinnerTemplateDirective,
-  MtxSelectLoadingTextTemplateDirective,
-  MtxSelectMultiLabelTemplateDirective,
-  MtxSelectNotFoundTemplateDirective,
-  MtxSelectOptgroupTemplateDirective,
-  MtxSelectOptionTemplateDirective,
-  MtxSelectTagTemplateDirective,
-  MtxSelectTypeToSearchTemplateDirective,
+  MtxSelectFooterTemplate,
+  MtxSelectHeaderTemplate,
+  MtxSelectLabelTemplate,
+  MtxSelectLoadingSpinnerTemplate,
+  MtxSelectLoadingTextTemplate,
+  MtxSelectMultiLabelTemplate,
+  MtxSelectNotFoundTemplate,
+  MtxSelectOptgroupTemplate,
+  MtxSelectOptionTemplate,
+  MtxSelectTagTemplate,
+  MtxSelectTypeToSearchTemplate,
 } from './templates';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
@@ -120,27 +120,27 @@ export class MtxSelect
 {
   @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelectComponent;
 
-  @ContentChild(MtxSelectOptionTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectOptionTemplate, { read: TemplateRef })
   optionTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectOptgroupTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectOptgroupTemplate, { read: TemplateRef })
   optgroupTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectLabelTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectLabelTemplate, { read: TemplateRef })
   labelTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectMultiLabelTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectMultiLabelTemplate, { read: TemplateRef })
   multiLabelTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectHeaderTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectHeaderTemplate, { read: TemplateRef })
   headerTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectFooterTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectFooterTemplate, { read: TemplateRef })
   footerTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectNotFoundTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectNotFoundTemplate, { read: TemplateRef })
   notFoundTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectTypeToSearchTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectTypeToSearchTemplate, { read: TemplateRef })
   typeToSearchTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectLoadingTextTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectLoadingTextTemplate, { read: TemplateRef })
   loadingTextTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectTagTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectTagTemplate, { read: TemplateRef })
   tagTemplate!: TemplateRef<any>;
-  @ContentChild(MtxSelectLoadingSpinnerTemplateDirective, { read: TemplateRef })
+  @ContentChild(MtxSelectLoadingSpinnerTemplate, { read: TemplateRef })
   loadingSpinnerTemplate!: TemplateRef<any>;
 
   @ContentChildren(MtxOption, { descendants: true })

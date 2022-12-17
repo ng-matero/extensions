@@ -190,7 +190,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** Event emitted when the cell is selected. */
   @Output() cellSelectionChange = new EventEmitter<any[]>();
 
-  private _selectedCell?: MtxGridCellSelection;
+  private _selectedCell?: MtxGridSelectableCell;
 
   // ===== Toolbar =====
 
@@ -425,7 +425,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   /** Cell select event */
-  _selectCell(cellRef: MtxGridCellSelection, rowData: any, colDef: any): void {
+  _selectCell(cellRef: MtxGridSelectableCell, rowData: any, colDef: any): void {
     // If not the same cell
     if (this._selectedCell !== cellRef) {
       const colValue = this._utils.getCellValue(rowData, colDef);
@@ -544,7 +544,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
 @Directive({
   selector: '[mtx-grid-selectable-cell]',
 })
-export class MtxGridCellSelection {
+export class MtxGridSelectableCell {
   private _selected = false;
   private _rowData: any;
 
@@ -563,7 +563,7 @@ export class MtxGridCellSelection {
     }
   }
 
-  @Output() cellSelectionChange = new EventEmitter<MtxGridCellSelection>();
+  @Output() cellSelectionChange = new EventEmitter<MtxGridSelectableCell>();
 
   constructor(private _grid: MtxGrid) {}
 

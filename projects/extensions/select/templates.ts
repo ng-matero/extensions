@@ -1,56 +1,56 @@
 import { Directive, TemplateRef } from '@angular/core';
 
 @Directive({ selector: '[ng-option-tmp]' })
-export class MtxSelectOptionTemplateDirective {
+export class MtxSelectOptionTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-optgroup-tmp]' })
-export class MtxSelectOptgroupTemplateDirective {
+export class MtxSelectOptgroupTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-label-tmp]' })
-export class MtxSelectLabelTemplateDirective {
+export class MtxSelectLabelTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-multi-label-tmp]' })
-export class MtxSelectMultiLabelTemplateDirective {
+export class MtxSelectMultiLabelTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-header-tmp]' })
-export class MtxSelectHeaderTemplateDirective {
+export class MtxSelectHeaderTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-footer-tmp]' })
-export class MtxSelectFooterTemplateDirective {
+export class MtxSelectFooterTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-notfound-tmp]' })
-export class MtxSelectNotFoundTemplateDirective {
+export class MtxSelectNotFoundTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-typetosearch-tmp]' })
-export class MtxSelectTypeToSearchTemplateDirective {
+export class MtxSelectTypeToSearchTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-loadingtext-tmp]' })
-export class MtxSelectLoadingTextTemplateDirective {
+export class MtxSelectLoadingTextTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-tag-tmp]' })
-export class MtxSelectTagTemplateDirective {
+export class MtxSelectTagTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
 
 @Directive({ selector: '[ng-loadingspinner-tmp]' })
-export class MtxSelectLoadingSpinnerTemplateDirective {
+export class MtxSelectLoadingSpinnerTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
