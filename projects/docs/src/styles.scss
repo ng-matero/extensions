@@ -16,6 +16,7 @@ $theme: mat.define-light-theme(
       accent: $accent
     ),
     typography: mat.define-typography-config(),
+    density: 0
   )
 );
 
@@ -33,7 +34,8 @@ $theme: mat.define-light-theme(
         primary: $primary,
         accent: $accent
       ),
-      typography: mat.define-typography-config(),
+      typography: null,
+      density: null
     )
   );
 
