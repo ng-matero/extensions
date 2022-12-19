@@ -207,6 +207,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   set _activeDate(value: D) {
     const oldActiveDate = this._clampedActiveDate;
     this._clampedActiveDate = this._adapter.clampDate(value, this.minDate, this.maxDate);
+
+    // whenever active date changed, and possibly got clamped we should adjust the am/pm setting
+    this._selectAMPM(this._clampedActiveDate);
     if (
       oldActiveDate &&
       this._clampedActiveDate &&
@@ -456,12 +459,11 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     if (source === this._AMPM) {
       return;
     }
-    this._AMPM = source;
 
     // if AMPM changed from PM to AM substract 12 hours
     const currentHour = this._adapter.getHour(this._activeDate);
     let newHourValue;
-    if (this._AMPM === 'AM') {
+    if (source === 'AM') {
       newHourValue = currentHour >= 12 ? this._adapter.getHour(this._activeDate) - 12 : 12;
     }
     // otherwise add 12 hours
@@ -469,13 +471,23 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
       newHourValue = (currentHour + 12) % 24;
     }
 
-    this._activeDate = this._adapter.createDatetime(
-      this._adapter.getYear(this._activeDate),
-      this._adapter.getMonth(this._activeDate),
-      this._adapter.getDate(this._activeDate),
-      newHourValue,
-      this._adapter.getMinute(this._activeDate)
+    const newActiveDate = this._adapter.clampDate(
+      this._adapter.createDatetime(
+        this._adapter.getYear(this._activeDate),
+        this._adapter.getMonth(this._activeDate),
+        this._adapter.getDate(this._activeDate),
+        newHourValue,
+        this._adapter.getMinute(this._activeDate)
+      ),
+      this.minDate,
+      this.maxDate
     );
+
+    // only if our clamped date is not changed, we know we can apply the newActiveDate to the activeDate
+    if (this._adapter.getHour(newActiveDate) === newHourValue) {
+      this._activeDate = newActiveDate;
+      this._AMPM = source;
+    }
   }
 
   _yearClicked(): void {
@@ -743,18 +755,12 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
           this._clockView === 'hour'
             ? this._adapter.addCalendarHours(this._activeDate, 1)
             : this._adapter.addCalendarMinutes(this._activeDate, this.timeInterval);
-
-        // if the hours changed the am/pm we should update the AM/PM
-        this._selectAMPM(this._activeDate);
         break;
       case DOWN_ARROW:
         this._activeDate =
           this._clockView === 'hour'
             ? this._adapter.addCalendarHours(this._activeDate, -1)
             : this._adapter.addCalendarMinutes(this._activeDate, -this.timeInterval);
-
-        // if the hours changed the am/pm we should update the AM/PM
-        this._selectAMPM(this._activeDate);
         break;
       case ENTER:
         if (!this.timeInput) {

@@ -10,12 +10,15 @@ import {
   EventEmitter,
   Inject,
   Input,
+  OnChanges,
   OnDestroy,
   Output,
+  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
+import { MtxAMPM } from './datetimepicker-types';
 
 const activeEventOptions = normalizePassiveListenerOptions({ passive: false });
 
@@ -45,7 +48,7 @@ export type MtxClockView = 'hour' | 'minute';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxClock<D> implements AfterContentInit, OnDestroy {
+export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
 
@@ -54,6 +57,9 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy {
 
   /** Whether the clock uses 12 hour format. */
   @Input() twelvehour: boolean = false;
+
+  /** Whether the time is now in AM or PM. */
+  @Input() AMPM: MtxAMPM = 'AM';
 
   /** Emits when the currently selected date changes. */
   @Output() selectedChange = new EventEmitter<D>();
@@ -178,6 +184,10 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy {
     this._removeGlobalEvents();
   }
 
+  ngOnChanges(): void {
+    this._init();
+  }
+
   /** Called when the user has put their pointer down on the clock. */
   private _pointerDown = (event: TouchEvent | MouseEvent) => {
     this._timeChanged = false;
@@ -249,11 +259,13 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy {
       for (let i = 1; i < hourNames.length / 2 + 1; i++) {
         const radian = (i / 6) * Math.PI;
         const radius = CLOCK_OUTER_RADIUS;
+
+        const hour = this.AMPM === 'AM' ? i + 1 : (i + 13) % 23;
         const date = this._adapter.createDatetime(
           this._adapter.getYear(this.activeDate),
           this._adapter.getMonth(this.activeDate),
           this._adapter.getDate(this.activeDate),
-          i + 1,
+          hour,
           0
         );
         const enabled =
@@ -345,13 +357,20 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy {
     let date;
     if (this._hourView) {
       if (this.twelvehour) {
-        value = value === 0 ? 12 : value;
+        if (this.AMPM === 'AM') {
+          value = value === 0 ? 12 : value;
+        } else {
+          // if we chosen 12 in PM, the value should be 0 for 0:00,
+          // else we can safely add 12 to the final value
+          value = value === 12 ? 0 : value + 12;
+        }
       } else {
         if (value === 12) {
           value = 0;
         }
         value = outer ? (value === 0 ? 12 : value) : value === 0 ? 0 : value + 12;
       }
+
       date = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),

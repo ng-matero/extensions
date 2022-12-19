@@ -44,6 +44,7 @@
 
 <mtx-clock (selectedChange)="_timeSelected($event)"
            (activeDateChange)="_onActiveDateChange($event)"
+           [AMPM]="AMPM"
            [dateFilter]="dateFilter"
            [interval]="interval"
            [maxDate]="maxDate"
