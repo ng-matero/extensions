@@ -16,6 +16,6 @@
       "@ng-matero/extensions-moment-adapter/*": ["../../extensions-moment-adapter/*"]
     }
   },
-  "files": ["src/main.ts", "src/polyfills.ts"],
+  "files": ["src/main.ts"],
   "include": ["src/**/*.d.ts"]
 }
