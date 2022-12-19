@@ -122,6 +122,7 @@
       <mtx-clock (_userSelection)="_userSelected()"
                  (activeDateChange)="_onActiveDateChange($event)"
                  (selectedChange)="_dialTimeSelected($event)"
+                 [AMPM]="_AMPM"
                  [dateFilter]="dateFilter"
                  [interval]="timeInterval"
                  [maxDate]="maxDate"

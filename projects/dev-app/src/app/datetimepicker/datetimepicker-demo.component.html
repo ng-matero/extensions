@@ -56,7 +56,7 @@
     <mtx-datetimepicker-toggle [for]="timeAMPMPickerManual" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #timeAMPMPickerManual startView="month" [timeInterval]="5"
                         [timeInput]="true" [twelvehour]="true"></mtx-datetimepicker>
-    <input [mtxDatetimepicker]="timeAMPMPickerManual"
+    <input [mtxDatetimepicker]="timeAMPMPickerManual" [max]="tomorrow" [min]="today"
            autocomplete="false" formControlName="timeAMPMManual" matInput required>
     <mat-error *ngIf="group.get('timeAMPMManual')?.errors?.required">required</mat-error>
     <mat-error *ngIf="group.get('timeAMPMManual')?.errors?.mtxDatetimepickerMin">min</mat-error>
