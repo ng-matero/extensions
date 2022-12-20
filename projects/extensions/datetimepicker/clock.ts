@@ -146,15 +146,8 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   }
 
   get _hand() {
-    let hour = this._adapter.getHour(this.activeDate);
-    if (this.twelvehour) {
-      if (hour === 0) {
-        hour = 24;
-      }
-      this._selectedHour = hour > 12 ? hour - 12 : hour;
-    } else {
-      this._selectedHour = hour;
-    }
+    const hour = this._adapter.getHour(this.activeDate);
+    this._selectedHour = hour;
     this._selectedMinute = this._adapter.getMinute(this.activeDate);
     let deg = 0;
     let radius = CLOCK_OUTER_RADIUS;
@@ -254,13 +247,13 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
 
     const hourNames = this._adapter.getHourNames();
     const minuteNames = this._adapter.getMinuteNames();
-
     if (this.twelvehour) {
-      for (let i = 1; i < hourNames.length / 2 + 1; i++) {
+      const hours = [];
+      for (let i = 0; i < hourNames.length; i++) {
         const radian = (i / 6) * Math.PI;
         const radius = CLOCK_OUTER_RADIUS;
 
-        const hour = this.AMPM === 'AM' ? i + 1 : (i + 13) % 23;
+        const hour = i;
         const date = this._adapter.createDatetime(
           this._adapter.getYear(this.activeDate),
           this._adapter.getMonth(this.activeDate),
@@ -268,16 +261,28 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
           hour,
           0
         );
+
+        // Check if the date is enabled, no need to respect the minute setting here
         const enabled =
-          (!this.minDate || this._adapter.compareDatetime(date, this.minDate) >= 0) &&
-          (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate) <= 0);
-        this._hours.push({
+          (!this.minDate || this._adapter.compareDatetime(date, this.minDate, false) >= 0) &&
+          (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate, false) <= 0) &&
+          (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.HOUR));
+
+        // display value for twelvehour clock should be from 1-12 not including 0 and not above 12
+        hours.push({
           value: i,
-          displayValue: i === 0 ? '00' : hourNames[i],
+          displayValue: i % 12 === 0 ? '12' : hourNames[i % 12],
           enabled,
           top: CLOCK_RADIUS - Math.cos(radian) * radius - CLOCK_TICK_RADIUS,
           left: CLOCK_RADIUS + Math.sin(radian) * radius - CLOCK_TICK_RADIUS,
         });
+      }
+
+      // filter out AM or PM hours based on AMPM
+      if (this.AMPM === 'AM') {
+        this._hours = hours.filter(x => x.value < 12);
+      } else {
+        this._hours = hours.filter(x => x.value >= 12);
       }
     } else {
       for (let i = 0; i < hourNames.length; i++) {
@@ -291,10 +296,13 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
           i,
           0
         );
+
+        // Check if the date is enabled, no need to respect the minute setting here
         const enabled =
           (!this.minDate || this._adapter.compareDatetime(date, this.minDate, false) >= 0) &&
           (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate, false) <= 0) &&
           (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.HOUR));
+
         this._hours.push({
           value: i,
           displayValue: i === 0 ? '00' : hourNames[i],
