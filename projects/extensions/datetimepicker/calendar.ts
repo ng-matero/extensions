@@ -153,9 +153,8 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   private _startAt!: D | null;
 
   /**
-   * Whether the calendar is in time mode. In time mode the calendar clock gets time input elements rather then just clock
-   *
-   * When touchUi is enabled this will be disabled
+   * Whether the calendar is in time mode. In time mode the calendar clock gets time input elements
+   * rather then just clock. When touchUi is enabled this will be disabled
    */
   @Input()
   get timeInput(): boolean {
@@ -483,7 +482,8 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
       this.maxDate
     );
 
-    // only if our clamped date is not changed, we know we can apply the newActiveDate to the activeDate
+    // only if our clamped date is not changed, we know we can apply the newActiveDate to the
+    // activeDate
     if (this._adapter.getHour(newActiveDate) === newHourValue) {
       this._activeDate = newActiveDate;
       this._AMPM = source;

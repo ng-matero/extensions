@@ -430,9 +430,10 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
       this._activeDate = this._adapter.clampDate(newValue, this.minDate, this.maxDate);
       this.activeDateChange.emit(this.activeDate);
 
-      // If previously we did set [mtxValue]="13" and the input changed to 6, and the clamping will make it "13" again
-      // then the hourInputDirective will not have been updated since "13" === "13" same reference so no change detected
-      // by directly setting it within this handler, we handle this usecase
+      // If previously we did set [mtxValue]="13" and the input changed to 6, and the clamping
+      // will make it "13" again then the hourInputDirective will not have been updated
+      // since "13" === "13" same reference so no change detected by directly setting it within
+      // this handler, we handle this usecase
       if (this.hourInputDirective) {
         this.hourInputDirective.timeValue = this.hour;
       }
@@ -475,9 +476,10 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
       this._activeDate = this._adapter.clampDate(newValue, this.minDate, this.maxDate);
       this.activeDateChange.emit(this.activeDate);
 
-      // If previously we did set [mtxValue]="40" and the input changed to 30, and the clamping will make it "40" again
-      // then the minuteInputDirective will not have been updated since "40" === "40" same reference so no change detected
-      // by directly setting it within this handler, we handle this usecase
+      // If previously we did set [mtxValue]="40" and the input changed to 30, and the clamping
+      // will make it "40" again then the minuteInputDirective will not have been updated
+      // since "40" === "40" same reference so no change detected by directly setting it within
+      // this handler, we handle this usecase
       if (this.minuteInputDirective) {
         this.minuteInputDirective.timeValue = this.minute;
       }
