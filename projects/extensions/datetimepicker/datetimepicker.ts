@@ -623,7 +623,8 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       overlayRef.detachments(),
       overlayRef.keydownEvents().pipe(
         filter(event => {
-          // Closing on alt + up is only valid when there's an input associated with the datetimepicker.
+          // Closing on alt + up is only valid when there's an input associated with the
+          // datetimepicker.
           return (
             (event.keyCode === ESCAPE && !hasModifierKey(event)) ||
             (this.datetimepickerInput &&
