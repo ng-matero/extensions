@@ -36,9 +36,9 @@ export class AppComponent {
 @Component({
   selector: 'drawer-overview',
   template: `
-    <h1 class="mat-h1" fxLayoutAlign=" center">
+    <h1 class="heading">
       <span>Title</span>
-      <span fxFlex></span>
+      <span class="flex-spacer"></span>
       <button mat-icon-button (click)="onClose()">
         <mat-icon>close</mat-icon>
       </button>
@@ -49,6 +49,18 @@ export class AppComponent {
       reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
     </p>
   `,
+  styles: [
+    `
+      .heading {
+        display: flex;
+        align-items: center;
+      }
+
+      .flex-spacer {
+        flex-grow: 1;
+      }
+    `,
+  ],
 })
 export class DrawerConfigurableOverviewComponent {
   constructor(public drawerRef: MtxDrawerRef<DrawerConfigurableOverviewComponent>) {}

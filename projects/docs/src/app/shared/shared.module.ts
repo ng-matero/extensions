@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { MaterialModule } from '../material.module';
 import { MaterialExtensionsModule } from '../material-extensions.module';
@@ -28,7 +27,6 @@ import { DocViewer } from './doc-viewer/doc-viewer';
     RouterModule,
     MaterialModule,
     MaterialExtensionsModule,
-    FlexLayoutModule,
     NgProgressModule,
     NgProgressHttpModule,
     NgProgressRouterModule,
@@ -41,7 +39,6 @@ import { DocViewer } from './doc-viewer/doc-viewer';
     RouterModule,
     MaterialModule,
     MaterialExtensionsModule,
-    FlexLayoutModule,
     NgProgressModule,
     NgProgressHttpModule,
     NgProgressRouterModule,

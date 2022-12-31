@@ -28,9 +28,9 @@ export class AppComponent {
 @Component({
   selector: 'drawer-overview',
   template: `
-    <h1 class="mat-h1" fxLayoutAlign=" center">
+    <h1 class="heading">
       Hi, {{ data.name }}
-      <span fxFlex></span>
+      <span class="flex-spacer"></span>
       <button mat-icon-button (click)="onNoClick()">
         <mat-icon>close</mat-icon>
       </button>
@@ -47,6 +47,18 @@ export class AppComponent {
       <button mat-button (click)="onOkClick()" cdkFocusInitial>Ok</button>
     </div>
   `,
+  styles: [
+    `
+      .heading {
+        display: flex;
+        align-items: center;
+      }
+
+      .flex-spacer {
+        flex-grow: 1;
+      }
+    `,
+  ],
 })
 export class DrawerSharingDataOverviewComponent {
   constructor(
