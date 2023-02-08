@@ -67,7 +67,7 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
-
+&nbsp;
 <mat-form-field appearance="outline">
   <mat-label>Choose an option</mat-label>
   <mat-select>
@@ -114,6 +114,24 @@
                  let-searchTerm="searchTerm">
       {{searchTerm}}
     </ng-template> -->
+  </mtx-select>
+
+  <mat-hint>Choose your favorite food</mat-hint>
+  <mat-error>Please choose a food</mat-error>
+</mat-form-field>
+
+<h2>Reactive Form</h2>
+
+<mat-form-field>
+  <mat-label>Select Food</mat-label>
+
+  <mtx-select [items]="items"
+              [formControl]="control"
+              placeholder="select food"
+              bindLabel="name"
+              bindValue="id"
+              [disabled]="disableSelect"
+              [multiple]="multipleSelect">
   </mtx-select>
 
   <mat-hint>Choose your favorite food</mat-hint>

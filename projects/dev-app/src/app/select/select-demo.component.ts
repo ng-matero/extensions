@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'dev-app-select',
@@ -100,6 +101,8 @@ export class SelectDemoComponent {
       child: { state: 'Inactive' },
     },
   ];
+
+  control = new FormControl(1, Validators.required);
 
   change(e: any) {
     console.log(e);
