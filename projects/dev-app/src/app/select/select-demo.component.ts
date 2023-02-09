@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'dev-app-select',
@@ -102,9 +103,13 @@ export class SelectDemoComponent {
     },
   ];
 
-  control = new FormControl(1, Validators.required);
+  control = new FormControl({ value: 1, disabled: true }, Validators.required);
 
-  change(e: any) {
-    console.log(e);
+  changeState(e: MatSlideToggleChange) {
+    if (e.checked) {
+      this.control.disable();
+    } else {
+      this.control.enable();
+    }
   }
 }
