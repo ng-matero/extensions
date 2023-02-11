@@ -177,7 +177,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** The formatter to disable the row selection or hide the row's checkbox. */
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
   /** The formatter to set the row's class. */
-  @Input() rowClassFormatter!: MtxGridRowClassFormatter;
+  @Input() rowClassFormatter?: MtxGridRowClassFormatter;
   /** Event emitted when the row is selected. */
   @Output() rowSelectionChange = new EventEmitter<any[]>();
 
@@ -309,28 +309,6 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
 
   _getColData(data: any[], colDef: MtxGridColumn) {
     return this._utils.getColData(data, colDef);
-  }
-
-  _getRowClassList(rowData: any, index: number) {
-    const classList: any = {
-      'selected': this.rowSelection.isSelected(rowData),
-      'mat-row-odd': index % 2,
-    };
-    if (this.rowClassFormatter) {
-      for (const key of Object.keys(this.rowClassFormatter)) {
-        classList[key] = this.rowClassFormatter[key](rowData, index);
-      }
-    }
-    return classList;
-  }
-
-  _getCellClassList(colDef: MtxGridColumn, rowData?: Record<string, any>) {
-    if (typeof colDef.class === 'string') {
-      return colDef.class;
-    } else if (typeof colDef.class === 'function') {
-      return colDef.class(rowData, colDef);
-    }
-    return '';
   }
 
   // Waiting for async data

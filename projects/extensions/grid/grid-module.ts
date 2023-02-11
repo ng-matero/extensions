@@ -23,6 +23,7 @@ import { MtxGridColumnMenu } from './column-menu';
 import { MtxGridExpansionToggle } from './expansion-toggle';
 import { MtxGridUtils } from './grid-utils';
 import { MatColumnResizeModule } from './column-resize/column-resize-module';
+import { MtxGridCellClassPipe, MtxGridRowClassPipe } from './grid-pipes';
 
 @NgModule({
   imports: [
@@ -52,6 +53,8 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MtxGridExpansionToggle,
     MtxGridSelectableCell,
     MatColumnResizeModule,
+    MtxGridRowClassPipe,
+    MtxGridCellClassPipe,
   ],
   declarations: [
     MtxGrid,
@@ -59,6 +62,8 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MtxGridColumnMenu,
     MtxGridExpansionToggle,
     MtxGridSelectableCell,
+    MtxGridRowClassPipe,
+    MtxGridCellClassPipe,
   ],
   providers: [MtxGridUtils],
 })
