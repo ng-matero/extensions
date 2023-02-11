@@ -1,6 +1,5 @@
 import { TemplateRef } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { TooltipPosition, TooltipTouchGestures } from '@angular/material/tooltip';
 import { Observable } from 'rxjs';
 
@@ -29,7 +28,7 @@ export interface MtxGridColumn {
   showExpand?: boolean;
   description?: string;
   summary?: ((data: any[], colDef?: MtxGridColumn) => any) | string;
-  class?: string;
+  class?: string | ((rowData?: Record<string, any>, colDef?: MtxGridColumn) => string);
 }
 
 /** Possible column pin values.  */

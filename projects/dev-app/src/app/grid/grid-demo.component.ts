@@ -68,12 +68,15 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       maxWidth: 300,
       resizable: true,
       sortable: true,
+      class: data => {
+        return data?.weight > 10 ? 'warning' : '';
+      },
     },
     {
       header: this.translate.stream('gender'),
       field: 'gender',
       minWidth: 150,
-      class: 'warning',
+      class: 'info',
     },
     {
       header: this.translate.stream('mobile'),

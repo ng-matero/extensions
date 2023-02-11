@@ -324,6 +324,15 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     return classList;
   }
 
+  _getCellClassList(colDef: MtxGridColumn, rowData?: Record<string, any>) {
+    if (typeof colDef.class === 'string') {
+      return colDef.class;
+    } else if (typeof colDef.class === 'function') {
+      return colDef.class(rowData, colDef);
+    }
+    return '';
+  }
+
   // Waiting for async data
   ngOnChanges(changes: SimpleChanges) {
     this._countPinnedPosition();
