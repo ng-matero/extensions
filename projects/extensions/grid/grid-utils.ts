@@ -31,7 +31,7 @@ export class MtxGridUtils {
    * @returns
    */
   getColData(data: any[], colDef: MtxGridColumn): any[] {
-    return data.map((rowData: any) => this.getCellValue(rowData, colDef));
+    return data.map(rowData => this.getCellValue(rowData, colDef));
   }
 
   /**

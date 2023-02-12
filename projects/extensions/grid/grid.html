@@ -6,7 +6,7 @@
 <!-- Toolbar -->
 <div class="mtx-grid-toolbar" *ngIf="showToolbar">
   <div class="mtx-grid-toolbar-content">
-    <ng-template [ngIf]="_isTemplateRef(toolbarTemplate)" [ngIfElse]="defaultToolbarTemplate">
+    <ng-template [ngIf]="toolbarTemplate" [ngIfElse]="defaultToolbarTemplate">
       <ng-template [ngTemplateOutlet]="toolbarTemplate"></ng-template>
     </ng-template>
     <ng-template #defaultToolbarTemplate>
@@ -83,15 +83,15 @@
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
               <div class="mat-header-cell-inner">
-                <ng-template [ngIf]="_isTemplateRef(headerTemplate)" [ngIfElse]="headerTpl">
-                  <ng-template [ngTemplateOutlet]="headerTemplate"
+                <ng-template [ngIf]="headerTemplate | isTemplateRef" [ngIfElse]="headerTpl">
+                  <ng-template [ngTemplateOutlet]="$any(headerTemplate)"
                                [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
                   </ng-template>
                 </ng-template>
                 <ng-template #headerTpl>
-                  <ng-template [ngIf]="headerTemplate && _isTemplateRef(headerTemplate[col.field])"
+                  <ng-template [ngIf]="$any(headerTemplate)?.[col.field] | isTemplateRef"
                                [ngIfElse]="defaultHeaderTpl">
-                    <ng-template [ngTemplateOutlet]="headerTemplate[col.field]"
+                    <ng-template [ngTemplateOutlet]="$any(headerTemplate)[col.field]"
                                  [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
                     </ng-template>
                   </ng-template>
@@ -122,15 +122,15 @@
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
                 mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
-              <ng-template [ngIf]="_isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
-                <ng-template [ngTemplateOutlet]="cellTemplate"
+              <ng-template [ngIf]="cellTemplate | isTemplateRef" [ngIfElse]="cellTpl">
+                <ng-template [ngTemplateOutlet]="$any(cellTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
                 </ng-template>
               </ng-template>
               <ng-template #cellTpl>
-                <ng-template [ngIf]="cellTemplate && _isTemplateRef(cellTemplate[col.field])"
+                <ng-template [ngIf]="$any(cellTemplate)?.[col.field] | isTemplateRef"
                              [ngIfElse]="colDefCellTpl">
-                  <ng-template [ngTemplateOutlet]="cellTemplate[col.field]"
+                  <ng-template [ngTemplateOutlet]="$any(cellTemplate)[col.field]"
                                [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
                   </ng-template>
                 </ng-template>
@@ -162,15 +162,15 @@
                 [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
               <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
 
-              <ng-template [ngIf]="_isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
-                <ng-template [ngTemplateOutlet]="summaryTemplate"
+              <ng-template [ngIf]="summaryTemplate | isTemplateRef" [ngIfElse]="summaryTpl">
+                <ng-template [ngTemplateOutlet]="$any(summaryTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }">
                 </ng-template>
               </ng-template>
               <ng-template #summaryTpl>
-                <ng-template [ngIf]="summaryTemplate && _isTemplateRef(summaryTemplate[col.field])"
+                <ng-template [ngIf]="$any(summaryTemplate)?.[col.field] | isTemplateRef"
                              [ngIfElse]="defaultSummaryTpl">
-                  <ng-template [ngTemplateOutlet]="summaryTemplate[col.field]"
+                  <ng-template [ngTemplateOutlet]="$any(summaryTemplate)[col.field]"
                                [ngTemplateOutletContext]="{ $implicit: _getColData(data, col), colData: _getColData(data, col), colDef: col }">
                   </ng-template>
                 </ng-template>
@@ -271,15 +271,15 @@
                 [resizable]="col.resizable"
                 [matResizableMinWidthPx]="col.minWidth" [matResizableMaxWidthPx]="col.maxWidth">
               <div class="mat-header-cell-inner">
-                <ng-template [ngIf]="_isTemplateRef(headerTemplate)" [ngIfElse]="headerTpl">
-                  <ng-template [ngTemplateOutlet]="headerTemplate"
+                <ng-template [ngIf]="headerTemplate | isTemplateRef" [ngIfElse]="headerTpl">
+                  <ng-template [ngTemplateOutlet]="$any(headerTemplate)"
                                [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
                   </ng-template>
                 </ng-template>
                 <ng-template #headerTpl>
-                  <ng-template [ngIf]="headerTemplate && _isTemplateRef(headerTemplate[col.field])"
+                  <ng-template [ngIf]="$any(headerTemplate)?.[col.field] | isTemplateRef"
                                [ngIfElse]="defaultHeaderTpl">
-                    <ng-template [ngTemplateOutlet]="headerTemplate[col.field]"
+                    <ng-template [ngTemplateOutlet]="$any(headerTemplate)[col.field]"
                                  [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
                     </ng-template>
                   </ng-template>
@@ -310,15 +310,15 @@
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}"
                 mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
-              <ng-template [ngIf]="_isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
-                <ng-template [ngTemplateOutlet]="cellTemplate"
+              <ng-template [ngIf]="cellTemplate | isTemplateRef" [ngIfElse]="cellTpl">
+                <ng-template [ngTemplateOutlet]="$any(cellTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
                 </ng-template>
               </ng-template>
               <ng-template #cellTpl>
-                <ng-template [ngIf]="cellTemplate && _isTemplateRef(cellTemplate[col.field])"
+                <ng-template [ngIf]="$any(cellTemplate)?.[col.field] | isTemplateRef"
                              [ngIfElse]="colDefCellTpl">
-                  <ng-template [ngTemplateOutlet]="cellTemplate[col.field]"
+                  <ng-template [ngTemplateOutlet]="$any(cellTemplate)[col.field]"
                                [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
                   </ng-template>
                 </ng-template>
@@ -350,15 +350,15 @@
                 [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}">
               <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
 
-              <ng-template [ngIf]="_isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
-                <ng-template [ngTemplateOutlet]="summaryTemplate"
+              <ng-template [ngIf]="summaryTemplate | isTemplateRef" [ngIfElse]="summaryTpl">
+                <ng-template [ngTemplateOutlet]="$any(summaryTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }">
                 </ng-template>
               </ng-template>
               <ng-template #summaryTpl>
-                <ng-template [ngIf]="summaryTemplate && _isTemplateRef(summaryTemplate[col.field])"
+                <ng-template [ngIf]="$any(summaryTemplate)?.[col.field] | isTemplateRef"
                              [ngIfElse]="defaultSummaryTpl">
-                  <ng-template [ngTemplateOutlet]="summaryTemplate[col.field]"
+                  <ng-template [ngTemplateOutlet]="$any(summaryTemplate)[col.field]"
                                [ngTemplateOutletContext]="{ $implicit: _getColData(data, col), colData: _getColData(data, col), colDef: col }">
                   </ng-template>
                 </ng-template>
@@ -417,7 +417,7 @@
 
     <!-- No result -->
     <div class="mtx-grid-no-result" *ngIf="_hasNoResult">
-      <ng-template [ngIf]="_isTemplateRef(noResultTemplate)" [ngIfElse]="defaultNoResultTpl">
+      <ng-template [ngIf]="noResultTemplate" [ngIfElse]="defaultNoResultTpl">
         <ng-template [ngTemplateOutlet]="noResultTemplate"></ng-template>
       </ng-template>
       <ng-template #defaultNoResultTpl>{{noResultText}}</ng-template>
@@ -426,7 +426,7 @@
 
   <!-- Tool sidebar -->
   <div class="mtx-grid-sidebar" *ngIf="showSidebar">
-    <ng-template [ngIf]="_isTemplateRef(sidebarTemplate)">
+    <ng-template [ngIf]="sidebarTemplate">
       <ng-template [ngTemplateOutlet]="sidebarTemplate"></ng-template>
     </ng-template>
   </div>
@@ -435,14 +435,14 @@
 <div class="mtx-grid-footer">
   <!-- Status Bar -->
   <div class="mtx-grid-statusbar" *ngIf="showStatusbar">
-    <ng-template [ngIf]="_isTemplateRef(statusbarTemplate)">
+    <ng-template [ngIf]="statusbarTemplate">
       <ng-template [ngTemplateOutlet]="statusbarTemplate"></ng-template>
     </ng-template>
   </div>
 
   <!-- Pagination -->
   <div class="mtx-grid-pagination">
-    <ng-template [ngIf]="_isTemplateRef(paginationTemplate)" [ngIfElse]="defaultPaginationTemplate">
+    <ng-template [ngIf]="paginationTemplate" [ngIfElse]="defaultPaginationTemplate">
       <ng-template [ngTemplateOutlet]="paginationTemplate"></ng-template>
     </ng-template>
     <ng-template #defaultPaginationTemplate>
@@ -462,13 +462,13 @@
 
 <!-- Header template for extra content -->
 <ng-template #headerExtraTplBase let-headerExtraTemplate let-col="colDef">
-  <ng-template [ngIf]="_isTemplateRef(headerExtraTemplate)" [ngIfElse]="headerExtraTpl">
+  <ng-template [ngIf]="headerExtraTemplate | isTemplateRef" [ngIfElse]="headerExtraTpl">
     <ng-template [ngTemplateOutlet]="headerExtraTemplate"
                  [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
     </ng-template>
   </ng-template>
   <ng-template #headerExtraTpl>
-    <ng-template [ngIf]="headerExtraTemplate && _isTemplateRef(headerExtraTemplate[col.field])">
+    <ng-template [ngIf]="$any(headerExtraTemplate)?.[col.field] | isTemplateRef">
       <ng-template [ngTemplateOutlet]="headerExtraTemplate[col.field]"
                    [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
       </ng-template>

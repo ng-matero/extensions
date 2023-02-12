@@ -256,11 +256,11 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   // ===== Cell Templates =====
 
   /** The header's cell template for the grid. */
-  @Input() headerTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+  @Input() headerTemplate!: TemplateRef<any> | MtxGridCellTemplate;
   /** The header's cell template for the grid exclude sort. */
-  @Input() headerExtraTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+  @Input() headerExtraTemplate!: TemplateRef<any> | MtxGridCellTemplate;
   /** The cell template for the grid. */
-  @Input() cellTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+  @Input() cellTemplate!: TemplateRef<any> | MtxGridCellTemplate;
 
   // ===== Row Templates =====
 
@@ -276,7 +276,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** Whether to show the summary. */
   @Input() showSummary = false;
   /** The template for the summary. */
-  @Input() summaryTemplate: TemplateRef<any> | MtxGridCellTemplate | any;
+  @Input() summaryTemplate!: TemplateRef<any> | MtxGridCellTemplate;
 
   // TODO: Summary display conditions
   get _whetherShowSummary() {
@@ -301,10 +301,6 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
 
   detectChanges() {
     this._changeDetectorRef.detectChanges();
-  }
-
-  _isTemplateRef(obj: any) {
-    return obj instanceof TemplateRef;
   }
 
   _getColData(data: any[], colDef: MtxGridColumn) {
@@ -404,15 +400,19 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** Expansion change event */
   _onExpansionChange(
     expansionRef: MtxGridExpansionToggle,
-    rowData: any,
-    column: any,
+    rowData: Record<string, any>,
+    column: MtxGridColumn,
     index: number
   ) {
     this.expansionChange.emit({ expanded: expansionRef.expanded, data: rowData, index, column });
   }
 
   /** Cell select event */
-  _selectCell(cellRef: MtxGridSelectableCell, rowData: any, colDef: any): void {
+  _selectCell(
+    cellRef: MtxGridSelectableCell,
+    rowData: Record<string, any>,
+    colDef: MtxGridColumn
+  ): void {
     // If not the same cell
     if (this._selectedCell !== cellRef) {
       const colValue = this._utils.getCellValue(rowData, colDef);
@@ -430,7 +430,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   /** Row select event */
-  _selectRow(event: MouseEvent, rowData: any, index: number) {
+  _selectRow(event: MouseEvent, rowData: Record<string, any>, index: number) {
     if (
       this.rowSelectable &&
       !this.rowSelectionFormatter.disabled?.(rowData, index) &&
@@ -469,13 +469,13 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   /** Select normal row */
-  _toggleNormalCheckbox(row: any) {
+  _toggleNormalCheckbox(row: Record<string, any>) {
     this.rowSelection.toggle(row);
     this.rowSelectionChange.emit(this.rowSelection.selected);
   }
 
   /** Column change event */
-  _onColumnChange(columns: any[]) {
+  _onColumnChange(columns: MtxGridColumn[]) {
     this.columnChange.emit(columns);
 
     this.displayedColumns = Object.assign([], this.getDisplayedColumnFields(columns));
@@ -533,7 +533,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
 })
 export class MtxGridSelectableCell {
   private _selected = false;
-  private _rowData: any;
+  private _rowData!: Record<string, any>;
 
   ctrlKeyPressed = false;
   shiftKeyPressed = false;

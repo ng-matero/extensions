@@ -9,9 +9,10 @@ import {
   TooltipComponent,
   MTX_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
 } from './tooltip';
+import { MtxPipesModule } from '../core';
 
 @NgModule({
-  imports: [A11yModule, CommonModule, OverlayModule, MatCommonModule],
+  imports: [A11yModule, CommonModule, OverlayModule, MatCommonModule, MtxPipesModule],
   exports: [MtxTooltip, TooltipComponent, MatCommonModule, CdkScrollableModule],
   declarations: [MtxTooltip, TooltipComponent],
   providers: [MTX_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],

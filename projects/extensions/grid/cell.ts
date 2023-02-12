@@ -46,7 +46,7 @@ export class MtxGridCell {
 
   constructor(private _dialog: MtxDialog, private _utils: MtxGridUtils) {}
 
-  _onActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: any) {
+  _onActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: Record<string, any>) {
     event.preventDefault();
     event.stopPropagation();
 
