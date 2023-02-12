@@ -187,9 +187,8 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   // mat-table
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = EXAMPLE_DATA;
 
-  constructor(public translate: TranslateService, private http: HttpClient) {}
+  constructor(private translate: TranslateService, private http: HttpClient) {}
 
   ngOnInit() {
     this.getRemoteData();
@@ -217,8 +216,8 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   updateCell() {
     this.list = this.list.map(item => {
-      item.weight = Math.round(Math.random() * 1000) / 100;
-      return item;
+      const weight = Math.round(Math.random() * 2000) / 100;
+      return { ...item, weight };
     });
   }
 

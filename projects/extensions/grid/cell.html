@@ -1,6 +1,6 @@
 <span *ngIf="summary; else customCellFormattingTpl"
-      [title]="_getFormatterTooltip(_formatSummary(data, colDef))"
-      [innerHTML]="_getText(_formatSummary(data, colDef))">
+      [title]="_getFormatterTooltip((data | cellSummary: colDef))"
+      [innerHTML]="_getText((data | cellSummary: colDef))">
 </span>
 
 <!-- Custom formatting -->
@@ -16,12 +16,12 @@
   <ng-container [ngSwitch]="colDef.type">
     <!-- Tag -->
     <ng-container *ngSwitchCase="'tag'">
-      <mat-chip-listbox *ngIf="colDef.tag && colDef.tag[_colValue]; else tagEmptyTpl">
-        <mat-chip color="primary" [ngClass]="['bg-' + colDef.tag[_colValue].color]">
-          {{colDef.tag[_colValue].text}}
+      <mat-chip-listbox *ngIf="colDef.tag && colDef.tag[_value]; else tagEmptyTpl">
+        <mat-chip color="primary" [ngClass]="['bg-' + colDef.tag[_value].color]">
+          {{colDef.tag[_value].text}}
         </mat-chip>
       </mat-chip-listbox>
-      <ng-template #tagEmptyTpl>{{_colValue}}</ng-template>
+      <ng-template #tagEmptyTpl>{{_value}}</ng-template>
     </ng-container>
     <!-- Buttons -->
     <ng-container *ngSwitchCase="'button'">
@@ -30,13 +30,13 @@
           <button *ngIf="btn.type==='basic'"
                   [ngClass]="['mtx-grid-action-button', btn.class||'']"
                   mat-button [color]="btn.color || 'primary'"
-                  [disabled]="_isActionDisabled(btn, rowData)"
-                  [matTooltip]="_getActionTooltip(btn)?.message | toObservable | async"
-                  [matTooltipClass]="_getActionTooltip(btn)?.class"
-                  [matTooltipHideDelay]="_getActionTooltip(btn)?.hideDelay"
-                  [matTooltipShowDelay]="_getActionTooltip(btn)?.showDelay"
-                  [matTooltipPosition]="_getActionTooltip(btn)?.position || 'below'"
-                  [matTooltipTouchGestures]="_getActionTooltip(btn)?.touchGestures || 'auto'"
+                  [disabled]="(btn | cellActionDisable: rowData)"
+                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltipClass]="(btn | cellActionTooltip).class"
+                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
+                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
+                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
+                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
                   (click)="_onActionClick($event, btn, rowData)">
             <mat-icon class="mtx-grid-icon" *ngIf="btn.icon">{{btn.icon}}</mat-icon>
             <span>{{btn.text | toObservable | async}}</span>
@@ -44,13 +44,13 @@
           <button *ngIf="!btn.type || btn.type==='icon'"
                   [ngClass]="['mtx-grid-action-button', btn.class||'']"
                   mat-icon-button [color]="btn.color || 'primary'"
-                  [disabled]="_isActionDisabled(btn, rowData)"
-                  [matTooltip]="_getActionTooltip(btn)?.message | toObservable | async"
-                  [matTooltipClass]="_getActionTooltip(btn)?.class"
-                  [matTooltipHideDelay]="_getActionTooltip(btn)?.hideDelay"
-                  [matTooltipShowDelay]="_getActionTooltip(btn)?.showDelay"
-                  [matTooltipPosition]="_getActionTooltip(btn)?.position || 'below'"
-                  [matTooltipTouchGestures]="_getActionTooltip(btn)?.touchGestures || 'auto'"
+                  [disabled]="(btn | cellActionDisable: rowData)"
+                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltipClass]="(btn | cellActionTooltip).class"
+                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
+                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
+                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
+                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
                   (click)="_onActionClick($event, btn, rowData)">
             <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
           </button>
@@ -59,57 +59,57 @@
     </ng-container>
     <!-- Link -->
     <ng-container *ngSwitchCase="'link'">
-      <a [href]="_colValue" target="_blank">{{_colValue}}</a>
+      <a [href]="_value" target="_blank">{{_value}}</a>
     </ng-container>
     <!-- Image -->
     <ng-container *ngSwitchCase="'image'">
-      <img class="mtx-grid-img" [src]="_colValue" (click)="_onImagePreview(_colValue)">
+      <img class="mtx-grid-img" [src]="_value" (click)="_onImagePreview(_value)">
     </ng-container>
     <!-- Boolean -->
     <ng-container *ngSwitchCase="'boolean'">
-      <span [title]="_getTooltip(_colValue)">{{_getText(_colValue)}}</span>
+      <span [title]="_getTooltip(_value)">{{_getText(_value)}}</span>
     </ng-container>
     <!-- Number -->
     <ng-container *ngSwitchCase="'number'">
-      <span [title]="_getTooltip(_colValue | number: colDef.typeParameter?.digitsInfo :
+      <span [title]="_getTooltip(_value | number: colDef.typeParameter?.digitsInfo:
       colDef.typeParameter?.locale)">
-        {{_getText(_colValue | number: colDef.typeParameter?.digitsInfo :
+        {{_getText(_value | number: colDef.typeParameter?.digitsInfo:
         colDef.typeParameter?.locale)}}
       </span>
     </ng-container>
     <!-- Currency -->
     <ng-container *ngSwitchCase="'currency'">
-      <span [title]="_getTooltip(_colValue | currency: colDef.typeParameter?.currencyCode :
-      colDef.typeParameter?.display :
-      colDef.typeParameter?.digitsInfo :
+      <span [title]="_getTooltip(_value | currency: colDef.typeParameter?.currencyCode:
+      colDef.typeParameter?.display:
+      colDef.typeParameter?.digitsInfo:
       colDef.typeParameter?.locale)">
-        {{_getText(_colValue | currency: colDef.typeParameter?.currencyCode :
-        colDef.typeParameter?.display :
-        colDef.typeParameter?.digitsInfo :
+        {{_getText(_value | currency: colDef.typeParameter?.currencyCode:
+        colDef.typeParameter?.display:
+        colDef.typeParameter?.digitsInfo:
         colDef.typeParameter?.locale)}}
       </span>
     </ng-container>
     <!-- Percent -->
     <ng-container *ngSwitchCase="'percent'">
-      <span [title]="_getTooltip(_colValue | percent: colDef.typeParameter?.digitsInfo :
+      <span [title]="_getTooltip(_value | percent: colDef.typeParameter?.digitsInfo:
       colDef.typeParameter?.locale)">
-        {{_getText(_colValue | percent: colDef.typeParameter?.digitsInfo :
+        {{_getText(_value | percent: colDef.typeParameter?.digitsInfo:
         colDef.typeParameter?.locale)}}
       </span>
     </ng-container>
     <!-- Date -->
     <ng-container *ngSwitchCase="'date'">
-      <span [title]="_getTooltip(_colValue | date: colDef.typeParameter?.format :
-      colDef.typeParameter?.timezone :
+      <span [title]="_getTooltip(_value | date: colDef.typeParameter?.format:
+      colDef.typeParameter?.timezone:
       colDef.typeParameter?.locale)">
-        {{_getText(_colValue | date: colDef.typeParameter?.format :
-        colDef.typeParameter?.timezone :
+        {{_getText(_value | date: colDef.typeParameter?.format:
+        colDef.typeParameter?.timezone:
         colDef.typeParameter?.locale)}}
       </span>
     </ng-container>
     <!-- Default -->
     <ng-container *ngSwitchDefault>
-      <span [title]="_getTooltip(_colValue)">{{_getText(_colValue)}}</span>
+      <span [title]="_getTooltip(_value)">{{_getText(_value)}}</span>
     </ng-container>
   </ng-container>
 </ng-template>

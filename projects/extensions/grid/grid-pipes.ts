@@ -1,10 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { MtxGridColumn, MtxGridRowClassFormatter } from './interfaces';
+import { isObservable } from 'rxjs';
+import { MtxGridUtils } from './grid-utils';
+import { MtxGridColumn, MtxGridColumnButton, MtxGridRowClassFormatter } from './interfaces';
 
 @Pipe({
-  name: 'cellClass',
+  name: 'colClass',
 })
-export class MtxGridCellClassPipe implements PipeTransform {
+export class MtxGridColClassPipe implements PipeTransform {
   transform(colDef: MtxGridColumn, rowData?: Record<string, any>): string {
     if (typeof colDef.class === 'string') {
       return colDef.class;
@@ -35,5 +37,52 @@ export class MtxGridRowClassPipe implements PipeTransform {
       }
     }
     return classList.join(' ');
+  }
+}
+
+@Pipe({
+  name: 'cellActionTooltip',
+})
+export class MtxGridCellActionTooltipPipe implements PipeTransform {
+  transform(btn: MtxGridColumnButton) {
+    if (typeof btn.tooltip === 'string' || isObservable(btn.tooltip)) {
+      return {
+        message: btn.tooltip,
+      };
+    } else {
+      return btn.tooltip || { message: '' };
+    }
+  }
+}
+
+@Pipe({
+  name: 'cellActionDisable',
+})
+export class MtxGridCellActionDisablePipe implements PipeTransform {
+  transform(btn: MtxGridColumnButton, rowData: Record<string, any>) {
+    if (typeof btn.disabled === 'boolean') {
+      return btn.disabled;
+    } else if (typeof btn.disabled === 'function') {
+      return btn.disabled(rowData);
+    } else {
+      return false;
+    }
+  }
+}
+
+@Pipe({
+  name: 'cellSummary',
+})
+export class MtxGridCellSummaryPipe implements PipeTransform {
+  constructor(private utils: MtxGridUtils) {}
+  transform(data: any[], colDef: MtxGridColumn) {
+    if (typeof colDef.summary === 'string') {
+      return colDef.summary;
+    } else if (typeof colDef.summary === 'function') {
+      return (colDef.summary as (data: any[], colDef?: MtxGridColumn) => any)(
+        this.utils.getColData(data, colDef),
+        colDef
+      );
+    }
   }
 }
