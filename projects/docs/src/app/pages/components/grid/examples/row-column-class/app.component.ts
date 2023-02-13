@@ -15,9 +15,15 @@ export class AppComponent {
 
   columns: MtxGridColumn[] = [
     { header: 'Name', field: 'name' },
-    { header: 'Weight', field: 'weight' },
+    {
+      header: 'Weight',
+      field: 'weight',
+      class: data => {
+        return data?.weight > 10 ? 'warning' : '';
+      },
+    },
     { header: 'Gender', field: 'gender' },
-    { header: 'Mobile', field: 'mobile', class: 'warning' },
+    { header: 'Mobile', field: 'mobile', class: 'info' },
     { header: 'City', field: 'city' },
   ];
 
