@@ -1,4 +1,15 @@
-import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  Input,
+  KeyValueChanges,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
@@ -12,7 +23,7 @@ import PhotoViewer from 'photoviewer';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxGridCell {
+export class MtxGridCell implements OnInit, DoCheck {
   /** Row data */
   @Input() rowData: Record<string, any> = {};
 
@@ -28,8 +39,34 @@ export class MtxGridCell {
   /** Placeholder for the empty value (`null`, `''`, `[]`) */
   @Input() placeholder: string = '--';
 
+  private rowDataDiffer?: KeyValueDiffer<string, any>;
+
   get _value() {
     return this._utils.getCellValue(this.rowData, this.colDef);
+  }
+
+  constructor(
+    private _dialog: MtxDialog,
+    private _utils: MtxGridUtils,
+    private _differs: KeyValueDiffers,
+    private _changeDetectorRef: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.rowDataDiffer = this._differs.find(this.rowData).create();
+  }
+
+  ngDoCheck(): void {
+    const changes = this.rowDataDiffer?.diff(this.rowData);
+    if (changes) {
+      this._applyChanges(changes);
+    }
+  }
+
+  private _applyChanges(changes: KeyValueChanges<string, any>) {
+    changes.forEachChangedItem(r => {
+      this._changeDetectorRef.markForCheck();
+    });
   }
 
   _getText(value: any) {
@@ -43,8 +80,6 @@ export class MtxGridCell {
   _getFormatterTooltip(value: any) {
     return this._utils.isContainHTML(value) || this._utils.isEmpty(value) ? '' : value;
   }
-
-  constructor(private _dialog: MtxDialog, private _utils: MtxGridUtils) {}
 
   _onActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: Record<string, any>) {
     event.preventDefault();

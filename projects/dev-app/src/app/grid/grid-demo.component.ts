@@ -216,8 +216,8 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   updateCell() {
     this.list = this.list.map(item => {
-      const weight = Math.round(Math.random() * 2000) / 100;
-      return { ...item, weight };
+      item.weight = Math.round(Math.random() * 2000) / 100;
+      return item;
     });
   }
 
