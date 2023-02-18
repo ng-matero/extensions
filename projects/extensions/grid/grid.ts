@@ -19,6 +19,7 @@ import {
   Directive,
   HostBinding,
   HostListener,
+  KeyValueChangeRecord,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -297,6 +298,9 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** The template for the status bar. */
   @Input() statusbarTemplate!: TemplateRef<any>;
 
+  /** The changed record of row data. */
+  rowChangeRecord?: KeyValueChangeRecord<string, any>;
+
   constructor(private _utils: MtxGridUtils, private _changeDetectorRef: ChangeDetectorRef) {}
 
   detectChanges() {
@@ -395,6 +399,11 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
 
   _onSortChange(sort: Sort) {
     this.sortChange.emit(sort);
+  }
+
+  _onRowDataChange(record: KeyValueChangeRecord<string, any>) {
+    this.rowChangeRecord = record;
+    this._changeDetectorRef.markForCheck();
   }
 
   /** Expansion change event */

@@ -118,7 +118,7 @@
             </th>
 
             <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
-                [class]="col | colClass: row"
+                [class]="col | colClass: row: rowChangeRecord"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
                 mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
@@ -152,7 +152,8 @@
                   </svg>
                 </button>
 
-                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder">
+                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder"
+                               (rowDataChange)="_onRowDataChange($event)">
                 </mtx-grid-cell>
               </ng-template>
             </td>
@@ -306,7 +307,7 @@
             </th>
 
             <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
-                [class]="col | colClass: row"
+                [class]="col | colClass: row: rowChangeRecord"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}"
                 mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
@@ -340,7 +341,8 @@
                   </svg>
                 </button>
 
-                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder">
+                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder"
+                               (rowDataChange)="_onRowDataChange($event)">
                 </mtx-grid-cell>
               </ng-template>
             </td>

@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { KeyValueChangeRecord, Pipe, PipeTransform } from '@angular/core';
 import { isObservable } from 'rxjs';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumn, MtxGridColumnButton, MtxGridRowClassFormatter } from './interfaces';
@@ -7,7 +7,11 @@ import { MtxGridColumn, MtxGridColumnButton, MtxGridRowClassFormatter } from './
   name: 'colClass',
 })
 export class MtxGridColClassPipe implements PipeTransform {
-  transform(colDef: MtxGridColumn, rowData?: Record<string, any>): string {
+  transform(
+    colDef: MtxGridColumn,
+    rowData?: Record<string, any>,
+    rowChangeRecord?: KeyValueChangeRecord<string, any>
+  ): string {
     if (typeof colDef.class === 'string') {
       return colDef.class;
     } else if (typeof colDef.class === 'function') {

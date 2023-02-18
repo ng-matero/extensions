@@ -3,11 +3,13 @@ import {
   ChangeDetectorRef,
   Component,
   DoCheck,
+  EventEmitter,
   Input,
   KeyValueChanges,
   KeyValueDiffer,
   KeyValueDiffers,
   OnInit,
+  Output,
   ViewEncapsulation,
 } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
@@ -39,6 +41,8 @@ export class MtxGridCell implements OnInit, DoCheck {
   /** Placeholder for the empty value (`null`, `''`, `[]`) */
   @Input() placeholder: string = '--';
 
+  @Output() rowDataChange = new EventEmitter<any>();
+
   private rowDataDiffer?: KeyValueDiffer<string, any>;
 
   get _value() {
@@ -64,8 +68,9 @@ export class MtxGridCell implements OnInit, DoCheck {
   }
 
   private _applyChanges(changes: KeyValueChanges<string, any>) {
-    changes.forEachChangedItem(r => {
+    changes.forEachChangedItem(record => {
       this._changeDetectorRef.markForCheck();
+      this.rowDataChange.emit(record);
     });
   }
 
