@@ -8,7 +8,7 @@
   $background: map.get($config, background);
 
   .mtx-loader-backdrop {
-    background-color: rgba(theming.get-color-from-palette($background, background), .75);
+    background-color: theming.get-color-from-palette($background, background, .75);
   }
 }
 
