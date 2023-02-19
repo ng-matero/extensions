@@ -91,6 +91,10 @@ $landscape-calendar-header-width: 144px;
     letter-spacing: normal;
     white-space: normal;
     word-break: break-word;
+
+    .mat-mdc-button-touch-target {
+      height: 100%;
+    }
   }
 
   .mtx-calendar-header-year {
