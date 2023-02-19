@@ -12,13 +12,15 @@ $calendar-prev-next-icon-margin: 15.5px;
 $calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
 $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
+$landscape-calendar-header-width: 144px;
+
 @mixin landscape-calendar-header {
   .mtx-calendar {
     display: flex;
 
     .mtx-calendar-header {
-      width: 150px;
-      min-width: 150px;
+      width: $landscape-calendar-header-width;
+      min-width: $landscape-calendar-header-width;
       padding: 16px 8px;
       border-radius: 4px 0 0 4px;
 
@@ -159,6 +161,7 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 .mtx-calendar-controls {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   margin: 0 $calendar-controls-side-margin;
 
