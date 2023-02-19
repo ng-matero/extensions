@@ -55,11 +55,11 @@ $time-ampm-width: 40px;
 
   .mtx-time-am,
   .mtx-time-pm {
+    --mdc-typography-button-font-weight: 400;
+
     flex: 1;
     width: $time-ampm-width;
     min-width: auto;
-    padding: 0;
-    line-height: normal;
     border-width: 1px;
     border-style: solid;
   }

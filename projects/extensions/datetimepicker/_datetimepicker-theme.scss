@@ -160,10 +160,14 @@ $clock-font-size: 14px !default;
   .mtx-time-ampm {
     .mtx-time-am,
     .mtx-time-pm {
-      color: theming.get-color-from-palette($foreground, text);
+      --mdc-text-button-label-text-color: #{theming.get-color-from-palette($foreground, text, .75)};
+
       border-color: theming.get-color-from-palette($foreground, hint-text);
 
       &.mtx-time-ampm-active {
+        --mdc-text-button-label-text-color: #{theming.get-color-from-palette($foreground, text)};
+        --mdc-typography-button-font-weight: 500;
+
         background-color: theming.get-color-from-palette($accent, .2);
       }
     }
