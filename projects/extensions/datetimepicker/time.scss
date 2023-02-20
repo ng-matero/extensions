@@ -62,6 +62,10 @@ $time-ampm-width: 40px;
     min-width: auto;
     border-width: 1px;
     border-style: solid;
+
+    .mat-mdc-button-touch-target {
+      height: 100%;
+    }
   }
 
   .mtx-time-am {
