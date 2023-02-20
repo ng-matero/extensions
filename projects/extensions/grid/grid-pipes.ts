@@ -10,7 +10,8 @@ export class MtxGridColClassPipe implements PipeTransform {
   transform(
     colDef: MtxGridColumn,
     rowData?: Record<string, any>,
-    rowChangeRecord?: KeyValueChangeRecord<string, any>
+    rowChangeRecord?: KeyValueChangeRecord<string, any>,
+    currentValue?: any
   ): string {
     if (typeof colDef.class === 'string') {
       return colDef.class;

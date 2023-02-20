@@ -5,6 +5,7 @@ import {
   DoCheck,
   EventEmitter,
   Input,
+  KeyValueChangeRecord,
   KeyValueChanges,
   KeyValueDiffer,
   KeyValueDiffers,
@@ -41,7 +42,7 @@ export class MtxGridCell implements OnInit, DoCheck {
   /** Placeholder for the empty value (`null`, `''`, `[]`) */
   @Input() placeholder: string = '--';
 
-  @Output() rowDataChange = new EventEmitter<any>();
+  @Output() rowDataChange = new EventEmitter<KeyValueChangeRecord<string, any>>();
 
   private rowDataDiffer?: KeyValueDiffer<string, any>;
 
