@@ -23,7 +23,13 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ErrorStateMatcher, mixinErrorState } from '@angular/material/core';
-import { ControlValueAccessor, FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import {
+  ControlValueAccessor,
+  FormGroupDirective,
+  NgControl,
+  NgForm,
+  Validators,
+} from '@angular/forms';
 import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/material/form-field';
 import { merge, Subject } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
@@ -284,13 +290,13 @@ export class MtxSelectComponent
   /** Whether the component is required. */
   @Input()
   get required(): boolean {
-    return this._required;
+    return this._required ?? this.ngControl?.control?.hasValidator(Validators.required) ?? false;
   }
   set required(value: boolean) {
     this._required = coerceBooleanProperty(value);
     this.stateChanges.next();
   }
-  private _required = false;
+  private _required: boolean | undefined;
 
   /** Whether the select is disabled. */
   @Input()
@@ -342,7 +348,7 @@ export class MtxSelectComponent
     @Optional() _parentForm: NgForm,
     @Optional() _parentFormGroup: FormGroupDirective,
     @Optional() @Self() ngControl: NgControl,
-    @Optional() @Inject(MAT_FORM_FIELD) private _parentFormField?: MatFormField
+    @Optional() @Inject(MAT_FORM_FIELD) protected _parentFormField?: MatFormField
   ) {
     super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
 
@@ -354,7 +360,7 @@ export class MtxSelectComponent
       this.stateChanges.next();
     });
 
-    if (this.ngControl != null) {
+    if (this.ngControl) {
       // Note: we provide the value accessor through here, instead of
       // the `providers` to avoid running into a circular import.
       this.ngControl.valueAccessor = this;
