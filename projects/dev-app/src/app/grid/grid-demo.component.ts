@@ -251,21 +251,19 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   getRemoteData() {
     this.isLoading3 = true;
-    this.http
-      .get('https://api.github.com/search/repositories', { params: this.params as any })
-      .subscribe(
-        (res: any) => {
-          this.list3 = res.items;
-          this.total3 = res.total_count;
-          this.isLoading3 = false;
-        },
-        () => {
-          this.isLoading3 = false;
-        },
-        () => {
-          this.isLoading3 = false;
-        }
-      );
+    this.http.get('https://api.github.com/search/repositories', { params: this.params }).subscribe(
+      (res: any) => {
+        this.list3 = res.items;
+        this.total3 = res.total_count;
+        this.isLoading3 = false;
+      },
+      () => {
+        this.isLoading3 = false;
+      },
+      () => {
+        this.isLoading3 = false;
+      }
+    );
   }
 
   getNextPage(e: PageEvent) {
