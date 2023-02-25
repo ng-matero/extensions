@@ -1,0 +1,20 @@
+@use '@angular/material' as mat;
+@use '../all-theme';
+
+// Define a theme.
+$primary: mat.define-palette(mat.$purple-palette, 700, 500, 800);
+$accent:  mat.define-palette(mat.$green-palette, A200, A100, A400);
+
+$theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $primary,
+      accent: $accent
+    ),
+    typography: mat.define-typography-config(),
+    density: 0,
+  )
+);
+
+// Include all theme styles for the components.
+@include all-theme.all-component-themes($theme);
