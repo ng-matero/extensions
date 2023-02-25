@@ -1,4 +1,5 @@
 // Import all the theming functionality.
+@use '../../button/button-theme';
 @use '../../alert/alert-theme';
 @use '../../colorpicker/colorpicker-theme';
 @use '../../datetimepicker/datetimepicker-theme';
@@ -17,6 +18,7 @@
 @mixin all-component-themes($theme-or-color-config) {
   $dedupe-key: 'angular-material-extensions-theme';
   @include theming.private-check-duplicate-theme-styles($theme-or-color-config, $dedupe-key) {
+    @include button-theme.theme($theme-or-color-config);
     @include alert-theme.theme($theme-or-color-config);
     @include colorpicker-theme.theme($theme-or-color-config);
     @include datetimepicker-theme.theme($theme-or-color-config);
