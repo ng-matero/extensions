@@ -205,10 +205,10 @@
   }
 }
 
-.mtx-grid-row-expand-button {
-  width: 36px !important;
-  height: 36px !important;
-  padding: 6px !important;
+.mtx-grid-row-expand-button.mat-mdc-icon-button {
+  width: 40px;
+  height: 40px;
+  padding: 8px;
   vertical-align: middle;
 
   &.expanded .mtx-grid-row-expand-icon {
@@ -218,4 +218,15 @@
   + mtx-grid-cell {
     vertical-align: middle;
   }
+
+  .mat-mdc-button-touch-target {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.mtx-grid-icon {
+  width: 20px;
+  height: 20px;
+  font-size: 20px;
 }

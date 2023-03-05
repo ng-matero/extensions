@@ -69,6 +69,11 @@
   width: 40px;
   height: 40px;
   padding: 8px;
+
+  .mat-mdc-button-touch-target {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 .mtx-grid-column-pin-option.mat-menu-item {
