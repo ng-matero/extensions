@@ -96,9 +96,11 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
       throw Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
     }
 
-    let result = moment({ year, month, date, hour, minute });
+    let result;
     if (this._useUtc) {
-      result = result.utc();
+      result = moment.utc({ year, month, date, hour, minute });
+    } else {
+      result = moment({ year, month, date, hour, minute });
     }
 
     // If the result isn't valid, the date must have been out of bounds for this month.
@@ -106,7 +108,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
       throw Error(`Invalid date "${date}" for month with index "${month}".`);
     }
 
-    return result;
+    return result.locale(this.locale);
   }
 
   getFirstDateOfMonth(date: Moment): Moment {

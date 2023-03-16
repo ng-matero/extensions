@@ -66,16 +66,18 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
     }
 
     // Luxon uses 1-indexed months so we need to add one to the month.
-    let result = DateTime.fromObject({ year, month: month + 1, day, hour, minute });
+    let result;
     if (this._useUtc) {
-      result = result.toUTC();
+      result = DateTime.utc(year, month + 1, day, hour, minute);
+    } else {
+      result = DateTime.local(year, month + 1, day, hour, minute);
     }
 
     if (!result.isValid) {
       throw Error(`Invalid date "${day}" for month with index "${month}".`);
     }
 
-    return result;
+    return result.setLocale(this.locale);
   }
 
   getFirstDateOfMonth(date: DateTime): DateTime {

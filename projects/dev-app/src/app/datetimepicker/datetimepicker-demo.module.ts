@@ -5,7 +5,10 @@ import { SharedModule } from '../shared.module';
 import { MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
-
+import {
+  MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+  MatMomentDateAdapterOptions,
+} from '@angular/material-moment-adapter';
 import { DatetimepickerDemoComponent } from './datetimepicker-demo.component';
 
 @NgModule({
@@ -39,6 +42,13 @@ import { DatetimepickerDemoComponent } from './datetimepicker-demo.component';
           popupHeaderDateLabel: 'MMM DD, ddd',
         },
       },
+    },
+    {
+      provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS,
+      // for testing date adapter settings
+      useValue: {
+        useUtc: false,
+      } as MatMomentDateAdapterOptions,
     },
   ],
 })
