@@ -4,17 +4,12 @@
   <mat-checkbox [(ngModel)]="closeOnSelect">Close on select</mat-checkbox>
 </div>
 
-<mat-form-field appearance="standard">
+<mat-form-field>
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [items]="items"
-              [(ngModel)]="value"
-              placeholder="select food"
-              bindLabel="name"
-              bindValue="id"
-              [disabled]="disableSelect"
-              [multiple]="multipleSelect"
-              required>
+  <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
+              [disabled]="disableSelect" [multiple]="multipleSelect"
+              placeholder="select food" required>
   </mtx-select>
 
   <mat-hint>Choose your favorite food</mat-hint>
@@ -24,16 +19,12 @@
 <mat-form-field appearance="fill">
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [items]="items"
-              [(ngModel)]="value"
-              placeholder="select food"
-              bindLabel="name"
-              bindValue="id"
-              [disabled]="disableSelect"
-              [multiple]="multipleSelect"
-              required>
+  <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
+              [disabled]="disableSelect" [multiple]="multipleSelect"
+              placeholder="select food" required>
   </mtx-select>
 
+  <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   <mat-hint>Choose your favorite food</mat-hint>
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
@@ -41,14 +32,9 @@
 <mat-form-field appearance="outline">
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [items]="items"
-              [(ngModel)]="value"
-              placeholder="select food"
-              bindLabel="name"
-              bindValue="id"
-              [disabled]="disableSelect"
-              [multiple]="multipleSelect"
-              required>
+  <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
+              [disabled]="disableSelect" [multiple]="multipleSelect"
+              placeholder="select food" required>
   </mtx-select>
 
   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
@@ -66,20 +52,23 @@
     </mat-option>
   </mat-select>
 </mat-form-field>
+&nbsp;
+<mat-form-field appearance="outline">
+  <mat-label>Choose an option</mat-label>
+  <mat-select>
+    <mat-option *ngFor="let food of items" [value]="food.id">
+      {{food.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
 
 <h2>Test Templates</h2>
 
-<mat-form-field appearance="standard">
+<mat-form-field>
 
-  <mtx-select [items]="items"
-              [(ngModel)]="value"
-              placeholder="select food"
-              bindLabel="name"
-              bindValue="id"
-              [disabled]="disableSelect"
-              [multiple]="multipleSelect"
-              [closeOnSelect]="closeOnSelect"
-              required>
+  <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
+              [disabled]="disableSelect" [multiple]="multipleSelect" [closeOnSelect]="closeOnSelect"
+              placeholder="select food" required>
     <!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"
                  let-searchTerm="searchTerm">
       <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.name}}
@@ -90,15 +79,10 @@
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 &nbsp;
-<mat-form-field appearance="standard">
+<mat-form-field>
 
-  <mtx-select [items]="accounts"
-              bindLabel="name"
-              bindValue="name"
-              groupBy="country"
-              [(ngModel)]="selectedAccount"
-              [disabled]="disableSelect"
-              [multiple]="multipleSelect"
+  <mtx-select [(ngModel)]="selectedAccount" [items]="accounts" bindLabel="name" bindValue="name"
+              groupBy="country" [disabled]="disableSelect" [multiple]="multipleSelect"
               [closeOnSelect]="closeOnSelect">
     <!-- <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index"
                  let-searchTerm="searchTerm">
@@ -109,3 +93,20 @@
   <mat-hint>Choose your favorite food</mat-hint>
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
+
+<h2>Reactive Form</h2>
+
+<mat-form-field>
+  <mat-label>Select Food</mat-label>
+
+  <mtx-select [items]="items" [formControl]="control"
+              bindLabel="name" bindValue="id">
+  </mtx-select>
+
+  <mat-hint>Choose your favorite food</mat-hint>
+  <mat-error>Please choose a food</mat-error>
+</mat-form-field>
+
+<mat-slide-toggle (change)="changeState($event)" [checked]="control.disabled">
+  {{control.disabled?'disable':'enable'}}
+</mat-slide-toggle>

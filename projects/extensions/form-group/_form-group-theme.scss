@@ -20,10 +20,10 @@
 
   .mtx-form-field-appearance-fluent {
     .mat-form-field-flex {
-      border: 1px solid rgba(theming.get-color-from-palette($foreground, divider), .54);
+      border: 1px solid theming.get-color-from-palette($foreground, divider, .54);
 
       &:hover {
-        border: 1px solid rgba(theming.get-color-from-palette($foreground, divider), .78);
+        border: 1px solid theming.get-color-from-palette($foreground, divider, .78);
       }
     }
 

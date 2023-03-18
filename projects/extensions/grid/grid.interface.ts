@@ -1,6 +1,5 @@
 import { TemplateRef } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { TooltipPosition, TooltipTouchGestures } from '@angular/material/tooltip';
 import { Observable } from 'rxjs';
 
@@ -131,12 +130,6 @@ export interface MtxGridRowSelectionFormatter {
 /** Row class formatter. */
 export interface MtxGridRowClassFormatter {
   [className: string]: (rowData: any, index?: number) => boolean;
-}
-
-/** Column menu component. */
-export interface MtxGridColumnMenu {
-  menuPanel: MatMenu;
-  menuTrigger: MatMenuTrigger;
 }
 
 /** Possible button type values. */

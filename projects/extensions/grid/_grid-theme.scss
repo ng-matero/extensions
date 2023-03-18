@@ -10,7 +10,7 @@
   $foreground: map.get($config, foreground);
 
   .mtx-grid {
-    border: 1px solid rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
+    border: 1px solid theming.get-color-from-palette($foreground, secondary-text, .2);
 
     .mat-table-sticky-left,
     .mat-table-sticky-right {
@@ -53,20 +53,20 @@
     }
 
     .mat-paginator {
-      border-top: 1px solid rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
+      border-top: 1px solid theming.get-color-from-palette($foreground, secondary-text, .2);
     }
   }
 
   .mtx-grid-toolbar {
-    border-bottom: 1px solid rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
+    border-bottom: 1px solid theming.get-color-from-palette($foreground, secondary-text, .2);
   }
 
   .mtx-grid-sidebar {
-    border-color: rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
+    border-color: theming.get-color-from-palette($foreground, secondary-text, .2);
   }
 
   .mtx-grid-statusbar {
-    border-top: 1px solid rgba(theming.get-color-from-palette($foreground, secondary-text), .2);
+    border-top: 1px solid theming.get-color-from-palette($foreground, secondary-text, .2);
   }
 
   .mtx-grid-column-menu-item {

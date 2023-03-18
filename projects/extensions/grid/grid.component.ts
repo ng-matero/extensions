@@ -1,28 +1,31 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SelectionModel } from '@angular/cdk/collections';
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ViewChild,
-  OnChanges,
-  TemplateRef,
-  TrackByFunction,
-  OnDestroy,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
-  ElementRef,
-  SimpleChanges,
-  QueryList,
+  Component,
   ContentChildren,
   Directive,
+  ElementRef,
+  EventEmitter,
   HostBinding,
   HostListener,
+  Input,
   KeyValueChangeRecord,
+  OnChanges,
+  OnDestroy,
+  Output,
+  QueryList,
+  SimpleChanges,
+  TemplateRef,
+  TrackByFunction,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { SelectionModel } from '@angular/cdk/collections';
+import { ThemePalette } from '@angular/material/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort, SortDirection } from '@angular/material/sort';
 import {
   MatFooterRow,
   MatFooterRowDef,
@@ -31,20 +34,17 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Sort, MatSort, SortDirection } from '@angular/material/sort';
-import { ThemePalette } from '@angular/material/core';
 
-import {
-  MtxGridColumn,
-  MtxGridCellTemplate,
-  MtxGridRowSelectionFormatter,
-  MtxGridRowClassFormatter,
-  MtxGridColumnMenu,
-  MtxGridButtonType,
-  MtxGridColumnPinOption,
-} from './grid.interface';
+import { MtxGridColumnMenuComponent } from './column-menu.component';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
+import {
+  MtxGridButtonType,
+  MtxGridCellTemplate,
+  MtxGridColumn,
+  MtxGridColumnPinOption,
+  MtxGridRowClassFormatter,
+  MtxGridRowSelectionFormatter,
+} from './grid.interface';
 import { MtxGridService } from './grid.service';
 
 @Component({
@@ -73,7 +73,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @ContentChildren(MatRowDef) rowDefs!: QueryList<MatRowDef<any>>;
   @ContentChildren(MatHeaderRowDef) headerRowDefs!: QueryList<MatHeaderRowDef>;
   @ContentChildren(MatFooterRow) footerRowDefs!: QueryList<MatFooterRowDef>;
-  @ViewChild('columnMenu') columnMenu!: MtxGridColumnMenu;
+  @ViewChild('columnMenu') columnMenu!: MtxGridColumnMenuComponent;
   @ViewChild('tableContainer') tableContainer!: ElementRef<HTMLDivElement>;
 
   dataSource = new MatTableDataSource();

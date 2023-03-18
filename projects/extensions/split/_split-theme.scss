@@ -7,7 +7,7 @@
 
   .mtx-split {
     > .mtx-split-gutter {
-      background-color: rgba(theming.get-color-from-palette($foreground, divider), .12);
+      background-color: theming.get-color-from-palette($foreground, divider, .12);
 
       &:hover {
         background-color: theming.get-color-from-palette(map.get($config, primary), text);

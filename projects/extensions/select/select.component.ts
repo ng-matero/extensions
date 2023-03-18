@@ -22,8 +22,14 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { ErrorStateMatcher, mixinErrorState } from '@angular/material/core';
 import {
+  CanDisable,
+  ErrorStateMatcher,
+  mixinDisabled,
+  mixinErrorState,
+} from '@angular/material/core';
+import {
+  AbstractControl,
   ControlValueAccessor,
   FormGroupDirective,
   NgControl,
@@ -63,27 +69,29 @@ let nextUniqueId = 0;
 
 // Boilerplate for applying mixins to MtxSelect.
 /** @docs-private */
-const _MtxSelectMixinBase = mixinErrorState(
-  class {
-    /**
-     * Emits whenever the component state changes and should cause the parent
-     * form-field to update. Implemented as part of `MatFormFieldControl`.
-     * @docs-private
-     */
-    readonly stateChanges = new Subject<void>();
-
-    constructor(
-      public _defaultErrorStateMatcher: ErrorStateMatcher,
-      public _parentForm: NgForm,
-      public _parentFormGroup: FormGroupDirective,
+const _MtxSelectMixinBase = mixinDisabled(
+  mixinErrorState(
+    class {
       /**
-       * Form control bound to the component.
-       * Implemented as part of `MatFormFieldControl`.
+       * Emits whenever the component state changes and should cause the parent
+       * form-field to update. Implemented as part of `MatFormFieldControl`.
        * @docs-private
        */
-      public ngControl: NgControl
-    ) {}
-  }
+      readonly stateChanges = new Subject<void>();
+
+      constructor(
+        public _defaultErrorStateMatcher: ErrorStateMatcher,
+        public _parentForm: NgForm,
+        public _parentFormGroup: FormGroupDirective,
+        /**
+         * Form control bound to the component.
+         * Implemented as part of `MatFormFieldControl`.
+         * @docs-private
+         */
+        public ngControl: NgControl
+      ) {}
+    }
+  )
 );
 
 @Component({
@@ -110,6 +118,7 @@ const _MtxSelectMixinBase = mixinErrorState(
   },
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
+  inputs: ['disabled'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: MatFormFieldControl, useExisting: MtxSelectComponent }],
@@ -122,6 +131,7 @@ export class MtxSelectComponent
     DoCheck,
     AfterViewInit,
     ControlValueAccessor,
+    CanDisable,
     MatFormFieldControl<any>
 {
   @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelectComponent;
@@ -155,7 +165,7 @@ export class MtxSelectComponent
   @Input() addTag: boolean | AddTagFn = false;
   @Input() addTagText = 'Add item';
   @Input() appearance = 'underline';
-  @Input() appendTo!: string;
+  @Input() appendTo = 'body';
   @Input() bindLabel!: string;
   @Input() bindValue!: string;
   @Input() closeOnSelect = true;
@@ -298,19 +308,6 @@ export class MtxSelectComponent
   }
   private _required: boolean | undefined;
 
-  /** Whether the select is disabled. */
-  @Input()
-  get disabled(): boolean {
-    return this._disabled;
-  }
-  set disabled(value: boolean) {
-    this._disabled = coerceBooleanProperty(value);
-    this.readonly = this._disabled;
-    this.stateChanges.next();
-    this._changeDetectorRef.markForCheck();
-  }
-  private _disabled = false;
-
   /** Object used to control when error messages are shown. */
   @Input() override errorStateMatcher!: ErrorStateMatcher;
 
@@ -339,6 +336,12 @@ export class MtxSelectComponent
   get panelOpen(): boolean {
     return !!this.ngSelect.isOpen;
   }
+
+  /**
+   * Keeps track of the previous form control assigned to the select.
+   * Used to detect if it has changed.
+   */
+  private _previousControl: AbstractControl | null | undefined;
 
   constructor(
     protected _changeDetectorRef: ChangeDetectorRef,
@@ -386,10 +389,21 @@ export class MtxSelectComponent
   }
 
   ngDoCheck(): void {
+    const ngControl = this.ngControl;
     if (this.ngControl) {
-      // We need to re-evaluate this on every change detection cycle, because there are some
-      // error triggers that we can't subscribe to (e.g. parent form submissions). This means
-      // that whatever logic is in here has to be super lean or we risk destroying the performance.
+      // The disabled state might go out of sync if the form group is swapped out. See #17860.
+      if (this._previousControl !== ngControl.control) {
+        if (
+          this._previousControl !== undefined &&
+          ngControl.disabled !== null &&
+          ngControl.disabled !== this.disabled
+        ) {
+          this.disabled = ngControl.disabled;
+        }
+
+        this._previousControl = ngControl.control;
+      }
+
       this.updateErrorState();
     }
   }
@@ -430,12 +444,15 @@ export class MtxSelectComponent
    */
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+    this.readonly = isDisabled;
+    this._changeDetectorRef.markForCheck();
+    this.stateChanges.next();
   }
 
   /** Implemented as part of MatFormFieldControl. */
   onContainerClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (/mat-form-field|mtx-select/g.test(target.parentElement?.classList[0] || '')) {
+    if (/mat-mdc-form-field|mtx-select/g.test(target.parentElement?.classList[0] || '')) {
       this.focus();
       this.open();
     }
