@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions-moment-adapter",
-  "version": "14.0.2",
+  "version": "14.0.3",
   "description": "Angular Material Extensions Moment Adapter",
   "publishConfig": {
     "access": "public"
