@@ -68,12 +68,15 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       maxWidth: 300,
       resizable: true,
       sortable: true,
+      class: data => {
+        return data?.weight > 10 ? 'warning' : '';
+      },
     },
     {
       header: this.translate.stream('gender'),
       field: 'gender',
       minWidth: 150,
-      class: 'warning',
+      class: 'info',
     },
     {
       header: this.translate.stream('mobile'),
@@ -186,7 +189,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = EXAMPLE_DATA;
 
-  constructor(public translate: TranslateService, private http: HttpClient) {}
+  constructor(private translate: TranslateService, private http: HttpClient) {}
 
   ngOnInit() {
     this.getRemoteData();
@@ -214,7 +217,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   updateCell() {
     this.list = this.list.map(item => {
-      item.weight = Math.round(Math.random() * 1000) / 100;
+      item.weight = Math.round(Math.random() * 2000) / 100;
       return item;
     });
   }
@@ -249,21 +252,19 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   getRemoteData() {
     this.isLoading3 = true;
-    this.http
-      .get('https://api.github.com/search/repositories', { params: this.params as any })
-      .subscribe(
-        (res: any) => {
-          this.list3 = res.items;
-          this.total3 = res.total_count;
-          this.isLoading3 = false;
-        },
-        () => {
-          this.isLoading3 = false;
-        },
-        () => {
-          this.isLoading3 = false;
-        }
-      );
+    this.http.get('https://api.github.com/search/repositories', { params: this.params }).subscribe(
+      (res: any) => {
+        this.list3 = res.items;
+        this.total3 = res.total_count;
+        this.isLoading3 = false;
+      },
+      () => {
+        this.isLoading3 = false;
+      },
+      () => {
+        this.isLoading3 = false;
+      }
+    );
   }
 
   getNextPage(e: PageEvent) {

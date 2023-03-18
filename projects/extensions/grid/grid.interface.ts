@@ -29,7 +29,7 @@ export interface MtxGridColumn {
   showExpand?: boolean;
   description?: string;
   summary?: ((data: any[], colDef?: MtxGridColumn) => any) | string;
-  class?: string;
+  class?: string | ((rowData?: Record<string, any>, colDef?: MtxGridColumn) => string);
 }
 
 /** Possible column pin values.  */

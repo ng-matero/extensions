@@ -1,6 +1,7 @@
 export * from './grid.module';
 export * from './grid.interface';
 export * from './grid.service';
+export * from './grid.pipe';
 export * from './grid.component';
 export * from './cell.component';
 export * from './column-menu.component';

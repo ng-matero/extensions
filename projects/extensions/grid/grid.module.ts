@@ -23,6 +23,13 @@ import { MtxGridColumnMenuComponent } from './column-menu.component';
 import { MtxGridExpansionToggleDirective } from './expansion-toggle.directive';
 import { MtxGridService } from './grid.service';
 import { MatColumnResizeModule } from './column-resize/column-resize-module';
+import {
+  MtxGridColClassPipe,
+  MtxGridCellActionTooltipPipe,
+  MtxGridCellActionDisablePipe,
+  MtxGridCellSummaryPipe,
+  MtxGridRowClassPipe,
+} from './grid.pipe';
 
 @NgModule({
   imports: [
@@ -52,6 +59,11 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
     MatColumnResizeModule,
+    MtxGridRowClassPipe,
+    MtxGridColClassPipe,
+    MtxGridCellActionTooltipPipe,
+    MtxGridCellActionDisablePipe,
+    MtxGridCellSummaryPipe,
   ],
   declarations: [
     MtxGridComponent,
@@ -59,6 +71,11 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
     MtxGridColumnMenuComponent,
     MtxGridExpansionToggleDirective,
     MtxGridCellSelectionDirective,
+    MtxGridRowClassPipe,
+    MtxGridColClassPipe,
+    MtxGridCellActionTooltipPipe,
+    MtxGridCellActionDisablePipe,
+    MtxGridCellSummaryPipe,
   ],
   providers: [MtxGridService],
 })

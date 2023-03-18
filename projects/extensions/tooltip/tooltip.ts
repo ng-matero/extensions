@@ -723,10 +723,6 @@ export class TooltipComponent implements OnDestroy {
   /** Stream that emits whether the user has a handset-sized display.  */
   _isHandset: Observable<BreakpointState> = this._breakpointObserver.observe(Breakpoints.Handset);
 
-  _isTemplateRef(obj: any) {
-    return obj instanceof TemplateRef;
-  }
-
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
     private _breakpointObserver: BreakpointObserver

@@ -79,17 +79,17 @@
           <ng-container [matColumnDef]="col.field"
                         [sticky]="col.pinned==='left'" [stickyEnd]="col.pinned==='right'">
             <th mat-header-cell *matHeaderCellDef
-                [class]="col.class!"
+                [class]="col | colClass"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
               <div class="mat-header-cell-inner">
-                <ng-template [ngIf]="_isTemplateRef(headerTemplate)" [ngIfElse]="headerTpl">
+                <ng-template [ngIf]="headerTemplate | isTemplateRef" [ngIfElse]="headerTpl">
                   <ng-template [ngTemplateOutlet]="$any(headerTemplate)"
                                [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
                   </ng-template>
                 </ng-template>
                 <ng-template #headerTpl>
-                  <ng-template [ngIf]="_isTemplateRef($any(headerTemplate)?.[col.field])"
+                  <ng-template [ngIf]="$any(headerTemplate)?.[col.field] | isTemplateRef"
                                [ngIfElse]="defaultHeaderTpl">
                     <ng-template [ngTemplateOutlet]="$any(headerTemplate)[col.field]"
                                  [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
@@ -118,17 +118,17 @@
             </th>
 
             <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
-                [class]="col.class!"
+                [class]="col | colClass: row: rowChangeRecord: rowChangeRecord?.currentValue"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
                 mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
-              <ng-template [ngIf]="_isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
+              <ng-template [ngIf]="cellTemplate | isTemplateRef" [ngIfElse]="cellTpl">
                 <ng-template [ngTemplateOutlet]="$any(cellTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
                 </ng-template>
               </ng-template>
               <ng-template #cellTpl>
-                <ng-template [ngIf]="_isTemplateRef($any(cellTemplate)?.[col.field])"
+                <ng-template [ngIf]="$any(cellTemplate)?.[col.field] | isTemplateRef"
                              [ngIfElse]="colDefCellTpl">
                   <ng-template [ngTemplateOutlet]="$any(cellTemplate)[col.field]"
                                [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
@@ -152,7 +152,8 @@
                   </svg>
                 </button>
 
-                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder">
+                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder"
+                               (rowDataChange)="_onRowDataChange($event)">
                 </mtx-grid-cell>
               </ng-template>
             </td>
@@ -162,13 +163,13 @@
                 [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
               <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
 
-              <ng-template [ngIf]="_isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
+              <ng-template [ngIf]="summaryTemplate | isTemplateRef" [ngIfElse]="summaryTpl">
                 <ng-template [ngTemplateOutlet]="$any(summaryTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }">
                 </ng-template>
               </ng-template>
               <ng-template #summaryTpl>
-                <ng-template [ngIf]="_isTemplateRef($any(summaryTemplate)?.[col.field])"
+                <ng-template [ngIf]="$any(summaryTemplate)?.[col.field] | isTemplateRef"
                              [ngIfElse]="defaultSummaryTpl">
                   <ng-template [ngTemplateOutlet]="$any(summaryTemplate)[col.field]"
                                [ngTemplateOutletContext]="{ $implicit: _getColData(data, col), colData: _getColData(data, col), colDef: col }">
@@ -194,7 +195,8 @@
         <ng-template #defaultRowTpl>
           <tr mat-row
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
-              [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
+              [class]="row | rowClass: index: dataIndex: rowClassFormatter"
+              [ngClass]="{'selected': rowSelection.isSelected(row)}"
               (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
           </tr>
         </ng-template>
@@ -264,19 +266,19 @@
           <ng-container [matColumnDef]="col.field"
                         [sticky]="col.pinned==='left'" [stickyEnd]="col.pinned==='right'">
             <th mat-header-cell *matHeaderCellDef
-                [class]="col.class!"
+                [class]="col | colClass"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}"
                 [resizable]="col.resizable"
                 [matResizableMinWidthPx]="col.minWidth" [matResizableMaxWidthPx]="col.maxWidth">
               <div class="mat-header-cell-inner">
-                <ng-template [ngIf]="_isTemplateRef(headerTemplate)" [ngIfElse]="headerTpl">
+                <ng-template [ngIf]="headerTemplate | isTemplateRef" [ngIfElse]="headerTpl">
                   <ng-template [ngTemplateOutlet]="$any(headerTemplate)"
                                [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
                   </ng-template>
                 </ng-template>
                 <ng-template #headerTpl>
-                  <ng-template [ngIf]="_isTemplateRef($any(headerTemplate)?.[col.field])"
+                  <ng-template [ngIf]="$any(headerTemplate)?.[col.field] | isTemplateRef"
                                [ngIfElse]="defaultHeaderTpl">
                     <ng-template [ngTemplateOutlet]="$any(headerTemplate)[col.field]"
                                  [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
@@ -305,17 +307,17 @@
             </th>
 
             <td mat-cell *matCellDef="let row; let index = index; let dataIndex = dataIndex;"
-                [class]="col.class!"
+                [class]="col | colClass: row: rowChangeRecord :rowChangeRecord?.currentValue"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}"
                 mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
-              <ng-template [ngIf]="_isTemplateRef(cellTemplate)" [ngIfElse]="cellTpl">
+              <ng-template [ngIf]="cellTemplate | isTemplateRef" [ngIfElse]="cellTpl">
                 <ng-template [ngTemplateOutlet]="$any(cellTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
                 </ng-template>
               </ng-template>
               <ng-template #cellTpl>
-                <ng-template [ngIf]="_isTemplateRef($any(cellTemplate)?.[col.field])"
+                <ng-template [ngIf]="$any(cellTemplate)?.[col.field] | isTemplateRef"
                              [ngIfElse]="colDefCellTpl">
                   <ng-template [ngTemplateOutlet]="$any(cellTemplate)[col.field]"
                                [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
@@ -339,7 +341,8 @@
                   </svg>
                 </button>
 
-                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder">
+                <mtx-grid-cell [rowData]="row" [colDef]="col" [placeholder]="emptyValuePlaceholder"
+                               (rowDataChange)="_onRowDataChange($event)">
                 </mtx-grid-cell>
               </ng-template>
             </td>
@@ -349,13 +352,13 @@
                 [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}">
               <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
 
-              <ng-template [ngIf]="_isTemplateRef(summaryTemplate)" [ngIfElse]="summaryTpl">
+              <ng-template [ngIf]="summaryTemplate | isTemplateRef" [ngIfElse]="summaryTpl">
                 <ng-template [ngTemplateOutlet]="$any(summaryTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }">
                 </ng-template>
               </ng-template>
               <ng-template #summaryTpl>
-                <ng-template [ngIf]="_isTemplateRef($any(summaryTemplate)?.[col.field])"
+                <ng-template [ngIf]="$any(summaryTemplate)?.[col.field] | isTemplateRef"
                              [ngIfElse]="defaultSummaryTpl">
                   <ng-template [ngTemplateOutlet]="$any(summaryTemplate)[col.field]"
                                [ngTemplateOutletContext]="{ $implicit: _getColData(data, col), colData: _getColData(data, col), colDef: col }">
@@ -381,7 +384,8 @@
         <ng-template #defaultRowTpl>
           <tr mat-row
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
-              [ngClass]="_getRowClassList(row, _getIndex(index, dataIndex))"
+              [class]="row | rowClass: index: dataIndex: rowClassFormatter"
+              [ngClass]="{'selected': rowSelection.isSelected(row)}"
               (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
           </tr>
         </ng-template>
@@ -460,14 +464,14 @@
 
 <!-- Header template for extra content -->
 <ng-template #headerExtraTplBase let-headerExtraTemplate let-col="colDef">
-  <ng-template [ngIf]="_isTemplateRef(headerExtraTemplate)" [ngIfElse]="headerExtraTpl">
+  <ng-template [ngIf]="headerExtraTemplate | isTemplateRef" [ngIfElse]="headerExtraTpl">
     <ng-template [ngTemplateOutlet]="headerExtraTemplate"
                  [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
     </ng-template>
   </ng-template>
   <ng-template #headerExtraTpl>
-    <ng-template [ngIf]="_isTemplateRef($any(headerExtraTemplate)?.[col.field])">
-      <ng-template [ngTemplateOutlet]="$any(headerExtraTemplate)[col.field]"
+    <ng-template [ngIf]="$any(headerExtraTemplate)?.[col.field] | isTemplateRef">
+      <ng-template [ngTemplateOutlet]="headerExtraTemplate[col.field]"
                    [ngTemplateOutletContext]="{ $implicit: col, colDef: col }">
       </ng-template>
     </ng-template>

@@ -1,7 +1,19 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  DoCheck,
+  EventEmitter,
+  Input,
+  KeyValueChangeRecord,
+  KeyValueChanges,
+  KeyValueDiffer,
+  KeyValueDiffers,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
-import { isObservable } from 'rxjs';
-
 import { MtxGridColumn, MtxGridColumnButton } from './grid.interface';
 import { MtxGridService } from './grid.service';
 import PhotoViewer from 'photoviewer';
@@ -12,10 +24,11 @@ import PhotoViewer from 'photoviewer';
   templateUrl: './cell.component.html',
   styleUrls: ['./cell.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MtxGridCellComponent {
+export class MtxGridCellComponent implements OnInit, DoCheck {
   /** Row data */
-  @Input() rowData: any = {};
+  @Input() rowData: Record<string, any> = {};
 
   /** Column definition */
   @Input() colDef!: MtxGridColumn;
@@ -29,44 +42,52 @@ export class MtxGridCellComponent {
   /** Placeholder for the empty value (`null`, `''`, `[]`) */
   @Input() placeholder: string = '--';
 
-  get _colValue() {
-    return this._dataGridSrv.getCellValue(this.rowData, this.colDef);
+  @Output() rowDataChange = new EventEmitter<KeyValueChangeRecord<string, any>>();
+
+  private rowDataDiffer?: KeyValueDiffer<string, any>;
+
+  get _value() {
+    return this._gridSrv.getCellValue(this.rowData, this.colDef);
   }
 
-  _isEmptyValue(value: any) {
-    return value == null || value.toString() === '';
+  constructor(
+    private _dialog: MtxDialog,
+    private _gridSrv: MtxGridService,
+    private _differs: KeyValueDiffers,
+    private _changeDetectorRef: ChangeDetectorRef
+  ) {}
+
+  ngOnInit(): void {
+    this.rowDataDiffer = this._differs.find(this.rowData).create();
   }
 
-  _isContainHTML(value: string) {
-    return /<\/?[a-z][\s\S]*>/i.test(value);
-  }
-
-  _getText(value: any) {
-    return value === undefined ? '' : this._isEmptyValue(value) ? this.placeholder : value;
-  }
-
-  _getTooltip(value: any) {
-    return this._isEmptyValue(value) ? '' : value;
-  }
-
-  _getFormatterTooltip(value: any) {
-    return this._isContainHTML(value) || this._isEmptyValue(value) ? '' : value;
-  }
-
-  _formatSummary(data: any[], colDef: MtxGridColumn) {
-    if (typeof colDef.summary === 'string') {
-      return colDef.summary;
-    } else if (typeof colDef.summary === 'function') {
-      return (colDef.summary as (data: any[], colDef?: MtxGridColumn) => any)(
-        this._dataGridSrv.getColData(data, colDef),
-        colDef
-      );
+  ngDoCheck(): void {
+    const changes = this.rowDataDiffer?.diff(this.rowData);
+    if (changes) {
+      this._applyChanges(changes);
     }
   }
 
-  constructor(private _dialog: MtxDialog, private _dataGridSrv: MtxGridService) {}
+  private _applyChanges(changes: KeyValueChanges<string, any>) {
+    changes.forEachChangedItem(record => {
+      this._changeDetectorRef.markForCheck();
+      this.rowDataChange.emit(record);
+    });
+  }
 
-  _onActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: any) {
+  _getText(value: any) {
+    return value === undefined ? '' : this._gridSrv.isEmpty(value) ? this.placeholder : value;
+  }
+
+  _getTooltip(value: any) {
+    return this._gridSrv.isEmpty(value) ? '' : value;
+  }
+
+  _getFormatterTooltip(value: any) {
+    return this._gridSrv.isContainHTML(value) || this._gridSrv.isEmpty(value) ? '' : value;
+  }
+
+  _onActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: Record<string, any>) {
     event.preventDefault();
     event.stopPropagation();
 
@@ -92,31 +113,11 @@ export class MtxGridCellComponent {
     }
   }
 
-  _getActionTooltip(btn: MtxGridColumnButton) {
-    if (typeof btn.tooltip === 'string' || isObservable(btn.tooltip)) {
-      return {
-        message: btn.tooltip,
-      };
-    } else {
-      return btn.tooltip;
-    }
-  }
-
-  _isActionDisabled(btn: MtxGridColumnButton, rowData: any) {
-    if (typeof btn.disabled === 'boolean') {
-      return btn.disabled;
-    } else if (typeof btn.disabled === 'function') {
-      return btn.disabled(rowData);
-    } else {
-      return false;
-    }
-  }
-
   /** Preview enlarged image */
   _onImagePreview(urlStr: string) {
     const imgs: PhotoViewer.Img[] = [];
 
-    this._dataGridSrv.str2arr(urlStr).forEach((url, index) => {
+    this._gridSrv.str2arr(urlStr).forEach((url, index) => {
       imgs.push({ title: index + 1 + '', src: url });
     });
 

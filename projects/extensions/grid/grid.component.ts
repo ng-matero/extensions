@@ -19,6 +19,7 @@ import {
   Directive,
   HostBinding,
   HostListener,
+  KeyValueChangeRecord,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -177,7 +178,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   /** The formatter to disable the row selection or hide the row's checkbox. */
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
   /** The formatter to set the row's class. */
-  @Input() rowClassFormatter!: MtxGridRowClassFormatter;
+  @Input() rowClassFormatter?: MtxGridRowClassFormatter;
   /** Event emitted when the row is selected. */
   @Output() rowSelectionChange = new EventEmitter<any[]>();
 
@@ -297,34 +298,17 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   /** The template for the status bar. */
   @Input() statusbarTemplate!: TemplateRef<any>;
 
-  constructor(
-    private _dataGridSrv: MtxGridService,
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {}
+  /** The changed record of row data. */
+  rowChangeRecord?: KeyValueChangeRecord<string, any>;
+
+  constructor(private _gridSrv: MtxGridService, private _changeDetectorRef: ChangeDetectorRef) {}
 
   detectChanges() {
     this._changeDetectorRef.detectChanges();
   }
 
-  _isTemplateRef(obj: any) {
-    return obj instanceof TemplateRef;
-  }
-
   _getColData(data: any[], colDef: MtxGridColumn) {
-    return this._dataGridSrv.getColData(data, colDef);
-  }
-
-  _getRowClassList(rowData: any, index: number) {
-    const classList: any = {
-      'selected': this.rowSelection.isSelected(rowData),
-      'mat-row-odd': index % 2,
-    };
-    if (this.rowClassFormatter) {
-      for (const key of Object.keys(this.rowClassFormatter)) {
-        classList[key] = this.rowClassFormatter[key](rowData, index);
-      }
-    }
-    return classList;
+    return this._gridSrv.getColData(data, colDef);
   }
 
   // Waiting for async data
@@ -417,6 +401,11 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     this.sortChange.emit(sort);
   }
 
+  _onRowDataChange(record: KeyValueChangeRecord<string, any>) {
+    this.rowChangeRecord = record;
+    this._changeDetectorRef.markForCheck();
+  }
+
   /** Expansion change event */
   _onExpansionChange(
     expansionRef: MtxGridExpansionToggleDirective,
@@ -435,7 +424,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   ): void {
     // If not the same cell
     if (this._selectedCell !== cellRef) {
-      const colValue = this._dataGridSrv.getCellValue(rowData, colDef);
+      const colValue = this._gridSrv.getCellValue(rowData, colDef);
       this.cellSelection = []; // reset
       this.cellSelection.push({ cellData: colValue, rowData, colDef });
 
@@ -572,14 +561,14 @@ export class MtxGridCellSelectionDirective {
 
   @Output() cellSelectionChange = new EventEmitter<MtxGridCellSelectionDirective>();
 
-  constructor(private _dataGrid: MtxGridComponent) {}
+  constructor(private _grid: MtxGridComponent) {}
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
     this.ctrlKeyPressed = event.ctrlKey;
     this.shiftKeyPressed = event.shiftKey;
 
-    if (this._dataGrid.cellSelectable) {
+    if (this._grid.cellSelectable) {
       this.select();
     }
   }
