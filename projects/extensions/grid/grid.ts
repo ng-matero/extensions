@@ -46,6 +46,7 @@ import {
 import { MtxGridExpansionToggle } from './expansion-toggle';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumnMenu } from './column-menu';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'mtx-grid',
@@ -94,6 +95,10 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() columnResizable = false;
   /** Placeholder for the empty value (`null`, `''`, `[]`). */
   @Input() emptyValuePlaceholder: string = '--';
+  /** Whether rows can be dragged and dropped. */
+  @Input() dragAndDrop = false;
+  /** Event emitted when the row has been dropped. */
+  @Output() dropRow = new EventEmitter<{ event: CdkDragDrop<any>; row: any }>();
 
   // ===== Page =====
 
@@ -456,6 +461,11 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     this.rowClick.emit({ rowData, index });
   }
 
+  /** Row drop event */
+  _dropRow(event: CdkDragDrop<any>, row: any) {
+    this.dropRow.emit({ event, row });
+  }
+
   /** Whether the number of selected elements matches the total number of rows. */
   _isAllSelected() {
     const numSelected = this.rowSelection.selected.length;
@@ -516,6 +526,14 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
       this.scrollTop(0);
     }
     this.page.emit(e);
+  }
+
+  /** Re-render rows after dragging and dropping. */
+  dropTable(event: CdkDragDrop<any[]>): void {
+    const prev = this.dataSource.data;
+    moveItemInArray(prev, event.previousIndex, event.currentIndex);
+    this.dataSource.data = prev;
+    this.table.renderRows();
   }
 
   scrollTop(value?: number): number | void {

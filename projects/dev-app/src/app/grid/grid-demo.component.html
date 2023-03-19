@@ -13,6 +13,7 @@
 <mat-checkbox [(ngModel)]="showStatusbar">showStatusbar</mat-checkbox>
 <mat-checkbox [(ngModel)]="showPaginator">showPaginator</mat-checkbox>
 <mat-checkbox [(ngModel)]="loading">loading</mat-checkbox>
+<mat-checkbox [(ngModel)]="dragAndDrop" disabled>Drag and Drop</mat-checkbox>
 
 <mtx-grid [data]="list" #grid
           [columns]="columns"
@@ -21,8 +22,10 @@
           [multiSelectable]="multiSelectable"
           [multiSelectionWithClick]="multiSelectionWithClick"
           [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+          [dragAndDrop]="dragAndDrop"
           [rowSelectable]="rowSelectable"
           [rowSelected]="rowSelected"
+          (dropRow)="log($event)"
           [rowSelectionFormatter]="rowSelectionFormatter"
           [rowClassFormatter]="rowClassFormatter"
           (rowSelectionChange)="log($event)"

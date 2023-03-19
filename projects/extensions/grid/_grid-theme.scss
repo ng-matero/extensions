@@ -57,6 +57,10 @@
     }
   }
 
+  .cdk-drag-preview td {
+    background-color: if($is-dark-theme, #2a2a2a, #e5e5e5);
+  }
+
   .mtx-grid-toolbar {
     border-bottom: 1px solid theming.get-color-from-palette($foreground, secondary-text, .2);
   }
