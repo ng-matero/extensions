@@ -45,6 +45,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   showStatusbar = false;
   showPaginator = true;
   loading = false;
+  dragAndDrop = true;
 
   list = EXAMPLE_DATA;
   isNewList = false;
