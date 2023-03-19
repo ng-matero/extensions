@@ -1,28 +1,32 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SelectionModel } from '@angular/cdk/collections';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ViewChild,
-  OnChanges,
-  TemplateRef,
-  TrackByFunction,
-  OnDestroy,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
-  ElementRef,
-  SimpleChanges,
-  QueryList,
+  Component,
   ContentChildren,
   Directive,
+  ElementRef,
+  EventEmitter,
   HostBinding,
   HostListener,
+  Input,
   KeyValueChangeRecord,
+  OnChanges,
+  OnDestroy,
+  Output,
+  QueryList,
+  SimpleChanges,
+  TemplateRef,
+  TrackByFunction,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { SelectionModel } from '@angular/cdk/collections';
+import { ThemePalette } from '@angular/material/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort, SortDirection } from '@angular/material/sort';
 import {
   MatFooterRow,
   MatFooterRowDef,
@@ -31,21 +35,18 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Sort, MatSort, SortDirection } from '@angular/material/sort';
-import { ThemePalette } from '@angular/material/core';
 
-import {
-  MtxGridColumn,
-  MtxGridCellTemplate,
-  MtxGridRowSelectionFormatter,
-  MtxGridRowClassFormatter,
-  MtxGridButtonType,
-  MtxGridColumnPinOption,
-} from './interfaces';
+import { MtxGridColumnMenu } from './column-menu';
 import { MtxGridExpansionToggle } from './expansion-toggle';
 import { MtxGridUtils } from './grid-utils';
-import { MtxGridColumnMenu } from './column-menu';
+import {
+  MtxGridButtonType,
+  MtxGridCellTemplate,
+  MtxGridColumn,
+  MtxGridColumnPinOption,
+  MtxGridRowClassFormatter,
+  MtxGridRowSelectionFormatter,
+} from './interfaces';
 
 @Component({
   selector: 'mtx-grid',
@@ -94,6 +95,10 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() columnResizable = false;
   /** Placeholder for the empty value (`null`, `''`, `[]`). */
   @Input() emptyValuePlaceholder: string = '--';
+  /** Whether rows can be dragged and dropped. */
+  @Input() dragAndDrop = false;
+  /** Event emitted when the row has been dropped. */
+  @Output() dropRow = new EventEmitter<{ event: CdkDragDrop<any>; row: any }>();
 
   // ===== Page =====
 
@@ -456,6 +461,10 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     this.rowClick.emit({ rowData, index });
   }
 
+  _dropRow(event: CdkDragDrop<any>, row: any) {
+    this.dropRow.emit({ event, row });
+  }
+
   /** Whether the number of selected elements matches the total number of rows. */
   _isAllSelected() {
     const numSelected = this.rowSelection.selected.length;
@@ -516,6 +525,14 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
       this.scrollTop(0);
     }
     this.page.emit(e);
+  }
+
+  /** Re-render rows after dragging and dropping. */
+  dropTable(event: CdkDragDrop<any[]>): void {
+    const prev = this.dataSource.data;
+    moveItemInArray(prev, event.previousIndex, event.currentIndex);
+    this.dataSource.data = prev;
+    this.table.renderRows();
   }
 
   scrollTop(value?: number): number | void {
