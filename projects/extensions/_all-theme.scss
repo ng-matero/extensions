@@ -1,5 +1,6 @@
 // Import all the theming functionality.
 @use './alert/alert-theme';
+@use './button/button-theme';
 @use './colorpicker/colorpicker-theme';
 @use './datetimepicker/datetimepicker-theme';
 @use './drawer/drawer-theme';
@@ -17,6 +18,7 @@
 // Create a theme.
 @mixin all-component-themes($theme) {
   @include alert-theme.theme($theme);
+  @include button-theme.theme($theme);
   @include colorpicker-theme.theme($theme);
   @include datetimepicker-theme.theme($theme);
   @include drawer-theme.theme($theme);
