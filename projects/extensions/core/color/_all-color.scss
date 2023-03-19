@@ -1,5 +1,5 @@
-@use './core/theming/theming';
-@use './all-theme';
+@use '../theming/theming';
+@use '../theming/all-theme';
 
 // Includes all of the color styles.
 @mixin all-component-colors($config-or-theme, $experimental: false) {

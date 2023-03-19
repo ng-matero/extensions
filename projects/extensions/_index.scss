@@ -16,5 +16,5 @@
 @forward './form-group/form-group-theme' as form-group-* show form-group-theme;
 @forward './text3d/text3d-theme' as text3d-* show text3d-theme;
 
-@forward './all-theme' show all-component-themes, all-experimental-component-themes;
-@forward './all-color' show all-component-colors, all-experimental-component-colors;
+@forward './core/theming/all-theme' show all-component-themes, all-experimental-component-themes;
+@forward './core/color/all-color' show all-component-colors, all-experimental-component-colors;
