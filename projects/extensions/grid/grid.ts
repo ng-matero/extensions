@@ -1,28 +1,32 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SelectionModel } from '@angular/cdk/collections';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ViewChild,
-  OnChanges,
-  TemplateRef,
-  TrackByFunction,
-  OnDestroy,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
-  ElementRef,
-  SimpleChanges,
-  QueryList,
+  Component,
   ContentChildren,
   Directive,
+  ElementRef,
+  EventEmitter,
   HostBinding,
   HostListener,
+  Input,
   KeyValueChangeRecord,
+  OnChanges,
+  OnDestroy,
+  Output,
+  QueryList,
+  SimpleChanges,
+  TemplateRef,
+  TrackByFunction,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { SelectionModel } from '@angular/cdk/collections';
+import { ThemePalette } from '@angular/material/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, Sort, SortDirection } from '@angular/material/sort';
 import {
   MatFooterRow,
   MatFooterRowDef,
@@ -31,10 +35,6 @@ import {
   MatTable,
   MatTableDataSource,
 } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Sort, MatSort, SortDirection } from '@angular/material/sort';
-import { ThemePalette } from '@angular/material/core';
-
 import {
   MtxGridColumn,
   MtxGridCellTemplate,
@@ -43,10 +43,9 @@ import {
   MtxGridButtonType,
   MtxGridColumnPinOption,
 } from './interfaces';
+import { MtxGridColumnMenu } from './column-menu';
 import { MtxGridExpansionToggle } from './expansion-toggle';
 import { MtxGridUtils } from './grid-utils';
-import { MtxGridColumnMenu } from './column-menu';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'mtx-grid',

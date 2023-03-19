@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
+import { PageEvent } from '@angular/material/paginator';
 import {
   MtxGrid,
   MtxGridColumn,
@@ -6,11 +9,8 @@ import {
   MtxGridRowClassFormatter,
   MtxGridRowSelectionFormatter,
 } from '@ng-matero/extensions/grid';
-import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
 import { TranslateService } from '@ngx-translate/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { HttpClient } from '@angular/common/http';
-import { PageEvent } from '@angular/material/paginator';
+import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
 
 @Component({
   selector: 'dev-grid-demo',
