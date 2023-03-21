@@ -20,6 +20,8 @@ export class ComponentSidenav implements OnInit, OnDestroy {
   params: Observable<Params> | undefined;
   isExtraScreenSmall: Observable<boolean>;
   isScreenSmall: Observable<boolean>;
+
+  private _urlFragment = '';
   private subscriptions = new Subscription();
 
   constructor(
@@ -51,6 +53,19 @@ export class ComponentSidenav implements OnInit, OnDestroy {
           }
         })
     );
+
+    this._route.fragment.subscribe(fragment => {
+      if (fragment != null) {
+        this._urlFragment = fragment;
+
+        setTimeout(() => {
+          const target = document.getElementById(this._urlFragment);
+          if (target) {
+            target.scrollIntoView();
+          }
+        });
+      }
+    });
   }
 
   ngOnDestroy() {
