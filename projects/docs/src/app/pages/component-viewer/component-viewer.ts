@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { startWith, Subject } from 'rxjs';
 import { ComponentPageTitle } from '../page-title/page-title';
 
@@ -26,7 +26,7 @@ export class ComponentViewer implements OnDestroy {
     }
 
     this._router.events.pipe(startWith(this._router)).subscribe(s => {
-      if (s instanceof Router) {
+      if (s instanceof Router || s instanceof NavigationEnd) {
         this.componentId = s.url.split('/')[2];
         this._componentPageTitle.title = this.componentId;
       }
