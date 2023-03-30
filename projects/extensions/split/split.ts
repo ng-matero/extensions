@@ -1,43 +1,51 @@
 import {
-  Component,
-  Input,
-  Output,
+  AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
-  Renderer2,
-  AfterViewInit,
-  OnDestroy,
+  Component,
   ElementRef,
-  NgZone,
-  ViewChildren,
-  QueryList,
   EventEmitter,
+  Inject,
+  InjectionToken,
+  Input,
+  NgZone,
+  OnDestroy,
+  Optional,
+  Output,
+  QueryList,
+  Renderer2,
+  ViewChildren,
   ViewEncapsulation,
 } from '@angular/core';
 import { CanColor, mixinColor } from '@angular/material/core';
-import { Observable, Subscriber, Subject } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { Observable, Subject, Subscriber, debounceTime } from 'rxjs';
 
 import {
   MtxSplitArea,
+  MtxSplitAreaSnapshot,
+  MtxSplitDefaultOptions,
+  MtxSplitOutputAreaSizes,
+  MtxSplitOutputData,
   MtxSplitPoint,
   MtxSplitSnapshot,
-  MtxSplitAreaSnapshot,
-  MtxSplitOutputData,
-  MtxSplitOutputAreaSizes,
 } from './interfaces';
 import { MtxSplitPane } from './split-pane';
 import {
-  getInputPositiveNumber,
-  getInputBoolean,
-  isUserSizesValid,
-  getAreaMinSize,
   getAreaMaxSize,
-  getPointFromEvent,
+  getAreaMinSize,
   getElementPixelSize,
   getGutterSideAbsorptionCapacity,
+  getInputBoolean,
+  getInputPositiveNumber,
+  getPointFromEvent,
+  isUserSizesValid,
   updateAreaSize,
 } from './utils';
+
+/** Injection token that can be used to specify default split options. */
+export const MTX_SPLIT_DEFAULT_OPTIONS = new InjectionToken<MtxSplitDefaultOptions>(
+  'mtx-split-default-options'
+);
 
 // Boilerplate for applying mixins to _MtxSplitBase.
 /** @docs-private */
@@ -85,7 +93,7 @@ const _MtxSplitBase = mixinColor(
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: [`./split.scss`],
+  styleUrls: ['./split.scss'],
   templateUrl: './split.html',
   inputs: ['color'],
 })
@@ -262,11 +270,22 @@ export class MtxSplit extends _MtxSplitBase implements AfterViewInit, OnDestroy,
     private ngZone: NgZone,
     private elRef: ElementRef,
     private cdRef: ChangeDetectorRef,
-    private renderer: Renderer2
+    private renderer: Renderer2,
+    @Optional()
+    @Inject(MTX_SPLIT_DEFAULT_OPTIONS)
+    protected _defaultOptions?: MtxSplitDefaultOptions
   ) {
     super(elRef);
-    // To force adding default class, could be override by user @Input() or not
-    this.direction = this._direction;
+
+    this.color = _defaultOptions?.color ?? 'primary';
+    this.direction = _defaultOptions?.direction ?? 'horizontal';
+    this.dir = _defaultOptions?.dir ?? 'ltr';
+    this.unit = _defaultOptions?.unit ?? 'percent';
+    this.gutterDblClickDuration = _defaultOptions?.gutterDblClickDuration ?? 0;
+    this.gutterSize = _defaultOptions?.gutterSize ?? 4;
+    this.gutterStep = _defaultOptions?.gutterStep ?? 1;
+    this.restrictMove = _defaultOptions?.restrictMove ?? false;
+    this.useTransition = _defaultOptions?.useTransition ?? false;
   }
 
   public ngAfterViewInit() {
@@ -652,7 +671,7 @@ export class MtxSplit extends _MtxSplitBase implements AfterViewInit, OnDestroy,
       this.direction === 'horizontal'
         ? (this.startPoint as MtxSplitPoint).x - this.endPoint.x
         : (this.startPoint as MtxSplitPoint).y - this.endPoint.y;
-    if (this.dir === 'rtl') {
+    if (this.dir === 'rtl' && this.direction === 'horizontal') {
       offset = -offset;
     }
     const steppedOffset = Math.round(offset / this.gutterStep) * this.gutterStep;

@@ -1,3 +1,4 @@
+import { ThemePalette } from '@angular/material/core';
 import { MtxSplitPane } from './split-pane';
 
 export interface MtxSplitPoint {
@@ -52,3 +53,15 @@ export interface MtxSplitOutputData {
 }
 
 export type MtxSplitOutputAreaSizes = Array<number | '*'>;
+
+export interface MtxSplitDefaultOptions {
+  color?: ThemePalette;
+  dir?: 'ltr' | 'rtl';
+  direction?: 'horizontal' | 'vertical';
+  unit?: 'percent' | 'pixel';
+  gutterDblClickDuration?: number;
+  gutterSize?: number;
+  gutterStep?: number;
+  restrictMove?: boolean;
+  useTransition?: boolean;
+}
