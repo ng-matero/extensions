@@ -11,6 +11,7 @@ import {
   ElementRef,
   EventEmitter,
   Inject,
+  InjectionToken,
   Input,
   OnDestroy,
   OnInit,
@@ -23,12 +24,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
-  CanDisable,
-  ErrorStateMatcher,
-  mixinDisabled,
-  mixinErrorState,
-} from '@angular/material/core';
-import {
   AbstractControl,
   ControlValueAccessor,
   FormGroupDirective,
@@ -36,10 +31,15 @@ import {
   NgForm,
   Validators,
 } from '@angular/forms';
+import {
+  CanDisable,
+  ErrorStateMatcher,
+  mixinDisabled,
+  mixinErrorState,
+} from '@angular/material/core';
 import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/material/form-field';
-import { merge, Subject } from 'rxjs';
-import { startWith, takeUntil } from 'rxjs/operators';
 import { NgSelectComponent } from '@ng-select/ng-select';
+import { merge, Subject, startWith, takeUntil } from 'rxjs';
 import { MtxOption } from './option';
 import {
   MtxSelectFooterTemplate,
@@ -64,6 +64,29 @@ export type GroupValueFn = (
 ) => string | Record<string, any>;
 export type SearchFn = (term: string, item: any) => boolean;
 export type TrackByFn = (item: any) => any;
+
+/**
+ * Represents the default options for the select that can be configured
+ * using the `MTX_SELECT_DEFAULT_OPTIONS` injection token.
+ */
+export interface MtxSelectDefaultOptions {
+  placeholder?: string;
+  notFoundText?: string;
+  typeToSearchText?: string;
+  addTagText?: string;
+  loadingText?: string;
+  clearAllText?: string;
+  appendTo?: string;
+  bindValue?: string;
+  bindLabel?: string;
+  openOnEnter?: boolean;
+  clearSearchOnAdd?: boolean;
+}
+
+/** Injection token that can be used to specify default select options. */
+export const MTX_SELECT_DEFAULT_OPTIONS = new InjectionToken<MtxSelectDefaultOptions>(
+  'mtx-select-default-options'
+);
 
 let nextUniqueId = 0;
 
@@ -163,13 +186,13 @@ export class MtxSelect
   mtxOptions!: QueryList<MtxOption>;
 
   @Input() addTag: boolean | AddTagFn = false;
-  @Input() addTagText = 'Add item';
+  @Input() addTagText = this._defaultOptions?.addTagText ?? 'Add item';
   @Input() appearance = 'underline';
-  @Input() appendTo = 'body';
-  @Input() bindLabel!: string;
-  @Input() bindValue!: string;
+  @Input() appendTo = this._defaultOptions?.appendTo ?? 'body';
+  @Input() bindLabel = this._defaultOptions?.bindLabel;
+  @Input() bindValue = this._defaultOptions?.bindValue;
   @Input() closeOnSelect = true;
-  @Input() clearAllText = 'Clear all';
+  @Input() clearAllText = this._defaultOptions?.clearAllText ?? 'Clear all';
   @Input() clearable = true;
   @Input() clearOnBackspace = true;
   @Input() compareWith!: CompareWithFn;
@@ -181,12 +204,12 @@ export class MtxSelect
   @Input() hideSelected = false;
   @Input() isOpen!: boolean;
   @Input() loading = false;
-  @Input() loadingText = 'Loading...';
+  @Input() loadingText = this._defaultOptions?.loadingText ?? 'Loading...';
   @Input() labelForId: string | null = null;
   @Input() markFirst = true;
   @Input() maxSelectedItems!: number;
   @Input() multiple = false;
-  @Input() notFoundText = 'No items found';
+  @Input() notFoundText = this._defaultOptions?.notFoundText ?? 'No items found';
   @Input() searchable = true;
   @Input() readonly = false;
   @Input() searchFn: SearchFn | null = null;
@@ -195,12 +218,12 @@ export class MtxSelect
   @Input() trackByFn: TrackByFn | null = null;
   @Input() inputAttrs: { [key: string]: string } = {};
   @Input() tabIndex!: number;
-  @Input() openOnEnter!: boolean;
+  @Input() openOnEnter = this._defaultOptions?.openOnEnter ?? true;
   @Input() minTermLength = 0;
   @Input() editableSearchTerm = false;
   @Input() keyDownFn = (_: KeyboardEvent) => true;
   @Input() virtualScroll = false;
-  @Input() typeToSearchText = 'Type to search';
+  @Input() typeToSearchText = this._defaultOptions?.typeToSearchText ?? 'Type to search';
   @Input() typeahead!: Subject<string>;
 
   @Output('blur') blurEvent = new EventEmitter();
@@ -222,7 +245,7 @@ export class MtxSelect
   set clearSearchOnAdd(value) {
     this._clearSearchOnAdd = value;
   }
-  private _clearSearchOnAdd?: boolean;
+  private _clearSearchOnAdd = this._defaultOptions?.clearSearchOnAdd;
 
   @Input()
   get items() {
@@ -270,13 +293,13 @@ export class MtxSelect
   /** Placeholder to be shown if value is empty. */
   @Input()
   get placeholder(): string {
-    return this._placeholder;
+    return this._placeholder!;
   }
   set placeholder(value: string) {
     this._placeholder = value;
     this.stateChanges.next();
   }
-  private _placeholder!: string;
+  private _placeholder = this._defaultOptions?.placeholder;
 
   /** Whether the select is focused. */
   get focused(): boolean {
@@ -351,7 +374,10 @@ export class MtxSelect
     @Optional() _parentForm: NgForm,
     @Optional() _parentFormGroup: FormGroupDirective,
     @Optional() @Self() ngControl: NgControl,
-    @Optional() @Inject(MAT_FORM_FIELD) protected _parentFormField?: MatFormField
+    @Optional() @Inject(MAT_FORM_FIELD) protected _parentFormField?: MatFormField,
+    @Optional()
+    @Inject(MTX_SELECT_DEFAULT_OPTIONS)
+    protected _defaultOptions?: MtxSelectDefaultOptions
   ) {
     super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
 
