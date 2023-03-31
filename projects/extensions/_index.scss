@@ -1,7 +1,7 @@
 @forward 'photoviewer/dist/photoviewer';
 
-@forward './button/button-theme' as button-* show button-theme;
 @forward './alert/alert-theme' as alert-* show alert-theme;
+@forward './button/button-theme' as button-* show button-theme;
 @forward './colorpicker/colorpicker-theme' as colorpicker-* show colorpicker-theme;
 @forward './datetimepicker/datetimepicker-theme' as datetimepicker-* show datetimepicker-theme;
 @forward './drawer/drawer-theme' as drawer-* show drawer-theme;
