@@ -1,21 +1,21 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  ViewEncapsulation,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectorRef,
-  forwardRef,
-  AfterViewInit,
-  ContentChildren,
-  QueryList,
-  ElementRef,
-  OnDestroy,
-} from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { FocusMonitor } from '@angular/cdk/a11y';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnDestroy,
+  Output,
+  QueryList,
+  ViewEncapsulation,
+} from '@angular/core';
+import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MtxCheckboxGroupOption } from './checkbox-group.interface';
 
@@ -50,7 +50,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, Cont
     return this._items;
   }
   set items(value: any[]) {
-    // TODO: Deep clone
+    // store the original data with deep clone
     this._originalItems = JSON.parse(JSON.stringify(value));
     this._items = value.map(option => {
       return option instanceof Object ? option : new MtxCheckboxBase(option, option);
@@ -78,8 +78,8 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, Cont
   get compareWith() {
     return this._compareWith;
   }
-  set compareWith(fn: (o1: any, o2: any) => boolean) {
-    if (typeof fn !== 'function') {
+  set compareWith(fn: ((o1: any, o2: any) => boolean) | undefined) {
+    if (fn != null && typeof fn !== 'function') {
       throw Error('`compareWith` must be a function.');
     }
 
@@ -87,7 +87,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, Cont
       this._compareWith = fn;
     }
   }
-  private _compareWith: (o1: any, o2: any) => boolean;
+  private _compareWith!: (o1: any, o2: any) => boolean;
 
   @Input()
   get disabled(): boolean {
@@ -225,7 +225,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, Cont
 
     if (this._compareWith) {
       this.selectedItems = (this._originalItems as MtxCheckboxGroupOption[]).filter(option =>
-        this.selectedItems.find(selectedOption => this._compareWith(option, selectedOption))
+        this.selectedItems.find(selectedOption => this._compareWith!(option, selectedOption))
       );
     } else {
       this.selectedItems = this.selectedItems.map(option => option[this.bindValue]);
