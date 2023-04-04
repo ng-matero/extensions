@@ -16,7 +16,7 @@ Exported as: `mtxSelect`
 
 | Name | Description |
 | :--- | :--- |
-| `@Input()`<br>`addTag: boolean \| ((term: string) => any \| Promise<any>)` | Allows to create custom options. Default is **`false`**. |
+| `@Input()`<br>`addTag: boolean \| AddTagFn` | Allows to create custom options. Default is **`false`**. |
 | `@Input()`<br>`addTagText: string` | Set custom text when using tagging. Default is **`Add item`**. |
 | `@Input()`<br>`appendTo: string` | Append dropdown to body or any other element using css selector. For correct positioning body should have `position:relative`. Default is **`body`** (since v15). |
 | `@Input()`<br>`bindValue: string` | Object property to use for selected model. By default binds to whole object. |
@@ -25,10 +25,10 @@ Exported as: `mtxSelect`
 | `@Input()`<br>`clearAllText: string` | Set custom text for clear all icon title. Default is **`Clear all`**. |
 | `@Input()`<br>`clearable: boolean` | Allow to clear selected value. Default is **`true`**. |
 | `@Input()`<br>`clearOnBackspace: boolean` | Clear selected values one by one when clicking backspace. Default is **`true`**. |
-| `@Input()`<br>`compareWith: (a: any, b: any) => boolean` | A function to compare the option values with the selected values. The first argument is a value from an option. The second is a value from the selection(model). A boolean should be returned. |
-| `@Input()`<br>`dropdownPosition: bottom \| top \| auto` | Set the dropdown position on open. Default is **`auto`**. |
-| `@Input()`<br>`groupBy: string \| Function` | Allow to group items by key or function expression. |
-| `@Input()`<br>`groupValue: (groupKey: string, children: any[]) => Object` | Function expression to provide group value. |
+| `@Input()`<br>`compareWith: CompareWithFn` | A function to compare the option values with the selected values. The first argument is a value from an option. The second is a value from the selection(model). A boolean should be returned. |
+| `@Input()`<br>`dropdownPosition: DropdownPosition` | Set the dropdown position on open. Default is **`auto`**. |
+| `@Input()`<br>`groupBy: string \| (() => void)` | Allow to group items by key or function expression. |
+| `@Input()`<br>`groupValue: GroupValueFn` | Function expression to provide group value. |
 | `@Input()`<br>`selectableGroup: boolean` | Allow to select group when groupBy is used. Default is **`false`**. |
 | `@Input()`<br>`selectableGroupAsModel: boolean` | Indicates whether to select all children or group itself. Default is **`true`**. |
 | `@Input()`<br>`items: boolean` | Items array. Default is **`[]`**. |
@@ -44,9 +44,9 @@ Exported as: `mtxSelect`
 | `@Input()`<br>`placeholder: string` | Placeholder text. |
 | `@Input()`<br>`searchable: boolean` | Allow to search for value. Default is **`true`**. |
 | `@Input()`<br>`readonly: boolean` | Set ng-select as readonly. Mostly used with reactive forms. Default is **`false`**. |
-| `@Input()`<br>`searchFn: (term: string, item: any) => boolean` | Allow to clear selected value. Default is **`null`**. |
+| `@Input()`<br>`searchFn: SearchFn` | Allow to clear selected value. Default is **`null`**. |
 | `@Input()`<br>`searchWhileComposing: boolean` | Whether items should be filtered while composition started. Default is **`true`**. |
-| `@Input()`<br>`trackByFn: (item: any) => any` | Provide custom trackBy function. Default is **`null`**. |
+| `@Input()`<br>`trackByFn: TrackByFn` | Provide custom trackBy function. Default is **`null`**. |
 | `@Input()`<br>`clearSearchOnAdd: boolean` | Clears search input when item is selected. Default true. Default false when `closeOnSelect` is false. Default is **`true`**. |
 | `@Input()`<br>`editableSearchTerm: boolean` | Allow to edit search query if option selected. Default `false`. Works only if multiple is `false`. |
 | `@Input()`<br>`selectOnTab: boolean` | Select marked dropdown item using tab. Default is **`true`**. |
@@ -58,6 +58,21 @@ Exported as: `mtxSelect`
 | `@Input()`<br>`inputAttrs: { [key: string]: string }` |Pass custom attributes to underlying input element. |
 | `@Input()`<br>`tabIndex: number` | Set tabindex on `ng-select`. |
 | `@Input()`<br>`keyDownFn: ($event: KeyboardEvent) => boolean` | Provide custom keyDown function. Executed before default handler. Return false to suppress execution of default key down handlers. Default is **`true`**. |
+| `@Output()`<br>`focus: void`| Fired on select focus. |
+| `@Output()`<br>`blur: void`| Fired on select blur. |
+| `@Output()`<br>`change: void`| Fired on model change. Outputs whole model. |
+| `@Output()`<br>`open: void`| Fired on select dropdown open. |
+| `@Output()`<br>`close: void`| Fired on select dropdown close. |
+| `@Output()`<br>`add: void`| Fired when item is added while `[multiple]="true"`. Outputs added item. |
+| `@Output()`<br>`remove: void`| Fired when item is removed while `[multiple]="true"`. |
+| `@Output()`<br>`search: { term: string, items: any[] }`| Fired while typing search term. Outputs search term with filtered items. |
+| `@Output()`<br>`clear: void`| Fired on clear icon click. |
+| `@Output()`<br>`scroll: { start: number; end: number }`| Fired when scrolled. Provides the start and end index of the currently available items. Can be used for loading more items in chunks before the user has scrolled all the way to the bottom of the list. |
+| `@Output()`<br>`scrollToEnd: void`| Fired when scrolled to the end of items. Can be used for loading more items in chunks. |
+| `open` | Opens the select dropdown panel. |
+| `close` | Closes the select dropdown panel. |
+| `focus` | Focuses the select element. |
+| `blur` | Blurs the select element. |
 
 ### Interfaces
 
@@ -79,6 +94,44 @@ interface MtxSelectDefaultOptions {
   openOnEnter?: boolean;
   clearSearchOnAdd?: boolean;
 }
+```
+
+### Type aliases
+
+#### `DropdownPosition`
+
+```ts
+type DropdownPosition = 'bottom' | 'top' | 'auto';
+```
+
+#### `AddTagFn`
+
+```ts
+type AddTagFn = (term: string) => any | Promise<any>;
+```
+
+#### `CompareWithFn`
+
+```ts
+type CompareWithFn = (a: any, b: any) => boolean;
+```
+
+#### `GroupValueFn`
+
+```ts
+type GroupValueFn = (key: string | Record<string, any>, children: any[]) => string | Record<string, any>;
+```
+
+#### `SearchFn`
+
+```ts
+type SearchFn = (term: string, item: any) => boolean;
+```
+
+#### `TrackByFn`
+
+```ts
+type TrackByFn = (item: any) => any;
 ```
 
 ### Constants
