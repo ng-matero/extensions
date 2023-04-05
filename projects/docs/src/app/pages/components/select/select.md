@@ -17,30 +17,30 @@ Exported as: `mtxSelect`
 | Name | Description |
 | :--- | :--- |
 | `@Input()`<br>`addTag: boolean \| AddTagFn` | Allows to create custom options. Default is **`false`**. |
-| `@Input()`<br>`addTagText: string` | Set custom text when using tagging. Default is **`Add item`**. |
-| `@Input()`<br>`appendTo: string` | Append dropdown to body or any other element using css selector. For correct positioning body should have `position:relative`. Default is **`body`** (since v15). |
+| `@Input()`<br>`addTagText: string` | Set custom text when using tagging. Default is **`'Add item'`**. |
+| `@Input()`<br>`appendTo: string` | Append dropdown to body or any other element using css selector. For correct positioning body should have `position:relative`. Default is **`'body'`** (since v15). |
 | `@Input()`<br>`bindValue: string` | Object property to use for selected model. By default binds to whole object. |
-| `@Input()`<br>`bindLabel: string` | Object property to use for label. Default is **`label`**. |
+| `@Input()`<br>`bindLabel: string` | Object property to use for label. Default is **`'label'`**. |
 | `@Input()`<br>`closeOnSelect: boolean` | Whether to close the menu when a value is selected. Default is **`true`**. |
-| `@Input()`<br>`clearAllText: string` | Set custom text for clear all icon title. Default is **`Clear all`**. |
+| `@Input()`<br>`clearAllText: string` | Set custom text for clear all icon title. Default is **`'Clear all'`**. |
 | `@Input()`<br>`clearable: boolean` | Allow to clear selected value. Default is **`true`**. |
 | `@Input()`<br>`clearOnBackspace: boolean` | Clear selected values one by one when clicking backspace. Default is **`true`**. |
 | `@Input()`<br>`compareWith: CompareWithFn` | A function to compare the option values with the selected values. The first argument is a value from an option. The second is a value from the selection(model). A boolean should be returned. |
-| `@Input()`<br>`dropdownPosition: DropdownPosition` | Set the dropdown position on open. Default is **`auto`**. |
+| `@Input()`<br>`dropdownPosition: DropdownPosition` | Set the dropdown position on open. Default is **`'auto'`**. |
 | `@Input()`<br>`groupBy: string \| (() => void)` | Allow to group items by key or function expression. |
 | `@Input()`<br>`groupValue: GroupValueFn` | Function expression to provide group value. |
 | `@Input()`<br>`selectableGroup: boolean` | Allow to select group when groupBy is used. Default is **`false`**. |
 | `@Input()`<br>`selectableGroupAsModel: boolean` | Indicates whether to select all children or group itself. Default is **`true`**. |
 | `@Input()`<br>`items: boolean` | Items array. Default is **`[]`**. |
 | `@Input()`<br>`loading: boolean` | You can set the loading state from the outside (e.g. async items loading). |
-| `@Input()`<br>`loadingText: string` | Set custom text when for loading items. Default is **`Loading...`**. |
+| `@Input()`<br>`loadingText: string` | Set custom text when for loading items. Default is **`'Loading...'`**. |
 | `@Input()`<br>`labelForId: string` | Id to associate control with label. |
 | `@Input()`<br>`markFirst: boolean` | Marks first item as focused when opening/filtering. Default is **`true`**. |
 | `@Input()`<br>`isOpen: boolean` | Allows manual control of dropdown opening and closing. `True` - won't close. `False` - won't open. |
 | `@Input()`<br>`maxSelectedItems: number` | When `multiple = true`, allows to set a limit number of selection. |
 | `@Input()`<br>`hideSelected: boolean` | Allows to hide selected items. Default is **`false`**. |
 | `@Input()`<br>`multiple: boolean` | Allows to select multiple items. Default is **`false`**. |
-| `@Input()`<br>`notFoundText: string` | Set custom text when filter returns empty result. Default is **`No items found`**. |
+| `@Input()`<br>`notFoundText: string` | Set custom text when filter returns empty result. Default is **`'No items found'`**. |
 | `@Input()`<br>`placeholder: string` | Placeholder text. |
 | `@Input()`<br>`searchable: boolean` | Allow to search for value. Default is **`true`**. |
 | `@Input()`<br>`readonly: boolean` | Set ng-select as readonly. Mostly used with reactive forms. Default is **`false`**. |
@@ -53,7 +53,7 @@ Exported as: `mtxSelect`
 | `@Input()`<br>`openOnEnter: boolean` | Open dropdown using enter. Default is **`true`**. |
 | `@Input()`<br>`typeahead: Subject` | Custom autocomplete or advanced filter. |
 | `@Input()`<br>`minTermLength: number` | Minimum term length to start a search. Should be used with typeahead. Default is **`0`**. |
-| `@Input()`<br>`typeToSearchText: string` | Set custom text when using Typeahead. Default is **`Type to search`**. |
+| `@Input()`<br>`typeToSearchText: string` | Set custom text when using Typeahead. Default is **`'Type to search'`**. |
 | `@Input()`<br>`virtualScroll: boolean` |Enable virtual scroll for better performance when rendering a lot of data. Default is **`false`**. |
 | `@Input()`<br>`inputAttrs: { [key: string]: string }` |Pass custom attributes to underlying input element. |
 | `@Input()`<br>`tabIndex: number` | Set tabindex on `ng-select`. |

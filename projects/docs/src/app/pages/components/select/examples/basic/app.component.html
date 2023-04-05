@@ -8,7 +8,8 @@
   <mat-label>Select Food</mat-label>
 
   <mtx-select [items]="foods" bindLabel="name" bindValue="id" [multiple]="multiple"
-              [(ngModel)]="food" [required]="required" [disabled]="disabled">
+              [(ngModel)]="food" [required]="required" [disabled]="disabled"
+              appendTo=".docs-component-viewer-content">
   </mtx-select>
 
   <mat-hint>Choose your favorite food</mat-hint>

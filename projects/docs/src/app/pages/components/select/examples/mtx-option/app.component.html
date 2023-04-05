@@ -11,7 +11,8 @@
 <mat-form-field>
   <mat-label>Select Car</mat-label>
 
-  <mtx-select [multiple]="true" [(ngModel)]="selectedCars">
+  <mtx-select [multiple]="true" [(ngModel)]="selectedCars"
+              appendTo=".docs-component-viewer-content">
     <mtx-option *ngFor="let car of cars" [value]="car.id" [disabled]="car.disabled">{{car.name}}
     </mtx-option>
     <mtx-option [value]="'custom'">Custom</mtx-option>

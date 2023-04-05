@@ -4,7 +4,7 @@
   <mat-label>Select City</mat-label>
 
   <mtx-select [items]="cities" groupBy="avatar" [(ngModel)]="selectedCity"
-              bindLabel="name" bindValue="name">
+              bindLabel="name" bindValue="name" appendTo=".docs-component-viewer-content">
     <ng-template ng-label-tmp let-item="item">
       <img height="15" width="15" [src]="item.avatar" />
       <b>{{item.name}}</b>
