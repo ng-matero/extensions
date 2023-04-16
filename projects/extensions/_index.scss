@@ -1,4 +1,4 @@
-@forward 'photoviewer/dist/photoviewer';
+@forward 'photoviewer';
 
 @forward './alert/alert-theme' as alert-* show alert-theme;
 @forward './button/button-theme' as button-* show button-theme;

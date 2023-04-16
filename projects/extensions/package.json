@@ -63,7 +63,7 @@
   "dependencies": {
     "@ng-select/ng-select": "^9.0.0",
     "ngx-color": "^8.0.0",
-    "photoviewer": "^3.6.0",
+    "photoviewer": "^3.7.0",
     "tslib": "^2.3.0"
   },
   "peerDependencies": {
