@@ -52,7 +52,7 @@
     "moment": "^2.29.4",
     "ngx-color": "^8.0.3",
     "ngx-progressbar": "^9.0.0",
-    "photoviewer": "^3.6.6",
+    "photoviewer": "^3.7.0",
     "rxjs": "~7.5.6",
     "tslib": "^2.5.0",
     "zone.js": "~0.12.0"
