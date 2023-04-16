@@ -9,7 +9,6 @@ import { MaterialExtensionsModule } from '../material-extensions.module';
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
 import { NgProgressRouterModule } from 'ngx-progressbar/router';
-import { NgOptionHighlightModule } from '@ng-select/ng-option-highlight';
 
 import { HeaderLinkComponent } from './doc-heading/header-link';
 import { DocHeadingComponent } from './doc-heading/doc-heading';
@@ -30,7 +29,6 @@ import { DocViewer } from './doc-viewer/doc-viewer';
     NgProgressModule,
     NgProgressHttpModule,
     NgProgressRouterModule,
-    NgOptionHighlightModule,
   ],
   exports: [
     CommonModule,
@@ -42,7 +40,6 @@ import { DocViewer } from './doc-viewer/doc-viewer';
     NgProgressModule,
     NgProgressHttpModule,
     NgProgressRouterModule,
-    NgOptionHighlightModule,
 
     HeaderLinkComponent,
     DocHeadingComponent,

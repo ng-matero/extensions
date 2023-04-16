@@ -9,7 +9,7 @@
       <div *ngIf="item.name === 'Kaunas'">{{item.name}}</div>
       <mat-card class="example-card" *ngIf="item.name !== 'Kaunas'">
         <mat-card-header>
-          <mat-card-title [ngOptionHighlight]="search">{{item.name}}</mat-card-title>
+          <mat-card-title>{{item.name}}</mat-card-title>
           <mat-card-subtitle>Card subtitle</mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>
