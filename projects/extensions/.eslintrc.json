@@ -4,17 +4,12 @@
     {
       "files": ["*.ts"],
       "rules": {
-        "@angular-eslint/directive-selector": [
-          "error",
-          {
-            "type": "attribute",
-            "style": "camelCase"
-          }
-        ],
+        "@angular-eslint/directive-selector": "off",
         "@angular-eslint/component-selector": [
           "error",
           {
             "type": "element",
+            "prefix": "mtx",
             "style": "kebab-case"
           }
         ]
