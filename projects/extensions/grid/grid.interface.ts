@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
+import { SortDirection } from '@angular/material/sort';
 import { TooltipPosition, TooltipTouchGestures } from '@angular/material/tooltip';
 import { Observable } from 'rxjs';
 
@@ -134,3 +135,61 @@ export interface MtxGridRowClassFormatter {
 
 /** Possible button type values. */
 export type MtxGridButtonType = 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';
+
+/**
+ * Represents the default options for the grid that can be configured
+ * using the `MTX_GRID_DEFAULT_OPTIONS` injection token.
+ */
+export interface MtxGridDefaultOptions {
+  columnResizable?: boolean;
+  emptyValuePlaceholder?: string;
+
+  pageOnFront?: boolean;
+  showPaginator?: boolean;
+  pageDisabled?: boolean;
+  showFirstLastButtons?: boolean;
+  pageIndex?: number;
+  pageSize?: number;
+  pageSizeOptions?: number[];
+  hidePageSize?: boolean;
+
+  sortOnFront?: boolean;
+  sortActive?: string;
+  sortDirection?: SortDirection;
+  sortDisableClear?: boolean;
+  sortDisabled?: boolean;
+  sortStart?: 'asc' | 'desc';
+
+  rowHover?: boolean;
+  rowStriped?: boolean;
+
+  multiSelectable?: boolean;
+  multiSelectionWithClick?: boolean;
+  rowSelectable?: boolean;
+  hideRowSelectionCheckbox?: boolean;
+
+  cellSelectable?: boolean;
+
+  showToolbar?: boolean;
+  toolbarTitle?: string;
+
+  columnHideable?: boolean;
+  columnHideableChecked?: 'show' | 'hide';
+  columnSortable?: boolean;
+  columnPinnable?: boolean;
+  columnPinOptions?: MtxGridColumnPinOption[];
+
+  showColumnMenuButton?: boolean;
+  columnMenuButtonText?: string;
+  columnMenuButtonType?: MtxGridButtonType;
+  columnMenuButtonColor?: ThemePalette;
+  columnMenuButtonClass?: string;
+  columnMenuButtonIcon?: string;
+
+  showColumnMenuHeader?: boolean;
+  columnMenuHeaderText?: string;
+  showColumnMenuFooter?: boolean;
+  columnMenuFooterText?: string;
+
+  noResultText?: string;
+}
