@@ -20,6 +20,9 @@ import {
   HostBinding,
   HostListener,
   KeyValueChangeRecord,
+  InjectionToken,
+  Optional,
+  Inject,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -42,10 +45,16 @@ import {
   MtxGridRowClassFormatter,
   MtxGridButtonType,
   MtxGridColumnPinOption,
+  MtxGridDefaultOptions,
 } from './interfaces';
 import { MtxGridExpansionToggle } from './expansion-toggle';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumnMenu } from './column-menu';
+
+/** Injection token that can be used to specify default grid options. */
+export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions>(
+  'mtx-grid-default-options'
+);
 
 @Component({
   selector: 'mtx-grid',
@@ -91,28 +100,28 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** Tracking function that will be used to check the differences in data changes. */
   @Input() trackBy!: TrackByFunction<any>;
   /** Whether the column is resizable. */
-  @Input() columnResizable = false;
+  @Input() columnResizable = this._defaultOptions?.columnResizable ?? false;
   /** Placeholder for the empty value (`null`, `''`, `[]`). */
-  @Input() emptyValuePlaceholder: string = '--';
+  @Input() emptyValuePlaceholder = this._defaultOptions?.emptyValuePlaceholder ?? '--';
 
   // ===== Page =====
 
   /** Whether to paginate the data on front end. */
-  @Input() pageOnFront = true;
+  @Input() pageOnFront = this._defaultOptions?.pageOnFront ?? true;
   /** Whether to show the paginator. */
-  @Input() showPaginator = true;
+  @Input() showPaginator = this._defaultOptions?.showPaginator ?? true;
   /** Whether the paginator is disabled. */
-  @Input() pageDisabled = false;
+  @Input() pageDisabled = this._defaultOptions?.pageDisabled ?? false;
   /** Whether to show the first/last buttons UI to the user. */
-  @Input() showFirstLastButtons = true;
+  @Input() showFirstLastButtons = this._defaultOptions?.showFirstLastButtons ?? true;
   /** The zero-based page index of the displayed list of items. */
-  @Input() pageIndex = 0;
+  @Input() pageIndex = this._defaultOptions?.pageIndex ?? 0;
   /** Number of items to display on a page. */
-  @Input() pageSize = 10;
+  @Input() pageSize = this._defaultOptions?.pageSize ?? 10;
   /** The set of provided page size options to display to the user. */
-  @Input() pageSizeOptions = [10, 50, 100];
+  @Input() pageSizeOptions = this._defaultOptions?.pageSizeOptions ?? [10, 50, 100];
   /** Whether to hide the page size selection UI from the user. */
-  @Input() hidePageSize = false;
+  @Input() hidePageSize = this._defaultOptions?.hidePageSize ?? false;
   /** Event emitted when the paginator changes the page size or page index. */
   @Output() page = new EventEmitter<PageEvent>();
   /** The template for the pagination. */
@@ -121,32 +130,32 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   // ===== Sort =====
 
   /** Whether to sort the data on front end. */
-  @Input() sortOnFront = true;
+  @Input() sortOnFront = this._defaultOptions?.sortOnFront ?? true;
   /** The id of the most recently sorted MatSortable. */
-  @Input() sortActive!: string;
+  @Input() sortActive = this._defaultOptions?.sortActive ?? '';
   /** The sort direction of the currently active MatSortable. */
-  @Input() sortDirection!: SortDirection;
+  @Input() sortDirection: SortDirection = this._defaultOptions?.sortDirection ?? '';
   /**
    * Whether to disable the user from clearing the sort by finishing the sort direction cycle.
    * May be overriden by the column's `disableClear` in `sortProp`.
    */
-  @Input() sortDisableClear: boolean = false;
+  @Input() sortDisableClear = this._defaultOptions?.sortDisableClear ?? false;
   /** Whether the sort is disabled. */
-  @Input() sortDisabled: boolean = false;
+  @Input() sortDisabled = this._defaultOptions?.sortDisabled ?? false;
   /**
    * The direction to set when an MatSortable is initially sorted.
    * May be overriden by the column's `start` in `sortProp`.
    */
-  @Input() sortStart: 'asc' | 'desc' = 'asc';
+  @Input() sortStart: 'asc' | 'desc' = this._defaultOptions?.sortStart ?? 'asc';
   /** Event emitted when the user changes either the active sort or sort direction. */
   @Output() sortChange = new EventEmitter<Sort>();
 
   // ===== Row =====
 
   /** Whether to use the row hover style. */
-  @Input() rowHover = false;
+  @Input() rowHover = this._defaultOptions?.rowHover ?? false;
   /** Whether to use the row striped style. */
-  @Input() rowStriped = false;
+  @Input() rowStriped = this._defaultOptions?.rowStriped ?? false;
   /** Event emitted when the user clicks the row. */
   @Output() rowClick = new EventEmitter<any>();
 
@@ -166,15 +175,15 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
   /** Whether to support multiple row/cell selection. */
-  @Input() multiSelectable = true;
+  @Input() multiSelectable = this._defaultOptions?.multiSelectable ?? true;
   /** Whether the user can select multiple rows with click. */
-  @Input() multiSelectionWithClick = false;
+  @Input() multiSelectionWithClick = this._defaultOptions?.multiSelectionWithClick ?? false;
   /** The selected row items. */
   @Input() rowSelected: any[] = [];
   /** Whether the row is selectable. */
-  @Input() rowSelectable = false;
+  @Input() rowSelectable = this._defaultOptions?.rowSelectable ?? false;
   /** Whether to hide the row selection checkbox. */
-  @Input() hideRowSelectionCheckbox = false;
+  @Input() hideRowSelectionCheckbox = this._defaultOptions?.hideRowSelectionCheckbox ?? false;
   /** The formatter to disable the row selection or hide the row's checkbox. */
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
   /** The formatter to set the row's class. */
@@ -187,7 +196,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   cellSelection: any[] = [];
 
   /** Whether the cell is selectable. */
-  @Input() cellSelectable = true;
+  @Input() cellSelectable = this._defaultOptions?.cellSelectable ?? true;
   /** Event emitted when the cell is selected. */
   @Output() cellSelectionChange = new EventEmitter<any[]>();
 
@@ -196,57 +205,60 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   // ===== Toolbar =====
 
   /** Whether to show the toolbar. */
-  @Input() showToolbar = false;
+  @Input() showToolbar = this._defaultOptions?.showToolbar ?? false;
   /** The text of the toolbar's title. */
-  @Input() toolbarTitle = '';
+  @Input() toolbarTitle = this._defaultOptions?.toolbarTitle ?? '';
   /** The template for the toolbar. */
   @Input() toolbarTemplate!: TemplateRef<any>;
 
   // ===== Column Menu =====
 
   /** Whether the column is hideable. */
-  @Input() columnHideable = true;
+  @Input() columnHideable = this._defaultOptions?.columnHideable ?? true;
   /** Hide or show when the column's checkbox is checked. */
-  @Input() columnHideableChecked: 'show' | 'hide' = 'show';
+  @Input() columnHideableChecked: 'show' | 'hide' =
+    this._defaultOptions?.columnHideableChecked ?? 'show';
   /** Whether the column is sortable. */
-  @Input() columnSortable = true;
+  @Input() columnSortable = this._defaultOptions?.columnSortable ?? true;
   /** Whether the column is pinnable. */
-  @Input() columnPinnable = true;
+  @Input() columnPinnable = this._defaultOptions?.columnPinnable ?? true;
   /** Event emitted when the column is hided or is sorted. */
   @Output() columnChange = new EventEmitter<MtxGridColumn[]>();
   /** The options for the column pin list. */
-  @Input() columnPinOptions: MtxGridColumnPinOption[] = [];
+  @Input() columnPinOptions: MtxGridColumnPinOption[] =
+    this._defaultOptions?.columnPinOptions ?? [];
 
   /** Whether to show the column menu button. */
-  @Input() showColumnMenuButton = true;
+  @Input() showColumnMenuButton = this._defaultOptions?.showColumnMenuButton ?? true;
   /** The text for the column menu button. */
-  @Input() columnMenuButtonText = '';
+  @Input() columnMenuButtonText = this._defaultOptions?.columnMenuButtonText ?? '';
   /** The type for the column menu button. */
-  @Input() columnMenuButtonType: MtxGridButtonType = 'stroked';
+  @Input() columnMenuButtonType: MtxGridButtonType =
+    this._defaultOptions?.columnMenuButtonType ?? 'stroked';
   /** The color for the column menu button. */
-  @Input() columnMenuButtonColor: ThemePalette;
+  @Input() columnMenuButtonColor: ThemePalette = this._defaultOptions?.columnMenuButtonColor;
   /** The class for the column menu button. */
-  @Input() columnMenuButtonClass = '';
+  @Input() columnMenuButtonClass = this._defaultOptions?.columnMenuButtonClass ?? '';
   /** The icon for the column menu button. */
-  @Input() columnMenuButtonIcon = '';
+  @Input() columnMenuButtonIcon = this._defaultOptions?.columnMenuButtonIcon ?? '';
 
   /** Whether to show the column-menu's header. */
-  @Input() showColumnMenuHeader = false;
+  @Input() showColumnMenuHeader = this._defaultOptions?.showColumnMenuHeader ?? false;
   /** The text for the column-menu's header. */
-  @Input() columnMenuHeaderText = 'Columns Header';
+  @Input() columnMenuHeaderText = this._defaultOptions?.columnMenuHeaderText ?? 'Columns Header';
   /** The template for the column-menu's header. */
   @Input() columnMenuHeaderTemplate!: TemplateRef<any>;
   /** Whether to show the the column-menu's footer. */
-  @Input() showColumnMenuFooter = false;
+  @Input() showColumnMenuFooter = this._defaultOptions?.showColumnMenuFooter ?? false;
   /** The text for the column-menu's footer. */
-  @Input() columnMenuFooterText = 'Columns Footer';
+  @Input() columnMenuFooterText = this._defaultOptions?.columnMenuFooterText ?? 'Columns Footer';
   /** The template for the column-menu's footer. */
   @Input() columnMenuFooterTemplate!: TemplateRef<any>;
 
   // ===== No Result =====
 
   /** The displayed text for the empty data. */
-  @Input() noResultText = 'No records found';
+  @Input() noResultText = this._defaultOptions?.noResultText ?? 'No records found';
   /** The template for the empty data. */
   @Input() noResultTemplate!: TemplateRef<any>;
 
@@ -301,7 +313,13 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** The changed record of row data. */
   rowChangeRecord?: KeyValueChangeRecord<string, any>;
 
-  constructor(private _utils: MtxGridUtils, private _changeDetectorRef: ChangeDetectorRef) {}
+  constructor(
+    private _utils: MtxGridUtils,
+    private _changeDetectorRef: ChangeDetectorRef,
+    @Optional()
+    @Inject(MTX_GRID_DEFAULT_OPTIONS)
+    private _defaultOptions?: MtxGridDefaultOptions
+  ) {}
 
   detectChanges() {
     this._changeDetectorRef.detectChanges();
