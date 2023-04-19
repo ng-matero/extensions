@@ -99,8 +99,8 @@
                 <ng-template #defaultHeaderTpl>
                   <div [mat-sort-header]="col.sortProp?.id || col.field"
                        [disabled]="!col.sortable"
+                       [disableClear]="col.sortProp?.disableClear ?? sortDisableClear"
                        [arrowPosition]="col.sortProp?.arrowPosition!"
-                       [disableClear]="col.sortProp?.disableClear"
                        [start]="col.sortProp?.start!">
                     <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
                     <span>{{col.header | toObservable | async}}</span>
@@ -286,8 +286,8 @@
                 <ng-template #defaultHeaderTpl>
                   <div [mat-sort-header]="col.sortProp?.id || col.field"
                        [disabled]="!col.sortable"
+                       [disableClear]="col.sortProp?.disableClear ?? sortDisableClear"
                        [arrowPosition]="col.sortProp?.arrowPosition!"
-                       [disableClear]="col.sortProp?.disableClear"
                        [start]="col.sortProp?.start!">
                     <span class="mtx-grid-expansion-placeholder" *ngIf="col.showExpand"></span>
                     <span>{{col.header | toObservable | async}}</span>
