@@ -64,7 +64,12 @@ export class MtxGridCellActionTooltipPipe implements PipeTransform {
   name: 'cellActionDisable',
 })
 export class MtxGridCellActionDisablePipe implements PipeTransform {
-  transform(btn: MtxGridColumnButton, rowData: Record<string, any>) {
+  transform(
+    btn: MtxGridColumnButton,
+    rowData: Record<string, any>,
+    rowChangeRecord?: KeyValueChangeRecord<string, any>,
+    currentValue?: any
+  ) {
     if (typeof btn.disabled === 'boolean') {
       return btn.disabled;
     } else if (typeof btn.disabled === 'function') {

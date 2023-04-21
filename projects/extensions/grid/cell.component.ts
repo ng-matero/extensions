@@ -46,6 +46,8 @@ export class MtxGridCellComponent implements OnInit, DoCheck {
 
   private rowDataDiffer?: KeyValueDiffer<string, any>;
 
+  rowChangeRecord?: KeyValueChangeRecord<string, any>;
+
   get _value() {
     return this._gridSrv.getCellValue(this.rowData, this.colDef);
   }
@@ -70,8 +72,9 @@ export class MtxGridCellComponent implements OnInit, DoCheck {
 
   private _applyChanges(changes: KeyValueChanges<string, any>) {
     changes.forEachChangedItem(record => {
-      this._changeDetectorRef.markForCheck();
+      this.rowChangeRecord = record;
       this.rowDataChange.emit(record);
+      this._changeDetectorRef.markForCheck();
     });
   }
 
