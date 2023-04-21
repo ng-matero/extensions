@@ -14,7 +14,8 @@
 <mat-checkbox [(ngModel)]="showPaginator">showPaginator</mat-checkbox>
 <mat-checkbox [(ngModel)]="loading">loading</mat-checkbox>
 
-<mtx-grid [data]="list" #grid
+<mtx-grid #grid
+          [data]="list"
           [columns]="columns"
           [loading]="loading"
           [columnResizable]="columnResizable"

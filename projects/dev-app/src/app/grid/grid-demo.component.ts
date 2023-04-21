@@ -109,6 +109,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
             closeText: this.translate.stream('close'),
           },
           class: 'custom',
+          disabled: data => data.weight > 10,
           click: () => alert('delete'),
         },
       ],
