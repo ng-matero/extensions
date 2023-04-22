@@ -39,7 +39,8 @@ import {
 } from '@angular/material/core';
 import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/material/form-field';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { merge, Subject, startWith, takeUntil } from 'rxjs';
+import { merge, Subject } from 'rxjs';
+import { startWith, takeUntil } from 'rxjs/operators';
 import { MtxOption } from './option';
 import {
   MtxSelectFooterTemplate,
