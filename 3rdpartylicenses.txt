@@ -108,9 +108,6 @@ MIT
 @ng-matero/extensions-moment-adapter
 MIT
 
-@ng-select/ng-option-highlight
-MIT
-
 @ng-select/ng-select
 MIT
 
