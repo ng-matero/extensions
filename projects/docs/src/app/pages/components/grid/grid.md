@@ -157,7 +157,7 @@ Exported as: `mtxGrid`
 #### `MtxGridColumn`
 
 ```ts
-interface MtxGridColumn {
+interface MtxGridColumn<T = any> {
   field: string;
   header?: string | Observable<string>;
   hide?: boolean;
@@ -175,13 +175,13 @@ interface MtxGridColumn {
   type?: MtxGridColumnType;
   typeParameter?: MtxGridColumnTypeParameter;
   tag?: MtxGridColumnTag;
-  buttons?: MtxGridColumnButton[];
-  formatter?: (rowData: any, colDef?: MtxGridColumn) => any;
+  buttons?: MtxGridColumnButton<T>[];
+  formatter?: (rowData: T, colDef?: MtxGridColumn) => any;
   cellTemplate?: TemplateRef<any> | null;
   showExpand?: boolean;
   description?: string;
-  summary?: ((data: any[], colDef?: MtxGridColumn) => any) | string;
-  class?: string | ((rowData?: Record<string, any>, colDef?: MtxGridColumn) => string);
+  summary?: ((data: T[], colDef?: MtxGridColumn) => any) | string;
+  class?: string | ((rowData?: T, colDef?: MtxGridColumn) => string);
 }
 ```
 
@@ -221,15 +221,15 @@ interface MtxGridSortProp {
 #### `MtxGridColumnButton`
 
 ```ts
-interface MtxGridColumnButton {
+interface MtxGridColumnButton<T = any> {
   type?: 'basic' | 'icon';
   text?: string | Observable<string>;
   icon?: string;
   color?: ThemePalette;
   class?: string;
-  disabled?: boolean | ((rowData: any) => boolean);
-  click?: (rowData: any) => void;
-  iif?: (rowData: any) => boolean;
+  disabled?: boolean | ((rowData: T) => boolean);
+  click?: (rowData: T) => void;
+  iif?: (rowData: T) => boolean;
   pop?: MtxGridColumnButtonPop;
   tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
 }
@@ -282,17 +282,75 @@ interface MtxGridColumnTagValue {
 #### `MtxGridRowSelectionFormatter`
 
 ```ts
-interface MtxGridRowSelectionFormatter {
-  disabled?: (rowData: any) => boolean;
-  hideCheckbox?: (rowData: any) => boolean;
+interface MtxGridRowSelectionFormatter<T = any> {
+  disabled?: (rowData: T, index: number) => boolean;
+  hideCheckbox?: (rowData: T, index: number) => boolean;
 }
 ```
 
 #### `MtxGridRowClassFormatter`
 
 ```ts
-interface MtxGridRowClassFormatter {
-  [className: string]: (rowData: any, index?: number) => boolean;
+interface MtxGridRowClassFormatter<T = any> {
+  [className: string]: (rowData: T, index: number) => boolean;
+}
+```
+
+#### `MtxGridDefaultOptions`
+
+```ts
+interface MtxGridDefaultOptions {
+  columnResizable?: boolean;
+  emptyValuePlaceholder?: string;
+
+  pageOnFront?: boolean;
+  showPaginator?: boolean;
+  pageDisabled?: boolean;
+  showFirstLastButtons?: boolean;
+  pageIndex?: number;
+  pageSize?: number;
+  pageSizeOptions?: number[];
+  hidePageSize?: boolean;
+
+  sortOnFront?: boolean;
+  sortActive?: string;
+  sortDirection?: SortDirection;
+  sortDisableClear?: boolean;
+  sortDisabled?: boolean;
+  sortStart?: 'asc' | 'desc';
+
+  rowHover?: boolean;
+  rowStriped?: boolean;
+
+  multiSelectable?: boolean;
+  multiSelectionWithClick?: boolean;
+  rowSelectable?: boolean;
+  hideRowSelectionCheckbox?: boolean;
+
+  cellSelectable?: boolean;
+
+  showToolbar?: boolean;
+  toolbarTitle?: string;
+
+  columnHideable?: boolean;
+  columnHideableChecked?: 'show' | 'hide';
+  columnSortable?: boolean;
+  columnPinnable?: boolean;
+  columnPinOptions?: MtxGridColumnPinOption[];
+
+  showColumnMenuButton?: boolean;
+  columnMenuButtonText?: string;
+  columnMenuButtonType?: MtxGridButtonType;
+  columnMenuButtonColor?: ThemePalette;
+  columnMenuButtonClass?: string;
+  columnMenuButtonIcon?: string;
+
+  showColumnMenuHeader?: boolean;
+  columnMenuHeaderText?: string;
+  showColumnMenuFooter?: boolean;
+  columnMenuFooterText?: string;
+
+  noResultText?: string;
 }
 ```
 
@@ -315,4 +373,14 @@ type MtxGridColumnPinValue = 'left' | 'right' | null;
 
 ```ts
 type MtxGridButtonType = 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';
+```
+
+### Constants
+
+#### `MTX_GRID_DEFAULT_OPTIONS`
+
+Injection token that can be used to specify default grid options.
+
+```ts
+const MTX_GRID_DEFAULT_OPTIONS: InjectionToken<() => MtxGridDefaultOptions>;
 ```
