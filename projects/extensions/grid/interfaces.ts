@@ -5,7 +5,7 @@ import { TooltipPosition, TooltipTouchGestures } from '@angular/material/tooltip
 import { Observable } from 'rxjs';
 
 /** Column definition of grid. */
-export interface MtxGridColumn {
+export interface MtxGridColumn<T = any> {
   field: string;
   header?: string | Observable<string>;
   hide?: boolean;
@@ -23,13 +23,13 @@ export interface MtxGridColumn {
   type?: MtxGridColumnType;
   typeParameter?: MtxGridColumnTypeParameter;
   tag?: MtxGridColumnTag;
-  buttons?: MtxGridColumnButton[];
-  formatter?: (rowData: any, colDef?: MtxGridColumn) => any;
+  buttons?: MtxGridColumnButton<T>[];
+  formatter?: (rowData: T, colDef?: MtxGridColumn) => any;
   cellTemplate?: TemplateRef<any> | null;
   showExpand?: boolean;
   description?: string;
-  summary?: ((data: any[], colDef?: MtxGridColumn) => any) | string;
-  class?: string | ((rowData?: Record<string, any>, colDef?: MtxGridColumn) => string);
+  summary?: ((data: T[], colDef?: MtxGridColumn) => any) | string;
+  class?: string | ((rowData?: T, colDef?: MtxGridColumn) => string);
 }
 
 /** Possible column pin values.  */
@@ -84,15 +84,15 @@ export interface MtxGridColumnTagValue {
 }
 
 /** The properties of column button. */
-export interface MtxGridColumnButton {
+export interface MtxGridColumnButton<T = any> {
   type?: 'basic' | 'icon';
   text?: string | Observable<string>;
   icon?: string;
   color?: ThemePalette;
   class?: string;
-  disabled?: boolean | ((rowData: any) => boolean);
-  click?: (rowData: any) => void;
-  iif?: (rowData: any) => boolean;
+  disabled?: boolean | ((rowData: T) => boolean);
+  click?: (rowData: T) => void;
+  iif?: (rowData: T) => boolean;
   pop?: MtxGridColumnButtonPop;
   tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
 }
@@ -123,14 +123,14 @@ export interface MtxGridCellTemplate {
 }
 
 /** Row selection formatter. */
-export interface MtxGridRowSelectionFormatter {
-  disabled?: (rowData: any, index?: number) => boolean;
-  hideCheckbox?: (rowData: any, index?: number) => boolean;
+export interface MtxGridRowSelectionFormatter<T = any> {
+  disabled?: (rowData: T, index: number) => boolean;
+  hideCheckbox?: (rowData: T, index: number) => boolean;
 }
 
 /** Row class formatter. */
-export interface MtxGridRowClassFormatter {
-  [className: string]: (rowData: any, index?: number) => boolean;
+export interface MtxGridRowClassFormatter<T = any> {
+  [className: string]: (rowData: T, index: number) => boolean;
 }
 
 /** Possible button type values. */
