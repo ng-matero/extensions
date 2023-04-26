@@ -95,6 +95,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, Cont
   }
   set disabled(value: boolean) {
     this._disabled = coerceBooleanProperty(value);
+    this._changeDetectorRef.markForCheck();
   }
   private _disabled = false;
 
@@ -197,7 +198,7 @@ export class MtxCheckboxGroupComponent implements AfterViewInit, OnDestroy, Cont
    * @param isDisabled Whether the control should be disabled.
    */
   setDisabledState(isDisabled: boolean) {
-    this._disabled = isDisabled;
+    this.disabled = isDisabled;
   }
 
   private _checkMasterCheckboxState() {
