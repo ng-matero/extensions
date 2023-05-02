@@ -27,7 +27,7 @@
     <ng-container *ngSwitchCase="'button'">
       <ng-container *ngFor="let btn of colDef.buttons;">
         <ng-container *ngIf="!btn.iif || btn.iif(rowData)">
-          <button *ngIf="btn.type==='basic'"
+          <button *ngIf="btn.type==='basic'" type="button"
                   [ngClass]="['mtx-grid-action-button', btn.class||'']"
                   mat-button [color]="btn.color || 'primary'"
                   [disabled]="(btn | cellActionDisable: rowData: rowChangeRecord: rowChangeRecord?.currentValue)"
@@ -41,7 +41,7 @@
             <mat-icon class="mtx-grid-icon" *ngIf="btn.icon">{{btn.icon}}</mat-icon>
             <span>{{btn.text | toObservable | async}}</span>
           </button>
-          <button *ngIf="!btn.type || btn.type==='icon'"
+          <button *ngIf="!btn.type || btn.type==='icon'" type="button"
                   [ngClass]="['mtx-grid-action-button', btn.class||'']"
                   mat-icon-button [color]="btn.color || 'primary'"
                   [disabled]="(btn | cellActionDisable: rowData: rowChangeRecord: rowChangeRecord?.currentValue)"
