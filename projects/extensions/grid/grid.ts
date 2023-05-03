@@ -182,6 +182,9 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() rowSelected: any[] = [];
   /** Whether the row is selectable. */
   @Input() rowSelectable = this._defaultOptions?.rowSelectable ?? false;
+  /** Whether the user can disable select row with click. */
+  @Input() disableRowSelectionWithClick =
+    this._defaultOptions?.disableRowSelectionWithClick ?? false;
   /** Whether to hide the row selection checkbox. */
   @Input() hideRowSelectionCheckbox = this._defaultOptions?.hideRowSelectionCheckbox ?? false;
   /** The formatter to disable the row selection or hide the row's checkbox. */
@@ -312,6 +315,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
 
   /** The changed record of row data. */
   rowChangeRecord?: KeyValueChangeRecord<string, any>;
+  selectedRowIndex = -1;
 
   constructor(
     private _utils: MtxGridUtils,
@@ -461,7 +465,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     if (
       this.rowSelectable &&
       !this.rowSelectionFormatter.disabled?.(rowData, index) &&
-      !this.rowSelectionFormatter.hideCheckbox?.(rowData, index)
+      !this.rowSelectionFormatter.hideCheckbox?.(rowData, index) &&
+      !this.disableRowSelectionWithClick
     ) {
       // metaKey -> command key
       if (!this.multiSelectionWithClick && !event.ctrlKey && !event.metaKey) {
@@ -471,6 +476,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
       this._toggleNormalCheckbox(rowData);
     }
 
+    this.selectedRowIndex = index;
     this.rowClick.emit({ rowData, index });
   }
 

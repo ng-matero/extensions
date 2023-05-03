@@ -25,6 +25,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   multiSelectionWithClick = false;
   hideRowSelectionCheckbox = false;
   rowSelectable = true;
+  disableRowSelectionWithClick = false;
   rowSelected = EXAMPLE_DATA.slice(2, 3);
   rowSelectionFormatter: MtxGridRowSelectionFormatter = {
     disabled: (data, index) => data.name === 'Boron',

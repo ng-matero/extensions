@@ -1,5 +1,6 @@
 <mat-checkbox [(ngModel)]="multiSelectable">multiSelectable</mat-checkbox>
 <mat-checkbox [(ngModel)]="multiSelectionWithClick">multiSelectionWithClick</mat-checkbox>
+<mat-checkbox [(ngModel)]="disableRowSelectionWithClick">disableRowSelectionWithClick</mat-checkbox>
 <mat-checkbox [(ngModel)]="hideRowSelectionCheckbox">hideRowSelectionCheckbox</mat-checkbox>
 <mat-checkbox [(ngModel)]="rowSelectable">rowSelectable</mat-checkbox>
 <mat-checkbox [(ngModel)]="expandable" (change)="toggleExpand()">expandable</mat-checkbox>
@@ -23,6 +24,7 @@
           [multiSelectionWithClick]="multiSelectionWithClick"
           [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
           [rowSelectable]="rowSelectable"
+          [disableRowSelectionWithClick]="disableRowSelectionWithClick"
           [rowSelected]="rowSelected"
           [rowSelectionFormatter]="rowSelectionFormatter"
           [rowClassFormatter]="rowClassFormatter"
