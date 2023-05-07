@@ -167,6 +167,7 @@ export interface MtxGridDefaultOptions {
   multiSelectionWithClick?: boolean;
   rowSelectable?: boolean;
   hideRowSelectionCheckbox?: boolean;
+  disableRowClickSelection?: boolean;
 
   cellSelectable?: boolean;
 
