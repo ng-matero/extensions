@@ -184,6 +184,8 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
   @Input() rowSelectable = this._defaultOptions?.rowSelectable ?? false;
   /** Whether to hide the row selection checkbox. */
   @Input() hideRowSelectionCheckbox = this._defaultOptions?.hideRowSelectionCheckbox ?? false;
+  /** Whether disable rows to be selected when clicked. */
+  @Input() disableRowClickSelection = this._defaultOptions?.disableRowClickSelection ?? false;
   /** The formatter to disable the row selection or hide the row's checkbox. */
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
   /** The formatter to set the row's class. */
@@ -461,7 +463,8 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
     if (
       this.rowSelectable &&
       !this.rowSelectionFormatter.disabled?.(rowData, index) &&
-      !this.rowSelectionFormatter.hideCheckbox?.(rowData, index)
+      !this.rowSelectionFormatter.hideCheckbox?.(rowData, index) &&
+      !this.disableRowClickSelection
     ) {
       // metaKey -> command key
       if (!this.multiSelectionWithClick && !event.ctrlKey && !event.metaKey) {
