@@ -1,11 +1,12 @@
-<div class="mtx-tooltip"
+<div #tooltip
+     class="mdc-tooltip mdc-tooltip--shown mtx-mdc-tooltip"
      [ngClass]="tooltipClass"
-     [class.mtx-tooltip-handset]="(_isHandset | async)?.matches"
-     [@state]="_visibility"
-     (@state.start)="_animationStart()"
-     (@state.done)="_animationDone($event)">
-  <ng-template [ngIf]="message | isTemplateRef" [ngIfElse]="msgStrTpl">
-    <ng-template [ngTemplateOutlet]="$any(message)"></ng-template>
-  </ng-template>
-  <ng-template #msgStrTpl>{{message}}</ng-template>
+     (animationend)="_handleAnimationEnd($event)"
+     [class.mdc-tooltip--multiline]="_isMultiline">
+  <div class="mdc-tooltip__surface mdc-tooltip__surface-animation">
+    <ng-template [ngIf]="message | isTemplateRef" [ngIfElse]="msgStrTpl">
+      <ng-template [ngTemplateOutlet]="$any(message)"></ng-template>
+    </ng-template>
+    <ng-template #msgStrTpl>{{message}}</ng-template>
+  </div>
 </div>

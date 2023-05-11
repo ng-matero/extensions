@@ -1,36 +1,100 @@
-@use '@angular/cdk' as cdk;
+@use '@material/tooltip/tooltip';
+@use '@material/tooltip/tooltip-theme';
+@use '@material/tooltip/plain-tooltip-theme';
+@use '../core/mdc-helpers/mdc-helpers';
 
-$mtx-tooltip-horizontal-padding: 8px;
-$mtx-tooltip-max-width: 250px;
-$mtx-tooltip-margin: 14px;
-
-$mtx-tooltip-handset-horizontal-padding: 16px;
-$mtx-tooltip-handset-margin: 24px;
-
-.mtx-tooltip-panel {
-  // The overlay reference updates the pointer-events style property directly on the HTMLElement
-  // depending on the state of the overlay. For tooltips the overlay panel should never enable
-  // pointer events. To overwrite the inline CSS from the overlay reference `!important` is needed.
-  pointer-events: none !important;
+@include mdc-helpers.disable-mdc-fallback-declarations {
+  // Only include the structural styles, because we handle the animation ourselves.
+  @include tooltip.static-styles($query: structure);
+  @include plain-tooltip-theme.theme-styles((
+    container-shape: tooltip-theme.$border-radius,
+    container-color: #fff,
+    supporting-text-color: #000,
+    supporting-text-font: inherit,
+    supporting-text-size: inherit,
+    supporting-text-tracking: inherit,
+    supporting-text-weight: inherit,
+  ));
 }
 
-.mtx-tooltip {
-  color: white;
-  border-radius: 4px;
-  margin: $mtx-tooltip-margin;
-  max-width: $mtx-tooltip-max-width;
-  padding-left: $mtx-tooltip-horizontal-padding;
-  padding-right: $mtx-tooltip-horizontal-padding;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.mtx-mdc-tooltip {
+  // We don't use MDC's positioning so this has to be relative.
+  position: relative;
+  transform: scale(0);
 
-  @include cdk.high-contrast(active, off) {
-    outline: solid 1px;
+  // Increases the area of the tooltip so the user's pointer can go from the trigger directly to it.
+  &::before {
+    $offset: -8px;
+
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    position: absolute;
+
+    // Only set the offset on the side closest to the panel so we
+    // don't accidentally cover more content than we need to.
+    .mtx-mdc-tooltip-panel-below & {
+      top: $offset;
+    }
+
+    .mtx-mdc-tooltip-panel-above & {
+      bottom: $offset;
+    }
+
+    // Note that here we use left/right instead of before/after
+    // so that we don't have to add extra styles for RTL.
+    .mtx-mdc-tooltip-panel-right & {
+      left: $offset;
+    }
+
+    .mtx-mdc-tooltip-panel-left & {
+      right: $offset;
+    }
+  }
+
+  &._mtx-animation-noopable {
+    animation: none;
+    transform: scale(1);
   }
 }
 
-.mtx-tooltip-handset {
-  margin: $mtx-tooltip-handset-margin;
-  padding-left: $mtx-tooltip-handset-horizontal-padding;
-  padding-right: $mtx-tooltip-handset-horizontal-padding;
+.mtx-mdc-tooltip-panel-non-interactive {
+  pointer-events: none;
+}
+
+// TODO(crisbeto): we may be able to use MDC directly for these animations.
+
+@keyframes mtx-mdc-tooltip-show {
+  0% {
+    opacity: 0;
+    transform: scale(.8);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes mtx-mdc-tooltip-hide {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(.8);
+  }
+}
+
+.mtx-mdc-tooltip-show {
+  animation: mtx-mdc-tooltip-show 150ms cubic-bezier(0, 0, .2, 1) forwards;
+}
+
+.mtx-mdc-tooltip-hide {
+  animation: mtx-mdc-tooltip-hide 75ms cubic-bezier(.4, 0, 1, 1) forwards;
 }

@@ -1,45 +1,42 @@
 @use 'sass:map';
+@use '@material/tooltip/plain-tooltip-theme';
+@use '@material/theme/theme-color' as mdc-theme-color;
+@use '@material/typography/typography' as mdc-typography;
 @use '../core/theming/theming';
+@use '../core/theming/palette';
+@use '../core/mdc-helpers/mdc-helpers';
 @use '../core/typography/typography';
-@use '../core/typography/typography-utils';
-
-$target-height: 22px;
-$font-size: 12px;
-$vertical-padding: ($target-height - $font-size) * .5;
-
-$handset-target-height: 30px;
-$handset-font-size: 14px;
-$handset-vertical-padding: ($handset-target-height - $handset-font-size) * .5;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $background: map.get($config, background);
-
-  .mtx-tooltip {
-    background: theming.get-color-from-palette($background, tooltip, .9);
+  @include mdc-helpers.using-mdc-theme($config) {
+    .mtx-mdc-tooltip {
+      @include plain-tooltip-theme.theme((
+        container-color: map.get(palette.$light-theme-background-palette, tooltip),
+        supporting-text-color: mdc-theme-color.prop-value(text-primary-on-dark)
+      ));
+    }
   }
 }
 
 @mixin typography($config-or-theme) {
-  $config: typography.private-typography-to-2014-config(
-    theming.get-typography-config($config-or-theme)
-  );
-
-  .mtx-tooltip {
-    font-family: typography-utils.font-family($config);
-    font-size: $font-size;
-    padding-top: $vertical-padding;
-    padding-bottom: $vertical-padding;
-  }
-
-  .mtx-tooltip-handset {
-    font-size: $handset-font-size;
-    padding-top: $handset-vertical-padding;
-    padding-bottom: $handset-vertical-padding;
+  $config: typography.private-typography-to-2018-config(
+    theming.get-typography-config($config-or-theme));
+  @include mdc-helpers.using-mdc-typography($config) {
+    .mtx-mdc-tooltip {
+      @include plain-tooltip-theme.theme((
+        supporting-text-font: mdc-typography.get-font(caption),
+        supporting-text-size: mdc-typography.get-size(caption),
+        supporting-text-weight: mdc-typography.get-weight(caption),
+        supporting-text-tracking: mdc-typography.get-tracking(caption),
+      ));
+    }
   }
 }
 
-@mixin density($config-or-theme) {}
+@mixin density($config-or-theme) {
+  $density-scale: theming.get-density-config($config-or-theme);
+}
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
