@@ -58,11 +58,12 @@
 <button mat-raised-button #tooltip="mtxTooltip"
         [mtxTooltip]="tpl"
         mtxTooltipPosition="right"
+        [mtxTooltipContext]="666"
         aria-tooltip="Button that displays and hides a tooltip triggered by other buttons">
   Action
 </button>
 
-<ng-template #tpl>
+<ng-template #tpl let-i>
   <div>我是一个模板 {{i}}</div>
   <div>我是一个模板 {{i}}</div>
   <div>我是一个模板 {{i}}</div>
