@@ -306,6 +306,18 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
   }
   private _message: string | TemplateRef<any> = '';
 
+  /** Context to be passed to the tooltip. */
+  @Input('mtxTooltipContext')
+  get tooltipContext() {
+    return this._tooltipContext;
+  }
+
+  set tooltipContext(value: any) {
+    this._tooltipContext = value;
+    this._setTooltipContext(this._tooltipContext);
+  }
+  private _tooltipContext: any;
+
   /** Classes to be passed to the tooltip. Supports the same syntax as `ngClass`. */
   @Input('mtxTooltipClass')
   get tooltipClass() {
@@ -433,6 +445,7 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
       .pipe(takeUntil(this._destroyed))
       .subscribe(() => this._detach());
     this._setTooltipClass(this._tooltipClass);
+    this._setTooltipContext(this._tooltipContext);
     this._updateTooltipMessage();
     instance.show(delay);
   }
@@ -644,6 +657,14 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
           this._overlayRef!.updatePosition();
         }
       });
+    }
+  }
+
+  /** Updates the tooltip context */
+  private _setTooltipContext(tooltipContext: any) {
+    if (this._tooltipInstance) {
+      this._tooltipInstance.tooltipContext = tooltipContext;
+      this._tooltipInstance._markForCheck();
     }
   }
 
@@ -916,6 +937,9 @@ export class MtxTooltip extends _MtxTooltipBase<TooltipComponent> {
 export abstract class _TooltipComponentBase implements OnDestroy {
   /** Message to display in the tooltip */
   message!: string | TemplateRef<any>;
+
+  /** Context to be added to the tooltip */
+  tooltipContext: any;
 
   /** Classes to be added to the tooltip. Supports the same syntax as `ngClass`. */
   tooltipClass!: string | string[] | Set<string> | { [key: string]: any };

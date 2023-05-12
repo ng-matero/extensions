@@ -5,7 +5,8 @@
      [class.mdc-tooltip--multiline]="_isMultiline">
   <div class="mdc-tooltip__surface mdc-tooltip__surface-animation">
     <ng-template [ngIf]="message | isTemplateRef" [ngIfElse]="msgStrTpl">
-      <ng-template [ngTemplateOutlet]="$any(message)"></ng-template>
+      <ng-template [ngTemplateOutlet]="$any(message)"
+                   [ngTemplateOutletContext]="{ $implicit: tooltipContext }"></ng-template>
     </ng-template>
     <ng-template #msgStrTpl>{{message}}</ng-template>
   </div>
