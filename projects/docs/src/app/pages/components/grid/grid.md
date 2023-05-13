@@ -70,6 +70,7 @@ Exported as: `mtxGrid`
 | `@Input()`<br>`rowSelectable: boolean` | Whether the row is selectable. Default is **`false`**. |
 | `@Input()`<br>`rowSelected: any[]` | The selected row items. Default is **`[]`**. |
 | `@Input()`<br>`hideRowSelectionCheckbox: boolean` | Whether to hide the row selection checkbox. Default is **`false`**. |
+| `@Input()`<br>`disableRowClickSelection: boolean` | Whether disable rows to be selected when clicked. Default is **`false`**. |
 | `@Input()`<br>`rowSelectionFormatter: MtxGridRowSelectionFormatter` | The formatter to disable the row selection or hide the row's checkbox. |
 | `@Output()`<br>`rowClassFormatter: MtxGridRowClassFormatter` | The formatter to set the row's class. |
 | `@Output()`<br>`rowSelectionChange: EventEmitter<any>` | Event emitted when the row is selected. |
@@ -326,6 +327,7 @@ interface MtxGridDefaultOptions {
   multiSelectionWithClick?: boolean;
   rowSelectable?: boolean;
   hideRowSelectionCheckbox?: boolean;
+  disableRowClickSelection?: boolean;
 
   cellSelectable?: boolean;
 
