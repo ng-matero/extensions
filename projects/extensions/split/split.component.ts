@@ -18,7 +18,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CanColor, mixinColor } from '@angular/material/core';
-import { Observable, Subject, Subscriber, debounceTime } from 'rxjs';
+import { Observable, Subject, Subscriber } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import {
   MtxSplitArea,
   MtxSplitAreaSnapshot,

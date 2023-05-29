@@ -370,7 +370,7 @@ export class MtxDatetimepickerInput<D>
     );
     return !this.min ||
       !controlValue ||
-      this._dateAdapter.compareDatetime(this.min, controlValue) <= 0
+      (this._dateAdapter.compareDatetime(this.min, controlValue) as number) <= 0
       ? null
       : { mtxDatetimepickerMin: { min: this.min, actual: controlValue } };
   };
@@ -382,7 +382,7 @@ export class MtxDatetimepickerInput<D>
     );
     return !this.max ||
       !controlValue ||
-      this._dateAdapter.compareDatetime(this.max, controlValue) >= 0
+      (this._dateAdapter.compareDatetime(this.max, controlValue) as number) >= 0
       ? null
       : { mtxDatetimepickerMax: { max: this.max, actual: controlValue } };
   };
