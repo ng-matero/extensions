@@ -49,7 +49,7 @@
   * Rules for when the device is detected to be a small screen.
   * Moves content two rows instead of one.
   */
-@media (max-width: 720px) {
+@media (width <= 720px) {
   .docs-navbar-hide-small {
     display: none;
   }
@@ -70,7 +70,7 @@
 theme-picker {
   display: none;
 
-  @media (min-width: 328px) {
+  @media (width >= 328px) {
     display: block;
   }
 }

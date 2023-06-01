@@ -185,10 +185,10 @@ export abstract class DatetimeAdapter<D> extends DateAdapter<D> {
   }
 
   clampDate(date: D, min?: D | null, max?: D | null): D {
-    if (min && this.compareDatetime(date, min) < 0) {
+    if (min && (this.compareDatetime(date, min) as number) < 0) {
       return min;
     }
-    if (max && this.compareDatetime(date, max) > 0) {
+    if (max && (this.compareDatetime(date, max) as number) > 0) {
       return max;
     }
     return date;

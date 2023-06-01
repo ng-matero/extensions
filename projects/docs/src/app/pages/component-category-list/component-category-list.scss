@@ -12,13 +12,13 @@
   justify-content: center;
 }
 
-@media (max-width: 1255px) {
+@media (width <= 1255px) {
   .docs-component-category-list-summary {
     max-width: 600px;
   }
 }
 
-@media (max-width: 694px) {
+@media (width <= 694px) {
   .docs-component-category-list-summary {
     max-width: 280px;
   }

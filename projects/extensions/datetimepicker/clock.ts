@@ -264,8 +264,10 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
 
         // Check if the date is enabled, no need to respect the minute setting here
         const enabled =
-          (!this.minDate || this._adapter.compareDatetime(date, this.minDate, false) >= 0) &&
-          (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate, false) <= 0) &&
+          (!this.minDate ||
+            (this._adapter.compareDatetime(date, this.minDate, false) as number) >= 0) &&
+          (!this.maxDate ||
+            (this._adapter.compareDatetime(date, this.maxDate, false) as number) <= 0) &&
           (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.HOUR));
 
         // display value for twelvehour clock should be from 1-12 not including 0 and not above 12
@@ -299,8 +301,10 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
 
         // Check if the date is enabled, no need to respect the minute setting here
         const enabled =
-          (!this.minDate || this._adapter.compareDatetime(date, this.minDate, false) >= 0) &&
-          (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate, false) <= 0) &&
+          (!this.minDate ||
+            (this._adapter.compareDatetime(date, this.minDate, false) as number) >= 0) &&
+          (!this.maxDate ||
+            (this._adapter.compareDatetime(date, this.maxDate, false) as number) <= 0) &&
           (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.HOUR));
 
         this._hours.push({
@@ -324,8 +328,8 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
         i
       );
       const enabled =
-        (!this.minDate || this._adapter.compareDatetime(date, this.minDate) >= 0) &&
-        (!this.maxDate || this._adapter.compareDatetime(date, this.maxDate) <= 0) &&
+        (!this.minDate || (this._adapter.compareDatetime(date, this.minDate) as number) >= 0) &&
+        (!this.maxDate || (this._adapter.compareDatetime(date, this.maxDate) as number) <= 0) &&
         (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.MINUTE));
       this._minutes.push({
         value: i,

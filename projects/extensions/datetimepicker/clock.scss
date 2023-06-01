@@ -32,10 +32,7 @@ $clock-cell-size: 14.1666% !default;
 
 .mtx-clock-hand {
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   width: 1px;
   margin: 0 auto;
   transform-origin: bottom;

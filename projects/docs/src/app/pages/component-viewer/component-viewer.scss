@@ -12,7 +12,7 @@ app-component-viewer {
   @media (max-width: constants.$small-breakpoint-width) {
     width: calc(100% - #{constants.$content-padding-sidenav * 2});
   }
-  @media (max-width: 599px) {
+  @media (width <= 599px) {
     width: calc(100% - #{constants.$content-padding-side-xs * 2});
     padding-left: constants.$content-padding-side-xs;
     padding-right: constants.$content-padding-side-xs;
