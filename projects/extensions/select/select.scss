@@ -136,13 +136,6 @@
 }
 
 .ng-dropdown-panel {
-  left: 0;
-
-  @include rtl {
-    right: 0;
-    left: auto;
-  }
-
   &.ng-select-bottom {
     top: 100%;
     border-bottom-left-radius: 4px;

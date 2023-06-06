@@ -61,7 +61,11 @@ export class DevAppLayout {
     @Inject(DOCUMENT) private _document: Document,
     public translate: TranslateService
   ) {
-    dir.change.subscribe(() => cdr.markForCheck());
+    dir.change.subscribe(value => {
+      document.body.dir = value;
+      cdr.markForCheck();
+    });
+
     try {
       const isDark = localStorage.getItem(isDarkThemeKey);
       if (isDark != null) {
