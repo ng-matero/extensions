@@ -27,7 +27,7 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
     _delegate: DateAdapter<DateTime>
   ) {
     super(_delegate);
-    this.setLocale(matDateLocale || DateTime.now().locale);
+    this.setLocale(matDateLocale || DateTime.now().locale || '');
     this._useUtc = matLuxonAdapterOptions.useUtc!;
   }
 
