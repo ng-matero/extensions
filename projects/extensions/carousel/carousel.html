@@ -1,0 +1,33 @@
+<div class="carousel">
+
+  <div class="carousel-container">
+    <div class="carousel-content" [style.transform]="'translateX(' + (-selectedIndex * 100) + '%)'">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+  <button mat-fab (click)="prevSlide()">
+    <svg width="24" height="24" viewBox="0 0 24 24">
+      <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+    </svg>
+  </button>
+  <button mat-fab (click)="nextSlide()">
+    <svg width="24" height="24" viewBox="0 0 24 24">
+      <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
+    </svg>
+  </button>
+
+  <div class="carousel-index" tabindex="-1">
+    <button *ngFor="let slide of slides; let i = index"
+      mat-mini-fab 
+      [disabled]="i == selectedIndex" 
+      (click)="toSlide(i)">
+    </button>
+  </div>
+  <div class="carousel-autoPlay">
+    <button mat-icon-button (click)="toggleAutoPlay($event)">
+      <mat-icon *ngIf="!autoPlay">play_arrow</mat-icon>
+      <mat-icon *ngIf="autoPlay">stop</mat-icon>
+    </button>
+  </div>
+</div>

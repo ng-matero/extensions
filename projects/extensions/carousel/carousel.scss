@@ -1,0 +1,58 @@
+.carousel {
+  &-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+  }
+
+  &-content {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  &-item {
+    width: 100%;
+    flex-shrink: 0;
+  }
+
+  & > button {
+    margin-top: 1rem;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+
+    &:first-of-type {
+      left: 30px;
+    }
+
+    &:last-of-type {
+      right: 30px;
+    }
+  }
+
+  &-index {
+    bottom: 15px;
+    z-index: 1;
+    outline: none;
+
+    & > button {
+      position: relative;
+      width: '10px';
+      height: '10px';
+      margin: 7.5px;
+      left: 50%;
+    }
+  }
+
+  &-autoPlay {
+    opacity: 0.2;
+    &:hover {
+      opacity: 0.8;
+    }
+    > button {
+      position: relative;
+      bottom: 35px;
+      left: 50%;
+    }
+  }
+}
