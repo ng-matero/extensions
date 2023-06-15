@@ -7,7 +7,7 @@
 
   &-content {
     display: flex;
-    transition: transform 0.3s ease-in-out;
+    transition: transform .3s ease-in-out;
   }
 
   &-item {
@@ -45,13 +45,15 @@
   }
 
   &-autoPlay {
-    opacity: 0.2;
+    opacity: .2;
+
     &:hover {
-      opacity: 0.8;
+      opacity: .8;
     }
+
     > button {
       position: relative;
-      bottom: 35px;
+      bottom: 5px;
       left: 50%;
     }
   }

@@ -6,25 +6,25 @@
     </div>
   </div>
 
-  <button mat-fab (click)="prevSlide()">
+  <button mat-fab (click)="prevSlide($event)" *ngIf="showPrevNextButtons">
     <svg width="24" height="24" viewBox="0 0 24 24">
       <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
     </svg>
   </button>
-  <button mat-fab (click)="nextSlide()">
+  <button mat-fab (click)="nextSlide($event)" *ngIf="showPrevNextButtons">
     <svg width="24" height="24" viewBox="0 0 24 24">
       <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"></path>
     </svg>
   </button>
 
-  <div class="carousel-index" tabindex="-1">
+  <div class="carousel-index" tabindex="-1" *ngIf="showIndexPan">
     <button *ngFor="let slide of slides; let i = index"
-      mat-mini-fab 
-      [disabled]="i == selectedIndex" 
-      (click)="toSlide(i)">
+      mat-mini-fab
+      [disabled]="i == selectedIndex"
+      (click)="toSlide($event, i)">
     </button>
   </div>
-  <div class="carousel-autoPlay">
+  <div class="carousel-autoPlay" *ngIf="showAutoPlay">
     <button mat-icon-button (click)="toggleAutoPlay($event)">
       <mat-icon *ngIf="!autoPlay">play_arrow</mat-icon>
       <mat-icon *ngIf="autoPlay">stop</mat-icon>

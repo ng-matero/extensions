@@ -26,9 +26,13 @@ export class MtxCarousel implements AfterContentInit, AfterViewInit, OnDestroy {
   selectedIndex = 0;
   timer$ = new Observable<number>();
   stopSubject = new Subject<void>();
+  timerIsStopped = false;
 
   intervalTime = 3000;
   autoPlay = true;
+  showAutoPlay = true;
+  showIndexPan = true;
+  showPrevNextButtons = true;
   effectAutoPlayOnMouse = true;
   enableMouseClick = true;
   enableMouseWheel = true;
@@ -55,7 +59,7 @@ export class MtxCarousel implements AfterContentInit, AfterViewInit, OnDestroy {
   @HostListener('click')
   onClick() {
     if (this.enableMouseClick) {
-      this.nextSlide();
+      this.nextIndex();
       this.resetTimer();
       this.startTimer();
     }
@@ -94,6 +98,7 @@ export class MtxCarousel implements AfterContentInit, AfterViewInit, OnDestroy {
   @HostListener('mouseenter')
   onMouseEnter() {
     if (this.effectAutoPlayOnMouse) {
+      this.timerIsStopped = true;
       this.stopTimer();
     }
   }
@@ -101,6 +106,7 @@ export class MtxCarousel implements AfterContentInit, AfterViewInit, OnDestroy {
   @HostListener('mouseleave')
   onMouseLeave() {
     if (this.effectAutoPlayOnMouse) {
+      this.timerIsStopped = false;
       this.startTimer();
     }
   }
@@ -127,11 +133,13 @@ export class MtxCarousel implements AfterContentInit, AfterViewInit, OnDestroy {
   }
 
   startTimer() {
-    this.timer$.pipe(takeUntil(this.stopSubject)).subscribe(() => {
-      if (this.autoPlay) {
-        this.nextSlide();
-      }
-    });
+    if (!this.timerIsStopped) {
+      this.timer$.pipe(takeUntil(this.stopSubject)).subscribe(() => {
+        if (this.autoPlay) {
+          this.nextIndex();
+        }
+      });
+    }
   }
 
   stopTimer() {
@@ -139,52 +147,53 @@ export class MtxCarousel implements AfterContentInit, AfterViewInit, OnDestroy {
   }
 
   incrementSelectedIndex() {
-    this.selectedIndex = (this.selectedIndex + 1) % this.slides.length;
+    if (this.infiniteLoop || this.selectedIndex != this.slides.length - 1) {
+      this.selectedIndex = (this.selectedIndex + 1) % this.slides.length;
+    }
   }
 
   decrementSelectedIndex() {
-    this.selectedIndex = (this.selectedIndex - 1 + this.slides.length) % this.slides.length;
-  }
-
-  isLastSlide() {
-    if (
-      (this.directionLoop == 'toLeft' && this.selectedIndex == 0) ||
-      (this.directionLoop == 'toRight' && this.selectedIndex == this.slides.length - 1)
-    ) {
-      return true;
-    }
-    return false;
-  }
-
-  nextSlide() {
-    if (this.infiniteLoop || !this.isLastSlide()) {
-      if (this.directionLoop == 'toLeft') {
-        this.decrementSelectedIndex();
-      } else {
-        this.incrementSelectedIndex();
-      }
+    if (this.infiniteLoop || this.selectedIndex != 0) {
+      this.selectedIndex = (this.selectedIndex - 1 + this.slides.length) % this.slides.length;
     }
   }
 
-  prevSlide() {
-    if (this.infiniteLoop || !this.isLastSlide()) {
-      if (this.directionLoop == 'toLeft') {
-        this.incrementSelectedIndex();
-      } else {
-        this.decrementSelectedIndex();
-      }
+  nextIndex() {
+    if (this.directionLoop == 'toLeft') {
+      this.decrementSelectedIndex();
+    } else {
+      this.incrementSelectedIndex();
     }
   }
 
-  toSlide(selectedSlide: number) {
+  prevIndex() {
+    if (this.directionLoop == 'toLeft') {
+      this.incrementSelectedIndex();
+    } else {
+      this.decrementSelectedIndex();
+    }
+  }
+
+  nextSlide($event: any) {
+    $event.stopPropagation();
+    this.incrementSelectedIndex();
+  }
+
+  prevSlide($event: any) {
+    $event.stopPropagation();
+    this.decrementSelectedIndex();
+  }
+
+  toSlide($event: any, selectedSlide: number) {
+    $event.stopPropagation();
     this.selectedIndex = selectedSlide;
     this.resetTimer();
     this.startTimer();
   }
 
   toggleAutoPlay($event: any) {
-    this.autoPlay = !this.autoPlay;
     $event.stopPropagation();
+    this.autoPlay = !this.autoPlay;
     this.resetTimer();
     this.startTimer();
   }
