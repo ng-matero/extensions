@@ -160,12 +160,14 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
    * @param value New value to be written to the model.
    */
   writeValue(value: any[]): void {
+    this.items.forEach(item => (item.checked = false));
+
     if (value) {
       if (!Array.isArray(value)) {
         throw Error('Value must be an array.');
       }
 
-      value.forEach((currentValue: any) => this._selectValue(currentValue));
+      value.forEach(currentValue => this._selectValue(currentValue));
       this.selectedItems = value;
     }
 
