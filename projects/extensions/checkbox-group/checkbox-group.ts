@@ -53,7 +53,7 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
     // store the original data with deep clone
     this._originalItems = JSON.parse(JSON.stringify(value));
     this._items = value.map(option => {
-      return option instanceof Object ? option : new MtxCheckboxBase(option, option);
+      return option instanceof Object ? { ...option } : new MtxCheckboxBase(option, option);
     });
   }
   private _items: any[] = [];
