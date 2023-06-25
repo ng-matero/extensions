@@ -659,7 +659,7 @@ export class MtxSplitComponent
       this.direction === 'horizontal'
         ? (this.startPoint as MtxSplitPoint).x - this.endPoint.x
         : (this.startPoint as MtxSplitPoint).y - this.endPoint.y;
-    if (this.dir === 'rtl') {
+    if (this.dir === 'rtl' && this.direction === 'horizontal') {
       offset = -offset;
     }
     const steppedOffset = Math.round(offset / this.gutterStep) * this.gutterStep;
