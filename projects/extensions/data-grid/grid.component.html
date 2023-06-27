@@ -137,7 +137,8 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultCellTpl>
-                <button *ngIf="col.showExpand" mat-icon-button mtx-grid-expansion-toggle
+                <button *ngIf="col.showExpand" mat-icon-button type="button"
+                        mtx-grid-expansion-toggle
                         [(opened)]="expansionRowStates[dataIndex].expanded"
                         (toggleChange)="_handleExpansionChange($event, row, col, dataIndex);">
                   <mat-icon>keyboard_arrow_right</mat-icon>
@@ -304,7 +305,8 @@
                 </ng-template>
               </ng-template>
               <ng-template #defaultCellTpl>
-                <button *ngIf="col.showExpand" mat-icon-button mtx-grid-expansion-toggle
+                <button *ngIf="col.showExpand" mat-icon-button type="button"
+                        mtx-grid-expansion-toggle
                         [(opened)]="expansionRowStates[dataIndex].expanded"
                         (toggleChange)="_handleExpansionChange($event, row, col, dataIndex);">
                   <mat-icon>keyboard_arrow_right</mat-icon>

@@ -27,21 +27,17 @@
     <ng-container *ngSwitchCase="'button'">
       <ng-container *ngFor="let btn of colDef.buttons;">
         <ng-container *ngIf="!btn.iif || btn.iif(rowData)">
-          <button [ngClass]="['mtx-grid-action-button', btn.class||'']"
-                  *ngIf="btn.type==='basic'"
-                  mat-button
-                  [color]="btn.color || 'primary'"
-                  [disabled]="btn.disabled"
+          <button *ngIf="btn.type==='basic'" type="button"
+                  [ngClass]="['mtx-grid-action-button', btn.class||'']"
+                  mat-button [color]="btn.color || 'primary'" [disabled]="btn.disabled"
                   [matTooltip]="btn.tooltip | toObservable | async"
                   (click)="_handleActionClick($event, btn, rowData)">
             <mat-icon class="mtx-grid-icon" *ngIf="btn.icon">{{btn.icon}}</mat-icon>
             <span>{{btn.text | toObservable | async}}</span>
           </button>
-          <button [ngClass]="['mtx-grid-action-button', btn.class||'']"
-                  *ngIf="!btn.type || btn.type==='icon'"
-                  mat-icon-button
-                  [color]="btn.color || 'primary'"
-                  [disabled]="btn.disabled"
+          <button *ngIf="!btn.type || btn.type==='icon'" type="button"
+                  [ngClass]="['mtx-grid-action-button', btn.class||'']"
+                  mat-icon-button [color]="btn.color || 'primary'" [disabled]="btn.disabled"
                   [matTooltip]="btn.tooltip | toObservable | async"
                   (click)="_handleActionClick($event, btn, rowData)">
             <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
