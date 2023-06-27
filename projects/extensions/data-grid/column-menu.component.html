@@ -1,41 +1,41 @@
 <ng-container [ngSwitch]="buttonType">
   <ng-container *ngSwitchCase="'raised'">
-    <button [ngClass]="buttonClass" mat-raised-button [color]="buttonColor"
+    <button [ngClass]="buttonClass" mat-raised-button type="button" [color]="buttonColor"
             [matMenuTriggerFor]="menu">
       <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
     </button>
   </ng-container>
   <ng-container *ngSwitchCase="'stroked'">
-    <button [ngClass]="buttonClass" mat-stroked-button [color]="buttonColor"
+    <button [ngClass]="buttonClass" mat-stroked-button type="button" [color]="buttonColor"
             [matMenuTriggerFor]="menu">
       <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
     </button>
   </ng-container>
   <ng-container *ngSwitchCase="'flat'">
-    <button [ngClass]="buttonClass" mat-flat-button [color]="buttonColor"
+    <button [ngClass]="buttonClass" mat-flat-button type="button" [color]="buttonColor"
             [matMenuTriggerFor]="menu">
       <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
     </button>
   </ng-container>
   <ng-container *ngSwitchCase="'icon'">
-    <button [ngClass]="buttonClass" mat-icon-button [color]="buttonColor"
+    <button [ngClass]="buttonClass" mat-icon-button type="button" [color]="buttonColor"
             [matMenuTriggerFor]="menu">
       <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon>
     </button>
   </ng-container>
   <ng-container *ngSwitchCase="'fab'">
-    <button [ngClass]="buttonClass" mat-fab [color]="buttonColor" [matMenuTriggerFor]="menu">
+    <button [ngClass]="buttonClass" mat-fab type="button" [color]="buttonColor" [matMenuTriggerFor]="menu">
       <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
     </button>
   </ng-container>
   <ng-container *ngSwitchCase="'mini-fab'">
-    <button [ngClass]="buttonClass" mat-mini-fab [color]="buttonColor"
+    <button [ngClass]="buttonClass" mat-mini-fab type="button" [color]="buttonColor"
             [matMenuTriggerFor]="menu">
       <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
     </button>
   </ng-container>
   <ng-container *ngSwitchDefault>
-    <button [ngClass]="buttonClass" mat-button [color]="buttonColor" [matMenuTriggerFor]="menu">
+    <button [ngClass]="buttonClass" mat-button type="button" [color]="buttonColor" [matMenuTriggerFor]="menu">
       <mat-icon *ngIf="buttonIcon">{{buttonIcon}}</mat-icon> {{buttonText}}
     </button>
   </ng-container>
