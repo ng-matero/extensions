@@ -16,7 +16,7 @@
     "release": "npm run build:docs && npm run deploy:docs",
     "build:lib": "ng build extensions --prod",
     "copy:scss": "gulp --gulpfile gulpfile.js",
-    "publish": "npm run build:lib && npm run copy:scss && cd dist/extensions && npm publish --access public"
+    "publish": "npm run build:lib && npm run copy:scss && cd dist/extensions && npm publish --tag v10-lts"
   },
   "private": true,
   "dependencies": {
