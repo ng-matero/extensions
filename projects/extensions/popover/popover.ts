@@ -321,8 +321,10 @@ export class MtxPopover implements MtxPopoverPanel, OnDestroy {
   /** Enables close of popover when mouse leaving popover element */
   onMouseLeave() {
     if (this.triggerEvent === 'hover') {
-      this.closeDisabled = false;
-      this._emitCloseEvent();
+      setTimeout(() => {
+        this.closeDisabled = false;
+        this._emitCloseEvent();
+      }, this.leaveDelay);
     }
   }
 
