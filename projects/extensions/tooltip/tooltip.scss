@@ -17,6 +17,12 @@
   ));
 }
 
+// Fix tooltip' positioning when mat-tooltip and mtx-tooltip coexist.
+.mdc-tooltip.mat-mdc-tooltip,
+.mdc-tooltip.mtx-mdc-tooltip {
+  position: relative;
+}
+
 .mtx-mdc-tooltip {
   // We don't use MDC's positioning so this has to be relative.
   position: relative;
