@@ -4,7 +4,7 @@
   <mat-label>Select City</mat-label>
 
   <mtx-select [items]="cities" [(ngModel)]="selectedCity" bindLabel="name" bindValue="name"
-              appendTo=".docs-component-viewer-content">
+              appendTo="app-select-overview">
     <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
       <div *ngIf="item.name === 'Kaunas'">{{item.name}}</div>
       <mat-card class="example-card" *ngIf="item.name !== 'Kaunas'">

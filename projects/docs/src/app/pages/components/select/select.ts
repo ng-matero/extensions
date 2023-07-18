@@ -22,6 +22,14 @@ import {
 @Component({
   selector: 'app-select-overview',
   templateUrl: './select-overview.html',
+  styles: [
+    `
+      :host {
+        position: relative;
+        display: block;
+      }
+    `,
+  ],
 })
 export class SelectOverviewComponent {
   constructor(public route: ActivatedRoute) {}
