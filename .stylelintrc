@@ -16,6 +16,7 @@
     "import-notation": null,
     "no-descending-specificity": null,
     "no-empty-source": null,
+    "media-query-no-invalid": null,
     "number-max-precision": null,
     "number-leading-zero": "never",
     "selector-pseudo-element-no-unknown": [
