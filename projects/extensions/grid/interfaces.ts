@@ -1,4 +1,5 @@
 import { TemplateRef } from '@angular/core';
+import { MatBadgePosition, MatBadgeSize } from '@angular/material/badge';
 import { ThemePalette } from '@angular/material/core';
 import { SortDirection } from '@angular/material/sort';
 import { TooltipPosition, TooltipTouchGestures } from '@angular/material/tooltip';
@@ -95,6 +96,7 @@ export interface MtxGridColumnButton<T = any> {
   iif?: (rowData: T) => boolean;
   pop?: MtxGridColumnButtonPop;
   tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
+  badge?: string | Observable<string> | MtxGridColumnButtonBadge;
 }
 
 /** The properties of column button pop. */
@@ -115,6 +117,18 @@ export interface MtxGridColumnButtonTooltip {
   hideDelay?: number;
   showDelay?: number;
   touchGestures?: TooltipTouchGestures;
+}
+
+/** The properties of column button badge. */
+export interface MtxGridColumnButtonBadge {
+  content: number | string | Observable<string>;
+  description?: string | Observable<string>;
+  color?: ThemePalette;
+  position?: MatBadgePosition;
+  size?: MatBadgeSize;
+  overlap?: boolean;
+  disabled?: boolean;
+  hidden?: boolean;
 }
 
 /** Cell template. */

@@ -26,10 +26,12 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
 import {
   MtxGridCellActionDisablePipe,
   MtxGridCellActionTooltipPipe,
+  MtxGridCellActionBadgePipe,
   MtxGridCellSummaryPipe,
   MtxGridColClassPipe,
   MtxGridRowClassPipe,
 } from './grid-pipes';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   imports: [
@@ -43,6 +45,7 @@ import {
     MatProgressBarModule,
     MatChipsModule,
     MatTooltipModule,
+    MatBadgeModule,
     MatIconModule,
     MatSelectModule,
     MatFormFieldModule,
@@ -74,6 +77,7 @@ import {
     MtxGridRowClassPipe,
     MtxGridColClassPipe,
     MtxGridCellActionTooltipPipe,
+    MtxGridCellActionBadgePipe,
     MtxGridCellActionDisablePipe,
     MtxGridCellSummaryPipe,
   ],

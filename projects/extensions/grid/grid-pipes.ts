@@ -51,11 +51,22 @@ export class MtxGridRowClassPipe implements PipeTransform {
 export class MtxGridCellActionTooltipPipe implements PipeTransform {
   transform(btn: MtxGridColumnButton) {
     if (typeof btn.tooltip === 'string' || isObservable(btn.tooltip)) {
-      return {
-        message: btn.tooltip,
-      };
+      return { message: btn.tooltip };
     } else {
       return btn.tooltip || { message: '' };
+    }
+  }
+}
+
+@Pipe({
+  name: 'cellActionBadge',
+})
+export class MtxGridCellActionBadgePipe implements PipeTransform {
+  transform(btn: MtxGridColumnButton) {
+    if (typeof btn.badge === 'number' || typeof btn.badge === 'string' || isObservable(btn.badge)) {
+      return { content: btn.badge };
+    } else {
+      return btn.badge || { content: '' };
     }
   }
 }

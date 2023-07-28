@@ -37,6 +37,14 @@
                   [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
                   [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
                   [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
+                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
+                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
+                  [matBadgeColor]="(btn | cellActionBadge).color"
+                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
+                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
+                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
+                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
+                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
             <mat-icon class="mtx-grid-icon" *ngIf="btn.icon">{{btn.icon}}</mat-icon>
             <span>{{btn.text | toObservable | async}}</span>
@@ -51,6 +59,14 @@
                   [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
                   [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
                   [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
+                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
+                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
+                  [matBadgeColor]="(btn | cellActionBadge).color"
+                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
+                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
+                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
+                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
+                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
             <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
           </button>
