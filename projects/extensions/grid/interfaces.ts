@@ -95,8 +95,16 @@ export interface MtxGridColumnButton<T = any> {
   click?: (rowData: T) => void;
   iif?: (rowData: T) => boolean;
   pop?: MtxGridColumnButtonPop;
-  tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
-  badge?: string | Observable<string> | MtxGridColumnButtonBadge;
+  tooltip?:
+    | string
+    | Observable<string>
+    | MtxGridColumnButtonTooltip
+    | ((rowData: T) => MtxGridColumnButtonTooltip);
+  badge?:
+    | string
+    | Observable<string>
+    | MtxGridColumnButtonBadge
+    | ((rowData: T) => MtxGridColumnButtonBadge);
 }
 
 /** The properties of column button pop. */
@@ -113,10 +121,12 @@ export interface MtxGridColumnButtonPop {
 export interface MtxGridColumnButtonTooltip {
   message: string | Observable<string>;
   position?: TooltipPosition;
+  positionAtOrigin?: boolean;
   class?: any;
   hideDelay?: number;
   showDelay?: number;
   touchGestures?: TooltipTouchGestures;
+  disabled?: boolean;
 }
 
 /** The properties of column button badge. */

@@ -49,9 +49,11 @@ export class MtxGridRowClassPipe implements PipeTransform {
   name: 'cellActionTooltip',
 })
 export class MtxGridCellActionTooltipPipe implements PipeTransform {
-  transform(btn: MtxGridColumnButton) {
+  transform(btn: MtxGridColumnButton, rowData?: Record<string, any>) {
     if (typeof btn.tooltip === 'string' || isObservable(btn.tooltip)) {
       return { message: btn.tooltip };
+    } else if (typeof btn.tooltip == 'function') {
+      return btn.tooltip(rowData);
     } else {
       return btn.tooltip || { message: '' };
     }
@@ -62,9 +64,11 @@ export class MtxGridCellActionTooltipPipe implements PipeTransform {
   name: 'cellActionBadge',
 })
 export class MtxGridCellActionBadgePipe implements PipeTransform {
-  transform(btn: MtxGridColumnButton) {
+  transform(btn: MtxGridColumnButton, rowData?: Record<string, any>) {
     if (typeof btn.badge === 'number' || typeof btn.badge === 'string' || isObservable(btn.badge)) {
       return { content: btn.badge };
+    } else if (typeof btn.badge == 'function') {
+      return btn.badge(rowData);
     } else {
       return btn.badge || { content: '' };
     }
