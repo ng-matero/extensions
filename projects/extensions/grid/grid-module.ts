@@ -24,6 +24,7 @@ import { MtxGridExpansionToggle } from './expansion-toggle';
 import { MtxGridUtils } from './grid-utils';
 import { MatColumnResizeModule } from './column-resize/column-resize-module';
 import {
+  MtxGridCellActionsPipe,
   MtxGridCellActionDisablePipe,
   MtxGridCellActionTooltipPipe,
   MtxGridCellActionBadgePipe,
@@ -76,6 +77,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MtxGridSelectableCell,
     MtxGridRowClassPipe,
     MtxGridColClassPipe,
+    MtxGridCellActionsPipe,
     MtxGridCellActionTooltipPipe,
     MtxGridCellActionBadgePipe,
     MtxGridCellActionDisablePipe,

@@ -24,7 +24,7 @@ export interface MtxGridColumn<T = any> {
   type?: MtxGridColumnType;
   typeParameter?: MtxGridColumnTypeParameter;
   tag?: MtxGridColumnTag;
-  buttons?: MtxGridColumnButton<T>[];
+  buttons?: MtxGridColumnButton<T>[] | ((rowData: T) => MtxGridColumnButton<T>[]);
   formatter?: (rowData: T, colDef?: MtxGridColumn) => any;
   cellTemplate?: TemplateRef<any> | null;
   showExpand?: boolean;
@@ -95,16 +95,8 @@ export interface MtxGridColumnButton<T = any> {
   click?: (rowData: T) => void;
   iif?: (rowData: T) => boolean;
   pop?: MtxGridColumnButtonPop;
-  tooltip?:
-    | string
-    | Observable<string>
-    | MtxGridColumnButtonTooltip
-    | ((rowData: T) => MtxGridColumnButtonTooltip);
-  badge?:
-    | string
-    | Observable<string>
-    | MtxGridColumnButtonBadge
-    | ((rowData: T) => MtxGridColumnButtonBadge);
+  tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
+  badge?: string | Observable<string> | MtxGridColumnButtonBadge;
 }
 
 /** The properties of column button pop. */

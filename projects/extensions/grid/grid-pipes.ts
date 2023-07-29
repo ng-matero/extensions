@@ -3,16 +3,14 @@ import { isObservable } from 'rxjs';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumn, MtxGridColumnButton, MtxGridRowClassFormatter } from './interfaces';
 
-@Pipe({
-  name: 'colClass',
-})
+@Pipe({ name: 'colClass' })
 export class MtxGridColClassPipe implements PipeTransform {
   transform(
     colDef: MtxGridColumn,
     rowData?: Record<string, any>,
     rowChangeRecord?: KeyValueChangeRecord<string, any>,
     currentValue?: any
-  ): string {
+  ) {
     if (typeof colDef.class === 'string') {
       return colDef.class;
     } else if (typeof colDef.class === 'function') {
@@ -22,16 +20,14 @@ export class MtxGridColClassPipe implements PipeTransform {
   }
 }
 
-@Pipe({
-  name: 'rowClass',
-})
+@Pipe({ name: 'rowClass' })
 export class MtxGridRowClassPipe implements PipeTransform {
   transform(
     rowData: Record<string, any>,
     index: number,
     dataIndex: number,
     rowClassFormatter?: MtxGridRowClassFormatter
-  ): string {
+  ) {
     const rowIndex = typeof index === 'undefined' ? dataIndex : index;
     const classList: string[] = rowIndex % 2 === 1 ? ['mat-row-odd'] : [];
     if (rowClassFormatter) {
@@ -45,39 +41,46 @@ export class MtxGridRowClassPipe implements PipeTransform {
   }
 }
 
-@Pipe({
-  name: 'cellActionTooltip',
-})
+@Pipe({ name: 'cellActions' })
+export class MtxGridCellActionsPipe implements PipeTransform {
+  transform(
+    btns?: MtxGridColumnButton[] | ((rowData: any) => MtxGridColumnButton[]),
+    rowData?: Record<string, any>,
+    rowChangeRecord?: KeyValueChangeRecord<string, any>,
+    currentValue?: any
+  ) {
+    if (typeof btns === 'function') {
+      return btns(rowData);
+    } else if (btns != null) {
+      return btns;
+    }
+    return [];
+  }
+}
+
+@Pipe({ name: 'cellActionTooltip' })
 export class MtxGridCellActionTooltipPipe implements PipeTransform {
-  transform(btn: MtxGridColumnButton, rowData?: Record<string, any>) {
+  transform(btn: MtxGridColumnButton) {
     if (typeof btn.tooltip === 'string' || isObservable(btn.tooltip)) {
       return { message: btn.tooltip };
-    } else if (typeof btn.tooltip == 'function') {
-      return btn.tooltip(rowData);
     } else {
       return btn.tooltip || { message: '' };
     }
   }
 }
 
-@Pipe({
-  name: 'cellActionBadge',
-})
+@Pipe({ name: 'cellActionBadge' })
 export class MtxGridCellActionBadgePipe implements PipeTransform {
-  transform(btn: MtxGridColumnButton, rowData?: Record<string, any>) {
+  transform(btn: MtxGridColumnButton) {
     if (typeof btn.badge === 'number' || typeof btn.badge === 'string' || isObservable(btn.badge)) {
       return { content: btn.badge };
-    } else if (typeof btn.badge == 'function') {
-      return btn.badge(rowData);
     } else {
       return btn.badge || { content: '' };
     }
   }
 }
 
-@Pipe({
-  name: 'cellActionDisable',
-})
+@Pipe({ name: 'cellActionDisable' })
 export class MtxGridCellActionDisablePipe implements PipeTransform {
   transform(
     btn: MtxGridColumnButton,
@@ -95,9 +98,7 @@ export class MtxGridCellActionDisablePipe implements PipeTransform {
   }
 }
 
-@Pipe({
-  name: 'cellSummary',
-})
+@Pipe({ name: 'cellSummary' })
 export class MtxGridCellSummaryPipe implements PipeTransform {
   constructor(private utils: MtxGridUtils) {}
   transform(data: any[], colDef: MtxGridColumn) {
