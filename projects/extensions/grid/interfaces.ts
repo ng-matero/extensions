@@ -44,8 +44,8 @@ export interface MtxGridColumnPinOption {
 
 /** Possible column type values. */
 export declare type MtxGridColumnType =
-  | 'tag'
   | 'button'
+  | 'tag'
   | 'link'
   | 'image'
   | 'boolean'
@@ -86,7 +86,7 @@ export interface MtxGridColumnTagValue {
 
 /** The properties of column button. */
 export interface MtxGridColumnButton<T = any> {
-  type?: 'basic' | 'icon';
+  type?: MtxGridButtonType;
   text?: string | Observable<string>;
   icon?: string;
   color?: ThemePalette;
@@ -150,7 +150,14 @@ export interface MtxGridRowClassFormatter<T = any> {
 }
 
 /** Possible button type values. */
-export type MtxGridButtonType = 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';
+export type MtxGridButtonType =
+  | 'basic'
+  | 'raised'
+  | 'stroked'
+  | 'flat'
+  | 'icon'
+  | 'fab'
+  | 'mini-fab';
 
 /**
  * Represents the default options for the grid that can be configured
