@@ -14,9 +14,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
+import PhotoViewer from 'photoviewer';
+import { isObservable } from 'rxjs';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
-import PhotoViewer from 'photoviewer';
 
 @Component({
   selector: 'mtx-grid-cell',
@@ -94,7 +95,15 @@ export class MtxGridCell implements OnInit, DoCheck {
     event.preventDefault();
     event.stopPropagation();
 
-    if (btn.pop) {
+    if (typeof btn.pop === 'string' || isObservable(btn.pop)) {
+      this._dialog.open({
+        title: btn.pop,
+        buttons: [
+          { color: 'primary', text: 'OK', onClick: () => btn.click?.(rowData) || {} },
+          { text: 'CLOSE' },
+        ],
+      });
+    } else if (typeof btn.pop === 'object') {
       this._dialog.open({
         title: btn.pop?.title,
         description: btn.pop?.description,
@@ -107,7 +116,6 @@ export class MtxGridCell implements OnInit, DoCheck {
           {
             color: btn.pop?.closeColor,
             text: btn.pop?.closeText || 'CLOSE',
-            onClick: () => {},
           },
         ],
       });
