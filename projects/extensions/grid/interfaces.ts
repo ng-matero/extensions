@@ -96,7 +96,7 @@ export interface MtxGridColumnButton<T = any> {
   iif?: (rowData: T) => boolean;
   pop?: string | Observable<string> | MtxGridColumnButtonPop;
   tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
-  badge?: string | Observable<string> | MtxGridColumnButtonBadge;
+  badge?: number | string | Observable<string> | MtxGridColumnButtonBadge;
 }
 
 /** The properties of column button pop. */
