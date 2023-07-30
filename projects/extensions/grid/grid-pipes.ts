@@ -51,7 +51,7 @@ export class MtxGridCellActionsPipe implements PipeTransform {
   ) {
     if (typeof btns === 'function') {
       return btns(rowData);
-    } else if (btns != null) {
+    } else if (Array.isArray(btns)) {
       return btns;
     }
     return [];
