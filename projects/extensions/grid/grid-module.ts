@@ -13,6 +13,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { MtxPipesModule } from '@ng-matero/extensions/core';
@@ -32,7 +33,6 @@ import {
   MtxGridColClassPipe,
   MtxGridRowClassPipe,
 } from './grid-pipes';
-import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   imports: [

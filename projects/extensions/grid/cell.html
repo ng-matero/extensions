@@ -16,8 +16,8 @@
   <ng-container [ngSwitch]="colDef.type">
     <!-- Buttons -->
     <ng-container *ngSwitchCase="'button'">
-      <ng-container *ngFor="let btn of colDef.buttons | cellActions: rowData:
-                            rowChangeRecord: rowChangeRecord?.currentValue">
+      <ng-container
+                    *ngFor="let btn of colDef.buttons | cellActions: rowData: rowChangeRecord: rowChangeRecord?.currentValue">
         <ng-container *ngIf="!btn.iif || btn.iif(rowData)">
           <ng-container [ngSwitch]="btn.type">
             <ng-container *ngSwitchCase="'raised'">
