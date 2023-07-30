@@ -176,7 +176,7 @@ interface MtxGridColumn<T = any> {
   type?: MtxGridColumnType;
   typeParameter?: MtxGridColumnTypeParameter;
   tag?: MtxGridColumnTag;
-  buttons?: MtxGridColumnButton<T>[];
+  buttons?: MtxGridColumnButton<T>[] | ((rowData: T) => MtxGridColumnButton<T>[]);
   formatter?: (rowData: T, colDef?: MtxGridColumn) => any;
   cellTemplate?: TemplateRef<any> | null;
   showExpand?: boolean;
@@ -223,7 +223,7 @@ interface MtxGridSortProp {
 
 ```ts
 interface MtxGridColumnButton<T = any> {
-  type?: 'basic' | 'icon';
+  type?: MtxGridButtonType;
   text?: string | Observable<string>;
   icon?: string;
   color?: ThemePalette;
@@ -231,8 +231,9 @@ interface MtxGridColumnButton<T = any> {
   disabled?: boolean | ((rowData: T) => boolean);
   click?: (rowData: T) => void;
   iif?: (rowData: T) => boolean;
-  pop?: MtxGridColumnButtonPop;
+  pop?: string | Observable<string> | MtxGridColumnButtonPop;
   tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
+  badge?: number | string | Observable<string> | MtxGridColumnButtonBadge;
 }
 ```
 
@@ -255,10 +256,27 @@ export interface MtxGridColumnButtonPop {
 export interface MtxGridColumnButtonTooltip {
   message: string | Observable<string>;
   position?: TooltipPosition;
+  positionAtOrigin?: boolean;
   class?: any;
   hideDelay?: number;
   showDelay?: number;
   touchGestures?: TooltipTouchGestures;
+  disabled?: boolean;
+}
+```
+
+#### `MtxGridColumnButtonBadge`
+
+```ts
+export interface MtxGridColumnButtonBadge {
+  content: number | string | Observable<string>;
+  description?: string | Observable<string>;
+  color?: ThemePalette;
+  position?: MatBadgePosition;
+  size?: MatBadgeSize;
+  overlap?: boolean;
+  disabled?: boolean;
+  hidden?: boolean;
 }
 ```
 
@@ -374,7 +392,7 @@ type MtxGridColumnPinValue = 'left' | 'right' | null;
 #### `MtxGridButtonType`
 
 ```ts
-type MtxGridButtonType = 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';
+type MtxGridButtonType = 'basic' | 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';
 ```
 
 ### Constants
