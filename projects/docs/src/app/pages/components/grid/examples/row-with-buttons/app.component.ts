@@ -43,10 +43,12 @@ export class AppComponent {
           icon: 'delete',
           tooltip: 'Delete',
           color: 'warn',
-          pop: {
-            title: 'Confirm delete?',
-          },
+          pop: 'Confirm delete?',
           click: () => alert('delete'),
+          badge: {
+            content: 1,
+            size: 'small',
+          },
         },
       ],
     },
