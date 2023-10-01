@@ -402,6 +402,18 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
       );
     }
 
+    // if there is a dateFilter, check if the date is allowed if it is not then do not set/emit new date
+    // https://github.com/ng-matero/extensions/issues/244
+    if (
+      this.dateFilter &&
+      !this.dateFilter(
+        date,
+        this._hourView ? MtxDatetimepickerFilterType.HOUR : MtxDatetimepickerFilterType.MINUTE
+      )
+    ) {
+      return;
+    }
+
     this._timeChanged = true;
     this.activeDate = date;
     this._changeDetectorRef.markForCheck();
