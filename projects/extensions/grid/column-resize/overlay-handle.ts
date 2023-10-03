@@ -67,7 +67,7 @@ export class MatColumnResizeOverlayHandle extends ResizeOverlayHandle {
     this.resizeRef.overlayRef.updateSize({
       height: active
         ? (this.columnResize as AbstractMatColumnResize).getTableHeight()
-        : this.resizeRef.origin.nativeElement!.offsetHeight,
+        : this.resizeRef.origin.nativeElement.offsetHeight,
     });
   }
 }

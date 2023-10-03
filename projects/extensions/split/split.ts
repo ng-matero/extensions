@@ -397,7 +397,7 @@ export class MtxSplit extends _MtxSplitBase implements AfterViewInit, OnDestroy,
       // If user provided 'order' for each area, use it to sort them.
       if (this.displayedAreas.every(a => a.component.order !== null)) {
         this.displayedAreas.sort(
-          (a, b) => ((a.component.order as number) - (b.component.order as number)) as number
+          (a, b) => (a.component.order as number) - (b.component.order as number)
         );
       }
 

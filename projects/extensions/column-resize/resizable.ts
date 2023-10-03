@@ -33,7 +33,8 @@ const OVERLAY_ACTIVE_CLASS = 'cdk-resizable-overlay-thumb-active';
  */
 @Directive()
 export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
-  implements AfterViewInit, OnDestroy {
+  implements AfterViewInit, OnDestroy
+{
   protected isResizable = true;
 
   protected minWidthPxInternal: number = 0;
@@ -109,7 +110,7 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
     this.destroyed.complete();
 
     if (this.inlineHandle) {
-      this.elementRef.nativeElement!.removeChild(this.inlineHandle);
+      this.elementRef.nativeElement.removeChild(this.inlineHandle);
     }
 
     if (this.overlayRef) {
@@ -129,7 +130,7 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
     const isRtl = this.directionality.value === 'rtl';
     const positionStrategy = this.overlay
       .position()
-      .flexibleConnectedTo(this.elementRef.nativeElement!)
+      .flexibleConnectedTo(this.elementRef.nativeElement)
       .withFlexibleDimensions(false)
       .withGrowAfterOpen(false)
       .withPush(false)
@@ -154,7 +155,7 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
   }
 
   private _listenForRowHoverEvents(): void {
-    const element = this.elementRef.nativeElement!;
+    const element = this.elementRef.nativeElement;
     const takeUntilDestroyed = takeUntil<boolean>(this.destroyed);
 
     this.eventDispatcher
@@ -183,7 +184,7 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
         filter(columnSize => columnSize.columnId === this.columnDef.name)
       )
       .subscribe(({ size, previousSize, completeImmediately }) => {
-        this.elementRef.nativeElement!.classList.add(OVERLAY_ACTIVE_CLASS);
+        this.elementRef.nativeElement.classList.add(OVERLAY_ACTIVE_CLASS);
         this._applySize(size, previousSize);
 
         if (completeImmediately) {
@@ -202,13 +203,13 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
     this.ngZone.run(() => {
       this.resizeNotifier.resizeCompleted.next({
         columnId: this.columnDef.name,
-        size: this.elementRef.nativeElement!.offsetWidth,
+        size: this.elementRef.nativeElement.offsetWidth,
       });
     });
   }
 
   private _cleanUpAfterResize(columnSize: ColumnSizeAction): void {
-    this.elementRef.nativeElement!.classList.remove(OVERLAY_ACTIVE_CLASS);
+    this.elementRef.nativeElement.classList.remove(OVERLAY_ACTIVE_CLASS);
 
     if (this.overlayRef && this.overlayRef.hasAttached()) {
       this._updateOverlayHandleHeight();
@@ -252,7 +253,7 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
   }
 
   private _updateOverlayHandleHeight() {
-    this.overlayRef!.updateSize({ height: this.elementRef.nativeElement!.offsetHeight });
+    this.overlayRef!.updateSize({ height: this.elementRef.nativeElement.offsetHeight });
   }
 
   private _applySize(sizeInPixels: number, previousSize?: number): void {
@@ -260,7 +261,7 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
 
     this.resizeStrategy.applyColumnSize(
       this.columnDef.cssClassFriendlyName,
-      this.elementRef.nativeElement!,
+      this.elementRef.nativeElement,
       sizeToApply,
       previousSize
     );
@@ -290,7 +291,7 @@ export abstract class Resizable<HandleComponent extends ResizeOverlayHandle>
 
       // TODO: Apply correct aria role (probably slider) after a11y spec questions resolved.
 
-      this.elementRef.nativeElement!.appendChild(this.inlineHandle);
+      this.elementRef.nativeElement.appendChild(this.inlineHandle);
     });
   }
 }

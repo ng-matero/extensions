@@ -226,6 +226,7 @@ export class MtxDrawerContainer extends BasePortalOutlet implements OnDestroy {
    * @param selector The CSS selector for the element to set focus to.
    */
   private _focusByCssSelector(selector: string, options?: FocusOptions) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const elementToFocus = this._elementRef.nativeElement.querySelector(
       selector
     ) as HTMLElement | null;

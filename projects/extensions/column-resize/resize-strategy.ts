@@ -277,7 +277,7 @@ export class CdkFlexTableResizeStrategy extends ResizeStrategy implements OnDest
     const selector = `.${tableClassName} .${columnClassName}`;
     const body = propertyKeys.map(key => `${key}:${properties.get(key)}`).join(';');
 
-    this._getStyleSheet().insertRule(`${selector} {${body}}`, index!);
+    this._getStyleSheet().insertRule(`${selector} {${body}}`, index);
   }
 }
 

@@ -102,6 +102,7 @@ export class DevAppLayout {
 
   toggleFullscreen() {
     // Cast to `any`, because the typings don't include the browser-prefixed methods.
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const elem = this._element.nativeElement.querySelector('.demo-content') as any;
     if (elem.requestFullscreen) {
       elem.requestFullscreen();

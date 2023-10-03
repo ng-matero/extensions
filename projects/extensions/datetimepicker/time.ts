@@ -78,7 +78,10 @@ export class MtxTimeInput implements OnDestroy {
   private keyPressListener = this.keyPressHandler.bind(this);
   private inputEventListener = this.inputChangedHandler.bind(this);
 
-  constructor(private element: ElementRef, private cdr: ChangeDetectorRef) {
+  constructor(
+    private element: ElementRef,
+    private cdr: ChangeDetectorRef
+  ) {
     this.inputElement.addEventListener('keydown', this.keyDownListener, {
       passive: true,
     });
@@ -407,11 +410,11 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   focusInputElement() {
     if (this.clockView === 'hour') {
       if (this.hourInputElement) {
-        (this.hourInputElement.nativeElement as HTMLInputElement).focus();
+        this.hourInputElement.nativeElement.focus();
       }
     } else {
       if (this.minuteInputElement) {
-        (this.minuteInputElement.nativeElement as HTMLInputElement).focus();
+        this.minuteInputElement.nativeElement.focus();
       }
     }
   }

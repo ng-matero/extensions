@@ -45,7 +45,7 @@ export abstract class ColumnResize implements AfterViewInit, OnDestroy {
   id?: string;
 
   ngAfterViewInit() {
-    this.elementRef.nativeElement!.classList.add(this.getUniqueCssClass());
+    this.elementRef.nativeElement.classList.add(this.getUniqueCssClass());
 
     this._listenForRowHoverEvents();
     this._listenForResizeActivity();
@@ -64,12 +64,12 @@ export abstract class ColumnResize implements AfterViewInit, OnDestroy {
 
   /** Called when a column in the table is resized. Applies a css class to the table element. */
   setResized() {
-    this.elementRef.nativeElement!.classList.add(WITH_RESIZED_COLUMN_CLASS);
+    this.elementRef.nativeElement.classList.add(WITH_RESIZED_COLUMN_CLASS);
   }
 
   private _listenForRowHoverEvents() {
     this.ngZone.runOutsideAngular(() => {
-      const element = this.elementRef.nativeElement!;
+      const element = this.elementRef.nativeElement;
 
       fromEvent<MouseEvent>(element, 'mouseover')
         .pipe(

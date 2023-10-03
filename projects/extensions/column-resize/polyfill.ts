@@ -40,7 +40,7 @@ function polyfillClosest(element: Element, selector: string): Element | null {
     curr = curr.parentNode;
   }
 
-  return (curr || null) as Element | null;
+  return curr || null;
 }
 
 const hasNativeClosest = !!Element.prototype.closest;

@@ -59,11 +59,11 @@ export abstract class ResizeOverlayHandle implements AfterViewInit, OnDestroy {
 
   private _listenForMouseEvents() {
     this.ngZone.runOutsideAngular(() => {
-      fromEvent<MouseEvent>(this.elementRef.nativeElement!, 'mouseenter')
-        .pipe(mapTo(this.resizeRef.origin.nativeElement!), takeUntil(this.destroyed))
+      fromEvent<MouseEvent>(this.elementRef.nativeElement, 'mouseenter')
+        .pipe(mapTo(this.resizeRef.origin.nativeElement), takeUntil(this.destroyed))
         .subscribe(cell => this.eventDispatcher.headerCellHovered.next(cell));
 
-      fromEvent<MouseEvent>(this.elementRef.nativeElement!, 'mouseleave')
+      fromEvent<MouseEvent>(this.elementRef.nativeElement, 'mouseleave')
         .pipe(
           map(
             event =>
@@ -73,7 +73,7 @@ export abstract class ResizeOverlayHandle implements AfterViewInit, OnDestroy {
         )
         .subscribe(cell => this.eventDispatcher.headerCellHovered.next(cell));
 
-      fromEvent<MouseEvent>(this.elementRef.nativeElement!, 'mousedown')
+      fromEvent<MouseEvent>(this.elementRef.nativeElement, 'mousedown')
         .pipe(takeUntil(this.destroyed))
         .subscribe(mousedownEvent => {
           this._dragStarted(mousedownEvent);
@@ -173,16 +173,16 @@ export abstract class ResizeOverlayHandle implements AfterViewInit, OnDestroy {
 
   protected updateResizeActive(active: boolean): void {
     this.eventDispatcher.overlayHandleActiveForCell.next(
-      active ? this.resizeRef.origin.nativeElement! : null
+      active ? this.resizeRef.origin.nativeElement : null
     );
   }
 
   private _getOriginWidth(): number {
-    return this.resizeRef.origin.nativeElement!.offsetWidth;
+    return this.resizeRef.origin.nativeElement.offsetWidth;
   }
 
   private _getOriginOffset(): number {
-    return this.resizeRef.origin.nativeElement!.offsetLeft;
+    return this.resizeRef.origin.nativeElement.offsetLeft;
   }
 
   private _updateOverlayOffset(offset: number): void {

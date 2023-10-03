@@ -57,7 +57,7 @@ import {
 } from './templates';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
-export type AddTagFn = (term: string) => any | Promise<any>;
+export type AddTagFn = (term: string) => any;
 export type CompareWithFn = (a: any, b: any) => boolean;
 export type GroupValueFn = (
   key: string | Record<string, any>,
