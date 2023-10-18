@@ -25,6 +25,11 @@
         }
       }
     }
+
+    .ng-clear-wrapper {
+      width: 24px;
+      text-align: center;
+    }
   }
 
   .ng-placeholder {
@@ -121,12 +126,8 @@
     }
   }
 
-  .ng-clear-wrapper {
-    text-align: center;
-  }
-
   .ng-arrow-wrapper {
-    width: 18px;
+    width: 10px;
 
     .ng-arrow {
       border-width: 5px 5px 2px;
