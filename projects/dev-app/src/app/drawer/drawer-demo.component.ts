@@ -18,6 +18,7 @@ export class DrawerDemoComponent {
   hasBackdrop = true;
   disableClose = false;
   closeOnNavigation = true;
+  disableAnimation = false;
 
   animal?: string;
   name?: string;
@@ -32,6 +33,7 @@ export class DrawerDemoComponent {
       hasBackdrop: this.hasBackdrop,
       disableClose: this.disableClose,
       closeOnNavigation: this.closeOnNavigation,
+      disableAnimation: this.disableAnimation,
       data: { name: this.name, animal: this.animal },
     });
 

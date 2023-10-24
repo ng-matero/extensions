@@ -8,6 +8,7 @@ import {
 } from '@angular/animations';
 
 /** Animations used by the drawer. */
+
 export const mtxDrawerAnimations: {
   readonly drawerState: AnimationTriggerMetadata;
 } = {

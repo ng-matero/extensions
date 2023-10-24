@@ -44,6 +44,11 @@ export class MtxDrawerConfig<D = any> {
   closeOnNavigation?: boolean = true;
 
   /**
+   * Wether the animation is disabled
+   */
+  disableAnimation?: boolean = false;
+
+  /**
    * Where the drawer should focus on open.
    * @breaking-change 14.0.0 Remove boolean option from autoFocus. Use string or
    * AutoFocusTarget instead.

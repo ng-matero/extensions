@@ -1,41 +1,42 @@
 <section>
-  <label>position:</label>
-  <mat-radio-group aria-label="Select an position" [(ngModel)]="position">
-    <mat-radio-button value="top">top</mat-radio-button>
-    <mat-radio-button value="right">right</mat-radio-button>
-    <mat-radio-button value="bottom">bottom</mat-radio-button>
-    <mat-radio-button value="left">left</mat-radio-button>
-  </mat-radio-group>
+    <label>position:</label>
+    <mat-radio-group aria-label="Select an position" [(ngModel)]="position">
+        <mat-radio-button value="top">top</mat-radio-button>
+        <mat-radio-button value="right">right</mat-radio-button>
+        <mat-radio-button value="bottom">bottom</mat-radio-button>
+        <mat-radio-button value="left">left</mat-radio-button>
+    </mat-radio-group>
 
-  <mat-slide-toggle [(ngModel)]="hasBackdrop">hasBackdrop</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="hasBackdrop">hasBackdrop</mat-slide-toggle>
 
-  <mat-slide-toggle [(ngModel)]="disableClose">disableClose</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="disableClose">disableClose</mat-slide-toggle>
 
-  <mat-slide-toggle [(ngModel)]="closeOnNavigation">closeOnNavigation</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="closeOnNavigation">closeOnNavigation</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="disableAnimation">Disable navigation</mat-slide-toggle>
 </section>
 <section>
-  <mat-form-field>
-    <mat-label>width</mat-label>
-    <input matInput [(ngModel)]="width" type="text">
-  </mat-form-field>
-  &nbsp;
-  <mat-form-field>
-    <mat-label>height</mat-label>
-    <input matInput [(ngModel)]="height" type="text">
-  </mat-form-field>
+    <mat-form-field>
+        <mat-label>width</mat-label>
+        <input matInput [(ngModel)]="width" type="text">
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+        <mat-label>height</mat-label>
+        <input matInput [(ngModel)]="height" type="text">
+    </mat-form-field>
 </section>
 
 <ol>
-  <li>
-    <mat-form-field>
-      <mat-label>What's your name?</mat-label>
-      <input matInput [(ngModel)]="name">
-    </mat-form-field>
-  </li>
-  <li>
-    <button mat-raised-button (click)="open()">Pick one</button>
-  </li>
-  <li *ngIf="animal">
-    You chose: <i>{{animal}}</i>
-  </li>
+    <li>
+        <mat-form-field>
+            <mat-label>What's your name?</mat-label>
+            <input matInput [(ngModel)]="name">
+        </mat-form-field>
+    </li>
+    <li>
+        <button mat-raised-button (click)="open()">Pick one</button>
+    </li>
+    <li *ngIf="animal">
+        You chose: <i>{{animal}}</i>
+    </li>
 </ol>

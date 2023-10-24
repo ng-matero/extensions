@@ -54,6 +54,7 @@ import { MtxDrawerConfig } from './drawer-config';
     '[@state]': '_animationState',
     '(@state.start)': '_onAnimationStart($event)',
     '(@state.done)': '_onAnimationDone($event)',
+    '[@.disabled]': 'drawerConfig?.disableAnimation',
   },
 })
 export class MtxDrawerContainer extends BasePortalOutlet implements OnDestroy {
