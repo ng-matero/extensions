@@ -88,6 +88,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       header: this.translate.stream('city'),
       field: 'city',
       minWidth: 150,
+      class: 'text-center',
     },
     {
       header: this.translate.stream('operation'),
@@ -189,7 +190,10 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   // mat-table
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
-  constructor(private translate: TranslateService, private http: HttpClient) {}
+  constructor(
+    private translate: TranslateService,
+    private http: HttpClient
+  ) {}
 
   ngOnInit() {
     this.getRemoteData();
