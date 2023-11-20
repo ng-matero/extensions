@@ -1,33 +1,14 @@
-@use 'sass:map';
+@use '../core/style/sass-utils';
 @use '../core/theming/theming';
-@use '../core/theming/palette';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/alert' as tokens-mtx-alert;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $background: map.get($config, background);
 
-  .mtx-alert {
-    background-color: theming.get-color-from-palette($background, card);
-  }
-
-  .mtx-alert-info.mtx-alert {
-    background-color: theming.get-color-from-palette(palette.$blue-palette, 500);
-    color: white;
-  }
-
-  .mtx-alert-success.mtx-alert {
-    background-color: theming.get-color-from-palette(palette.$green-palette, 500);
-    color: white;
-  }
-
-  .mtx-alert-warning.mtx-alert {
-    background-color: theming.get-color-from-palette(palette.$orange-palette, 500);
-    color: white;
-  }
-
-  .mtx-alert-danger.mtx-alert {
-    background-color: theming.get-color-from-palette(palette.$red-palette, 500);
-    color: white;
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-alert.$prefix,
+      tokens-mtx-alert.get-color-tokens($config));
   }
 }
 
@@ -37,18 +18,21 @@
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
+
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-alert') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
     $typography: theming.get-typography-config($theme);
 
-    @if $color != null {
+    @if $color !=null {
       @include color($color);
     }
-    @if $density != null {
+
+    @if $density !=null {
       @include density($density);
     }
-    @if $typography != null {
+
+    @if $typography !=null {
       @include typography($typography);
     }
   }

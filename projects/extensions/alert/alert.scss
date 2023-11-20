@@ -1,10 +1,41 @@
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/alert' as tokens-mtx-alert;
+
 .mtx-alert {
+  @include token-utils.create-token-values(tokens-mtx-alert.$prefix,
+    tokens-mtx-alert.get-unthemable-tokens());
+
   position: relative;
   display: block;
   padding: .75rem 1.25rem;
   margin-bottom: 1rem;
   border: 1px solid transparent;
   border-radius: .25rem;
+
+  @include token-utils.use-tokens(tokens-mtx-alert.$prefix, tokens-mtx-alert.get-token-slots()) {
+    @include token-utils.create-token-slot(background-color, default-background-color);
+    @include token-utils.create-token-slot(color, default-text-color);
+
+    &.mtx-alert-info {
+      @include token-utils.create-token-slot(background-color, info-background-color);
+      @include token-utils.create-token-slot(color, info-text-color);
+    }
+
+    &.mtx-alert-success {
+      @include token-utils.create-token-slot(background-color, success-background-color);
+      @include token-utils.create-token-slot(color, success-text-color);
+    }
+
+    &.mtx-alert-warning {
+      @include token-utils.create-token-slot(background-color, warning-background-color);
+      @include token-utils.create-token-slot(color, warning-text-color);
+    }
+
+    &.mtx-alert-danger {
+      @include token-utils.create-token-slot(background-color, danger-background-color);
+      @include token-utils.create-token-slot(color, danger-text-color);
+    }
+  }
 }
 
 .mtx-alert-close {

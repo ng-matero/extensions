@@ -1,20 +1,29 @@
+@use 'sass:color';
 @use 'sass:map';
+@use '../core/tokens/m2/mtx/colorpicker' as tokens-mtx-colorpicker;
 @use '../core/theming/theming';
-@use '../core/theming/palette';
+@use '../core/tokens/token-utils';
+@use '../core/style/sass-utils';
+@use '../core/typography/typography';
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
   $background: map.get($config, background);
 
-  .mtx-colorpicker-toggle-active {
-    color: theming.get-color-from-palette(map.get($config, primary), text);
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-colorpicker.$prefix,
+      tokens-mtx-colorpicker.get-color-tokens($config));
+  }
 
+  .mtx-colorpicker-toggle-active {
     &.mat-accent {
-      color: theming.get-color-from-palette(map.get($config, accent), text);
+      $accent-tokens: tokens-mtx-colorpicker.private-get-toggle-color-palette-color-tokens($config, accent);
+      @include token-utils.create-token-values(tokens-mtx-colorpicker.$prefix, $accent-tokens);
     }
 
     &.mat-warn {
-      color: theming.get-color-from-palette(map.get($config, warn), text);
+      $warn-tokens: tokens-mtx-colorpicker.private-get-toggle-color-palette-color-tokens($config, warn);
+      @include token-utils.create-token-values(tokens-mtx-colorpicker.$prefix, $warn-tokens);
     }
   }
 }
@@ -25,18 +34,21 @@
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
+
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-colorpicker') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
     $typography: theming.get-typography-config($theme);
 
-    @if $color != null {
+    @if $color !=null {
       @include color($color);
     }
-    @if $density != null {
+
+    @if $density !=null {
       @include density($density);
     }
-    @if $typography != null {
+
+    @if $typography !=null {
       @include typography($typography);
     }
   }

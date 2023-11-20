@@ -1,23 +1,29 @@
-.mat-form-field-appearance-legacy {
-  .mat-form-field-prefix,
-  .mat-form-field-suffix {
-    .mtx-colorpicker-toggle-default-icon {
-      width: 1em;
-    }
+@use '@angular/cdk';
+@use '../core/tokens/m2/mtx/colorpicker' as tokens-mtx-colorpicker;
+@use '../core/tokens/token-utils';
+
+$_tokens: (tokens-mtx-colorpicker.$prefix, tokens-mtx-colorpicker.get-token-slots());
+
+// We support the case where the form field is disabled, but the datepicker is not.
+// MDC sets `pointer-events: none` on disabled form fields which prevents clicks on the toggle.
+.mtx-colorpicker-toggle {
+  pointer-events: auto;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(color, toggle-icon-color);
   }
 }
 
-.mat-form-field:not(.mat-form-field-appearance-legacy) {
-  .mat-form-field-prefix,
-  .mat-form-field-suffix {
-    .mtx-colorpicker-toggle-default-icon {
-      display: block;
-      width: 1.5em;
-      height: 1.5em;
-    }
+.mtx-colorpicker-toggle-active {
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(color, toggle-active-state-icon-color);
+  }
+}
 
-    .mat-icon-button .mtx-colorpicker-toggle-default-icon {
-      margin: auto;
-    }
+@include cdk.high-contrast(active, off) {
+  .mtx-colorpicker-toggle-default-icon {
+    // On Chromium-based browsers the icon doesn't appear to inherit the text color in high
+    // contrast mode so we have to set it explicitly. This is a no-op on IE and Firefox.
+    color: CanvasText;
   }
 }
