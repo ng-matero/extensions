@@ -6,8 +6,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatButtonLoading } from './button-loading';
 
 @NgModule({
-  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatButtonModule, MatProgressSpinnerModule, MatButtonLoading],
   exports: [MatButtonLoading],
-  declarations: [MatButtonLoading],
 })
 export class MtxButtonModule {}

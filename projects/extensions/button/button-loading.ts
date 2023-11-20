@@ -20,6 +20,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
              [mat-icon-button][loading],
              [mat-fab][loading],
              [mat-mini-fab][loading]`,
+  standalone: true,
 })
 export class MatButtonLoading implements OnChanges {
   private spinner!: ComponentRef<MatProgressSpinner> | null;
@@ -54,7 +55,7 @@ export class MatButtonLoading implements OnChanges {
     if (!changes.loading) {
       return;
     }
-
+    console.log('ngOnChanges', changes);
     if (changes.loading.currentValue) {
       this._elementRef.nativeElement.classList.add('mat-button-loading');
       setTimeout(() => this._elementRef.nativeElement.setAttribute('disabled', ''));
