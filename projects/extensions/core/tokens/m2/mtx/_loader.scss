@@ -1,11 +1,12 @@
+@use 'sass:color';
 @use 'sass:map';
+@use 'sass:meta';
 @use '../../token-utils';
 @use '../../../theming/theming';
 @use '../../../style/sass-utils';
-@use '../../../theming/palette';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, alert);
+$prefix: (mtx, loader);
 
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
@@ -15,20 +16,10 @@ $prefix: (mtx, alert);
 
 // Tokens that can be configured through Angular Material's color theming API.
 @function get-color-tokens($config) {
-  $foreground: map.get($config, foreground);
   $background: map.get($config, background);
 
   @return (
-    default-background-color: theming.get-color-from-palette($background, dialog),
-    default-text-color: theming.get-color-from-palette($foreground, text),
-    info-background-color: theming.get-color-from-palette(palette.$blue-palette, 500),
-    info-text-color: white,
-    success-background-color: theming.get-color-from-palette(palette.$green-palette, 500),
-    success-text-color: white,
-    warning-background-color: theming.get-color-from-palette(palette.$orange-palette, 500),
-    warning-text-color: white,
-    danger-background-color: theming.get-color-from-palette(palette.$red-palette, 500),
-    danger-text-color: white,
+    backdrop-background-color: theming.get-color-from-palette($background, background, .75),
   );
 }
 

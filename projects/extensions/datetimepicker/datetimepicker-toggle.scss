@@ -2,7 +2,7 @@
 @use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 @use '../core/tokens/token-utils';
 
-$_tokens: (tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token-slots());
+$_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token-slots();
 
 // We support the case where the form field is disabled, but the datepicker is not.
 // MDC sets `pointer-events: none` on disabled form fields which prevents clicks on the toggle.

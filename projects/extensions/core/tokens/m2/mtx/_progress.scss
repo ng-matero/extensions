@@ -5,7 +5,7 @@
 @use '../../../theming/palette';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, alert);
+$prefix: (mtx, progress);
 
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
@@ -19,15 +19,14 @@ $prefix: (mtx, alert);
   $background: map.get($config, background);
 
   @return (
-    default-background-color: theming.get-color-from-palette($background, dialog),
-    default-text-color: theming.get-color-from-palette($foreground, text),
-    info-background-color: theming.get-color-from-palette(palette.$blue-palette, 500),
+    track-color: theming.get-color-from-palette($background, hover),
+    info-indicator-color: theming.get-color-from-palette(palette.$blue-palette, 500),
     info-text-color: white,
-    success-background-color: theming.get-color-from-palette(palette.$green-palette, 500),
+    success-indicator-color: theming.get-color-from-palette(palette.$green-palette, 500),
     success-text-color: white,
-    warning-background-color: theming.get-color-from-palette(palette.$orange-palette, 500),
+    warning-indicator-color: theming.get-color-from-palette(palette.$orange-palette, 500),
     warning-text-color: white,
-    danger-background-color: theming.get-color-from-palette(palette.$red-palette, 500),
+    danger-indicator-color: theming.get-color-from-palette(palette.$red-palette, 500),
     danger-text-color: white,
   );
 }

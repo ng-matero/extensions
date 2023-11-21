@@ -14,10 +14,7 @@ $calendar-body-cell-radius: 999px !default;
 $calendar-body-min-size: 7 * $calendar-body-cell-min-size !default;
 $calendar-body-cell-content-size: 100% - $calendar-body-cell-content-margin * 2 !default;
 
-$_tokens: (
-  tokens-mtx-datetimepicker.$prefix,
-  tokens-mtx-datetimepicker.get-token-slots()
-);
+$_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token-slots();
 
 // Styles for a highlighted calendar cell (e.g. hovered or focused).
 @mixin _highlighted-cell($token-name) {
