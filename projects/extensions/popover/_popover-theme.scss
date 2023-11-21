@@ -1,48 +1,14 @@
-@use 'sass:map';
+@use '../core/style/sass-utils';
 @use '../core/theming/theming';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/popover' as tokens-mtx-popover;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $background: map.get($config, background);
-  $foreground: map.get($config, foreground);
 
-  .mtx-popover-panel {
-    color: theming.get-color-from-palette($foreground, text);
-    background-color: theming.get-color-from-palette($background, card);
-  }
-
-  [class*='mtx-popover'] {
-    .mtx-popover-direction-arrow {
-      &::before {
-        border-color: theming.get-color-from-palette($foreground, divider);
-      }
-
-      &::after {
-        border-color: theming.get-color-from-palette($background, card);
-      }
-    }
-  }
-
-  [class*='mtx-popover-below'],
-  [class*='mtx-popover-above'] {
-    .mtx-popover-direction-arrow {
-      &::before,
-      &::after {
-        border-left-color: transparent;
-        border-right-color: transparent;
-      }
-    }
-  }
-
-  [class*='mtx-popover-before'],
-  [class*='mtx-popover-after'] {
-    .mtx-popover-direction-arrow {
-      &::before,
-      &::after {
-        border-top-color: transparent;
-        border-bottom-color: transparent;
-      }
-    }
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-popover.$prefix,
+      tokens-mtx-popover.get-color-tokens($config));
   }
 }
 

@@ -1,4 +1,9 @@
+@use '../core/tokens/m2/mtx/popover' as tokens-mtx-popover;
+@use '../core/tokens/token-utils';
+
 $arrow-size: 1em; // 16px default
+
+$_tokens: tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots();
 
 .mtx-popover-panel {
   position: relative;
@@ -7,6 +12,11 @@ $arrow-size: 1em; // 16px default
   border-radius: 4px;
   font-size: 16px; // It can change the arrow size
   outline: 0;
+
+  @include token-utils.use-tokens(tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots()) {
+    @include token-utils.create-token-slot(background-color, panel-background-color);
+    @include token-utils.create-token-slot(color, panel-text-color);
+  }
 
   &[class*='mtx-popover-below'] {
     margin-top: calc(#{$arrow-size * .5} + 2px);
@@ -47,9 +57,17 @@ $arrow-size: 1em; // 16px default
     border-style: solid;
   }
 
-  &::after {
-    border-width: calc(#{$arrow-size * .5} - 1px);
+  @include token-utils.use-tokens($_tokens...) {
+    &::before {
+      @include token-utils.create-token-slot(border-color, arrow-border-color);
+    }
+
+    &::after {
+      border-width: calc(#{$arrow-size * .5} - 1px);
+      @include token-utils.create-token-slot(border-color, panel-background-color);
+    }
   }
+
 }
 
 // Arrow up and down
@@ -58,6 +76,12 @@ $arrow-size: 1em; // 16px default
 [class*='mtx-popover-above'] {
   .mtx-popover-direction-arrow {
     width: $arrow-size;
+
+    &::before,
+    &::after {
+      border-left-color: transparent;
+      border-right-color: transparent;
+    }
 
     &::after {
       left: 1px;
@@ -100,6 +124,12 @@ $arrow-size: 1em; // 16px default
 [class*='mtx-popover-after'] {
   .mtx-popover-direction-arrow {
     height: $arrow-size;
+
+    &::before,
+    &::after {
+      border-top-color: transparent;
+      border-bottom-color: transparent;
+    }
 
     &::after {
       top: 1px;

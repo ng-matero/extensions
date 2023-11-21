@@ -1,20 +1,10 @@
-@use 'sass:color';
 @use 'sass:map';
-@use 'sass:meta';
 @use '../../token-utils';
 @use '../../../theming/theming';
 @use '../../../style/sass-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, colorpicker);
-
-@function private-get-toggle-color-palette-color-tokens($config, $palette-name) {
-  $palette: map.get($config, $palette-name);
-
-  @return (
-    toggle-active-state-icon-color: theming.get-color-from-palette($palette, text),
-  );
-}
+$prefix: (mtx, popover);
 
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
@@ -25,12 +15,13 @@ $prefix: (mtx, colorpicker);
 // Tokens that can be configured through Angular Material's color theming API.
 @function get-color-tokens($config) {
   $foreground: map.get($config, foreground);
-  $inactive-icon-color: theming.get-color-from-palette($foreground, icon);
-  $toggle-tokens: private-get-toggle-color-palette-color-tokens($config, primary);
+  $background: map.get($config, background);
 
-  @return sass-utils.merge-all($toggle-tokens, (
-    toggle-icon-color: $inactive-icon-color
-  ));
+  @return (
+    panel-background-color: theming.get-color-from-palette($background, card),
+    panel-text-color:theming.get-color-from-palette($foreground, text),
+    arrow-border-color: theming.get-color-from-palette($foreground, divider),
+  );
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.

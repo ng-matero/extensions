@@ -6,13 +6,13 @@
 @use '../../../style/sass-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, colorpicker);
+$prefix: (mtx, split);
 
-@function private-get-toggle-color-palette-color-tokens($config, $palette-name) {
+@function private-get-gutter-color-palette-color-tokens($config, $palette-name) {
   $palette: map.get($config, $palette-name);
 
   @return (
-    toggle-active-state-icon-color: theming.get-color-from-palette($palette, text),
+    gutter-hover-state-background-color: theming.get-color-from-palette($palette, text),
   );
 }
 
@@ -25,11 +25,10 @@ $prefix: (mtx, colorpicker);
 // Tokens that can be configured through Angular Material's color theming API.
 @function get-color-tokens($config) {
   $foreground: map.get($config, foreground);
-  $inactive-icon-color: theming.get-color-from-palette($foreground, icon);
-  $toggle-tokens: private-get-toggle-color-palette-color-tokens($config, primary);
+  $gutter-tokens: private-get-gutter-color-palette-color-tokens($config, primary);
 
-  @return sass-utils.merge-all($toggle-tokens, (
-    toggle-icon-color: $inactive-icon-color
+  @return sass-utils.merge-all($gutter-tokens, (
+    gutter-background-color: theming.get-color-from-palette($foreground, divider, .12),
   ));
 }
 
