@@ -1,90 +1,17 @@
 @use 'sass:map';
+@use '../core/style/sass-utils';
 @use '../core/theming/theming';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/grid' as tokens-mtx-grid;
 @use './column-resize/column-resize';
+
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $is-dark-theme: map.get($config, is-dark);
-  $accent: map.get($config, accent);
-  $background: map.get($config, background);
-  $foreground: map.get($config, foreground);
 
-  .mtx-grid {
-    border: 1px solid theming.get-color-from-palette($foreground, secondary-text, .2);
-
-    .mat-table-sticky-left,
-    .mat-table-sticky-right {
-      border-color: theming.get-color-from-palette($foreground, divider);
-    }
-
-    .mat-mdc-table {
-      &.mat-table-striped {
-        .mat-row-odd {
-          background-color: if($is-dark-theme, #3a3a3a, #f5f5f5);
-        }
-      }
-
-      &.mat-table-hover {
-        .mat-mdc-row:hover {
-          background-color: if($is-dark-theme, #2a2a2a, #e5e5e5);
-        }
-      }
-
-      .mat-mdc-row {
-        &.selected,
-        &.mat-row-odd.selected {
-          background-color: if($is-dark-theme, #2a2a2a, #e5e5e5);
-        }
-      }
-
-      .mat-mdc-cell {
-        &.selected {
-          box-shadow: inset 0 0 0 1px theming.get-color-from-palette($accent);
-        }
-      }
-    }
-
-    .mat-mdc-footer-row {
-      .mat-mdc-footer-cell {
-        border-top: 1px solid theming.get-color-from-palette($foreground, divider);
-        border-bottom-width: 0;
-        background-color: theming.get-color-from-palette($background, app-bar);
-      }
-    }
-
-    .mat-mdc-paginator {
-      border-top: 1px solid theming.get-color-from-palette($foreground, secondary-text, .2);
-    }
-  }
-
-  .mtx-grid-toolbar {
-    border-bottom: 1px solid theming.get-color-from-palette($foreground, secondary-text, .2);
-  }
-
-  .mtx-grid-sidebar {
-    border-color: theming.get-color-from-palette($foreground, secondary-text, .2);
-  }
-
-  .mtx-grid-statusbar {
-    border-top: 1px solid theming.get-color-from-palette($foreground, secondary-text, .2);
-  }
-
-  .mtx-grid-column-menu-item {
-    color: theming.get-color-from-palette($foreground, text);
-  }
-
-  .mtx-grid-column-menu-header,
-  .mtx-grid-column-menu-footer {
-    color: theming.get-color-from-palette($foreground, text);
-    background-color: theming.get-color-from-palette($background, card);
-  }
-
-  .mtx-grid-column-menu-header {
-    border-bottom: 1px solid theming.get-color-from-palette($foreground, divider);
-  }
-
-  .mtx-grid-column-menu-footer {
-    border-top: 1px solid theming.get-color-from-palette($foreground, divider);
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-grid.$prefix,
+      tokens-mtx-grid.get-color-tokens($config));
   }
 
   @include column-resize.color($config-or-theme);
@@ -96,18 +23,21 @@
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
+
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-grid') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
     $typography: theming.get-typography-config($theme);
 
-    @if $color != null {
+    @if $color !=null {
       @include color($color);
     }
-    @if $density != null {
+
+    @if $density !=null {
       @include density($density);
     }
-    @if $typography != null {
+
+    @if $typography !=null {
       @include typography($typography);
     }
   }

@@ -1,8 +1,40 @@
+@use '../core/tokens/m2/mtx/grid' as tokens-mtx-grid;
+@use '../core/tokens/token-utils';
+
+$_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
+
 .mtx-grid {
   position: relative;
   display: flex;
   flex-direction: column;
   width: 100%;
+
+  @include token-utils.use-tokens($_tokens...) {
+    $border-color: token-utils.get-token-variable(outline-color);
+
+    border: 1px solid var($border-color);
+
+    .mat-mdc-table {
+      &.mat-table-striped .mat-row-odd {
+        @include token-utils.create-token-slot(background-color, table-row-striped-background-color);
+      }
+
+      &.mat-table-hover .mat-mdc-row:hover {
+        @include token-utils.create-token-slot(background-color, table-row-hover-state-background-color);
+      }
+
+      .mat-mdc-row.selected,
+      .mat-mdc-row.mat-row-odd.selected {
+        @include token-utils.create-token-slot(background-color, table-row-selected-state-background-color);
+      }
+
+      .mat-mdc-cell.selected {
+        $shadow: token-utils.get-token-variable(table-cell-selected-state-outline-color);
+
+        box-shadow: inset 0 0 0 1px var($shadow);
+      }
+    }
+  }
 
   .mat-table-container {
     overflow: auto;
@@ -26,24 +58,20 @@
   }
 
   .mat-table-sticky-left {
-    border-right-width: 1px;
-    border-right-style: solid;
+    border-right: 1px solid var(--mat-table-row-item-outline-color);
 
     [dir='rtl'] & {
       border-right-width: 0;
-      border-left-width: 1px;
-      border-left-style: solid;
+      border-left: 1px solid var(--mat-table-row-item-outline-color);
     }
   }
 
   .mat-table-sticky-right {
-    border-left-width: 1px;
-    border-left-style: solid;
+    border-left: 1px solid var(--mat-table-row-item-outline-color);
 
     [dir='rtl'] & {
       border-left-width: 0;
-      border-right-width: 1px;
-      border-right-style: solid;
+      border-right: 1px solid var(--mat-table-row-item-outline-color);
     }
   }
 
@@ -82,6 +110,14 @@
     }
   }
 
+  .mat-mdc-footer-cell {
+    border-top: 1px solid var(--mat-table-row-item-outline-color);
+
+    @include token-utils.use-tokens($_tokens...) {
+      @include token-utils.create-token-slot(background-color, table-footer-background-color);
+    }
+  }
+
   .mat-mdc-row {
     &.mtx-grid-expansion {
       height: 0;
@@ -111,6 +147,14 @@
     align-items: center;
   }
 
+  .mat-mdc-paginator {
+    @include token-utils.use-tokens($_tokens...) {
+      $border-color: token-utils.get-token-variable(outline-color);
+
+      border-top: 1px solid var($border-color);
+    }
+  }
+
   .mat-paginator-hidden {
     display: none;
   }
@@ -130,6 +174,12 @@
   min-height: 48px;
   padding: 8px;
   box-sizing: border-box;
+
+  @include token-utils.use-tokens($_tokens...) {
+    $border-color: token-utils.get-token-variable(outline-color);
+
+    border-bottom: 1px solid var($border-color);
+  }
 }
 
 .mtx-grid-layout {
@@ -145,13 +195,16 @@
 
 .mtx-grid-sidebar {
   max-width: 50%;
-  border-left-width: 1px;
-  border-left-style: solid;
 
-  [dir='rtl'] & {
-    border-left-width: 0;
-    border-right-width: 1px;
-    border-right-style: solid;
+  @include token-utils.use-tokens($_tokens...) {
+    $border-color: token-utils.get-token-variable(outline-color);
+
+    border-left: 1px solid var($border-color);
+
+    [dir='rtl'] & {
+      border-left-width: 0;
+      border-right: 1px solid var($border-color);
+    }
   }
 }
 
@@ -165,6 +218,12 @@
   align-items: center;
   min-height: 56px;
   padding: 8px;
+
+  @include token-utils.use-tokens($_tokens...) {
+    $border-color: token-utils.get-token-variable(outline-color);
+
+    border-top: 1px solid var($border-color);
+  }
 }
 
 .mtx-grid-no-result {
@@ -215,7 +274,7 @@
     transform: rotate(90deg);
   }
 
-  + mtx-grid-cell {
+  +mtx-grid-cell {
     vertical-align: middle;
   }
 
@@ -229,4 +288,35 @@
   width: 20px;
   height: 20px;
   font-size: 20px;
+}
+
+.mtx-grid-column-menu-item {
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(color, column-menu-text-color);
+  }
+}
+
+.mtx-grid-column-menu-header,
+.mtx-grid-column-menu-footer {
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(color, column-menu-text-color);
+  }
+}
+
+.mtx-grid-column-menu-header {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(border-bottom-color, column-menu-border-color);
+  }
+}
+
+.mtx-grid-column-menu-footer {
+  border-top-width: 1px;
+  border-top-style: solid;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(border-top-color, column-menu-border-color);
+  }
 }
