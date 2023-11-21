@@ -1,9 +1,14 @@
+@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
+@use '../core/tokens/token-utils';
+
 $time-font-size: 36px;
 $time-border-radius: 8px;
 $time-input-width: 72px;
 $time-input-height: 56px;
 $time-seperator-width: 24px;
 $time-ampm-width: 40px;
+
+$_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token-slots();
 
 .mtx-time {
   display: block;
@@ -32,6 +37,29 @@ $time-ampm-width: 40px;
   border: 2px solid transparent;
   appearance: none;
   outline: none;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(background-color, time-input-background-color);
+    @include token-utils.create-token-slot(color, time-input-text-color);
+
+    &.mtx-time-input-active {
+      @include token-utils.create-token-slot(background-color, time-input-active-state-background-color);
+      @include token-utils.create-token-slot(color, time-input-active-state-text-color);
+
+      &:focus {
+        @include token-utils.create-token-slot(border-color, time-input-focus-state-border-color);
+        @include token-utils.create-token-slot(background-color, time-input-focus-state-background-color);
+
+        &::placeholder {
+          @include token-utils.create-token-slot(color, time-input-focus-state-placeholder-text-color);
+        }
+      }
+    }
+
+    &.mtx-time-input-warning {
+      @include token-utils.create-token-slot(border-color, time-input-warn-state-border-color);
+    }
+  }
 }
 
 .mtx-time-seperator {
@@ -56,6 +84,18 @@ $time-ampm-width: 40px;
   .mtx-time-am,
   .mtx-time-pm {
     --mdc-typography-button-font-weight: 400;
+
+    @include token-utils.use-tokens($_tokens...) {
+      @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-text-color);
+      @include token-utils.create-token-slot(border-color, time-ampm-border-color);
+
+      &.mtx-time-ampm-active {
+        --mdc-typography-button-font-weight: 500;
+
+        @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-active-state-text-color);
+        @include token-utils.create-token-slot(background-color, time-ampm-active-state-background-color);
+      }
+    }
 
     flex: 1;
     width: $time-ampm-width;
@@ -83,7 +123,7 @@ $time-ampm-width: 40px;
   justify-content: flex-end;
   padding-top: 8px;
 
-  .mat-mdc-button-base + .mat-mdc-button-base {
+  .mat-mdc-button-base+.mat-mdc-button-base {
     margin-left: 8px;
 
     [dir='rtl'] & {

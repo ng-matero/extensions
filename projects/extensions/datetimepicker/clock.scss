@@ -1,6 +1,11 @@
+@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
+@use '../core/tokens/token-utils';
+
 $clock-min-size: 224px !default;
 $clock-margin: 12px !default;
 $clock-cell-size: 14.1666% !default;
+
+$_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token-slots();
 
 .mtx-clock {
   position: relative;
@@ -10,6 +15,10 @@ $clock-cell-size: 14.1666% !default;
   box-sizing: border-box;
   user-select: none;
   touch-action: none;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(font-size, clock-text-size);
+  }
 }
 
 .mtx-clock-wrapper {
@@ -18,6 +27,10 @@ $clock-cell-size: 14.1666% !default;
   height: 0;
   padding-top: 100%;
   border-radius: 50%;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(background-color, clock-dial-background-color);
+  }
 }
 
 .mtx-clock-center {
@@ -28,6 +41,10 @@ $clock-cell-size: 14.1666% !default;
   height: 2%;
   margin: -1%;
   border-radius: 50%;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(background-color, clock-hand-background-color);
+  }
 }
 
 .mtx-clock-hand {
@@ -37,15 +54,22 @@ $clock-cell-size: 14.1666% !default;
   margin: 0 auto;
   transform-origin: bottom;
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: -4px;
-    left: -4px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(background-color, clock-hand-background-color);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+
+      @include token-utils.create-token-slot(background-color, clock-hand-background-color);
+    }
   }
+
 }
 
 .mtx-clock-hours,
@@ -82,7 +106,23 @@ $clock-cell-size: 14.1666% !default;
   align-items: center;
   cursor: pointer;
 
-  &.mtx-clock-cell-disabled {
-    pointer-events: none;
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(color, clock-cell-text-color);
+
+    &.mtx-clock-cell-selected {
+      color: white;
+
+      @include token-utils.create-token-slot(background-color, clock-hand-background-color);
+    }
+
+    &:not(.mtx-clock-cell-selected, .mtx-clock-cell-disabled):hover {
+      @include token-utils.create-token-slot(background-color, clock-cell-hover-state-background-color);
+    }
+
+    &.mtx-clock-cell-disabled {
+      pointer-events: none;
+
+      @include token-utils.create-token-slot(color, clock-cell-disabled-state-text-color);
+    }
   }
 }

@@ -1,3 +1,6 @@
+@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
+@use '../core/tokens/token-utils';
+
 $calendar-padding: 8px !default;
 
 // We use the same padding as the month / year label, but subtract 16px since there is padding
@@ -14,6 +17,8 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 $landscape-calendar-header-width: 144px;
 
+$_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token-slots();
+
 @mixin landscape-calendar-header {
   .mtx-calendar {
     display: flex;
@@ -29,8 +34,8 @@ $landscape-calendar-header-width: 144px;
       }
     }
 
-    .mtx-calendar-header-year + .mtx-calendar-header-date-time,
-    .mtx-calendar-header-date + .mtx-calendar-header-time {
+    .mtx-calendar-header-year+.mtx-calendar-header-date-time,
+    .mtx-calendar-header-date+.mtx-calendar-header-time {
       margin-top: 4px;
     }
 
@@ -58,7 +63,7 @@ $landscape-calendar-header-width: 144px;
     .mtx-calendar-header-ampm {
       padding: 4px;
 
-      + .mtx-calendar-header-ampm {
+      +.mtx-calendar-header-ampm {
         margin: 0 8px;
       }
     }
@@ -68,12 +73,22 @@ $landscape-calendar-header-width: 144px;
 .mtx-calendar {
   display: block;
   outline: none;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(font-family, calendar-text-font);
+    @include token-utils.create-token-slot(font-size, calendar-text-size);
+  }
 }
 
 .mtx-calendar-header {
   box-sizing: border-box;
   padding: 8px;
   border-radius: 4px 4px 0 0;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(background-color, calendar-header-background-color);
+    @include token-utils.create-token-slot(color, calendar-header-text-color);
+  }
 
   .mtx-calendar-header-year,
   .mtx-calendar-header-date,
@@ -185,12 +200,21 @@ $landscape-calendar-header-width: 144px;
   border: 0;
   background: transparent;
   box-sizing: border-box;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(font-size, calendar-period-button-text-size);
+    @include token-utils.create-token-slot(font-weight, calendar-period-button-text-weight);
+  }
 }
 
 .mtx-calendar-previous-button,
 .mtx-calendar-next-button {
   &.disabled {
     pointer-events: none;
+
+    @include token-utils.use-tokens($_tokens...) {
+      @include token-utils.create-token-slot(color, calendar-date-disabled-state-text-color);
+    }
   }
 
   svg {
@@ -212,4 +236,10 @@ $landscape-calendar-header-width: 144px;
 .mtx-calendar-table-header th {
   text-align: center;
   padding: $calendar-padding 0;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(color, calendar-table-header-text-color);
+    @include token-utils.create-token-slot(font-size, calendar-table-header-text-size);
+    @include token-utils.create-token-slot(font-weight, calendar-table-header-text-weight);
+  }
 }

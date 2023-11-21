@@ -1,209 +1,54 @@
 @use 'sass:map';
+@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 @use '../core/theming/theming';
-@use '../core/theming/palette';
-@use '../core/style/private';
+@use '../core/tokens/token-utils';
+@use '../core/style/sass-utils';
 @use '../core/typography/typography';
-@use '../core/typography/typography-utils';
 
-$selected-today-box-shadow-width: 1px;
-$calendar-body-font-size: 13px !default;
-$calendar-weekday-table-font-size: 11px !default;
-$clock-font-size: 14px !default;
+@mixin _calendar-color($config, $palette) {
+  $palette-color: theming.get-color-from-palette(map.get($config, $palette));
+  $calendar-tokens: tokens-mtx-datetimepicker.private-get-calendar-color-palette-color-tokens($config, $palette);
+
+  @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix, $calendar-tokens);
+}
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $is-dark-theme: map.get($config, is-dark);
-  $primary: map.get($config, primary);
-  $accent: map.get($config, accent);
-  $warn: map.get($config, warn);
-  $background: map.get($config, background);
-  $foreground: map.get($config, foreground);
-  $disabled-color: theming.get-color-from-palette($foreground, disabled-text);
+
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
+      tokens-mtx-datetimepicker.get-color-tokens($config));
+  }
 
   .mtx-datetimepicker-content {
-    background-color: theming.get-color-from-palette($background, card);
-    color: theming.get-color-from-palette($foreground, text);
-
-    @include private.private-theme-elevation(8, $config);
-  }
-
-  .mtx-calendar-header {
-    background-color: theming.get-color-from-palette($primary);
-    color: white;
-  }
-
-  .mtx-calendar-body-label {
-    color: theming.get-color-from-palette($foreground, secondary-text);
-  }
-
-  .mtx-calendar-table-header {
-    color: theming.get-color-from-palette($foreground, hint-text);
-  }
-
-  .mtx-calendar-body-cell-content {
-    color: theming.get-color-from-palette($foreground, text);
-
-    &.mtx-calendar-body-selected {
-      background-color: theming.get-color-from-palette($primary);
-      color: white;
-
-      &.mtx-calendar-body-today {
-        box-shadow:
-          inset 0 0 0 $selected-today-box-shadow-width
-          theming.get-color-from-palette($primary, default-contrast);
-      }
+    &.mat-accent {
+      @include _calendar-color($config, accent);
     }
 
-    &:not(.mtx-calendar-body-selected) {
-      &.mtx-calendar-body-today {
-        border-color: theming.get-color-from-palette($foreground, hint-text);
-      }
-    }
-  }
-
-  .mtx-calendar-body-cell:not(.mtx-calendar-body-disabled):hover,
-  .mtx-calendar-body-active {
-    & > .mtx-calendar-body-cell-content:not(.mtx-calendar-body-selected) {
-      background-color: theming.get-color-from-palette($primary, .3);
-    }
-  }
-
-  .mtx-calendar-body-disabled {
-    > .mtx-calendar-body-cell-content:not(.mtx-calendar-body-selected) {
-      color: $disabled-color;
-    }
-
-    > .mtx-calendar-body-today:not(.mtx-calendar-body-selected) {
-      border-color: $disabled-color;
-    }
-
-    > .mtx-calendar-body-selected {
-      background-color: theming.get-color-from-palette($primary, .4);
-    }
-  }
-
-  .mtx-calendar-previous-button,
-  .mtx-calendar-next-button {
-    &.disabled {
-      color: $disabled-color;
-    }
-  }
-
-  .mtx-clock-wrapper {
-    background-color: theming.get-color-from-palette($foreground, divider);
-  }
-
-  .mtx-clock-center {
-    background-color: theming.get-color-from-palette($primary);
-  }
-
-  .mtx-clock-hand {
-    background-color: theming.get-color-from-palette($primary);
-
-    &::before {
-      background-color: theming.get-color-from-palette($primary);
-    }
-  }
-
-  .mtx-clock-cell {
-    color: theming.get-color-from-palette($foreground, text);
-
-    &.mtx-clock-cell-selected {
-      background-color: theming.get-color-from-palette($primary);
-      color: white;
-    }
-
-    &:not(.mtx-clock-cell-selected, .mtx-clock-cell-disabled):hover {
-      background-color: theming.get-color-from-palette($background, hover);
-    }
-
-    &.mtx-clock-cell-disabled {
-      color: $disabled-color;
+    &.mat-warn {
+      @include _calendar-color($config, warn);
     }
   }
 
   .mtx-datetimepicker-toggle-active {
-    color: theming.get-color-from-palette($primary);
-
     &.mat-accent {
-      color: theming.get-color-from-palette($accent);
+      $accent-tokens: tokens-mtx-datetimepicker.private-get-toggle-color-palette-color-tokens($config, accent);
+      @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix, $accent-tokens);
     }
 
     &.mat-warn {
-      color: theming.get-color-from-palette($warn);
-    }
-  }
-
-  .mtx-time-input {
-    color: theming.get-color-from-palette($foreground, text);
-    background-color: theming.get-color-from-palette($background, disabled-button);
-
-    &.mtx-time-input-active {
-      color: theming.get-color-from-palette($primary);
-      background-color: theming.get-color-from-palette($primary, .2);
-
-      &:focus {
-        border-color: theming.get-color-from-palette($primary);
-        background-color: theming.get-color-from-palette($background, background);
-
-        &::placeholder {
-          color: theming.get-color-from-palette($primary, .6);
-        }
-      }
-    }
-
-    &.mtx-time-input-warning {
-      border-color: theming.get-color-from-palette($warn);
-    }
-  }
-
-  .mtx-time-ampm {
-    .mtx-time-am,
-    .mtx-time-pm {
-      --mdc-text-button-label-text-color: #{theming.get-color-from-palette($foreground, text, .75)};
-
-      border-color: theming.get-color-from-palette($foreground, hint-text);
-
-      &.mtx-time-ampm-active {
-        --mdc-text-button-label-text-color: #{theming.get-color-from-palette($foreground, text)};
-        --mdc-typography-button-font-weight: 500;
-
-        background-color: theming.get-color-from-palette($accent, .2);
-      }
+      $warn-tokens: tokens-mtx-datetimepicker.private-get-toggle-color-palette-color-tokens($config, warn);
+      @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix, $warn-tokens);
     }
   }
 }
 
 @mixin typography($config-or-theme) {
-  $config: typography.private-typography-to-2014-config(
-    theming.get-typography-config($config-or-theme)
-  );
+  $config: typography.private-typography-to-2014-config(theming.get-typography-config($config-or-theme));
 
-  .mtx-calendar {
-    font-family: typography-utils.font-family($config);
-  }
-
-  .mtx-calendar-body {
-    font-size: $calendar-body-font-size;
-  }
-
-  .mtx-calendar-body-label,
-  .mtx-calendar-period-button {
-    font: {
-      size: typography-utils.font-size($config, button);
-      weight: typography-utils.font-weight($config, button);
-    }
-  }
-
-  .mtx-calendar-table-header th {
-    font: {
-      size: $calendar-weekday-table-font-size;
-      weight: typography-utils.font-weight($config, body-1);
-    }
-  }
-
-  .mtx-clock {
-    font-size: $clock-font-size;
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
+      tokens-mtx-datetimepicker.get-typography-tokens($config));
   }
 }
 
@@ -211,18 +56,21 @@ $clock-font-size: 14px !default;
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
+
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-datetimepicker') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
     $typography: theming.get-typography-config($theme);
 
-    @if $color != null {
+    @if $color !=null {
       @include color($color);
     }
-    @if $density != null {
+
+    @if $density !=null {
       @include density($density);
     }
-    @if $typography != null {
+
+    @if $typography !=null {
       @include typography($typography);
     }
   }
