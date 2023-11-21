@@ -1,18 +1,14 @@
-@use 'sass:map';
+@use '../core/style/sass-utils';
 @use '../core/theming/theming';
-@use '../core/theming/palette';
-@use '../core/style/private';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/drawer' as tokens-mtx-drawer;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $background: map.get($config, background);
-  $foreground: map.get($config, foreground);
 
-  .mtx-drawer-container {
-    @include private.private-theme-elevation(16, $config);
-
-    background: theming.get-color-from-palette($background, dialog);
-    color: theming.get-color-from-palette($foreground, text);
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-drawer.$prefix,
+      tokens-mtx-drawer.get-color-tokens($config));
   }
 }
 
