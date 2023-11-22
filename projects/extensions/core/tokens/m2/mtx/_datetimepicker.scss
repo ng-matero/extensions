@@ -114,8 +114,8 @@ $_today-fade-amount: .2;
     time-input-warn-state-border-color: theming.get-color-from-palette($warn),
     time-ampm-text-color: theming.get-color-from-palette($foreground, text, .75),
     time-ampm-border-color: $hint-text-color,
-    time-ampm-active-state-text-color: theming.get-color-from-palette($foreground, text),
-    time-ampm-active-state-background-color: theming.get-color-from-palette($accent, .2),
+    time-ampm-selected-state-text-color: theming.get-color-from-palette($foreground, text),
+    time-ampm-selected-state-background-color: theming.get-color-from-palette($accent, .2),
   ));
 }
 

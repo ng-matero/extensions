@@ -92,8 +92,8 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
       &.mtx-time-ampm-active {
         --mdc-typography-button-font-weight: 500;
 
-        @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-active-state-text-color);
-        @include token-utils.create-token-slot(background-color, time-ampm-active-state-background-color);
+        @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-selected-state-text-color);
+        @include token-utils.create-token-slot(background-color, time-ampm-selected-state-background-color);
       }
     }
 
