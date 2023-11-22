@@ -65,11 +65,6 @@ export const COMPONENTS_MENU = [
     summary: 'A ng-select wrapper to be used in the form field.',
   },
   {
-    id: 'slider',
-    name: 'Slider',
-    summary: 'Provide a range slider for Material',
-  },
-  {
     id: 'split',
     name: 'Split Pane',
     summary: 'A component for creating multi-view layouts.',

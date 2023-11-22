@@ -9,7 +9,6 @@
 @use '../../popover/popover-theme';
 @use '../../progress/progress-theme';
 @use '../../select/select-theme';
-@use '../../slider/slider-theme';
 @use '../../split/split-theme';
 @use '../../tooltip/tooltip-theme';
 @use './theming';
@@ -28,7 +27,6 @@
     @include popover-theme.theme($theme-or-color-config);
     @include progress-theme.theme($theme-or-color-config);
     @include select-theme.theme($theme-or-color-config);
-    @include slider-theme.theme($theme-or-color-config);
     @include split-theme.theme($theme-or-color-config);
     @include tooltip-theme.theme($theme-or-color-config);
   }
