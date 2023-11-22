@@ -1,144 +1,27 @@
 @use 'sass:map';
-@use '../core/theming/theming';
 @use './select-density';
+@use '../core/style/sass-utils';
+@use '../core/theming/theming';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/select' as tokens-mtx-select;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $warn: map.get($config, warn);
-  $background: map.get($config, background);
-  $foreground: map.get($config, foreground);
 
-  .ng-select {
-    .ng-select-container {
-      color: theming.get-color-from-palette($foreground, text);
-
-      .ng-value-container {
-        .ng-placeholder {
-          color: theming.get-color-from-palette($foreground, hint-text);
-        }
-
-        .ng-input {
-          > input {
-            color: theming.get-color-from-palette($foreground, text);
-          }
-        }
-      }
-    }
-
-    &.ng-select-disabled {
-      .ng-value {
-        color: theming.get-color-from-palette($foreground, hint-text);
-      }
-    }
-
-    &.ng-select-multiple {
-      .ng-select-container {
-        .ng-value-container {
-          .ng-value {
-            color: theming.get-color-from-palette($foreground, text);
-            background-color: theming.get-color-from-palette($background, unselected-chip);
-            border: 1px solid theming.get-color-from-palette($foreground, divider);
-
-            &.ng-value-disabled {
-              opacity: .4;
-            }
-
-            .ng-value-icon {
-              &:hover {
-                background-color: theming.get-color-from-palette($foreground, divider);
-              }
-            }
-          }
-        }
-      }
-    }
-
-    .ng-clear-wrapper {
-      color: theming.get-color-from-palette($foreground, secondary-text);
-
-      &:hover .ng-clear {
-        color: theming.get-color-from-palette($warn);
-      }
-    }
-
-    .ng-arrow-wrapper .ng-arrow {
-      border-color: theming.get-color-from-palette($foreground, secondary-text) transparent transparent;
-    }
-
-    &.ng-select-invalid {
-      .ng-arrow-wrapper .ng-arrow {
-        border-color: theming.get-color-from-palette($warn) transparent transparent;
-      }
-    }
-
-    &.ng-select-opened {
-      .ng-arrow-wrapper .ng-arrow {
-        border-color: transparent transparent theming.get-color-from-palette($foreground, secondary-text);
-      }
-    }
-
-    &.ng-select-opened.ng-select-invalid {
-      .ng-arrow-wrapper .ng-arrow {
-        border-color: transparent transparent theming.get-color-from-palette($warn);
-      }
-    }
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-select.$prefix,
+      tokens-mtx-select.get-color-tokens($config));
   }
 
   .ng-dropdown-panel {
-    background-color: theming.get-color-from-palette($background, card);
-
-    &.multiple {
-      .ng-option {
-        &.selected {
-          background: theming.get-color-from-palette($foreground, divider);
-        }
-
-        &.marked {
-          background: theming.get-color-from-palette($background, hover);
-        }
-      }
+    &.mat-accent {
+      $accent-tokens: tokens-mtx-select.private-get-color-palette-color-tokens($config, accent);
+      @include token-utils.create-token-values(tokens-mtx-select.$prefix, $accent-tokens);
     }
 
-    .ng-dropdown-header {
-      border-bottom: 1px solid theming.get-color-from-palette($foreground, divider);
-    }
-
-    .ng-dropdown-footer {
-      border-top: 1px solid theming.get-color-from-palette($foreground, divider);
-    }
-
-    .ng-dropdown-panel-items {
-      .ng-optgroup {
-        color: theming.get-color-from-palette($foreground, secondary-text);
-
-        &.ng-option-marked {
-          background: theming.get-color-from-palette($background, hover);
-        }
-
-        &.ng-option-selected {
-          background: theming.get-color-from-palette($foreground, divider);
-        }
-      }
-
-      .ng-option {
-        color: theming.get-color-from-palette($foreground, text);
-
-        &.ng-option-marked {
-          background: theming.get-color-from-palette($background, hover);
-        }
-
-        &.ng-option-selected {
-          background: theming.get-color-from-palette($foreground, divider);
-        }
-
-        &.ng-option-disabled {
-          color: theming.get-color-from-palette($foreground, hint-text);
-        }
-
-        .ng-tag-label {
-          color: theming.get-color-from-palette($foreground, hint-text);
-        }
-      }
+    &.mat-warn {
+      $warn-tokens: tokens-mtx-select.private-get-color-palette-color-tokens($config, warn);
+      @include token-utils.create-token-values(tokens-mtx-select.$prefix, $warn-tokens);
     }
   }
 }
@@ -151,18 +34,21 @@
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
+
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-select') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
     $typography: theming.get-typography-config($theme);
 
-    @if $color != null {
+    @if $color !=null {
       @include color($color);
     }
-    @if $density != null {
+
+    @if $density !=null {
       @include density($density);
     }
-    @if $typography != null {
+
+    @if $typography !=null {
       @include typography($typography);
     }
   }
