@@ -20,6 +20,8 @@ $prefix: (mtx, progress);
 
   @return (
     track-color: theming.get-color-from-palette($background, hover),
+    indicator-color: theming.get-color-from-palette($foreground, divider),
+    text-color: theming.get-color-from-palette($foreground, text),
     info-indicator-color: theming.get-color-from-palette(palette.$blue-palette, 500),
     info-text-color: white,
     success-indicator-color: theming.get-color-from-palette(palette.$green-palette, 500),

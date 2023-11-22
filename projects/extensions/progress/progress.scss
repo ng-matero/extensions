@@ -39,6 +39,11 @@ $_tokens: tokens-mtx-progress.$prefix, tokens-mtx-progress.get-token-slots();
   justify-content: center;
   text-align: center;
   transition: width .6s ease;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(background-color, indicator-color);
+    @include token-utils.create-token-slot(color, text-color);
+  }
 }
 
 .mtx-progress-fill-info {

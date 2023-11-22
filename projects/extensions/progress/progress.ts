@@ -1,7 +1,7 @@
 import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
-export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'danger';
+export type MtxProgressType = 'info' | 'success' | 'warning' | 'danger';
 
 @Component({
   selector: 'mtx-progress',
@@ -17,8 +17,8 @@ export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'dang
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MtxProgress {
-  /** The progress's type. Can be `default`, `info`, `success`, `warning` or `danger`. */
-  @Input() type: MtxProgressType = 'info';
+  /** The progress's type. Can be `info`, `success`, `warning` or `danger`. */
+  @Input() type?: MtxProgressType;
 
   /** The value of the progress. */
   @Input() value = 0;

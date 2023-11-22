@@ -16,7 +16,7 @@ Exported as: `mtxProgress`
 
 | **Name** | Description |
 | :--- | :--- |
-| `@Input()`<br>`type: MtxProgressType` | The progress's type. Default is **`'info'`**. |
+| `@Input()`<br>`type: MtxProgressType \| undefined` | The progress's type. Default is **`undefined`**. |
 | `@Input()`<br>`value: number` | The value of the progress. Default is **`0`**. |
 | `@Input()`<br>`height: number` | The height of the progress. |
 | `@Input()`<br>`color: string` | The text color of the progress. |
@@ -30,5 +30,5 @@ Exported as: `mtxProgress`
 #### `MtxProgressType`
 
 ```ts
-type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'danger';
+type MtxProgressType = 'info' | 'success' | 'warning' | 'danger';
 ```
