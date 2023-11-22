@@ -13,7 +13,7 @@ $_tokens: tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots();
   font-size: 16px; // It can change the arrow size
   outline: 0;
 
-  @include token-utils.use-tokens(tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots()) {
+  @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(background-color, panel-background-color);
     @include token-utils.create-token-slot(color, panel-text-color);
   }

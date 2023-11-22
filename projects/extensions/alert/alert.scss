@@ -2,9 +2,6 @@
 @use '../core/tokens/m2/mtx/alert' as tokens-mtx-alert;
 
 .mtx-alert {
-  @include token-utils.create-token-values(tokens-mtx-alert.$prefix,
-    tokens-mtx-alert.get-unthemable-tokens());
-
   position: relative;
   display: block;
   padding: .75rem 1.25rem;

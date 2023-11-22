@@ -13,12 +13,12 @@
 
   .mtx-split>.mtx-split-gutter {
     &.mat-accent:hover {
-      $accent-tokens: tokens-mtx-split.private-get-gutter-color-palette-color-tokens($config, accent);
+      $accent-tokens: tokens-mtx-split.private-get-color-palette-color-tokens($config, accent);
       @include token-utils.create-token-values(tokens-mtx-split.$prefix, $accent-tokens);
     }
 
     &.mat-warn:hover {
-      $warn-tokens: tokens-mtx-split.private-get-gutter-color-palette-color-tokens($config, warn);
+      $warn-tokens: tokens-mtx-split.private-get-color-palette-color-tokens($config, warn);
       @include token-utils.create-token-values(tokens-mtx-split.$prefix, $warn-tokens);
     }
   }
