@@ -19,6 +19,10 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
   .ng-select-container {
     align-items: center;
 
+    @include token-utils.use-tokens($_tokens...) {
+      @include token-utils.create-token-slot(color, container-text-color);
+    }
+
     .ng-value-container {
       align-items: center;
 

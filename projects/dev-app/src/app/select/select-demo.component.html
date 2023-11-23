@@ -2,9 +2,15 @@
   <mat-checkbox [(ngModel)]="multipleSelect">Mulitple select</mat-checkbox>
   <mat-checkbox [(ngModel)]="disableSelect">Disable select</mat-checkbox>
   <mat-checkbox [(ngModel)]="closeOnSelect">Close on select</mat-checkbox>
+
+  <mat-radio-group [(ngModel)]="themeColor">
+    <mat-radio-button value="primary">primary</mat-radio-button>
+    <mat-radio-button value="accent">accent</mat-radio-button>
+    <mat-radio-button value="warn">warn</mat-radio-button>
+  </mat-radio-group>
 </div>
 
-<mat-form-field>
+<mat-form-field [color]="themeColor">
   <mat-label>Select Food</mat-label>
 
   <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
@@ -16,7 +22,7 @@
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 &nbsp;
-<mat-form-field appearance="fill">
+<mat-form-field [color]="themeColor" appearance="fill">
   <mat-label>Select Food</mat-label>
 
   <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
@@ -29,7 +35,7 @@
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 &nbsp;
-<mat-form-field appearance="outline">
+<mat-form-field [color]="themeColor" appearance="outline">
   <mat-label>Select Food</mat-label>
 
   <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"

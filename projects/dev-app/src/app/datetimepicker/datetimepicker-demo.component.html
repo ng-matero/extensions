@@ -1,5 +1,11 @@
+<mat-radio-group [(ngModel)]="themeColor">
+  <mat-radio-button value="primary">primary</mat-radio-button>
+  <mat-radio-button value="accent">accent</mat-radio-button>
+  <mat-radio-button value="warn">warn</mat-radio-button>
+</mat-radio-group>
+
 <form [formGroup]="group">
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>DateTime</mat-label>
     <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datetimePicker startView="month" [timeInterval]="5"></mtx-datetimepicker>
@@ -10,7 +16,7 @@
     <mat-error *ngIf="group.get('dateTime')?.errors?.mtxDatetimepickerMax">max</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>DateTime with manual input</mat-label>
     <mtx-datetimepicker-toggle [for]="datetimePickerManual" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datetimePickerManual startView="month" [timeInterval]="5"
@@ -22,7 +28,7 @@
     <mat-error *ngIf="group.get('dateTimeManual')?.errors?.mtxDatetimepickerMax">max</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>DateTime Year selector</mat-label>
     <mtx-datetimepicker-toggle [for]="datetimeYearPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datetimeYearPicker [multiYearSelector]="true" startView="month"
@@ -34,7 +40,7 @@
     <mat-error *ngIf="group.get('dateTimeYear')?.errors?.mtxDatetimepickerMax">max</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>Time</mat-label>
     <mtx-datetimepicker-toggle [for]="timePicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #timePicker [timeInterval]="5" type="time"></mtx-datetimepicker>
@@ -42,7 +48,7 @@
     <mat-error *ngIf="group.get('time')?.errors?.required">required</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>Time AM/PM</mat-label>
     <mtx-datetimepicker-toggle [for]="timeAMPMPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #timeAMPMPicker [timeInterval]="5"
@@ -51,7 +57,7 @@
     <mat-error *ngIf="group.get('timeAMPM')?.errors?.required">required</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>DateTime AM/PM with manual input</mat-label>
     <mtx-datetimepicker-toggle [for]="timeAMPMPickerManual" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #timeAMPMPickerManual startView="month" [timeInterval]="5"
@@ -63,7 +69,7 @@
     <mat-error *ngIf="group.get('timeAMPMManual')?.errors?.mtxDatetimepickerMax">max</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>Date</mat-label>
     <mtx-datetimepicker-toggle [for]="datePicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #datePicker type="date"></mtx-datetimepicker>
@@ -71,7 +77,7 @@
     <mat-error *ngIf="group.get('date')?.errors?.required">required</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>Month</mat-label>
     <mtx-datetimepicker-toggle [for]="monthPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #monthPicker mode="portrait" type="month">
@@ -80,7 +86,7 @@
     <mat-error *ngIf="group.get('month')?.errors?.required">required</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>Year</mat-label>
     <mtx-datetimepicker-toggle [for]="yearPicker" matSuffix></mtx-datetimepicker-toggle>
     <mtx-datetimepicker #yearPicker type="year"></mtx-datetimepicker>
@@ -88,7 +94,7 @@
     <mat-error *ngIf="group.get('year')?.errors?.required">required</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>Min/Max Test</mat-label>
     <input [mtxDatetimepicker]="minTestPicker" [max]="max" [min]="min" formControlName="mintest"
            matInput required>
@@ -99,7 +105,7 @@
     <mat-error *ngIf="group.get('mintest')?.errors?.mtxDatetimepickerMax">max</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>Filter Test</mat-label>
     <input [mtxDatetimepickerFilter]="filter" [mtxDatetimepicker]="filterTestPicker"
            formControlName="filtertest" matInput required>
@@ -109,7 +115,7 @@
     <mat-error *ngIf="group.get('filtertest')?.errors?.mtxDatetimepickerFilter">filter</mat-error>
   </mat-form-field>
 
-  <mat-form-field>
+  <mat-form-field [color]="themeColor">
     <mat-label>TouchUi</mat-label>
     <input [mtxDatetimepicker]="touch" [min]="min" formControlName="touch" matInput required>
     <mtx-datetimepicker-toggle [for]="touch" matSuffix></mtx-datetimepicker-toggle>

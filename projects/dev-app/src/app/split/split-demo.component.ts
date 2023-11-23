@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./split-demo.component.scss'],
 })
 export class SplitDemoComponent {
-  color = 'primary';
+  themeColor = 'primary';
 }
