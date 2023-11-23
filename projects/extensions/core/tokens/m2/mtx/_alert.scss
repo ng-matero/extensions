@@ -17,17 +17,18 @@ $prefix: (mtx, alert);
 @function get-color-tokens($config) {
   $foreground: map.get($config, foreground);
   $background: map.get($config, background);
+  $is-dark-theme: map.get($config, is-dark);
 
   @return (
     background-color: theming.get-color-from-palette($background, dialog),
     text-color: theming.get-color-from-palette($foreground, text),
-    info-background-color: theming.get-color-from-palette(palette.$blue-palette, 500),
+    info-background-color: theming.get-color-from-palette(palette.$blue-palette, if($is-dark-theme, 900, 500)),
     info-text-color: white,
-    success-background-color: theming.get-color-from-palette(palette.$green-palette, 500),
+    success-background-color: theming.get-color-from-palette(palette.$green-palette, if($is-dark-theme, 900, 500)),
     success-text-color: white,
-    warning-background-color: theming.get-color-from-palette(palette.$orange-palette, 500),
+    warning-background-color: theming.get-color-from-palette(palette.$orange-palette, if($is-dark-theme, 900, 500)),
     warning-text-color: white,
-    danger-background-color: theming.get-color-from-palette(palette.$red-palette, 500),
+    danger-background-color: theming.get-color-from-palette(palette.$red-palette, if($is-dark-theme, 900, 500)),
     danger-text-color: white,
   );
 }

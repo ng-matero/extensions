@@ -17,18 +17,19 @@ $prefix: (mtx, progress);
 @function get-color-tokens($config) {
   $foreground: map.get($config, foreground);
   $background: map.get($config, background);
+  $is-dark-theme: map.get($config, is-dark);
 
   @return (
     track-color: theming.get-color-from-palette($background, hover),
     indicator-color: theming.get-color-from-palette($foreground, divider),
     text-color: theming.get-color-from-palette($foreground, text),
-    info-indicator-color: theming.get-color-from-palette(palette.$blue-palette, 500),
+    info-indicator-color: theming.get-color-from-palette(palette.$blue-palette, if($is-dark-theme, 900, 500)),
     info-text-color: white,
-    success-indicator-color: theming.get-color-from-palette(palette.$green-palette, 500),
+    success-indicator-color: theming.get-color-from-palette(palette.$green-palette, if($is-dark-theme, 900, 500)),
     success-text-color: white,
-    warning-indicator-color: theming.get-color-from-palette(palette.$orange-palette, 500),
+    warning-indicator-color: theming.get-color-from-palette(palette.$orange-palette, if($is-dark-theme, 900, 500)),
     warning-text-color: white,
-    danger-indicator-color: theming.get-color-from-palette(palette.$red-palette, 500),
+    danger-indicator-color: theming.get-color-from-palette(palette.$red-palette, if($is-dark-theme, 900, 500)),
     danger-text-color: white,
   );
 }
