@@ -19,8 +19,8 @@ $prefix: (mtx, alert);
   $background: map.get($config, background);
 
   @return (
-    default-background-color: theming.get-color-from-palette($background, dialog),
-    default-text-color: theming.get-color-from-palette($foreground, text),
+    background-color: theming.get-color-from-palette($background, dialog),
+    text-color: theming.get-color-from-palette($foreground, text),
     info-background-color: theming.get-color-from-palette(palette.$blue-palette, 500),
     info-text-color: white,
     success-background-color: theming.get-color-from-palette(palette.$green-palette, 500),

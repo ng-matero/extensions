@@ -10,8 +10,8 @@
   border-radius: .25rem;
 
   @include token-utils.use-tokens(tokens-mtx-alert.$prefix, tokens-mtx-alert.get-token-slots()) {
-    @include token-utils.create-token-slot(background-color, default-background-color);
-    @include token-utils.create-token-slot(color, default-text-color);
+    @include token-utils.create-token-slot(background-color, background-color);
+    @include token-utils.create-token-slot(color, text-color);
 
     &.mtx-alert-info {
       @include token-utils.create-token-slot(background-color, info-background-color);
