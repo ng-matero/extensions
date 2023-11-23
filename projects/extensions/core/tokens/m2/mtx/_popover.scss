@@ -18,9 +18,9 @@ $prefix: (mtx, popover);
   $background: map.get($config, background);
 
   @return (
-    panel-background-color: theming.get-color-from-palette($background, card),
-    panel-text-color:theming.get-color-from-palette($foreground, text),
-    arrow-border-color: theming.get-color-from-palette($foreground, divider),
+    background-color: theming.get-color-from-palette($background, card),
+    text-color: theming.get-color-from-palette($foreground, text),
+    arrow-outline-color: theming.get-color-from-palette($foreground, divider),
   );
 }
 

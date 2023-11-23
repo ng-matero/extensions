@@ -22,12 +22,12 @@ $prefix: (mtx, grid);
   @return (
     outline-color: theming.get-color-from-palette($foreground, secondary-text, .2),
     column-menu-text-color: theming.get-color-from-palette($foreground, text),
-    column-menu-border-color: theming.get-color-from-palette($foreground, divider),
+    column-menu-divider-color: theming.get-color-from-palette($foreground, divider),
     table-footer-background-color: theming.get-color-from-palette($background, app-bar),
     table-row-striped-background-color: if($is-dark-theme, #3a3a3a, #f5f5f5),
-    table-row-hover-state-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
-    table-row-selected-state-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
-    table-cell-selected-state-outline-color: theming.get-color-from-palette($accent),
+    table-row-hover-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
+    table-row-selected-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
+    table-cell-selected-outline-color: theming.get-color-from-palette($accent),
   );
 }
 
