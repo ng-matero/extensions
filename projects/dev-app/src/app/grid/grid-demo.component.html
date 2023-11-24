@@ -84,7 +84,7 @@
 </ng-template>
 
 <ng-template #ctxMenuTpl let-row>
-  <div>
+  <div cdkMenu>
     <button mat-button cdkMenuItem (click)="closeCdkMenu()"> {{row.city}} </button>
   </div>
 </ng-template>
