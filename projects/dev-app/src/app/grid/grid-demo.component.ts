@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import {
   MtxGrid,
   MtxGridColumn,
@@ -21,10 +21,14 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   @ViewChild('grid', { static: true }) grid!: MtxGrid;
   @ViewChild('grid2', { static: true }) grid2!: MtxGrid;
 
+  @Output() rowRightClick = new EventEmitter<any>();
+
   multiSelectable = true;
   multiSelectionWithClick = false;
   hideRowSelectionCheckbox = false;
   rowSelectable = true;
+  rowRightClickable = false;
+  enableContextCdkMenu = false;
   rowSelected = EXAMPLE_DATA.slice(2, 3);
   rowSelectionFormatter: MtxGridRowSelectionFormatter = {
     disabled: (data, index) => data.name === 'Boron',
@@ -88,7 +92,6 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       header: this.translate.stream('city'),
       field: 'city',
       minWidth: 150,
-      class: 'text-center',
     },
     {
       header: this.translate.stream('operation'),
@@ -237,6 +240,10 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   closeMenu() {
     this.grid.columnMenu.menuTrigger.closeMenu();
+  }
+
+  closeCdkMenu() {
+    this.grid.cdkContextMenuTrigger.close();
   }
 
   toggleSummary(e: MatCheckboxChange) {

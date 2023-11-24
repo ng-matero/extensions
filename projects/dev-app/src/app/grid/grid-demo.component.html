@@ -2,6 +2,8 @@
 <mat-checkbox [(ngModel)]="multiSelectionWithClick">multiSelectionWithClick</mat-checkbox>
 <mat-checkbox [(ngModel)]="hideRowSelectionCheckbox">hideRowSelectionCheckbox</mat-checkbox>
 <mat-checkbox [(ngModel)]="rowSelectable">rowSelectable</mat-checkbox>
+<mat-checkbox [(ngModel)]="rowRightClickable">rowRightClickable</mat-checkbox>
+<mat-checkbox [(ngModel)]="enableContextCdkMenu">enableContextCdkMenu</mat-checkbox>
 <mat-checkbox [(ngModel)]="expandable" (change)="toggleExpand()">expandable</mat-checkbox>
 <mat-checkbox [(ngModel)]="showSummary" (change)="toggleSummary($event)">showSummary</mat-checkbox>
 <mat-checkbox [(ngModel)]="columnResizable">columnResizable</mat-checkbox>
@@ -23,6 +25,9 @@
           [multiSelectionWithClick]="multiSelectionWithClick"
           [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
           [rowSelectable]="rowSelectable"
+          [rowRightClickable]="rowRightClickable"
+          [enableContextCdkMenu]="enableContextCdkMenu"
+          [contextCdkMenuTemplate]="ctxMenuTpl"
           [rowSelected]="rowSelected"
           [rowSelectionFormatter]="rowSelectionFormatter"
           [rowClassFormatter]="rowClassFormatter"
@@ -46,6 +51,7 @@
           [showColumnMenuFooter]="true"
           [columnMenuFooterTemplate]="menuFooterTpl"
           (rowClick)="log($event)"
+          (rowRightClick)="log($event)"
           [showSidebar]="showSidebar"
           [sidebarTemplate]="sidebarTpl"
           [sortOnFront]="sortOnFront"
@@ -75,6 +81,12 @@
 
 <ng-template #expansionTpl let-row let-expanded="expanded">
   {{expanded}} {{row.name}}
+</ng-template>
+
+<ng-template #ctxMenuTpl let-row>
+  <div>
+    <button mat-button cdkMenuItem (click)="closeCdkMenu()"> {{row.city}} </button>
+  </div>
 </ng-template>
 
 <ng-template #headerTpl let-col>

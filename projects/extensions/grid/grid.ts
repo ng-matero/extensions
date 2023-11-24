@@ -50,6 +50,7 @@ import {
 import { MtxGridExpansionToggle } from './expansion-toggle';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumnMenu } from './column-menu';
+import { CdkContextMenuTrigger } from '@angular/cdk/menu';
 
 /** Injection token that can be used to specify default grid options. */
 export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions>(
@@ -84,6 +85,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @ContentChildren(MatFooterRow) footerRowDefs!: QueryList<MatFooterRowDef>;
   @ViewChild('columnMenu') columnMenu!: MtxGridColumnMenu;
   @ViewChild('tableContainer') tableContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild(CdkContextMenuTrigger) cdkContextMenuTrigger!: CdkContextMenuTrigger;
 
   dataSource = new MatTableDataSource();
 
@@ -158,7 +160,12 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() rowStriped = this._defaultOptions?.rowStriped ?? false;
   /** Event emitted when the user clicks the row. */
   @Output() rowClick = new EventEmitter<any>();
-
+  /** Event emitted when the user right clicks the row. */
+  @Output() rowRightClick = new EventEmitter<any>();
+  /** Whether to enable context cdk menu */
+  @Input() enableContextCdkMenu = this._defaultOptions?.enableContextCdkMenu ?? false;
+  /** The template for the cdk context menu. */
+  @Input() contextCdkMenuTemplate!: TemplateRef<any>;
   // ===== Expandable Row =====
 
   expansionRowStates: any[] = [];
@@ -182,6 +189,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() rowSelected: any[] = [];
   /** Whether the row is selectable. */
   @Input() rowSelectable = this._defaultOptions?.rowSelectable ?? false;
+  /** Whether the row is selectable. */
+  @Input() rowRightClickable = this._defaultOptions?.rowRightClickable ?? false;
   /** Whether to hide the row selection checkbox. */
   @Input() hideRowSelectionCheckbox = this._defaultOptions?.hideRowSelectionCheckbox ?? false;
   /** Whether disable rows to be selected when clicked. */
@@ -474,7 +483,15 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
       this._toggleNormalCheckbox(rowData);
     }
 
-    this.rowClick.emit({ rowData, index });
+    this.rowClick.emit({ rowData, index, event });
+  }
+
+  /** Row right click event */
+  _rightClickRow(event: MouseEvent, rowData: Record<string, any>, index: number) {
+    if (this.rowRightClickable) {
+      event.preventDefault();
+      this.rowRightClick.emit({ rowData, index, event });
+    }
   }
 
   /** Whether the number of selected elements matches the total number of rows. */

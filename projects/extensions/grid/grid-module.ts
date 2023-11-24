@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 import { MtxPipesModule } from '@ng-matero/extensions/core';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
@@ -55,6 +56,7 @@ import {
     MtxDialogModule,
     MtxPipesModule,
     MatColumnResizeModule,
+    CdkMenuModule,
   ],
   exports: [
     MtxGrid,

@@ -197,8 +197,19 @@
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
               [class]="row | rowClass: index: dataIndex: rowClassFormatter"
               [ngClass]="{'selected': rowSelection.isSelected(row)}"
-              (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
+              (click)="_selectRow($event, row, _getIndex(index, dataIndex))"
+              (contextmenu)="_rightClickRow($event, row, _getIndex(index, dataIndex))"
+              [cdkContextMenuDisabled]="!enableContextCdkMenu"
+              [cdkContextMenuTriggerFor]="contextMenuTpl"
+              [cdkContextMenuTriggerData]="{ rowData: row }"
+              >
           </tr>
+        </ng-template>
+
+        <ng-template #contextMenuTpl let-rowData="rowData">
+            <ng-template [ngTemplateOutlet]="contextCdkMenuTemplate"
+                         [ngTemplateOutletContext]="{ $implicit: rowData, rowData: rowData }">
+            </ng-template>
         </ng-template>
 
         <ng-template [ngIf]="_whetherShowSummary">
@@ -386,7 +397,8 @@
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
               [class]="row | rowClass: index: dataIndex: rowClassFormatter"
               [ngClass]="{'selected': rowSelection.isSelected(row)}"
-              (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
+              (click)="_selectRow($event, row, _getIndex(index, dataIndex))"
+              (contextmenu)="_rightClickRow($event, row, _getIndex(index, dataIndex))">
           </tr>
         </ng-template>
 
