@@ -207,9 +207,11 @@
         </ng-template>
 
         <ng-template #contextMenuTpl let-rowData="rowData">
+          <div cdkMenu>
             <ng-template [ngTemplateOutlet]="contextCdkMenuTemplate"
                          [ngTemplateOutletContext]="{ $implicit: rowData, rowData: rowData }">
             </ng-template>
+          </div>
         </ng-template>
 
         <ng-template [ngIf]="_whetherShowSummary">
