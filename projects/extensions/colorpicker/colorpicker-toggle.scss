@@ -1,6 +1,6 @@
 @use '@angular/cdk';
-@use '../core/tokens/m2/mtx/colorpicker' as tokens-mtx-colorpicker;
 @use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/colorpicker' as tokens-mtx-colorpicker;
 
 $_tokens: tokens-mtx-colorpicker.$prefix, tokens-mtx-colorpicker.get-token-slots();
 

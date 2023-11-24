@@ -1,10 +1,10 @@
 @use 'sass:color';
 @use 'sass:map';
-@use '../core/tokens/m2/mtx/colorpicker' as tokens-mtx-colorpicker;
 @use '../core/theming/theming';
-@use '../core/tokens/token-utils';
-@use '../core/style/sass-utils';
 @use '../core/typography/typography';
+@use '../core/style/sass-utils';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/colorpicker' as tokens-mtx-colorpicker;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);

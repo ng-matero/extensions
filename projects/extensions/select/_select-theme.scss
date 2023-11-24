@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use './select-density';
-@use '../core/style/sass-utils';
 @use '../core/theming/theming';
+@use '../core/style/sass-utils';
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/select' as tokens-mtx-select;
 

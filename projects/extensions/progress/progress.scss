@@ -1,5 +1,5 @@
-@use '../core/tokens/m2/mtx/progress' as tokens-mtx-progress;
 @use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/progress' as tokens-mtx-progress;
 
 $progress-height: 1rem !default;
 $progress-fill-animation-timing: 1s linear infinite !default;

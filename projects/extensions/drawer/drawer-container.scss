@@ -1,8 +1,8 @@
 @use '@angular/cdk' as cdk;
 
 @use '../core/style/elevation';
-@use '../core/tokens/m2/mtx/drawer' as tokens-mtx-drawer;
 @use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/drawer' as tokens-mtx-drawer;
 
 .mtx-drawer-container {
   display: block;

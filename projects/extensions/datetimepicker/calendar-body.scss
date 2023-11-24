@@ -1,6 +1,6 @@
 @use 'sass:math';
-@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 @use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 
 $calendar-body-label-padding-start: 5% !default;
 $calendar-body-label-side-padding: math.div(33%, 7) !default;

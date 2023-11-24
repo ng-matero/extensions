@@ -1,9 +1,9 @@
 @use 'sass:map';
-@use '../core/style/sass-utils';
+@use './column-resize/column-resize';
 @use '../core/theming/theming';
+@use '../core/style/sass-utils';
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/grid' as tokens-mtx-grid;
-@use './column-resize/column-resize';
 
 
 @mixin color($config-or-theme) {

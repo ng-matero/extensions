@@ -1,9 +1,9 @@
 @use 'sass:map';
-@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 @use '../core/theming/theming';
-@use '../core/tokens/token-utils';
-@use '../core/style/sass-utils';
 @use '../core/typography/typography';
+@use '../core/style/sass-utils';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 
 @mixin _calendar-color($config, $palette) {
   $palette-color: theming.get-color-from-palette(map.get($config, $palette));

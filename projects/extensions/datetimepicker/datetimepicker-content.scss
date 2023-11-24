@@ -1,6 +1,6 @@
 @use '../core/style/elevation';
-@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 @use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 
 $calendar-padding: 8px;
 $non-touch-calendar-cell-size: 40px;
