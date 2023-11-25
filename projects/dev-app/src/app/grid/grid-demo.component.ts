@@ -21,8 +21,6 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   @ViewChild('grid', { static: true }) grid!: MtxGrid;
   @ViewChild('grid2', { static: true }) grid2!: MtxGrid;
 
-  @Output() rowRightClick = new EventEmitter<any>();
-
   multiSelectable = true;
   multiSelectionWithClick = false;
   hideRowSelectionCheckbox = false;
@@ -92,6 +90,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       header: this.translate.stream('city'),
       field: 'city',
       minWidth: 150,
+      class: 'text-center',
     },
     {
       header: this.translate.stream('operation'),
