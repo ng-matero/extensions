@@ -3,6 +3,7 @@
 @use './styles/app-theme';
 @use './styles/constants';
 @use './styles/reboot';
+@use 'photoviewer';
 
 @include mat.core();
 

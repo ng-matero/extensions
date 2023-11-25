@@ -14,7 +14,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
-import PhotoViewer from 'photoviewer';
 import { isObservable } from 'rxjs';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
@@ -122,26 +121,5 @@ export class MtxGridCell implements OnInit, DoCheck {
     } else {
       btn.click?.(rowData);
     }
-  }
-
-  /** Preview enlarged image */
-  _onImagePreview(urlStr: string) {
-    const imgs: PhotoViewer.Img[] = [];
-
-    this._utils.str2arr(urlStr).forEach((url, index) => {
-      imgs.push({ title: index + 1 + '', src: url });
-    });
-
-    const footerToolbar =
-      imgs.length > 1
-        ? ['zoomIn', 'zoomOut', 'prev', 'next', 'rotateRight', 'rotateLeft', 'actualSize']
-        : ['zoomIn', 'zoomOut', 'rotateRight', 'rotateLeft', 'actualSize'];
-
-    const options: PhotoViewer.Options = {
-      title: imgs.length > 1,
-      footerToolbar,
-    };
-
-    const photoviewer = new PhotoViewer(imgs, options);
   }
 }
