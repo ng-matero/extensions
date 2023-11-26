@@ -200,7 +200,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** Whether the cell is selectable. */
   @Input() cellSelectable = this._defaultOptions?.cellSelectable ?? true;
   /** Event emitted when the cell is selected. */
-  @Output() cellSelectionChange = new EventEmitter<any[]>();
+  @Output() cellSelectedChange = new EventEmitter<any[]>();
 
   private _selectedCell?: MtxGridSelectableCell;
 
@@ -448,7 +448,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
       this.cellSelection = []; // reset
       this.cellSelection.push({ cellData: colValue, rowData, colDef });
 
-      this.cellSelectionChange.emit(this.cellSelection);
+      this.cellSelectedChange.emit(this.cellSelection);
 
       if (this._selectedCell) {
         this._selectedCell.deselect(); // the selectedCell will be undefined
@@ -580,7 +580,7 @@ export class MtxGridSelectableCell {
     }
   }
 
-  @Output() cellSelectionChange = new EventEmitter<MtxGridSelectableCell>();
+  @Output() cellSelectedChange = new EventEmitter<MtxGridSelectableCell>();
 
   constructor(private _grid: MtxGrid) {}
 
@@ -596,16 +596,16 @@ export class MtxGridSelectableCell {
 
   select(): void {
     this._selected = true;
-    this.cellSelectionChange.emit(this);
+    this.cellSelectedChange.emit(this);
   }
 
   deselect(): void {
     this._selected = false;
-    this.cellSelectionChange.emit(this);
+    this.cellSelectedChange.emit(this);
   }
 
   toggle(): void {
     this._selected = !this._selected;
-    this.cellSelectionChange.emit(this);
+    this.cellSelectedChange.emit(this);
   }
 }

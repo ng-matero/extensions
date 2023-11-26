@@ -75,7 +75,7 @@ Exported as: `mtxGrid`
 | `@Output()`<br>`rowClassFormatter: MtxGridRowClassFormatter` | The formatter to set the row's class. |
 | `@Output()`<br>`rowSelectedChange: EventEmitter<any>` | Event emitted when the row is selected. |
 | `@Input()`<br>`cellSelectable: boolean` | Whether the cell is selectable. Default is **`true`**. |
-| `@Output()`<br>`cellSelectionChange: EventEmitter<any>` | Event emitted when the cell is selected. |
+| `@Output()`<br>`cellSelectedChange: EventEmitter<any>` | Event emitted when the cell is selected. |
 
 ###### Toolbar
 

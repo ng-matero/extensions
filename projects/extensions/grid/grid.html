@@ -121,7 +121,7 @@
                 [class]="col | colClass: row: rowChangeRecord: rowChangeRecord?.currentValue"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
-                mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
+                mtx-grid-selectable-cell (cellSelectedChange)="_selectCell($event, row, col)">
               <ng-template [ngIf]="cellTemplate | isTemplateRef" [ngIfElse]="cellTpl">
                 <ng-template [ngTemplateOutlet]="$any(cellTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
@@ -310,7 +310,7 @@
                 [class]="col | colClass: row: rowChangeRecord :rowChangeRecord?.currentValue"
                 [ngClass]="{'mat-table-sticky-left': col.pinned === 'left', 'mat-table-sticky-right': col.pinned === 'right'}"
                 [ngStyle]="{'width': col.width, 'left': col.left, 'right': col.right}"
-                mtx-grid-selectable-cell (cellSelectionChange)="_selectCell($event, row, col)">
+                mtx-grid-selectable-cell (cellSelectedChange)="_selectCell($event, row, col)">
               <ng-template [ngIf]="cellTemplate | isTemplateRef" [ngIfElse]="cellTpl">
                 <ng-template [ngTemplateOutlet]="$any(cellTemplate)"
                              [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
