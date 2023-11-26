@@ -178,8 +178,6 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() multiSelectable = this._defaultOptions?.multiSelectable ?? true;
   /** Whether the user can select multiple rows with click. */
   @Input() multiSelectionWithClick = this._defaultOptions?.multiSelectionWithClick ?? false;
-  /** The selected row items. */
-  @Input() rowSelected: any[] = [];
   /** Whether the row is selectable. */
   @Input() rowSelectable = this._defaultOptions?.rowSelectable ?? false;
   /** Whether to hide the row selection checkbox. */
@@ -190,8 +188,10 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
   /** The formatter to set the row's class. */
   @Input() rowClassFormatter?: MtxGridRowClassFormatter;
+  /** The selected row items. */
+  @Input() rowSelected: any[] = [];
   /** Event emitted when the row is selected. */
-  @Output() rowSelectionChange = new EventEmitter<any[]>();
+  @Output() rowSelectedChange = new EventEmitter<any[]>();
 
   // ===== Cell Selection =====
 
@@ -495,13 +495,13 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
             this.rowSelection.select(row);
           }
         });
-    this.rowSelectionChange.emit(this.rowSelection.selected);
+    this.rowSelectedChange.emit(this.rowSelection.selected);
   }
 
   /** Select normal row */
   _toggleNormalCheckbox(row: Record<string, any>) {
     this.rowSelection.toggle(row);
-    this.rowSelectionChange.emit(this.rowSelection.selected);
+    this.rowSelectedChange.emit(this.rowSelection.selected);
   }
 
   /** Column change event */
