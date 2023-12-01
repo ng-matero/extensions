@@ -1,6 +1,6 @@
-<div [class]="'mtx-progress-fill mtx-progress-fill-' + type"
+<div class="mtx-progress-fill {{'mtx-progress-fill-' + type}}"
      [ngClass]="{'mtx-progress-fill-striped': striped, 'mtx-progress-fill-animated': animate}"
-     [ngStyle]="{ 'width.%': value, 'background-color': foreground }"
+     [ngStyle]="{'width.%': value, 'background-color': foreground, 'color': color}"
      role="progress-fill">
   <ng-content></ng-content>
 </div>

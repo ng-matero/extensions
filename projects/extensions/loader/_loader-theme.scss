@@ -1,14 +1,14 @@
-@use 'sass:map';
 @use '../core/theming/theming';
+@use '../core/style/sass-utils';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/loader' as tokens-mtx-loader;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $is-dark-theme: map.get($config, is-dark);
-  $foreground: map.get($config, foreground);
-  $background: map.get($config, background);
 
-  .mtx-loader-backdrop {
-    background-color: theming.get-color-from-palette($background, background, .75);
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-loader.$prefix,
+      tokens-mtx-loader.get-color-tokens($config));
   }
 }
 

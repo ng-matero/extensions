@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatColumnResizeModule } from './column-resize/column-resize-module';
 import { CdkMenuModule } from '@angular/cdk/menu';
 
 import { MtxPipesModule } from '@ng-matero/extensions/core';
@@ -23,8 +24,8 @@ import { MtxGrid, MtxGridSelectableCell } from './grid';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
 import { MtxGridExpansionToggle } from './expansion-toggle';
+import { MtxGridImagePreview } from './image-preview';
 import { MtxGridUtils } from './grid-utils';
-import { MatColumnResizeModule } from './column-resize/column-resize-module';
 import {
   MtxGridCellActionsPipe,
   MtxGridCellActionDisablePipe,
@@ -53,21 +54,24 @@ import {
     MatFormFieldModule,
     MatMenuModule,
     DragDropModule,
+    MatColumnResizeModule,
     MtxDialogModule,
     MtxPipesModule,
-    MatColumnResizeModule,
     CdkMenuModule,
   ],
   exports: [
+    MatColumnResizeModule,
     MtxGrid,
     MtxGridCell,
     MtxGridColumnMenu,
     MtxGridExpansionToggle,
+    MtxGridImagePreview,
     MtxGridSelectableCell,
-    MatColumnResizeModule,
     MtxGridRowClassPipe,
     MtxGridColClassPipe,
+    MtxGridCellActionsPipe,
     MtxGridCellActionTooltipPipe,
+    MtxGridCellActionBadgePipe,
     MtxGridCellActionDisablePipe,
     MtxGridCellSummaryPipe,
   ],
@@ -76,6 +80,7 @@ import {
     MtxGridCell,
     MtxGridColumnMenu,
     MtxGridExpansionToggle,
+    MtxGridImagePreview,
     MtxGridSelectableCell,
     MtxGridRowClassPipe,
     MtxGridColClassPipe,

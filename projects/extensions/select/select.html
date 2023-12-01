@@ -44,17 +44,17 @@
            [editableSearchTerm]="editableSearchTerm"
            [keyDownFn]="keyDownFn"
            [virtualScroll]="virtualScroll"
-           (blur)="blurEvent.emit($event)"
-           (focus)="focusEvent.emit($event)"
-           (change)="changeEvent.emit($event)"
-           (open)="openEvent.emit($event)"
-           (close)="closeEvent.emit($event)"
+           (blur)="blurEvent.emit()"
+           (focus)="focusEvent.emit()"
+           (change)="changeEvent.emit()"
+           (open)="openChange()"
+           (close)="closeEvent.emit()"
            (search)="searchEvent.emit($event)"
-           (clear)="clearEvent.emit($event)"
-           (add)="addEvent.emit($event)"
-           (remove)="removeEvent.emit($event)"
+           (clear)="clearEvent.emit()"
+           (add)="addEvent.emit()"
+           (remove)="removeEvent.emit()"
            (scroll)="scroll.emit($event)"
-           (scrollToEnd)="scrollToEnd.emit($event)">
+           (scrollToEnd)="scrollToEnd.emit()">
 
   <ng-container *ngIf="optionTemplate">
     <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"

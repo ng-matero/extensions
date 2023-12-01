@@ -192,6 +192,17 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
   // mat-table
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
 
+  images = [
+    {
+      title: 'Slipping Away by Jerry Fryer',
+      src: 'https://farm1.staticflickr.com/313/31812080833_297acfbbd9_z.jpg',
+    },
+    {
+      title: 'Mi Fuego by albert dros',
+      src: 'https://farm4.staticflickr.com/3804/33589584740_b0fbdcd4aa_z.jpg',
+    },
+  ];
+
   constructor(
     private translate: TranslateService,
     private http: HttpClient

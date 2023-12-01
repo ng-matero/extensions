@@ -28,13 +28,13 @@
           [rowRightClickable]="rowRightClickable"
           [enableContextCdkMenu]="enableContextCdkMenu"
           [contextCdkMenuTemplate]="ctxMenuTpl"
-          [rowSelected]="rowSelected"
           [rowSelectionFormatter]="rowSelectionFormatter"
           [rowClassFormatter]="rowClassFormatter"
-          (rowSelectionChange)="log($event)"
+          [(rowSelected)]="rowSelected"
+          (rowSelectedChange)="log($event)"
           [rowHover]="rowHover"
           [rowStriped]="rowStriped"
-          (cellSelectionChange)="log($event)"
+          (cellSelectedChange)="log($event)"
           [trackBy]="trackByName"
           [expandable]="expandable"
           [expansionTemplate]="expansionTpl"
@@ -147,6 +147,16 @@
 <button (click)="updateList()">Update List</button>
 <button (click)="updateEmptyList()">Update Empty List</button>
 <button (click)="select2ndData()">Select 2nd data</button>
+
+<h2>Image Preview</h2>
+
+<figure>
+  <img mtx-grid-image-preview
+       src="https://farm5.staticflickr.com/4267/34162425794_1430f38362_z.jpg, https://farm1.staticflickr.com/313/31812080833_297acfbbd9_z.jpg"
+       alt="">
+</figure>
+
+<figure mtx-grid-image-preview [images]="images" [options]="{}">Click Me!</figure>
 
 <h2>Original Material Table</h2>
 

@@ -73,9 +73,9 @@ Exported as: `mtxGrid`
 | `@Input()`<br>`disableRowClickSelection: boolean` | Whether disable rows to be selected when clicked. Default is **`false`**. |
 | `@Input()`<br>`rowSelectionFormatter: MtxGridRowSelectionFormatter` | The formatter to disable the row selection or hide the row's checkbox. |
 | `@Output()`<br>`rowClassFormatter: MtxGridRowClassFormatter` | The formatter to set the row's class. |
-| `@Output()`<br>`rowSelectionChange: EventEmitter<any>` | Event emitted when the row is selected. |
+| `@Output()`<br>`rowSelectedChange: EventEmitter<any>` | Event emitted when the row is selected. |
 | `@Input()`<br>`cellSelectable: boolean` | Whether the cell is selectable. Default is **`true`**. |
-| `@Output()`<br>`cellSelectionChange: EventEmitter<any>` | Event emitted when the cell is selected. |
+| `@Output()`<br>`cellSelectedChange: EventEmitter<any>` | Event emitted when the cell is selected. |
 
 ###### Toolbar
 

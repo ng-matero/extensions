@@ -1,25 +1,25 @@
-@use 'sass:map';
 @use '../core/theming/theming';
+@use '../core/style/sass-utils';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/split' as tokens-mtx-split;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $foreground: map.get($config, foreground);
 
-  .mtx-split {
-    > .mtx-split-gutter {
-      background-color: theming.get-color-from-palette($foreground, divider, .12);
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-split.$prefix,
+      tokens-mtx-split.get-color-tokens($config));
+  }
 
-      &:hover {
-        background-color: theming.get-color-from-palette(map.get($config, primary), text);
-      }
+  .mtx-split>.mtx-split-gutter {
+    &.mat-accent:hover {
+      $accent-tokens: tokens-mtx-split.private-get-color-palette-color-tokens($config, accent);
+      @include token-utils.create-token-values(tokens-mtx-split.$prefix, $accent-tokens);
+    }
 
-      &.mat-accent:hover {
-        background-color: theming.get-color-from-palette(map.get($config, accent), text);
-      }
-
-      &.mat-warn:hover {
-        background-color: theming.get-color-from-palette(map.get($config, warn), text);
-      }
+    &.mat-warn:hover {
+      $warn-tokens: tokens-mtx-split.private-get-color-palette-color-tokens($config, warn);
+      @include token-utils.create-token-values(tokens-mtx-split.$prefix, $warn-tokens);
     }
   }
 }
@@ -30,18 +30,21 @@
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
+
   @include theming.private-check-duplicate-theme-styles($theme, 'mtx-split') {
     $color: theming.get-color-config($theme);
     $density: theming.get-density-config($theme);
     $typography: theming.get-typography-config($theme);
 
-    @if $color != null {
+    @if $color !=null {
       @include color($color);
     }
-    @if $density != null {
+
+    @if $density !=null {
       @include density($density);
     }
-    @if $typography != null {
+
+    @if $typography !=null {
       @include typography($typography);
     }
   }

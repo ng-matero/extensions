@@ -1,3 +1,7 @@
+@use '../core/style/elevation';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
+
 $calendar-padding: 8px;
 $non-touch-calendar-cell-size: 40px;
 $non-touch-calendar-portrait-width: $non-touch-calendar-cell-size * 7 + $calendar-padding * 2;
@@ -40,6 +44,14 @@ $touch-max-height: 850px;
 .mtx-datetimepicker-content {
   display: block;
   border-radius: 4px;
+
+  @include elevation.elevation(4);
+
+  @include token-utils.use-tokens(tokens-mtx-datetimepicker.$prefix,
+    tokens-mtx-datetimepicker.get-token-slots()) {
+    @include token-utils.create-token-slot(background-color, calendar-container-background-color);
+    @include token-utils.create-token-slot(color, calendar-container-text-color);
+  }
 }
 
 .mtx-datetimepicker-content-container {

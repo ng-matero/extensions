@@ -1,4 +1,8 @@
-@use '@angular/material' as mat;
+@use '../core/style/elevation';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/select' as tokens-mtx-select;
+
+$_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
 @mixin rtl {
   @at-root [dir='rtl'] #{&} {
@@ -15,13 +19,18 @@
   .ng-select-container {
     align-items: center;
 
+    @include token-utils.use-tokens($_tokens...) {
+      @include token-utils.create-token-slot(color, container-text-color);
+    }
+
     .ng-value-container {
       align-items: center;
 
       .ng-input {
-        > input {
-          font: inherit;
+        >input {
           padding: 0;
+          color: inherit;
+          font: inherit;
         }
       }
     }
@@ -36,6 +45,10 @@
     transition: opacity 200ms;
     opacity: 1;
 
+    @include token-utils.use-tokens($_tokens...) {
+      @include token-utils.create-token-slot(color, placeholder-text-color);
+    }
+
     .mat-form-field-hide-placeholder & {
       opacity: 0;
     }
@@ -43,6 +56,24 @@
 
   .ng-has-value .ng-placeholder {
     display: none;
+  }
+
+  .ng-clear-wrapper {
+    @include token-utils.use-tokens($_tokens...) {
+      @include token-utils.create-token-slot(color, clear-icon-color);
+
+      &:hover .ng-clear {
+        @include token-utils.create-token-slot(color, clear-icon-hover-color);
+      }
+    }
+  }
+
+  &.ng-select-disabled {
+    .ng-value {
+      @include token-utils.use-tokens($_tokens...) {
+        @include token-utils.create-token-slot(color, disabled-text-color);
+      }
+    }
   }
 
   &.ng-select-opened {
@@ -86,9 +117,21 @@
           font-size: .875em;
           line-height: 18px;
 
+          @include token-utils.use-tokens($_tokens...) {
+            @include token-utils.create-token-slot(background-color, multiple-value-background-color);
+
+            $border-color: token-utils.get-token-variable(multiple-value-border-color);
+
+            border: 1px solid var($border-color);
+          }
+
           @include rtl {
             margin-right: auto;
             margin-left: 4px;
+          }
+
+          &.ng-value-disabled {
+            opacity: .4;
           }
 
           .ng-value-label {
@@ -120,6 +163,12 @@
                 margin-left: auto;
               }
             }
+
+            &:hover {
+              @include token-utils.use-tokens($_tokens...) {
+                @include token-utils.create-token-slot(background-color, multiple-value-icon-hover-background-color);
+              }
+            }
           }
         }
       }
@@ -128,10 +177,33 @@
 
   .ng-arrow-wrapper {
     width: 10px;
+  }
+
+  @include token-utils.use-tokens($_tokens...) {
+    $enabled-arrow-color: token-utils.get-token-variable(enabled-arrow-color);
+    $disabled-arrow-color: token-utils.get-token-variable(disabled-arrow-color);
+    $invalid-arrow-color: token-utils.get-token-variable(invalid-arrow-color);
 
     .ng-arrow {
       border-width: 5px 5px 2px;
       border-style: solid;
+      border-color: var($enabled-arrow-color) transparent transparent;
+    }
+
+    &.ng-select-disabled .ng-arrow {
+      border-color: var($disabled-arrow-color) transparent transparent;
+    }
+
+    &.ng-select-invalid .ng-arrow {
+      border-color: var($invalid-arrow-color) transparent transparent;
+    }
+
+    &.ng-select-opened .ng-arrow {
+      border-color: transparent transparent var($enabled-arrow-color);
+    }
+
+    &.ng-select-opened.ng-select-invalid .ng-arrow {
+      border-color: transparent transparent var($invalid-arrow-color);
     }
   }
 }
@@ -142,7 +214,7 @@
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
 
-    @include mat.elevation(4);
+    @include elevation.elevation(8);
   }
 
   &.ng-select-top {
@@ -150,7 +222,7 @@
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
 
-    @include mat.elevation(4);
+    @include elevation.elevation(8);
   }
 
   .ng-dropdown-header,
@@ -158,48 +230,87 @@
     padding: 14px 16px;
   }
 
-  .ng-dropdown-panel-items {
-    .ng-optgroup {
-      padding: 14px 16px;
-      font-weight: 500;
-      user-select: none;
-      cursor: pointer;
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(background-color, panel-background-color);
 
-      &.ng-option-disabled {
-        cursor: default;
-      }
+    $border-color: token-utils.get-token-variable(panel-divider-color);
+
+    .ng-dropdown-header {
+      border-bottom: 1px solid var($border-color);
     }
 
-    .ng-option {
-      position: relative;
-      padding: 14px 16px;
-      text-overflow: ellipsis;
-      text-decoration: none;
-      text-align: left;
-      white-space: nowrap;
-      overflow: hidden;
+    .ng-dropdown-footer {
+      border-top: 1px solid var($border-color);
+    }
 
-      @include rtl {
-        text-align: right;
-      }
+    .ng-dropdown-panel-items {
+      .ng-optgroup {
+        padding: 14px 16px;
+        font-weight: 500;
+        user-select: none;
+        cursor: pointer;
 
-      &.ng-option-child {
-        padding-left: 32px;
+        @include token-utils.create-token-slot(color, optgroup-label-text-color);
 
-        @include rtl {
-          padding-right: 32px;
-          padding-left: 0;
+        &.ng-option-disabled {
+          cursor: default;
+        }
+
+        &.ng-option-marked {
+          @include token-utils.create-token-slot(background-color, option-hover-state-background-color);
+        }
+
+        &.ng-option-selected {
+          @include token-utils.create-token-slot(background-color, option-selected-state-background-color);
+          @include token-utils.create-token-slot(color, option-selected-state-text-color);
         }
       }
 
-      .ng-tag-label {
-        padding-right: 5px;
-        font-size: 80%;
-        font-weight: 400;
+      .ng-option {
+        position: relative;
+        padding: 14px 16px;
+        text-overflow: ellipsis;
+        text-decoration: none;
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+
+        @include token-utils.create-token-slot(color, option-label-text-color);
+
+        &.ng-option-marked {
+          @include token-utils.create-token-slot(background-color, option-hover-state-background-color);
+        }
+
+        &.ng-option-selected {
+          @include token-utils.create-token-slot(background-color, option-selected-state-background-color);
+          @include token-utils.create-token-slot(color, option-selected-state-text-color);
+        }
+
+        &.ng-option-disabled {
+          @include token-utils.create-token-slot(color, option-disabled-state-text-color);
+        }
 
         @include rtl {
-          padding-left: 5px;
-          padding-right: 0;
+          text-align: right;
+        }
+
+        &.ng-option-child {
+          padding-left: 32px;
+
+          @include rtl {
+            padding-right: 32px;
+            padding-left: 0;
+          }
+        }
+
+        .ng-tag-label {
+          margin-right: 6px;
+          font-size: 80%;
+
+          @include rtl {
+            margin-left: 6px;
+            margin-right: 0;
+          }
         }
       }
     }

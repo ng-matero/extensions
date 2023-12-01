@@ -185,8 +185,6 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() multiSelectable = this._defaultOptions?.multiSelectable ?? true;
   /** Whether the user can select multiple rows with click. */
   @Input() multiSelectionWithClick = this._defaultOptions?.multiSelectionWithClick ?? false;
-  /** The selected row items. */
-  @Input() rowSelected: any[] = [];
   /** Whether the row is selectable. */
   @Input() rowSelectable = this._defaultOptions?.rowSelectable ?? false;
   /** Whether the row is selectable. */
@@ -199,8 +197,10 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
   /** The formatter to set the row's class. */
   @Input() rowClassFormatter?: MtxGridRowClassFormatter;
+  /** The selected row items. */
+  @Input() rowSelected: any[] = [];
   /** Event emitted when the row is selected. */
-  @Output() rowSelectionChange = new EventEmitter<any[]>();
+  @Output() rowSelectedChange = new EventEmitter<any[]>();
 
   // ===== Cell Selection =====
 
@@ -209,7 +209,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** Whether the cell is selectable. */
   @Input() cellSelectable = this._defaultOptions?.cellSelectable ?? true;
   /** Event emitted when the cell is selected. */
-  @Output() cellSelectionChange = new EventEmitter<any[]>();
+  @Output() cellSelectedChange = new EventEmitter<any[]>();
 
   private _selectedCell?: MtxGridSelectableCell;
 
@@ -457,7 +457,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
       this.cellSelection = []; // reset
       this.cellSelection.push({ cellData: colValue, rowData, colDef });
 
-      this.cellSelectionChange.emit(this.cellSelection);
+      this.cellSelectedChange.emit(this.cellSelection);
 
       if (this._selectedCell) {
         this._selectedCell.deselect(); // the selectedCell will be undefined
@@ -512,13 +512,13 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
             this.rowSelection.select(row);
           }
         });
-    this.rowSelectionChange.emit(this.rowSelection.selected);
+    this.rowSelectedChange.emit(this.rowSelection.selected);
   }
 
   /** Select normal row */
   _toggleNormalCheckbox(row: Record<string, any>) {
     this.rowSelection.toggle(row);
-    this.rowSelectionChange.emit(this.rowSelection.selected);
+    this.rowSelectedChange.emit(this.rowSelection.selected);
   }
 
   /** Column change event */
@@ -597,7 +597,7 @@ export class MtxGridSelectableCell {
     }
   }
 
-  @Output() cellSelectionChange = new EventEmitter<MtxGridSelectableCell>();
+  @Output() cellSelectedChange = new EventEmitter<MtxGridSelectableCell>();
 
   constructor(private _grid: MtxGrid) {}
 
@@ -613,16 +613,16 @@ export class MtxGridSelectableCell {
 
   select(): void {
     this._selected = true;
-    this.cellSelectionChange.emit(this);
+    this.cellSelectedChange.emit(this);
   }
 
   deselect(): void {
     this._selected = false;
-    this.cellSelectionChange.emit(this);
+    this.cellSelectedChange.emit(this);
   }
 
   toggle(): void {
     this._selected = !this._selected;
-    this.cellSelectionChange.emit(this);
+    this.cellSelectedChange.emit(this);
   }
 }

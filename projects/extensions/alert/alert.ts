@@ -16,7 +16,7 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
   selector: 'mtx-alert',
   exportAs: 'mtxAlert',
   host: {
-    '[class.mtx-alert]': 'true',
+    'class': 'mtx-alert',
     '[class.mtx-alert-dismissible]': 'dismissible',
     'role': 'alert',
   },

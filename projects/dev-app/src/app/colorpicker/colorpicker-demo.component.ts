@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 import { ColorFormat } from '@ng-matero/extensions/colorpicker';
 
@@ -9,6 +10,8 @@ import { ColorFormat } from '@ng-matero/extensions/colorpicker';
   styleUrls: ['./colorpicker-demo.component.scss'],
 })
 export class ColorPickerDemoComponent {
+  themeColor: ThemePalette = 'primary';
+
   color = '#3f51b5';
   disabled = false;
 

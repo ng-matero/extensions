@@ -569,6 +569,16 @@ export class MtxSelect
     this.ngSelect.blur();
   }
 
+  openChange() {
+    this.openEvent.emit();
+
+    // TODO: The ng-select has no `panelClass` prop, so we can add the theme color by the following way.
+    setTimeout(() => {
+      const dropdownEl = document.getElementById(this.ngSelect.dropdownId) as HTMLElement;
+      dropdownEl.classList.add('mat-' + this._parentFormField?.color);
+    });
+  }
+
   static ngAcceptInputType_required: BooleanInput;
   static ngAcceptInputType_disabled: BooleanInput;
 }

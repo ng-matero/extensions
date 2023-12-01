@@ -1,4 +1,10 @@
-<mat-form-field>
+<mat-radio-group [(ngModel)]="themeColor">
+  <mat-radio-button value="primary">primary</mat-radio-button>
+  <mat-radio-button value="accent">accent</mat-radio-button>
+  <mat-radio-button value="warn">warn</mat-radio-button>
+</mat-radio-group>
+
+<mat-form-field [color]="themeColor">
   <mat-label>Color picker</mat-label>
   <input matInput [(ngModel)]="color" [mtxColorpicker]="picker" [disabled]="disabled">
   <mtx-colorpicker-toggle matSuffix [for]="picker"></mtx-colorpicker-toggle>

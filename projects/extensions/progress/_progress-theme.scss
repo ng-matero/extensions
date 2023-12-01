@@ -1,33 +1,14 @@
-@use 'sass:map';
 @use '../core/theming/theming';
-@use '../core/theming/palette';
+@use '../core/style/sass-utils';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/progress' as tokens-mtx-progress;
 
 @mixin color($config-or-theme) {
   $config: theming.get-color-config($config-or-theme);
-  $background: map.get($config, background);
 
-  .mtx-progress {
-    background-color: theming.get-color-from-palette($background, hover);
-  }
-
-  .mtx-progress-fill-info {
-    background-color: theming.get-color-from-palette(palette.$blue-palette, 500);
-    color: white;
-  }
-
-  .mtx-progress-fill-success {
-    background-color: theming.get-color-from-palette(palette.$green-palette, 500);
-    color: white;
-  }
-
-  .mtx-progress-fill-warning {
-    background-color: theming.get-color-from-palette(palette.$orange-palette, 500);
-    color: white;
-  }
-
-  .mtx-progress-fill-danger {
-    background-color: theming.get-color-from-palette(palette.$red-palette, 500);
-    color: white;
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-progress.$prefix,
+      tokens-mtx-progress.get-color-tokens($config));
   }
 }
 

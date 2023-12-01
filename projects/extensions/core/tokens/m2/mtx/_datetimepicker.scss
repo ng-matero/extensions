@@ -1,0 +1,155 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../../token-utils';
+@use '../../../theming/theming';
+@use '../../../style/sass-utils';
+@use '../../../typography/typography-utils';
+
+// The prefix used to generate the fully qualified name for tokens in this file.
+$prefix: (mtx, datetimepicker);
+
+$_selected-fade-amount: .6;
+$_today-fade-amount: .2;
+
+@function private-get-calendar-color-palette-color-tokens($config, $palette-name) {
+  $foreground: map.get($config, foreground);
+  $background: map.get($config, background);
+  $palette: map.get($config, $palette-name);
+  $palette-color: theming.get-color-from-palette($palette);
+  $default-contrast: theming.get-color-from-palette($palette, default-contrast);
+  $active-background-color: theming.get-color-from-palette($palette, .3);
+  $active-disabled-color: null;
+
+  @if (meta.type-of($palette-color) == color) {
+    $active-disabled-color: color.adjust($palette-color, $alpha: -$_selected-fade-amount);
+  }
+  @else {
+    $active-disabled-color: theming.get-color-from-palette($foreground, disabled-button);
+  }
+
+  @return (
+    calendar-header-background-color: $palette-color,
+
+    calendar-date-selected-state-text-color: $default-contrast,
+    calendar-date-selected-state-background-color: $palette-color,
+    calendar-date-selected-disabled-state-background-color: $active-disabled-color,
+    calendar-date-today-selected-state-outline-color: $default-contrast,
+    calendar-date-focus-state-background-color: $active-background-color,
+    calendar-date-hover-state-background-color: $active-background-color,
+
+    clock-hand-background-color: $palette-color,
+    clock-cell-selected-state-background-color: $palette-color,
+
+    time-input-active-state-text-color: $palette-color,
+    time-input-active-state-background-color: theming.get-color-from-palette($palette, .2),
+    time-input-focus-state-border-color: $palette-color,
+    time-input-focus-state-placeholder-text-color: theming.get-color-from-palette($palette, .6),
+  );
+}
+
+@function private-get-toggle-color-palette-color-tokens($config, $palette-name) {
+  $palette: map.get($config, $palette-name);
+
+  @return (
+    toggle-active-state-icon-color: theming.get-color-from-palette($palette, text),
+  );
+}
+
+// Tokens that can't be configured through Angular Material's current theming API,
+// but may be in a future version of the theming API.
+@function get-unthemable-tokens() {
+  @return ();
+}
+
+// Tokens that can be configured through Angular Material's color theming API.
+@function get-color-tokens($config) {
+  $foreground: map.get($config, foreground);
+  $background: map.get($config, background);
+  $primary: map.get($config, primary);
+  $accent: map.get($config, accent);
+  $warn: map.get($config, warn);
+  $inactive-icon-color: theming.get-color-from-palette($foreground, icon);
+  $text-color: theming.get-color-from-palette($foreground, text);
+  $secondary-text-color: theming.get-color-from-palette($foreground, secondary-text);
+  $disabled-text-color: theming.get-color-from-palette($foreground, disabled-text);
+  $divider-color: theming.get-color-from-palette($foreground, divider);
+  $hint-text-color: theming.get-color-from-palette($foreground, hint-text);
+  $preview-outline-color: $divider-color;
+  $today-disabled-outline-color: null;
+
+  $primary-color: theming.get-color-from-palette(map.get($config, primary));
+  $calendar-tokens: private-get-calendar-color-palette-color-tokens($config, primary);
+  $toggle-tokens: private-get-toggle-color-palette-color-tokens($config, primary);
+
+  @return sass-utils.merge-all($calendar-tokens, $toggle-tokens, (
+    toggle-icon-color: $inactive-icon-color,
+    calendar-body-label-text-color: $secondary-text-color,
+    // calendar-period-button-icon-color: $inactive-icon-color,
+    // calendar-navigation-button-icon-color: $inactive-icon-color,
+    calendar-header-text-color: white,
+    calendar-header-divider-color: $divider-color,
+    calendar-table-header-text-color: $secondary-text-color,
+
+    // Note: though it's not text, the border is a hint about the fact
+    // that this is today's date, so we use the hint color.
+    calendar-date-today-outline-color: $hint-text-color,
+    // calendar-date-today-disabled-state-outline-color: $today-disabled-outline-color,
+    calendar-date-text-color: $text-color,
+    calendar-date-outline-color: transparent,
+    calendar-date-disabled-state-text-color: $disabled-text-color,
+    // calendar-date-preview-state-outline-color: $preview-outline-color,
+
+    calendar-container-background-color: theming.get-color-from-palette($background, card),
+    calendar-container-text-color: $text-color,
+
+    clock-dial-background-color: $divider-color,
+    clock-cell-text-color: $text-color,
+    clock-cell-hover-state-background-color: theming.get-color-from-palette($background, hover),
+    clock-cell-disabled-state-text-color: $disabled-text-color,
+
+    time-input-text-color: $text-color,
+    time-input-background-color: $divider-color,
+    time-input-focus-state-background-color: theming.get-color-from-palette($background, background),
+    time-input-warn-state-border-color: theming.get-color-from-palette($warn),
+    time-ampm-text-color: theming.get-color-from-palette($foreground, text, .75),
+    time-ampm-border-color: $hint-text-color,
+    time-ampm-selected-state-text-color: theming.get-color-from-palette($foreground, text),
+    time-ampm-selected-state-background-color: theming.get-color-from-palette($accent, .2),
+  ));
+}
+
+// Tokens that can be configured through Angular Material's typography theming API.
+@function get-typography-tokens($config) {
+  @return (
+    calendar-text-font: typography-utils.font-family($config),
+    calendar-text-size: 13px,
+
+    calendar-body-label-text-size: typography-utils.font-size($config, button),
+    calendar-body-label-text-weight: typography-utils.font-weight($config, button),
+
+    calendar-period-button-text-size: typography-utils.font-size($config, button),
+    calendar-period-button-text-weight: typography-utils.font-weight($config, button),
+
+    calendar-table-header-text-size: 11px,
+    calendar-table-header-text-weight: typography-utils.font-weight($config, body-1),
+
+    clock-text-size: 14px,
+  );
+}
+
+// Tokens that can be configured through Angular Material's density theming API.
+@function get-density-tokens($config) {
+  @return ();
+}
+
+// Combines the tokens generated by the above functions into a single map with placeholder values.
+// This is used to create token slots.
+@function get-token-slots() {
+  @return sass-utils.deep-merge-all(
+    get-unthemable-tokens(),
+    get-color-tokens(token-utils.$placeholder-color-config),
+    get-typography-tokens(token-utils.$placeholder-typography-config),
+    get-density-tokens(token-utils.$placeholder-density-config)
+  );
+}

@@ -56,10 +56,6 @@ export const DEV_APP_ROUTES: Routes = [
     loadChildren: () => import('../select/select-demo.module').then(m => m.SelectDemoModule),
   },
   {
-    path: 'slider',
-    loadChildren: () => import('../slider/slider-demo.module').then(m => m.SliderDemoModule),
-  },
-  {
     path: 'split',
     loadChildren: () => import('../split/split-demo.module').then(m => m.SplitDemoModule),
   },

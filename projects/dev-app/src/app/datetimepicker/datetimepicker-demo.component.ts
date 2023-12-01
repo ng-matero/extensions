@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
-import { DateAdapter } from '@angular/material/core';
+import { DateAdapter, ThemePalette } from '@angular/material/core';
 import { TranslateService } from '@ngx-translate/core';
 import * as moment from 'moment';
 import { Subscription } from 'rxjs';
@@ -12,6 +12,8 @@ import { MtxDatetimepickerFilterType } from '@ng-matero/extensions/datetimepicke
   styleUrls: ['datetimepicker-demo.component.scss'],
 })
 export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
+  themeColor: ThemePalette = 'primary';
+
   type = 'moment';
 
   group: UntypedFormGroup;

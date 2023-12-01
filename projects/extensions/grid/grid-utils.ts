@@ -40,7 +40,9 @@ export class MtxGridUtils {
    * @returns
    */
   str2arr(str: string): string[] {
-    return str.replace(/[\r\n\s]/g, '').split(',');
+    return decodeURI(str)
+      .replace(/[\r\n\s]/g, '')
+      .split(',');
   }
 
   /**
