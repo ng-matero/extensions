@@ -35,17 +35,6 @@ export class MtxGridUtils {
   }
 
   /**
-   * Remove white spaces in a string and convert string to array
-   * @param str
-   * @returns
-   */
-  str2arr(str: string): string[] {
-    return decodeURI(str)
-      .replace(/[\r\n\s]/g, '')
-      .split(',');
-  }
-
-  /**
    * Whether the value is empty (`null`, `undefined`, `''`, `[]`)
    * @param value
    * @returns

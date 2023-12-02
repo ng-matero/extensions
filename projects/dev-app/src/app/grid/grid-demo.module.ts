@@ -3,6 +3,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared.module';
 
 import { MtxGridModule } from '@ng-matero/extensions/grid';
+import { MtxPhotoviewerModule } from '@ng-matero/extensions/photoviewer';
 
 import { GridDemoComponent } from './grid-demo.component';
 
@@ -11,6 +12,7 @@ import { GridDemoComponent } from './grid-demo.component';
     SharedModule,
     RouterModule.forChild([{ path: '', component: GridDemoComponent }]),
     MtxGridModule,
+    MtxPhotoviewerModule,
   ],
   declarations: [GridDemoComponent],
 })

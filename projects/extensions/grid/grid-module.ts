@@ -23,7 +23,6 @@ import { MtxGrid, MtxGridSelectableCell } from './grid';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
 import { MtxGridExpansionToggle } from './expansion-toggle';
-import { MtxGridImagePreview } from './image-preview';
 import { MtxGridUtils } from './grid-utils';
 import {
   MtxGridCellActionsPipe,
@@ -63,7 +62,6 @@ import {
     MtxGridCell,
     MtxGridColumnMenu,
     MtxGridExpansionToggle,
-    MtxGridImagePreview,
     MtxGridSelectableCell,
     MtxGridRowClassPipe,
     MtxGridColClassPipe,
@@ -78,7 +76,6 @@ import {
     MtxGridCell,
     MtxGridColumnMenu,
     MtxGridExpansionToggle,
-    MtxGridImagePreview,
     MtxGridSelectableCell,
     MtxGridRowClassPipe,
     MtxGridColClassPipe,
