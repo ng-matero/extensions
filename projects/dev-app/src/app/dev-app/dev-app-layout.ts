@@ -30,6 +30,7 @@ export class DevAppLayout {
     { name: 'Dialog', route: '/dialog' },
     { name: 'Drawer', route: '/drawer' },
     { name: 'Loader', route: '/loader' },
+    { name: 'Photoviewer', route: '/photoviewer' },
     { name: 'Popover', route: '/popover' },
     { name: 'Progress', route: '/progress' },
     { name: 'Select', route: '/select' },

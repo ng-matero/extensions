@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxPhotoviewer",
+    "entryFile": "public-api.ts"
+  }
+}

@@ -44,6 +44,11 @@ export const DEV_APP_ROUTES: Routes = [
     loadChildren: () => import('../loader/loader-demo.module').then(m => m.LoaderDemoModule),
   },
   {
+    path: 'photoviewer',
+    loadChildren: () =>
+      import('../photoviewer/photoviewer-demo.module').then(m => m.PhotoviewerDemoModule),
+  },
+  {
     path: 'popover',
     loadChildren: () => import('../popover/popover-demo.module').then(m => m.PopoverDemoModule),
   },

@@ -1,0 +1,19 @@
+<button mat-stroked-button
+        mtxPhotoViewer
+        [mtxPhotoViewerItems]="images1"
+        [mtxPhotoViewerOptions]="{}">Open PhotoViewer</button>
+
+<h2>Img element</h2>
+<img mtxPhotoViewer
+     src="https://farm5.staticflickr.com/4267/34162425794_1430f38362_z.jpg"
+     alt="Rémi Bizouard triple champion du monde by malainxx24"
+     width="200">
+
+<h2>Thumbnail</h2>
+<a *ngFor="let item of images2; index as index"
+   [href]="item.src" [title]="item.title"
+   mtxPhotoViewer
+   [mtxPhotoViewerItems]="images2"
+   [mtxPhotoViewerOptions]="{ index }">
+  <img [src]="item.thumbnail" alt="">
+</a>
