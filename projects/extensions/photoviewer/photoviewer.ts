@@ -1,8 +1,9 @@
-import { Directive, HostListener, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import PhotoViewer from 'photoviewer';
 
 @Directive({
   selector: '[mtxPhotoViewer]',
+  exportAs: 'mtxPhotoViewer',
 })
 export class MtxPhotoviewer implements OnInit {
   @Input('mtxPhotoViewerItems')
@@ -11,26 +12,43 @@ export class MtxPhotoviewer implements OnInit {
   @Input('mtxPhotoViewerOptions')
   options?: PhotoViewer.Options;
 
-  constructor() {}
+  @Input('mtxPhotoViewerEmbed')
+  embed = false;
 
-  ngOnInit(): void {}
+  photoviewerInstance!: PhotoViewer;
+
+  constructor(private _elementRef: ElementRef<Element>) {}
+
+  ngOnInit(): void {
+    const { nativeElement } = this._elementRef;
+
+    if (this.embed) {
+      this.options = {
+        appendTo: nativeElement,
+        positionFixed: false,
+        modalWidth: nativeElement.clientWidth,
+        modalHeight: nativeElement.clientHeight,
+        ...this.options,
+      };
+      this.initPhotoViewer();
+    } else {
+      if (this.images.length === 0 && nativeElement.nodeName === 'IMG') {
+        const img = nativeElement as HTMLImageElement;
+        this.images = [{ title: img.title || img.alt, src: img.src }];
+      }
+    }
+  }
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent) {
     event.preventDefault();
 
-    if (this.images.length > 0) {
-      this.initPhotoViewer(this.images);
-    } else {
-      const el = event.target as HTMLImageElement;
-      if (el.nodeName === 'IMG') {
-        const imgs = [{ title: el.title || el.alt, src: el.src }];
-        this.initPhotoViewer(imgs);
-      }
+    if (!this.embed) {
+      this.initPhotoViewer();
     }
   }
 
-  initPhotoViewer(imgs: PhotoViewer.Img[] = []) {
-    new PhotoViewer(imgs, this.options);
+  initPhotoViewer() {
+    this.photoviewerInstance = new PhotoViewer(this.images, this.options);
   }
 }
