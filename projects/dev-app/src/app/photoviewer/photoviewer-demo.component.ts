@@ -41,4 +41,6 @@ export class PhotoviewerDemoComponent {
       thumbnail: 'https://farm1.staticflickr.com/470/31340603494_fb7228020d_s.jpg',
     },
   ];
+
+  showEmbed = false;
 }

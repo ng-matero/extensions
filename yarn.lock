@@ -9953,10 +9953,10 @@ performance-now@^2.1.0:
   resolved "https://registry.npmjs.org/performance-now/-/performance-now-2.1.0.tgz"
   integrity sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==
 
-photoviewer@^3.9.1:
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/photoviewer/-/photoviewer-3.9.1.tgz#0f5daa873ee5269484be15d28a7ab1b2f8f1170c"
-  integrity sha512-4Ucsct/B+8wcaVd2eXQ/a5lT6rQZhSx7CYA7J9ie0Ol7MQwjuloLs+MoNj6avT/nrACtZyU0bpDwavz7FmF7GQ==
+photoviewer@^3.9.2:
+  version "3.9.2"
+  resolved "https://registry.yarnpkg.com/photoviewer/-/photoviewer-3.9.2.tgz#9281b3a97d33e4bcabdcacadcab366242c3eb188"
+  integrity sha512-WprmLuSPyDH69nm5uSbr8HKzzvP1LS4Ks7Zzzwsf51NAGbcYpME3Lae5tFOWxY8fQtj3E17iov4zzMGJnZDLyA==
   dependencies:
     domq.js "^0.7.0"
 

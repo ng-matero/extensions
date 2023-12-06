@@ -1,11 +1,11 @@
-import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 import PhotoViewer from 'photoviewer';
 
 @Directive({
   selector: '[mtxPhotoViewer]',
   exportAs: 'mtxPhotoViewer',
 })
-export class MtxPhotoviewer implements OnInit {
+export class MtxPhotoviewer implements OnInit, OnDestroy {
   @Input('mtxPhotoViewerItems')
   images: PhotoViewer.Img[] = [];
 
@@ -15,7 +15,7 @@ export class MtxPhotoviewer implements OnInit {
   @Input('mtxPhotoViewerEmbed')
   embed = false;
 
-  photoviewerInstance!: PhotoViewer;
+  photoviewerInstance?: PhotoViewer;
 
   constructor(private _elementRef: ElementRef<Element>) {}
 
@@ -37,6 +37,10 @@ export class MtxPhotoviewer implements OnInit {
         this.images = [{ title: img.title || img.alt, src: img.src }];
       }
     }
+  }
+
+  ngOnDestroy(): void {
+    this.photoviewerInstance?.close();
   }
 
   @HostListener('click', ['$event'])

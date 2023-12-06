@@ -4,12 +4,14 @@
         [mtxPhotoViewerOptions]="{}">Open PhotoViewer</button>
 
 <h2>Img element</h2>
+
 <img mtxPhotoViewer
      src="https://farm5.staticflickr.com/4267/34162425794_1430f38362_z.jpg"
      alt="Rémi Bizouard triple champion du monde by malainxx24"
      width="200">
 
 <h2>Thumbnail</h2>
+
 <a *ngFor="let item of images2; index as index"
    [href]="item.src" [title]="item.title"
    mtxPhotoViewer
@@ -19,7 +21,10 @@
 </a>
 
 <h2>Embed</h2>
-<div class="wrapper"
+
+<button mat-stroked-button (click)="showEmbed=!showEmbed">Toggle embed PhotoViewer</button>
+
+<div class="wrapper" *ngIf="showEmbed"
      mtxPhotoViewer
      [mtxPhotoViewerEmbed]="true"
      [mtxPhotoViewerItems]="images2"
