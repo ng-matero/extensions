@@ -31,6 +31,7 @@ import { AbstractMatResizable, RESIZABLE_HOST_BINDINGS, RESIZABLE_INPUTS } from 
  */
 @Directive({
   selector: 'mat-header-cell[resizable], th[mat-header-cell][resizable]',
+  host: RESIZABLE_HOST_BINDINGS,
   inputs: RESIZABLE_INPUTS,
 })
 export class MatResizable extends AbstractMatResizable {

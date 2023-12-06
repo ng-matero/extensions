@@ -13,7 +13,7 @@ import { filter, map, mapTo, pairwise, startWith, take, takeUntil } from 'rxjs/o
 import { ColumnResizeNotifier, ColumnResizeNotifierSource } from './column-resize-notifier';
 import { HEADER_CELL_SELECTOR, RESIZE_OVERLAY_SELECTOR } from './selectors';
 import { HeaderRowEventDispatcher } from './event-dispatcher';
-import { closest, matches } from './polyfill';
+import { closest } from './polyfill';
 
 const HOVER_OR_ACTIVE_CLASS = 'cdk-column-resize-hover-or-active';
 const WITH_RESIZED_COLUMN_CLASS = 'cdk-column-resize-with-resized-column';
@@ -82,7 +82,7 @@ export abstract class ColumnResize implements AfterViewInit, OnDestroy {
           filter(
             event =>
               !!event.relatedTarget &&
-              !matches(event.relatedTarget as Element, RESIZE_OVERLAY_SELECTOR)
+              !(event.relatedTarget as Element).matches(RESIZE_OVERLAY_SELECTOR)
           ),
           mapTo(null),
           takeUntil(this.destroyed)

@@ -15,9 +15,10 @@ $prefix: (mtx, grid);
 // Tokens that can be configured through Angular Material's color theming API.
 @function get-color-tokens($config) {
   $is-dark-theme: map.get($config, is-dark);
-  $accent: map.get($config, accent);
   $foreground: map.get($config, foreground);
   $background: map.get($config, background);
+  $primary: map.get($config, primary);
+  $accent: map.get($config, accent);
 
   @return (
     outline-color: theming.get-color-from-palette($foreground, secondary-text, .2),
@@ -28,6 +29,9 @@ $prefix: (mtx, grid);
     table-row-hover-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
     table-row-selected-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
     table-cell-selected-outline-color: theming.get-color-from-palette($accent),
+    resizable-handle-active-background-color: theming.get-color-from-palette($primary),
+    resizable-handle-hover-background-color: theming.get-color-from-palette($primary),
+    resizable-handle-disabled-background-color: theming.get-color-from-palette($foreground, divider),
   );
 }
 

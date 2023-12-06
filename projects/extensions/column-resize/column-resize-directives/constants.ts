@@ -6,9 +6,9 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import {Provider} from '@angular/core';
-import {ColumnResizeNotifier, ColumnResizeNotifierSource} from '../column-resize-notifier';
-import {HeaderRowEventDispatcher} from '../event-dispatcher';
+import { Provider } from '@angular/core';
+import { ColumnResizeNotifier, ColumnResizeNotifierSource } from '../column-resize-notifier';
+import { HeaderRowEventDispatcher } from '../event-dispatcher';
 import {
   TABLE_LAYOUT_FIXED_RESIZE_STRATEGY_PROVIDER,
   FLEX_RESIZE_STRATEGY_PROVIDER,

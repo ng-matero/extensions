@@ -13,8 +13,6 @@
     @include token-utils.create-token-values(tokens-mtx-grid.$prefix,
       tokens-mtx-grid.get-color-tokens($config));
   }
-
-  @include column-resize.color($config-or-theme);
 }
 
 @mixin typography($config-or-theme) {}
