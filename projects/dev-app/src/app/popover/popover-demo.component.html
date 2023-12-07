@@ -1,3 +1,5 @@
+<mat-slide-toggle [(ngModel)]="hideArrow">Hide Arrow</mat-slide-toggle>
+
 <button cdkDrag mat-raised-button color="primary"
         #popoverTrigger="mtxPopoverTrigger"
         [mtxPopoverTriggerFor]="popover"
@@ -7,7 +9,7 @@
   Show Popover
 </button>
 
-<mtx-popover #popover="mtxPopover"
+<mtx-popover #popover="mtxPopover" [hideArrow]="hideArrow"
              [position]="['above', 'after']"
              [arrowOffsetX]="28"
              [closeOnPanelClick]="true"
@@ -27,7 +29,7 @@
   Show Popover With Hover
 </button>
 
-<mtx-popover #popover2="mtxPopover"
+<mtx-popover #popover2="mtxPopover" [hideArrow]="hideArrow"
              [position]="['below', 'center']"
              [xOffset]="10"
              [yOffset]="10"

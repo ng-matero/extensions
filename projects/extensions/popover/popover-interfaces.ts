@@ -41,6 +41,7 @@ export interface MtxPopoverDefaultOptions {
   arrowHeight?: number;
   arrowOffsetX?: number;
   arrowOffsetY?: number;
+  hideArrow?: boolean;
   closeOnPanelClick?: boolean;
   closeOnBackdropClick?: boolean;
   overlayPanelClass?: string;

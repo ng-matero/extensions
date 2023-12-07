@@ -43,6 +43,10 @@ $_tokens: tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots();
       margin-right: calc(#{$arrow-size * .5} + 2px);
     }
   }
+
+  &.mtx-popover-panel-without-arrow {
+    margin: 0;
+  }
 }
 
 .mtx-popover-direction-arrow {

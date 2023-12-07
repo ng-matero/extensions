@@ -67,6 +67,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _arrowHeight = this._defaultOptions.arrowHeight ?? 16;
   private _arrowOffsetX = this._defaultOptions.arrowOffsetX ?? 20;
   private _arrowOffsetY = this._defaultOptions.arrowOffsetY ?? 20;
+  private _hideArrow = this._defaultOptions.hideArrow ?? false;
   private _closeOnPanelClick = this._defaultOptions.closeOnPanelClick ?? false;
   private _closeOnBackdropClick = this._defaultOptions.closeOnBackdropClick ?? true;
   private _focusTrapEnabled = this._defaultOptions.focusTrapEnabled ?? false;
@@ -208,6 +209,15 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   }
   set arrowOffsetY(value: number) {
     this._arrowOffsetY = value;
+  }
+
+  /** Whether the popover has an arrow. */
+  @Input()
+  get hideArrow() {
+    return this._hideArrow;
+  }
+  set hideArrow(value) {
+    this._hideArrow = coerceBooleanProperty(value);
   }
 
   /** Whether popover can be closed when click the popover-panel. */
@@ -449,4 +459,5 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   static ngAcceptInputType_focusTrapEnabled: BooleanInput;
   static ngAcceptInputType_focusTrapAutoCaptureEnabled: BooleanInput;
   static ngAcceptInputType_hasBackdrop: BooleanInput;
+  static ngAcceptInputType_hideArrow: BooleanInput;
 }

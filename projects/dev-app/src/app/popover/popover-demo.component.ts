@@ -6,6 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['popover-demo.component.scss'],
 })
 export class PopoverDemoComponent {
+  hideArrow = false;
+
   log() {
     console.log('popover event!');
   }
