@@ -11,6 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { HttpClient } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
+import { Observable, Subscription, finalize, fromEvent, merge } from 'rxjs';
+import { MatMenuTrigger } from '@angular/material/menu';
 
 @Component({
   selector: 'dev-grid-demo',
@@ -142,6 +144,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
     { header: 'Status', field: 'status', type: 'boolean' },
   ];
 
+  list3 = [];
   columns3: MtxGridColumn[] = [
     {
       header: 'Name',
@@ -171,7 +174,6 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
     { header: 'Created Date', field: 'created_at' },
     { header: 'Updated Date', field: 'updated_at' },
   ];
-  list3 = [];
   total3 = 0;
   rowSelected3 = [];
   isLoading3 = true;
@@ -189,17 +191,6 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   // mat-table
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-
-  images = [
-    {
-      title: 'Slipping Away by Jerry Fryer',
-      src: 'https://farm1.staticflickr.com/313/31812080833_297acfbbd9_z.jpg',
-    },
-    {
-      title: 'Mi Fuego by albert dros',
-      src: 'https://farm4.staticflickr.com/3804/33589584740_b0fbdcd4aa_z.jpg',
-    },
-  ];
 
   constructor(
     private translate: TranslateService,
@@ -267,19 +258,13 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   getRemoteData() {
     this.isLoading3 = true;
-    this.http.get('https://api.github.com/search/repositories', { params: this.params }).subscribe(
-      (res: any) => {
+    this.http
+      .get('https://api.github.com/search/repositories', { params: this.params })
+      .pipe(finalize(() => (this.isLoading3 = false)))
+      .subscribe((res: any) => {
         this.list3 = res.items;
         this.total3 = res.total_count;
-        this.isLoading3 = false;
-      },
-      () => {
-        this.isLoading3 = false;
-      },
-      () => {
-        this.isLoading3 = false;
-      }
-    );
+      });
   }
 
   getNextPage(e: PageEvent) {
@@ -308,5 +293,34 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   getColumnKeys(columns: MtxGridColumn[]): string[] {
     return columns.map(c => c.field);
+  }
+
+  // ========== Context Menu ==========
+
+  @ViewChild(MatMenuTrigger) contextMenu!: MatMenuTrigger;
+  contextMenuPosition = { x: '0px', y: '0px' };
+  private closingMenuSubscription!: Subscription;
+
+  onContextMenu(e: any) {
+    const { event, rowData, index } = e;
+    event.preventDefault();
+
+    this.contextMenu.closeMenu();
+
+    const timer = this.contextMenu.menuOpen ? 150 : 0;
+    setTimeout(() => this.contextMenu.openMenu(), timer);
+
+    this.contextMenuPosition.x = event.clientX + 'px';
+    this.contextMenuPosition.y = event.clientY + 'px';
+    this.contextMenu.menuData = { rowData, index };
+    this.contextMenu.menu?.focusFirstItem('mouse');
+
+    this.closingMenuSubscription = merge(
+      fromEvent(document, 'click') as Observable<MouseEvent>,
+      fromEvent(document, 'touchend') as Observable<MouseEvent>
+    ).subscribe(_ => {
+      this.contextMenu.closeMenu();
+      this.closingMenuSubscription.unsubscribe();
+    });
   }
 }

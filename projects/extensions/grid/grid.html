@@ -197,7 +197,8 @@
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
               [class]="row | rowClass: index: dataIndex: rowClassFormatter"
               [ngClass]="{'selected': rowSelection.isSelected(row)}"
-              (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
+              (click)="_selectRow($event, row, _getIndex(index, dataIndex))"
+              (contextmenu)="_contextmenu($event, row, _getIndex(index, dataIndex))">
           </tr>
         </ng-template>
 
@@ -386,7 +387,8 @@
               *matRowDef="let row; let index = index; let dataIndex = dataIndex; columns: displayedColumns;"
               [class]="row | rowClass: index: dataIndex: rowClassFormatter"
               [ngClass]="{'selected': rowSelection.isSelected(row)}"
-              (click)="_selectRow($event, row, _getIndex(index, dataIndex))">
+              (click)="_selectRow($event, row, _getIndex(index, dataIndex))"
+              (contextmenu)="_contextmenu($event, row, _getIndex(index, dataIndex))">
           </tr>
         </ng-template>
 

@@ -158,6 +158,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() rowStriped = this._defaultOptions?.rowStriped ?? false;
   /** Event emitted when the user clicks the row. */
   @Output() rowClick = new EventEmitter<any>();
+  /** Event emitted when the user attempts to open a context menu. */
+  @Output() rowContextMenu = new EventEmitter<any>();
 
   // ===== Expandable Row =====
 
@@ -474,7 +476,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
       this._toggleNormalCheckbox(rowData);
     }
 
-    this.rowClick.emit({ rowData, index });
+    this.rowClick.emit({ event, rowData, index });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -555,6 +557,10 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     if (this.tableContainer && !this.loading) {
       this.tableContainer.nativeElement.scrollLeft = value;
     }
+  }
+
+  _contextmenu(event: MouseEvent, rowData: Record<string, any>, index: number) {
+    this.rowContextMenu.emit({ event, rowData, index });
   }
 }
 

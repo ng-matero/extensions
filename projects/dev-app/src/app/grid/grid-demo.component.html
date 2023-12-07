@@ -46,6 +46,7 @@
           [showColumnMenuFooter]="true"
           [columnMenuFooterTemplate]="menuFooterTpl"
           (rowClick)="log($event)"
+          (rowContextMenu)="onContextMenu($event)"
           [showSidebar]="showSidebar"
           [sidebarTemplate]="sidebarTpl"
           [sortOnFront]="sortOnFront"
@@ -142,6 +143,18 @@
 <button (click)="updateList()">Update List</button>
 <button (click)="updateEmptyList()">Update Empty List</button>
 <button (click)="select2ndData()">Select 2nd data</button>
+
+<!-- Context Menu -->
+<div style="position: fixed; visibility: hidden;"
+     [style.left]="contextMenuPosition.x"
+     [style.top]="contextMenuPosition.y"
+     [matMenuTriggerFor]="contextMenu">
+</div>
+<mat-menu #contextMenu="matMenu" [hasBackdrop]="false">
+  <ng-template matMenuContent let-row="rowData" let-index="index">
+    <button mat-menu-item>{{row.name}}, {{index}}</button>
+  </ng-template>
+</mat-menu>
 
 <h2>Original Material Table</h2>
 
