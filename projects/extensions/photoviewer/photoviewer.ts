@@ -2,17 +2,17 @@ import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@
 import PhotoViewer from 'photoviewer';
 
 @Directive({
-  selector: '[mtxPhotoViewer]',
-  exportAs: 'mtxPhotoViewer',
+  selector: '[mtxPhotoviewer]',
+  exportAs: 'mtxPhotoviewer',
 })
 export class MtxPhotoviewer implements OnInit, OnDestroy {
-  @Input('mtxPhotoViewerItems')
+  @Input('mtxPhotoviewerItems')
   images: PhotoViewer.Img[] = [];
 
-  @Input('mtxPhotoViewerOptions')
+  @Input('mtxPhotoviewerOptions')
   options?: PhotoViewer.Options;
 
-  @Input('mtxPhotoViewerEmbed')
+  @Input('mtxPhotoviewerEmbed')
   embed = false;
 
   photoviewerInstance?: PhotoViewer;

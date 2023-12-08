@@ -1,11 +1,11 @@
 <button mat-stroked-button
-        mtxPhotoViewer
-        [mtxPhotoViewerItems]="images1"
-        [mtxPhotoViewerOptions]="{}">Open PhotoViewer</button>
+        mtxPhotoviewer
+        [mtxPhotoviewerItems]="images1"
+        [mtxPhotoviewerOptions]="{}">Open PhotoViewer</button>
 
 <h2>Img element</h2>
 
-<img mtxPhotoViewer
+<img mtxPhotoviewer
      src="https://farm5.staticflickr.com/4267/34162425794_1430f38362_z.jpg"
      alt="Rémi Bizouard triple champion du monde by malainxx24"
      width="200">
@@ -14,9 +14,9 @@
 
 <a *ngFor="let item of images2; index as index"
    [href]="item.src" [title]="item.title"
-   mtxPhotoViewer
-   [mtxPhotoViewerItems]="images2"
-   [mtxPhotoViewerOptions]="{ index }">
+   mtxPhotoviewer
+   [mtxPhotoviewerItems]="images2"
+   [mtxPhotoviewerOptions]="{ index }">
   <img [src]="item.thumbnail" alt="">
 </a>
 
@@ -25,8 +25,8 @@
 <button mat-stroked-button (click)="showEmbed=!showEmbed">Toggle embed PhotoViewer</button>
 
 <div class="wrapper" *ngIf="showEmbed"
-     mtxPhotoViewer
-     [mtxPhotoViewerEmbed]="true"
-     [mtxPhotoViewerItems]="images2"
-     [mtxPhotoViewerOptions]="{}">
+     mtxPhotoviewer
+     [mtxPhotoviewerEmbed]="true"
+     [mtxPhotoviewerItems]="images2"
+     [mtxPhotoviewerOptions]="{}">
 </div>
