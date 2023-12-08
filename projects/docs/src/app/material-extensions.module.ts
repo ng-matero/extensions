@@ -9,6 +9,7 @@ import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxDrawerModule } from '@ng-matero/extensions/drawer';
 import { MtxLoaderModule } from '@ng-matero/extensions/loader';
+import { MtxPhotoviewerModule } from '@ng-matero/extensions/photoviewer';
 import { MtxPopoverModule } from '@ng-matero/extensions/popover';
 import { MtxProgressModule } from '@ng-matero/extensions/progress';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
@@ -27,6 +28,7 @@ import { MtxMomentDatetimeModule } from '@ng-matero/extensions-moment-adapter';
     MtxDialogModule,
     MtxDrawerModule,
     MtxLoaderModule,
+    MtxPhotoviewerModule,
     MtxPopoverModule,
     MtxProgressModule,
     MtxSelectModule,

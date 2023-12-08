@@ -1,0 +1,7 @@
+<a *ngFor="let item of images; index as index"
+   [href]="item.src" [title]="item.title"
+   mtxPhotoviewer
+   [mtxPhotoviewerItems]="images"
+   [mtxPhotoviewerOptions]="{ index }">
+  <img [src]="item.thumbnail" alt="" />
+</a>

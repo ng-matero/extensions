@@ -1,0 +1,16 @@
+<p>
+  <code>mtxPhotoviewer</code> is a wrapper directive of
+  <a href="https://nzbin.github.io/photoviewer/" target="_blank">
+    <code>photoviewer</code>
+  </a>.
+</p>
+
+<mtx-alert type="danger">
+  If you use the <code>mtxPhotoviewer</code>, you should import the <code>photoviewer</code> styles.
+</mtx-alert>
+
+<ng-container *ngIf="route.data | async as data">
+  <ng-container *ngFor="let exampleData of data.examples">
+    <example-viewer [exampleData]="exampleData"></example-viewer>
+  </ng-container>
+</ng-container>

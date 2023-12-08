@@ -50,6 +50,11 @@ export const COMPONENTS_MENU = [
     summary: 'An easier loading component wrap with progress bar and spinner.',
   },
   {
+    id: 'photoviewer',
+    name: 'Photoviewer',
+    summary: 'A feature-rich image viewer.',
+  },
+  {
     id: 'popover',
     name: 'Popover',
     summary: 'A floating panel containing html content.',

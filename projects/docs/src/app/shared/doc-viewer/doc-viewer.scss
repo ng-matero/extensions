@@ -18,11 +18,11 @@
     margin-bottom: 16px;
     font-weight: 700;
     font-size: 20px;
-    background: none;
 
     code {
       padding: 0;
       background: none;
+      border: none;
     }
   }
 
@@ -44,6 +44,7 @@
     code {
       padding: 0;
       background-color: transparent;
+      border-color: transparent;
     }
   }
 

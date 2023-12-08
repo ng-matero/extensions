@@ -48,6 +48,10 @@ const routes = [
         loadChildren: () => import('./loader/loader').then(m => m.LoaderModule),
       },
       {
+        path: 'photoviewer',
+        loadChildren: () => import('./photoviewer/photoviewer').then(m => m.PhotoviewerModule),
+      },
+      {
         path: 'popover',
         loadChildren: () => import('./popover/popover').then(m => m.PopoverModule),
       },

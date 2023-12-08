@@ -51,10 +51,12 @@ pre {
 }
 
 code {
-  padding: 3px;
-  font-size: 90%;
-  background-color: rgba(0, 0, 0, .06);
-  word-wrap: break-word;
+  padding: 2px 4px;
+  font-size: 80%;
+  word-break: break-word;
+  background-color: rgba(0, 0, 0, .04);
+  border: 1px solid rgba(0, 0, 0, .08);
+  border-radius: 4px;
 }
 
 pre {
@@ -87,8 +89,11 @@ p {
 }
 
 a {
-  color: #3f51b5;
-  text-decoration: none;
+  color: #1e88e5;
+
+  &:hover {
+    color: #166dba;
+  }
 }
 
 // Helps fonts on OSX looks more consistent with other systems
