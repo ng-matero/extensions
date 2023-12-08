@@ -115,6 +115,7 @@ Exported as: `mtxGrid`
 | `@Input()`<br>`rowHover: boolean` | Whether to use the row hover style. Default is **`false`**. |
 | `@Input()`<br>`rowStriped: boolean` | Whether to use the row striped style. Default is **`false`**. |
 | `@Output()`<br>`rowClick: EventEmitter<any>;` | Event emitted when the user clicks the row. |
+| `@Output()`<br>`rowContextMenu: EventEmitter<any>;` | Event emitted when the user attempts to open a context menu. |
 | `@Input()`<br>`useContentRowTemplate: boolean` | Whether to use custom row template. If true, you should define a `matRowDef`. Default is **`false`**. |
 
 ###### Cell templates

@@ -75,6 +75,7 @@ import {
   GridRowColumnClassComponent,
   gridRowColumnClassExampleConfig,
 } from './examples/row-column-class';
+import { GridContextMenuComponent, gridContextMenuExampleConfig } from './examples/context-menu';
 
 @Component({
   selector: 'app-grid-overview',
@@ -112,6 +113,7 @@ export class GridApiComponent {
           examples: [
             gridBasicExampleConfig,
             gridColumnResizeExampleConfig,
+            gridContextMenuExampleConfig,
             gridLoadingStatusExampleConfig,
             gridHidePaginationExampleConfig,
             gridSortableExampleConfig,
@@ -151,6 +153,7 @@ export class GridApiComponent {
 
     GridBasicComponent,
     GridColumnResizeComponent,
+    GridContextMenuComponent,
     GridLoadingStatusComponent,
     GridHidePaginationComponent,
     GridSortableComponent,
