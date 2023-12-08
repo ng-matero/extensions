@@ -29,6 +29,7 @@ Exported as: `mtxPopover`
 | `@Input()`<br>`arrowHeight: number` | Popover-arrow's height. Default is **`16`**. |
 | `@Input()`<br>`arrowOffsetX: number` | Popover-arrow's X offset. Default is **`20`**. |
 | `@Input()`<br>`arrowOffsetY: number` | Popover-arrow's Y offset. Default is **`20`**. |
+| `@Input()`<br>`hideArrow: boolean` | Whether the popover arrow should be hidden. Default is **`false`**. |
 | `@Input()`<br>`closeOnPanelClick: boolean` | Whether popover can be closed when click the popover-panel. Default is **`false`**. |
 | `@Input()`<br>`closeOnBackdropClick: boolean` | Whether popover can be closed when click the backdrop. Default is **`true`**. |
 | `@Input()`<br>`focusTrapEnabled: boolean` | Whether the popover should focus trap. Default is **`false`**. |
@@ -75,6 +76,7 @@ export interface MtxPopoverDefaultOptions {
   arrowHeight?: number;
   arrowOffsetX?: number;
   arrowOffsetY?: number;
+  hideArrow?: boolean;
   closeOnPanelClick?: boolean;
   closeOnBackdropClick?: boolean;
   overlayPanelClass?: string;

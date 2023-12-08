@@ -211,7 +211,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._arrowOffsetY = value;
   }
 
-  /** Whether the popover has an arrow. */
+  /** Whether the popover arrow should be hidden. */
   @Input()
   get hideArrow() {
     return this._hideArrow;

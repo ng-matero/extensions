@@ -19,6 +19,7 @@ export class AppComponent implements OnInit {
   closeOnPanelClick = false;
   hasBackdrop = true;
   elevation = 8;
+  hideArrow = false;
 
   positionXOptions = ['before', 'after'];
   positionYOptions = ['above', 'below'];

@@ -58,6 +58,10 @@
 </section>
 
 <section>
+  <mat-checkbox [(ngModel)]="hideArrow">HideArrow</mat-checkbox>
+</section>
+
+<section>
   <label>Elevation:</label>
   <mat-slider min="0" max="24" discrete>
     <input matSliderThumb [(ngModel)]="elevation">
@@ -91,7 +95,8 @@
              [closeOnPanelClick]="closeOnPanelClick"
              [closeOnBackdropClick]="true"
              [hasBackdrop]="hasBackdrop"
-             [elevation]="elevation">
+             [elevation]="elevation"
+             [hideArrow]="hideArrow">
   <div style="max-width: 300px;">
     A material design popover component created using Angular with the Angular CDK.
   </div>
