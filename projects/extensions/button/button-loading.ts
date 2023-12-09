@@ -55,7 +55,6 @@ export class MatButtonLoading implements OnChanges {
     if (!changes.loading) {
       return;
     }
-    console.log('ngOnChanges', changes);
     if (changes.loading.currentValue) {
       this._elementRef.nativeElement.classList.add('mat-button-loading');
       setTimeout(() => this._elementRef.nativeElement.setAttribute('disabled', ''));
