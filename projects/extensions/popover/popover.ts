@@ -1,6 +1,5 @@
 import { AnimationEvent } from '@angular/animations';
 import { Direction } from '@angular/cdk/bidi';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
@@ -18,10 +17,11 @@ import {
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 import { transformPopover } from './popover-animations';
-import { MtxPopoverContent, MTX_POPOVER_CONTENT } from './popover-content';
+import { MTX_POPOVER_CONTENT, MtxPopoverContent } from './popover-content';
 import {
   throwMtxPopoverInvalidPositionEnd,
   throwMtxPopoverInvalidPositionStart,
@@ -57,24 +57,6 @@ let popoverPanelUid = 0;
   exportAs: 'mtxPopover',
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
-  private _triggerEvent = this._defaultOptions.triggerEvent ?? 'hover';
-  private _enterDelay = this._defaultOptions.enterDelay ?? 100;
-  private _leaveDelay = this._defaultOptions.leaveDelay ?? 100;
-  private _position = this._defaultOptions.position ?? ['below', 'after'];
-  private _panelOffsetX = this._defaultOptions.xOffset ?? 0;
-  private _panelOffsetY = this._defaultOptions.yOffset ?? 0;
-  private _arrowWidth = this._defaultOptions.arrowWidth ?? 16;
-  private _arrowHeight = this._defaultOptions.arrowHeight ?? 16;
-  private _arrowOffsetX = this._defaultOptions.arrowOffsetX ?? 20;
-  private _arrowOffsetY = this._defaultOptions.arrowOffsetY ?? 20;
-  private _hideArrow = this._defaultOptions.hideArrow ?? false;
-  private _closeOnPanelClick = this._defaultOptions.closeOnPanelClick ?? false;
-  private _closeOnBackdropClick = this._defaultOptions.closeOnBackdropClick ?? true;
-  private _focusTrapEnabled = this._defaultOptions.focusTrapEnabled ?? false;
-  private _focusTrapAutoCaptureEnabled = this._defaultOptions.focusTrapAutoCaptureEnabled ?? false;
-  private _hasBackdrop = this._defaultOptions.hasBackdrop;
-  private _elevation = this._defaultOptions.elevation ?? 8;
-
   private _previousElevation?: string;
   private _elevationPrefix = 'mat-elevation-z';
 
@@ -115,31 +97,13 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   @Input('aria-describedby') ariaDescribedby?: string;
 
   /** Popover's trigger event. */
-  @Input()
-  get triggerEvent(): MtxPopoverTriggerEvent {
-    return this._triggerEvent;
-  }
-  set triggerEvent(value: MtxPopoverTriggerEvent) {
-    this._triggerEvent = value;
-  }
+  @Input() triggerEvent: MtxPopoverTriggerEvent = this._defaultOptions.triggerEvent ?? 'hover';
 
   /** Popover's enter delay. */
-  @Input()
-  get enterDelay(): number {
-    return this._enterDelay;
-  }
-  set enterDelay(value: number) {
-    this._enterDelay = value;
-  }
+  @Input() enterDelay = this._defaultOptions.enterDelay ?? 100;
 
   /** Popover's leave delay. */
-  @Input()
-  get leaveDelay(): number {
-    return this._leaveDelay;
-  }
-  set leaveDelay(value: number) {
-    this._leaveDelay = value;
-  }
+  @Input() leaveDelay = this._defaultOptions.leaveDelay ?? 100;
 
   /** Popover's position. */
   @Input()
@@ -156,114 +120,49 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     this._position = value;
     this.setPositionClasses();
   }
+  private _position = this._defaultOptions.position ?? ['below', 'after'];
 
   /** Popover-panel's X offset. */
-  @Input()
-  get xOffset(): number {
-    return this._panelOffsetX;
-  }
-  set xOffset(value: number) {
-    this._panelOffsetX = value;
-  }
+  @Input() xOffset = this._defaultOptions.xOffset ?? 0;
 
   /** Popover-panel's Y offset. */
-  @Input()
-  get yOffset(): number {
-    return this._panelOffsetY;
-  }
-  set yOffset(value: number) {
-    this._panelOffsetY = value;
-  }
+  @Input() yOffset = this._defaultOptions.yOffset ?? 0;
 
   /** Popover-arrow's width. */
-  @Input()
-  get arrowWidth(): number {
-    return this._arrowWidth;
-  }
-  set arrowWidth(value: number) {
-    this._arrowWidth = value;
-  }
+  @Input() arrowWidth = this._defaultOptions.arrowWidth ?? 16;
 
   /** Popover-arrow's height. */
-  @Input()
-  get arrowHeight(): number {
-    return this._arrowHeight;
-  }
-  set arrowHeight(value: number) {
-    this._arrowHeight = value;
-  }
+  @Input() arrowHeight = this._defaultOptions.arrowHeight ?? 16;
 
   /** Popover-arrow's X offset. */
-  @Input()
-  get arrowOffsetX(): number {
-    return this._arrowOffsetX;
-  }
-  set arrowOffsetX(value: number) {
-    this._arrowOffsetX = value;
-  }
+  @Input() arrowOffsetX = this._defaultOptions.arrowOffsetX ?? 20;
 
   /** Popover-arrow's Y offset. */
-  @Input()
-  get arrowOffsetY(): number {
-    return this._arrowOffsetY;
-  }
-  set arrowOffsetY(value: number) {
-    this._arrowOffsetY = value;
-  }
+  @Input() arrowOffsetY = this._defaultOptions.arrowOffsetY ?? 20;
 
   /** Whether the popover arrow should be hidden. */
-  @Input()
-  get hideArrow() {
-    return this._hideArrow;
-  }
-  set hideArrow(value) {
-    this._hideArrow = coerceBooleanProperty(value);
-  }
+  @Input({ transform: booleanAttribute })
+  hideArrow = this._defaultOptions.hideArrow ?? false;
 
   /** Whether popover can be closed when click the popover-panel. */
-  @Input()
-  get closeOnPanelClick(): boolean {
-    return this._closeOnPanelClick;
-  }
-  set closeOnPanelClick(value: boolean) {
-    this._closeOnPanelClick = coerceBooleanProperty(value);
-  }
+  @Input({ transform: booleanAttribute })
+  closeOnPanelClick = this._defaultOptions.closeOnPanelClick ?? false;
 
   /** Whether popover can be closed when click the backdrop. */
-  @Input()
-  get closeOnBackdropClick(): boolean {
-    return this._closeOnBackdropClick;
-  }
-  set closeOnBackdropClick(value: boolean) {
-    this._closeOnBackdropClick = coerceBooleanProperty(value);
-  }
+  @Input({ transform: booleanAttribute })
+  closeOnBackdropClick = this._defaultOptions.closeOnBackdropClick ?? true;
 
   /** Whether enable focus trap using `cdkTrapFocus`. */
-  @Input()
-  get focusTrapEnabled(): boolean {
-    return this._focusTrapEnabled;
-  }
-  set focusTrapEnabled(value: boolean) {
-    this._focusTrapEnabled = coerceBooleanProperty(value);
-  }
+  @Input({ transform: booleanAttribute })
+  focusTrapEnabled = this._defaultOptions.focusTrapEnabled ?? false;
 
   /** Whether enable focus trap auto capture using `cdkTrapFocusAutoCapture`. */
-  @Input()
-  get focusTrapAutoCaptureEnabled(): boolean {
-    return this._focusTrapAutoCaptureEnabled;
-  }
-  set focusTrapAutoCaptureEnabled(value: boolean) {
-    this._focusTrapAutoCaptureEnabled = coerceBooleanProperty(value);
-  }
+  @Input({ transform: booleanAttribute })
+  focusTrapAutoCaptureEnabled = this._defaultOptions.focusTrapAutoCaptureEnabled ?? false;
 
   /** Whether the popover has a backdrop. It will always be false if the trigger event is hover. */
-  @Input()
-  get hasBackdrop(): boolean | undefined {
-    return this._hasBackdrop;
-  }
-  set hasBackdrop(value: boolean | undefined) {
-    this._hasBackdrop = coerceBooleanProperty(value);
-  }
+  @Input({ transform: booleanAttribute })
+  hasBackdrop = this._defaultOptions.hasBackdrop;
 
   /** Popover-panel's elevation (0~24). */
   @Input()
@@ -273,6 +172,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   set elevation(value: number) {
     this._elevation = value;
   }
+  private _elevation = this._defaultOptions.elevation ?? 8;
 
   /**
    * This method takes classes set on the host md-popover element and applies them on the
@@ -453,11 +353,4 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   _onAnimationStart(event: AnimationEvent) {
     this._isAnimating = true;
   }
-
-  static ngAcceptInputType_closeOnPanelClick: BooleanInput;
-  static ngAcceptInputType_closeOnBackdropClick: BooleanInput;
-  static ngAcceptInputType_focusTrapEnabled: BooleanInput;
-  static ngAcceptInputType_focusTrapAutoCaptureEnabled: BooleanInput;
-  static ngAcceptInputType_hasBackdrop: BooleanInput;
-  static ngAcceptInputType_hideArrow: BooleanInput;
 }

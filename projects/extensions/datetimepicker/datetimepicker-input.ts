@@ -1,5 +1,7 @@
+import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import {
   AfterContentInit,
+  booleanAttribute,
   Directive,
   ElementRef,
   EventEmitter,
@@ -20,17 +22,15 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import { ThemePalette } from '@angular/material/core';
-import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { MatFormField } from '@angular/material/form-field';
-import { Subscription } from 'rxjs';
+import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
 } from '@ng-matero/extensions/core';
+import { Subscription } from 'rxjs';
 import { MtxDatetimepicker } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
@@ -56,7 +56,10 @@ export class MtxDatetimepickerInputEvent<D> {
   /** The new value for the target datetimepicker input. */
   value: D | null;
 
-  constructor(public target: MtxDatetimepickerInput<D>, public targetElement: HTMLElement) {
+  constructor(
+    public target: MtxDatetimepickerInput<D>,
+    public targetElement: HTMLElement
+  ) {
     this.value = this.target.value;
   }
 }
@@ -186,16 +189,14 @@ export class MtxDatetimepickerInput<D>
   private _max!: D | null;
 
   /** Whether the datetimepicker-input is disabled. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get disabled(): boolean {
     return !!this._disabled;
   }
   set disabled(value: boolean) {
-    const newValue = coerceBooleanProperty(value);
-
-    if (this._disabled !== newValue) {
-      this._disabled = newValue;
-      this._disabledChange.emit(newValue);
+    if (this._disabled !== value) {
+      this._disabled = value;
+      this._disabledChange.emit(value);
     }
   }
   private _disabled!: boolean;
@@ -418,6 +419,4 @@ export class MtxDatetimepickerInput<D>
   getThemePalette(): ThemePalette {
     return this._formField ? this._formField.color : undefined;
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
 }

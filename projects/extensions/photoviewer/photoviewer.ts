@@ -1,4 +1,12 @@
-import { Directive, ElementRef, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  HostListener,
+  Input,
+  OnDestroy,
+  OnInit,
+  booleanAttribute,
+} from '@angular/core';
 import PhotoViewer from 'photoviewer';
 
 @Directive({
@@ -12,7 +20,7 @@ export class MtxPhotoviewer implements OnInit, OnDestroy {
   @Input('mtxPhotoviewerOptions')
   options?: PhotoViewer.Options;
 
-  @Input('mtxPhotoviewerEmbed')
+  @Input({ alias: 'mtxPhotoviewerEmbed', transform: booleanAttribute })
   embed = false;
 
   photoviewerInstance?: PhotoViewer;

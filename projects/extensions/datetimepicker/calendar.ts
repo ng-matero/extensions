@@ -1,4 +1,15 @@
 import {
+  DOWN_ARROW,
+  END,
+  ENTER,
+  HOME,
+  LEFT_ARROW,
+  PAGE_DOWN,
+  PAGE_UP,
+  RIGHT_ARROW,
+  UP_ARROW,
+} from '@angular/cdk/keycodes';
+import {
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -12,33 +23,22 @@ import {
   Optional,
   Output,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
-import {
-  DOWN_ARROW,
-  END,
-  ENTER,
-  HOME,
-  LEFT_ARROW,
-  PAGE_DOWN,
-  PAGE_UP,
-  RIGHT_ARROW,
-  UP_ARROW,
-} from '@angular/cdk/keycodes';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
 import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
 } from '@ng-matero/extensions/core';
+import { Subscription } from 'rxjs';
+import { first } from 'rxjs/operators';
 import { MtxClockView } from './clock';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
-import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
-import { MtxAMPM, MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
+import { MtxAMPM, MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
+import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
 
 /**
  * A calendar that is used as part of the datetimepicker.
@@ -61,24 +61,10 @@ import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 })
 export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Whether to show multi-year view. */
-  @Input()
-  get multiYearSelector(): boolean {
-    return this._multiYearSelector;
-  }
-  set multiYearSelector(value: boolean) {
-    this._multiYearSelector = coerceBooleanProperty(value);
-  }
-  private _multiYearSelector = false;
+  @Input({ transform: booleanAttribute }) multiYearSelector = false;
 
   /** Whether the clock uses 12 hour format. */
-  @Input()
-  get twelvehour(): boolean {
-    return this._twelvehour;
-  }
-  set twelvehour(value: boolean) {
-    this._twelvehour = coerceBooleanProperty(value);
-  }
-  private _twelvehour = false;
+  @Input({ transform: booleanAttribute }) twelvehour = false;
 
   /** Whether the calendar should be started in month or year view. */
   @Input() startView: MtxCalendarView = 'month';
@@ -156,14 +142,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
    * Whether the calendar is in time mode. In time mode the calendar clock gets time input elements
    * rather then just clock. When touchUi is enabled this will be disabled
    */
-  @Input()
-  get timeInput(): boolean {
-    return this._timeInput;
-  }
-  set timeInput(value: boolean) {
-    this._timeInput = coerceBooleanProperty(value);
-  }
-  private _timeInput = false;
+  @Input({ transform: booleanAttribute }) timeInput = false;
 
   /** The currently selected date. */
   @Input()
@@ -807,8 +786,4 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   private _2digit(n: number) {
     return ('00' + n).slice(-2);
   }
-
-  static ngAcceptInputType_multiYearSelector: BooleanInput;
-  static ngAcceptInputType_twelvehour: BooleanInput;
-  static ngAcceptInputType_timeInput: BooleanInput;
 }

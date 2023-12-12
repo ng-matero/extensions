@@ -12,10 +12,10 @@ import {
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { MatButton } from '@angular/material/button';
-import { merge, of as observableOf, Subscription, Observable } from 'rxjs';
+import { Observable, Subscription, merge, of as observableOf } from 'rxjs';
 import { MtxDatetimepicker } from './datetimepicker';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 
@@ -60,17 +60,17 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   @Input('aria-label') ariaLabel?: string;
 
   /** Whether the toggle button is disabled. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get disabled(): boolean {
     return this._disabled === undefined ? this.datetimepicker.disabled : !!this._disabled;
   }
   set disabled(value: boolean) {
-    this._disabled = coerceBooleanProperty(value);
+    this._disabled = value;
   }
   private _disabled!: boolean;
 
   /** Whether ripples on the toggle should be disabled. */
-  @Input() disableRipple!: boolean;
+  @Input({ transform: booleanAttribute }) disableRipple!: boolean;
 
   /** Custom icon set by the consumer. */
   @ContentChild(MtxDatetimepickerToggleIcon) _customIcon!: MtxDatetimepickerToggleIcon;
@@ -128,7 +128,4 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
       datetimepickerToggled
     ).subscribe(() => this._changeDetectorRef.markForCheck());
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
-  static ngAcceptInputType_disableRipple: BooleanInput;
 }

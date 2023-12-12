@@ -23,6 +23,7 @@ import {
   InjectionToken,
   Optional,
   Inject,
+  booleanAttribute,
 } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
@@ -96,24 +97,29 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** The total number of the data. */
   @Input() length = 0;
   /** Whether the grid is loading. */
-  @Input() loading = false;
+  @Input({ transform: booleanAttribute }) loading = false;
   /** Tracking function that will be used to check the differences in data changes. */
   @Input() trackBy!: TrackByFunction<any>;
   /** Whether the column is resizable. */
-  @Input() columnResizable = this._defaultOptions?.columnResizable ?? false;
+  @Input({ transform: booleanAttribute })
+  columnResizable = this._defaultOptions?.columnResizable ?? false;
   /** Placeholder for the empty value (`null`, `''`, `[]`). */
   @Input() emptyValuePlaceholder = this._defaultOptions?.emptyValuePlaceholder ?? '--';
 
   // ===== Page =====
 
   /** Whether to paginate the data on front end. */
-  @Input() pageOnFront = this._defaultOptions?.pageOnFront ?? true;
+  @Input({ transform: booleanAttribute })
+  pageOnFront = this._defaultOptions?.pageOnFront ?? true;
   /** Whether to show the paginator. */
-  @Input() showPaginator = this._defaultOptions?.showPaginator ?? true;
+  @Input({ transform: booleanAttribute })
+  showPaginator = this._defaultOptions?.showPaginator ?? true;
   /** Whether the paginator is disabled. */
-  @Input() pageDisabled = this._defaultOptions?.pageDisabled ?? false;
+  @Input({ transform: booleanAttribute })
+  pageDisabled = this._defaultOptions?.pageDisabled ?? false;
   /** Whether to show the first/last buttons UI to the user. */
-  @Input() showFirstLastButtons = this._defaultOptions?.showFirstLastButtons ?? true;
+  @Input({ transform: booleanAttribute })
+  showFirstLastButtons = this._defaultOptions?.showFirstLastButtons ?? true;
   /** The zero-based page index of the displayed list of items. */
   @Input() pageIndex = this._defaultOptions?.pageIndex ?? 0;
   /** Number of items to display on a page. */
@@ -121,7 +127,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   /** The set of provided page size options to display to the user. */
   @Input() pageSizeOptions = this._defaultOptions?.pageSizeOptions ?? [10, 50, 100];
   /** Whether to hide the page size selection UI from the user. */
-  @Input() hidePageSize = this._defaultOptions?.hidePageSize ?? false;
+  @Input({ transform: booleanAttribute })
+  hidePageSize = this._defaultOptions?.hidePageSize ?? false;
   /** Event emitted when the paginator changes the page size or page index. */
   @Output() page = new EventEmitter<PageEvent>();
   /** The template for the pagination. */
@@ -130,7 +137,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   // ===== Sort =====
 
   /** Whether to sort the data on front end. */
-  @Input() sortOnFront = this._defaultOptions?.sortOnFront ?? true;
+  @Input({ transform: booleanAttribute })
+  sortOnFront = this._defaultOptions?.sortOnFront ?? true;
   /** The id of the most recently sorted MatSortable. */
   @Input() sortActive = this._defaultOptions?.sortActive ?? '';
   /** The sort direction of the currently active MatSortable. */
@@ -139,9 +147,11 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
    * Whether to disable the user from clearing the sort by finishing the sort direction cycle.
    * May be overriden by the column's `disableClear` in `sortProp`.
    */
-  @Input() sortDisableClear = this._defaultOptions?.sortDisableClear ?? false;
+  @Input({ transform: booleanAttribute })
+  sortDisableClear = this._defaultOptions?.sortDisableClear ?? false;
   /** Whether the sort is disabled. */
-  @Input() sortDisabled = this._defaultOptions?.sortDisabled ?? false;
+  @Input({ transform: booleanAttribute })
+  sortDisabled = this._defaultOptions?.sortDisabled ?? false;
   /**
    * The direction to set when an MatSortable is initially sorted.
    * May be overriden by the column's `start` in `sortProp`.
@@ -153,9 +163,11 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   // ===== Row =====
 
   /** Whether to use the row hover style. */
-  @Input() rowHover = this._defaultOptions?.rowHover ?? false;
+  @Input({ transform: booleanAttribute })
+  rowHover = this._defaultOptions?.rowHover ?? false;
   /** Whether to use the row striped style. */
-  @Input() rowStriped = this._defaultOptions?.rowStriped ?? false;
+  @Input({ transform: booleanAttribute })
+  rowStriped = this._defaultOptions?.rowStriped ?? false;
   /** Event emitted when the user clicks the row. */
   @Output() rowClick = new EventEmitter<any>();
   /** Event emitted when the user attempts to open a context menu. */
@@ -166,7 +178,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   expansionRowStates: any[] = [];
 
   /** Whether the row is expandable. */
-  @Input() expandable = false;
+  @Input({ transform: booleanAttribute }) expandable = false;
   /** The template for the expandable row. */
   @Input() expansionTemplate!: TemplateRef<any>;
   /** Event emitted when the user toggles the expandable row. */
@@ -177,15 +189,20 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   rowSelection: SelectionModel<any> = new SelectionModel<any>(true, []);
 
   /** Whether to support multiple row/cell selection. */
-  @Input() multiSelectable = this._defaultOptions?.multiSelectable ?? true;
+  @Input({ transform: booleanAttribute })
+  multiSelectable = this._defaultOptions?.multiSelectable ?? true;
   /** Whether the user can select multiple rows with click. */
-  @Input() multiSelectionWithClick = this._defaultOptions?.multiSelectionWithClick ?? false;
+  @Input({ transform: booleanAttribute })
+  multiSelectionWithClick = this._defaultOptions?.multiSelectionWithClick ?? false;
   /** Whether the row is selectable. */
-  @Input() rowSelectable = this._defaultOptions?.rowSelectable ?? false;
+  @Input({ transform: booleanAttribute })
+  rowSelectable = this._defaultOptions?.rowSelectable ?? false;
   /** Whether to hide the row selection checkbox. */
-  @Input() hideRowSelectionCheckbox = this._defaultOptions?.hideRowSelectionCheckbox ?? false;
+  @Input({ transform: booleanAttribute })
+  hideRowSelectionCheckbox = this._defaultOptions?.hideRowSelectionCheckbox ?? false;
   /** Whether disable rows to be selected when clicked. */
-  @Input() disableRowClickSelection = this._defaultOptions?.disableRowClickSelection ?? false;
+  @Input({ transform: booleanAttribute })
+  disableRowClickSelection = this._defaultOptions?.disableRowClickSelection ?? false;
   /** The formatter to disable the row selection or hide the row's checkbox. */
   @Input() rowSelectionFormatter: MtxGridRowSelectionFormatter = {};
   /** The formatter to set the row's class. */
@@ -200,7 +217,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   cellSelection: any[] = [];
 
   /** Whether the cell is selectable. */
-  @Input() cellSelectable = this._defaultOptions?.cellSelectable ?? true;
+  @Input({ transform: booleanAttribute })
+  cellSelectable = this._defaultOptions?.cellSelectable ?? true;
   /** Event emitted when the cell is selected. */
   @Output() cellSelectedChange = new EventEmitter<any[]>();
 
@@ -209,7 +227,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   // ===== Toolbar =====
 
   /** Whether to show the toolbar. */
-  @Input() showToolbar = this._defaultOptions?.showToolbar ?? false;
+  @Input({ transform: booleanAttribute })
+  showToolbar = this._defaultOptions?.showToolbar ?? false;
   /** The text of the toolbar's title. */
   @Input() toolbarTitle = this._defaultOptions?.toolbarTitle ?? '';
   /** The template for the toolbar. */
@@ -218,14 +237,17 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   // ===== Column Menu =====
 
   /** Whether the column is hideable. */
-  @Input() columnHideable = this._defaultOptions?.columnHideable ?? true;
+  @Input({ transform: booleanAttribute })
+  columnHideable = this._defaultOptions?.columnHideable ?? true;
   /** Hide or show when the column's checkbox is checked. */
   @Input() columnHideableChecked: 'show' | 'hide' =
     this._defaultOptions?.columnHideableChecked ?? 'show';
   /** Whether the column is sortable. */
-  @Input() columnSortable = this._defaultOptions?.columnSortable ?? true;
+  @Input({ transform: booleanAttribute })
+  columnSortable = this._defaultOptions?.columnSortable ?? true;
   /** Whether the column is pinnable. */
-  @Input() columnPinnable = this._defaultOptions?.columnPinnable ?? true;
+  @Input({ transform: booleanAttribute })
+  columnPinnable = this._defaultOptions?.columnPinnable ?? true;
   /** Event emitted when the column is hided or is sorted. */
   @Output() columnChange = new EventEmitter<MtxGridColumn[]>();
   /** The options for the column pin list. */
@@ -233,7 +255,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     this._defaultOptions?.columnPinOptions ?? [];
 
   /** Whether to show the column menu button. */
-  @Input() showColumnMenuButton = this._defaultOptions?.showColumnMenuButton ?? true;
+  @Input({ transform: booleanAttribute })
+  showColumnMenuButton = this._defaultOptions?.showColumnMenuButton ?? true;
   /** The text for the column menu button. */
   @Input() columnMenuButtonText = this._defaultOptions?.columnMenuButtonText ?? '';
   /** The type for the column menu button. */
@@ -247,13 +270,15 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() columnMenuButtonIcon = this._defaultOptions?.columnMenuButtonIcon ?? '';
 
   /** Whether to show the column-menu's header. */
-  @Input() showColumnMenuHeader = this._defaultOptions?.showColumnMenuHeader ?? false;
+  @Input({ transform: booleanAttribute })
+  showColumnMenuHeader = this._defaultOptions?.showColumnMenuHeader ?? false;
   /** The text for the column-menu's header. */
   @Input() columnMenuHeaderText = this._defaultOptions?.columnMenuHeaderText ?? 'Columns Header';
   /** The template for the column-menu's header. */
   @Input() columnMenuHeaderTemplate!: TemplateRef<any>;
   /** Whether to show the the column-menu's footer. */
-  @Input() showColumnMenuFooter = this._defaultOptions?.showColumnMenuFooter ?? false;
+  @Input({ transform: booleanAttribute })
+  showColumnMenuFooter = this._defaultOptions?.showColumnMenuFooter ?? false;
   /** The text for the column-menu's footer. */
   @Input() columnMenuFooterText = this._defaultOptions?.columnMenuFooterText ?? 'Columns Footer';
   /** The template for the column-menu's footer. */
@@ -282,16 +307,16 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   // ===== Row Templates =====
 
   /** Whether to use custom row template. If true, you should define a matRowDef. */
-  @Input() useContentRowTemplate = false;
+  @Input({ transform: booleanAttribute }) useContentRowTemplate = false;
   // TODO: It can't use together with `useContentRowTemplate`
-  @Input() useContentHeaderRowTemplate = false;
+  @Input({ transform: booleanAttribute }) useContentHeaderRowTemplate = false;
   // TODO: It's not working
-  @Input() useContentFooterRowTemplate = false;
+  @Input({ transform: booleanAttribute }) useContentFooterRowTemplate = false;
 
   // ===== Summary =====
 
   /** Whether to show the summary. */
-  @Input() showSummary = false;
+  @Input({ transform: booleanAttribute }) showSummary = false;
   /** The template for the summary. */
   @Input() summaryTemplate!: TemplateRef<any> | MtxGridCellTemplate;
 
@@ -303,14 +328,14 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   // ===== Side Bar =====
 
   /** Whether to show the sidebar. */
-  @Input() showSidebar = false;
+  @Input({ transform: booleanAttribute }) showSidebar = false;
   /** The template for the sidebar. */
   @Input() sidebarTemplate!: TemplateRef<any>;
 
   // ===== Status Bar =====
 
   /** Whether to show the status bar. */
-  @Input() showStatusbar = false;
+  @Input({ transform: booleanAttribute }) showStatusbar = false;
   /** The template for the status bar. */
   @Input() statusbarTemplate!: TemplateRef<any>;
 

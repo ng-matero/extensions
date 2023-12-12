@@ -1,5 +1,4 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -8,19 +7,23 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
-  forwardRef,
   Input,
   OnDestroy,
   Output,
   QueryList,
   ViewEncapsulation,
+  booleanAttribute,
+  forwardRef,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { MtxCheckboxGroupOption } from './interfaces';
 
 export class MtxCheckboxBase {
-  constructor(public label?: any, public value?: any) {}
+  constructor(
+    public label?: any,
+    public value?: any
+  ) {}
 }
 
 @Component({
@@ -63,14 +66,7 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
 
   @Input() bindValue = 'value';
 
-  @Input()
-  get showSelectAll(): boolean {
-    return this._showSelectAll;
-  }
-  set showSelectAll(value: boolean) {
-    this._showSelectAll = coerceBooleanProperty(value);
-  }
-  private _showSelectAll = false;
+  @Input({ transform: booleanAttribute }) showSelectAll = false;
 
   @Input() selectAllLabel = 'Select All';
 
@@ -87,15 +83,7 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
   }
   private _compareWith?: (o1: any, o2: any) => boolean;
 
-  @Input()
-  get disabled(): boolean {
-    return this._disabled;
-  }
-  set disabled(value: boolean) {
-    this._disabled = coerceBooleanProperty(value);
-    this._changeDetectorRef.markForCheck();
-  }
-  private _disabled = false;
+  @Input({ transform: booleanAttribute }) disabled = false;
 
   @Output() change = new EventEmitter<{ model: MtxCheckboxGroupOption[]; index: number }>();
 
@@ -199,6 +187,7 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
    */
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
+    this._changeDetectorRef.markForCheck();
   }
 
   private _checkMasterCheckboxState() {
@@ -260,7 +249,4 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
 
     this._getSelectedItems(index);
   }
-
-  static ngAcceptInputType_showSelectAll: BooleanInput;
-  static ngAcceptInputType_disabled: BooleanInput;
 }

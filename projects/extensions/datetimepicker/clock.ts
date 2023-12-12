@@ -1,4 +1,3 @@
-import { BooleanInput } from '@angular/cdk/coercion';
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { DOCUMENT } from '@angular/common';
 import {
@@ -13,8 +12,8 @@ import {
   OnChanges,
   OnDestroy,
   Output,
-  SimpleChanges,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
@@ -56,7 +55,7 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   @Input() interval: number = 1;
 
   /** Whether the clock uses 12 hour format. */
-  @Input() twelvehour: boolean = false;
+  @Input({ transform: booleanAttribute }) twelvehour: boolean = false;
 
   /** Whether the time is now in AM or PM. */
   @Input() AMPM: MtxAMPM = 'AM';
@@ -423,8 +422,6 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
     this._changeDetectorRef.markForCheck();
     this.activeDateChange.emit(this.activeDate);
   }
-
-  static ngAcceptInputType_twelvehour: BooleanInput;
 }
 
 /** Returns whether an event is a touch event. */

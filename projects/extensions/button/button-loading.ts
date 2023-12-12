@@ -7,8 +7,8 @@ import {
   Renderer2,
   SimpleChanges,
   ViewContainerRef,
+  booleanAttribute,
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ThemePalette } from '@angular/material/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
@@ -25,23 +25,9 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 export class MatButtonLoading implements OnChanges {
   private spinner!: ComponentRef<MatProgressSpinner> | null;
 
-  @Input()
-  get loading(): boolean {
-    return this._loading;
-  }
-  set loading(value: boolean) {
-    this._loading = coerceBooleanProperty(value);
-  }
-  private _loading = false;
+  @Input({ transform: booleanAttribute }) loading = false;
 
-  @Input()
-  get disabled(): boolean {
-    return this._disabled;
-  }
-  set disabled(value: boolean) {
-    this._disabled = coerceBooleanProperty(value);
-  }
-  private _disabled = false;
+  @Input({ transform: booleanAttribute }) disabled = false;
 
   @Input() color: ThemePalette;
 
@@ -85,7 +71,4 @@ export class MatButtonLoading implements OnChanges {
       this.spinner = null;
     }
   }
-
-  static ngAcceptInputType_loading: BooleanInput;
-  static ngAcceptInputType_disabled: BooleanInput;
 }

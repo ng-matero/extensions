@@ -1,12 +1,8 @@
-import {
-  BooleanInput,
-  coerceBooleanProperty,
-  coerceNumberProperty,
-  NumberInput,
-} from '@angular/cdk/coercion';
+import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
+  booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -270,14 +266,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   datetimepickerIntlChangesSubscription: SubscriptionLike;
 
   /** Whether the clock uses 12 hour format. */
-  @Input()
-  get twelvehour(): boolean {
-    return this._twelvehour;
-  }
-  set twelvehour(value: boolean) {
-    this._twelvehour = coerceBooleanProperty(value);
-  }
-  private _twelvehour = false;
+  @Input({ transform: booleanAttribute }) twelvehour = false;
 
   /** Whether the time is now in AM or PM. */
   @Input() AMPM: MtxAMPM = 'AM';
@@ -522,6 +511,4 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
       this.datetimepickerIntlChangesSubscription.unsubscribe();
     }
   }
-
-  static ngAcceptInputType_twelvehour: BooleanInput;
 }

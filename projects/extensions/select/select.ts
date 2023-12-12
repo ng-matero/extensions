@@ -1,5 +1,4 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -22,6 +21,7 @@ import {
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -37,9 +37,9 @@ import {
   mixinDisabled,
   mixinErrorState,
 } from '@angular/material/core';
-import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/material/form-field';
+import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 import { NgSelectComponent } from '@ng-select/ng-select';
-import { merge, Subject } from 'rxjs';
+import { Subject, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { MtxOption } from './option';
 import {
@@ -322,12 +322,12 @@ export class MtxSelect
   }
 
   /** Whether the component is required. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get required(): boolean {
     return this._required ?? this.ngControl?.control?.hasValidator(Validators.required) ?? false;
   }
   set required(value: boolean) {
-    this._required = coerceBooleanProperty(value);
+    this._required = value;
     this.stateChanges.next();
   }
   private _required: boolean | undefined;
@@ -578,7 +578,4 @@ export class MtxSelect
       dropdownEl.classList.add('mat-' + this._parentFormField?.color);
     });
   }
-
-  static ngAcceptInputType_required: BooleanInput;
-  static ngAcceptInputType_disabled: BooleanInput;
 }

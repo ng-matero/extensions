@@ -1,15 +1,15 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { DOWN_ARROW } from '@angular/cdk/keycodes';
 import {
   AfterViewInit,
   Directive,
   ElementRef,
   EventEmitter,
-  forwardRef,
   Input,
   OnDestroy,
   Optional,
   Output,
+  booleanAttribute,
+  forwardRef,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -98,24 +98,23 @@ export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit,
   _picker!: MtxColorpicker;
 
   /** Whether the colorpicker-input is disabled. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get disabled(): boolean {
     return !!this._disabled;
   }
   set disabled(value: boolean) {
-    const newValue = coerceBooleanProperty(value);
     const element = this._elementRef.nativeElement;
 
-    if (this._disabled !== newValue) {
-      this._disabled = newValue;
-      this._disabledChange.emit(newValue);
+    if (this._disabled !== value) {
+      this._disabled = value;
+      this._disabledChange.emit(value);
     }
 
     // We need to null check the `blur` method, because it's undefined during SSR.
     // In Ivy static bindings are invoked earlier, before the element is attached to the DOM.
     // This can cause an error to be thrown in some browsers (IE/Edge) which assert that the
     // element has been inserted.
-    if (newValue && this._isInitialized && element.blur) {
+    if (value && this._isInitialized && element.blur) {
       // Normally, native input elements automatically blur if they turn disabled. This behavior
       // is problematic, because it would mean that it triggers another change detection cycle,
       // which then causes a changed after checked error if the input element was focused before.
@@ -279,9 +278,4 @@ export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit,
   private _formatValue(value: string | null) {
     this._elementRef.nativeElement.value = value ? value : '';
   }
-
-  // Accept `any` to avoid conflicts with other directives on `<input>` that
-  // may accept different types.
-  static ngAcceptInputType_value: any;
-  static ngAcceptInputType_disabled: BooleanInput;
 }

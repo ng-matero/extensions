@@ -1,11 +1,11 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  ViewEncapsulation,
-  Input,
   ChangeDetectorRef,
+  Component,
+  Input,
+  ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressBarMode } from '@angular/material/progress-bar';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
@@ -47,27 +47,10 @@ export class MtxLoader {
   @Input() value = 0;
 
   /** Whether the loader is loading. */
-  @Input()
-  get loading(): boolean {
-    return this._loading;
-  }
-  set loading(value: boolean) {
-    this._loading = coerceBooleanProperty(value);
-  }
-  private _loading = true;
+  @Input({ transform: booleanAttribute }) loading = true;
 
   /** Whether the loader has a backdrop. */
-  @Input()
-  get hasBackdrop(): boolean {
-    return this._hasBackdrop;
-  }
-  set hasBackdrop(value: boolean) {
-    this._hasBackdrop = coerceBooleanProperty(value);
-  }
-  private _hasBackdrop = true;
+  @Input({ transform: booleanAttribute }) hasBackdrop = true;
 
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
-
-  static ngAcceptInputType_loading: BooleanInput;
-  static ngAcceptInputType_hasBackdrop: BooleanInput;
 }

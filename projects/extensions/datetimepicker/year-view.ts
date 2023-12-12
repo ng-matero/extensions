@@ -9,14 +9,14 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { createMissingDateImplError } from './datetimepicker-errors';
-import { MtxCalendarCell } from './calendar-body';
-import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import {
+  DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
-  DatetimeAdapter,
 } from '@ng-matero/extensions/core';
+import { MtxCalendarCell } from './calendar-body';
+import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
+import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerType } from './datetimepicker-types';
 
 /**

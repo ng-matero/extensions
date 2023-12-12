@@ -1,14 +1,14 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  ViewEncapsulation,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  HostBinding,
   Input,
   Output,
-  EventEmitter,
-  ChangeDetectorRef,
-  HostBinding,
+  ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 
 export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger';
 
@@ -35,14 +35,7 @@ export class MtxAlert {
   @Input() type: MtxAlertType = 'default';
 
   /** Whether to display an inline close button. */
-  @Input()
-  get dismissible(): boolean {
-    return this._dismissible;
-  }
-  set dismissible(value: boolean) {
-    this._dismissible = coerceBooleanProperty(value);
-  }
-  private _dismissible = false;
+  @Input({ transform: booleanAttribute }) dismissible = false;
 
   /** The alert's elevation (0~24). */
   @Input() elevation = 0;
@@ -56,6 +49,4 @@ export class MtxAlert {
     this._changeDetectorRef.markForCheck();
     this.closed.emit(this);
   }
-
-  static ngAcceptInputType_dismissible: BooleanInput;
 }

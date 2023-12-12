@@ -1,5 +1,10 @@
-import { Component, Input, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Input,
+  ViewEncapsulation,
+  booleanAttribute,
+} from '@angular/core';
 
 export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'danger';
 
@@ -36,25 +41,8 @@ export class MtxProgress {
   @Input() background!: string;
 
   /** Whether to apply the striped class. */
-  @Input()
-  get striped(): boolean {
-    return this._striped;
-  }
-  set striped(value: boolean) {
-    this._striped = coerceBooleanProperty(value);
-  }
-  private _striped = false;
+  @Input({ transform: booleanAttribute }) striped = false;
 
   /** Whether to apply the animated class. */
-  @Input()
-  get animate(): boolean {
-    return this._animate;
-  }
-  set animate(value: boolean) {
-    this._animate = coerceBooleanProperty(value);
-  }
-  private _animate = false;
-
-  static ngAcceptInputType_striped: BooleanInput;
-  static ngAcceptInputType_animate: BooleanInput;
+  @Input({ transform: booleanAttribute }) animate = false;
 }

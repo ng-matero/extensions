@@ -10,9 +10,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import {
+  DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
-  DatetimeAdapter,
 } from '@ng-matero/extensions/core';
 import { MtxCalendarCell } from './calendar-body';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';

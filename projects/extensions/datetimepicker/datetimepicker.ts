@@ -1,5 +1,19 @@
+import { Directionality } from '@angular/cdk/bidi';
+import { coerceStringArray } from '@angular/cdk/coercion';
+import { ESCAPE, hasModifierKey, UP_ARROW } from '@angular/cdk/keycodes';
+import {
+  FlexibleConnectedPositionStrategy,
+  Overlay,
+  OverlayConfig,
+  OverlayRef,
+  ScrollStrategy,
+} from '@angular/cdk/overlay';
+import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
+  booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -19,29 +33,16 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { Directionality } from '@angular/cdk/bidi';
-import { BooleanInput, coerceBooleanProperty, coerceStringArray } from '@angular/cdk/coercion';
-import { ESCAPE, hasModifierKey, UP_ARROW } from '@angular/cdk/keycodes';
-import {
-  FlexibleConnectedPositionStrategy,
-  Overlay,
-  OverlayConfig,
-  OverlayRef,
-  ScrollStrategy,
-} from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
+import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxCalendar } from './calendar';
+import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
-import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
-import { DOCUMENT } from '@angular/common';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
@@ -124,7 +125,10 @@ export class MtxDatetimepickerContent<D>
   /** Id of the label for the `role="dialog"` element. */
   _dialogLabelId: string | null = null;
 
-  constructor(elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    elementRef: ElementRef,
+    private _changeDetectorRef: ChangeDetectorRef
+  ) {
     super(elementRef);
   }
 
@@ -158,24 +162,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   private _document = inject(DOCUMENT);
 
   /** Whether to show multi-year view. */
-  @Input()
-  get multiYearSelector(): boolean {
-    return this._multiYearSelector;
-  }
-  set multiYearSelector(value: boolean) {
-    this._multiYearSelector = coerceBooleanProperty(value);
-  }
-  private _multiYearSelector = false;
+  @Input({ transform: booleanAttribute }) multiYearSelector = false;
 
   /** Whether the clock uses 12 hour format. */
-  @Input()
-  get twelvehour(): boolean {
-    return this._twelvehour;
-  }
-  set twelvehour(value: boolean) {
-    this._twelvehour = coerceBooleanProperty(value);
-  }
-  private _twelvehour = false;
+  @Input({ transform: booleanAttribute }) twelvehour = false;
 
   /** The view that the calendar should start in. */
   @Input() startView: MtxCalendarView = 'month';
@@ -187,7 +177,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   @Input() timeInterval: number = 1;
 
   /** Prevent user to select same date time */
-  @Input() preventSameDateTimeSelection = false;
+  @Input({ transform: booleanAttribute }) preventSameDateTimeSelection = false;
 
   /**
    * Emits new selected date when selected date changes.
@@ -218,12 +208,12 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   private _panelClass!: string[];
 
   /** Whether the calendar is open. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get opened(): boolean {
     return this._opened;
   }
   set opened(value: boolean) {
-    coerceBooleanProperty(value) ? this.open() : this.close();
+    value ? this.open() : this.close();
   }
   private _opened = false;
 
@@ -304,41 +294,25 @@ export class MtxDatetimepicker<D> implements OnDestroy {
    * Whether the calendar UI is in touch mode. In touch mode the calendar opens in a dialog rather
    * than a popup and elements have more padding to allow for bigger touch targets.
    */
-  @Input()
-  get touchUi(): boolean {
-    return this._touchUi;
-  }
-  set touchUi(value: boolean) {
-    this._touchUi = coerceBooleanProperty(value);
-  }
-  private _touchUi = false;
+  @Input({ transform: booleanAttribute }) touchUi = false;
 
   /**
    * Whether the calendar is in time mode. In time mode the calendar clock gets time input
    * elements rather then just clock. When `touchUi` is enabled this will be disabled.
    */
-  @Input()
-  get timeInput(): boolean {
-    return this._timeInput && !this.touchUi;
-  }
-  set timeInput(value: boolean) {
-    this._timeInput = coerceBooleanProperty(value);
-  }
-  private _timeInput = false;
+  @Input({ transform: booleanAttribute }) timeInput = false;
 
   /** Whether the datetimepicker pop-up should be disabled. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get disabled(): boolean {
     return this._disabled === undefined && this.datetimepickerInput
       ? this.datetimepickerInput.disabled
       : !!this._disabled;
   }
   set disabled(value: boolean) {
-    const newValue = coerceBooleanProperty(value);
-
-    if (newValue !== this._disabled) {
-      this._disabled = newValue;
-      this._disabledChange.next(newValue);
+    if (value !== this._disabled) {
+      this._disabled = value;
+      this._disabledChange.next(value);
     }
   }
   private _disabled!: boolean;
@@ -356,14 +330,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
    * Note that automatic focus restoration is an accessibility feature and it is recommended that
    * you provide your own equivalent, if you decide to turn it off.
    */
-  @Input()
-  get restoreFocus(): boolean {
-    return this._restoreFocus;
-  }
-  set restoreFocus(value: boolean) {
-    this._restoreFocus = coerceBooleanProperty(value);
-  }
-  private _restoreFocus = true;
+  @Input({ transform: booleanAttribute }) restoreFocus = true;
 
   /** The currently selected date. */
   get _selected(): D | null {
@@ -444,7 +411,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     }
 
     const canRestoreFocus =
-      this._restoreFocus &&
+      this.restoreFocus &&
       this._focusedElementBeforeOpen &&
       typeof this._focusedElementBeforeOpen.focus === 'function';
 
@@ -635,13 +602,4 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       )
     );
   }
-
-  static ngAcceptInputType_multiYearSelector: BooleanInput;
-  static ngAcceptInputType_twelvehour: BooleanInput;
-  static ngAcceptInputType_preventSameDateTimeSelection: BooleanInput;
-  static ngAcceptInputType_disabled: BooleanInput;
-  static ngAcceptInputType_opened: BooleanInput;
-  static ngAcceptInputType_touchUi: BooleanInput;
-  static ngAcceptInputType_timeInput: BooleanInput;
-  static ngAcceptInputType_restoreFocus: BooleanInput;
 }

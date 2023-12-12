@@ -1,4 +1,3 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterContentInit,
   Attribute,
@@ -13,9 +12,10 @@ import {
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { Subscription, of as observableOf, merge, Observable } from 'rxjs';
+import { Observable, Subscription, merge, of as observableOf } from 'rxjs';
 import { MtxColorpicker } from './colorpicker';
 
 /** Can be used to override the icon of a `mtxColorpickerToggle`. */
@@ -56,7 +56,7 @@ export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDest
   @Input('aria-label') ariaLabel!: string;
 
   /** Whether the toggle button is disabled. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get disabled(): boolean {
     if (this._disabled == null && this.picker) {
       return this.picker.disabled;
@@ -65,12 +65,12 @@ export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDest
     return !!this._disabled;
   }
   set disabled(value: boolean) {
-    this._disabled = coerceBooleanProperty(value);
+    this._disabled = value;
   }
   private _disabled!: boolean;
 
   /** Whether ripples on the toggle should be disabled. */
-  @Input() disableRipple!: boolean;
+  @Input({ transform: booleanAttribute }) disableRipple!: boolean;
 
   /** Custom icon set by the consumer. */
   @ContentChild(MtxColorpickerToggleIcon) _customIcon!: MtxColorpickerToggleIcon;
@@ -124,7 +124,4 @@ export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDest
       pickerToggled
     ).subscribe(() => this._changeDetectorRef.markForCheck());
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
-  static ngAcceptInputType_disableRipple: BooleanInput;
 }
