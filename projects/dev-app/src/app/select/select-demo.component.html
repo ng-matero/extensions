@@ -48,6 +48,23 @@
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 
+<h2>Reactive Form</h2>
+
+<mat-form-field>
+  <mat-label>Select Food</mat-label>
+
+  <mtx-select [items]="items" [formControl]="control"
+              bindLabel="name" bindValue="id">
+  </mtx-select>
+
+  <mat-hint>Choose your favorite food</mat-hint>
+  <mat-error>Please choose a food</mat-error>
+</mat-form-field>
+
+<mat-slide-toggle (change)="changeState($event)" [checked]="control.disabled">
+  {{control.disabled?'disable':'enable'}}
+</mat-slide-toggle>
+
 <h2>Material Select</h2>
 
 <mat-form-field>
@@ -100,19 +117,22 @@
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 
-<h2>Reactive Form</h2>
+<h2>Test Events</h2>
 
 <mat-form-field>
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [items]="items" [formControl]="control"
-              bindLabel="name" bindValue="id">
+  <mtx-select [items]="items" bindLabel="name" bindValue="id"
+              [(ngModel)]="value"
+              [multiple]="multipleSelect"
+              (open)="log($event, 'open')"
+              (close)="log($event, 'close')"
+              (blur)="log($event, 'blur')"
+              (focus)="log($event, 'focus')"
+              (clear)="log($event, 'clear')"
+              (change)="log($event, 'change')"
+              (add)="log($event, 'add')"
+              (remove)="log($event, 'remove')"
+              (search)="log($event, 'search')">
   </mtx-select>
-
-  <mat-hint>Choose your favorite food</mat-hint>
-  <mat-error>Please choose a food</mat-error>
 </mat-form-field>
-
-<mat-slide-toggle (change)="changeState($event)" [checked]="control.disabled">
-  {{control.disabled?'disable':'enable'}}
-</mat-slide-toggle>

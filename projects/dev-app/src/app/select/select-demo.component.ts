@@ -115,4 +115,8 @@ export class SelectDemoComponent {
       this.control.enable();
     }
   }
+
+  log(e: any, type = '') {
+    console.log(type + ':', e);
+  }
 }
