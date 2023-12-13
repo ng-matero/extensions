@@ -1,4 +1,3 @@
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import {
   AfterViewChecked,
   ChangeDetectionStrategy,
@@ -8,6 +7,7 @@ import {
   OnChanges,
   OnDestroy,
   SimpleChanges,
+  booleanAttribute,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -20,14 +20,7 @@ import { Subject } from 'rxjs';
 export class MtxOption implements OnChanges, AfterViewChecked, OnDestroy {
   @Input() value: any;
 
-  @Input()
-  get disabled() {
-    return this._disabled;
-  }
-  set disabled(value: boolean) {
-    this._disabled = coerceBooleanProperty(value);
-  }
-  private _disabled = false;
+  @Input({ transform: booleanAttribute }) disabled = false;
 
   get label() {
     return (this.elementRef.nativeElement.textContent || '').trim();
@@ -46,7 +39,7 @@ export class MtxOption implements OnChanges, AfterViewChecked, OnDestroy {
     if (changes.disabled) {
       this.stateChange$.next({
         value: this.value,
-        disabled: this._disabled,
+        disabled: this.disabled,
       });
     }
   }
@@ -56,7 +49,7 @@ export class MtxOption implements OnChanges, AfterViewChecked, OnDestroy {
       this._previousLabel = this.label;
       this.stateChange$.next({
         value: this.value,
-        disabled: this._disabled,
+        disabled: this.disabled,
         label: this.elementRef.nativeElement.innerHTML,
       });
     }
@@ -65,6 +58,4 @@ export class MtxOption implements OnChanges, AfterViewChecked, OnDestroy {
   ngOnDestroy() {
     this.stateChange$.complete();
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
 }

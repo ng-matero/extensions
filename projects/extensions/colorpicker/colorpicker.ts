@@ -1,12 +1,11 @@
 import { Directionality } from '@angular/cdk/bidi';
-import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
-import { ESCAPE, hasModifierKey, UP_ARROW } from '@angular/cdk/keycodes';
+import { ESCAPE, UP_ARROW, hasModifierKey } from '@angular/cdk/keycodes';
 import {
-  ScrollStrategy,
-  OverlayConfig,
-  Overlay,
-  OverlayRef,
   FlexibleConnectedPositionStrategy,
+  Overlay,
+  OverlayConfig,
+  OverlayRef,
+  ScrollStrategy,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
@@ -28,8 +27,9 @@ import {
   TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
-import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
+import { CanColor, ThemePalette, mixinColor } from '@angular/material/core';
 import { Subject, Subscription, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { mtxColorpickerAnimations } from './colorpicker-animations';
@@ -98,7 +98,10 @@ export class MtxColorpickerContent
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
 
-  constructor(elementRef: ElementRef, private _changeDetectorRef: ChangeDetectorRef) {
+  constructor(
+    elementRef: ElementRef,
+    private _changeDetectorRef: ChangeDetectorRef
+  ) {
     super(elementRef);
   }
 
@@ -141,17 +144,15 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
   /** Emits when the colorpicker has been closed. */
   @Output('closed') closedStream: EventEmitter<void> = new EventEmitter<void>();
 
-  @Input() get disabled() {
+  @Input({ transform: booleanAttribute }) get disabled() {
     return this._disabled === undefined && this.pickerInput
       ? this.pickerInput.disabled
       : !!this._disabled;
   }
   set disabled(value: boolean) {
-    const newValue = coerceBooleanProperty(value);
-
-    if (newValue !== this._disabled) {
-      this._disabled = newValue;
-      this._disabledChange.next(newValue);
+    if (value !== this._disabled) {
+      this._disabled = value;
+      this._disabledChange.next(value);
     }
   }
   private _disabled!: boolean;
@@ -169,22 +170,15 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
    * Note that automatic focus restoration is an accessibility feature and it is recommended that
    * you provide your own equivalent, if you decide to turn it off.
    */
-  @Input()
-  get restoreFocus(): boolean {
-    return this._restoreFocus;
-  }
-  set restoreFocus(value: boolean) {
-    this._restoreFocus = coerceBooleanProperty(value);
-  }
-  private _restoreFocus = true;
+  @Input({ transform: booleanAttribute }) restoreFocus = true;
 
   /** Whether the panel is open. */
-  @Input()
+  @Input({ transform: booleanAttribute })
   get opened(): boolean {
     return this._opened;
   }
   set opened(value: boolean) {
-    coerceBooleanProperty(value) ? this.open() : this.close();
+    value ? this.open() : this.close();
   }
   private _opened = false;
 
@@ -325,7 +319,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     };
 
     if (
-      this._restoreFocus &&
+      this.restoreFocus &&
       this._focusedElementBeforeOpen &&
       typeof this._focusedElementBeforeOpen.focus === 'function'
     ) {
@@ -459,6 +453,4 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
       )
     );
   }
-
-  static ngAcceptInputType_disabled: BooleanInput;
 }
