@@ -48,7 +48,7 @@
     "@angular/platform-browser": "^17.0.7",
     "@angular/platform-browser-dynamic": "^17.0.7",
     "@angular/router": "^17.0.7",
-    "@ng-select/ng-select": "^11.1.0",
+    "@ng-select/ng-select": "^12.0.4",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
     "date-fns": "^2.30.0",

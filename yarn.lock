@@ -2634,10 +2634,10 @@
     "@material/theme" "15.0.0-canary.a246a4439.0"
     tslib "^2.1.0"
 
-"@ng-select/ng-select@^11.1.0":
-  version "11.2.0"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-11.2.0.tgz#33048ddeb6a524078f3134167d75137239bf1c6e"
-  integrity sha512-lTyw93kFdKGecp9eKmOP0PQSCaAJS8DCt4D60ns055+ixvRSp2fuXAuJUvn1e3gAsvpZor37osmYlOJ4LYwYIA==
+"@ng-select/ng-select@^12.0.4":
+  version "12.0.4"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-12.0.4.tgz#0313c11dff33335b9b6a8ba2b2a85cc3e7082d36"
+  integrity sha512-bcvYLCdmKtJBZRLFLfnKauPqVlJJDecMzU4pZ360h1V8EsE4BCHoabNJQptqOESigcxBY1bpAe0i6aKu6JgL5Q==
   dependencies:
     tslib "^2.3.1"
 
