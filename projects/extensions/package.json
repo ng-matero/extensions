@@ -38,12 +38,6 @@
     ".": {
       "sass": "./_index.scss"
     },
-    "./theming": {
-      "sass": "./_theming.scss"
-    },
-    "./_theming": {
-      "sass": "./_theming.scss"
-    },
     "./prebuilt-themes/indigo-pink.css": {
       "style": "./prebuilt-themes/indigo-pink.css"
     },
