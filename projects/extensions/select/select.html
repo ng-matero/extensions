@@ -1,145 +1,141 @@
 <ng-select #ngSelect
-           [class.ng-select-invalid]="errorState"
-           [(ngModel)]="value"
-           [ngModelOptions]="{standalone: true}"
-           [placeholder]="placeholder"
-           [items]="items"
-           [addTag]="addTag"
-           [addTagText]="addTagText"
-           [appendTo]="appendTo"
-           [appearance]="appearance"
-           [bindLabel]="bindLabel!"
-           [bindValue]="bindValue!"
-           [closeOnSelect]="closeOnSelect"
-           [clearAllText]="clearAllText"
-           [clearable]="clearable"
-           [clearOnBackspace]="clearOnBackspace"
-           [dropdownPosition]="dropdownPosition"
-           [groupBy]="groupBy"
-           [groupValue]="groupValue"
-           [hideSelected]="hideSelected"
-           [isOpen]="isOpen"
-           [inputAttrs]="inputAttrs"
-           [loading]="loading"
-           [loadingText]="loadingText"
-           [labelForId]="labelForId"
-           [markFirst]="markFirst"
-           [maxSelectedItems]="maxSelectedItems"
-           [multiple]="multiple"
-           [notFoundText]="notFoundText"
-           [readonly]="readonly"
-           [typeahead]="typeahead"
-           [typeToSearchText]="typeToSearchText"
-           [trackByFn]="trackByFn"
-           [searchable]="searchable"
-           [searchFn]="searchFn"
-           [searchWhileComposing]="searchWhileComposing"
-           [clearSearchOnAdd]="clearSearchOnAdd"
-           [selectableGroup]="selectableGroup"
-           [selectableGroupAsModel]="selectableGroupAsModel"
-           [selectOnTab]="selectOnTab"
-           [tabIndex]="tabIndex"
-           [openOnEnter]="openOnEnter"
-           [minTermLength]="minTermLength"
-           [editableSearchTerm]="editableSearchTerm"
-           [keyDownFn]="keyDownFn"
-           [virtualScroll]="virtualScroll"
-           (blur)="blurEvent.emit($event)"
-           (focus)="focusEvent.emit($event)"
-           (change)="changeEvent.emit($event)"
-           (open)="openChange()"
-           (close)="closeEvent.emit()"
-           (search)="searchEvent.emit($event)"
-           (clear)="clearEvent.emit($event)"
-           (add)="addEvent.emit($event)"
-           (remove)="removeEvent.emit($event)"
-           (scroll)="scroll.emit($event)"
-           (scrollToEnd)="scrollToEnd.emit()">
+  [class.ng-select-invalid]="errorState"
+  [(ngModel)]="value"
+  [ngModelOptions]="{standalone: true}"
+  [placeholder]="placeholder"
+  [items]="items"
+  [addTag]="addTag"
+  [addTagText]="addTagText"
+  [appendTo]="appendTo"
+  [appearance]="appearance"
+  [bindLabel]="bindLabel!"
+  [bindValue]="bindValue!"
+  [closeOnSelect]="closeOnSelect"
+  [clearAllText]="clearAllText"
+  [clearable]="clearable"
+  [clearOnBackspace]="clearOnBackspace"
+  [dropdownPosition]="dropdownPosition"
+  [groupBy]="groupBy"
+  [groupValue]="groupValue"
+  [hideSelected]="hideSelected"
+  [isOpen]="isOpen"
+  [inputAttrs]="inputAttrs"
+  [loading]="loading"
+  [loadingText]="loadingText"
+  [labelForId]="labelForId"
+  [markFirst]="markFirst"
+  [maxSelectedItems]="maxSelectedItems"
+  [multiple]="multiple"
+  [notFoundText]="notFoundText"
+  [readonly]="readonly"
+  [typeahead]="typeahead"
+  [typeToSearchText]="typeToSearchText"
+  [trackByFn]="trackByFn"
+  [searchable]="searchable"
+  [searchFn]="searchFn"
+  [searchWhileComposing]="searchWhileComposing"
+  [clearSearchOnAdd]="clearSearchOnAdd"
+  [selectableGroup]="selectableGroup"
+  [selectableGroupAsModel]="selectableGroupAsModel"
+  [selectOnTab]="selectOnTab"
+  [tabIndex]="tabIndex"
+  [openOnEnter]="openOnEnter"
+  [minTermLength]="minTermLength"
+  [editableSearchTerm]="editableSearchTerm"
+  [keyDownFn]="keyDownFn"
+  [virtualScroll]="virtualScroll"
+  (blur)="blurEvent.emit($event)"
+  (focus)="focusEvent.emit($event)"
+  (change)="changeEvent.emit($event)"
+  (open)="openChange()"
+  (close)="closeEvent.emit()"
+  (search)="searchEvent.emit($event)"
+  (clear)="clearEvent.emit($event)"
+  (add)="addEvent.emit($event)"
+  (remove)="removeEvent.emit($event)"
+  (scroll)="scroll.emit($event)"
+  (scrollToEnd)="scrollToEnd.emit()">
 
-  <ng-container *ngIf="optionTemplate">
+  @if (optionTemplate) {
     <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"
-                 let-searchTerm="searchTerm">
+      let-searchTerm="searchTerm">
       <ng-template [ngTemplateOutlet]="optionTemplate"
-                   [ngTemplateOutletContext]="{ item: item, item$: item$, index: index, searchTerm: searchTerm }">
+        [ngTemplateOutletContext]="{ item: item, item$: item$, index: index, searchTerm: searchTerm }">
       </ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="optgroupTemplate">
+  @if (optgroupTemplate) {
     <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index"
-                 let-searchTerm="searchTerm">
+      let-searchTerm="searchTerm">
       <ng-template [ngTemplateOutlet]="optgroupTemplate"
-                   [ngTemplateOutletContext]="{ item: item, item$: item$, index: index, searchTerm: searchTerm }">
+        [ngTemplateOutletContext]="{ item: item, item$: item$, index: index, searchTerm: searchTerm }">
       </ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="labelTemplate">
+  @if (labelTemplate) {
     <ng-template ng-label-tmp let-item="item" let-clear="clear" let-label="label">
       <ng-template [ngTemplateOutlet]="labelTemplate"
-                   [ngTemplateOutletContext]="{ item: item, clear: clear, label: label }">
+        [ngTemplateOutletContext]="{ item: item, clear: clear, label: label }">
       </ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="multiLabelTemplate">
+  @if (multiLabelTemplate) {
     <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
       <ng-template [ngTemplateOutlet]="multiLabelTemplate"
-                   [ngTemplateOutletContext]="{ items: items, clear: clear }">
+        [ngTemplateOutletContext]="{ items: items, clear: clear }">
       </ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="headerTemplate">
+  @if (headerTemplate) {
     <ng-template ng-header-tmp>
-      <ng-template [ngTemplateOutlet]="headerTemplate">
-      </ng-template>
+      <ng-template [ngTemplateOutlet]="headerTemplate"></ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="footerTemplate">
+  @if (footerTemplate) {
     <ng-template ng-footer-tmp>
-      <ng-template [ngTemplateOutlet]="footerTemplate">
-      </ng-template>
+      <ng-template [ngTemplateOutlet]="footerTemplate"></ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="notFoundTemplate">
+  @if (notFoundTemplate) {
     <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
       <ng-template [ngTemplateOutlet]="notFoundTemplate"
-                   [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
+        [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
       </ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="typeToSearchTemplate">
+  @if (typeToSearchTemplate) {
     <ng-template ng-typetosearch-tmp>
-      <ng-template [ngTemplateOutlet]="typeToSearchTemplate">
-      </ng-template>
+      <ng-template [ngTemplateOutlet]="typeToSearchTemplate"></ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="loadingTextTemplate">
+  @if (loadingTextTemplate) {
     <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
       <ng-template [ngTemplateOutlet]="loadingTextTemplate"
-                   [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
+        [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
       </ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="tagTemplate">
+  @if (tagTemplate) {
     <ng-template ng-tag-tmp let-searchTerm="searchTerm">
       <ng-template [ngTemplateOutlet]="tagTemplate"
-                   [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
+        [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
       </ng-template>
     </ng-template>
-  </ng-container>
+  }
 
-  <ng-container *ngIf="loadingSpinnerTemplate">
+  @if (loadingSpinnerTemplate) {
     <ng-template ng-loadingspinner-tmp>
-      <ng-template [ngTemplateOutlet]="loadingSpinnerTemplate">
-      </ng-template>
+      <ng-template [ngTemplateOutlet]="loadingSpinnerTemplate"></ng-template>
     </ng-template>
-  </ng-container>
+  }
 
 </ng-select>

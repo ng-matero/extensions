@@ -1,24 +1,23 @@
-<mat-checkbox class="mtx-checkbox-master"
-              *ngIf="showSelectAll"
-              [checked]="selectAll"
-              [(indeterminate)]="selectAllIndeterminate"
-              [disabled]="disabled"
-              (change)="_updateMasterCheckboxState($event, -1)">
-  {{selectAllLabel}}
-</mat-checkbox>
+@if (showSelectAll) {
+  <mat-checkbox class="mtx-checkbox-master"
+    [checked]="selectAll"
+    [(indeterminate)]="selectAllIndeterminate"
+    [disabled]="disabled"
+    (change)="_updateMasterCheckboxState($event, -1)">{{selectAllLabel}}</mat-checkbox>
+}
 
-<mat-checkbox class="mtx-checkbox-normal"
-              *ngFor="let option of items; let i = index;"
-              [(ngModel)]="option.checked"
-              [ngModelOptions]="{standalone: true}"
-              [aria-describedby]="option.ariaDescribedby"
-              [aria-label]="option.ariaLabel"
-              [aria-labelledby]="option.ariaLabelledby"
-              [color]="option.color"
-              [disabled]="option.disabled || disabled"
-              [disableRipple]="option.disableRipple"
-              [labelPosition]="option.labelPosition"
-              [required]="option.required"
-              (change)="_updateNormalCheckboxState($event, i)">
-  {{option[bindLabel] | toObservable | async}}
-</mat-checkbox>
+@for (option of items; track option; let i = $index) {
+  <mat-checkbox class="mtx-checkbox-normal"
+    [(ngModel)]="option.checked"
+    [ngModelOptions]="{standalone: true}"
+    [aria-describedby]="option.ariaDescribedby"
+    [aria-label]="option.ariaLabel"
+    [aria-labelledby]="option.ariaLabelledby"
+    [color]="option.color"
+    [disabled]="option.disabled || disabled"
+    [disableRipple]="option.disableRipple"
+    [labelPosition]="option.labelPosition"
+    [required]="option.required"
+    (change)="_updateNormalCheckboxState($event, i)"
+  >{{option[bindLabel] | toObservable | async}}</mat-checkbox>
+}

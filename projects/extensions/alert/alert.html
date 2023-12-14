@@ -1,6 +1,6 @@
 <ng-content></ng-content>
-<ng-template [ngIf]="dismissible">
+@if (dismissible) {
   <button type="button" class="mtx-alert-close" aria-label="Close" (click)="_onClosed()">
     <span aria-hidden="true">&times;</span>
   </button>
-</ng-template>
+}

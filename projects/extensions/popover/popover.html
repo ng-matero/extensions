@@ -1,25 +1,27 @@
 <ng-template>
   <div class="mtx-popover-panel"
-       [class.mtx-popover-panel-without-arrow]="hideArrow"
-       [id]="panelId"
-       [ngClass]="_classList"
-       (keydown)="_handleKeydown($event)"
-       (click)="_handleClick()"
-       (mouseover)="_handleMouseOver()"
-       (mouseleave)="_handleMouseLeave()"
-       [@transformPopover]="_panelAnimationState"
-       (@transformPopover.start)="_onAnimationStart($event)"
-       (@transformPopover.done)="_onAnimationDone($event)"
-       tabindex="-1"
-       role="dialog"
-       [attr.aria-label]="ariaLabel || null"
-       [attr.aria-labelledby]="ariaLabelledby || null"
-       [attr.aria-describedby]="ariaDescribedby || null"
-       [cdkTrapFocus]="focusTrapEnabled"
-       [cdkTrapFocusAutoCapture]="focusTrapAutoCaptureEnabled">
+    [class.mtx-popover-panel-without-arrow]="hideArrow"
+    [id]="panelId"
+    [ngClass]="_classList"
+    (keydown)="_handleKeydown($event)"
+    (click)="_handleClick()"
+    (mouseover)="_handleMouseOver()"
+    (mouseleave)="_handleMouseLeave()"
+    [@transformPopover]="_panelAnimationState"
+    (@transformPopover.start)="_onAnimationStart($event)"
+    (@transformPopover.done)="_onAnimationDone($event)"
+    tabindex="-1"
+    role="dialog"
+    [attr.aria-label]="ariaLabel || null"
+    [attr.aria-labelledby]="ariaLabelledby || null"
+    [attr.aria-describedby]="ariaDescribedby || null"
+    [cdkTrapFocus]="focusTrapEnabled"
+    [cdkTrapFocusAutoCapture]="focusTrapAutoCaptureEnabled">
     <div class="mtx-popover-content">
       <ng-content></ng-content>
     </div>
-    <div class="mtx-popover-direction-arrow" *ngIf="!hideArrow" [ngStyle]="arrowStyles"></div>
+    @if (!hideArrow) {
+      <div class="mtx-popover-direction-arrow" [ngStyle]="arrowStyles"></div>
+    }
   </div>
 </ng-template>

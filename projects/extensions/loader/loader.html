@@ -1,18 +1,25 @@
-<div class="mtx-loader-backdrop" *ngIf="loading && hasBackdrop"></div>
-<div class="mtx-loader-main" *ngIf="loading">
-  <mat-spinner *ngIf="type==='spinner'"
-               [color]="color"
-               [strokeWidth]="strokeWidth"
-               [diameter]="diameter"
-               [mode]="$any(mode)"
-               [value]="value">
-  </mat-spinner>
-
-  <mat-progress-bar *ngIf="type==='progressbar'"
-                    [color]="color"
-                    [mode]="$any(mode)"
-                    [value]="value"
-                    [bufferValue]="bufferValue">
-  </mat-progress-bar>
-</div>
+@if (loading && hasBackdrop) {
+  <div class="mtx-loader-backdrop"></div>
+}
+@if (loading) {
+  <div class="mtx-loader-main">
+    @if (type==='spinner') {
+      <mat-spinner
+        [color]="color"
+        [strokeWidth]="strokeWidth"
+        [diameter]="diameter"
+        [mode]="$any(mode)"
+        [value]="value">
+      </mat-spinner>
+    }
+    @if (type==='progressbar') {
+      <mat-progress-bar
+        [color]="color"
+        [mode]="$any(mode)"
+        [value]="value"
+        [bufferValue]="bufferValue">
+      </mat-progress-bar>
+    }
+  </div>
+}
 <ng-content></ng-content>

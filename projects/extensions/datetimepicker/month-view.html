@@ -1,15 +1,17 @@
 <table class="mtx-calendar-table" role="grid">
   <thead class="mtx-calendar-table-header">
     <tr>
-      <th *ngFor="let day of _weekdays" [attr.aria-label]="day.long">{{day.narrow}}</th>
+      @for (day of _weekdays; track day) {
+        <th [attr.aria-label]="day.long">{{day.narrow}}</th>
+      }
     </tr>
   </thead>
   <tbody mtx-calendar-body
-         (@slideCalendar.done)="_calendarStateDone()"
-         [@slideCalendar]="_calendarState"
-         [rows]="_weeks"
-         [todayValue]="_todayDate!"
-         [activeCell]="_adapter.getDate(activeDate) - 1"
-         [selectedValue]="_selectedDate!"
-         (selectedValueChange)="_dateSelected($event)"></tbody>
+    (@slideCalendar.done)="_calendarStateDone()"
+    [@slideCalendar]="_calendarState"
+    [rows]="_weeks"
+    [todayValue]="_todayDate!"
+    [activeCell]="_adapter.getDate(activeDate) - 1"
+    [selectedValue]="_selectedDate!"
+    (selectedValueChange)="_dateSelected($event)"></tbody>
 </table>

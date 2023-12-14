@@ -1,57 +1,59 @@
 <div class="mtx-time-input-wrapper">
   <div class="mtx-time-input-inner">
     <input class="mtx-time-input"
-           [class.mtx-time-input-active]="clockView === 'hour'"
-           [class.mtx-time-input-warning]="!hourInput.valid"
-           #hourInput="mtxTimeInput"
-           type="text"
-           inputmode="numeric"
-           maxlength="2"
-           [timeMin]="twelvehour ? 1 : 0"
-           [timeMax]="twelvehour ? 12 : 23"
-           [timeValue]="hour"
-           (timeValueChanged)="handleHourInputChange($event)"
-           (focus)="handleFocus('hour')" />
+      [class.mtx-time-input-active]="clockView === 'hour'"
+      [class.mtx-time-input-warning]="!hourInput.valid"
+      #hourInput="mtxTimeInput"
+      type="text"
+      inputmode="numeric"
+      maxlength="2"
+      [timeMin]="twelvehour ? 1 : 0"
+      [timeMax]="twelvehour ? 12 : 23"
+      [timeValue]="hour"
+      (timeValueChanged)="handleHourInputChange($event)"
+      (focus)="handleFocus('hour')" />
 
     <div class="mtx-time-seperator">:</div>
 
     <input class="mtx-time-input"
-           [class.mtx-time-input-active]="clockView === 'minute'"
-           [class.mtx-time-input-warning]="!minuteInput.valid"
-           #minuteInput="mtxTimeInput"
-           type="text"
-           inputmode="numeric"
-           maxlength="2"
-           [timeMin]="0"
-           [timeMax]="59"
-           [timeValue]="minute"
-           (timeValueChanged)="handleMinuteInputChange($event)"
-           [timeInterval]="interval"
-           (focus)="handleFocus('minute')" />
+      [class.mtx-time-input-active]="clockView === 'minute'"
+      [class.mtx-time-input-warning]="!minuteInput.valid"
+      #minuteInput="mtxTimeInput"
+      type="text"
+      inputmode="numeric"
+      maxlength="2"
+      [timeMin]="0"
+      [timeMax]="59"
+      [timeValue]="minute"
+      (timeValueChanged)="handleMinuteInputChange($event)"
+      [timeInterval]="interval"
+      (focus)="handleFocus('minute')" />
 
-    <div *ngIf="twelvehour" class="mtx-time-ampm">
-      <button mat-button type="button" class="mtx-time-am"
-              [class.mtx-time-ampm-active]="AMPM === 'AM'" aria-label="AM"
-              (keydown)="$event.stopPropagation()"
-              (click)="ampmChange.emit('AM')">AM</button>
-      <button mat-button type="button" class="mtx-time-pm"
-              [class.mtx-time-ampm-active]="AMPM === 'PM'" aria-label="PM"
-              (keydown)="$event.stopPropagation()"
-              (click)="ampmChange.emit('PM')">PM</button>
-    </div>
+    @if (twelvehour) {
+      <div class="mtx-time-ampm">
+        <button mat-button type="button" class="mtx-time-am"
+          [class.mtx-time-ampm-active]="AMPM === 'AM'" aria-label="AM"
+          (keydown)="$event.stopPropagation()"
+        (click)="ampmChange.emit('AM')">AM</button>
+        <button mat-button type="button" class="mtx-time-pm"
+          [class.mtx-time-ampm-active]="AMPM === 'PM'" aria-label="PM"
+          (keydown)="$event.stopPropagation()"
+        (click)="ampmChange.emit('PM')">PM</button>
+      </div>
+    }
   </div>
 </div>
 
 <mtx-clock (selectedChange)="_timeSelected($event)"
-           (activeDateChange)="_onActiveDateChange($event)"
-           [AMPM]="AMPM"
-           [dateFilter]="dateFilter"
-           [interval]="interval"
-           [maxDate]="maxDate"
-           [minDate]="minDate"
-           [selected]="selected"
-           [startView]="clockView"
-           [twelvehour]="twelvehour">
+  (activeDateChange)="_onActiveDateChange($event)"
+  [AMPM]="AMPM"
+  [dateFilter]="dateFilter"
+  [interval]="interval"
+  [maxDate]="maxDate"
+  [minDate]="minDate"
+  [selected]="selected"
+  [startView]="clockView"
+  [twelvehour]="twelvehour">
 </mtx-clock>
 
 <div class="mtx-time-button-wrapper">
@@ -59,7 +61,7 @@
     {{ _datetimepickerIntl.cancelLabel }}
   </button>
   <button class="mtx-time-ok-button" mat-button type="button" (click)="handleOk()"
-          [disabled]="minuteInputDirective?.invalid || hourInputDirective?.invalid">
+    [disabled]="minuteInputDirective?.invalid || hourInputDirective?.invalid">
     {{ _datetimepickerIntl.okLabel }}
   </button>
 </div>
