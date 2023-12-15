@@ -1,4 +1,4 @@
-@use '../core/style/elevation';
+@use '@angular/material' as mat;
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 
@@ -45,7 +45,7 @@ $touch-max-height: 850px;
   display: block;
   border-radius: 4px;
 
-  @include elevation.elevation(4);
+  @include mat.elevation(4);
 
   @include token-utils.use-tokens(tokens-mtx-datetimepicker.$prefix,
     tokens-mtx-datetimepicker.get-token-slots()) {

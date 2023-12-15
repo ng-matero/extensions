@@ -1,6 +1,6 @@
 @use 'sass:map';
+@use '@angular/material' as mat;
 @use '../../token-utils';
-@use '../../../theming/theming';
 @use '../../../style/sass-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
@@ -21,17 +21,17 @@ $prefix: (mtx, grid);
   $accent: map.get($config, accent);
 
   @return (
-    outline-color: theming.get-color-from-palette($foreground, secondary-text, .2),
-    column-menu-text-color: theming.get-color-from-palette($foreground, text),
-    column-menu-divider-color: theming.get-color-from-palette($foreground, divider),
-    table-footer-background-color: theming.get-color-from-palette($background, app-bar),
+    outline-color: mat.get-color-from-palette($foreground, secondary-text, .2),
+    column-menu-text-color: mat.get-color-from-palette($foreground, text),
+    column-menu-divider-color: mat.get-color-from-palette($foreground, divider),
+    table-footer-background-color: mat.get-color-from-palette($background, app-bar),
     table-row-striped-background-color: if($is-dark-theme, #3a3a3a, #f5f5f5),
     table-row-hover-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
     table-row-selected-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
-    table-cell-selected-outline-color: theming.get-color-from-palette($accent),
-    resizable-handle-active-background-color: theming.get-color-from-palette($primary),
-    resizable-handle-hover-background-color: theming.get-color-from-palette($primary),
-    resizable-handle-disabled-background-color: theming.get-color-from-palette($foreground, divider),
+    table-cell-selected-outline-color: mat.get-color-from-palette($accent),
+    resizable-handle-active-background-color: mat.get-color-from-palette($primary),
+    resizable-handle-hover-background-color: mat.get-color-from-palette($primary),
+    resizable-handle-disabled-background-color: mat.get-color-from-palette($foreground, divider),
   );
 }
 

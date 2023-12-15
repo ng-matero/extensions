@@ -1,10 +1,10 @@
-@use '../core/theming/theming';
+@use '@angular/material' as mat;
 @use '../core/style/sass-utils';
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/split' as tokens-mtx-split;
 
 @mixin color($config-or-theme) {
-  $config: theming.get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
 
   @include sass-utils.current-selector-or-root() {
     @include token-utils.create-token-values(tokens-mtx-split.$prefix,
@@ -29,12 +29,12 @@
 @mixin density($config-or-theme) {}
 
 @mixin theme($theme-or-color-config) {
-  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  $theme: mat.private-legacy-get-theme($theme-or-color-config);
 
-  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-split') {
-    $color: theming.get-color-config($theme);
-    $density: theming.get-density-config($theme);
-    $typography: theming.get-typography-config($theme);
+  @include mat.private-check-duplicate-theme-styles($theme, 'mtx-split') {
+    $color: mat.get-color-config($theme);
+    $density: mat.get-density-config($theme);
+    $typography: mat.get-typography-config($theme);
 
     @if $color !=null {
       @include color($color);

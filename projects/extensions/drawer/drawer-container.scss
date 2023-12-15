@@ -1,6 +1,6 @@
 @use '@angular/cdk' as cdk;
+@use '@angular/material' as mat;
 
-@use '../core/style/elevation';
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/drawer' as tokens-mtx-drawer;
 
@@ -8,7 +8,7 @@
   display: block;
   outline: 0;
 
-  @include elevation.elevation(16);
+  @include mat.elevation(16);
 
   @include token-utils.use-tokens(tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots()) {
     @include token-utils.create-token-slot(background-color, container-background-color);

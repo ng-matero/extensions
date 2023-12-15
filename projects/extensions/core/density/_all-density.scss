@@ -1,4 +1,4 @@
-@use '../theming/theming';
+@use '@angular/material' as mat;
 @use '../../select/select-theme';
 
 // Includes all of the density styles.
@@ -6,8 +6,8 @@
   // In case a theme object has been passed instead of a configuration for
   // the color system, extract the color config from the theme object.
   $config: if(
-    theming.private-is-theme-object($config-or-theme),
-    theming.get-color-config($config-or-theme),
+    mat.private-is-theme-object($config-or-theme),
+    mat.get-color-config($config-or-theme),
     $config-or-theme
   );
 

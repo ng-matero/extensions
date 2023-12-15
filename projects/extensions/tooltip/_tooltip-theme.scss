@@ -1,10 +1,9 @@
 @use '@material/tooltip/plain-tooltip-theme' as mdc-plain-tooltip-theme;
-@use '../core/theming/theming';
-@use '../core/typography/typography';
+@use '@angular/material' as mat;
 @use '../core/tokens/m2/mdc/plain-tooltip' as m2-mdc-plain-tooltip;
 
 @mixin color($config-or-theme) {
-  $config: theming.get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
   $mdc-tooltip-color-tokens: m2-mdc-plain-tooltip.get-color-tokens($config);
 
   // Add values for MDC tooltip tokens.
@@ -14,7 +13,7 @@
 }
 
 @mixin typography($config-or-theme) {
-  $config: typography.private-typography-to-2018-config(theming.get-typography-config($config-or-theme));
+  $config: mat.private-typography-to-2018-config(mat.get-typography-config($config-or-theme));
   $mdc-tooltip-typography-tokens: m2-mdc-plain-tooltip.get-typography-tokens($config);
 
   // Add values for MDC tooltip tokens.
@@ -24,7 +23,7 @@
 }
 
 @mixin density($config-or-theme) {
-  $density-scale: theming.get-density-config($config-or-theme);
+  $density-scale: mat.get-density-config($config-or-theme);
   $mdc-tooltip-density-tokens: m2-mdc-plain-tooltip.get-density-tokens($density-scale);
 
   // Add values for MDC tooltip tokens.
@@ -34,11 +33,11 @@
 }
 
 @mixin theme($theme-or-color-config) {
-  $theme: theming.private-legacy-get-theme($theme-or-color-config);
-  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
-    $color: theming.get-color-config($theme);
-    $density: theming.get-density-config($theme);
-    $typography: theming.get-typography-config($theme);
+  $theme: mat.private-legacy-get-theme($theme-or-color-config);
+  @include mat.private-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
+    $color: mat.get-color-config($theme);
+    $density: mat.get-density-config($theme);
+    $typography: mat.get-typography-config($theme);
 
     @if $color != null {
       @include color($color);

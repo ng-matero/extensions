@@ -1,13 +1,12 @@
 @use 'sass:color';
 @use 'sass:map';
-@use '../core/theming/theming';
-@use '../core/typography/typography';
+@use '@angular/material' as mat;
 @use '../core/style/sass-utils';
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/colorpicker' as tokens-mtx-colorpicker;
 
 @mixin color($config-or-theme) {
-  $config: theming.get-color-config($config-or-theme);
+  $config: mat.get-color-config($config-or-theme);
   $background: map.get($config, background);
 
   @include sass-utils.current-selector-or-root() {
@@ -33,12 +32,12 @@
 @mixin density($config-or-theme) {}
 
 @mixin theme($theme-or-color-config) {
-  $theme: theming.private-legacy-get-theme($theme-or-color-config);
+  $theme: mat.private-legacy-get-theme($theme-or-color-config);
 
-  @include theming.private-check-duplicate-theme-styles($theme, 'mtx-colorpicker') {
-    $color: theming.get-color-config($theme);
-    $density: theming.get-density-config($theme);
-    $typography: theming.get-typography-config($theme);
+  @include mat.private-check-duplicate-theme-styles($theme, 'mtx-colorpicker') {
+    $color: mat.get-color-config($theme);
+    $density: mat.get-density-config($theme);
+    $typography: mat.get-typography-config($theme);
 
     @if $color !=null {
       @include color($color);

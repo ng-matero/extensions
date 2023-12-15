@@ -3,11 +3,10 @@
 @use '@material/theme/custom-properties' as mdc-custom-properties;
 @use '@material/theme/theme' as mdc-theme;
 @use '@material/theme/keys' as mdc-keys;
-@use '../theming/palette';
-@use '../theming/theming';
+@use '@angular/material' as mat;
 @use '../typography/typography';
 
-$_placeholder-color-palette: theming.define-palette(palette.$red-palette);
+$_placeholder-color-palette: mat.define-palette(mat.$red-palette);
 
 // Placeholder color config that can be passed to token getter functions when generating token
 // slots.
@@ -16,8 +15,8 @@ $placeholder-color-config: (
   accent: $_placeholder-color-palette,
   warn: $_placeholder-color-palette,
   is-dark: false,
-  foreground: palette.$light-theme-foreground-palette,
-  background: palette.$light-theme-background-palette,
+  foreground: mat.$light-theme-foreground-palette,
+  background: mat.$light-theme-background-palette,
 );
 
 $_placeholder-typography-level-config: typography.typography-config-level-from-mdc(body1);

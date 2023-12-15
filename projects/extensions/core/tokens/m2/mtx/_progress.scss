@@ -1,8 +1,7 @@
 @use 'sass:map';
+@use '@angular/material' as mat;
 @use '../../token-utils';
-@use '../../../theming/theming';
 @use '../../../style/sass-utils';
-@use '../../../theming/palette';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, progress);
@@ -20,16 +19,16 @@ $prefix: (mtx, progress);
   $is-dark-theme: map.get($config, is-dark);
 
   @return (
-    track-color: theming.get-color-from-palette($background, hover),
-    indicator-color: theming.get-color-from-palette($foreground, divider),
-    text-color: theming.get-color-from-palette($foreground, text),
-    info-indicator-color: theming.get-color-from-palette(palette.$blue-palette, if($is-dark-theme, 900, 500)),
+    track-color: mat.get-color-from-palette($background, hover),
+    indicator-color: mat.get-color-from-palette($foreground, divider),
+    text-color: mat.get-color-from-palette($foreground, text),
+    info-indicator-color: mat.get-color-from-palette(mat.$blue-palette, if($is-dark-theme, 900, 500)),
     info-text-color: white,
-    success-indicator-color: theming.get-color-from-palette(palette.$green-palette, if($is-dark-theme, 900, 500)),
+    success-indicator-color: mat.get-color-from-palette(mat.$green-palette, if($is-dark-theme, 900, 500)),
     success-text-color: white,
-    warning-indicator-color: theming.get-color-from-palette(palette.$orange-palette, if($is-dark-theme, 900, 500)),
+    warning-indicator-color: mat.get-color-from-palette(mat.$orange-palette, if($is-dark-theme, 900, 500)),
     warning-text-color: white,
-    danger-indicator-color: theming.get-color-from-palette(palette.$red-palette, if($is-dark-theme, 900, 500)),
+    danger-indicator-color: mat.get-color-from-palette(mat.$red-palette, if($is-dark-theme, 900, 500)),
     danger-text-color: white,
   );
 }

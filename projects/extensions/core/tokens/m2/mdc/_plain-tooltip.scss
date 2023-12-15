@@ -1,6 +1,5 @@
 @use 'sass:map';
-@use '../../../theming/theming';
-@use '../../../typography/typography-utils';
+@use '@angular/material' as mat;
 @use '../../../mdc-helpers/mdc-helpers';
 @use '../../../style/sass-utils';
 @use '../../token-utils';
@@ -29,7 +28,7 @@ $prefix: (mdc, plain-tooltip);
   $background: map.get($config, background);
 
   @return ( // Color of the tooltip container.
-    container-color: theming.get-color-from-palette($background, tooltip),
+    container-color: mat.get-color-from-palette($background, tooltip),
     // Color of the tooltip text.
     supporting-text-color: #fff,
   );
@@ -47,13 +46,13 @@ $prefix: (mdc, plain-tooltip);
   }
 
   @return ( // Font for the tooltip text.
-    supporting-text-font: typography-utils.font-family($config, caption) or typography-utils.font-family($config),
+    supporting-text-font: mat.font-family($config, caption) or mat.font-family($config),
     // Font size for the tooltip text.
-    supporting-text-size: typography-utils.font-size($config, caption),
+    supporting-text-size: mat.font-size($config, caption),
     // Font weight of the tooltip text.
-    supporting-text-weight: typography-utils.font-weight($config, caption),
+    supporting-text-weight: mat.font-weight($config, caption),
     // Tracking (space between letters) of the tooltip text.
-    supporting-text-tracking: typography-utils.letter-spacing($config, caption),
+    supporting-text-tracking: mat.letter-spacing($config, caption),
   );
 }
 

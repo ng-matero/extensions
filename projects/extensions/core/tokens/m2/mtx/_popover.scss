@@ -1,6 +1,6 @@
 @use 'sass:map';
+@use '@angular/material' as mat;
 @use '../../token-utils';
-@use '../../../theming/theming';
 @use '../../../style/sass-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
@@ -18,9 +18,9 @@ $prefix: (mtx, popover);
   $background: map.get($config, background);
 
   @return (
-    background-color: theming.get-color-from-palette($background, card),
-    text-color: theming.get-color-from-palette($foreground, text),
-    arrow-outline-color: theming.get-color-from-palette($foreground, divider),
+    background-color: mat.get-color-from-palette($background, card),
+    text-color: mat.get-color-from-palette($foreground, text),
+    arrow-outline-color: mat.get-color-from-palette($foreground, divider),
   );
 }
 

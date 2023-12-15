@@ -41,15 +41,13 @@ $_tokens: tokens-mtx-split.$prefix, tokens-mtx-split.get-token-slots();
   > .mtx-split-pane {
     flex-grow: 0;
     flex-shrink: 0;
-    overflow-x: hidden;
-    overflow-y: auto;
+    overflow: hidden auto;
 
     /* When <mtx-split-pane [visible]="false"> force size to 0. */
 
     &.mtx-split-pane-hidden {
       flex: 0 1 0 !important;
-      overflow-x: hidden;
-      overflow-y: hidden;
+      overflow: hidden hidden;
     }
   }
 

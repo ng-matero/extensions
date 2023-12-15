@@ -1,6 +1,6 @@
 @use 'sass:map';
+@use '@angular/material' as mat;
 @use '../../token-utils';
-@use '../../../theming/theming';
 @use '../../../style/sass-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
@@ -11,7 +11,7 @@ $prefix: (mtx, select);
   $palette: map.get($config, $palette-name);
 
   @return (
-    option-selected-state-text-color: theming.get-color-from-palette($palette),
+    option-selected-state-text-color: mat.get-color-from-palette($palette),
   );
 }
 
@@ -27,12 +27,12 @@ $prefix: (mtx, select);
   $background: map.get($config, background);
   $primary: map.get($config, primary);
   $warn: map.get($config, warn);
-  $text-color: theming.get-color-from-palette($foreground, text);
-  $hint-text-color: theming.get-color-from-palette($foreground, hint-text);
-  $secondary-text-color: theming.get-color-from-palette($foreground, secondary-text);
-  $disabled-text-color: theming.get-color-from-palette($foreground, disabled-text);
-  $divider-color: theming.get-color-from-palette($foreground, divider);
-  $hover-color: theming.get-color-from-palette($background, hover);
+  $text-color: mat.get-color-from-palette($foreground, text);
+  $hint-text-color: mat.get-color-from-palette($foreground, hint-text);
+  $secondary-text-color: mat.get-color-from-palette($foreground, secondary-text);
+  $disabled-text-color: mat.get-color-from-palette($foreground, disabled-text);
+  $divider-color: mat.get-color-from-palette($foreground, divider);
+  $hover-color: mat.get-color-from-palette($background, hover);
   $palette-tokens: private-get-color-palette-color-tokens($config, primary);
 
   @return map.merge($palette-tokens, (
@@ -40,18 +40,18 @@ $prefix: (mtx, select);
     placeholder-text-color: $hint-text-color,
     disabled-text-color: $hint-text-color,
 
-    multiple-value-background-color: theming.get-color-from-palette($background, unselected-chip),
+    multiple-value-background-color: mat.get-color-from-palette($background, unselected-chip),
     multiple-value-border-color: $divider-color,
     multiple-value-icon-hover-background-color: $divider-color,
 
     clear-icon-color: $secondary-text-color,
-    clear-icon-hover-color: theming.get-color-from-palette($warn),
+    clear-icon-hover-color: mat.get-color-from-palette($warn),
 
     enabled-arrow-color: $secondary-text-color,
     disabled-arrow-color: $disabled-text-color,
-    invalid-arrow-color: theming.get-color-from-palette($warn),
+    invalid-arrow-color: mat.get-color-from-palette($warn),
 
-    panel-background-color: theming.get-color-from-palette($background, card),
+    panel-background-color: mat.get-color-from-palette($background, card),
     panel-divider-color: $divider-color,
     optgroup-label-text-color: $secondary-text-color,
     option-label-text-color: $text-color,
