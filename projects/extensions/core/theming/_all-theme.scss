@@ -32,7 +32,20 @@
   }
 }
 
-@mixin all-component-bases($theme) {}
+@mixin all-component-bases($theme) {
+  @include alert-theme.base($theme);
+  @include button-theme.base($theme);
+  @include colorpicker-theme.base($theme);
+  @include datetimepicker-theme.base($theme);
+  @include drawer-theme.base($theme);
+  @include grid-theme.base($theme);
+  @include loader-theme.base($theme);
+  @include popover-theme.base($theme);
+  @include progress-theme.base($theme);
+  @include select-theme.base($theme);
+  @include split-theme.base($theme);
+  @include tooltip-theme.base($theme);
+}
 
 // @deprecated Use `all-component-themes`.
 @mixin material-extensions-theme($theme) {

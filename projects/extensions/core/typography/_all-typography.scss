@@ -1,5 +1,17 @@
 @use './typography';
 @use '../theming/inspection';
+@use '../../alert/alert-theme';
+@use '../../button/button-theme';
+@use '../../colorpicker/colorpicker-theme';
+@use '../../datetimepicker/datetimepicker-theme';
+@use '../../drawer/drawer-theme';
+@use '../../grid/grid-theme';
+@use '../../loader/loader-theme';
+@use '../../popover/popover-theme';
+@use '../../progress/progress-theme';
+@use '../../select/select-theme';
+@use '../../split/split-theme';
+@use '../../tooltip/tooltip-theme';
 
 // Includes all of the typographic styles.
 @mixin all-component-typographies($theme: null) {
@@ -7,6 +19,19 @@
   @if not inspection.theme-has($theme, typography) {
     $theme: typography.define-typography-config();
   }
+
+  @include alert-theme.typography($theme);
+  @include button-theme.typography($theme);
+  @include colorpicker-theme.typography($theme);
+  @include datetimepicker-theme.typography($theme);
+  @include drawer-theme.typography($theme);
+  @include grid-theme.typography($theme);
+  @include loader-theme.typography($theme);
+  @include popover-theme.typography($theme);
+  @include progress-theme.typography($theme);
+  @include select-theme.typography($theme);
+  @include split-theme.typography($theme);
+  @include tooltip-theme.typography($theme);
 }
 
 // @deprecated Use `all-component-typographies`.

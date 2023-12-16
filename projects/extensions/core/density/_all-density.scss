@@ -1,5 +1,16 @@
 @use '../theming/inspection';
+@use '../../alert/alert-theme';
+@use '../../button/button-theme';
+@use '../../colorpicker/colorpicker-theme';
+@use '../../datetimepicker/datetimepicker-theme';
+@use '../../drawer/drawer-theme';
+@use '../../grid/grid-theme';
+@use '../../loader/loader-theme';
+@use '../../popover/popover-theme';
+@use '../../progress/progress-theme';
 @use '../../select/select-theme';
+@use '../../split/split-theme';
+@use '../../tooltip/tooltip-theme';
 
 // Includes all of the density styles.
 @mixin all-component-densities($theme) {
@@ -7,7 +18,18 @@
     @error 'No density configuration specified.';
   }
 
+  @include alert-theme.density($theme);
+  @include button-theme.density($theme);
+  @include colorpicker-theme.density($theme);
+  @include datetimepicker-theme.density($theme);
+  @include drawer-theme.density($theme);
+  @include grid-theme.density($theme);
+  @include loader-theme.density($theme);
+  @include popover-theme.density($theme);
+  @include progress-theme.density($theme);
   @include select-theme.density($theme);
+  @include split-theme.density($theme);
+  @include tooltip-theme.density($theme);
 }
 
 // @deprecated Use `all-component-densities`.
