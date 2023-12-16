@@ -11,161 +11,161 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 }
 
 .ng-select {
-  padding-right: 16px;
-  padding-left: 16px;
-  margin-right: -16px;
-  margin-left: -16px;
+  @include token-utils.use-tokens($_tokens...) {
+    $filled-padding-top: token-utils.get-token-variable(filled-padding-top);
+    $filled-padding-bottom: token-utils.get-token-variable(filled-padding-bottom);
+    $vertical-padding: token-utils.get-token-variable(vertical-padding);
 
-  .ng-select-container {
-    align-items: center;
+    padding: var($filled-padding-top) 16px var($filled-padding-bottom);
+    margin: calc(var($filled-padding-top) * -1) -16px calc(var($filled-padding-bottom) * -1);
 
-    @include token-utils.use-tokens($_tokens...) {
-      @include token-utils.create-token-slot(color, container-text-color);
+    .mdc-text-field--outlined &,
+    .mdc-text-field--no-label & {
+      padding-top: var($vertical-padding);
+      padding-bottom: var($vertical-padding);
+      margin-top: calc(var($vertical-padding) * -1);
+      margin-bottom: calc(var($vertical-padding) * -1);
     }
 
-    .ng-value-container {
+    .ng-select-container {
       align-items: center;
 
-      .ng-input {
-        >input {
-          padding: 0;
-          color: inherit;
-          font: inherit;
+      @include token-utils.create-token-slot(color, container-text-color);
+
+      .ng-value-container {
+        align-items: center;
+
+        .ng-input {
+          >input {
+            padding: 0;
+            color: inherit;
+            font: inherit;
+          }
         }
+      }
+
+      .ng-clear-wrapper {
+        width: 24px;
+        text-align: center;
       }
     }
 
-    .ng-clear-wrapper {
-      width: 24px;
-      text-align: center;
-    }
-  }
+    .ng-placeholder {
+      transition: opacity 200ms;
+      opacity: 1;
 
-  .ng-placeholder {
-    transition: opacity 200ms;
-    opacity: 1;
-
-    @include token-utils.use-tokens($_tokens...) {
       @include token-utils.create-token-slot(color, placeholder-text-color);
+
+      .mat-form-field-hide-placeholder & {
+        opacity: 0;
+      }
     }
 
-    .mat-form-field-hide-placeholder & {
-      opacity: 0;
+    .ng-has-value .ng-placeholder {
+      display: none;
     }
-  }
 
-  .ng-has-value .ng-placeholder {
-    display: none;
-  }
-
-  .ng-clear-wrapper {
-    @include token-utils.use-tokens($_tokens...) {
+    .ng-clear-wrapper {
       @include token-utils.create-token-slot(color, clear-icon-color);
 
       &:hover .ng-clear {
         @include token-utils.create-token-slot(color, clear-icon-hover-color);
       }
     }
-  }
 
-  &.ng-select-disabled {
-    .ng-value {
-      @include token-utils.use-tokens($_tokens...) {
+    &.ng-select-disabled {
+      .ng-value {
         @include token-utils.create-token-slot(color, disabled-text-color);
       }
     }
-  }
 
-  &.ng-select-opened {
-    .ng-arrow-wrapper {
-      .ng-arrow {
-        top: -2px;
-        border-width: 0 5px 5px;
-      }
-    }
-  }
-
-  &.ng-select-single {
-    // vertical align with material form field
-    &.ng-select-filtered {
-      .ng-placeholder {
-        display: initial;
-        visibility: hidden;
+    &.ng-select-opened {
+      .ng-arrow-wrapper {
+        .ng-arrow {
+          top: -2px;
+          border-width: 0 5px 5px;
+        }
       }
     }
 
-    .ng-select-container {
-      .ng-value-container {
-        // vertical align with material form field
-        .ng-placeholder,
-        .ng-value {
-          &::after {
-            display: inline-block;
-            content: '';
+    &.ng-select-single {
+      // vertical align with material form field
+      &.ng-select-filtered {
+        .ng-placeholder {
+          display: initial;
+          visibility: hidden;
+        }
+      }
+
+      .ng-select-container {
+        .ng-value-container {
+          // vertical align with material form field
+          .ng-placeholder,
+          .ng-value {
+            &::after {
+              display: inline-block;
+              content: '';
+            }
           }
         }
       }
     }
-  }
 
-  &.ng-select-multiple {
-    .ng-select-container {
-      .ng-value-container {
-        .ng-value {
-          margin: 2px 4px 2px 0;
-          border-radius: 16px;
-          font-size: .875em;
-          line-height: 18px;
+    &.ng-select-multiple {
+      .ng-select-container {
+        .ng-value-container {
+          .ng-value {
+            margin: 2px 4px 2px 0;
+            border-radius: 16px;
+            font-size: .875em;
+            line-height: 18px;
 
-          @include token-utils.use-tokens($_tokens...) {
             @include token-utils.create-token-slot(background-color, multiple-value-background-color);
 
             $border-color: token-utils.get-token-variable(multiple-value-border-color);
 
             border: 1px solid var($border-color);
-          }
 
-          @include rtl {
-            margin-right: auto;
-            margin-left: 4px;
-          }
-
-          &.ng-value-disabled {
-            opacity: .4;
-          }
-
-          .ng-value-label {
-            display: inline-block;
-            margin: 0 8px;
-          }
-
-          .ng-value-icon {
-            display: inline-block;
-            width: 18px;
-            height: 18px;
-            border-radius: 100%;
-            text-align: center;
-
-            &.left {
-              margin-right: -4px;
-
-              @include rtl {
-                margin-left: -4px;
-                margin-right: auto;
-              }
+            @include rtl {
+              margin-right: auto;
+              margin-left: 4px;
             }
 
-            &.right {
-              margin-left: -4px;
+            &.ng-value-disabled {
+              opacity: .4;
+            }
 
-              @include rtl {
+            .ng-value-label {
+              display: inline-block;
+              margin: 0 8px;
+            }
+
+            .ng-value-icon {
+              display: inline-block;
+              width: 18px;
+              height: 18px;
+              border-radius: 100%;
+              text-align: center;
+
+              &.left {
                 margin-right: -4px;
-                margin-left: auto;
-              }
-            }
 
-            &:hover {
-              @include token-utils.use-tokens($_tokens...) {
+                @include rtl {
+                  margin-left: -4px;
+                  margin-right: auto;
+                }
+              }
+
+              &.right {
+                margin-left: -4px;
+
+                @include rtl {
+                  margin-right: -4px;
+                  margin-left: auto;
+                }
+              }
+
+              &:hover {
                 @include token-utils.create-token-slot(background-color, multiple-value-icon-hover-background-color);
               }
             }
@@ -173,13 +173,11 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
         }
       }
     }
-  }
 
-  .ng-arrow-wrapper {
-    width: 10px;
-  }
+    .ng-arrow-wrapper {
+      width: 10px;
+    }
 
-  @include token-utils.use-tokens($_tokens...) {
     $enabled-arrow-color: token-utils.get-token-variable(enabled-arrow-color);
     $disabled-arrow-color: token-utils.get-token-variable(disabled-arrow-color);
     $invalid-arrow-color: token-utils.get-token-variable(invalid-arrow-color);

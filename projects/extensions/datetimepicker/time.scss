@@ -83,14 +83,14 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 
   .mtx-time-am,
   .mtx-time-pm {
-    --mdc-typography-button-font-weight: 400;
+    --mdc-text-button-label-text-weight: 400;
 
     @include token-utils.use-tokens($_tokens...) {
       @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-text-color);
       @include token-utils.create-token-slot(border-color, time-ampm-border-color);
 
       &.mtx-time-ampm-active {
-        --mdc-typography-button-font-weight: 500;
+        --mdc-text-button-label-text-weight: 500;
 
         @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-selected-state-text-color);
         @include token-utils.create-token-slot(background-color, time-ampm-selected-state-background-color);

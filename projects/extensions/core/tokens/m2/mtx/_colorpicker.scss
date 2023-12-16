@@ -8,11 +8,9 @@
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, colorpicker);
 
-@function private-get-toggle-color-palette-color-tokens($config, $palette-name) {
-  $palette: map.get($config, $palette-name);
-
+@function private-get-toggle-color-palette-color-tokens($theme, $palette-name) {
   @return (
-    toggle-active-state-icon-color: mat.get-color-from-palette($palette, text),
+    toggle-active-state-icon-color: mat.get-theme-color($theme, $palette-name, text),
   );
 }
 
@@ -23,10 +21,9 @@ $prefix: (mtx, colorpicker);
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($config) {
-  $foreground: map.get($config, foreground);
-  $inactive-icon-color: mat.get-color-from-palette($foreground, icon);
-  $toggle-tokens: private-get-toggle-color-palette-color-tokens($config, primary);
+@function get-color-tokens($theme) {
+  $inactive-icon-color: mat.get-theme-color($theme, foreground, icon);
+  $toggle-tokens: private-get-toggle-color-palette-color-tokens($theme, primary);
 
   @return sass-utils.merge-all($toggle-tokens, (
     toggle-icon-color: $inactive-icon-color
@@ -34,12 +31,12 @@ $prefix: (mtx, colorpicker);
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
-@function get-typography-tokens($config) {
+@function get-typography-tokens($theme) {
   @return ();
 }
 
 // Tokens that can be configured through Angular Material's density theming API.
-@function get-density-tokens($config) {
+@function get-density-tokens($theme) {
   @return ();
 }
 

@@ -1,24 +1,16 @@
-@use '@angular/material' as mat;
+@use '../theming/inspection';
 @use '../../select/select-theme';
 
 // Includes all of the density styles.
-@mixin all-component-densities($config-or-theme) {
-  // In case a theme object has been passed instead of a configuration for
-  // the color system, extract the color config from the theme object.
-  $config: if(
-    mat.private-is-theme-object($config-or-theme),
-    mat.get-color-config($config-or-theme),
-    $config-or-theme
-  );
-
-  @if $config == null {
+@mixin all-component-densities($theme) {
+  @if not inspection.theme-has($theme, density) {
     @error 'No density configuration specified.';
   }
 
-  @include select-theme.density($config);
+  @include select-theme.density($theme);
 }
 
 // @deprecated Use `all-component-densities`.
-@mixin material-extensions-density($config-or-theme) {
-  @include all-component-densities($config-or-theme);
+@mixin material-extensions-density($theme) {
+  @include all-component-densities($theme);
 }

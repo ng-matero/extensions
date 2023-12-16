@@ -3,37 +3,67 @@
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/alert' as tokens-mtx-alert;
 
-@mixin color($config-or-theme) {
-  $config: mat.get-color-config($config-or-theme);
-
-  @include sass-utils.current-selector-or-root() {
-    @include token-utils.create-token-values(tokens-mtx-alert.$prefix,
-      tokens-mtx-alert.get-color-tokens($config));
+@mixin base($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, base));
+  }
+  @else {
+    @include sass-utils.current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-alert.$prefix,
+        tokens-mtx-alert.get-unthemable-tokens());
+    }
   }
 }
 
-@mixin typography($config-or-theme) {}
+@mixin color($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, color));
+  }
+  @else {
+    @include sass-utils.current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-alert.$prefix,
+        tokens-mtx-alert.get-color-tokens($theme));
+    }
+  }
+}
 
-@mixin density($config-or-theme) {}
+@mixin typography($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, typography));
+  }
+  @else {}
+}
 
-@mixin theme($theme-or-color-config) {
-  $theme: mat.private-legacy-get-theme($theme-or-color-config);
+@mixin density($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, density));
+  }
+  @else {}
+}
 
+@mixin theme($theme) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-alert') {
-    $color: mat.get-color-config($theme);
-    $density: mat.get-density-config($theme);
-    $typography: mat.get-typography-config($theme);
-
-    @if $color !=null {
-      @include color($color);
+    @if mat.get-theme-version($theme) == 1 {
+      @include _theme-from-tokens(mat.get-theme-tokens($theme));
     }
-
-    @if $density !=null {
-      @include density($density);
+    @else {
+      @include base($theme);
+      @if mat.theme-has($theme, color) {
+        @include color($theme);
+      }
+      @if mat.theme-has($theme, density) {
+        @include density($theme);
+      }
+      @if mat.theme-has($theme, typography) {
+        @include typography($theme);
+      }
     }
+  }
+}
 
-    @if $typography !=null {
-      @include typography($typography);
-    }
+@mixin _theme-from-tokens($tokens) {
+  @if ($tokens != ()) {
+    @include token-utils.create-token-values(tokens-mtx-alert.$prefix,
+      map.get($tokens, tokens-mtx-alert.$prefix));
   }
 }

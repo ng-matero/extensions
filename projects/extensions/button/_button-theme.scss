@@ -1,9 +1,11 @@
 @use './button-loading.scss';
 
-@mixin color($config-or-theme) {}
+@mixin base($theme) {}
 
-@mixin typography($config-or-theme) {}
+@mixin color($theme) {}
 
-@mixin density($config-or-theme) {}
+@mixin typography($theme) {}
 
-@mixin theme($theme-or-color-config) {}
+@mixin density($theme) {}
+
+@mixin theme($theme) {}

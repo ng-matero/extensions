@@ -8,11 +8,9 @@
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, split);
 
-@function private-get-color-palette-color-tokens($config, $palette-name) {
-  $palette: map.get($config, $palette-name);
-
+@function private-get-color-palette-color-tokens($theme, $palette-name) {
   @return (
-    gutter-hover-state-background-color: mat.get-color-from-palette($palette, text),
+    gutter-hover-state-background-color: mat.get-theme-color($theme, $palette-name, text),
   );
 }
 
@@ -23,22 +21,21 @@ $prefix: (mtx, split);
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($config) {
-  $foreground: map.get($config, foreground);
-  $gutter-tokens: private-get-color-palette-color-tokens($config, primary);
+@function get-color-tokens($theme) {
+  $gutter-tokens: private-get-color-palette-color-tokens($theme, primary);
 
   @return sass-utils.merge-all($gutter-tokens, (
-    gutter-background-color: mat.get-color-from-palette($foreground, divider, .12),
+    gutter-background-color: mat.get-theme-color($theme, foreground, divider),
   ));
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
-@function get-typography-tokens($config) {
+@function get-typography-tokens($theme) {
   @return ();
 }
 
 // Tokens that can be configured through Angular Material's density theming API.
-@function get-density-tokens($config) {
+@function get-density-tokens($theme) {
   @return ();
 }
 

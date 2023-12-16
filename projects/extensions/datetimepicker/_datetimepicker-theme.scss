@@ -4,73 +4,101 @@
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 
-@mixin _calendar-color($config, $palette) {
-  $palette-color: mat.get-color-from-palette(map.get($config, $palette));
-  $calendar-tokens: tokens-mtx-datetimepicker.private-get-calendar-color-palette-color-tokens($config, $palette);
+@mixin _calendar-color($theme, $palette-name) {
+  $palette-color: mat.get-theme-color($theme, $palette-name);
+  $calendar-tokens: tokens-mtx-datetimepicker.private-get-calendar-color-palette-color-tokens($theme, $palette-name);
 
   @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix, $calendar-tokens);
 }
 
-@mixin color($config-or-theme) {
-  $config: mat.get-color-config($config-or-theme);
-
-  @include sass-utils.current-selector-or-root() {
-    @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
-      tokens-mtx-datetimepicker.get-color-tokens($config));
+@mixin base($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, base));
   }
-
-  .mtx-datetimepicker-content {
-    &.mat-accent {
-      @include _calendar-color($config, accent);
-    }
-
-    &.mat-warn {
-      @include _calendar-color($config, warn);
-    }
-  }
-
-  .mtx-datetimepicker-toggle-active {
-    &.mat-accent {
-      $accent-tokens: tokens-mtx-datetimepicker.private-get-toggle-color-palette-color-tokens($config, accent);
-      @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix, $accent-tokens);
-    }
-
-    &.mat-warn {
-      $warn-tokens: tokens-mtx-datetimepicker.private-get-toggle-color-palette-color-tokens($config, warn);
-      @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix, $warn-tokens);
+  @else {
+    @include sass-utils.current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
+        tokens-mtx-datetimepicker.get-unthemable-tokens());
     }
   }
 }
 
-@mixin typography($config-or-theme) {
-  $config: mat.private-typography-to-2014-config(mat.get-typography-config($config-or-theme));
+@mixin color($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, color));
+  }
+  @else {
+    @include sass-utils.current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
+        tokens-mtx-datetimepicker.get-color-tokens($theme));
+    }
 
-  @include sass-utils.current-selector-or-root() {
-    @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
-      tokens-mtx-datetimepicker.get-typography-tokens($config));
+    .mtx-datetimepicker-content {
+      &.mat-accent {
+        @include _calendar-color($theme, accent);
+      }
+
+      &.mat-warn {
+        @include _calendar-color($theme, warn);
+      }
+    }
+
+    .mtx-datetimepicker-toggle-active {
+      &.mat-accent {
+        $accent-tokens: tokens-mtx-datetimepicker.private-get-toggle-color-palette-color-tokens($theme, accent);
+        @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix, $accent-tokens);
+      }
+
+      &.mat-warn {
+        $warn-tokens: tokens-mtx-datetimepicker.private-get-toggle-color-palette-color-tokens($theme, warn);
+        @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix, $warn-tokens);
+      }
+    }
   }
 }
 
-@mixin density($config-or-theme) {}
+@mixin typography($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, typography));
+  }
+  @else {
+    @include sass-utils.current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
+        tokens-mtx-datetimepicker.get-typography-tokens($theme));
+    }
+  }
+}
 
-@mixin theme($theme-or-color-config) {
-  $theme: mat.private-legacy-get-theme($theme-or-color-config);
+@mixin density($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, density));
+  }
+  @else {}
+}
 
+@mixin theme($theme) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-datetimepicker') {
-    $color: mat.get-color-config($theme);
-    $density: mat.get-density-config($theme);
-    $typography: mat.get-typography-config($theme);
-
-    @if $color !=null {
-      @include color($color);
+    @if mat.get-theme-version($theme) == 1 {
+      @include _theme-from-tokens(mat.get-theme-tokens($theme));
     }
-
-    @if $density !=null {
-      @include density($density);
+    @else {
+      @include base($theme);
+      @if mat.theme-has($theme, color) {
+        @include color($theme);
+      }
+      @if mat.theme-has($theme, density) {
+        @include density($theme);
+      }
+      @if mat.theme-has($theme, typography) {
+        @include typography($theme);
+      }
     }
+  }
+}
 
-    @if $typography !=null {
-      @include typography($typography);
-    }
+@mixin _theme-from-tokens($tokens) {
+  @if ($tokens != ()) {
+    @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
+      map.get($tokens, tokens-mtx-datetimepicker.$prefix));
   }
 }

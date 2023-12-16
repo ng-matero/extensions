@@ -13,33 +13,31 @@ $prefix: (mtx, progress);
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($config) {
-  $foreground: map.get($config, foreground);
-  $background: map.get($config, background);
-  $is-dark-theme: map.get($config, is-dark);
+@function get-color-tokens($theme) {
+  $is-dark: mat.get-theme-type($theme) == dark;
 
   @return (
-    track-color: mat.get-color-from-palette($background, hover),
-    indicator-color: mat.get-color-from-palette($foreground, divider),
-    text-color: mat.get-color-from-palette($foreground, text),
-    info-indicator-color: mat.get-color-from-palette(mat.$blue-palette, if($is-dark-theme, 900, 500)),
+    track-color: mat.get-theme-color($theme, background, hover),
+    indicator-color: mat.get-theme-color($theme, foreground, divider),
+    text-color: mat.get-theme-color($theme, foreground, text),
+    info-indicator-color: mat.get-color-from-palette(mat.$blue-palette, if($is-dark, 900, 500)),
     info-text-color: white,
-    success-indicator-color: mat.get-color-from-palette(mat.$green-palette, if($is-dark-theme, 900, 500)),
+    success-indicator-color: mat.get-color-from-palette(mat.$green-palette, if($is-dark, 900, 500)),
     success-text-color: white,
-    warning-indicator-color: mat.get-color-from-palette(mat.$orange-palette, if($is-dark-theme, 900, 500)),
+    warning-indicator-color: mat.get-color-from-palette(mat.$orange-palette, if($is-dark, 900, 500)),
     warning-text-color: white,
-    danger-indicator-color: mat.get-color-from-palette(mat.$red-palette, if($is-dark-theme, 900, 500)),
+    danger-indicator-color: mat.get-color-from-palette(mat.$red-palette, if($is-dark, 900, 500)),
     danger-text-color: white,
   );
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
-@function get-typography-tokens($config) {
+@function get-typography-tokens($theme) {
   @return ();
 }
 
 // Tokens that can be configured through Angular Material's density theming API.
-@function get-density-tokens($config) {
+@function get-density-tokens($theme) {
   @return ();
 }
 

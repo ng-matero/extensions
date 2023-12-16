@@ -15,21 +15,21 @@ $prefix: (mtx, loader);
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($config) {
-  $background: map.get($config, background);
+@function get-color-tokens($theme) {
+  $background-color: mat.get-theme-color($theme, background, background);
 
   @return (
-    backdrop-background-color: mat.get-color-from-palette($background, background, .75),
+    backdrop-background-color: sass-utils.safe-color-change($background-color, $alpha: .75),
   );
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
-@function get-typography-tokens($config) {
+@function get-typography-tokens($theme) {
   @return ();
 }
 
 // Tokens that can be configured through Angular Material's density theming API.
-@function get-density-tokens($config) {
+@function get-density-tokens($theme) {
   @return ();
 }
 

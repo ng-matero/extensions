@@ -1,52 +1,85 @@
+@use 'sass:map';
 @use '@material/tooltip/plain-tooltip-theme' as mdc-plain-tooltip-theme;
 @use '@angular/material' as mat;
-@use '../core/tokens/m2/mdc/plain-tooltip' as m2-mdc-plain-tooltip;
+@use '../core/style/sass-utils';
+@use '../core/tokens/m2/mdc/plain-tooltip' as tokens-mdc-plain-tooltip;
 
-@mixin color($config-or-theme) {
-  $config: mat.get-color-config($config-or-theme);
-  $mdc-tooltip-color-tokens: m2-mdc-plain-tooltip.get-color-tokens($config);
-
-  // Add values for MDC tooltip tokens.
-  .mtx-mdc-tooltip {
-    @include mdc-plain-tooltip-theme.theme($mdc-tooltip-color-tokens);
+@mixin base($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, base));
+  }
+  @else {
+    // Add default values for tokens not related to color, typography, or density.
+    @include sass-utils.current-selector-or-root() {
+      @include mdc-plain-tooltip-theme.theme(tokens-mdc-plain-tooltip.get-unthemable-tokens());
+    }
   }
 }
 
-@mixin typography($config-or-theme) {
-  $config: mat.private-typography-to-2018-config(mat.get-typography-config($config-or-theme));
-  $mdc-tooltip-typography-tokens: m2-mdc-plain-tooltip.get-typography-tokens($config);
+@mixin color($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, color));
+  }
+  @else {
+    $mdc-tooltip-color-tokens: tokens-mdc-plain-tooltip.get-color-tokens($theme);
 
-  // Add values for MDC tooltip tokens.
-  .mtx-mdc-tooltip {
-    @include mdc-plain-tooltip-theme.theme($mdc-tooltip-typography-tokens);
+    // Add values for MDC tooltip tokens.
+    @include sass-utils.current-selector-or-root() {
+      @include mdc-plain-tooltip-theme.theme($mdc-tooltip-color-tokens);
+    }
   }
 }
 
-@mixin density($config-or-theme) {
-  $density-scale: mat.get-density-config($config-or-theme);
-  $mdc-tooltip-density-tokens: m2-mdc-plain-tooltip.get-density-tokens($density-scale);
+@mixin typography($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, typography));
+  }
+  @else {
+    $mdc-tooltip-typography-tokens: tokens-mdc-plain-tooltip.get-typography-tokens($theme);
 
-  // Add values for MDC tooltip tokens.
-  .mtx-mdc-tooltip {
-    @include mdc-plain-tooltip-theme.theme($mdc-tooltip-density-tokens);
+    // Add values for MDC tooltip tokens.
+    @include sass-utils.current-selector-or-root() {
+      @include mdc-plain-tooltip-theme.theme($mdc-tooltip-typography-tokens);
+    }
   }
 }
 
-@mixin theme($theme-or-color-config) {
-  $theme: mat.private-legacy-get-theme($theme-or-color-config);
+@mixin density($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(mat.get-theme-tokens($theme, density));
+  }
+  @else {
+    $mdc-tooltip-density-tokens: tokens-mdc-plain-tooltip.get-density-tokens($theme);
+
+    // Add values for MDC tooltip tokens.
+    @include sass-utils.current-selector-or-root() {
+      @include mdc-plain-tooltip-theme.theme($mdc-tooltip-density-tokens);
+    }
+  }
+}
+
+@mixin theme($theme) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
-    $color: mat.get-color-config($theme);
-    $density: mat.get-density-config($theme);
-    $typography: mat.get-typography-config($theme);
+    @if mat.get-theme-version($theme) == 1 {
+      @include _theme-from-tokens(mat.get-theme-tokens($theme));
+    }
+    @else {
+      @include base($theme);
+      @if mat.theme-has($theme, color) {
+        @include color($theme);
+      }
+      @if mat.theme-has($theme, density) {
+        @include density($theme);
+      }
+      @if mat.theme-has($theme, typography) {
+        @include typography($theme);
+      }
+    }
+  }
+}
 
-    @if $color != null {
-      @include color($color);
-    }
-    @if $density != null {
-      @include density($density);
-    }
-    @if $typography != null {
-      @include typography($typography);
-    }
+@mixin _theme-from-tokens($tokens) {
+  @if $tokens != () {
+    @include mdc-plain-tooltip-theme.theme(map.get($tokens, tokens-mdc-plain-tooltip.$prefix));
   }
 }

@@ -13,24 +13,21 @@ $prefix: (mtx, popover);
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($config) {
-  $foreground: map.get($config, foreground);
-  $background: map.get($config, background);
-
+@function get-color-tokens($theme) {
   @return (
-    background-color: mat.get-color-from-palette($background, card),
-    text-color: mat.get-color-from-palette($foreground, text),
-    arrow-outline-color: mat.get-color-from-palette($foreground, divider),
+    background-color: mat.get-theme-color($theme, background, card),
+    text-color: mat.get-theme-color($theme, foreground, text),
+    arrow-outline-color: mat.get-theme-color($theme, foreground, divider),
   );
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
-@function get-typography-tokens($config) {
+@function get-typography-tokens($theme) {
   @return ();
 }
 
 // Tokens that can be configured through Angular Material's density theming API.
-@function get-density-tokens($config) {
+@function get-density-tokens($theme) {
   @return ();
 }
 

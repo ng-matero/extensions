@@ -13,35 +13,33 @@ $prefix: (mtx, grid);
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($config) {
-  $is-dark-theme: map.get($config, is-dark);
-  $foreground: map.get($config, foreground);
-  $background: map.get($config, background);
-  $primary: map.get($config, primary);
-  $accent: map.get($config, accent);
+@function get-color-tokens($theme) {
+  $is-dark: mat.get-theme-type($theme) == dark;
+  $text-color: mat.get-theme-color($theme, foreground, text);
+  $divider-color: mat.get-theme-color($theme, foreground, divider);
 
   @return (
-    outline-color: mat.get-color-from-palette($foreground, secondary-text, .2),
-    column-menu-text-color: mat.get-color-from-palette($foreground, text),
-    column-menu-divider-color: mat.get-color-from-palette($foreground, divider),
-    table-footer-background-color: mat.get-color-from-palette($background, app-bar),
-    table-row-striped-background-color: if($is-dark-theme, #3a3a3a, #f5f5f5),
-    table-row-hover-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
-    table-row-selected-background-color: if($is-dark-theme, #2a2a2a, #e5e5e5),
-    table-cell-selected-outline-color: mat.get-color-from-palette($accent),
-    resizable-handle-active-background-color: mat.get-color-from-palette($primary),
-    resizable-handle-hover-background-color: mat.get-color-from-palette($primary),
-    resizable-handle-disabled-background-color: mat.get-color-from-palette($foreground, divider),
+    outline-color: sass-utils.safe-color-change($text-color, $alpha: .2),
+    column-menu-text-color: $text-color,
+    column-menu-divider-color: $divider-color,
+    table-footer-background-color: mat.get-theme-color($theme, background, app-bar),
+    table-row-striped-background-color: if($is-dark, #3a3a3a, #f5f5f5),
+    table-row-hover-background-color: if($is-dark, #2a2a2a, #e5e5e5),
+    table-row-selected-background-color: if($is-dark, #2a2a2a, #e5e5e5),
+    table-cell-selected-outline-color: mat.get-theme-color($theme, accent),
+    resizable-handle-active-background-color: mat.get-theme-color($theme, primary),
+    resizable-handle-hover-background-color: mat.get-theme-color($theme, primary),
+    resizable-handle-disabled-background-color: $divider-color,
   );
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
-@function get-typography-tokens($config) {
+@function get-typography-tokens($theme) {
   @return ();
 }
 
 // Tokens that can be configured through Angular Material's density theming API.
-@function get-density-tokens($config) {
+@function get-density-tokens($theme) {
   @return ();
 }
 
