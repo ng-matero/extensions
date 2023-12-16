@@ -14,6 +14,8 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 
     border: 1px solid var($border-color);
 
+    @include token-utils.create-token-slot(border-radius, container-shape);
+
     .mat-mdc-table {
       &.mat-table-striped .mat-row-odd {
         @include token-utils.create-token-slot(background-color, table-row-striped-background-color);
@@ -52,7 +54,9 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
     .mat-mdc-footer-cell,
     .mat-mdc-cell {
       &:not(.mtx-grid-checkbox-cell) {
-        min-width: 80px;
+        @include token-utils.use-tokens($_tokens...) {
+          @include token-utils.create-token-slot(min-width, table-cell-min-width);
+        }
       }
     }
   }
@@ -152,6 +156,9 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
       $border-color: token-utils.get-token-variable(outline-color);
 
       border-top: 1px solid var($border-color);
+
+      @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
+      @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
     }
   }
 
@@ -265,8 +272,8 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 }
 
 .mtx-grid-row-expand-button.mat-mdc-icon-button {
-  width: 40px;
-  height: 40px;
+  --mdc-icon-button-state-layer-size: 40px;
+
   padding: 8px;
   vertical-align: middle;
 

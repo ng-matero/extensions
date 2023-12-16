@@ -9,11 +9,11 @@ $_tokens: tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots();
   position: relative;
   max-height: calc(100vh - 48px);
   padding: 8px;
-  border-radius: 4px;
-  font-size: 16px; // It can change the arrow size
+  font-size: inherit; // It can change the arrow size
   outline: 0;
 
   @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(border-radius, container-shape);
     @include token-utils.create-token-slot(background-color, background-color);
     @include token-utils.create-token-slot(color, text-color);
   }

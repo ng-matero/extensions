@@ -16,6 +16,7 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
     $filled-padding-bottom: token-utils.get-token-variable(filled-padding-bottom);
     $vertical-padding: token-utils.get-token-variable(vertical-padding);
 
+    // TODO: use `mat-form-field` token
     padding: var($filled-padding-top) 16px var($filled-padding-bottom);
     margin: calc(var($filled-padding-top) * -1) -16px calc(var($filled-padding-bottom) * -1);
 
@@ -35,12 +36,10 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
       .ng-value-container {
         align-items: center;
 
-        .ng-input {
-          >input {
-            padding: 0;
-            color: inherit;
-            font: inherit;
-          }
+        .ng-input>input {
+          padding: 0;
+          color: inherit;
+          font: inherit;
         }
       }
 
@@ -80,95 +79,73 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
     }
 
     &.ng-select-opened {
-      .ng-arrow-wrapper {
-        .ng-arrow {
-          top: -2px;
-          border-width: 0 5px 5px;
-        }
+      .ng-arrow-wrapper .ng-arrow {
+        top: -2px;
+        border-width: 0 5px 5px;
       }
     }
 
     &.ng-select-single {
-      // vertical align with material form field
-      &.ng-select-filtered {
-        .ng-placeholder {
-          display: initial;
-          visibility: hidden;
-        }
-      }
-
-      .ng-select-container {
-        .ng-value-container {
-          // vertical align with material form field
-          .ng-placeholder,
-          .ng-value {
-            &::after {
-              display: inline-block;
-              content: '';
-            }
-          }
-        }
+      &.ng-select-filtered .ng-placeholder {
+        display: initial;
+        visibility: hidden;
       }
     }
 
     &.ng-select-multiple {
-      .ng-select-container {
-        .ng-value-container {
-          .ng-value {
-            margin: 2px 4px 2px 0;
-            border-radius: 16px;
-            font-size: .875em;
-            line-height: 18px;
+      .ng-select-container .ng-value-container .ng-value {
+        margin: 2px 4px 2px 0;
+        border-radius: 16px;
+        font-size: .875em;
+        line-height: 18px;
 
-            @include token-utils.create-token-slot(background-color, multiple-value-background-color);
+        @include token-utils.create-token-slot(background-color, multiple-value-background-color);
 
-            $border-color: token-utils.get-token-variable(multiple-value-border-color);
+        $border-color: token-utils.get-token-variable(multiple-value-border-color);
 
-            border: 1px solid var($border-color);
+        border: 1px solid var($border-color);
+
+        @include rtl {
+          margin-right: auto;
+          margin-left: 4px;
+        }
+
+        &.ng-value-disabled {
+          opacity: .4;
+        }
+
+        .ng-value-label {
+          display: inline-block;
+          margin: 0 8px;
+        }
+
+        .ng-value-icon {
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          border-radius: 100%;
+          text-align: center;
+
+          &.left {
+            margin-right: -4px;
 
             @include rtl {
+              margin-left: -4px;
               margin-right: auto;
-              margin-left: 4px;
             }
+          }
 
-            &.ng-value-disabled {
-              opacity: .4;
+          &.right {
+            margin-left: -4px;
+
+            @include rtl {
+              margin-right: -4px;
+              margin-left: auto;
             }
+          }
 
-            .ng-value-label {
-              display: inline-block;
-              margin: 0 8px;
-            }
-
-            .ng-value-icon {
-              display: inline-block;
-              width: 18px;
-              height: 18px;
-              border-radius: 100%;
-              text-align: center;
-
-              &.left {
-                margin-right: -4px;
-
-                @include rtl {
-                  margin-left: -4px;
-                  margin-right: auto;
-                }
-              }
-
-              &.right {
-                margin-left: -4px;
-
-                @include rtl {
-                  margin-right: -4px;
-                  margin-left: auto;
-                }
-              }
-
-              &:hover {
-                @include token-utils.create-token-slot(background-color, multiple-value-icon-hover-background-color);
-              }
-            }
+          &:hover {
+            @include token-utils.create-token-slot(background-color, multiple-value-icon-hover-background-color);
           }
         }
       }
@@ -207,28 +184,30 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 }
 
 .ng-dropdown-panel {
-  &.ng-select-bottom {
-    top: 100%;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-
-    @include mat.elevation(8);
-  }
-
-  &.ng-select-top {
-    bottom: 100%;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-
-    @include mat.elevation(8);
-  }
-
-  .ng-dropdown-header,
-  .ng-dropdown-footer {
-    padding: 14px 16px;
-  }
-
   @include token-utils.use-tokens($_tokens...) {
+    &.ng-select-bottom {
+      top: 100%;
+
+      @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
+      @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
+
+      @include mat.elevation(8);
+    }
+
+    &.ng-select-top {
+      bottom: 100%;
+
+      @include token-utils.create-token-slot(border-top-left-radius, container-shape);
+      @include token-utils.create-token-slot(border-top-right-radius, container-shape);
+
+      @include mat.elevation(8);
+    }
+
+    .ng-dropdown-header,
+    .ng-dropdown-footer {
+      padding: 14px 16px;
+    }
+
     @include token-utils.create-token-slot(background-color, panel-background-color);
 
     $border-color: token-utils.get-token-variable(panel-divider-color);

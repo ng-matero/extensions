@@ -53,7 +53,9 @@ $_today-fade-amount: .2;
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
-  @return ();
+  @return (
+    container-shape: 4px,
+  );
 }
 
 // Tokens that can be configured through Angular Material's color theming API.

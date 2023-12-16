@@ -43,12 +43,12 @@ $touch-max-height: 850px;
 
 .mtx-datetimepicker-content {
   display: block;
-  border-radius: 4px;
 
   @include mat.elevation(4);
 
   @include token-utils.use-tokens(tokens-mtx-datetimepicker.$prefix,
     tokens-mtx-datetimepicker.get-token-slots()) {
+    @include token-utils.create-token-slot(border-radius, container-shape);
     @include token-utils.create-token-slot(background-color, calendar-container-background-color);
     @include token-utils.create-token-slot(color, calendar-container-text-color);
   }

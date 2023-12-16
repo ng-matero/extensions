@@ -1,7 +1,7 @@
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/progress' as tokens-mtx-progress;
 
-$progress-height: 1rem !default;
+$progress-height: 16px !default;
 $progress-fill-animation-timing: 1s linear infinite !default;
 
 $_tokens: tokens-mtx-progress.$prefix, tokens-mtx-progress.get-token-slots();
@@ -25,10 +25,10 @@ $_tokens: tokens-mtx-progress.$prefix, tokens-mtx-progress.get-token-slots();
   height: $progress-height;
   margin: 8px 0;
   overflow: hidden;
-  font-size: .75rem;
-  border-radius: .25rem;
 
   @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(font-size, text-size);
+    @include token-utils.create-token-slot(border-radius, container-shape);
     @include token-utils.create-token-slot(background-color, track-color);
   }
 }

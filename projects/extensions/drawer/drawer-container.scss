@@ -1,8 +1,9 @@
 @use '@angular/cdk' as cdk;
 @use '@angular/material' as mat;
-
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/drawer' as tokens-mtx-drawer;
+
+$_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
 
 .mtx-drawer-container {
   display: block;
@@ -10,7 +11,7 @@
 
   @include mat.elevation(16);
 
-  @include token-utils.use-tokens(tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots()) {
+  @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(background-color, container-background-color);
     @include token-utils.create-token-slot(color, container-text-color);
   }
@@ -28,16 +29,36 @@
 
 .mtx-drawer-right {
   transform: translateX(100%);
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(border-top-left-radius, container-shape);
+    @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
+  }
 }
 
 .mtx-drawer-left {
   transform: translateX(-100%);
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(border-top-right-radius, container-shape);
+    @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
+  }
 }
 
 .mtx-drawer-bottom {
   transform: translateY(100%);
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(border-top-left-radius, container-shape);
+    @include token-utils.create-token-slot(border-top-right-radius, container-shape);
+  }
 }
 
 .mtx-drawer-top {
   transform: translateY(-100%);
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
+    @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
+  }
 }

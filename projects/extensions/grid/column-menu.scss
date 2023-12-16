@@ -66,8 +66,8 @@
 }
 
 .mtx-grid-column-pin-button.mat-mdc-icon-button {
-  width: 40px;
-  height: 40px;
+  --mdc-icon-button-state-layer-size: 40px;
+
   padding: 8px;
 
   .mat-mdc-button-touch-target {

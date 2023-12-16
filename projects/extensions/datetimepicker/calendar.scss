@@ -27,10 +27,21 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
       width: $landscape-calendar-header-width;
       min-width: $landscape-calendar-header-width;
       padding: 16px 8px;
-      border-radius: 4px 0 0 4px;
 
-      [dir='rtl'] & {
-        border-radius: 0 4px 4px 0;
+      @include token-utils.use-tokens($_tokens...) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        @include token-utils.create-token-slot(border-top-left-radius, container-shape);
+        @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
+
+        [dir='rtl'] & {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+
+          @include token-utils.create-token-slot(border-top-right-radius, container-shape);
+          @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
+        }
       }
     }
 
@@ -83,9 +94,10 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 .mtx-calendar-header {
   box-sizing: border-box;
   padding: 8px;
-  border-radius: 4px 4px 0 0;
 
   @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(border-top-left-radius, container-shape);
+    @include token-utils.create-token-slot(border-top-right-radius, container-shape);
     @include token-utils.create-token-slot(background-color, calendar-header-background-color);
     @include token-utils.create-token-slot(color, calendar-header-text-color);
   }

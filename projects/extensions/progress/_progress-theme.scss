@@ -31,7 +31,12 @@
   @if mat.get-theme-version($theme) == 1 {
     @include _theme-from-tokens(mat.get-theme-tokens($theme, typography));
   }
-  @else {}
+  @else {
+    @include sass-utils.current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-progress.$prefix,
+        tokens-mtx-progress.get-typography-tokens($theme));
+    }
+  }
 }
 
 @mixin density($theme) {
