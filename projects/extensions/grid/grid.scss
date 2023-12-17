@@ -136,7 +136,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 .mtx-grid-progress {
   position: absolute;
   top: 0;
-  z-index: 2;
+  z-index: 120;
   width: 100%;
 }
 
@@ -153,6 +153,12 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 
     border-bottom: 1px solid var($border-color);
   }
+}
+
+.mtx-grid-toolbar-content {
+  flex: 1;
+  width: 0;
+  padding: 0 8px;
 }
 
 .mtx-grid-layout {
@@ -239,33 +245,4 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   width: 20px;
   height: 20px;
   font-size: 20px;
-}
-
-.mtx-grid-column-menu-item {
-  @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(color, column-menu-text-color);
-  }
-}
-
-.mtx-grid-column-menu-header,
-.mtx-grid-column-menu-footer {
-  @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(color, column-menu-text-color);
-  }
-}
-
-.mtx-grid-column-menu-header {
-  @include token-utils.use-tokens($_tokens...) {
-    $border-color: token-utils.get-token-variable(column-menu-divider-color);
-
-    border-bottom: 1px solid var($border-color);
-  }
-}
-
-.mtx-grid-column-menu-footer {
-  @include token-utils.use-tokens($_tokens...) {
-    $border-color: token-utils.get-token-variable(column-menu-divider-color);
-
-    border-top: 1px solid var($border-color);
-  }
 }
