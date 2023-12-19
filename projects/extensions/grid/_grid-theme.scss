@@ -17,7 +17,14 @@
 
 @mixin typography($config-or-theme) {}
 
-@mixin density($config-or-theme) {}
+@mixin density($config-or-theme) {
+  $density-scale: theming.get-density-config($config-or-theme);
+
+  @include sass-utils.current-selector-or-root() {
+    @include token-utils.create-token-values(tokens-mtx-grid.$prefix,
+      tokens-mtx-grid.get-density-tokens($density-scale));
+  }
+}
 
 @mixin theme($theme-or-color-config) {
   $theme: theming.private-legacy-get-theme($theme-or-color-config);
