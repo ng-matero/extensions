@@ -28,7 +28,7 @@ $prefix: (mtx, split);
   $gutter-tokens: private-get-color-palette-color-tokens($config, primary);
 
   @return sass-utils.merge-all($gutter-tokens, (
-    gutter-background-color: theming.get-color-from-palette($foreground, divider, .12),
+    gutter-background-color: theming.get-color-from-palette($foreground, divider),
   ));
 }
 
