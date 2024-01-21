@@ -18,7 +18,6 @@
     "no-empty-source": null,
     "media-query-no-invalid": null,
     "number-max-precision": null,
-    "number-leading-zero": "never",
     "selector-pseudo-element-no-unknown": [
       true,
       {
@@ -29,7 +28,6 @@
     ],
     "selector-class-pattern": null,
     "selector-type-no-unknown": null,
-    "string-quotes": "single",
     "value-keyword-case": null,
     "scss/at-extend-no-missing-placeholder": null,
     "scss/at-if-no-null": null,
