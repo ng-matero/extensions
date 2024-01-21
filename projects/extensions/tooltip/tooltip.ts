@@ -158,7 +158,7 @@ const UNBOUNDED_ANCHOR_GAP = 8;
 const MIN_HEIGHT = 24;
 const MAX_WIDTH = 200;
 
-@Directive({ standalone: true })
+@Directive()
 export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
   implements OnDestroy, AfterViewInit
 {
@@ -936,7 +936,7 @@ export class MtxTooltip extends _MtxTooltipBase<TooltipComponent> {
   }
 }
 
-@Directive({ standalone: true })
+@Directive()
 export abstract class _TooltipComponentBase implements OnDestroy {
   /** Message to display in the tooltip */
   message!: string | TemplateRef<any>;
