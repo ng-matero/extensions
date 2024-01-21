@@ -55,6 +55,8 @@ import { MtxDrawerConfig } from './drawer-config';
     '(@state.start)': '_onAnimationStart($event)',
     '(@state.done)': '_onAnimationDone($event)',
   },
+  standalone: true,
+  imports: [CdkPortalOutlet],
 })
 export class MtxDrawerContainer extends BasePortalOutlet implements OnDestroy {
   private _breakpointSubscription: Subscription;

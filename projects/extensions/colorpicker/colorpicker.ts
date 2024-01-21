@@ -32,12 +32,12 @@ import {
 import { CanColor, ThemePalette, mixinColor } from '@angular/material/core';
 import { Subject, Subscription, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
-import { mtxColorpickerAnimations } from './colorpicker-animations';
-import { ColorFormat, MtxColorpickerInput } from './colorpicker-input';
-
-import { ColorEvent } from 'ngx-color';
 
 import { TinyColor } from '@ctrl/tinycolor';
+import { ColorEvent } from 'ngx-color';
+import { ColorChromeModule } from 'ngx-color/chrome';
+import { mtxColorpickerAnimations } from './colorpicker-animations';
+import { ColorFormat, MtxColorpickerInput } from './colorpicker-input';
 
 /** Used to generate a unique ID for each colorpicker instance. */
 let colorpickerUid = 0;
@@ -85,6 +85,8 @@ const _MtxColorpickerContentBase = mixinColor(
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   inputs: ['color'],
+  standalone: true,
+  imports: [ColorChromeModule],
 })
 export class MtxColorpickerContent
   extends _MtxColorpickerContentBase
@@ -130,6 +132,7 @@ export class MtxColorpickerContent
   exportAs: 'mtxColorpicker',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
 })
 export class MtxColorpicker implements OnChanges, OnDestroy {
   private _scrollStrategy: () => ScrollStrategy;

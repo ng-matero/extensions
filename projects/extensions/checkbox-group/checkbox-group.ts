@@ -1,4 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { AsyncPipe } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -15,8 +16,10 @@ import {
   booleanAttribute,
   forwardRef,
 } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+
+import { MtxToObservablePipe } from '@ng-matero/extensions/core';
 import { MtxCheckboxGroupOption } from './interfaces';
 
 export class MtxCheckboxBase {
@@ -43,6 +46,8 @@ export class MtxCheckboxBase {
       multi: true,
     },
   ],
+  standalone: true,
+  imports: [MatCheckbox, MtxToObservablePipe, AsyncPipe, FormsModule],
 })
 export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueAccessor {
   @ContentChildren(forwardRef(() => MatCheckbox), { descendants: true })

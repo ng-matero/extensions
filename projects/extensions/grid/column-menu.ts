@@ -1,4 +1,5 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray } from '@angular/cdk/drag-drop';
+import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -9,9 +10,14 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
+import { FormsModule } from '@angular/forms';
+import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
+import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { ThemePalette } from '@angular/material/core';
-import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
+import { MatIcon } from '@angular/material/icon';
+import { MatMenu, MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+
+import { MtxToObservablePipe } from '@ng-matero/extensions/core';
 import {
   MtxGridButtonType,
   MtxGridColumn,
@@ -26,6 +32,23 @@ import {
   styleUrls: ['./column-menu.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    NgClass,
+    NgTemplateOutlet,
+    FormsModule,
+    MatButton,
+    MatIconButton,
+    MatFabButton,
+    MatMiniFabButton,
+    MatIcon,
+    MatMenuModule,
+    MatCheckbox,
+    CdkDrag,
+    CdkDropList,
+    MtxToObservablePipe,
+  ],
 })
 export class MtxGridColumnMenu {
   @ViewChild('menu', { static: true }) menuPanel!: MatMenu;

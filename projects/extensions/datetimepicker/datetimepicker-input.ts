@@ -25,12 +25,13 @@ import {
 import { ThemePalette } from '@angular/material/core';
 import { MatFormField } from '@angular/material/form-field';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
+import { Subscription } from 'rxjs';
+
 import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
 } from '@ng-matero/extensions/core';
-import { Subscription } from 'rxjs';
 import { MtxDatetimepicker } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
@@ -84,6 +85,7 @@ export class MtxDatetimepickerInputEvent<D> {
     '(keydown)': '_onKeydown($event)',
   },
   exportAs: 'mtxDatetimepickerInput',
+  standalone: true,
 })
 export class MtxDatetimepickerInput<D>
   implements AfterContentInit, ControlValueAccessor, OnDestroy, Validator

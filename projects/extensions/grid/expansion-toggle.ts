@@ -10,6 +10,7 @@ import {
 
 @Directive({
   selector: '[mtx-grid-expansion-toggle]',
+  standalone: true,
 })
 export class MtxGridExpansionToggle {
   private _opened = false;

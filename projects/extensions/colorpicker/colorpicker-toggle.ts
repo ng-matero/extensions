@@ -14,13 +14,15 @@ import {
   ViewEncapsulation,
   booleanAttribute,
 } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { Observable, Subscription, merge, of as observableOf } from 'rxjs';
+
 import { MtxColorpicker } from './colorpicker';
 
 /** Can be used to override the icon of a `mtxColorpickerToggle`. */
 @Directive({
   selector: '[mtxColorpickerToggleIcon]',
+  standalone: true,
 })
 export class MtxColorpickerToggleIcon {}
 
@@ -42,6 +44,8 @@ export class MtxColorpickerToggleIcon {}
   exportAs: 'mtxColorpickerToggle',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatIconButton],
 })
 export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDestroy {
   private _stateChanges = Subscription.EMPTY;

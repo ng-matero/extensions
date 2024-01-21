@@ -5,8 +5,7 @@ import { MtxSplit } from './split';
 import { MtxSplitPane } from './split-pane';
 
 @NgModule({
-  imports: [CommonModule],
-  declarations: [MtxSplit, MtxSplitPane],
+  imports: [CommonModule, MtxSplit, MtxSplitPane],
   exports: [MtxSplit, MtxSplitPane],
 })
 export class MtxSplitModule {}

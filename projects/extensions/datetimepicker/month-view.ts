@@ -14,7 +14,7 @@ import {
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
 } from '@ng-matero/extensions/core';
-import { MtxCalendarCell } from './calendar-body';
+import { MtxCalendarBody, MtxCalendarCell } from './calendar-body';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerType } from './datetimepicker-types';
@@ -32,6 +32,8 @@ const DAYS_PER_WEEK = 7;
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MtxCalendarBody],
 })
 export class MtxMonthView<D> implements AfterContentInit {
   @Input() type: MtxDatetimepickerType = 'date';

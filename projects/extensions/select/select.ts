@@ -27,6 +27,7 @@ import {
   AbstractControl,
   ControlValueAccessor,
   FormGroupDirective,
+  FormsModule,
   NgControl,
   NgForm,
   Validators,
@@ -38,7 +39,7 @@ import {
   mixinErrorState,
 } from '@angular/material/core';
 import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
-import { NgSelectComponent } from '@ng-select/ng-select';
+import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 import { Subject, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { MtxOption } from './option';
@@ -146,6 +147,8 @@ const _MtxSelectMixinBase = mixinDisabled(
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: MatFormFieldControl, useExisting: MtxSelect }],
+  standalone: true,
+  imports: [NgSelectModule, FormsModule],
 })
 export class MtxSelect
   extends _MtxSelectMixinBase

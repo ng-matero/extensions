@@ -10,9 +10,16 @@ import { MtxPopoverTarget } from './popover-target';
 import { MtxPopoverContent } from './popover-content';
 
 @NgModule({
-  imports: [CommonModule, OverlayModule, A11yModule],
+  imports: [
+    CommonModule,
+    OverlayModule,
+    A11yModule,
+    MtxPopover,
+    MtxPopoverTrigger,
+    MtxPopoverTarget,
+    MtxPopoverContent,
+  ],
   exports: [MtxPopover, MtxPopoverTrigger, MtxPopoverTarget, MtxPopoverContent],
-  declarations: [MtxPopover, MtxPopoverTrigger, MtxPopoverTarget, MtxPopoverContent],
   providers: [MTX_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER],
 })
 export class MtxPopoverModule {}

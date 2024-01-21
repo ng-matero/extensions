@@ -7,8 +7,8 @@ import {
   booleanAttribute,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
-import { ProgressBarMode } from '@angular/material/progress-bar';
-import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
+import { MatProgressBar, ProgressBarMode } from '@angular/material/progress-bar';
+import { MatProgressSpinner, ProgressSpinnerMode } from '@angular/material/progress-spinner';
 
 export type MtxLoaderType = 'spinner' | 'progressbar';
 
@@ -23,6 +23,8 @@ export type MtxLoaderType = 'spinner' | 'progressbar';
   styleUrls: ['./loader.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatProgressSpinner, MatProgressBar],
 })
 export class MtxLoader {
   /** The loader's type. Can be `spinner` or `progressbar` */

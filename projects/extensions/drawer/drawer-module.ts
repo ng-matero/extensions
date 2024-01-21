@@ -6,9 +6,8 @@ import { MtxDrawer } from './drawer';
 import { MtxDrawerContainer } from './drawer-container';
 
 @NgModule({
-  imports: [OverlayModule, PortalModule, MatCommonModule],
+  imports: [OverlayModule, PortalModule, MatCommonModule, MtxDrawerContainer],
   exports: [MtxDrawerContainer, MatCommonModule],
-  declarations: [MtxDrawerContainer],
   providers: [MtxDrawer],
 })
 export class MtxDrawerModule {}

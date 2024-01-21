@@ -23,7 +23,7 @@ import {
 } from '@angular/cdk/overlay';
 import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -45,6 +45,8 @@ import {
 import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 import { Observable, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
+
+import { MtxIsTemplateRefPipe } from '@ng-matero/extensions/core';
 
 /** Possible positions for a tooltip. */
 export type TooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before' | 'after';
@@ -156,7 +158,7 @@ const UNBOUNDED_ANCHOR_GAP = 8;
 const MIN_HEIGHT = 24;
 const MAX_WIDTH = 200;
 
-@Directive()
+@Directive({ standalone: true })
 export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
   implements OnDestroy, AfterViewInit
 {
@@ -879,6 +881,7 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
   host: {
     class: 'mtx-mdc-tooltip-trigger',
   },
+  standalone: true,
 })
 export class MtxTooltip extends _MtxTooltipBase<TooltipComponent> {
   protected override readonly _tooltipComponent = TooltipComponent;
@@ -933,7 +936,7 @@ export class MtxTooltip extends _MtxTooltipBase<TooltipComponent> {
   }
 }
 
-@Directive()
+@Directive({ standalone: true })
 export abstract class _TooltipComponentBase implements OnDestroy {
   /** Message to display in the tooltip */
   message!: string | TemplateRef<any>;
@@ -1142,6 +1145,8 @@ export abstract class _TooltipComponentBase implements OnDestroy {
     '(mouseleave)': '_handleMouseLeave($event)',
     'aria-hidden': 'true',
   },
+  standalone: true,
+  imports: [NgClass, NgTemplateOutlet, MtxIsTemplateRefPipe],
 })
 export class TooltipComponent extends _TooltipComponentBase {
   /* Whether the tooltip text overflows to multiple lines */

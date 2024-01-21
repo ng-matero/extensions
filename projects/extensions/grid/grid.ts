@@ -1,32 +1,39 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { SelectionModel } from '@angular/cdk/collections';
+import { AsyncPipe, NgClass, NgStyle, NgTemplateOutlet } from '@angular/common';
 import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  ViewEncapsulation,
-  ChangeDetectionStrategy,
-  ViewChild,
-  OnChanges,
-  TemplateRef,
-  TrackByFunction,
-  OnDestroy,
   AfterViewInit,
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
-  ElementRef,
-  SimpleChanges,
-  QueryList,
+  Component,
   ContentChildren,
   Directive,
+  ElementRef,
+  EventEmitter,
   HostBinding,
   HostListener,
-  KeyValueChangeRecord,
-  InjectionToken,
-  Optional,
   Inject,
+  InjectionToken,
+  Input,
+  KeyValueChangeRecord,
+  OnChanges,
+  OnDestroy,
+  Optional,
+  Output,
+  QueryList,
+  SimpleChanges,
+  TemplateRef,
+  TrackByFunction,
+  ViewChild,
+  ViewEncapsulation,
   booleanAttribute,
 } from '@angular/core';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { SelectionModel } from '@angular/cdk/collections';
+import { MatIconButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { ThemePalette } from '@angular/material/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { MatSort, MatSortHeader, Sort, SortDirection } from '@angular/material/sort';
 import {
   MatFooterRow,
   MatFooterRowDef,
@@ -34,28 +41,83 @@ import {
   MatRowDef,
   MatTable,
   MatTableDataSource,
+  MatTableModule,
 } from '@angular/material/table';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Sort, MatSort, SortDirection } from '@angular/material/sort';
-import { ThemePalette } from '@angular/material/core';
 
+import { MtxIsTemplateRefPipe, MtxToObservablePipe } from '@ng-matero/extensions/core';
+import { MtxGridCell } from './cell';
+import { MtxGridColumnMenu } from './column-menu';
+import { MatColumnResizeModule } from './column-resize/column-resize-module';
+import { MtxGridExpansionToggle } from './expansion-toggle';
+import { MtxGridColClassPipe, MtxGridRowClassPipe } from './grid-pipes';
+import { MtxGridUtils } from './grid-utils';
 import {
-  MtxGridColumn,
-  MtxGridCellTemplate,
-  MtxGridRowSelectionFormatter,
-  MtxGridRowClassFormatter,
   MtxGridButtonType,
+  MtxGridCellTemplate,
+  MtxGridColumn,
   MtxGridColumnPinOption,
   MtxGridDefaultOptions,
+  MtxGridRowClassFormatter,
+  MtxGridRowSelectionFormatter,
 } from './interfaces';
-import { MtxGridExpansionToggle } from './expansion-toggle';
-import { MtxGridUtils } from './grid-utils';
-import { MtxGridColumnMenu } from './column-menu';
 
 /** Injection token that can be used to specify default grid options. */
 export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions>(
   'mtx-grid-default-options'
 );
+
+@Directive({
+  selector: '[mtx-grid-selectable-cell]',
+  standalone: true,
+})
+export class MtxGridSelectableCell {
+  private _selected = false;
+  private _rowData!: Record<string, any>;
+
+  ctrlKeyPressed = false;
+  shiftKeyPressed = false;
+
+  @HostBinding('class.selected')
+  get selected(): boolean {
+    return this._selected;
+  }
+
+  @Input()
+  set mtxSelectableRowData(value: any) {
+    if (value !== this._rowData) {
+      this._rowData = value;
+    }
+  }
+
+  @Output() cellSelectedChange = new EventEmitter<MtxGridSelectableCell>();
+
+  constructor(private _grid: MtxGrid) {}
+
+  @HostListener('click', ['$event'])
+  onClick(event: MouseEvent): void {
+    this.ctrlKeyPressed = event.ctrlKey;
+    this.shiftKeyPressed = event.shiftKey;
+
+    if (this._grid.cellSelectable) {
+      this.select();
+    }
+  }
+
+  select(): void {
+    this._selected = true;
+    this.cellSelectedChange.emit(this);
+  }
+
+  deselect(): void {
+    this._selected = false;
+    this.cellSelectedChange.emit(this);
+  }
+
+  toggle(): void {
+    this._selected = !this._selected;
+    this.cellSelectedChange.emit(this);
+  }
+}
 
 @Component({
   selector: 'mtx-grid',
@@ -74,6 +136,29 @@ export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
       transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
+  ],
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    NgClass,
+    NgStyle,
+    NgTemplateOutlet,
+    MatProgressBar,
+    MatIconButton,
+    MatTableModule,
+    MatSort,
+    MatSortHeader,
+    MatCheckbox,
+    MatPaginator,
+    MatColumnResizeModule,
+    MtxGridCell,
+    MtxGridColumnMenu,
+    MtxGridSelectableCell,
+    MtxGridExpansionToggle,
+    MtxToObservablePipe,
+    MtxIsTemplateRefPipe,
+    MtxGridColClassPipe,
+    MtxGridRowClassPipe,
   ],
 })
 export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
@@ -586,57 +671,5 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
 
   _contextmenu(event: MouseEvent, rowData: Record<string, any>, index: number) {
     this.rowContextMenu.emit({ event, rowData, index });
-  }
-}
-
-@Directive({
-  selector: '[mtx-grid-selectable-cell]',
-})
-export class MtxGridSelectableCell {
-  private _selected = false;
-  private _rowData!: Record<string, any>;
-
-  ctrlKeyPressed = false;
-  shiftKeyPressed = false;
-
-  @HostBinding('class.selected')
-  get selected(): boolean {
-    return this._selected;
-  }
-
-  @Input()
-  set mtxSelectableRowData(value: any) {
-    if (value !== this._rowData) {
-      this._rowData = value;
-    }
-  }
-
-  @Output() cellSelectedChange = new EventEmitter<MtxGridSelectableCell>();
-
-  constructor(private _grid: MtxGrid) {}
-
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent): void {
-    this.ctrlKeyPressed = event.ctrlKey;
-    this.shiftKeyPressed = event.shiftKey;
-
-    if (this._grid.cellSelectable) {
-      this.select();
-    }
-  }
-
-  select(): void {
-    this._selected = true;
-    this.cellSelectedChange.emit(this);
-  }
-
-  deselect(): void {
-    this._selected = false;
-    this.cellSelectedChange.emit(this);
-  }
-
-  toggle(): void {
-    this._selected = !this._selected;
-    this.cellSelectedChange.emit(this);
   }
 }

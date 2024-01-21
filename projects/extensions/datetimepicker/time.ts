@@ -17,9 +17,11 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { MatButton } from '@angular/material/button';
 import { SubscriptionLike } from 'rxjs';
-import { MtxClockView } from './clock';
+
+import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { MtxClock, MtxClockView } from './clock';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 import { MtxAMPM } from './datetimepicker-types';
@@ -37,6 +39,7 @@ function pad(num: NumberInput, size: number) {
     '(focus)': 'focus($event)',
   },
   exportAs: 'mtxTimeInput',
+  standalone: true,
 })
 export class MtxTimeInput implements OnDestroy {
   @Input('timeInterval')
@@ -228,6 +231,8 @@ export class MtxTimeInput implements OnDestroy {
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatButton, MtxClock, MtxTimeInput],
 })
 export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   /** Emits when the currently selected date changes. */

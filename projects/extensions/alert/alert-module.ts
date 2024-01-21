@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MtxAlert } from './alert';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, MtxAlert],
   exports: [MtxAlert],
-  declarations: [MtxAlert],
 })
 export class MtxAlertModule {}

@@ -9,9 +9,16 @@ import { MtxDialogContainer } from './dialog-container';
 import { MtxDialog } from './dialog';
 
 @NgModule({
-  imports: [CommonModule, MatDialogModule, MatButtonModule, MatIconModule, MtxPipesModule],
+  imports: [
+    CommonModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MtxPipesModule,
+    MtxDialogContainer,
+  ],
   exports: [MtxDialogContainer],
-  declarations: [MtxDialogContainer],
+
   providers: [MtxDialog],
 })
 export class MtxDialogModule {}

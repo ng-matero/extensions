@@ -1,6 +1,8 @@
 import { AnimationEvent } from '@angular/animations';
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
+import { NgClass, NgStyle } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -20,6 +22,7 @@ import {
   booleanAttribute,
 } from '@angular/core';
 import { Subject } from 'rxjs';
+
 import { transformPopover } from './popover-animations';
 import { MTX_POPOVER_CONTENT, MtxPopoverContent } from './popover-content';
 import {
@@ -55,6 +58,8 @@ let popoverPanelUid = 0;
   encapsulation: ViewEncapsulation.None,
   animations: [transformPopover],
   exportAs: 'mtxPopover',
+  standalone: true,
+  imports: [NgClass, NgStyle, CdkTrapFocus],
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _previousElevation?: string;
@@ -280,16 +285,16 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
       pos[1] === 'after'
         ? `${this.arrowOffsetX - this.arrowWidth / 2}px`
         : pos[1] === 'center'
-        ? `calc(50% - ${this.arrowWidth / 2}px)`
-        : '';
+          ? `calc(50% - ${this.arrowWidth / 2}px)`
+          : '';
     const right = pos[1] === 'before' ? `${this.arrowOffsetX - this.arrowWidth / 2}px` : '';
 
     const bottom =
       pos[1] === 'above'
         ? `${this.arrowOffsetY - this.arrowHeight / 2}px`
         : pos[1] === 'center'
-        ? `calc(50% - ${this.arrowHeight / 2}px)`
-        : '';
+          ? `calc(50% - ${this.arrowHeight / 2}px)`
+          : '';
     const top = pos[1] === 'below' ? `${this.arrowOffsetY - this.arrowHeight / 2}px` : '';
 
     this.arrowStyles =

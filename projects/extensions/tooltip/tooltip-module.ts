@@ -12,9 +12,16 @@ import {
 } from './tooltip';
 
 @NgModule({
-  imports: [A11yModule, CommonModule, OverlayModule, MatCommonModule, MtxPipesModule],
+  imports: [
+    A11yModule,
+    CommonModule,
+    OverlayModule,
+    MatCommonModule,
+    MtxPipesModule,
+    MtxTooltip,
+    TooltipComponent,
+  ],
   exports: [MtxTooltip, TooltipComponent, MatCommonModule, CdkScrollableModule],
-  declarations: [MtxTooltip, TooltipComponent],
   providers: [MTX_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
 })
 export class MtxTooltipModule {}

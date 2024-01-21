@@ -14,14 +14,16 @@ import {
   ViewEncapsulation,
   booleanAttribute,
 } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { Observable, Subscription, merge, of as observableOf } from 'rxjs';
+
 import { MtxDatetimepicker } from './datetimepicker';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 
 /** Can be used to override the icon of a `mtxDatetimepickerToggle`. */
 @Directive({
   selector: '[mtxDatetimepickerToggleIcon]',
+  standalone: true,
 })
 export class MtxDatetimepickerToggleIcon {}
 
@@ -46,6 +48,8 @@ export class MtxDatetimepickerToggleIcon {}
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [MatIconButton],
 })
 export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {
   private _stateChanges = Subscription.EMPTY;

@@ -7,8 +7,7 @@ import { MtxPipesModule } from '@ng-matero/extensions/core';
 import { MtxCheckboxGroup } from './checkbox-group';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, MatCheckboxModule, MtxPipesModule],
+  imports: [CommonModule, FormsModule, MatCheckboxModule, MtxPipesModule, MtxCheckboxGroup],
   exports: [MtxCheckboxGroup, MtxPipesModule],
-  declarations: [MtxCheckboxGroup],
 })
 export class MtxCheckboxGroupModule {}

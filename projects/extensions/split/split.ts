@@ -1,3 +1,4 @@
+import { NgClass } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -18,7 +19,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CanColor, mixinColor } from '@angular/material/core';
-import { Observable, Subscriber, Subject } from 'rxjs';
+import { Observable, Subject, Subscriber } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
 import {
@@ -97,6 +98,8 @@ const _MtxSplitBase = mixinColor(
   styleUrls: ['./split.scss'],
   templateUrl: './split.html',
   inputs: ['color'],
+  standalone: true,
+  imports: [NgClass],
 })
 export class MtxSplit extends _MtxSplitBase implements AfterViewInit, OnDestroy, CanColor {
   private _direction: 'horizontal' | 'vertical' = 'horizontal';

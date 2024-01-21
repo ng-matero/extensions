@@ -24,6 +24,7 @@ import { ThemePalette } from '@angular/material/core';
 import { MatFormField } from '@angular/material/form-field';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { Subscription } from 'rxjs';
+
 import { MtxColorpicker } from './colorpicker';
 
 export class MtxColorPickerInputEvent {
@@ -72,6 +73,7 @@ export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsv';
     '(keydown)': '_onKeydown($event)',
   },
   exportAs: 'mtxColorpickerInput',
+  standalone: true,
 })
 export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit, OnDestroy {
   /** Whether the component has been initialized. */

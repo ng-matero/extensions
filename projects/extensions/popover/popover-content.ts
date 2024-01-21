@@ -21,7 +21,7 @@ import { Subject } from 'rxjs';
  */
 export const MTX_POPOVER_CONTENT = new InjectionToken<MtxPopoverContent>('MtxPopoverContent');
 
-@Directive()
+@Directive({ standalone: true })
 export abstract class _MtxPopoverContentBase implements OnDestroy {
   private _portal!: TemplatePortal<any>;
   private _outlet!: DomPortalOutlet;
@@ -103,5 +103,6 @@ export abstract class _MtxPopoverContentBase implements OnDestroy {
 @Directive({
   selector: 'ng-template[mtxPopoverContent]',
   providers: [{ provide: MTX_POPOVER_CONTENT, useExisting: MtxPopoverContent }],
+  standalone: true,
 })
 export class MtxPopoverContent extends _MtxPopoverContentBase {}

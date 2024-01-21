@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgStyle } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -15,6 +15,7 @@ import {
   ViewEncapsulation,
   booleanAttribute,
 } from '@angular/core';
+
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxAMPM } from './datetimepicker-types';
@@ -46,6 +47,8 @@ export type MtxClockView = 'hour' | 'minute';
   exportAs: 'mtxClock',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [NgStyle],
 })
 export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   /** A function used to filter which dates are selectable. */

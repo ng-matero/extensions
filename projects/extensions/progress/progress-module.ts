@@ -4,8 +4,7 @@ import { CommonModule } from '@angular/common';
 import { MtxProgress } from './progress';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, MtxProgress],
   exports: [MtxProgress],
-  declarations: [MtxProgress],
 })
 export class MtxProgressModule {}

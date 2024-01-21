@@ -25,6 +25,7 @@ import {
   ViewEncapsulation,
   booleanAttribute,
 } from '@angular/core';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
@@ -32,13 +33,23 @@ import {
 } from '@ng-matero/extensions/core';
 import { Subscription } from 'rxjs';
 import { first } from 'rxjs/operators';
-import { MtxClockView } from './clock';
+
+import { MtxClock, MtxClockView } from './clock';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 import { MtxAMPM, MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
-import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from './multi-year-view';
+import { MtxMonthView } from './month-view';
+import {
+  MtxMultiYearView,
+  getActiveOffset,
+  isSameMultiYearView,
+  yearsPerPage,
+  yearsPerRow,
+} from './multi-year-view';
+import { MtxTime } from './time';
+import { MtxYearView } from './year-view';
 
 /**
  * A calendar that is used as part of the datetimepicker.
@@ -58,6 +69,16 @@ import { getActiveOffset, isSameMultiYearView, yearsPerPage, yearsPerRow } from 
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    MatButton,
+    MatIconButton,
+    MtxMonthView,
+    MtxYearView,
+    MtxMultiYearView,
+    MtxTime,
+    MtxClock,
+  ],
 })
 export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Whether to show multi-year view. */

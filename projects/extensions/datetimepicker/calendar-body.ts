@@ -34,6 +34,7 @@ export class MtxCalendarCell {
   exportAs: 'mtxCalendarBody',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class MtxCalendarBody {
   /** The label for the table. (e.g. "Jan 2017"). */

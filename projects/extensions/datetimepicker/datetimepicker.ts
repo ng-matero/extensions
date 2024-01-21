@@ -10,7 +10,7 @@ import {
 } from '@angular/cdk/overlay';
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgClass } from '@angular/common';
 import {
   AfterContentInit,
   booleanAttribute,
@@ -34,9 +34,10 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
+
+import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxCalendar } from './calendar';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
@@ -104,6 +105,8 @@ const _MtxDatetimepickerContentBase = mixinColor(
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   inputs: ['color'],
+  standalone: true,
+  imports: [MtxCalendar, NgClass],
 })
 export class MtxDatetimepickerContent<D>
   extends _MtxDatetimepickerContentBase
@@ -157,6 +160,7 @@ export class MtxDatetimepickerContent<D>
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
+  standalone: true,
 })
 export class MtxDatetimepicker<D> implements OnDestroy {
   private _document = inject(DOCUMENT);

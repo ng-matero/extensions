@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { NgSelectModule } from '@ng-select/ng-select';
 
 import { MtxSelect } from './select';
@@ -21,8 +20,11 @@ import {
 import { MtxOption } from './option';
 
 @NgModule({
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, NgSelectModule],
-  exports: [
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgSelectModule,
     MtxSelect,
     MtxOption,
     MtxSelectOptgroupTemplate,
@@ -37,7 +39,7 @@ import { MtxOption } from './option';
     MtxSelectTagTemplate,
     MtxSelectLoadingSpinnerTemplate,
   ],
-  declarations: [
+  exports: [
     MtxSelect,
     MtxOption,
     MtxSelectOptgroupTemplate,

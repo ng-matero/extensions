@@ -73,6 +73,7 @@ export const MTX_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     '(mousedown)': '_handleMousedown($event)',
     '(keydown)': '_handleKeydown($event)',
   },
+  standalone: true,
 })
 export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   private _portal?: TemplatePortal;
@@ -409,14 +410,14 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
         change.connectionPair.overlayX === 'start'
           ? 'after'
           : change.connectionPair.overlayX === 'end'
-          ? 'before'
-          : 'center';
+            ? 'before'
+            : 'center';
       const posY =
         change.connectionPair.overlayY === 'top'
           ? 'below'
           : change.connectionPair.overlayY === 'bottom'
-          ? 'above'
-          : 'center';
+            ? 'above'
+            : 'center';
 
       const pos: MtxPopoverPosition =
         this.popover.position[0] === 'above' || this.popover.position[0] === 'below'
@@ -441,29 +442,29 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
       this.popover.position[0] === 'before' || this.popover.position[1] === 'after'
         ? ['start', 'center', 'end']
         : this.popover.position[0] === 'after' || this.popover.position[1] === 'before'
-        ? ['end', 'center', 'start']
-        : ['center', 'start', 'end'];
+          ? ['end', 'center', 'start']
+          : ['center', 'start', 'end'];
 
     const [originY, origin2ndY, origin3rdY]: VerticalConnectionPos[] =
       this.popover.position[0] === 'above' || this.popover.position[1] === 'below'
         ? ['top', 'center', 'bottom']
         : this.popover.position[0] === 'below' || this.popover.position[1] === 'above'
-        ? ['bottom', 'center', 'top']
-        : ['center', 'top', 'bottom'];
+          ? ['bottom', 'center', 'top']
+          : ['center', 'top', 'bottom'];
 
     const [overlayX, overlayFallbackX]: HorizontalConnectionPos[] =
       this.popover.position[0] === 'below' || this.popover.position[0] === 'above'
         ? [originX, originX]
         : this.popover.position[0] === 'before'
-        ? ['end', 'start']
-        : ['start', 'end'];
+          ? ['end', 'start']
+          : ['start', 'end'];
 
     const [overlayY, overlayFallbackY]: VerticalConnectionPos[] =
       this.popover.position[0] === 'before' || this.popover.position[0] === 'after'
         ? [originY, originY]
         : this.popover.position[0] === 'below'
-        ? ['top', 'bottom']
-        : ['bottom', 'top'];
+          ? ['top', 'bottom']
+          : ['bottom', 'top'];
 
     const originFallbackX = overlayX;
     const originFallbackY = overlayY;

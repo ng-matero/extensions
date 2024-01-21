@@ -5,8 +5,7 @@ import { MtxToObservablePipe } from './to-observable.pipe';
 import { MtxIsTemplateRefPipe } from './is-template-ref.pipe';
 
 @NgModule({
-  imports: [CommonModule],
+  imports: [CommonModule, MtxToObservablePipe, MtxIsTemplateRefPipe],
   exports: [MtxToObservablePipe, MtxIsTemplateRefPipe],
-  declarations: [MtxToObservablePipe, MtxIsTemplateRefPipe],
 })
 export class MtxPipesModule {}

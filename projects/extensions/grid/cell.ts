@@ -1,4 +1,12 @@
 import {
+  AsyncPipe,
+  CurrencyPipe,
+  DatePipe,
+  DecimalPipe,
+  NgClass,
+  PercentPipe,
+} from '@angular/common';
+import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -13,8 +21,22 @@ import {
   Output,
   ViewEncapsulation,
 } from '@angular/core';
-import { MtxDialog } from '@ng-matero/extensions/dialog';
+import { MatBadge } from '@angular/material/badge';
+import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
+import { MatChip, MatChipListbox } from '@angular/material/chips';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
 import { isObservable } from 'rxjs';
+
+import { MtxToObservablePipe } from '@ng-matero/extensions/core';
+import { MtxDialog } from '@ng-matero/extensions/dialog';
+import {
+  MtxGridCellActionBadgePipe,
+  MtxGridCellActionDisablePipe,
+  MtxGridCellActionTooltipPipe,
+  MtxGridCellActionsPipe,
+  MtxGridCellSummaryPipe,
+} from './grid-pipes';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
 
@@ -25,6 +47,30 @@ import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
   styleUrls: ['./cell.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    AsyncPipe,
+    CurrencyPipe,
+    DatePipe,
+    DecimalPipe,
+    PercentPipe,
+    NgClass,
+    MatButton,
+    MatIconButton,
+    MatFabButton,
+    MatMiniFabButton,
+    MatIcon,
+    MatChipListbox,
+    MatChip,
+    MatTooltip,
+    MatBadge,
+    MtxToObservablePipe,
+    MtxGridCellActionsPipe,
+    MtxGridCellSummaryPipe,
+    MtxGridCellActionDisablePipe,
+    MtxGridCellActionTooltipPipe,
+    MtxGridCellActionBadgePipe,
+  ],
 })
 export class MtxGridCell implements OnInit, DoCheck {
   /** Row data */

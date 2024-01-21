@@ -24,6 +24,7 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
   styleUrls: ['./alert.scss'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class MtxAlert {
   @HostBinding('class')
