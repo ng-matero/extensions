@@ -1,4 +1,4 @@
-@use '../../../theming/inspection';
+@use '@angular/material' as mat;
 @use '../../../style/sass-utils';
 @use '../../token-utils';
 
@@ -27,7 +27,7 @@ $prefix: (mdc, plain-tooltip);
 
   @return (
     // Color of the tooltip container.
-    container-color: inspection.get-theme-color($theme, background, tooltip),
+    container-color: mat.get-theme-color($theme, background, tooltip),
     // Color of the tooltip text.
     supporting-text-color: #fff,
   );
@@ -37,13 +37,13 @@ $prefix: (mdc, plain-tooltip);
 @function get-typography-tokens($theme) {
   @return (
     // Font for the tooltip text.
-    supporting-text-font: inspection.get-theme-typography($theme, caption, font-family),
+    supporting-text-font: mat.get-theme-typography($theme, caption, font-family),
     // Font size for the tooltip text.
-    supporting-text-size: inspection.get-theme-typography($theme, caption, font-size),
+    supporting-text-size: mat.get-theme-typography($theme, caption, font-size),
     // Font weight of the tooltip text.
-    supporting-text-weight: inspection.get-theme-typography($theme, caption, font-weight),
+    supporting-text-weight: mat.get-theme-typography($theme, caption, font-weight),
     // Tracking (space between letters) of the tooltip text.
-    supporting-text-tracking: inspection.get-theme-typography($theme, caption, letter-spacing),
+    supporting-text-tracking: mat.get-theme-typography($theme, caption, letter-spacing),
   );
 }
 

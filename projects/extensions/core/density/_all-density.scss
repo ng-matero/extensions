@@ -1,4 +1,4 @@
-@use '../theming/inspection';
+@use '@angular/material' as mat;
 @use '../../alert/alert-theme';
 @use '../../button/button-theme';
 @use '../../colorpicker/colorpicker-theme';
@@ -14,7 +14,7 @@
 
 // Includes all of the density styles.
 @mixin all-component-densities($theme) {
-  @if not inspection.theme-has($theme, density) {
+  @if not mat.theme-has($theme, density) {
     @error 'No density configuration specified.';
   }
 
