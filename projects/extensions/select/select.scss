@@ -12,20 +12,19 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
 .ng-select {
   @include token-utils.use-tokens($_tokens...) {
-    $filled-padding-top: token-utils.get-token-variable(filled-padding-top);
-    $filled-padding-bottom: token-utils.get-token-variable(filled-padding-bottom);
-    $vertical-padding: token-utils.get-token-variable(vertical-padding);
+    $filled-padding-top: var(--mat-form-field-filled-with-label-container-padding-top);
+    $filled-padding-bottom: var(--mat-form-field-filled-with-label-container-padding-bottom);
+    $vertical-padding: var(--mat-form-field-container-vertical-padding);
 
-    // TODO: use `mat-form-field` token
-    padding: var($filled-padding-top) 16px var($filled-padding-bottom);
-    margin: calc(var($filled-padding-top) * -1) -16px calc(var($filled-padding-bottom) * -1);
+    padding: $filled-padding-top 16px $filled-padding-bottom;
+    margin: calc($filled-padding-top * -1) -16px calc($filled-padding-bottom * -1);
 
     .mdc-text-field--outlined &,
     .mdc-text-field--no-label & {
-      padding-top: var($vertical-padding);
-      padding-bottom: var($vertical-padding);
-      margin-top: calc(var($vertical-padding) * -1);
-      margin-bottom: calc(var($vertical-padding) * -1);
+      padding-top: $vertical-padding;
+      padding-bottom: $vertical-padding;
+      margin-top: calc($vertical-padding * -1);
+      margin-bottom: calc($vertical-padding * -1);
     }
 
     .ng-select-container {
