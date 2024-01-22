@@ -8,7 +8,6 @@ import {
 } from '@angular/cdk/coercion';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import {
-  ComponentType,
   ConnectedPosition,
   ConnectionPositionPair,
   FlexibleConnectedPositionStrategy,
@@ -25,6 +24,7 @@ import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
+  ANIMATION_MODULE_TYPE,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -41,8 +41,8 @@ import {
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
-import { ANIMATION_MODULE_TYPE } from '@angular/platform-browser/animations';
 import { Observable, Subject } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 
@@ -73,7 +73,14 @@ export function getMtxTooltipInvalidPositionError(position: string) {
 
 /** Injection token that determines the scroll handling while a tooltip is visible. */
 export const MTX_TOOLTIP_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrategy>(
-  'mtx-tooltip-scroll-strategy'
+  'mtx-tooltip-scroll-strategy',
+  {
+    providedIn: 'root',
+    factory: () => {
+      const overlay = inject(Overlay);
+      return () => overlay.scrollStrategies.reposition({ scrollThrottle: SCROLL_THROTTLE_MS });
+    },
+  }
 );
 
 /** @docs-private */
@@ -158,14 +165,26 @@ const UNBOUNDED_ANCHOR_GAP = 8;
 const MIN_HEIGHT = 24;
 const MAX_WIDTH = 200;
 
-@Directive()
-export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
-  implements OnDestroy, AfterViewInit
-{
-  _overlayRef!: OverlayRef | null;
-  _tooltipInstance!: T | null;
+/**
+ * Directive that attaches a material design tooltip to the host element. Animates the showing and
+ * hiding of a tooltip provided position (defaults to below the element).
+ *
+ * https://material.io/design/components/tooltips.html
+ */
+@Directive({
+  selector: '[mtxTooltip]',
+  exportAs: 'mtxTooltip',
+  host: {
+    'class': 'mtx-mdc-tooltip-trigger',
+    '[class.mtx-mdc-tooltip-disabled]': 'disabled',
+  },
+  standalone: true,
+})
+export class MtxTooltip implements OnDestroy, AfterViewInit {
+  _overlayRef: OverlayRef | null = null;
+  _tooltipInstance: TooltipComponent | null = null;
 
-  private _portal!: ComponentPortal<T>;
+  private _portal!: ComponentPortal<TooltipComponent>;
   private _position: TooltipPosition = 'below';
   private _positionAtOrigin: boolean = false;
   private _disabled: boolean = false;
@@ -173,10 +192,10 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
   private _scrollStrategy: () => ScrollStrategy;
   private _viewInitialized = false;
   private _pointerExitEventsInitialized = false;
-  protected abstract readonly _tooltipComponent: ComponentType<T>;
-  protected _viewportMargin = 8;
+  private readonly _tooltipComponent = TooltipComponent;
+  private _viewportMargin = 8;
   private _currentPosition!: TooltipPosition;
-  protected readonly _cssClassPrefix: string = 'mtx';
+  private readonly _cssClassPrefix: string = 'mtx-mdc';
 
   /** Allows the user to define the position of the tooltip relative to the parent element */
   @Input('mtxTooltipPosition')
@@ -196,10 +215,15 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
     }
   }
 
+  /**
+   * Whether tooltip should be relative to the click or touch origin
+   * instead of outside the element bounding box.
+   */
   @Input('mtxTooltipPositionAtOrigin')
   get positionAtOrigin(): boolean {
     return this._positionAtOrigin;
   }
+
   set positionAtOrigin(value: BooleanInput) {
     this._positionAtOrigin = coerceBooleanProperty(value);
     this._detach();
@@ -233,7 +257,7 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
     this._showDelay = coerceNumberProperty(value);
   }
 
-  private _showDelay = this._defaultOptions.showDelay;
+  private _showDelay!: number;
 
   /** The default delay in ms before hiding the tooltip after hide is called */
   @Input('mtxTooltipHideDelay')
@@ -249,7 +273,7 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
     }
   }
 
-  private _hideDelay = this._defaultOptions.hideDelay;
+  private _hideDelay!: number;
 
   /**
    * How touch gestures should be handled by the tooltip. On touch devices the tooltip directive
@@ -341,7 +365,7 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
   private _document: Document;
 
   /** Timer started at the last `touchstart` event. */
-  private _touchstartTimeout!: number;
+  private _touchstartTimeout!: ReturnType<typeof setTimeout>;
 
   /** Emits when the component is destroyed. */
   private readonly _destroyed = new Subject<void>();
@@ -355,8 +379,10 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
     private _platform: Platform,
     private _ariaDescriber: AriaDescriber,
     private _focusMonitor: FocusMonitor,
-    scrollStrategy: any,
+    @Inject(MTX_TOOLTIP_SCROLL_STRATEGY) scrollStrategy: any,
     protected _dir: Directionality,
+    @Optional()
+    @Inject(MTX_TOOLTIP_DEFAULT_OPTIONS)
     private _defaultOptions: MtxTooltipDefaultOptions,
     @Inject(DOCUMENT) _document: any
   ) {
@@ -364,6 +390,9 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
     this._document = _document;
 
     if (_defaultOptions) {
+      this._showDelay = _defaultOptions.showDelay;
+      this._hideDelay = _defaultOptions.hideDelay;
+
       if (_defaultOptions.position) {
         this.position = _defaultOptions.position;
       }
@@ -382,6 +411,8 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
         this._updatePosition(this._overlayRef);
       }
     });
+
+    this._viewportMargin = MIN_VIEWPORT_TOOLTIP_THRESHOLD;
   }
 
   ngAfterViewInit() {
@@ -574,6 +605,19 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
 
   /** Adds the configured offset to a position. Used as a hook for child classes. */
   protected _addOffset(position: ConnectedPosition): ConnectedPosition {
+    const offset = UNBOUNDED_ANCHOR_GAP;
+    const isLtr = !this._dir || this._dir.value == 'ltr';
+
+    if (position.originY === 'top') {
+      position.offsetY = -offset;
+    } else if (position.originY === 'bottom') {
+      position.offsetY = offset;
+    } else if (position.originX === 'start') {
+      position.offsetX = isLtr ? -offset : offset;
+    } else if (position.originX === 'end') {
+      position.offsetX = isLtr ? offset : -offset;
+    }
+
     return position;
   }
 
@@ -768,10 +812,7 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
           // because it can prevent click events from firing on the element.
           this._setupPointerExitEventsIfNeeded();
           clearTimeout(this._touchstartTimeout);
-          this._touchstartTimeout = setTimeout(
-            () => this.show(undefined, origin),
-            LONGPRESS_DELAY
-          ) as any;
+          this._touchstartTimeout = setTimeout(() => this.show(undefined, origin), LONGPRESS_DELAY);
         },
       ]);
     }
@@ -870,74 +911,29 @@ export abstract class _MtxTooltipBase<T extends _TooltipComponentBase>
 }
 
 /**
- * Directive that attaches a material design tooltip to the host element. Animates the showing and
- * hiding of a tooltip provided position (defaults to below the element).
- *
- * https://material.io/design/components/tooltips.html
+ * Internal component that wraps the tooltip's content.
+ * @docs-private
  */
-@Directive({
-  selector: '[mtxTooltip]',
-  exportAs: 'mtxTooltip',
+@Component({
+  selector: 'mtx-tooltip-component',
+  templateUrl: 'tooltip.html',
+  styleUrls: ['tooltip.scss'],
+  encapsulation: ViewEncapsulation.None,
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    class: 'mtx-mdc-tooltip-trigger',
+    // Forces the element to have a layout in IE and Edge. This fixes issues where the element
+    // won't be rendered if the animations are disabled or there is no web animations polyfill.
+    '[style.zoom]': 'isVisible() ? 1 : null',
+    '(mouseleave)': '_handleMouseLeave($event)',
+    'aria-hidden': 'true',
   },
   standalone: true,
+  imports: [NgClass, NgTemplateOutlet, MtxIsTemplateRefPipe],
 })
-export class MtxTooltip extends _MtxTooltipBase<TooltipComponent> {
-  protected override readonly _tooltipComponent = TooltipComponent;
-  protected override readonly _cssClassPrefix = 'mtx-mdc';
+export class TooltipComponent implements OnDestroy {
+  /* Whether the tooltip text overflows to multiple lines */
+  _isMultiline = false;
 
-  constructor(
-    overlay: Overlay,
-    elementRef: ElementRef<HTMLElement>,
-    scrollDispatcher: ScrollDispatcher,
-    viewContainerRef: ViewContainerRef,
-    ngZone: NgZone,
-    platform: Platform,
-    ariaDescriber: AriaDescriber,
-    focusMonitor: FocusMonitor,
-    @Inject(MTX_TOOLTIP_SCROLL_STRATEGY) scrollStrategy: any,
-    @Optional() dir: Directionality,
-    @Optional() @Inject(MTX_TOOLTIP_DEFAULT_OPTIONS) defaultOptions: MtxTooltipDefaultOptions,
-    @Inject(DOCUMENT) _document: any
-  ) {
-    super(
-      overlay,
-      elementRef,
-      scrollDispatcher,
-      viewContainerRef,
-      ngZone,
-      platform,
-      ariaDescriber,
-      focusMonitor,
-      scrollStrategy,
-      dir,
-      defaultOptions,
-      _document
-    );
-    this._viewportMargin = MIN_VIEWPORT_TOOLTIP_THRESHOLD;
-  }
-
-  protected override _addOffset(position: ConnectedPosition): ConnectedPosition {
-    const offset = UNBOUNDED_ANCHOR_GAP;
-    const isLtr = !this._dir || this._dir.value == 'ltr';
-
-    if (position.originY === 'top') {
-      position.offsetY = -offset;
-    } else if (position.originY === 'bottom') {
-      position.offsetY = offset;
-    } else if (position.originX === 'start') {
-      position.offsetX = isLtr ? -offset : offset;
-    } else if (position.originX === 'end') {
-      position.offsetX = isLtr ? offset : -offset;
-    }
-
-    return position;
-  }
-}
-
-@Directive()
-export abstract class _TooltipComponentBase implements OnDestroy {
   /** Message to display in the tooltip */
   message!: string | TemplateRef<any>;
 
@@ -948,10 +944,10 @@ export abstract class _TooltipComponentBase implements OnDestroy {
   tooltipClass!: string | string[] | Set<string> | { [key: string]: any };
 
   /** The timeout ID of any current timer set to show the tooltip */
-  private _showTimeoutId: number | undefined;
+  private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
   /** The timeout ID of any current timer set to hide the tooltip */
-  private _hideTimeoutId: number | undefined;
+  private _hideTimeoutId: ReturnType<typeof setTimeout> | undefined;
 
   /** Element that caused the tooltip to open. */
   _triggerElement!: HTMLElement;
@@ -963,7 +959,12 @@ export abstract class _TooltipComponentBase implements OnDestroy {
   private _animationsDisabled: boolean;
 
   /** Reference to the internal tooltip element. */
-  abstract _tooltip: ElementRef<HTMLElement>;
+  @ViewChild('tooltip', {
+    // Use a static query here since we interact directly with
+    // the DOM which can happen before `ngAfterViewInit`.
+    static: true,
+  })
+  _tooltip!: ElementRef<HTMLElement>;
 
   /** Whether interactions on the page should close the tooltip */
   private _closeOnInteraction = false;
@@ -975,13 +976,14 @@ export abstract class _TooltipComponentBase implements OnDestroy {
   private readonly _onHide: Subject<void> = new Subject();
 
   /** Name of the show animation and the class that toggles it. */
-  protected abstract readonly _showAnimation: string;
+  private readonly _showAnimation = 'mtx-mdc-tooltip-show';
 
   /** Name of the hide animation and the class that toggles it. */
-  protected abstract readonly _hideAnimation: string;
+  private readonly _hideAnimation = 'mtx-mdc-tooltip-hide';
 
   constructor(
     private _changeDetectorRef: ChangeDetectorRef,
+    protected _elementRef: ElementRef<HTMLElement>,
     @Optional() @Inject(ANIMATION_MODULE_TYPE) animationMode?: string
   ) {
     this._animationsDisabled = animationMode === 'NoopAnimations';
@@ -993,12 +995,14 @@ export abstract class _TooltipComponentBase implements OnDestroy {
    */
   show(delay: number): void {
     // Cancel the delayed hide if it is scheduled
-    clearTimeout(this._hideTimeoutId);
+    if (this._hideTimeoutId != null) {
+      clearTimeout(this._hideTimeoutId);
+    }
 
     this._showTimeoutId = setTimeout(() => {
       this._toggleVisibility(true);
       this._showTimeoutId = undefined;
-    }, delay) as any;
+    }, delay);
   }
 
   /**
@@ -1007,12 +1011,14 @@ export abstract class _TooltipComponentBase implements OnDestroy {
    */
   hide(delay: number): void {
     // Cancel the delayed show if it is scheduled
-    clearTimeout(this._showTimeoutId);
+    if (this._showTimeoutId != null) {
+      clearTimeout(this._showTimeoutId);
+    }
 
     this._hideTimeoutId = setTimeout(() => {
       this._toggleVisibility(false);
       this._hideTimeoutId = undefined;
-    }, delay) as any;
+    }, delay);
   }
 
   /** Returns an observable that notifies when the tooltip has been hidden from view. */
@@ -1066,7 +1072,16 @@ export abstract class _TooltipComponentBase implements OnDestroy {
    * This method is only needed by the mdc-tooltip, and so it is only implemented
    * in the mdc-tooltip, not here.
    */
-  protected _onShow(): void {}
+  protected _onShow(): void {
+    this._isMultiline = this._isTooltipMultiline();
+    this._markForCheck();
+  }
+
+  /** Whether the tooltip text has overflown to the next line */
+  private _isTooltipMultiline() {
+    const rect = this._elementRef.nativeElement.getBoundingClientRect();
+    return rect.height > MIN_HEIGHT && rect.width >= MAX_WIDTH;
+  }
 
   /** Event listener dispatched when an animation on the tooltip finishes. */
   _handleAnimationEnd({ animationName }: AnimationEvent) {
@@ -1077,8 +1092,14 @@ export abstract class _TooltipComponentBase implements OnDestroy {
 
   /** Cancels any pending animation sequences. */
   _cancelPendingAnimations() {
-    clearTimeout(this._showTimeoutId);
-    clearTimeout(this._hideTimeoutId);
+    if (this._showTimeoutId != null) {
+      clearTimeout(this._showTimeoutId);
+    }
+
+    if (this._hideTimeoutId != null) {
+      clearTimeout(this._hideTimeoutId);
+    }
+
     this._showTimeoutId = this._hideTimeoutId = undefined;
   }
 
@@ -1125,59 +1146,5 @@ export abstract class _TooltipComponentBase implements OnDestroy {
       tooltip.classList.add('_mtx-animation-noopable');
       this._finalizeAnimation(isVisible);
     }
-  }
-}
-
-/**
- * Internal component that wraps the tooltip's content.
- * @docs-private
- */
-@Component({
-  selector: 'mtx-tooltip-component',
-  templateUrl: 'tooltip.html',
-  styleUrls: ['tooltip.scss'],
-  encapsulation: ViewEncapsulation.None,
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  host: {
-    // Forces the element to have a layout in IE and Edge. This fixes issues where the element
-    // won't be rendered if the animations are disabled or there is no web animations polyfill.
-    '[style.zoom]': 'isVisible() ? 1 : null',
-    '(mouseleave)': '_handleMouseLeave($event)',
-    'aria-hidden': 'true',
-  },
-  standalone: true,
-  imports: [NgClass, NgTemplateOutlet, MtxIsTemplateRefPipe],
-})
-export class TooltipComponent extends _TooltipComponentBase {
-  /* Whether the tooltip text overflows to multiple lines */
-  _isMultiline = false;
-
-  /** Reference to the internal tooltip element. */
-  @ViewChild('tooltip', {
-    // Use a static query here since we interact directly with
-    // the DOM which can happen before `ngAfterViewInit`.
-    static: true,
-  })
-  _tooltip!: ElementRef<HTMLElement>;
-  _showAnimation = 'mtx-mdc-tooltip-show';
-  _hideAnimation = 'mtx-mdc-tooltip-hide';
-
-  constructor(
-    changeDetectorRef: ChangeDetectorRef,
-    private _elementRef: ElementRef<HTMLElement>,
-    @Optional() @Inject(ANIMATION_MODULE_TYPE) animationMode?: string
-  ) {
-    super(changeDetectorRef, animationMode);
-  }
-
-  protected override _onShow(): void {
-    this._isMultiline = this._isTooltipMultiline();
-    this._markForCheck();
-  }
-
-  /** Whether the tooltip text has overflown to the next line */
-  private _isTooltipMultiline() {
-    const rect = this._elementRef.nativeElement.getBoundingClientRect();
-    return rect.height > MIN_HEIGHT && rect.width >= MAX_WIDTH;
   }
 }

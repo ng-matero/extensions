@@ -12,9 +12,6 @@
   .mtx-mdc-tooltip {
     // Add the official slots for the MDC tooltip.
     @include mdc-plain-tooltip-theme.theme-styles($mdc-tooltip-token-slots);
-
-    // Add default values for MDC tooltip tokens that aren't outputted by the theming API.
-    @include mdc-plain-tooltip-theme.theme(m2-mdc-plain-tooltip.get-unthemable-tokens());
   }
 }
 
@@ -65,7 +62,8 @@
   }
 }
 
-.mtx-mdc-tooltip-panel-non-interactive {
+// We need the additional specificity here, because it can be overridden by `.cdk-overlay-panel`.
+.mtx-mdc-tooltip-panel.mtx-mdc-tooltip-panel-non-interactive {
   pointer-events: none;
 }
 
