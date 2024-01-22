@@ -1,15 +1,27 @@
-@forward './alert/alert-theme' as alert-* show alert-theme;
-@forward './button/button-theme' as button-* show button-theme;
-@forward './colorpicker/colorpicker-theme' as colorpicker-* show colorpicker-theme;
-@forward './datetimepicker/datetimepicker-theme' as datetimepicker-* show datetimepicker-theme;
-@forward './drawer/drawer-theme' as drawer-* show drawer-theme;
-@forward './grid/grid-theme' as grid-* show grid-theme;
-@forward './loader/loader-theme' as loader-* show loader-theme;
-@forward './popover/popover-theme' as popover-* show popover-theme;
-@forward './progress/progress-theme' as progress-* show progress-theme;
-@forward './select/select-theme' as select-* show select-theme;
-@forward './split/split-theme' as split-* show split-theme;
-@forward './tooltip/tooltip-theme' as tooltip-* show tooltip-theme;
+@forward './alert/alert-theme' as alert-* show alert-theme,
+alert-color, alert-typography, alert-density, alert-base;
+@forward './button/button-theme' as button-* show button-theme,
+button-color, button-typography, button-density, button-base;
+@forward './colorpicker/colorpicker-theme' as colorpicker-* show colorpicker-theme,
+colorpicker-color, colorpicker-typography, colorpicker-density, colorpicker-base;
+@forward './datetimepicker/datetimepicker-theme' as datetimepicker-* show datetimepicker-theme,
+datetimepicker-color, datetimepicker-typography, datetimepicker-density, datetimepicker-base;
+@forward './drawer/drawer-theme' as drawer-* show drawer-theme,
+drawer-color, drawer-typography, drawer-density, drawer-base;
+@forward './grid/grid-theme' as grid-* show grid-theme,
+grid-color, grid-typography, grid-density, grid-base;
+@forward './loader/loader-theme' as loader-* show loader-theme,
+loader-color, loader-typography, loader-density, loader-base;
+@forward './popover/popover-theme' as popover-* show popover-theme,
+popover-color, popover-typography, popover-density, popover-base;
+@forward './progress/progress-theme' as progress-* show progress-theme,
+progress-color, progress-typography, progress-density, progress-base;
+@forward './select/select-theme' as select-* show select-theme,
+select-color, select-typography, select-density, select-base;
+@forward './split/split-theme' as split-* show split-theme,
+split-color, split-typography, split-density, split-base;
+@forward './tooltip/tooltip-theme' as tooltip-* show tooltip-theme,
+tooltip-color, tooltip-typography, tooltip-density, tooltip-base;
 
 @forward './core/theming/all-theme' show all-component-themes, all-component-bases;
 @forward './core/color/all-color' show all-component-colors;
