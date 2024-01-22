@@ -28,6 +28,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
   booleanAttribute,
+  inject,
 } from '@angular/core';
 import { CanColor, ThemePalette, mixinColor } from '@angular/material/core';
 import { Subject, Subscription, merge } from 'rxjs';
@@ -44,7 +45,14 @@ let colorpickerUid = 0;
 
 /** Injection token that determines the scroll handling while the panel is open. */
 export const MTX_COLORPICKER_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrategy>(
-  'mtx-colorpicker-scroll-strategy'
+  'mtx-colorpicker-scroll-strategy',
+  {
+    providedIn: 'root',
+    factory: () => {
+      const overlay = inject(Overlay);
+      return () => overlay.scrollStrategies.reposition();
+    },
+  }
 );
 
 export function MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {

@@ -25,6 +25,7 @@ import {
   Optional,
   Output,
   ViewContainerRef,
+  inject,
 } from '@angular/core';
 import { merge, of as observableOf, Subscription } from 'rxjs';
 import { filter, take, takeUntil } from 'rxjs/operators';
@@ -41,7 +42,14 @@ import {
 
 /** Injection token that determines the scroll handling while the popover is open. */
 export const MTX_POPOVER_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrategy>(
-  'mtx-popover-scroll-strategy'
+  'mtx-popover-scroll-strategy',
+  {
+    providedIn: 'root',
+    factory: () => {
+      const overlay = inject(Overlay);
+      return () => overlay.scrollStrategies.reposition();
+    },
+  }
 );
 
 /** @docs-private */
