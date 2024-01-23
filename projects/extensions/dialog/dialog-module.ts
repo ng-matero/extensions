@@ -18,7 +18,6 @@ import { MtxDialog } from './dialog';
     MtxDialogContainer,
   ],
   exports: [MtxDialogContainer],
-
   providers: [MtxDialog],
 })
 export class MtxDialogModule {}

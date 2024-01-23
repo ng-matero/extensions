@@ -47,7 +47,7 @@ export class MtxCheckboxBase {
     },
   ],
   standalone: true,
-  imports: [MatCheckbox, MtxToObservablePipe, AsyncPipe, FormsModule],
+  imports: [FormsModule, MatCheckbox, MtxToObservablePipe, AsyncPipe],
 })
 export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueAccessor {
   @ContentChildren(forwardRef(() => MatCheckbox), { descendants: true })

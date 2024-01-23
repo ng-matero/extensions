@@ -15,7 +15,7 @@ import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angul
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 import { ThemePalette } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
-import { MatMenu, MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 
 import { MtxToObservablePipe } from '@ng-matero/extensions/core';
 import {
@@ -43,7 +43,9 @@ import {
     MatFabButton,
     MatMiniFabButton,
     MatIcon,
-    MatMenuModule,
+    MatMenu,
+    MatMenuTrigger,
+    MatMenuItem,
     MatCheckbox,
     CdkDrag,
     CdkDropList,
