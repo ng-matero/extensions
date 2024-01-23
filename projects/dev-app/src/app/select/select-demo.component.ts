@@ -1,12 +1,38 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { ThemePalette } from '@angular/material/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatOption, ThemePalette } from '@angular/material/core';
+import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatSelect } from '@angular/material/select';
+import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MtxSelect } from '@ng-matero/extensions/select';
 
 @Component({
   selector: 'dev-app-select',
   templateUrl: './select-demo.component.html',
   styleUrls: ['./select-demo.component.scss'],
+  standalone: true,
+  imports: [
+    MatCheckbox,
+    ReactiveFormsModule,
+    FormsModule,
+    MatRadioGroup,
+    MatRadioButton,
+    MatFormField,
+    MatLabel,
+    MtxSelect,
+    MatHint,
+    MatError,
+    MatIcon,
+    MatSuffix,
+    MatSlideToggle,
+    MatSelect,
+    NgFor,
+    MatOption,
+  ],
 })
 export class SelectDemoComponent {
   themeColor: ThemePalette = 'primary';

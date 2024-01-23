@@ -1,9 +1,16 @@
-import { Directionality } from '@angular/cdk/bidi';
+import { Dir, Directionality } from '@angular/cdk/bidi';
+import { DOCUMENT, NgClass, NgFor } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Inject, ViewEncapsulation } from '@angular/core';
-import { DevAppRippleOptions } from './ripple-options';
-import { DevAppDirectionality } from './dev-app-directionality';
-import { DOCUMENT } from '@angular/common';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatListItem, MatNavList } from '@angular/material/list';
+import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
+import { MatToolbar } from '@angular/material/toolbar';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { DevAppDirectionality } from './dev-app-directionality';
+import { DevAppRippleOptions } from './ripple-options';
 
 const isDarkThemeKey = 'MATERIAL_EXTENSIONS_DEV_APP_DARK_THEME';
 
@@ -15,6 +22,25 @@ export const ANIMATIONS_STORAGE_KEY = 'MATERIAL_EXTENSIONS_ANIMATIONS_DISABLED';
   templateUrl: 'dev-app-layout.html',
   styleUrls: ['dev-app-layout.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    MatSidenavContainer,
+    MatSidenav,
+    MatNavList,
+    NgFor,
+    MatListItem,
+    RouterLinkActive,
+    RouterLink,
+    MatButton,
+    NgClass,
+    MatToolbar,
+    Dir,
+    MatIconButton,
+    MatIcon,
+    MatMenuTrigger,
+    MatMenu,
+    MatMenuItem,
+  ],
 })
 export class DevAppLayout {
   readonly darkThemeClass = 'demo-unicorn-dark-theme';

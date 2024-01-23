@@ -1,4 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { DevAppLayout } from './dev-app/dev-app-layout';
 
 /** Root component for the dev-app demos. */
 @Component({
@@ -9,5 +11,7 @@ import { Component, ViewEncapsulation } from '@angular/core';
     </dev-app-layout>
   `,
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [DevAppLayout, RouterOutlet],
 })
 export class AppComponent {}

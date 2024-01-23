@@ -1,13 +1,16 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
-import { UntypedFormControl, Validators } from '@angular/forms';
-
-import { MtxCheckboxGroupOption } from '@ng-matero/extensions/checkbox-group';
+import { FormsModule, ReactiveFormsModule, UntypedFormControl, Validators } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MtxCheckboxGroup, MtxCheckboxGroupOption } from '@ng-matero/extensions/checkbox-group';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'dev-checkbox-group-demo',
   templateUrl: './checkbox-group-demo.component.html',
   styleUrls: ['./checkbox-group-demo.component.scss'],
+  standalone: true,
+  imports: [MatCheckbox, MtxCheckboxGroup, ReactiveFormsModule, FormsModule, JsonPipe],
 })
 export class CheckboxGroupDemoComponent {
   foods: MtxCheckboxGroupOption[] = [

@@ -1,6 +1,17 @@
-import { Component, OnInit, Inject } from '@angular/core';
-
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgIf } from '@angular/common';
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import {
+  MAT_DIALOG_DATA,
+  MatDialogActions,
+  MatDialogClose,
+  MatDialogContent,
+  MatDialogRef,
+  MatDialogTitle,
+} from '@angular/material/dialog';
+import { MatFormField } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -8,11 +19,16 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'dev-dialog-demo',
   templateUrl: './dialog-demo.component.html',
   styleUrls: ['./dialog-demo.component.scss'],
+  standalone: true,
+  imports: [MatButton, NgIf],
 })
 export class DialogDemoComponent implements OnInit {
   animal?: string;
 
-  constructor(private mtxDialog: MtxDialog, public translate: TranslateService) {}
+  constructor(
+    private mtxDialog: MtxDialog,
+    public translate: TranslateService
+  ) {}
 
   ngOnInit() {}
 
@@ -94,6 +110,18 @@ export class DialogDemoComponent implements OnInit {
       <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
     </div>
   `,
+  standalone: true,
+  imports: [
+    MatDialogTitle,
+    MatDialogContent,
+    MatFormField,
+    MatInput,
+    ReactiveFormsModule,
+    FormsModule,
+    MatDialogActions,
+    MatButton,
+    MatDialogClose,
+  ],
 })
 export class DialogOverviewComponent {
   constructor(

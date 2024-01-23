@@ -1,13 +1,44 @@
 import { Component } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import { MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { ColorFormat } from '@ng-matero/extensions/colorpicker';
+import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
+import {
+  ColorFormat,
+  MtxColorpicker,
+  MtxColorpickerInput,
+  MtxColorpickerToggle,
+  MtxColorpickerToggleIcon,
+} from '@ng-matero/extensions/colorpicker';
+import { ColorSketchModule } from 'ngx-color/sketch';
 
 @Component({
   selector: 'dev-colorpicker-demo',
   templateUrl: './colorpicker-demo.component.html',
   styleUrls: ['./colorpicker-demo.component.scss'],
+  standalone: true,
+  imports: [
+    MatRadioGroup,
+    ReactiveFormsModule,
+    FormsModule,
+    MatRadioButton,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MtxColorpickerInput,
+    MtxColorpickerToggle,
+    MatSuffix,
+    MtxColorpicker,
+    MatHint,
+    MatError,
+    MatSlideToggle,
+    MatIcon,
+    MtxColorpickerToggleIcon,
+    ColorSketchModule,
+  ],
 })
 export class ColorPickerDemoComponent {
   themeColor: ThemePalette = 'primary';

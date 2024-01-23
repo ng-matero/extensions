@@ -1,9 +1,14 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MtxPhotoviewer } from '@ng-matero/extensions/photoviewer/photoviewer';
 
 @Component({
   selector: 'dev-photoviewer-demo',
   templateUrl: 'photoviewer-demo.component.html',
   styleUrls: ['photoviewer-demo.component.scss'],
+  standalone: true,
+  imports: [MatButton, MtxPhotoviewer, NgFor, NgIf],
 })
 export class PhotoviewerDemoComponent {
   images1 = [
