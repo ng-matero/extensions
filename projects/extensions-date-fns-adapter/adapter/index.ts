@@ -1,6 +1,10 @@
-import { NgModule } from '@angular/core';
-import { DateFnsModule, MatDateFnsModule } from '@angular/material-date-fns-adapter';
-import { DatetimeAdapter, MTX_DATETIME_FORMATS } from '@ng-matero/extensions/core';
+import { NgModule, Provider } from '@angular/core';
+import { DateFnsModule, provideDateFnsAdapter } from '@angular/material-date-fns-adapter';
+import {
+  DatetimeAdapter,
+  MTX_DATETIME_FORMATS,
+  MtxDatetimeFormats,
+} from '@ng-matero/extensions/core';
 import { DateFnsDateTimeAdapter } from './date-fns-adapter';
 import { MTX_DATE_FNS_FORMATS } from './date-fns-formats';
 
@@ -9,18 +13,22 @@ export * from './date-fns-formats';
 
 @NgModule({
   imports: [DateFnsModule],
-  providers: [
-    {
-      provide: DatetimeAdapter,
-      useClass: DateFnsDateTimeAdapter,
-    },
-  ],
+  providers: [{ provide: DatetimeAdapter, useClass: DateFnsDateTimeAdapter }],
 })
 export class DateFnsDatetimeModule {}
 
+export function provideDateFnsDatetimeAdapter(
+  formats: MtxDatetimeFormats = MTX_DATE_FNS_FORMATS
+): Provider[] {
+  return [
+    provideDateFnsAdapter(),
+    { provide: DatetimeAdapter, useClass: DateFnsDateTimeAdapter },
+    { provide: MTX_DATETIME_FORMATS, useValue: formats },
+  ];
+}
+
 @NgModule({
-  imports: [MatDateFnsModule, DateFnsDatetimeModule],
-  providers: [{ provide: MTX_DATETIME_FORMATS, useValue: MTX_DATE_FNS_FORMATS }],
+  providers: [provideDateFnsDatetimeAdapter()],
 })
 export class MtxDateFnsDatetimeModule {}
 
