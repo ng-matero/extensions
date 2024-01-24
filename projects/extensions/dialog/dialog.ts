@@ -26,7 +26,7 @@ const defaults: MtxDialogData = {
   width: '300px',
 };
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MtxDialog {
   constructor(public dialog: MatDialog) {}
 

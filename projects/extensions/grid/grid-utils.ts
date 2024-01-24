@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MtxGridColumn } from './interfaces';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MtxGridUtils {
   constructor() {}
 

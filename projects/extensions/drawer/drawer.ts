@@ -30,7 +30,7 @@ export const MTX_DRAWER_DEFAULT_OPTIONS = new InjectionToken<MtxDrawerConfig>(
 /**
  * Service to trigger Material Design bottom sheets.
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MtxDrawer implements OnDestroy {
   private _drawerRefAtThisLevel: MtxDrawerRef<any> | null = null;
 

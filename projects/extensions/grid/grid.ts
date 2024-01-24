@@ -35,19 +35,27 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatSort, MatSortHeader, Sort, SortDirection } from '@angular/material/sort';
 import {
+  MatCell,
+  MatCellDef,
+  MatColumnDef,
+  MatFooterCell,
+  MatFooterCellDef,
   MatFooterRow,
   MatFooterRowDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
+  MatHeaderRow,
   MatHeaderRowDef,
+  MatRow,
   MatRowDef,
   MatTable,
   MatTableDataSource,
-  MatTableModule,
 } from '@angular/material/table';
 
 import { MtxIsTemplateRefPipe, MtxToObservablePipe } from '@ng-matero/extensions/core';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
-import { MatColumnResizeModule } from './column-resize/column-resize-module';
+import { MatColumnResize, MatResizable } from './column-resize';
 import { MtxGridExpansionToggle } from './expansion-toggle';
 import { MtxGridColClassPipe, MtxGridRowClassPipe } from './grid-pipes';
 import { MtxGridUtils } from './grid-utils';
@@ -145,20 +153,34 @@ export class MtxGridSelectableCell {
     NgTemplateOutlet,
     MatProgressBar,
     MatIconButton,
-    MatTableModule,
+    MatCheckbox,
+    MatTable,
+    MatColumnDef,
+    MatHeaderRowDef,
+    MatHeaderRow,
+    MatRowDef,
+    MatRow,
+    MatFooterRowDef,
+    MatFooterRow,
+    MatHeaderCellDef,
+    MatHeaderCell,
+    MatCellDef,
+    MatCell,
+    MatFooterCellDef,
+    MatFooterCell,
     MatSort,
     MatSortHeader,
-    MatCheckbox,
     MatPaginator,
-    MatColumnResizeModule,
+    MatResizable,
+    MatColumnResize,
     MtxGridCell,
     MtxGridColumnMenu,
     MtxGridSelectableCell,
     MtxGridExpansionToggle,
-    MtxToObservablePipe,
     MtxIsTemplateRefPipe,
     MtxGridColClassPipe,
     MtxGridRowClassPipe,
+    MtxToObservablePipe,
   ],
 })
 export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
