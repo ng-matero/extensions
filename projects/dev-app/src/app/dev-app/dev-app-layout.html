@@ -1,25 +1,27 @@
 <mat-sidenav-container class="demo-container">
   <mat-sidenav #navigation role="navigation">
     <mat-nav-list>
-      <a *ngFor="let navItem of navItems"
-         mat-list-item
-         (click)="navigation.close()"
-         routerLinkActive
-         #routerLinkActiveInstance="routerLinkActive"
-         [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
-         [routerLink]="[navItem.route]">
-        {{navItem.name}}
-      </a>
+      @for (navItem of navItems; track navItem) {
+        <a
+          mat-list-item
+          (click)="navigation.close()"
+          routerLinkActive
+          #routerLinkActiveInstance="routerLinkActive"
+          [attr.tabindex]="routerLinkActiveInstance.isActive ? 0 : -1"
+          [routerLink]="[navItem.route]">
+          {{navItem.name}}
+        </a>
+      }
     </mat-nav-list>
     <button mat-button tabindex="-1" (click)="navigation.close()">CLOSE</button>
   </mat-sidenav>
   <!--
-    Note that the setup with the directionality and density is a little convoluted, but it's
-    organized this way so that we can test MDC's density styles in both LTR and RTL. Their mixins
-    output styles in the form of `[dir='rtl'] .density-min .foo` which means that the `dir` has to
-    be one level above the density class in the DOM. At the same time, we want the density to apply
-    to the toolbar while always keeping it in LTR at the same time.
-   -->
+  Note that the setup with the directionality and density is a little convoluted, but it's
+  organized this way so that we can test MDC's density styles in both LTR and RTL. Their mixins
+  output styles in the form of `[dir='rtl'] .density-min .foo` which means that the `dir` has to
+  be one level above the density class in the DOM. At the same time, we want the density to apply
+  to the toolbar while always keeping it in LTR at the same time.
+  -->
   <main [attr.dir]="dir.value" [ngClass]="getDensityClass()" class="demo-main">
     <!-- The toolbar should always be in the LTR direction -->
     <mat-toolbar color="primary" dir="ltr">
@@ -34,9 +36,11 @@
           </button>
 
           <mat-menu #menu="matMenu">
-            <button mat-menu-item *ngFor="let lang of langs" (click)="useLanguage(lang.value)">
-              <span>{{ lang.label }}</span>
-            </button>
+            @for (lang of langs; track lang) {
+              <button mat-menu-item (click)="useLanguage(lang.value)">
+                <span>{{ lang.label }}</span>
+              </button>
+            }
           </mat-menu>
 
           <button mat-icon-button (click)="toggleFullscreen()" title="Toggle fullscreen">
@@ -55,11 +59,11 @@
             {{strongFocus ? 'Disable strong focus' : 'Enable strong focus'}}
           </button>
           <button mat-button (click)="dir.value = (dir.value === 'rtl' ? 'ltr' : 'rtl')"
-                  title="Toggle between RTL and LTR">
+            title="Toggle between RTL and LTR">
             {{dir.value.toUpperCase()}}
           </button>
           <button mat-button (click)="selectNextDensity()"
-                  title="Use next density scale: {{densityScales[getNextDensityIndex()]}}">
+            title="Use next density scale: {{densityScales[getNextDensityIndex()]}}">
             Density scale: {{densityScales[this.currentDensityIndex]}}
           </button>
         </div>

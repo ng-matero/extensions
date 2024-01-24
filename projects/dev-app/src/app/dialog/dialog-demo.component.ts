@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -20,7 +19,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './dialog-demo.component.html',
   styleUrls: ['./dialog-demo.component.scss'],
   standalone: true,
-  imports: [MatButton, NgIf],
+  imports: [MatButton],
 })
 export class DialogDemoComponent implements OnInit {
   animal?: string;

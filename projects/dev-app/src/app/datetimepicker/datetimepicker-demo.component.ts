@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
   FormsModule,
@@ -39,7 +38,6 @@ import { Subscription } from 'rxjs';
     MatLabel,
     MatSuffix,
     MatInput,
-    NgIf,
     MatError,
     MatButton,
     MatCard,

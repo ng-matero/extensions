@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -28,7 +27,6 @@ import {
     MatLabel,
     MatInput,
     MatButton,
-    NgIf,
   ],
 })
 export class DrawerDemoComponent {

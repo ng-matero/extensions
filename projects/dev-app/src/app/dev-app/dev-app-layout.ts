@@ -1,5 +1,5 @@
 import { Dir, Directionality } from '@angular/cdk/bidi';
-import { DOCUMENT, NgClass, NgFor } from '@angular/common';
+import { DOCUMENT, NgClass } from '@angular/common';
 import { ChangeDetectorRef, Component, ElementRef, Inject, ViewEncapsulation } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -27,7 +27,6 @@ export const ANIMATIONS_STORAGE_KEY = 'MATERIAL_EXTENSIONS_ANIMATIONS_DISABLED';
     MatSidenavContainer,
     MatSidenav,
     MatNavList,
-    NgFor,
     MatListItem,
     RouterLinkActive,
     RouterLink,

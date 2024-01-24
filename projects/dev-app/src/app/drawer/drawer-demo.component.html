@@ -35,7 +35,9 @@
   <li>
     <button mat-raised-button (click)="open()">Pick one</button>
   </li>
-  <li *ngIf="animal">
-    You chose: <i>{{animal}}</i>
-  </li>
+  @if (animal) {
+    <li>
+      You chose: <i>{{animal}}</i>
+    </li>
+  }
 </ol>

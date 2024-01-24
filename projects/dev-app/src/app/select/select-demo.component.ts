@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -30,7 +29,6 @@ import { MtxSelect } from '@ng-matero/extensions/select';
     MatSuffix,
     MatSlideToggle,
     MatSelect,
-    NgFor,
     MatOption,
   ],
 })

@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -21,7 +20,6 @@ import { MtxLoader, MtxLoaderType } from '@ng-matero/extensions/loader';
     MatSlider,
     MatSliderThumb,
     MtxLoader,
-    NgIf,
   ],
 })
 export class LoaderDemoComponent {
