@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -11,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [MatRadioGroup, FormsModule, NgFor, MatRadioButton, MatButton],
+  imports: [FormsModule, MatRadioGroup, MatRadioButton, MatButton],
 })
 export class AppComponent {
   constructor(

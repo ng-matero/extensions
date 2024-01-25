@@ -3,8 +3,8 @@
   You should use prefix <code>mtx</code> instead of <code>mat</code>.
 </p>
 
-<ng-container *ngIf="route.data | async as data">
-  <ng-container *ngFor="let exampleData of data.examples">
+@if (route.data | async; as data) {
+  @for (exampleData of data.examples; track exampleData) {
     <example-viewer [exampleData]="exampleData"></example-viewer>
-  </ng-container>
-</ng-container>
+  }
+}

@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -18,7 +17,6 @@ import { MtxTooltip, TooltipPosition } from '@ng-matero/extensions/tooltip';
     MatFormField,
     MatLabel,
     MatSelect,
-    NgFor,
     MatOption,
     MatButton,
     MtxTooltip,

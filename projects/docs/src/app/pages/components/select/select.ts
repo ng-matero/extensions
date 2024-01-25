@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { MtxAlert } from '@ng-matero/extensions/alert';
@@ -23,7 +23,7 @@ import { selectOptionExampleConfig } from './examples/mtx-option';
     `,
   ],
   standalone: true,
-  imports: [MtxAlert, NgIf, NgFor, DocHeadingComponent, ExampleViewer, AsyncPipe],
+  imports: [MtxAlert, DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class SelectOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -33,7 +33,7 @@ export class SelectOverviewComponent {
   selector: 'app-select-api',
   templateUrl: './select-api.html',
   standalone: true,
-  imports: [NgIf, DocViewer, AsyncPipe],
+  imports: [DocViewer, AsyncPipe],
 })
 export class SelectApiComponent {
   constructor(public route: ActivatedRoute) {}

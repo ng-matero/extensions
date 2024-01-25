@@ -1,13 +1,15 @@
 <div class="docs-component-viewer-nav">
   <div class="docs-component-viewer-nav-content">
     <mat-nav-list>
-      <a *ngFor="let component of menus"
-         mat-list-item
-         routerLinkActive="docs-component-viewer-sidenav-item-selected"
-         #routerLinkActiveInstance="routerLinkActive"
-         [routerLink]="['/components/' + component.id]">
-        {{component.name}}
-      </a>
+      @for (component of menus; track component) {
+        <a
+          mat-list-item
+          routerLinkActive="docs-component-viewer-sidenav-item-selected"
+          #routerLinkActiveInstance="routerLinkActive"
+          [routerLink]="['/components/' + component.id]">
+          {{component.name}}
+        </a>
+      }
     </mat-nav-list>
   </div>
 </div>

@@ -1,5 +1,4 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatListItem, MatNavList } from '@angular/material/list';
 import { Params, RouterLink, RouterLinkActive } from '@angular/router';
@@ -95,7 +94,7 @@ export const COMPONENTS_MENU = [
     ]),
   ],
   standalone: true,
-  imports: [MatNavList, NgFor, MatListItem, RouterLinkActive, RouterLink],
+  imports: [MatNavList, MatListItem, RouterLinkActive, RouterLink],
 })
 export class ComponentNav {
   @Input() params: Observable<Params> | undefined;

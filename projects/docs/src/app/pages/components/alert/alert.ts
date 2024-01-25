@@ -1,18 +1,15 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
-import {
-  AlertConfigurableComponent,
-  alertConfigurableExampleConfig,
-} from './examples/configurable';
+import { alertConfigurableExampleConfig } from './examples/configurable';
 
 @Component({
   selector: 'app-alert-overview',
   templateUrl: './alert-overview.html',
   standalone: true,
-  imports: [NgIf, NgFor, ExampleViewer, AsyncPipe],
+  imports: [ExampleViewer, AsyncPipe],
 })
 export class AlertOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -22,7 +19,7 @@ export class AlertOverviewComponent {
   selector: 'app-alert-api',
   templateUrl: './alert-api.html',
   standalone: true,
-  imports: [NgIf, DocViewer, AsyncPipe],
+  imports: [DocViewer, AsyncPipe],
 })
 export class AlertApiComponent {
   constructor(public route: ActivatedRoute) {}

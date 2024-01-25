@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -19,7 +18,7 @@ import { MtxDialog } from '@ng-matero/extensions/dialog';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [MatButton, NgIf],
+  imports: [MatButton],
 })
 export class AppComponent {
   animal?: string;

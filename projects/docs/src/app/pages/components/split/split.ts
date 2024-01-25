@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
@@ -9,7 +9,7 @@ import { splitBasicExampleConfig } from './examples/basic';
   selector: 'app-split-overview',
   templateUrl: './split-overview.html',
   standalone: true,
-  imports: [NgIf, NgFor, ExampleViewer, AsyncPipe],
+  imports: [ExampleViewer, AsyncPipe],
 })
 export class SplitOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -19,7 +19,7 @@ export class SplitOverviewComponent {
   selector: 'app-split-api',
   templateUrl: './split-api.html',
   standalone: true,
-  imports: [NgIf, DocViewer, AsyncPipe],
+  imports: [DocViewer, AsyncPipe],
 })
 export class SplitApiComponent {
   constructor(public route: ActivatedRoute) {}

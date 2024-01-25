@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
@@ -10,7 +10,7 @@ import { progressCustomColorExampleConfig } from './examples/custom-color';
   selector: 'app-progress-overview',
   templateUrl: './progress-overview.html',
   standalone: true,
-  imports: [NgIf, NgFor, ExampleViewer, AsyncPipe],
+  imports: [ExampleViewer, AsyncPipe],
 })
 export class ProgressOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -20,7 +20,7 @@ export class ProgressOverviewComponent {
   selector: 'app-progress-api',
   templateUrl: './progress-api.html',
   standalone: true,
-  imports: [NgIf, DocViewer, AsyncPipe],
+  imports: [DocViewer, AsyncPipe],
 })
 export class ProgressApiComponent {
   constructor(public route: ActivatedRoute) {}

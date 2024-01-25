@@ -9,8 +9,8 @@
   If you use the <code>mtxPhotoviewer</code>, you should import the <code>photoviewer</code> styles.
 </mtx-alert>
 
-<ng-container *ngIf="route.data | async as data">
-  <ng-container *ngFor="let exampleData of data.examples">
+@if (route.data | async; as data) {
+  @for (exampleData of data.examples; track exampleData) {
     <example-viewer [exampleData]="exampleData"></example-viewer>
-  </ng-container>
-</ng-container>
+  }
+}

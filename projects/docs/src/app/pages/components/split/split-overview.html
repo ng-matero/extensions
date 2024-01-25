@@ -1,13 +1,13 @@
 <p>
   The <code>mtx-split</code> is cloned from <a
-     href="https://github.com/bertrandg/angular-split" target="_blank">angular-split</a>.
+href="https://github.com/bertrandg/angular-split" target="_blank">angular-split</a>.
 </p>
 <p>
   I modify the component name and improve the styles and some classnames.
 </p>
 
-<ng-container *ngIf="route.data | async as data">
-  <ng-container *ngFor="let exampleData of data.examples">
+@if (route.data | async; as data) {
+  @for (exampleData of data.examples; track exampleData) {
     <example-viewer [exampleData]="exampleData"></example-viewer>
-  </ng-container>
-</ng-container>
+  }
+}

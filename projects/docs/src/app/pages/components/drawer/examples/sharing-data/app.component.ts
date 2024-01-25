@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton, MatIconButton } from '@angular/material/button';
@@ -12,7 +11,7 @@ import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [MatFormField, MatLabel, MatInput, FormsModule, MatButton, NgIf],
+  imports: [FormsModule, MatFormField, MatLabel, MatInput, MatButton],
 })
 export class AppComponent {
   animal?: string;

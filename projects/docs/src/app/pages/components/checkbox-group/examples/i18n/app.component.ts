@@ -1,4 +1,4 @@
-import { JsonPipe, NgFor } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [MatRadioGroup, FormsModule, NgFor, MatRadioButton, MtxCheckboxGroup, JsonPipe],
+  imports: [MatRadioGroup, FormsModule, MatRadioButton, MtxCheckboxGroup, JsonPipe],
 })
 export class AppComponent {
   foods: MtxCheckboxGroupOption[] = [

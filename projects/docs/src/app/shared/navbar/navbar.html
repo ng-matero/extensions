@@ -1,23 +1,25 @@
 <ng-progress color="white"></ng-progress>
 
 <nav class="docs-navbar-header" aria-label="Top Toolbar">
-  <div class="skip-link-wrapper" [class.cdk-visually-hidden]="skipLinkHidden" *ngIf="skipLinkHref">
-    <a mat-raised-button [href]="skipLinkHref" (focus)="skipLinkHidden = false"
-       (blur)="skipLinkHidden = true" color="accent">
-      Skip to main content
-    </a>
-  </div>
+  @if (skipLinkHref) {
+    <div class="skip-link-wrapper" [class.cdk-visually-hidden]="skipLinkHidden">
+      <a mat-raised-button [href]="skipLinkHref" (focus)="skipLinkHidden = false"
+        (blur)="skipLinkHidden = true" color="accent">
+        Skip to main content
+      </a>
+    </div>
+  }
 
   <a mat-button class="docs-button" routerLink="/" aria-label="Angular Material">
     <img class="logo" matButtonIcon src="assets/img/angular-white-transparent.svg" alt="angular"
-         aria-hidden="true">
+      aria-hidden="true">
     <span>Material Extensions</span>
   </a>
 
   <a mat-button class="docs-navbar-hide-small docs-button" routerLink="components"
-     routerLinkActive="docs-navbar-header-item-selected">Components</a>
+  routerLinkActive="docs-navbar-header-item-selected">Components</a>
   <a mat-button class="docs-navbar-hide-small docs-button" routerLink="guides"
-     routerLinkActive="docs-navbar-header-item-selected">Guides</a>
+  routerLinkActive="docs-navbar-header-item-selected">Guides</a>
 
   <div class="flex-spacer"></div>
 
@@ -26,19 +28,19 @@
   </button>
 
   <a mat-button class="docs-button docs-navbar-hide-small"
-     href="https://github.com/ng-matero/extensions" target="_blank"
-     aria-label="GitHub Repository">
+    href="https://github.com/ng-matero/extensions" target="_blank"
+    aria-label="GitHub Repository">
     <img class="logo" matButtonIcon
-         src="assets/img/github-circle-white-transparent.svg"
-         alt="angular" aria-hidden="true">
+      src="assets/img/github-circle-white-transparent.svg"
+      alt="angular" aria-hidden="true">
     GitHub
   </a>
   <a mat-icon-button class="docs-button docs-navbar-show-small"
-     href="https://github.com/ng-matero/extensions" target="_blank"
-     aria-label="GitHub Repository">
+    href="https://github.com/ng-matero/extensions" target="_blank"
+    aria-label="GitHub Repository">
     <img class="logo docs-navbar--github-logo" matButtonIcon
-         src="assets/img/github-circle-white-transparent.svg"
-         alt="angular" aria-hidden="true">
+      src="assets/img/github-circle-white-transparent.svg"
+      alt="angular" aria-hidden="true">
   </a>
 </nav>
 <nav class="docs-navbar docs-navbar-show-small" aria-label="Section Nav Bar">

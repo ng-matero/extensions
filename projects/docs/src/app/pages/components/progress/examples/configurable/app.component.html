@@ -19,7 +19,9 @@
 
 <section>
   <mat-checkbox [(ngModel)]="striped">Striped</mat-checkbox>
-  <mat-checkbox *ngIf="striped" [(ngModel)]="animate">Animate</mat-checkbox>
+  @if (striped) {
+    <mat-checkbox [(ngModel)]="animate">Animate</mat-checkbox>
+  }
 </section>
 
 <section>
@@ -48,9 +50,9 @@
 <h2>Result</h2>
 
 <mtx-progress [type]="type"
-              [value]="value"
-              [striped]="striped" [animate]="animate"
-              [height]="height + 'px'"
-              [foreground]="foreground" [background]="background">
+  [value]="value"
+  [striped]="striped" [animate]="animate"
+  [height]="height + 'px'"
+  [foreground]="foreground" [background]="background">
   {{height>=14 ? value + '%' : ''}}
 </mtx-progress>

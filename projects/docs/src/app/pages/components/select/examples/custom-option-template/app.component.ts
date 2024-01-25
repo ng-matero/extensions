@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -22,7 +21,6 @@ import { MtxSelect, MtxSelectOptionTemplate } from '@ng-matero/extensions/select
     FormsModule,
     MatFormField,
     MatLabel,
-    NgIf,
     MatCard,
     MatCardHeader,
     MatCardTitle,

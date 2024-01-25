@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
@@ -11,7 +10,7 @@ import { EXAMPLE_DATA } from '../../data';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [MatRadioGroup, FormsModule, NgFor, MatRadioButton, MtxGrid],
+  imports: [FormsModule, MatRadioGroup, MatRadioButton, MtxGrid],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
@@ -12,7 +12,7 @@ import { dialogOriginalExampleConfig } from './examples/original';
   selector: 'app-dialog-overview',
   templateUrl: './dialog-overview.html',
   standalone: true,
-  imports: [NgIf, NgFor, DocHeadingComponent, ExampleViewer, AsyncPipe],
+  imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class DialogOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -22,7 +22,7 @@ export class DialogOverviewComponent {
   selector: 'app-dialog-api',
   templateUrl: './dialog-api.html',
   standalone: true,
-  imports: [NgIf, DocViewer, AsyncPipe],
+  imports: [DocViewer, AsyncPipe],
 })
 export class DialogApiComponent {
   constructor(public route: ActivatedRoute) {}

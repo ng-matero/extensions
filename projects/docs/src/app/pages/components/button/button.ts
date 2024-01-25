@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
@@ -9,7 +9,7 @@ import { buttonConfigurableExampleConfig } from './examples/configurable';
   selector: 'app-button-overview',
   templateUrl: './button-overview.html',
   standalone: true,
-  imports: [NgIf, NgFor, ExampleViewer, AsyncPipe],
+  imports: [ExampleViewer, AsyncPipe],
 })
 export class ButtonOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -19,7 +19,7 @@ export class ButtonOverviewComponent {
   selector: 'app-button-api',
   templateUrl: './button-api.html',
   standalone: true,
-  imports: [NgIf, DocViewer, AsyncPipe],
+  imports: [DocViewer, AsyncPipe],
 })
 export class ButtonApiComponent {
   constructor(public route: ActivatedRoute) {}

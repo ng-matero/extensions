@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
@@ -14,7 +14,7 @@ import { checkboxGroupSelectAllExampleConfig } from './examples/select-all';
   selector: 'app-checkbox-group-overview',
   templateUrl: './checkbox-group-overview.html',
   standalone: true,
-  imports: [NgIf, NgFor, DocHeadingComponent, ExampleViewer, AsyncPipe],
+  imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class CheckboxGroupOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -24,7 +24,7 @@ export class CheckboxGroupOverviewComponent {
   selector: 'app-checkbox-group-api',
   templateUrl: './checkbox-group-api.html',
   standalone: true,
-  imports: [NgIf, DocViewer, AsyncPipe],
+  imports: [DocViewer, AsyncPipe],
 })
 export class CheckboxGroupApiComponent {
   constructor(public route: ActivatedRoute) {}

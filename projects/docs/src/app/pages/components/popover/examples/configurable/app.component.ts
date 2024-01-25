@@ -1,5 +1,4 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
-import { NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -26,14 +25,12 @@ import {
   imports: [
     FormsModule,
     MatFormField,
+    MatInput,
     MatLabel,
     MatSelect,
     MatOption,
-    NgFor,
-    MatInput,
     MatRadioGroup,
     MatRadioButton,
-    NgIf,
     MatCheckbox,
     MatSlider,
     MatSliderThumb,

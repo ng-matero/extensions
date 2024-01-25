@@ -1,5 +1,5 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatDrawerToggleResult, MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 import { ActivatedRoute, Params, RouterOutlet } from '@angular/router';
@@ -20,7 +20,6 @@ const SMALL_WIDTH_BREAKPOINT = 959;
   standalone: true,
   imports: [
     MatSidenavContainer,
-    NgIf,
     MatSidenav,
     ComponentNav,
     ComponentPageHeader,

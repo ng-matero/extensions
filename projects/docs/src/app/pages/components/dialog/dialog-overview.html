@@ -2,9 +2,9 @@
   The Extensions dialog is a wrapper of Angular Material dialog.
 </p>
 
-<ng-container *ngIf="route.data | async as data">
-  <ng-container *ngFor="let exampleData of data.examples">
+@if (route.data | async; as data) {
+  @for (exampleData of data.examples; track exampleData) {
     <doc-heading [text]="exampleData.title"></doc-heading>
     <example-viewer [exampleData]="exampleData"></example-viewer>
-  </ng-container>
-</ng-container>
+  }
+}

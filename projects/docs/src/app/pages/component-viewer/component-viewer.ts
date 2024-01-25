@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { MatTabLink, MatTabNav, MatTabNavPanel } from '@angular/material/tabs';
 import {
@@ -22,7 +21,6 @@ import { ComponentPageTitle } from '../page-title/page-title';
   imports: [
     MatTabNav,
     NavigationFocus,
-    NgFor,
     MatTabLink,
     RouterLinkActive,
     RouterLink,

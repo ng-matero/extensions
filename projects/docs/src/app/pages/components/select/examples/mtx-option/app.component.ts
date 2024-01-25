@@ -1,4 +1,4 @@
-import { JsonPipe, NgFor } from '@angular/common';
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
@@ -15,7 +15,6 @@ import { MtxOption, MtxSelect } from '@ng-matero/extensions/select';
     MatButton,
     MatFormField,
     MatLabel,
-    NgFor,
     MatHint,
     MatError,
     JsonPipe,

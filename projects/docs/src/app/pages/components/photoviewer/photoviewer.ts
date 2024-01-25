@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { MtxAlert } from '@ng-matero/extensions/alert';
@@ -12,7 +12,7 @@ import { photoviewerThumbnailExampleConfig } from './examples/thumbnail';
   selector: 'app-photoviewer-overview',
   templateUrl: './photoviewer-overview.html',
   standalone: true,
-  imports: [MtxAlert, NgIf, NgFor, ExampleViewer, AsyncPipe],
+  imports: [MtxAlert, ExampleViewer, AsyncPipe],
 })
 export class PhotoviewerOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -22,7 +22,7 @@ export class PhotoviewerOverviewComponent {
   selector: 'app-photoviewer-api',
   templateUrl: './photoviewer-api.html',
   standalone: true,
-  imports: [NgIf, DocViewer, AsyncPipe],
+  imports: [DocViewer, AsyncPipe],
 })
 export class PhotoviewerApiComponent {
   constructor(public route: ActivatedRoute) {}

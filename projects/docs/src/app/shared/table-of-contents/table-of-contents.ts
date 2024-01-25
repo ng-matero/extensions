@@ -1,4 +1,4 @@
-import { DOCUMENT, NgFor } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -40,7 +40,7 @@ interface Link {
   styleUrls: ['./table-of-contents.scss'],
   templateUrl: './table-of-contents.html',
   standalone: true,
-  imports: [NgFor],
+  imports: [],
 })
 export class TableOfContents implements OnInit, AfterViewInit, OnDestroy {
   @Input() container!: string;

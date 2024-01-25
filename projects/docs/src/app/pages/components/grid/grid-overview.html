@@ -3,9 +3,9 @@
   row selectable, multiple row selectable, row expandable, column hiding, column moving and so on.
 </p>
 
-<ng-container *ngIf="route.data | async as data">
-  <ng-container *ngFor="let exampleData of data.examples">
+@if (route.data | async; as data) {
+  @for (exampleData of data.examples; track exampleData) {
     <doc-heading [text]="exampleData.title"></doc-heading>
     <example-viewer [exampleData]="exampleData"></example-viewer>
-  </ng-container>
-</ng-container>
+  }
+}

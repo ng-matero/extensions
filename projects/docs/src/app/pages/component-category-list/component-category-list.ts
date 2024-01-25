@@ -1,4 +1,3 @@
-import { NgFor } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 import { Observable, Subscription, combineLatest } from 'rxjs';
@@ -11,7 +10,7 @@ import { ComponentPageTitle } from '../page-title/page-title';
   templateUrl: './component-category-list.html',
   styleUrls: ['./component-category-list.scss'],
   standalone: true,
-  imports: [NavigationFocus, NgFor, RouterLink],
+  imports: [NavigationFocus, RouterLink],
 })
 export class ComponentCategoryList implements OnInit, OnDestroy {
   params!: Observable<Params>;

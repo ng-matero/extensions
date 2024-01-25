@@ -1,4 +1,3 @@
-import { NgIf } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
 import { MatAnchor, MatIconAnchor, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -16,7 +15,6 @@ import { AppThemes } from '../themes';
   standalone: true,
   imports: [
     NgProgressComponent,
-    NgIf,
     MatAnchor,
     RouterLink,
     RouterLinkActive,

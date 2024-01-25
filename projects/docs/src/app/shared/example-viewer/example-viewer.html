@@ -5,33 +5,39 @@
     <div class="docs-example-viewer-title-spacer"></div>
 
     <button mat-icon-button type="button" (click)="toggleSourceView()" [matTooltip]="'View source'"
-            aria-label="View source">
+      aria-label="View source">
       <mat-icon>code</mat-icon>
     </button>
   </div>
 
-  <div class="docs-example-viewer-source" *ngIf="showSource">
-    <mat-tab-group animationDuration="0ms" mat-stretch-tabs="false">
-      <mat-tab *ngFor="let f of exampleData.files" [label]="f.file">
-        <div class="docs-example-source-wrapper">
-          <div class="button-bar">
-            <button mat-icon-button type="button" (click)="copySource(textContent)"
-                    class="docs-example-source-copy docs-example-button"
-                    [matTooltip]="'Copy example source'"
-                    title="Copy example source" aria-label="Copy example source to clipboard">
-              <mat-icon>content_copy</mat-icon>
-            </button>
-          </div>
-          <div class="code-snippet">
-            <pre class="docs-example-source" [innerHtml]="f.content" #textContent></pre>
-          </div>
-        </div>
-      </mat-tab>
-    </mat-tab-group>
-  </div>
+  @if (showSource) {
+    <div class="docs-example-viewer-source">
+      <mat-tab-group animationDuration="0ms" mat-stretch-tabs="false">
+        @for (f of exampleData.files; track f) {
+          <mat-tab [label]="f.file">
+            <div class="docs-example-source-wrapper">
+              <div class="button-bar">
+                <button mat-icon-button type="button" (click)="copySource(textContent)"
+                  class="docs-example-source-copy docs-example-button"
+                  [matTooltip]="'Copy example source'"
+                  title="Copy example source" aria-label="Copy example source to clipboard">
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </div>
+              <div class="code-snippet">
+                <pre class="docs-example-source" [innerHtml]="f.content" #textContent></pre>
+              </div>
+            </div>
+          </mat-tab>
+        }
+      </mat-tab-group>
+    </div>
+  }
 
   <div class="docs-example-viewer-body">
-    <div *ngIf="exampleData.description" [innerHtml]="exampleData.description"></div>
+    @if (exampleData.description) {
+      <div [innerHtml]="exampleData.description"></div>
+    }
 
     <ng-template #demo></ng-template>
   </div>

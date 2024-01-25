@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
   Component,
   ComponentFactoryResolver,
@@ -34,7 +33,7 @@ export interface ExampleType {
   templateUrl: './example-viewer.html',
   styleUrls: ['./example-viewer.scss'],
   standalone: true,
-  imports: [MatIconButton, MatTooltip, MatIcon, NgIf, MatTabGroup, NgFor, MatTab],
+  imports: [MatIconButton, MatTooltip, MatIcon, MatTabGroup, MatTab],
 })
 export class ExampleViewer implements OnInit, OnDestroy {
   @Input() type!: string;

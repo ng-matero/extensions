@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
@@ -10,7 +10,7 @@ import { datetimepickerTargetExampleConfig } from './examples/inline';
   selector: 'app-datetimepicker-overview',
   templateUrl: './datetimepicker-overview.html',
   standalone: true,
-  imports: [NgIf, NgFor, ExampleViewer, AsyncPipe],
+  imports: [ExampleViewer, AsyncPipe],
 })
 export class DatetimepickerOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -20,7 +20,7 @@ export class DatetimepickerOverviewComponent {
   selector: 'app-datetimepicker-api',
   templateUrl: './datetimepicker-api.html',
   standalone: true,
-  imports: [NgIf, DocViewer, AsyncPipe],
+  imports: [DocViewer, AsyncPipe],
 })
 export class DatetimepickerApiComponent {
   constructor(public route: ActivatedRoute) {}
