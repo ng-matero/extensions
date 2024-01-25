@@ -1,7 +1,6 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { SharedModule } from '../../../shared';
+import { ActivatedRoute, RouterModule, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import {
@@ -29,32 +28,23 @@ export class AlertApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
-@NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      {
-        path: 'overview',
-        component: AlertOverviewComponent,
-        pathMatch: 'full',
-        data: {
-          examples: [alertConfigurableExampleConfig],
-        },
-      },
-      {
-        path: 'api',
-        component: AlertApiComponent,
-        pathMatch: 'full',
-        data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./alert.md'),
-        },
-      },
-      { path: '**', redirectTo: 'overview' },
-    ]),
-    AlertOverviewComponent,
-    AlertApiComponent,
-    AlertConfigurableComponent,
-  ],
-})
-export class AlertModule {}
+export const routes: Routes = [
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  {
+    path: 'overview',
+    component: AlertOverviewComponent,
+    pathMatch: 'full',
+    data: {
+      examples: [alertConfigurableExampleConfig],
+    },
+  },
+  {
+    path: 'api',
+    component: AlertApiComponent,
+    pathMatch: 'full',
+    data: {
+      content: require('!!raw-loader!!highlight-loader!markdown-loader!./alert.md'),
+    },
+  },
+  { path: '**', redirectTo: 'overview' },
+];

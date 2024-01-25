@@ -1,19 +1,12 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { MtxAlert } from '@ng-matero/extensions/alert';
-import { SharedModule } from '../../../shared';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
-import { PhotoviewerBasicComponent, photoviewerBasicExampleConfig } from './examples/basic';
-import {
-  PhotoviewerSimpleImageComponent,
-  photoviewerSimpleImageExampleConfig,
-} from './examples/simple-image';
-import {
-  PhotoviewerThumbnailComponent,
-  photoviewerThumbnailExampleConfig,
-} from './examples/thumbnail';
+import { photoviewerBasicExampleConfig } from './examples/basic';
+import { photoviewerSimpleImageExampleConfig } from './examples/simple-image';
+import { photoviewerThumbnailExampleConfig } from './examples/thumbnail';
 
 @Component({
   selector: 'app-photoviewer-overview',
@@ -35,38 +28,27 @@ export class PhotoviewerApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
-@NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      {
-        path: 'overview',
-        component: PhotoviewerOverviewComponent,
-        pathMatch: 'full',
-        data: {
-          examples: [
-            photoviewerBasicExampleConfig,
-            photoviewerSimpleImageExampleConfig,
-            photoviewerThumbnailExampleConfig,
-          ],
-        },
-      },
-      {
-        path: 'api',
-        component: PhotoviewerApiComponent,
-        pathMatch: 'full',
-        data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./photoviewer.md'),
-        },
-      },
-      { path: '**', redirectTo: 'overview' },
-    ]),
-    PhotoviewerOverviewComponent,
-    PhotoviewerApiComponent,
-    PhotoviewerBasicComponent,
-    PhotoviewerSimpleImageComponent,
-    PhotoviewerThumbnailComponent,
-  ],
-})
-export class PhotoviewerModule {}
+export const routes: Routes = [
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  {
+    path: 'overview',
+    component: PhotoviewerOverviewComponent,
+    pathMatch: 'full',
+    data: {
+      examples: [
+        photoviewerBasicExampleConfig,
+        photoviewerSimpleImageExampleConfig,
+        photoviewerThumbnailExampleConfig,
+      ],
+    },
+  },
+  {
+    path: 'api',
+    component: PhotoviewerApiComponent,
+    pathMatch: 'full',
+    data: {
+      content: require('!!raw-loader!!highlight-loader!markdown-loader!./photoviewer.md'),
+    },
+  },
+  { path: '**', redirectTo: 'overview' },
+];

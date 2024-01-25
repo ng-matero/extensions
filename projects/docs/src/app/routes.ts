@@ -10,9 +10,7 @@ export const DOCS_APP_ROUTES: Routes = [
   {
     path: 'components',
     loadChildren: () =>
-      import('./pages/component-sidenav/component-sidenav.module').then(
-        m => m.ComponentSidenavModule
-      ),
+      import('./pages/component-sidenav/component-sidenav.routes').then(m => m.routes),
   },
   { path: '**', redirectTo: '' },
 ];

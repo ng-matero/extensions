@@ -1,23 +1,12 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { ColorSketchModule } from 'ngx-color/sketch';
-import { SharedModule } from '../../../shared';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
-import { ColorpickerBasicComponent, colorpickerBasicExampleConfig } from './examples/basic';
-import {
-  ColorpickerCustomIconComponent,
-  colorpickerCustomIconExampleConfig,
-} from './examples/custom-icon';
-import {
-  ColorpickerCustomPickerComponent,
-  colorpickerCustomPickerExampleConfig,
-} from './examples/custom-picker';
-import {
-  ColorpickerDisabledComponent,
-  colorpickerDisabledExampleConfig,
-} from './examples/disabled';
+import { colorpickerBasicExampleConfig } from './examples/basic';
+import { colorpickerCustomIconExampleConfig } from './examples/custom-icon';
+import { colorpickerCustomPickerExampleConfig } from './examples/custom-picker';
+import { colorpickerDisabledExampleConfig } from './examples/disabled';
 
 @Component({
   selector: 'app-colorpicker-overview',
@@ -39,41 +28,28 @@ export class ColorPickerApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
-@NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      {
-        path: 'overview',
-        component: ColorPickerOverviewComponent,
-        pathMatch: 'full',
-        data: {
-          examples: [
-            colorpickerBasicExampleConfig,
-            colorpickerCustomPickerExampleConfig,
-            colorpickerCustomIconExampleConfig,
-            colorpickerDisabledExampleConfig,
-          ],
-        },
-      },
-      {
-        path: 'api',
-        component: ColorPickerApiComponent,
-        pathMatch: 'full',
-        data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./colorpicker.md'),
-        },
-      },
-      { path: '**', redirectTo: 'overview' },
-    ]),
-    ColorSketchModule,
-    ColorPickerOverviewComponent,
-    ColorPickerApiComponent,
-    ColorpickerBasicComponent,
-    ColorpickerCustomPickerComponent,
-    ColorpickerCustomIconComponent,
-    ColorpickerDisabledComponent,
-  ],
-})
-export class ColorPickerModule {}
+export const routes: Routes = [
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  {
+    path: 'overview',
+    component: ColorPickerOverviewComponent,
+    pathMatch: 'full',
+    data: {
+      examples: [
+        colorpickerBasicExampleConfig,
+        colorpickerCustomPickerExampleConfig,
+        colorpickerCustomIconExampleConfig,
+        colorpickerDisabledExampleConfig,
+      ],
+    },
+  },
+  {
+    path: 'api',
+    component: ColorPickerApiComponent,
+    pathMatch: 'full',
+    data: {
+      content: require('!!raw-loader!!highlight-loader!markdown-loader!./colorpicker.md'),
+    },
+  },
+  { path: '**', redirectTo: 'overview' },
+];

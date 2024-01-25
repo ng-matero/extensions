@@ -1,17 +1,10 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { SharedModule } from '../../../shared';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
-import {
-  DatetimepickerConfigurableComponent,
-  datetimepickerConfigurableExampleConfig,
-} from './examples/configurable';
-import {
-  DatetimepickerTargetComponent,
-  datetimepickerTargetExampleConfig,
-} from './examples/inline';
+import { datetimepickerConfigurableExampleConfig } from './examples/configurable';
+import { datetimepickerTargetExampleConfig } from './examples/inline';
 
 @Component({
   selector: 'app-datetimepicker-overview',
@@ -33,33 +26,23 @@ export class DatetimepickerApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
-@NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      {
-        path: 'overview',
-        component: DatetimepickerOverviewComponent,
-        pathMatch: 'full',
-        data: {
-          examples: [datetimepickerConfigurableExampleConfig, datetimepickerTargetExampleConfig],
-        },
-      },
-      {
-        path: 'api',
-        component: DatetimepickerApiComponent,
-        pathMatch: 'full',
-        data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./datetimepicker.md'),
-        },
-      },
-      { path: '**', redirectTo: 'overview' },
-    ]),
-    DatetimepickerOverviewComponent,
-    DatetimepickerApiComponent,
-    DatetimepickerConfigurableComponent,
-    DatetimepickerTargetComponent,
-  ],
-})
-export class DatetimepickerModule {}
+export const routes: Routes = [
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  {
+    path: 'overview',
+    component: DatetimepickerOverviewComponent,
+    pathMatch: 'full',
+    data: {
+      examples: [datetimepickerConfigurableExampleConfig, datetimepickerTargetExampleConfig],
+    },
+  },
+  {
+    path: 'api',
+    component: DatetimepickerApiComponent,
+    pathMatch: 'full',
+    data: {
+      content: require('!!raw-loader!!highlight-loader!markdown-loader!./datetimepicker.md'),
+    },
+  },
+  { path: '**', redirectTo: 'overview' },
+];

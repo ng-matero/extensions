@@ -1,13 +1,9 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { SharedModule } from '../../../shared';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
-import {
-  ButtonConfigurableComponent,
-  buttonConfigurableExampleConfig,
-} from './examples/configurable';
+import { buttonConfigurableExampleConfig } from './examples/configurable';
 
 @Component({
   selector: 'app-button-overview',
@@ -29,32 +25,23 @@ export class ButtonApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
-@NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      {
-        path: 'overview',
-        component: ButtonOverviewComponent,
-        pathMatch: 'full',
-        data: {
-          examples: [buttonConfigurableExampleConfig],
-        },
-      },
-      {
-        path: 'api',
-        component: ButtonApiComponent,
-        pathMatch: 'full',
-        data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./button.md'),
-        },
-      },
-      { path: '**', redirectTo: 'overview' },
-    ]),
-    ButtonOverviewComponent,
-    ButtonApiComponent,
-    ButtonConfigurableComponent,
-  ],
-})
-export class ButtonModule {}
+export const routes: Routes = [
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  {
+    path: 'overview',
+    component: ButtonOverviewComponent,
+    pathMatch: 'full',
+    data: {
+      examples: [buttonConfigurableExampleConfig],
+    },
+  },
+  {
+    path: 'api',
+    component: ButtonApiComponent,
+    pathMatch: 'full',
+    data: {
+      content: require('!!raw-loader!!highlight-loader!markdown-loader!./button.md'),
+    },
+  },
+  { path: '**', redirectTo: 'overview' },
+];

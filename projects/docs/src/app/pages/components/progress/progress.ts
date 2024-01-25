@@ -1,17 +1,10 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { SharedModule } from '../../../shared';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
-import {
-  ProgressConfigurableComponent,
-  progressConfigurableExampleConfig,
-} from './examples/configurable';
-import {
-  ProgressCustomColorComponent,
-  progressCustomColorExampleConfig,
-} from './examples/custom-color';
+import { progressConfigurableExampleConfig } from './examples/configurable';
+import { progressCustomColorExampleConfig } from './examples/custom-color';
 
 @Component({
   selector: 'app-progress-overview',
@@ -33,33 +26,23 @@ export class ProgressApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
-@NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      {
-        path: 'overview',
-        component: ProgressOverviewComponent,
-        pathMatch: 'full',
-        data: {
-          examples: [progressConfigurableExampleConfig, progressCustomColorExampleConfig],
-        },
-      },
-      {
-        path: 'api',
-        component: ProgressApiComponent,
-        pathMatch: 'full',
-        data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./progress.md'),
-        },
-      },
-      { path: '**', redirectTo: 'overview' },
-    ]),
-    ProgressOverviewComponent,
-    ProgressApiComponent,
-    ProgressConfigurableComponent,
-    ProgressCustomColorComponent,
-  ],
-})
-export class ProgressModule {}
+export const routes: Routes = [
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  {
+    path: 'overview',
+    component: ProgressOverviewComponent,
+    pathMatch: 'full',
+    data: {
+      examples: [progressConfigurableExampleConfig, progressCustomColorExampleConfig],
+    },
+  },
+  {
+    path: 'api',
+    component: ProgressApiComponent,
+    pathMatch: 'full',
+    data: {
+      content: require('!!raw-loader!!highlight-loader!markdown-loader!./progress.md'),
+    },
+  },
+  { path: '**', redirectTo: 'overview' },
+];

@@ -1,25 +1,15 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { MtxAlert } from '@ng-matero/extensions/alert';
-import { SharedModule } from '../../../shared';
 import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
-import { SelectBasicComponent, selectBasicExampleConfig } from './examples/basic';
-import {
-  SelectCustomLabelTemplateComponent,
-  selectCustomLabelTemplateExampleConfig,
-} from './examples/custom-label-template';
-import {
-  SelectCustomOptgroupTemplateComponent,
-  selectCustomOptgroupTemplateExampleConfig,
-} from './examples/custom-optgroup-template';
-import {
-  SelectCustomOptionTemplateComponent,
-  selectCustomOptionTemplateExampleConfig,
-} from './examples/custom-option-template';
-import { SelectOptionComponent, selectOptionExampleConfig } from './examples/mtx-option';
+import { selectBasicExampleConfig } from './examples/basic';
+import { selectCustomLabelTemplateExampleConfig } from './examples/custom-label-template';
+import { selectCustomOptgroupTemplateExampleConfig } from './examples/custom-optgroup-template';
+import { selectCustomOptionTemplateExampleConfig } from './examples/custom-option-template';
+import { selectOptionExampleConfig } from './examples/mtx-option';
 
 @Component({
   selector: 'app-select-overview',
@@ -49,42 +39,29 @@ export class SelectApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
-@NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      {
-        path: 'overview',
-        component: SelectOverviewComponent,
-        pathMatch: 'full',
-        data: {
-          examples: [
-            selectBasicExampleConfig,
-            selectOptionExampleConfig,
-            selectCustomLabelTemplateExampleConfig,
-            selectCustomOptionTemplateExampleConfig,
-            selectCustomOptgroupTemplateExampleConfig,
-          ],
-        },
-      },
-      {
-        path: 'api',
-        component: SelectApiComponent,
-        pathMatch: 'full',
-        data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./select.md'),
-        },
-      },
-      { path: '**', redirectTo: 'overview' },
-    ]),
-    SelectOverviewComponent,
-    SelectApiComponent,
-    SelectBasicComponent,
-    SelectOptionComponent,
-    SelectCustomLabelTemplateComponent,
-    SelectCustomOptionTemplateComponent,
-    SelectCustomOptgroupTemplateComponent,
-  ],
-})
-export class SelectModule {}
+export const routes: Routes = [
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  {
+    path: 'overview',
+    component: SelectOverviewComponent,
+    pathMatch: 'full',
+    data: {
+      examples: [
+        selectBasicExampleConfig,
+        selectOptionExampleConfig,
+        selectCustomLabelTemplateExampleConfig,
+        selectCustomOptionTemplateExampleConfig,
+        selectCustomOptgroupTemplateExampleConfig,
+      ],
+    },
+  },
+  {
+    path: 'api',
+    component: SelectApiComponent,
+    pathMatch: 'full',
+    data: {
+      content: require('!!raw-loader!!highlight-loader!markdown-loader!./select.md'),
+    },
+  },
+  { path: '**', redirectTo: 'overview' },
+];

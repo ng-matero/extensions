@@ -1,7 +1,7 @@
 import { Component, HostBinding, NgModule, OnInit } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
 import { RouterLink, RouterModule, Routes } from '@angular/router';
-import { SharedModule } from '../../shared';
+
 import { NavigationFocus } from '../../shared/navigation-focus/navigation-focus';
 import { ComponentPageTitle } from '../page-title/page-title';
 
@@ -25,7 +25,7 @@ export class Homepage implements OnInit {
 const routes: Routes = [{ path: '', component: Homepage }];
 
 @NgModule({
-  imports: [SharedModule, RouterModule.forChild(routes), Homepage],
+  imports: [RouterModule.forChild(routes), Homepage],
   exports: [Homepage],
 })
 export class HomepageModule {}

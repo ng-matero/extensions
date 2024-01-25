@@ -8,7 +8,9 @@
  */
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class CopierService {
   private textarea: HTMLTextAreaElement | undefined;
 

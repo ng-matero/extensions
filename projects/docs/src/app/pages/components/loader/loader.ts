@@ -1,14 +1,10 @@
 import { AsyncPipe, NgFor, NgIf } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { SharedModule } from '../../../shared';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
-import {
-  LoaderConfigurableComponent,
-  loaderConfigurableExampleConfig,
-} from './examples/configurable';
-import { LoaderSimpleComponent, loaderSimpleExampleConfig } from './examples/simple';
+import { loaderConfigurableExampleConfig } from './examples/configurable';
+import { loaderSimpleExampleConfig } from './examples/simple';
 
 @Component({
   selector: 'app-loader-overview',
@@ -30,33 +26,23 @@ export class LoaderApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
-@NgModule({
-  imports: [
-    SharedModule,
-    RouterModule.forChild([
-      { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      {
-        path: 'overview',
-        component: LoaderOverviewComponent,
-        pathMatch: 'full',
-        data: {
-          examples: [loaderConfigurableExampleConfig, loaderSimpleExampleConfig],
-        },
-      },
-      {
-        path: 'api',
-        component: LoaderApiComponent,
-        pathMatch: 'full',
-        data: {
-          content: require('!!raw-loader!!highlight-loader!markdown-loader!./loader.md'),
-        },
-      },
-      { path: '**', redirectTo: 'overview' },
-    ]),
-    LoaderOverviewComponent,
-    LoaderApiComponent,
-    LoaderConfigurableComponent,
-    LoaderSimpleComponent,
-  ],
-})
-export class LoaderModule {}
+export const routes: Routes = [
+  { path: '', redirectTo: 'overview', pathMatch: 'full' },
+  {
+    path: 'overview',
+    component: LoaderOverviewComponent,
+    pathMatch: 'full',
+    data: {
+      examples: [loaderConfigurableExampleConfig, loaderSimpleExampleConfig],
+    },
+  },
+  {
+    path: 'api',
+    component: LoaderApiComponent,
+    pathMatch: 'full',
+    data: {
+      content: require('!!raw-loader!!highlight-loader!markdown-loader!./loader.md'),
+    },
+  },
+  { path: '**', redirectTo: 'overview' },
+];
