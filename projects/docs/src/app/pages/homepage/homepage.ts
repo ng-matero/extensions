@@ -1,6 +1,6 @@
-import { Component, HostBinding, NgModule, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { MatAnchor } from '@angular/material/button';
-import { RouterLink, RouterModule, Routes } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
 import { NavigationFocus } from '../../shared/navigation-focus/navigation-focus';
 import { ComponentPageTitle } from '../page-title/page-title';
@@ -21,11 +21,3 @@ export class Homepage implements OnInit {
     this._componentPageTitle.title = '';
   }
 }
-
-const routes: Routes = [{ path: '', component: Homepage }];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes), Homepage],
-  exports: [Homepage],
-})
-export class HomepageModule {}

@@ -4,7 +4,7 @@ export const DOCS_APP_ROUTES: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () => import('./pages/homepage').then(m => m.HomepageModule),
+    loadComponent: () => import('./pages/homepage').then(m => m.Homepage),
   },
   { path: 'categories', redirectTo: '/components/categories' },
   {
