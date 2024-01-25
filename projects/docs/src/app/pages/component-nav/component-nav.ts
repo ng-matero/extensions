@@ -1,6 +1,8 @@
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { NgFor } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { Params } from '@angular/router';
+import { MatListItem, MatNavList } from '@angular/material/list';
+import { Params, RouterLink, RouterLinkActive } from '@angular/router';
 import { Observable } from 'rxjs';
 
 export const COMPONENTS_MENU = [
@@ -92,6 +94,8 @@ export const COMPONENTS_MENU = [
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4,0.0,0.2,1)')),
     ]),
   ],
+  standalone: true,
+  imports: [MatNavList, NgFor, MatListItem, RouterLinkActive, RouterLink],
 })
 export class ComponentNav {
   @Input() params: Observable<Params> | undefined;

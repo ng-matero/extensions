@@ -1,12 +1,16 @@
 import { Component, HostBinding, NgModule, OnInit } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { MatAnchor } from '@angular/material/button';
+import { RouterLink, RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared';
+import { NavigationFocus } from '../../shared/navigation-focus/navigation-focus';
 import { ComponentPageTitle } from '../page-title/page-title';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.html',
   styleUrls: ['./homepage.scss'],
+  standalone: true,
+  imports: [NavigationFocus, MatAnchor, RouterLink],
 })
 export class Homepage implements OnInit {
   @HostBinding('class.main-content') readonly mainContentClass = true;
@@ -21,8 +25,7 @@ export class Homepage implements OnInit {
 const routes: Routes = [{ path: '', component: Homepage }];
 
 @NgModule({
-  imports: [SharedModule, RouterModule.forChild(routes)],
+  imports: [SharedModule, RouterModule.forChild(routes), Homepage],
   exports: [Homepage],
-  declarations: [Homepage],
 })
 export class HomepageModule {}

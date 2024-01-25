@@ -1,9 +1,13 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { MtxPhotoviewer } from '@ng-matero/extensions/photoviewer';
 
 @Component({
   selector: 'photoviewer-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [NgFor, MtxPhotoviewer],
 })
 export class AppComponent {
   images = [

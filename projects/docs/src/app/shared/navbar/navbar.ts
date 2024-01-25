@@ -1,4 +1,10 @@
+import { NgIf } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
+import { MatAnchor, MatIconAnchor, MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { NgProgressComponent } from 'ngx-progressbar';
 import { Subscription } from 'rxjs';
 import { NavigationFocusService } from '../navigation-focus/navigation-focus.service';
 import { AppThemes } from '../themes';
@@ -7,6 +13,18 @@ import { AppThemes } from '../themes';
   selector: 'app-navbar',
   templateUrl: './navbar.html',
   styleUrls: ['./navbar.scss'],
+  standalone: true,
+  imports: [
+    NgProgressComponent,
+    NgIf,
+    MatAnchor,
+    RouterLink,
+    RouterLinkActive,
+    MatIconButton,
+    MatTooltip,
+    MatIcon,
+    MatIconAnchor,
+  ],
 })
 export class Navbar implements OnDestroy {
   private subscriptions = new Subscription();

@@ -1,23 +1,25 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { Component, NgModule } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { MtxAlert } from '@ng-matero/extensions/alert';
 import { SharedModule } from '../../../shared';
-
+import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
+import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
+import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { SelectBasicComponent, selectBasicExampleConfig } from './examples/basic';
-import { SelectOptionComponent, selectOptionExampleConfig } from './examples/mtx-option';
 import {
   SelectCustomLabelTemplateComponent,
   selectCustomLabelTemplateExampleConfig,
 } from './examples/custom-label-template';
 import {
-  SelectCustomOptionTemplateComponent,
-  selectCustomOptionTemplateExampleConfig,
-} from './examples/custom-option-template';
-import {
   SelectCustomOptgroupTemplateComponent,
   selectCustomOptgroupTemplateExampleConfig,
 } from './examples/custom-optgroup-template';
+import {
+  SelectCustomOptionTemplateComponent,
+  selectCustomOptionTemplateExampleConfig,
+} from './examples/custom-option-template';
+import { SelectOptionComponent, selectOptionExampleConfig } from './examples/mtx-option';
 
 @Component({
   selector: 'app-select-overview',
@@ -30,6 +32,8 @@ import {
       }
     `,
   ],
+  standalone: true,
+  imports: [MtxAlert, NgIf, NgFor, DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class SelectOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -38,6 +42,8 @@ export class SelectOverviewComponent {
 @Component({
   selector: 'app-select-api',
   templateUrl: './select-api.html',
+  standalone: true,
+  imports: [NgIf, DocViewer, AsyncPipe],
 })
 export class SelectApiComponent {
   constructor(public route: ActivatedRoute) {}
@@ -72,11 +78,8 @@ export class SelectApiComponent {
       },
       { path: '**', redirectTo: 'overview' },
     ]),
-  ],
-  declarations: [
     SelectOverviewComponent,
     SelectApiComponent,
-
     SelectBasicComponent,
     SelectOptionComponent,
     SelectCustomLabelTemplateComponent,

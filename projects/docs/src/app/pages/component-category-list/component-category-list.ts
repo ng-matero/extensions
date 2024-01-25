@@ -1,6 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Subscription, Observable, combineLatest } from 'rxjs';
+import { NgFor } from '@angular/common';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, RouterLink } from '@angular/router';
+import { Observable, Subscription, combineLatest } from 'rxjs';
+import { NavigationFocus } from '../../shared/navigation-focus/navigation-focus';
 import { COMPONENTS_MENU } from '../component-nav/component-nav';
 import { ComponentPageTitle } from '../page-title/page-title';
 
@@ -8,6 +10,8 @@ import { ComponentPageTitle } from '../page-title/page-title';
   selector: 'app-component-category-list',
   templateUrl: './component-category-list.html',
   styleUrls: ['./component-category-list.scss'],
+  standalone: true,
+  imports: [NavigationFocus, NgFor, RouterLink],
 })
 export class ComponentCategoryList implements OnInit, OnDestroy {
   params!: Observable<Params>;
@@ -16,7 +20,10 @@ export class ComponentCategoryList implements OnInit, OnDestroy {
 
   list = COMPONENTS_MENU;
 
-  constructor(public _componentPageTitle: ComponentPageTitle, private _route: ActivatedRoute) {}
+  constructor(
+    public _componentPageTitle: ComponentPageTitle,
+    private _route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
     // Combine params from all of the path into a single object.

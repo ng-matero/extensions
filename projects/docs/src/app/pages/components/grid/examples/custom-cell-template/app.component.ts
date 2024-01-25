@@ -1,11 +1,14 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn } from '@ng-matero/extensions/grid';
 
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MtxGrid, MatSlideToggle],
 })
 export class AppComponent implements OnInit {
   @ViewChild('statusTpl', { static: true }) statusTpl!: TemplateRef<any>;

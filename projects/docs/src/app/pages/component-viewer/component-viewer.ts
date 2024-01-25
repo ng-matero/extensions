@@ -1,6 +1,16 @@
+import { NgFor } from '@angular/common';
 import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { startWith, Subject } from 'rxjs';
+import { MatTabLink, MatTabNav, MatTabNavPanel } from '@angular/material/tabs';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
+import { Subject, startWith } from 'rxjs';
+import { NavigationFocus } from '../../shared/navigation-focus/navigation-focus';
 import { ComponentPageTitle } from '../page-title/page-title';
 
 @Component({
@@ -8,6 +18,17 @@ import { ComponentPageTitle } from '../page-title/page-title';
   templateUrl: './component-viewer.html',
   styleUrls: ['./component-viewer.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    MatTabNav,
+    NavigationFocus,
+    NgFor,
+    MatTabLink,
+    RouterLinkActive,
+    RouterLink,
+    MatTabNavPanel,
+    RouterOutlet,
+  ],
 })
 export class ComponentViewer implements OnDestroy {
   sections: Set<string> = new Set(['overview', 'api']);

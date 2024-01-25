@@ -1,12 +1,17 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
-import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn, MtxGridColumnPinOption } from '@ng-matero/extensions/grid';
+import { FormsModule } from '@angular/forms';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MtxGrid, MtxGridColumn, MtxGridColumnPinOption } from '@ng-matero/extensions/grid';
 import { TranslateService } from '@ngx-translate/core';
+import { EXAMPLE_DATA } from '../../data';
 
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MatRadioGroup, FormsModule, NgFor, MatRadioButton, MtxGrid],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

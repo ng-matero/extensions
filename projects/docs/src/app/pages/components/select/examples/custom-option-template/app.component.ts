@@ -1,9 +1,40 @@
+import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardSubtitle,
+  MatCardTitle,
+} from '@angular/material/card';
+import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
+import { MtxSelect, MtxSelectOptionTemplate } from '@ng-matero/extensions/select';
 
 @Component({
   selector: 'select-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatFormField,
+    MatLabel,
+    NgIf,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardSubtitle,
+    MatCardContent,
+    MatCardActions,
+    MatButton,
+    MatHint,
+    MatError,
+    MtxSelect,
+    MtxSelectOptionTemplate,
+  ],
 })
 export class AppComponent {
   cities = [

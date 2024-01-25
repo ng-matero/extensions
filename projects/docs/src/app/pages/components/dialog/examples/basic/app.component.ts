@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 
 @Component({
   selector: 'dialog-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MatButton],
 })
 export class AppComponent {
   constructor(private mtxDialog: MtxDialog) {}

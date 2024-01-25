@@ -1,8 +1,10 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { Component, NgModule } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { MtxAlert } from '@ng-matero/extensions/alert';
 import { SharedModule } from '../../../shared';
+import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
+import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { PhotoviewerBasicComponent, photoviewerBasicExampleConfig } from './examples/basic';
 import {
   PhotoviewerSimpleImageComponent,
@@ -16,6 +18,8 @@ import {
 @Component({
   selector: 'app-photoviewer-overview',
   templateUrl: './photoviewer-overview.html',
+  standalone: true,
+  imports: [MtxAlert, NgIf, NgFor, ExampleViewer, AsyncPipe],
 })
 export class PhotoviewerOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -24,6 +28,8 @@ export class PhotoviewerOverviewComponent {
 @Component({
   selector: 'app-photoviewer-api',
   templateUrl: './photoviewer-api.html',
+  standalone: true,
+  imports: [NgIf, DocViewer, AsyncPipe],
 })
 export class PhotoviewerApiComponent {
   constructor(public route: ActivatedRoute) {}
@@ -56,8 +62,6 @@ export class PhotoviewerApiComponent {
       },
       { path: '**', redirectTo: 'overview' },
     ]),
-  ],
-  declarations: [
     PhotoviewerOverviewComponent,
     PhotoviewerApiComponent,
     PhotoviewerBasicComponent,

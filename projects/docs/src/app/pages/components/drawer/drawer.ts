@@ -1,23 +1,25 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { Component, NgModule } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared';
-
+import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
+import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import {
   DrawerConfigurableComponent,
-  drawerConfigurableExampleConfig,
   DrawerConfigurableOverviewComponent,
+  drawerConfigurableExampleConfig,
 } from './examples/configurable';
 import {
   DrawerSharingDataComponent,
-  drawerSharingDataExampleConfig,
   DrawerSharingDataOverviewComponent,
+  drawerSharingDataExampleConfig,
 } from './examples/sharing-data';
 
 @Component({
   selector: 'app-drawer-overview',
   templateUrl: './drawer-overview.html',
+  standalone: true,
+  imports: [NgIf, NgFor, ExampleViewer, AsyncPipe],
 })
 export class DrawerOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -26,6 +28,8 @@ export class DrawerOverviewComponent {
 @Component({
   selector: 'app-drawer-api',
   templateUrl: './drawer-api.html',
+  standalone: true,
+  imports: [NgIf, DocViewer, AsyncPipe],
 })
 export class DrawerApiComponent {
   constructor(public route: ActivatedRoute) {}
@@ -54,8 +58,6 @@ export class DrawerApiComponent {
       },
       { path: '**', redirectTo: 'overview' },
     ]),
-  ],
-  declarations: [
     DrawerOverviewComponent,
     DrawerApiComponent,
     DrawerConfigurableComponent,

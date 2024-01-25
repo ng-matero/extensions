@@ -1,11 +1,16 @@
 import { Component, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
+import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn, MtxGrid } from '@ng-matero/extensions/grid';
 
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MatCheckbox, FormsModule, MatRadioGroup, MatRadioButton, MtxGrid],
 })
 export class AppComponent {
   @ViewChild('grid') grid!: MtxGrid;

@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SharedModule } from '../../shared';
 
-import { ComponentSidenav } from './component-sidenav';
 import { ComponentCategoryList } from '../component-category-list/component-category-list';
 import { ComponentNav } from '../component-nav/component-nav';
 import { ComponentPageHeader } from '../component-page-header/component-page-header';
 import { ComponentViewer } from '../component-viewer/component-viewer';
+import { ComponentSidenav } from './component-sidenav';
 
 const routes: Routes = [
   {
@@ -28,8 +28,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [SharedModule, RouterModule.forChild(routes)],
-  declarations: [
+  imports: [
+    SharedModule,
+    RouterModule.forChild(routes),
     ComponentSidenav,
     ComponentNav,
     ComponentCategoryList,

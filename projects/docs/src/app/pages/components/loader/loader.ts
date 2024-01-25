@@ -1,9 +1,9 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { Component, NgModule } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 import { SharedModule } from '../../../shared';
-
+import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
+import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import {
   LoaderConfigurableComponent,
   loaderConfigurableExampleConfig,
@@ -13,6 +13,8 @@ import { LoaderSimpleComponent, loaderSimpleExampleConfig } from './examples/sim
 @Component({
   selector: 'app-loader-overview',
   templateUrl: './loader-overview.html',
+  standalone: true,
+  imports: [NgIf, NgFor, ExampleViewer, AsyncPipe],
 })
 export class LoaderOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -21,6 +23,8 @@ export class LoaderOverviewComponent {
 @Component({
   selector: 'app-loader-api',
   templateUrl: './loader-api.html',
+  standalone: true,
+  imports: [NgIf, DocViewer, AsyncPipe],
 })
 export class LoaderApiComponent {
   constructor(public route: ActivatedRoute) {}
@@ -49,8 +53,6 @@ export class LoaderApiComponent {
       },
       { path: '**', redirectTo: 'overview' },
     ]),
-  ],
-  declarations: [
     LoaderOverviewComponent,
     LoaderApiComponent,
     LoaderConfigurableComponent,

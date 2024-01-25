@@ -1,14 +1,19 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   Component,
-  Input,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  ViewContainerRef,
   ComponentFactoryResolver,
   ComponentRef,
+  Input,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
 } from '@angular/core';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTab, MatTabGroup } from '@angular/material/tabs';
+import { MatTooltip } from '@angular/material/tooltip';
 import { CopierService } from '../copier/copier.service';
 
 export interface ExampleType {
@@ -28,6 +33,8 @@ export interface ExampleType {
   selector: 'example-viewer',
   templateUrl: './example-viewer.html',
   styleUrls: ['./example-viewer.scss'],
+  standalone: true,
+  imports: [MatIconButton, MatTooltip, MatIcon, NgIf, MatTabGroup, NgFor, MatTab],
 })
 export class ExampleViewer implements OnInit, OnDestroy {
   @Input() type!: string;

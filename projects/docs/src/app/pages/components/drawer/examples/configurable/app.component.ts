@@ -1,10 +1,28 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { DrawerPosition, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/drawer';
 
 @Component({
   selector: 'drawer-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    MatRadioGroup,
+    MatRadioButton,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatCheckbox,
+    MatButton,
+  ],
 })
 export class AppComponent {
   position: DrawerPosition = 'right';
@@ -61,6 +79,8 @@ export class AppComponent {
       }
     `,
   ],
+  standalone: true,
+  imports: [MatIconButton, MatIcon],
 })
 export class DrawerConfigurableOverviewComponent {
   constructor(public drawerRef: MtxDrawerRef<DrawerConfigurableOverviewComponent>) {}

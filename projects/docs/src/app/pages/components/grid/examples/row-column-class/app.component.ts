@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
+import { MtxGrid, MtxGridColumn, MtxGridRowClassFormatter } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
-import { MtxGridColumn, MtxGridRowClassFormatter } from '@ng-matero/extensions/grid';
 
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MtxGrid],
 })
 export class AppComponent {
   rowClassFormatter: MtxGridRowClassFormatter = {

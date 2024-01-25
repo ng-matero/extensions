@@ -1,17 +1,13 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { SharedModule } from '../../../shared';
-
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-// Required for AOT compilation
-export function TranslateHttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/checkbox-group/', '_json');
-}
-
+import { Component, NgModule } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SharedModule } from '../../../shared';
+import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
+import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
+import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { CheckboxGroupBasicComponent, checkboxGroupBasicExampleConfig } from './examples/basic';
 import {
   CheckboxGroupBindLabelBindValueComponent,
@@ -21,16 +17,22 @@ import {
   CheckboxGroupCompareWithComponent,
   checkboxGroupCompareWithExampleConfig,
 } from './examples/compare-with';
+import { CheckboxGroupI18nComponent, checkboxGroupI18nExampleConfig } from './examples/i18n';
 import {
   CheckboxGroupSelectAllComponent,
   checkboxGroupSelectAllExampleConfig,
 } from './examples/select-all';
 
-import { CheckboxGroupI18nComponent, checkboxGroupI18nExampleConfig } from './examples/i18n';
+// Required for AOT compilation
+export function TranslateHttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/checkbox-group/', '_json');
+}
 
 @Component({
   selector: 'app-checkbox-group-overview',
   templateUrl: './checkbox-group-overview.html',
+  standalone: true,
+  imports: [NgIf, NgFor, DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class CheckboxGroupOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -39,6 +41,8 @@ export class CheckboxGroupOverviewComponent {
 @Component({
   selector: 'app-checkbox-group-api',
   templateUrl: './checkbox-group-api.html',
+  standalone: true,
+  imports: [NgIf, DocViewer, AsyncPipe],
 })
 export class CheckboxGroupApiComponent {
   constructor(public route: ActivatedRoute) {}
@@ -79,11 +83,8 @@ export class CheckboxGroupApiComponent {
       },
       { path: '**', redirectTo: 'overview' },
     ]),
-  ],
-  declarations: [
     CheckboxGroupOverviewComponent,
     CheckboxGroupApiComponent,
-
     CheckboxGroupBasicComponent,
     CheckboxGroupBindLabelBindValueComponent,
     CheckboxGroupCompareWithComponent,

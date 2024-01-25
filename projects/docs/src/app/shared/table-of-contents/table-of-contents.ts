@@ -1,3 +1,4 @@
+import { DOCUMENT, NgFor } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -7,9 +8,8 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
-import { fromEvent, Subscription } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { NavigationFocusService } from '../navigation-focus/navigation-focus.service';
 
@@ -39,6 +39,8 @@ interface Link {
   selector: 'table-of-contents',
   styleUrls: ['./table-of-contents.scss'],
   templateUrl: './table-of-contents.html',
+  standalone: true,
+  imports: [NgFor],
 })
 export class TableOfContents implements OnInit, AfterViewInit, OnDestroy {
   @Input() container!: string;

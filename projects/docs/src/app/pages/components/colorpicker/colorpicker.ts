@@ -1,14 +1,11 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { Component, NgModule } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { ColorSketchModule } from 'ngx-color/sketch';
 import { SharedModule } from '../../../shared';
-
+import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
+import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { ColorpickerBasicComponent, colorpickerBasicExampleConfig } from './examples/basic';
-import {
-  ColorpickerDisabledComponent,
-  colorpickerDisabledExampleConfig,
-} from './examples/disabled';
 import {
   ColorpickerCustomIconComponent,
   colorpickerCustomIconExampleConfig,
@@ -17,12 +14,16 @@ import {
   ColorpickerCustomPickerComponent,
   colorpickerCustomPickerExampleConfig,
 } from './examples/custom-picker';
-
-import { ColorSketchModule } from 'ngx-color/sketch';
+import {
+  ColorpickerDisabledComponent,
+  colorpickerDisabledExampleConfig,
+} from './examples/disabled';
 
 @Component({
   selector: 'app-colorpicker-overview',
   templateUrl: './colorpicker-overview.html',
+  standalone: true,
+  imports: [NgIf, NgFor, ExampleViewer, AsyncPipe],
 })
 export class ColorPickerOverviewComponent {
   constructor(public route: ActivatedRoute) {}
@@ -31,6 +32,8 @@ export class ColorPickerOverviewComponent {
 @Component({
   selector: 'app-colorpicker-api',
   templateUrl: './colorpicker-api.html',
+  standalone: true,
+  imports: [NgIf, DocViewer, AsyncPipe],
 })
 export class ColorPickerApiComponent {
   constructor(public route: ActivatedRoute) {}
@@ -65,11 +68,8 @@ export class ColorPickerApiComponent {
       { path: '**', redirectTo: 'overview' },
     ]),
     ColorSketchModule,
-  ],
-  declarations: [
     ColorPickerOverviewComponent,
     ColorPickerApiComponent,
-
     ColorpickerBasicComponent,
     ColorpickerCustomPickerComponent,
     ColorpickerCustomIconComponent,

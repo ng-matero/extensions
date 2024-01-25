@@ -1,4 +1,8 @@
+import { NgFor } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -6,9 +10,14 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'dialog-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MatRadioGroup, FormsModule, NgFor, MatRadioButton, MatButton],
 })
 export class AppComponent {
-  constructor(private mtxDialog: MtxDialog, public translate: TranslateService) {
+  constructor(
+    private mtxDialog: MtxDialog,
+    public translate: TranslateService
+  ) {
     translate.addLangs(this.langs.map(item => item.value));
     translate.setDefaultLang(this.defaultlang);
   }

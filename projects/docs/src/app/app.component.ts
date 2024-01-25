@@ -1,12 +1,16 @@
 import { Component, ViewEncapsulation, ElementRef } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { AppThemes, themeClass } from './shared';
+import { RouterOutlet } from '@angular/router';
+import { Navbar } from './shared/navbar/navbar';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [Navbar, RouterOutlet],
 })
 export class AppComponent {
   constructor(

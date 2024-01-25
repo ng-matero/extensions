@@ -1,10 +1,18 @@
+import { NgIf } from '@angular/common';
 import { Component, Inject } from '@angular/core';
-import { MtxDrawer, MtxDrawerRef, MTX_DRAWER_DATA } from '@ng-matero/extensions/drawer';
+import { FormsModule } from '@angular/forms';
+import { MatButton, MatIconButton } from '@angular/material/button';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/drawer';
 
 @Component({
   selector: 'drawer-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MatFormField, MatLabel, MatInput, FormsModule, MatButton, NgIf],
 })
 export class AppComponent {
   animal?: string;
@@ -59,6 +67,8 @@ export class AppComponent {
       }
     `,
   ],
+  standalone: true,
+  imports: [MatIconButton, MatIcon, MatFormField, MatLabel, MatInput, FormsModule, MatButton],
 })
 export class DrawerSharingDataOverviewComponent {
   constructor(

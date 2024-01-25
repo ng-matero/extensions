@@ -1,9 +1,14 @@
+import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MtxCheckboxGroup } from '@ng-matero/extensions/checkbox-group';
 
 @Component({
   selector: 'checkbox-group-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MtxCheckboxGroup, FormsModule, JsonPipe],
 })
 export class AppComponent {
   cars = [

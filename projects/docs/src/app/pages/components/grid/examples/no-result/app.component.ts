@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
-import { MtxGridColumn } from '@ng-matero/extensions/grid';
+import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
 
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MtxGrid],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

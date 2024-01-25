@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { MatMenuTrigger } from '@angular/material/menu';
-import { MtxGridColumn } from '@ng-matero/extensions/grid';
+import { MatMenu, MatMenuContent, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
 import { Observable, Subscription, fromEvent, merge } from 'rxjs';
 import { EXAMPLE_DATA } from '../../data';
 
@@ -8,6 +8,8 @@ import { EXAMPLE_DATA } from '../../data';
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
+  standalone: true,
+  imports: [MtxGrid, MatMenuTrigger, MatMenu, MatMenuContent, MatMenuItem],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

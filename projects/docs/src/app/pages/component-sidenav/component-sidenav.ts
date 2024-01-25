@@ -1,10 +1,13 @@
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { MatSidenav, MatDrawerToggleResult } from '@angular/material/sidenav';
-import { combineLatest, Observable, Subscription } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { MatDrawerToggleResult, MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
+import { ActivatedRoute, Params, RouterOutlet } from '@angular/router';
+import { Observable, Subscription, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { NavigationFocusService } from '../../shared/navigation-focus/navigation-focus.service';
+import { ComponentNav } from '../component-nav/component-nav';
+import { ComponentPageHeader } from '../component-page-header/component-page-header';
 
 const EXTRA_SMALL_WIDTH_BREAKPOINT = 720;
 const SMALL_WIDTH_BREAKPOINT = 959;
@@ -14,6 +17,16 @@ const SMALL_WIDTH_BREAKPOINT = 959;
   templateUrl: 'component-sidenav.html',
   styleUrls: ['component-sidenav.scss'],
   encapsulation: ViewEncapsulation.None,
+  standalone: true,
+  imports: [
+    MatSidenavContainer,
+    NgIf,
+    MatSidenav,
+    ComponentNav,
+    ComponentPageHeader,
+    RouterOutlet,
+    AsyncPipe,
+  ],
 })
 export class ComponentSidenav implements OnInit, OnDestroy {
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
