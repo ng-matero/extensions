@@ -8,7 +8,7 @@ import {
   ScrollStrategy,
 } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -94,7 +94,7 @@ const _MtxColorpickerContentBase = mixinColor(
   changeDetection: ChangeDetectionStrategy.OnPush,
   inputs: ['color'],
   standalone: true,
-  imports: [ColorChromeModule],
+  imports: [ColorChromeModule, NgTemplateOutlet],
 })
 export class MtxColorpickerContent
   extends _MtxColorpickerContentBase

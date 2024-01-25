@@ -56,6 +56,7 @@ import {
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
 } from './templates';
+import { NgTemplateOutlet } from '@angular/common';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = (term: string) => any;
@@ -148,7 +149,7 @@ const _MtxSelectMixinBase = mixinDisabled(
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: MatFormFieldControl, useExisting: MtxSelect }],
   standalone: true,
-  imports: [NgSelectModule, FormsModule],
+  imports: [NgSelectModule, FormsModule, NgTemplateOutlet],
 })
 export class MtxSelect
   extends _MtxSelectMixinBase
