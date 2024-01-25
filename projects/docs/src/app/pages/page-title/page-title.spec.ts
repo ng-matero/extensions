@@ -1,5 +1,5 @@
-import {ComponentPageTitle} from './page-title';
-import {Title} from '@angular/platform-browser';
+import { ComponentPageTitle } from './page-title';
+import { Title } from '@angular/platform-browser';
 
 describe('ComponentPageTitle', () => {
   const title: Title = new Title({});

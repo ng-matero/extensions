@@ -1,9 +1,7 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { TableOfContents } from './table-of-contents';
-
-import { DocsAppTestingModule } from '../../testing/testing-module';
 
 const mockActivatedRoute = {
   fragment: new Observable(observer => {
@@ -14,7 +12,7 @@ const mockActivatedRoute = {
 describe('TableOfContents', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [DocsAppTestingModule],
+      imports: [],
       providers: [{ provide: ActivatedRoute, useValue: mockActivatedRoute }],
     }).compileComponents();
   }));

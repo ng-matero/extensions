@@ -1,14 +1,12 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import {ComponentHeaderModule, ComponentPageHeader} from './component-page-header';
-import {DocsAppTestingModule} from '../../testing/testing-module';
-
+import { ComponentPageHeader } from './component-page-header';
 
 describe('ComponentPageHeader', () => {
   let fixture: ComponentFixture<ComponentPageHeader>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [ComponentHeaderModule, DocsAppTestingModule],
+      imports: [ComponentPageHeader],
     }).compileComponents();
   }));
 
@@ -28,10 +26,7 @@ describe('ComponentPageHeader', () => {
     const component = fixture.componentInstance;
     fixture.detectChanges();
     spyOn(component.toggleSidenav, 'emit');
-    fixture
-      .nativeElement
-      .querySelector('.sidenav-toggle')
-      .click();
+    fixture.nativeElement.querySelector('.sidenav-toggle').click();
     expect(component.toggleSidenav.emit).toHaveBeenCalled();
   });
 });
