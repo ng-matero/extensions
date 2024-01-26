@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions-date-fns-adapter",
-  "version": "17.0.0",
+  "version": "17.1.0",
   "description": "Angular Material Extensions date-fns Adapter",
   "publishConfig": {
     "access": "public"
@@ -12,11 +12,11 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": ">=17.0.0",
-    "@angular/material": ">=17.0.0",
-    "@angular/material-date-fns-adapter": ">=17.0.0",
-    "@ng-matero/extensions": ">=17.0.0",
-    "date-fns": "^2.30.0"
+    "@angular/core": ">=17.1.0",
+    "@angular/material": ">=17.1.0",
+    "@angular/material-date-fns-adapter": ">=17.1.0",
+    "@ng-matero/extensions": ">=17.1.0",
+    "date-fns": ">2.20.0 <4.0"
   },
   "dependencies": {
     "tslib": "^2.4.0"
