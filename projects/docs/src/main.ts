@@ -6,6 +6,8 @@ import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { NgProgressHttpModule } from 'ngx-progressbar/http';
+import { NgProgressRouterModule } from 'ngx-progressbar/router';
 import { AppComponent } from './app/app.component';
 import { DOCS_APP_ROUTES } from './app/routes';
 import { AppDirectionality } from './app/shared';
@@ -24,6 +26,8 @@ bootstrapApplication(AppComponent, {
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled', anchorScrolling: 'enabled' })
     ),
     importProvidersFrom(
+      NgProgressHttpModule,
+      NgProgressRouterModule,
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
