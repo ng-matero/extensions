@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatCard } from '@angular/material/card';
-import { provideNativeDatetimeAdapter } from '@ng-matero/extensions/core/datetime/datetime.module';
+import { provideNativeDatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxCalendar } from '@ng-matero/extensions/datetimepicker';
 
 @Component({

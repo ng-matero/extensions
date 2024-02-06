@@ -3,7 +3,6 @@ import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MatMomentDateAdapterOptions,
   MomentDateModule,
-  provideMomentDateAdapter,
 } from '@angular/material-moment-adapter';
 import {
   DatetimeAdapter,
@@ -27,7 +26,6 @@ export function provideMomentDatetimeAdapter(
   options?: MatMomentDateAdapterOptions
 ): Provider[] {
   const providers: Provider[] = [
-    provideMomentDateAdapter(),
     { provide: DatetimeAdapter, useClass: MomentDatetimeAdapter },
     { provide: MTX_DATETIME_FORMATS, useValue: formats },
   ];

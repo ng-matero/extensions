@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
@@ -37,6 +38,7 @@ import {
     MtxDatetimepickerToggle,
   ],
   providers: [
+    provideMomentDateAdapter(),
     provideMomentDatetimeAdapter({
       parse: {
         dateInput: 'YYYY-MM-DD',

@@ -1,5 +1,5 @@
 import { NgModule, Provider } from '@angular/core';
-import { DateFnsModule, provideDateFnsAdapter } from '@angular/material-date-fns-adapter';
+import { DateFnsModule } from '@angular/material-date-fns-adapter';
 import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
@@ -21,7 +21,6 @@ export function provideDateFnsDatetimeAdapter(
   formats: MtxDatetimeFormats = MTX_DATE_FNS_FORMATS
 ): Provider[] {
   return [
-    provideDateFnsAdapter(),
     { provide: DatetimeAdapter, useClass: DateFnsDateTimeAdapter },
     { provide: MTX_DATETIME_FORMATS, useValue: formats },
   ];

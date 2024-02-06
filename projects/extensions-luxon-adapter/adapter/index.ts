@@ -1,5 +1,5 @@
 import { NgModule, Provider } from '@angular/core';
-import { LuxonDateModule, provideLuxonDateAdapter } from '@angular/material-luxon-adapter';
+import { LuxonDateModule } from '@angular/material-luxon-adapter';
 import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
@@ -21,7 +21,6 @@ export function provideLuxonDatetimeAdapter(
   formats: MtxDatetimeFormats = MTX_LUXON_DATETIME_FORMATS
 ): Provider[] {
   return [
-    provideLuxonDateAdapter(),
     { provide: DatetimeAdapter, useClass: LuxonDatetimeAdapter },
     { provide: MTX_DATETIME_FORMATS, useValue: formats },
   ];
