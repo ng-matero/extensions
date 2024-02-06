@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions-luxon-adapter",
-  "version": "17.1.0",
+  "version": "17.1.1",
   "description": "Angular Material Extensions Luxon Adapter",
   "publishConfig": {
     "access": "public"
