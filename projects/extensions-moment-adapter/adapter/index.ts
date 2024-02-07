@@ -2,8 +2,10 @@ import { NgModule, Provider } from '@angular/core';
 import {
   MAT_MOMENT_DATE_ADAPTER_OPTIONS,
   MatMomentDateAdapterOptions,
+  MomentDateAdapter,
   MomentDateModule,
 } from '@angular/material-moment-adapter';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
@@ -26,6 +28,11 @@ export function provideMomentDatetimeAdapter(
   options?: MatMomentDateAdapterOptions
 ): Provider[] {
   const providers: Provider[] = [
+    {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS],
+    },
     { provide: DatetimeAdapter, useClass: MomentDatetimeAdapter },
     { provide: MTX_DATETIME_FORMATS, useValue: formats },
   ];

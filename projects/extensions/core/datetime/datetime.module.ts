@@ -1,5 +1,5 @@
 import { NgModule, Provider } from '@angular/core';
-import { NativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
+import { DateAdapter, NativeDateAdapter, NativeDateModule } from '@angular/material/core';
 import { DatetimeAdapter } from './datetime-adapter';
 import { MTX_DATETIME_FORMATS, MtxDatetimeFormats } from './datetime-formats';
 import { NativeDatetimeAdapter } from './native-datetime-adapter';
@@ -15,7 +15,7 @@ export function provideNativeDatetimeAdapter(
   formats: MtxDatetimeFormats = MTX_NATIVE_DATETIME_FORMATS
 ): Provider[] {
   return [
-    provideNativeDateAdapter(),
+    { provide: DateAdapter, useClass: NativeDateAdapter },
     { provide: DatetimeAdapter, useClass: NativeDatetimeAdapter },
     { provide: MTX_DATETIME_FORMATS, useValue: formats },
   ];

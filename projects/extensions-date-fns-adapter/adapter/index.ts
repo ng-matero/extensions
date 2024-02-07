@@ -1,5 +1,6 @@
 import { NgModule, Provider } from '@angular/core';
-import { DateFnsModule } from '@angular/material-date-fns-adapter';
+import { DateFnsAdapter, DateFnsModule } from '@angular/material-date-fns-adapter';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
@@ -21,6 +22,11 @@ export function provideDateFnsDatetimeAdapter(
   formats: MtxDatetimeFormats = MTX_DATE_FNS_FORMATS
 ): Provider[] {
   return [
+    {
+      provide: DateAdapter,
+      useClass: DateFnsAdapter,
+      deps: [MAT_DATE_LOCALE],
+    },
     { provide: DatetimeAdapter, useClass: DateFnsDateTimeAdapter },
     { provide: MTX_DATETIME_FORMATS, useValue: formats },
   ];

@@ -6,7 +6,6 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { MatButton } from '@angular/material/button';
 import { MatCard } from '@angular/material/card';
 import { DateAdapter, ThemePalette } from '@angular/material/core';
@@ -48,7 +47,6 @@ import { Subscription } from 'rxjs';
     MtxCalendar,
   ],
   providers: [
-    provideMomentDateAdapter(),
     provideMomentDatetimeAdapter(
       {
         parse: {
