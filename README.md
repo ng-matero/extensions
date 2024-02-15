@@ -51,6 +51,17 @@ After import modules, you must define a theme. [More about theming](https://mate
 
 The @use-based Sass API is only available in the version `12.0.0` or above.
 
+## Development
+
+```bash
+$ git clone git@github.com:ng-matero/extensions.git
+$ cd extensions
+$ yarn
+$ yarn run start
+```
+
+Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+
 ## License
 
 MIT
