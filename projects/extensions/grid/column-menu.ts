@@ -12,7 +12,7 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { ThemePalette } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
@@ -106,7 +106,12 @@ export class MtxGridColumnMenu {
     this.columnChange.emit(this.columns);
   }
 
-  _handleChecked(e: MatCheckboxChange) {
+  _handleChecked(col: MtxGridColumn) {
+    if (this.selectableChecked === 'show') {
+      col.hide = !col.show;
+    } else {
+      col.show = !col.hide;
+    }
     this.columnChange.emit(this.columns);
   }
 

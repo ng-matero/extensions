@@ -160,7 +160,7 @@
   @if (selectable) {
     <mat-checkbox class="mtx-grid-column-menu-item-label"
       [(ngModel)]="col[selectableChecked]" [disabled]="col.disabled"
-      (change)="_handleChecked($event)">{{col.header | toObservable | async}}</mat-checkbox>
+      (change)="_handleChecked(col)">{{col.header | toObservable | async}}</mat-checkbox>
   } @else {
     <span class="mtx-grid-column-menu-item-label">{{col.header | toObservable | async}}</span>
   }
