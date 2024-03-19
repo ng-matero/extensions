@@ -24,11 +24,11 @@ export class MtxGridColClassPipe implements PipeTransform {
 export class MtxGridRowClassPipe implements PipeTransform {
   transform(
     rowData: Record<string, any>,
-    index: number,
+    index: number | undefined,
     dataIndex: number,
     rowClassFormatter?: MtxGridRowClassFormatter
   ) {
-    const rowIndex = typeof index === 'undefined' ? dataIndex : index;
+    const rowIndex = index === undefined ? dataIndex : index;
     const classList: string[] = rowIndex % 2 === 1 ? ['mat-row-odd'] : [];
     if (rowClassFormatter) {
       for (const key of Object.keys(rowClassFormatter)) {

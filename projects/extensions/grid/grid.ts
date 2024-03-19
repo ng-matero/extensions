@@ -331,19 +331,22 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     return this._utils.getColData(data, colDef);
   }
 
+  _isColumnHide(item: MtxGridColumn) {
+    return item.hide !== undefined ? item.hide : item.show !== undefined ? !item.show : false;
+  }
+
   // Waiting for async data
   ngOnChanges(changes: SimpleChanges) {
     this._countPinnedPosition();
 
-    this.displayedColumns = this.columns.filter(item => !item.hide).map(item => item.field);
+    this.displayedColumns = this.columns
+      .filter(item => !this._isColumnHide(item))
+      .map(item => item.field);
 
     if (this.showColumnMenuButton) {
       this.columns.forEach(item => {
-        if (this.columnHideableChecked === 'show') {
-          item.show = !item.hide;
-        } else {
-          item.hide = !!item.hide;
-        }
+        item.hide = this._isColumnHide(item);
+        item.show = !item.hide;
       });
     }
 
@@ -413,8 +416,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     });
   }
 
-  _getIndex(index: number, dataIndex: number) {
-    return typeof index === 'undefined' ? dataIndex : index;
+  _getIndex(index: number | undefined, dataIndex: number) {
+    return index === undefined ? dataIndex : index;
   }
 
   _onSortChange(sort: Sort) {

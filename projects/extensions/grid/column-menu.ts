@@ -9,7 +9,6 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { MatCheckboxChange } from '@angular/material/checkbox';
 import { ThemePalette } from '@angular/material/core';
 import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import {
@@ -81,7 +80,12 @@ export class MtxGridColumnMenu {
     this.columnChange.emit(this.columns);
   }
 
-  _handleChecked(e: MatCheckboxChange) {
+  _handleChecked(col: MtxGridColumn) {
+    if (this.selectableChecked === 'show') {
+      col.hide = !col.show;
+    } else {
+      col.show = !col.hide;
+    }
     this.columnChange.emit(this.columns);
   }
 

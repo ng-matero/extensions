@@ -120,7 +120,7 @@
 
   <mat-checkbox class="mtx-grid-column-menu-item-label" *ngIf="selectable"
                 [(ngModel)]="col[selectableChecked]" [disabled]="col.disabled"
-                (change)="_handleChecked($event)">
+                (change)="_handleChecked(col)">
     {{col.header | toObservable | async}}
   </mat-checkbox>
   <span class="mtx-grid-column-menu-item-label" *ngIf="!selectable">
