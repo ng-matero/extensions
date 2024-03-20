@@ -21,8 +21,11 @@ import {
   MtxDatetimepickerToggle,
 } from '@ng-matero/extensions/datetimepicker';
 import { TranslateService } from '@ngx-translate/core';
-import * as moment from 'moment';
+import * as _moment from 'moment';
+import { default as _rollupMoment } from 'moment';
 import { Subscription } from 'rxjs';
+
+const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'dev-datetimepicker-demo',

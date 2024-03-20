@@ -29,7 +29,8 @@
       "@ng-matero/extensions-date-fns-adapter": ["projects/extensions-date-fns-adapter"],
       "@ng-matero/extensions-date-fns-adapter/*": ["projects/extensions-date-fns-adapter/*"]
     },
-    "useDefineForClassFields": false
+    "useDefineForClassFields": false,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
