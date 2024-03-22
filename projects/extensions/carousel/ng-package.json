@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxCarousel",
+    "entryFile": "public-api"
+  }
+}
