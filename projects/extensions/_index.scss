@@ -23,6 +23,8 @@ split-color, split-typography, split-density, split-base;
 @forward './tooltip/tooltip-theme' as tooltip-* show tooltip-theme,
 tooltip-color, tooltip-typography, tooltip-density, tooltip-base;
 
+@forward './core/tokens/m2' show m2-tokens-from-theme;
+
 @forward './core/theming/all-theme' show all-component-themes, all-component-bases;
 @forward './core/color/all-color' show all-component-colors;
 @forward './core/typography/all-typography' show all-component-typographies;

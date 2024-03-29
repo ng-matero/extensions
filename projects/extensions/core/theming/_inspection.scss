@@ -1,6 +1,6 @@
 @use 'sass:list';
 @use 'sass:map';
-@use '../style/validation';
+@use '@angular/material' as mat;
 
 $_internals: _mat-theming-internals-do-not-access;
 
@@ -8,7 +8,7 @@ $_internals: _mat-theming-internals-do-not-access;
 /// @param {Any} $theme The theme object to validate.
 /// @return {Boolean|Null} true if the theme has errors, else null.
 @function _validate-theme-object($theme) {
-  $err: validation.validate-type($theme, 'map') or
+  $err: mat.private-validate-type($theme, 'map') or
         map.get($theme, $_internals, theme-version) == null;
   @return if($err, true, null);
 }
@@ -25,7 +25,7 @@ $_internals: _mat-theming-internals-do-not-access;
   @if $err {
     @error #{'Expected $theme to be an Angular Material theme object. Got:'} $theme;
   }
-  $err: validation.validate-allowed-values($systems, color, typography, density, base);
+  $err: mat.private-validate-allowed-values($systems, color, typography, density, base);
   @if $err {
     @error #{'Expected $systems to contain valid system names (color, typography, density, or'}
     #{'base). Got invalid system names:'} $err;

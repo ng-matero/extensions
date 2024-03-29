@@ -1,6 +1,17 @@
 @use 'sass:map';
 @use 'sass:meta';
+@use '@angular/material' as mat;
 @use '../../style/sass-utils';
+@use './mtx/alert' as tokens-mtx-alert;
+@use './mtx/colorpicker' as tokens-mtx-colorpicker;
+@use './mtx/datetimepicker' as tokens-mtx-datetimepicker;
+@use './mtx/drawer' as tokens-mtx-drawer;
+@use './mtx/grid' as tokens-mtx-grid;
+@use './mtx/loader' as tokens-mtx-loader;
+@use './mtx/popover' as tokens-mtx-popover;
+@use './mtx/progress' as tokens-mtx-progress;
+@use './mtx/select' as tokens-mtx-select;
+@use './mtx/split' as tokens-mtx-split;
 
 /// Gets the tokens for the given theme, m2 tokens module, and theming system.
 /// @param {Map} $theme The Angular Material theme object to generate token values from.
@@ -14,11 +25,11 @@
     @return meta.call(
         meta.get-function(get-#{$system}-tokens, $module: $module));
   }
-  @if not map.get($theme, $system) {
+  @if not mat.theme-has($theme, $system) {
     @return ();
   }
   @return meta.call(
-      meta.get-function(get-#{$system}-tokens, $module: $module), map.get($theme, $system));
+      meta.get-function(get-#{$system}-tokens, $module: $module), $theme);
 }
 
 /// Gets the fully qualified tokens map for the given theme and m2 tokens module.
@@ -45,5 +56,15 @@
 ///     )
 @function m2-tokens-from-theme($theme) {
   @return sass-utils.deep-merge-all(
+    _get-tokens-for-module($theme, tokens-mtx-alert),
+    _get-tokens-for-module($theme, tokens-mtx-colorpicker),
+    _get-tokens-for-module($theme, tokens-mtx-datetimepicker),
+    _get-tokens-for-module($theme, tokens-mtx-drawer),
+    _get-tokens-for-module($theme, tokens-mtx-grid),
+    _get-tokens-for-module($theme, tokens-mtx-loader),
+    _get-tokens-for-module($theme, tokens-mtx-popover),
+    _get-tokens-for-module($theme, tokens-mtx-progress),
+    _get-tokens-for-module($theme, tokens-mtx-select),
+    _get-tokens-for-module($theme, tokens-mtx-split),
   );
 }

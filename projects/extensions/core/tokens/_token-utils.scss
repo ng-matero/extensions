@@ -1,10 +1,15 @@
+@use 'sass:list';
 @use 'sass:map';
 @use '@material/elevation/elevation-theme' as mdc-elevation-theme;
 @use '@material/theme/custom-properties' as mdc-custom-properties;
 @use '@material/theme/theme' as mdc-theme;
 @use '@material/theme/keys' as mdc-keys;
 @use '@angular/material' as mat;
+@use '../style/sass-utils';
 @use '../typography/typography';
+
+// Indicates whether we're building internally. Used for backwards compatibility.
+$private-is-internal-build: false;
 
 $_placeholder-color-palette: mat.define-palette(mat.$red-palette);
 
@@ -107,6 +112,28 @@ $_component-prefix: null;
   @return mdc-custom-properties.create-varname('#{$_component-prefix}-#{$token}');
 }
 
+// TODO(crisbeto): should be able to replace the usages of `get-token-variable` with this.
+// Returns a `var()` reference to a specific token. Intended for declarations
+// where the token has to be referenced as a part of a larger expression.
+@function get-token-variable-reference($token, $emit-fallback: false) {
+  @if $_component-prefix == null or $_tokens == null {
+    @error '`get-token-variable-reference` must be used within `use-tokens`';
+  }
+  @if not map.has-key($_tokens, $token) {
+    @error 'Token #{$token} does not exist. Configured tokens are: #{map.keys($_tokens)}';
+  }
+
+  $var: get-token-variable($token);
+  $fallback: if($emit-fallback, map.get($_tokens, $token), null);
+
+  @if ($fallback != null) {
+    @return var($var, $fallback);
+  }
+  @else {
+    @return var($var);
+  }
+}
+
 @mixin create-token-values($prefix, $tokens) {
   @include _configure-token-prefix($prefix...) {
     @include mdc-keys.declare-custom-properties($tokens, $_component-prefix);
@@ -123,4 +150,117 @@ $_component-prefix: null;
     $elevation-token: mdc-elevation-theme.elevation-box-shadow($elevation, $shadow-color),
     $shadow-color-token: null,
   ));
+}
+
+/// Checks whether a list starts wih a given prefix
+/// @param {List} $list The list value to check the prefix of.
+/// @param {List} $prefix The prefix to check.
+/// @return {Boolean} Whether the list starts with the prefix.
+@function _is-prefix($list, $prefix) {
+  @for $i from 1 through list.length($prefix) {
+    @if list.nth($list, $i) != list.nth($prefix, $i) {
+      @return false;
+    }
+  }
+  @return true;
+}
+
+/// Gets the supported color variants in the given token set for the given prefix.
+/// @param {Map} $tokens The full token map.
+/// @param {List} $prefix The component prefix to get color variants for.
+/// @return {List} The supported color variants.
+@function _supported-color-variants($tokens, $prefix) {
+  $result: ();
+  @each $namespace in map.keys($tokens) {
+    @if list.length($prefix) == list.length($namespace) - 1 and _is-prefix($namespace, $prefix) {
+      $result: list.append($result, list.nth($namespace, list.length($namespace)), comma);
+    }
+  }
+  @return $result;
+}
+
+/// Gets the token values for the given components prefix with the given options.
+/// @param {Map} $tokens The full token map.
+/// @param {List} $prefix The component prefix to get the token values for.
+/// @param {ArgList} Any additional options
+///   Currently the additional supported options are:
+//     - $color-variant - The color variant to use for the component
+//     - $emit-overrides-only - Whether to emit *only* the overrides for the
+//                              specific color variant, or all color styles. Defaults to false.
+/// @throws If given options are invalid
+/// @return {Map} The token values for the requested component.
+@function get-tokens-for($tokens, $prefix, $options...) {
+  $options: sass-utils.validate-keyword-args($options, (color-variant, emit-overrides-only));
+  @if $tokens == () {
+    @return ();
+  }
+  $values: map.get($tokens, $prefix);
+  $color-variant: map.get($options, color-variant);
+  $emit-overrides-only: map.get($options, emit-overrides-only);
+  @if $color-variant == null {
+    @return $values;
+  }
+  $overrides: map.get($tokens, list.append($prefix, $color-variant));
+  @if $overrides == null {
+    @error #{'Invalid color variant: '}#{$color-variant}#{'. Supported color variants are: '}#{
+      _supported-color-variants($tokens, $prefix)
+    }#{'.'};
+  }
+  @return if($emit-overrides-only, $overrides, map.merge($values, $overrides));
+}
+
+/// Emits new token values for the given tokens.
+/// Verifies that the tokens passed in are valid tokens.
+/// New token values are emitted under the current selector or root.
+@mixin batch-create-token-values(
+  $tokens: (),
+  $mat-prefix: '',
+  $mdc-prefix: '',
+  $mat-tokens: (),
+  $mdc-tokens: ()
+) {
+  $custom-mat-tokens: ();
+  $custom-mdc-tokens: ();
+
+  $mat-token-names: map.keys($mat-tokens);
+  $mdc-token-names: map.keys($mdc-tokens);
+  $valid-token-names: _get-valid-token-names($mat-tokens, $mdc-tokens);
+
+  @each $name, $value in $tokens {
+    $is-mat-token: list.index($mat-token-names, $name) != null;
+    $is-mdc-token: list.index($mdc-token-names, $name) != null;
+
+    @if ($is-mat-token) {
+      $custom-mat-tokens: map.set($custom-mat-tokens, $name, $value);
+    }
+
+    @if ($is-mdc-token) {
+      $custom-mdc-tokens: map.set($custom-mdc-tokens, $name, $value);
+    }
+
+    @if (list.index($valid-token-names, $name) == null) {
+      @error (
+        'Invalid token: "' + $name + '"'
+        'Valid tokens include: ' $valid-token-names
+      );
+    }
+  }
+
+  @include sass-utils.current-selector-or-root() {
+    @include create-token-values($mat-prefix, $custom-mat-tokens);
+    @include create-token-values($mdc-prefix, $custom-mdc-tokens);
+  }
+}
+
+/// Returns the union of token names whose values are not null.
+@function _get-valid-token-names($mat-tokens, $mdc-tokens) {
+  $mat-and-mdc-tokens: map.merge($mat-tokens, $mdc-tokens);
+
+  @each $name, $value in $mat-and-mdc-tokens {
+    @if ($value == null) {
+      $mat-and-mdc-tokens: map.remove($mat-and-mdc-tokens, $name);
+    }
+  }
+
+  @return map.keys($mat-and-mdc-tokens);
 }
