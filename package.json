@@ -42,6 +42,7 @@
     "@angular/core": "^17.3.0",
     "@angular/forms": "^17.3.0",
     "@angular/material": "^17.3.0",
+    "@angular/material-experimental": "^17.3.0",
     "@angular/material-date-fns-adapter": "^17.3.0",
     "@angular/material-luxon-adapter": "^17.3.0",
     "@angular/material-moment-adapter": "^17.3.0",

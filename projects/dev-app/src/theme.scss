@@ -1,0 +1,85 @@
+@use '@angular/material' as mat;
+@use '../../extensions' as mtx;
+@use 'photoviewer';
+
+// Plus imports for other components in your app.
+
+// Define the default (light) theme.
+$candy-app-primary: mat.define-palette(mat.$indigo-palette);
+$candy-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+$candy-app-theme: mat.define-light-theme(
+  (
+    // Define the default colors for our app.
+    color:
+      (
+        primary: $candy-app-primary,
+        accent: $candy-app-accent,
+      ),
+    // Define the default typography for our app.
+    typography: mat.define-typography-config(),
+    // Define the default density level for our app.
+    density: 0
+  )
+);
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// **Be sure that you only ever include this mixin once!**
+@include mat.core();
+
+// Include the default theme styles.
+@include mat.all-component-themes($candy-app-theme);
+@include mtx.all-component-themes($candy-app-theme);
+
+// @include mat.legacy-typography-hierarchy($candy-app-theme, '.mat-legacy-typography');
+// @include mat.typography-hierarchy($candy-app-theme);
+
+.demo-strong-focus {
+  // Note: we can theme the indicators directly through `strong-focus-indicators` as well.
+  // Use the theme so we have some coverage over the entire API surface.
+  @include mat.strong-focus-indicators();
+  @include mat.strong-focus-indicators-theme($candy-app-theme);
+}
+
+// Include the alternative theme styles inside of a block with a CSS class. You can make this
+// CSS class whatever you want. In this example, any component inside of an element with
+// `.demo-unicorn-dark-theme` will be affected by this alternate dark theme instead of the
+// default theme.
+.demo-unicorn-dark-theme {
+  // Create the color palettes used in our dark theme.
+  $dark-primary: mat.define-palette(mat.$blue-grey-palette);
+  $dark-accent: mat.define-palette(mat.$amber-palette, A200, A100, A400);
+  $dark-warn: mat.define-palette(mat.$deep-orange-palette);
+  $dark-colors: mat.define-dark-theme(
+    (
+      color: (
+        primary: $dark-primary,
+        accent: $dark-accent,
+        warn: $dark-warn,
+      ),
+      typography: mat.define-typography-config(),
+      density: 0,
+    )
+  );
+
+  // Include the dark theme color styles.
+  @include mat.all-component-colors($dark-colors);
+  @include mtx.all-component-colors($dark-colors);
+
+  // Include the dark theme colors for focus indicators.
+  &.demo-strong-focus {
+    @include mat.strong-focus-indicators-color($dark-colors);
+  }
+}
+
+// Create classes for all density scales which are supported by all MDC-based components.
+// The classes are applied conditionally based on the selected density in the dev-app layout
+// component.
+$density-scales: (-1, -2, minimum, maximum);
+
+@each $density in $density-scales {
+  .demo-density-#{$density} {
+    @include mat.all-component-densities($density);
+    @include mtx.all-component-densities($density);
+  }
+}
