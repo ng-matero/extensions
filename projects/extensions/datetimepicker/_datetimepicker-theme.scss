@@ -1,6 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '../core/style/sass-utils';
+@use '../core/theming/inspection';
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 
@@ -13,7 +14,7 @@
 
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(mat.get-theme-tokens($theme, base));
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, base));
   }
   @else {
     @include sass-utils.current-selector-or-root() {
@@ -25,7 +26,7 @@
 
 @mixin color($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(mat.get-theme-tokens($theme, color));
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, color));
   }
   @else {
     @include sass-utils.current-selector-or-root() {
@@ -59,7 +60,7 @@
 
 @mixin typography($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(mat.get-theme-tokens($theme, typography));
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, typography));
   }
   @else {
     @include sass-utils.current-selector-or-root() {
@@ -71,7 +72,7 @@
 
 @mixin density($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(mat.get-theme-tokens($theme, density));
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, density));
   }
   @else {}
 }
@@ -79,7 +80,7 @@
 @mixin theme($theme) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-datetimepicker') {
     @if mat.get-theme-version($theme) == 1 {
-      @include _theme-from-tokens(mat.get-theme-tokens($theme));
+      @include _theme-from-tokens(inspection.get-theme-tokens($theme));
     }
     @else {
       @include base($theme);

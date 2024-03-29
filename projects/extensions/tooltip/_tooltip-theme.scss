@@ -2,11 +2,12 @@
 @use '@material/tooltip/plain-tooltip-theme' as mdc-plain-tooltip-theme;
 @use '@angular/material' as mat;
 @use '../core/style/sass-utils';
+@use '../core/theming/inspection';
 @use '../core/tokens/m2/mdc/plain-tooltip' as tokens-mdc-plain-tooltip;
 
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(mat.get-theme-tokens($theme, base));
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, base));
   }
   @else {
     // Add default values for tokens not related to color, typography, or density.
@@ -18,7 +19,7 @@
 
 @mixin color($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(mat.get-theme-tokens($theme, color));
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, color));
   }
   @else {
     $mdc-tooltip-color-tokens: tokens-mdc-plain-tooltip.get-color-tokens($theme);
@@ -32,7 +33,7 @@
 
 @mixin typography($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(mat.get-theme-tokens($theme, typography));
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, typography));
   }
   @else {
     $mdc-tooltip-typography-tokens: tokens-mdc-plain-tooltip.get-typography-tokens($theme);
@@ -46,7 +47,7 @@
 
 @mixin density($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(mat.get-theme-tokens($theme, density));
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, density));
   }
   @else {
     $mdc-tooltip-density-tokens: tokens-mdc-plain-tooltip.get-density-tokens($theme);
@@ -61,7 +62,7 @@
 @mixin theme($theme) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
     @if mat.get-theme-version($theme) == 1 {
-      @include _theme-from-tokens(mat.get-theme-tokens($theme));
+      @include _theme-from-tokens(inspection.get-theme-tokens($theme));
     }
     @else {
       @include base($theme);
