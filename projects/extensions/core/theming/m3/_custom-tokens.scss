@@ -65,17 +65,8 @@
       map.get($systems, md-sys-color, on-surface),
       $alpha: map.get($systems, md-sys-state, hover-state-layer-opacity)
     ),
-
-    clock-hand-background-color: map.get($systems, md-sys-color, primary),
-    clock-cell-selected-state-background-color: map.get($systems, md-sys-color, primary),
-    time-input-active-state-text-color: map.get($systems, md-sys-color, on-primary-container),
-    time-input-active-state-background-color: map.get($systems, md-sys-color, primary-container),
-    time-input-focus-state-border-color: map.get($systems, md-sys-color, primary),
-    time-input-focus-state-placeholder-text-color: map.get($systems, md-sys-color, on-primary-container),
-
     toggle-active-state-icon-color: map.get($systems, md-sys-color, on-surface-variant),
     toggle-icon-color: map.get($systems, md-sys-color, on-surface-variant),
-
     calendar-body-label-text-color: map.get($systems, md-sys-color, on-surface),
     calendar-header-text-color: map.get($systems, md-sys-color, on-surface-variant),
     calendar-header-divider-color: map.get($systems, md-sys-color, outline-variant),
@@ -100,6 +91,12 @@
       map.get($systems, md-sys-color, on-surface),
       $alpha: 0.38
     ),
+    clock-cell-selected-state-background-color: map.get($systems, md-sys-color, primary),
+    clock-hand-background-color: map.get($systems, md-sys-color, primary),
+    time-input-active-state-text-color: map.get($systems, md-sys-color, on-primary-container),
+    time-input-active-state-background-color: map.get($systems, md-sys-color, primary-container),
+    time-input-focus-state-border-color: map.get($systems, md-sys-color, primary),
+    time-input-focus-state-placeholder-text-color: map.get($systems, md-sys-color, on-primary-container),
     time-input-text-color: map.get($systems, md-sys-color, on-surface),
     time-input-background-color: map.get($systems, md-sys-color, surface-container-highest),
     time-input-focus-state-background-color: map.get($systems, md-sys-color, primary-container),
@@ -120,7 +117,7 @@
     calendar-period-button-text-weight: map.get($systems, md-sys-typescale, title-small-weight),
     calendar-header-text-size: map.get($systems, md-sys-typescale, title-small-size),
     calendar-header-text-weight: map.get($systems, md-sys-typescale, title-small-weight),
-    clock-text-size: 14px,
+    clock-text-size: map.get($systems, md-sys-typescale, title-small-size),
   ), (
     // Color variants:
     primary: (), // Default, no overrides needed.
@@ -129,21 +126,24 @@
       calendar-date-selected-state-background-color: map.get($systems, md-sys-color, secondary),
       calendar-date-today-selected-state-outline-color: map.get($systems, md-sys-color, secondary),
       calendar-date-today-outline-color: map.get($systems, md-sys-color, secondary),
-      calendar-date-preview-state-outline-color: map.get($systems, md-sys-color, secondary),
+      clock-hand-background-color: map.get($systems, md-sys-color, secondary),
+      clock-cell-selected-state-background-color: map.get($systems, md-sys-color, secondary),
     ),
     tertiary: (
       calendar-date-selected-state-text-color: map.get($systems, md-sys-color, on-tertiary),
       calendar-date-selected-state-background-color: map.get($systems, md-sys-color, tertiary),
       calendar-date-today-selected-state-outline-color: map.get($systems, md-sys-color, tertiary),
       calendar-date-today-outline-color: map.get($systems, md-sys-color, tertiary),
-      calendar-date-preview-state-outline-color: map.get($systems, md-sys-color, tertiary),
+      clock-hand-background-color: map.get($systems, md-sys-color, tertiary),
+      clock-cell-selected-state-background-color: map.get($systems, md-sys-color, tertiary),
     ),
     error: (
       calendar-date-selected-state-text-color: map.get($systems, md-sys-color, on-error),
       calendar-date-selected-state-background-color: map.get($systems, md-sys-color, error),
       calendar-date-today-selected-state-outline-color: map.get($systems, md-sys-color, error),
       calendar-date-today-outline-color: map.get($systems, md-sys-color, error),
-      calendar-date-preview-state-outline-color: map.get($systems, md-sys-color, error),
+      clock-hand-background-color: map.get($systems, md-sys-color, error),
+      clock-cell-selected-state-background-color: map.get($systems, md-sys-color, error),
     )
   ));
 }
@@ -159,6 +159,9 @@
 
 @function grid($systems, $exclude-hardcoded) {
   @return (
+    container-shape: 0,
+    table-cell-min-width: 80px,
+
     outline-color: map.get($systems, md-sys-color, outline-variant),
     column-menu-text-color: map.get($systems, md-sys-color, on-surface-variant),
     column-menu-divider-color: map.get($systems, md-sys-color, outline-variant),
@@ -170,9 +173,6 @@
     resizable-handle-active-background-color: map.get($systems, md-sys-color, primary),
     resizable-handle-hover-background-color: map.get($systems, md-sys-color, primary),
     resizable-handle-disabled-background-color: map.get($systems, md-sys-color, outline-variant),
-
-    container-shape: 0,
-    table-cell-min-width: 80px,
   );
 }
 

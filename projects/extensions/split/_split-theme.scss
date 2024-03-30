@@ -2,6 +2,7 @@
 @use '@angular/material' as mat;
 @use '../core/style/sass-utils';
 @use '../core/theming/inspection';
+@use '../core/theming/validation';
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/split' as tokens-mtx-split;
 
@@ -17,9 +18,9 @@
   }
 }
 
-@mixin color($theme) {
+@mixin color($theme, $options...) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, color));
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, color), $options...);
   }
   @else {
     @include sass-utils.current-selector-or-root() {
@@ -55,10 +56,10 @@
   @else {}
 }
 
-@mixin theme($theme) {
+@mixin theme($theme, $options...) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-split') {
     @if mat.get-theme-version($theme) == 1 {
-      @include _theme-from-tokens(inspection.get-theme-tokens($theme));
+      @include _theme-from-tokens(inspection.get-theme-tokens($theme), $options...);
     }
     @else {
       @include base($theme);
@@ -75,9 +76,9 @@
   }
 }
 
-@mixin _theme-from-tokens($tokens) {
-  @if ($tokens != ()) {
-    @include token-utils.create-token-values(tokens-mtx-split.$prefix,
-      map.get($tokens, tokens-mtx-split.$prefix));
-  }
+@mixin _theme-from-tokens($tokens, $options...) {
+  @include validation.selector-defined(
+    'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
+  $mtx-split-tokens: token-utils.get-tokens-for($tokens, tokens-mtx-split.$prefix, $options...);
+  @include token-utils.create-token-values(tokens-mtx-split.$prefix, $mtx-split-tokens);
 }
