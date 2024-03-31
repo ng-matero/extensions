@@ -268,9 +268,11 @@ export class MtxSelectComponent
     return this._value;
   }
   set value(newValue: any) {
-    this._value = newValue;
-    this._onChange(newValue);
-    this.stateChanges.next();
+    const hasAssigned = this._assignValue(newValue);
+
+    if (hasAssigned) {
+      this._onChange(newValue);
+    }
   }
   private _value = null;
 
@@ -492,8 +494,7 @@ export class MtxSelectComponent
    * @param value New value to be written to the model.
    */
   writeValue(value: any): void {
-    this.value = value;
-    this._changeDetectorRef.markForCheck();
+    this._assignValue(value);
   }
 
   /**
@@ -516,6 +517,17 @@ export class MtxSelectComponent
    */
   registerOnTouched(fn: any): void {
     this._onTouched = fn;
+  }
+
+  /** Assigns a specific value to the select. Returns whether the value has changed. */
+  private _assignValue(newValue: any | any[]): boolean {
+    // Always re-assign an array, because it might have been mutated.
+    if (newValue !== this._value || (this.multiple && Array.isArray(newValue))) {
+      this._value = newValue;
+      this._changeDetectorRef.markForCheck();
+      return true;
+    }
+    return false;
   }
 
   /** NgSelect's `_setItemsFromNgOptions` */
