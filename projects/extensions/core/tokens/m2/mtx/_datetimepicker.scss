@@ -45,6 +45,8 @@ $_today-fade-amount: .2;
     time-input-active-state-background-color: theming.get-color-from-palette($palette, .2),
     time-input-focus-state-border-color: $palette-color,
     time-input-focus-state-placeholder-text-color: theming.get-color-from-palette($palette, .6),
+
+    time-ampm-selected-state-background-color: theming.get-color-from-palette($palette, .2),
   );
 }
 
@@ -115,7 +117,6 @@ $_today-fade-amount: .2;
     time-ampm-text-color: theming.get-color-from-palette($foreground, text, .75),
     time-ampm-border-color: $hint-text-color,
     time-ampm-selected-state-text-color: theming.get-color-from-palette($foreground, text),
-    time-ampm-selected-state-background-color: theming.get-color-from-palette($accent, .2),
   ));
 }
 
