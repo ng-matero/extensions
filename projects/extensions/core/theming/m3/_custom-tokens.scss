@@ -49,7 +49,7 @@
 
 @function datetimepicker($systems, $exclude-hardcoded) {
   @return ((
-    calendar-header-background-color: transparent,
+    calendar-header-background-color: _hardcode(transparent, $exclude-hardcoded),
     calendar-date-selected-state-text-color: map.get($systems, md-sys-color, on-primary),
     calendar-date-selected-state-background-color: map.get($systems, md-sys-color, primary),
     calendar-date-selected-disabled-state-background-color: mat.private-safe-color-change(
@@ -73,7 +73,7 @@
     calendar-table-header-text-color: map.get($systems, md-sys-color, on-surface),
     calendar-date-today-outline-color: map.get($systems, md-sys-color, primary),
     calendar-date-text-color: map.get($systems, md-sys-color, on-surface),
-    calendar-date-outline-color: transparent,
+    calendar-date-outline-color: _hardcode(transparent, $exclude-hardcoded),
     calendar-date-disabled-state-text-color: mat.private-safe-color-change(
       map.get($systems, md-sys-color, on-surface),
       $alpha: 0.38
@@ -168,7 +168,7 @@
     table-footer-background-color: map.get($systems, md-sys-color, surface-container),
     table-row-striped-background-color: map.get($systems, md-sys-color, surface-container),
     table-row-hover-background-color: map.get($systems, md-sys-color, surface-container-highest),
-    table-row-selected-background-color: map.get($systems, md-sys-color, surface-container),
+    table-row-selected-background-color: map.get($systems, md-sys-color, primary-container),
     table-cell-selected-outline-color: map.get($systems, md-sys-color, primary),
     resizable-handle-active-background-color: map.get($systems, md-sys-color, primary),
     resizable-handle-hover-background-color: map.get($systems, md-sys-color, primary),
@@ -218,8 +218,14 @@
     container-shape: 4px,
 
     container-text-color: map.get($systems, md-sys-color, on-surface),
-    placeholder-text-color: map.get($systems, md-sys-color, on-surface-variant),
-    disabled-text-color: map.get($systems, md-sys-color, on-surface-variant),
+    placeholder-text-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, on-surface),
+      $alpha: 0.38
+    ),
+    disabled-text-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, on-surface),
+      $alpha: 0.38
+    ),
 
     // multiple-value-background-color: map.get($systems, md-sys-color, primary-container),
     multiple-value-border-color: map.get($systems, md-sys-color, outline),
@@ -229,7 +235,10 @@
     clear-icon-hover-color: map.get($systems, md-sys-color, error),
 
     enabled-arrow-color: map.get($systems, md-sys-color, on-surface),
-    disabled-arrow-color: map.get($systems, md-sys-color, secondary),
+    disabled-arrow-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, on-surface),
+      $alpha: 0.38
+    ),
     invalid-arrow-color: map.get($systems, md-sys-color, error),
 
     panel-background-color: map.get($systems, md-sys-color, surface-container),
@@ -245,7 +254,10 @@
       map.get($systems, md-sys-color, on-surface),
       $alpha: map.get($systems, md-sys-state, hover-state-layer-opacity)
     ),
-    option-disabled-state-text-color: map.get($systems, md-sys-color, on-surface-variant),
+    option-disabled-state-text-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, on-surface),
+      $alpha: 0.38
+    ),
   );
 }
 
