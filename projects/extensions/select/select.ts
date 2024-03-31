@@ -1,4 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -32,12 +33,7 @@ import {
   NgForm,
   Validators,
 } from '@angular/forms';
-import {
-  CanDisable,
-  ErrorStateMatcher,
-  mixinDisabled,
-  mixinErrorState,
-} from '@angular/material/core';
+import { ErrorStateMatcher, _ErrorStateTracker } from '@angular/material/core';
 import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 import { Subject, merge } from 'rxjs';
@@ -56,7 +52,6 @@ import {
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
 } from './templates';
-import { NgTemplateOutlet } from '@angular/common';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
 export type AddTagFn = (term: string) => any;
@@ -93,33 +88,6 @@ export const MTX_SELECT_DEFAULT_OPTIONS = new InjectionToken<MtxSelectDefaultOpt
 
 let nextUniqueId = 0;
 
-// Boilerplate for applying mixins to MtxSelect.
-/** @docs-private */
-const _MtxSelectMixinBase = mixinDisabled(
-  mixinErrorState(
-    class {
-      /**
-       * Emits whenever the component state changes and should cause the parent
-       * form-field to update. Implemented as part of `MatFormFieldControl`.
-       * @docs-private
-       */
-      readonly stateChanges = new Subject<void>();
-
-      constructor(
-        public _defaultErrorStateMatcher: ErrorStateMatcher,
-        public _parentForm: NgForm,
-        public _parentFormGroup: FormGroupDirective,
-        /**
-         * Form control bound to the component.
-         * Implemented as part of `MatFormFieldControl`.
-         * @docs-private
-         */
-        public ngControl: NgControl
-      ) {}
-    }
-  )
-);
-
 @Component({
   selector: 'mtx-select',
   exportAs: 'mtxSelect',
@@ -152,14 +120,12 @@ const _MtxSelectMixinBase = mixinDisabled(
   imports: [NgSelectModule, FormsModule, NgTemplateOutlet],
 })
 export class MtxSelect
-  extends _MtxSelectMixinBase
   implements
     OnInit,
     OnDestroy,
     DoCheck,
     AfterViewInit,
     ControlValueAccessor,
-    CanDisable,
     MatFormFieldControl<any>
 {
   @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelectComponent;
@@ -272,9 +238,11 @@ export class MtxSelect
     return this._value;
   }
   set value(newValue: any) {
-    this._value = newValue;
-    this._onChange(newValue);
-    this.stateChanges.next();
+    const hasAssigned = this._assignValue(newValue);
+
+    if (hasAssigned) {
+      this._onChange(newValue);
+    }
   }
   private _value = null;
 
@@ -325,6 +293,10 @@ export class MtxSelect
     return this.focused || !this.empty;
   }
 
+  /** Whether the select is disabled. */
+  @Input({ transform: booleanAttribute })
+  disabled: boolean = false;
+
   /** Whether the component is required. */
   @Input({ transform: booleanAttribute })
   get required(): boolean {
@@ -337,7 +309,13 @@ export class MtxSelect
   private _required: boolean | undefined;
 
   /** Object used to control when error messages are shown. */
-  @Input() override errorStateMatcher!: ErrorStateMatcher;
+  @Input()
+  get errorStateMatcher() {
+    return this._errorStateTracker.matcher;
+  }
+  set errorStateMatcher(value: ErrorStateMatcher) {
+    this._errorStateTracker.matcher = value;
+  }
 
   /** Aria label of the select. */
   @Input('aria-label') ariaLabel: string = '';
@@ -371,21 +349,30 @@ export class MtxSelect
    */
   private _previousControl: AbstractControl | null | undefined;
 
+  /** Tracks the error state of the select. */
+  private _errorStateTracker: _ErrorStateTracker;
+
+  /** Whether the select is in an error state. */
+  get errorState() {
+    return this._errorStateTracker.errorState;
+  }
+  set errorState(value: boolean) {
+    this._errorStateTracker.errorState = value;
+  }
+
   constructor(
     protected _changeDetectorRef: ChangeDetectorRef,
     protected _elementRef: ElementRef,
     protected _focusMonitor: FocusMonitor,
-    _defaultErrorStateMatcher: ErrorStateMatcher,
-    @Optional() _parentForm: NgForm,
-    @Optional() _parentFormGroup: FormGroupDirective,
-    @Optional() @Self() ngControl: NgControl,
+    defaultErrorStateMatcher: ErrorStateMatcher,
+    @Optional() parentForm: NgForm,
+    @Optional() parentFormGroup: FormGroupDirective,
+    @Optional() @Self() public ngControl: NgControl,
     @Optional() @Inject(MAT_FORM_FIELD) protected _parentFormField?: MatFormField,
     @Optional()
     @Inject(MTX_SELECT_DEFAULT_OPTIONS)
     protected _defaultOptions?: MtxSelectDefaultOptions
   ) {
-    super(_defaultErrorStateMatcher, _parentForm, _parentFormGroup, ngControl);
-
     _focusMonitor.monitor(this._elementRef, true).subscribe(origin => {
       if (this._focused && !origin) {
         this._onTouched();
@@ -399,6 +386,14 @@ export class MtxSelect
       // the `providers` to avoid running into a circular import.
       this.ngControl.valueAccessor = this;
     }
+
+    this._errorStateTracker = new _ErrorStateTracker(
+      defaultErrorStateMatcher,
+      ngControl,
+      parentFormGroup,
+      parentForm,
+      this.stateChanges
+    );
 
     // Force setter to be called in case id was not specified.
     // eslint-disable-next-line no-self-assign
@@ -496,8 +491,7 @@ export class MtxSelect
    * @param value New value to be written to the model.
    */
   writeValue(value: any): void {
-    this.value = value;
-    this._changeDetectorRef.markForCheck();
+    this._assignValue(value);
   }
 
   /**
@@ -520,6 +514,23 @@ export class MtxSelect
    */
   registerOnTouched(fn: any): void {
     this._onTouched = fn;
+  }
+
+  /** Refreshes the error state of the select. */
+  updateErrorState() {
+    this._errorStateTracker.updateErrorState();
+  }
+
+  /** Assigns a specific value to the select. Returns whether the value has changed. */
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+  private _assignValue(newValue: any | any[]): boolean {
+    // Always re-assign an array, because it might have been mutated.
+    if (newValue !== this._value || (this.multiple && Array.isArray(newValue))) {
+      this._value = newValue;
+      this._changeDetectorRef.markForCheck();
+      return true;
+    }
+    return false;
   }
 
   /** NgSelect's `_setItemsFromNgOptions` */
