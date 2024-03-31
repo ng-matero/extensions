@@ -1,17 +1,16 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import {
-  Component,
-  Input,
-  ViewEncapsulation,
   ChangeDetectionStrategy,
-  Output,
+  Component,
   EventEmitter,
+  Input,
+  Output,
   TemplateRef,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import { ThemePalette } from '@angular/material/core';
+import { MatMenu, MatMenuTrigger } from '@angular/material/menu';
 import {
   MtxGridButtonType,
   MtxGridColumn,
@@ -81,7 +80,12 @@ export class MtxGridColumnMenuComponent {
     this.columnChange.emit(this.columns);
   }
 
-  _handleChecked(e: MatCheckboxChange) {
+  _handleChecked(col: MtxGridColumn) {
+    if (this.selectableChecked === 'show') {
+      col.hide = !col.show;
+    } else {
+      col.show = !col.hide;
+    }
     this.columnChange.emit(this.columns);
   }
 

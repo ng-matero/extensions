@@ -1,7 +1,7 @@
 import { KeyValueChangeRecord, Pipe, PipeTransform } from '@angular/core';
 import { isObservable } from 'rxjs';
-import { MtxGridService } from './grid.service';
 import { MtxGridColumn, MtxGridColumnButton, MtxGridRowClassFormatter } from './grid.interface';
+import { MtxGridService } from './grid.service';
 
 @Pipe({
   name: 'colClass',
@@ -28,11 +28,11 @@ export class MtxGridColClassPipe implements PipeTransform {
 export class MtxGridRowClassPipe implements PipeTransform {
   transform(
     rowData: Record<string, any>,
-    index: number,
+    index: number | undefined,
     dataIndex: number,
     rowClassFormatter?: MtxGridRowClassFormatter
   ): string {
-    const rowIndex = typeof index === 'undefined' ? dataIndex : index;
+    const rowIndex = index === undefined ? dataIndex : index;
     const classList: string[] = rowIndex % 2 === 1 ? ['mat-row-odd'] : [];
     if (rowClassFormatter) {
       for (const key of Object.keys(rowClassFormatter)) {
