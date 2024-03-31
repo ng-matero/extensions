@@ -20,6 +20,10 @@ $clock-font-size: 14px !default;
   $foreground: map.get($config, foreground);
   $disabled-color: theming.get-color-from-palette($foreground, disabled-text);
 
+  .mtx-datetimepicker-toggle {
+    color: theming.get-color-from-palette($foreground, icon);
+  }
+
   .mtx-datetimepicker-content {
     background-color: theming.get-color-from-palette($background, card);
     color: theming.get-color-from-palette($foreground, text);
@@ -168,7 +172,7 @@ $clock-font-size: 14px !default;
         --mdc-text-button-label-text-color: #{theming.get-color-from-palette($foreground, text)};
         --mdc-typography-button-font-weight: 500;
 
-        background-color: theming.get-color-from-palette($accent, .2);
+        background-color: theming.get-color-from-palette($primary, .2);
       }
     }
   }
