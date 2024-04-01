@@ -50,6 +50,7 @@ $touch-max-height: 850px;
     tokens-mtx-datetimepicker.get-token-slots()) {
     @include token-utils.create-token-slot(border-radius, container-shape);
     @include token-utils.create-token-slot(background-color, container-background-color);
+    @include token-utils.create-token-slot(box-shadow, container-elevation-shadow);
     @include token-utils.create-token-slot(color, container-text-color);
   }
 }

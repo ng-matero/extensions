@@ -37,9 +37,9 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 2%;
-  height: 2%;
-  margin: -1%;
+  width: 3%;
+  height: 3%;
+  margin: -1.5%;
   border-radius: 50%;
 
   @include token-utils.use-tokens($_tokens...) {
@@ -50,7 +50,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 .mtx-clock-hand {
   position: absolute;
   inset: 0;
-  width: 1px;
+  width: 2px;
   margin: 0 auto;
   transform-origin: bottom;
 
@@ -61,7 +61,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
       content: '';
       position: absolute;
       top: -4px;
-      left: -4px;
+      left: -3px; // 8px - 2px / 2
       width: 8px;
       height: 8px;
       border-radius: 50%;
