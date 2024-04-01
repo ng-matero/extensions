@@ -1,8 +1,10 @@
 @use '@angular/material' as mat;
 @use '../../extensions' as mtx;
-@use 'photoviewer';
 
 // Plus imports for other components in your app.
+
+// Disable legacy API compatibility, since dev-app is fully migrated to theme inspection API.
+mat.$theme-legacy-inspection-api-compatibility: false;
 
 // Define the default (light) theme.
 $candy-app-primary: mat.define-palette(mat.$indigo-palette);
@@ -31,8 +33,7 @@ $candy-app-theme: mat.define-light-theme(
 @include mat.all-component-themes($candy-app-theme);
 @include mtx.all-component-themes($candy-app-theme);
 
-// @include mat.legacy-typography-hierarchy($candy-app-theme, '.mat-legacy-typography');
-// @include mat.typography-hierarchy($candy-app-theme);
+@include mat.typography-hierarchy($candy-app-theme);
 
 .demo-strong-focus {
   // Note: we can theme the indicators directly through `strong-focus-indicators` as well.
@@ -75,8 +76,7 @@ $candy-app-theme: mat.define-light-theme(
 // Create classes for all density scales which are supported by all MDC-based components.
 // The classes are applied conditionally based on the selected density in the dev-app layout
 // component.
-$density-scales: (-1, -2, minimum, maximum);
-
+$density-scales: (-1, -2, -3, -4, minimum, maximum);
 @each $density in $density-scales {
   .demo-density-#{$density} {
     @include mat.all-component-densities($density);

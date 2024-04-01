@@ -3,16 +3,18 @@ import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overl
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { importProvidersFrom } from '@angular/core';
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
-import { BrowserModule, bootstrapApplication } from '@angular/platform-browser';
+import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app/app.component';
 import { DevAppDirectionality } from './app/dev-app/dev-app-directionality';
-import { ANIMATIONS_STORAGE_KEY } from './app/dev-app/dev-app-layout';
+import { getAppState } from './app/dev-app/dev-app-state';
 import { DevAppRippleOptions } from './app/dev-app/ripple-options';
 import { DEV_APP_ROUTES } from './app/routes';
+
+const cachedAppState = getAppState();
 
 // Required for AOT compilation
 export function TranslateHttpLoaderFactory(http: HttpClient) {
@@ -25,9 +27,8 @@ bootstrapApplication(AppComponent, {
     provideHttpClient(withInterceptorsFromDi()),
     importProvidersFrom(
       BrowserAnimationsModule.withConfig({
-        disableAnimations: localStorage.getItem(ANIMATIONS_STORAGE_KEY) === 'true',
+        disableAnimations: !cachedAppState.animations,
       }),
-      BrowserModule,
       TranslateModule.forRoot({
         loader: {
           provide: TranslateLoader,
