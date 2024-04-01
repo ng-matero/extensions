@@ -111,6 +111,8 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
     @include token-utils.create-token-slot(border-top-right-radius, container-shape);
     @include token-utils.create-token-slot(background-color, calendar-header-background-color);
     @include token-utils.create-token-slot(color, calendar-header-text-color);
+
+    @include token-utils.create-token-slot(--mdc-text-button-container-shape, selector-container-shape);
   }
 
   .mtx-calendar-header-year,

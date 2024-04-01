@@ -33,12 +33,12 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   padding: 0;
   font-size: $time-font-size;
   text-align: center;
-  border-radius: $time-border-radius;
   border: 2px solid transparent;
   appearance: none;
   outline: none;
 
   @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(border-radius, selector-container-shape);
     @include token-utils.create-token-slot(background-color, time-input-background-color);
     @include token-utils.create-token-slot(color, time-input-text-color);
 
@@ -87,6 +87,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 
     @include token-utils.use-tokens($_tokens...) {
       @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-text-color);
+      @include token-utils.create-token-slot(--mdc-text-button-container-shape, selector-container-shape);
       @include token-utils.create-token-slot(border-color, time-ampm-border-color);
 
       &.mtx-time-ampm-active {
@@ -109,12 +110,14 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   }
 
   .mtx-time-am {
-    border-radius: $time-border-radius $time-border-radius 0 0;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .mtx-time-pm {
-    border-radius: 0 0 $time-border-radius $time-border-radius;
-    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-width: 0;
   }
 }
 

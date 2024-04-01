@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use 'sass:map';
 @use 'sass:meta';
+@use '@material/elevation/elevation-theme' as mdc-elevation;
 @use '@angular/material' as mat;
 @use '../../token-utils';
 @use '../../../style/sass-utils';
@@ -56,7 +57,11 @@ $_today-fade-amount: .2;
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
   @return (
+    container-elevation-shadow: mdc-elevation.elevation-box-shadow(4),
+    container-touch-elevation-shadow: mdc-elevation.elevation-box-shadow(24),
     container-shape: 4px,
+    container-touch-shape: 4px,
+    selector-container-shape: 4px,
   );
 }
 
@@ -93,8 +98,8 @@ $_today-fade-amount: .2;
     calendar-date-disabled-state-text-color: $disabled-text-color,
     // calendar-date-preview-state-outline-color: $preview-outline-color,
 
-    calendar-container-background-color: mat.get-theme-color($theme, background, card),
-    calendar-container-text-color: $text-color,
+    container-background-color: mat.get-theme-color($theme, background, card),
+    container-text-color: $text-color,
 
     clock-dial-background-color: $divider-color,
     clock-cell-text-color: $text-color,

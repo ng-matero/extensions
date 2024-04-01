@@ -49,8 +49,8 @@ $touch-max-height: 850px;
   @include token-utils.use-tokens(tokens-mtx-datetimepicker.$prefix,
     tokens-mtx-datetimepicker.get-token-slots()) {
     @include token-utils.create-token-slot(border-radius, container-shape);
-    @include token-utils.create-token-slot(background-color, calendar-container-background-color);
-    @include token-utils.create-token-slot(color, calendar-container-text-color);
+    @include token-utils.create-token-slot(background-color, container-background-color);
+    @include token-utils.create-token-slot(color, container-text-color);
   }
 }
 
@@ -84,6 +84,12 @@ $touch-max-height: 850px;
 .mtx-datetimepicker-content-touch {
   display: block;
   max-height: 80vh;
+
+  @include token-utils.use-tokens(tokens-mtx-datetimepicker.$prefix,
+    tokens-mtx-datetimepicker.get-token-slots()) {
+    @include token-utils.create-token-slot(box-shadow, container-touch-elevation-shadow);
+    @include token-utils.create-token-slot(border-radius, container-touch-shape);
+  }
 
   // Allows for the screen reader close button to be seen in touch UI mode.
   position: relative;
