@@ -214,7 +214,7 @@
 }
 
 @function select($systems, $exclude-hardcoded) {
-  @return (
+  @return ((
     container-shape: 4px,
 
     container-text-color: map.get($systems, md-sys-color, on-surface),
@@ -227,7 +227,7 @@
       $alpha: 0.38
     ),
 
-    // multiple-value-background-color: map.get($systems, md-sys-color, primary-container),
+    multiple-value-background-color: _hardcode(transparent, $exclude-hardcoded),
     multiple-value-border-color: map.get($systems, md-sys-color, outline),
     multiple-value-icon-hover-background-color: map.get($systems, md-sys-color, outline-variant),
 
@@ -245,10 +245,7 @@
     panel-divider-color: map.get($systems, md-sys-color, outline),
     optgroup-label-text-color: map.get($systems, md-sys-color, on-surface),
     option-label-text-color: map.get($systems, md-sys-color, on-surface),
-    option-selected-state-background-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: map.get($systems, md-sys-state, focus-state-layer-opacity)
-    ),
+    option-selected-state-background-color: map.get($systems, md-sys-color, secondary-container),
     option-selected-state-text-color: map.get($systems, md-sys-color, on-surface),
     option-hover-state-background-color: mat.private-safe-color-change(
       map.get($systems, md-sys-color, on-surface),
@@ -258,7 +255,19 @@
       map.get($systems, md-sys-color, on-surface),
       $alpha: 0.38
     ),
-  );
+  ), (
+    // Color variants:
+    primary: (
+      option-selected-state-background-color: map.get($systems, md-sys-color, primary-container),
+    ),
+    secondary: (), // Default, no overrides needed.
+    tertiary: (
+      option-selected-state-background-color: map.get($systems, md-sys-color, tertiary-container),
+    ),
+    error: (
+      option-selected-state-background-color: map.get($systems, md-sys-color, error-container),
+    )
+  ));
 }
 
 @function split($systems, $exclude-hardcoded) {
