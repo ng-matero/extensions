@@ -1,7 +1,7 @@
 <ng-content></ng-content>
 @for (area of displayedAreas; track area; let index = $index; let last = $last) {
   @if (!last) {
-    <div #gutterEls class="mtx-split-gutter" [ngClass]="['mat-' + color]"
+    <div #gutterEls class="mtx-split-gutter" [ngClass]="[color ? 'mat-' + color : '']"
       [style.flex-basis.px]="gutterSize"
       [style.order]="index * 2 + 1"
       (mousedown)="startDragging($event, index * 2 + 1, index + 1)"

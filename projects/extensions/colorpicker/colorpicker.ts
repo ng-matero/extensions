@@ -14,7 +14,6 @@ import {
   ChangeDetectorRef,
   Component,
   ComponentRef,
-  ElementRef,
   EventEmitter,
   Inject,
   InjectionToken,
@@ -30,7 +29,7 @@ import {
   booleanAttribute,
   inject,
 } from '@angular/core';
-import { CanColor, ThemePalette, mixinColor } from '@angular/material/core';
+import { ThemePalette } from '@angular/material/core';
 import { Subject, Subscription, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
@@ -71,20 +70,13 @@ export const MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   useFactory: MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY,
 };
 
-// Boilerplate for applying mixins to MtxColorpickerContent.
-/** @docs-private */
-const _MtxColorpickerContentBase = mixinColor(
-  class {
-    constructor(public _elementRef: ElementRef) {}
-  }
-);
-
 @Component({
   selector: 'mtx-colorpicker-content',
   templateUrl: './colorpicker-content.html',
   styleUrls: ['colorpicker-content.scss'],
   host: {
     'class': 'mtx-colorpicker-content',
+    '[class]': 'color ? "mat-" + color : ""',
     '[@transformPanel]': '_animationState',
     '(@transformPanel.done)': '_animationDone.next()',
   },
@@ -92,14 +84,12 @@ const _MtxColorpickerContentBase = mixinColor(
   exportAs: 'mtxColorpickerContent',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  inputs: ['color'],
   standalone: true,
   imports: [ColorChromeModule, NgTemplateOutlet],
 })
-export class MtxColorpickerContent
-  extends _MtxColorpickerContentBase
-  implements OnDestroy, CanColor
-{
+export class MtxColorpickerContent implements OnDestroy {
+  @Input() color: ThemePalette;
+
   picker!: MtxColorpicker;
 
   /** Current state of the animation. */
@@ -108,12 +98,7 @@ export class MtxColorpickerContent
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
 
-  constructor(
-    elementRef: ElementRef,
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {
-    super(elementRef);
-  }
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
   _startExitAnimation() {
     this._animationState = 'void';

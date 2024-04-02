@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { MtxSplit, MtxSplitPane } from '@ng-matero/extensions/split';
 
@@ -18,5 +19,5 @@ import { MtxSplit, MtxSplitPane } from '@ng-matero/extensions/split';
   ],
 })
 export class SplitDemoComponent {
-  themeColor = 'primary';
+  themeColor: ThemePalette = 'primary';
 }

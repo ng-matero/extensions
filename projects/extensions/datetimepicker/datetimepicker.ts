@@ -18,7 +18,6 @@ import {
   ChangeDetectorRef,
   Component,
   ComponentRef,
-  ElementRef,
   EventEmitter,
   inject,
   Inject,
@@ -33,7 +32,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { CanColor, mixinColor, ThemePalette } from '@angular/material/core';
+import { ThemePalette } from '@angular/material/core';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
@@ -79,14 +78,6 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   useFactory: MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY,
 };
 
-// Boilerplate for applying mixins to MtxDatetimepickerContent.
-/** @docs-private */
-const _MtxDatetimepickerContentBase = mixinColor(
-  class {
-    constructor(public _elementRef: ElementRef) {}
-  }
-);
-
 /**
  * Component used as the content for the datetimepicker dialog and popup. We use this instead of
  * using MtxCalendar directly as the content so we can control the initial focus. This also gives us
@@ -100,6 +91,7 @@ const _MtxDatetimepickerContentBase = mixinColor(
   styleUrls: ['datetimepicker-content.scss'],
   host: {
     'class': 'mtx-datetimepicker-content',
+    '[class]': 'color ? "mat-" + color : ""',
     '[class.mtx-datetimepicker-content-touch]': 'datetimepicker?.touchUi',
     '[attr.mode]': 'datetimepicker.mode',
     '[@transformPanel]': '_animationState',
@@ -111,15 +103,13 @@ const _MtxDatetimepickerContentBase = mixinColor(
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  inputs: ['color'],
   standalone: true,
   imports: [MtxCalendar, NgClass],
 })
-export class MtxDatetimepickerContent<D>
-  extends _MtxDatetimepickerContentBase
-  implements OnInit, AfterContentInit, OnDestroy, CanColor
-{
+export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
+
+  @Input() color: ThemePalette;
 
   datetimepicker!: MtxDatetimepicker<D>;
 
@@ -135,12 +125,7 @@ export class MtxDatetimepickerContent<D>
   /** Id of the label for the `role="dialog"` element. */
   _dialogLabelId: string | null = null;
 
-  constructor(
-    elementRef: ElementRef,
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {
-    super(elementRef);
-  }
+  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
   ngOnInit() {
     this._animationState = this.datetimepicker.touchUi ? 'enter-dialog' : 'enter-dropdown';
@@ -241,6 +226,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
   set color(value: ThemePalette) {
     this._color = value;
+    console.log(value);
   }
   private _color: ThemePalette;
 

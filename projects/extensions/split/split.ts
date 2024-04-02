@@ -18,7 +18,7 @@ import {
   ViewChildren,
   ViewEncapsulation,
 } from '@angular/core';
-import { CanColor, mixinColor } from '@angular/material/core';
+import { ThemePalette } from '@angular/material/core';
 import { Observable, Subject, Subscriber } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -47,14 +47,6 @@ import {
 /** Injection token that can be used to specify default split options. */
 export const MTX_SPLIT_DEFAULT_OPTIONS = new InjectionToken<MtxSplitDefaultOptions>(
   'mtx-split-default-options'
-);
-
-// Boilerplate for applying mixins to _MtxSplitBase.
-/** @docs-private */
-const _MtxSplitBase = mixinColor(
-  class {
-    constructor(public _elementRef: ElementRef) {}
-  }
 );
 
 /**
@@ -97,11 +89,12 @@ const _MtxSplitBase = mixinColor(
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrls: ['./split.scss'],
   templateUrl: './split.html',
-  inputs: ['color'],
   standalone: true,
   imports: [NgClass],
 })
-export class MtxSplit extends _MtxSplitBase implements AfterViewInit, OnDestroy, CanColor {
+export class MtxSplit implements AfterViewInit, OnDestroy {
+  @Input() color: ThemePalette;
+
   private _direction: 'horizontal' | 'vertical' = 'horizontal';
 
   @Input() set direction(v: 'horizontal' | 'vertical') {
@@ -279,8 +272,6 @@ export class MtxSplit extends _MtxSplitBase implements AfterViewInit, OnDestroy,
     @Inject(MTX_SPLIT_DEFAULT_OPTIONS)
     protected _defaultOptions?: MtxSplitDefaultOptions
   ) {
-    super(elRef);
-
     this.color = _defaultOptions?.color ?? 'primary';
     this.direction = _defaultOptions?.direction ?? 'horizontal';
     this.dir = _defaultOptions?.dir ?? 'ltr';
