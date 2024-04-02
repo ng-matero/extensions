@@ -46,7 +46,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
       @include token-utils.create-token-slot(color, time-input-active-state-text-color);
 
       &:focus {
-        @include token-utils.create-token-slot(border-color, time-input-focus-state-border-color);
+        @include token-utils.create-token-slot(border-color, time-input-focus-state-outline-color);
         @include token-utils.create-token-slot(background-color, time-input-focus-state-background-color);
 
         &::placeholder {
@@ -56,7 +56,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
     }
 
     &.mtx-time-input-warning {
-      @include token-utils.create-token-slot(border-color, time-input-warn-state-border-color);
+      @include token-utils.create-token-slot(border-color, time-input-warn-state-outline-color);
     }
   }
 }
@@ -87,7 +87,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
     @include token-utils.use-tokens($_tokens...) {
       @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-text-color);
       @include token-utils.create-token-slot(--mdc-text-button-container-shape, selector-container-shape);
-      @include token-utils.create-token-slot(border-color, time-ampm-border-color);
+      @include token-utils.create-token-slot(border-color, time-ampm-outline-color);
 
       &.mtx-time-ampm-active {
         --mdc-text-button-label-text-weight: 500;

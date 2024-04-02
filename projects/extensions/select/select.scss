@@ -100,7 +100,7 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
         @include token-utils.create-token-slot(background-color, multiple-value-background-color);
 
-        $border-color: token-utils.get-token-variable(multiple-value-border-color);
+        $border-color: token-utils.get-token-variable(multiple-value-outline-color);
 
         border: 1px solid var($border-color);
 

@@ -19,6 +19,7 @@ $prefix: (mtx, alert);
   $is-dark: mat.get-theme-type($theme) == dark;
 
   @return (
+    outline-color: transparent,
     background-color: mat.get-theme-color($theme, background, dialog),
     text-color: mat.get-theme-color($theme, foreground, text),
     info-background-color: mat.get-color-from-palette(mat.$blue-palette, if($is-dark, 900, 500)),

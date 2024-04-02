@@ -40,7 +40,7 @@ $prefix: (mtx, select);
     disabled-text-color: $hint-text-color,
 
     multiple-value-background-color: mat.get-theme-color($theme, background, unselected-chip),
-    multiple-value-border-color: $divider-color,
+    multiple-value-outline-color: $divider-color,
     multiple-value-icon-hover-background-color: $divider-color,
 
     clear-icon-color: $secondary-text-color,
