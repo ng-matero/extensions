@@ -7,6 +7,8 @@ import { NgProgressComponent } from 'ngx-progressbar';
 import { Subscription } from 'rxjs';
 import { NavigationFocusService } from '../navigation-focus/navigation-focus.service';
 import { AppThemes } from '../themes';
+import { AppLogo } from '../logo/logo';
+import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -22,6 +24,8 @@ import { AppThemes } from '../themes';
     MatTooltip,
     MatIcon,
     MatIconAnchor,
+    AppLogo,
+    NgTemplateOutlet,
   ],
 })
 export class Navbar implements OnDestroy {

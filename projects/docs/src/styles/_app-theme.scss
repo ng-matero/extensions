@@ -1,8 +1,7 @@
-@use 'sass:map';
+@use '@angular/material' as mat;
 
 @use '../app/pages/component-category-list/component-category-list-theme';
 @use '../app/pages/component-page-header/component-page-header-theme';
-@use '../app/pages/component-nav/component-nav-theme';
 @use '../app/pages/component-sidenav/component-sidenav-theme';
 @use '../app/pages/component-viewer/component-viewer-theme';
 @use '../app/pages/homepage/homepage-theme';
@@ -16,11 +15,10 @@
 
 // Styles for the docs app that are based on the current theme.
 @mixin theme($theme) {
-  $is-dark-theme: map.get($theme, is-dark);
+  $is-dark-theme: if(mat.get-theme-type($theme) == dark, true, false);
 
   @include component-category-list-theme.theme($theme);
   @include component-page-header-theme.theme($theme);
-  @include component-nav-theme.theme($theme);
   @include component-sidenav-theme.theme($theme);
   @include component-viewer-theme.theme($theme);
   @include homepage-theme.theme($theme);
@@ -31,8 +29,7 @@
 
   @if $is-dark-theme {
     @include highlightjs-material-dark();
-  }
-  @else {
+  } @else {
     @include highlightjs-material-light();
   }
 }

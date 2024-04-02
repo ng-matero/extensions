@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@use '@angular/material-experimental' as matx;
 @use '../../extensions' as mtx;
 @use './styles/app-theme';
 @use './styles/constants';
@@ -7,40 +8,43 @@
 
 @include mat.core();
 
-// Define the default theme.
-$primary: mat.define-palette(mat.$indigo-palette);
-$accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
-$theme: mat.define-light-theme(
-  (
-    color: (
-      primary: $primary,
-      accent: $accent
-    ),
-    typography: mat.define-typography-config(),
-    density: 0
-  )
+$light-config: (
+  color: (
+    theme-type: 'light',
+    primary: matx.$m3-azure-palette,
+    tertiary: matx.$m3-blue-palette,
+  ),
 );
 
-@include mat.all-component-themes($theme);
-@include mtx.all-component-themes($theme);
-@include app-theme.theme($theme);
+// Define the default (light) theme.
+$light-theme: mat.private-deep-merge-all(
+  matx.define-theme($light-config),
+  mtx.define-theme($light-config)
+);
+
+:root {
+  @include mat.all-component-themes($light-theme);
+  @include mtx.all-component-themes($light-theme);
+}
+
+@include app-theme.theme($light-theme);
+
+$dark-config: (
+  color: (
+    theme-type: 'dark',
+    primary: matx.$m3-cyan-palette,
+    tertiary: matx.$m3-orange-palette,
+  ),
+);
 
 // Define an alternate dark theme.
-.docs-theme-dark {
-  $primary: mat.define-palette(mat.$pink-palette);
-  $accent: mat.define-palette(mat.$blue-grey-palette);
-  $theme: mat.define-dark-theme(
-    (
-      color: (
-        primary: $primary,
-        accent: $accent
-      ),
-      typography: null,
-      density: null
-    )
-  );
+$dark-theme: mat.private-deep-merge-all(
+  matx.define-theme($dark-config),
+  mtx.define-theme($dark-config)
+);
 
-  @include mat.all-component-themes($theme);
-  @include mtx.all-component-themes($theme);
-  @include app-theme.theme($theme);
+.docs-theme-dark {
+  @include mat.all-component-colors($dark-theme);
+  @include mtx.all-component-colors($dark-theme);
+  @include app-theme.theme($dark-theme);
 }
