@@ -17,9 +17,9 @@ $prefix: (mtx, popover);
 // Tokens that can be configured through Angular Material's color theming API.
 @function get-color-tokens($theme) {
   @return (
+    outline-color: mat.get-theme-color($theme, foreground, divider),
     background-color: mat.get-theme-color($theme, background, card),
     text-color: mat.get-theme-color($theme, foreground, text),
-    arrow-outline-color: mat.get-theme-color($theme, foreground, divider),
   );
 }
 

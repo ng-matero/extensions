@@ -215,9 +215,9 @@
   @return (
     container-shape: map.get($systems, md-sys-shape, corner-extra-small),
 
+    outline-color: map.get($systems, md-sys-color, surface-container),
     background-color: map.get($systems, md-sys-color, surface-container),
     text-color: map.get($systems, md-sys-color, on-surface),
-    arrow-outline-color: map.get($systems, md-sys-color, surface-container),
   );
 }
 

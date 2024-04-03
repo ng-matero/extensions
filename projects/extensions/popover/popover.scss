@@ -63,7 +63,7 @@ $_tokens: tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots();
 
   @include token-utils.use-tokens($_tokens...) {
     &::before {
-      @include token-utils.create-token-slot(border-color, arrow-outline-color);
+      @include token-utils.create-token-slot(border-color, outline-color);
     }
 
     &::after {
