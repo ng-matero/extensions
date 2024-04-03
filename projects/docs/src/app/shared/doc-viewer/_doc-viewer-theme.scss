@@ -6,12 +6,12 @@
       border-bottom: 1px solid mat.get-theme-color($theme, outline-variant);
     }
 
-    th {
-      background-color: mat.get-theme-color($theme, surface-container);
+    tr {
+      border-bottom: 1px solid mat.get-theme-color($theme, outline-variant);
     }
 
-    td {
-      border: 1px solid mat.get-theme-color($theme, outline-variant);
+    pre {
+      border: solid 1px mat.get-theme-color($theme, outline-variant);
     }
   }
 }
