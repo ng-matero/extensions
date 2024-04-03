@@ -27,6 +27,8 @@ $light-theme: mat.private-deep-merge-all(
   @include mtx.all-component-themes($light-theme);
 }
 
+@include matx.color-variants-back-compat($light-theme);
+@include mtx.color-variants-back-compat($light-theme);
 @include app-theme.theme($light-theme);
 
 $dark-config: (
@@ -46,5 +48,8 @@ $dark-theme: mat.private-deep-merge-all(
 .docs-theme-dark {
   @include mat.all-component-colors($dark-theme);
   @include mtx.all-component-colors($dark-theme);
+
+  @include matx.color-variants-back-compat($dark-theme);
+  @include mtx.color-variants-back-compat($dark-theme);
   @include app-theme.theme($dark-theme);
 }
