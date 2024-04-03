@@ -22,8 +22,14 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
         @include token-utils.create-token-slot(background-color, table-row-striped-background-color);
       }
 
-      &.mat-table-hover .mat-mdc-row:hover {
-        @include token-utils.create-token-slot(background-color, table-row-hover-background-color);
+      &.mat-table-hover {
+        .mat-mdc-row:hover {
+          @include token-utils.create-token-slot(background-color, table-row-hover-background-color);
+        }
+
+        .mat-mdc-row.selected:hover {
+          @include token-utils.create-token-slot(background-color, table-row-selected-hover-background-color);
+        }
       }
 
       .mat-mdc-row.selected {
@@ -218,9 +224,12 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   display: inline-block;
   vertical-align: middle;
 
+
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(width, row-expand-button-size);
-    @include token-utils.create-token-slot(height, row-expand-button-size);
+    $compat-size: token-utils.get-token-variable(row-expand-button-size);
+
+    width: var(--mdc-icon-button-state-layer-size, var($compat-size));
+    height: var(--mdc-icon-button-state-layer-size, var($compat-size));
   }
 }
 
