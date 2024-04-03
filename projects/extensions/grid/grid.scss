@@ -8,6 +8,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   display: flex;
   flex-direction: column;
   width: 100%;
+  overflow: hidden;
 
   @include token-utils.use-tokens($_tokens...) {
     $border-color: token-utils.get-token-variable(outline-color);
@@ -25,8 +26,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
         @include token-utils.create-token-slot(background-color, table-row-hover-background-color);
       }
 
-      .mat-mdc-row.selected,
-      .mat-mdc-row.mat-row-odd.selected {
+      .mat-mdc-row.selected {
         @include token-utils.create-token-slot(background-color, table-row-selected-background-color);
       }
 
@@ -144,7 +144,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 48px;
+  min-height: var(--mat-table-header-container-height);
   padding: 8px;
   box-sizing: border-box;
 
@@ -195,8 +195,9 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 .mtx-grid-statusbar {
   display: flex;
   align-items: center;
-  min-height: 56px;
+  min-height: var(--mat-table-header-container-height);
   padding: 8px;
+  box-sizing: border-box;
 
   @include token-utils.use-tokens($_tokens...) {
     $border-color: token-utils.get-token-variable(outline-color);
