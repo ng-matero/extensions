@@ -16,7 +16,7 @@ export class AppComponent {
     { header: 'Gender', field: 'gender' },
     { header: 'Mobile', field: 'mobile' },
     { header: 'City', field: 'city' },
-    { header: 'Cost', field: 'cost', type: 'currency' },
+    { header: 'Cost', field: 'cost', type: 'currency', typeParameter: { display: '$' } },
   ];
 
   list = EXAMPLE_DATA;

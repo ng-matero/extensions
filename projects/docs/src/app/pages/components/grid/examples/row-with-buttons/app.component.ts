@@ -49,7 +49,6 @@ export class AppComponent {
           click: () => alert('delete'),
           badge: {
             content: 1,
-            size: 'small',
           },
         },
       ],
