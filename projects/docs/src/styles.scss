@@ -1,6 +1,6 @@
 @use '@angular/material' as mat;
 @use '@angular/material-experimental' as matx;
-@use '../../extensions' as mtx;
+@use '../../extensions/experimental' as mtx;
 @use './styles/app-theme';
 @use './styles/constants';
 @use './styles/reboot';

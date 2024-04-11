@@ -29,7 +29,3 @@ tooltip-color, tooltip-typography, tooltip-density, tooltip-base;
 @forward './core/color/all-color' show all-component-colors;
 @forward './core/typography/all-typography' show all-component-typographies;
 @forward './core/density/all-density' show all-component-densities;
-
-// Experimental M3 Token-based theming API
-@forward './core/theming/m3/definition' show define-theme, define-colors, define-typography, define-density;
-@forward './core/theming/m3/color-api-back-compat' show color-variants-back-compat;

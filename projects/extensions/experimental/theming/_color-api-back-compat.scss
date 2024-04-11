@@ -1,7 +1,7 @@
 @use '@angular/material' as mat;
-@use '../../../datetimepicker/datetimepicker-theme';
-@use '../../../select/select-theme';
-@use '../../../split/split-theme';
+@use '../../datetimepicker/datetimepicker-theme';
+@use '../../select/select-theme';
+@use '../../split/split-theme';
 
 // We want to emit only the overrides, because the backwards compatibility styles are usually
 // emitted after all the tokens have been included once already. This allows us to save ~50kb

@@ -6,7 +6,7 @@
 @use './m3-density';
 @use './custom-tokens';
 @use './format-tokens';
-@use '../../tokens/m2';
+@use '../../core/tokens/m2';
 
 /// Picks a submap containing only the given keys out the given map.
 /// @param {Map} $map The map to pick from.
