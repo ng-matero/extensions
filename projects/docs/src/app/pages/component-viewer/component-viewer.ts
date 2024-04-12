@@ -46,7 +46,7 @@ export class ComponentViewer implements OnDestroy {
 
     this._router.events.pipe(startWith(this._router)).subscribe(s => {
       if (s instanceof Router || s instanceof NavigationEnd) {
-        this.componentId = s.url.split('/')[2];
+        this.componentId = s.url.split('/').pop()??'';
         this._componentPageTitle.title = this.componentId;
       }
     });
