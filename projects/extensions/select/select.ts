@@ -168,8 +168,9 @@ export class MtxSelect
   @Input() clearOnBackspace = true;
   @Input() compareWith!: CompareWithFn;
   @Input() dropdownPosition: DropdownPosition = 'auto';
-  @Input() groupBy!: string | (() => void);
+  @Input() groupBy!: string | ((value: any) => any);
   @Input() groupValue!: GroupValueFn;
+  @Input() bufferAmount = 4;
   @Input() selectableGroup = false;
   @Input() selectableGroupAsModel = true;
   @Input() hideSelected = false;
