@@ -50,6 +50,13 @@ import {
 } from './multi-year-view';
 import { MtxTime } from './time';
 import { MtxYearView } from './year-view';
+import {
+  CdkPortalOutlet,
+  ComponentPortal,
+  ComponentType,
+  Portal,
+  PortalModule,
+} from '@angular/cdk/portal';
 
 /**
  * A calendar that is used as part of the datetimepicker.
@@ -71,6 +78,7 @@ import { MtxYearView } from './year-view';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
+    CdkPortalOutlet,
     MatButton,
     MatIconButton,
     MtxMonthView,
@@ -99,6 +107,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Prevent user to select same date time */
   @Input() preventSameDateTimeSelection = false;
 
+  /** Input for custom header component */
+  @Input() headerComponent!: ComponentType<any>;
+
   /** Emits when the currently selected date changes. */
   @Output() selectedChange: EventEmitter<D> = new EventEmitter<D>();
 
@@ -112,6 +123,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   _clockView: MtxClockView = 'hour';
 
   _calendarState!: string;
+
+  /** A portal containing the header component. */
+  _calendarHeaderPortal!: Portal<any>;
 
   private _intlChanges: Subscription;
 
@@ -342,6 +356,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   ngAfterContentInit() {
+    if (this.headerComponent) {
+      this._calendarHeaderPortal = new ComponentPortal(this.headerComponent);
+    }
     this._activeDate = this.startAt || this._adapter.today();
     this._selectAMPM(this._activeDate);
 

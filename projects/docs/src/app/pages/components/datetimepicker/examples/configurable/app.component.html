@@ -43,6 +43,11 @@
 </section>
 
 <section>
+  <mat-checkbox (change)="showCustomHeader($event)">Custom Header</mat-checkbox>
+</section>
+
+
+<section>
   <label>TimeInterval:</label>
   <mat-slider min="1" max="30" discrete>
     <input matSliderThumb [(ngModel)]="timeInterval">
@@ -61,6 +66,7 @@
                       [type]="type"
                       [mode]="mode"
                       [multiYearSelector]="multiYearSelector"
+                      [calendarHeaderComponent]="customHeader"
                       [startView]="startView"
                       [twelvehour]="twelvehour"
                       [timeInterval]="timeInterval"
