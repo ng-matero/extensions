@@ -10,7 +10,7 @@ import {
 } from '@angular/cdk/overlay';
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
 import { CdkPortalOutlet, ComponentPortal, ComponentType } from '@angular/cdk/portal';
-import { DOCUMENT, NgClass } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   booleanAttribute,
@@ -104,7 +104,7 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MtxCalendar, NgClass, CdkPortalOutlet],
+  imports: [MtxCalendar, CdkPortalOutlet],
 })
 export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
@@ -193,10 +193,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   /** Emits when the view has been changed. */
   @Output() viewChanged: EventEmitter<MtxCalendarView> = new EventEmitter<MtxCalendarView>();
 
-  /**
-   * Classes to be passed to the date picker panel.
-   * Supports string and string array values, similar to `ngClass`.
-   */
+  /** Classes to be passed to the date picker panel. */
   @Input()
   get panelClass(): string | string[] {
     return this._panelClass;

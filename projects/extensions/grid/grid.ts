@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
-import { AsyncPipe, NgClass, NgTemplateOutlet } from '@angular/common';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -148,7 +148,6 @@ export class MtxGridSelectableCell {
   standalone: true,
   imports: [
     AsyncPipe,
-    NgClass,
     NgTemplateOutlet,
     MatProgressBar,
     MatIconButton,

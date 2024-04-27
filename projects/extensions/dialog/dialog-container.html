@@ -19,12 +19,12 @@
       @case ('raised') {
         @if (btn.focusInitial) {
           <button mat-raised-button cdkFocusInitial
-            [color]="btn.color" [ngClass]="btn.class!" (click)="_onClick(btn.onClick!)">
+            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
             {{btn.text | toObservable | async}}
           </button>
         } @else {
           <button mat-raised-button
-            [color]="btn.color" [ngClass]="btn.class!" (click)="_onClick(btn.onClick!)">
+            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
             {{btn.text | toObservable | async}}
           </button>
         }
@@ -32,12 +32,12 @@
       @case ('stroked') {
         @if (btn.focusInitial) {
           <button mat-stroked-button cdkFocusInitial
-            [color]="btn.color" [ngClass]="btn.class!" (click)="_onClick(btn.onClick!)">
+            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
             {{btn.text | toObservable | async}}
           </button>
         } @else {
           <button mat-stroked-button
-            [color]="btn.color" [ngClass]="btn.class!" (click)="_onClick(btn.onClick!)">
+            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
             {{btn.text | toObservable | async}}
           </button>
         }
@@ -45,12 +45,12 @@
       @case ('flat') {
         @if (btn.focusInitial) {
           <button mat-flat-button cdkFocusInitial
-            [color]="btn.color" [ngClass]="btn.class!" (click)="_onClick(btn.onClick!)">
+            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
             {{btn.text | toObservable | async}}
           </button>
         } @else {
           <button mat-flat-button
-            [color]="btn.color" [ngClass]="btn.class!" (click)="_onClick(btn.onClick!)">
+            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
             {{btn.text | toObservable | async}}
           </button>
         }
@@ -58,12 +58,12 @@
       @default {
         @if (btn.focusInitial) {
           <button mat-button cdkFocusInitial
-            [color]="btn.color" [ngClass]="btn.class!" (click)="_onClick(btn.onClick!)">
+            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
             {{btn.text | toObservable | async}}
           </button>
         } @else {
           <button mat-button
-            [color]="btn.color" [ngClass]="btn.class!" (click)="_onClick(btn.onClick!)">
+            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
             {{btn.text | toObservable | async}}
           </button>
         }

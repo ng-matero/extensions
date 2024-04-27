@@ -1,8 +1,9 @@
 <ng-template>
-  <div class="mtx-popover-panel"
-    [class.mtx-popover-panel-without-arrow]="hideArrow"
+  <div
     [id]="panelId"
-    [ngClass]="_classList"
+    class="mtx-popover-panel"
+    [class]="_classList"
+    [class.mtx-popover-panel-without-arrow]="hideArrow"
     (keydown)="_handleKeydown($event)"
     (click)="_handleClick()"
     (mouseover)="_handleMouseOver()"

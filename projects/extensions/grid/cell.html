@@ -20,7 +20,7 @@
             @switch (btn.type) {
               @case ('raised') {
                 <button mat-raised-button [color]="btn.color || 'primary'" type="button"
-                  [ngClass]="['mtx-grid-action-button', btn.class || '']"
+                  class="mtx-grid-action-button" [class]="btn.class"
                   [disabled]="btn | cellActionDisable: rowData: rowChangeRecord: rowChangeRecord?.currentValue"
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
@@ -47,7 +47,7 @@
               }
               @case ('stroked') {
                 <button mat-stroked-button [color]="btn.color || 'primary'" type="button"
-                  [ngClass]="['mtx-grid-action-button', btn.class || '']"
+                  class="mtx-grid-action-button" [class]="btn.class"
                   [disabled]="btn | cellActionDisable: rowData: rowChangeRecord: rowChangeRecord?.currentValue"
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
@@ -74,7 +74,7 @@
               }
               @case ('flat') {
                 <button mat-flat-button [color]="btn.color || 'primary'" type="button"
-                  [ngClass]="['mtx-grid-action-button', btn.class || '']"
+                  class="mtx-grid-action-button" [class]="btn.class"
                   [disabled]="btn | cellActionDisable: rowData: rowChangeRecord: rowChangeRecord?.currentValue"
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
@@ -101,7 +101,7 @@
               }
               @case ('icon') {
                 <button mat-icon-button [color]="btn.color || 'primary'" type="button"
-                  [ngClass]="['mtx-grid-action-button', btn.class || '']"
+                  class="mtx-grid-action-button" [class]="btn.class"
                   [disabled]="btn | cellActionDisable: rowData: rowChangeRecord: rowChangeRecord?.currentValue"
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
@@ -125,7 +125,7 @@
               }
               @case ('fab') {
                 <button mat-fab [color]="btn.color || 'primary'" type="button"
-                  [ngClass]="['mtx-grid-action-button', btn.class || '']"
+                  class="mtx-grid-action-button" [class]="btn.class"
                   [disabled]="btn | cellActionDisable: rowData: rowChangeRecord: rowChangeRecord?.currentValue"
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
@@ -149,7 +149,7 @@
               }
               @case ('mini-fab') {
                 <button mat-mini-fab [color]="btn.color || 'primary'" type="button"
-                  [ngClass]="['mtx-grid-action-button', btn.class || '']"
+                  class="mtx-grid-action-button" [class]="btn.class"
                   [disabled]="btn | cellActionDisable: rowData: rowChangeRecord: rowChangeRecord?.currentValue"
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
@@ -173,7 +173,7 @@
               }
               @default {
                 <button mat-button [color]="btn.color || 'primary'" type="button"
-                  [ngClass]="['mtx-grid-action-button', btn.class || '']"
+                  class="mtx-grid-action-button" [class]="btn.class"
                   [disabled]="btn | cellActionDisable: rowData: rowChangeRecord: rowChangeRecord?.currentValue"
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
@@ -206,7 +206,7 @@
       @case ('tag') {
         @if (colDef.tag && colDef.tag[_value]) {
           <mat-chip-listbox>
-            <mat-chip color="primary" [ngClass]="['bg-' + colDef.tag[_value].color]">
+            <mat-chip color="primary" [class]="'bg-' + colDef.tag[_value].color">
               {{colDef.tag[_value].text}}
             </mat-chip>
           </mat-chip-listbox>

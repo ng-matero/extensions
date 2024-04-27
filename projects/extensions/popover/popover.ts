@@ -2,7 +2,6 @@ import { AnimationEvent } from '@angular/animations';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
-import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -59,13 +58,13 @@ let popoverPanelUid = 0;
   animations: [transformPopover],
   exportAs: 'mtxPopover',
   standalone: true,
-  imports: [NgClass, CdkTrapFocus],
+  imports: [CdkTrapFocus],
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _previousElevation?: string;
   private _elevationPrefix = 'mat-elevation-z';
 
-  /** Config object to be passed into the popover's ngClass. */
+  /** Config object to be passed into the popover's class. */
   _classList: { [key: string]: boolean } = {};
 
   /** Current state of the panel animation. */

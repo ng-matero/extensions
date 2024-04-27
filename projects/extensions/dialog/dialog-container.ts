@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -20,7 +20,6 @@ import { MtxDialogData } from './dialog-config';
   standalone: true,
   imports: [
     AsyncPipe,
-    NgClass,
     MatButton,
     MatIconButton,
     MatFabButton,

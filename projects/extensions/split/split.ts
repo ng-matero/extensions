@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -90,7 +89,6 @@ export const MTX_SPLIT_DEFAULT_OPTIONS = new InjectionToken<MtxSplitDefaultOptio
   styleUrls: ['./split.scss'],
   templateUrl: './split.html',
   standalone: true,
-  imports: [NgClass],
 })
 export class MtxSplit implements AfterViewInit, OnDestroy {
   @Input() color: ThemePalette;

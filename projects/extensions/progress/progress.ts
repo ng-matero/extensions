@@ -1,4 +1,3 @@
-import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -22,7 +21,6 @@ export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'dang
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgClass],
 })
 export class MtxProgress {
   /** The progress's type. Can be `default`, `info`, `success`, `warning` or `danger`. */

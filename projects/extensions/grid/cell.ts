@@ -1,11 +1,4 @@
-import {
-  AsyncPipe,
-  CurrencyPipe,
-  DatePipe,
-  DecimalPipe,
-  NgClass,
-  PercentPipe,
-} from '@angular/common';
+import { AsyncPipe, CurrencyPipe, DatePipe, DecimalPipe, PercentPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -54,7 +47,6 @@ import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
     DatePipe,
     DecimalPipe,
     PercentPipe,
-    NgClass,
     MatButton,
     MatIconButton,
     MatFabButton,

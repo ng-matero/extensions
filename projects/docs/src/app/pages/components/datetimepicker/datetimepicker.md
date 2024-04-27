@@ -76,7 +76,7 @@ Exported as: `mtxDatetimepicker`
 | `@Input()`<br>`color: ThemePalette` | Color palette to use on the datetimepicker's calendar. |
 | `@Input()`<br>`disabled: boolean` | Whether the datetimepicker pop-up should be disabled. |
 | `@Input()`<br>`opened: boolean` | Whether the calendar is open. |
-| `@Input()`<br>`panelClass: string \| string[]` | Classes to be passed to the date picker panel. Supports string and string array values, similar to ngClass. |
+| `@Input()`<br>`panelClass: string \| string[]` | Classes to be passed to the date picker panel. |
 | `@Input()`<br>`restoreFocus: boolean` | Whether to restore focus to the previously-focused element when the calendar is closed. Note that automatic focus restoration is an accessibility feature and it is recommended that you provide your own equivalent, if you decide to turn it off. |
 | `@Input()`<br>`touchUi: boolean` | Whether the calendar UI is in touch mode. In touch mode the calendar opens in a dialog rather than a dropdown and elements have more padding to allow for bigger touch targets. |
 | `@Input()`<br>`xPosition: DatetimepickerDropdownPositionX`| Preferred position of the datetimepicker in the X axis. |
