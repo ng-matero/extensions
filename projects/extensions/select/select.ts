@@ -112,7 +112,6 @@ let nextUniqueId = 0;
   },
   templateUrl: './select.html',
   styleUrls: ['./select.scss'],
-  inputs: ['disabled'],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: MatFormFieldControl, useExisting: MtxSelect }],

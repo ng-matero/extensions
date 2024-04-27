@@ -2,7 +2,7 @@ import { AnimationEvent } from '@angular/animations';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
-import { NgClass, NgStyle } from '@angular/common';
+import { NgClass } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -59,7 +59,7 @@ let popoverPanelUid = 0;
   animations: [transformPopover],
   exportAs: 'mtxPopover',
   standalone: true,
-  imports: [NgClass, NgStyle, CdkTrapFocus],
+  imports: [NgClass, CdkTrapFocus],
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _previousElevation?: string;
@@ -80,7 +80,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   /** Closing disabled on popover */
   closeDisabled = false;
 
-  /** Config object to be passed into the popover's arrow ngStyle */
+  /** Config object to be passed into the popover's arrow style */
   arrowStyles?: Record<string, unknown>;
 
   /** Layout direction of the popover. */

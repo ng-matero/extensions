@@ -1,5 +1,5 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { DOCUMENT, NgStyle } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -48,7 +48,6 @@ export type MtxClockView = 'hour' | 'minute';
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [NgStyle],
 })
 export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   /** A function used to filter which dates are selectable. */
