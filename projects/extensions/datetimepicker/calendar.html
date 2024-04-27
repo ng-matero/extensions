@@ -1,56 +1,60 @@
 <div class="mtx-calendar-header">
-  @if (type !== 'time') {
-    <button
-      mat-button type="button" class="mtx-calendar-header-year"
-      [class.active]="currentView === 'year' || currentView === 'multi-year'"
-      [attr.aria-label]="_yearButtonLabel"
-      (click)="_yearClicked()">
-      <span>{{ _yearButtonText }}</span>
-      @if (multiYearSelector || type === 'year') {
-        <svg
-          class="mtx-calendar-header-year-dropdown" matButtonIcon iconPositionEnd
-          width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M7,10L12,15L17,10H7Z" />
-        </svg>
-      }
-    </button>
-  }
-  @if (type !== 'year') {
-    <div class="mtx-calendar-header-date-time">
-      @if (type !== 'time') {
-        <button
-          mat-button type="button" class="mtx-calendar-header-date"
-          [class.active]="currentView === 'month'"
-          [class.not-clickable]="type === 'month'"
-          [attr.aria-label]="_dateButtonLabel"
-          (click)="_dateClicked()">{{ _dateButtonText }}</button>
-      }
-      @if (type.endsWith('time')) {
-        <span class="mtx-calendar-header-time" [class.active]="currentView === 'clock'">
-          <span class="mtx-calendar-header-hour-minute-container">
-            <button mat-button type="button" class="mtx-calendar-header-hours"
-              [class.active]="_clockView === 'hour'"
-              [attr.aria-label]="_hourButtonLabel"
-              (click)="_hoursClicked()">{{ _hoursButtonText }}</button>
-            <span class="mtx-calendar-header-hour-minute-separator">:</span>
-            <button mat-button type="button" class="mtx-calendar-header-minutes"
-              [class.active]="_clockView === 'minute'"
-              [attr.aria-label]="_minuteButtonLabel"
-              (click)="_minutesClicked()">{{ _minutesButtonText }}</button>
-          </span>
-          @if (twelvehour) {
-            <span class="mtx-calendar-header-ampm-container">
-              <button mat-button type="button" class="mtx-calendar-header-ampm"
-                [class.active]="_AMPM === 'AM'" aria-label="AM"
-                (click)="_ampmClicked('AM')">AM</button>
-              <button mat-button type="button" class="mtx-calendar-header-ampm"
-                [class.active]="_AMPM === 'PM'" aria-label="PM"
-                (click)="_ampmClicked('PM')">PM</button>
+  @if (_calendarHeaderPortal) {
+    <ng-template [cdkPortalOutlet]="_calendarHeaderPortal"></ng-template>
+  } @else {
+    @if (type !== 'time') {
+      <button
+        mat-button type="button" class="mtx-calendar-header-year"
+        [class.active]="currentView === 'year' || currentView === 'multi-year'"
+        [attr.aria-label]="_yearButtonLabel"
+        (click)="_yearClicked()">
+        <span>{{ _yearButtonText }}</span>
+        @if (multiYearSelector || type === 'year') {
+          <svg
+            class="mtx-calendar-header-year-dropdown" matButtonIcon iconPositionEnd
+            width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7,10L12,15L17,10H7Z" />
+          </svg>
+        }
+      </button>
+    }
+    @if (type !== 'year') {
+      <div class="mtx-calendar-header-date-time">
+        @if (type !== 'time') {
+          <button
+            mat-button type="button" class="mtx-calendar-header-date"
+            [class.active]="currentView === 'month'"
+            [class.not-clickable]="type === 'month'"
+            [attr.aria-label]="_dateButtonLabel"
+            (click)="_dateClicked()">{{ _dateButtonText }}</button>
+        }
+        @if (type.endsWith('time')) {
+          <span class="mtx-calendar-header-time" [class.active]="currentView === 'clock'">
+            <span class="mtx-calendar-header-hour-minute-container">
+              <button mat-button type="button" class="mtx-calendar-header-hours"
+                [class.active]="_clockView === 'hour'"
+                [attr.aria-label]="_hourButtonLabel"
+                (click)="_hoursClicked()">{{ _hoursButtonText }}</button>
+              <span class="mtx-calendar-header-hour-minute-separator">:</span>
+              <button mat-button type="button" class="mtx-calendar-header-minutes"
+                [class.active]="_clockView === 'minute'"
+                [attr.aria-label]="_minuteButtonLabel"
+                (click)="_minutesClicked()">{{ _minutesButtonText }}</button>
             </span>
-          }
-        </span>
-      }
-    </div>
+            @if (twelvehour) {
+              <span class="mtx-calendar-header-ampm-container">
+                <button mat-button type="button" class="mtx-calendar-header-ampm"
+                  [class.active]="_AMPM === 'AM'" aria-label="AM"
+                  (click)="_ampmClicked('AM')">AM</button>
+                <button mat-button type="button" class="mtx-calendar-header-ampm"
+                  [class.active]="_AMPM === 'PM'" aria-label="PM"
+                  (click)="_ampmClicked('PM')">PM</button>
+              </span>
+            }
+          </span>
+        }
+      </div>
+    }
   }
 </div>
 

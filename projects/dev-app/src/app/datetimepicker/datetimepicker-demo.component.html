@@ -170,6 +170,24 @@
     }
   </mat-form-field>
 
+  <mat-form-field [color]="themeColor">
+    <mat-label>Custom Header</mat-label>
+    <mtx-datetimepicker-toggle [for]="datetimePickerCustomHeader" matSuffix></mtx-datetimepicker-toggle>
+    <mtx-datetimepicker #datetimePickerCustomHeader startView="month" [timeInterval]="5"
+    [calendarHeaderComponent]="customHeader"></mtx-datetimepicker>
+    <input [mtxDatetimepicker]="datetimePickerCustomHeader" [max]="tomorrow" [min]="today"
+      autocomplete="false" formControlName="dateTime" matInput required>
+    @if (group.get('dateTime')?.errors?.required) {
+      <mat-error>required</mat-error>
+    }
+    @if (group.get('dateTime')?.errors?.mtxDatetimepickerMin) {
+      <mat-error>min</mat-error>
+    }
+    @if (group.get('dateTime')?.errors?.mtxDatetimepickerMax) {
+      <mat-error>max</mat-error>
+    }
+  </mat-form-field>
+
   <button mat-button>Submit</button>
 </form>
 

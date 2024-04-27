@@ -50,6 +50,7 @@ Exported as: `mtxCalendar`
 | `@Input()`<br>`dateFilter: (date: D, type: MtxDatetimepickerFilterType) => boolean` | Function used to filter which dates are selectable. |
 | `@Input()`<br>`type: MtxDatetimepickerType` | The type of datetimepicker. Default is **`'date'`**. |
 | `@Input()`<br>`multiYearSelector: boolean` | Whether to show multi-year view. Default is **`false`**. |
+| `@Input()`<br>`headerComponent: ComponentType<any>` | Component for a custom header |
 | `@Input()`<br>`twelvehour: boolean` | Whether the clock uses 12 hour format. Default is **`false`**. |
 | `@Input()`<br>`timeInterval: number` | Step over minutes. Default is **`1`**. |
 | `@Input()`<br>`maxDate: D \| null` | The maximum selectable date. |
@@ -83,6 +84,7 @@ Exported as: `mtxDatetimepicker`
 | `@Input()`<br>`mode: MtxDatetimepickerMode` | The display mode of datetimepicker pop-up. Default is **`'auto'`**. |
 | `@Input()`<br>`type: MtxDatetimepickerType` | The type of datetimepicker. Default is **`'date'`**. |
 | `@Input()`<br>`multiYearSelector: boolean` | Whether to show multi-year view. Default is **`false`**. |
+| `@Input()`<br>`calendarHeaderComponent: ComponentType<any>` | Component for a custom header |
 | `@Input()`<br>`twelvehour: boolean` | Whether the clock uses 12 hour format. Default is **`false`**. |
 | `@Input()`<br>`timeInterval: number` | Step over minutes. Default is **`1`**. |
 | `@Input()`<br>`maxDate: D \| null` | The maximum selectable date. |
