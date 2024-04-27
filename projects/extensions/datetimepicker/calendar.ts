@@ -9,6 +9,7 @@ import {
   RIGHT_ARROW,
   UP_ARROW,
 } from '@angular/cdk/keycodes';
+import { CdkPortalOutlet, ComponentPortal, ComponentType, Portal } from '@angular/cdk/portal';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -50,13 +51,6 @@ import {
 } from './multi-year-view';
 import { MtxTime } from './time';
 import { MtxYearView } from './year-view';
-import {
-  CdkPortalOutlet,
-  ComponentPortal,
-  ComponentType,
-  Portal,
-  PortalModule,
-} from '@angular/cdk/portal';
 
 /**
  * A calendar that is used as part of the datetimepicker.
