@@ -13,7 +13,7 @@ import { NgTemplateOutlet } from '@angular/common';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.html',
-  styleUrls: ['./navbar.scss'],
+  styleUrl: './navbar.scss',
   standalone: true,
   imports: [
     NgProgressComponent,

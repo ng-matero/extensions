@@ -11,7 +11,7 @@ import { MtxDialogData } from './dialog-config';
   selector: 'mtx-dialog-container',
   exportAs: 'mtxDialogContainer',
   templateUrl: './dialog-container.html',
-  styleUrls: ['./dialog-container.scss'],
+  styleUrl: './dialog-container.scss',
   host: {
     class: 'mtx-dialog-container',
   },

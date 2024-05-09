@@ -6,7 +6,7 @@ import { EXAMPLE_DATA } from '../../data';
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [MtxGrid, MatSlideToggle],
 })

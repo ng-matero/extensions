@@ -73,7 +73,7 @@ export const MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 @Component({
   selector: 'mtx-colorpicker-content',
   templateUrl: './colorpicker-content.html',
-  styleUrls: ['colorpicker-content.scss'],
+  styleUrl: 'colorpicker-content.scss',
   host: {
     'class': 'mtx-colorpicker-content',
     '[class]': 'color ? "mat-" + color : ""',

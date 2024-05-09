@@ -9,7 +9,7 @@ import { MtxPopover } from '@ng-matero/extensions/popover/popover';
 @Component({
   selector: 'popover-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [
     MatRadioGroup,

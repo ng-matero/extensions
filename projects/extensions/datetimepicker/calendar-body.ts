@@ -27,7 +27,7 @@ export class MtxCalendarCell {
 @Component({
   selector: '[mtx-calendar-body]',
   templateUrl: 'calendar-body.html',
-  styleUrls: ['calendar-body.scss'],
+  styleUrl: 'calendar-body.scss',
   host: {
     class: 'mtx-calendar-body',
   },

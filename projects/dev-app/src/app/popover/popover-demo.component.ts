@@ -10,7 +10,7 @@ import { MtxPopover, MtxPopoverTarget, MtxPopoverTrigger } from '@ng-matero/exte
 @Component({
   selector: 'dev-popover-demo',
   templateUrl: 'popover-demo.component.html',
-  styleUrls: ['popover-demo.component.scss'],
+  styleUrl: 'popover-demo.component.scss',
   standalone: true,
   imports: [
     MatSlideToggle,

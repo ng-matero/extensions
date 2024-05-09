@@ -18,7 +18,7 @@ import { DevAppRippleOptions } from './ripple-options';
 @Component({
   selector: 'dev-app-layout',
   templateUrl: 'dev-app-layout.html',
-  styleUrls: ['dev-app-layout.scss'],
+  styleUrl: 'dev-app-layout.scss',
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [

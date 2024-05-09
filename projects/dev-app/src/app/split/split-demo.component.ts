@@ -7,7 +7,7 @@ import { MtxSplit, MtxSplitPane } from '@ng-matero/extensions/split';
 @Component({
   selector: 'dev-split',
   templateUrl: './split-demo.component.html',
-  styleUrls: ['./split-demo.component.scss'],
+  styleUrl: './split-demo.component.scss',
   standalone: true,
   imports: [
     MatRadioGroup,

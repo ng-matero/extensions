@@ -9,7 +9,7 @@ import { MtxLoader, MtxLoaderType } from '@ng-matero/extensions/loader';
 @Component({
   selector: 'dev-loader-demo',
   templateUrl: 'loader-demo.component.html',
-  styleUrls: ['loader-demo.component.scss'],
+  styleUrl: 'loader-demo.component.scss',
   standalone: true,
   imports: [
     MatCheckbox,

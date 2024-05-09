@@ -13,7 +13,7 @@ import {
 @Component({
   selector: 'color-picker-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [
     FormsModule,

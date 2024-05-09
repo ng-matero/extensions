@@ -11,7 +11,7 @@ import { DrawerPosition, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/d
 @Component({
   selector: 'drawer-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [
     FormsModule,

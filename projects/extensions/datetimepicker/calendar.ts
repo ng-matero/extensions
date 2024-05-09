@@ -59,7 +59,7 @@ import { MtxYearView } from './year-view';
 @Component({
   selector: 'mtx-calendar',
   templateUrl: 'calendar.html',
-  styleUrls: ['calendar.scss'],
+  styleUrl: 'calendar.scss',
   host: {
     'class': 'mtx-calendar',
     '[class.mtx-calendar-with-time-input]': 'timeInput',

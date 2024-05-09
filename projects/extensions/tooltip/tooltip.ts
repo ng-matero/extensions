@@ -917,7 +917,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
 @Component({
   selector: 'mtx-tooltip-component',
   templateUrl: 'tooltip.html',
-  styleUrls: ['tooltip.scss'],
+  styleUrl: 'tooltip.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {

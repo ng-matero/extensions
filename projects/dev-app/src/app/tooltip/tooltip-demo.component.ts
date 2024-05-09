@@ -6,7 +6,7 @@ import { MtxTooltip } from '@ng-matero/extensions/tooltip';
 @Component({
   selector: 'dev-tooltip-demo',
   templateUrl: 'tooltip-demo.component.html',
-  styleUrls: ['tooltip-demo.component.scss'],
+  styleUrl: 'tooltip-demo.component.scss',
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [MatButton, MatTooltip, MtxTooltip],

@@ -4,7 +4,7 @@ import { MtxProgress } from '@ng-matero/extensions/progress';
 @Component({
   selector: 'dev-progress-demo',
   templateUrl: './progress-demo.component.html',
-  styleUrls: ['./progress-demo.component.scss'],
+  styleUrl: './progress-demo.component.scss',
   standalone: true,
   imports: [MtxProgress],
 })

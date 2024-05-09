@@ -37,7 +37,7 @@ export type MtxClockView = 'hour' | 'minute';
 @Component({
   selector: 'mtx-clock',
   templateUrl: 'clock.html',
-  styleUrls: ['clock.scss'],
+  styleUrl: 'clock.scss',
   host: {
     'role': 'clock',
     'class': 'mtx-clock',

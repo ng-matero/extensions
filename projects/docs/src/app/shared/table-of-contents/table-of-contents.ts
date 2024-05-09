@@ -37,7 +37,7 @@ interface Link {
 
 @Component({
   selector: 'table-of-contents',
-  styleUrls: ['./table-of-contents.scss'],
+  styleUrl: './table-of-contents.scss',
   templateUrl: './table-of-contents.html',
   standalone: true,
   imports: [],

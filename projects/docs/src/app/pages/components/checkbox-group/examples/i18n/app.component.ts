@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'checkbox-group-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [MatRadioGroup, FormsModule, MatRadioButton, MtxCheckboxGroup, JsonPipe],
 })

@@ -11,7 +11,7 @@ import {
 @Component({
   selector: 'select-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [
     FormsModule,

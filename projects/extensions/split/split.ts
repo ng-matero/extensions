@@ -86,7 +86,7 @@ export const MTX_SPLIT_DEFAULT_OPTIONS = new InjectionToken<MtxSplitDefaultOptio
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  styleUrls: ['./split.scss'],
+  styleUrl: './split.scss',
   templateUrl: './split.html',
   standalone: true,
 })

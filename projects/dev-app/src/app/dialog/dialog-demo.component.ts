@@ -17,7 +17,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'dev-dialog-demo',
   templateUrl: './dialog-demo.component.html',
-  styleUrls: ['./dialog-demo.component.scss'],
+  styleUrl: './dialog-demo.component.scss',
   standalone: true,
   imports: [MatButton],
 })

@@ -37,7 +37,7 @@ import { MtxDrawerConfig } from './drawer-config';
 @Component({
   selector: 'mtx-drawer-container',
   templateUrl: 'drawer-container.html',
-  styleUrls: ['drawer-container.scss'],
+  styleUrl: 'drawer-container.scss',
   // In Ivy embedded views will be change detected from their declaration place, rather than where
   // they were stamped out. This means that we can't have the drawer container be OnPush,
   // because it might cause the sheets that were opened from a template not to be out of date.

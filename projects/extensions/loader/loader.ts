@@ -20,7 +20,7 @@ export type MtxLoaderType = 'spinner' | 'progressbar';
     '[class.mtx-loader-loading]': 'loading',
   },
   templateUrl: './loader.html',
-  styleUrls: ['./loader.scss'],
+  styleUrl: './loader.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,

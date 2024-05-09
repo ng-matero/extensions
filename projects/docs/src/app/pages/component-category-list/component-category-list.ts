@@ -8,7 +8,7 @@ import { ComponentPageTitle } from '../page-title/page-title';
 @Component({
   selector: 'app-component-category-list',
   templateUrl: './component-category-list.html',
-  styleUrls: ['./component-category-list.scss'],
+  styleUrl: './component-category-list.scss',
   standalone: true,
   imports: [NavigationFocus, RouterLink],
 })

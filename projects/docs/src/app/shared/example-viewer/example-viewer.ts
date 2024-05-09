@@ -31,7 +31,7 @@ export interface ExampleType {
 @Component({
   selector: 'example-viewer',
   templateUrl: './example-viewer.html',
-  styleUrls: ['./example-viewer.scss'],
+  styleUrl: './example-viewer.scss',
   standalone: true,
   imports: [MatIconButton, MatTooltip, MatIcon, MatTabGroup, MatTab],
 })

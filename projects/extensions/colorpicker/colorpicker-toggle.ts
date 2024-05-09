@@ -29,7 +29,7 @@ export class MtxColorpickerToggleIcon {}
 @Component({
   selector: 'mtx-colorpicker-toggle',
   templateUrl: './colorpicker-toggle.html',
-  styleUrls: ['./colorpicker-toggle.scss'],
+  styleUrl: './colorpicker-toggle.scss',
   host: {
     'class': 'mtx-colorpicker-toggle',
     '[attr.tabindex]': 'null',

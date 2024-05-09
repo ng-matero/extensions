@@ -19,7 +19,7 @@ import { MatButtonLoading } from '@ng-matero/extensions/button/button-loading';
 @Component({
   selector: 'dev-button-demo',
   templateUrl: 'button-demo.component.html',
-  styleUrls: ['button-demo.component.scss'],
+  styleUrl: 'button-demo.component.scss',
   standalone: true,
   imports: [
     MatCheckbox,

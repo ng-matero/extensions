@@ -9,7 +9,7 @@ import { AppLogo } from '../../shared/logo/logo';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.html',
-  styleUrls: ['./homepage.scss'],
+  styleUrl: './homepage.scss',
   standalone: true,
   imports: [NavigationFocus, MatAnchor, RouterLink, AppLogo],
 })

@@ -88,7 +88,7 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
 @Component({
   selector: 'mtx-datetimepicker-content',
   templateUrl: 'datetimepicker-content.html',
-  styleUrls: ['datetimepicker-content.scss'],
+  styleUrl: 'datetimepicker-content.scss',
   host: {
     'class': 'mtx-datetimepicker-content',
     '[class]': 'color ? "mat-" + color : ""',

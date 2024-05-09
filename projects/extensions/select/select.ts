@@ -111,7 +111,7 @@ let nextUniqueId = 0;
     'class': 'mtx-select',
   },
   templateUrl: './select.html',
-  styleUrls: ['./select.scss'],
+  styleUrl: './select.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: MatFormFieldControl, useExisting: MtxSelect }],

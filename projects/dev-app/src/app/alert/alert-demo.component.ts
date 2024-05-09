@@ -8,7 +8,7 @@ import { MtxAlert, MtxAlertType } from '@ng-matero/extensions/alert';
 @Component({
   selector: 'dev-alert-demo',
   templateUrl: 'alert-demo.component.html',
-  styleUrls: ['alert-demo.component.scss'],
+  styleUrl: 'alert-demo.component.scss',
   standalone: true,
   imports: [
     MatRadioGroup,

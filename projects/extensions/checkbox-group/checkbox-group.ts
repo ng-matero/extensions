@@ -36,7 +36,7 @@ export class MtxCheckboxBase {
     class: 'mtx-checkbox-group',
   },
   templateUrl: './checkbox-group.html',
-  styleUrls: ['./checkbox-group.scss'],
+  styleUrl: './checkbox-group.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [

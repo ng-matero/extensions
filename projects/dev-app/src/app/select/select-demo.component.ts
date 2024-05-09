@@ -12,7 +12,7 @@ import { MtxSelect } from '@ng-matero/extensions/select';
 @Component({
   selector: 'dev-app-select',
   templateUrl: './select-demo.component.html',
-  styleUrls: ['./select-demo.component.scss'],
+  styleUrl: './select-demo.component.scss',
   standalone: true,
   imports: [
     MatCheckbox,

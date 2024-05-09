@@ -21,7 +21,7 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
     'role': 'alert',
   },
   templateUrl: './alert.html',
-  styleUrls: ['./alert.scss'],
+  styleUrl: './alert.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,

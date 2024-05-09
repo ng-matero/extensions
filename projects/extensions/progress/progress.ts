@@ -17,7 +17,7 @@ export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'dang
     '[style.backgroundColor]': 'background',
   },
   templateUrl: './progress.html',
-  styleUrls: ['./progress.scss'],
+  styleUrl: './progress.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,

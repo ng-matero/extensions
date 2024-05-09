@@ -10,7 +10,7 @@ import { MatButtonLoading } from '@ng-matero/extensions/button';
 @Component({
   selector: 'button-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [
     FormsModule,

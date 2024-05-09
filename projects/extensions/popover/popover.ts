@@ -52,7 +52,7 @@ let popoverPanelUid = 0;
 @Component({
   selector: 'mtx-popover',
   templateUrl: './popover.html',
-  styleUrls: ['./popover.scss'],
+  styleUrl: './popover.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   animations: [transformPopover],

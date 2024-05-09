@@ -37,7 +37,7 @@ import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
   selector: 'mtx-grid-cell',
   exportAs: 'mtxGridCell',
   templateUrl: './cell.html',
-  styleUrls: ['./cell.scss'],
+  styleUrl: './cell.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,

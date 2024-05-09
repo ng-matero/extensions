@@ -5,7 +5,7 @@ import { MtxPhotoviewer } from '@ng-matero/extensions/photoviewer/photoviewer';
 @Component({
   selector: 'dev-photoviewer-demo',
   templateUrl: 'photoviewer-demo.component.html',
-  styleUrls: ['photoviewer-demo.component.scss'],
+  styleUrl: 'photoviewer-demo.component.scss',
   standalone: true,
   imports: [MatButton, MtxPhotoviewer],
 })

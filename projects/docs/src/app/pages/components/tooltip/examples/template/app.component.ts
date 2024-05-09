@@ -9,7 +9,7 @@ import { MtxTooltip, TooltipPosition } from '@ng-matero/extensions/tooltip';
 @Component({
   selector: 'tooltip-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [
     FormsModule,

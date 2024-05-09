@@ -31,7 +31,7 @@ const moment = _rollupMoment || _moment;
 @Component({
   selector: 'dev-datetimepicker-demo',
   templateUrl: 'datetimepicker-demo.component.html',
-  styleUrls: ['datetimepicker-demo.component.scss'],
+  styleUrl: 'datetimepicker-demo.component.scss',
   standalone: true,
   imports: [
     MatRadioGroup,

@@ -18,7 +18,7 @@ import { ColorSketchModule } from 'ngx-color/sketch';
 @Component({
   selector: 'dev-colorpicker-demo',
   templateUrl: './colorpicker-demo.component.html',
-  styleUrls: ['./colorpicker-demo.component.scss'],
+  styleUrl: './colorpicker-demo.component.scss',
   standalone: true,
   imports: [
     MatRadioGroup,

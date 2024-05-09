@@ -9,7 +9,7 @@ import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/
 @Component({
   selector: 'drawer-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [FormsModule, MatFormField, MatLabel, MatInput, MatButton],
 })

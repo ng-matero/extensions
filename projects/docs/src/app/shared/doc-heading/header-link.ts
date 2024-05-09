@@ -14,7 +14,7 @@ import { MatIcon } from '@angular/material/icon';
       <mat-icon>link</mat-icon>
     </a>
   `,
-  styleUrls: ['./header-link.scss'],
+  styleUrl: './header-link.scss',
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [MatIcon],

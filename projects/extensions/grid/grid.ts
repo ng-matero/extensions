@@ -131,7 +131,7 @@ export class MtxGridSelectableCell {
   selector: 'mtx-grid',
   exportAs: 'mtxGrid',
   templateUrl: './grid.html',
-  styleUrls: ['./grid.scss'],
+  styleUrl: './grid.scss',
   host: {
     class: 'mtx-grid',
   },

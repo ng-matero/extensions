@@ -8,7 +8,7 @@ import { MtxAlert, MtxAlertType } from '@ng-matero/extensions/alert';
 @Component({
   selector: 'alert-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [
     FormsModule,

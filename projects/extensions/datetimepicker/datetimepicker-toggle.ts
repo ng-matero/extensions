@@ -30,7 +30,7 @@ export class MtxDatetimepickerToggleIcon {}
 @Component({
   selector: 'mtx-datetimepicker-toggle',
   templateUrl: 'datetimepicker-toggle.html',
-  styleUrls: ['./datetimepicker-toggle.scss'],
+  styleUrl: './datetimepicker-toggle.scss',
   host: {
     'class': 'mtx-datetimepicker-toggle',
     '[attr.tabindex]': 'null',

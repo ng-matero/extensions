@@ -224,7 +224,7 @@ export class MtxTimeInput implements OnDestroy {
 @Component({
   selector: 'mtx-time',
   templateUrl: 'time.html',
-  styleUrls: ['time.scss'],
+  styleUrl: 'time.scss',
   exportAs: 'mtxTime',
   host: {
     class: 'mtx-time',

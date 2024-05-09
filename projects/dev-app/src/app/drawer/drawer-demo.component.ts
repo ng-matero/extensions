@@ -15,7 +15,7 @@ import {
 @Component({
   selector: 'dev-drawer-demo',
   templateUrl: './drawer-demo.component.html',
-  styleUrls: ['./drawer-demo.component.scss'],
+  styleUrl: './drawer-demo.component.scss',
   standalone: true,
   imports: [
     MatRadioGroup,

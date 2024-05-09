@@ -8,7 +8,7 @@ import { MtxLoader, MtxLoaderType } from '@ng-matero/extensions/loader';
 @Component({
   selector: 'loader-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [MatRadioGroup, FormsModule, MatRadioButton, MatCheckbox, MtxLoader],
 })

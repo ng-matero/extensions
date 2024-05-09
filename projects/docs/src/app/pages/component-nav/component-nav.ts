@@ -85,7 +85,7 @@ export const COMPONENTS_MENU = [
 @Component({
   selector: 'app-component-nav',
   templateUrl: './component-nav.html',
-  styleUrls: ['./component-nav.scss'],
+  styleUrl: './component-nav.scss',
   animations: [
     trigger('bodyExpansion', [
       state('collapsed', style({ height: '0px', display: 'none' })),

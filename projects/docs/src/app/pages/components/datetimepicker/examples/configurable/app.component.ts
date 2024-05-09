@@ -19,7 +19,7 @@ import { CustomHeader } from './custom-header.component';
 @Component({
   selector: 'datetimepicker-example',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrl: './app.component.scss',
   standalone: true,
   imports: [
     FormsModule,

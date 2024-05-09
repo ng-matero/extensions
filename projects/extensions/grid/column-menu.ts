@@ -29,7 +29,7 @@ import {
   selector: 'mtx-grid-column-menu',
   exportAs: 'mtxGridColumnMenu',
   templateUrl: './column-menu.html',
-  styleUrls: ['./column-menu.scss'],
+  styleUrl: './column-menu.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,

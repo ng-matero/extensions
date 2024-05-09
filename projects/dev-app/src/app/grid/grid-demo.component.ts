@@ -50,7 +50,7 @@ import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
 @Component({
   selector: 'dev-grid-demo',
   templateUrl: './grid-demo.component.html',
-  styleUrls: ['./grid-demo.component.scss'],
+  styleUrl: './grid-demo.component.scss',
   standalone: true,
   imports: [
     ReactiveFormsModule,

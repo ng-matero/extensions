@@ -15,7 +15,7 @@ import { ComponentPageTitle } from '../page-title/page-title';
 @Component({
   selector: 'app-component-viewer',
   templateUrl: './component-viewer.html',
-  styleUrls: ['./component-viewer.scss'],
+  styleUrl: './component-viewer.scss',
   encapsulation: ViewEncapsulation.None,
   standalone: true,
   imports: [
