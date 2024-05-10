@@ -179,26 +179,40 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _elevation = this._defaultOptions.elevation ?? 8;
 
   /**
-   * This method takes classes set on the host md-popover element and applies them on the
+   * This method takes classes set on the host mtx-popover element and applies them on the
    * popover template that displays in the overlay container. Otherwise, it's difficult
    * to style the containing popover from outside the component.
    * @param classes list of class names
    */
   @Input('class')
   set panelClass(classes: string) {
+    const previousPanelClass = this._previousPanelClass;
+    const newClassList = { ...this._classList };
+
+    if (previousPanelClass && previousPanelClass.length) {
+      previousPanelClass.split(' ').forEach((className: string) => {
+        newClassList[className] = false;
+      });
+    }
+
+    this._previousPanelClass = classes;
+
     if (classes && classes.length) {
-      this._classList = classes.split(' ').reduce((obj: any, className: string) => {
-        obj[className] = true;
-        return obj;
-      }, {});
+      classes.split(' ').forEach((className: string) => {
+        newClassList[className] = true;
+      });
 
       this._elementRef.nativeElement.className = '';
+
       this.setPositionClasses();
     }
+
+    this._classList = newClassList;
   }
+  private _previousPanelClass?: string;
 
   /**
-   * This method takes classes set on the host md-popover element and applies them on the
+   * This method takes classes set on the host mtx-popover element and applies them on the
    * popover template that displays in the overlay container. Otherwise, it's difficult
    * to style the containing popover from outside the component.
    * @deprecated Use `panelClass` instead.
