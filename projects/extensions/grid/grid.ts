@@ -267,7 +267,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() noResultTemplate!: TemplateRef<any>;
 
   get _hasNoResult() {
-    return (!this.data || this.data.length === 0) && !this.loading;
+    return (!this.dataSource.data || this.dataSource.data.length === 0) && !this.loading;
   }
 
   // ===== Cell Templates =====
