@@ -49,7 +49,13 @@ After import modules, you must define a theme. [More about theming](https://mate
 @include mtx.all-component-themes($theme);
 ```
 
-The @use-based Sass API is only available in the version `12.0.0` or above.
+The @use-based Sass API is only available in the version `12.0.0` and above.
+
+You can also [using a pre-built theme](https://material.angular.io/guide/theming#using-a-pre-built-theme) which in the "prebuilt-themes" directory of the npm package (@ng-matero/extensions/prebuilt-themes).
+
+```scss
+@import '@ng-matero/extensions/prebuilt-themes/indigo-pink.css'
+```
 
 ## License
 
