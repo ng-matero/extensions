@@ -22,13 +22,13 @@ $prefix: (mtx, progress);
     track-color: mat.get-theme-color($theme, background, hover),
     indicator-color: mat.get-theme-color($theme, foreground, divider),
     text-color: mat.get-theme-color($theme, foreground, text),
-    info-indicator-color: mat.get-color-from-palette(mat.$blue-palette, if($is-dark, 900, 500)),
+    info-indicator-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 500)),
     info-text-color: white,
-    success-indicator-color: mat.get-color-from-palette(mat.$green-palette, if($is-dark, 900, 500)),
+    success-indicator-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 500)),
     success-text-color: white,
-    warning-indicator-color: mat.get-color-from-palette(mat.$orange-palette, if($is-dark, 900, 500)),
+    warning-indicator-color: mat.m2-get-color-from-palette(mat.$m2-orange-palette, if($is-dark, 900, 500)),
     warning-text-color: white,
-    danger-indicator-color: mat.get-color-from-palette(mat.$red-palette, if($is-dark, 900, 500)),
+    danger-indicator-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 500)),
     danger-text-color: white,
   );
 }

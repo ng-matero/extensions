@@ -12,8 +12,8 @@ mat.$theme-legacy-inspection-api-compatibility: false;
   $config: (
     color: (
       theme-type: $type,
-      primary: matx.$m3-azure-palette,
-      tertiary: matx.$m3-blue-palette,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
     ),
     density: (
       scale: $density
@@ -21,7 +21,7 @@ mat.$theme-legacy-inspection-api-compatibility: false;
   );
 
   @return mat.private-deep-merge-all(
-    matx.define-theme($config),
+    mat.define-theme($config),
     mtx.define-theme($config),
   );
 }
@@ -81,12 +81,12 @@ $density-scales: (-1, -2, -3, -4, minimum, maximum);
 
 // Enable back-compat CSS for color="..." API & typography hierarchy.
 .demo-color-api-back-compat {
-  @include matx.color-variants-back-compat($light-theme);
+  @include mat.color-variants-backwards-compatibility($light-theme);
   @include mtx.color-variants-back-compat($light-theme);
   @include mat.typography-hierarchy($light-theme, $back-compat: true);
 
   &.demo-unicorn-dark-theme {
-    @include matx.color-variants-back-compat($dark-theme);
+    @include mat.color-variants-backwards-compatibility($dark-theme);
     @include mtx.color-variants-back-compat($dark-theme);
   }
 }

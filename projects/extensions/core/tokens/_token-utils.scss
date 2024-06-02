@@ -11,7 +11,7 @@
 // Indicates whether we're building internally. Used for backwards compatibility.
 $private-is-internal-build: false;
 
-$_placeholder-color-palette: mat.define-palette(mat.$red-palette);
+$_placeholder-color-palette: mat.m2-define-palette(mat.$m2-red-palette);
 
 // Placeholder color config that can be passed to token getter functions when generating token
 // slots.
@@ -20,8 +20,8 @@ $placeholder-color-config: (
   accent: $_placeholder-color-palette,
   warn: $_placeholder-color-palette,
   is-dark: false,
-  foreground: mat.$light-theme-foreground-palette,
-  background: mat.$light-theme-background-palette,
+  foreground: mat.$m2-light-theme-foreground-palette,
+  background: mat.$m2-light-theme-background-palette,
 );
 
 $_placeholder-typography-level-config: typography.typography-config-level-from-mdc(body1);

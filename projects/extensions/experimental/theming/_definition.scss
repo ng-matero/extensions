@@ -38,7 +38,7 @@ $theme-version: 1;
   }
 
   $type: map.get($config, theme-type) or light;
-  $primary: map.get($config, primary) or matx.$m3-violet-palette;
+  $primary: map.get($config, primary) or mat.$violet-palette;
   $tertiary: map.get($config, tertiary) or $primary;
 
   @return (

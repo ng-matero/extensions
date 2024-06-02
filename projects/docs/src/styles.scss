@@ -11,14 +11,14 @@
 $light-config: (
   color: (
     theme-type: 'light',
-    primary: matx.$m3-azure-palette,
-    tertiary: matx.$m3-blue-palette,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
   ),
 );
 
 // Define the default (light) theme.
 $light-theme: mat.private-deep-merge-all(
-  matx.define-theme($light-config),
+  mat.define-theme($light-config),
   mtx.define-theme($light-config)
 );
 
@@ -27,21 +27,21 @@ $light-theme: mat.private-deep-merge-all(
   @include mtx.all-component-themes($light-theme);
 }
 
-@include matx.color-variants-back-compat($light-theme);
+@include mat.color-variants-backwards-compatibility($light-theme);
 @include mtx.color-variants-back-compat($light-theme);
 @include app-theme.theme($light-theme);
 
 $dark-config: (
   color: (
     theme-type: 'dark',
-    primary: matx.$m3-cyan-palette,
-    tertiary: matx.$m3-orange-palette,
+    primary: mat.$cyan-palette,
+    tertiary: mat.$orange-palette,
   ),
 );
 
 // Define an alternate dark theme.
 $dark-theme: mat.private-deep-merge-all(
-  matx.define-theme($dark-config),
+  mat.define-theme($dark-config),
   mtx.define-theme($dark-config)
 );
 
@@ -49,7 +49,7 @@ $dark-theme: mat.private-deep-merge-all(
   @include mat.all-component-colors($dark-theme);
   @include mtx.all-component-colors($dark-theme);
 
-  @include matx.color-variants-back-compat($dark-theme);
+  @include mat.color-variants-backwards-compatibility($dark-theme);
   @include mtx.color-variants-back-compat($dark-theme);
   @include app-theme.theme($dark-theme);
 }

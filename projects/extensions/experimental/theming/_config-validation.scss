@@ -34,13 +34,13 @@
     @return true;
   }
   $keys: map.keys($palette);
-  $expected-keys: map.keys(matx.$m3-red-palette);
+  $expected-keys: map.keys(mat.$red-palette);
   @if mat.private-validate-allowed-values($keys, $expected-keys...) or
       mat.private-validate-required-values($keys, $expected-keys...) {
     @return true;
   }
   $nv-keys: map.keys(map.get($palette, neutral-variant));
-  $expected-nv-keys: map.keys(map.get(matx.$m3-red-palette, neutral-variant));
+  $expected-nv-keys: map.keys(map.get(mat.$red-palette, neutral-variant));
   @if mat.private-validate-allowed-values($nv-keys, $expected-nv-keys...) or
       mat.private-validate-required-values($nv-keys, $expected-nv-keys...) {
     @return true;

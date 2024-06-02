@@ -22,13 +22,13 @@ $prefix: (mtx, alert);
     outline-color: transparent,
     background-color: mat.get-theme-color($theme, background, dialog),
     text-color: mat.get-theme-color($theme, foreground, text),
-    info-background-color: mat.get-color-from-palette(mat.$blue-palette, if($is-dark, 900, 500)),
+    info-background-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 500)),
     info-text-color: white,
-    success-background-color: mat.get-color-from-palette(mat.$green-palette, if($is-dark, 900, 500)),
+    success-background-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 500)),
     success-text-color: white,
-    warning-background-color: mat.get-color-from-palette(mat.$orange-palette, if($is-dark, 900, 500)),
+    warning-background-color: mat.m2-get-color-from-palette(mat.$m2-orange-palette, if($is-dark, 900, 500)),
     warning-text-color: white,
-    danger-background-color: mat.get-color-from-palette(mat.$red-palette, if($is-dark, 900, 500)),
+    danger-background-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 500)),
     danger-text-color: white,
   );
 }
