@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use '@material/tooltip/plain-tooltip-theme' as mdc-plain-tooltip-theme;
 @use '@angular/material' as mat;
-@use '../core/style/sass-utils';
 @use '../core/theming/inspection';
 @use '../core/theming/validation';
 @use '../core/tokens/m2/mdc/plain-tooltip' as tokens-mdc-plain-tooltip;
@@ -12,7 +11,7 @@
   }
   @else {
     // Add default values for tokens not related to color, typography, or density.
-    @include sass-utils.current-selector-or-root() {
+    @include mat.private-current-selector-or-root() {
       @include mdc-plain-tooltip-theme.theme(tokens-mdc-plain-tooltip.get-unthemable-tokens());
     }
   }
@@ -26,7 +25,7 @@
     $mdc-tooltip-color-tokens: tokens-mdc-plain-tooltip.get-color-tokens($theme);
 
     // Add values for MDC tooltip tokens.
-    @include sass-utils.current-selector-or-root() {
+    @include mat.private-current-selector-or-root() {
       @include mdc-plain-tooltip-theme.theme($mdc-tooltip-color-tokens);
     }
   }
@@ -40,7 +39,7 @@
     $mdc-tooltip-typography-tokens: tokens-mdc-plain-tooltip.get-typography-tokens($theme);
 
     // Add values for MDC tooltip tokens.
-    @include sass-utils.current-selector-or-root() {
+    @include mat.private-current-selector-or-root() {
       @include mdc-plain-tooltip-theme.theme($mdc-tooltip-typography-tokens);
     }
   }
@@ -54,7 +53,7 @@
     $mdc-tooltip-density-tokens: tokens-mdc-plain-tooltip.get-density-tokens($theme);
 
     // Add values for MDC tooltip tokens.
-    @include sass-utils.current-selector-or-root() {
+    @include mat.private-current-selector-or-root() {
       @include mdc-plain-tooltip-theme.theme($mdc-tooltip-density-tokens);
     }
   }

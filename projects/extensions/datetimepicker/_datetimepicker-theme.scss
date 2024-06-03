@@ -1,6 +1,5 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../core/style/sass-utils';
 @use '../core/theming/inspection';
 @use '../core/theming/validation';
 @use '../core/tokens/token-utils';
@@ -18,7 +17,7 @@
     @include _theme-from-tokens(inspection.get-theme-tokens($theme, base));
   }
   @else {
-    @include sass-utils.current-selector-or-root() {
+    @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
         tokens-mtx-datetimepicker.get-unthemable-tokens());
     }
@@ -30,7 +29,7 @@
     @include _theme-from-tokens(inspection.get-theme-tokens($theme, color), $options...);
   }
   @else {
-    @include sass-utils.current-selector-or-root() {
+    @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
         tokens-mtx-datetimepicker.get-color-tokens($theme));
     }
@@ -64,7 +63,7 @@
     @include _theme-from-tokens(inspection.get-theme-tokens($theme, typography));
   }
   @else {
-    @include sass-utils.current-selector-or-root() {
+    @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(tokens-mtx-datetimepicker.$prefix,
         tokens-mtx-datetimepicker.get-typography-tokens($theme));
     }

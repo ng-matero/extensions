@@ -1,7 +1,6 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use '@angular/material' as mat;
-@use '../../style/sass-utils';
 @use './mtx/alert' as tokens-mtx-alert;
 @use './mtx/colorpicker' as tokens-mtx-colorpicker;
 @use './mtx/datetimepicker' as tokens-mtx-datetimepicker;
@@ -38,7 +37,7 @@
 /// @return {Map} The token map by calling the token getters in the given module with the given
 ///     Angular Material theme. Token names are fully-qualified.
 @function _get-tokens-for-module($theme, $module) {
-  $tokens: sass-utils.deep-merge-all(
+  $tokens: mat.private-deep-merge-all(
       _get-tokens-for-module-and-system($theme, $module, unthemable),
       _get-tokens-for-module-and-system($theme, $module, color),
       _get-tokens-for-module-and-system($theme, $module, typography),
@@ -55,7 +54,7 @@
 ///       )
 ///     )
 @function m2-tokens-from-theme($theme) {
-  @return sass-utils.deep-merge-all(
+  @return mat.private-deep-merge-all(
     _get-tokens-for-module($theme, tokens-mtx-alert),
     _get-tokens-for-module($theme, tokens-mtx-colorpicker),
     _get-tokens-for-module($theme, tokens-mtx-datetimepicker),

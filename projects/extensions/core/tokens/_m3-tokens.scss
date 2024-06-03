@@ -1,6 +1,5 @@
 @use 'sass:map';
 @use '@material/tokens/v0_161' as mdc-tokens;
-@use '../style/sass-utils';
 @use '@angular/material' as mat;
 @use './m3';
 @use '../tokens/m2' as m2-tokens;
@@ -135,9 +134,11 @@ $_cached-token-slots: null;
   $ref: (
     md-ref-palette: _generate-ref-palette-tokens($primary, $tertiary, $error)
   );
+
   $sys-color: if($type == dark,
     mdc-tokens.md-sys-color-values-dark($ref),
     mdc-tokens.md-sys-color-values-light($ref));
+
   @return _generate-tokens(map.merge($ref, (
     md-sys-color: $sys-color,
     // Because the elevation values are always combined with color values to create the box shadow,
@@ -162,6 +163,7 @@ $_cached-token-slots: null;
   $ref: (
     md-ref-typeface: _generate-ref-typeface-tokens($brand, $plain, $bold, $medium, $regular)
   );
+
   @return _generate-tokens((
     md-sys-typescale: mdc-tokens.md-sys-typescale-values($ref)
   ));

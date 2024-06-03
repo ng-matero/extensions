@@ -6,7 +6,6 @@
 @use '@material/theme/theme' as mdc-theme;
 @use '@material/theme/keys' as mdc-keys;
 @use '@angular/material' as mat;
-@use '../style/sass-utils';
 @use '../typography/typography';
 
 // Indicates whether we're building internally. Used for backwards compatibility.
@@ -191,7 +190,7 @@ $_component-prefix: null;
 /// @throws If given options are invalid
 /// @return {Map} The token values for the requested component.
 @function get-tokens-for($tokens, $prefix, $options...) {
-  $options: sass-utils.validate-keyword-args($options, (color-variant, emit-overrides-only));
+  $options: mat.private-validate-keyword-args($options, (color-variant, emit-overrides-only));
   @if $tokens == () {
     @return ();
   }
@@ -224,7 +223,7 @@ $_component-prefix: null;
       $tokens: map.set($tokens, $name, map.get($overrides, $name));
     }
 
-    @include sass-utils.current-selector-or-root() {
+    @include mat.private-current-selector-or-root() {
       @include create-token-values($prefix, $tokens);
     }
   }
