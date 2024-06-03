@@ -173,7 +173,6 @@ export class MtxSelect
   @Input() selectableGroup = false;
   @Input() selectableGroupAsModel = true;
   @Input() hideSelected = false;
-  @Input() isOpen!: boolean;
   @Input() loading = false;
   @Input() loadingText = this._defaultOptions?.loadingText ?? 'Loading...';
   @Input() labelForId: string | null = null;
