@@ -1,0 +1,19 @@
+@use 'sass:map';
+@use '../../token-utils';
+
+// The prefix used to generate the fully qualified name for tokens in this file.
+$prefix: (mtx, colorpicker);
+
+/// Generates custom tokens for the mat-badge.
+/// @param {Map} $systems The MDC system tokens
+/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
+/// @param {Map} $token-slots Possible token slots
+/// @return {Map} A set of custom tokens for the mat-badge
+@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
+  $tokens: (
+    toggle-active-state-icon-color: map.get($systems, md-sys-color, on-surface-variant),
+    toggle-icon-color: map.get($systems, md-sys-color, on-surface-variant),
+  );
+
+  @return token-utils.namespace-tokens($prefix, $tokens, $token-slots);
+}

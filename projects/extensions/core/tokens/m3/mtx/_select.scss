@@ -1,0 +1,70 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../../token-utils';
+
+// The prefix used to generate the fully qualified name for tokens in this file.
+$prefix: (mtx, select);
+
+/// Generates custom tokens for the mat-badge.
+/// @param {Map} $systems The MDC system tokens
+/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
+/// @param {Map} $token-slots Possible token slots
+/// @return {Map} A set of custom tokens for the mat-badge
+@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
+  $tokens: ((
+    container-shape: map.get($systems, md-sys-shape, corner-extra-small),
+
+    container-text-color: map.get($systems, md-sys-color, on-surface),
+    placeholder-text-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, on-surface),
+      $alpha: 0.38
+    ),
+    disabled-text-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, on-surface),
+      $alpha: 0.38
+    ),
+
+    multiple-value-background-color: _hardcode(transparent, $exclude-hardcoded),
+    multiple-value-outline-color: map.get($systems, md-sys-color, outline),
+    multiple-value-icon-hover-background-color: map.get($systems, md-sys-color, outline-variant),
+
+    clear-icon-color: map.get($systems, md-sys-color, on-surface),
+    clear-icon-hover-color: map.get($systems, md-sys-color, error),
+
+    enabled-arrow-color: map.get($systems, md-sys-color, on-surface),
+    disabled-arrow-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, on-surface),
+      $alpha: 0.38
+    ),
+    invalid-arrow-color: map.get($systems, md-sys-color, error),
+
+    panel-background-color: map.get($systems, md-sys-color, surface-container),
+    panel-divider-color: map.get($systems, md-sys-color, outline),
+    optgroup-label-text-color: map.get($systems, md-sys-color, on-surface),
+    option-label-text-color: map.get($systems, md-sys-color, on-surface),
+    option-selected-state-background-color: map.get($systems, md-sys-color, secondary-container),
+    option-selected-state-text-color: map.get($systems, md-sys-color, on-surface),
+    option-hover-state-background-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, on-surface),
+      $alpha: map.get($systems, md-sys-state, hover-state-layer-opacity)
+    ),
+    option-disabled-state-text-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, on-surface),
+      $alpha: 0.38
+    ),
+  ), (
+    // Color variants:
+    primary: (
+      option-selected-state-background-color: map.get($systems, md-sys-color, primary-container),
+    ),
+    secondary: (), // Default, no overrides needed.
+    tertiary: (
+      option-selected-state-background-color: map.get($systems, md-sys-color, tertiary-container),
+    ),
+    error: (
+      option-selected-state-background-color: map.get($systems, md-sys-color, error-container),
+    )
+  ));
+
+  @return token-utils.namespace-tokens($prefix, $tokens, $token-slots);
+}

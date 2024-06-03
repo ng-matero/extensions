@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../../token-utils';
+
+// The prefix used to generate the fully qualified name for tokens in this file.
+$prefix: (mtx, alert);
+
+/// Generates custom tokens for the mat-badge.
+/// @param {Map} $systems The MDC system tokens
+/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
+/// @param {Map} $token-slots Possible token slots
+/// @return {Map} A set of custom tokens for the mat-badge
+@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
+  $tokens: (
+    container-shape: map.get($systems, md-sys-shape, corner-small),
+
+    outline-color: token-utils.hardcode(transparent, $exclude-hardcoded),
+    background-color: map.get($systems, md-sys-color, surface-container),
+    text-color: map.get($systems, md-sys-color, on-surface),
+    info-background-color: map.get(mat.$blue-palette, 50),
+    info-text-color: token-utils.hardcode(white, $exclude-hardcoded),
+    success-background-color: map.get(mat.$green-palette, 50),
+    success-text-color: token-utils.hardcode(white, $exclude-hardcoded),
+    warning-background-color: map.get(mat.$orange-palette, 50),
+    warning-text-color: token-utils.hardcode(white, $exclude-hardcoded),
+    danger-background-color: map.get(mat.$red-palette, 50),
+    danger-text-color: token-utils.hardcode(white, $exclude-hardcoded),
+  );
+
+  @return token-utils.namespace-tokens($prefix, $tokens, $token-slots);
+}

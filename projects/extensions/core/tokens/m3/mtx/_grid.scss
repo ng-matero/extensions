@@ -1,0 +1,32 @@
+@use 'sass:map';
+@use '../../token-utils';
+
+// The prefix used to generate the fully qualified name for tokens in this file.
+$prefix: (mtx, grid);
+
+/// Generates custom tokens for the mat-badge.
+/// @param {Map} $systems The MDC system tokens
+/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
+/// @param {Map} $token-slots Possible token slots
+/// @return {Map} A set of custom tokens for the mat-badge
+@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
+  $tokens: (
+    container-shape:  map.get($systems, md-sys-shape, corner-medium),
+    table-cell-min-width: token-utils.hardcode(80px, $exclude-hardcoded),
+
+    outline-color: map.get($systems, md-sys-color, outline-variant),
+    column-menu-text-color: map.get($systems, md-sys-color, on-surface-variant),
+    column-menu-divider-color: map.get($systems, md-sys-color, outline-variant),
+    table-footer-background-color: map.get($systems, md-sys-color, surface-container),
+    table-row-striped-background-color: map.get($systems, md-sys-color, surface-container),
+    table-row-hover-background-color: map.get($systems, md-sys-color, secondary-container),
+    table-row-selected-background-color: map.get($systems, md-sys-color, secondary-container),
+    table-row-selected-hover-background-color: map.get($systems, md-sys-color, primary-container),
+    table-cell-selected-outline-color: map.get($systems, md-sys-color, primary),
+    resizable-handle-active-background-color: map.get($systems, md-sys-color, primary),
+    resizable-handle-hover-background-color: map.get($systems, md-sys-color, primary),
+    resizable-handle-disabled-background-color: map.get($systems, md-sys-color, outline-variant),
+  );
+
+  @return token-utils.namespace-tokens($prefix, $tokens, $token-slots);
+}

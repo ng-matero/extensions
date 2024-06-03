@@ -1,6 +1,5 @@
 @use '@angular/material' as mat;
-@use '@angular/material-experimental' as matx;
-@use '../../extensions/experimental' as mtx;
+@use '../../extensions' as mtx;
 
 // Plus imports for other components in your app.
 
@@ -82,12 +81,12 @@ $density-scales: (-1, -2, -3, -4, minimum, maximum);
 // Enable back-compat CSS for color="..." API & typography hierarchy.
 .demo-color-api-back-compat {
   @include mat.color-variants-backwards-compatibility($light-theme);
-  @include mtx.color-variants-back-compat($light-theme);
+  @include mtx.color-variants-backwards-compatibility($light-theme);
   @include mat.typography-hierarchy($light-theme, $back-compat: true);
 
   &.demo-unicorn-dark-theme {
     @include mat.color-variants-backwards-compatibility($dark-theme);
-    @include mtx.color-variants-back-compat($dark-theme);
+    @include mtx.color-variants-backwards-compatibility($dark-theme);
   }
 }
 
