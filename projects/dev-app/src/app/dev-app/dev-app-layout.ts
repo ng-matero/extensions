@@ -1,6 +1,15 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import { ChangeDetectorRef, Component, ElementRef, Inject, ViewEncapsulation } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  Inject,
+  NgZone,
+  ViewEncapsulation,
+  inject,
+  ɵNoopNgZone,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
@@ -64,6 +73,10 @@ export class DevAppLayout {
   /** List of possible global density scale values. */
   private _densityScales = [0, -1, -2, -3, -4, 'minimum', 'maximum'];
 
+  private _ngZone = inject(NgZone);
+
+  readonly isZoneless = this._ngZone instanceof ɵNoopNgZone;
+
   constructor(
     private _element: ElementRef<HTMLElement>,
     private _rippleOptions: DevAppRippleOptions,
@@ -96,6 +109,12 @@ export class DevAppLayout {
     this.state.strongFocusEnabled = value;
     this._document.body.classList.toggle('demo-strong-focus', value);
     setAppState(this.state);
+  }
+
+  toggleZoneless(value = !this.isZoneless) {
+    this.state.zoneless = value;
+    setAppState(this.state);
+    location.reload();
   }
 
   toggleAnimations() {

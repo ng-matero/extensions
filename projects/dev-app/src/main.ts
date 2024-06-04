@@ -1,7 +1,11 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { importProvidersFrom } from '@angular/core';
+import {
+  importProvidersFrom,
+  provideExperimentalZonelessChangeDetection,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -40,5 +44,8 @@ bootstrapApplication(AppComponent, {
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
     { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: DevAppRippleOptions },
     { provide: Directionality, useClass: DevAppDirectionality },
+    cachedAppState.zoneless
+      ? provideExperimentalZonelessChangeDetection()
+      : provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
   ],
 }).catch(err => console.error(err));

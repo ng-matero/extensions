@@ -68,6 +68,16 @@
           </button>
           <button
             mat-icon-button
+            (click)="toggleZoneless()"
+            [matTooltip]="isZoneless ? 'Use zones' : 'Use zoneless'">
+            @if (isZoneless) {
+              <mat-icon>visibility</mat-icon>
+            } @else {
+              <mat-icon>visibility_off</mat-icon>
+            }
+          </button>
+          <button
+            mat-icon-button
             (click)="toggleAnimations()"
             [matTooltip]="state.animations ? 'Disable animations' : 'Enable animations'">
             @if (state.animations) {

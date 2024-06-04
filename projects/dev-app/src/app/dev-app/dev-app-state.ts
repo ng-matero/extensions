@@ -6,6 +6,7 @@ const KEY = 'MTX_DEV_APP_STATE';
 export interface DevAppState {
   density: string | number;
   animations: boolean;
+  zoneless: boolean;
   darkTheme: boolean;
   rippleDisabled: boolean;
   strongFocusEnabled: boolean;
@@ -33,6 +34,7 @@ export function getAppState(): DevAppState {
     value = {
       density: 0,
       animations: true,
+      zoneless: false,
       darkTheme: false,
       rippleDisabled: false,
       strongFocusEnabled: false,
