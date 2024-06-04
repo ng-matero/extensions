@@ -132,7 +132,8 @@
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
                 [style]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
-                mtx-grid-selectable-cell (cellSelectedChange)="_selectCell($event, row, col)">
+                mtx-grid-selectable-cell [cellSelectable]="cellSelectable"
+                (cellSelectedChange)="_selectCell($event, row, col)">
                 @if (cellTemplate | isTemplateRef) {
                   <ng-template [ngTemplateOutlet]="$any(cellTemplate)"
                     [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">
@@ -313,7 +314,8 @@
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
                 [style]="{'width': col.width, 'left': col.left, 'right': col.right}"
-                mtx-grid-selectable-cell (cellSelectedChange)="_selectCell($event, row, col)">
+                mtx-grid-selectable-cell [cellSelectable]="cellSelectable"
+                (cellSelectedChange)="_selectCell($event, row, col)">
                 @if (cellTemplate | isTemplateRef) {
                   <ng-template [ngTemplateOutlet]="$any(cellTemplate)"
                     [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: _getIndex(index, dataIndex), colDef: col }">

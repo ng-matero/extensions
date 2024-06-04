@@ -79,34 +79,25 @@ export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions
   standalone: true,
 })
 export class MtxGridSelectableCell {
-  private _selected = false;
-  private _rowData!: Record<string, any>;
-
   ctrlKeyPressed = false;
   shiftKeyPressed = false;
 
   @HostBinding('class.selected')
-  get selected(): boolean {
+  get selected() {
     return this._selected;
   }
+  private _selected = false;
 
-  @Input()
-  set mtxSelectableRowData(value: any) {
-    if (value !== this._rowData) {
-      this._rowData = value;
-    }
-  }
+  @Input() cellSelectable = true;
 
   @Output() cellSelectedChange = new EventEmitter<MtxGridSelectableCell>();
-
-  constructor(private _grid: MtxGrid) {}
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
     this.ctrlKeyPressed = event.ctrlKey;
     this.shiftKeyPressed = event.shiftKey;
 
-    if (this._grid.cellSelectable) {
+    if (this.cellSelectable) {
       this.select();
     }
   }
