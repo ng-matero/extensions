@@ -1,6 +1,9 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, importProvidersFrom } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
@@ -30,6 +33,10 @@ export class CheckboxGroupApiComponent {
   constructor(public route: ActivatedRoute) {}
 }
 
+export function TranslateHttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, 'assets/i18n/checkbox-group/', '_json');
+}
+
 export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
@@ -44,6 +51,17 @@ export const routes: Routes = [
         checkboxGroupI18nExampleConfig,
       ],
     },
+    providers: [
+      importProvidersFrom(
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: TranslateHttpLoaderFactory,
+            deps: [HttpClient],
+          },
+        })
+      ),
+    ],
   },
   {
     path: 'api',
