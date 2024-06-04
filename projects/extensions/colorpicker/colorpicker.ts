@@ -17,8 +17,8 @@ import {
   EventEmitter,
   Inject,
   InjectionToken,
+  Injector,
   Input,
-  NgZone,
   OnChanges,
   OnDestroy,
   Optional,
@@ -26,6 +26,7 @@ import {
   TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
+  afterNextRender,
   booleanAttribute,
   inject,
 } from '@angular/core';
@@ -231,9 +232,10 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
   /** Emits new selected color when selected color changes. */
   readonly _selectedChanged = new Subject<string>();
 
+  private _injector = inject(Injector);
+
   constructor(
     private _overlay: Overlay,
-    private _ngZone: NgZone,
     private _viewContainerRef: ViewContainerRef,
     @Inject(MTX_COLORPICKER_SCROLL_STRATEGY) scrollStrategy: any,
     @Optional() private _dir: Directionality,
@@ -374,7 +376,12 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     this._forwardContentValues(this._componentRef.instance);
 
     // Update the position once the panel has rendered. Only relevant in dropdown mode.
-    this._ngZone.onStable.pipe(take(1)).subscribe(() => overlayRef.updatePosition());
+    afterNextRender(
+      () => {
+        overlayRef.updatePosition();
+      },
+      { injector: this._injector }
+    );
   }
 
   /** Destroys the current overlay. */

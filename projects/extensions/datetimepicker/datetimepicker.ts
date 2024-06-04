@@ -13,6 +13,7 @@ import { CdkPortalOutlet, ComponentPortal, ComponentType } from '@angular/cdk/po
 import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
+  afterNextRender,
   booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -22,8 +23,8 @@ import {
   inject,
   Inject,
   InjectionToken,
+  Injector,
   Input,
-  NgZone,
   OnDestroy,
   OnInit,
   Optional,
@@ -157,6 +158,8 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, On
 export class MtxDatetimepicker<D> implements OnDestroy {
   private _document = inject(DOCUMENT);
 
+  private _injector = inject(Injector);
+
   /** Whether to show multi-year view. */
   @Input({ transform: booleanAttribute }) multiYearSelector = false;
 
@@ -254,7 +257,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   constructor(
     private _overlay: Overlay,
-    private _ngZone: NgZone,
     private _viewContainerRef: ViewContainerRef,
     @Inject(MTX_DATETIMEPICKER_SCROLL_STRATEGY) private _scrollStrategy: any,
     @Optional() private _dateAdapter: DatetimeAdapter<D>,
@@ -513,7 +515,12 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
     // Update the position once the calendar has rendered. Only relevant in dropdown mode.
     if (!isDialog) {
-      this._ngZone.onStable.pipe(take(1)).subscribe(() => overlayRef.updatePosition());
+      afterNextRender(
+        () => {
+          overlayRef.updatePosition();
+        },
+        { injector: this._injector }
+      );
     }
   }
 

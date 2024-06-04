@@ -18,13 +18,16 @@ import {
   ElementRef,
   EventEmitter,
   Inject,
+  Injector,
   Input,
   NgZone,
   OnDestroy,
   Optional,
   Output,
   ViewEncapsulation,
+  afterNextRender,
   booleanAttribute,
+  inject,
 } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import {
@@ -124,6 +127,8 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   private _intlChanges: Subscription;
 
   private _clampedActiveDate!: D;
+
+  private _injector = inject(Injector);
 
   constructor(
     private _elementRef: ElementRef,
@@ -577,14 +582,12 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   _focusActiveCell() {
-    this._ngZone.runOutsideAngular(() => {
-      this._ngZone.onStable
-        .asObservable()
-        .pipe(first())
-        .subscribe(() => {
-          this._elementRef.nativeElement.focus();
-        });
-    });
+    afterNextRender(
+      () => {
+        this._elementRef.nativeElement.focus();
+      },
+      { injector: this._injector }
+    );
   }
 
   _calendarStateDone() {
