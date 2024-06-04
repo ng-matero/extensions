@@ -242,7 +242,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
 
   constructor(
     private _elementRef: ElementRef,
-    private _ngZone: NgZone,
+    private _unusedNgZone: NgZone,
     @Inject(MTX_POPOVER_DEFAULT_OPTIONS) private _defaultOptions: MtxPopoverDefaultOptions
   ) {}
 

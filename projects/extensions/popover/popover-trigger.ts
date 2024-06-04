@@ -113,7 +113,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
 
     if (popover) {
       this._popoverCloseSubscription = popover.closed.subscribe((reason: PopoverCloseReason) => {
-        this._destroyPopover();
+        this._destroyPopover(reason);
       });
     }
   }
@@ -330,10 +330,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
       }
     } else {
       this._setIsPopoverOpen(false);
-
-      if (popover.lazyContent) {
-        popover.lazyContent.detach();
-      }
+      popover.lazyContent?.detach();
     }
   }
 
