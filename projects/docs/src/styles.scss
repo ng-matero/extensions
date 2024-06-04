@@ -1,6 +1,5 @@
 @use '@angular/material' as mat;
-@use '@angular/material-experimental' as matx;
-@use '../../extensions/experimental' as mtx;
+@use '../../extensions' as mtx;
 @use './styles/app-theme';
 @use './styles/constants';
 @use './styles/reboot';
@@ -28,7 +27,7 @@ $light-theme: mat.private-deep-merge-all(
 }
 
 @include mat.color-variants-backwards-compatibility($light-theme);
-@include mtx.color-variants-back-compat($light-theme);
+@include mtx.color-variants-backwards-compatibility($light-theme);
 @include app-theme.theme($light-theme);
 
 $dark-config: (
@@ -50,6 +49,6 @@ $dark-theme: mat.private-deep-merge-all(
   @include mtx.all-component-colors($dark-theme);
 
   @include mat.color-variants-backwards-compatibility($dark-theme);
-  @include mtx.color-variants-back-compat($dark-theme);
+  @include mtx.color-variants-backwards-compatibility($dark-theme);
   @include app-theme.theme($dark-theme);
 }
