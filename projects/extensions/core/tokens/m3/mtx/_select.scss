@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
+@use '@material/elevation' as mdc-elevation;
 @use '../../token-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
@@ -24,7 +25,7 @@ $prefix: (mtx, select);
       $alpha: 0.38
     ),
 
-    multiple-value-background-color: _hardcode(transparent, $exclude-hardcoded),
+    multiple-value-background-color: token-utils.hardcode(transparent, $exclude-hardcoded),
     multiple-value-outline-color: map.get($systems, md-sys-color, outline),
     multiple-value-icon-hover-background-color: map.get($systems, md-sys-color, outline-variant),
 
@@ -52,6 +53,7 @@ $prefix: (mtx, select);
       map.get($systems, md-sys-color, on-surface),
       $alpha: 0.38
     ),
+    container-elevation-shadow: token-utils.hardcode(mdc-elevation.elevation-box-shadow(2), $exclude-hardcoded),
   ), (
     // Color variants:
     primary: (

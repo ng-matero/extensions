@@ -189,8 +189,7 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
       @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
       @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
-
-      @include mat.elevation(8);
+      @include token-utils.create-token-slot(box-shadow, container-elevation-shadow);
     }
 
     &.ng-select-top {
@@ -198,8 +197,7 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
       @include token-utils.create-token-slot(border-top-left-radius, container-shape);
       @include token-utils.create-token-slot(border-top-right-radius, container-shape);
-
-      @include mat.elevation(8);
+      @include token-utils.create-token-slot(box-shadow, container-elevation-shadow);
     }
 
     .ng-dropdown-header,
