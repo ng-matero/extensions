@@ -2,7 +2,7 @@
   <div class="mtx-clock-center"></div>
   <div class="mtx-clock-hand" [style]="_hand"></div>
   <div class="mtx-clock-hours" [class.active]="_hourView">
-    @for (item of _hours; track item) {
+    @for (item of _hours; track item.value) {
       <div
         class="mtx-clock-cell"
         [class.mtx-clock-cell-disabled]="!item.enabled"
@@ -13,7 +13,7 @@
     }
   </div>
   <div class="mtx-clock-minutes" [class.active]="!_hourView">
-    @for (item of _minutes; track item) {
+    @for (item of _minutes; track item.value) {
       <div
         class="mtx-clock-cell"
         [class.mtx-clock-cell-disabled]="!item.enabled"
