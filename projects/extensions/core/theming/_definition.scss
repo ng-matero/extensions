@@ -40,6 +40,7 @@ $theme-version: 1;
   $type: map.get($config, theme-type) or light;
   $primary: map.get($config, primary) or mat.$violet-palette;
   $tertiary: map.get($config, tertiary) or $primary;
+  // mat.$private-use-system-color-variables: map.get($config, use-system-variables) or false;
 
   @return (
     $internals: (
@@ -73,6 +74,7 @@ $theme-version: 1;
   $bold: map.get($config, bold-weight) or 700;
   $medium: map.get($config, medium-weight) or 500;
   $regular: map.get($config, regular-weight) or 400;
+  // mat.$private-use-system-typography-variables: map.get($config, use-system-variables) or false;
 
   @return (
     $internals: (

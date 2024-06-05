@@ -13,7 +13,9 @@ mat.$theme-legacy-inspection-api-compatibility: false;
       theme-type: $type,
       primary: mat.$azure-palette,
       tertiary: mat.$blue-palette,
+      use-system-variables: false,
     ),
+    typography: (use-system-variables: false),
     density: (
       scale: $density
     ),
