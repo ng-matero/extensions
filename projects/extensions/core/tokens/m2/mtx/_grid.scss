@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
+@use '@material/elevation' as mdc-elevation;
 @use '../../token-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
@@ -11,6 +12,7 @@ $prefix: (mtx, grid);
   @return (
     container-shape: 0,
     table-cell-min-width: 80px,
+    column-menu-elevation-shadow: mdc-elevation.elevation-box-shadow(8),
   );
 }
 
