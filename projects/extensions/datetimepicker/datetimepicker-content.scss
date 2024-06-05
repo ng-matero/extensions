@@ -44,8 +44,6 @@ $touch-max-height: 850px;
 .mtx-datetimepicker-content {
   display: block;
 
-  @include mat.elevation(4);
-
   @include token-utils.use-tokens(tokens-mtx-datetimepicker.$prefix,
     tokens-mtx-datetimepicker.get-token-slots()) {
     @include token-utils.create-token-slot(border-radius, container-shape);

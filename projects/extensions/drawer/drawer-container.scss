@@ -9,11 +9,10 @@ $_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
   display: block;
   outline: 0;
 
-  @include mat.elevation(16);
-
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(background-color, container-background-color);
     @include token-utils.create-token-slot(color, container-text-color);
+    @include token-utils.create-token-slot(box-shadow, container-elevation-shadow);
   }
 
   @include cdk.high-contrast(active, off) {

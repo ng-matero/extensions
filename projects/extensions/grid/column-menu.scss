@@ -79,7 +79,13 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   }
 
   &.cdk-drag-preview {
-    @include mat.elevation(2);
+    border-radius: 4px;
+
+    @include token-utils.use-tokens($_tokens...) {
+      $shadow-color: token-utils.get-token-variable(outline-color);
+
+      box-shadow: 0 0 0 1px var($shadow-color);
+    }
   }
 
   &.cdk-drag-placeholder {
@@ -92,10 +98,6 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 }
 
 .mtx-grid-column-pin-button.mat-mdc-icon-button {
-  --mdc-icon-button-state-layer-size: 40px;
-
-  padding: 8px;
-
   .mat-mdc-button-touch-target {
     width: 100%;
     height: 100%;

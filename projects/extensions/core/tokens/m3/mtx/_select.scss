@@ -14,6 +14,7 @@ $prefix: (mtx, select);
 @function get-tokens($systems, $exclude-hardcoded, $token-slots) {
   $tokens: ((
     container-shape: map.get($systems, md-sys-shape, corner-extra-small),
+    container-elevation-shadow: token-utils.hardcode(mdc-elevation.elevation-box-shadow(2), $exclude-hardcoded),
 
     container-text-color: map.get($systems, md-sys-color, on-surface),
     placeholder-text-color: mat.private-safe-color-change(
@@ -53,7 +54,6 @@ $prefix: (mtx, select);
       map.get($systems, md-sys-color, on-surface),
       $alpha: 0.38
     ),
-    container-elevation-shadow: token-utils.hardcode(mdc-elevation.elevation-box-shadow(2), $exclude-hardcoded),
   ), (
     // Color variants:
     primary: (

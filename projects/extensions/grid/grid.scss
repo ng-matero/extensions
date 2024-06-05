@@ -37,9 +37,9 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
       }
 
       .mat-mdc-cell.selected {
-        $shadow: token-utils.get-token-variable(table-cell-selected-outline-color);
+        $shadow-color: token-utils.get-token-variable(table-cell-selected-outline-color);
 
-        box-shadow: inset 0 0 0 1px var($shadow);
+        box-shadow: inset 0 0 0 1px var($shadow-color);
       }
     }
   }
