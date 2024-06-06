@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "17.3.3",
+  "version": "17.3.4",
   "description": "Angular Material Extensions",
   "publishConfig": {
     "access": "public"
