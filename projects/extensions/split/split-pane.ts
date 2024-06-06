@@ -1,7 +1,16 @@
-import { Directive, Input, ElementRef, Renderer2, OnInit, OnDestroy, NgZone } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  Input,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  booleanAttribute,
+} from '@angular/core';
 
 import { MtxSplit } from './split';
-import { getInputPositiveNumber, getInputBoolean } from './utils';
+import { getInputPositiveNumber } from './utils';
 
 @Directive({
   selector: 'mtx-split-pane, [mtx-split-pane]',
@@ -9,81 +18,78 @@ import { getInputPositiveNumber, getInputBoolean } from './utils';
   standalone: true,
 })
 export class MtxSplitPane implements OnInit, OnDestroy {
-  private _order: number | null = null;
-
-  @Input() set order(v: number | null) {
+  /**
+   * Order of the area. Used to maintain the order of areas when toggling their visibility.
+   * Toggling area visibility without specifying an `order` leads to weird behavior.
+   */
+  @Input()
+  get order() {
+    return this._order;
+  }
+  set order(v: number | null) {
     this._order = getInputPositiveNumber(v, null);
 
     this.split.updateArea(this, true, false);
   }
+  private _order: number | null = null;
 
-  get order(): number | null {
-    return this._order;
+  /**
+   * Size of the area in selected unit (percent/pixel).
+   * - Percent: All areas sizes should equal to `100`, If not, all areas will have the same size.
+   * - Pixel: An area with wildcard size (`size="*"`) is mandatory (only one) and
+   *   can't have `visible="false"` or `minSize`/`maxSize`/`lockSize` properties.
+   */
+  @Input()
+  get size() {
+    return this._size;
   }
-
-  ////
-
-  private _size: number | null = null;
-
-  @Input() set size(v: number | null) {
+  set size(v: number | null) {
     this._size = getInputPositiveNumber(v, null);
 
     this.split.updateArea(this, false, true);
   }
+  private _size: number | null = null;
 
-  get size(): number | null {
-    return this._size;
+  /** Minimum pixel or percent size, should be equal to or smaller than provided `size`. */
+  @Input()
+  get minSize() {
+    return this._minSize;
   }
-
-  ////
-
-  private _minSize: number | null = null;
-
-  @Input() set minSize(v: number | null) {
+  set minSize(v: number | null) {
     this._minSize = getInputPositiveNumber(v, null);
 
     this.split.updateArea(this, false, true);
   }
+  private _minSize: number | null = null;
 
-  get minSize(): number | null {
-    return this._minSize;
+  /** Maximum pixel or percent size, should be equal to or larger than provided `size`. */
+  @Input()
+  get maxSize() {
+    return this._maxSize;
   }
-
-  ////
-
-  private _maxSize: number | null = null;
-
-  @Input() set maxSize(v: number | null) {
+  set maxSize(v: number | null) {
     this._maxSize = getInputPositiveNumber(v, null);
 
     this.split.updateArea(this, false, true);
   }
+  private _maxSize: number | null = null;
 
-  get maxSize(): number | null {
-    return this._maxSize;
-  }
-
-  ////
-
-  private _lockSize = false;
-
-  @Input() set lockSize(v: boolean) {
-    this._lockSize = getInputBoolean(v);
-
-    this.split.updateArea(this, false, true);
-  }
-
-  get lockSize(): boolean {
+  /** Lock area size, same as `minSize`=`maxSize`=`size`. */
+  @Input({ transform: booleanAttribute })
+  get lockSize() {
     return this._lockSize;
   }
+  set lockSize(v: boolean) {
+    this.split.updateArea(this, false, true);
+  }
+  private _lockSize = false;
 
-  ////
-
-  private _visible = true;
-
-  @Input() set visible(v: boolean) {
-    this._visible = getInputBoolean(v);
-
+  /** Hide area visually but still present in the DOM, use `ngIf` to completely remove it. */
+  @Input({ transform: booleanAttribute })
+  get visible() {
+    return this._visible;
+  }
+  set visible(v: boolean) {
     if (this._visible) {
       this.split.showArea(this);
       this.renderer.removeClass(this.elRef.nativeElement, 'mtx-split-pane-hidden');
@@ -92,12 +98,7 @@ export class MtxSplitPane implements OnInit, OnDestroy {
       this.renderer.addClass(this.elRef.nativeElement, 'mtx-split-pane-hidden');
     }
   }
-
-  get visible(): boolean {
-    return this._visible;
-  }
-
-  ////
+  private _visible = true;
 
   private transitionListener!: () => void;
   private readonly lockListeners: Array<() => void> = [];
@@ -111,7 +112,7 @@ export class MtxSplitPane implements OnInit, OnDestroy {
     this.renderer.addClass(this.elRef.nativeElement, 'mtx-split-pane');
   }
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.split.addArea(this);
 
     this.ngZone.runOutsideAngular(() => {
@@ -128,17 +129,11 @@ export class MtxSplitPane implements OnInit, OnDestroy {
     });
   }
 
-  public setStyleOrder(value: number): void {
+  setStyleOrder(value: number): void {
     this.renderer.setStyle(this.elRef.nativeElement, 'order', value);
   }
 
-  public setStyleFlex(
-    grow: number,
-    shrink: number,
-    basis: string,
-    isMin: boolean,
-    isMax: boolean
-  ): void {
+  setStyleFlex(grow: number, shrink: number, basis: string, isMin: boolean, isMax: boolean): void {
     // Need 3 separated properties to work on IE11 (https://github.com/angular/flex-layout/issues/323)
     this.renderer.setStyle(this.elRef.nativeElement, 'flex-grow', grow);
     this.renderer.setStyle(this.elRef.nativeElement, 'flex-shrink', shrink);
@@ -157,7 +152,7 @@ export class MtxSplitPane implements OnInit, OnDestroy {
     }
   }
 
-  public lockEvents(): void {
+  lockEvents(): void {
     this.ngZone.runOutsideAngular(() => {
       this.lockListeners.push(
         this.renderer.listen(this.elRef.nativeElement, 'selectstart', (e: Event) => false)
@@ -168,7 +163,7 @@ export class MtxSplitPane implements OnInit, OnDestroy {
     });
   }
 
-  public unlockEvents(): void {
+  unlockEvents(): void {
     while (this.lockListeners.length > 0) {
       const fct = this.lockListeners.pop();
       if (fct) {
@@ -177,7 +172,7 @@ export class MtxSplitPane implements OnInit, OnDestroy {
     }
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.unlockEvents();
 
     if (this.transitionListener) {

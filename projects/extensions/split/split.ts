@@ -16,6 +16,7 @@ import {
   Renderer2,
   ViewChildren,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { Observable, Subject, Subscriber } from 'rxjs';
@@ -36,7 +37,6 @@ import {
   getAreaMinSize,
   getElementPixelSize,
   getGutterSideAbsorptionCapacity,
-  getInputBoolean,
   getInputPositiveNumber,
   getPointFromEvent,
   isUserSizesValid,
@@ -93,9 +93,12 @@ export const MTX_SPLIT_DEFAULT_OPTIONS = new InjectionToken<MtxSplitDefaultOptio
 export class MtxSplit implements AfterViewInit, OnDestroy {
   @Input() color: ThemePalette;
 
-  private _direction: 'horizontal' | 'vertical' = 'horizontal';
-
-  @Input() set direction(v: 'horizontal' | 'vertical') {
+  /** The split direction. */
+  @Input()
+  get direction() {
+    return this._direction;
+  }
+  set direction(v: 'horizontal' | 'vertical') {
     this._direction = v === 'vertical' ? 'vertical' : 'horizontal';
 
     this.renderer.addClass(this.elRef.nativeElement, `mtx-split-${this._direction}`);
@@ -106,16 +109,14 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
 
     this.build(false, false);
   }
+  private _direction: 'horizontal' | 'vertical' = 'horizontal';
 
-  get direction(): 'horizontal' | 'vertical' {
-    return this._direction;
+  /** The unit you want to specify area sizes. */
+  @Input()
+  get unit() {
+    return this._unit;
   }
-
-  ////
-
-  private _unit: 'percent' | 'pixel' = 'percent';
-
-  @Input() set unit(v: 'percent' | 'pixel') {
+  set unit(v: 'percent' | 'pixel') {
     this._unit = v === 'pixel' ? 'pixel' : 'percent';
 
     this.renderer.addClass(this.elRef.nativeElement, `mtx-split-${this._unit}`);
@@ -126,129 +127,111 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
 
     this.build(false, true);
   }
+  private _unit: 'percent' | 'pixel' = 'percent';
 
-  get unit(): 'percent' | 'pixel' {
-    return this._unit;
+  /** Gutters's size (dragging elements) in pixels. */
+  @Input()
+  get gutterSize() {
+    return this._gutterSize;
   }
-
-  ////
-
-  private _gutterSize = 4;
-
-  @Input() set gutterSize(v: number) {
-    this._gutterSize = getInputPositiveNumber(v, 11);
+  set gutterSize(v: number) {
+    this._gutterSize = getInputPositiveNumber(v, 4);
 
     this.build(false, false);
   }
+  private _gutterSize = 4;
 
-  get gutterSize(): number {
-    return this._gutterSize;
-  }
-
-  ////
-
-  private _gutterStep = 1;
-
-  @Input() set gutterStep(v: number) {
-    this._gutterStep = getInputPositiveNumber(v, 1);
-  }
-
-  get gutterStep(): number {
+  /** Gutter step while moving in pixels. */
+  @Input()
+  get gutterStep() {
     return this._gutterStep;
   }
-
-  ////
-
-  private _restrictMove = false;
-
-  @Input() set restrictMove(v: boolean) {
-    this._restrictMove = getInputBoolean(v);
+  set gutterStep(v: number) {
+    this._gutterStep = getInputPositiveNumber(v, 1);
   }
+  private _gutterStep = 1;
 
-  get restrictMove(): boolean {
-    return this._restrictMove;
+  /** Set to true if you want to limit gutter move to adjacent areas only. */
+  @Input({ transform: booleanAttribute }) restrictMove = false;
+
+  /** Add transition when toggling visibility using `visible` or `size` changes. */
+  @Input({ transform: booleanAttribute })
+  get useTransition() {
+    return this._useTransition;
   }
-
-  ////
-
-  private _useTransition = false;
-
-  @Input() set useTransition(v: boolean) {
-    this._useTransition = getInputBoolean(v);
-
+  set useTransition(v: boolean) {
     if (this._useTransition) {
       this.renderer.addClass(this.elRef.nativeElement, 'mtx-split-transition');
     } else {
       this.renderer.removeClass(this.elRef.nativeElement, 'mtx-split-transition');
     }
   }
+  private _useTransition = false;
 
-  get useTransition(): boolean {
-    return this._useTransition;
+  /**
+   * Disable the dragging feature (remove cursor/image on gutters).
+   * `gutterClick`/`gutterDblClick` still emits.
+   */
+  @Input({ transform: booleanAttribute })
+  get disabled() {
+    return this._disabled;
   }
-
-  ////
-
-  private _disabled = false;
-
-  @Input() set disabled(v: boolean) {
-    this._disabled = getInputBoolean(v);
-
+  set disabled(v: boolean) {
     if (this._disabled) {
       this.renderer.addClass(this.elRef.nativeElement, 'mtx-split-disabled');
     } else {
       this.renderer.removeClass(this.elRef.nativeElement, 'mtx-split-disabled');
     }
   }
+  private _disabled = false;
 
-  get disabled(): boolean {
-    return this._disabled;
+  /** Indicates the directionality of the areas. */
+  @Input()
+  get dir() {
+    return this._dir;
   }
-
-  ////
-
-  private _dir: 'ltr' | 'rtl' = 'ltr';
-
-  @Input() set dir(v: 'ltr' | 'rtl') {
+  set dir(v: 'ltr' | 'rtl') {
     this._dir = v === 'rtl' ? 'rtl' : 'ltr';
 
     this.renderer.setAttribute(this.elRef.nativeElement, 'dir', this._dir);
   }
+  private _dir: 'ltr' | 'rtl' = 'ltr';
 
-  get dir(): 'ltr' | 'rtl' {
-    return this._dir;
-  }
-
-  ////
-
-  private _gutterDblClickDuration = 0;
-
-  @Input() set gutterDblClickDuration(v: number) {
-    this._gutterDblClickDuration = getInputPositiveNumber(v, 0);
-  }
-
-  get gutterDblClickDuration(): number {
+  /**
+   * Milliseconds to detect a double click on a gutter. Set it around 300-500ms if
+   * you want to use `gutterDblClick` event.
+   */
+  @Input()
+  get gutterDblClickDuration() {
     return this._gutterDblClickDuration;
   }
+  set gutterDblClickDuration(v: number) {
+    this._gutterDblClickDuration = getInputPositiveNumber(v, 0);
+  }
+  private _gutterDblClickDuration = 0;
 
-  ////
-
+  /** Event emitted when drag starts. */
   @Output() dragStart = new EventEmitter<MtxSplitOutputData>(false);
+  /** Event emitted when drag ends. */
   @Output() dragEnd = new EventEmitter<MtxSplitOutputData>(false);
+  /** Event emitted when user clicks on a gutter. */
   @Output() gutterClick = new EventEmitter<MtxSplitOutputData>(false);
+  /** Event emitted when user double clicks on a gutter. */
   @Output() gutterDblClick = new EventEmitter<MtxSplitOutputData>(false);
-
-  private transitionEndSubscriber!: Subscriber<MtxSplitOutputAreaSizes>;
-  @Output() get transitionEnd(): Observable<MtxSplitOutputAreaSizes> {
+  /**
+   * Event emitted when transition ends (could be triggered from `visible` or `size` changes).
+   * Only if `useTransition` equals true.
+   */
+  @Output()
+  get transitionEnd(): Observable<MtxSplitOutputAreaSizes> {
     return new Observable(subscriber => (this.transitionEndSubscriber = subscriber)).pipe(
       debounceTime<any>(20)
     );
   }
+  private transitionEndSubscriber!: Subscriber<MtxSplitOutputAreaSizes>;
 
   private dragProgressSubject: Subject<MtxSplitOutputData> = new Subject();
   dragProgress$: Observable<MtxSplitOutputData> = this.dragProgressSubject.asObservable();
-
-  ////
 
   private isDragging = false;
   private dragListeners: Array<() => void> = [];
@@ -281,7 +264,7 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     this.useTransition = _defaultOptions?.useTransition ?? false;
   }
 
-  public ngAfterViewInit() {
+  ngAfterViewInit() {
     this.ngZone.runOutsideAngular(() => {
       // To avoid transition at first rendering
       setTimeout(() => this.renderer.addClass(this.elRef.nativeElement, 'mtx-split-init'));
@@ -292,7 +275,7 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     return this.displayedAreas.length === 0 ? 0 : this.displayedAreas.length - 1;
   }
 
-  public addArea(component: MtxSplitPane): void {
+  addArea(component: MtxSplitPane): void {
     const newArea: MtxSplitArea = {
       component,
       order: 0,
@@ -310,7 +293,7 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     }
   }
 
-  public removeArea(component: MtxSplitPane): void {
+  removeArea(component: MtxSplitPane): void {
     if (this.displayedAreas.some(a => a.component === component)) {
       const area = this.displayedAreas.find(a => a.component === component) as MtxSplitArea;
       this.displayedAreas.splice(this.displayedAreas.indexOf(area), 1);
@@ -322,13 +305,13 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     }
   }
 
-  public updateArea(component: MtxSplitPane, resetOrders: boolean, resetSizes: boolean): void {
+  updateArea(component: MtxSplitPane, resetOrders: boolean, resetSizes: boolean): void {
     if (component.visible === true) {
       this.build(resetOrders, resetSizes);
     }
   }
 
-  public showArea(component: MtxSplitPane): void {
+  showArea(component: MtxSplitPane): void {
     const area = this.hidedAreas.find(a => a.component === component);
     if (area === undefined) {
       return;
@@ -340,7 +323,7 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     this.build(true, true);
   }
 
-  public hideArea(comp: MtxSplitPane): void {
+  hideArea(comp: MtxSplitPane): void {
     const area = this.displayedAreas.find(a => a.component === comp);
     if (area === undefined) {
       return;
@@ -356,11 +339,11 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     this.build(true, true);
   }
 
-  public getVisibleAreaSizes(): MtxSplitOutputAreaSizes {
+  getVisibleAreaSizes(): MtxSplitOutputAreaSizes {
     return this.displayedAreas.map(a => (a.size === null ? '*' : a.size));
   }
 
-  public setVisibleAreaSizes(sizes: MtxSplitOutputAreaSizes): boolean {
+  setVisibleAreaSizes(sizes: MtxSplitOutputAreaSizes): boolean {
     if (sizes.length !== this.displayedAreas.length) {
       return false;
     }
@@ -372,9 +355,7 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
       return false;
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    this.displayedAreas.forEach((area, i) => (area.component._size = formatedSizes[i]));
+    this.displayedAreas.forEach((area, i) => (area.component.size = formatedSizes[i]));
 
     this.build(false, true);
     return true;
@@ -527,7 +508,7 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
 
   _clickTimeout: number | null = null;
 
-  public clickGutter(event: MouseEvent | TouchEvent, gutterNum: number): void {
+  clickGutter(event: MouseEvent | TouchEvent, gutterNum: number): void {
     const tempPoint = getPointFromEvent(event) as MtxSplitPoint;
 
     // Be sure mouseup/touchend happened at same point as mousedown/touchstart to trigger click/dblclick
@@ -550,11 +531,7 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     }
   }
 
-  public startDragging(
-    event: MouseEvent | TouchEvent,
-    gutterOrder: number,
-    gutterNum: number
-  ): void {
+  startDragging(event: MouseEvent | TouchEvent, gutterOrder: number, gutterNum: number): void {
     event.preventDefault();
     event.stopPropagation();
 
@@ -806,7 +783,7 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     });
   }
 
-  public notify(
+  notify(
     type: 'start' | 'progress' | 'end' | 'click' | 'dblclick' | 'transitionEnd',
     gutterNum: number
   ): void {
@@ -830,7 +807,7 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     }
   }
 
-  public ngOnDestroy(): void {
+  ngOnDestroy(): void {
     this.stopDragging();
   }
 }

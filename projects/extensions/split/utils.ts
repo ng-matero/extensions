@@ -41,10 +41,6 @@ export function getElementPixelSize(
   return direction === 'horizontal' ? rect.width : rect.height;
 }
 
-export function getInputBoolean(v: any): boolean {
-  return typeof v === 'boolean' ? v : v === 'false' ? false : true;
-}
-
 export function getInputPositiveNumber<T>(v: any, defaultValue: T): number | T {
   if (v === null || v === undefined) {
     return defaultValue;
