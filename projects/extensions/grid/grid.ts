@@ -571,9 +571,6 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   selector: '[mtx-grid-selectable-cell]',
 })
 export class MtxGridSelectableCell {
-  private _selected = false;
-  private _rowData!: Record<string, any>;
-
   ctrlKeyPressed = false;
   shiftKeyPressed = false;
 
@@ -581,13 +578,7 @@ export class MtxGridSelectableCell {
   get selected(): boolean {
     return this._selected;
   }
-
-  @Input()
-  set mtxSelectableRowData(value: any) {
-    if (value !== this._rowData) {
-      this._rowData = value;
-    }
-  }
+  private _selected = false;
 
   @Output() cellSelectedChange = new EventEmitter<MtxGridSelectableCell>();
 
