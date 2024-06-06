@@ -7,11 +7,8 @@ import {
   ChangeDetectorRef,
   Component,
   ContentChildren,
-  Directive,
   ElementRef,
   EventEmitter,
-  HostBinding,
-  HostListener,
   Inject,
   InjectionToken,
   Input,
@@ -68,55 +65,12 @@ import {
   MtxGridRowClassFormatter,
   MtxGridRowSelectionFormatter,
 } from './interfaces';
+import { MtxGridSelectableCell } from './selectable-cell';
 
 /** Injection token that can be used to specify default grid options. */
 export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions>(
   'mtx-grid-default-options'
 );
-
-@Directive({
-  selector: '[mtx-grid-selectable-cell]',
-  standalone: true,
-})
-export class MtxGridSelectableCell {
-  ctrlKeyPressed = false;
-  shiftKeyPressed = false;
-
-  @HostBinding('class.selected')
-  get selected() {
-    return this._selected;
-  }
-  private _selected = false;
-
-  @Input() cellSelectable = true;
-
-  @Output() cellSelectedChange = new EventEmitter<MtxGridSelectableCell>();
-
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent): void {
-    this.ctrlKeyPressed = event.ctrlKey;
-    this.shiftKeyPressed = event.shiftKey;
-
-    if (this.cellSelectable) {
-      this.select();
-    }
-  }
-
-  select(): void {
-    this._selected = true;
-    this.cellSelectedChange.emit(this);
-  }
-
-  deselect(): void {
-    this._selected = false;
-    this.cellSelectedChange.emit(this);
-  }
-
-  toggle(): void {
-    this._selected = !this._selected;
-    this.cellSelectedChange.emit(this);
-  }
-}
 
 @Component({
   selector: 'mtx-grid',

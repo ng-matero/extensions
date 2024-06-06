@@ -22,7 +22,7 @@ import { MtxDialogModule } from '@ng-matero/extensions/dialog';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
 import { MtxGridExpansionToggle } from './expansion-toggle';
-import { MtxGrid, MtxGridSelectableCell } from './grid';
+import { MtxGrid } from './grid';
 import {
   MtxGridCellActionBadgePipe,
   MtxGridCellActionDisablePipe,
@@ -33,6 +33,7 @@ import {
   MtxGridRowClassPipe,
 } from './grid-pipes';
 import { MtxGridUtils } from './grid-utils';
+import { MtxGridSelectableCell } from './selectable-cell';
 
 @NgModule({
   imports: [
