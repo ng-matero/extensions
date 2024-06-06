@@ -65,7 +65,7 @@ export const MTX_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   exportAs: 'mtxPopoverTrigger',
   host: {
     'aria-haspopup': 'true',
-    '[attr.aria-expanded]': 'popoverOpen || null',
+    '[attr.aria-expanded]': 'popoverOpen',
     '[attr.aria-controls]': 'popoverOpen ? popover.panelId : null',
     '(click)': '_handleClick($event)',
     '(mouseenter)': '_handleMouseEnter($event)',
@@ -339,8 +339,12 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
 
   // set state rather than toggle to support triggers sharing a popover
   private _setIsPopoverOpen(isOpen: boolean): void {
-    this._popoverOpen = isOpen;
-    this._popoverOpen ? this.popoverOpened.emit() : this.popoverClosed.emit();
+    if (isOpen !== this._popoverOpen) {
+      this._popoverOpen = isOpen;
+      this._popoverOpen ? this.popoverOpened.emit() : this.popoverClosed.emit();
+
+      this._changeDetectorRef.markForCheck();
+    }
   }
 
   /**
