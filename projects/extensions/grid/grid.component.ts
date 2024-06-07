@@ -477,7 +477,7 @@ export class MtxGridComponent implements OnChanges, AfterViewInit, OnDestroy {
       this._toggleNormalCheckbox(rowData);
     }
 
-    this.rowClick.emit({ rowData, index });
+    this.rowClick.emit({ event, rowData, index });
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
