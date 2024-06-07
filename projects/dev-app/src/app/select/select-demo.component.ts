@@ -35,8 +35,9 @@ import { MtxSelect } from '@ng-matero/extensions/select';
 export class SelectDemoComponent {
   themeColor: ThemePalette = 'primary';
 
+  disabled = false;
+  readonly = false;
   multipleSelect = false;
-  disableSelect = false;
   closeOnSelect = true;
 
   items = [
