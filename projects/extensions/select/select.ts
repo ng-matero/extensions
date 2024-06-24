@@ -195,6 +195,7 @@ export class MtxSelect
   @Input({ transform: booleanAttribute }) virtualScroll = false;
   @Input() typeToSearchText = this._defaultOptions?.typeToSearchText ?? 'Type to search';
   @Input() typeahead!: Subject<string>;
+  @Input() isOpen?: boolean;
 
   @Output('blur') blurEvent = new EventEmitter();
   @Output('focus') focusEvent = new EventEmitter();
