@@ -80,6 +80,8 @@ export class MtxSplitPane implements OnInit, OnDestroy {
     return this._lockSize;
   }
   set lockSize(v: boolean) {
+    this._lockSize = v;
+
     this.split.updateArea(this, false, true);
   }
   private _lockSize = false;
@@ -90,6 +92,8 @@ export class MtxSplitPane implements OnInit, OnDestroy {
     return this._visible;
   }
   set visible(v: boolean) {
+    this._visible = v;
+
     if (this._visible) {
       this.split.showArea(this);
       this.renderer.removeClass(this.elRef.nativeElement, 'mtx-split-pane-hidden');

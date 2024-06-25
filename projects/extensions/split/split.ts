@@ -160,6 +160,8 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     return this._useTransition;
   }
   set useTransition(v: boolean) {
+    this._useTransition = v;
+
     if (this._useTransition) {
       this.renderer.addClass(this.elRef.nativeElement, 'mtx-split-transition');
     } else {
@@ -177,6 +179,8 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
     return this._disabled;
   }
   set disabled(v: boolean) {
+    this._disabled = v;
+
     if (this._disabled) {
       this.renderer.addClass(this.elRef.nativeElement, 'mtx-split-disabled');
     } else {
