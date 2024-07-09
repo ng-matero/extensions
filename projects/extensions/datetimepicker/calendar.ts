@@ -36,8 +36,6 @@ import {
   MtxDatetimeFormats,
 } from '@ng-matero/extensions/core';
 import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
-
 import { MtxClock, MtxClockView } from './clock';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
@@ -107,6 +105,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Input for custom header component */
   @Input() headerComponent!: ComponentType<any>;
 
+  /** input for custom options below the calendar */
+  @Input() footerComponent!: ComponentType<any>;
+
   /** Emits when the currently selected date changes. */
   @Output() selectedChange: EventEmitter<D> = new EventEmitter<D>();
 
@@ -123,6 +124,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   /** A portal containing the header component. */
   _calendarHeaderPortal!: Portal<any>;
+
+  /** A portal containing the footer component. */
+  _customFooterPortal!: Portal<any>;
 
   private _intlChanges: Subscription;
 
@@ -358,6 +362,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     if (this.headerComponent) {
       this._calendarHeaderPortal = new ComponentPortal(this.headerComponent);
     }
+    if (this.footerComponent) {
+      this._customFooterPortal = new ComponentPortal(this.footerComponent);
+    }
     this._activeDate = this.startAt || this._adapter.today();
     this._selectAMPM(this._activeDate);
 
@@ -379,8 +386,12 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Handles date selection in the month view. */
   _dateSelected(date: D): void {
     if (this.type === 'date') {
-      if (!this._adapter.sameDate(date, this.selected) || !this.preventSameDateTimeSelection) {
-        this.selectedChange.emit(date);
+      if (!this._customFooterPortal) {
+        if (!this._adapter.sameDate(date, this.selected) || !this.preventSameDateTimeSelection) {
+          this.selectedChange.emit(date);
+        }
+      } else {
+        this._activeDate = date;
       }
     } else {
       this._activeDate = date;
@@ -391,12 +402,15 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Handles month selection in the year view. */
   _monthSelected(month: D): void {
     if (this.type === 'month') {
-      if (
-        !this._adapter.sameMonthAndYear(month, this.selected) ||
-        !this.preventSameDateTimeSelection
-      ) {
-        this.selectedChange.emit(this._adapter.getFirstDateOfMonth(month));
+      if (!this._customFooterPortal) {
+        if (
+          !this._adapter.sameMonthAndYear(month, this.selected) ||
+          !this.preventSameDateTimeSelection
+        ) {
+          this.selectedChange.emit(this._adapter.getFirstDateOfMonth(month));
+        }
       }
+      this._activeDate = month;
     } else {
       this._activeDate = month;
       this.currentView = 'month';
@@ -407,16 +421,22 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Handles year selection in the multi year view. */
   _yearSelected(year: D): void {
     if (this.type === 'year') {
-      if (!this._adapter.sameYear(year, this.selected as D) || !this.preventSameDateTimeSelection) {
-        const normalizedDate = this._adapter.createDatetime(
-          this._adapter.getYear(year),
-          0,
-          1,
-          0,
-          0
-        );
-        this.selectedChange.emit(normalizedDate);
+      if (!this._customFooterPortal) {
+        if (
+          !this._adapter.sameYear(year, this.selected as D) ||
+          !this.preventSameDateTimeSelection
+        ) {
+          const normalizedDate = this._adapter.createDatetime(
+            this._adapter.getYear(year),
+            0,
+            1,
+            0,
+            0
+          );
+          this.selectedChange.emit(normalizedDate);
+        }
       }
+      this._activeDate = year;
     } else {
       this._activeDate = year;
       this.currentView = 'year';
@@ -425,8 +445,10 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   _timeSelected(date: D) {
     this._activeDate = this._updateDate(date);
-    if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
-      this.selectedChange.emit(date);
+    if (!this._customFooterPortal) {
+      if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
+        this.selectedChange.emit(date);
+      }
     }
   }
 
@@ -435,9 +457,21 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
       this._activeDate = this._updateDate(date);
       this._clockView = 'minute';
     } else {
-      if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
-        this.selectedChange.emit(date);
+      if (!this._customFooterPortal) {
+        if (
+          !this._adapter.sameDatetime(date, this.selected) ||
+          !this.preventSameDateTimeSelection
+        ) {
+          this.selectedChange.emit(date);
+        }
       }
+    }
+  }
+
+  /** Prevents same year selection and emits selected year. */
+  preventEmittingSameDateSelection(date: D): void {
+    if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
+      this.selectedChange.emit(date);
     }
   }
 

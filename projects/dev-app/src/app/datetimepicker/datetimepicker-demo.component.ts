@@ -25,6 +25,7 @@ import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
 import { Subscription } from 'rxjs';
 import { CustomHeader } from './custom-header.component';
+import { CustomFooter } from 'projects/docs/src/app/pages/components/datetimepicker/examples/configurable/custom-footer.component';
 
 const moment = _rollupMoment || _moment;
 
@@ -91,6 +92,7 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
   filter: (date: moment.Moment | null, type: MtxDatetimepickerFilterType) => boolean;
 
   customHeader = CustomHeader;
+  customFooter = CustomFooter;
 
   translateSubscription!: Subscription;
 

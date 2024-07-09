@@ -46,6 +46,10 @@
   <mat-checkbox (change)="showCustomHeader($event)">Custom Header</mat-checkbox>
 </section>
 
+<section>
+  <mat-checkbox (change)="showCustomFooter($event)">Custom Footer</mat-checkbox>
+</section>
+
 
 <section>
   <label>TimeInterval:</label>
@@ -67,6 +71,7 @@
                       [mode]="mode"
                       [multiYearSelector]="multiYearSelector"
                       [calendarHeaderComponent]="customHeader"
+                      [calendarFooterComponent]="customFooter"
                       [startView]="startView"
                       [twelvehour]="twelvehour"
                       [timeInterval]="timeInterval"

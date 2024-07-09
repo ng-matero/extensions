@@ -59,6 +59,9 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   /** Whether the clock uses 12 hour format. */
   @Input({ transform: booleanAttribute }) twelvehour: boolean = false;
 
+  /** This will be true when a custom Footer Component is passed */
+  @Input({ transform: booleanAttribute }) customFooter: boolean = false;
+
   /** Whether the time is now in AM or PM. */
   @Input() AMPM: MtxAMPM = 'AM';
 
@@ -209,9 +212,10 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
 
     if (this._timeChanged) {
       this.selectedChange.emit(this.activeDate);
-      if (!this._hourView) {
-        this._userSelection.emit();
-      }
+      if (!this.customFooter)
+        if (!this._hourView) {
+          this._userSelection.emit();
+        }
     }
   };
 

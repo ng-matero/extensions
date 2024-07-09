@@ -256,6 +256,9 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   /** Step over minutes. */
   @Input() interval: number = 1;
 
+  /** Whether the custom footer is added. */
+  @Input() customFooter: boolean = false;
+
   @ViewChild('hourInput', { read: ElementRef<HTMLInputElement> })
   protected hourInputElement: ElementRef<HTMLInputElement> | undefined;
 

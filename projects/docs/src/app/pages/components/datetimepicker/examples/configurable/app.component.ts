@@ -15,6 +15,7 @@ import {
   MtxDatetimepickerType,
 } from '@ng-matero/extensions/datetimepicker';
 import { CustomHeader } from './custom-header.component';
+import { CustomFooter } from './custom-footer.component';
 
 @Component({
   selector: 'datetimepicker-example',
@@ -70,6 +71,7 @@ export class AppComponent {
   timeInterval = 1;
   timeInput = true;
   customHeader!: any;
+  customFooter!: any;
 
   datetime = new UntypedFormControl();
 
@@ -78,6 +80,13 @@ export class AppComponent {
       this.customHeader = CustomHeader;
     } else {
       this.customHeader = null;
+    }
+  }
+  showCustomFooter($event: MatCheckboxChange) {
+    if ($event.checked) {
+      this.customFooter = CustomFooter;
+    } else {
+      this.customFooter = null;
     }
   }
 }

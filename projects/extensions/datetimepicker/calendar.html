@@ -99,6 +99,7 @@
         [activeDate]="_activeDate"
         [dateFilter]="_dateFilterForViews"
         [selected]="selected!"
+        [customFooter]="!!_customFooterPortal"
         [type]="type">
       </mtx-month-view>
     }
@@ -109,6 +110,7 @@
         [activeDate]="_activeDate"
         [dateFilter]="_dateFilterForViews"
         [selected]="selected!"
+        [customFooter]="!!_customFooterPortal"
         [type]="type">
       </mtx-year-view>
     }
@@ -121,6 +123,7 @@
         [maxDate]="maxDate"
         [minDate]="minDate"
         [selected]="selected!"
+        [customFooter]="!!_customFooterPortal"
         [type]="type">
       </mtx-multi-year-view>
     }
@@ -139,6 +142,7 @@
           [interval]="timeInterval"
           [maxDate]="maxDate"
           [minDate]="minDate"
+          [customFooter]="!!_customFooterPortal"
           [selected]="_activeDate">
         </mtx-time>
       } @else {
@@ -152,9 +156,14 @@
           [minDate]="minDate"
           [selected]="_activeDate"
           [startView]="_clockView"
-          [twelvehour]="twelvehour">
+          [twelvehour]="twelvehour"
+          [customFooter]="!!_customFooterPortal">
         </mtx-clock>
       }
     }
+  }
+
+  @if (_customFooterPortal) {
+    <ng-template [cdkPortalOutlet]="_customFooterPortal"></ng-template>
   }
 </div>

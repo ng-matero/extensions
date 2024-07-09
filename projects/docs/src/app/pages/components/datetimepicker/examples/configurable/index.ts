@@ -19,6 +19,16 @@ const datetimepickerConfigurableExampleConfig = {
       content: require('!!highlight-loader?raw=true&lang=scss!./app.component.scss'),
       filecontent: require('!!raw-loader!./app.component.scss'),
     },
+    {
+      file: 'custom-header.component.ts',
+      content: require('!!highlight-loader?raw=true&lang=typescript!./custom-header.component.ts'),
+      filecontent: require('!!raw-loader!./custom-header.component.ts'),
+    },
+    {
+      file: 'custom-footer.component.ts',
+      content: require('!!highlight-loader?raw=true&lang=typescript!./custom-footer.component.ts'),
+      filecontent: require('!!raw-loader!./custom-footer.component.ts'),
+    },
   ],
 };
 

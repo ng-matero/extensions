@@ -43,6 +43,9 @@ export class MtxMultiYearView<D> implements AfterContentInit {
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
 
+  /** Whether the custom footer is added in the parent. */
+  @Input() customFooter: boolean = false;
+
   /** Emits when a new month is selected. */
   @Output() selectedChange = new EventEmitter<D>();
 
@@ -145,20 +148,24 @@ export class MtxMultiYearView<D> implements AfterContentInit {
     const month = this._adapter.getMonth(this.activeDate);
     const normalizedDate = this._adapter.createDatetime(year, month, 1, 0, 0);
 
-    this.selectedChange.emit(
-      this._adapter.createDatetime(
-        year,
-        month,
-        Math.min(
-          this._adapter.getDate(this.activeDate),
-          this._adapter.getNumDaysInMonth(normalizedDate)
-        ),
-        this._adapter.getHour(this.activeDate),
-        this._adapter.getMinute(this.activeDate)
-      )
+    const date = this._adapter.createDatetime(
+      year,
+      month,
+      Math.min(
+        this._adapter.getDate(this.activeDate),
+        this._adapter.getNumDaysInMonth(normalizedDate)
+      ),
+      this._adapter.getHour(this.activeDate),
+      this._adapter.getMinute(this.activeDate)
     );
 
-    if (this.type === 'year') {
+    this.selectedChange.emit(date);
+
+    if (this.customFooter) {
+      this.selected = date;
+    }
+
+    if (this.type === 'year' && !this.customFooter) {
       this._userSelection.emit();
     }
   }
