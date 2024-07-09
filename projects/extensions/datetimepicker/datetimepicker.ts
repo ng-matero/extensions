@@ -181,6 +181,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   /** Input for a custom header component */
   @Input() calendarHeaderComponent!: ComponentType<any>;
 
+  /** input for custom options below the calendar */
+  @Input() calendarFooterComponent!: ComponentType<any>;
+
   /**
    * Emits new selected date when selected date changes.
    * @deprecated Switch to the `dateChange` and `dateInput` binding on the input element.
@@ -366,9 +369,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   /** Selects the given date */
-  _select(date: D): void {
+  _select(date: D | undefined): void {
     const oldValue = this._selected;
-    this._selected = date;
+    this._selected = date || null;
     if (!this._dateAdapter.sameDatetime(oldValue, this._selected)) {
       this.selectedChanged.emit(date);
     }

@@ -41,6 +41,9 @@ export class MtxMonthView<D> implements AfterContentInit {
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
 
+  /** Whether the custom footer is added in the parent. */
+  @Input() customFooter: boolean = false;
+
   /** Emits when a new date is selected. */
   @Output() selectedChange = new EventEmitter<D>();
 
@@ -136,16 +139,21 @@ export class MtxMonthView<D> implements AfterContentInit {
 
   /** Handles when a new date is selected. */
   _dateSelected(date: number) {
-    this.selectedChange.emit(
-      this._adapter.createDatetime(
-        this._adapter.getYear(this.activeDate),
-        this._adapter.getMonth(this.activeDate),
-        date,
-        this._adapter.getHour(this.activeDate),
-        this._adapter.getMinute(this.activeDate)
-      )
+    const dateObject = this._adapter.createDatetime(
+      this._adapter.getYear(this.activeDate),
+      this._adapter.getMonth(this.activeDate),
+      date,
+      this._adapter.getHour(this.activeDate),
+      this._adapter.getMinute(this.activeDate)
     );
-    if (this.type === 'date') {
+
+    this.selectedChange.emit(dateObject);
+
+    if (this.customFooter) {
+      this.selected = dateObject;
+    }
+
+    if (this.type === 'date' && !this.customFooter) {
       this._userSelection.emit();
     }
   }

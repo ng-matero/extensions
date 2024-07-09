@@ -199,6 +199,8 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 }
 
 .mtx-calendar-content {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   padding: $calendar-padding;
   outline: none;
