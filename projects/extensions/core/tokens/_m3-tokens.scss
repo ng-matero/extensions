@@ -300,6 +300,9 @@ $_cached-token-slots: null;
   $sys-color: _get-sys-color($type, $ref);
 
   @return _generate-tokens(map.merge($ref, (
+    // Used to get the theme type
+    md-sys-type: $type,
+
     md-sys-color: $sys-color,
     // Because the elevation values are always combined with color values to create the box shadow,
     // elevation needs to be part of the color dimension.

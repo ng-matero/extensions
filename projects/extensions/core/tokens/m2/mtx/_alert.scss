@@ -19,16 +19,20 @@ $prefix: (mtx, alert);
 
   @return (
     outline-color: transparent,
-    background-color: mat.get-theme-color($theme, background, dialog),
+    background-color: mat.m2-get-color-from-palette(mat.$m2-gray-palette, if($is-dark, 900, 100)),
     text-color: mat.get-theme-color($theme, foreground, text),
-    info-background-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 500)),
-    info-text-color: white,
-    success-background-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 500)),
-    success-text-color: white,
-    warning-background-color: mat.m2-get-color-from-palette(mat.$m2-orange-palette, if($is-dark, 900, 500)),
-    warning-text-color: white,
-    danger-background-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 500)),
-    danger-text-color: white,
+
+    info-background-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 100)),
+    info-text-color: mat.get-theme-color($theme, foreground, text),
+
+    success-background-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 100)),
+    success-text-color: mat.get-theme-color($theme, foreground, text),
+
+    warning-background-color: mat.m2-get-color-from-palette(mat.$m2-amber-palette, if($is-dark, 900, 100)),
+    warning-text-color: mat.get-theme-color($theme, foreground, text),
+
+    danger-background-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 100)),
+    danger-text-color: mat.get-theme-color($theme, foreground, text),
   );
 }
 
