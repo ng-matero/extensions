@@ -17,21 +17,25 @@
     @include token-utils.create-token-slot(color, text-color);
 
     &.mtx-alert-info {
+      @include token-utils.create-token-slot(border-color, info-outline-color);
       @include token-utils.create-token-slot(background-color, info-background-color);
       @include token-utils.create-token-slot(color, info-text-color);
     }
 
     &.mtx-alert-success {
+      @include token-utils.create-token-slot(border-color, success-outline-color);
       @include token-utils.create-token-slot(background-color, success-background-color);
       @include token-utils.create-token-slot(color, success-text-color);
     }
 
     &.mtx-alert-warning {
+      @include token-utils.create-token-slot(border-color, warning-outline-color);
       @include token-utils.create-token-slot(background-color, warning-background-color);
       @include token-utils.create-token-slot(color, warning-text-color);
     }
 
     &.mtx-alert-danger {
+      @include token-utils.create-token-slot(border-color, danger-outline-color);
       @include token-utils.create-token-slot(background-color, danger-background-color);
       @include token-utils.create-token-slot(color, danger-text-color);
     }

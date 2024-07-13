@@ -16,19 +16,23 @@ $prefix: (mtx, alert);
   $tokens: (
     container-shape: map.get($systems, md-sys-shape, corner-small),
 
-    outline-color: token-utils.hardcode(transparent, $exclude-hardcoded),
+    outline-color: map.get($systems, md-sys-color, outline-variant),
     background-color: map.get($systems, md-sys-color, surface-container),
     text-color: map.get($systems, md-sys-color, on-surface),
 
+    info-outline-color: map.get(mat.$azure-palette, if($is-dark, 40, 80)),
     info-background-color: map.get(mat.$azure-palette, if($is-dark, 20, 90)),
     info-text-color: map.get(mat.$azure-palette, if($is-dark, 90, 20)),
 
+    success-outline-color: map.get(mat.$green-palette, if($is-dark, 40, 80)),
     success-background-color: map.get(mat.$green-palette, if($is-dark, 20, 95)),
     success-text-color: map.get(mat.$green-palette, if($is-dark, 95, 20)),
 
-    warning-background-color: map.get(mat.$yellow-palette, if($is-dark, 20, 95)),
-    warning-text-color: map.get(mat.$yellow-palette, if($is-dark, 95, 20)),
+    warning-outline-color: map.get(mat.$yellow-palette, if($is-dark, 40, 80)),
+    warning-background-color: map.get(mat.$yellow-palette, if($is-dark, 20, 98)),
+    warning-text-color: map.get(mat.$yellow-palette, if($is-dark, 98, 20)),
 
+    danger-outline-color: map.get(mat.$red-palette, if($is-dark, 40, 80)),
     danger-background-color: map.get(mat.$red-palette, if($is-dark, 20, 90)),
     danger-text-color: map.get(mat.$red-palette, if($is-dark, 90, 20)),
   );
