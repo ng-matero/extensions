@@ -9,6 +9,7 @@ import {
   ViewEncapsulation,
   booleanAttribute,
 } from '@angular/core';
+import { MatIconButton } from '@angular/material/button';
 
 export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger';
 
@@ -25,6 +26,7 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
+  imports: [MatIconButton],
 })
 export class MtxAlert {
   @HostBinding('class')
