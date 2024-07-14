@@ -48,7 +48,6 @@ export class AppComponent implements OnInit {
   yOffset = 0;
   closeOnPanelClick = false;
   hasBackdrop = true;
-  elevation = 8;
   hideArrow = false;
 
   positionXOptions = ['before', 'after'];

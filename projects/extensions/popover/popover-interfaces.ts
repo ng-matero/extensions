@@ -49,5 +49,4 @@ export interface MtxPopoverDefaultOptions {
   hasBackdrop?: boolean;
   focusTrapEnabled?: boolean;
   focusTrapAutoCaptureEnabled?: boolean;
-  elevation?: number;
 }
