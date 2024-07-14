@@ -1,17 +1,15 @@
 import { Component } from '@angular/core';
-import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatSlider, MatSliderThumb } from '@angular/material/slider';
+import { FormsModule } from '@angular/forms';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
 import { provideMomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter';
 import {
   MtxCalendarView,
-  MtxDatetimepicker,
-  MtxDatetimepickerInput,
   MtxDatetimepickerMode,
-  MtxDatetimepickerToggle,
+  MtxDatetimepickerModule,
   MtxDatetimepickerType,
 } from '@ng-matero/extensions/datetimepicker';
 import { CustomHeader } from './custom-header.component';
@@ -23,19 +21,12 @@ import { CustomHeader } from './custom-header.component';
   standalone: true,
   imports: [
     FormsModule,
-    ReactiveFormsModule,
-    MatRadioGroup,
-    MatRadioButton,
-    MatCheckbox,
-    MatSlider,
-    MatSliderThumb,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatSuffix,
-    MtxDatetimepicker,
-    MtxDatetimepickerInput,
-    MtxDatetimepickerToggle,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MtxDatetimepickerModule,
   ],
   providers: [
     provideMomentDatetimeAdapter({
@@ -71,7 +62,7 @@ export class AppComponent {
   timeInput = true;
   customHeader!: any;
 
-  datetime = new UntypedFormControl();
+  datetime = '';
 
   showCustomHeader($event: MatCheckboxChange) {
     if ($event.checked) {

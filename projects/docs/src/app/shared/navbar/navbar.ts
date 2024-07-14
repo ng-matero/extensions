@@ -1,14 +1,14 @@
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, OnDestroy } from '@angular/core';
-import { MatAnchor, MatIconAnchor, MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MatTooltip } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NgProgressComponent } from 'ngx-progressbar';
+import { NgProgressModule } from 'ngx-progressbar';
 import { Subscription } from 'rxjs';
+import { AppLogo } from '../logo/logo';
 import { NavigationFocusService } from '../navigation-focus/navigation-focus.service';
 import { AppThemes } from '../themes';
-import { AppLogo } from '../logo/logo';
-import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -16,14 +16,12 @@ import { NgTemplateOutlet } from '@angular/common';
   styleUrl: './navbar.scss',
   standalone: true,
   imports: [
-    NgProgressComponent,
-    MatAnchor,
+    NgProgressModule,
     RouterLink,
     RouterLinkActive,
-    MatIconButton,
-    MatTooltip,
-    MatIcon,
-    MatIconAnchor,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
     AppLogo,
     NgTemplateOutlet,
   ],

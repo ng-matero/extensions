@@ -1,29 +1,21 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatSlider, MatSliderThumb } from '@angular/material/slider';
-import { MtxAlert, MtxAlertType } from '@ng-matero/extensions/alert';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+import { MtxAlertModule, MtxAlertType } from '@ng-matero/extensions/alert';
 
 @Component({
   selector: 'alert-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [
-    FormsModule,
-    MatRadioGroup,
-    MatRadioButton,
-    MatCheckbox,
-    MatSlider,
-    MatSliderThumb,
-    MtxAlert,
-  ],
+  imports: [FormsModule, MatRadioModule, MatCheckboxModule, MatSliderModule, MtxAlertModule],
 })
 export class AppComponent {
   type: MtxAlertType = 'info';
   dismissible = false;
-  elevation = 3;
+  elevation = 0;
 
   onClosed(e: any) {
     alert('closed event!');

@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MtxGrid, MtxGridColumn, MtxGridRowSelectionFormatter } from '@ng-matero/extensions/grid';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import {
+  MtxGridColumn,
+  MtxGridModule,
+  MtxGridRowSelectionFormatter,
+} from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
@@ -10,7 +14,7 @@ import { EXAMPLE_DATA } from '../../data';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MatCheckbox, FormsModule, MatRadioGroup, MatRadioButton, MtxGrid],
+  imports: [MatCheckboxModule, FormsModule, MatRadioModule, MtxGridModule],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

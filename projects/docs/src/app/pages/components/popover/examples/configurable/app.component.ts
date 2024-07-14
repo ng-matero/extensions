@@ -1,19 +1,17 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatOption } from '@angular/material/core';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatSelect } from '@angular/material/select';
-import { MatSlider, MatSliderThumb } from '@angular/material/slider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 import {
-  MtxPopover,
+  MtxPopoverModule,
   MtxPopoverPositionEnd,
   MtxPopoverPositionStart,
-  MtxPopoverTrigger,
   MtxPopoverTriggerEvent,
 } from '@ng-matero/extensions/popover';
 
@@ -24,20 +22,15 @@ import {
   standalone: true,
   imports: [
     FormsModule,
-    MatFormField,
-    MatInput,
-    MatLabel,
-    MatSelect,
-    MatOption,
-    MatRadioGroup,
-    MatRadioButton,
-    MatCheckbox,
-    MatSlider,
-    MatSliderThumb,
-    MatButton,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatCheckboxModule,
+    MatSliderModule,
+    MatButtonModule,
+    MtxPopoverModule,
     CdkDrag,
-    MtxPopoverTrigger,
-    MtxPopover,
   ],
 })
 export class AppComponent implements OnInit {

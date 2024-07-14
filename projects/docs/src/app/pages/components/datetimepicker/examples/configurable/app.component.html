@@ -72,6 +72,6 @@
                       [timeInterval]="timeInterval"
                       [touchUi]="touchUi"
                       [timeInput]="timeInput"></mtx-datetimepicker>
-  <input [mtxDatetimepicker]="datetimePicker" [formControl]="datetime" matInput required>
+  <input [mtxDatetimepicker]="datetimePicker" [(ngModel)]="datetime" matInput required>
   <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
 </mat-form-field>

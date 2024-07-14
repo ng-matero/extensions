@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
-import { MtxSplit, MtxSplitPane } from '@ng-matero/extensions/split';
+import { MtxSplitModule } from '@ng-matero/extensions/split';
 
 @Component({
   selector: 'split-pane-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MtxSplit, MtxSplitPane],
+  imports: [MtxSplitModule],
 })
 export class AppComponent {}

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
+import { MatButtonModule } from '@angular/material/button';
+import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
@@ -8,7 +8,7 @@ import { EXAMPLE_DATA } from '../../data';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MtxGrid, MatButton],
+  imports: [MtxGridModule, MatButtonModule],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

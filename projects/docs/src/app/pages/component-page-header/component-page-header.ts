@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ComponentPageTitle } from '../page-title/page-title';
 
 @Component({
@@ -8,7 +8,7 @@ import { ComponentPageTitle } from '../page-title/page-title';
   templateUrl: './component-page-header.html',
   styleUrl: './component-page-header.scss',
   standalone: true,
-  imports: [MatButton, MatIcon],
+  imports: [MatButtonModule, MatIconModule],
 })
 export class ComponentPageHeader {
   constructor(public _componentPageTitle: ComponentPageTitle) {}

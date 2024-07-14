@@ -1,16 +1,16 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MtxCheckboxGroup } from '@ng-matero/extensions/checkbox-group';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
 
 @Component({
   selector: 'checkbox-group-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MatButton, MatCheckbox, FormsModule, MtxCheckboxGroup, JsonPipe],
+  imports: [MatButtonModule, MatCheckboxModule, FormsModule, MtxCheckboxGroupModule, JsonPipe],
 })
 export class AppComponent {
   foods = [

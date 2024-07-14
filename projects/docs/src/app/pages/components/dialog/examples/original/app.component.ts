@@ -1,16 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import { MatFormField } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 
 @Component({
@@ -18,7 +11,7 @@ import { MtxDialog } from '@ng-matero/extensions/dialog';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MatButton],
+  imports: [MatButtonModule],
 })
 export class AppComponent {
   animal?: string;
@@ -42,16 +35,7 @@ export class AppComponent {
   selector: 'dialog-overview',
   templateUrl: './dialog.html',
   standalone: true,
-  imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatFormField,
-    MatInput,
-    FormsModule,
-    MatDialogActions,
-    MatButton,
-    MatDialogClose,
-  ],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, MatDialogModule, MatButtonModule],
 })
 export class DialogOriginalOverviewComponent {
   constructor(

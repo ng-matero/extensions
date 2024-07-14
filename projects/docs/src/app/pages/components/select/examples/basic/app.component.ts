@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
-import { MtxSelect } from '@ng-matero/extensions/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
 
 @Component({
   selector: 'select-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MatCheckbox, FormsModule, MatFormField, MatLabel, MtxSelect, MatHint, MatError],
+  imports: [MatCheckboxModule, FormsModule, MatFormFieldModule, MtxSelectModule],
 })
 export class AppComponent {
   foods = [

@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton, MatIconButton } from '@angular/material/button';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/drawer';
 
 @Component({
@@ -11,7 +11,7 @@ import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [FormsModule, MatFormField, MatLabel, MatInput, MatButton],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class AppComponent {
   animal?: string;
@@ -67,7 +67,7 @@ export class AppComponent {
     `,
   ],
   standalone: true,
-  imports: [MatIconButton, MatIcon, MatFormField, MatLabel, MatInput, FormsModule, MatButton],
+  imports: [MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
 })
 export class DrawerSharingDataOverviewComponent {
   constructor(

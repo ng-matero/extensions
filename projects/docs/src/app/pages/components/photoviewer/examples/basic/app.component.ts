@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
-import { MtxPhotoviewer } from '@ng-matero/extensions/photoviewer';
+import { MatButtonModule } from '@angular/material/button';
+import { MtxPhotoviewerModule } from '@ng-matero/extensions/photoviewer';
 
 @Component({
   selector: 'photoviewer-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MatButton, MtxPhotoviewer],
+  imports: [MatButtonModule, MtxPhotoviewerModule],
 })
 export class AppComponent {
   images = [
