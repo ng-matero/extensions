@@ -8,7 +8,6 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 .mtx-grid-column-pin-list {
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(color, column-menu-text-color);
-    @include token-utils.create-token-slot(box-shadow, column-menu-elevation-shadow);
   }
 }
 
