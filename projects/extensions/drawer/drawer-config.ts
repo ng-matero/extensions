@@ -63,11 +63,11 @@ export class MtxDrawerConfig<D = any> {
   /** Position of the drawer */
   position?: DrawerPosition = 'right';
 
-  /** Width of the drawer. If a number is provided, assumes pixel units. */
-  width?: number | string;
+  /** Width of the drawer.  */
+  width?: string;
 
-  /** Height of the drawer. If a number is provided, assumes pixel units. */
-  height?: number | string;
+  /** Height of the drawer.  */
+  height?: string;
 
   /** Min-width of the drawer. If a number is provided, assumes pixel units. */
   minWidth?: number | string;

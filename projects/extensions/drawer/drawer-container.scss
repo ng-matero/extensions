@@ -7,7 +7,11 @@ $_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
 
 .mtx-drawer-container {
   display: block;
+  width: 100%;
+  padding: 8px 16px;
+  overflow: auto;
   outline: 0;
+  box-sizing: border-box;
 
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(background-color, container-background-color);
@@ -18,12 +22,6 @@ $_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
   @include cdk.high-contrast(active, off) {
     outline: 1px solid;
   }
-}
-
-.mtx-drawer-content-wrapper {
-  box-sizing: border-box;
-  padding: 8px 16px;
-  overflow: auto;
 }
 
 .mtx-drawer-right {
