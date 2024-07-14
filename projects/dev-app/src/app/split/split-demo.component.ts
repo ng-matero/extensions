@@ -1,22 +1,15 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MtxSplit, MtxSplitPane } from '@ng-matero/extensions/split';
+import { MatRadioModule } from '@angular/material/radio';
+import { MtxSplitModule } from '@ng-matero/extensions/split';
 
 @Component({
   selector: 'dev-split',
   templateUrl: './split-demo.component.html',
   styleUrl: './split-demo.component.scss',
   standalone: true,
-  imports: [
-    MatRadioGroup,
-    ReactiveFormsModule,
-    FormsModule,
-    MatRadioButton,
-    MtxSplit,
-    MtxSplitPane,
-  ],
+  imports: [MatRadioModule, ReactiveFormsModule, FormsModule, MtxSplitModule],
 })
 export class SplitDemoComponent {
   themeColor: ThemePalette = 'primary';

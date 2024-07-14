@@ -1,8 +1,11 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormControl, Validators } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MtxCheckboxGroup, MtxCheckboxGroupOption } from '@ng-matero/extensions/checkbox-group';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import {
+  MtxCheckboxGroupModule,
+  MtxCheckboxGroupOption,
+} from '@ng-matero/extensions/checkbox-group';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -10,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './checkbox-group-demo.component.html',
   styleUrl: './checkbox-group-demo.component.scss',
   standalone: true,
-  imports: [MatCheckbox, MtxCheckboxGroup, ReactiveFormsModule, FormsModule, JsonPipe],
+  imports: [MatCheckboxModule, MtxCheckboxGroupModule, ReactiveFormsModule, FormsModule, JsonPipe],
 })
 export class CheckboxGroupDemoComponent {
   foods: MtxCheckboxGroupOption[] = [

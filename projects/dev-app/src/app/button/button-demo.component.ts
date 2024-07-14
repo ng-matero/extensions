@@ -1,20 +1,11 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {
-  MatAnchor,
-  MatButton,
-  MatFabAnchor,
-  MatFabButton,
-  MatIconAnchor,
-  MatIconButton,
-  MatMiniFabAnchor,
-  MatMiniFabButton,
-} from '@angular/material/button';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ThemePalette } from '@angular/material/core';
-import { MatIcon } from '@angular/material/icon';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatButtonLoading } from '@ng-matero/extensions/button/button-loading';
+import { MatIconModule } from '@angular/material/icon';
+import { MatRadioModule } from '@angular/material/radio';
+import { MtxButtonModule } from '@ng-matero/extensions/button';
 
 @Component({
   selector: 'dev-button-demo',
@@ -22,21 +13,13 @@ import { MatButtonLoading } from '@ng-matero/extensions/button/button-loading';
   styleUrl: 'button-demo.component.scss',
   standalone: true,
   imports: [
-    MatCheckbox,
     ReactiveFormsModule,
     FormsModule,
-    MatRadioGroup,
-    MatRadioButton,
-    MatButton,
-    MatButtonLoading,
-    MatIconButton,
-    MatIcon,
-    MatFabButton,
-    MatMiniFabButton,
-    MatAnchor,
-    MatIconAnchor,
-    MatFabAnchor,
-    MatMiniFabAnchor,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatIconModule,
+    MtxButtonModule,
   ],
 })
 export class ButtonDemoComponent {

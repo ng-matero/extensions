@@ -2,47 +2,20 @@ import { AsyncPipe, JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardAvatar,
-  MatCardContent,
-  MatCardHeader,
-  MatCardImage,
-  MatCardSubtitle,
-  MatCardTitle,
-} from '@angular/material/card';
-import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
-import { MatIcon } from '@angular/material/icon';
-import { MatMenu, MatMenuContent, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
+import { MatCardModule } from '@angular/material/card';
+import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { PageEvent } from '@angular/material/paginator';
+import { MatTableModule } from '@angular/material/table';
 import {
-  MatCell,
-  MatCellDef,
-  MatColumnDef,
-  MatFooterCell,
-  MatFooterCellDef,
-  MatFooterRow,
-  MatFooterRowDef,
-  MatHeaderCell,
-  MatHeaderCellDef,
-  MatHeaderRow,
-  MatHeaderRowDef,
-  MatRow,
-  MatRowDef,
-  MatTable,
-} from '@angular/material/table';
-import {
-  MatColumnResize,
-  MatResizable,
   MtxGrid,
   MtxGridColumn,
   MtxGridColumnPinOption,
+  MtxGridModule,
   MtxGridRowClassFormatter,
   MtxGridRowSelectionFormatter,
 } from '@ng-matero/extensions/grid';
-import { MtxPhotoviewer } from '@ng-matero/extensions/photoviewer';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription, finalize, fromEvent, merge } from 'rxjs';
 import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
@@ -53,43 +26,16 @@ import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
   styleUrl: './grid-demo.component.scss',
   standalone: true,
   imports: [
-    ReactiveFormsModule,
-    FormsModule,
-    MatCheckbox,
-    MatIcon,
-    MatCard,
-    MatCardHeader,
-    MatCardAvatar,
-    MatCardTitle,
-    MatCardSubtitle,
-    MatCardImage,
-    MatCardContent,
-    MatCardActions,
-    MatButton,
-    MatMenuTrigger,
-    MatMenu,
-    MatMenuContent,
-    MatMenuItem,
-    MatTable,
-    MatColumnDef,
-    MatHeaderRowDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatRow,
-    MatHeaderCellDef,
-    MatHeaderCell,
-    MatCellDef,
-    MatCell,
-    MatFooterCellDef,
-    MatFooterCell,
-    MatFooterRowDef,
-    MatFooterRow,
-    MatResizable,
-    MatColumnResize,
     AsyncPipe,
     JsonPipe,
-    MtxGrid,
-    MtxPhotoviewer,
+    ReactiveFormsModule,
+    FormsModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatCardModule,
+    MatMenuModule,
+    MatTableModule,
+    MtxGridModule,
   ],
 })
 export class GridDemoComponent implements OnInit, AfterViewInit {

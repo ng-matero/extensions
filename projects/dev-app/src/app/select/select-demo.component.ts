@@ -1,13 +1,14 @@
 import { Component } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatOption, ThemePalette } from '@angular/material/core';
-import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatSelect } from '@angular/material/select';
-import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
-import { MtxSelect } from '@ng-matero/extensions/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ThemePalette } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
 
 @Component({
   selector: 'dev-app-select',
@@ -15,21 +16,16 @@ import { MtxSelect } from '@ng-matero/extensions/select';
   styleUrl: './select-demo.component.scss',
   standalone: true,
   imports: [
-    MatCheckbox,
     ReactiveFormsModule,
     FormsModule,
-    MatRadioGroup,
-    MatRadioButton,
-    MatFormField,
-    MatLabel,
-    MtxSelect,
-    MatHint,
-    MatError,
-    MatIcon,
-    MatSuffix,
-    MatSlideToggle,
-    MatSelect,
-    MatOption,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatSlideToggleModule,
+    MatSelectModule,
+    MtxSelectModule,
   ],
 })
 export class SelectDemoComponent {
