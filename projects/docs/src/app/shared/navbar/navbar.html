@@ -23,6 +23,8 @@
 
   <div class="flex-spacer"></div>
 
+  <button mat-button>{{version$ | async}}</button>
+
   <button mat-icon-button matTooltip="Toggle the theme" (click)="toggleTheme()">
     <mat-icon>{{dark ? 'brightness_3' : 'wb_sunny'}}</mat-icon>
   </button>

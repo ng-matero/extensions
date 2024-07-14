@@ -43,18 +43,43 @@ export class YourAppModule {
 
 After import modules, you must define a theme. [More about theming](https://material.angular.io/guide/theming).
 
+### M2 theme
+
 ```scss
+@use '@angular/material' as mat;
 @use '@ng-matero/extensions' as mtx;
 
+$theme: mat.define-light-theme(...);
+
+@include mat.all-component-themes($theme);
 @include mtx.all-component-themes($theme);
+```
+
+### M3 theme
+
+```scss
+@use '@angular/material' as mat;
+@use '@ng-matero/extensions' as mtx;
+
+$config: (...);
+
+$theme: mat.private-deep-merge-all(
+  mat.define-theme($config),
+  mtx.define-theme($config)
+);
+
+html {
+  @include mat.all-component-themes($theme);
+  @include mtx.all-component-themes($theme);
+}
 ```
 
 The @use-based Sass API is only available in the version `12.0.0` and above.
 
-You can also [using a pre-built theme](https://material.angular.io/guide/theming#using-a-pre-built-theme) which in the "prebuilt-themes" directory of the npm package (@ng-matero/extensions/prebuilt-themes).
+You can also [using a pre-built theme](https://material.angular.io/guide/theming#pre-built-themes) which in the "prebuilt-themes" directory of the npm package (@ng-matero/extensions/prebuilt-themes).
 
 ```scss
-@import '@ng-matero/extensions/prebuilt-themes/indigo-pink.css'
+@import '@ng-matero/extensions/prebuilt-themes/azure-blue.css'
 ```
 
 ## Development

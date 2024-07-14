@@ -24,4 +24,5 @@ import { MtxButtonModule } from '@ng-matero/extensions/button';
 export class AppComponent {
   color: ThemePalette = 'primary';
   loading = true;
+  disabled = false;
 }
