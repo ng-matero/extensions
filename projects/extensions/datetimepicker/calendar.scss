@@ -199,6 +199,8 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 }
 
 .mtx-calendar-content {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   padding: $calendar-padding;
   outline: none;
@@ -215,6 +217,10 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   .mat-icon-button:hover .mat-button-focus-overlay {
     opacity: .04;
   }
+}
+
+.mtx-calendar-actions {
+  margin-top: auto;
 }
 
 .mtx-calendar-period-button {

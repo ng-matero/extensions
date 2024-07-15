@@ -15,6 +15,14 @@ import {
   MtxDatetimepickerType,
 } from '@ng-matero/extensions/datetimepicker';
 import { CustomHeader } from './custom-header.component';
+import {
+  MtxDateTimePickerActions,
+  MtxDatepickerApply,
+  MtxDatepickerCancel,
+  MtxDatepickerClear,
+} from '@ng-matero/extensions/datetimepicker/datetimepicker-actions';
+import { MatButton } from '@angular/material/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'datetimepicker-example',
@@ -32,10 +40,16 @@ import { CustomHeader } from './custom-header.component';
     MatFormField,
     MatLabel,
     MatInput,
+    MatButton,
     MatSuffix,
     MtxDatetimepicker,
     MtxDatetimepickerInput,
     MtxDatetimepickerToggle,
+    MtxDateTimePickerActions,
+    MtxDatepickerApply,
+    MtxDatepickerCancel,
+    MtxDatepickerClear,
+    CommonModule,
   ],
   providers: [
     provideMomentDatetimeAdapter({
@@ -70,6 +84,7 @@ export class AppComponent {
   timeInterval = 1;
   timeInput = true;
   customHeader!: any;
+  actionButtons = false;
 
   datetime = new UntypedFormControl();
 

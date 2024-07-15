@@ -25,6 +25,12 @@ import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
 import { Subscription } from 'rxjs';
 import { CustomHeader } from './custom-header.component';
+import {
+  MtxDateTimePickerActions,
+  MtxDatepickerApply,
+  MtxDatepickerCancel,
+  MtxDatepickerClear,
+} from '@ng-matero/extensions/datetimepicker/datetimepicker-actions';
 
 const moment = _rollupMoment || _moment;
 
@@ -49,6 +55,10 @@ const moment = _rollupMoment || _moment;
     MtxDatetimepicker,
     MtxDatetimepickerInput,
     MtxCalendar,
+    MtxDateTimePickerActions,
+    MtxDatepickerClear,
+    MtxDatepickerCancel,
+    MtxDatepickerApply,
   ],
   providers: [
     provideMomentDatetimeAdapter(
@@ -132,6 +142,7 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
       mintest: [this.today, Validators.required],
       filtertest: [this.today, Validators.required],
       touch: [null, Validators.required],
+      dateTimeButtons: [null, Validators.required],
     });
   }
 

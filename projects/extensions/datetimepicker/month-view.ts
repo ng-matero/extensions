@@ -44,6 +44,9 @@ export class MtxMonthView<D> implements AfterContentInit {
   /** Emits when a new date is selected. */
   @Output() selectedChange = new EventEmitter<D>();
 
+  /** Input for provided action buttons */
+  @Input() actionButtons: boolean = false;
+
   /** Emits when any date is selected. */
   @Output() readonly _userSelection = new EventEmitter<void>();
 
@@ -136,16 +139,17 @@ export class MtxMonthView<D> implements AfterContentInit {
 
   /** Handles when a new date is selected. */
   _dateSelected(date: number) {
-    this.selectedChange.emit(
-      this._adapter.createDatetime(
-        this._adapter.getYear(this.activeDate),
-        this._adapter.getMonth(this.activeDate),
-        date,
-        this._adapter.getHour(this.activeDate),
-        this._adapter.getMinute(this.activeDate)
-      )
+    const dateObject = this._adapter.createDatetime(
+      this._adapter.getYear(this.activeDate),
+      this._adapter.getMonth(this.activeDate),
+      date,
+      this._adapter.getHour(this.activeDate),
+      this._adapter.getMinute(this.activeDate)
     );
-    if (this.type === 'date') {
+    this.selectedChange.emit(dateObject);
+    this._activeDate = dateObject;
+
+    if (this.type === 'date' && this.actionButtons === false) {
       this._userSelection.emit();
     }
   }

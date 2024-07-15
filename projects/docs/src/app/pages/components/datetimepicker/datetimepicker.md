@@ -51,6 +51,7 @@ Exported as: `mtxCalendar`
 | `@Input()`<br>`type: MtxDatetimepickerType` | The type of datetimepicker. Default is **`'date'`**. |
 | `@Input()`<br>`multiYearSelector: boolean` | Whether to show multi-year view. Default is **`false`**. |
 | `@Input()`<br>`headerComponent: ComponentType<any>` | Component for a custom header |
+| `@Input()`<br>`actionsPortal: TemplatePortal` | Input for providing action buttons. Default is **`null`**. |
 | `@Input()`<br>`twelvehour: boolean` | Whether the clock uses 12 hour format. Default is **`false`**. |
 | `@Input()`<br>`timeInterval: number` | Step over minutes. Default is **`1`**. |
 | `@Input()`<br>`maxDate: D \| null` | The maximum selectable date. |
@@ -77,6 +78,7 @@ Exported as: `mtxDatetimepicker`
 | `@Input()`<br>`disabled: boolean` | Whether the datetimepicker pop-up should be disabled. |
 | `@Input()`<br>`opened: boolean` | Whether the calendar is open. |
 | `@Input()`<br>`panelClass: string \| string[]` | Classes to be passed to the date picker panel. |
+| `@Input()`<br>`_actionsPortal: TemplatePortal` |  Portal with projected action buttons. Default is **`null`**. |
 | `@Input()`<br>`restoreFocus: boolean` | Whether to restore focus to the previously-focused element when the calendar is closed. Note that automatic focus restoration is an accessibility feature and it is recommended that you provide your own equivalent, if you decide to turn it off. |
 | `@Input()`<br>`touchUi: boolean` | Whether the calendar UI is in touch mode. In touch mode the calendar opens in a dialog rather than a dropdown and elements have more padding to allow for bigger touch targets. |
 | `@Input()`<br>`xPosition: DatetimepickerDropdownPositionX`| Preferred position of the datetimepicker in the X axis. |

@@ -256,6 +256,9 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   /** Step over minutes. */
   @Input() interval: number = 1;
 
+  /** Input for provided action buttons */
+  @Input() actionButtons: boolean = false;
+
   @ViewChild('hourInput', { read: ElementRef<HTMLInputElement> })
   protected hourInputElement: ElementRef<HTMLInputElement> | undefined;
 
@@ -500,15 +503,13 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
     this.activeDateChange.emit(date);
   }
 
-  handleOk() {
+  handleSelection() {
     if (this._selected) {
       this.selectedChange.emit(this._selected);
     }
-    this._userSelection.emit();
-  }
-
-  handleCancel() {
-    this._userSelection.emit();
+    if (!this.actionButtons) {
+      this._userSelection.emit();
+    }
   }
 
   ngOnDestroy(): void {
