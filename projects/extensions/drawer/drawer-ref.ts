@@ -23,6 +23,9 @@ export class MtxDrawerRef<T = any, R = any> {
   /** Whether the user is allowed to close the drawer. */
   disableClose: boolean | undefined;
 
+  /** Unique ID for the drawer. */
+  id: string;
+
   /** Subject for notifying the user that the drawer has been dismissed. */
   private readonly _afterDismissed = new Subject<R | undefined>();
 
@@ -33,7 +36,7 @@ export class MtxDrawerRef<T = any, R = any> {
   private _result: R | undefined;
 
   /** Handle to the timeout that's running as a fallback in case the exit animation doesn't fire. */
-  private _closeFallbackTimeout!: any;
+  private _closeFallbackTimeout: any;
 
   constructor(
     private _ref: DialogRef<R, T>,
@@ -42,6 +45,7 @@ export class MtxDrawerRef<T = any, R = any> {
   ) {
     this.containerInstance = containerInstance;
     this.disableClose = config.disableClose;
+    this.id = _ref.id;
 
     // Emit when opening animation completes
     containerInstance._animationStateChanged
@@ -88,7 +92,7 @@ export class MtxDrawerRef<T = any, R = any> {
    * @param result Data to be passed back to the drawer opener.
    */
   dismiss(result?: R): void {
-    if (!this._afterDismissed.closed) {
+    if (this.containerInstance && !this._afterDismissed.closed) {
       // Transition the backdrop in parallel to the drawer.
       this.containerInstance._animationStateChanged
         .pipe(

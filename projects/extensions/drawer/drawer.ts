@@ -12,6 +12,8 @@ import {
   SkipSelf,
   TemplateRef,
 } from '@angular/core';
+import { defer, Observable, Subject } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { MtxDrawerConfig } from './drawer-config';
 import { MtxDrawerContainer } from './drawer-container';
 import { MtxDrawerRef } from './drawer-ref';
@@ -24,27 +26,43 @@ export const MTX_DRAWER_DEFAULT_OPTIONS = new InjectionToken<MtxDrawerConfig>(
   'mtx-drawer-default-options'
 );
 
+// Counter for unique drawer ids.
+let uniqueId = 0;
+
 /**
  * Service to trigger Material Design bottom sheets.
  */
 @Injectable({ providedIn: 'root' })
 export class MtxDrawer implements OnDestroy {
-  private _drawerRefAtThisLevel: MtxDrawerRef<any> | null = null;
+  private readonly _openDrawersAtThisLevel: MtxDrawerRef<any>[] = [];
+  private readonly _afterAllDismissedAtThisLevel = new Subject<void>();
+  private readonly _afterOpenedAtThisLevel = new Subject<MtxDrawerRef<any>>();
   private _dialog: Dialog;
 
-  /** Reference to the currently opened drawer. */
-  get _openedDrawerRef(): MtxDrawerRef<any> | null {
-    const parent = this._parentDrawer;
-    return parent ? parent._openedDrawerRef : this._drawerRefAtThisLevel;
+  /** Keeps track of the currently-open dialogs. */
+  get openDrawers(): MtxDrawerRef<any>[] {
+    return this._parentDrawer ? this._parentDrawer.openDrawers : this._openDrawersAtThisLevel;
   }
 
-  set _openedDrawerRef(value: MtxDrawerRef<any> | null) {
-    if (this._parentDrawer) {
-      this._parentDrawer._openedDrawerRef = value;
-    } else {
-      this._drawerRefAtThisLevel = value;
-    }
+  /** Stream that emits when a drawer has been opened. */
+  get afterOpened(): Subject<MtxDrawerRef<any>> {
+    return this._parentDrawer ? this._parentDrawer.afterOpened : this._afterOpenedAtThisLevel;
   }
+
+  private _getAfterAllDismissed(): Subject<void> {
+    const parent = this._parentDrawer;
+    return parent ? parent._getAfterAllDismissed() : this._afterAllDismissedAtThisLevel;
+  }
+
+  /**
+   * Stream that emits when all open drawer have finished closing.
+   * Will emit on subscribe if there are no open drawers to begin with.
+   */
+  readonly afterAllDismissed: Observable<void> = defer(() =>
+    this.openDrawers.length
+      ? this._getAfterAllDismissed()
+      : this._getAfterAllDismissed().pipe(startWith(undefined))
+  ) as Observable<any>;
 
   constructor(
     private _overlay: Overlay,
@@ -83,9 +101,10 @@ export class MtxDrawer implements OnDestroy {
     componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
     config?: MtxDrawerConfig<D>
   ): MtxDrawerRef<T, R> {
-    let ref!: MtxDrawerRef<T, R>;
+    let drawerRef!: MtxDrawerRef<T, R>;
 
     const _config = { ...(this._defaultOptions || new MtxDrawerConfig()), ...config };
+    _config.id = _config.id || `mtx-drawer-${uniqueId++}`;
 
     _config.width =
       _config.position === 'left' || _config.position === 'right'
@@ -115,52 +134,62 @@ export class MtxDrawer implements OnDestroy {
       },
       scrollStrategy: _config.scrollStrategy || this._overlay.scrollStrategies.block(),
       positionStrategy: this._overlay.position().global()[_config.position!]('0'),
-      templateContext: () => ({ drawerRef: ref }),
+      templateContext: () => ({ drawerRef }),
       providers: (cdkRef, _cdkConfig, container) => {
-        ref = new MtxDrawerRef(cdkRef, _config, container as MtxDrawerContainer);
+        drawerRef = new MtxDrawerRef(cdkRef, _config, container as MtxDrawerContainer);
         return [
-          { provide: MtxDrawerRef, useValue: ref },
+          { provide: MtxDrawerRef, useValue: drawerRef },
           { provide: MTX_DRAWER_DATA, useValue: _config.data },
         ];
       },
     });
 
-    // When the drawer is dismissed, clear the reference to it.
-    ref.afterDismissed().subscribe(() => {
-      // Clear the drawer ref if it hasn't already been replaced by a newer one.
-      if (this._openedDrawerRef == ref) {
-        this._openedDrawerRef = null;
+    this.openDrawers.push(drawerRef);
+    this.afterOpened.next(drawerRef);
+
+    drawerRef.afterDismissed().subscribe(() => {
+      const index = this.openDrawers.indexOf(drawerRef);
+
+      if (index > -1) {
+        this.openDrawers.splice(index, 1);
+
+        if (!this.openDrawers.length) {
+          this._getAfterAllDismissed().next();
+        }
       }
     });
 
-    if (this._openedDrawerRef) {
-      // If a drawer is already in view, dismiss it and enter the
-      // new drawer after exit animation is complete.
-      this._openedDrawerRef.afterDismissed().subscribe(() => ref.containerInstance.enter());
-      this._openedDrawerRef.dismiss();
-    } else {
-      // If no drawer is in view, enter the new drawer.
-      ref.containerInstance.enter();
-    }
-
-    this._openedDrawerRef = ref;
-
-    return ref;
+    return drawerRef;
   }
 
   /**
-   * Dismisses the currently-visible drawer.
-   * @param result Data to pass to the drawer instance.
+   * Dismisses all of the currently-open drawers.
    */
-  dismiss<R = any>(result?: R): void {
-    if (this._openedDrawerRef) {
-      this._openedDrawerRef.dismiss(result);
-    }
+  dismissAll(): void {
+    this._dismissDrawers(this.openDrawers);
+  }
+
+  /**
+   * Finds an open drawer by its id.
+   * @param id ID to use when looking up the drawer.
+   */
+  getDrawerById(id: string): MtxDrawerRef<any> | undefined {
+    return this.openDrawers.find(drawer => drawer.id === id);
   }
 
   ngOnDestroy() {
-    if (this._drawerRefAtThisLevel) {
-      this._drawerRefAtThisLevel.dismiss();
+    // Only dismiss the drawers at this level on destroy
+    // since the parent service may still be active.
+    this._dismissDrawers(this._openDrawersAtThisLevel);
+    this._afterAllDismissedAtThisLevel.complete();
+    this._afterOpenedAtThisLevel.complete();
+  }
+
+  private _dismissDrawers(drawers: MtxDrawerRef<any>[]) {
+    let i = drawers.length;
+
+    while (i--) {
+      drawers[i].dismiss();
     }
   }
 }

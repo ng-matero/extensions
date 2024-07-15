@@ -1,7 +1,6 @@
 import { AnimationEvent } from '@angular/animations';
 import { FocusMonitor, FocusTrapFactory, InteractivityChecker } from '@angular/cdk/a11y';
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { OverlayRef } from '@angular/cdk/overlay';
 import { CdkPortalOutlet } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
@@ -17,7 +16,6 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { mtxDrawerAnimations } from './drawer-animation';
 import { MtxDrawerConfig } from './drawer-config';
 
@@ -39,6 +37,7 @@ import { MtxDrawerConfig } from './drawer-config';
     'class': 'mtx-drawer-container',
     '[class]': '_drawerPosition',
     'tabindex': '-1',
+    '[id]': '_config.id',
     '[attr.role]': '_config.role',
     '[attr.aria-modal]': '_config.isModal',
     '[attr.aria-label]': '_config.ariaLabel',
@@ -50,8 +49,6 @@ import { MtxDrawerConfig } from './drawer-config';
   imports: [CdkPortalOutlet],
 })
 export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> implements OnDestroy {
-  private _breakpointSubscription: Subscription;
-
   /** The portal outlet inside of this container into which the content will be loaded. */
   @ViewChild(CdkPortalOutlet, { static: true }) _portalOutlet!: CdkPortalOutlet;
 
@@ -62,7 +59,7 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
   _animationStateChanged = new EventEmitter<AnimationEvent>();
 
   /** Whether the component has been destroyed. */
-  private _destroyed!: boolean;
+  private _destroyed = false;
 
   get _drawerPosition() {
     return `mtx-drawer-${this._config.position}`;
@@ -76,7 +73,6 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
     checker: InteractivityChecker,
     ngZone: NgZone,
     overlayRef: OverlayRef,
-    breakpointObserver: BreakpointObserver,
     focusMonitor?: FocusMonitor
   ) {
     super(
@@ -89,10 +85,14 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
       overlayRef,
       focusMonitor
     );
+  }
 
-    this._breakpointSubscription = breakpointObserver
-      .observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
-      .subscribe(() => {});
+  protected override _contentAttached(): void {
+    // Delegate to the original dialog-container initialization (i.e. saving the
+    // previous element, setting up the focus trap and moving focus to the container).
+    super._contentAttached();
+
+    this.enter();
   }
 
   /** Begin animation of bottom sheet entrance into view. */
@@ -114,7 +114,7 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
 
   override ngOnDestroy() {
     super.ngOnDestroy();
-    this._breakpointSubscription.unsubscribe();
+
     this._destroyed = true;
   }
 

@@ -15,6 +15,9 @@ export class MtxDrawerConfig<D = any> {
   /** The view container to place the overlay for the drawer into. */
   viewContainerRef?: ViewContainerRef;
 
+  /** ID for the drawer. If omitted, a unique one will be generated. */
+  id?: string;
+
   /** Extra CSS classes to be added to the drawer container. */
   panelClass?: string | string[];
 
