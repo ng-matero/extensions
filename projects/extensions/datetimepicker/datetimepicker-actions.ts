@@ -71,7 +71,7 @@ export class MtxDatetimepickerClear<D> {
   encapsulation: ViewEncapsulation.None,
   standalone: true,
 })
-export class MtxDateTimePickerActions<D> implements AfterViewInit, OnDestroy {
+export class MtxDatetimePickerActions<D> implements AfterViewInit, OnDestroy {
   @ViewChild(TemplateRef) _template!: TemplateRef<unknown>;
   private _portal!: TemplatePortal;
   constructor(

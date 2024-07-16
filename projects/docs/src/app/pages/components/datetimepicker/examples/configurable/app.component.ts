@@ -13,14 +13,7 @@ import {
   MtxDatetimepickerType,
 } from '@ng-matero/extensions/datetimepicker';
 import { CustomHeader } from './custom-header.component';
-import {
-  MtxDateTimePickerActions,
-  MtxDatetimepickerApply,
-  MtxDatetimepickerCancel,
-  MtxDatetimepickerClear,
-} from '@ng-matero/extensions/datetimepicker/datetimepicker-actions';
-import { MatButton, MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'datetimepicker-example',

@@ -20,7 +20,7 @@ import { MtxMultiYearView } from './multi-year-view';
 import { MtxTime, MtxTimeInput } from './time';
 import { MtxYearView } from './year-view';
 import {
-  MtxDateTimePickerActions,
+  MtxDatetimePickerActions,
   MtxDatetimepickerApply,
   MtxDatetimepickerCancel,
   MtxDatetimepickerClear,
@@ -49,7 +49,7 @@ import {
     MtxDatetimepickerApply,
     MtxDatetimepickerCancel,
     MtxDatetimepickerClear,
-    MtxDateTimePickerActions,
+    MtxDatetimePickerActions,
   ],
   exports: [
     MtxCalendar,
@@ -67,7 +67,7 @@ import {
     MtxDatetimepickerApply,
     MtxDatetimepickerCancel,
     MtxDatetimepickerClear,
-    MtxDateTimePickerActions,
+    MtxDatetimePickerActions,
   ],
   providers: [MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER],
 })
