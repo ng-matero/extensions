@@ -20,8 +20,10 @@
                 [twelvehour]="datetimepicker.twelvehour"
                 [selected]="datetimepicker._selected"
                 [timeInput]="datetimepicker.timeInput"
+                [actionsPortal]="_actionsPortal"
                 (selectedChange)="datetimepicker._select($event)"
                 (viewChanged)="datetimepicker._viewChanged($event)"
+                (viewChanged)="_viewChanged($event)"
                 (_userSelection)="datetimepicker.close()"
                 [@fadeInCalendar]="'enter'">
   </mtx-calendar>

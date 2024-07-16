@@ -46,6 +46,7 @@
 
 <mtx-clock (selectedChange)="_timeSelected($event)"
   (activeDateChange)="_onActiveDateChange($event)"
+  (_userSelection)="handleSelection()"
   [AMPM]="AMPM"
   [dateFilter]="dateFilter"
   [interval]="interval"
@@ -56,12 +57,14 @@
   [twelvehour]="twelvehour">
 </mtx-clock>
 
-<div class="mtx-time-button-wrapper">
-  <button class="mtx-time-cancel-button" mat-button type="button" (click)="handleCancel()">
-    {{ _datetimepickerIntl.cancelLabel }}
-  </button>
-  <button class="mtx-time-ok-button" mat-button type="button" (click)="handleOk()"
-    [disabled]="minuteInputDirective?.invalid || hourInputDirective?.invalid">
-    {{ _datetimepickerIntl.okLabel }}
-  </button>
-</div>
+@if (!actionButtons) {
+  <div class="mtx-time-button-wrapper">
+    <button class="mtx-time-cancel-button" mat-button type="button" (click)="handleCancel()">
+      {{ _datetimepickerIntl.cancelLabel }}
+    </button>
+    <button class="mtx-time-ok-button" mat-button type="button" (click)="handleOk()"
+      [disabled]="minuteInputDirective?.invalid || hourInputDirective?.invalid">
+      {{ _datetimepickerIntl.okLabel }}
+    </button>
+  </div>
+}

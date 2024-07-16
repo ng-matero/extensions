@@ -188,6 +188,24 @@
     }
   </mat-form-field>
 
+  <mat-form-field [color]="themeColor">
+    <mat-label>Action Buttons</mat-label>
+    <mtx-datetimepicker #datetimePickerButtons type="date">
+      <mtx-calendar-actions>
+        <button mat-button mtxDatetimepickerClear>Clear</button>
+        <button mat-button mtxDatetimepickerCancel>Cancel</button>
+        <button mat-raised-button mtxDatetimepickerApply>Apply</button>
+      </mtx-calendar-actions>
+    </mtx-datetimepicker>
+    <input [mtxDatetimepicker]="datetimePickerButtons"
+    autocomplete="false" formControlName="dateTimeButtons" matInput required>
+    @if (group.get('dateTimeButtons')?.errors?.required) {
+      <mat-error>required</mat-error>
+    }
+    <mtx-datetimepicker-toggle [for]="datetimePickerButtons" matSuffix></mtx-datetimepicker-toggle>
+  </mat-form-field>
+
+
   <button mat-button>Submit</button>
 </form>
 

@@ -9,8 +9,13 @@ import {
   ScrollStrategy,
 } from '@angular/cdk/overlay';
 import { _getFocusedElementPierceShadowDom } from '@angular/cdk/platform';
-import { CdkPortalOutlet, ComponentPortal, ComponentType } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
+import {
+  CdkPortalOutlet,
+  ComponentPortal,
+  ComponentType,
+  TemplatePortal,
+} from '@angular/cdk/portal';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   afterNextRender,
@@ -105,7 +110,7 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MtxCalendar, CdkPortalOutlet],
+  imports: [MtxCalendar, CdkPortalOutlet, CommonModule],
 })
 export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
@@ -126,7 +131,20 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, On
   /** Id of the label for the `role="dialog"` element. */
   _dialogLabelId: string | null = null;
 
+  /** Portal with projected action buttons. */
+  _actionsPortal: TemplatePortal | null = null;
+
+  /** The display type of datetimepicker. */
+  type: MtxDatetimepickerType = 'datetime';
+
+  /** The view of the calendar. */
+  view: MtxCalendarView = 'month';
+
   constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+
+  _viewChanged(view: MtxCalendarView): void {
+    this.view = view;
+  }
 
   ngOnInit() {
     this._animationState = this.datetimepicker.touchUi ? 'enter-dialog' : 'enter-dropdown';
@@ -143,6 +161,18 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, On
 
   ngOnDestroy() {
     this._animationDone.complete();
+  }
+
+  /**
+   * Assigns a new portal containing the datepicker actions.
+   * @param portal Portal with the actions to be assigned.
+   * @param forceRerender Whether a re-render of the portal should be triggered.
+   */
+  _assignActions(portal: TemplatePortal<any> | null, forceRerender: boolean) {
+    this._actionsPortal = portal;
+    if (forceRerender) {
+      this._changeDetectorRef.detectChanges();
+    }
   }
 }
 
@@ -255,6 +285,12 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   private _inputStateChanges = Subscription.EMPTY;
 
+  /** Portal with projected action buttons. */
+  _actionsPortal: TemplatePortal | null = null;
+
+  /** Previous selected value. */
+  oldValue: D | null = null;
+
   constructor(
     private _overlay: Overlay,
     private _viewContainerRef: ViewContainerRef,
@@ -354,8 +390,8 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     return this.datetimepickerInput && this.datetimepickerInput._dateFilter;
   }
 
-  _viewChanged(type: MtxCalendarView): void {
-    this.viewChanged.emit(type);
+  _viewChanged(view: MtxCalendarView): void {
+    this.viewChanged.emit(view);
   }
 
   ngOnDestroy() {
@@ -367,11 +403,31 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   /** Selects the given date */
   _select(date: D): void {
-    const oldValue = this._selected;
+    this.oldValue = this._selected;
     this._selected = date;
-    if (!this._dateAdapter.sameDatetime(oldValue, this._selected)) {
-      this.selectedChanged.emit(date);
+    if (!this._actionsPortal) {
+      if (!this._dateAdapter.sameDatetime(this.oldValue, this._selected)) {
+        this.selectedChanged.emit(date);
+      }
     }
+  }
+
+  _selectManually(): void {
+    if (this.type === 'time' && !this._selected) {
+      const today = this._dateAdapter.today();
+      this._selected = today;
+      this.selectedChanged.emit(today);
+    } else if (!this._dateAdapter.sameDatetime(this.oldValue, this._selected)) {
+      this.selectedChanged.emit((this._selected as D) || (this.oldValue as D));
+    }
+    this.close();
+  }
+
+  _clearSelected(): void {
+    this.oldValue = null;
+    this._selected = null;
+    this.selectedChanged.emit();
+    this.close();
   }
 
   /**
@@ -465,6 +521,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     instance.datetimepicker = this;
     instance.color = this.color;
     instance._dialogLabelId = this.datetimepickerInput.getOverlayLabelId();
+    instance.type = this.type;
+    instance.view = this.startView;
+    instance._assignActions(this._actionsPortal, false);
   }
 
   /** Opens the overlay with the calendar. */
@@ -605,5 +664,27 @@ export class MtxDatetimepicker<D> implements OnDestroy {
         })
       )
     );
+  }
+  /**
+   * Registers a portal containing action buttons with the datepicker.
+   * @param portal Portal to be registered.
+   */
+  registerActions(portal: TemplatePortal): void {
+    if (this._actionsPortal) {
+      throw Error('A MtxDatetimepicker can only be associated with a single actions row.');
+    }
+    this._actionsPortal = portal;
+    this._componentRef?.instance._assignActions(portal, true);
+  }
+
+  /**
+   * Removes a portal containing action buttons from the datepicker.
+   * @param portal Portal to be removed.
+   */
+  removeActions(portal: TemplatePortal): void {
+    if (portal === this._actionsPortal) {
+      this._actionsPortal = null;
+      this._componentRef?.instance._assignActions(null, true);
+    }
   }
 }

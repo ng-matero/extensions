@@ -13,6 +13,7 @@ import {
   MtxDatetimepickerType,
 } from '@ng-matero/extensions/datetimepicker';
 import { CustomHeader } from './custom-header.component';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'datetimepicker-example',
@@ -26,6 +27,7 @@ import { CustomHeader } from './custom-header.component';
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
     MtxDatetimepickerModule,
   ],
   providers: [
@@ -61,6 +63,7 @@ export class AppComponent {
   timeInterval = 1;
   timeInput = true;
   customHeader!: any;
+  actionButtons = false;
 
   datetime = '';
 

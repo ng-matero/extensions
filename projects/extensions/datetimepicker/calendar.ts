@@ -9,7 +9,13 @@ import {
   RIGHT_ARROW,
   UP_ARROW,
 } from '@angular/cdk/keycodes';
-import { CdkPortalOutlet, ComponentPortal, ComponentType, Portal } from '@angular/cdk/portal';
+import {
+  CdkPortalOutlet,
+  ComponentPortal,
+  ComponentType,
+  Portal,
+  TemplatePortal,
+} from '@angular/cdk/portal';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
@@ -36,8 +42,6 @@ import {
   MtxDatetimeFormats,
 } from '@ng-matero/extensions/core';
 import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
-
 import { MtxClock, MtxClockView } from './clock';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
@@ -106,6 +110,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   /** Input for custom header component */
   @Input() headerComponent!: ComponentType<any>;
+
+  /** Input for action buttons. */
+  @Input() actionsPortal: TemplatePortal | null = null;
 
   /** Emits when the currently selected date changes. */
   @Output() selectedChange: EventEmitter<D> = new EventEmitter<D>();
@@ -385,6 +392,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     } else {
       this._activeDate = date;
       this.currentView = 'clock';
+      if (this.actionsPortal) {
+        this.selectedChange.emit(date);
+      }
     }
   }
 
