@@ -1,20 +1,19 @@
-import { Directionality } from '@angular/cdk/bidi';
-import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal, ComponentType, TemplatePortal } from '@angular/cdk/portal';
+import { coerceCssPixelValue } from '@angular/cdk/coercion';
+import { Dialog, DialogConfig } from '@angular/cdk/dialog';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentType } from '@angular/cdk/portal';
 import {
-  ComponentRef,
+  Inject,
   Injectable,
+  InjectionToken,
   Injector,
+  OnDestroy,
   Optional,
   SkipSelf,
   TemplateRef,
-  InjectionToken,
-  Inject,
-  OnDestroy,
-  StaticProvider,
-  InjectFlags,
 } from '@angular/core';
-import { of as observableOf } from 'rxjs';
+import { defer, Observable, Subject } from 'rxjs';
+import { startWith } from 'rxjs/operators';
 import { MtxDrawerConfig } from './drawer-config';
 import { MtxDrawerContainer } from './drawer-container';
 import { MtxDrawerRef } from './drawer-ref';
@@ -27,35 +26,54 @@ export const MTX_DRAWER_DEFAULT_OPTIONS = new InjectionToken<MtxDrawerConfig>(
   'mtx-drawer-default-options'
 );
 
+// Counter for unique drawer ids.
+let uniqueId = 0;
+
 /**
  * Service to trigger Material Design bottom sheets.
  */
 @Injectable({ providedIn: 'root' })
 export class MtxDrawer implements OnDestroy {
-  private _drawerRefAtThisLevel: MtxDrawerRef<any> | null = null;
+  private readonly _openDrawersAtThisLevel: MtxDrawerRef<any>[] = [];
+  private readonly _afterAllDismissedAtThisLevel = new Subject<void>();
+  private readonly _afterOpenedAtThisLevel = new Subject<MtxDrawerRef<any>>();
+  private _dialog: Dialog;
 
-  /** Reference to the currently opened drawer. */
-  get _openedDrawerRef(): MtxDrawerRef<any> | null {
+  /** Keeps track of the currently-open dialogs. */
+  get openDrawers(): MtxDrawerRef<any>[] {
+    return this._parentDrawer ? this._parentDrawer.openDrawers : this._openDrawersAtThisLevel;
+  }
+
+  /** Stream that emits when a drawer has been opened. */
+  get afterOpened(): Subject<MtxDrawerRef<any>> {
+    return this._parentDrawer ? this._parentDrawer.afterOpened : this._afterOpenedAtThisLevel;
+  }
+
+  private _getAfterAllDismissed(): Subject<void> {
     const parent = this._parentDrawer;
-    return parent ? parent._openedDrawerRef : this._drawerRefAtThisLevel;
+    return parent ? parent._getAfterAllDismissed() : this._afterAllDismissedAtThisLevel;
   }
 
-  set _openedDrawerRef(value: MtxDrawerRef<any> | null) {
-    if (this._parentDrawer) {
-      this._parentDrawer._openedDrawerRef = value;
-    } else {
-      this._drawerRefAtThisLevel = value;
-    }
-  }
+  /**
+   * Stream that emits when all open drawer have finished closing.
+   * Will emit on subscribe if there are no open drawers to begin with.
+   */
+  readonly afterAllDismissed: Observable<void> = defer(() =>
+    this.openDrawers.length
+      ? this._getAfterAllDismissed()
+      : this._getAfterAllDismissed().pipe(startWith(undefined))
+  ) as Observable<any>;
 
   constructor(
     private _overlay: Overlay,
-    private _injector: Injector,
+    injector: Injector,
     @Optional() @SkipSelf() private _parentDrawer: MtxDrawer,
     @Optional()
     @Inject(MTX_DRAWER_DEFAULT_OPTIONS)
     private _defaultOptions?: MtxDrawerConfig
-  ) {}
+  ) {
+    this._dialog = injector.get(Dialog);
+  }
 
   /**
    * Opens a drawer containing the given component.
@@ -83,143 +101,95 @@ export class MtxDrawer implements OnDestroy {
     componentOrTemplateRef: ComponentType<T> | TemplateRef<T>,
     config?: MtxDrawerConfig<D>
   ): MtxDrawerRef<T, R> {
-    const _config = _applyConfigDefaults(this._defaultOptions || new MtxDrawerConfig(), config);
-    const overlayRef = this._createOverlay(_config);
-    const container = this._attachContainer(overlayRef, _config);
-    const ref = new MtxDrawerRef<T, R>(container, overlayRef);
+    let drawerRef!: MtxDrawerRef<T, R>;
 
-    if (componentOrTemplateRef instanceof TemplateRef) {
-      container.attachTemplatePortal(
-        new TemplatePortal<T>(componentOrTemplateRef, null!, {
-          $implicit: _config.data,
-          drawerRef: ref,
-        } as any)
-      );
-    } else {
-      const portal = new ComponentPortal(
-        componentOrTemplateRef,
-        undefined,
-        this._createInjector(_config, ref)
-      );
-      const contentRef = container.attachComponentPortal(portal);
-      ref.instance = contentRef.instance;
-    }
+    const _config = { ...(this._defaultOptions || new MtxDrawerConfig()), ...config };
+    _config.id = _config.id || `mtx-drawer-${uniqueId++}`;
 
-    // When the drawer is dismissed, clear the reference to it.
-    ref.afterDismissed().subscribe(() => {
-      // Clear the drawer ref if it hasn't already been replaced by a newer one.
-      if (this._openedDrawerRef == ref) {
-        this._openedDrawerRef = null;
+    _config.width =
+      _config.position === 'left' || _config.position === 'right'
+        ? coerceCssPixelValue(_config.width)
+        : '100vw';
+
+    _config.height =
+      _config.position === 'top' || _config.position === 'bottom'
+        ? coerceCssPixelValue(_config.height)
+        : '100vh';
+
+    this._dialog.open<R, D, T>(componentOrTemplateRef, {
+      ..._config,
+      // Disable closing since we need to sync it up to the animation ourselves.
+      disableClose: true,
+      // Disable closing on detachments so that we can sync up the animation.
+      closeOnOverlayDetachments: false,
+      container: {
+        type: MtxDrawerContainer,
+        providers: () => [
+          // Provide our config as the CDK config as well since it has the same interface as the
+          // CDK one, but it contains the actual values passed in by the user for things like
+          // `disableClose` which we disable for the CDK dialog since we handle it ourselves.
+          { provide: MtxDrawerConfig, useValue: _config },
+          { provide: DialogConfig, useValue: _config },
+        ],
+      },
+      scrollStrategy: _config.scrollStrategy || this._overlay.scrollStrategies.block(),
+      positionStrategy: this._overlay.position().global()[_config.position!]('0'),
+      templateContext: () => ({ drawerRef }),
+      providers: (cdkRef, _cdkConfig, container) => {
+        drawerRef = new MtxDrawerRef(cdkRef, _config, container as MtxDrawerContainer);
+        return [
+          { provide: MtxDrawerRef, useValue: drawerRef },
+          { provide: MTX_DRAWER_DATA, useValue: _config.data },
+        ];
+      },
+    });
+
+    this.openDrawers.push(drawerRef);
+    this.afterOpened.next(drawerRef);
+
+    drawerRef.afterDismissed().subscribe(() => {
+      const index = this.openDrawers.indexOf(drawerRef);
+
+      if (index > -1) {
+        this.openDrawers.splice(index, 1);
+
+        if (!this.openDrawers.length) {
+          this._getAfterAllDismissed().next();
+        }
       }
     });
 
-    if (this._openedDrawerRef) {
-      // If a drawer is already in view, dismiss it and enter the
-      // new drawer after exit animation is complete.
-      this._openedDrawerRef.afterDismissed().subscribe(() => ref.containerInstance.enter());
-      this._openedDrawerRef.dismiss();
-    } else {
-      // If no drawer is in view, enter the new drawer.
-      ref.containerInstance.enter();
-    }
-
-    this._openedDrawerRef = ref;
-
-    return ref;
+    return drawerRef;
   }
 
   /**
-   * Dismisses the currently-visible drawer.
-   * @param result Data to pass to the drawer instance.
+   * Dismisses all of the currently-open drawers.
    */
-  dismiss<R = any>(result?: R): void {
-    if (this._openedDrawerRef) {
-      this._openedDrawerRef.dismiss(result);
-    }
+  dismissAll(): void {
+    this._dismissDrawers(this.openDrawers);
+  }
+
+  /**
+   * Finds an open drawer by its id.
+   * @param id ID to use when looking up the drawer.
+   */
+  getDrawerById(id: string): MtxDrawerRef<any> | undefined {
+    return this.openDrawers.find(drawer => drawer.id === id);
   }
 
   ngOnDestroy() {
-    if (this._drawerRefAtThisLevel) {
-      this._drawerRefAtThisLevel.dismiss();
+    // Only dismiss the drawers at this level on destroy
+    // since the parent service may still be active.
+    this._dismissDrawers(this._openDrawersAtThisLevel);
+    this._afterAllDismissedAtThisLevel.complete();
+    this._afterOpenedAtThisLevel.complete();
+  }
+
+  private _dismissDrawers(drawers: MtxDrawerRef<any>[]) {
+    let i = drawers.length;
+
+    while (i--) {
+      drawers[i].dismiss();
     }
   }
-
-  /**
-   * Attaches the drawer container component to the overlay.
-   */
-  private _attachContainer(overlayRef: OverlayRef, config: MtxDrawerConfig): MtxDrawerContainer {
-    const userInjector = config && config.viewContainerRef && config.viewContainerRef.injector;
-    const injector = Injector.create({
-      parent: userInjector || this._injector,
-      providers: [{ provide: MtxDrawerConfig, useValue: config }],
-    });
-
-    const containerPortal = new ComponentPortal(
-      MtxDrawerContainer,
-      config.viewContainerRef,
-      injector
-    );
-    const containerRef: ComponentRef<MtxDrawerContainer> = overlayRef.attach(containerPortal);
-    return containerRef.instance;
-  }
-
-  /**
-   * Creates a new overlay and places it in the correct location.
-   * @param config The user-specified drawer config.
-   */
-  private _createOverlay(config: MtxDrawerConfig): OverlayRef {
-    const overlayConfig = new OverlayConfig({
-      direction: config.direction,
-      hasBackdrop: config.hasBackdrop,
-      disposeOnNavigation: config.closeOnNavigation,
-      maxWidth: '100%',
-      scrollStrategy: config.scrollStrategy || this._overlay.scrollStrategies.block(),
-      positionStrategy: this._overlay.position().global()[config.position!]('0'),
-    });
-
-    if (config.backdropClass) {
-      overlayConfig.backdropClass = config.backdropClass;
-    }
-
-    return this._overlay.create(overlayConfig);
-  }
-
-  /**
-   * Creates an injector to be used inside of a drawer component.
-   * @param config Config that was used to create the drawer.
-   * @param drawerRef Reference to the drawer.
-   */
-  private _createInjector<T>(config: MtxDrawerConfig, drawerRef: MtxDrawerRef<T>): Injector {
-    const userInjector = config && config.viewContainerRef && config.viewContainerRef.injector;
-    const providers: StaticProvider[] = [
-      { provide: MtxDrawerRef, useValue: drawerRef },
-      { provide: MTX_DRAWER_DATA, useValue: config.data },
-    ];
-
-    if (
-      config.direction &&
-      (!userInjector ||
-        !userInjector.get<Directionality | null>(Directionality, null, InjectFlags.Optional))
-    ) {
-      providers.push({
-        provide: Directionality,
-        useValue: { value: config.direction, change: observableOf() },
-      });
-    }
-
-    return Injector.create({ parent: userInjector || this._injector, providers });
-  }
-}
-
-/**
- * Applies default options to the drawer config.
- * @param defaults Object containing the default values to which to fall back.
- * @param config The configuration to which the defaults will be applied.
- * @returns The new configuration object with defaults applied.
- */
-function _applyConfigDefaults(
-  defaults: MtxDrawerConfig,
-  config?: MtxDrawerConfig
-): MtxDrawerConfig {
-  return { ...defaults, ...config };
 }

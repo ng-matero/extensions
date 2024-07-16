@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { MatTabLink, MatTabNav, MatTabNavPanel } from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 import {
   ActivatedRoute,
   NavigationEnd,
@@ -18,15 +18,7 @@ import { ComponentPageTitle } from '../page-title/page-title';
   styleUrl: './component-viewer.scss',
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [
-    MatTabNav,
-    NavigationFocus,
-    MatTabLink,
-    RouterLinkActive,
-    RouterLink,
-    MatTabNavPanel,
-    RouterOutlet,
-  ],
+  imports: [MatTabsModule, NavigationFocus, RouterLinkActive, RouterLink, RouterOutlet],
 })
 export class ComponentViewer implements OnDestroy {
   sections: Set<string> = new Set(['overview', 'api']);

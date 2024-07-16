@@ -18,6 +18,8 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
     @include token-utils.create-token-slot(border-radius, container-shape);
 
     .mat-mdc-table {
+      --mat-table-row-item-outline-color: #{var($border-color)};
+
       &.mat-table-striped .mat-row-odd {
         @include token-utils.create-token-slot(background-color, table-row-striped-background-color);
       }

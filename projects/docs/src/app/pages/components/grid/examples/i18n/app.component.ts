@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MtxGrid, MtxGridColumn, MtxGridColumnPinOption } from '@ng-matero/extensions/grid';
+import { MatRadioModule } from '@angular/material/radio';
+import { MtxGridColumn, MtxGridColumnPinOption, MtxGridModule } from '@ng-matero/extensions/grid';
 import { TranslateService } from '@ngx-translate/core';
 import { EXAMPLE_DATA } from '../../data';
 
@@ -10,7 +10,7 @@ import { EXAMPLE_DATA } from '../../data';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [FormsModule, MatRadioGroup, MatRadioButton, MtxGrid],
+  imports: [FormsModule, MatRadioModule, MtxGridModule],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

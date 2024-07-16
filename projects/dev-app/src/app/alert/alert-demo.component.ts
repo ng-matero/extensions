@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatSlider, MatSliderThumb } from '@angular/material/slider';
-import { MtxAlert, MtxAlertType } from '@ng-matero/extensions/alert';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+import { MtxAlertModule, MtxAlertType } from '@ng-matero/extensions/alert';
 
 @Component({
   selector: 'dev-alert-demo',
@@ -11,14 +11,12 @@ import { MtxAlert, MtxAlertType } from '@ng-matero/extensions/alert';
   styleUrl: 'alert-demo.component.scss',
   standalone: true,
   imports: [
-    MatRadioGroup,
     ReactiveFormsModule,
     FormsModule,
-    MatRadioButton,
-    MatCheckbox,
-    MatSlider,
-    MatSliderThumb,
-    MtxAlert,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSliderModule,
+    MtxAlertModule,
   ],
 })
 export class AlertDemoComponent {

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ThemePalette } from '@angular/material/core';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatSlider, MatSliderThumb } from '@angular/material/slider';
-import { MtxLoader, MtxLoaderType } from '@ng-matero/extensions/loader';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+import { MtxLoaderModule, MtxLoaderType } from '@ng-matero/extensions/loader';
 
 @Component({
   selector: 'dev-loader-demo',
@@ -12,14 +12,12 @@ import { MtxLoader, MtxLoaderType } from '@ng-matero/extensions/loader';
   styleUrl: 'loader-demo.component.scss',
   standalone: true,
   imports: [
-    MatCheckbox,
     ReactiveFormsModule,
     FormsModule,
-    MatRadioGroup,
-    MatRadioButton,
-    MatSlider,
-    MatSliderThumb,
-    MtxLoader,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatSliderModule,
+    MtxLoaderModule,
   ],
 })
 export class LoaderDemoComponent {

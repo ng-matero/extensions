@@ -1,16 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import {
-  MAT_DIALOG_DATA,
-  MatDialogActions,
-  MatDialogClose,
-  MatDialogContent,
-  MatDialogRef,
-  MatDialogTitle,
-} from '@angular/material/dialog';
-import { MatFormField } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -19,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './dialog-demo.component.html',
   styleUrl: './dialog-demo.component.scss',
   standalone: true,
-  imports: [MatButton],
+  imports: [MatButtonModule],
 })
 export class DialogDemoComponent implements OnInit {
   animal?: string;
@@ -110,17 +103,7 @@ export class DialogDemoComponent implements OnInit {
     </div>
   `,
   standalone: true,
-  imports: [
-    MatDialogTitle,
-    MatDialogContent,
-    MatFormField,
-    MatInput,
-    ReactiveFormsModule,
-    FormsModule,
-    MatDialogActions,
-    MatButton,
-    MatDialogClose,
-  ],
+  imports: [FormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class DialogOverviewComponent {
   constructor(

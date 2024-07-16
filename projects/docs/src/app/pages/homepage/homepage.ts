@@ -1,17 +1,17 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
-import { MatAnchor } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
 
+import { AppLogo } from '../../shared/logo/logo';
 import { NavigationFocus } from '../../shared/navigation-focus/navigation-focus';
 import { ComponentPageTitle } from '../page-title/page-title';
-import { AppLogo } from '../../shared/logo/logo';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.html',
   styleUrl: './homepage.scss',
   standalone: true,
-  imports: [NavigationFocus, MatAnchor, RouterLink, AppLogo],
+  imports: [NavigationFocus, MatButtonModule, RouterLink, AppLogo],
 })
 export class Homepage implements OnInit {
   @HostBinding('class.main-content') readonly mainContentClass = true;

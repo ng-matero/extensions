@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 
 @Component({
@@ -7,7 +7,7 @@ import { MtxDialog } from '@ng-matero/extensions/dialog';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MatButton],
+  imports: [MatButtonModule],
 })
 export class AppComponent {
   constructor(private mtxDialog: MtxDialog) {}

@@ -9,10 +9,10 @@ import {
   ViewContainerRef,
 } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatTab, MatTabGroup } from '@angular/material/tabs';
-import { MatTooltip } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { CopierService } from '../copier/copier.service';
 
 export interface ExampleType {
@@ -33,7 +33,7 @@ export interface ExampleType {
   templateUrl: './example-viewer.html',
   styleUrl: './example-viewer.scss',
   standalone: true,
-  imports: [MatIconButton, MatTooltip, MatIcon, MatTabGroup, MatTab],
+  imports: [MatIconButton, MatTooltipModule, MatIconModule, MatTabsModule],
 })
 export class ExampleViewer implements OnInit, OnDestroy {
   @Input() type!: string;

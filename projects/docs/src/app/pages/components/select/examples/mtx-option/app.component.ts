@@ -1,26 +1,16 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
-import { MtxOption, MtxSelect } from '@ng-matero/extensions/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
 
 @Component({
   selector: 'select-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [
-    FormsModule,
-    MatButton,
-    MatFormField,
-    MatLabel,
-    MatHint,
-    MatError,
-    JsonPipe,
-    MtxSelect,
-    MtxOption,
-  ],
+  imports: [FormsModule, MatButtonModule, MatFormFieldModule, JsonPipe, MtxSelectModule],
 })
 export class AppComponent {
   selectedCars = [3];

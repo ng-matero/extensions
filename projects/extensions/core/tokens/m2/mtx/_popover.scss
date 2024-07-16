@@ -10,6 +10,9 @@ $prefix: (mtx, popover);
 @function get-unthemable-tokens() {
   @return (
     container-shape: 4px,
+    // Note that this uses a value, rather than a computed box-shadow, because we use
+    // the value at runtime to determine which shadow to set based on the popover's depth.
+    base-elevation-level: 8,
   );
 }
 

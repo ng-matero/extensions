@@ -1,14 +1,15 @@
-import { Component, OnDestroy } from '@angular/core';
-import { MatAnchor, MatIconAnchor, MatIconButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
-import { MatTooltip } from '@angular/material/tooltip';
+import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component, inject, OnInit } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NgProgressComponent } from 'ngx-progressbar';
-import { Subscription } from 'rxjs';
+import { NgProgressModule } from 'ngx-progressbar';
+import { map } from 'rxjs';
+import { AppLogo } from '../logo/logo';
 import { NavigationFocusService } from '../navigation-focus/navigation-focus.service';
 import { AppThemes } from '../themes';
-import { AppLogo } from '../logo/logo';
-import { NgTemplateOutlet } from '@angular/common';
 
 @Component({
   selector: 'app-navbar',
@@ -16,24 +17,25 @@ import { NgTemplateOutlet } from '@angular/common';
   styleUrl: './navbar.scss',
   standalone: true,
   imports: [
-    NgProgressComponent,
-    MatAnchor,
+    NgProgressModule,
     RouterLink,
     RouterLinkActive,
-    MatIconButton,
-    MatTooltip,
-    MatIcon,
-    MatIconAnchor,
+    MatButtonModule,
+    MatTooltipModule,
+    MatIconModule,
     AppLogo,
     NgTemplateOutlet,
+    AsyncPipe,
   ],
 })
-export class Navbar implements OnDestroy {
-  private subscriptions = new Subscription();
+export class Navbar implements OnInit {
+  private readonly http = inject(HttpClient);
 
   dark = false;
   skipLinkHref: string | null | undefined;
   skipLinkHidden = true;
+
+  version$: any;
 
   constructor(
     private _appThemes: AppThemes,
@@ -47,7 +49,9 @@ export class Navbar implements OnDestroy {
     this._appThemes.value = this.dark ? 'docs-theme-dark' : 'docs-theme-light';
   }
 
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
+  ngOnInit(): void {
+    this.version$ = this.http
+      .get('https://registry.npmjs.org/@ng-matero/extensions')
+      .pipe(map((data: any) => data['dist-tags'].latest));
   }
 }

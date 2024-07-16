@@ -1,18 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormControl } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
-import { MatError, MatFormField, MatHint, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatSlideToggle, MatSlideToggleChange } from '@angular/material/slide-toggle';
-import {
-  ColorFormat,
-  MtxColorpicker,
-  MtxColorpickerInput,
-  MtxColorpickerToggle,
-  MtxColorpickerToggleIcon,
-} from '@ng-matero/extensions/colorpicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { ColorFormat, MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
 import { ColorSketchModule } from 'ngx-color/sketch';
 
 @Component({
@@ -21,22 +15,14 @@ import { ColorSketchModule } from 'ngx-color/sketch';
   styleUrl: './colorpicker-demo.component.scss',
   standalone: true,
   imports: [
-    MatRadioGroup,
     ReactiveFormsModule,
     FormsModule,
-    MatRadioButton,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MtxColorpickerInput,
-    MtxColorpickerToggle,
-    MatSuffix,
-    MtxColorpicker,
-    MatHint,
-    MatError,
-    MatSlideToggle,
-    MatIcon,
-    MtxColorpickerToggleIcon,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MtxColorpickerModule,
     ColorSketchModule,
   ],
 })

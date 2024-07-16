@@ -1,11 +1,11 @@
 import { CdkDrag } from '@angular/cdk/drag-drop';
 import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatCard, MatCardContent } from '@angular/material/card';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { MatToolbar } from '@angular/material/toolbar';
-import { MtxPopover, MtxPopoverTarget, MtxPopoverTrigger } from '@ng-matero/extensions/popover';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MtxPopoverModule } from '@ng-matero/extensions/popover';
 
 @Component({
   selector: 'dev-popover-demo',
@@ -13,17 +13,14 @@ import { MtxPopover, MtxPopoverTarget, MtxPopoverTrigger } from '@ng-matero/exte
   styleUrl: 'popover-demo.component.scss',
   standalone: true,
   imports: [
-    MatSlideToggle,
     ReactiveFormsModule,
     FormsModule,
-    MatButton,
     CdkDrag,
-    MtxPopoverTrigger,
-    MtxPopover,
-    MatCard,
-    MatCardContent,
-    MatToolbar,
-    MtxPopoverTarget,
+    MatSlideToggleModule,
+    MatButtonModule,
+    MatCardModule,
+    MatToolbarModule,
+    MtxPopoverModule,
   ],
 })
 export class PopoverDemoComponent {

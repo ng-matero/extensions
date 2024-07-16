@@ -1,6 +1,6 @@
 import { PlatformLocation } from '@angular/common';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'header-link',
@@ -17,7 +17,7 @@ import { MatIcon } from '@angular/material/icon';
   styleUrl: './header-link.scss',
   encapsulation: ViewEncapsulation.None,
   standalone: true,
-  imports: [MatIcon],
+  imports: [MatIconModule],
 })
 export class HeaderLinkComponent implements OnInit {
   /**

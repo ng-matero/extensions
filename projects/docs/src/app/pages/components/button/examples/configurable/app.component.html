@@ -14,18 +14,22 @@
   <mat-checkbox [(ngModel)]="loading">Loading</mat-checkbox>
 </section>
 
+<section>
+  <mat-checkbox [(ngModel)]="disabled">Disabled</mat-checkbox>
+</section>
+
 <h2>Result</h2>
 
-<button mat-button [loading]="loading" [color]="color">Button</button>
-<button mat-raised-button [loading]="loading" [color]="color">Button</button>
-<button mat-stroked-button [loading]="loading" [color]="color">Button</button>
-<button mat-flat-button [loading]="loading" [color]="color">Button</button>
-<button mat-icon-button [loading]="loading" [color]="color">
+<button mat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button mat-raised-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button mat-stroked-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button mat-flat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button mat-icon-button [loading]="loading" [color]="color" [disabled]="disabled">
   <mat-icon>more_vert</mat-icon>
 </button>
-<button mat-fab [loading]="loading" [color]="color">
+<button mat-fab [loading]="loading" [color]="color" [disabled]="disabled">
   <mat-icon>delete</mat-icon>
 </button>
-<button mat-mini-fab [loading]="loading" [color]="color">
+<button mat-mini-fab [loading]="loading" [color]="color" [disabled]="disabled">
   <mat-icon>menu</mat-icon>
 </button>

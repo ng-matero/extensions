@@ -1,14 +1,12 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatSlider, MatSliderThumb } from '@angular/material/slider';
-import { MtxColorpicker } from '@ng-matero/extensions/colorpicker/colorpicker';
-import { MtxColorpickerInput } from '@ng-matero/extensions/colorpicker/colorpicker-input';
-import { MtxColorpickerToggle } from '@ng-matero/extensions/colorpicker/colorpicker-toggle';
-import { MtxProgress, MtxProgressType } from '@ng-matero/extensions/progress';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSliderModule } from '@angular/material/slider';
+import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
+import { MtxProgressModule, MtxProgressType } from '@ng-matero/extensions/progress';
 
 @Component({
   selector: 'progress-example',
@@ -17,19 +15,13 @@ import { MtxProgress, MtxProgressType } from '@ng-matero/extensions/progress';
   standalone: true,
   imports: [
     FormsModule,
-    MatRadioGroup,
-    MatRadioButton,
-    MatSlider,
-    MatSliderThumb,
-    MatCheckbox,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatSuffix,
-    MtxColorpicker,
-    MtxColorpickerInput,
-    MtxColorpickerToggle,
-    MtxProgress,
+    MatRadioModule,
+    MatSliderModule,
+    MatCheckboxModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MtxColorpickerModule,
+    MtxProgressModule,
   ],
 })
 export class AppComponent {

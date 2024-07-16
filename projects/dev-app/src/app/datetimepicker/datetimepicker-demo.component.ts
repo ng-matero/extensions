@@ -6,31 +6,22 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatCard } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { DateAdapter, ThemePalette } from '@angular/material/core';
-import { MatError, MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { provideMomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter';
 import {
-  MtxCalendar,
-  MtxDatetimepicker,
   MtxDatetimepickerFilterType,
-  MtxDatetimepickerInput,
-  MtxDatetimepickerToggle,
+  MtxDatetimepickerModule,
 } from '@ng-matero/extensions/datetimepicker';
 import { TranslateService } from '@ngx-translate/core';
 import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
 import { Subscription } from 'rxjs';
 import { CustomHeader } from './custom-header.component';
-import {
-  MtxDateTimePickerActions,
-  MtxDatetimepickerApply,
-  MtxDatetimepickerCancel,
-  MtxDatetimepickerClear,
-} from '@ng-matero/extensions/datetimepicker/datetimepicker-actions';
+import { MatInputModule } from '@angular/material/input';
 
 const moment = _rollupMoment || _moment;
 
@@ -44,21 +35,11 @@ const moment = _rollupMoment || _moment;
     ReactiveFormsModule,
     FormsModule,
     MatRadioButton,
-    MatFormField,
-    MatLabel,
-    MatSuffix,
-    MatInput,
-    MatError,
-    MatButton,
-    MatCard,
-    MtxDatetimepickerToggle,
-    MtxDatetimepicker,
-    MtxDatetimepickerInput,
-    MtxCalendar,
-    MtxDateTimePickerActions,
-    MtxDatetimepickerClear,
-    MtxDatetimepickerCancel,
-    MtxDatetimepickerApply,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MtxDatetimepickerModule,
   ],
   providers: [
     provideMomentDatetimeAdapter(

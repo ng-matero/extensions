@@ -1,22 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
-import { MtxSelect, MtxSelectLabelTemplate } from '@ng-matero/extensions/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MtxSelectModule } from '@ng-matero/extensions/select';
 
 @Component({
   selector: 'select-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [
-    FormsModule,
-    MatFormField,
-    MatLabel,
-    MatHint,
-    MatError,
-    MtxSelect,
-    MtxSelectLabelTemplate,
-  ],
+  imports: [FormsModule, MatFormFieldModule, MtxSelectModule],
 })
 export class AppComponent {
   cities = [

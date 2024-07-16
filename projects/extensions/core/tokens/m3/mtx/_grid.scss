@@ -1,5 +1,4 @@
 @use 'sass:map';
-@use '@material/elevation' as mdc-elevation;
 @use '../../token-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
@@ -18,7 +17,6 @@ $prefix: (mtx, grid);
     outline-color: map.get($systems, md-sys-color, outline-variant),
     column-menu-text-color: map.get($systems, md-sys-color, on-surface-variant),
     column-menu-divider-color: map.get($systems, md-sys-color, outline-variant),
-    column-menu-elevation-shadow: token-utils.hardcode(mdc-elevation.elevation-box-shadow(2), $exclude-hardcoded),
     table-footer-background-color: map.get($systems, md-sys-color, surface-container),
     table-row-striped-background-color: map.get($systems, md-sys-color, surface-container),
     table-row-hover-background-color: map.get($systems, md-sys-color, secondary-container),

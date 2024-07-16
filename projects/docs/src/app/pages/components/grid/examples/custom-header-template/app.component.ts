@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { MatIcon } from '@angular/material/icon';
-import { MatTooltip } from '@angular/material/tooltip';
-import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
@@ -9,7 +9,7 @@ import { EXAMPLE_DATA } from '../../data';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MtxGrid, MatIcon, MatTooltip],
+  imports: [MtxGridModule, MatIconModule, MatTooltipModule],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

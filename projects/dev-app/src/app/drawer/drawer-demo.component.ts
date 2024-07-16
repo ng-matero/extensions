@@ -1,10 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
+import { MatButton, MatButtonModule } from '@angular/material/button';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {
   DrawerPosition,
   MTX_DRAWER_DATA,
@@ -18,15 +18,13 @@ import {
   styleUrl: './drawer-demo.component.scss',
   standalone: true,
   imports: [
-    MatRadioGroup,
     ReactiveFormsModule,
     FormsModule,
-    MatRadioButton,
-    MatSlideToggle,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatButton,
+    MatRadioModule,
+    MatSlideToggleModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
   ],
 })
 export class DrawerDemoComponent {

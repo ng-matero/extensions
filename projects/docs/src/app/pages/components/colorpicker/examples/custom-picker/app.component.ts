@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { TinyColor } from '@ctrl/tinycolor';
-import {
-  MtxColorpicker,
-  MtxColorpickerInput,
-  MtxColorpickerToggle,
-} from '@ng-matero/extensions/colorpicker';
+import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
 import { ColorEvent } from 'ngx-color';
 import { ColorSketchModule } from 'ngx-color/sketch';
 
@@ -15,16 +11,7 @@ import { ColorSketchModule } from 'ngx-color/sketch';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatSuffix,
-    MtxColorpicker,
-    MtxColorpickerInput,
-    MtxColorpickerToggle,
-    ColorSketchModule,
-  ],
+  imports: [MatFormFieldModule, MatInputModule, MtxColorpickerModule, ColorSketchModule],
 })
 export class AppComponent {
   getHex8(e: ColorEvent): string {

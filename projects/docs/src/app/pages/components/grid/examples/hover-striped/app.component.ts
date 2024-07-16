@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
@@ -9,7 +9,7 @@ import { EXAMPLE_DATA } from '../../data';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MatCheckbox, FormsModule, MtxGrid],
+  imports: [MatCheckboxModule, FormsModule, MtxGridModule],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

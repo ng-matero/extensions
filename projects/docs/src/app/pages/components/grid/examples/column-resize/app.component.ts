@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
+import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
@@ -7,7 +7,7 @@ import { EXAMPLE_DATA } from '../../data';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MtxGrid],
+  imports: [MtxGridModule],
 })
 export class AppComponent {
   columns: MtxGridColumn[] = [

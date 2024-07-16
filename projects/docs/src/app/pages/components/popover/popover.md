@@ -37,7 +37,6 @@ Exported as: `mtxPopover`
 | `@Input()`<br>`backdropClass: string` | Class to be added to the backdrop element. |
 | `@Input()`<br>`hasBackdrop: boolean \| undefined` | Whether the popover has a backdrop. It will always be false if the trigger event is hover. |
 | `@Input('class')`<br>`panelClass: string` | This method takes classes set on the host mtx-popover element and applies them on the popover template that displays in the overlay container. Otherwise, it's difficult to style the containing popover from outside the component. |
-| `@Input()`<br>`elevation: number` | Popover-panel's elevation (0~24). Default is **`8`**. |
 | `@Output()`<br>`closed: EventEmitter<PopoverCloseReason>` | Event emitted when the popover is closed. |
 
 #### `MtxPopoverTrigger`
@@ -84,7 +83,6 @@ export interface MtxPopoverDefaultOptions {
   hasBackdrop?: boolean;
   focusTrapEnabled?: boolean;
   focusTrapAutoCaptureEnabled?: boolean;
-  elevation?: number;
 }
 ```
 

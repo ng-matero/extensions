@@ -1,8 +1,11 @@
 import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { MtxCheckboxGroup, MtxCheckboxGroupOption } from '@ng-matero/extensions/checkbox-group';
+import { MatRadioModule } from '@angular/material/radio';
+import {
+  MtxCheckboxGroupModule,
+  MtxCheckboxGroupOption,
+} from '@ng-matero/extensions/checkbox-group';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -10,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MatRadioGroup, FormsModule, MatRadioButton, MtxCheckboxGroup, JsonPipe],
+  imports: [MatRadioModule, FormsModule, MtxCheckboxGroupModule, JsonPipe],
 })
 export class AppComponent {
   foods: MtxCheckboxGroupOption[] = [

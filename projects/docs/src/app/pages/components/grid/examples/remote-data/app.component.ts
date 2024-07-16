@@ -1,15 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MatButton } from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { PageEvent } from '@angular/material/paginator';
-import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
+import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 
 @Component({
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MatButton, MtxGrid],
+  imports: [MatButtonModule, MtxGridModule],
 })
 export class AppComponent implements OnInit {
   columns: MtxGridColumn[] = [

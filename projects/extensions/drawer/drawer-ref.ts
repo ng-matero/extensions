@@ -1,7 +1,8 @@
+import { DialogRef } from '@angular/cdk/dialog';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
-import { OverlayRef } from '@angular/cdk/overlay';
 import { merge, Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
+import { MtxDrawerConfig } from './drawer-config';
 import { MtxDrawerContainer } from './drawer-container';
 
 /**
@@ -9,7 +10,9 @@ import { MtxDrawerContainer } from './drawer-container';
  */
 export class MtxDrawerRef<T = any, R = any> {
   /** Instance of the component making up the content of the drawer. */
-  instance!: T;
+  get instance(): T {
+    return this._ref.componentInstance!;
+  }
 
   /**
    * Instance of the component into which the drawer content is projected.
@@ -19,6 +22,9 @@ export class MtxDrawerRef<T = any, R = any> {
 
   /** Whether the user is allowed to close the drawer. */
   disableClose: boolean | undefined;
+
+  /** Unique ID for the drawer. */
+  id: string;
 
   /** Subject for notifying the user that the drawer has been dismissed. */
   private readonly _afterDismissed = new Subject<R | undefined>();
@@ -30,11 +36,17 @@ export class MtxDrawerRef<T = any, R = any> {
   private _result: R | undefined;
 
   /** Handle to the timeout that's running as a fallback in case the exit animation doesn't fire. */
-  private _closeFallbackTimeout!: any;
+  private _closeFallbackTimeout: any;
 
-  constructor(containerInstance: MtxDrawerContainer, private _overlayRef: OverlayRef) {
+  constructor(
+    private _ref: DialogRef<R, T>,
+    config: MtxDrawerConfig,
+    containerInstance: MtxDrawerContainer
+  ) {
     this.containerInstance = containerInstance;
-    this.disableClose = containerInstance.drawerConfig.disableClose;
+    this.disableClose = config.disableClose;
+    this.id = _ref.id;
+
     // Emit when opening animation completes
     containerInstance._animationStateChanged
       .pipe(
@@ -54,20 +66,16 @@ export class MtxDrawerRef<T = any, R = any> {
       )
       .subscribe(() => {
         clearTimeout(this._closeFallbackTimeout);
-        _overlayRef.dispose();
+        this._ref.close(this._result);
       });
 
-    _overlayRef
-      .detachments()
-      .pipe(take(1))
-      .subscribe(() => {
-        this._afterDismissed.next(this._result);
-        this._afterDismissed.complete();
-      });
+    _ref.overlayRef.detachments().subscribe(() => {
+      this._ref.close(this._result);
+    });
 
     merge(
-      _overlayRef.backdropClick(),
-      _overlayRef.keydownEvents().pipe(filter(event => event.keyCode === ESCAPE))
+      this.backdropClick(),
+      this.keydownEvents().pipe(filter(event => event.keyCode === ESCAPE))
     ).subscribe(event => {
       if (
         !this.disableClose &&
@@ -84,7 +92,7 @@ export class MtxDrawerRef<T = any, R = any> {
    * @param result Data to be passed back to the drawer opener.
    */
   dismiss(result?: R): void {
-    if (!this._afterDismissed.closed) {
+    if (this.containerInstance && !this._afterDismissed.closed) {
       // Transition the backdrop in parallel to the drawer.
       this.containerInstance._animationStateChanged
         .pipe(
@@ -98,20 +106,21 @@ export class MtxDrawerRef<T = any, R = any> {
           // amount of time plus 100ms. We don't need to run this outside the NgZone, because for the
           // vast majority of cases the timeout will have been cleared before it has fired.
           this._closeFallbackTimeout = setTimeout(() => {
-            this._overlayRef.dispose();
+            this._ref.close(this._result);
           }, event.totalTime + 100);
 
-          this._overlayRef.detachBackdrop();
+          this._ref.overlayRef.detachBackdrop();
         });
 
       this._result = result;
       this.containerInstance.exit();
+      this.containerInstance = null!;
     }
   }
 
   /** Gets an observable that is notified when the drawer is finished closing. */
   afterDismissed(): Observable<R | undefined> {
-    return this._afterDismissed;
+    return this._ref.closed;
   }
 
   /** Gets an observable that is notified when the drawer has opened and appeared. */
@@ -123,13 +132,13 @@ export class MtxDrawerRef<T = any, R = any> {
    * Gets an observable that emits when the overlay's backdrop has been clicked.
    */
   backdropClick(): Observable<MouseEvent> {
-    return this._overlayRef.backdropClick();
+    return this._ref.backdropClick;
   }
 
   /**
    * Gets an observable that emits when keydown events are targeted on the overlay.
    */
   keydownEvents(): Observable<KeyboardEvent> {
-    return this._overlayRef.keydownEvents();
+    return this._ref.keydownEvents;
   }
 }

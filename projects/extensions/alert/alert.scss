@@ -4,8 +4,9 @@
 .mtx-alert {
   position: relative;
   display: block;
-  padding: 12px 20px;
-  margin-bottom: 16px;
+  padding: .75rem 1rem;
+  margin-bottom: 1rem;
+  line-height: 1.5;
 
   @include token-utils.use-tokens(tokens-mtx-alert.$prefix, tokens-mtx-alert.get-token-slots()) {
     $border-color: token-utils.get-token-variable(outline-color);
@@ -17,21 +18,25 @@
     @include token-utils.create-token-slot(color, text-color);
 
     &.mtx-alert-info {
+      @include token-utils.create-token-slot(border-color, info-outline-color);
       @include token-utils.create-token-slot(background-color, info-background-color);
       @include token-utils.create-token-slot(color, info-text-color);
     }
 
     &.mtx-alert-success {
+      @include token-utils.create-token-slot(border-color, success-outline-color);
       @include token-utils.create-token-slot(background-color, success-background-color);
       @include token-utils.create-token-slot(color, success-text-color);
     }
 
     &.mtx-alert-warning {
+      @include token-utils.create-token-slot(border-color, warning-outline-color);
       @include token-utils.create-token-slot(background-color, warning-background-color);
       @include token-utils.create-token-slot(color, warning-text-color);
     }
 
     &.mtx-alert-danger {
+      @include token-utils.create-token-slot(border-color, danger-outline-color);
       @include token-utils.create-token-slot(background-color, danger-background-color);
       @include token-utils.create-token-slot(color, danger-text-color);
     }
@@ -41,27 +46,19 @@
 .mtx-alert-close {
   position: absolute;
   top: 0;
-  bottom: 0;
   right: 0;
-  padding: 0 1.25rem;
-  font-size: 1.5rem;
-  line-height: 1;
-  color: inherit;
-  opacity: .5;
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
 
   [dir='rtl'] & {
     right: auto;
     left: 0;
   }
-
-  &:hover {
-    opacity: .75;
-  }
 }
 
 .mtx-alert-dismissible {
-  padding-right: 4rem;
+  padding-right: 3rem;
 }

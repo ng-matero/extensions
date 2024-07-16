@@ -63,6 +63,7 @@ let popoverPanelUid = 0;
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _previousElevation?: string;
   private _elevationPrefix = 'mat-elevation-z';
+  private _baseElevation: number | null = null;
 
   /** Config object to be passed into the popover's class. */
   _classList: { [key: string]: boolean } = {};
@@ -167,16 +168,6 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   /** Whether the popover has a backdrop. It will always be false if the trigger event is hover. */
   @Input({ transform: booleanAttribute })
   hasBackdrop = this._defaultOptions.hasBackdrop;
-
-  /** Popover-panel's elevation (0~24). */
-  @Input()
-  get elevation(): number {
-    return Math.max(0, Math.min(Math.round(this._elevation), 24));
-  }
-  set elevation(value: number) {
-    this._elevation = value;
-  }
-  private _elevation = this._defaultOptions.elevation ?? 8;
 
   /**
    * This method takes classes set on the host mtx-popover element and applies them on the
@@ -340,14 +331,33 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
 
   /** Sets the popover-panel's elevation. */
   setElevation(): void {
-    const newElevation = `${this._elevationPrefix}${this.elevation}`;
-
-    if (this._previousElevation) {
-      this._classList[this._previousElevation] = false;
+    // The base elevation depends on which version of the spec
+    // we're running so we have to resolve it at runtime.
+    if (this._baseElevation === null) {
+      const styles =
+        typeof getComputedStyle === 'function'
+          ? getComputedStyle(this._elementRef.nativeElement)
+          : null;
+      const value = styles?.getPropertyValue('--mtx-popover-base-elevation-level') || '8';
+      this._baseElevation = parseInt(value);
     }
 
-    this._classList[newElevation] = true;
-    this._previousElevation = newElevation;
+    // The elevation starts at the base and increases by one for each level.
+    // Capped at 24 because that's the maximum elevation defined in the Material design spec.
+    const elevation = Math.min(this._baseElevation, 24);
+    const newElevation = `${this._elevationPrefix}${elevation}`;
+    const customElevation = Object.keys(this._classList).find(className => {
+      return className.startsWith(this._elevationPrefix);
+    });
+    if (!customElevation || customElevation === this._previousElevation) {
+      const newClassList = { ...this._classList };
+      if (this._previousElevation) {
+        newClassList[this._previousElevation] = false;
+      }
+      newClassList[newElevation] = true;
+      this._previousElevation = newElevation;
+      this._classList = newClassList;
+    }
   }
 
   /** Starts the enter animation. */

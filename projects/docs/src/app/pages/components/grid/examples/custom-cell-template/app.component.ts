@@ -1,6 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MatSlideToggle } from '@angular/material/slide-toggle';
-import { MtxGrid, MtxGridColumn } from '@ng-matero/extensions/grid';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
@@ -8,7 +8,7 @@ import { EXAMPLE_DATA } from '../../data';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [MtxGrid, MatSlideToggle],
+  imports: [MtxGridModule, MatSlideToggleModule],
 })
 export class AppComponent implements OnInit {
   @ViewChild('statusTpl', { static: true }) statusTpl!: TemplateRef<any>;

@@ -1,29 +1,14 @@
 import { Component } from '@angular/core';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
-import { MatInput } from '@angular/material/input';
-import {
-  MtxColorpicker,
-  MtxColorpickerInput,
-  MtxColorpickerToggle,
-  MtxColorpickerToggleIcon,
-} from '@ng-matero/extensions/colorpicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
 
 @Component({
   selector: 'color-picker-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   standalone: true,
-  imports: [
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatSuffix,
-    MatIcon,
-    MtxColorpicker,
-    MtxColorpickerInput,
-    MtxColorpickerToggle,
-    MtxColorpickerToggleIcon,
-  ],
+  imports: [MatFormFieldModule, MatInputModule, MatIconModule, MtxColorpickerModule],
 })
 export class AppComponent {}
