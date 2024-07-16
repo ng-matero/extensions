@@ -21,9 +21,9 @@ import { MtxTime, MtxTimeInput } from './time';
 import { MtxYearView } from './year-view';
 import {
   MtxDateTimePickerActions,
-  MtxDatepickerApply,
-  MtxDatepickerCancel,
-  MtxDatepickerClear,
+  MtxDatetimepickerApply,
+  MtxDatetimepickerCancel,
+  MtxDatetimepickerClear,
 } from './datetimepicker-actions';
 
 @NgModule({
@@ -46,9 +46,9 @@ import {
     MtxMonthView,
     MtxYearView,
     MtxMultiYearView,
-    MtxDatepickerApply,
-    MtxDatepickerCancel,
-    MtxDatepickerClear,
+    MtxDatetimepickerApply,
+    MtxDatetimepickerCancel,
+    MtxDatetimepickerClear,
     MtxDateTimePickerActions,
   ],
   exports: [
@@ -64,9 +64,9 @@ import {
     MtxMonthView,
     MtxYearView,
     MtxMultiYearView,
-    MtxDatepickerApply,
-    MtxDatepickerCancel,
-    MtxDatepickerClear,
+    MtxDatetimepickerApply,
+    MtxDatetimepickerCancel,
+    MtxDatetimepickerClear,
     MtxDateTimePickerActions,
   ],
   providers: [MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER],

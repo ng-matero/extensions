@@ -17,9 +17,9 @@ import {
 import { CustomHeader } from './custom-header.component';
 import {
   MtxDateTimePickerActions,
-  MtxDatepickerApply,
-  MtxDatepickerCancel,
-  MtxDatepickerClear,
+  MtxDatetimepickerApply,
+  MtxDatetimepickerCancel,
+  MtxDatetimepickerClear,
 } from '@ng-matero/extensions/datetimepicker/datetimepicker-actions';
 import { MatButton } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
@@ -46,9 +46,9 @@ import { CommonModule } from '@angular/common';
     MtxDatetimepickerInput,
     MtxDatetimepickerToggle,
     MtxDateTimePickerActions,
-    MtxDatepickerApply,
-    MtxDatepickerCancel,
-    MtxDatepickerClear,
+    MtxDatetimepickerApply,
+    MtxDatetimepickerCancel,
+    MtxDatetimepickerClear,
     CommonModule,
   ],
   providers: [

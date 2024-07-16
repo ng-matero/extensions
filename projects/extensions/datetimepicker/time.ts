@@ -504,12 +504,20 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   handleSelection() {
+    if (this.actionButtons && this._selected) {
+      this.selectedChange.emit(this._selected);
+    }
+  }
+
+  handleOk() {
     if (this._selected) {
       this.selectedChange.emit(this._selected);
     }
-    if (!this.actionButtons) {
-      this._userSelection.emit();
-    }
+    this._userSelection.emit();
+  }
+
+  handleCancel() {
+    this._userSelection.emit();
   }
 
   ngOnDestroy(): void {

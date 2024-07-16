@@ -13,3 +13,4 @@ export * from './multi-year-view';
 export * from './datetimepicker-animations';
 export * from './datetimepicker-types';
 export * from './datetimepicker-intl';
+export * from './datetimepicker-actions';

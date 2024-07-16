@@ -13,30 +13,30 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { MtxDatetimepicker } from './datetimepicker';
 
 @Directive({
-  selector: '[mtxDatepickerApply]',
-  host: { '(click)': '_datepicker._selectManually()' },
+  selector: '[mtxDatetimepickerApply]',
+  host: { '(click)': '_datetimepicker._selectManually()' },
   standalone: true,
 })
-export class MtxDatepickerApply<D> {
-  constructor(public _datepicker: MtxDatetimepicker<D>) {}
+export class MtxDatetimepickerApply<D> {
+  constructor(public _datetimepicker: MtxDatetimepicker<D>) {}
 }
 
 @Directive({
-  selector: '[mtxDatepickerCancel]',
-  host: { '(click)': '_datepicker.close()' },
+  selector: '[mtxDatetimepickerCancel]',
+  host: { '(click)': '_datetimepicker.close()' },
   standalone: true,
 })
-export class MtxDatepickerCancel<D> {
-  constructor(public _datepicker: MtxDatetimepicker<D>) {}
+export class MtxDatetimepickerCancel<D> {
+  constructor(public _datetimepicker: MtxDatetimepicker<D>) {}
 }
 
 @Directive({
-  selector: '[mtxDatepickerClear]',
-  host: { '(click)': '_datepicker._clearSelected()' },
+  selector: '[mtxDatetimepickerClear]',
+  host: { '(click)': '_datetimepicker._clearSelected()' },
   standalone: true,
 })
-export class MtxDatepickerClear<D> {
-  constructor(public _datepicker: MtxDatetimepicker<D>) {}
+export class MtxDatetimepickerClear<D> {
+  constructor(public _datetimepicker: MtxDatetimepicker<D>) {}
 }
 
 @Component({
