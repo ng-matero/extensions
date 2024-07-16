@@ -8,8 +8,10 @@ $non-touch-calendar-portrait-width: $non-touch-calendar-cell-size * 7 + $calenda
 $non-touch-calendar-portrait-height: 424px;
 $non-touch-calendar-landscape-width: 432px;
 $non-touch-calendar-landscape-height: 328px;
-$non-touch-calendar-with-time-input-portrait-height: 490px;
-$non-touch-calendar-with-time-input-landscape-height: 404px;
+$non-touch-calendar-with-time-input-portrait-height: 442px;
+$non-touch-calendar-with-time-input-actions-portrait-height: 490px;
+$non-touch-calendar-with-time-input-landscape-height: 356px;
+$non-touch-calendar-with-time-input-actions-landscape-height: 404px;
 
 // Ideally the calendar would have a constant aspect ratio, no matter its size, and we would base
 // these measurements off the aspect ratio. Unfortunately, the aspect ratio does change a little as
@@ -21,10 +23,10 @@ $touch-landscape-mode-landscape-height: 80vh;
 $touch-landscape-mode-portrait-width: 90vw;
 $touch-landscape-mode-portrait-height: 64vw;
 $touch-portrait-mode-landscape-width: 64vh;
-$touch-portrait-mode-landscape-height: 90vh;
+$touch-portrait-mode-landscape-height: 80vh;
 $touch-portrait-mode-portrait-width: 80vw;
 $touch-portrait-mode-portrait-height: 120vw;
-$touch-portrait-mode-portrait-height-with-actions: 135vw;
+$touch-portrait-mode-portrait-height-with-actions: 124vw;
 $touch-min-width: 250px;
 $touch-min-height: 300px;
 $touch-max-width: 750px;
@@ -36,8 +38,12 @@ $touch-max-height: 850px;
     height: $non-touch-calendar-landscape-height;
 
     &.mtx-calendar-with-time-input {
-      height: $non-touch-calendar-with-time-input-landscape-height;
+      height: $non-touch-calendar-with-time-input-actions-landscape-height;
     }
+  }
+
+  .mtx-datetimepicker-content-container-with-actions .mtx-calendar.mtx-calendar-with-time-input {
+    height: $non-touch-calendar-with-time-input-landscape-height;
   }
 }
 
@@ -51,6 +57,19 @@ $touch-max-height: 850px;
     @include token-utils.create-token-slot(box-shadow, container-elevation-shadow);
     @include token-utils.create-token-slot(color, container-text-color);
   }
+
+  .mtx-calendar {
+    width: $non-touch-calendar-portrait-width;
+    height: $non-touch-calendar-portrait-height;
+
+    &.mtx-calendar-with-time-input {
+      height: $non-touch-calendar-with-time-input-actions-portrait-height;
+    }
+  }
+
+  .mtx-datetimepicker-content-container-with-actions .mtx-calendar.mtx-calendar-with-time-input {
+    height: $non-touch-calendar-with-time-input-portrait-height;
+  }
 }
 
 .mtx-datetimepicker-content-container {
@@ -59,15 +78,6 @@ $touch-max-height: 850px;
 
   // TODO: Ensures that `mtx-datetimepicker-actions` is pushed to the bottom of the popup.
   justify-content: space-between;
-}
-
-.mtx-datetimepicker-content .mtx-calendar {
-  width: $non-touch-calendar-portrait-width;
-  height: $non-touch-calendar-portrait-height;
-
-  &.mtx-calendar-with-time-input {
-    height: $non-touch-calendar-with-time-input-portrait-height;
-  }
 }
 
 .mtx-datetimepicker-content[mode='landscape'] {
@@ -82,7 +92,7 @@ $touch-max-height: 850px;
 
 .mtx-datetimepicker-content-touch {
   display: block;
-  max-height: 80vh;
+  max-height: 84vh;
 
   @include token-utils.use-tokens(tokens-mtx-datetimepicker.$prefix,
     tokens-mtx-datetimepicker.get-token-slots()) {
@@ -107,6 +117,12 @@ $touch-max-height: 850px;
     width: 100%;
     height: auto;
   }
+
+  .mtx-clock {
+    width: 50vh;
+    max-width: 80%;
+    margin: 12px auto;
+  }
 }
 
 @media all and (orientation: landscape) {
@@ -116,7 +132,8 @@ $touch-max-height: 850px;
       width: $touch-landscape-mode-landscape-width;
       height: $touch-landscape-mode-landscape-height;
 
-      .mtx-calendar {
+      .mtx-calendar,
+      &.mtx-datetimepicker-content-container-with-actions .mtx-calendar.mtx-calendar-with-time-input {
         width: auto;
         height: 100%;
       }
@@ -145,6 +162,13 @@ $touch-max-height: 850px;
         width: 100%;
         height: auto;
       }
+
+      // The content needs to be a bit taller when actions have
+      // been projected so that it doesn't have to scroll.
+      &.mtx-datetimepicker-content-container-with-actions,
+      &.mtx-datetimepicker-content-container-with-time-input {
+        height: $touch-portrait-mode-portrait-height-with-actions;
+      }
     }
 
     .mtx-datetimepicker-content-container[mode='landscape'] {
@@ -155,12 +179,6 @@ $touch-max-height: 850px;
         width: auto;
         height: 100%;
       }
-    }
-
-    // The content needs to be a bit taller when actions have
-    // been projected so that it doesn't have to scroll.
-    .mtx-datetimepicker-content-container-with-actions {
-      height: $touch-portrait-mode-portrait-height-with-actions;
     }
   }
 }

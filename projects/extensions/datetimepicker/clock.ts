@@ -62,9 +62,6 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   /** Whether the time is now in AM or PM. */
   @Input() AMPM: MtxAMPM = 'AM';
 
-  /** Whether the time is now in AM or PM. */
-  @Input() actionButtons: boolean = false;
-
   /** Emits when the currently selected date changes. */
   @Output() selectedChange = new EventEmitter<D>();
 
@@ -212,7 +209,7 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
 
     if (this._timeChanged) {
       this.selectedChange.emit(this.activeDate);
-      if (!this._hourView && !this.actionButtons) {
+      if (!this._hourView) {
         this._userSelection.emit();
       }
     }

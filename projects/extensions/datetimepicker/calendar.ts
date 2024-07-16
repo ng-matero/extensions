@@ -392,9 +392,6 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     } else {
       this._activeDate = date;
       this.currentView = 'clock';
-      if (this.actionsPortal) {
-        this.selectedChange.emit(date);
-      }
     }
   }
 

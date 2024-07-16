@@ -15,7 +15,7 @@ import {
   ComponentType,
   TemplatePortal,
 } from '@angular/cdk/portal';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   afterNextRender,
@@ -110,7 +110,7 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
-  imports: [MtxCalendar, CdkPortalOutlet, CommonModule],
+  imports: [MtxCalendar, CdkPortalOutlet],
 })
 export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
@@ -154,22 +154,30 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, On
     this._calendar._focusActiveCell();
   }
 
+  ngOnDestroy() {
+    this._animationDone.complete();
+  }
+
   _startExitAnimation() {
     this._animationState = 'void';
     this._changeDetectorRef.markForCheck();
   }
 
-  ngOnDestroy() {
-    this._animationDone.complete();
+  _handleUserSelection() {
+    // Delegate closing the overlay to the actions.
+    if (!this._actionsPortal) {
+      this.datetimepicker.close();
+    }
   }
 
   /**
-   * Assigns a new portal containing the datepicker actions.
+   * Assigns a new portal containing the datetimepicker actions.
    * @param portal Portal with the actions to be assigned.
    * @param forceRerender Whether a re-render of the portal should be triggered.
    */
   _assignActions(portal: TemplatePortal<any> | null, forceRerender: boolean) {
     this._actionsPortal = portal;
+
     if (forceRerender) {
       this._changeDetectorRef.detectChanges();
     }
@@ -259,7 +267,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
   set color(value: ThemePalette) {
     this._color = value;
-    console.log(value);
   }
   private _color: ThemePalette;
 
@@ -503,10 +510,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
     if (canRestoreFocus) {
       // Because IE moves focus asynchronously, we can't count on it being restored before we've
-      // marked the datepicker as closed. If the event fires out of sequence and the element that
-      // we're refocusing opens the datepicker on focus, the user could be stuck with not being
+      // marked the datetimepicker as closed. If the event fires out of sequence and the element that
+      // we're refocusing opens the datetimepicker on focus, the user could be stuck with not being
       // able to close the calendar at all. We work around it by making the logic, that marks
-      // the datepicker as closed, async as well.
+      // the datetimepicker as closed, async as well.
       setTimeout(completeClose);
     } else {
       completeClose();
@@ -666,7 +673,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     );
   }
   /**
-   * Registers a portal containing action buttons with the datepicker.
+   * Registers a portal containing action buttons with the datetimepicker.
    * @param portal Portal to be registered.
    */
   registerActions(portal: TemplatePortal): void {
@@ -678,7 +685,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   /**
-   * Removes a portal containing action buttons from the datepicker.
+   * Removes a portal containing action buttons from the datetimepicker.
    * @param portal Portal to be removed.
    */
   removeActions(portal: TemplatePortal): void {

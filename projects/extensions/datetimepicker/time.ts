@@ -1,5 +1,6 @@
 import { coerceNumberProperty, NumberInput } from '@angular/cdk/coercion';
 import { DOWN_ARROW, UP_ARROW } from '@angular/cdk/keycodes';
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterViewInit,
   booleanAttribute,
@@ -256,8 +257,8 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   /** Step over minutes. */
   @Input() interval: number = 1;
 
-  /** Input for provided action buttons */
-  @Input() actionButtons: boolean = false;
+  /** Input for action buttons. */
+  @Input() actionsPortal: TemplatePortal | null = null;
 
   @ViewChild('hourInput', { read: ElementRef<HTMLInputElement> })
   protected hourInputElement: ElementRef<HTMLInputElement> | undefined;
@@ -404,6 +405,12 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
     this.focusInputElement();
   }
 
+  ngOnDestroy(): void {
+    if (this.datetimepickerIntlChangesSubscription) {
+      this.datetimepickerIntlChangesSubscription.unsubscribe();
+    }
+  }
+
   focusInputElement() {
     if (this.clockView === 'hour') {
       if (this.hourInputElement) {
@@ -416,14 +423,14 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
-  handleHourInputChange(value: NumberInput) {
+  _handleHourInputChange(value: NumberInput) {
     const hour = coerceNumberProperty(value);
     if (hour || hour === 0) {
       const newValue = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
         this._adapter.getDate(this.activeDate),
-        this.updateHourForAmPm(hour),
+        this._updateHourForAmPm(hour),
         this._adapter.getMinute(this.activeDate)
       );
 
@@ -440,7 +447,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
-  updateHourForAmPm(value: number) {
+  _updateHourForAmPm(value: number) {
     if (!this.twelvehour) {
       return value;
     }
@@ -463,7 +470,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
-  handleMinuteInputChange(value: NumberInput) {
+  _handleMinuteInputChange(value: NumberInput) {
     const minute = coerceNumberProperty(value);
     if (minute || minute === 0) {
       const newValue = this._adapter.createDatetime(
@@ -486,7 +493,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
     }
   }
 
-  handleFocus(clockView: MtxClockView) {
+  _handleFocus(clockView: MtxClockView) {
     this.clockView = clockView;
     this.clockViewChange.emit(clockView);
   }
@@ -503,26 +510,20 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
     this.activeDateChange.emit(date);
   }
 
-  handleSelection() {
-    if (this.actionButtons && this._selected) {
+  _handleSelection() {
+    if (this.actionsPortal && this._selected) {
       this.selectedChange.emit(this._selected);
     }
   }
 
-  handleOk() {
+  _handleOk() {
     if (this._selected) {
       this.selectedChange.emit(this._selected);
     }
     this._userSelection.emit();
   }
 
-  handleCancel() {
+  _handleCancel() {
     this._userSelection.emit();
-  }
-
-  ngOnDestroy(): void {
-    if (this.datetimepickerIntlChangesSubscription) {
-      this.datetimepickerIntlChangesSubscription.unsubscribe();
-    }
   }
 }

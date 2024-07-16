@@ -77,11 +77,11 @@
                       [touchUi]="touchUi"
                       [timeInput]="timeInput">
     @if(actionButtons) {
-      <mtx-calendar-actions>
+      <mtx-datetimepicker-actions>
         <button mat-button mtxDatetimepickerClear>Clear</button>
         <button mat-button mtxDatetimepickerCancel>Cancel</button>
         <button mat-raised-button mtxDatetimepickerApply>Apply</button>
-      </mtx-calendar-actions>
+      </mtx-datetimepicker-actions>
     }
   </mtx-datetimepicker>
   <input [mtxDatetimepicker]="datetimePicker" [(ngModel)]="datetime" matInput required>

@@ -43,9 +43,6 @@ export class MtxMultiYearView<D> implements AfterContentInit {
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
 
-  /** Input for provided action buttons */
-  @Input() actionButtons: boolean = false;
-
   /** Emits when a new month is selected. */
   @Output() selectedChange = new EventEmitter<D>();
 
@@ -162,7 +159,7 @@ export class MtxMultiYearView<D> implements AfterContentInit {
     this.selectedChange.emit(dateObject);
     this._activeDate = dateObject;
 
-    if (this.type === 'year' && !this.actionButtons) {
+    if (this.type === 'year') {
       this._userSelection.emit();
     }
   }

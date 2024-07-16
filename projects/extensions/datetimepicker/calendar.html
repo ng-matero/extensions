@@ -99,8 +99,7 @@
         [activeDate]="_activeDate"
         [dateFilter]="_dateFilterForViews"
         [selected]="selected!"
-        [type]="type"
-        [actionButtons]="!!actionsPortal">
+        [type]="type">
       </mtx-month-view>
     }
     @case ('year') {
@@ -110,8 +109,7 @@
         [activeDate]="_activeDate"
         [dateFilter]="_dateFilterForViews"
         [selected]="selected!"
-        [type]="type"
-        [actionButtons]="!!actionsPortal">
+        [type]="type">
       </mtx-year-view>
     }
     @case ('multi-year') {
@@ -123,8 +121,7 @@
         [maxDate]="maxDate"
         [minDate]="minDate"
         [selected]="selected!"
-        [type]="type"
-        [actionButtons]="!!actionsPortal">
+        [type]="type">
       </mtx-multi-year-view>
     }
     @default {
@@ -143,7 +140,7 @@
           [maxDate]="maxDate"
           [minDate]="minDate"
           [selected]="_activeDate"
-          [actionButtons]="!!actionsPortal">
+          [actionsPortal]="actionsPortal">
         </mtx-time>
       } @else {
         <mtx-clock (_userSelection)="_userSelected()"
@@ -156,14 +153,9 @@
           [minDate]="minDate"
           [selected]="_activeDate"
           [startView]="_clockView"
-          [twelvehour]="twelvehour"
-          [actionButtons]="!!actionsPortal"
-          >
+          [twelvehour]="twelvehour">
         </mtx-clock>
       }
     }
   }
-  <ng-template
-    [cdkPortalOutlet]="actionsPortal">
-  </ng-template>
 </div>

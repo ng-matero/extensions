@@ -40,29 +40,11 @@ export class MtxDatetimepickerClear<D> {
 }
 
 @Component({
-  selector: 'mtx-calendar-actions',
-  styles: [
-    `
-      .mtx-calendar-actions {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 0 8px 8px 8px;
-      }
-
-      .mat-calendar-actions .mat-mdc-button-base + .mat-mdc-button-base {
-        margin-left: 8px;
-      }
-
-      .mat-calendar-actions[dir='rtl'] .mat-mdc-button-base + .mat-mdc-button-base {
-        margin-left: 0;
-        margin-right: 8px;
-      }
-    `,
-  ],
+  selector: 'mtx-datetimepicker-actions',
+  styleUrl: './datetimepicker-actions.scss',
   template: `
     <ng-template>
-      <div class="mtx-calendar-actions">
+      <div class="mtx-datetimepicker-actions">
         <ng-content></ng-content>
       </div>
     </ng-template>
@@ -71,21 +53,21 @@ export class MtxDatetimepickerClear<D> {
   encapsulation: ViewEncapsulation.None,
   standalone: true,
 })
-export class MtxDatetimePickerActions<D> implements AfterViewInit, OnDestroy {
+export class MtxDatetimepickerActions<D> implements AfterViewInit, OnDestroy {
   @ViewChild(TemplateRef) _template!: TemplateRef<unknown>;
   private _portal!: TemplatePortal;
   constructor(
-    private _datepicker: MtxDatetimepicker<D>,
+    private _datetimepicker: MtxDatetimepicker<D>,
     private _viewContainerRef: ViewContainerRef
   ) {}
 
   ngAfterViewInit() {
     this._portal = new TemplatePortal(this._template, this._viewContainerRef);
-    this._datepicker.registerActions(this._portal);
+    this._datetimepicker.registerActions(this._portal);
   }
 
   ngOnDestroy() {
-    this._datepicker.removeActions(this._portal);
+    this._datetimepicker.removeActions(this._portal);
     // Needs to be null checked since we initialize it in `ngAfterViewInit`.
     if (this._portal && this._portal.isAttached) {
       this._portal?.detach();

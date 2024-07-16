@@ -86,6 +86,42 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
       }
     }
   }
+
+  .mtx-datetimepicker-content-container-with-actions .mtx-calendar .mtx-calendar-header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+@mixin landscape-actions-placeholder {
+  .mtx-datetimepicker-actions::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: $landscape-calendar-header-width;
+    height: 100%;
+    content: '';
+
+    @include token-utils.use-tokens($_tokens...) {
+      $border-color: token-utils.get-token-variable(calendar-header-divider-color);
+
+      border-right: 1px solid var($border-color);
+
+      @include token-utils.create-token-slot(background-color, calendar-header-background-color);
+      @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
+
+      [dir='rtl'] & {
+        left: auto;
+        right: 0;
+        border-right-width: 0;
+        border-left: 1px solid var($border-color);
+        border-bottom-left-radius: 0;
+
+        @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
+      }
+    }
+  }
 }
 
 .mtx-calendar {
@@ -190,17 +226,17 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 
 [mode='landscape'] {
   @include landscape-calendar-header;
+  @include landscape-actions-placeholder;
 }
 
 @media all and (orientation: landscape) {
   [mode='auto'] {
     @include landscape-calendar-header;
+    @include landscape-actions-placeholder;
   }
 }
 
 .mtx-calendar-content {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   padding: $calendar-padding;
   outline: none;
@@ -217,10 +253,6 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   .mat-icon-button:hover .mat-button-focus-overlay {
     opacity: .04;
   }
-}
-
-.mtx-calendar-actions {
-  margin-top: auto;
 }
 
 .mtx-calendar-period-button {

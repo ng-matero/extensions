@@ -3,7 +3,10 @@
      [attr.aria-modal]="true"
      [attr.aria-labelledby]="_dialogLabelId ?? undefined"
      [attr.mode]="datetimepicker.mode"
-     class="mtx-datetimepicker-content-container">
+     class="mtx-datetimepicker-content-container"
+     [class.mtx-datetimepicker-content-container-with-custom-header]="datetimepicker.calendarHeaderComponent"
+     [class.mtx-datetimepicker-content-container-with-actions]="_actionsPortal"
+     [class.mtx-datetimepicker-content-container-with-time-input]="datetimepicker.timeInput">
   <mtx-calendar [id]="datetimepicker.id"
                 [class]="datetimepicker.panelClass"
                 [attr.mode]="datetimepicker.mode"
@@ -24,7 +27,9 @@
                 (selectedChange)="datetimepicker._select($event)"
                 (viewChanged)="datetimepicker._viewChanged($event)"
                 (viewChanged)="_viewChanged($event)"
-                (_userSelection)="datetimepicker.close()"
+                (_userSelection)="_handleUserSelection()"
                 [@fadeInCalendar]="'enter'">
   </mtx-calendar>
+
+  <ng-template [cdkPortalOutlet]="_actionsPortal"></ng-template>
 </div>

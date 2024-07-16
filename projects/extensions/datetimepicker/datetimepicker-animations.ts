@@ -9,7 +9,7 @@ import {
 } from '@angular/animations';
 
 /**
- * Animations used by the Material datepicker.
+ * Animations used by the Material datetimepicker.
  * @docs-private
  */
 export const mtxDatetimepickerAnimations: {
@@ -17,7 +17,7 @@ export const mtxDatetimepickerAnimations: {
   readonly fadeInCalendar: AnimationTriggerMetadata;
   readonly slideCalendar: AnimationTriggerMetadata;
 } = {
-  /** Transforms the height of the datepicker's calendar. */
+  /** Transforms the height of the datetimepicker's calendar. */
   transformPanel: trigger('transformPanel', [
     transition(
       'void => enter-dropdown',

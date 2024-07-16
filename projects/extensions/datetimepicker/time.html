@@ -10,8 +10,8 @@
       [timeMin]="twelvehour ? 1 : 0"
       [timeMax]="twelvehour ? 12 : 23"
       [timeValue]="hour"
-      (timeValueChanged)="handleHourInputChange($event)"
-      (focus)="handleFocus('hour')" />
+      (timeValueChanged)="_handleHourInputChange($event)"
+      (focus)="_handleFocus('hour')" />
 
     <div class="mtx-time-seperator">:</div>
 
@@ -25,20 +25,20 @@
       [timeMin]="0"
       [timeMax]="59"
       [timeValue]="minute"
-      (timeValueChanged)="handleMinuteInputChange($event)"
+      (timeValueChanged)="_handleMinuteInputChange($event)"
       [timeInterval]="interval"
-      (focus)="handleFocus('minute')" />
+      (focus)="_handleFocus('minute')" />
 
     @if (twelvehour) {
       <div class="mtx-time-ampm">
         <button mat-button type="button" class="mtx-time-am"
           [class.mtx-time-ampm-active]="AMPM === 'AM'" aria-label="AM"
           (keydown)="$event.stopPropagation()"
-        (click)="ampmChange.emit('AM')">AM</button>
+          (click)="ampmChange.emit('AM')">AM</button>
         <button mat-button type="button" class="mtx-time-pm"
           [class.mtx-time-ampm-active]="AMPM === 'PM'" aria-label="PM"
           (keydown)="$event.stopPropagation()"
-        (click)="ampmChange.emit('PM')">PM</button>
+          (click)="ampmChange.emit('PM')">PM</button>
       </div>
     }
   </div>
@@ -46,7 +46,7 @@
 
 <mtx-clock (selectedChange)="_timeSelected($event)"
   (activeDateChange)="_onActiveDateChange($event)"
-  (_userSelection)="handleSelection()"
+  (_userSelection)="_handleSelection()"
   [AMPM]="AMPM"
   [dateFilter]="dateFilter"
   [interval]="interval"
@@ -57,12 +57,12 @@
   [twelvehour]="twelvehour">
 </mtx-clock>
 
-@if (!actionButtons) {
+@if (!actionsPortal) {
   <div class="mtx-time-button-wrapper">
-    <button class="mtx-time-cancel-button" mat-button type="button" (click)="handleCancel()">
+    <button class="mtx-time-cancel-button" mat-button type="button" (click)="_handleCancel()">
       {{ _datetimepickerIntl.cancelLabel }}
     </button>
-    <button class="mtx-time-ok-button" mat-button type="button" (click)="handleOk()"
+    <button class="mtx-time-ok-button" mat-button type="button" (click)="_handleOk()"
       [disabled]="minuteInputDirective?.invalid || hourInputDirective?.invalid">
       {{ _datetimepickerIntl.okLabel }}
     </button>
