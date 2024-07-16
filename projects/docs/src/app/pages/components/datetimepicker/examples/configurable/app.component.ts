@@ -19,7 +19,7 @@ import {
   MtxDatetimepickerCancel,
   MtxDatetimepickerClear,
 } from '@ng-matero/extensions/datetimepicker/datetimepicker-actions';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -34,6 +34,7 @@ import { CommonModule } from '@angular/common';
     MatSliderModule,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
     MtxDatetimepickerModule,
   ],
   providers: [
