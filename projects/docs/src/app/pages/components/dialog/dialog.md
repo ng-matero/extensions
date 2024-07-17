@@ -10,9 +10,9 @@
 
 ##### Methods
 
-| Name | Description |
-| :--- | :--- |
-| **`alert`**`(title: string \| Observable<string>, description: string \| Observable<string> = '', onOk = () => {})` | A simple alert dialog with a single button. |
+<a>alert</a>
+
+A simple alert dialog with a single button.
 
 | Parameters | Description |
 | :--- | :--- |
@@ -20,9 +20,9 @@
 | `description: string \| Observable<string>` | The dialog description.  |
 | `onOk: () => void` | The ok callback function. |
 
-| Name | Description |
-| :--- | :--- |
-| **`confirm`**`(title: string \| Observable<string>, description: string \| Observable<string> = '', onOk = () => {}, onClose = () => {})` | A confirm dialog with a cancel and a confirm button. |
+<a>confirm</a>
+
+A confirm dialog with a cancel and a confirm button.
 
 | Parameters | Description |
 | :--- | :--- |
@@ -31,18 +31,18 @@
 | `onOk: () => void` | The ok callback function. |
 | `onClose: () => void` | The close callback function. |
 
-| Name | Description |
-| :--- | :--- |
-| **`open`**`(config: MtxDialogData, componentOrTemplateRef: ComponentType<any> \| TemplateRef<any> = MtxDialogComponent)` | Opens a modal dialog containing the given template. |
+<a>open</a>
+
+Opens a modal dialog containing the given template.
 
 | Parameters | Description |
 | :--- | :--- |
 | `config: MtxDialogData` | The dialog description. |
 | `componentOrTemplateRef: ComponentType<T> \| TemplateRef<any>` | The component to load into the dialog. |
 
-| Name | Description |
-| :--- | :--- |
-| **`originalOpen`**`(componentOrTemplateRef: ComponentType<any> \| TemplateRef<any> = MtxDialogComponent, config: any)` | The original `matDialog` open method. |
+<a>originalOpen</a>
+
+The original `matDialog` open method.
 
 | Parameters | Description |
 | :--- | :--- |

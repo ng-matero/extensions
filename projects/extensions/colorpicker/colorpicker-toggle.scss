@@ -4,7 +4,7 @@
 
 $_tokens: tokens-mtx-colorpicker.$prefix, tokens-mtx-colorpicker.get-token-slots();
 
-// We support the case where the form field is disabled, but the datepicker is not.
+// We support the case where the form field is disabled, but the colorpicker is not.
 // MDC sets `pointer-events: none` on disabled form fields which prevents clicks on the toggle.
 .mtx-colorpicker-toggle {
   pointer-events: auto;

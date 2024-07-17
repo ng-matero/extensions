@@ -226,7 +226,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
   /** The input element this colorpicker is associated with. */
   pickerInput!: MtxColorpickerInput;
 
-  /** Emits when the datepicker is disabled. */
+  /** Emits when the colorpicker is disabled. */
   readonly _disabledChange = new Subject<boolean>();
 
   /** Emits new selected color when selected color changes. */

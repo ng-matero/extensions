@@ -29,11 +29,26 @@ Exported as: `mtxDatetimepickerInput`
 
 ##### Methods
 
-| Name | Description |
+<a>getConnectedOverlayOrigin</a>
+
+Gets the element that the datetimepicker popup should be connected to.
+
+| | |
 | :--- | :--- |
-| `getConnectedOverlayOrigin(): ElementRef` | Gets the element that the datetimepicker popup should be connected to. |
-| `getOverlayLabelId(): string \| null` | Gets the ID of an element that should be used a description for the overlay. |
-| `getThemePalette(): ThemePalette` | Returns the palette used by the input's form field, if any. |
+
+<a>getOverlayLabelId</a>
+
+Gets the ID of an element that should be used a description for the overlay.
+
+| | |
+| :--- | :--- |
+
+<a>getThemePalette</a>
+
+Returns the palette used by the input's form field, if any.
+
+| | |
+| :--- | :--- |
 
 #### `MtxCalendar`
 
@@ -102,10 +117,19 @@ Exported as: `mtxDatetimepicker`
 
 ##### Methods
 
-| Name | Description |
+<a>open</a>
+
+Open the calendar.
+
+| | |
 | :--- | :--- |
-| `open(): void` | Open the calendar. |
-| `close(): void` | Close the calendar. |
+
+<a>close</a>
+
+Close the calendar.
+
+| | |
+| :--- | :--- |
 
 #### `MtxDatetimepickerToggleIcon`
 

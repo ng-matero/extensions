@@ -27,11 +27,26 @@ Exported as: `mtxColorpickerInput`
 
 ##### Methods
 
-| Name | Description |
+<a>getConnectedOverlayOrigin</a>
+
+Gets the element that the colorpicker popup should be connected to.
+
+| | |
 | :--- | :--- |
-| `getConnectedOverlayOrigin(): ElementRef` | Gets the element that the colorpicker popup should be connected to. |
-| `getOverlayLabelId(): string \| null` | Gets the ID of an element that should be used a description for the overlay. |
-| `getThemePalette(): ThemePalette` | Returns the palette used by the input's form field, if any. |
+
+<a>getOverlayLabelId</a>
+
+Gets the ID of an element that should be used a description for the overlay.
+
+| | |
+| :--- | :--- |
+
+<a>getThemePalette</a>
+
+Returns the palette used by the input's form field, if any.
+
+| | |
+| :--- | :--- |
 
 #### `MtxColorpicker`
 
@@ -57,12 +72,35 @@ Exported as: `mtxColorpicker`
 
 ##### Methods
 
-| Name | Description |
+<a>open</a>
+
+Open the colorpicker panel.
+
+| | |
 | :--- | :--- |
-| `open(): void` | Open the colorpicker panel. |
-| `close(): void` | Close the colorpicker panel. |
-| `select(nextVal: string): void` | Selects the given color. |
-| `registerInput(input: MtxColorpickerInput): void` | Register an input with this colorpicker. |
+
+<a>close</a>
+
+Close the colorpicker panel.
+
+| | |
+| :--- | :--- |
+
+<a>select</a>
+
+Selects the given color.
+
+| Parameters | Description |
+| :--- | :--- |
+| `nextVal: string` | The color value. |
+
+<a>registerInput</a>
+
+Register an input with this colorpicker.
+
+| Parameters | Description |
+| :--- | :--- |
+| `input: MtxColorpickerInput` | The colorpicker input to register with this colorpicker. |
 
 #### `MtxColorpickerToggleIcon`
 

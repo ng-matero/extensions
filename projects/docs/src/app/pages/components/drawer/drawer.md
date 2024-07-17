@@ -24,13 +24,15 @@ Service to open Material Design drawers.
 
 Dismissed all of the currently-open dialogs.
 
-<hr>
+| | |
+| :--- | :--- |
 
 <a>getDrawerById</a>
 
 Finds an open drawer by its id.
 
-<hr>
+| | |
+| :--- | :--- |
 
 <a>open</a>
 
