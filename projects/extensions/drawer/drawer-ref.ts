@@ -4,6 +4,7 @@ import { merge, Observable, Subject } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 import { MtxDrawerConfig } from './drawer-config';
 import { MtxDrawerContainer } from './drawer-container';
+import { ComponentRef } from '@angular/core';
 
 /**
  * Reference to a drawer dispatched from the drawer service.
@@ -12,6 +13,14 @@ export class MtxDrawerRef<T = any, R = any> {
   /** Instance of the component making up the content of the drawer. */
   get instance(): T {
     return this._ref.componentInstance!;
+  }
+
+  /**
+   * `ComponentRef` of the component opened into the drawer. Will be
+   * null when the drawer is opened using a `TemplateRef`.
+   */
+  get componentRef(): ComponentRef<T> | null {
+    return this._ref.componentRef;
   }
 
   /**

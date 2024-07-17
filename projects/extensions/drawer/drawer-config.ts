@@ -2,7 +2,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { ScrollStrategy } from '@angular/cdk/overlay';
 import { ViewContainerRef } from '@angular/core';
 
-/** Options for where to set focus to automatically on dialog open */
+/** Options for where to set focus to automatically on dialog open. */
 export type AutoFocusTarget = 'dialog' | 'first-tabbable' | 'first-heading';
 
 /** Possible overrides for a drawer's position. */
@@ -63,13 +63,13 @@ export class MtxDrawerConfig<D = any> {
   /** Scroll strategy to be used for the drawer. */
   scrollStrategy?: ScrollStrategy;
 
-  /** Position of the drawer */
+  /** Position of the drawer. */
   position?: DrawerPosition = 'right';
 
-  /** Width of the drawer.  */
+  /** Width of the drawer. */
   width?: string;
 
-  /** Height of the drawer.  */
+  /** Height of the drawer. */
   height?: string;
 
   /** Min-width of the drawer. If a number is provided, assumes pixel units. */
