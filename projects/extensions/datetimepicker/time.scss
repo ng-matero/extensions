@@ -84,6 +84,12 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   .mtx-time-pm {
     --mdc-text-button-label-text-weight: 400;
 
+    flex: 1;
+    width: $time-ampm-width;
+    min-width: auto;
+    border-width: 1px;
+    border-style: solid;
+
     @include token-utils.use-tokens($_tokens...) {
       @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-text-color);
       @include token-utils.create-token-slot(--mdc-text-button-container-shape, selector-container-shape);
@@ -96,12 +102,6 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
         @include token-utils.create-token-slot(background-color, time-ampm-selected-state-background-color);
       }
     }
-
-    flex: 1;
-    width: $time-ampm-width;
-    min-width: auto;
-    border-width: 1px;
-    border-style: solid;
 
     .mat-mdc-button-touch-target {
       height: 100%;

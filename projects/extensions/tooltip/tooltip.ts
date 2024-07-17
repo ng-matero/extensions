@@ -2,9 +2,9 @@ import { AriaDescriber, FocusMonitor } from '@angular/cdk/a11y';
 import { Directionality } from '@angular/cdk/bidi';
 import {
   BooleanInput,
-  NumberInput,
   coerceBooleanProperty,
   coerceNumberProperty,
+  NumberInput,
 } from '@angular/cdk/coercion';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import {
@@ -20,19 +20,22 @@ import {
   ScrollStrategy,
   VerticalConnectionPos,
 } from '@angular/cdk/overlay';
-import { Platform, normalizePassiveListenerOptions } from '@angular/cdk/platform';
+import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common';
 import {
-  ANIMATION_MODULE_TYPE,
+  afterNextRender,
   AfterViewInit,
+  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   Directive,
   ElementRef,
   Inject,
+  inject,
   InjectionToken,
+  Injector,
   Input,
   NgZone,
   OnDestroy,
@@ -41,10 +44,9 @@ import {
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
-  inject,
 } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { take, takeUntil } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 import { MtxIsTemplateRefPipe } from '@ng-matero/extensions/core';
 
@@ -124,6 +126,9 @@ export interface MtxTooltipDefaultOptions {
   /** Default delay when hiding the tooltip on a touch device. */
   touchendHideDelay: number;
 
+  /** Time between the user putting the pointer on a tooltip trigger and the long press event being fired on a touch device. */
+  touchLongPressShowDelay?: number;
+
   /** Default touch gesture handling for tooltips. */
   touchGestures?: TooltipTouchGestures;
 
@@ -151,12 +156,6 @@ const PANEL_CLASS = 'tooltip-panel';
 
 /** Options used to bind passive event listeners. */
 const passiveListenerOptions = normalizePassiveListenerOptions({ passive: true });
-
-/**
- * Time between the user putting the pointer on a tooltip
- * trigger and the long press event being fired.
- */
-const LONGPRESS_DELAY = 500;
 
 // These constants were taken from MDC's `numbers` object. We can't import them from MDC,
 // because they have some top-level references to `window` which break during SSR.
@@ -369,6 +368,8 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
 
   /** Emits when the component is destroyed. */
   private readonly _destroyed = new Subject<void>();
+
+  private _injector = inject(Injector);
 
   constructor(
     private _overlay: Overlay,
@@ -698,11 +699,16 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
       this._tooltipInstance.message = this.message;
       this._tooltipInstance._markForCheck();
 
-      this._ngZone.onMicrotaskEmpty.pipe(take(1), takeUntil(this._destroyed)).subscribe(() => {
-        if (this._tooltipInstance) {
-          this._overlayRef!.updatePosition();
+      afterNextRender(
+        () => {
+          if (this._tooltipInstance) {
+            this._overlayRef!.updatePosition();
+          }
+        },
+        {
+          injector: this._injector,
         }
-      });
+      );
     }
   }
 
@@ -812,7 +818,12 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
           // because it can prevent click events from firing on the element.
           this._setupPointerExitEventsIfNeeded();
           clearTimeout(this._touchstartTimeout);
-          this._touchstartTimeout = setTimeout(() => this.show(undefined, origin), LONGPRESS_DELAY);
+
+          const DEFAULT_LONGPRESS_DELAY = 500;
+          this._touchstartTimeout = setTimeout(
+            () => this.show(undefined, origin),
+            this._defaultOptions.touchLongPressShowDelay ?? DEFAULT_LONGPRESS_DELAY
+          );
         },
       ]);
     }
@@ -1122,7 +1133,10 @@ export class TooltipComponent implements OnDestroy {
     const hideClass = this._hideAnimation;
     tooltip.classList.remove(isVisible ? hideClass : showClass);
     tooltip.classList.add(isVisible ? showClass : hideClass);
-    this._isVisible = isVisible;
+    if (this._isVisible !== isVisible) {
+      this._isVisible = isVisible;
+      this._changeDetectorRef.markForCheck();
+    }
 
     // It's common for internal apps to disable animations using `* { animation: none !important }`
     // which can break the opening sequence. Try to detect such cases and work around them.

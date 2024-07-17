@@ -184,6 +184,8 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
 .ng-dropdown-panel {
   @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(background-color, panel-background-color);
+
     &.ng-select-bottom {
       top: 100%;
 
@@ -204,8 +206,6 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
     .ng-dropdown-footer {
       padding: 14px 16px;
     }
-
-    @include token-utils.create-token-slot(background-color, panel-background-color);
 
     $border-color: token-utils.get-token-variable(panel-divider-color);
 
