@@ -8,7 +8,7 @@
   "author": "nzbin<nzb329@163.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ng-matero/extensions.git"
+    "url": "git+https://github.com/ng-matero/extensions.git"
   },
   "keywords": [
     "angular",
