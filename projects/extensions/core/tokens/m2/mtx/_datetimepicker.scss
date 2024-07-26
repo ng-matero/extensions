@@ -1,9 +1,9 @@
 @use 'sass:color';
 @use 'sass:map';
 @use 'sass:meta';
-@use '@material/elevation/elevation-theme' as mdc-elevation;
 @use '@angular/material' as mat;
 @use '../../token-utils';
+@use '../../../style/elevation';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, datetimepicker);
@@ -56,8 +56,8 @@ $_today-fade-amount: .2;
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
   @return (
-    container-elevation-shadow: mdc-elevation.elevation-box-shadow(4),
-    container-touch-elevation-shadow: mdc-elevation.elevation-box-shadow(24),
+    container-elevation-shadow: elevation.get-box-shadow(4),
+    container-touch-elevation-shadow: elevation.get-box-shadow(24),
     container-shape: 4px,
     container-touch-shape: 4px,
     selector-container-shape: 4px,

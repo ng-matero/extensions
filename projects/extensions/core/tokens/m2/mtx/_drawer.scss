@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '@material/elevation' as mdc-elevation;
 @use '../../token-utils';
+@use '../../../style/elevation';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, drawer);
@@ -11,7 +11,7 @@ $prefix: (mtx, drawer);
 @function get-unthemable-tokens() {
   @return (
     container-shape: 0,
-    container-elevation-shadow: mdc-elevation.elevation-box-shadow(16),
+    container-elevation-shadow: elevation.get-box-shadow(16),
   );
 }
 

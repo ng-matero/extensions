@@ -1,10 +1,8 @@
 @use 'sass:map';
 @use 'sass:math';
-@use '@material/textfield' as mdc-textfield;
-@use '@material/density' as mdc-density;
-@use '@material/elevation' as mdc-elevation;
 @use '@angular/material' as mat;
 @use '../../token-utils';
+@use '../../../style/elevation';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, select);
@@ -21,7 +19,7 @@ $prefix: (mtx, select);
 @function get-unthemable-tokens() {
   @return (
     container-shape: 4px,
-    container-elevation-shadow: mdc-elevation.elevation-box-shadow(8),
+    container-elevation-shadow: elevation.get-box-shadow(8),
   );
 }
 

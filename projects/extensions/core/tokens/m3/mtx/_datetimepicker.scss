@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '@material/elevation' as mdc-elevation;
 @use '../../token-utils';
+@use '../../../style/elevation';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, datetimepicker);
@@ -70,8 +70,8 @@ $prefix: (mtx, datetimepicker);
     time-ampm-selected-state-text-color: map.get($systems, md-sys-color, on-tertiary-container),
     time-ampm-selected-state-background-color: map.get($systems, md-sys-color, tertiary-container),
 
-    container-elevation-shadow: token-utils.hardcode(mdc-elevation.elevation-box-shadow(0), $exclude-hardcoded),
-    container-touch-elevation-shadow: token-utils.hardcode(mdc-elevation.elevation-box-shadow(0), $exclude-hardcoded),
+    container-elevation-shadow: token-utils.hardcode(elevation.get-box-shadow(0), $exclude-hardcoded),
+    container-touch-elevation-shadow: token-utils.hardcode(elevation.get-box-shadow(0), $exclude-hardcoded),
     container-shape: map.get($systems, md-sys-shape, corner-large),
     container-touch-shape: map.get($systems, md-sys-shape, corner-extra-large),
     selector-container-shape: map.get($systems, md-sys-shape, corner-small),
