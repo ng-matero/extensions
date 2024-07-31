@@ -127,7 +127,6 @@ export class MtxTimeInput implements OnDestroy {
   blur() {
     this.writeValue(this._value);
     this.writePlaceholder(this._value);
-    this.timeValueChanged.emit(this._value);
   }
 
   focus() {
@@ -477,9 +476,10 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
         this._adapter.getDate(this.activeDate),
-        this._adapter.getHour(this._activeDate),
+        this._adapter.getHour(this.activeDate),
         minute
       );
+
       this._activeDate = this._adapter.clampDate(newValue, this.minDate, this.maxDate);
       this.activeDateChange.emit(this.activeDate);
 

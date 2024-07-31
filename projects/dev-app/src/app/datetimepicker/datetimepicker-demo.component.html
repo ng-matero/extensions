@@ -187,7 +187,7 @@
 
   <mat-form-field [color]="themeColor">
     <mat-label>Action Buttons</mat-label>
-    <mtx-datetimepicker #datetimePickerButtons type="date">
+    <mtx-datetimepicker #datetimePickerButtons type="datetime" [timeInput]="true">
       <mtx-datetimepicker-actions>
         <button mat-button mtxDatetimepickerClear>Clear</button>
         <button mat-button mtxDatetimepickerCancel>Cancel</button>
