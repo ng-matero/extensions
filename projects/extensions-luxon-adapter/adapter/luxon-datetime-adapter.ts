@@ -43,6 +43,10 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
     return date.minute;
   }
 
+  getSecond(date: DateTime<boolean>): number {
+    return date.second;
+  }
+
   isInNextMonth(startDate: DateTime, endDate: DateTime): boolean {
     const nextMonth = this.getDateInNextMonth(startDate);
     return super.sameMonthAndYear(nextMonth, endDate);
@@ -106,5 +110,17 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
 
   private getDateInNextMonth(date: DateTime) {
     return date.plus({ month: 1 });
+  }
+
+  setHour(date: DateTime<boolean>, value: number): void {
+    date.set({ hour: value });
+  }
+
+  setMinute(date: DateTime<boolean>, value: number): void {
+    date.set({ minute: value });
+  }
+
+  setSecond(date: DateTime<boolean>, value: number): void {
+    date.set({ second: value });
   }
 }

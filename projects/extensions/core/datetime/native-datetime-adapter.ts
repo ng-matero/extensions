@@ -43,7 +43,9 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
   getMinute(date: Date): number {
     return date.getMinutes();
   }
-
+  getSecond(date: Date): number {
+    return date.getSeconds();
+  }
   isInNextMonth(startDate: Date, endDate: Date): boolean {
     const nextMonth = this.getDateInNextMonth(startDate);
     return this.sameMonthAndYear(nextMonth, endDate);
@@ -200,5 +202,15 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
       result.setFullYear(this.getYear(result) - 1900);
     }
     return result;
+  }
+
+  setHour(date: Date, value: number): void {
+    date.setHours(value);
+  }
+  setMinute(date: Date, value: number): void {
+    date.setMinutes(value);
+  }
+  setSecond(date: Date, value: number): void {
+    date.setSeconds(value);
   }
 }

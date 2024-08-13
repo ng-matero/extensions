@@ -72,6 +72,10 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     return super.clone(date).minute();
   }
 
+  getSecond(date: _moment.Moment): number {
+    return date.seconds();
+  }
+
   isInNextMonth(startDate: Moment, endDate: Moment): boolean {
     const nextMonth = this.getDateInNextMonth(startDate);
     return super.sameMonthAndYear(nextMonth, endDate);
@@ -137,5 +141,15 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
 
   private getDateInNextMonth(date: Moment) {
     return super.clone(date).date(1).add({ month: 1 });
+  }
+
+  setHour(date: _moment.Moment, value: number): void {
+    date.hours(value);
+  }
+  setMinute(date: _moment.Moment, value: number): void {
+    date.minutes(value);
+  }
+  setSecond(date: _moment.Moment, value: number): void {
+    date.seconds(value);
   }
 }

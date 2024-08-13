@@ -8,6 +8,12 @@ export abstract class DatetimeAdapter<D> extends DateAdapter<D> {
   abstract getHour(date: D): number;
 
   abstract getMinute(date: D): number;
+  /**
+   * Gets the second component of the given date.
+   * @param date The date to extract the month from.
+   * @returns The second component.
+   */
+  abstract getSecond(date: D): number;
 
   abstract getFirstDateOfMonth(date: D): D;
 
@@ -28,7 +34,26 @@ export abstract class DatetimeAdapter<D> extends DateAdapter<D> {
     hour: number,
     minute: number
   ): D;
+  /**
+   * Set the hour component of the given date.
+   * @param date The date to extract the month from.
+   * @param value The value to set.
+   */
+  abstract setHour(date: D, value: number): void;
 
+  /**
+   * Set the second component of the given date.
+   * @param date The date to extract the month from.
+   * @param value The value to set.
+   */
+  abstract setMinute(date: D, value: number): void;
+
+  /**
+   * Set the second component of the given date.
+   * @param date The date to extract the month from.
+   * @param value The value to set.
+   */
+  abstract setSecond(date: D, value: number): void;
   getValidDateOrNull(obj: any): D | null {
     return this.isDateInstance(obj) && this.isValid(obj) ? obj : null;
   }

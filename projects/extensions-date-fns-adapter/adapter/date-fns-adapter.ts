@@ -7,6 +7,7 @@ import {
   addMonths,
   getHours,
   getMinutes,
+  getSeconds,
   isValid,
   startOfMonth,
 } from 'date-fns';
@@ -39,6 +40,10 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
 
   getMinute(date: Date): number {
     return getMinutes(date);
+  }
+
+  getSecond(date: Date): number {
+    return getSeconds(date);
   }
 
   isInNextMonth(startDate: Date, endDate: Date): boolean {
@@ -98,5 +103,17 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
 
   private getDateInNextMonth(date: Date) {
     return addMonths(date, 1);
+  }
+
+  setHour(date: Date, value: number): void {
+    date.setHours(value);
+  }
+
+  setMinute(date: Date, value: number): void {
+    date.setMinutes(value);
+  }
+
+  setSecond(date: Date, value: number): void {
+    date.setSeconds(value);
   }
 }
