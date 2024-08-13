@@ -1,0 +1,10 @@
+<p>
+  If you want to customize the parse and display formats, please check the issue
+  <a href="https://github.com/ng-matero/extensions/issues/141" target="_blank">#141</a>.
+</p>
+
+@if (route.data | async; as data) {
+  @for (exampleData of data.examples; track exampleData) {
+    <example-viewer [exampleData]="exampleData"></example-viewer>
+  }
+}

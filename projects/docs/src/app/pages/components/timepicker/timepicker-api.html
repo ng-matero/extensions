@@ -1,0 +1,3 @@
+@if (route.data | async; as data) {
+  <doc-viewer [textContent]="data.content.default"></doc-viewer>
+}

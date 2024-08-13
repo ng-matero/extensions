@@ -3,7 +3,6 @@
   <mat-radio-button value="accent">accent</mat-radio-button>
   <mat-radio-button value="warn">warn</mat-radio-button>
 </mat-radio-group>
-
 <form [formGroup]="group">
   <mat-form-field [color]="themeColor">
     <mat-label>DateTime</mat-label>
@@ -214,7 +213,7 @@
 <p>Selected date: {{selectedDate}}</p>
 
 <mat-card class="demo-inline-card">
-  <mtx-calendar (selectedChange)="selectedTime = $event" type="time" startView="clock">
+  <mtx-calendar [timeInterval]="5" (selectedChange)="selectedTime = $event" type="time" startView="clock">
   </mtx-calendar>
 </mat-card>
 <p>Selected time: {{selectedTime}}</p>

@@ -52,6 +52,7 @@ export class DevAppLayout {
     { name: 'Checkbox Group', route: '/checkbox-group' },
     { name: 'Data Grid', route: '/grid' },
     { name: 'Datetimepicker', route: '/datetimepicker' },
+    { name: 'Timepicker', route: '/timepicker' },
     { name: 'Dialog', route: '/dialog' },
     { name: 'Drawer', route: '/drawer' },
     { name: 'Loader', route: '/loader' },

@@ -30,6 +30,12 @@ export const DEV_APP_ROUTES: Routes = [
       import('./datetimepicker/datetimepicker-demo.component').then(
         m => m.DatetimepickerDemoComponent
       ),
+  },  {
+    path: 'timepicker',
+    loadComponent: () =>
+      import('./timepicker/timepicker-demo.component').then(
+        m => m.TimepickerDemoComponent
+      ),
   },
   {
     path: 'dialog',

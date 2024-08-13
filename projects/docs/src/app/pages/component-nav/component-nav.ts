@@ -34,6 +34,10 @@ export const COMPONENTS_MENU = [
     id: 'datetimepicker',
     name: 'Datetimepicker',
     summary: 'Allows the user to choose both dates and times.',
+  },  {
+    id: 'timepicker',
+    name: 'Timepicker',
+    summary: 'Allows the user to choose time.',
   },
   {
     id: 'dialog',

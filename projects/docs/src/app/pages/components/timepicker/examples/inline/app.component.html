@@ -1,0 +1,11 @@
+<mat-card class="demo-inline-card">
+  <mtx-calendar (selectedChange)="selectedDate = $event" type="date" startView="month">
+  </mtx-calendar>
+</mat-card>
+<p>Selected date: {{selectedDate}}</p>
+
+<mat-card class="demo-inline-card">
+  <mtx-calendar (selectedChange)="selectedTime = $event" type="time" startView="clock">
+  </mtx-calendar>
+</mat-card>
+<p>Selected time: {{selectedTime}}</p>

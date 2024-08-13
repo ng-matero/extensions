@@ -1,0 +1,89 @@
+<h2>Datetimepicker configuration</h2>
+
+<section>
+  <label>Type:</label>
+  <mat-radio-group [(ngModel)]="type">
+    <mat-radio-button value="datetime">Datetime</mat-radio-button>
+    <mat-radio-button value="date">Date</mat-radio-button>
+    <mat-radio-button value="time">Time</mat-radio-button>
+    <mat-radio-button value="month">Month</mat-radio-button>
+    <mat-radio-button value="year">Year</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <label>Mode:</label>
+  <mat-radio-group [(ngModel)]="mode">
+    <mat-radio-button value="auto">Auto</mat-radio-button>
+    <mat-radio-button value="landscape">Landscape</mat-radio-button>
+    <mat-radio-button value="portrait">Portrait</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <label>StartView:</label>
+  <mat-radio-group [(ngModel)]="startView">
+    <mat-radio-button value="month">Month</mat-radio-button>
+    <mat-radio-button value="year">Year</mat-radio-button>
+    <mat-radio-button value="multi-year">Multi-Year</mat-radio-button>
+    <mat-radio-button value="clock">Clock</mat-radio-button>
+  </mat-radio-group>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="multiYearSelector">MultiYearSelector</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="timeInput">TimeInput</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="twelvehour">Twelvehour</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox (change)="showCustomHeader($event)">Custom Header</mat-checkbox>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="actionButtons">Action Buttons</mat-checkbox>
+</section>
+
+
+<section>
+  <label>TimeInterval:</label>
+  <mat-slider min="1" max="30" discrete>
+    <input matSliderThumb [(ngModel)]="timeInterval">
+  </mat-slider>
+</section>
+
+<section>
+  <mat-checkbox [(ngModel)]="touchUi">TouchUi</mat-checkbox>
+</section>
+
+<h2>Result</h2>
+
+<mat-form-field>
+  <mat-label>{{type}}</mat-label>
+  <mtx-datetimepicker #datetimePicker
+                      [type]="type"
+                      [mode]="mode"
+                      [multiYearSelector]="multiYearSelector"
+                      [calendarHeaderComponent]="customHeader"
+                      [startView]="startView"
+                      [twelvehour]="twelvehour"
+                      [timeInterval]="timeInterval"
+                      [touchUi]="touchUi"
+                      [timeInput]="timeInput">
+    @if(actionButtons) {
+      <mtx-datetimepicker-actions>
+        <button mat-button mtxDatetimepickerClear>Clear</button>
+        <button mat-button mtxDatetimepickerCancel>Cancel</button>
+        <button mat-raised-button mtxDatetimepickerApply>Apply</button>
+      </mtx-datetimepicker-actions>
+    }
+  </mtx-datetimepicker>
+  <input [mtxDatetimepicker]="datetimePicker" [(ngModel)]="datetime" matInput required>
+  <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
+</mat-form-field>
