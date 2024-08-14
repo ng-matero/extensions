@@ -1,0 +1,104 @@
+<form [formGroup]="form">
+  <table class="mtx-timepicker-table">
+    <tbody class="mtx-timepicker-tbody">
+    <tr *ngIf="showSpinners()">
+      <td>
+        <button type="button" mat-icon-button aria-label="expand_less icon" (click)="change('hour', true)"
+                [disabled]="disabled()">
+          <mat-icon>expand_less</mat-icon>
+        </button>
+      </td>
+      <td></td>
+      <td>
+        <button type="button" mat-icon-button aria-label="expand_less icon" (click)="change('minute', true)"
+                [disabled]="disabled() || disableMinute()">
+          <mat-icon>expand_less</mat-icon>
+        </button> </td>
+      <td></td>
+      <td *ngIf="showSeconds()">
+        <button type="button" mat-icon-button aria-label="expand_less icon" (click)="change('second', true)"
+                [disabled]="disabled() || disableMinute()">
+          <mat-icon>expand_less</mat-icon>
+        </button>
+      </td>
+      <td *ngIf="enableMeridian()" class="mtx-timepicker-spacer"></td>
+      <td *ngIf="enableMeridian()"></td>
+    </tr>
+
+    <tr>
+      <td>
+        <mat-form-field appearance="fill">
+          <input type="text" matInput maxlength="2" formControlName="hour"
+                 [matAutocomplete]="auto"
+                 (selectionchange)="formatInput($any($event).target)"
+               >
+          <mat-autocomplete #auto="matAutocomplete" hideSingleSelectionIndicator panelWidth="70px" >
+            @for ( hour of hoursOfTheDay; track hour.value){
+              <mat-option [value]="hour.viewValue">{{hour.viewValue}}</mat-option>
+
+            }
+
+          </mat-autocomplete>
+        </mat-form-field>
+      </td>
+      <td class="mtx-timepicker-spacer">&#58;</td>
+      <td>
+        <mat-form-field appearance="fill" >
+<!--          <input type="text" matInput (input)="formatInput($any($event).target)" maxlength="2"-->
+<!--                 formControlName="minute" (keydown.ArrowUp)="change('minute', true); $event.preventDefault()"-->
+<!--                 (keydown.ArrowDown)="change('minute', false); $event.preventDefault()" (blur)="change('minute')">-->
+          <input type="text" matInput maxlength="2" formControlName="minute"
+                 [matAutocomplete]="minute"
+                 (selectionchange)="formatInput($any($event).target)"
+          >
+          <mat-autocomplete #minute="matAutocomplete" hideSingleSelectionIndicator panelWidth="70px" >
+            @for ( hour of minutesOfTheDay; track hour.value){
+              <mat-option [value]="hour.viewValue">{{hour.viewValue}}</mat-option>
+
+            }
+
+          </mat-autocomplete>
+        </mat-form-field>
+      </td>
+      <td *ngIf="showSeconds()" class="mtx-timepicker-spacer">&#58;</td>
+      <td *ngIf="showSeconds()">
+        <mat-form-field appearance="fill">
+          <input type="text" matInput (input)="formatInput($any($event).target)" maxlength="2"
+                 formControlName="second" (keydown.ArrowUp)="change('second', true); $event.preventDefault()"
+                 (keydown.ArrowDown)="change('second', false); $event.preventDefault()" (blur)="change('second')">
+        </mat-form-field>
+      </td>
+
+      <td *ngIf="enableMeridian()" class="mtx-timepicker-spacer"></td>
+      <td *ngIf="enableMeridian()" class="mtx-timepicker-meridian">
+        <button mat-button (click)="toggleMeridian()" mat-stroked-button [color]="color" [disabled]="disabled">
+          {{meridian}}
+        </button>
+      </td>
+    </tr>
+
+    <tr *ngIf="showSpinners()">
+      <td>
+        <button type="button" mat-icon-button aria-label="expand_more icon" (click)="change('hour', false)"
+                [disabled]="disabled()">
+          <mat-icon>expand_more</mat-icon>
+        </button> </td>
+      <td></td>
+      <td>
+        <button type="button" mat-icon-button aria-label="expand_more icon" (click)="change('minute', false)"
+                [disabled]="disabled() || disableMinute()">
+          <mat-icon>expand_more</mat-icon>
+        </button> </td>
+      <td *ngIf="showSeconds()"></td>
+      <td *ngIf="showSeconds()">
+        <button type="button" mat-icon-button aria-label="expand_more icon" (click)="change('second', false)"
+                [disabled]="disabled() || disableMinute()">
+          <mat-icon>expand_more</mat-icon>
+        </button>
+      </td>
+      <td *ngIf="enableMeridian()" class="mtx-timepicker-spacer"></td>
+      <td *ngIf="enableMeridian()"></td>
+    </tr>
+    </tbody>
+  </table>
+</form>

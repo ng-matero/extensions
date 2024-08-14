@@ -1,0 +1,83 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../core/theming/inspection';
+@use '../core/theming/validation';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/split' as tokens-mtx-split;
+
+@mixin base($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, base));
+  }
+  @else {
+    @include mat.private-current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-split.$prefix,
+        tokens-mtx-split.get-unthemable-tokens());
+    }
+  }
+}
+
+@mixin color($theme, $options...) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, color), $options...);
+  }
+  @else {
+    @include mat.private-current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-split.$prefix,
+        tokens-mtx-split.get-color-tokens($theme));
+    }
+
+    .mtx-split>.mtx-split-gutter {
+      &.mat-accent:hover {
+        $accent-tokens: tokens-mtx-split.private-get-color-palette-color-tokens($theme, accent);
+        @include token-utils.create-token-values(tokens-mtx-split.$prefix, $accent-tokens);
+      }
+
+      &.mat-warn:hover {
+        $warn-tokens: tokens-mtx-split.private-get-color-palette-color-tokens($theme, warn);
+        @include token-utils.create-token-values(tokens-mtx-split.$prefix, $warn-tokens);
+      }
+    }
+  }
+}
+
+@mixin typography($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, typography));
+  }
+  @else {}
+}
+
+@mixin density($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, density));
+  }
+  @else {}
+}
+
+@mixin theme($theme, $options...) {
+  @include mat.private-check-duplicate-theme-styles($theme, 'mtx-split') {
+    @if mat.get-theme-version($theme) == 1 {
+      @include _theme-from-tokens(inspection.get-theme-tokens($theme), $options...);
+    }
+    @else {
+      @include base($theme);
+      @if mat.theme-has($theme, color) {
+        @include color($theme);
+      }
+      @if mat.theme-has($theme, density) {
+        @include density($theme);
+      }
+      @if mat.theme-has($theme, typography) {
+        @include typography($theme);
+      }
+    }
+  }
+}
+
+@mixin _theme-from-tokens($tokens, $options...) {
+  @include validation.selector-defined(
+    'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
+  $mtx-split-tokens: token-utils.get-tokens-for($tokens, tokens-mtx-split.$prefix, $options...);
+  @include token-utils.create-token-values(tokens-mtx-split.$prefix, $mtx-split-tokens);
+}

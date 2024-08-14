@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxTimepicker",
+    "entryFile": "public-api.ts"
+  }
+}

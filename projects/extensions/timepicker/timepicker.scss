@@ -1,0 +1,77 @@
+$fontSizeIcon: 24px;
+$sizeButtonMeridian: 36px;
+$inputWidth: 48px;
+
+.mtx-timepicker {
+  form {
+
+    .mtx-timepicker-table {
+      .mtx-timepicker-tbody {
+        tr {
+          td {
+            text-align: center;
+
+            &.mtx-timepicker-spacer {
+              font-weight: bold;
+            }
+
+            &.mtx-timepicker-meridian {
+              .mdc-button {
+                min-width: 64px;
+                line-height: $sizeButtonMeridian;
+                border-radius: 4px;
+                min-width: 0;
+                border-radius: 50%;
+                width: $sizeButtonMeridian;
+                height: $sizeButtonMeridian;
+                padding: 0;
+                flex-shrink: 0;
+              }
+            }
+
+            .mat-mdc-icon-button {
+              height: $fontSizeIcon;
+              width: $fontSizeIcon;
+              line-height: $fontSizeIcon;
+              padding: 0;
+
+              .mat-icon {
+                font-size: $fontSizeIcon;
+              }
+            }
+
+            .mat-mdc-form-field {
+              width: $inputWidth;
+              max-width: $inputWidth;
+              text-align: center;
+
+              &.mat-focused,
+              &:hover {
+                .mdc-text-field--filled {
+                  .mat-mdc-form-field-focus-overlay {
+                    background-color: transparent;
+                  }
+                }
+              }
+
+              .mdc-text-field--filled {
+                background-color: transparent !important;
+                padding: 0 !important;
+
+                .mat-mdc-form-field-infix {
+                  padding: 4px 0;
+                  min-height: 1px !important;
+
+                  input {
+                    text-align: center;
+                    font-size: 14px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
