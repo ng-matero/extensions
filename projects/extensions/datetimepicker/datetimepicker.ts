@@ -420,10 +420,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   _selectManually(): void {
-    if (this.type === 'time' && !this._selected) {
-      const today = this._dateAdapter.today();
-      this._selected = today;
-      this.selectedChanged.emit(today);
+    if (!this._selected) {
+      this._selected = this._dateAdapter.today();
+      this.selectedChanged.emit(this._selected);
     } else if (!this._dateAdapter.sameDatetime(this.oldValue, this._selected)) {
       this.selectedChanged.emit((this._selected as D) || (this.oldValue as D));
     }
