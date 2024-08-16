@@ -1,6 +1,7 @@
 <div>
+  <mat-checkbox [(ngModel)]="disabled">Disabled</mat-checkbox>
+  <mat-checkbox [(ngModel)]="readonly">Readonly</mat-checkbox>
   <mat-checkbox [(ngModel)]="multipleSelect">Mulitple select</mat-checkbox>
-  <mat-checkbox [(ngModel)]="disableSelect">Disable select</mat-checkbox>
   <mat-checkbox [(ngModel)]="closeOnSelect">Close on select</mat-checkbox>
 
   <mat-radio-group [(ngModel)]="themeColor">
@@ -14,7 +15,7 @@
   <mat-label>Select Food</mat-label>
 
   <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
-              [disabled]="disableSelect" [multiple]="multipleSelect"
+              [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
               placeholder="select food" required>
   </mtx-select>
 
@@ -26,7 +27,7 @@
   <mat-label>Select Food</mat-label>
 
   <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
-              [disabled]="disableSelect" [multiple]="multipleSelect"
+              [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
               placeholder="select food" required>
   </mtx-select>
 
@@ -39,7 +40,7 @@
   <mat-label>Select Food</mat-label>
 
   <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
-              [disabled]="disableSelect" [multiple]="multipleSelect"
+              [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
               placeholder="select food" required>
   </mtx-select>
 
@@ -90,8 +91,8 @@
 <mat-form-field>
 
   <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
-              [disabled]="disableSelect" [multiple]="multipleSelect" [closeOnSelect]="closeOnSelect"
-              placeholder="select food" required>
+              [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
+              [closeOnSelect]="closeOnSelect" placeholder="select food" required>
     <!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"
                  let-searchTerm="searchTerm">
       <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.name}}
@@ -105,8 +106,8 @@
 <mat-form-field>
 
   <mtx-select [(ngModel)]="selectedAccount" [items]="accounts" bindLabel="name" bindValue="name"
-              groupBy="country" [disabled]="disableSelect" [multiple]="multipleSelect"
-              [closeOnSelect]="closeOnSelect">
+              groupBy="country" [disabled]="disabled" [readonly]="readonly"
+              [multiple]="multipleSelect" [closeOnSelect]="closeOnSelect">
     <!-- <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index"
                  let-searchTerm="searchTerm">
       {{searchTerm}}

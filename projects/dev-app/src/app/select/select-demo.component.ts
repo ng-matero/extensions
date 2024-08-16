@@ -11,8 +11,9 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 export class SelectDemoComponent {
   themeColor: ThemePalette = 'primary';
 
+  disabled = false;
+  readonly = false;
   multipleSelect = false;
-  disableSelect = false;
   closeOnSelect = true;
 
   items = [
