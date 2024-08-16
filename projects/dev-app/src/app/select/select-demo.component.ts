@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { ThemePalette } from '@angular/material/core';
 import { MatSlideToggleChange } from '@angular/material/slide-toggle';
 
 @Component({
@@ -8,8 +9,11 @@ import { MatSlideToggleChange } from '@angular/material/slide-toggle';
   styleUrls: ['./select-demo.component.scss'],
 })
 export class SelectDemoComponent {
+  themeColor: ThemePalette = 'primary';
+
+  disabled = false;
+  readonly = false;
   multipleSelect = false;
-  disableSelect = false;
   closeOnSelect = true;
 
   items = [

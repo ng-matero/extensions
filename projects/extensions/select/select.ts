@@ -474,7 +474,6 @@ export class MtxSelect
    */
   setDisabledState(isDisabled: boolean) {
     this.disabled = isDisabled;
-    this.readonly = isDisabled;
     this._changeDetectorRef.markForCheck();
     this.stateChanges.next();
   }
