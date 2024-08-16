@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../token-utils';
+@use '../../token-definition';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, colorpicker);
@@ -15,5 +15,5 @@ $prefix: (mtx, colorpicker);
     toggle-icon-color: map.get($systems, md-sys-color, on-surface-variant),
   );
 
-  @return token-utils.namespace-tokens($prefix, $tokens, $token-slots);
+  @return token-definition.namespace-tokens($prefix, $tokens, $token-slots);
 }

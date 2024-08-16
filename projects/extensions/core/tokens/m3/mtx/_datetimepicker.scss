@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../../token-utils';
+@use '../../token-definition';
 @use '../../../style/elevation';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
@@ -13,7 +13,7 @@ $prefix: (mtx, datetimepicker);
 /// @return {Map} A set of custom tokens for the mat-badge
 @function get-tokens($systems, $exclude-hardcoded, $token-slots) {
   $tokens: ((
-    calendar-header-background-color: token-utils.hardcode(transparent, $exclude-hardcoded),
+    calendar-header-background-color: token-definition.hardcode(transparent, $exclude-hardcoded),
     calendar-date-selected-state-text-color: map.get($systems, md-sys-color, on-primary),
     calendar-date-selected-state-background-color: map.get($systems, md-sys-color, primary),
     calendar-date-selected-disabled-state-background-color: mat.private-safe-color-change(
@@ -37,7 +37,7 @@ $prefix: (mtx, datetimepicker);
     calendar-table-header-text-color: map.get($systems, md-sys-color, on-surface),
     calendar-date-today-outline-color: map.get($systems, md-sys-color, primary),
     calendar-date-text-color: map.get($systems, md-sys-color, on-surface),
-    calendar-date-outline-color: token-utils.hardcode(transparent, $exclude-hardcoded),
+    calendar-date-outline-color: token-definition.hardcode(transparent, $exclude-hardcoded),
     calendar-date-disabled-state-text-color: mat.private-safe-color-change(
       map.get($systems, md-sys-color, on-surface),
       $alpha: 0.38
@@ -70,8 +70,8 @@ $prefix: (mtx, datetimepicker);
     time-ampm-selected-state-text-color: map.get($systems, md-sys-color, on-tertiary-container),
     time-ampm-selected-state-background-color: map.get($systems, md-sys-color, tertiary-container),
 
-    container-elevation-shadow: token-utils.hardcode(elevation.get-box-shadow(0), $exclude-hardcoded),
-    container-touch-elevation-shadow: token-utils.hardcode(elevation.get-box-shadow(0), $exclude-hardcoded),
+    container-elevation-shadow: token-definition.hardcode(elevation.get-box-shadow(0), $exclude-hardcoded),
+    container-touch-elevation-shadow: token-definition.hardcode(elevation.get-box-shadow(0), $exclude-hardcoded),
     container-shape: map.get($systems, md-sys-shape, corner-large),
     container-touch-shape: map.get($systems, md-sys-shape, corner-extra-large),
     selector-container-shape: map.get($systems, md-sys-shape, corner-small),
@@ -135,5 +135,5 @@ $prefix: (mtx, datetimepicker);
     )
   ));
 
-  @return token-utils.namespace-tokens($prefix, $tokens, $token-slots);
+  @return token-definition.namespace-tokens($prefix, $tokens, $token-slots);
 }

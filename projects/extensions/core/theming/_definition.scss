@@ -37,9 +37,10 @@ $theme-version: 1;
   }
 
   $type: map.get($config, theme-type) or light;
-  $primary: map.get($config, primary) or mat.$violet-palette;
+  $primary: map.get($config, primary) or palettes.$violet-palette;
   $tertiary: map.get($config, tertiary) or $primary;
-  // mat.$private-use-system-color-variables: map.get($config, use-system-variables) or false;
+  $system-variables-prefix: map.get($config, system-variables-prefix) or sys;
+  mat.$private-use-system-color-variables: map.get($config, use-system-variables) or false;
 
   @return (
     $internals: (
@@ -53,8 +54,9 @@ $theme-version: 1;
         neutral-variant: map.get($primary, neutral-variant),
         error: map.get($primary, error),
       ),
+      color-system-variables-prefix: $system-variables-prefix,
       color-tokens: m3-tokens.generate-color-tokens(
-          $type, $primary, $tertiary, map.get($primary, error))
+          $type, $primary, $tertiary, map.get($primary, error), $system-variables-prefix)
     )
   );
 }
@@ -73,13 +75,22 @@ $theme-version: 1;
   $bold: map.get($config, bold-weight) or 700;
   $medium: map.get($config, medium-weight) or 500;
   $regular: map.get($config, regular-weight) or 400;
-  // mat.$private-use-system-typography-variables: map.get($config, use-system-variables) or false;
+  $system-variables-prefix: map.get($config, system-variables-prefix) or sys;
+  mat.$private-use-system-typography-variables: map.get($config, use-system-variables) or false;
 
   @return (
     $internals: (
       theme-version: $theme-version,
+      font-definition: (
+        plain: $plain,
+        brand: $brand,
+        bold: $bold,
+        medium: $medium,
+        regular: $regular,
+      ),
+      typography-system-variables-prefix: $system-variables-prefix,
       typography-tokens: m3-tokens.generate-typography-tokens(
-          $brand, $plain, $bold, $medium, $regular)
+          $brand, $plain, $bold, $medium, $regular, $system-variables-prefix)
     )
   );
 }

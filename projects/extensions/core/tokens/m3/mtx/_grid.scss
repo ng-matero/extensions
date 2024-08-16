@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../token-utils';
+@use '../../token-definition';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, grid);
@@ -12,7 +12,7 @@ $prefix: (mtx, grid);
 @function get-tokens($systems, $exclude-hardcoded, $token-slots) {
   $tokens: (
     container-shape:  map.get($systems, md-sys-shape, corner-medium),
-    table-cell-min-width: token-utils.hardcode(80px, $exclude-hardcoded),
+    table-cell-min-width: token-definition.hardcode(80px, $exclude-hardcoded),
 
     outline-color: map.get($systems, md-sys-color, outline-variant),
     column-menu-text-color: map.get($systems, md-sys-color, on-surface-variant),
@@ -28,5 +28,5 @@ $prefix: (mtx, grid);
     resizable-handle-disabled-background-color: map.get($systems, md-sys-color, outline-variant),
   );
 
-  @return token-utils.namespace-tokens($prefix, $tokens, $token-slots);
+  @return token-definition.namespace-tokens($prefix, $tokens, $token-slots);
 }

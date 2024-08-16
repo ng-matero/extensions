@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../../token-utils';
+@use '../../token-definition';
 @use '../../../style/elevation';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
@@ -14,7 +14,7 @@ $prefix: (mtx, select);
 @function get-tokens($systems, $exclude-hardcoded, $token-slots) {
   $tokens: ((
     container-shape: map.get($systems, md-sys-shape, corner-extra-small),
-    container-elevation-shadow: token-utils.hardcode(elevation.get-box-shadow(2), $exclude-hardcoded),
+    container-elevation-shadow: token-definition.hardcode(elevation.get-box-shadow(2), $exclude-hardcoded),
 
     container-text-color: map.get($systems, md-sys-color, on-surface),
     placeholder-text-color: mat.private-safe-color-change(
@@ -26,7 +26,7 @@ $prefix: (mtx, select);
       $alpha: 0.38
     ),
 
-    multiple-value-background-color: token-utils.hardcode(transparent, $exclude-hardcoded),
+    multiple-value-background-color: token-definition.hardcode(transparent, $exclude-hardcoded),
     multiple-value-outline-color: map.get($systems, md-sys-color, outline),
     multiple-value-icon-hover-background-color: map.get($systems, md-sys-color, outline-variant),
 
@@ -68,5 +68,5 @@ $prefix: (mtx, select);
     )
   ));
 
-  @return token-utils.namespace-tokens($prefix, $tokens, $token-slots);
+  @return token-definition.namespace-tokens($prefix, $tokens, $token-slots);
 }
