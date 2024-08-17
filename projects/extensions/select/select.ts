@@ -49,6 +49,7 @@ import {
   MtxSelectNotFoundTemplate,
   MtxSelectOptgroupTemplate,
   MtxSelectOptionTemplate,
+  MtxSelectPlaceholderTemplate,
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
 } from './templates';
@@ -151,6 +152,8 @@ export class MtxSelect
   tagTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectLoadingSpinnerTemplate, { read: TemplateRef })
   loadingSpinnerTemplate!: TemplateRef<any>;
+  @ContentChild(MtxSelectPlaceholderTemplate, { read: TemplateRef })
+  placeholderTemplate!: TemplateRef<any>;
 
   @ContentChildren(MtxOption, { descendants: true })
   mtxOptions!: QueryList<MtxOption>;
