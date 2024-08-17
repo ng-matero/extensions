@@ -2290,10 +2290,10 @@
   resolved "https://registry.yarnpkg.com/@msgpackr-extract/msgpackr-extract-win32-x64/-/msgpackr-extract-win32-x64-3.0.3.tgz#0aa5502d547b57abfc4ac492de68e2006e417242"
   integrity sha512-x0fWaQtYp4E6sktbsdAqnehxDgEc/VwM7uLsRCYWaiGu0ykYdZPiS8zCWdnjHwyiumousxfBm4SO31eXqwEZhQ==
 
-"@ng-select/ng-select@^13.4.0":
-  version "13.4.1"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-13.4.1.tgz#746b3dd1b6af0dd7e556d559995c3843eaefce47"
-  integrity sha512-b8ITHwOlG1boPBbhKRLNvhXBW85OrRgo8E7fgdO0B6iwppTGD0+wSCepf4gh4z7rE/StYsrjwP+Unq0OFOZEwA==
+"@ng-select/ng-select@^13.7.0":
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-13.7.0.tgz#f8cef490af1e6ee4ef601c7e15f6441e7fa4fdeb"
+  integrity sha512-GMNu3bLYxWAbgy9pXZ4RgnWp/cxRcrWRQdxLLyg8p9gMCLpim1p4TXR8laXJKK25MKG/LEaWgs+90yCVOoWgZA==
   dependencies:
     tslib "^2.3.1"
 
@@ -6772,10 +6772,10 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-luxon@^3.4.0:
-  version "3.4.4"
-  resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.4.4.tgz#cf20dc27dc532ba41a169c43fdcc0063601577af"
-  integrity sha512-zobTr7akeGHnv7eBOXcRgMeCP6+uyYsczwmeRCauvpvaAltgNyTbLH/+VaEAPUeWBT+1GuNmz4wC/6jtQzbbVA==
+luxon@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/luxon/-/luxon-3.5.0.tgz#6b6f65c5cd1d61d1fd19dbf07ee87a50bf4b8e20"
+  integrity sha512-rh+Zjr6DNfUYR3bPwJEnuwDdqMbxZW7LOQfUN4B54+Cl+0o5zaU9RJ6bcidfDtC1cWCZXQ+nvX8bf6bAji37QQ==
 
 magic-string@0.30.10:
   version "0.30.10"
@@ -7692,10 +7692,10 @@ performance-now@^2.1.0:
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
   integrity sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==
 
-photoviewer@^3.10.1:
-  version "3.10.1"
-  resolved "https://registry.yarnpkg.com/photoviewer/-/photoviewer-3.10.1.tgz#477c20a71c2b0fa9d0136bcd78c9717c33416873"
-  integrity sha512-wPHiaamDw/Jxv/vKMsxnXNQURZXG1sk03KZFNjUscHLJNXlKc2H/xdDkMqlr6kQiAXFpCXt/+VuiMU69E066CA==
+photoviewer@^3.10.2:
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/photoviewer/-/photoviewer-3.10.2.tgz#3bc77665216a7d5ee8fcc0c71891a788c23a0537"
+  integrity sha512-liikwlwe3jsqgQPeaNR4FkM/9siAmxA9+DQB3iwO56Idg+Rxu1/t8fJDsLSza6mXZuyA6eBl/jtaCOeGlQSupg==
   dependencies:
     domq.js "^0.7.0"
 
