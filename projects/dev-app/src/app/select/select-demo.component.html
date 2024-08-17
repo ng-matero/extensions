@@ -93,6 +93,10 @@
   <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
     [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
     [closeOnSelect]="closeOnSelect" placeholder="select food" required>
+    <ng-template ng-placeholder-tmp>
+      <img height="15" width="15" src="//www.gravatar.com/avatar/b0d8c6e5ea589e6fc3d3e08afb1873bb?d=retro&r=g&s=30 2x" />
+      Select your food
+    </ng-template>
     <!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"
       let-searchTerm="searchTerm">
       <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.name}}

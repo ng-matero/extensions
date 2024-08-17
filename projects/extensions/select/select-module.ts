@@ -14,6 +14,7 @@ import {
   MtxSelectNotFoundTemplate,
   MtxSelectOptgroupTemplate,
   MtxSelectOptionTemplate,
+  MtxSelectPlaceholderTemplate,
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
 } from './templates';
@@ -38,6 +39,7 @@ import { MtxOption } from './option';
     MtxSelectLoadingTextTemplate,
     MtxSelectTagTemplate,
     MtxSelectLoadingSpinnerTemplate,
+    MtxSelectPlaceholderTemplate,
   ],
   exports: [
     MtxSelect,
@@ -53,6 +55,7 @@ import { MtxOption } from './option';
     MtxSelectLoadingTextTemplate,
     MtxSelectTagTemplate,
     MtxSelectLoadingSpinnerTemplate,
+    MtxSelectPlaceholderTemplate,
   ],
 })
 export class MtxSelectModule {}

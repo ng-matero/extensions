@@ -54,3 +54,8 @@ export class MtxSelectTagTemplate {
 export class MtxSelectLoadingSpinnerTemplate {
   constructor(public template: TemplateRef<any>) {}
 }
+
+@Directive({ selector: '[ng-placeholder-tmp]', standalone: true })
+export class MtxSelectPlaceholderTemplate {
+  constructor(public template: TemplateRef<any>) {}
+}

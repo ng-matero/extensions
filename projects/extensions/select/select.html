@@ -139,4 +139,10 @@
     </ng-template>
   }
 
+  @if (placeholderTemplate) {
+    <ng-template ng-placeholder-tmp>
+      <ng-template [ngTemplateOutlet]="placeholderTemplate"></ng-template>
+    </ng-template>
+  }
+
 </ng-select>
