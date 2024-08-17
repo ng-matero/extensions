@@ -13,12 +13,12 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   @include token-utils.use-tokens($_tokens...) {
     $border-color: token-utils.get-token-variable(outline-color);
 
-    border: 1px solid var($border-color);
+    border: 1px solid $border-color;
 
     @include token-utils.create-token-slot(border-radius, container-shape);
 
     .mat-mdc-table {
-      --mat-table-row-item-outline-color: #{var($border-color)};
+      --mat-table-row-item-outline-color: #{$border-color};
 
       &.mat-table-striped .mat-row-odd {
         @include token-utils.create-token-slot(background-color, table-row-striped-background-color);
@@ -41,7 +41,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
       .mat-mdc-cell.selected {
         $shadow-color: token-utils.get-token-variable(table-cell-selected-outline-color);
 
-        box-shadow: inset 0 0 0 1px var($shadow-color);
+        box-shadow: inset 0 0 0 1px $shadow-color;
       }
     }
   }
@@ -123,7 +123,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
     @include token-utils.use-tokens($_tokens...) {
       $border-color: token-utils.get-token-variable(outline-color);
 
-      border-top: 1px solid var($border-color);
+      border-top: 1px solid $border-color;
 
       @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
       @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
@@ -159,7 +159,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   @include token-utils.use-tokens($_tokens...) {
     $border-color: token-utils.get-token-variable(outline-color);
 
-    border-bottom: 1px solid var($border-color);
+    border-bottom: 1px solid $border-color;
   }
 }
 
@@ -186,11 +186,11 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   @include token-utils.use-tokens($_tokens...) {
     $border-color: token-utils.get-token-variable(outline-color);
 
-    border-left: 1px solid var($border-color);
+    border-left: 1px solid $border-color;
 
     [dir='rtl'] & {
       border-left-width: 0;
-      border-right: 1px solid var($border-color);
+      border-right: 1px solid $border-color;
     }
   }
 }
@@ -210,7 +210,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   @include token-utils.use-tokens($_tokens...) {
     $border-color: token-utils.get-token-variable(outline-color);
 
-    border-top: 1px solid var($border-color);
+    border-top: 1px solid $border-color;
   }
 }
 

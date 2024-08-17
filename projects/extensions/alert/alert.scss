@@ -11,7 +11,7 @@
   @include token-utils.use-tokens(tokens-mtx-alert.$prefix, tokens-mtx-alert.get-token-slots()) {
     $border-color: token-utils.get-token-variable(outline-color);
 
-    border: 1px solid var($border-color);
+    border: 1px solid $border-color;
 
     @include token-utils.create-token-slot(border-radius, container-shape);
     @include token-utils.create-token-slot(background-color, background-color);

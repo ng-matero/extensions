@@ -133,7 +133,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
     &.mtx-calendar-body-today {
       $shadow-color: token-utils.get-token-variable(calendar-date-today-selected-state-outline-color);
 
-      box-shadow: inset 0 0 0 1px var(#{$shadow-color});
+      box-shadow: inset 0 0 0 1px #{$shadow-color};
     }
   }
 }

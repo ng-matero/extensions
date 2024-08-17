@@ -36,7 +36,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   @include token-utils.use-tokens($_tokens...) {
     $border-color: token-utils.get-token-variable(column-menu-divider-color);
 
-    border-bottom: 1px solid var($border-color);
+    border-bottom: 1px solid $border-color;
   }
 }
 
@@ -46,7 +46,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   @include token-utils.use-tokens($_tokens...) {
     $border-color: token-utils.get-token-variable(column-menu-divider-color);
 
-    border-top: 1px solid var($border-color);
+    border-top: 1px solid $border-color;
   }
 }
 
@@ -83,7 +83,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
     @include token-utils.use-tokens($_tokens...) {
       $shadow-color: token-utils.get-token-variable(outline-color);
 
-      box-shadow: 0 0 0 1px var($shadow-color);
+      box-shadow: 0 0 0 1px $shadow-color;
     }
   }
 

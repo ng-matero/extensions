@@ -102,7 +102,7 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
         $border-color: token-utils.get-token-variable(multiple-value-outline-color);
 
-        border: 1px solid var($border-color);
+        border: 1px solid $border-color;
 
         @include rtl {
           margin-right: auto;
@@ -161,23 +161,23 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
     .ng-arrow {
       border-width: 5px 5px 2px;
       border-style: solid;
-      border-color: var($enabled-arrow-color) transparent transparent;
+      border-color: $enabled-arrow-color transparent transparent;
     }
 
     &.ng-select-disabled .ng-arrow {
-      border-color: var($disabled-arrow-color) transparent transparent;
+      border-color: $disabled-arrow-color transparent transparent;
     }
 
     &.ng-select-invalid .ng-arrow {
-      border-color: var($invalid-arrow-color) transparent transparent;
+      border-color: $invalid-arrow-color transparent transparent;
     }
 
     &.ng-select-opened .ng-arrow {
-      border-color: transparent transparent var($enabled-arrow-color);
+      border-color: transparent transparent $enabled-arrow-color;
     }
 
     &.ng-select-opened.ng-select-invalid .ng-arrow {
-      border-color: transparent transparent var($invalid-arrow-color);
+      border-color: transparent transparent $invalid-arrow-color;
     }
   }
 }
@@ -210,11 +210,11 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
     $border-color: token-utils.get-token-variable(panel-divider-color);
 
     .ng-dropdown-header {
-      border-bottom: 1px solid var($border-color);
+      border-bottom: 1px solid $border-color;
     }
 
     .ng-dropdown-footer {
-      border-top: 1px solid var($border-color);
+      border-top: 1px solid $border-color;
     }
 
     .ng-dropdown-panel-items {

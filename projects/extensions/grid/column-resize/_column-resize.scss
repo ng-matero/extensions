@@ -103,13 +103,13 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 
       background: linear-gradient(90deg,
           transparent, transparent 7px,
-          var($background-color) 7px, var($background-color) 9px,
+          $background-color 7px, $background-color 9px,
           transparent 9px, transparent);
 
       .mat-column-resize-overlay-thumb-top {
         background: linear-gradient(90deg,
             transparent, transparent 4px,
-            var($background-color) 4px, var($background-color) 12px,
+            $background-color 4px, $background-color 12px,
             transparent 12px, transparent);
       }
     }
