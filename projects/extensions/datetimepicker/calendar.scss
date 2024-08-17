@@ -35,7 +35,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 
         $border-color: token-utils.get-token-variable(calendar-header-divider-color);
 
-        border-right: 1px solid var($border-color);
+        border-right: 1px solid $border-color;
 
         @include token-utils.create-token-slot(border-top-left-radius, container-shape);
         @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
@@ -44,7 +44,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
           border-top-left-radius: 0;
           border-bottom-left-radius: 0;
           border-right-width: 0;
-          border-left: 1px solid var($border-color);
+          border-left: 1px solid $border-color;
 
           @include token-utils.create-token-slot(border-top-right-radius, container-shape);
           @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
@@ -106,7 +106,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
     @include token-utils.use-tokens($_tokens...) {
       $border-color: token-utils.get-token-variable(calendar-header-divider-color);
 
-      border-right: 1px solid var($border-color);
+      border-right: 1px solid $border-color;
 
       @include token-utils.create-token-slot(background-color, calendar-header-background-color);
       @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
@@ -115,7 +115,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
         left: auto;
         right: 0;
         border-right-width: 0;
-        border-left: 1px solid var($border-color);
+        border-left: 1px solid $border-color;
         border-bottom-left-radius: 0;
 
         @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
@@ -141,7 +141,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   @include token-utils.use-tokens($_tokens...) {
     $border-color: token-utils.get-token-variable(calendar-header-divider-color);
 
-    border-bottom: 1px solid var($border-color);
+    border-bottom: 1px solid $border-color;
 
     @include token-utils.create-token-slot(border-top-left-radius, container-shape);
     @include token-utils.create-token-slot(border-top-right-radius, container-shape);
