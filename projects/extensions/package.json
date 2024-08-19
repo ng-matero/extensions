@@ -50,22 +50,34 @@
     "./prebuilt-themes/purple-green.css": {
       "style": "./prebuilt-themes/purple-green.css"
     },
+    "./prebuilt-themes/azure-blue.css": {
+      "style": "./prebuilt-themes/azure-blue.css"
+    },
+    "./prebuilt-themes/rose-red.css": {
+      "style": "./prebuilt-themes/rose-red.css"
+    },
+    "./prebuilt-themes/cyan-orange.css": {
+      "style": "./prebuilt-themes/cyan-orange.css"
+    },
+    "./prebuilt-themes/magenta-violet.css": {
+      "style": "./prebuilt-themes/magenta-violet.css"
+    },
     "./prebuilt-themes/*": {
       "style": "./prebuilt-themes/*.css"
     }
   },
   "dependencies": {
-    "@ng-select/ng-select": "^13.0.0",
+    "@ng-select/ng-select": "^13.7.0",
     "ngx-color": "^9.0.0",
     "photoviewer": "^3.10.0",
     "tslib": "^2.4.0"
   },
   "peerDependencies": {
-    "@angular/animations": ">=18.0.0",
-    "@angular/cdk": ">=18.0.0",
-    "@angular/common": ">=18.0.0",
-    "@angular/core": ">=18.0.0",
-    "@angular/material": ">=18.0.0"
+    "@angular/animations": ">=18.2.0",
+    "@angular/cdk": ">=18.2.0",
+    "@angular/common": ">=18.2.0",
+    "@angular/core": ">=18.2.0",
+    "@angular/material": ">=18.2.0"
   },
   "sideEffects": false
 }
