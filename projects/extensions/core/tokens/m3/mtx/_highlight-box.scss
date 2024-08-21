@@ -14,7 +14,7 @@ $prefix: (mtx, highlight-box);
   $tokens: (
     container-shape: map.get($systems, md-sys-shape, corner-small),
     border-left-width: token-definition.hardcode(4px, $exclude-hardcoded),
-    padding: token-definition.hardcode(8px, $exclude-hardcoded),
+    padding: token-definition.hardcode(12px, $exclude-hardcoded),
     elevation-shadow: token-definition.hardcode(elevation.get-box-shadow(3), $exclude-hardcoded),
 
     border-color: map.get($systems, md-sys-color, border-variant),

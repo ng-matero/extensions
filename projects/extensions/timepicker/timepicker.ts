@@ -1,6 +1,7 @@
 import {
   ChangeDetectorRef,
-  Component, effect,
+  Component,
+  effect,
   forwardRef,
   inject,
   input,
@@ -11,18 +12,26 @@ import {
 } from '@angular/core';
 import {
   ControlValueAccessor,
-  FormBuilder, FormControl,
+  FormBuilder,
+  FormControl,
   FormGroup,
-  NG_VALUE_ACCESSOR, ReactiveFormsModule,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import {
-  DEFAULT_STEP, formatTwoDigitTimeValue, HOURS, LIMIT_TIMES,
-  MERIDIANS, MINUTES, NUMERIC_REGEX,
+  DEFAULT_STEP,
+  formatTwoDigitTimeValue,
+  HOURS,
+  LIMIT_TIMES,
+  MERIDIANS,
+  MINUTES,
+  NUMERIC_REGEX,
   PATTERN_INPUT_HOUR,
   PATTERN_INPUT_MINUTE,
-  PATTERN_INPUT_SECOND, TimeUnits,
-} from '@ng-matero/extensions/timepicker/date-utils';
+  PATTERN_INPUT_SECOND,
+  TimeUnits,
+} from './date-utils';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -86,7 +95,7 @@ export class MtxTimepicker<D> implements ControlValueAccessor, OnInit, OnChanges
   disableMinute = input(false);
   enableMeridian = input(false);
   defaultTime = input<number[]>();
-  hoursToShow = input<number[]>([8,17]);
+  hoursToShow = input<number[]>([8, 17]);
   color = 'primary';
   meridian: string = MERIDIANS.AM;
 
@@ -96,12 +105,12 @@ export class MtxTimepicker<D> implements ControlValueAccessor, OnInit, OnChanges
   }
 
   get #minute() {
-    const val = Number(this.form?.controls['minute'].value);
+    const val = Number(this.form?.controls.minute.value);
     return isNaN(val) ? 0 : val;
   }
 
   get #second() {
-    const val = Number(this.form?.controls['second'].value);
+    const val = Number(this.form?.controls.second.value);
     return isNaN(val) ? 0 : val;
   }
 
@@ -125,7 +134,7 @@ export class MtxTimepicker<D> implements ControlValueAccessor, OnInit, OnChanges
 
   constructor() {
     effect(() => {
-      if(this.hoursToShow()) {
+      if (this.hoursToShow()) {
         console.log(this.hoursToShow());
       }
     });
@@ -192,7 +201,7 @@ export class MtxTimepicker<D> implements ControlValueAccessor, OnInit, OnChanges
    * @param input
    */
   public formatInput(input: HTMLInputElement) {
-    console.log('format',input.value);
+    console.log('format', input.value);
     input.value = input.value.replace(NUMERIC_REGEX, '');
   }
 
@@ -205,7 +214,7 @@ export class MtxTimepicker<D> implements ControlValueAccessor, OnInit, OnChanges
   /** Change property of time */
   public change(prop: TimeUnits, up?: boolean) {
     const next = this.#getNextValueByProp(prop, up);
-    console.log(next)
+    console.log(next);
     this.form?.controls[prop].setValue(formatTwoDigitTimeValue(next), {
       onlySelf: false,
       emitEvent: true,
@@ -429,5 +438,3 @@ export class MtxTimepicker<D> implements ControlValueAccessor, OnInit, OnChanges
     }
   }
 }
-
-

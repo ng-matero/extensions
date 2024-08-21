@@ -13,7 +13,7 @@ $prefix: (mtx, highlight-box);
   @return (
     container-shape: 4px,
     border-left-width: 4px,
-    padding: 8px,
+    padding: 12px,
     elevation-shadow: elevation.get-box-shadow(3),
   );
 }
@@ -54,9 +54,9 @@ $prefix: (mtx, highlight-box);
     -5: 40px,
   );
   $height: map.get($size-scale, $density-scale);
-  $vertical-deduction: math.div(88px - $height, 2);
+  $vertical-deduction: math.div(68px - $height, 2);
 
-  $vertical-padding: 8px - $vertical-deduction;
+  $vertical-padding: 12px - $vertical-deduction;
   @return (
     container-height: $height,
     container-vertical-padding: $vertical-padding,
