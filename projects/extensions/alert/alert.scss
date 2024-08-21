@@ -4,15 +4,19 @@
 .mtx-alert {
   position: relative;
   display: block;
-  padding: .75rem 1rem;
+  //padding: .75rem 1rem;
   margin-bottom: 1rem;
   line-height: 1.5;
 
   @include token-utils.use-tokens(tokens-mtx-alert.$prefix, tokens-mtx-alert.get-token-slots()) {
     $border-color: token-utils.get-token-variable(outline-color);
+    $padding: token-utils.get-token-variable(container-vertical-padding);
+    @include token-utils.create-token-slot(padding-left, padding);
+    @include token-utils.create-token-slot(padding-right, padding);
 
     border: 1px solid $border-color;
-
+    padding-top: $padding;
+    padding-bottom: $padding;
     @include token-utils.create-token-slot(border-radius, container-shape);
     @include token-utils.create-token-slot(background-color, background-color);
     @include token-utils.create-token-slot(color, text-color);

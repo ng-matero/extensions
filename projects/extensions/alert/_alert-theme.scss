@@ -40,7 +40,12 @@
   @if mat.get-theme-version($theme) == 1 {
     @include _theme-from-tokens(inspection.get-theme-tokens($theme, density));
   }
-  @else {}
+  @else {
+    @include mat.private-current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-alert.$prefix,
+        tokens-mtx-alert.get-density-tokens($theme));
+    }
+  }
 }
 
 @mixin theme($theme) {
