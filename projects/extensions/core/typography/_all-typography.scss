@@ -12,6 +12,7 @@
 @use '../../select/select-theme';
 @use '../../split/split-theme';
 @use '../../tooltip/tooltip-theme';
+@use '../../highlight-box/highlight-box-theme';
 
 // Includes all of the typographic styles.
 @mixin all-component-typographies($theme: null) {
@@ -32,6 +33,7 @@
   @include select-theme.typography($theme);
   @include split-theme.typography($theme);
   @include tooltip-theme.typography($theme);
+  @include highlight-box-theme.typography($theme);
 }
 
 // @deprecated Use `all-component-typographies`.

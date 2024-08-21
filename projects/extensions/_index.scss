@@ -22,6 +22,8 @@ select-color, select-typography, select-density, select-base;
 split-color, split-typography, split-density, split-base;
 @forward './tooltip/tooltip-theme' as tooltip-* show tooltip-theme,
 tooltip-color, tooltip-typography, tooltip-density, tooltip-base;
+@forward './highlight-box/highlight-box-theme' as highlight-box-* show highlight-box-theme,
+highlight-box-color, highlight-box-typography, highlight-box-density, highlight-box-base;
 
 @forward './core/theming/definition' show define-theme, define-colors, define-typography,
   define-density;

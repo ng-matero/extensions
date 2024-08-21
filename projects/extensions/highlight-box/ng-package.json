@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxHighlightBox",
+    "entryFile": "public-api.ts"
+  }
+}

@@ -1,0 +1,38 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../../token-definition';
+@use '../../../style/elevation';
+
+// The prefix used to generate the fully qualified name for tokens in this file.
+$prefix: (mtx, highlight-box);
+
+/// Generates custom tokens for the mtx-highlight-box.
+
+@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
+  $is-dark: map.get($systems, md-sys-type) == dark;
+
+  $tokens: (
+    container-shape: map.get($systems, md-sys-shape, corner-small),
+    border-left-width: token-definition.hardcode(4px, $exclude-hardcoded),
+    padding: token-definition.hardcode(8px, $exclude-hardcoded),
+    elevation-shadow: token-definition.hardcode(elevation.get-box-shadow(3), $exclude-hardcoded),
+
+    border-color: map.get($systems, md-sys-color, border-variant),
+    background-color: map.get($systems, md-sys-color, surface-container),
+    text-color: map.get($systems, md-sys-color, on-surface),
+
+    info-border-color: map.get(mat.$azure-palette, if($is-dark, 40, 80)),
+    info-text-color: map.get(mat.$azure-palette, if($is-dark, 90, 20)),
+
+    success-border-color: map.get(mat.$green-palette, if($is-dark, 40, 80)),
+    success-text-color: map.get(mat.$green-palette, if($is-dark, 95, 20)),
+
+    warning-border-color: map.get(mat.$yellow-palette, if($is-dark, 40, 80)),
+    warning-text-color: map.get(mat.$yellow-palette, if($is-dark, 98, 20)),
+
+    danger-border-color: map.get(mat.$red-palette, if($is-dark, 40, 80)),
+    danger-text-color: map.get(mat.$red-palette, if($is-dark, 90, 20)),
+  );
+
+  @return token-definition.namespace-tokens($prefix, $tokens, $token-slots);
+}

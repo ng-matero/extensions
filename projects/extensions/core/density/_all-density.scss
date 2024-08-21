@@ -11,6 +11,7 @@
 @use '../../select/select-theme';
 @use '../../split/split-theme';
 @use '../../tooltip/tooltip-theme';
+@use '../../highlight-box/highlight-box-theme';
 
 // Includes all of the density styles.
 @mixin all-component-densities($theme) {
@@ -30,6 +31,7 @@
   @include select-theme.density($theme);
   @include split-theme.density($theme);
   @include tooltip-theme.density($theme);
+  @include highlight-box-theme.density($theme);
 }
 
 // @deprecated Use `all-component-densities`.

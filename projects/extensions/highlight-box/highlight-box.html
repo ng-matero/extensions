@@ -1,0 +1,17 @@
+<div [ngClass]="[
+      'mtx-highlight-box-'+type(),
+      'mtx-highlight-box-'+appearance()
+    ]"
+     [class.mtx-highlight-box-rounded]="rounded()">
+  @if (label()) {
+    <p class="mtx-highlight-box-outer-label">
+      <strong class="mtx-highlight-box-inner-label">
+        <span [matTooltip]="showLabelAsTooltip() ? label() : null">
+          {{ label() }}
+        </span>
+      </strong>
+      <ng-content select="mat-icon"></ng-content>
+    </p>
+  }
+  <ng-content></ng-content>
+</div>

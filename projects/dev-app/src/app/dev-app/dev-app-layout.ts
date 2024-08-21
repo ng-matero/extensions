@@ -47,6 +47,7 @@ export class DevAppLayout {
 
   navItems = [
     { name: 'Alert', route: '/alert' },
+    { name: 'Highlight Box', route: '/highlight-box' },
     { name: 'Button', route: '/button' },
     { name: 'Color Picker', route: '/colorpicker' },
     { name: 'Checkbox Group', route: '/checkbox-group' },

@@ -1,0 +1,91 @@
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/highlight-box' as tokens-mtx-highlight-box;
+$_tokens: tokens-mtx-highlight-box.$prefix, tokens-mtx-highlight-box.get-token-slots();
+
+.mtx-highlight-box {
+  div {
+    border-left-style: solid;
+    @include token-utils.use-tokens(tokens-mtx-highlight-box.$prefix, tokens-mtx-highlight-box.get-token-slots()) {
+      $height: token-utils.get-token-variable(container-height);
+      $padding: token-utils.get-token-variable(container-vertical-padding);
+
+      @include token-utils.create-token-slot(border-left-width, border-left-width);
+      @include token-utils.create-token-slot(padding-left, padding);
+      @include token-utils.create-token-slot(padding-right, padding);
+      @include token-utils.create-token-slot(background-color, background-color);
+
+      padding-top: $padding;
+      padding-bottom: $padding;
+      //min-height: #{$height};
+      .mat-icon {
+        @include token-utils.create-token-slot(color, text-color);
+      }
+
+      &.mtx-highlight-box-outlined {
+        border-top-width: 1px;
+        border-bottom-width: 1px;
+        border-right-width: 1px;
+        border-style: solid;
+      }
+
+      &.mtx-highlight-box-rounded {
+        @include token-utils.create-token-slot(border-radius, container-shape);
+      }
+
+      &.mtx-highlight-box-raised {
+        @include token-utils.create-token-slot(box-shadow, elevation-shadow);
+      }
+
+
+      &.mtx-highlight-box-info {
+        @include token-utils.create-token-slot(border-color, info-border-color);
+
+        .mat-icon {
+          @include token-utils.create-token-slot(color, info-text-color);
+        }
+      }
+
+      &.mtx-highlight-box-success {
+        @include token-utils.create-token-slot(border-color, success-border-color);
+
+        .mat-icon {
+          @include token-utils.create-token-slot(color, success-text-color);
+        }
+      }
+
+      &.mtx-highlight-box-warning {
+        @include token-utils.create-token-slot(border-color, warning-border-color);
+
+        .mat-icon {
+          @include token-utils.create-token-slot(color, warning-text-color);
+        }
+      }
+
+      &.mtx-highlight-box-danger {
+        @include token-utils.create-token-slot(border-color, danger-border-color);
+
+        .mat-icon {
+          @include token-utils.create-token-slot(color, danger-text-color);
+        }
+      }
+    }
+
+  }
+
+  .mtx-highlight-box-inner-label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+  }
+
+  .mtx-highlight-box-outer-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
+  }
+
+
+}
+

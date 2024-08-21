@@ -12,6 +12,7 @@
 @use '../../select/select-theme';
 @use '../../split/split-theme';
 @use '../../tooltip/tooltip-theme';
+@use '../../highlight-box/highlight-box-theme';
 
 // Create a theme.
 @mixin all-component-themes($theme) {
@@ -29,6 +30,7 @@
     @include select-theme.theme($theme);
     @include split-theme.theme($theme);
     @include tooltip-theme.theme($theme);
+    @include highlight-box-theme.theme($theme);
   }
 }
 
@@ -45,6 +47,7 @@
   @include select-theme.base($theme);
   @include split-theme.base($theme);
   @include tooltip-theme.base($theme);
+  @include highlight-box-theme.base($theme);
 }
 
 // @deprecated Use `all-component-themes`.

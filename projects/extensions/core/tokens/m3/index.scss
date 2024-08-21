@@ -10,6 +10,7 @@
 @use './mtx/progress' as tokens-mtx-progress;
 @use './mtx/select' as tokens-mtx-select;
 @use './mtx/split' as tokens-mtx-split;
+@use './mtx/highlight-box' as tokens-mtx-highlight-box;
 
 $_module-names: (
   // Custom tokens
@@ -23,6 +24,7 @@ $_module-names: (
   tokens-mtx-progress,
   tokens-mtx-select,
   tokens-mtx-split,
+  tokens-mtx-highlight-box,
 );
 
 /// Gets the full set of M3 tokens for the given theme object.

@@ -1,0 +1,74 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../core/theming/inspection';
+@use '../core/theming/validation';
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/highlight-box' as tokens-mtx-highlight-box;
+
+@mixin base($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, base));
+  } @else {
+    @include mat.private-current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-highlight-box.$prefix,
+        tokens-mtx-highlight-box.get-unthemable-tokens());
+    }
+  }
+}
+
+@mixin color($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, color));
+  } @else {
+    @include mat.private-current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-highlight-box.$prefix,
+        tokens-mtx-highlight-box.get-color-tokens($theme));
+    }
+  }
+}
+
+@mixin typography($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, typography));
+  } @else {
+  }
+}
+
+@mixin density($theme) {
+  @if mat.get-theme-version($theme) == 1 {
+    @include _theme-from-tokens(inspection.get-theme-tokens($theme, density));
+  } @else {
+    @include mat.private-current-selector-or-root() {
+      @include token-utils.create-token-values(tokens-mtx-highlight-box.$prefix,
+        tokens-mtx-highlight-box.get-density-tokens($theme));
+    }
+  }
+}
+
+@mixin theme($theme) {
+  @include mat.private-check-duplicate-theme-styles($theme, 'mtx-highlight-box') {
+    @if mat.get-theme-version($theme) == 1 {
+      @include _theme-from-tokens(inspection.get-theme-tokens($theme));
+    } @else {
+      @include base($theme);
+      @if mat.theme-has($theme, color) {
+        @include color($theme);
+      }
+      @if mat.theme-has($theme, density) {
+        @include density($theme);
+      }
+      @if mat.theme-has($theme, typography) {
+        @include typography($theme);
+      }
+    }
+  }
+}
+
+@mixin _theme-from-tokens($tokens) {
+  @include validation.selector-defined(
+      'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
+  @if ($tokens != ()) {
+    @include token-utils.create-token-values(tokens-mtx-highlight-box.$prefix,
+      map.get($tokens, tokens-mtx-highlight-box.$prefix));
+  }
+}
