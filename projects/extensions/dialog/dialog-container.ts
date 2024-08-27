@@ -4,7 +4,7 @@ import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angul
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 
-import { MtxToObservablePipe } from '@ng-matero/extensions/core';
+import { MtxToObservablePipe } from '@dcnx/mat-extensions/core';
 import { MtxDialogData } from './dialog-config';
 
 @Component({

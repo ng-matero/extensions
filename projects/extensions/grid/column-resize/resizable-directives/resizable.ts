@@ -22,7 +22,7 @@ import {
   ColumnResizeNotifierSource,
   HeaderRowEventDispatcher,
   ResizeStrategy,
-} from '@ng-matero/extensions/column-resize';
+} from '@dcnx/mat-extensions/column-resize';
 
 import { AbstractMatResizable, RESIZABLE_HOST_BINDINGS, RESIZABLE_INPUTS } from './common';
 

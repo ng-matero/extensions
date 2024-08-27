@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxHighlightBox } from '@ng-matero/extensions/highlight-box';
+import { MtxHighlightBox } from '@dcnx/mat-extensions/highlight-box';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 

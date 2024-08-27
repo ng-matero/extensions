@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { DrawerPosition, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/drawer';
+import { DrawerPosition, MtxDrawer, MtxDrawerRef } from '@dcnx/mat-extensions/drawer';
 
 @Component({
   selector: 'drawer-example',

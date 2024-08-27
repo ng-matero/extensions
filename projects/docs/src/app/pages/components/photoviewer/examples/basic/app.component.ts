@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MtxPhotoviewerModule } from '@ng-matero/extensions/photoviewer';
+import { MtxPhotoviewerModule } from '@dcnx/mat-extensions/photoviewer';
 
 @Component({
   selector: 'photoviewer-example',

@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
-import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
+import { MtxGridColumn, MtxGridModule } from '@dcnx/mat-extensions/grid';
 import { Observable, Subscription, fromEvent, merge } from 'rxjs';
 import { EXAMPLE_DATA } from '../../data';
 

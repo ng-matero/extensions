@@ -10,7 +10,7 @@ import {
   MTX_DRAWER_DATA,
   MtxDrawer,
   MtxDrawerRef,
-} from '@ng-matero/extensions/drawer';
+} from '@dcnx/mat-extensions/drawer';
 
 @Component({
   selector: 'dev-drawer-demo',

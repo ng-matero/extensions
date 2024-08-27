@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxTimepicker } from '@ng-matero/extensions/timepicker/timepicker';
+import { MtxTimepicker } from '@dcnx/mat-extensions/timepicker/timepicker';
 
 @Component({
   selector: 'dev-timepicker-demo',

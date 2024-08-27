@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxLoaderModule } from '@ng-matero/extensions/loader';
+import { MtxLoaderModule } from '@dcnx/mat-extensions/loader';
 
 @Component({
   selector: 'loader-example',

@@ -11,11 +11,11 @@ import { MatCardModule } from '@angular/material/card';
 import { DateAdapter, ThemePalette } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { provideMomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter';
+import { provideMomentDatetimeAdapter } from '@dcnx/mat-extensions-moment-adapter';
 import {
   MtxDatetimepickerFilterType,
   MtxDatetimepickerModule,
-} from '@ng-matero/extensions/datetimepicker';
+} from '@dcnx/mat-extensions/datetimepicker';
 import { TranslateService } from '@ngx-translate/core';
 import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';

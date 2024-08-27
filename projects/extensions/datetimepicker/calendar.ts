@@ -40,7 +40,7 @@ import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
-} from '@ng-matero/extensions/core';
+} from '@dcnx/mat-extensions/core';
 import { Subscription } from 'rxjs';
 import { MtxClock, MtxClockView } from './clock';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';

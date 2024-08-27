@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
-import { MtxTooltipModule, TooltipPosition } from '@ng-matero/extensions/tooltip';
+import { MtxTooltipModule, TooltipPosition } from '@dcnx/mat-extensions/tooltip';
 
 @Component({
   selector: 'tooltip-example',

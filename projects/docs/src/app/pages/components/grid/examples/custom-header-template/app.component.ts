@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
+import { MtxGridColumn, MtxGridModule } from '@dcnx/mat-extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
-import { MtxGridColumn, MtxGridColumnPinOption, MtxGridModule } from '@ng-matero/extensions/grid';
+import { MtxGridColumn, MtxGridColumnPinOption, MtxGridModule } from '@dcnx/mat-extensions/grid';
 import { TranslateService } from '@ngx-translate/core';
 import { EXAMPLE_DATA } from '../../data';
 

@@ -1,6 +1,6 @@
 import { Inject, Injectable, Optional } from '@angular/core';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { DatetimeAdapter } from '@dcnx/mat-extensions/core';
 import {
   addHours,
   addMinutes,

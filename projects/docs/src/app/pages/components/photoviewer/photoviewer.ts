@@ -1,7 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
-import { MtxAlert } from '@ng-matero/extensions/alert';
+import { MtxAlert } from '@dcnx/mat-extensions/alert';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { photoviewerBasicExampleConfig } from './examples/basic';

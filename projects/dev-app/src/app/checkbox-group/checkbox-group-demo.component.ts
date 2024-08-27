@@ -5,7 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import {
   MtxCheckboxGroupModule,
   MtxCheckboxGroupOption,
-} from '@ng-matero/extensions/checkbox-group';
+} from '@dcnx/mat-extensions/checkbox-group';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

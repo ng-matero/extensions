@@ -32,7 +32,7 @@ import {
   PATTERN_INPUT_SECOND,
   TimeUnits,
 } from './date-utils';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { DatetimeAdapter } from '@dcnx/mat-extensions/core';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NgIf } from '@angular/common';

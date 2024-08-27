@@ -17,7 +17,7 @@ import { ThemePalette } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 
-import { MtxToObservablePipe } from '@ng-matero/extensions/core';
+import { MtxToObservablePipe } from '@dcnx/mat-extensions/core';
 import {
   MtxGridButtonType,
   MtxGridColumn,

@@ -21,7 +21,7 @@ import {
 import { MatButton } from '@angular/material/button';
 import { SubscriptionLike } from 'rxjs';
 
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { DatetimeAdapter } from '@dcnx/mat-extensions/core';
 import { MtxClock, MtxClockView } from './clock';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';

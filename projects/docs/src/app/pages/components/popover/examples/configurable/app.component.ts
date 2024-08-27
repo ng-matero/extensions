@@ -13,7 +13,7 @@ import {
   MtxPopoverPositionEnd,
   MtxPopoverPositionStart,
   MtxPopoverTriggerEvent,
-} from '@ng-matero/extensions/popover';
+} from '@dcnx/mat-extensions/popover';
 
 @Component({
   selector: 'popover-example',

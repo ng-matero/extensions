@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
+import { MtxGridColumn, MtxGridModule } from '@dcnx/mat-extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({

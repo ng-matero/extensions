@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
-import { MtxAlertModule, MtxAlertType } from '@ng-matero/extensions/alert';
+import { MtxAlertModule, MtxAlertType } from '@dcnx/mat-extensions/alert';
 
 @Component({
   selector: 'alert-example',

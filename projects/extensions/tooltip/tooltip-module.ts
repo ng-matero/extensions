@@ -4,7 +4,7 @@ import { A11yModule } from '@angular/cdk/a11y';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
 import { MatCommonModule } from '@angular/material/core';
-import { MtxPipesModule } from '@ng-matero/extensions/core';
+import { MtxPipesModule } from '@dcnx/mat-extensions/core';
 import {
   MtxTooltip,
   TooltipComponent,

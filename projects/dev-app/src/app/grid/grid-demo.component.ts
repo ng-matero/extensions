@@ -15,7 +15,7 @@ import {
   MtxGridModule,
   MtxGridRowClassFormatter,
   MtxGridRowSelectionFormatter,
-} from '@ng-matero/extensions/grid';
+} from '@dcnx/mat-extensions/grid';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription, finalize, fromEvent, merge } from 'rxjs';
 import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';

@@ -42,7 +42,7 @@ import { ThemePalette } from '@angular/material/core';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { DatetimeAdapter } from '@dcnx/mat-extensions/core';
 import { MtxCalendar } from './calendar';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';

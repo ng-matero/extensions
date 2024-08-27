@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
-import { MtxGrid, MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
+import { MtxGrid, MtxGridColumn, MtxGridModule } from '@dcnx/mat-extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({

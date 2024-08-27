@@ -5,8 +5,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
-import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
-import { MtxProgressModule, MtxProgressType } from '@ng-matero/extensions/progress';
+import { MtxColorpickerModule } from '@dcnx/mat-extensions/colorpicker';
+import { MtxProgressModule, MtxProgressType } from '@dcnx/mat-extensions/progress';
 
 @Component({
   selector: 'progress-example',

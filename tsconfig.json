@@ -20,14 +20,14 @@
     "types": ["jasmine"],
     "lib": ["ES2022", "dom"],
     "paths": {
-      "@ng-matero/extensions": ["projects/extensions"],
-      "@ng-matero/extensions/*": ["projects/extensions/*"],
-      "@ng-matero/extensions-moment-adapter": ["projects/extensions-moment-adapter"],
-      "@ng-matero/extensions-moment-adapter/*": ["projects/extensions-moment-adapter/*"],
-      "@ng-matero/extensions-luxon-adapter": ["projects/extensions-luxon-adapter"],
-      "@ng-matero/extensions-luxon-adapter/*": ["projects/extensions-luxon-adapter/*"],
-      "@ng-matero/extensions-date-fns-adapter": ["projects/extensions-date-fns-adapter"],
-      "@ng-matero/extensions-date-fns-adapter/*": ["projects/extensions-date-fns-adapter/*"]
+      "@dcnx/mat-extensions": ["projects/extensions"],
+      "@dcnx/mat-extensions/*": ["projects/extensions/*"],
+      "@dcnx/mat-extensions-moment-adapter": ["projects/extensions-moment-adapter"],
+      "@dcnx/mat-extensions-moment-adapter/*": ["projects/extensions-moment-adapter/*"],
+      "@dcnx/mat-extensions-luxon-adapter": ["projects/extensions-luxon-adapter"],
+      "@dcnx/mat-extensions-luxon-adapter/*": ["projects/extensions-luxon-adapter/*"],
+      "@dcnx/mat-extensions-date-fns-adapter": ["projects/extensions-date-fns-adapter"],
+      "@dcnx/mat-extensions-date-fns-adapter/*": ["projects/extensions-date-fns-adapter/*"]
     },
     "useDefineForClassFields": false,
     "allowSyntheticDefaultImports": true

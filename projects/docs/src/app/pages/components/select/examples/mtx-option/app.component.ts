@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MtxSelectModule } from '@ng-matero/extensions/select';
+import { MtxSelectModule } from '@dcnx/mat-extensions/select';
 
 @Component({
   selector: 'select-example',

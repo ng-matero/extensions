@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { MtxDialog } from '@ng-matero/extensions/dialog';
+import { MtxDialog } from '@dcnx/mat-extensions/dialog';
 
 @Component({
   selector: 'dialog-example',

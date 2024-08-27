@@ -6,7 +6,7 @@ import {
   MtxGridColumn,
   MtxGridModule,
   MtxGridRowSelectionFormatter,
-} from '@ng-matero/extensions/grid';
+} from '@dcnx/mat-extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({

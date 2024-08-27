@@ -5,7 +5,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ThemePalette } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatRadioModule } from '@angular/material/radio';
-import { MtxButtonModule } from '@ng-matero/extensions/button';
+import { MtxButtonModule } from '@dcnx/mat-extensions/button';
 
 @Component({
   selector: 'dev-button-demo',

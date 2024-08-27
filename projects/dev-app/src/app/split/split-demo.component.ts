@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatRadioModule } from '@angular/material/radio';
-import { MtxSplitModule } from '@ng-matero/extensions/split';
+import { MtxSplitModule } from '@dcnx/mat-extensions/split';
 
 @Component({
   selector: 'dev-split',

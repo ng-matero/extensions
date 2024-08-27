@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
-import { MtxDialog } from '@ng-matero/extensions/dialog';
+import { MtxDialog } from '@dcnx/mat-extensions/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

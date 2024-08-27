@@ -3,8 +3,8 @@
   "compilerOptions": {
     "declarationMap": false,
     "paths": {
-      "@ng-matero/extensions": ["dist/extensions"],
-      "@ng-matero/extensions/*": ["dist/extensions/*"]
+      "@dcnx/mat-extensions": ["dist/extensions"],
+      "@dcnx/mat-extensions/*": ["dist/extensions/*"]
     }
   },
   "angularCompilerOptions": {

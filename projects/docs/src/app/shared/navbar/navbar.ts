@@ -51,7 +51,7 @@ export class Navbar implements OnInit {
 
   ngOnInit(): void {
     this.version$ = this.http
-      .get('https://registry.npmjs.org/@ng-matero/extensions')
+      .get('https://registry.npmjs.org/@dcnx/mat-extensions')
       .pipe(map((data: any) => data['dist-tags'].latest));
   }
 }

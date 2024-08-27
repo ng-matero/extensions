@@ -48,7 +48,7 @@ import {
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
-import { MtxIsTemplateRefPipe } from '@ng-matero/extensions/core';
+import { MtxIsTemplateRefPipe } from '@dcnx/mat-extensions/core';
 
 /** Possible positions for a tooltip. */
 export type TooltipPosition = 'left' | 'right' | 'above' | 'below' | 'before' | 'after';

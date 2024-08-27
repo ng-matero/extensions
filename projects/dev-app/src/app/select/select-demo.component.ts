@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { MtxSelectModule } from '@ng-matero/extensions/select';
+import { MtxSelectModule } from '@dcnx/mat-extensions/select';
 
 @Component({
   selector: 'dev-app-select',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxGridColumn, MtxGridModule, MtxGridRowClassFormatter } from '@ng-matero/extensions/grid';
+import { MtxGridColumn, MtxGridModule, MtxGridRowClassFormatter } from '@dcnx/mat-extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({

@@ -10,7 +10,7 @@ import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
-} from '@ng-matero/extensions/core';
+} from '@dcnx/mat-extensions/core';
 import { MomentDatetimeAdapter } from './moment-datetime-adapter';
 import { MTX_MOMENT_DATETIME_FORMATS } from './moment-datetime-formats';
 

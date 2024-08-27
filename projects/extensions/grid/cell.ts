@@ -21,8 +21,8 @@ import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
 import { isObservable } from 'rxjs';
 
-import { MtxToObservablePipe } from '@ng-matero/extensions/core';
-import { MtxDialog } from '@ng-matero/extensions/dialog';
+import { MtxToObservablePipe } from '@dcnx/mat-extensions/core';
+import { MtxDialog } from '@dcnx/mat-extensions/dialog';
 import {
   MtxGridCellActionBadgePipe,
   MtxGridCellActionDisablePipe,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxSplitModule } from '@ng-matero/extensions/split';
+import { MtxSplitModule } from '@dcnx/mat-extensions/split';
 
 @Component({
   selector: 'split-pane-example',

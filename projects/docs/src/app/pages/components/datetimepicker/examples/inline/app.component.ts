@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { provideNativeDatetimeAdapter } from '@ng-matero/extensions/core';
-import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
+import { provideNativeDatetimeAdapter } from '@dcnx/mat-extensions/core';
+import { MtxDatetimepickerModule } from '@dcnx/mat-extensions/datetimepicker';
 
 @Component({
   selector: 'datetimepicker-example',

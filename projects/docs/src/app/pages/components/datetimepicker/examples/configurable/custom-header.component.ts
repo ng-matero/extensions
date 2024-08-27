@@ -5,13 +5,13 @@ import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
-} from '@ng-matero/extensions/core';
+} from '@dcnx/mat-extensions/core';
 import {
   MtxCalendar,
   MtxCalendarView,
   MtxClockView,
   MtxAMPM,
-} from '@ng-matero/extensions/datetimepicker';
+} from '@dcnx/mat-extensions/datetimepicker';
 
 /** Custom header component for datetimepicker. */
 @Component({

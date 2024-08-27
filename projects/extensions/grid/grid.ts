@@ -49,7 +49,7 @@ import {
   MatTableDataSource,
 } from '@angular/material/table';
 
-import { MtxIsTemplateRefPipe, MtxToObservablePipe } from '@ng-matero/extensions/core';
+import { MtxIsTemplateRefPipe, MtxToObservablePipe } from '@dcnx/mat-extensions/core';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
 import { MatColumnResize, MatResizable } from './column-resize';

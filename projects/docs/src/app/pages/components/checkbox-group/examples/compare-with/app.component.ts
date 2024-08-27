@@ -2,7 +2,7 @@ import { JsonPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDividerModule } from '@angular/material/divider';
-import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
+import { MtxCheckboxGroupModule } from '@dcnx/mat-extensions/checkbox-group';
 
 @Component({
   selector: 'checkbox-group-example',

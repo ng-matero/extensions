@@ -16,7 +16,7 @@ import {
   booleanAttribute,
 } from '@angular/core';
 
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { DatetimeAdapter } from '@dcnx/mat-extensions/core';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxAMPM } from './datetimepicker-types';
 
@@ -408,7 +408,7 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
     }
 
     // if there is a dateFilter, check if the date is allowed if it is not then do not set/emit new date
-    // https://github.com/ng-matero/extensions/issues/244
+    // https://github.com/dcnx/mat-extensions/issues/244
     if (
       this.dateFilter &&
       !this.dateFilter(

@@ -4,7 +4,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/drawer';
+import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@dcnx/mat-extensions/drawer';
 
 @Component({
   selector: 'drawer-example',

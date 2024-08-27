@@ -4,7 +4,7 @@ import {
   MAT_LUXON_DATE_ADAPTER_OPTIONS,
   MatLuxonDateAdapterOptions,
 } from '@angular/material-luxon-adapter';
-import { DatetimeAdapter } from '@ng-matero/extensions/core';
+import { DatetimeAdapter } from '@dcnx/mat-extensions/core';
 import { DateTime } from 'luxon';
 
 function range<T>(length: number, valueFunction: (index: number) => T): T[] {

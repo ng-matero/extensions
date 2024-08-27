@@ -31,7 +31,7 @@ import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
-} from '@ng-matero/extensions/core';
+} from '@dcnx/mat-extensions/core';
 import { MtxDatetimepicker } from './datetimepicker';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';

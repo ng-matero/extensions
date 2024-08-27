@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
+import { MtxCheckboxGroupModule } from '@dcnx/mat-extensions/checkbox-group';
 
 @Component({
   selector: 'checkbox-group-example',

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { TinyColor } from '@ctrl/tinycolor';
-import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
+import { MtxColorpickerModule } from '@dcnx/mat-extensions/colorpicker';
 import { ColorEvent } from 'ngx-color';
 import { ColorSketchModule } from 'ngx-color/sketch';
 

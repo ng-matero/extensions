@@ -19,7 +19,7 @@ import {
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
 
-import { MtxToObservablePipe } from '@ng-matero/extensions/core';
+import { MtxToObservablePipe } from '@dcnx/mat-extensions/core';
 import { MtxCheckboxGroupOption } from './interfaces';
 
 export class MtxCheckboxBase {

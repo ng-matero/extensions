@@ -5,13 +5,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
-import { provideMomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter';
+import { provideMomentDatetimeAdapter } from '@dcnx/mat-extensions-moment-adapter';
 import {
   MtxCalendarView,
   MtxDatetimepickerMode,
   MtxDatetimepickerModule,
   MtxDatetimepickerType,
-} from '@ng-matero/extensions/datetimepicker';
+} from '@dcnx/mat-extensions/datetimepicker';
 import { CustomHeader } from './custom-header.component';
 import { MatButtonModule } from '@angular/material/button';
 

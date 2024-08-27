@@ -9,7 +9,7 @@ import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
-} from '@ng-matero/extensions/core';
+} from '@dcnx/mat-extensions/core';
 import { LuxonDatetimeAdapter } from './luxon-datetime-adapter';
 import { MTX_LUXON_DATETIME_FORMATS } from './luxon-datetime-formats';
 

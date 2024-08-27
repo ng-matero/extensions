@@ -5,7 +5,7 @@ import {
   ColumnResizeNotifier,
   ColumnResizeNotifierSource,
   HeaderRowEventDispatcher,
-} from '@ng-matero/extensions/column-resize';
+} from '@dcnx/mat-extensions/column-resize';
 
 import {
   TABLE_LAYOUT_FIXED_RESIZE_STRATEGY_PROVIDER,

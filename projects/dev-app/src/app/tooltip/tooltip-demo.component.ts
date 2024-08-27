@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
+import { MtxTooltipModule } from '@dcnx/mat-extensions/tooltip';
 
 @Component({
   selector: 'dev-tooltip-demo',

@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSlideToggleChange, MatSlideToggleModule } from '@angular/material/slide-toggle';
-import { ColorFormat, MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
+import { ColorFormat, MtxColorpickerModule } from '@dcnx/mat-extensions/colorpicker';
 import { ColorSketchModule } from 'ngx-color/sketch';
 
 @Component({

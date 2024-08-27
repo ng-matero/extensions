@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { MtxPopoverModule } from '@ng-matero/extensions/popover';
+import { MtxPopoverModule } from '@dcnx/mat-extensions/popover';
 
 @Component({
   selector: 'dev-popover-demo',

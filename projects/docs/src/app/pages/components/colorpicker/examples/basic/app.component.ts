@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
-import { ColorFormat, MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
+import { ColorFormat, MtxColorpickerModule } from '@dcnx/mat-extensions/colorpicker';
 
 @Component({
   selector: 'color-picker-example',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MtxProgressModule } from '@ng-matero/extensions/progress';
+import { MtxProgressModule } from '@dcnx/mat-extensions/progress';
 
 @Component({
   selector: 'progress-example',

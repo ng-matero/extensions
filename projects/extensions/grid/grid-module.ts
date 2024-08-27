@@ -17,8 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatColumnResizeModule } from './column-resize/column-resize-module';
 
-import { MtxPipesModule } from '@ng-matero/extensions/core';
-import { MtxDialogModule } from '@ng-matero/extensions/dialog';
+import { MtxPipesModule } from '@dcnx/mat-extensions/core';
+import { MtxDialogModule } from '@dcnx/mat-extensions/dialog';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
 import { MtxGridExpansionToggle } from './expansion-toggle';

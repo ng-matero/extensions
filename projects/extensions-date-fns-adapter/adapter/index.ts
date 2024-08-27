@@ -5,7 +5,7 @@ import {
   DatetimeAdapter,
   MTX_DATETIME_FORMATS,
   MtxDatetimeFormats,
-} from '@ng-matero/extensions/core';
+} from '@dcnx/mat-extensions/core';
 import { DateFnsDateTimeAdapter } from './date-fns-adapter';
 import { MTX_DATE_FNS_FORMATS } from './date-fns-formats';
 
