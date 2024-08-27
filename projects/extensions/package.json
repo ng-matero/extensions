@@ -1,21 +1,14 @@
 {
-  "name": "@ng-matero/extensions",
+  "name": "@dcnx/mat-extensions",
   "version": "18.2.0",
   "description": "Angular Material Extensions",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "nzbin<nzb329@163.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ng-matero/extensions.git"
-  },
+
   "keywords": [
     "angular",
     "angular-material",
     "angular-components",
     "angular-material-extensions",
-    "ng-matero",
+    "dcnx",
     "data-grid",
     "ngx-data-grid",
     "material-data-table",
@@ -30,10 +23,6 @@
     "datetimepicker"
   ],
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ng-matero/extensions/issues"
-  },
-  "homepage": "https://ng-matero.github.io/extensions/",
   "exports": {
     ".": {
       "sass": "./_index.scss"

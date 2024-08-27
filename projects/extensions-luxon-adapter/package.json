@@ -1,21 +1,13 @@
 {
-  "name": "@ng-matero/extensions-luxon-adapter",
+  "name": "@dcnx/mat-extensions-luxon-adapter",
   "version": "18.0.0",
   "description": "Angular Material Extensions Luxon Adapter",
-  "publishConfig": {
-    "access": "public"
-  },
-  "author": "Jelle Bruisten <jelle_bruisten@hotmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ng-matero/extensions.git"
-  },
   "license": "MIT",
   "peerDependencies": {
     "@angular/core": ">=18.0.0",
     "@angular/material": ">=18.0.0",
     "@angular/material-luxon-adapter": ">=18.0.0",
-    "@ng-matero/extensions": ">=18.0.0",
+    "@dcnx/mat-extensions": ">=18.0.0",
     "luxon": "^3.4.0"
   },
   "dependencies": {
