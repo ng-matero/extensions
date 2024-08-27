@@ -1,0 +1,58 @@
+@use '../core/tokens/token-utils';
+@use '../core/tokens/m2/mtx/file-upload' as tokens-mtx-file-upload;
+
+$_tokens: tokens-mtx-file-upload.$prefix, tokens-mtx-file-upload.get-token-slots();
+
+.mtx-file-upload {
+  @include token-utils.use-tokens(tokens-mtx-file-upload.$prefix, tokens-mtx-file-upload.get-token-slots()) {
+    $padding: token-utils.get-token-variable(container-vertical-padding);
+
+    .mtx-file-upload-wrapper {
+      padding-top: $padding;
+      padding-bottom: $padding;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      border-style: dashed;
+      @include token-utils.create-token-slot(border-width, border-width);
+      @include token-utils.create-token-slot(padding, padding);
+      @include token-utils.create-token-slot(margin-bottom, margin);
+      @include token-utils.create-token-slot(border-color, border-color);
+      @include token-utils.create-token-slot(border-radius, container-shape);
+      //cursor: pointer;
+    }
+
+    .mtx-file-upload-wrapper.mtx-file-upload-success {
+      @include token-utils.create-token-slot(border-color, success-border-color);
+    }
+
+    .file-upload-wrapper.mtx-file-upload-error {
+      @include token-utils.create-token-slot(border-color, error-border-color);
+    }
+
+    .mtx-file-upload-file-dropper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .mtx-file-upload-image-name {
+      font-weight: bold;
+    }
+
+    .mtx-file-upload-image-preview {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 0.5rem;
+      @include token-utils.create-token-slot(border-radius, container-shape);
+    }
+
+    .mtx-file-upload-delete-icon {
+      cursor: pointer;
+      color: red;
+    }
+  }
+}

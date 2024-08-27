@@ -24,6 +24,8 @@ split-color, split-typography, split-density, split-base;
 tooltip-color, tooltip-typography, tooltip-density, tooltip-base;
 @forward './highlight-box/highlight-box-theme' as highlight-box-* show highlight-box-theme,
 highlight-box-color, highlight-box-typography, highlight-box-density, highlight-box-base;
+@forward './highlight-box/highlight-box-theme' as file-upload-* show file-upload-theme,
+file-upload-color, file-upload-typography, file-upload-density, file-upload-base;
 
 @forward './core/theming/definition' show define-theme, define-colors, define-typography,
   define-density;

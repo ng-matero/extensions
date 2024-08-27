@@ -1,0 +1,24 @@
+@use 'sass:map';
+@use '@angular/material' as mat;
+@use '../../token-definition';
+
+// The prefix used to generate the fully qualified name for tokens in this file.
+$prefix: (mtx, file-upload);
+
+/// Generates custom tokens for the mtx-highlight-box.
+
+@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
+  $is-dark: map.get($systems, md-sys-type) == dark;
+
+  $tokens: (
+    container-shape: map.get($systems, md-sys-shape, corner-medium),
+    padding: token-definition.hardcode(12px, $exclude-hardcoded),
+    margin: token-definition.hardcode(16px, $exclude-hardcoded),
+    border-width: token-definition.hardcode(2px, $exclude-hardcoded),
+    border-color: map.get($systems, md-sys-color, outline),
+    success-border-color: map.get(mat.$green-palette, if($is-dark, 40, 80)),
+    error-border-color: map.get(mat.$red-palette, if($is-dark, 40, 80)),
+  );
+
+  @return token-definition.namespace-tokens($prefix, $tokens, $token-slots);
+}

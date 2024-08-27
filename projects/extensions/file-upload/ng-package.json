@@ -1,0 +1,6 @@
+{
+  "lib": {
+    "flatModuleFile": "mtxFileUploadBox",
+    "entryFile": "public-api.ts"
+  }
+}

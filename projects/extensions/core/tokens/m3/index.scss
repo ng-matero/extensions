@@ -11,6 +11,7 @@
 @use './mtx/select' as tokens-mtx-select;
 @use './mtx/split' as tokens-mtx-split;
 @use './mtx/highlight-box' as tokens-mtx-highlight-box;
+@use './mtx/file-upload' as tokens-mtx-file-upload;
 
 $_module-names: (
   // Custom tokens
@@ -25,6 +26,7 @@ $_module-names: (
   tokens-mtx-select,
   tokens-mtx-split,
   tokens-mtx-highlight-box,
+  tokens-mtx-file-upload,
 );
 
 /// Gets the full set of M3 tokens for the given theme object.

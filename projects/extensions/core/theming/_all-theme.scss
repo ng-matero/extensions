@@ -13,6 +13,7 @@
 @use '../../split/split-theme';
 @use '../../tooltip/tooltip-theme';
 @use '../../highlight-box/highlight-box-theme';
+@use '../../file-upload/file-upload-theme';
 
 // Create a theme.
 @mixin all-component-themes($theme) {
@@ -31,6 +32,7 @@
     @include split-theme.theme($theme);
     @include tooltip-theme.theme($theme);
     @include highlight-box-theme.theme($theme);
+    @include file-upload-theme.theme($theme);
   }
 }
 
@@ -48,6 +50,7 @@
   @include split-theme.base($theme);
   @include tooltip-theme.base($theme);
   @include highlight-box-theme.base($theme);
+  @include file-upload-theme.base($theme);
 }
 
 // @deprecated Use `all-component-themes`.

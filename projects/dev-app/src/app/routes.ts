@@ -50,6 +50,11 @@ export const DEV_APP_ROUTES: Routes = [
     loadComponent: () => import('./drawer/drawer-demo.component').then(m => m.DrawerDemoComponent),
   },
   {
+    path: 'file-upload',
+    loadComponent: () =>
+      import('./file-upload/file-upload-demo.component').then(m => m.FileUploadDemoComponent),
+  },
+  {
     path: 'grid',
     loadComponent: () => import('./grid/grid-demo.component').then(m => m.GridDemoComponent),
   },

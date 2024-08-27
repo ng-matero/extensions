@@ -56,6 +56,7 @@ export class DevAppLayout {
     { name: 'Timepicker', route: '/timepicker' },
     { name: 'Dialog', route: '/dialog' },
     { name: 'Drawer', route: '/drawer' },
+    { name: 'File Upload', route: '/file-upload' },
     { name: 'Loader', route: '/loader' },
     { name: 'Photoviewer', route: '/photoviewer' },
     { name: 'Popover', route: '/popover' },

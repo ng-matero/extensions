@@ -22,6 +22,9 @@ $_density-tokens: (
       container-height: (68px, 64px, 60px, 56px, 52px, 40px),
       container-vertical-padding: (16px, 14px, 12px, 10px, 8px, 6px),
     ),
+    (mtx, file-upload): (
+      container-vertical-padding: (16px, 14px, 12px, 10px, 8px, 6px),
+    ),
 );
 
 /// Gets the value for the given density scale from the given set of density values.
