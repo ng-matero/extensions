@@ -157,6 +157,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
       this._overlayRef = null;
     }
 
+    this._halt = true;
     this._positionSubscription.unsubscribe();
     this._popoverCloseSubscription.unsubscribe();
     this._closingActionsSubscription.unsubscribe();
