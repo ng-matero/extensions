@@ -224,6 +224,7 @@
 @function progress($systems, $exclude-hardcoded) {
   @return (
     container-shape: map.get($systems, md-sys-shape, corner-extra-small),
+    text-size: map.get($systems, md-sys-typescale, label-medium-size),
 
     track-color: map.get($systems, md-sys-color, surface-container),
     indicator-color: map.get($systems, md-sys-color, outline-variant),
