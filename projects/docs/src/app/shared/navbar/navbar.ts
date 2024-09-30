@@ -5,7 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { NgProgressModule } from 'ngx-progressbar';
+import { NgProgressbar } from 'ngx-progressbar';
+import { NgProgressRouter } from 'ngx-progressbar/router';
 import { map } from 'rxjs';
 import { AppLogo } from '../logo/logo';
 import { NavigationFocusService } from '../navigation-focus/navigation-focus.service';
@@ -17,7 +18,8 @@ import { AppThemes } from '../themes';
   styleUrl: './navbar.scss',
   standalone: true,
   imports: [
-    NgProgressModule,
+    NgProgressbar,
+    NgProgressRouter,
     RouterLink,
     RouterLinkActive,
     MatButtonModule,
