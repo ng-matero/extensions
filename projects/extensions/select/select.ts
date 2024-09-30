@@ -410,6 +410,7 @@ export class MtxSelect
 
   ngAfterViewInit() {
     if (!this._itemsAreUsed) {
+      this.ngSelect.escapeHTML = false;
       this._setItemsFromMtxOptions();
     }
   }
