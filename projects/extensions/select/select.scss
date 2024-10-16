@@ -57,6 +57,14 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
       .mat-form-field-hide-placeholder & {
         opacity: 0;
       }
+
+      &:empty::before{
+        content: " ";
+        white-space: pre;
+        width: 1px;
+        display: inline-block;
+        visibility: hidden;
+      }
     }
 
     .ng-has-value .ng-placeholder {
