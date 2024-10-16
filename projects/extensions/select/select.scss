@@ -160,6 +160,7 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
     .ng-arrow-wrapper {
       width: 10px;
+      transform: var(--mat-select-arrow-transform);
     }
 
     $enabled-arrow-color: token-utils.get-token-variable(enabled-arrow-color);
