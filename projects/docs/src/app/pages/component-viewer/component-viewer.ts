@@ -21,7 +21,7 @@ import { ComponentPageTitle } from '../page-title/page-title';
   imports: [MatTabsModule, NavigationFocus, RouterLinkActive, RouterLink, RouterOutlet],
 })
 export class ComponentViewer implements OnDestroy {
-  sections: Set<string> = new Set(['overview', 'api']);
+  sections = new Set<string>(['overview', 'api']);
   private _destroyed = new Subject<void>();
 
   componentId = '';

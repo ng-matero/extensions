@@ -6,11 +6,11 @@
   <mtx-select [items]="cities" groupBy="avatar" [(ngModel)]="selectedCity"
               bindLabel="name" bindValue="name" appendTo="app-select-overview">
     <ng-template ng-label-tmp let-item="item">
-      <img height="15" width="15" [src]="item.avatar" />
+      <img height="15" width="15" [src]="item.avatar" alt="" />
       <b>{{item.name}}</b>
     </ng-template>
     <ng-template ng-optgroup-tmp let-item="item" let-index="index">
-      City group logo <img height="15" width="15" [src]="item.avatar" />
+      City group logo <img height="15" width="15" [src]="item.avatar" alt="" />
     </ng-template>
     <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
       <b>{{item.name}}</b>

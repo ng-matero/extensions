@@ -234,17 +234,17 @@ export class MtxSplit implements AfterViewInit, OnDestroy {
   }
   private transitionEndSubscriber!: Subscriber<MtxSplitOutputAreaSizes>;
 
-  private dragProgressSubject: Subject<MtxSplitOutputData> = new Subject();
+  private dragProgressSubject = new Subject<MtxSplitOutputData>();
   dragProgress$: Observable<MtxSplitOutputData> = this.dragProgressSubject.asObservable();
 
   private isDragging = false;
-  private dragListeners: Array<() => void> = [];
+  private dragListeners: (() => void)[] = [];
   private snapshot: MtxSplitSnapshot | null = null;
   private startPoint: MtxSplitPoint | null = null;
   private endPoint: MtxSplitPoint | null = null;
 
-  public readonly displayedAreas: Array<MtxSplitArea> = [];
-  private readonly hidedAreas: Array<MtxSplitArea> = [];
+  public readonly displayedAreas: MtxSplitArea[] = [];
+  private readonly hidedAreas: MtxSplitArea[] = [];
 
   @ViewChildren('gutterEls') private gutterEls!: QueryList<ElementRef>;
 

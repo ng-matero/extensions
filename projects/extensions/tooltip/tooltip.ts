@@ -984,7 +984,7 @@ export class TooltipComponent implements OnDestroy {
   private _isVisible = false;
 
   /** Subject for notifying that the tooltip has been hidden from the view */
-  private readonly _onHide: Subject<void> = new Subject();
+  private readonly _onHide = new Subject<void>();
 
   /** Name of the show animation and the class that toggles it. */
   private readonly _showAnimation = 'mtx-mdc-tooltip-show';

@@ -1,7 +1,7 @@
 <h2>Alert configuration</h2>
 
 <section>
-  <label>Type:</label>
+  <label for="">Type:</label>
   <mat-radio-group [(ngModel)]="type">
     <mat-radio-button value="info">Info</mat-radio-button>
     <mat-radio-button value="success">Success</mat-radio-button>
@@ -15,7 +15,7 @@
 </section>
 
 <section>
-  <label>Elevation:</label>
+  <label for="">Elevation:</label>
   <mat-slider min="0" max="24" discrete>
     <input matSliderThumb [(ngModel)]="elevation">
   </mat-slider>

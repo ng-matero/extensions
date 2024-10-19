@@ -21,8 +21,8 @@ export interface MtxSplitSnapshot {
   allAreasSizePixel: number;
   allInvolvedAreasSizePercent: number;
   lastSteppedOffset: number;
-  areasBeforeGutter: Array<MtxSplitAreaSnapshot>;
-  areasAfterGutter: Array<MtxSplitAreaSnapshot>;
+  areasBeforeGutter: MtxSplitAreaSnapshot[];
+  areasAfterGutter: MtxSplitAreaSnapshot[];
 }
 
 export interface MtxSplitAreaSnapshot {
@@ -35,7 +35,7 @@ export interface MtxSplitAreaSnapshot {
 
 export interface MtxSplitSideAbsorptionCapacity {
   remain: number;
-  list: Array<MtxSplitAreaAbsorptionCapacity>;
+  list: MtxSplitAreaAbsorptionCapacity[];
 }
 
 export interface MtxSplitAreaAbsorptionCapacity {
@@ -52,7 +52,7 @@ export interface MtxSplitOutputData {
   sizes: MtxSplitOutputAreaSizes;
 }
 
-export type MtxSplitOutputAreaSizes = Array<number | '*'>;
+export type MtxSplitOutputAreaSizes = (number | '*')[];
 
 export interface MtxSplitDefaultOptions {
   color?: ThemePalette;

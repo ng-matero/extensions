@@ -51,7 +51,6 @@ export class MtxDrawerConfig<D = any> {
    * @breaking-change 14.0.0 Remove boolean option from autoFocus. Use string or
    * AutoFocusTarget instead.
    */
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   autoFocus?: AutoFocusTarget | string | boolean = 'first-tabbable';
 
   /**

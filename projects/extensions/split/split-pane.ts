@@ -105,7 +105,7 @@ export class MtxSplitPane implements OnInit, OnDestroy {
   private _visible = true;
 
   private transitionListener!: () => void;
-  private readonly lockListeners: Array<() => void> = [];
+  private readonly lockListeners: (() => void)[] = [];
 
   constructor(
     private ngZone: NgZone,

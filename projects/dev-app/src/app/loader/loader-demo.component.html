@@ -2,24 +2,24 @@
   <mat-checkbox [(ngModel)]="loading">Loading</mat-checkbox>
   <mat-checkbox [(ngModel)]="hasBackdrop">hasBackdrop</mat-checkbox>
 
-  <label>Type:</label>
+  <label for="">Type:</label>
   <mat-radio-group [(ngModel)]="type">
     <mat-radio-button value="spinner">spinner</mat-radio-button>
     <mat-radio-button value="progressbar">progressbar</mat-radio-button>
   </mat-radio-group>
 
-  <label>Color:</label>
+  <label for="">Color:</label>
   <mat-radio-group [(ngModel)]="color">
     <mat-radio-button value="primary">primary</mat-radio-button>
     <mat-radio-button value="accent">accent</mat-radio-button>
     <mat-radio-button value="warn">warn</mat-radio-button>
   </mat-radio-group>
 
-  <label>StrokeWidth:</label>
+  <label for="">StrokeWidth:</label>
   <mat-slider [max]="10" [min]="1">
     <input matSliderThumb [(ngModel)]="strokeWidth">
   </mat-slider>
-  <label>Diameter:</label>
+  <label for="">Diameter:</label>
   <mat-slider [max]="100" [min]="10">
     <input matSliderThumb [(ngModel)]="diameter">
   </mat-slider>

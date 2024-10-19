@@ -52,7 +52,7 @@ export function getInputPositiveNumber<T>(v: any, defaultValue: T): number | T {
 
 export function isUserSizesValid(
   unit: 'percent' | 'pixel',
-  sizes: Array<number>
+  sizes: number[]
 ): boolean | number | void {
   // All sizes have to be not null and total should be 100
   if (unit === 'percent') {
@@ -108,7 +108,7 @@ export function getAreaMaxSize(a: MtxSplitArea): null | number {
 
 export function getGutterSideAbsorptionCapacity(
   unit: 'percent' | 'pixel',
-  sideAreas: Array<MtxSplitAreaSnapshot>,
+  sideAreas: MtxSplitAreaSnapshot[],
   pixels: number,
   allAreasSizePixel: number
 ): MtxSplitSideAbsorptionCapacity {

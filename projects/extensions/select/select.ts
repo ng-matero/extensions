@@ -525,7 +525,6 @@ export class MtxSelect
   }
 
   /** Assigns a specific value to the select. Returns whether the value has changed. */
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
   private _assignValue(newValue: any | any[]): boolean {
     // Always re-assign an array, because it might have been mutated.
     if (newValue !== this._value || (this.multiple && Array.isArray(newValue))) {

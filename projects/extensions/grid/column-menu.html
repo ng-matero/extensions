@@ -64,6 +64,7 @@
 }
 
 <mat-menu #menu="matMenu" class="mtx-grid-column-menu">
+  <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->
   <div class="mtx-grid-column-menu-content"
     (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
     @if (showHeader) {

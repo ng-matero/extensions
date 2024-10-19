@@ -6,7 +6,7 @@
   <mtx-select [items]="cities" [(ngModel)]="selectedCity" bindLabel="name" bindValue="name"
               appendTo="app-select-overview">
     <ng-template ng-label-tmp let-item="item">
-      <img height="15" width="15" [src]="item.avatar" />
+      <img height="15" width="15" [src]="item.avatar" alt="" />
       {{item.name}}
     </ng-template>
   </mtx-select>
