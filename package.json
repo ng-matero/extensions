@@ -59,15 +59,10 @@
     "photoviewer": "^3.10.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.6.0",
-    "zone.js": "~0.15.0"
+    "zone.js": "~0.14.10"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^18.2.0",
-    "@angular-eslint/builder": "^18.3.0",
-    "@angular-eslint/eslint-plugin": "^18.3.0",
-    "@angular-eslint/eslint-plugin-template": "^18.3.0",
-    "@angular-eslint/schematics": "^18.3.0",
-    "@angular-eslint/template-parser": "^18.3.0",
     "@angular/cli": "^18.2.0",
     "@angular/compiler-cli": "^18.2.0",
     "@commitlint/cli": "^19.5.0",
@@ -76,10 +71,9 @@
     "@types/jasminewd2": "~2.0.10",
     "@types/luxon": "^3.4.0",
     "@types/node": "^22.7.0",
-    "@typescript-eslint/eslint-plugin": "^7.16.0",
-    "@typescript-eslint/parser": "^7.16.0",
     "angular-cli-ghpages": "^2.0.0",
-    "eslint": "^8.57.0",
+    "angular-eslint": "^18.3.1",
+    "eslint": "^9.13.0",
     "highlight-loader": "^0.7.4",
     "highlight.js": "^11.10.0",
     "husky": "^8.0.3",
@@ -100,6 +94,7 @@
     "stylelint-config-recommended-scss": "^14.1.0",
     "stylelint-config-standard": "^36.0.0",
     "ts-node": "~10.9.0",
-    "typescript": "~5.5.2"
+    "typescript": "~5.5.2",
+    "typescript-eslint": "^8.10.0"
   }
 }

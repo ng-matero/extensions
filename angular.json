@@ -228,15 +228,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/docs/**/*.ts",
-              "projects/docs/**/*.html"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -247,6 +238,16 @@
             "production": {
               "devServerTarget": "docs:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/docs/**/*.ts",
+              "projects/docs/**/*.html"
+            ],
+            "eslintConfig": "projects/docs/eslint.config.js"
           }
         }
       }
@@ -260,7 +261,7 @@
       },
       "root": "projects/dev-app",
       "sourceRoot": "projects/dev-app/src",
-      "prefix": "app",
+      "prefix": "dev",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
@@ -353,15 +354,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/dev-app/**/*.ts",
-              "projects/dev-app/**/*.html"
-            ]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -372,6 +364,16 @@
             "production": {
               "devServerTarget": "dev-app:serve:production"
             }
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/dev-app/**/*.ts",
+              "projects/dev-app/**/*.html"
+            ],
+            "eslintConfig": "projects/dev-app/eslint.config.js"
           }
         }
       }
