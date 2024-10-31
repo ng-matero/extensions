@@ -56,6 +56,8 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   /** Step over minutes. */
   @Input() interval: number = 1;
 
+  @Input() actionButtons: boolean = false;
+
   /** Whether the clock uses 12 hour format. */
   @Input({ transform: booleanAttribute }) twelvehour: boolean = false;
 
@@ -209,7 +211,7 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
 
     if (this._timeChanged) {
       this.selectedChange.emit(this.activeDate);
-      if (!this._hourView) {
+      if (this.actionButtons || !this._hourView) {
         this._userSelection.emit();
       }
     }
