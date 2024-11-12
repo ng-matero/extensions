@@ -110,7 +110,12 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   }
 
   .mat-sort-header-icon {
-    margin: 0 4px;
+    margin-left: 4px;
+
+    [dir='rtl'] & {
+      margin-left: 0;
+      margin-right: 4px;
+    }
   }
 
   .mat-header-cell-inner {
