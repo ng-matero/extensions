@@ -55,6 +55,13 @@
   @else {}
 }
 
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values(
+    $tokens,
+    (prefix: tokens-mtx-split.$prefix, tokens: tokens-mtx-split.get-token-slots()),
+  );
+}
+
 @mixin theme($theme, $options...) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-split') {
     @if mat.get-theme-version($theme) == 1 {

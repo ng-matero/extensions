@@ -1,32 +1,31 @@
 @forward './alert/alert-theme' as alert-* show alert-theme,
-alert-color, alert-typography, alert-density, alert-base;
+alert-color, alert-typography, alert-density, alert-base, alert-overrides;
 @forward './button/button-theme' as button-* show button-theme,
-button-color, button-typography, button-density, button-base;
+button-color, button-typography, button-density, button-base, button-overrides;
 @forward './colorpicker/colorpicker-theme' as colorpicker-* show colorpicker-theme,
-colorpicker-color, colorpicker-typography, colorpicker-density, colorpicker-base;
+colorpicker-color, colorpicker-typography, colorpicker-density, colorpicker-base, colorpicker-overrides;
 @forward './datetimepicker/datetimepicker-theme' as datetimepicker-* show datetimepicker-theme,
-datetimepicker-color, datetimepicker-typography, datetimepicker-density, datetimepicker-base;
+datetimepicker-color, datetimepicker-typography, datetimepicker-density, datetimepicker-base, datetimepicker-overrides;
 @forward './drawer/drawer-theme' as drawer-* show drawer-theme,
-drawer-color, drawer-typography, drawer-density, drawer-base;
+drawer-color, drawer-typography, drawer-density, drawer-base, drawer-overrides;
 @forward './grid/grid-theme' as grid-* show grid-theme,
-grid-color, grid-typography, grid-density, grid-base;
+grid-color, grid-typography, grid-density, grid-base, grid-overrides;
 @forward './loader/loader-theme' as loader-* show loader-theme,
-loader-color, loader-typography, loader-density, loader-base;
+loader-color, loader-typography, loader-density, loader-base, loader-overrides;
 @forward './popover/popover-theme' as popover-* show popover-theme,
-popover-color, popover-typography, popover-density, popover-base;
+popover-color, popover-typography, popover-density, popover-base, popover-overrides;
 @forward './progress/progress-theme' as progress-* show progress-theme,
-progress-color, progress-typography, progress-density, progress-base;
+progress-color, progress-typography, progress-density, progress-base, progress-overrides;
 @forward './select/select-theme' as select-* show select-theme,
-select-color, select-typography, select-density, select-base;
+select-color, select-typography, select-density, select-base, select-overrides;
 @forward './split/split-theme' as split-* show split-theme,
-split-color, split-typography, split-density, split-base;
+split-color, split-typography, split-density, split-base, split-overrides;
 @forward './tooltip/tooltip-theme' as tooltip-* show tooltip-theme,
-tooltip-color, tooltip-typography, tooltip-density, tooltip-base;
+tooltip-color, tooltip-typography, tooltip-density, tooltip-base, tooltip-overrides;
 
 @forward './core/theming/definition' show define-theme, define-colors, define-typography,
-  define-density;
-@forward './core/theming/color-api-backwards-compatibility' show
-  color-variants-backwards-compatibility;
+define-density;
+@forward './core/theming/color-api-backwards-compatibility' show color-variants-backwards-compatibility;
 
 @forward './core/tokens/m2' show m2-tokens-from-theme;
 @forward './core/tokens/m3-tokens' show system-level-colors, system-level-typography;

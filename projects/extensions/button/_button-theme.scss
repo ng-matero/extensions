@@ -1,4 +1,4 @@
-@use './button-loading.scss';
+@use './button-loading';
 
 @mixin base($theme) {}
 
@@ -7,5 +7,7 @@
 @mixin typography($theme) {}
 
 @mixin density($theme) {}
+
+@mixin overrides($tokens: ()) {}
 
 @mixin theme($theme) {}

@@ -51,6 +51,13 @@
   }
 }
 
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values(
+    $tokens,
+    (prefix: tokens-mtx-grid.$prefix, tokens: tokens-mtx-grid.get-token-slots()),
+  );
+}
+
 @mixin theme($theme) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-grid') {
     @if mat.get-theme-version($theme) == 1 {

@@ -60,6 +60,13 @@
   }
 }
 
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values(
+    $tokens,
+    (prefix: tokens-mtx-select.$prefix, tokens: tokens-mtx-select.get-token-slots()),
+  );
+}
+
 @mixin theme($theme, $options...) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-select') {
     @if mat.get-theme-version($theme) == 1 {

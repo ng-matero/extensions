@@ -43,6 +43,13 @@
   @else {}
 }
 
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values(
+    $tokens,
+    (prefix: tokens-mtx-loader.$prefix, tokens: tokens-mtx-loader.get-token-slots()),
+  );
+}
+
 @mixin theme($theme) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-loader') {
     @if mat.get-theme-version($theme) == 1 {

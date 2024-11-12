@@ -77,6 +77,13 @@
   @else {}
 }
 
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values(
+    $tokens,
+    (prefix: tokens-mtx-datetimepicker.$prefix, tokens: tokens-mtx-datetimepicker.get-token-slots()),
+  );
+}
+
 @mixin theme($theme, $options...) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-datetimepicker') {
     @if mat.get-theme-version($theme) == 1 {

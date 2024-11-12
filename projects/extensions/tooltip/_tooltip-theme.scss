@@ -62,6 +62,13 @@
   }
 }
 
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values(
+    $tokens,
+    (prefix: tokens-mdc-plain-tooltip.$prefix, tokens: tokens-mdc-plain-tooltip.get-token-slots()),
+  );
+}
+
 @mixin theme($theme) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-tooltip') {
     @if mat.get-theme-version($theme) == 1 {
