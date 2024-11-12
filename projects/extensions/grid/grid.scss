@@ -230,8 +230,8 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   @include token-utils.use-tokens($_tokens...) {
     $compat-size: token-utils.get-token-variable(row-expand-button-size);
 
-    width: var(--mdc-icon-button-state-layer-size, var($compat-size));
-    height: var(--mdc-icon-button-state-layer-size, var($compat-size));
+    width: var(--mdc-icon-button-state-layer-size, $compat-size);
+    height: var(--mdc-icon-button-state-layer-size, $compat-size);
   }
 }
 
@@ -251,10 +251,4 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   +mtx-grid-cell {
     vertical-align: middle;
   }
-}
-
-.mtx-grid-icon {
-  width: 20px;
-  height: 20px;
-  font-size: 20px;
 }

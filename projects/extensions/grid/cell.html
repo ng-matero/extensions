@@ -39,8 +39,7 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <ng-template [ngTemplateOutlet]="iconTpl"
-                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
                   <span>{{btn.text | toObservable | async}}</span>
                 </button>
               }
@@ -65,8 +64,7 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <ng-template [ngTemplateOutlet]="iconTpl"
-                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
                   <span>{{btn.text | toObservable | async}}</span>
                 </button>
               }
@@ -91,8 +89,7 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <ng-template [ngTemplateOutlet]="iconTpl"
-                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
                   <span>{{btn.text | toObservable | async}}</span>
                 </button>
               }
@@ -117,8 +114,7 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <ng-template [ngTemplateOutlet]="iconTpl"
-                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
                 </button>
               }
               @case ('fab') {
@@ -142,8 +138,7 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <ng-template [ngTemplateOutlet]="iconTpl"
-                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
                 </button>
               }
               @case ('mini-fab') {
@@ -167,8 +162,7 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <ng-template [ngTemplateOutlet]="iconTpl"
-                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
                 </button>
               }
               @default {
@@ -192,8 +186,7 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <ng-template [ngTemplateOutlet]="iconTpl"
-                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
                   <span>{{btn.text | toObservable | async}}</span>
                 </button>
               }
