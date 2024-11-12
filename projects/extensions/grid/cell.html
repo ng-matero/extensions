@@ -39,9 +39,8 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  @if (btn.icon) {
-                    <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
-                  }
+                  <ng-template [ngTemplateOutlet]="iconTpl"
+                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
                   <span>{{btn.text | toObservable | async}}</span>
                 </button>
               }
@@ -66,9 +65,8 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  @if (btn.icon) {
-                    <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
-                  }
+                  <ng-template [ngTemplateOutlet]="iconTpl"
+                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
                   <span>{{btn.text | toObservable | async}}</span>
                 </button>
               }
@@ -93,9 +91,8 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  @if (btn.icon) {
-                    <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
-                  }
+                  <ng-template [ngTemplateOutlet]="iconTpl"
+                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
                   <span>{{btn.text | toObservable | async}}</span>
                 </button>
               }
@@ -120,7 +117,8 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
+                  <ng-template [ngTemplateOutlet]="iconTpl"
+                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
                 </button>
               }
               @case ('fab') {
@@ -144,7 +142,8 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
+                  <ng-template [ngTemplateOutlet]="iconTpl"
+                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
                 </button>
               }
               @case ('mini-fab') {
@@ -168,7 +167,8 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
+                  <ng-template [ngTemplateOutlet]="iconTpl"
+                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
                 </button>
               }
               @default {
@@ -192,9 +192,8 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   (click)="_onActionClick($event, btn, rowData)">
-                  @if (btn.icon) {
-                    <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
-                  }
+                  <ng-template [ngTemplateOutlet]="iconTpl"
+                               [ngTemplateOutletContext]="{ $implicit: btn }"></ng-template>
                   <span>{{btn.text | toObservable | async}}</span>
                 </button>
               }
@@ -257,3 +256,13 @@
     }
   }
 }
+
+<ng-template #iconTpl let-btn>
+  @if (btn.icon) {
+    <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
+  } @else if(btn.fontIcon) {
+    <mat-icon class="mtx-grid-icon" [fontIcon]="btn.fontIcon"></mat-icon>
+  } @else if(btn.svgIcon) {
+    <mat-icon class="mtx-grid-icon" [svgIcon]="btn.svgIcon"></mat-icon>
+  }
+</ng-template>

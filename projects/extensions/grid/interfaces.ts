@@ -89,6 +89,8 @@ export interface MtxGridColumnButton<T = any> {
   type?: MtxGridButtonType;
   text?: string | Observable<string>;
   icon?: string;
+  fontIcon?: string;
+  svgIcon?: string;
   color?: ThemePalette;
   class?: string;
   disabled?: boolean | ((rowData: T) => boolean);
