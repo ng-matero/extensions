@@ -386,6 +386,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** Handles date selection in the month view. */
   _dateSelected(date: D): void {
     if (this.type === 'date') {
+      this._onActiveDateChange(date);
       if (!this._adapter.sameDate(date, this.selected) || !this.preventSameDateTimeSelection) {
         this.selectedChange.emit(date);
       }
@@ -454,6 +455,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   _updateDate(date: D): D {
+    console.log(date);
     if (this.twelvehour) {
       const HOUR = this._adapter.getHour(date);
       if (HOUR === 12) {
