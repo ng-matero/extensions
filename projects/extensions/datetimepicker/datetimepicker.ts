@@ -423,7 +423,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     if (!this._selected) {
       this._selected = this._dateAdapter.today();
       this.selectedChanged.emit(this._selected);
-    } else if (!this._dateAdapter.sameDatetime(this.oldValue, this._selected)) {
+    } else {
       this.selectedChanged.emit((this._selected as D) || (this.oldValue as D));
     }
     this.close();
