@@ -460,7 +460,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
         if (this._AMPM === 'AM') {
           return this._adapter.addCalendarHours(date, -12);
         }
-      } else if (this._AMPM === 'PM') {
+      } else if (this._AMPM === 'PM' && !this.actionsPortal) {
         return this._adapter.addCalendarHours(date, 12);
       }
     }
