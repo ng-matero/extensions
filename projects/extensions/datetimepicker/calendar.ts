@@ -455,7 +455,6 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   _updateDate(date: D): D {
-    console.log(date);
     if (this.twelvehour) {
       const HOUR = this._adapter.getHour(date);
       if (HOUR === 12) {
