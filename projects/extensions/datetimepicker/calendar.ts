@@ -475,6 +475,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     } else {
       this._AMPM = 'AM';
     }
+    if (this.actionsPortal && this._selected && !this._adapter.sameHour(date, this._selected)) {
+      this.selectedChange.emit(date);
+    }
   }
 
   _ampmClicked(source: MtxAMPM): void {
