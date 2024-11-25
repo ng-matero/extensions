@@ -443,10 +443,9 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
     if (this._clockView !== 'minute') {
       this._activeDate = this._updateDate(date);
       this._clockView = 'minute';
-    } else {
-      if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
-        this.selectedChange.emit(date);
-      }
+    }
+    if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
+      this.selectedChange.emit(date);
     }
   }
 
