@@ -433,7 +433,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   _timeSelected(date: D) {
-    this._activeDate = this._updateDate(date);
+    this._activeDate = date;
     if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
       this.selectedChange.emit(date);
     }
@@ -441,7 +441,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   _dialTimeSelected(date: D): void {
     if (this._clockView !== 'minute') {
-      this._activeDate = this._updateDate(date);
+      this._activeDate = date;
       this._clockView = 'minute';
     }
     if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
@@ -451,20 +451,6 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   _onActiveDateChange(date: D) {
     this._activeDate = date;
-  }
-
-  _updateDate(date: D): D {
-    if (this.twelvehour) {
-      const HOUR = this._adapter.getHour(date);
-      if (HOUR === 12) {
-        if (this._AMPM === 'AM') {
-          return this._adapter.addCalendarHours(date, -12);
-        }
-      } else if (this._AMPM === 'PM' && !this.actionsPortal) {
-        return this._adapter.addCalendarHours(date, 12);
-      }
-    }
-    return date;
   }
 
   _selectAMPM(date: D) {
