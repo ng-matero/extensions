@@ -180,10 +180,13 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   private _startAt!: D | null;
 
   /**
-   * Whether the calendar is in time mode. In time mode the calendar clock gets time input elements
-   * rather then just clock. When touchUi is enabled this will be disabled
+   * Whether the calendar is in time mode. In time mode the calendar clock gets time input
+   * elements rather then just clock. When `touchUi` is enabled this will be disabled.
    */
   @Input({ transform: booleanAttribute }) timeInput = false;
+
+  /** Whether the time input should be auto-focused after view init.  */
+  @Input({ transform: booleanAttribute }) timeInputAutoFocus = true;
 
   /** The currently selected date. */
   @Input()

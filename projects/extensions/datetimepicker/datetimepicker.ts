@@ -344,6 +344,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
    */
   @Input({ transform: booleanAttribute }) timeInput = false;
 
+  /** Whether the time input should be auto-focused after view init.  */
+  @Input({ transform: booleanAttribute }) timeInputAutoFocus = true;
+
   /** Whether the datetimepicker pop-up should be disabled. */
   @Input({ transform: booleanAttribute })
   get disabled(): boolean {

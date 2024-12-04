@@ -259,6 +259,9 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   /** Input for action buttons. */
   @Input() actionsPortal: TemplatePortal | null = null;
 
+  /** Whether the time input should be auto-focused after view init. */
+  @Input({ transform: booleanAttribute }) autoFocus = true;
+
   @ViewChild('hourInput', { read: ElementRef<HTMLInputElement> })
   protected hourInputElement: ElementRef<HTMLInputElement> | undefined;
 
@@ -279,9 +282,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   /** Whether the time is now in AM or PM. */
   @Input() AMPM: MtxAMPM = 'AM';
 
-  /**
-   * The date to display in this clock view.
-   */
+  /** The date to display in this clock view. */
   @Input()
   get activeDate(): D {
     return this._activeDate;
@@ -394,14 +395,16 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   ngOnChanges(changes: SimpleChanges): void {
     // when clockView changes by input we should focus the correct input
     if (changes.clockView) {
-      if (changes.clockView.currentValue !== changes.clockView.previousValue) {
+      if (changes.clockView.currentValue !== changes.clockView.previousValue && this.autoFocus) {
         this.focusInputElement();
       }
     }
   }
 
   ngAfterViewInit(): void {
-    this.focusInputElement();
+    if (this.autoFocus) {
+      this.focusInputElement();
+    }
   }
 
   ngOnDestroy(): void {

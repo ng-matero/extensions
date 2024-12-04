@@ -4,6 +4,8 @@
   <mat-radio-button value="warn">warn</mat-radio-button>
 </mat-radio-group>
 
+<mat-checkbox [(ngModel)]="timeInputAutoFocus">timeInputAutoFocus</mat-checkbox>
+
 <form [formGroup]="group">
   <mat-form-field [color]="themeColor">
     <mat-label>DateTime</mat-label>
@@ -26,7 +28,7 @@
     <mat-label>DateTime with manual input</mat-label>
     <mtx-datetimepicker-toggle [for]="datetimePickerManual" matSuffix />
     <mtx-datetimepicker #datetimePickerManual startView="month" [timeInterval]="5"
-      [timeInput]="true" />
+      [timeInput]="true" [timeInputAutoFocus]="timeInputAutoFocus" />
     <input [mtxDatetimepicker]="datetimePickerManual" [max]="tomorrow" [min]="today"
       autocomplete="false" formControlName="dateTimeManual" matInput required>
     @if (group.get('dateTimeManual')?.errors?.required) {
@@ -71,7 +73,8 @@
   <mat-form-field [color]="themeColor">
     <mat-label>Time AM/PM</mat-label>
     <mtx-datetimepicker-toggle [for]="timeAMPMPicker2" matSuffix />
-    <mtx-datetimepicker #timeAMPMPicker2 [timeInterval]="5" [twelvehour]="true" [timeInput]="true" type="time" />
+    <mtx-datetimepicker #timeAMPMPicker2 [timeInterval]="5" [twelvehour]="true" [timeInput]="true"
+      [timeInputAutoFocus]="timeInputAutoFocus" type="time" />
     <input [mtxDatetimepicker]="timeAMPMPicker2" formControlName="timeAMPM2" matInput required>
     @if (group.get('timeAMPM2')?.errors?.required) {
       <mat-error>required</mat-error>
@@ -92,7 +95,7 @@
     <mat-label>DateTime AM/PM with manual input</mat-label>
     <mtx-datetimepicker-toggle [for]="timeAMPMPickerManual" matSuffix />
     <mtx-datetimepicker #timeAMPMPickerManual startView="month" [timeInterval]="5"
-      [timeInput]="true" [twelvehour]="true"/>
+      [timeInput]="true" [timeInputAutoFocus]="timeInputAutoFocus" [twelvehour]="true"/>
     <input [mtxDatetimepicker]="timeAMPMPickerManual" [max]="tomorrow" [min]="today"
       autocomplete="false" formControlName="timeAMPMManual" matInput required>
     @if (group.get('timeAMPMManual')?.errors?.required) {
@@ -197,7 +200,8 @@
 
   <mat-form-field [color]="themeColor">
     <mat-label>Action Buttons</mat-label>
-    <mtx-datetimepicker #datetimePickerButtons type="datetime" [timeInput]="true">
+    <mtx-datetimepicker #datetimePickerButtons type="datetime" [timeInput]="true"
+      [timeInputAutoFocus]="timeInputAutoFocus">
       <mtx-datetimepicker-actions>
         <button mat-button mtxDatetimepickerClear>Clear</button>
         <button mat-button mtxDatetimepickerCancel>Cancel</button>

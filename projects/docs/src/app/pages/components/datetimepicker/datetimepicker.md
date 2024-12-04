@@ -74,6 +74,8 @@ Exported as: `mtxCalendar`
 | `@Input()`<br>`selected: D \| null` | The currently selected datetime. |
 | `@Input()`<br>`startAt: D \| null` | A date representing the period (month or year) to start the calendar in. |
 | `@Input()`<br>`startView: MtxCalendarView` | The calendar started view. Default is **`'month'`**. |
+| `@Input()`<br>`timeInput: boolean` | Whether to show the time input in time mode. When the `touchUi` is enabled it will be disabled. Default is **`false`**. |
+| `@Input()`<br>`timeInpuAutoFocus: boolean` | Whether the time input should be auto-focused after view init. Default is **`true`**. |
 | `@Output()`<br>`selectedChange: EventEmitter<D \| null>` | Emits when the currently selected datetime changes. |
 | `@Output()`<br>`viewChanged: EventEmitter<MtxCalendarView>` | Emits when the current view changes. |
 
@@ -110,6 +112,7 @@ Exported as: `mtxDatetimepicker`
 | `@Input()`<br>`startAt: D \| null` | A date representing the period (month or year) to start the calendar in. |
 | `@Input()`<br>`startView: MtxCalendarView` | The calendar started view. Default is **`'month'`**. |
 | `@Input()`<br>`timeInput: boolean` | Whether to show the time input in time mode. When the `touchUi` is enabled it will be disabled. Default is **`false`**. |
+| `@Input()`<br>`timeInpuAutoFocus: boolean` | Whether the time input should be auto-focused after view init. Default is **`true`**. |
 | `@Output('opened')`<br>`openedStream: EventEmitter<void>`| Emits when the datetimepicker has been opened. |
 | `@Output('closed')`<br>`closedStream: EventEmitter<void>`| Emits when the datetimepicker has been closed. |
 | `@Output()`<br>`viewChanged: EventEmitter<MtxCalendarView>` | Emits when the current view changes. |

@@ -140,7 +140,8 @@
           [maxDate]="maxDate"
           [minDate]="minDate"
           [selected]="_activeDate"
-          [actionsPortal]="actionsPortal">
+          [actionsPortal]="actionsPortal"
+          [autoFocus]="timeInputAutoFocus">
         </mtx-time>
       } @else {
         <mtx-clock (_userSelection)="_userSelected()"

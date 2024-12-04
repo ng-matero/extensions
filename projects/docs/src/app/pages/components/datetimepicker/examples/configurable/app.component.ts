@@ -62,6 +62,7 @@ export class AppComponent {
   twelvehour = false;
   timeInterval = 1;
   timeInput = true;
+  timeInputAutoFocus = true;
   customHeader!: any;
   actionButtons = false;
 

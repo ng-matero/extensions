@@ -39,6 +39,10 @@
 </section>
 
 <section>
+  <mat-checkbox [(ngModel)]="timeInputAutoFocus">TimeInputAutoFocus</mat-checkbox>
+</section>
+
+<section>
   <mat-checkbox [(ngModel)]="twelvehour">Twelvehour</mat-checkbox>
 </section>
 
@@ -75,7 +79,8 @@
                       [twelvehour]="twelvehour"
                       [timeInterval]="timeInterval"
                       [touchUi]="touchUi"
-                      [timeInput]="timeInput">
+                      [timeInput]="timeInput"
+                      [timeInputAutoFocus]="timeInputAutoFocus">
     @if(actionButtons) {
       <mtx-datetimepicker-actions>
         <button mat-button mtxDatetimepickerClear>Clear</button>

@@ -22,6 +22,7 @@ import { default as _rollupMoment } from 'moment';
 import { Subscription } from 'rxjs';
 import { CustomHeader } from './custom-header.component';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const moment = _rollupMoment || _moment;
 
@@ -39,6 +40,7 @@ const moment = _rollupMoment || _moment;
     MatInputModule,
     MatButtonModule,
     MatCardModule,
+    MatCheckboxModule,
     MtxDatetimepickerModule,
   ],
   providers: [
@@ -69,6 +71,7 @@ const moment = _rollupMoment || _moment;
 })
 export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
   themeColor: ThemePalette = 'primary';
+  timeInputAutoFocus = true;
 
   type = 'moment';
 
