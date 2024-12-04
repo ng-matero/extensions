@@ -70,8 +70,18 @@
 
   <mat-form-field [color]="themeColor">
     <mat-label>Time AM/PM</mat-label>
+    <mtx-datetimepicker-toggle [for]="timeAMPMPicker2" matSuffix />
+    <mtx-datetimepicker #timeAMPMPicker2 [timeInterval]="5" [twelvehour]="true" [timeInput]="true" type="time" />
+    <input [mtxDatetimepicker]="timeAMPMPicker2" formControlName="timeAMPM2" matInput required>
+    @if (group.get('timeAMPM2')?.errors?.required) {
+      <mat-error>required</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field [color]="themeColor">
+    <mat-label>Time AM/PM</mat-label>
     <mtx-datetimepicker-toggle [for]="timeAMPMPicker" matSuffix />
-    <mtx-datetimepicker #timeAMPMPicker [timeInterval]="5" [twelvehour]="true" type="time"/>
+    <mtx-datetimepicker #timeAMPMPicker [timeInterval]="5" [twelvehour]="true" type="time" />
     <input [mtxDatetimepicker]="timeAMPMPicker" formControlName="timeAMPM" matInput required>
     @if (group.get('timeAMPM')?.errors?.required) {
       <mat-error>required</mat-error>

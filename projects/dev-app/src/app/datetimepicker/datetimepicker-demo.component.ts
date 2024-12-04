@@ -117,6 +117,7 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
       date: [null, Validators.required],
       time: [null, Validators.required],
       timeAMPM: [null, Validators.required],
+      timeAMPM2: [null, Validators.required],
       timeAMPMManual: [null, Validators.required],
       month: [null, Validators.required],
       year: [null, Validators.required],

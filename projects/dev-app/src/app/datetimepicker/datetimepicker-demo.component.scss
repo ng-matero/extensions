@@ -1,3 +1,9 @@
 .demo-inline-card {
   width: 300px;
 }
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
