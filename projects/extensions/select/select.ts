@@ -81,6 +81,9 @@ export interface MtxSelectDefaultOptions {
   bindLabel?: string;
   openOnEnter?: boolean;
   clearSearchOnAdd?: boolean;
+  virtualScroll?: boolean;
+  fixedPlaceholder?: boolean;
+  deselectOnClick?: boolean;
 }
 
 /** Injection token that can be used to specify default select options. */
@@ -196,10 +199,15 @@ export class MtxSelect
   @Input() minTermLength = 0;
   @Input({ transform: booleanAttribute }) editableSearchTerm = false;
   @Input() keyDownFn = (_: KeyboardEvent) => true;
-  @Input({ transform: booleanAttribute }) virtualScroll = false;
+  @Input({ transform: booleanAttribute }) virtualScroll =
+    this._defaultOptions?.virtualScroll ?? false;
   @Input() typeToSearchText?: string;
   @Input() typeahead!: Subject<string>;
   @Input() isOpen?: boolean;
+  @Input({ transform: booleanAttribute }) fixedPlaceholder =
+    this._defaultOptions?.fixedPlaceholder ?? false;
+  @Input({ transform: booleanAttribute }) deselectOnClick =
+    this._defaultOptions?.deselectOnClick ?? false;
 
   @Output('blur') blurEvent = new EventEmitter();
   @Output('focus') focusEvent = new EventEmitter();

@@ -3,20 +3,33 @@
   <mat-checkbox [(ngModel)]="readonly">Readonly</mat-checkbox>
   <mat-checkbox [(ngModel)]="multipleSelect">Mulitple select</mat-checkbox>
   <mat-checkbox [(ngModel)]="closeOnSelect">Close on select</mat-checkbox>
+  <mat-checkbox [(ngModel)]="deselectOnClick">Deselect on click</mat-checkbox>
 
   <mat-radio-group [(ngModel)]="themeColor">
     <mat-radio-button value="primary">primary</mat-radio-button>
     <mat-radio-button value="accent">accent</mat-radio-button>
     <mat-radio-button value="warn">warn</mat-radio-button>
   </mat-radio-group>
+
+  <button mat-button (click)="changeIntl()">Change Intl</button>
 </div>
 
 <mat-form-field [color]="themeColor">
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
-    [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
-    placeholder="select food" required>
+  <mtx-select
+    [(ngModel)]="value"
+    [items]="items"
+    bindLabel="name"
+    bindValue="id"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [multiple]="multipleSelect"
+    [closeOnSelect]="closeOnSelect"
+    [deselectOnClick]="deselectOnClick"
+    placeholder="select food"
+    required
+  >
   </mtx-select>
 
   <mat-hint>Choose your favorite food</mat-hint>
@@ -26,9 +39,19 @@
 <mat-form-field [color]="themeColor" appearance="fill">
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
-    [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
-    placeholder="select food" required>
+  <mtx-select
+    [(ngModel)]="value"
+    [items]="items"
+    bindLabel="name"
+    bindValue="id"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [multiple]="multipleSelect"
+    [closeOnSelect]="closeOnSelect"
+    [deselectOnClick]="deselectOnClick"
+    placeholder="select food"
+    required
+  >
   </mtx-select>
 
   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
@@ -39,9 +62,19 @@
 <mat-form-field [color]="themeColor" appearance="outline">
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
-    [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
-    placeholder="select food" required>
+  <mtx-select
+    [(ngModel)]="value"
+    [items]="items"
+    bindLabel="name"
+    bindValue="id"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [multiple]="multipleSelect"
+    [closeOnSelect]="closeOnSelect"
+    [deselectOnClick]="deselectOnClick"
+    placeholder="select food"
+    required
+  >
   </mtx-select>
 
   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
@@ -54,16 +87,14 @@
 <mat-form-field>
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [items]="items" [formControl]="control"
-    bindLabel="name" bindValue="id">
-  </mtx-select>
+  <mtx-select [items]="items" [formControl]="control" bindLabel="name" bindValue="id"> </mtx-select>
 
   <mat-hint>Choose your favorite food</mat-hint>
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 
 <mat-slide-toggle (change)="changeState($event)" [checked]="control.disabled">
-  {{control.disabled?'disable':'enable'}}
+  {{ control.disabled ? 'disable' : 'enable' }}
 </mat-slide-toggle>
 
 <h2>Material Select</h2>
@@ -72,7 +103,7 @@
   <mat-label>Choose an option</mat-label>
   <mat-select>
     @for (food of items; track food) {
-      <mat-option [value]="food.id">{{food.name}}</mat-option>
+      <mat-option [value]="food.id">{{ food.name }}</mat-option>
     }
   </mat-select>
 </mat-form-field>
@@ -81,7 +112,7 @@
   <mat-label>Choose an option</mat-label>
   <mat-select>
     @for (food of items; track food) {
-      <mat-option [value]="food.id">{{food.name}}</mat-option>
+      <mat-option [value]="food.id">{{ food.name }}</mat-option>
     }
   </mat-select>
 </mat-form-field>
@@ -89,17 +120,36 @@
 <h2>Test Templates</h2>
 
 <mat-form-field>
-
-  <mtx-select [(ngModel)]="value" [items]="items" bindLabel="name" bindValue="id"
-    [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
-    [closeOnSelect]="closeOnSelect" placeholder="select food" required>
+  <mtx-select
+    [(ngModel)]="value"
+    [items]="items"
+    bindLabel="name"
+    bindValue="id"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [multiple]="multipleSelect"
+    [closeOnSelect]="closeOnSelect"
+    [deselectOnClick]="deselectOnClick"
+    placeholder="select food"
+    required
+  >
     <ng-template ng-placeholder-tmp>
-      <img height="15" width="15" src="//www.gravatar.com/avatar/b0d8c6e5ea589e6fc3d3e08afb1873bb?d=retro&r=g&s=30 2x" alt="" />
+      <img
+        height="15"
+        width="15"
+        src="//www.gravatar.com/avatar/b0d8c6e5ea589e6fc3d3e08afb1873bb?d=retro&r=g&s=30 2x"
+        alt=""
+      />
       Select your food
     </ng-template>
-    <!-- <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"
-      let-searchTerm="searchTerm">
-      <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.name}}
+    <!-- <ng-template
+      ng-option-tmp
+      let-item="item"
+      let-item$="item$"
+      let-index="index"
+      let-searchTerm="searchTerm"
+    >
+      <input id="item-{{ index }}" type="checkbox" [ngModel]="item$.selected" /> {{ item.name }}
     </ng-template> -->
   </mtx-select>
 
@@ -108,13 +158,26 @@
 </mat-form-field>
 
 <mat-form-field>
-
-  <mtx-select [(ngModel)]="selectedAccount" [items]="accounts" bindLabel="name" bindValue="name"
-    groupBy="country" [disabled]="disabled" [readonly]="readonly" [multiple]="multipleSelect"
-    [closeOnSelect]="closeOnSelect">
-    <!-- <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index"
-      let-searchTerm="searchTerm">
-      {{searchTerm}}
+  <mtx-select
+    [(ngModel)]="selectedAccount"
+    [items]="accounts"
+    bindLabel="name"
+    bindValue="name"
+    groupBy="country"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [multiple]="multipleSelect"
+    [closeOnSelect]="closeOnSelect"
+    [deselectOnClick]="deselectOnClick"
+  >
+    <!-- <ng-template
+      ng-optgroup-tmp
+      let-item="item"
+      let-item$="item$"
+      let-index="index"
+      let-searchTerm="searchTerm"
+    >
+      {{ searchTerm }}
     </ng-template> -->
   </mtx-select>
 
@@ -127,7 +190,10 @@
 <mat-form-field>
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [items]="items" bindLabel="name" bindValue="id"
+  <mtx-select
+    [items]="items"
+    bindLabel="name"
+    bindValue="id"
     [(ngModel)]="value"
     [multiple]="multipleSelect"
     (open)="log($event, 'open')"
@@ -138,6 +204,7 @@
     (change)="log($event, 'change')"
     (add)="log($event, 'add')"
     (remove)="log($event, 'remove')"
-    (search)="log($event, 'search')">
+    (search)="log($event, 'search')"
+  >
   </mtx-select>
 </mat-form-field>
