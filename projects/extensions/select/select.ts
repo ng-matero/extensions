@@ -36,9 +36,10 @@ import {
 import { ErrorStateMatcher, _ErrorStateTracker } from '@angular/material/core';
 import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
-import { Subject, merge } from 'rxjs';
+import { Subject, Subscription, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { MtxOption } from './option';
+import { MtxSelectIntl } from './select-intl';
 import {
   MtxSelectFooterTemplate,
   MtxSelectHeaderTemplate,
@@ -159,13 +160,13 @@ export class MtxSelect
   mtxOptions!: QueryList<MtxOption>;
 
   @Input() addTag: boolean | AddTagFn = false;
-  @Input() addTagText = this._defaultOptions?.addTagText ?? 'Add item';
+  @Input() addTagText?: string;
   @Input() appearance = 'underline';
   @Input() appendTo = this._defaultOptions?.appendTo ?? 'body';
   @Input() bindLabel = this._defaultOptions?.bindLabel;
   @Input() bindValue = this._defaultOptions?.bindValue;
   @Input({ transform: booleanAttribute }) closeOnSelect = true;
-  @Input() clearAllText = this._defaultOptions?.clearAllText ?? 'Clear all';
+  @Input() clearAllText?: string;
   @Input({ transform: booleanAttribute }) clearable = true;
   @Input({ transform: booleanAttribute }) clearOnBackspace = true;
   @Input() compareWith!: CompareWithFn;
@@ -177,12 +178,12 @@ export class MtxSelect
   @Input({ transform: booleanAttribute }) selectableGroupAsModel = true;
   @Input({ transform: booleanAttribute }) hideSelected = false;
   @Input({ transform: booleanAttribute }) loading = false;
-  @Input() loadingText = this._defaultOptions?.loadingText ?? 'Loading...';
+  @Input() loadingText?: string;
   @Input() labelForId: string | null = null;
   @Input({ transform: booleanAttribute }) markFirst = true;
   @Input() maxSelectedItems!: number;
   @Input({ transform: booleanAttribute }) multiple = false;
-  @Input() notFoundText = this._defaultOptions?.notFoundText ?? 'No items found';
+  @Input() notFoundText?: string;
   @Input({ transform: booleanAttribute }) searchable = true;
   @Input({ transform: booleanAttribute }) readonly = false;
   @Input() searchFn: SearchFn | null = null;
@@ -196,7 +197,7 @@ export class MtxSelect
   @Input({ transform: booleanAttribute }) editableSearchTerm = false;
   @Input() keyDownFn = (_: KeyboardEvent) => true;
   @Input({ transform: booleanAttribute }) virtualScroll = false;
-  @Input() typeToSearchText = this._defaultOptions?.typeToSearchText ?? 'Type to search';
+  @Input() typeToSearchText?: string;
   @Input() typeahead!: Subject<string>;
   @Input() isOpen?: boolean;
 
@@ -275,7 +276,7 @@ export class MtxSelect
     this._placeholder = value;
     this.stateChanges.next();
   }
-  private _placeholder = this._defaultOptions?.placeholder;
+  private _placeholder!: string;
 
   /** Whether the select is focused. */
   get focused(): boolean {
@@ -363,7 +364,10 @@ export class MtxSelect
     this._errorStateTracker.errorState = value;
   }
 
+  private _intlChangesSubscription = Subscription.EMPTY;
+
   constructor(
+    protected _intl: MtxSelectIntl,
     protected _changeDetectorRef: ChangeDetectorRef,
     protected _elementRef: ElementRef,
     protected _focusMonitor: FocusMonitor,
@@ -376,6 +380,10 @@ export class MtxSelect
     @Inject(MTX_SELECT_DEFAULT_OPTIONS)
     protected _defaultOptions?: MtxSelectDefaultOptions
   ) {
+    this._intlChangesSubscription = this._intl.changes.subscribe(() => {
+      this._changeDetectorRef.detectChanges();
+    });
+
     _focusMonitor.monitor(this._elementRef, true).subscribe(origin => {
       if (this._focused && !origin) {
         this._onTouched();
@@ -443,6 +451,7 @@ export class MtxSelect
     this._destroy$.complete();
     this.stateChanges.complete();
     this._focusMonitor.stopMonitoring(this._elementRef);
+    this._intlChangesSubscription.unsubscribe();
   }
 
   /** Gets the value for the `aria-labelledby` attribute of the inputs. */
