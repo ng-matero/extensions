@@ -16,7 +16,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { mtxDrawerAnimations } from './drawer-animation';
+import { mtxDrawerAnimations } from './drawer-animations';
 import { MtxDrawerConfig } from './drawer-config';
 
 /**
