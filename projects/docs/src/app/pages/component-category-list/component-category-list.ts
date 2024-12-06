@@ -9,7 +9,6 @@ import { ComponentPageTitle } from '../page-title/page-title';
   selector: 'app-component-category-list',
   templateUrl: './component-category-list.html',
   styleUrl: './component-category-list.scss',
-  standalone: true,
   imports: [NavigationFocus, RouterLink],
 })
 export class ComponentCategoryList implements OnInit, OnDestroy {

@@ -5,7 +5,6 @@ import { MtxProgressModule } from '@ng-matero/extensions/progress';
   selector: 'progress-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MtxProgressModule],
 })
 export class AppComponent {}

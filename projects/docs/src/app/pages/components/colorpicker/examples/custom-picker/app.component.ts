@@ -10,7 +10,6 @@ import { ColorSketchModule } from 'ngx-color/sketch';
   selector: 'color-picker-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MtxColorpickerModule, ColorSketchModule],
 })
 export class AppComponent {

@@ -93,7 +93,6 @@ export const COMPONENTS_MENU = [
       transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4,0.0,0.2,1)')),
     ]),
   ],
-  standalone: true,
   imports: [MatListModule, RouterLinkActive, RouterLink],
 })
 export class ComponentNav {

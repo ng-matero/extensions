@@ -85,7 +85,6 @@ export const MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   exportAs: 'mtxColorpickerContent',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [ColorChromeModule, NgTemplateOutlet],
 })
 export class MtxColorpickerContent implements OnDestroy {

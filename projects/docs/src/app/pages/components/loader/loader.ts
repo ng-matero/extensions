@@ -9,7 +9,6 @@ import { loaderSimpleExampleConfig } from './examples/simple';
 @Component({
   selector: 'app-loader-overview',
   templateUrl: './loader-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class LoaderOverviewComponent {
@@ -19,7 +18,6 @@ export class LoaderOverviewComponent {
 @Component({
   selector: 'app-loader-api',
   templateUrl: './loader-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class LoaderApiComponent {

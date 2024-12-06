@@ -10,7 +10,6 @@ import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/
   selector: 'drawer-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class AppComponent {
@@ -66,7 +65,6 @@ export class AppComponent {
       }
     `,
   ],
-  standalone: true,
   imports: [MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
 })
 export class DrawerSharingDataOverviewComponent {

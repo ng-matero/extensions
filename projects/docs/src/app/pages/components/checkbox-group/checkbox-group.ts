@@ -16,7 +16,6 @@ import { checkboxGroupSelectAllExampleConfig } from './examples/select-all';
 @Component({
   selector: 'app-checkbox-group-overview',
   templateUrl: './checkbox-group-overview.html',
-  standalone: true,
   imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class CheckboxGroupOverviewComponent {
@@ -26,7 +25,6 @@ export class CheckboxGroupOverviewComponent {
 @Component({
   selector: 'app-checkbox-group-api',
   templateUrl: './checkbox-group-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class CheckboxGroupApiComponent {

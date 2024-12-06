@@ -8,7 +8,6 @@ import { buttonConfigurableExampleConfig } from './examples/configurable';
 @Component({
   selector: 'app-button-overview',
   templateUrl: './button-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class ButtonOverviewComponent {
@@ -18,7 +17,6 @@ export class ButtonOverviewComponent {
 @Component({
   selector: 'app-button-api',
   templateUrl: './button-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class ButtonApiComponent {

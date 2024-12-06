@@ -32,7 +32,6 @@ import {
   styleUrl: './column-menu.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     AsyncPipe,
     NgTemplateOutlet,

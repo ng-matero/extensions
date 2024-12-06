@@ -231,7 +231,6 @@ export class MtxTimeInput implements OnDestroy {
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatButton, MtxClock, MtxTimeInput],
 })
 export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {

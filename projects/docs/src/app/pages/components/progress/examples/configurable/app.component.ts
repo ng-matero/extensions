@@ -12,7 +12,6 @@ import { MtxProgressModule, MtxProgressType } from '@ng-matero/extensions/progre
   selector: 'progress-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [
     FormsModule,
     MatRadioModule,

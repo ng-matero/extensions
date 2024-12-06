@@ -113,7 +113,6 @@ import {
       <p>This is an example header component for the datetimepicker.</p>
     }
   `,
-  standalone: true,
   imports: [MatButtonModule, MatIconModule],
 })
 export class CustomHeader<D> {

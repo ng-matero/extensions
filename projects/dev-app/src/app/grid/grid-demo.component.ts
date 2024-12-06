@@ -24,7 +24,6 @@ import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
   selector: 'dev-grid-demo',
   templateUrl: './grid-demo.component.html',
   styleUrl: './grid-demo.component.scss',
-  standalone: true,
   imports: [
     AsyncPipe,
     JsonPipe,

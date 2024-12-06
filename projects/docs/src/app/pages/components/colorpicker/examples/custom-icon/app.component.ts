@@ -8,7 +8,6 @@ import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
   selector: 'color-picker-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MatFormFieldModule, MatInputModule, MatIconModule, MtxColorpickerModule],
 })
 export class AppComponent {}

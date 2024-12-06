@@ -10,7 +10,6 @@ import { MtxLoaderModule, MtxLoaderType } from '@ng-matero/extensions/loader';
   selector: 'dev-loader-demo',
   templateUrl: 'loader-demo.component.html',
   styleUrl: 'loader-demo.component.scss',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     FormsModule,
