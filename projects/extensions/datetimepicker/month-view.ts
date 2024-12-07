@@ -32,7 +32,6 @@ const DAYS_PER_WEEK = 7;
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MtxCalendarBody],
 })
 export class MtxMonthView<D> implements AfterContentInit {

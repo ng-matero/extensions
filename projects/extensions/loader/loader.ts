@@ -23,7 +23,6 @@ export type MtxLoaderType = 'spinner' | 'progressbar';
   styleUrl: './loader.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatProgressSpinner, MatProgressBar],
 })
 export class MtxLoader {

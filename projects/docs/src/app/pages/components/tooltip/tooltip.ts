@@ -8,7 +8,6 @@ import { tooltipTemplateExampleConfig } from './examples/template';
 @Component({
   selector: 'app-tooltip-overview',
   templateUrl: './tooltip-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class TooltipOverviewComponent {
@@ -18,7 +17,6 @@ export class TooltipOverviewComponent {
 @Component({
   selector: 'app-tooltip-api',
   templateUrl: './tooltip-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class TooltipApiComponent {

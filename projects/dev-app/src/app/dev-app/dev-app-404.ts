@@ -9,7 +9,6 @@ import { MatAnchor } from '@angular/material/button';
     <a mat-raised-button routerLink="/">Go back to the home page</a>
   `,
   host: { class: 'mat-typography' },
-  standalone: true,
   imports: [MatAnchor, RouterLink],
 })
 export class DevApp404 {}

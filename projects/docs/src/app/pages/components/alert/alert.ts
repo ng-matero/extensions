@@ -8,7 +8,6 @@ import { alertConfigurableExampleConfig } from './examples/configurable';
 @Component({
   selector: 'app-alert-overview',
   templateUrl: './alert-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class AlertOverviewComponent {
@@ -18,7 +17,6 @@ export class AlertOverviewComponent {
 @Component({
   selector: 'app-alert-api',
   templateUrl: './alert-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class AlertApiComponent {

@@ -10,7 +10,6 @@ import { popoverTargetExampleConfig } from './examples/target';
 @Component({
   selector: 'app-popover-overview',
   templateUrl: './popover-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class PopoverOverviewComponent {
@@ -20,7 +19,6 @@ export class PopoverOverviewComponent {
 @Component({
   selector: 'app-popover-api',
   templateUrl: './popover-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class PopoverApiComponent {

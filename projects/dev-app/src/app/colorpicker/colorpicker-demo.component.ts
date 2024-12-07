@@ -13,7 +13,6 @@ import { ColorSketchModule } from 'ngx-color/sketch';
   selector: 'dev-colorpicker-demo',
   templateUrl: './colorpicker-demo.component.html',
   styleUrl: './colorpicker-demo.component.scss',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     FormsModule,

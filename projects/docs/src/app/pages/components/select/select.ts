@@ -22,7 +22,6 @@ import { selectOptionExampleConfig } from './examples/mtx-option';
       }
     `,
   ],
-  standalone: true,
   imports: [MtxAlert, DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class SelectOverviewComponent {
@@ -32,7 +31,6 @@ export class SelectOverviewComponent {
 @Component({
   selector: 'app-select-api',
   templateUrl: './select-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class SelectApiComponent {

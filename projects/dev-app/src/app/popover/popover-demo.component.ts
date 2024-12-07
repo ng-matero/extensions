@@ -11,7 +11,6 @@ import { MtxPopoverModule } from '@ng-matero/extensions/popover';
   selector: 'dev-popover-demo',
   templateUrl: 'popover-demo.component.html',
   styleUrl: 'popover-demo.component.scss',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     FormsModule,

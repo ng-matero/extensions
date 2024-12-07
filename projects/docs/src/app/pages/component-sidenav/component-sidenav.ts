@@ -17,7 +17,6 @@ const SMALL_WIDTH_BREAKPOINT = 959;
   templateUrl: 'component-sidenav.html',
   styleUrl: 'component-sidenav.scss',
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [MatSidenavModule, ComponentNav, ComponentPageHeader, RouterOutlet, AsyncPipe],
 })
 export class ComponentSidenav implements OnInit, OnDestroy {

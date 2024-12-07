@@ -8,7 +8,6 @@ import { EXAMPLE_DATA } from '../../data';
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MatCheckboxModule, FormsModule, MtxGridModule],
 })
 export class AppComponent {

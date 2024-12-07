@@ -32,7 +32,6 @@ export interface ExampleType {
   selector: 'example-viewer',
   templateUrl: './example-viewer.html',
   styleUrl: './example-viewer.scss',
-  standalone: true,
   imports: [MatIconButton, MatTooltipModule, MatIconModule, MatTabsModule],
 })
 export class ExampleViewer implements OnInit, OnDestroy {

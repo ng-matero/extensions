@@ -44,7 +44,6 @@ export class MtxColorpickerToggleIcon {}
   exportAs: 'mtxColorpickerToggle',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatIconButton],
 })
 export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDestroy {

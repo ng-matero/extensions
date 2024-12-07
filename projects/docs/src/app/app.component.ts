@@ -9,7 +9,6 @@ import { Navbar } from './shared/navbar/navbar';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [Navbar, RouterOutlet],
 })
 export class AppComponent {

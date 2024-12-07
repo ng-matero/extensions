@@ -57,7 +57,6 @@ let popoverPanelUid = 0;
   encapsulation: ViewEncapsulation.None,
   animations: [transformPopover],
   exportAs: 'mtxPopover',
-  standalone: true,
   imports: [CdkTrapFocus],
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {

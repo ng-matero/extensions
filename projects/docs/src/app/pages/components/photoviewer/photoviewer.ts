@@ -11,7 +11,6 @@ import { photoviewerThumbnailExampleConfig } from './examples/thumbnail';
 @Component({
   selector: 'app-photoviewer-overview',
   templateUrl: './photoviewer-overview.html',
-  standalone: true,
   imports: [MtxAlert, ExampleViewer, AsyncPipe],
 })
 export class PhotoviewerOverviewComponent {
@@ -21,7 +20,6 @@ export class PhotoviewerOverviewComponent {
 @Component({
   selector: 'app-photoviewer-api',
   templateUrl: './photoviewer-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class PhotoviewerApiComponent {

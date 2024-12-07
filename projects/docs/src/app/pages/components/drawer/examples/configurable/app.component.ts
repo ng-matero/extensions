@@ -12,7 +12,6 @@ import { DrawerPosition, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/d
   selector: 'drawer-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [
     FormsModule,
     MatRadioModule,
@@ -77,7 +76,6 @@ export class AppComponent {
       }
     `,
   ],
-  standalone: true,
   imports: [MatIconModule, MatButtonModule],
 })
 export class DrawerConfigurableOverviewComponent {

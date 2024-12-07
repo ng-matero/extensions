@@ -8,7 +8,6 @@ import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MatButtonModule, MtxGridModule],
 })
 export class AppComponent implements OnInit {

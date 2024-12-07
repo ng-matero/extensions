@@ -8,7 +8,6 @@ import { splitBasicExampleConfig } from './examples/basic';
 @Component({
   selector: 'app-split-overview',
   templateUrl: './split-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class SplitOverviewComponent {
@@ -18,7 +17,6 @@ export class SplitOverviewComponent {
 @Component({
   selector: 'app-split-api',
   templateUrl: './split-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class SplitApiComponent {

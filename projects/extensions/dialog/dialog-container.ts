@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
-import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 
@@ -17,16 +17,7 @@ import { MtxDialogData } from './dialog-config';
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
-  imports: [
-    AsyncPipe,
-    MatButton,
-    MatIconButton,
-    MatFabButton,
-    MatMiniFabButton,
-    MatIcon,
-    MtxToObservablePipe,
-  ],
+  imports: [AsyncPipe, MatButton, MatIconButton, MatIcon, MtxToObservablePipe],
 })
 export class MtxDialogContainer {
   constructor(

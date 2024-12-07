@@ -25,7 +25,6 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
   styleUrl: './alert.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatIconButton],
 })
 export class MtxAlert {

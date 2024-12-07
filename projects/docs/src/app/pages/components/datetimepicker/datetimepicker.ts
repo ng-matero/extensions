@@ -9,7 +9,6 @@ import { datetimepickerTargetExampleConfig } from './examples/inline';
 @Component({
   selector: 'app-datetimepicker-overview',
   templateUrl: './datetimepicker-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class DatetimepickerOverviewComponent {
@@ -19,7 +18,6 @@ export class DatetimepickerOverviewComponent {
 @Component({
   selector: 'app-datetimepicker-api',
   templateUrl: './datetimepicker-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class DatetimepickerApiComponent {

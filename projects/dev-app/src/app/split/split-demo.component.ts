@@ -8,7 +8,6 @@ import { MtxSplitModule } from '@ng-matero/extensions/split';
   selector: 'dev-split',
   templateUrl: './split-demo.component.html',
   styleUrl: './split-demo.component.scss',
-  standalone: true,
   imports: [MatRadioModule, ReactiveFormsModule, FormsModule, MtxSplitModule],
 })
 export class SplitDemoComponent {

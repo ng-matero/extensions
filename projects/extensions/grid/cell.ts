@@ -47,7 +47,6 @@ import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
   styleUrl: './cell.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     AsyncPipe,
     CurrencyPipe,

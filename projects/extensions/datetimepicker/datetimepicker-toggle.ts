@@ -48,7 +48,6 @@ export class MtxDatetimepickerToggleIcon {}
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MatIconButton],
 })
 export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {

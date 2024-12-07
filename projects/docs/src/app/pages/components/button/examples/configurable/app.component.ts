@@ -11,7 +11,6 @@ import { MtxButtonModule } from '@ng-matero/extensions/button';
   selector: 'button-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [
     FormsModule,
     MatRadioModule,

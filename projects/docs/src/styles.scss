@@ -5,7 +5,8 @@
 @use './styles/reboot';
 @use 'photoviewer';
 
-@include mat.core();
+@include mat.elevation-classes();
+@include mat.app-background();
 
 $light-config: (
   color: (

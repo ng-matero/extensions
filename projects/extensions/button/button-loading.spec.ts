@@ -9,6 +9,7 @@ import { MtxButtonModule } from './button-module';
 @Component({
   selector: 'test-app',
   template: ` <button mat-button [loading]="loading">Test Button</button> `,
+  standalone: false,
 })
 class TestApp {
   public loading: boolean = false;
@@ -47,8 +48,9 @@ describe('ButtonLoading', () => {
     expect(buttonNativeElement.getAttribute('disabled'))
       .withContext('Expected button not to be disabled')
       .toBeFalsy();
-    const spinner2 = fixture.debugElement.query(By.directive(MatProgressSpinner))
-      ?.componentInstance;
+    const spinner2 = fixture.debugElement.query(
+      By.directive(MatProgressSpinner)
+    )?.componentInstance;
     expect(spinner2).withContext('Expected spinner to be not existed').toBeFalsy();
     flush();
   }));

@@ -9,7 +9,6 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'dialog-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [FormsModule, MatRadioModule, MatButtonModule],
 })
 export class AppComponent {

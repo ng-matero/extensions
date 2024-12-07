@@ -34,7 +34,6 @@ export const yearsPerRow = 4;
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MtxCalendarBody],
 })
 export class MtxMultiYearView<D> implements AfterContentInit {

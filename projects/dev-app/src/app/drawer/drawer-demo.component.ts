@@ -16,7 +16,6 @@ import {
   selector: 'dev-drawer-demo',
   templateUrl: './drawer-demo.component.html',
   styleUrl: './drawer-demo.component.scss',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -73,7 +72,6 @@ export class DrawerDemoComponent {
       <button mat-button (click)="onOkClick()" cdkFocusInitial>Ok</button>
     </div>
   `,
-  standalone: true,
   imports: [MatFormField, MatInput, ReactiveFormsModule, FormsModule, MatButton],
 })
 export class DrawerOverviewComponent {

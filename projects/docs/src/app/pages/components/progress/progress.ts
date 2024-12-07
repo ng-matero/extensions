@@ -9,7 +9,6 @@ import { progressCustomColorExampleConfig } from './examples/custom-color';
 @Component({
   selector: 'app-progress-overview',
   templateUrl: './progress-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class ProgressOverviewComponent {
@@ -19,7 +18,6 @@ export class ProgressOverviewComponent {
 @Component({
   selector: 'app-progress-api',
   templateUrl: './progress-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class ProgressApiComponent {

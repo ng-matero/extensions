@@ -19,7 +19,6 @@ import {
   selector: 'popover-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [
     FormsModule,
     MatFormFieldModule,

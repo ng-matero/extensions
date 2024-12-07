@@ -17,7 +17,6 @@ import { ComponentPageTitle } from '../page-title/page-title';
   templateUrl: './component-viewer.html',
   styleUrl: './component-viewer.scss',
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [MatTabsModule, NavigationFocus, RouterLinkActive, RouterLink, RouterOutlet],
 })
 export class ComponentViewer implements OnDestroy {

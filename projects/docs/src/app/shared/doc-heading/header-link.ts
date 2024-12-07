@@ -16,7 +16,6 @@ import { MatIconModule } from '@angular/material/icon';
   `,
   styleUrl: './header-link.scss',
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [MatIconModule],
 })
 export class HeaderLinkComponent implements OnInit {

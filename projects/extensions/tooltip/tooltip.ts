@@ -938,7 +938,6 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
     '(mouseleave)': '_handleMouseLeave($event)',
     'aria-hidden': 'true',
   },
-  standalone: true,
   imports: [NgClass, NgTemplateOutlet, MtxIsTemplateRefPipe],
 })
 export class TooltipComponent implements OnDestroy {

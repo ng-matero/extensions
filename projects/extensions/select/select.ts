@@ -120,7 +120,6 @@ let nextUniqueId = 0;
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [{ provide: MatFormFieldControl, useExisting: MtxSelect }],
-  standalone: true,
   imports: [NgSelectModule, FormsModule, NgTemplateOutlet],
 })
 export class MtxSelect

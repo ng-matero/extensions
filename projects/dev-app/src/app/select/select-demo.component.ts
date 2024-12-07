@@ -15,7 +15,6 @@ import { MtxSelectIntl, MtxSelectModule } from '@ng-matero/extensions/select';
   selector: 'dev-app-select',
   templateUrl: './select-demo.component.html',
   styleUrl: './select-demo.component.scss',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     FormsModule,

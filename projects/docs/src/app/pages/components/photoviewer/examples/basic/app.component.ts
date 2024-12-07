@@ -6,7 +6,6 @@ import { MtxPhotoviewerModule } from '@ng-matero/extensions/photoviewer';
   selector: 'photoviewer-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MatButtonModule, MtxPhotoviewerModule],
 })
 export class AppComponent {

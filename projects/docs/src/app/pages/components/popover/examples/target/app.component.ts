@@ -9,7 +9,6 @@ import { MtxPopoverModule } from '@ng-matero/extensions/popover';
   selector: 'popover-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [FormsModule, MatRadioModule, MatButtonModule, MtxPopoverModule, CdkDrag],
 })
 export class AppComponent {

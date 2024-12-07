@@ -6,7 +6,6 @@ import { EXAMPLE_DATA } from '../../data';
   selector: 'data-grid-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MtxGridModule],
 })
 export class AppComponent {

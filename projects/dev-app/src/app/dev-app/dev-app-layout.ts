@@ -29,7 +29,6 @@ import { DevAppRippleOptions } from './ripple-options';
   templateUrl: 'dev-app-layout.html',
   styleUrl: 'dev-app-layout.scss',
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [
     CommonModule,
     MatButtonModule,

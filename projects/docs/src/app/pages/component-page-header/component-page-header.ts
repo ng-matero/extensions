@@ -7,7 +7,6 @@ import { ComponentPageTitle } from '../page-title/page-title';
   selector: 'component-page-header',
   templateUrl: './component-page-header.html',
   styleUrl: './component-page-header.scss',
-  standalone: true,
   imports: [MatButtonModule, MatIconModule],
 })
 export class ComponentPageHeader {

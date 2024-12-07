@@ -9,7 +9,6 @@ import { drawerSharingDataExampleConfig } from './examples/sharing-data';
 @Component({
   selector: 'app-drawer-overview',
   templateUrl: './drawer-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class DrawerOverviewComponent {
@@ -19,7 +18,6 @@ export class DrawerOverviewComponent {
 @Component({
   selector: 'app-drawer-api',
   templateUrl: './drawer-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class DrawerApiComponent {

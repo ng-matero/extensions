@@ -11,7 +11,6 @@ import { DevAppLayout } from './dev-app/dev-app-layout';
     </dev-app-layout>
   `,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [DevAppLayout, RouterOutlet],
 })
 export class AppComponent {}

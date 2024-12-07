@@ -39,7 +39,6 @@ interface Link {
   selector: 'table-of-contents',
   styleUrl: './table-of-contents.scss',
   templateUrl: './table-of-contents.html',
-  standalone: true,
   imports: [],
 })
 export class TableOfContents implements OnInit, AfterViewInit, OnDestroy {

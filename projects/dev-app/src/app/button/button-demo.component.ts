@@ -11,7 +11,6 @@ import { MtxButtonModule } from '@ng-matero/extensions/button';
   selector: 'dev-button-demo',
   templateUrl: 'button-demo.component.html',
   styleUrl: 'button-demo.component.scss',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     FormsModule,

@@ -9,7 +9,6 @@ import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
   selector: 'checkbox-group-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MatButtonModule, MatCheckboxModule, FormsModule, MtxCheckboxGroupModule, JsonPipe],
 })
 export class AppComponent {
