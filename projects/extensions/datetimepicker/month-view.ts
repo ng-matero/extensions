@@ -90,6 +90,7 @@ export class MtxMonthView<D> implements AfterContentInit {
     this._weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
 
     this._activeDate = this._adapter.today();
+    this._selected = this._adapter.today();
   }
 
   private _activeDate: D;
@@ -145,6 +146,7 @@ export class MtxMonthView<D> implements AfterContentInit {
     );
     this.selectedChange.emit(dateObject);
     this._activeDate = dateObject;
+    this.selected = dateObject;
 
     if (this.type === 'date') {
       this._userSelection.emit();
@@ -213,5 +215,35 @@ export class MtxMonthView<D> implements AfterContentInit {
 
   private calendarState(direction: string): void {
     this._calendarState = direction;
+  }
+
+  /**
+   * Gets the index of the cell that should be highlighted in the month view.
+   * Used to highlight either the selected date or today's date in the calendar.
+   *
+   * Highlighting priority:
+   * 1. Currently selected date (if it's in the displayed month)
+   * 2. Today's date (if it's in the displayed month)
+   * 3. No highlight (-1) if neither date is in the current month
+   *
+   * @returns Zero-based index of the cell to highlight, or -1 if no cell should be highlighted
+   */
+  protected _getActiveCell(): number {
+    if (!this.activeDate || !this._adapter) {
+      return -1;
+    }
+
+    // Check if selected date is in current month - highlight it if so
+    if (this.selected && this._adapter.sameMonthAndYear(this.activeDate, this.selected)) {
+      return Math.max(0, this._adapter.getDate(this.selected) - 1);
+    }
+
+    // Otherwise highlight today's date if it's in the current month and not selected
+    const today = this._adapter.today();
+    if (!this.selected && this._adapter.sameMonthAndYear(this.activeDate, today)) {
+      return Math.max(0, this._adapter.getDate(today) - 1);
+    }
+
+    return -1;
   }
 }
