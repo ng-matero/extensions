@@ -9,7 +9,6 @@ import { MtxAlertModule, MtxAlertType } from '@ng-matero/extensions/alert';
   selector: 'dev-alert-demo',
   templateUrl: 'alert-demo.component.html',
   styleUrl: 'alert-demo.component.scss',
-  standalone: true,
   imports: [
     ReactiveFormsModule,
     FormsModule,

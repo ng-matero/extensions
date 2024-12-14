@@ -109,7 +109,6 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MtxCalendar, CdkPortalOutlet],
 })
 export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, OnDestroy {

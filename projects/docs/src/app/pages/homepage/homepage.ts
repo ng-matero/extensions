@@ -10,7 +10,6 @@ import { ComponentPageTitle } from '../page-title/page-title';
   selector: 'app-homepage',
   templateUrl: './homepage.html',
   styleUrl: './homepage.scss',
-  standalone: true,
   imports: [NavigationFocus, MatButtonModule, RouterLink, AppLogo],
 })
 export class Homepage implements OnInit {

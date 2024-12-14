@@ -33,7 +33,6 @@ import { gridSortableExampleConfig } from './examples/sortable';
 @Component({
   selector: 'app-grid-overview',
   templateUrl: './grid-overview.html',
-  standalone: true,
   imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class GridOverviewComponent {
@@ -43,7 +42,6 @@ export class GridOverviewComponent {
 @Component({
   selector: 'app-grid-api',
   templateUrl: './grid-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class GridApiComponent {

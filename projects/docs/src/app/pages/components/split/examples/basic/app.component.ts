@@ -5,7 +5,6 @@ import { MtxSplitModule } from '@ng-matero/extensions/split';
   selector: 'split-pane-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MtxSplitModule],
 })
 export class AppComponent {}

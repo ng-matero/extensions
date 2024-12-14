@@ -17,7 +17,6 @@ import { MtxDialogData } from './dialog-config';
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     AsyncPipe,
     MatButton,

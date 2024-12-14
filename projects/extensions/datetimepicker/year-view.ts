@@ -30,7 +30,6 @@ import { MtxDatetimepickerType } from './datetimepicker-types';
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [MtxCalendarBody],
 })
 export class MtxYearView<D> implements AfterContentInit {

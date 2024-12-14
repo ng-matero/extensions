@@ -12,7 +12,6 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'dev-checkbox-group-demo',
   templateUrl: './checkbox-group-demo.component.html',
   styleUrl: './checkbox-group-demo.component.scss',
-  standalone: true,
   imports: [MatCheckboxModule, MtxCheckboxGroupModule, ReactiveFormsModule, FormsModule, JsonPipe],
 })
 export class CheckboxGroupDemoComponent {

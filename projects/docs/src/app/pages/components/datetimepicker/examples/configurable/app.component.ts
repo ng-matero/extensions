@@ -19,7 +19,6 @@ import { MatButtonModule } from '@angular/material/button';
   selector: 'datetimepicker-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [
     FormsModule,
     MatRadioModule,

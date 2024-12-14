@@ -14,7 +14,6 @@ import { dialogOriginalExampleConfig } from './examples/original';
 @Component({
   selector: 'app-dialog-overview',
   templateUrl: './dialog-overview.html',
-  standalone: true,
   imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class DialogOverviewComponent {
@@ -24,7 +23,6 @@ export class DialogOverviewComponent {
 @Component({
   selector: 'app-dialog-api',
   templateUrl: './dialog-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class DialogApiComponent {

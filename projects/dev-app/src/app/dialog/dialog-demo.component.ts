@@ -11,7 +11,6 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'dev-dialog-demo',
   templateUrl: './dialog-demo.component.html',
   styleUrl: './dialog-demo.component.scss',
-  standalone: true,
   imports: [MatButtonModule],
 })
 export class DialogDemoComponent implements OnInit {
@@ -102,7 +101,6 @@ export class DialogDemoComponent implements OnInit {
       <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
     </div>
   `,
-  standalone: true,
   imports: [FormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class DialogOverviewComponent {

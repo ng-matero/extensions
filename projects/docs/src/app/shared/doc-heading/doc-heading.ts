@@ -10,7 +10,6 @@ import { HeaderLinkComponent } from './header-link';
     </h3>
   `,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [HeaderLinkComponent],
 })
 export class DocHeadingComponent implements OnInit {

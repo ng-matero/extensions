@@ -11,7 +11,6 @@ import { colorpickerDisabledExampleConfig } from './examples/disabled';
 @Component({
   selector: 'app-colorpicker-overview',
   templateUrl: './colorpicker-overview.html',
-  standalone: true,
   imports: [ExampleViewer, AsyncPipe],
 })
 export class ColorPickerOverviewComponent {
@@ -21,7 +20,6 @@ export class ColorPickerOverviewComponent {
 @Component({
   selector: 'app-colorpicker-api',
   templateUrl: './colorpicker-api.html',
-  standalone: true,
   imports: [DocViewer, AsyncPipe],
 })
 export class ColorPickerApiComponent {

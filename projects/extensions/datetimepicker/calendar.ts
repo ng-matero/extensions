@@ -77,7 +77,6 @@ import { MtxYearView } from './year-view';
   animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     CdkPortalOutlet,
     MatButton,

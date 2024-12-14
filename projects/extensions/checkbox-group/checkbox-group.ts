@@ -46,7 +46,6 @@ export class MtxCheckboxBase {
       multi: true,
     },
   ],
-  standalone: true,
   imports: [FormsModule, MatCheckbox, MtxToObservablePipe, AsyncPipe],
 })
 export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueAccessor {

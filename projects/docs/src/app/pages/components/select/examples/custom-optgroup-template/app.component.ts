@@ -7,7 +7,6 @@ import { MtxSelectModule } from '@ng-matero/extensions/select';
   selector: 'select-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [FormsModule, MatFormFieldModule, MtxSelectModule],
 })
 export class AppComponent {

@@ -16,7 +16,6 @@ import { AppThemes } from '../themes';
   selector: 'app-navbar',
   templateUrl: './navbar.html',
   styleUrl: './navbar.scss',
-  standalone: true,
   imports: [
     NgProgressbar,
     NgProgressRouter,

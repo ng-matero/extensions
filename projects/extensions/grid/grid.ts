@@ -90,7 +90,6 @@ export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions
       transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
     ]),
   ],
-  standalone: true,
   imports: [
     AsyncPipe,
     NgTemplateOutlet,

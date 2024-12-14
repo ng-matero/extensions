@@ -8,7 +8,6 @@ import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
   templateUrl: 'tooltip-demo.component.html',
   styleUrl: 'tooltip-demo.component.scss',
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
   imports: [MatButtonModule, MatTooltipModule, MtxTooltipModule],
 })
 export class TooltipDemoComponent {

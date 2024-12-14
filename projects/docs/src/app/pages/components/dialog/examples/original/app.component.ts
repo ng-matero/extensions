@@ -10,7 +10,6 @@ import { MtxDialog } from '@ng-matero/extensions/dialog';
   selector: 'dialog-example',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  standalone: true,
   imports: [MatButtonModule],
 })
 export class AppComponent {
@@ -34,7 +33,6 @@ export class AppComponent {
 @Component({
   selector: 'dialog-overview',
   templateUrl: './dialog.html',
-  standalone: true,
   imports: [MatFormFieldModule, MatInputModule, FormsModule, MatDialogModule, MatButtonModule],
 })
 export class DialogOriginalOverviewComponent {
