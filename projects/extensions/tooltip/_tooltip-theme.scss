@@ -62,11 +62,18 @@
   }
 }
 
-@mixin overrides($tokens: ()) {
-  @include token-utils.batch-create-token-values(
-    $tokens,
-    (prefix: tokens-mdc-plain-tooltip.$prefix, tokens: tokens-mdc-plain-tooltip.get-token-slots()),
+/// Defines the tokens that will be available in the `overrides` mixin and for docs extraction.
+@function _define-overrides() {
+  @return (
+    (
+      namespace: tokens-mdc-plain-tooltip.$prefix,
+      tokens: tokens-mdc-plain-tooltip.get-token-slots(),
+    ),
   );
+}
+
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values($tokens, _define-overrides()...);
 }
 
 @mixin theme($theme) {

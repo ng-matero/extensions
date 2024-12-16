@@ -11,8 +11,10 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-select.$prefix,
-        tokens-mtx-select.get-unthemable-tokens());
+      @include token-utils.create-token-values(
+        tokens-mtx-select.$prefix,
+        tokens-mtx-select.get-unthemable-tokens()
+      );
     }
   }
 }
@@ -23,8 +25,10 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-select.$prefix,
-        tokens-mtx-select.get-color-tokens($theme));
+      @include token-utils.create-token-values(
+        tokens-mtx-select.$prefix,
+        tokens-mtx-select.get-color-tokens($theme)
+      );
     }
 
     .ng-dropdown-panel {
@@ -54,17 +58,26 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-select.$prefix,
-        tokens-mtx-select.get-density-tokens($theme));
+      @include token-utils.create-token-values(
+        tokens-mtx-select.$prefix,
+        tokens-mtx-select.get-density-tokens($theme)
+      );
     }
   }
 }
 
-@mixin overrides($tokens: ()) {
-  @include token-utils.batch-create-token-values(
-    $tokens,
-    (prefix: tokens-mtx-select.$prefix, tokens: tokens-mtx-select.get-token-slots()),
+/// Defines the tokens that will be available in the `overrides` mixin and for docs extraction.
+@function _define-overrides() {
+  @return (
+    (
+      namespace: tokens-mtx-select.$prefix,
+      tokens: tokens-mtx-select.get-token-slots(),
+    ),
   );
+}
+
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values($tokens, _define-overrides()...);
 }
 
 @mixin theme($theme, $options...) {

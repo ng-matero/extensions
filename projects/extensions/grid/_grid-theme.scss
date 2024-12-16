@@ -14,8 +14,10 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-grid.$prefix,
-        tokens-mtx-grid.get-unthemable-tokens());
+      @include token-utils.create-token-values(
+        tokens-mtx-grid.$prefix,
+        tokens-mtx-grid.get-unthemable-tokens()
+      );
     }
   }
 }
@@ -26,8 +28,10 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-grid.$prefix,
-        tokens-mtx-grid.get-color-tokens($theme));
+      @include token-utils.create-token-values(
+        tokens-mtx-grid.$prefix,
+        tokens-mtx-grid.get-color-tokens($theme)
+      );
     }
   }
 }
@@ -45,17 +49,26 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-grid.$prefix,
-        tokens-mtx-grid.get-density-tokens($theme));
+      @include token-utils.create-token-values(
+        tokens-mtx-grid.$prefix,
+        tokens-mtx-grid.get-density-tokens($theme)
+      );
     }
   }
 }
 
-@mixin overrides($tokens: ()) {
-  @include token-utils.batch-create-token-values(
-    $tokens,
-    (prefix: tokens-mtx-grid.$prefix, tokens: tokens-mtx-grid.get-token-slots()),
+/// Defines the tokens that will be available in the `overrides` mixin and for docs extraction.
+@function _define-overrides() {
+  @return (
+    (
+      namespace: tokens-mtx-grid.$prefix,
+      tokens: tokens-mtx-grid.get-token-slots(),
+    ),
   );
+}
+
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values($tokens, _define-overrides()...);
 }
 
 @mixin theme($theme) {

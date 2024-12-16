@@ -11,8 +11,10 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-progress.$prefix,
-        tokens-mtx-progress.get-unthemable-tokens());
+      @include token-utils.create-token-values(
+        tokens-mtx-progress.$prefix,
+        tokens-mtx-progress.get-unthemable-tokens()
+      );
     }
   }
 }
@@ -23,8 +25,10 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-progress.$prefix,
-        tokens-mtx-progress.get-color-tokens($theme));
+      @include token-utils.create-token-values(
+        tokens-mtx-progress.$prefix,
+        tokens-mtx-progress.get-color-tokens($theme)
+      );
     }
   }
 }
@@ -35,8 +39,10 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-progress.$prefix,
-        tokens-mtx-progress.get-typography-tokens($theme));
+      @include token-utils.create-token-values(
+        tokens-mtx-progress.$prefix,
+        tokens-mtx-progress.get-typography-tokens($theme)
+      );
     }
   }
 }
@@ -48,11 +54,18 @@
   @else {}
 }
 
-@mixin overrides($tokens: ()) {
-  @include token-utils.batch-create-token-values(
-    $tokens,
-    (prefix: tokens-mtx-progress.$prefix, tokens: tokens-mtx-progress.get-token-slots()),
+/// Defines the tokens that will be available in the `overrides` mixin and for docs extraction.
+@function _define-overrides() {
+  @return (
+    (
+      namespace: tokens-mtx-progress.$prefix,
+      tokens: tokens-mtx-progress.get-token-slots(),
+    ),
   );
+}
+
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values($tokens, _define-overrides()...);
 }
 
 @mixin theme($theme) {

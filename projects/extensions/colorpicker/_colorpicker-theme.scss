@@ -12,8 +12,10 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-colorpicker.$prefix,
-        tokens-mtx-colorpicker.get-unthemable-tokens());
+      @include token-utils.create-token-values(
+        tokens-mtx-colorpicker.$prefix,
+        tokens-mtx-colorpicker.get-unthemable-tokens()
+      );
     }
   }
 }
@@ -24,8 +26,10 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(tokens-mtx-colorpicker.$prefix,
-        tokens-mtx-colorpicker.get-color-tokens($theme));
+      @include token-utils.create-token-values(
+        tokens-mtx-colorpicker.$prefix,
+        tokens-mtx-colorpicker.get-color-tokens($theme)
+      );
     }
 
     .mtx-colorpicker-toggle-active {
@@ -56,11 +60,18 @@
   @else {}
 }
 
-@mixin overrides($tokens: ()) {
-  @include token-utils.batch-create-token-values(
-    $tokens,
-    (prefix: tokens-mtx-colorpicker.$prefix, tokens: tokens-mtx-colorpicker.get-token-slots()),
+/// Defines the tokens that will be available in the `overrides` mixin and for docs extraction.
+@function _define-overrides() {
+  @return (
+    (
+      namespace: tokens-mtx-colorpicker.$prefix,
+      tokens: tokens-mtx-colorpicker.get-token-slots(),
+    ),
   );
+}
+
+@mixin overrides($tokens: ()) {
+  @include token-utils.batch-create-token-values($tokens, _define-overrides()...);
 }
 
 @mixin theme($theme) {
