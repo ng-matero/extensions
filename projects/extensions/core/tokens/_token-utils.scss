@@ -3,11 +3,12 @@
 @use 'sass:string';
 @use '@angular/material' as mat;
 @use '../style/elevation';
+@use './m3-system';
 @use './m3-tokens';
 
 $_tokens: null;
 $_component-prefix: null;
-$_system-fallbacks: m3-tokens.create-system-fallbacks();
+$_system-fallbacks: m3-system.create-system-fallbacks();
 
 // Sets the token prefix and map to use when creating token slots.
 @mixin use-tokens($prefix, $tokens) {
