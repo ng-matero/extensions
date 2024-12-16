@@ -86,6 +86,7 @@ export class DevAppLayout {
     private _translate: TranslateService
   ) {
     this.toggleTheme(this.state.darkTheme);
+    this.toggleSystemTheme(this.state.systemTheme);
     this.toggleStrongFocus(this.state.strongFocusEnabled);
     this.toggleDensity(Math.max(this._densityScales.indexOf(this.state.density), 0));
     this.toggleRippleDisabled(this.state.rippleDisabled);
@@ -97,6 +98,12 @@ export class DevAppLayout {
   toggleTheme(value = !this.state.darkTheme) {
     this.state.darkTheme = value;
     this._document.body.classList.toggle('demo-unicorn-dark-theme', value);
+    setAppState(this.state);
+  }
+
+  toggleSystemTheme(value = !this.state.systemTheme) {
+    this.state.systemTheme = value;
+    this._document.body.classList.toggle('demo-experimental-theme', value);
     setAppState(this.state);
   }
 
