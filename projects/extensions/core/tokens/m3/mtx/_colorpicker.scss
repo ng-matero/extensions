@@ -4,11 +4,11 @@
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, colorpicker);
 
-/// Generates custom tokens for the mat-badge.
+/// Generates custom tokens for the mtx-colorpicker.
 /// @param {Map} $systems The MDC system tokens
 /// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
 /// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mat-badge
+/// @return {Map} A set of custom tokens for the mtx-colorpicker
 @function get-tokens($systems, $exclude-hardcoded, $token-slots) {
   $tokens: (
     toggle-active-state-icon-color: map.get($systems, md-sys-color, on-surface-variant),

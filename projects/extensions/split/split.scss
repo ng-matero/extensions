@@ -47,7 +47,7 @@ $_tokens: tokens-mtx-split.$prefix, tokens-mtx-split.get-token-slots();
 
     &.mtx-split-pane-hidden {
       flex: 0 1 0 !important;
-      overflow: hidden hidden;
+      overflow: hidden;
     }
   }
 
