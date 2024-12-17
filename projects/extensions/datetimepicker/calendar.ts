@@ -286,14 +286,12 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   get _dateButtonText(): string {
+    const selectedDate = this.selected || this._adapter.today();
     switch (this.type) {
       case 'month':
-        return this._adapter.getMonthNames('long')[this._adapter.getMonth(this._activeDate)];
+        return this._adapter.getMonthNames('long')[this._adapter.getMonth(selectedDate)];
       default:
-        return this._adapter.format(
-          this._activeDate,
-          this._dateFormats.display.popupHeaderDateLabel
-        );
+        return this._adapter.format(selectedDate, this._dateFormats.display.popupHeaderDateLabel);
     }
   }
 
