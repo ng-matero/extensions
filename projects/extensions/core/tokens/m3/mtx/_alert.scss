@@ -20,21 +20,21 @@ $prefix: (mtx, alert);
     background-color: map.get($systems, md-sys-color, surface-container),
     text-color: map.get($systems, md-sys-color, on-surface),
 
-    info-outline-color: map.get(mat.$azure-palette, if($is-dark, 40, 80)),
-    info-background-color: map.get(mat.$azure-palette, if($is-dark, 20, 90)),
-    info-text-color: map.get(mat.$azure-palette, if($is-dark, 90, 20)),
+    info-outline-color: light-dark(map.get(mat.$azure-palette, 80), map.get(mat.$azure-palette, 40)),
+    info-background-color: light-dark(map.get(mat.$azure-palette, 90), map.get(mat.$azure-palette, 20)),
+    info-text-color: light-dark(map.get(mat.$azure-palette, 20), map.get(mat.$azure-palette, 90)),
 
-    success-outline-color: map.get(mat.$green-palette, if($is-dark, 40, 80)),
-    success-background-color: map.get(mat.$green-palette, if($is-dark, 20, 95)),
-    success-text-color: map.get(mat.$green-palette, if($is-dark, 95, 20)),
+    success-outline-color: light-dark(map.get(mat.$green-palette, 80), map.get(mat.$green-palette, 40)),
+    success-background-color: light-dark(map.get(mat.$green-palette, 95), map.get(mat.$green-palette, 20)),
+    success-text-color: light-dark(map.get(mat.$green-palette, 20), map.get(mat.$green-palette, 95)),
 
-    warning-outline-color: map.get(mat.$yellow-palette, if($is-dark, 40, 80)),
-    warning-background-color: map.get(mat.$yellow-palette, if($is-dark, 20, 98)),
-    warning-text-color: map.get(mat.$yellow-palette, if($is-dark, 98, 20)),
+    warning-outline-color: light-dark(map.get(mat.$yellow-palette, 80), map.get(mat.$yellow-palette, 40)),
+    warning-background-color: light-dark(map.get(mat.$yellow-palette, 98), map.get(mat.$yellow-palette, 20)),
+    warning-text-color: light-dark(map.get(mat.$yellow-palette, 20), map.get(mat.$yellow-palette, 98)),
 
-    danger-outline-color: map.get(mat.$red-palette, if($is-dark, 40, 80)),
-    danger-background-color: map.get(mat.$red-palette, if($is-dark, 20, 90)),
-    danger-text-color: map.get(mat.$red-palette, if($is-dark, 90, 20)),
+    danger-outline-color: light-dark(map.get(mat.$red-palette, 80), map.get(mat.$red-palette, 40)),
+    danger-background-color: light-dark(map.get(mat.$red-palette, 90), map.get(mat.$red-palette, 20)),
+    danger-text-color: light-dark(map.get(mat.$red-palette, 20), map.get(mat.$red-palette, 90)),
   );
 
   @return token-definition.namespace-tokens($prefix, $tokens, $token-slots);

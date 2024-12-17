@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+@use '../../extensions' as mtx;
+
+$light-theme: (
+  color: (
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+    // theme-type: light,
+  ),
+  typography: Roboto,
+  density: 'maximum'
+);
+
+$dark-theme: (
+  color: (
+    primary: mat.$violet-palette,
+    tertiary: mat.$orange-palette,
+    // theme-type: dark,
+  ),
+  typography: Roboto,
+  density: 'maximum'
+);
+
+html {
+  color-scheme: light;
+
+  @include mat.theme($light-theme);
+  // @include mtx.theme($light-theme);
+}
+
+.demo-unicorn-dark-theme {
+  color-scheme: dark;
+
+  // @include mat.theme($dark-theme);
+  // @include mtx.theme($dark-theme);
+}
