@@ -8,7 +8,7 @@ $light-theme: (
     // theme-type: light,
   ),
   typography: Roboto,
-  density: 'maximum'
+  density: 0
 );
 
 $dark-theme: (
@@ -18,7 +18,7 @@ $dark-theme: (
     // theme-type: dark,
   ),
   typography: Roboto,
-  density: 'maximum'
+  density: 0
 );
 
 html {
