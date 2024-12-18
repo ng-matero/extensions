@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -7,7 +6,9 @@ import {
   Input,
   Optional,
   Output,
+  AfterContentInit,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
 import {
   DatetimeAdapter,
@@ -90,6 +91,7 @@ export class MtxMonthView<D> implements AfterContentInit {
     this._weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
 
     this._activeDate = this._adapter.today();
+    this._selected = this._adapter.today();
   }
 
   private _activeDate: D;
@@ -103,15 +105,15 @@ export class MtxMonthView<D> implements AfterContentInit {
   }
 
   set activeDate(value: D) {
-    const oldActiveDate = this._activeDate;
+    const _oldActiveDate = this._activeDate;
     this._activeDate = value || this._adapter.today();
     if (
-      oldActiveDate &&
+      _oldActiveDate &&
       this._activeDate &&
-      !this._adapter.sameMonthAndYear(oldActiveDate, this._activeDate)
+      !this._adapter.sameMonthAndYear(_oldActiveDate, this._activeDate)
     ) {
       this._init();
-      if (this._adapter.isInNextMonth(oldActiveDate, this._activeDate)) {
+      if (this._adapter.isInNextMonth(_oldActiveDate, this._activeDate)) {
         this.calendarState('right');
       } else {
         this.calendarState('left');
@@ -130,6 +132,8 @@ export class MtxMonthView<D> implements AfterContentInit {
   }
   private _selected!: D;
 
+  @Input({ transform: booleanAttribute }) nextOrPreviousManuallyClicked = false;
+
   ngAfterContentInit(): void {
     this._init();
   }
@@ -145,6 +149,7 @@ export class MtxMonthView<D> implements AfterContentInit {
     );
     this.selectedChange.emit(dateObject);
     this._activeDate = dateObject;
+    this.selected = dateObject;
 
     if (this.type === 'date') {
       this._userSelection.emit();
@@ -213,5 +218,21 @@ export class MtxMonthView<D> implements AfterContentInit {
 
   private calendarState(direction: string): void {
     this._calendarState = direction;
+  }
+
+  protected _getActiveCell(): number {
+    if (!this.activeDate || !this._adapter) {
+      return -1;
+    }
+
+    if (!this.nextOrPreviousManuallyClicked && !this.selected) {
+      return Math.max(0, this._adapter.getDate(this.activeDate) - 1);
+    }
+
+    if (!this.nextOrPreviousManuallyClicked && this.selected) {
+      return Math.max(0, this._adapter.getDate(this.activeDate) - 1);
+    }
+
+    return -1;
   }
 }
