@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 /**
@@ -6,6 +6,8 @@ import { Title } from '@angular/platform-browser';
  */
 @Injectable({ providedIn: 'root' })
 export class ComponentPageTitle {
+  private bodyTitle = inject(Title);
+
   _title = '';
   _originalTitle = 'Angular Material Extensions library';
 
@@ -22,8 +24,6 @@ export class ComponentPageTitle {
     }
     this.bodyTitle.setTitle(title);
   }
-
-  constructor(private bodyTitle: Title) {}
 
   capitalizeTitle(title: string): string {
     return title

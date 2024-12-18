@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -36,7 +36,7 @@ import { gridSortableExampleConfig } from './examples/sortable';
   imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class GridOverviewComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 @Component({
@@ -45,7 +45,7 @@ export class GridOverviewComponent {
   imports: [DocViewer, AsyncPipe],
 })
 export class GridApiComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {

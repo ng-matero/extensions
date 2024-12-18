@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { MtxAlert } from '@ng-matero/extensions/alert';
 import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
@@ -14,18 +14,16 @@ import { selectOptionExampleConfig } from './examples/mtx-option';
 @Component({
   selector: 'app-select-overview',
   templateUrl: './select-overview.html',
-  styles: [
-    `
-      :host {
-        position: relative;
-        display: block;
-      }
-    `,
-  ],
+  styles: `
+    :host {
+      position: relative;
+      display: block;
+    }
+  `,
   imports: [MtxAlert, DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class SelectOverviewComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 @Component({
@@ -34,7 +32,7 @@ export class SelectOverviewComponent {
   imports: [DocViewer, AsyncPipe],
 })
 export class SelectApiComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 export const routes: Routes = [

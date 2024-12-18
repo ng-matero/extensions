@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 
@@ -9,7 +9,7 @@ import { MtxDialog } from '@ng-matero/extensions/dialog';
   imports: [MatButtonModule],
 })
 export class AppComponent {
-  constructor(private mtxDialog: MtxDialog) {}
+  private mtxDialog = inject(MtxDialog);
 
   alert() {
     this.mtxDialog.alert(`My name is Zongbin!`, '', () => {

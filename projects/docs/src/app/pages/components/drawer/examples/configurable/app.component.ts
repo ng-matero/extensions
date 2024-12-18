@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -22,14 +22,14 @@ import { DrawerPosition, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/d
   ],
 })
 export class AppComponent {
+  private drawer = inject(MtxDrawer);
+
   position: DrawerPosition = 'right';
   width = '300px';
   height = '300px';
   hasBackdrop = true;
   disableClose = false;
   closeOnNavigation = true;
-
-  constructor(private drawer: MtxDrawer) {}
 
   open() {
     const drawerRef = this.drawer.open(DrawerConfigurableOverviewComponent, {
@@ -64,22 +64,20 @@ export class AppComponent {
       reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
     </p>
   `,
-  styles: [
-    `
-      .heading {
-        display: flex;
-        align-items: center;
-      }
+  styles: `
+    .heading {
+      display: flex;
+      align-items: center;
+    }
 
-      .flex-spacer {
-        flex-grow: 1;
-      }
-    `,
-  ],
+    .flex-spacer {
+      flex-grow: 1;
+    }
+  `,
   imports: [MatIconModule, MatButtonModule],
 })
 export class DrawerConfigurableOverviewComponent {
-  constructor(public drawerRef: MtxDrawerRef<DrawerConfigurableOverviewComponent>) {}
+  private drawerRef = inject<MtxDrawerRef<DrawerConfigurableOverviewComponent>>(MtxDrawerRef);
 
   onClose(): void {
     this.drawerRef.dismiss();

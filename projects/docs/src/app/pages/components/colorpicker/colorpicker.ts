@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
@@ -14,7 +14,7 @@ import { colorpickerDisabledExampleConfig } from './examples/disabled';
   imports: [ExampleViewer, AsyncPipe],
 })
 export class ColorPickerOverviewComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 @Component({
@@ -23,7 +23,7 @@ export class ColorPickerOverviewComponent {
   imports: [DocViewer, AsyncPipe],
 })
 export class ColorPickerApiComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 export const routes: Routes = [

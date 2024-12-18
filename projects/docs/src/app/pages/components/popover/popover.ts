@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
@@ -13,7 +13,7 @@ import { popoverTargetExampleConfig } from './examples/target';
   imports: [ExampleViewer, AsyncPipe],
 })
 export class PopoverOverviewComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 @Component({
@@ -22,7 +22,7 @@ export class PopoverOverviewComponent {
   imports: [DocViewer, AsyncPipe],
 })
 export class PopoverApiComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 export const routes: Routes = [

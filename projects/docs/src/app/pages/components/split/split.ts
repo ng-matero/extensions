@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
@@ -11,7 +11,7 @@ import { splitBasicExampleConfig } from './examples/basic';
   imports: [ExampleViewer, AsyncPipe],
 })
 export class SplitOverviewComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 @Component({
@@ -20,7 +20,7 @@ export class SplitOverviewComponent {
   imports: [DocViewer, AsyncPipe],
 })
 export class SplitApiComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 export const routes: Routes = [

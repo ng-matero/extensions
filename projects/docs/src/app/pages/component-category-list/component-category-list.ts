@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Params, RouterLink } from '@angular/router';
 import { Observable, Subscription, combineLatest } from 'rxjs';
 import { NavigationFocus } from '../../shared/navigation-focus/navigation-focus';
@@ -12,16 +12,14 @@ import { ComponentPageTitle } from '../page-title/page-title';
   imports: [NavigationFocus, RouterLink],
 })
 export class ComponentCategoryList implements OnInit, OnDestroy {
+  _componentPageTitle = inject(ComponentPageTitle);
+  private _route = inject(ActivatedRoute);
+
   params!: Observable<Params>;
   routeParamSubscription!: Subscription;
   _categoryListSummary: string | undefined;
 
   list = COMPONENTS_MENU;
-
-  constructor(
-    public _componentPageTitle: ComponentPageTitle,
-    private _route: ActivatedRoute
-  ) {}
 
   ngOnInit() {
     // Combine params from all of the path into a single object.

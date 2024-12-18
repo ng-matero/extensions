@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import {
@@ -15,6 +15,8 @@ import { TranslateService } from '@ngx-translate/core';
   imports: [MatRadioModule, FormsModule, MtxCheckboxGroupModule, JsonPipe],
 })
 export class AppComponent {
+  translate = inject(TranslateService);
+
   foods: MtxCheckboxGroupOption[] = [
     {
       label: this.translate.stream('steak'),
@@ -37,8 +39,8 @@ export class AppComponent {
   ];
   defaultlang = 'zh-CN';
 
-  constructor(public translate: TranslateService) {
-    translate.addLangs(this.langs.map(item => item.value));
-    translate.setDefaultLang(this.defaultlang);
+  constructor() {
+    this.translate.addLangs(this.langs.map(item => item.value));
+    this.translate.setDefaultLang(this.defaultlang);
   }
 }

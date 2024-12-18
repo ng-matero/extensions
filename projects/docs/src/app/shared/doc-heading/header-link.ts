@@ -1,5 +1,5 @@
 import { PlatformLocation } from '@angular/common';
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -19,6 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [MatIconModule],
 })
 export class HeaderLinkComponent implements OnInit {
+  private platformLocation = inject(PlatformLocation);
+
   /**
    * Id of the anchor element. Note that is uses "example" because we instantiate the
    * header link components through the ComponentPortal.
@@ -26,8 +28,6 @@ export class HeaderLinkComponent implements OnInit {
   @Input() example!: string;
 
   private _text = '';
-
-  constructor(private platformLocation: PlatformLocation) {}
 
   ngOnInit() {
     this._text = this.example

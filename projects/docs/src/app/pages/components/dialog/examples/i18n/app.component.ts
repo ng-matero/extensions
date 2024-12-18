@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatRadioModule } from '@angular/material/radio';
@@ -12,12 +12,12 @@ import { TranslateService } from '@ngx-translate/core';
   imports: [FormsModule, MatRadioModule, MatButtonModule],
 })
 export class AppComponent {
-  constructor(
-    private mtxDialog: MtxDialog,
-    public translate: TranslateService
-  ) {
-    translate.addLangs(this.langs.map(item => item.value));
-    translate.setDefaultLang(this.defaultlang);
+  private mtxDialog = inject(MtxDialog);
+  translate = inject(TranslateService);
+
+  constructor() {
+    this.translate.addLangs(this.langs.map(item => item.value));
+    this.translate.setDefaultLang(this.defaultlang);
   }
 
   open() {

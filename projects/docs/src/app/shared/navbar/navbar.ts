@@ -30,6 +30,9 @@ import { AppThemes } from '../themes';
   ],
 })
 export class Navbar implements OnInit {
+  private _appThemes = inject(AppThemes);
+  private navigationFocusService = inject(NavigationFocusService);
+
   private readonly http = inject(HttpClient);
 
   dark = false;
@@ -38,10 +41,7 @@ export class Navbar implements OnInit {
 
   version$: any;
 
-  constructor(
-    private _appThemes: AppThemes,
-    private navigationFocusService: NavigationFocusService
-  ) {
+  constructor() {
     setTimeout(() => (this.skipLinkHref = this.navigationFocusService.getSkipLinkHref()), 100);
   }
 

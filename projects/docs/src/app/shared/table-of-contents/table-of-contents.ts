@@ -3,10 +3,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  Inject,
   Input,
   OnDestroy,
   OnInit,
+  inject,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, fromEvent } from 'rxjs';
@@ -42,6 +42,12 @@ interface Link {
   imports: [],
 })
 export class TableOfContents implements OnInit, AfterViewInit, OnDestroy {
+  private _router = inject(Router);
+  private _route = inject(ActivatedRoute);
+  private _element = inject(ElementRef);
+  private _navigationFocusService = inject(NavigationFocusService);
+  private _document = inject<Document>(DOCUMENT);
+
   @Input() container!: string;
 
   _linkSections: LinkSection[] = [];
@@ -52,13 +58,9 @@ export class TableOfContents implements OnInit, AfterViewInit, OnDestroy {
   private _urlFragment = '';
   private subscriptions = new Subscription();
 
-  constructor(
-    private _router: Router,
-    private _route: ActivatedRoute,
-    private _element: ElementRef,
-    private _navigationFocusService: NavigationFocusService,
-    @Inject(DOCUMENT) private _document: Document
-  ) {
+  constructor() {
+    const _router = this._router;
+
     this.subscriptions.add(
       this._navigationFocusService.navigationEndEvents.subscribe(() => {
         const rootUrl = _router.url.split('#')[0];

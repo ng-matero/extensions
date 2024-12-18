@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -19,7 +19,7 @@ import { checkboxGroupSelectAllExampleConfig } from './examples/select-all';
   imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class CheckboxGroupOverviewComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 @Component({
@@ -28,7 +28,7 @@ export class CheckboxGroupOverviewComponent {
   imports: [DocViewer, AsyncPipe],
 })
 export class CheckboxGroupApiComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {

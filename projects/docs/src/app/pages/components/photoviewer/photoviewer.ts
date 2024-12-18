@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { MtxAlert } from '@ng-matero/extensions/alert';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
@@ -14,7 +14,7 @@ import { photoviewerThumbnailExampleConfig } from './examples/thumbnail';
   imports: [MtxAlert, ExampleViewer, AsyncPipe],
 })
 export class PhotoviewerOverviewComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 @Component({
@@ -23,7 +23,7 @@ export class PhotoviewerOverviewComponent {
   imports: [DocViewer, AsyncPipe],
 })
 export class PhotoviewerApiComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 export const routes: Routes = [

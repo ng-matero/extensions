@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { PageEvent } from '@angular/material/paginator';
 import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
@@ -11,6 +11,8 @@ import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
   imports: [MatButtonModule, MtxGridModule],
 })
 export class AppComponent implements OnInit {
+  private http = inject(HttpClient);
+
   columns: MtxGridColumn[] = [
     {
       header: 'Name',
@@ -55,8 +57,6 @@ export class AppComponent implements OnInit {
     p.page += 1;
     return p;
   }
-
-  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.getList();

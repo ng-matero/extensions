@@ -1,12 +1,12 @@
 import {
   Component,
-  ComponentFactoryResolver,
   ComponentRef,
   Input,
   OnDestroy,
   OnInit,
   ViewChild,
   ViewContainerRef,
+  inject,
 } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -35,6 +35,9 @@ export interface ExampleType {
   imports: [MatIconButton, MatTooltipModule, MatIconModule, MatTabsModule],
 })
 export class ExampleViewer implements OnInit, OnDestroy {
+  private readonly snackbar = inject(MatSnackBar);
+  private readonly copier = inject(CopierService);
+
   @Input() type!: string;
   @Input() exampleData!: ExampleType;
 
@@ -44,17 +47,8 @@ export class ExampleViewer implements OnInit, OnDestroy {
   /** Whether the source for the example is being displayed. */
   showSource = false;
 
-  constructor(
-    private readonly snackbar: MatSnackBar,
-    private readonly copier: CopierService,
-    private componentFactoryResolver: ComponentFactoryResolver
-  ) {}
-
   ngOnInit() {
-    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(
-      this.exampleData.component
-    );
-    this.demoComponentRef = this.demoRef.createComponent(componentFactory);
+    this.demoComponentRef = this.demoRef.createComponent(this.exampleData.component);
   }
 
   ngOnDestroy() {

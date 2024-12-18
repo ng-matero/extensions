@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -13,10 +13,10 @@ import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/
   imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class AppComponent {
+  private drawer = inject(MtxDrawer);
+
   animal?: string;
   name?: string;
-
-  constructor(private drawer: MtxDrawer) {}
 
   open() {
     const drawerRef = this.drawer.open(DrawerSharingDataOverviewComponent, {
@@ -53,25 +53,21 @@ export class AppComponent {
       <button mat-button (click)="onOkClick()" cdkFocusInitial>Ok</button>
     </div>
   `,
-  styles: [
-    `
-      .heading {
-        display: flex;
-        align-items: center;
-      }
+  styles: `
+    .heading {
+      display: flex;
+      align-items: center;
+    }
 
-      .flex-spacer {
-        flex-grow: 1;
-      }
-    `,
-  ],
+    .flex-spacer {
+      flex-grow: 1;
+    }
+  `,
   imports: [MatIconModule, MatFormFieldModule, MatInputModule, FormsModule, MatButtonModule],
 })
 export class DrawerSharingDataOverviewComponent {
-  constructor(
-    public drawerRef: MtxDrawerRef<DrawerSharingDataOverviewComponent>,
-    @Inject(MTX_DRAWER_DATA) public data: any
-  ) {}
+  drawerRef = inject<MtxDrawerRef<DrawerSharingDataOverviewComponent>>(MtxDrawerRef);
+  data = inject(MTX_DRAWER_DATA);
 
   onNoClick(): void {
     this.drawerRef.dismiss();

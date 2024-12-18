@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ElementRef } from '@angular/core';
+import { Component, ViewEncapsulation, ElementRef, inject } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { AppThemes, themeClass } from './shared';
 import { RouterOutlet } from '@angular/router';
@@ -12,11 +12,11 @@ import { Navbar } from './shared/navbar/navbar';
   imports: [Navbar, RouterOutlet],
 })
 export class AppComponent {
-  constructor(
-    private _element: ElementRef<HTMLElement>,
-    private _overlayContainer: OverlayContainer,
-    private _appThemes: AppThemes
-  ) {
+  private _element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private _overlayContainer = inject(OverlayContainer);
+  private _appThemes = inject(AppThemes);
+
+  constructor() {
     this._appThemes.change.subscribe((themeSelect: themeClass) => {
       this._appThemes.themes
         .filter(theme => theme !== themeSelect)

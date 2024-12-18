@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -17,7 +17,7 @@ import { dialogOriginalExampleConfig } from './examples/original';
   imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
 })
 export class DialogOverviewComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 @Component({
@@ -26,7 +26,7 @@ export class DialogOverviewComponent {
   imports: [DocViewer, AsyncPipe],
 })
 export class DialogApiComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 export function TranslateHttpLoaderFactory(http: HttpClient) {

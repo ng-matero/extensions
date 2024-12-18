@@ -1,4 +1,4 @@
-import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, ViewEncapsulation, inject } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import {
   ActivatedRoute,
@@ -20,19 +20,19 @@ import { ComponentPageTitle } from '../page-title/page-title';
   imports: [MatTabsModule, NavigationFocus, RouterLinkActive, RouterLink, RouterOutlet],
 })
 export class ComponentViewer implements OnDestroy {
+  private _router = inject(Router);
+  private _route = inject(ActivatedRoute);
+  private _componentPageTitle = inject(ComponentPageTitle);
+
   sections = new Set<string>(['overview', 'api']);
   private _destroyed = new Subject<void>();
 
   componentId = '';
 
-  constructor(
-    _route: ActivatedRoute,
-    private _router: Router,
-    private _componentPageTitle: ComponentPageTitle
-  ) {
-    const routeAndParentParams = [_route.params];
-    if (_route.parent) {
-      routeAndParentParams.push(_route.parent.params);
+  constructor() {
+    const routeAndParentParams = [this._route.params];
+    if (this._route.parent) {
+      routeAndParentParams.push(this._route.parent.params);
     }
 
     this._router.events.pipe(startWith(this._router)).subscribe(s => {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { ComponentPageTitle } from '../page-title/page-title';
@@ -10,7 +10,7 @@ import { ComponentPageTitle } from '../page-title/page-title';
   imports: [MatButtonModule, MatIconModule],
 })
 export class ComponentPageHeader {
-  constructor(public _componentPageTitle: ComponentPageTitle) {}
+  private _componentPageTitle = inject(ComponentPageTitle);
 
   @Output() toggleSidenav = new EventEmitter<void>();
 

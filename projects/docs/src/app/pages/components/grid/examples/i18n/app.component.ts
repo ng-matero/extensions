@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MtxGridColumn, MtxGridColumnPinOption, MtxGridModule } from '@ng-matero/extensions/grid';
@@ -12,6 +12,8 @@ import { EXAMPLE_DATA } from '../../data';
   imports: [FormsModule, MatRadioModule, MtxGridModule],
 })
 export class AppComponent {
+  translate = inject(TranslateService);
+
   columns: MtxGridColumn[] = [
     {
       header: this.translate.stream('name'),
@@ -72,8 +74,8 @@ export class AppComponent {
   ];
   defaultlang = 'zh-CN';
 
-  constructor(public translate: TranslateService) {
-    translate.addLangs(this.langs.map(item => item.value));
-    translate.setDefaultLang(this.defaultlang);
+  constructor() {
+    this.translate.addLangs(this.langs.map(item => item.value));
+    this.translate.setDefaultLang(this.defaultlang);
   }
 }

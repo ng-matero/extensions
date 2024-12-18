@@ -1,6 +1,6 @@
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
-import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, ViewEncapsulation, inject } from '@angular/core';
 import { MatDrawerToggleResult, MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { ActivatedRoute, Params, RouterOutlet } from '@angular/router';
 import { Observable, Subscription, combineLatest } from 'rxjs';
@@ -20,6 +20,9 @@ const SMALL_WIDTH_BREAKPOINT = 959;
   imports: [MatSidenavModule, ComponentNav, ComponentPageHeader, RouterOutlet, AsyncPipe],
 })
 export class ComponentSidenav implements OnInit, OnDestroy {
+  private _route = inject(ActivatedRoute);
+  private _navigationFocusService = inject(NavigationFocusService);
+
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
   params: Observable<Params> | undefined;
   isExtraScreenSmall: Observable<boolean>;
@@ -28,11 +31,9 @@ export class ComponentSidenav implements OnInit, OnDestroy {
   private _urlFragment = '';
   private subscriptions = new Subscription();
 
-  constructor(
-    private _route: ActivatedRoute,
-    private _navigationFocusService: NavigationFocusService,
-    breakpoints: BreakpointObserver
-  ) {
+  constructor() {
+    const breakpoints = inject(BreakpointObserver);
+
     this.isExtraScreenSmall = breakpoints
       .observe(`(max-width: ${EXTRA_SMALL_WIDTH_BREAKPOINT}px)`)
       .pipe(map(breakpoint => breakpoint.matches));

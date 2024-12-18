@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
@@ -11,7 +11,7 @@ import { tooltipTemplateExampleConfig } from './examples/template';
   imports: [ExampleViewer, AsyncPipe],
 })
 export class TooltipOverviewComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 @Component({
@@ -20,7 +20,7 @@ export class TooltipOverviewComponent {
   imports: [DocViewer, AsyncPipe],
 })
 export class TooltipApiComponent {
-  constructor(public route: ActivatedRoute) {}
+  route = inject(ActivatedRoute);
 }
 
 export const routes: Routes = [
