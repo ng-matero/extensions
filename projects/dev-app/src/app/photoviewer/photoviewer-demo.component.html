@@ -1,36 +1,45 @@
-<button mat-stroked-button
+<button
+  mat-stroked-button
   mtxPhotoviewer
   [mtxPhotoviewerItems]="images1"
-  [mtxPhotoviewerOptions]="{}">Open PhotoViewer</button>
+  [mtxPhotoviewerOptions]="{}"
+>
+  Open PhotoViewer
+</button>
 
 <h2>Img element</h2>
 
-<img mtxPhotoviewer
+<img
+  mtxPhotoviewer
   src="https://farm5.staticflickr.com/4267/34162425794_1430f38362_z.jpg"
   alt="Rémi Bizouard triple champion du monde by malainxx24"
-  width="200">
+  width="200"
+/>
 
 <h2>Thumbnail</h2>
 
 @for (item of images2; track item; let index = $index) {
   <a
-    [href]="item.src" [title]="item.title"
+    [href]="item.src"
+    [title]="item.title"
     mtxPhotoviewer
     [mtxPhotoviewerItems]="images2"
-    [mtxPhotoviewerOptions]="{ index }">
-    <img [src]="item.thumbnail" alt="">
+    [mtxPhotoviewerOptions]="{ index }"
+  >
+    <img [src]="item.thumbnail" alt="" />
   </a>
 }
 
 <h2>Embed</h2>
 
-<button mat-stroked-button (click)="showEmbed=!showEmbed">Toggle embed PhotoViewer</button>
+<button mat-stroked-button (click)="showEmbed = !showEmbed">Toggle embed PhotoViewer</button>
 
 @if (showEmbed) {
-  <div class="wrapper"
+  <div
+    class="wrapper"
     mtxPhotoviewer
     [mtxPhotoviewerEmbed]="true"
     [mtxPhotoviewerItems]="images2"
-    [mtxPhotoviewerOptions]="{}">
-  </div>
+    [mtxPhotoviewerOptions]="{}"
+  ></div>
 }

@@ -29,8 +29,7 @@
     [deselectOnClick]="deselectOnClick"
     placeholder="select food"
     required
-  >
-  </mtx-select>
+  ></mtx-select>
 
   <mat-hint>Choose your favorite food</mat-hint>
   <mat-error>Please choose a food</mat-error>
@@ -51,8 +50,7 @@
     [deselectOnClick]="deselectOnClick"
     placeholder="select food"
     required
-  >
-  </mtx-select>
+  ></mtx-select>
 
   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   <mat-hint>Choose your favorite food</mat-hint>
@@ -74,8 +72,7 @@
     [deselectOnClick]="deselectOnClick"
     placeholder="select food"
     required
-  >
-  </mtx-select>
+  ></mtx-select>
 
   <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
   <mat-hint>Choose your favorite food</mat-hint>
@@ -87,7 +84,7 @@
 <mat-form-field>
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [items]="items" [formControl]="control" bindLabel="name" bindValue="id"> </mtx-select>
+  <mtx-select [items]="items" [formControl]="control" bindLabel="name" bindValue="id"></mtx-select>
 
   <mat-hint>Choose your favorite food</mat-hint>
   <mat-error>Please choose a food</mat-error>
@@ -205,6 +202,5 @@
     (add)="log($event, 'add')"
     (remove)="log($event, 'remove')"
     (search)="log($event, 'search')"
-  >
-  </mtx-select>
+  ></mtx-select>
 </mat-form-field>

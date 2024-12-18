@@ -54,11 +54,10 @@
   <mat-checkbox [(ngModel)]="actionButtons">Action Buttons</mat-checkbox>
 </section>
 
-
 <section>
   <label for="">TimeInterval:</label>
   <mat-slider min="1" max="30" discrete>
-    <input matSliderThumb [(ngModel)]="timeInterval">
+    <input matSliderThumb [(ngModel)]="timeInterval" />
   </mat-slider>
 </section>
 
@@ -69,19 +68,21 @@
 <h2>Result</h2>
 
 <mat-form-field>
-  <mat-label>{{type}}</mat-label>
-  <mtx-datetimepicker #datetimePicker
-                      [type]="type"
-                      [mode]="mode"
-                      [multiYearSelector]="multiYearSelector"
-                      [calendarHeaderComponent]="customHeader"
-                      [startView]="startView"
-                      [twelvehour]="twelvehour"
-                      [timeInterval]="timeInterval"
-                      [touchUi]="touchUi"
-                      [timeInput]="timeInput"
-                      [timeInputAutoFocus]="timeInputAutoFocus">
-    @if(actionButtons) {
+  <mat-label>{{ type }}</mat-label>
+  <mtx-datetimepicker
+    #datetimePicker
+    [type]="type"
+    [mode]="mode"
+    [multiYearSelector]="multiYearSelector"
+    [calendarHeaderComponent]="customHeader"
+    [startView]="startView"
+    [twelvehour]="twelvehour"
+    [timeInterval]="timeInterval"
+    [touchUi]="touchUi"
+    [timeInput]="timeInput"
+    [timeInputAutoFocus]="timeInputAutoFocus"
+  >
+    @if (actionButtons) {
       <mtx-datetimepicker-actions>
         <button mat-button mtxDatetimepickerClear>Clear</button>
         <button mat-button mtxDatetimepickerCancel>Cancel</button>
@@ -89,6 +90,6 @@
       </mtx-datetimepicker-actions>
     }
   </mtx-datetimepicker>
-  <input [mtxDatetimepicker]="datetimePicker" [(ngModel)]="datetime" matInput required>
+  <input [mtxDatetimepicker]="datetimePicker" [(ngModel)]="datetime" matInput required />
   <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix></mtx-datetimepicker-toggle>
 </mat-form-field>

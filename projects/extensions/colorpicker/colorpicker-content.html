@@ -1,5 +1,8 @@
 @if (picker.content) {
   <ng-template [ngTemplateOutlet]="picker.content"></ng-template>
 } @else {
-  <color-chrome [color]="picker.selected" (onChangeComplete)="picker.select(getColorString($event))" />
+  <color-chrome
+    [color]="picker.selected"
+    (onChangeComplete)="picker.select(getColorString($event))"
+  />
 }

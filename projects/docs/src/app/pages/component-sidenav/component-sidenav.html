@@ -1,11 +1,15 @@
 <mat-sidenav-container class="docs-component-viewer-sidenav-container">
   <!-- If on small screen, menu resides in drawer -->
-  @if ((isScreenSmall | async)) {
-    <mat-sidenav #sidenav class="docs-component-viewer-sidenav" role="navigation"
+  @if (isScreenSmall | async) {
+    <mat-sidenav
+      #sidenav
+      class="docs-component-viewer-sidenav"
+      role="navigation"
       [opened]="(isScreenSmall | async) === false"
       [mode]="(isScreenSmall | async) ? 'over' : 'side'"
-      [fixedInViewport]="(isScreenSmall | async)"
-      [fixedTopGap]="(isExtraScreenSmall | async) ? 92 : 56">
+      [fixedInViewport]="isScreenSmall | async"
+      [fixedTopGap]="(isExtraScreenSmall | async) ? 92 : 56"
+    >
       <app-component-nav [params]="params"></app-component-nav>
     </mat-sidenav>
   }

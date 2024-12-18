@@ -1,6 +1,4 @@
-<mtx-grid [data]="list"
-          [columns]="columns">
-</mtx-grid>
+<mtx-grid [data]="list" [columns]="columns"></mtx-grid>
 
 <ng-template #statusTpl let-row let-index="index" let-col="colDef">
   <mat-slide-toggle [checked]="row.status">Slide me!</mat-slide-toggle>

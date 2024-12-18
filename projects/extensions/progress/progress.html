@@ -1,10 +1,12 @@
-<div class="mtx-progress-fill"
-     [class]="'mtx-progress-fill-' + type"
-     [class.mtx-progress-fill-striped]="striped"
-     [class.mtx-progress-fill-animated]="animate"
-     [style.width.%]="value"
-     [style.background-color]="foreground"
-     [style.color]="color"
-     role="progress-fill">
+<div
+  class="mtx-progress-fill"
+  [class]="'mtx-progress-fill-' + type"
+  [class.mtx-progress-fill-striped]="striped"
+  [class.mtx-progress-fill-animated]="animate"
+  [style.width.%]="value"
+  [style.background-color]="foreground"
+  [style.color]="color"
+  role="progress-fill"
+>
   <ng-content></ng-content>
 </div>

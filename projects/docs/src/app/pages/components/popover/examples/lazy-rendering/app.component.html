@@ -1,21 +1,29 @@
 <mtx-popover #popover="mtxPopover">
   <ng-template mtxPopoverContent let-name="name">
     <div>
-      Lazy rendering with additional context data <strong>{{name}}</strong>.
+      Lazy rendering with additional context data
+      <strong>{{ name }}</strong>
+      .
     </div>
   </ng-template>
 </mtx-popover>
 
-<button mat-raised-button color="primary"
-        #popoverTrigger="mtxPopoverTrigger"
-        [mtxPopoverTriggerFor]="popover"
-        [mtxPopoverTriggerData]="{name: 'Sally'}">
+<button
+  mat-raised-button
+  color="primary"
+  #popoverTrigger="mtxPopoverTrigger"
+  [mtxPopoverTriggerFor]="popover"
+  [mtxPopoverTriggerData]="{ name: 'Sally' }"
+>
   Show Sally's Popover
 </button>
 
-<button mat-raised-button color="primary"
-        #popoverTrigger="mtxPopoverTrigger"
-        [mtxPopoverTriggerFor]="popover"
-        [mtxPopoverTriggerData]="{name: 'Bob'}">
+<button
+  mat-raised-button
+  color="primary"
+  #popoverTrigger="mtxPopoverTrigger"
+  [mtxPopoverTriggerFor]="popover"
+  [mtxPopoverTriggerData]="{ name: 'Bob' }"
+>
   Show Bob's Popover
 </button>

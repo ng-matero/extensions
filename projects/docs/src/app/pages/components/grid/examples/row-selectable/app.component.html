@@ -7,13 +7,14 @@
   </mat-radio-group>
 </div>
 
-<mtx-grid [data]="list"
-          [columns]="columns"
-          [multiSelectable]="multiSelectable"
-          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
-          [rowSelectable]="rowSelectable"
-          [rowSelected]="rowSelected"
-          [rowSelectionFormatter]="rowSelectionFormatter"
-          (rowSelectedChange)="log($event)"
-          (cellSelectedChange)="log($event)">
-</mtx-grid>
+<mtx-grid
+  [data]="list"
+  [columns]="columns"
+  [multiSelectable]="multiSelectable"
+  [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+  [rowSelectable]="rowSelectable"
+  [rowSelected]="rowSelected"
+  [rowSelectionFormatter]="rowSelectionFormatter"
+  (rowSelectedChange)="log($event)"
+  (cellSelectedChange)="log($event)"
+></mtx-grid>

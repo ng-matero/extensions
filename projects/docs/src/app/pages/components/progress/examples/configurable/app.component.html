@@ -13,7 +13,7 @@
 <section>
   <label for="">Progress:</label>
   <mat-slider min="0" max="100" discrete>
-    <input matSliderThumb [(ngModel)]="value">
+    <input matSliderThumb [(ngModel)]="value" />
   </mat-slider>
 </section>
 
@@ -27,21 +27,21 @@
 <section>
   <label for="">Height:</label>
   <mat-slider min="1" max="16" discrete>
-    <input matSliderThumb [(ngModel)]="height">
+    <input matSliderThumb [(ngModel)]="height" />
   </mat-slider>
 </section>
 
 <section>
   <mat-form-field>
     <mat-label>Foreground color</mat-label>
-    <input matInput [(ngModel)]="foreground" [mtxColorpicker]="cp1">
+    <input matInput [(ngModel)]="foreground" [mtxColorpicker]="cp1" />
     <mtx-colorpicker-toggle matSuffix [for]="cp1"></mtx-colorpicker-toggle>
     <mtx-colorpicker #cp1></mtx-colorpicker>
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>Background color</mat-label>
-    <input matInput [(ngModel)]="background" [mtxColorpicker]="cp2">
+    <input matInput [(ngModel)]="background" [mtxColorpicker]="cp2" />
     <mtx-colorpicker-toggle matSuffix [for]="cp2"></mtx-colorpicker-toggle>
     <mtx-colorpicker #cp2></mtx-colorpicker>
   </mat-form-field>
@@ -49,10 +49,14 @@
 
 <h2>Result</h2>
 
-<mtx-progress [type]="type"
+<mtx-progress
+  [type]="type"
   [value]="value"
-  [striped]="striped" [animate]="animate"
+  [striped]="striped"
+  [animate]="animate"
   [height]="height + 'px'"
-  [foreground]="foreground" [background]="background">
-  {{height>=14 ? value + '%' : ''}}
+  [foreground]="foreground"
+  [background]="background"
+>
+  {{ height >= 14 ? value + '%' : '' }}
 </mtx-progress>

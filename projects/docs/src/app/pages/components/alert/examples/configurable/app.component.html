@@ -17,13 +17,18 @@
 <section>
   <label for="">Elevation:</label>
   <mat-slider min="0" max="24" discrete>
-    <input matSliderThumb [(ngModel)]="elevation">
+    <input matSliderThumb [(ngModel)]="elevation" />
   </mat-slider>
 </section>
 
 <h2>Result</h2>
 
-<mtx-alert [type]="type" [elevation]="elevation" [dismissible]="dismissible"
-           (closed)="onClosed($event)">
-  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+<mtx-alert
+  [type]="type"
+  [elevation]="elevation"
+  [dismissible]="dismissible"
+  (closed)="onClosed($event)"
+>
+  <strong>Heads up!</strong>
+  This alert needs your attention, but it's not super important.
 </mtx-alert>

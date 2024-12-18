@@ -1,9 +1,8 @@
 <mat-radio-group [(ngModel)]="defaultlang" (change)="translate.use($event.value)">
   @for (lang of langs; track lang) {
-    <mat-radio-button [value]="lang.value">{{lang.label}}</mat-radio-button>
+    <mat-radio-button [value]="lang.value">{{ lang.label }}</mat-radio-button>
   }
 </mat-radio-group>
 
 <mtx-checkbox-group [items]="foods" [(ngModel)]="selectedFoods"></mtx-checkbox-group>
-<p>{{selectedFoods|json}}</p>
-
+<p>{{ selectedFoods | json }}</p>

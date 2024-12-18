@@ -1,13 +1,14 @@
 <button mat-raised-button color="primary" (click)="refresh()">Refresh</button>
 <button mat-raised-button color="warn" (click)="reset()">Reset</button>
 
-<mtx-grid [data]="list"
-          [columns]="columns"
-          [length]="total"
-          [loading]="isLoading"
-          [pageOnFront]="false"
-          [pageIndex]="query.page"
-          [pageSize]="query.per_page"
-          [pageSizeOptions]="[5,10,20]"
-          (page)="getNextPage($event)">
-</mtx-grid>
+<mtx-grid
+  [data]="list"
+  [columns]="columns"
+  [length]="total"
+  [loading]="isLoading"
+  [pageOnFront]="false"
+  [pageIndex]="query.page"
+  [pageSize]="query.per_page"
+  [pageSizeOptions]="[5, 10, 20]"
+  (page)="getNextPage($event)"
+></mtx-grid>

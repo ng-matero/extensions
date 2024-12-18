@@ -14,57 +14,58 @@
 <mat-checkbox [(ngModel)]="showPaginator">showPaginator</mat-checkbox>
 <mat-checkbox [(ngModel)]="loading">loading</mat-checkbox>
 
-<mtx-grid #grid
-          [data]="list"
-          [columns]="columns"
-          [loading]="loading"
-          [columnResizable]="columnResizable"
-          [multiSelectable]="multiSelectable"
-          [multiSelectionWithClick]="multiSelectionWithClick"
-          [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
-          [rowSelectable]="rowSelectable"
-          [rowSelectionFormatter]="rowSelectionFormatter"
-          [rowClassFormatter]="rowClassFormatter"
-          [(rowSelected)]="rowSelected"
-          (rowSelectedChange)="log($event)"
-          [rowHover]="rowHover"
-          [rowStriped]="rowStriped"
-          (cellSelectedChange)="log($event)"
-          [trackBy]="trackByName"
-          [expandable]="expandable"
-          [expansionTemplate]="expansionTpl"
-          (expansionChange)="log($event)"
-          [showSummary]="showSummary"
-          [summaryTemplate]="{'weight': summaryTpl}"
-          [showToolbar]="true"
-          [toolbarTitle]="'123'"
-          [toolbarTemplate]="toolbarTpl"
-          [columnHideableChecked]="'show'"
-          (columnChange)="log($event)"
-          [showColumnMenuButton]="true"
-          [showColumnMenuHeader]="true"
-          [showColumnMenuFooter]="true"
-          [columnMenuFooterTemplate]="menuFooterTpl"
-          (rowClick)="log($event)"
-          (rowContextMenu)="onContextMenu($event)"
-          [showSidebar]="showSidebar"
-          [sidebarTemplate]="sidebarTpl"
-          [sortOnFront]="sortOnFront"
-          [showPaginator]="showPaginator"
-          [pageOnFront]="pageOnFront"
-          [pageSize]="1"
-          [pageSizeOptions]="[1,5,10,50,100,500,1000]"
-          [headerTemplate]="{operation: headerTpl}"
-          [headerExtraTemplate]="{name: headerExtraTpl}"
-          [cellTemplate]="{avatar: avatarTpl}"
-          [showStatusbar]="showStatusbar"
-          [useContentHeaderRowTemplate]="false"
-          [useContentRowTemplate]="false"
-          [useContentFooterRowTemplate]="false"
-          [statusbarTemplate]="statusbarTpl"
-          [columnPinOptions]="columnPinOptions"
-          [emptyValuePlaceholder]="'**'">
-
+<mtx-grid
+  #grid
+  [data]="list"
+  [columns]="columns"
+  [loading]="loading"
+  [columnResizable]="columnResizable"
+  [multiSelectable]="multiSelectable"
+  [multiSelectionWithClick]="multiSelectionWithClick"
+  [hideRowSelectionCheckbox]="hideRowSelectionCheckbox"
+  [rowSelectable]="rowSelectable"
+  [rowSelectionFormatter]="rowSelectionFormatter"
+  [rowClassFormatter]="rowClassFormatter"
+  [(rowSelected)]="rowSelected"
+  (rowSelectedChange)="log($event)"
+  [rowHover]="rowHover"
+  [rowStriped]="rowStriped"
+  (cellSelectedChange)="log($event)"
+  [trackBy]="trackByName"
+  [expandable]="expandable"
+  [expansionTemplate]="expansionTpl"
+  (expansionChange)="log($event)"
+  [showSummary]="showSummary"
+  [summaryTemplate]="{ weight: summaryTpl }"
+  [showToolbar]="true"
+  [toolbarTitle]="'123'"
+  [toolbarTemplate]="toolbarTpl"
+  [columnHideableChecked]="'show'"
+  (columnChange)="log($event)"
+  [showColumnMenuButton]="true"
+  [showColumnMenuHeader]="true"
+  [showColumnMenuFooter]="true"
+  [columnMenuFooterTemplate]="menuFooterTpl"
+  (rowClick)="log($event)"
+  (rowContextMenu)="onContextMenu($event)"
+  [showSidebar]="showSidebar"
+  [sidebarTemplate]="sidebarTpl"
+  [sortOnFront]="sortOnFront"
+  [showPaginator]="showPaginator"
+  [pageOnFront]="pageOnFront"
+  [pageSize]="1"
+  [pageSizeOptions]="[1, 5, 10, 50, 100, 500, 1000]"
+  [headerTemplate]="{ operation: headerTpl }"
+  [headerExtraTemplate]="{ name: headerExtraTpl }"
+  [cellTemplate]="{ avatar: avatarTpl }"
+  [showStatusbar]="showStatusbar"
+  [useContentHeaderRowTemplate]="false"
+  [useContentRowTemplate]="false"
+  [useContentFooterRowTemplate]="false"
+  [statusbarTemplate]="statusbarTpl"
+  [columnPinOptions]="columnPinOptions"
+  [emptyValuePlaceholder]="'**'"
+>
   <ng-template [matHeaderRowDef]="getColumnKeys(columns)">
     <tr mat-header-row (contextmenu)="log($event)"></tr>
   </ng-template>
@@ -72,15 +73,15 @@
   <ng-template matRowDef [matRowDefColumns]="getColumnKeys(columns)">
     <tr mat-row class="custom-row-template" (contextmenu)="log($event)"></tr>
   </ng-template>
-
 </mtx-grid>
 
 <ng-template #expansionTpl let-row let-expanded="expanded">
-  {{expanded}} {{row.name}}
+  {{ expanded }} {{ row.name }}
 </ng-template>
 
 <ng-template #headerTpl let-col>
-  <mat-icon>build</mat-icon> {{col.header | async}}
+  <mat-icon>build</mat-icon>
+  {{ col.header | async }}
 </ng-template>
 
 <ng-template #headerExtraTpl let-col>
@@ -88,11 +89,11 @@
 </ng-template>
 
 <ng-template #avatarTpl let-row>
-  <img class="mtx-grid-img" mtxPhotoviewer [src]="row.avatar" alt="">
+  <img class="mtx-grid-img" mtxPhotoviewer [src]="row.avatar" alt="" />
 </ng-template>
 
 <ng-template #summaryTpl let-data>
-  <div>{{data | json}}</div>
+  <div>{{ data | json }}</div>
 </ng-template>
 
 <ng-template #menuFooterTpl>
@@ -107,15 +108,16 @@
       <mat-card-title>Shiba Inu</mat-card-title>
       <mat-card-subtitle>Dog Breed</mat-card-subtitle>
     </mat-card-header>
-    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-         alt="Photo of a Shiba Inu">
+    <img
+      mat-card-image
+      src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+      alt="Photo of a Shiba Inu"
+    />
     <mat-card-content>
       <p>
         The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-        Japan.
-        A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-        originally
-        bred for hunting.
+        Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
+        originally bred for hunting.
       </p>
     </mat-card-content>
     <mat-card-actions>
@@ -129,15 +131,13 @@
   <button>Toolbar</button>
 </ng-template>
 
-<ng-template #noResultTpl>
-</ng-template>
+<ng-template #noResultTpl></ng-template>
 
 <ng-template #statusbarTpl>
   <button>Statusbar</button>
 </ng-template>
 
-<ng-template #paginationTpl>
-</ng-template>
+<ng-template #paginationTpl></ng-template>
 
 <button (click)="updateCell()">Update Cell</button>
 <button (click)="updateList()">Update List</button>
@@ -145,14 +145,15 @@
 <button (click)="select2ndData()">Select 2nd data</button>
 
 <!-- Context Menu -->
-<div style="position: fixed; visibility: hidden;"
-     [style.left]="contextMenuPosition.x"
-     [style.top]="contextMenuPosition.y"
-     [matMenuTriggerFor]="contextMenu">
-</div>
+<div
+  style="position: fixed; visibility: hidden"
+  [style.left]="contextMenuPosition.x"
+  [style.top]="contextMenuPosition.y"
+  [matMenuTriggerFor]="contextMenu"
+></div>
 <mat-menu #contextMenu="matMenu" [hasBackdrop]="false">
   <ng-template matMenuContent let-row="rowData" let-index="index">
-    <button mat-menu-item>{{row.name}}, {{index}}</button>
+    <button mat-menu-item>{{ row.name }}, {{ index }}</button>
   </ng-template>
 </mat-menu>
 
@@ -161,45 +162,54 @@
 <table mat-table columnResize [dataSource]="list" class="example-table">
   <!-- Position Column -->
   <ng-container matColumnDef="position" sticky>
-    <th mat-header-cell *matHeaderCellDef resizable [matResizableMaxWidthPx]="100"> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
-    <td mat-footer-cell *matFooterCellDef> Footer cell </td>
+    <th mat-header-cell *matHeaderCellDef resizable [matResizableMaxWidthPx]="100">No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.position }}</td>
+    <td mat-footer-cell *matFooterCellDef>Footer cell</td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="name" sticky>
-    <th mat-header-cell *matHeaderCellDef resizable [matResizableMinWidthPx]="150"
-        [matResizableMaxWidthPx]="300"> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-    <td mat-footer-cell *matFooterCellDef> Footer cell </td>
+    <th
+      mat-header-cell
+      *matHeaderCellDef
+      resizable
+      [matResizableMinWidthPx]="150"
+      [matResizableMaxWidthPx]="300"
+    >
+      Name
+    </th>
+    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    <td mat-footer-cell *matFooterCellDef>Footer cell</td>
   </ng-container>
 
   <!-- Weight Column (not resizable) -->
   <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef> Weight (Not resizable) </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-    <td mat-footer-cell *matFooterCellDef> Footer cell </td>
+    <th mat-header-cell *matHeaderCellDef>Weight (Not resizable)</th>
+    <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+    <td mat-footer-cell *matFooterCellDef>Footer cell</td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef resizable> Symbol </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-    <td mat-footer-cell *matFooterCellDef> Footer cell </td>
+    <th mat-header-cell *matHeaderCellDef resizable>Symbol</th>
+    <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+    <td mat-footer-cell *matFooterCellDef>Footer cell</td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  <tr mat-footer-row *matFooterRowDef="displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
 </table>
 
 <h2>Test Scrolling</h2>
 
-<mtx-grid class="fixed-height" #grid2
-          [data]="list2"
-          [columnResizable]="true"
-          [columns]="columns2">
-</mtx-grid>
+<mtx-grid
+  class="fixed-height"
+  #grid2
+  [data]="list2"
+  [columnResizable]="true"
+  [columns]="columns2"
+></mtx-grid>
 <button (click)="scrollTop()">Get scrollTop</button>
 <button (click)="scrollTop(100)">Set scrollTop</button>
 <button (click)="scrollLeft()">Get scrollLeft</button>
@@ -207,17 +217,18 @@
 
 <h2>Test Remote API</h2>
 
-<mtx-grid class="fixed-height"
-          [data]="list3"
-          [columns]="columns3"
-          [length]="total3"
-          [loading]="isLoading3"
-          [rowSelectable]="true"
-          [rowSelected]="rowSelected3"
-          [showToolbar]="true"
-          [pageOnFront]="false"
-          [pageIndex]="query.page"
-          [pageSize]="query.per_page"
-          [pageSizeOptions]="[10,20,50]"
-          (page)="getNextPage($event)">
-</mtx-grid>
+<mtx-grid
+  class="fixed-height"
+  [data]="list3"
+  [columns]="columns3"
+  [length]="total3"
+  [loading]="isLoading3"
+  [rowSelectable]="true"
+  [rowSelected]="rowSelected3"
+  [showToolbar]="true"
+  [pageOnFront]="false"
+  [pageIndex]="query.page"
+  [pageSize]="query.per_page"
+  [pageSizeOptions]="[10, 20, 50]"
+  (page)="getNextPage($event)"
+></mtx-grid>

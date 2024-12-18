@@ -1,14 +1,16 @@
-<mtx-checkbox-group [items]="foods"
-                    [(ngModel)]="selectedFoods"
-                    [compareWith]="compareWith">
-</mtx-checkbox-group>
-<p>{{selectedFoods|json}}</p>
+<mtx-checkbox-group
+  [items]="foods"
+  [(ngModel)]="selectedFoods"
+  [compareWith]="compareWith"
+></mtx-checkbox-group>
+<p>{{ selectedFoods | json }}</p>
 
 <mat-divider></mat-divider>
 
-<mtx-checkbox-group [items]="cars"
-                    bindLabel="name"
-                    [(ngModel)]="selectedCars"
-                    [compareWith]="compareWith2">
-</mtx-checkbox-group>
-<p>{{selectedCars|json}}</p>
+<mtx-checkbox-group
+  [items]="cars"
+  bindLabel="name"
+  [(ngModel)]="selectedCars"
+  [compareWith]="compareWith2"
+></mtx-checkbox-group>
+<p>{{ selectedCars | json }}</p>

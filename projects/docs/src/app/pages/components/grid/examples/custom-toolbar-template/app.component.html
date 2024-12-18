@@ -1,10 +1,11 @@
-<mtx-grid [data]="list"
-          [columns]="columns"
-          [showToolbar]="true"
-          [showColumnMenuButton]="false"
-          [toolbarTemplate]="toolbarTpl">
-</mtx-grid>
+<mtx-grid
+  [data]="list"
+  [columns]="columns"
+  [showToolbar]="true"
+  [showColumnMenuButton]="false"
+  [toolbarTemplate]="toolbarTpl"
+></mtx-grid>
 
 <ng-template #toolbarTpl>
-  <input placeholder="Search">
+  <input placeholder="Search" />
 </ng-template>

@@ -1,16 +1,14 @@
-<mtx-grid [data]="list"
-          [columns]="columns"
-          (rowContextMenu)="onContextMenu($event)">
-</mtx-grid>
+<mtx-grid [data]="list" [columns]="columns" (rowContextMenu)="onContextMenu($event)"></mtx-grid>
 
 <!-- Context Menu -->
-<div style="position: fixed; visibility: hidden;"
-     [style.left]="contextMenuPosition.x"
-     [style.top]="contextMenuPosition.y"
-     [matMenuTriggerFor]="contextMenu">
-</div>
+<div
+  style="position: fixed; visibility: hidden"
+  [style.left]="contextMenuPosition.x"
+  [style.top]="contextMenuPosition.y"
+  [matMenuTriggerFor]="contextMenu"
+></div>
 <mat-menu #contextMenu="matMenu" [hasBackdrop]="false">
   <ng-template matMenuContent let-row="rowData" let-index="index">
-    <button mat-menu-item>{{row.name}}, {{index}}</button>
+    <button mat-menu-item>{{ row.name }}, {{ index }}</button>
   </ng-template>
 </mat-menu>

@@ -1,14 +1,15 @@
 <mat-form-field>
   <mat-label>Custom Color Picker</mat-label>
-  <input matInput [mtxColorpicker]="customPicker">
+  <input matInput [mtxColorpicker]="customPicker" />
   <mtx-colorpicker-toggle matSuffix [for]="customPicker"></mtx-colorpicker-toggle>
   <mtx-colorpicker #customPicker [content]="customPickerContent"></mtx-colorpicker>
 </mat-form-field>
 
 <ng-template #customPickerContent>
   <div [style.width.px]="240">
-    <color-sketch [color]="customPicker.selected"
-                  (onChangeComplete)="customPicker.select(getHex8($event))">
-    </color-sketch>
+    <color-sketch
+      [color]="customPicker.selected"
+      (onChangeComplete)="customPicker.select(getHex8($event))"
+    ></color-sketch>
   </div>
 </ng-template>

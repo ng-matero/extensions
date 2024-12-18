@@ -4,15 +4,17 @@
   <mat-label>Tooltip position</mat-label>
   <mat-select [(ngModel)]="position">
     @for (positionOption of positionOptions; track positionOption) {
-      <mat-option [value]="positionOption">{{positionOption}}</mat-option>
+      <mat-option [value]="positionOption">{{ positionOption }}</mat-option>
     }
   </mat-select>
 </mat-form-field>
 
-<button mat-raised-button
+<button
+  mat-raised-button
   [mtxTooltip]="tooltipTpl"
   [mtxTooltipPosition]="position"
-  aria-label="Button that displays a tooltip in various positions">
+  aria-label="Button that displays a tooltip in various positions"
+>
   Action
 </button>
 

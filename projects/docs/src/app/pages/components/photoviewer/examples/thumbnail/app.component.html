@@ -1,9 +1,11 @@
 @for (item of images; track item; let index = $index) {
   <a
-    [href]="item.src" [title]="item.title"
+    [href]="item.src"
+    [title]="item.title"
     mtxPhotoviewer
     [mtxPhotoviewerItems]="images"
-    [mtxPhotoviewerOptions]="{ index }">
+    [mtxPhotoviewerOptions]="{ index }"
+  >
     <img [src]="item.thumbnail" alt="" />
   </a>
 }

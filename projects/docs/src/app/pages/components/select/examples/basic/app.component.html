@@ -1,5 +1,7 @@
 <div>
-  <mat-checkbox [(ngModel)]="multiple" (change)="onMultiSelectChange()">Mulitple select</mat-checkbox>
+  <mat-checkbox [(ngModel)]="multiple" (change)="onMultiSelectChange()">
+    Mulitple select
+  </mat-checkbox>
   <mat-checkbox [(ngModel)]="disabled">Disable select</mat-checkbox>
   <mat-checkbox [(ngModel)]="required">Required</mat-checkbox>
 </div>
@@ -7,10 +9,16 @@
 <mat-form-field>
   <mat-label>Select Food</mat-label>
 
-  <mtx-select [items]="foods" bindLabel="name" bindValue="id" [multiple]="multiple"
-              [(ngModel)]="food" [required]="required" [disabled]="disabled"
-              appendTo="app-select-overview">
-  </mtx-select>
+  <mtx-select
+    [items]="foods"
+    bindLabel="name"
+    bindValue="id"
+    [multiple]="multiple"
+    [(ngModel)]="food"
+    [required]="required"
+    [disabled]="disabled"
+    appendTo="app-select-overview"
+  ></mtx-select>
 
   <mat-hint>Choose your favorite food</mat-hint>
   <mat-error>Please choose a food</mat-error>

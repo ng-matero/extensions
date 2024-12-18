@@ -1,13 +1,14 @@
 <mat-radio-group [(ngModel)]="defaultlang" (change)="translate.use($event.value)">
   @for (lang of langs; track lang) {
-    <mat-radio-button [value]="lang.value">{{lang.label}}</mat-radio-button>
+    <mat-radio-button [value]="lang.value">{{ lang.label }}</mat-radio-button>
   }
 </mat-radio-group>
 
-<mtx-grid [data]="list"
+<mtx-grid
+  [data]="list"
   [columns]="columns"
   [showToolbar]="true"
   [columnHideable]="true"
   [columnSortable]="true"
-  [columnPinOptions]="columnPinOptions">
-</mtx-grid>
+  [columnPinOptions]="columnPinOptions"
+></mtx-grid>

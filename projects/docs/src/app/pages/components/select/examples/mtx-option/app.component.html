@@ -13,7 +13,7 @@
 
   <mtx-select [multiple]="true" [(ngModel)]="selectedCars" appendTo="app-select-overview">
     @for (car of cars; track car) {
-      <mtx-option [value]="car.id" [disabled]="car.disabled">{{car.name}}</mtx-option>
+      <mtx-option [value]="car.id" [disabled]="car.disabled">{{ car.name }}</mtx-option>
     }
     <mtx-option [value]="'custom'">Custom</mtx-option>
   </mtx-select>
@@ -22,4 +22,4 @@
   <mat-error>Please choose a car</mat-error>
 </mat-form-field>
 
-<p>Selected car ID: {{selectedCars | json}}</p>
+<p>Selected car ID: {{ selectedCars | json }}</p>

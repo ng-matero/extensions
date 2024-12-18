@@ -7,7 +7,7 @@
     <mat-label>Start</mat-label>
     <mat-select [(ngModel)]="positionStart" (ngModelChange)="onPositionStartChange()">
       @for (item of positionStartOptions; track item) {
-        <mat-option [value]="item">{{item}}</mat-option>
+        <mat-option [value]="item">{{ item }}</mat-option>
       }
     </mat-select>
   </mat-form-field>
@@ -16,7 +16,7 @@
     <mat-label>End</mat-label>
     <mat-select [(ngModel)]="positionEnd">
       @for (item of positionEndOptions; track item) {
-        <mat-option [value]="item">{{item}}</mat-option>
+        <mat-option [value]="item">{{ item }}</mat-option>
       }
     </mat-select>
   </mat-form-field>
@@ -26,11 +26,11 @@
 <section>
   <mat-form-field>
     <mat-label>XOffset</mat-label>
-    <input matInput type="number" [(ngModel)]="xOffset">
+    <input matInput type="number" [(ngModel)]="xOffset" />
   </mat-form-field>
   <mat-form-field>
     <mat-label>YOffset</mat-label>
-    <input matInput type="number" [(ngModel)]="yOffset">
+    <input matInput type="number" [(ngModel)]="yOffset" />
   </mat-form-field>
 </section>
 
@@ -42,15 +42,15 @@
   </mat-radio-group>
 </section>
 
-@if (triggerEvent==='hover') {
+@if (triggerEvent === 'hover') {
   <section>
     <mat-form-field>
       <mat-label>EnterDelay</mat-label>
-      <input matInput type="number" [(ngModel)]="enterDelay">
+      <input matInput type="number" [(ngModel)]="enterDelay" />
     </mat-form-field>
     <mat-form-field>
       <mat-label>LeaveDelay</mat-label>
-      <input matInput type="number" [(ngModel)]="leaveDelay">
+      <input matInput type="number" [(ngModel)]="leaveDelay" />
     </mat-form-field>
   </section>
 }
@@ -59,7 +59,7 @@
   <mat-checkbox [(ngModel)]="closeOnPanelClick">CloseOnPanelClick</mat-checkbox>
 </section>
 
-@if (triggerEvent==='click') {
+@if (triggerEvent === 'click') {
   <section>
     <mat-checkbox [(ngModel)]="hasBackdrop">HasBackdrop</mat-checkbox>
   </section>
@@ -71,27 +71,34 @@
 
 <h2>Result</h2>
 
-@if (triggerEvent==='hover') {
-  <button cdkDrag
-    mat-raised-button color="primary"
+@if (triggerEvent === 'hover') {
+  <button
+    cdkDrag
+    mat-raised-button
+    color="primary"
     #popoverTrigger="mtxPopoverTrigger"
     [mtxPopoverTriggerFor]="popover"
-    mtxPopoverTriggerOn="hover">
+    mtxPopoverTriggerOn="hover"
+  >
     Show Popover With Hover
   </button>
 }
 
-@if (triggerEvent==='click') {
-  <button cdkDrag
-    mat-raised-button color="primary"
+@if (triggerEvent === 'click') {
+  <button
+    cdkDrag
+    mat-raised-button
+    color="primary"
     #popoverTrigger2="mtxPopoverTrigger"
     [mtxPopoverTriggerFor]="popover"
-    mtxPopoverTriggerOn="click">
+    mtxPopoverTriggerOn="click"
+  >
     Show Popover With Click
   </button>
 }
 
-<mtx-popover #popover="mtxPopover"
+<mtx-popover
+  #popover="mtxPopover"
   [enterDelay]="enterDelay"
   [leaveDelay]="leaveDelay"
   [position]="[positionStart, positionEnd]"
@@ -100,8 +107,9 @@
   [closeOnPanelClick]="closeOnPanelClick"
   [closeOnBackdropClick]="true"
   [hasBackdrop]="hasBackdrop"
-  [hideArrow]="hideArrow">
-  <div style="max-width: 300px;">
+  [hideArrow]="hideArrow"
+>
+  <div style="max-width: 300px">
     A material design popover component created using Angular with the Angular CDK.
   </div>
 </mtx-popover>

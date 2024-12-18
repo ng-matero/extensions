@@ -1,13 +1,17 @@
 <ng-content></ng-content>
 @for (area of displayedAreas; track area; let index = $index; let last = $last) {
   @if (!last) {
-    <div #gutterEls class="mtx-split-gutter" [class]="color ? 'mat-' + color : ''"
+    <div
+      #gutterEls
+      class="mtx-split-gutter"
+      [class]="color ? 'mat-' + color : ''"
       [style.flex-basis.px]="gutterSize"
       [style.order]="index * 2 + 1"
       (mousedown)="startDragging($event, index * 2 + 1, index + 1)"
       (touchstart)="startDragging($event, index * 2 + 1, index + 1)"
       (mouseup)="clickGutter($event, index + 1)"
-      (touchend)="clickGutter($event, index + 1)">
+      (touchend)="clickGutter($event, index + 1)"
+    >
       <div class="mtx-split-gutter-handle"></div>
     </div>
   }

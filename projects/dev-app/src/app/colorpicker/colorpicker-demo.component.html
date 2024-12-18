@@ -6,7 +6,7 @@
 
 <mat-form-field [color]="themeColor">
   <mat-label>Color picker</mat-label>
-  <input matInput [(ngModel)]="color" [mtxColorpicker]="picker" [disabled]="disabled">
+  <input matInput [(ngModel)]="color" [mtxColorpicker]="picker" [disabled]="disabled" />
   <mtx-colorpicker-toggle matSuffix [for]="picker"></mtx-colorpicker-toggle>
   <mtx-colorpicker #picker [disabled]="false"></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>
@@ -19,28 +19,29 @@
 
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [formControl]="color2" [mtxColorpicker]="picker2">
+  <input matInput [formControl]="color2" [mtxColorpicker]="picker2" />
   <mtx-colorpicker-toggle matSuffix [for]="picker2"></mtx-colorpicker-toggle>
   <mtx-colorpicker #picker2></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
 </mat-form-field>
 
-<mat-slide-toggle (change)="toggleDisabled($event)" [checked]="color2.disabled">Disabled
+<mat-slide-toggle (change)="toggleDisabled($event)" [checked]="color2.disabled">
+  Disabled
 </mat-slide-toggle>
 
 <h2>Test Readonly</h2>
 
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput type="color" value="#ff0000" readonly>
+  <input matInput type="color" value="#ff0000" readonly />
   <mat-hint>Choose your favorite color</mat-hint>
   <mat-error>Please enter the color</mat-error>
 </mat-form-field>
 
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [formControl]="color3" [mtxColorpicker]="picker3">
+  <input matInput [formControl]="color3" [mtxColorpicker]="picker3" />
   <mtx-colorpicker-toggle matSuffix [for]="picker3"></mtx-colorpicker-toggle>
   <mtx-colorpicker #picker3></mtx-colorpicker>
   <mat-hint>Choose your favorite color</mat-hint>
@@ -51,7 +52,7 @@
 
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [formControl]="color3" [mtxColorpicker]="picker4">
+  <input matInput [formControl]="color3" [mtxColorpicker]="picker4" />
   <mtx-colorpicker-toggle matSuffix [for]="picker4">
     <mat-icon mtxColorpickerToggleIcon>keyboard_arrow_down</mat-icon>
   </mtx-colorpicker-toggle>
@@ -62,9 +63,10 @@
 
 <ng-template #customPickerContent>
   <div [style.width.px]="240">
-    <color-sketch [color]="picker4.selected"
-                  (onChangeComplete)="picker4.select($event.color.hex)">
-    </color-sketch>
+    <color-sketch
+      [color]="picker4.selected"
+      (onChangeComplete)="picker4.select($event.color.hex)"
+    ></color-sketch>
   </div>
 </ng-template>
 
@@ -78,7 +80,7 @@
 
 <mat-form-field>
   <mat-label>Color picker</mat-label>
-  <input matInput [mtxColorpicker]="picker5" [format]="format">
+  <input matInput [mtxColorpicker]="picker5" [format]="format" />
   <mtx-colorpicker-toggle matSuffix [for]="picker5"></mtx-colorpicker-toggle>
   <mtx-colorpicker #picker5></mtx-colorpicker>
 </mat-form-field>

@@ -3,22 +3,22 @@
 }
 @if (loading) {
   <div class="mtx-loader-main">
-    @if (type==='spinner') {
+    @if (type === 'spinner') {
       <mat-spinner
         [color]="color"
         [strokeWidth]="strokeWidth"
         [diameter]="diameter"
         [mode]="$any(mode)"
-        [value]="value">
-      </mat-spinner>
+        [value]="value"
+      ></mat-spinner>
     }
-    @if (type==='progressbar') {
+    @if (type === 'progressbar') {
       <mat-progress-bar
         [color]="color"
         [mode]="$any(mode)"
         [value]="value"
-        [bufferValue]="bufferValue">
-      </mat-progress-bar>
+        [bufferValue]="bufferValue"
+      ></mat-progress-bar>
     }
   </div>
 }

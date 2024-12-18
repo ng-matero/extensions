@@ -10,20 +10,22 @@
   </mat-radio-group>
 </div>
 
-<mtx-grid [data]="list" #grid
-          [columns]="columns"
-          [showToolbar]="true"
-          [toolbarTitle]="'Data Grid'"
-          [columnHideable]="columnHideable"
-          [columnHideableChecked]="columnHideableChecked"
-          [columnSortable]="columnSortable"
-          [columnPinnable]="columnPinnable"
-          (columnChange)="log($event)"
-          [showColumnMenuHeader]="true"
-          [columnMenuHeaderText]="'Title'"
-          [showColumnMenuFooter]="true"
-          [columnMenuFooterTemplate]="menuFooter">
-</mtx-grid>
+<mtx-grid
+  [data]="list"
+  #grid
+  [columns]="columns"
+  [showToolbar]="true"
+  [toolbarTitle]="'Data Grid'"
+  [columnHideable]="columnHideable"
+  [columnHideableChecked]="columnHideableChecked"
+  [columnSortable]="columnSortable"
+  [columnPinnable]="columnPinnable"
+  (columnChange)="log($event)"
+  [showColumnMenuHeader]="true"
+  [columnMenuHeaderText]="'Title'"
+  [showColumnMenuFooter]="true"
+  [columnMenuFooterTemplate]="menuFooter"
+></mtx-grid>
 
 <ng-template #menuFooter>
   <button>Save</button>

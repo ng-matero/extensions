@@ -1,14 +1,18 @@
-<div #tooltip
+<div
+  #tooltip
   class="mdc-tooltip mtx-mdc-tooltip"
   [ngClass]="tooltipClass"
   (animationend)="_handleAnimationEnd($event)"
-  [class.mdc-tooltip--multiline]="_isMultiline">
+  [class.mdc-tooltip--multiline]="_isMultiline"
+>
   <div class="mtx-mdc-tooltip-surface mdc-tooltip__surface">
     @if (message | isTemplateRef) {
-      <ng-template [ngTemplateOutlet]="$any(message)"
-      [ngTemplateOutletContext]="{ $implicit: tooltipContext }"></ng-template>
+      <ng-template
+        [ngTemplateOutlet]="$any(message)"
+        [ngTemplateOutletContext]="{ $implicit: tooltipContext }"
+      ></ng-template>
     } @else {
-      {{message}}
+      {{ message }}
     }
   </div>
 </div>

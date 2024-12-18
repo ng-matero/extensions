@@ -16,12 +16,12 @@
 <section>
   <mat-form-field>
     <mat-label>width</mat-label>
-    <input matInput [(ngModel)]="width" type="text">
+    <input matInput [(ngModel)]="width" type="text" />
   </mat-form-field>
 
   <mat-form-field>
     <mat-label>height</mat-label>
-    <input matInput [(ngModel)]="height" type="text">
+    <input matInput [(ngModel)]="height" type="text" />
   </mat-form-field>
 </section>
 
@@ -29,7 +29,7 @@
   <li>
     <mat-form-field>
       <mat-label>What's your name?</mat-label>
-      <input matInput [(ngModel)]="name">
+      <input matInput [(ngModel)]="name" />
     </mat-form-field>
   </li>
   <li>
@@ -37,7 +37,8 @@
   </li>
   @if (animal) {
     <li>
-      You chose: <i>{{animal}}</i>
+      You chose:
+      <i>{{ animal }}</i>
     </li>
   }
 </ol>

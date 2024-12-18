@@ -3,11 +3,12 @@
   <mat-checkbox [(ngModel)]="disabled">Disabled checkbox group</mat-checkbox>
 </p>
 
-<mtx-checkbox-group [items]="foods"
-                    [(ngModel)]="selectedFoods"
-                    [disabled]="disabled"
-                    [showSelectAll]="true"
-                    selectAllLabel="Select all foods"
-                    (change)="onOptionChange($event)">
-</mtx-checkbox-group>
-<p>{{selectedFoods|json}}</p>
+<mtx-checkbox-group
+  [items]="foods"
+  [(ngModel)]="selectedFoods"
+  [disabled]="disabled"
+  [showSelectAll]="true"
+  selectAllLabel="Select all foods"
+  (change)="onOptionChange($event)"
+></mtx-checkbox-group>
+<p>{{ selectedFoods | json }}</p>

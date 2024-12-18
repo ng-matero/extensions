@@ -1,12 +1,13 @@
-<mtx-grid [data]="list"
-          [columns]="columns"
-          [cellTemplate]="{mobile: mobileTpl, city: cityTpl}">
-</mtx-grid>
+<mtx-grid
+  [data]="list"
+  [columns]="columns"
+  [cellTemplate]="{ mobile: mobileTpl, city: cityTpl }"
+></mtx-grid>
 
 <ng-template #mobileTpl let-row let-index="index" let-col="colDef">
-  <button mat-raised-button color="accent">{{row.mobile}}</button>
+  <button mat-raised-button color="accent">{{ row.mobile }}</button>
 </ng-template>
 
 <ng-template #cityTpl let-row let-index="index" let-col="colDef">
-  <button mat-raised-button color="primary">{{row.city}}</button>
+  <button mat-raised-button color="primary">{{ row.city }}</button>
 </ng-template>

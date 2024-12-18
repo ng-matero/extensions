@@ -1,8 +1,6 @@
-<mtx-grid [data]="list"
-          [columns]="columns"
-          [headerTemplate]="headerTpl">
-</mtx-grid>
+<mtx-grid [data]="list" [columns]="columns" [headerTemplate]="headerTpl"></mtx-grid>
 
 <ng-template #headerTpl let-col>
-  {{col.header}} <mat-icon [matTooltip]="col.description">info</mat-icon>
+  {{ col.header }}
+  <mat-icon [matTooltip]="col.description">info</mat-icon>
 </ng-template>

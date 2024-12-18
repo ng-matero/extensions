@@ -6,8 +6,9 @@
           mat-list-item
           routerLinkActive="docs-component-viewer-sidenav-item-selected"
           #routerLinkActiveInstance="routerLinkActive"
-          [routerLink]="['/components/' + component.id]">
-          {{component.name}}
+          [routerLink]="['/components/' + component.id]"
+        >
+          {{ component.name }}
         </a>
       }
     </mat-nav-list>

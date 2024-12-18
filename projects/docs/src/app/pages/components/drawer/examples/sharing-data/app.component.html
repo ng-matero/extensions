@@ -2,7 +2,7 @@
   <li>
     <mat-form-field>
       <mat-label>What's your name?</mat-label>
-      <input matInput [(ngModel)]="name">
+      <input matInput [(ngModel)]="name" />
     </mat-form-field>
   </li>
   <li>
@@ -10,7 +10,8 @@
   </li>
   @if (animal) {
     <li>
-      You chose: <i>{{animal}}</i>
+      You chose:
+      <i>{{ animal }}</i>
     </li>
   }
 </ol>

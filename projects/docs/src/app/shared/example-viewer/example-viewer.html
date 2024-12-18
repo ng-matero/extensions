@@ -1,11 +1,16 @@
 <div class="docs-example-viewer-wrapper">
   <div class="docs-example-viewer-title">
-    <span>{{exampleData.title}}</span>
+    <span>{{ exampleData.title }}</span>
 
     <div class="docs-example-viewer-title-spacer"></div>
 
-    <button mat-icon-button type="button" (click)="toggleSourceView()" [matTooltip]="'View source'"
-      aria-label="View source">
+    <button
+      mat-icon-button
+      type="button"
+      (click)="toggleSourceView()"
+      [matTooltip]="'View source'"
+      aria-label="View source"
+    >
       <mat-icon>code</mat-icon>
     </button>
   </div>
@@ -17,10 +22,15 @@
           <mat-tab [label]="f.file">
             <div class="docs-example-source-wrapper">
               <div class="button-bar">
-                <button mat-icon-button type="button" (click)="copySource(textContent)"
+                <button
+                  mat-icon-button
+                  type="button"
+                  (click)="copySource(textContent)"
                   class="docs-example-source-copy docs-example-button"
                   [matTooltip]="'Copy example source'"
-                  title="Copy example source" aria-label="Copy example source to clipboard">
+                  title="Copy example source"
+                  aria-label="Copy example source to clipboard"
+                >
                   <mat-icon>content_copy</mat-icon>
                 </button>
               </div>
