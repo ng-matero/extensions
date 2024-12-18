@@ -1,3 +1,8 @@
+:host {
+  color: var(--mat-sys-primary);
+  background: var(--mat-sys-primary-container);
+}
+
 .docs-navbar-header {
   display: flex;
   flex-wrap: wrap;
@@ -8,6 +13,10 @@
     &:last-child {
       margin-left: auto;
     }
+  }
+
+  .docs-navbar-header-item-selected {
+    background: color-mix(in srgb, var(--mat-sys-primary) 10%, transparent);
   }
 }
 

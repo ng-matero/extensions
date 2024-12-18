@@ -4,8 +4,9 @@
       @for (component of menus; track component) {
         <a
           mat-list-item
+          #link="routerLinkActive"
+          [activated]="link.isActive"
           routerLinkActive="docs-component-viewer-sidenav-item-selected"
-          #routerLinkActiveInstance="routerLinkActive"
           [routerLink]="['/components/' + component.id]"
         >
           {{ component.name }}

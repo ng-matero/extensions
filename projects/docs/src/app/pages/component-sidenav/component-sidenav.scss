@@ -27,14 +27,20 @@ app-component-sidenav {
   top: 0;
 
   .docs-component-viewer-nav-content {
+    border-right: 1px solid var(--mat-sys-outline-variant);
     width: constants.$sidenav-width;
-    padding: 16px 0;
+    padding: 16px 8px;
     height: calc(100vh - 56px);
     overflow: auto;
+    box-sizing: border-box;
 
     &::-webkit-scrollbar {
       height: 4px;
       width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, .26);
     }
 
     ul {
@@ -81,6 +87,7 @@ div.docs-component-viewer-nav-content .mat-nav-list .mat-mdc-list-item .mat-list
 }
 
 @media (max-width: constants.$small-breakpoint-width) {
+
   // Add specific rule to prevent default rule conflict
   .docs-component-viewer-sidenav-container .docs-component-viewer-sidenav {
     // position right above the content
@@ -100,7 +107,7 @@ div.docs-component-viewer-nav-content .mat-nav-list .mat-mdc-list-item .mat-list
   }
 }
 
-@media (width <= 720px) {
+@media (width <=720px) {
   .docs-component-viewer-sidenav-container {
     flex: 1 0 auto;
   }

@@ -10,6 +10,7 @@
     font-weight: 300;
     font-size: 24px;
     line-height: 32px;
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
   }
 
   h4 {
@@ -53,6 +54,10 @@
     text-align: left;
   }
 
+  tr {
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+  }
+
   td {
     padding: 8px 16px;
     font-weight: 400;
@@ -65,5 +70,6 @@
     overflow-x: auto;
     border-radius: 12px;
     white-space: pre-wrap;
+    border: 1px solid var(--mat-sys-outline-variant);
   }
 }

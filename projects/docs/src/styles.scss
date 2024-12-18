@@ -1,55 +1,31 @@
 @use '@angular/material' as mat;
 @use '../../extensions' as mtx;
-@use './styles/app-theme';
+@use './styles/highlightjs';
 @use './styles/constants';
 @use './styles/reboot';
 @use 'photoviewer';
 
-@include mat.elevation-classes();
-@include mat.app-background();
-
 $light-config: (
   color: (
-    theme-type: 'light',
     primary: mat.$azure-palette,
     tertiary: mat.$blue-palette,
   ),
+  typography: Roboto,
+  density: 0,
 );
 
-// Define the default (light) theme.
-$light-theme: mat.private-deep-merge-all(
-  mat.define-theme($light-config),
-  mtx.define-theme($light-config)
-);
+html {
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
 
-:root {
-  @include mat.all-component-themes($light-theme);
-  @include mtx.all-component-themes($light-theme);
+  @include mat.theme($light-config);
 }
 
-@include mat.color-variants-backwards-compatibility($light-theme);
-@include mtx.color-variants-backwards-compatibility($light-theme);
-@include app-theme.theme($light-theme);
-
-$dark-config: (
-  color: (
-    theme-type: 'dark',
-    primary: mat.$cyan-palette,
-    tertiary: mat.$orange-palette,
-  ),
-);
-
-// Define an alternate dark theme.
-$dark-theme: mat.private-deep-merge-all(
-  mat.define-theme($dark-config),
-  mtx.define-theme($dark-config)
-);
+@include highlightjs.theme(light);
 
 .docs-theme-dark {
-  @include mat.all-component-colors($dark-theme);
-  @include mtx.all-component-colors($dark-theme);
+  color-scheme: dark;
 
-  @include mat.color-variants-backwards-compatibility($dark-theme);
-  @include mtx.color-variants-backwards-compatibility($dark-theme);
-  @include app-theme.theme($dark-theme);
+  @include highlightjs.theme(dark);
 }

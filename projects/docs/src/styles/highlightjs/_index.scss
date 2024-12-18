@@ -1,0 +1,11 @@
+@use './material-light' as *;
+@use './material-dark' as *;
+
+// Styles for the docs app that are based on the current theme.
+@mixin theme($type: light) {
+  @if $type == dark {
+    @include highlightjs-material-dark();
+  } @else {
+    @include highlightjs-material-light();
+  }
+}
