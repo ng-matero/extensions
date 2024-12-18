@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, UntypedFormControl, Validators } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import {
@@ -15,6 +15,8 @@ import { TranslateService } from '@ngx-translate/core';
   imports: [MatCheckboxModule, MtxCheckboxGroupModule, ReactiveFormsModule, FormsModule, JsonPipe],
 })
 export class CheckboxGroupDemoComponent {
+  private translate = inject(TranslateService);
+
   foods: MtxCheckboxGroupOption[] = [
     { label: this.translate.stream('steak'), value: 'steak', color: 'primary', disabled: true },
     { label: this.translate.stream('pizza'), value: 'pizza', color: 'accent' },
@@ -25,6 +27,4 @@ export class CheckboxGroupDemoComponent {
   cars = ['Ford', 'Chevrolet', 'Dodge'];
   f1 = new UntypedFormControl(['Chevrolet'], Validators.required);
   f2 = new UntypedFormControl(true, Validators.required);
-
-  constructor(public translate: TranslateService) {}
 }

@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButton, MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
@@ -27,6 +27,8 @@ import {
   ],
 })
 export class DrawerDemoComponent {
+  private drawer = inject(MtxDrawer);
+
   position: DrawerPosition = 'right';
   width = '300px';
   height = '300px';
@@ -36,8 +38,6 @@ export class DrawerDemoComponent {
 
   animal?: string;
   name?: string;
-
-  constructor(private drawer: MtxDrawer) {}
 
   open() {
     const drawerRef = this.drawer.open(DrawerOverviewComponent, {
@@ -75,10 +75,8 @@ export class DrawerDemoComponent {
   imports: [MatFormField, MatInput, ReactiveFormsModule, FormsModule, MatButton],
 })
 export class DrawerOverviewComponent {
-  constructor(
-    public drawerRef: MtxDrawerRef<DrawerOverviewComponent>,
-    @Inject(MTX_DRAWER_DATA) public data: any
-  ) {}
+  drawerRef = inject<MtxDrawerRef<DrawerOverviewComponent>>(MtxDrawerRef);
+  data = inject(MTX_DRAWER_DATA);
 
   onNoClick(): void {
     this.drawerRef.dismiss();

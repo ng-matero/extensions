@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -30,6 +30,8 @@ import { MtxSelectIntl, MtxSelectModule } from '@ng-matero/extensions/select';
   ],
 })
 export class SelectDemoComponent {
+  private intl = inject(MtxSelectIntl);
+
   themeColor: ThemePalette = 'primary';
 
   disabled = false;
@@ -130,8 +132,6 @@ export class SelectDemoComponent {
   ];
 
   control = new FormControl({ value: 1, disabled: true }, Validators.required);
-
-  constructor(private intl: MtxSelectIntl) {}
 
   changeIntl() {
     this.intl.placeholder = 'custom placeholder';

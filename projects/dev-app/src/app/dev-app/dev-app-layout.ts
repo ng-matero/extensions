@@ -4,7 +4,6 @@ import {
   ChangeDetectorRef,
   Component,
   ElementRef,
-  Inject,
   NgZone,
   ViewEncapsulation,
   inject,
@@ -42,6 +41,14 @@ import { DevAppRippleOptions } from './ripple-options';
   ],
 })
 export class DevAppLayout {
+  private _element = inject<ElementRef<HTMLElement>>(ElementRef);
+  private _rippleOptions = inject(DevAppRippleOptions);
+  private _dir = inject(Directionality) as DevAppDirectionality;
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+  private _document = inject<Document>(DOCUMENT);
+  private _iconRegistry = inject(MatIconRegistry);
+  private _translate = inject(TranslateService);
+
   state = getAppState();
 
   navItems = [
@@ -76,15 +83,7 @@ export class DevAppLayout {
 
   readonly isZoneless = this._ngZone instanceof ɵNoopNgZone;
 
-  constructor(
-    private _element: ElementRef<HTMLElement>,
-    private _rippleOptions: DevAppRippleOptions,
-    @Inject(Directionality) private _dir: DevAppDirectionality,
-    private _changeDetectorRef: ChangeDetectorRef,
-    @Inject(DOCUMENT) private _document: Document,
-    private _iconRegistry: MatIconRegistry,
-    private _translate: TranslateService
-  ) {
+  constructor() {
     this.toggleTheme(this.state.darkTheme);
     this.toggleSystemTheme(this.state.systemTheme);
     this.toggleStrongFocus(this.state.strongFocusEnabled);

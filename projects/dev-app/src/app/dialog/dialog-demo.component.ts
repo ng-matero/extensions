@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -14,12 +14,10 @@ import { TranslateService } from '@ngx-translate/core';
   imports: [MatButtonModule],
 })
 export class DialogDemoComponent implements OnInit {
-  animal?: string;
+  private mtxDialog = inject(MtxDialog);
+  private translate = inject(TranslateService);
 
-  constructor(
-    private mtxDialog: MtxDialog,
-    public translate: TranslateService
-  ) {}
+  animal?: string;
 
   ngOnInit() {}
 
@@ -104,10 +102,8 @@ export class DialogDemoComponent implements OnInit {
   imports: [FormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule],
 })
 export class DialogOverviewComponent {
-  constructor(
-    public dialogRef: MatDialogRef<DialogOverviewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
-  ) {}
+  dialogRef = inject<MatDialogRef<DialogOverviewComponent>>(MatDialogRef);
+  data = inject(MAT_DIALOG_DATA);
 
   onNoClick(): void {
     this.dialogRef.close();
