@@ -36,7 +36,7 @@ const DAYS_PER_WEEK = 7;
   standalone: true,
   imports: [MtxCalendarBody],
 })
-export class MtxMonthView implements AfterContentInit<D> {
+export class MtxMonthView<D> implements AfterContentInit {
   @Input() type: MtxDatetimepickerType = 'date';
 
   /** A function used to filter which dates are selectable. */
