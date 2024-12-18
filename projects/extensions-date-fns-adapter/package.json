@@ -16,7 +16,7 @@
     "@angular/material": ">=18.0.0",
     "@angular/material-date-fns-adapter": ">=18.0.0",
     "@ng-matero/extensions": ">=18.0.0",
-    "date-fns": ">2.20.0 <4.0"
+    "date-fns": ">2.20.0 <5.0"
   },
   "dependencies": {
     "tslib": "^2.4.0"

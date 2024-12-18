@@ -10,7 +10,7 @@ import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppComponent } from './app/app.component';
 import { DevAppDirectionality } from './app/dev-app/dev-app-directionality';
@@ -29,16 +29,16 @@ bootstrapApplication(AppComponent, {
   providers: [
     provideRouter(DEV_APP_ROUTES),
     provideHttpClient(withInterceptorsFromDi()),
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: TranslateHttpLoaderFactory,
+        deps: [HttpClient],
+      },
+    }),
     importProvidersFrom(
       BrowserAnimationsModule.withConfig({
         disableAnimations: !cachedAppState.animations,
-      }),
-      TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: TranslateHttpLoaderFactory,
-          deps: [HttpClient],
-        },
       })
     ),
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },

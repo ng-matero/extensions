@@ -1,8 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, importProvidersFrom } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
@@ -85,15 +85,13 @@ export const routes: Routes = [
       ],
     },
     providers: [
-      importProvidersFrom(
-        TranslateModule.forRoot({
-          loader: {
-            provide: TranslateLoader,
-            useFactory: TranslateHttpLoaderFactory,
-            deps: [HttpClient],
-          },
-        })
-      ),
+      provideTranslateService({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: TranslateHttpLoaderFactory,
+          deps: [HttpClient],
+        },
+      }),
     ],
   },
   {
