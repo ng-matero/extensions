@@ -1,18 +1,11 @@
 import { AnimationEvent } from '@angular/animations';
-import { FocusMonitor, FocusTrapFactory, InteractivityChecker } from '@angular/cdk/a11y';
 import { CdkDialogContainer } from '@angular/cdk/dialog';
-import { OverlayRef } from '@angular/cdk/overlay';
 import { CdkPortalOutlet } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  ElementRef,
   EventEmitter,
-  Inject,
-  NgZone,
   OnDestroy,
-  Optional,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -62,28 +55,6 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
 
   get _drawerPosition() {
     return `mtx-drawer-${this._config.position}`;
-  }
-
-  constructor(
-    elementRef: ElementRef,
-    focusTrapFactory: FocusTrapFactory,
-    @Optional() @Inject(DOCUMENT) document: any,
-    config: MtxDrawerConfig,
-    checker: InteractivityChecker,
-    ngZone: NgZone,
-    overlayRef: OverlayRef,
-    focusMonitor?: FocusMonitor
-  ) {
-    super(
-      elementRef,
-      focusTrapFactory,
-      document,
-      config,
-      checker,
-      ngZone,
-      overlayRef,
-      focusMonitor
-    );
   }
 
   protected override _contentAttached(): void {

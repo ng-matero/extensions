@@ -26,13 +26,11 @@ import {
   ComponentRef,
   EventEmitter,
   inject,
-  Inject,
   InjectionToken,
   Injector,
   Input,
   OnDestroy,
   OnInit,
-  Optional,
   Output,
   ViewChild,
   ViewContainerRef,
@@ -112,6 +110,8 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   imports: [MtxCalendar, CdkPortalOutlet],
 })
 export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, OnDestroy {
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+
   @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
 
   @Input() color: ThemePalette;
@@ -139,7 +139,10 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, On
   /** The view of the calendar. */
   view: MtxCalendarView = 'month';
 
-  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   _viewChanged(view: MtxCalendarView): void {
     this.view = view;
@@ -193,6 +196,12 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, On
   standalone: true,
 })
 export class MtxDatetimepicker<D> implements OnDestroy {
+  private _overlay = inject(Overlay);
+  private _viewContainerRef = inject(ViewContainerRef);
+  private _scrollStrategy = inject(MTX_DATETIMEPICKER_SCROLL_STRATEGY);
+  private _dateAdapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
+  private _dir = inject(Directionality, { optional: true });
+
   private _document = inject(DOCUMENT);
 
   private _injector = inject(Injector);
@@ -297,13 +306,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   /** Previous selected value. */
   oldValue: D | null = null;
 
-  constructor(
-    private _overlay: Overlay,
-    private _viewContainerRef: ViewContainerRef,
-    @Inject(MTX_DATETIMEPICKER_SCROLL_STRATEGY) private _scrollStrategy: any,
-    @Optional() private _dateAdapter: DatetimeAdapter<D>,
-    @Optional() private _dir: Directionality
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     if (!this._dateAdapter) {
       throw createMissingDateImplError('DateAdapter');
     }
@@ -553,7 +559,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
           isDialog ? 'cdk-overlay-dark-backdrop' : 'mat-overlay-transparent-backdrop',
           this._backdropHarnessClass,
         ],
-        direction: this._dir,
+        direction: this._dir || undefined,
         scrollStrategy: isDialog ? this._overlay.scrollStrategies.block() : this._scrollStrategy(),
         panelClass: `mtx-datetimepicker-${isDialog ? 'dialog' : 'popup'}`,
       })

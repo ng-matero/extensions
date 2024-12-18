@@ -1,4 +1,4 @@
-import { Directive, ElementRef } from '@angular/core';
+import { Directive, ElementRef, inject } from '@angular/core';
 
 @Directive({
   selector: 'mtx-popover-target, [mtxPopoverTarget]',
@@ -6,5 +6,5 @@ import { Directive, ElementRef } from '@angular/core';
   standalone: true,
 })
 export class MtxPopoverTarget {
-  constructor(public elementRef: ElementRef) {}
+  elementRef = inject(ElementRef);
 }

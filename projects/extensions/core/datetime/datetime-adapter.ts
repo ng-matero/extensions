@@ -1,9 +1,8 @@
+import { inject } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 
 export abstract class DatetimeAdapter<D> extends DateAdapter<D> {
-  constructor(protected _delegate: DateAdapter<D>) {
-    super();
-  }
+  protected _delegate = inject<DateAdapter<D>>(DateAdapter);
 
   abstract getHour(date: D): number;
 

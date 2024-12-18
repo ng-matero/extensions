@@ -6,10 +6,10 @@ import {
   EventEmitter,
   Input,
   OnDestroy,
-  Optional,
   Output,
   booleanAttribute,
   forwardRef,
+  inject,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -76,6 +76,9 @@ export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsv';
   standalone: true,
 })
 export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit, OnDestroy {
+  private _elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef);
+  private _formField = inject(MatFormField, { optional: true });
+
   /** Whether the component has been initialized. */
   private _isInitialized!: boolean;
 
@@ -169,11 +172,6 @@ export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit,
 
   /** Whether the last value set on the input was valid. */
   private _lastValueValid = false;
-
-  constructor(
-    private _elementRef: ElementRef<HTMLInputElement>,
-    @Optional() private _formField: MatFormField
-  ) {}
 
   ngAfterViewInit() {
     this._isInitialized = true;

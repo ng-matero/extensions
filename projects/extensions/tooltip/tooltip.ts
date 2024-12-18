@@ -32,14 +32,12 @@ import {
   Component,
   Directive,
   ElementRef,
-  Inject,
   inject,
   InjectionToken,
   Injector,
   Input,
   NgZone,
   OnDestroy,
-  Optional,
   TemplateRef,
   ViewChild,
   ViewContainerRef,
@@ -180,6 +178,19 @@ const MAX_WIDTH = 200;
   standalone: true,
 })
 export class MtxTooltip implements OnDestroy, AfterViewInit {
+  private _overlay = inject(Overlay);
+  private _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private _scrollDispatcher = inject(ScrollDispatcher);
+  private _viewContainerRef = inject(ViewContainerRef);
+  private _ngZone = inject(NgZone);
+  private _platform = inject(Platform);
+  private _ariaDescriber = inject(AriaDescriber);
+  private _focusMonitor = inject(FocusMonitor);
+  protected _dir = inject(Directionality);
+  private _defaultOptions = inject<MtxTooltipDefaultOptions>(MTX_TOOLTIP_DEFAULT_OPTIONS, {
+    optional: true,
+  });
+
   _overlayRef: OverlayRef | null = null;
   _tooltipInstance: TooltipComponent | null = null;
 
@@ -188,7 +199,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   private _positionAtOrigin: boolean = false;
   private _disabled: boolean = false;
   private _tooltipClass!: string | string[] | Set<string> | { [key: string]: any };
-  private _scrollStrategy: () => ScrollStrategy;
+  private _scrollStrategy = inject(MTX_TOOLTIP_SCROLL_STRATEGY);
   private _viewInitialized = false;
   private _pointerExitEventsInitialized = false;
   private readonly _tooltipComponent = TooltipComponent;
@@ -361,7 +372,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
     [];
 
   /** Reference to the current document. */
-  private _document: Document;
+  private _document = inject(DOCUMENT);
 
   /** Timer started at the last `touchstart` event. */
   private _touchstartTimeout!: ReturnType<typeof setTimeout>;
@@ -371,24 +382,11 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
 
   private _injector = inject(Injector);
 
-  constructor(
-    private _overlay: Overlay,
-    private _elementRef: ElementRef<HTMLElement>,
-    private _scrollDispatcher: ScrollDispatcher,
-    private _viewContainerRef: ViewContainerRef,
-    private _ngZone: NgZone,
-    private _platform: Platform,
-    private _ariaDescriber: AriaDescriber,
-    private _focusMonitor: FocusMonitor,
-    @Inject(MTX_TOOLTIP_SCROLL_STRATEGY) scrollStrategy: any,
-    protected _dir: Directionality,
-    @Optional()
-    @Inject(MTX_TOOLTIP_DEFAULT_OPTIONS)
-    private _defaultOptions: MtxTooltipDefaultOptions,
-    @Inject(DOCUMENT) _document: any
-  ) {
-    this._scrollStrategy = scrollStrategy;
-    this._document = _document;
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
+    const _defaultOptions = this._defaultOptions;
 
     if (_defaultOptions) {
       this._showDelay = _defaultOptions.showDelay;
@@ -407,7 +405,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
       }
     }
 
-    _dir.change.pipe(takeUntil(this._destroyed)).subscribe(() => {
+    this._dir.change.pipe(takeUntil(this._destroyed)).subscribe(() => {
       if (this._overlayRef) {
         this._updatePosition(this._overlayRef);
       }
@@ -822,7 +820,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
           const DEFAULT_LONGPRESS_DELAY = 500;
           this._touchstartTimeout = setTimeout(
             () => this.show(undefined, origin),
-            this._defaultOptions.touchLongPressShowDelay ?? DEFAULT_LONGPRESS_DELAY
+            this._defaultOptions?.touchLongPressShowDelay ?? DEFAULT_LONGPRESS_DELAY
           );
         },
       ]);
@@ -855,7 +853,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
       this._disableNativeGesturesIfNecessary();
       const touchendListener = () => {
         clearTimeout(this._touchstartTimeout);
-        this.hide(this._defaultOptions.touchendHideDelay);
+        this.hide(this._defaultOptions?.touchendHideDelay);
       };
 
       exitListeners.push(['touchend', touchendListener], ['touchcancel', touchendListener]);
@@ -941,6 +939,9 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   imports: [NgClass, NgTemplateOutlet, MtxIsTemplateRefPipe],
 })
 export class TooltipComponent implements OnDestroy {
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+  protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
   /* Whether the tooltip text overflows to multiple lines */
   _isMultiline = false;
 
@@ -991,11 +992,12 @@ export class TooltipComponent implements OnDestroy {
   /** Name of the hide animation and the class that toggles it. */
   private readonly _hideAnimation = 'mtx-mdc-tooltip-hide';
 
-  constructor(
-    private _changeDetectorRef: ChangeDetectorRef,
-    protected _elementRef: ElementRef<HTMLElement>,
-    @Optional() @Inject(ANIMATION_MODULE_TYPE) animationMode?: string
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
+    const animationMode = inject(ANIMATION_MODULE_TYPE, { optional: true });
+
     this._animationsDisabled = animationMode === 'NoopAnimations';
   }
 

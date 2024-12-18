@@ -5,6 +5,7 @@ import {
   Input,
   ViewEncapsulation,
   booleanAttribute,
+  inject,
 } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatProgressBar, ProgressBarMode } from '@angular/material/progress-bar';
@@ -26,6 +27,8 @@ export type MtxLoaderType = 'spinner' | 'progressbar';
   imports: [MatProgressSpinner, MatProgressBar],
 })
 export class MtxLoader {
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+
   /** The loader's type. Can be `spinner` or `progressbar` */
   @Input() type: MtxLoaderType = 'spinner';
 
@@ -52,6 +55,4 @@ export class MtxLoader {
 
   /** Whether the loader has a backdrop. */
   @Input({ transform: booleanAttribute }) hasBackdrop = true;
-
-  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 }

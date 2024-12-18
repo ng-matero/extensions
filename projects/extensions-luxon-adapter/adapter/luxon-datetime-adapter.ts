@@ -1,9 +1,9 @@
-import { Inject, Injectable, Optional } from '@angular/core';
-import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { Injectable, inject } from '@angular/core';
 import {
   MAT_LUXON_DATE_ADAPTER_OPTIONS,
   MatLuxonDateAdapterOptions,
 } from '@angular/material-luxon-adapter';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { DateTime } from 'luxon';
 
@@ -19,16 +19,20 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
 export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
   private _useUtc = false;
 
-  constructor(
-    @Optional() @Inject(MAT_DATE_LOCALE) matDateLocale: string,
-    @Optional()
-    @Inject(MAT_LUXON_DATE_ADAPTER_OPTIONS)
-    matLuxonAdapterOptions: MatLuxonDateAdapterOptions,
-    _delegate: DateAdapter<DateTime>
-  ) {
-    super(_delegate);
-    this.setLocale(matDateLocale || DateTime.now().locale || '');
-    this._useUtc = matLuxonAdapterOptions.useUtc!;
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
+    super();
+
+    const matDateLocale: any = inject(MAT_DATE_LOCALE, { optional: true });
+    const matLuxonAdapterOptions = inject<MatLuxonDateAdapterOptions>(
+      MAT_LUXON_DATE_ADAPTER_OPTIONS,
+      { optional: true }
+    );
+
+    this.setLocale(matDateLocale || DateTime.now().locale);
+    this._useUtc = matLuxonAdapterOptions?.useUtc || false;
   }
 
   setLocale(locale: string) {

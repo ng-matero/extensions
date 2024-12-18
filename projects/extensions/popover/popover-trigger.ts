@@ -18,11 +18,9 @@ import {
   Directive,
   ElementRef,
   EventEmitter,
-  Inject,
   InjectionToken,
   Input,
   OnDestroy,
-  Optional,
   Output,
   ViewContainerRef,
   inject,
@@ -84,6 +82,13 @@ export const MTX_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   standalone: true,
 })
 export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
+  private _overlay = inject(Overlay);
+  private _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private _viewContainerRef = inject(ViewContainerRef);
+  private _dir = inject(Directionality, { optional: true });
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+  private _focusMonitor = inject(FocusMonitor);
+
   private _portal?: TemplatePortal;
   private _overlayRef: OverlayRef | null = null;
   private _popoverOpen = false;
@@ -91,7 +96,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   private _positionSubscription = Subscription.EMPTY;
   private _popoverCloseSubscription = Subscription.EMPTY;
   private _closingActionsSubscription = Subscription.EMPTY;
-  private _scrollStrategy!: () => ScrollStrategy;
+  private _scrollStrategy = inject(MTX_POPOVER_SCROLL_STRATEGY);
   private _mouseoverTimer: any;
 
   // Tracking input type is necessary so it's possible to only auto-focus
@@ -133,18 +138,6 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
 
   /** Event emitted when the associated popover is closed. */
   @Output() popoverClosed = new EventEmitter<void>();
-
-  constructor(
-    private _overlay: Overlay,
-    private _elementRef: ElementRef<HTMLElement>,
-    private _viewContainerRef: ViewContainerRef,
-    @Inject(MTX_POPOVER_SCROLL_STRATEGY) scrollStrategy: any,
-    @Optional() private _dir: Directionality,
-    private _changeDetectorRef: ChangeDetectorRef,
-    private _focusMonitor?: FocusMonitor
-  ) {
-    this._scrollStrategy = scrollStrategy;
-  }
 
   ngAfterContentInit() {
     this._checkPopover();
@@ -397,7 +390,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
       backdropClass: this.popover.backdropClass || 'cdk-overlay-transparent-backdrop',
       panelClass: this.popover.overlayPanelClass,
       scrollStrategy: this._scrollStrategy(),
-      direction: this._dir,
+      direction: this._dir || undefined,
     });
   }
 

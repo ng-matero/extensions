@@ -1,13 +1,13 @@
 import {
   Directive,
   ElementRef,
-  Inject,
   Injector,
   NgZone,
   ViewContainerRef,
   ChangeDetectorRef,
   Input,
   HostBinding,
+  inject,
 } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Directionality } from '@angular/cdk/bidi';
@@ -36,6 +36,21 @@ import { AbstractMatResizable, RESIZABLE_HOST_BINDINGS, RESIZABLE_INPUTS } from 
   standalone: true,
 })
 export class MatResizable extends AbstractMatResizable {
+  protected readonly columnDef = inject(CdkColumnDef);
+  protected readonly columnResize = inject(ColumnResize);
+  protected readonly directionality = inject(Directionality);
+  protected readonly elementRef = inject(ElementRef);
+  protected readonly eventDispatcher = inject(HeaderRowEventDispatcher);
+  protected readonly injector = inject(Injector);
+  protected readonly ngZone = inject(NgZone);
+  protected readonly overlay = inject(Overlay);
+  protected readonly resizeNotifier = inject(ColumnResizeNotifierSource);
+  protected readonly resizeStrategy = inject(ResizeStrategy);
+  protected readonly styleScheduler = inject<_CoalescedStyleScheduler>(_COALESCED_STYLE_SCHEDULER);
+  protected readonly viewContainerRef = inject(ViewContainerRef);
+  protected readonly changeDetectorRef = inject(ChangeDetectorRef);
+  protected readonly document = inject(DOCUMENT);
+
   isResizable = true;
 
   @HostBinding('class') get hasResizableClass() {
@@ -48,28 +63,5 @@ export class MatResizable extends AbstractMatResizable {
   }
   set resizable(newValue: any) {
     this.isResizable = newValue == null || newValue === '' || newValue;
-  }
-
-  protected readonly document: Document;
-
-  constructor(
-    protected readonly columnDef: CdkColumnDef,
-    protected readonly columnResize: ColumnResize,
-    protected readonly directionality: Directionality,
-    @Inject(DOCUMENT) document: any,
-    protected readonly elementRef: ElementRef,
-    protected readonly eventDispatcher: HeaderRowEventDispatcher,
-    protected readonly injector: Injector,
-    protected readonly ngZone: NgZone,
-    protected readonly overlay: Overlay,
-    protected readonly resizeNotifier: ColumnResizeNotifierSource,
-    protected readonly resizeStrategy: ResizeStrategy,
-    @Inject(_COALESCED_STYLE_SCHEDULER)
-    protected readonly styleScheduler: _CoalescedStyleScheduler,
-    protected readonly viewContainerRef: ViewContainerRef,
-    protected readonly changeDetectorRef: ChangeDetectorRef
-  ) {
-    super();
-    this.document = document;
   }
 }

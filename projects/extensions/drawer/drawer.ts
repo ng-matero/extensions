@@ -3,14 +3,12 @@ import { Dialog, DialogConfig } from '@angular/cdk/dialog';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
 import {
-  Inject,
   Injectable,
   InjectionToken,
   Injector,
   OnDestroy,
-  Optional,
-  SkipSelf,
   TemplateRef,
+  inject,
 } from '@angular/core';
 import { defer, Observable, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
@@ -34,10 +32,14 @@ let uniqueId = 0;
  */
 @Injectable({ providedIn: 'root' })
 export class MtxDrawer implements OnDestroy {
+  private _overlay = inject(Overlay);
+  private _parentDrawer = inject(MtxDrawer, { optional: true, skipSelf: true });
+  private _defaultOptions = inject<MtxDrawerConfig>(MTX_DRAWER_DEFAULT_OPTIONS, { optional: true });
+
   private readonly _openDrawersAtThisLevel: MtxDrawerRef<any>[] = [];
   private readonly _afterAllDismissedAtThisLevel = new Subject<void>();
   private readonly _afterOpenedAtThisLevel = new Subject<MtxDrawerRef<any>>();
-  private _dialog: Dialog;
+  private _dialog = inject(Dialog);
 
   /** Keeps track of the currently-open dialogs. */
   get openDrawers(): MtxDrawerRef<any>[] {
@@ -63,17 +65,6 @@ export class MtxDrawer implements OnDestroy {
       ? this._getAfterAllDismissed()
       : this._getAfterAllDismissed().pipe(startWith(undefined))
   ) as Observable<any>;
-
-  constructor(
-    private _overlay: Overlay,
-    injector: Injector,
-    @Optional() @SkipSelf() private _parentDrawer: MtxDrawer,
-    @Optional()
-    @Inject(MTX_DRAWER_DEFAULT_OPTIONS)
-    private _defaultOptions?: MtxDrawerConfig
-  ) {
-    this._dialog = injector.get(Dialog);
-  }
 
   /**
    * Opens a drawer containing the given component.

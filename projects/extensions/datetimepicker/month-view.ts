@@ -3,11 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Inject,
   Input,
-  Optional,
   Output,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import {
   DatetimeAdapter,
@@ -35,6 +34,9 @@ const DAYS_PER_WEEK = 7;
   imports: [MtxCalendarBody],
 })
 export class MtxMonthView<D> implements AfterContentInit {
+  _adapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
+  private _dateFormats = inject<MtxDatetimeFormats>(MTX_DATETIME_FORMATS, { optional: true })!;
+
   @Input() type: MtxDatetimepickerType = 'date';
 
   /** A function used to filter which dates are selectable. */
@@ -66,10 +68,10 @@ export class MtxMonthView<D> implements AfterContentInit {
 
   _calendarState!: string;
 
-  constructor(
-    @Optional() public _adapter: DatetimeAdapter<D>,
-    @Optional() @Inject(MTX_DATETIME_FORMATS) private _dateFormats: MtxDatetimeFormats
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     if (!this._adapter) {
       throw createMissingDateImplError('DatetimeAdapter');
     }

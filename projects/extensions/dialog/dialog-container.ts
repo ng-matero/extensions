@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, Inject, ViewEncapsulation } from '@angular/core';
-import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
+import { ChangeDetectionStrategy, Component, ViewEncapsulation, inject } from '@angular/core';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 
@@ -17,21 +17,11 @@ import { MtxDialogData } from './dialog-config';
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    AsyncPipe,
-    MatButton,
-    MatIconButton,
-    MatFabButton,
-    MatMiniFabButton,
-    MatIcon,
-    MtxToObservablePipe,
-  ],
+  imports: [AsyncPipe, MatButton, MatIconButton, MatIcon, MtxToObservablePipe],
 })
 export class MtxDialogContainer {
-  constructor(
-    public dialogRef: MatDialogRef<MtxDialogContainer>,
-    @Inject(MAT_DIALOG_DATA) public data: MtxDialogData
-  ) {}
+  dialogRef = inject<MatDialogRef<MtxDialogContainer>>(MatDialogRef);
+  data = inject<MtxDialogData>(MAT_DIALOG_DATA);
 
   _onClick(fn: () => void) {
     if (fn) {

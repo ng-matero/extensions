@@ -7,13 +7,13 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Inject,
   Input,
   OnChanges,
   OnDestroy,
   Output,
   ViewEncapsulation,
   booleanAttribute,
+  inject,
 } from '@angular/core';
 
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
@@ -50,6 +50,11 @@ export type MtxClockView = 'hour' | 'minute';
   standalone: true,
 })
 export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
+  private _elementRef = inject(ElementRef);
+  private _adapter = inject<DatetimeAdapter<D>>(DatetimeAdapter);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+  private _document = inject(DOCUMENT);
+
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D, type: MtxDatetimepickerFilterType) => boolean;
 
@@ -86,12 +91,10 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
 
   private _timeChanged = false;
 
-  constructor(
-    private _elementRef: ElementRef,
-    private _adapter: DatetimeAdapter<D>,
-    private _changeDetectorRef: ChangeDetectorRef,
-    @Inject(DOCUMENT) private _document: any
-  ) {}
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {}
 
   /**
    * The date to display in this clock view.

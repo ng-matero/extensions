@@ -20,6 +20,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { MatBadge } from '@angular/material/badge';
 import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
@@ -72,6 +73,11 @@ import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
   ],
 })
 export class MtxGridCell implements OnInit, DoCheck {
+  private _dialog = inject(MtxDialog);
+  private _utils = inject(MtxGridUtils);
+  private _differs = inject(KeyValueDiffers);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+
   /** Row data */
   @Input() rowData: Record<string, any> = {};
 
@@ -96,13 +102,6 @@ export class MtxGridCell implements OnInit, DoCheck {
   get _value() {
     return this._utils.getCellValue(this.rowData, this.colDef);
   }
-
-  constructor(
-    private _dialog: MtxDialog,
-    private _utils: MtxGridUtils,
-    private _differs: KeyValueDiffers,
-    private _changeDetectorRef: ChangeDetectorRef
-  ) {}
 
   ngOnInit(): void {
     this.rowDataDiffer = this._differs.find(this.rowData).create();

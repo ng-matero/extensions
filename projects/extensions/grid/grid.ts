@@ -9,13 +9,11 @@ import {
   ContentChildren,
   ElementRef,
   EventEmitter,
-  Inject,
   InjectionToken,
   Input,
   KeyValueChangeRecord,
   OnChanges,
   OnDestroy,
-  Optional,
   Output,
   QueryList,
   SimpleChanges,
@@ -24,6 +22,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   booleanAttribute,
+  inject,
 } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
@@ -126,6 +125,12 @@ export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions
   ],
 })
 export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
+  private _utils = inject(MtxGridUtils);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+  private _defaultOptions = inject<MtxGridDefaultOptions>(MTX_GRID_DEFAULT_OPTIONS, {
+    optional: true,
+  });
+
   @ViewChild(MatTable) table!: MatTable<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -390,14 +395,6 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
 
   /** The changed record of row data. */
   rowChangeRecord?: KeyValueChangeRecord<string, any>;
-
-  constructor(
-    private _utils: MtxGridUtils,
-    private _changeDetectorRef: ChangeDetectorRef,
-    @Optional()
-    @Inject(MTX_GRID_DEFAULT_OPTIONS)
-    private _defaultOptions?: MtxGridDefaultOptions
-  ) {}
 
   detectChanges() {
     this._changeDetectorRef.detectChanges();

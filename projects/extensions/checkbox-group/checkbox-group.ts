@@ -15,6 +15,7 @@ import {
   ViewEncapsulation,
   booleanAttribute,
   forwardRef,
+  inject,
 } from '@angular/core';
 import { ControlValueAccessor, FormsModule, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatCheckbox, MatCheckboxChange } from '@angular/material/checkbox';
@@ -49,6 +50,10 @@ export class MtxCheckboxBase {
   imports: [FormsModule, MatCheckbox, MtxToObservablePipe, AsyncPipe],
 })
 export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueAccessor {
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+  private _focusMonitor = inject(FocusMonitor);
+  private _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
   @ContentChildren(forwardRef(() => MatCheckbox), { descendants: true })
   _checkboxes!: QueryList<MatCheckbox>;
 
@@ -98,12 +103,6 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
 
   _onChange: (value: MtxCheckboxGroupOption[]) => void = () => null;
   _onTouched: () => void = () => null;
-
-  constructor(
-    private _changeDetectorRef: ChangeDetectorRef,
-    private _focusMonitor: FocusMonitor,
-    private _elementRef: ElementRef<HTMLElement>
-  ) {}
 
   ngAfterViewInit() {
     this._focusMonitor.monitor(this._elementRef, true).subscribe(focusOrigin => {

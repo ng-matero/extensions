@@ -3,11 +3,10 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  Inject,
   Input,
-  Optional,
   Output,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import {
   DatetimeAdapter,
@@ -37,6 +36,9 @@ export const yearsPerRow = 4;
   imports: [MtxCalendarBody],
 })
 export class MtxMultiYearView<D> implements AfterContentInit {
+  private _adapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
+  private _dateFormats = inject<MtxDatetimeFormats>(MTX_DATETIME_FORMATS, { optional: true })!;
+
   @Input() type: MtxDatetimepickerType = 'date';
 
   /** A function used to filter which dates are selectable. */
@@ -65,10 +67,10 @@ export class MtxMultiYearView<D> implements AfterContentInit {
 
   _calendarState!: string;
 
-  constructor(
-    @Optional() public _adapter: DatetimeAdapter<D>,
-    @Optional() @Inject(MTX_DATETIME_FORMATS) private _dateFormats: MtxDatetimeFormats
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     if (!this._adapter) {
       throw createMissingDateImplError('DatetimeAdapter');
     }

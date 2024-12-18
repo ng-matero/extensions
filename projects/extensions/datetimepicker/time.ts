@@ -17,6 +17,7 @@ import {
   SimpleChanges,
   ViewChild,
   ViewEncapsulation,
+  inject,
 } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { SubscriptionLike } from 'rxjs';
@@ -43,6 +44,9 @@ function pad(num: NumberInput, size: number) {
   standalone: true,
 })
 export class MtxTimeInput implements OnDestroy {
+  private element = inject(ElementRef);
+  private cdr = inject(ChangeDetectorRef);
+
   @Input('timeInterval')
   set timeInterval(value: NumberInput) {
     this._interval = coerceNumberProperty(value);
@@ -78,10 +82,10 @@ export class MtxTimeInput implements OnDestroy {
   private keyPressListener = this.keyPressHandler.bind(this);
   private inputEventListener = this.inputChangedHandler.bind(this);
 
-  constructor(
-    private element: ElementRef,
-    private cdr: ChangeDetectorRef
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.inputElement.addEventListener('keydown', this.keyDownListener, {
       passive: true,
     });
@@ -234,6 +238,10 @@ export class MtxTimeInput implements OnDestroy {
   imports: [MatButton, MtxClock, MtxTimeInput],
 })
 export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
+  private _adapter = inject<DatetimeAdapter<D>>(DatetimeAdapter);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+  protected _datetimepickerIntl = inject(MtxDatetimepickerIntl);
+
   /** Emits when the currently selected date changes. */
   @Output() readonly selectedChange = new EventEmitter<D>();
 
@@ -381,11 +389,10 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
     return String(value);
   }
 
-  constructor(
-    private _adapter: DatetimeAdapter<D>,
-    private _changeDetectorRef: ChangeDetectorRef,
-    protected _datetimepickerIntl: MtxDatetimepickerIntl
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
     this.datetimepickerIntlChangesSubscription = this._datetimepickerIntl.changes.subscribe(() => {
       this._changeDetectorRef.detectChanges();
     });

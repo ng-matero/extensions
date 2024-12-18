@@ -1,4 +1,4 @@
-import { KeyValueChangeRecord, Pipe, PipeTransform } from '@angular/core';
+import { KeyValueChangeRecord, Pipe, PipeTransform, inject } from '@angular/core';
 import { isObservable } from 'rxjs';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumn, MtxGridColumnButton, MtxGridRowClassFormatter } from './interfaces';
@@ -100,7 +100,8 @@ export class MtxGridCellActionDisablePipe implements PipeTransform {
 
 @Pipe({ name: 'cellSummary', standalone: true })
 export class MtxGridCellSummaryPipe implements PipeTransform {
-  constructor(private utils: MtxGridUtils) {}
+  private utils = inject(MtxGridUtils);
+
   transform(data: any[], colDef: MtxGridColumn) {
     if (typeof colDef.summary === 'string') {
       return colDef.summary;

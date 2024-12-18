@@ -1,14 +1,12 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MTX_SELECT_DEFAULT_OPTIONS, MtxSelectDefaultOptions } from './select';
 
 @Injectable({ providedIn: 'root' })
 export class MtxSelectIntl {
-  constructor(
-    @Optional()
-    @Inject(MTX_SELECT_DEFAULT_OPTIONS)
-    private _defaultOptions?: MtxSelectDefaultOptions
-  ) {}
+  private _defaultOptions = inject<MtxSelectDefaultOptions>(MTX_SELECT_DEFAULT_OPTIONS, {
+    optional: true,
+  });
 
   /**
    * Stream to emit from when labels are changed. Use this to notify components when the labels have

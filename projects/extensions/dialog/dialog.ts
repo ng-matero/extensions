@@ -1,4 +1,4 @@
-import { Injectable, TemplateRef } from '@angular/core';
+import { Injectable, TemplateRef, inject } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -28,7 +28,7 @@ const defaults: MtxDialogData = {
 
 @Injectable({ providedIn: 'root' })
 export class MtxDialog {
-  constructor(public dialog: MatDialog) {}
+  dialog = inject(MatDialog);
 
   originalOpen(
     componentOrTemplateRef: ComponentType<any> | TemplateRef<any> = MtxDialogContainer,

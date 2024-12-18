@@ -1,6 +1,5 @@
 import {
   AfterContentInit,
-  Attribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -13,6 +12,8 @@ import {
   ViewChild,
   ViewEncapsulation,
   booleanAttribute,
+  inject,
+  HostAttributeToken,
 } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { Observable, Subscription, merge, of as observableOf } from 'rxjs';
@@ -51,6 +52,9 @@ export class MtxDatetimepickerToggleIcon {}
   imports: [MatIconButton],
 })
 export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, OnDestroy {
+  _intl = inject(MtxDatetimepickerIntl);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+
   private _stateChanges = Subscription.EMPTY;
 
   /** Datetimepicker instance that the button will toggle. */
@@ -81,11 +85,11 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   /** Underlying button element. */
   @ViewChild('button') _button!: MatButton;
 
-  constructor(
-    public _intl: MtxDatetimepickerIntl,
-    private _changeDetectorRef: ChangeDetectorRef,
-    @Attribute('tabindex') defaultTabIndex: string
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
+    const defaultTabIndex = inject(new HostAttributeToken('tabindex'), { optional: true });
     const parsedTabIndex = Number(defaultTabIndex);
     this.tabIndex = parsedTabIndex || parsedTabIndex === 0 ? parsedTabIndex : null;
   }

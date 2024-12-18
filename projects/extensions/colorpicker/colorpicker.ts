@@ -15,13 +15,11 @@ import {
   Component,
   ComponentRef,
   EventEmitter,
-  Inject,
   InjectionToken,
   Injector,
   Input,
   OnChanges,
   OnDestroy,
-  Optional,
   Output,
   TemplateRef,
   ViewContainerRef,
@@ -88,6 +86,8 @@ export const MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   imports: [ColorChromeModule, NgTemplateOutlet],
 })
 export class MtxColorpickerContent implements OnDestroy {
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+
   @Input() color: ThemePalette;
 
   picker!: MtxColorpicker;
@@ -97,8 +97,6 @@ export class MtxColorpickerContent implements OnDestroy {
 
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
-
-  constructor(private _changeDetectorRef: ChangeDetectorRef) {}
 
   _startExitAnimation() {
     this._animationState = 'void';
@@ -128,7 +126,12 @@ export class MtxColorpickerContent implements OnDestroy {
   standalone: true,
 })
 export class MtxColorpicker implements OnChanges, OnDestroy {
-  private _scrollStrategy: () => ScrollStrategy;
+  private _overlay = inject(Overlay);
+  private _viewContainerRef = inject(ViewContainerRef);
+  private _dir? = inject(Directionality, { optional: true });
+  private _document? = inject(DOCUMENT, { optional: true });
+
+  private _scrollStrategy = inject(MTX_COLORPICKER_SCROLL_STRATEGY);
   private _inputStateChanges = Subscription.EMPTY;
 
   /** Custom colorpicker content set by the consumer. */
@@ -233,16 +236,6 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
 
   private _injector = inject(Injector);
 
-  constructor(
-    private _overlay: Overlay,
-    private _viewContainerRef: ViewContainerRef,
-    @Inject(MTX_COLORPICKER_SCROLL_STRATEGY) scrollStrategy: any,
-    @Optional() private _dir: Directionality,
-    @Optional() @Inject(DOCUMENT) private _document: any
-  ) {
-    this._scrollStrategy = scrollStrategy;
-  }
-
   ngOnChanges() {}
 
   ngOnDestroy() {
@@ -285,7 +278,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     }
 
     if (this._document) {
-      this._focusedElementBeforeOpen = this._document.activeElement;
+      this._focusedElementBeforeOpen = this._document.activeElement as HTMLElement;
     }
 
     this._openOverlay();
@@ -352,7 +345,7 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
         positionStrategy: this._getDropdownStrategy(),
         hasBackdrop: true,
         backdropClass: ['mat-overlay-transparent-backdrop', this._backdropHarnessClass],
-        direction: this._dir,
+        direction: this._dir || undefined,
         scrollStrategy: this._scrollStrategy(),
         panelClass: `mtx-colorpicker-popup`,
       })

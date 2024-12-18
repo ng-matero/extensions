@@ -8,6 +8,7 @@ import {
   OnDestroy,
   SimpleChanges,
   booleanAttribute,
+  inject,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -19,6 +20,8 @@ import { Subject } from 'rxjs';
   standalone: true,
 })
 export class MtxOption implements OnChanges, AfterViewChecked, OnDestroy {
+  elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+
   @Input() value: any;
 
   @Input({ transform: booleanAttribute }) disabled = false;
@@ -33,8 +36,6 @@ export class MtxOption implements OnChanges, AfterViewChecked, OnDestroy {
     disabled: boolean;
     label?: string;
   }>();
-
-  constructor(public elementRef: ElementRef<HTMLElement>) {}
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.disabled) {

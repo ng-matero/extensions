@@ -1,5 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { NgTemplateOutlet } from '@angular/common';
+import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -10,19 +10,17 @@ import {
   DoCheck,
   ElementRef,
   EventEmitter,
-  Inject,
   InjectionToken,
   Input,
   OnDestroy,
   OnInit,
-  Optional,
   Output,
   QueryList,
-  Self,
   TemplateRef,
   ViewChild,
   ViewEncapsulation,
   booleanAttribute,
+  inject,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -131,6 +129,17 @@ export class MtxSelect
     ControlValueAccessor,
     MatFormFieldControl<any>
 {
+  protected _intl = inject(MtxSelectIntl);
+  protected _changeDetectorRef = inject(ChangeDetectorRef);
+  protected _elementRef = inject(ElementRef);
+  protected _focusMonitor = inject(FocusMonitor);
+  ngControl = inject(NgControl, { optional: true, self: true });
+  protected _parentFormField? = inject<MatFormField>(MAT_FORM_FIELD, { optional: true });
+  protected _defaultOptions? = inject<MtxSelectDefaultOptions>(MTX_SELECT_DEFAULT_OPTIONS, {
+    optional: true,
+  });
+  private _document = inject(DOCUMENT);
+
   @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelectComponent;
 
   @ContentChild(MtxSelectOptionTemplate, { read: TemplateRef })
@@ -373,20 +382,13 @@ export class MtxSelect
 
   private _intlChangesSubscription = Subscription.EMPTY;
 
-  constructor(
-    protected _intl: MtxSelectIntl,
-    protected _changeDetectorRef: ChangeDetectorRef,
-    protected _elementRef: ElementRef,
-    protected _focusMonitor: FocusMonitor,
-    defaultErrorStateMatcher: ErrorStateMatcher,
-    @Optional() parentForm: NgForm,
-    @Optional() parentFormGroup: FormGroupDirective,
-    @Optional() @Self() public ngControl: NgControl,
-    @Optional() @Inject(MAT_FORM_FIELD) protected _parentFormField?: MatFormField,
-    @Optional()
-    @Inject(MTX_SELECT_DEFAULT_OPTIONS)
-    protected _defaultOptions?: MtxSelectDefaultOptions
-  ) {
+  constructor() {
+    const _focusMonitor = this._focusMonitor;
+    const defaultErrorStateMatcher = inject(ErrorStateMatcher);
+    const parentForm = inject(NgForm, { optional: true });
+    const parentFormGroup = inject(FormGroupDirective, { optional: true });
+    const ngControl = this.ngControl;
+
     this._intlChangesSubscription = this._intl.changes.subscribe(() => {
       this._changeDetectorRef.detectChanges();
     });
@@ -434,8 +436,8 @@ export class MtxSelect
   }
 
   ngDoCheck(): void {
-    const ngControl = this.ngControl;
     if (this.ngControl) {
+      const ngControl = this.ngControl;
       // The disabled state might go out of sync if the form group is swapped out. See #17860.
       if (this._previousControl !== ngControl.control) {
         if (
@@ -607,7 +609,7 @@ export class MtxSelect
 
     // TODO: The ng-select has no `panelClass` prop, so we can add the theme color by the following way.
     setTimeout(() => {
-      const dropdownEl = document.getElementById(this.ngSelect.dropdownId);
+      const dropdownEl = this._document.getElementById(this.ngSelect.dropdownId);
       dropdownEl?.classList.add('mat-' + this._parentFormField?.color);
     });
   }

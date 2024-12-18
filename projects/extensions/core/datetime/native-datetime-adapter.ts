@@ -1,4 +1,4 @@
-import { Inject, Injectable, Optional } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatetimeAdapter } from './datetime-adapter';
 
@@ -18,11 +18,14 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
 
 @Injectable()
 export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
-  constructor(
-    @Optional() @Inject(MAT_DATE_LOCALE) matDateLocale: string,
-    _delegate: DateAdapter<Date>
-  ) {
-    super(_delegate);
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
+    super();
+
+    const matDateLocale = inject(MAT_DATE_LOCALE, { optional: true });
+
     this.setLocale(matDateLocale);
   }
 

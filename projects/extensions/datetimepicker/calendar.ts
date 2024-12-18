@@ -23,12 +23,10 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  Inject,
   Injector,
   Input,
   NgZone,
   OnDestroy,
-  Optional,
   Output,
   ViewEncapsulation,
   afterNextRender,
@@ -89,6 +87,12 @@ import { MtxYearView } from './year-view';
   ],
 })
 export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
+  private _elementRef = inject(ElementRef);
+  private _intl = inject(MtxDatetimepickerIntl);
+  private _ngZone = inject(NgZone);
+  private _adapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
+  private _dateFormats = inject<MtxDatetimeFormats>(MTX_DATETIME_FORMATS, { optional: true })!;
+
   /** Whether to show multi-year view. */
   @Input({ transform: booleanAttribute }) multiYearSelector = false;
 
@@ -136,14 +140,13 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   private _injector = inject(Injector);
 
-  constructor(
-    private _elementRef: ElementRef,
-    private _intl: MtxDatetimepickerIntl,
-    private _ngZone: NgZone,
-    @Optional() private _adapter: DatetimeAdapter<D>,
-    @Optional() @Inject(MTX_DATETIME_FORMATS) private _dateFormats: MtxDatetimeFormats,
-    _changeDetectorRef: ChangeDetectorRef
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
+    const _intl = this._intl;
+    const _changeDetectorRef = inject(ChangeDetectorRef);
+
     if (!this._adapter) {
       throw createMissingDateImplError('DatetimeAdapter');
     }

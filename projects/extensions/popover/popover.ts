@@ -8,7 +8,6 @@ import {
   ContentChild,
   ElementRef,
   EventEmitter,
-  Inject,
   InjectionToken,
   Input,
   NgZone,
@@ -19,6 +18,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   booleanAttribute,
+  inject,
 } from '@angular/core';
 import { Subject } from 'rxjs';
 
@@ -60,6 +60,10 @@ let popoverPanelUid = 0;
   imports: [CdkTrapFocus],
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
+  private _elementRef = inject(ElementRef);
+  private _unusedNgZone = inject(NgZone);
+  private _defaultOptions = inject<MtxPopoverDefaultOptions>(MTX_POPOVER_DEFAULT_OPTIONS);
+
   private _previousElevation?: string;
   private _elevationPrefix = 'mat-elevation-z';
   private _baseElevation: number | null = null;
@@ -229,12 +233,6 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   @ContentChild(MTX_POPOVER_CONTENT) lazyContent?: MtxPopoverContent;
 
   readonly panelId = `mtx-popover-panel-${popoverPanelUid++}`;
-
-  constructor(
-    private _elementRef: ElementRef,
-    private _unusedNgZone: NgZone,
-    @Inject(MTX_POPOVER_DEFAULT_OPTIONS) private _defaultOptions: MtxPopoverDefaultOptions
-  ) {}
 
   ngOnInit() {
     this.setPositionClasses();
