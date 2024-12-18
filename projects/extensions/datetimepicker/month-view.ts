@@ -1,5 +1,4 @@
 import {
-  AfterContentInit,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
@@ -7,7 +6,9 @@ import {
   Input,
   Optional,
   Output,
+  AfterContentInit,
   ViewEncapsulation,
+  booleanAttribute,
 } from '@angular/core';
 import {
   DatetimeAdapter,
@@ -35,7 +36,7 @@ const DAYS_PER_WEEK = 7;
   standalone: true,
   imports: [MtxCalendarBody],
 })
-export class MtxMonthView<D> implements AfterContentInit {
+export class MtxMonthView implements AfterContentInit<D> {
   @Input() type: MtxDatetimepickerType = 'date';
 
   /** A function used to filter which dates are selectable. */
@@ -104,15 +105,15 @@ export class MtxMonthView<D> implements AfterContentInit {
   }
 
   set activeDate(value: D) {
-    const oldActiveDate = this._activeDate;
+    const _oldActiveDate = this._activeDate;
     this._activeDate = value || this._adapter.today();
     if (
-      oldActiveDate &&
+      _oldActiveDate &&
       this._activeDate &&
-      !this._adapter.sameMonthAndYear(oldActiveDate, this._activeDate)
+      !this._adapter.sameMonthAndYear(_oldActiveDate, this._activeDate)
     ) {
       this._init();
-      if (this._adapter.isInNextMonth(oldActiveDate, this._activeDate)) {
+      if (this._adapter.isInNextMonth(_oldActiveDate, this._activeDate)) {
         this.calendarState('right');
       } else {
         this.calendarState('left');
@@ -130,6 +131,8 @@ export class MtxMonthView<D> implements AfterContentInit {
     this._selectedDate = this._getDateInCurrentMonth(this.selected);
   }
   private _selected!: D;
+
+  @Input({ transform: booleanAttribute }) nextOrPreviousManuallyClicked = false;
 
   ngAfterContentInit(): void {
     this._init();
@@ -217,31 +220,17 @@ export class MtxMonthView<D> implements AfterContentInit {
     this._calendarState = direction;
   }
 
-  /**
-   * Gets the index of the cell that should be highlighted in the month view.
-   * Used to highlight either the selected date or today's date in the calendar.
-   *
-   * Highlighting priority:
-   * 1. Currently selected date (if it's in the displayed month)
-   * 2. Today's date (if it's in the displayed month)
-   * 3. No highlight (-1) if neither date is in the current month
-   *
-   * @returns Zero-based index of the cell to highlight, or -1 if no cell should be highlighted
-   */
   protected _getActiveCell(): number {
     if (!this.activeDate || !this._adapter) {
       return -1;
     }
 
-    // Check if selected date is in current month - highlight it if so
-    if (this.selected && this._adapter.sameMonthAndYear(this.activeDate, this.selected)) {
-      return Math.max(0, this._adapter.getDate(this.selected) - 1);
+    if (!this.nextOrPreviousManuallyClicked && !this.selected) {
+      return Math.max(0, this._adapter.getDate(this.activeDate) - 1);
     }
 
-    // Otherwise highlight today's date if it's in the current month and not selected
-    const today = this._adapter.today();
-    if (!this.selected && this._adapter.sameMonthAndYear(this.activeDate, today)) {
-      return Math.max(0, this._adapter.getDate(today) - 1);
+    if (!this.nextOrPreviousManuallyClicked && this.selected) {
+      return Math.max(0, this._adapter.getDate(this.activeDate) - 1);
     }
 
     return -1;

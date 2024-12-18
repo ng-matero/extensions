@@ -131,6 +131,8 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   /** A portal containing the header component. */
   _calendarHeaderPortal!: Portal<any>;
 
+  _nextOrPreviousManuallyClicked = false;
+
   private _intlChanges: Subscription;
 
   private _clampedActiveDate!: D;
@@ -286,7 +288,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
   }
 
   get _dateButtonText(): string {
-    const selectedDate = this.selected || this._adapter.today();
+    const selectedDate = this.selected ?? this._activeDate;
     switch (this.type) {
       case 'month':
         return this._adapter.getMonthNames('long')[this._adapter.getMonth(selectedDate)];
@@ -390,12 +392,15 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
       this._onActiveDateChange(date);
       if (!this._adapter.sameDate(date, this.selected) || !this.preventSameDateTimeSelection) {
         this.selectedChange.emit(date);
+        this.selected = date;
       }
     } else {
       this.selectedChange.emit(date);
+      this.selected = date;
       this._activeDate = date;
       this.currentView = 'clock';
     }
+    this._nextOrPreviousManuallyClicked = false; // reset the flag
   }
 
   /** Handles month selection in the year view. */
@@ -537,6 +542,8 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
             this._activeDate,
             this.currentView === 'year' ? -1 : -yearsPerPage
           );
+
+    this._nextOrPreviousManuallyClicked = true;
   }
 
   /** Handles user clicks on the next button. */
@@ -548,6 +555,7 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
             this._activeDate,
             this.currentView === 'year' ? 1 : yearsPerPage
           );
+    this._nextOrPreviousManuallyClicked = true;
   }
 
   /** Whether the previous period button is enabled. */
@@ -609,6 +617,11 @@ export class MtxCalendar<D> implements AfterContentInit, OnDestroy {
 
   /** Handles keydown events on the calendar body when calendar is in month view. */
   private _handleCalendarBodyKeydownInMonthView(event: KeyboardEvent): void {
+    // if we manually switched month, we don't want to handle any key events (like angular material does)
+    if (this._nextOrPreviousManuallyClicked) {
+      return;
+    }
+
     switch (event.keyCode) {
       case LEFT_ARROW:
         this._activeDate = this._adapter.addCalendarDays(this._activeDate, -1);
