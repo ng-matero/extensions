@@ -1,26 +1,14 @@
 @use '@angular/material' as mat;
-@use '../definition' as mtx;
-@use '../color-api-backwards-compatibility';
-@use '../all-theme';
-
-$config: (
-  color: (
-    theme-type: light,
-    primary: mat.$rose-palette,
-    tertiary: mat.$red-palette,
-  ),
-  density: (
-    scale: 0,
-  )
-);
-
-$theme: mat.private-deep-merge-all(
-  mat.define-theme($config),
-  mtx.define-theme($config),
-);
+@use '../../../core/tokens/m3-system';
 
 html {
-  @include all-theme.all-component-themes($theme);
+  @include m3-system.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$rose-palette,
+      tertiary: mat.$red-palette,
+    ),
+    typography: Roboto,
+    density: 0,
+  ));
 }
-
-@include color-api-backwards-compatibility.color-variants-backwards-compatibility($theme);
