@@ -141,6 +141,12 @@ export interface MtxTooltipDefaultOptions {
 
   /** Disables the ability for the user to interact with the tooltip element. */
   disableTooltipInteractivity?: boolean;
+
+  /**
+   * Default classes to be applied to the tooltip. These default classes will not be applied if
+   * `tooltipClass` is defined directly on the tooltip element, as it will override the default.
+   */
+  tooltipClass?: string | string[];
 }
 
 /**
@@ -187,6 +193,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   private _ariaDescriber = inject(AriaDescriber);
   private _focusMonitor = inject(FocusMonitor);
   protected _dir = inject(Directionality);
+  private _injector = inject(Injector);
   private _defaultOptions = inject<MtxTooltipDefaultOptions>(MTX_TOOLTIP_DEFAULT_OPTIONS, {
     optional: true,
   });
@@ -206,6 +213,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   private _viewportMargin = 8;
   private _currentPosition!: TooltipPosition;
   private readonly _cssClassPrefix: string = 'mtx-mdc';
+  private _ariaDescriptionPending: boolean = false;
 
   /** Allows the user to define the position of the tooltip relative to the parent element */
   @Input('mtxTooltipPosition')
@@ -247,13 +255,19 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   }
 
   set disabled(value: BooleanInput) {
-    this._disabled = coerceBooleanProperty(value);
+    const isDisabled = coerceBooleanProperty(value);
 
-    // If tooltip is disabled, hide immediately.
-    if (this._disabled) {
-      this.hide(0);
-    } else {
-      this._setupPointerEnterEventsIfNeeded();
+    if (this._disabled !== isDisabled) {
+      this._disabled = isDisabled;
+
+      // If tooltip is disabled, hide immediately.
+      if (isDisabled) {
+        this.hide(0);
+      } else {
+        this._setupPointerEnterEventsIfNeeded();
+      }
+
+      this._syncAriaDescription(this.message);
     }
   }
 
@@ -308,11 +322,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   }
 
   set message(value: string | TemplateRef<any>) {
-    this._ariaDescriber.removeDescription(
-      this._elementRef.nativeElement,
-      this._message as string,
-      'tooltip'
-    );
+    const oldMessage = this._message;
 
     // TODO: If the message is a TemplateRef, it's hard to support a11y.
     // If the message is not a string (e.g. number), convert it to a string and trim it.
@@ -325,21 +335,11 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
     } else {
       this._setupPointerEnterEventsIfNeeded();
       this._updateTooltipMessage();
-      this._ngZone.runOutsideAngular(() => {
-        // The `AriaDescriber` has some functionality that avoids adding a description if it's the
-        // same as the `aria-label` of an element, however we can't know whether the tooltip trigger
-        // has a data-bound `aria-label` or when it'll be set for the first time. We can avoid the
-        // issue by deferring the description by a tick so Angular has time to set the `aria-label`.
-        Promise.resolve().then(() => {
-          this._ariaDescriber.describe(
-            this._elementRef.nativeElement,
-            this.message as string,
-            'tooltip'
-          );
-        });
-      });
     }
+
+    this._syncAriaDescription(oldMessage);
   }
+
   private _message: string | TemplateRef<any> = '';
 
   /** Context to be passed to the tooltip. */
@@ -375,33 +375,35 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   private _document = inject(DOCUMENT);
 
   /** Timer started at the last `touchstart` event. */
-  private _touchstartTimeout!: ReturnType<typeof setTimeout>;
+  private _touchstartTimeout: null | ReturnType<typeof setTimeout> = null;
 
   /** Emits when the component is destroyed. */
   private readonly _destroyed = new Subject<void>();
-
-  private _injector = inject(Injector);
 
   /** Inserted by Angular inject() migration for backwards compatibility */
   constructor(...args: unknown[]);
 
   constructor() {
-    const _defaultOptions = this._defaultOptions;
+    const defaultOptions = this._defaultOptions;
 
-    if (_defaultOptions) {
-      this._showDelay = _defaultOptions.showDelay;
-      this._hideDelay = _defaultOptions.hideDelay;
+    if (defaultOptions) {
+      this._showDelay = defaultOptions.showDelay;
+      this._hideDelay = defaultOptions.hideDelay;
 
-      if (_defaultOptions.position) {
-        this.position = _defaultOptions.position;
+      if (defaultOptions.position) {
+        this.position = defaultOptions.position;
       }
 
-      if (_defaultOptions.positionAtOrigin) {
-        this.positionAtOrigin = _defaultOptions.positionAtOrigin;
+      if (defaultOptions.positionAtOrigin) {
+        this.positionAtOrigin = defaultOptions.positionAtOrigin;
       }
 
-      if (_defaultOptions.touchGestures) {
-        this.touchGestures = _defaultOptions.touchGestures;
+      if (defaultOptions.touchGestures) {
+        this.touchGestures = defaultOptions.touchGestures;
+      }
+
+      if (defaultOptions.tooltipClass) {
+        this.tooltipClass = defaultOptions.tooltipClass;
       }
     }
 
@@ -438,7 +440,10 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   ngOnDestroy() {
     const nativeElement = this._elementRef.nativeElement;
 
-    clearTimeout(this._touchstartTimeout);
+    // Optimization: Do not call clearTimeout unless there is an active timer.
+    if (this._touchstartTimeout) {
+      clearTimeout(this._touchstartTimeout);
+    }
 
     if (this._overlayRef) {
       this._overlayRef.dispose();
@@ -454,7 +459,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
     this._destroyed.next();
     this._destroyed.complete();
 
-    this._ariaDescriber.removeDescription(nativeElement, this.message as string, 'tooltip');
+    this._ariaDescriber.removeDescription(nativeElement, this.message.toString(), 'tooltip');
     this._focusMonitor.stopMonitoring(nativeElement);
   }
 
@@ -815,13 +820,15 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
           // Note that it's important that we don't `preventDefault` here,
           // because it can prevent click events from firing on the element.
           this._setupPointerExitEventsIfNeeded();
-          clearTimeout(this._touchstartTimeout);
+          if (this._touchstartTimeout) {
+            clearTimeout(this._touchstartTimeout);
+          }
 
           const DEFAULT_LONGPRESS_DELAY = 500;
-          this._touchstartTimeout = setTimeout(
-            () => this.show(undefined, origin),
-            this._defaultOptions?.touchLongPressShowDelay ?? DEFAULT_LONGPRESS_DELAY
-          );
+          this._touchstartTimeout = setTimeout(() => {
+            this._touchstartTimeout = null;
+            this.show(undefined, origin);
+          }, this._defaultOptions?.touchLongPressShowDelay ?? DEFAULT_LONGPRESS_DELAY);
         },
       ]);
     }
@@ -852,7 +859,9 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
     } else if (this.touchGestures !== 'off') {
       this._disableNativeGesturesIfNecessary();
       const touchendListener = () => {
-        clearTimeout(this._touchstartTimeout);
+        if (this._touchstartTimeout) {
+          clearTimeout(this._touchstartTimeout);
+        }
         this.hide(this._defaultOptions?.touchendHideDelay);
       };
 
@@ -917,6 +926,38 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
       (style as any).webkitTapHighlightColor = 'transparent';
     }
   }
+
+  /** Updates the tooltip's ARIA description based on it current state. */
+  private _syncAriaDescription(oldMessage: string | TemplateRef<any>): void {
+    if (this._ariaDescriptionPending) {
+      return;
+    }
+
+    this._ariaDescriptionPending = true;
+    this._ariaDescriber.removeDescription(
+      this._elementRef.nativeElement,
+      oldMessage.toString(),
+      'tooltip'
+    );
+
+    this._ngZone.runOutsideAngular(() => {
+      // The `AriaDescriber` has some functionality that avoids adding a description if it's the
+      // same as the `aria-label` of an element, however we can't know whether the tooltip trigger
+      // has a data-bound `aria-label` or when it'll be set for the first time. We can avoid the
+      // issue by deferring the description by a tick so Angular has time to set the `aria-label`.
+      Promise.resolve().then(() => {
+        this._ariaDescriptionPending = false;
+
+        if (this.message && !this.disabled) {
+          this._ariaDescriber.describe(
+            this._elementRef.nativeElement,
+            this.message.toString(),
+            'tooltip'
+          );
+        }
+      });
+    });
+  }
 }
 
 /**
@@ -930,9 +971,6 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
-    // Forces the element to have a layout in IE and Edge. This fixes issues where the element
-    // won't be rendered if the animations are disabled or there is no web animations polyfill.
-    '[style.zoom]': 'isVisible() ? 1 : null',
     '(mouseleave)': '_handleMouseLeave($event)',
     'aria-hidden': 'true',
   },
