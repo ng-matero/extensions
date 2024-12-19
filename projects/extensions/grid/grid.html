@@ -50,8 +50,11 @@
     <div #tableContainer class="mat-table-container" [class.mat-table-with-data]="!_hasNoResult">
       @if (!columnResizable) {
         <table mat-table
-          [class]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
-          [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
+          [class.mat-table-hover]="rowHover"
+          [class.mat-table-striped]="rowStriped"
+          [class.mat-table-expandable]="expandable"
+          [dataSource]="dataSource"
+          [multiTemplateDataRows]="expandable"
           matSort
           [matSortActive]="sortActive"
           [matSortDirection]="sortDirection"
@@ -92,7 +95,10 @@
                 [class]="col | colClass"
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
-                [style]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
+                [style.width]="col.width"
+                [style.min-width]="col.width"
+                [style.left]="col.left"
+                [style.right]="col.right">
                 <div class="mat-header-cell-inner">
                   @if (headerTemplate | isTemplateRef) {
                     <ng-template [ngTemplateOutlet]="$any(headerTemplate)"
@@ -131,7 +137,10 @@
                 [class]="col | colClass: row: rowChangeRecord: rowChangeRecord?.currentValue"
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
-                [style]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}"
+                [style.width]="col.width"
+                [style.min-width]="col.width"
+                [style.left]="col.left"
+                [style.right]="col.right"
                 mtx-grid-selectable-cell [cellSelectable]="cellSelectable"
                 (cellSelectedChange)="_selectCell($event, row, col)">
                 @if (cellTemplate | isTemplateRef) {
@@ -170,7 +179,10 @@
               <td mat-footer-cell *matFooterCellDef
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
-                [style]="{'width': col.width, 'min-width': col.width, 'left': col.left, 'right': col.right}">
+                [style.width]="col.width"
+                [style.min-width]="col.width"
+                [style.left]="col.left"
+                [style.right]="col.right">
                 @if (col.showExpand) {
                   <span class="mtx-grid-expansion-placeholder"></span>
                 }
@@ -230,8 +242,11 @@
         <!-- TODO: Use flexbox-based mat-table -->
         <table mat-table
           columnResize
-          [class]="{'mat-table-hover': rowHover, 'mat-table-striped': rowStriped, 'mat-table-expandable': expandable}"
-          [dataSource]="dataSource" [multiTemplateDataRows]="expandable"
+          [class.mat-table-hover]="rowHover"
+          [class.mat-table-striped]="rowStriped"
+          [class.mat-table-expandable]="expandable"
+          [dataSource]="dataSource"
+          [multiTemplateDataRows]="expandable"
           matSort
           [matSortActive]="sortActive"
           [matSortDirection]="sortDirection"
@@ -272,9 +287,12 @@
                 [class]="col | colClass"
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
-                [style]="{'width': col.width, 'left': col.left, 'right': col.right}"
+                [style.width]="col.width"
+                [style.left]="col.left"
+                [style.right]="col.right"
                 [resizable]="col.resizable"
-                [matResizableMinWidthPx]="col.minWidth" [matResizableMaxWidthPx]="col.maxWidth">
+                [matResizableMinWidthPx]="col.minWidth"
+                [matResizableMaxWidthPx]="col.maxWidth">
                 <div class="mat-header-cell-inner">
                   @if (headerTemplate | isTemplateRef) {
                     <ng-template [ngTemplateOutlet]="$any(headerTemplate)"
@@ -313,7 +331,9 @@
                 [class]="col | colClass: row: rowChangeRecord :rowChangeRecord?.currentValue"
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
-                [style]="{'width': col.width, 'left': col.left, 'right': col.right}"
+                [style.width]="col.width"
+                [style.left]="col.left"
+                [style.right]="col.right"
                 mtx-grid-selectable-cell [cellSelectable]="cellSelectable"
                 (cellSelectedChange)="_selectCell($event, row, col)">
                 @if (cellTemplate | isTemplateRef) {
@@ -352,7 +372,9 @@
               <td mat-footer-cell *matFooterCellDef
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
-                [style]="{'width': col.width, 'left': col.left, 'right': col.right}">
+                [style.width]="col.width"
+                [style.left]="col.left"
+                [style.right]="col.right">
                 @if (col.showExpand) {
                   <span class="mtx-grid-expansion-placeholder"></span>
                 }
