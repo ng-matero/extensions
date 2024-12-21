@@ -11,13 +11,13 @@ const defaults: MtxDialogData = {
   description: '',
   buttons: [
     {
-      color: 'warn',
-      text: 'OK',
-      focusInitial: true,
+      text: 'Cancel',
       onClick: () => {},
     },
     {
-      text: 'CLOSE',
+      color: 'warn',
+      text: 'OK',
+      focusInitial: true,
       onClick: () => {},
     },
   ],
@@ -77,13 +77,14 @@ export class MtxDialog {
       description,
       buttons: [
         {
-          color: 'warn',
-          text: 'OK',
-          onClick: () => onOk(),
+          text: 'Cancel',
+          onClick: () => onClose(),
         },
         {
-          text: 'CLOSE',
-          onClick: () => onClose(),
+          color: 'warn',
+          text: 'OK',
+          focusInitial: true,
+          onClick: () => onOk(),
         },
       ],
     });
