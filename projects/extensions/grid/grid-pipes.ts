@@ -3,7 +3,7 @@ import { isObservable } from 'rxjs';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumn, MtxGridColumnButton, MtxGridRowClassFormatter } from './interfaces';
 
-@Pipe({ name: 'colClass', standalone: true })
+@Pipe({ name: 'colClass' })
 export class MtxGridColClassPipe implements PipeTransform {
   transform(
     colDef: MtxGridColumn,
@@ -20,7 +20,7 @@ export class MtxGridColClassPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'rowClass', standalone: true })
+@Pipe({ name: 'rowClass' })
 export class MtxGridRowClassPipe implements PipeTransform {
   transform(
     rowData: Record<string, any>,
@@ -41,7 +41,7 @@ export class MtxGridRowClassPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'cellActions', standalone: true })
+@Pipe({ name: 'cellActions' })
 export class MtxGridCellActionsPipe implements PipeTransform {
   transform(
     btns?: MtxGridColumnButton[] | ((rowData: any) => MtxGridColumnButton[]),
@@ -58,7 +58,7 @@ export class MtxGridCellActionsPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'cellActionTooltip', standalone: true })
+@Pipe({ name: 'cellActionTooltip' })
 export class MtxGridCellActionTooltipPipe implements PipeTransform {
   transform(btn: MtxGridColumnButton) {
     if (typeof btn.tooltip === 'string' || isObservable(btn.tooltip)) {
@@ -69,7 +69,7 @@ export class MtxGridCellActionTooltipPipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'cellActionBadge', standalone: true })
+@Pipe({ name: 'cellActionBadge' })
 export class MtxGridCellActionBadgePipe implements PipeTransform {
   transform(btn: MtxGridColumnButton) {
     if (typeof btn.badge === 'number' || typeof btn.badge === 'string' || isObservable(btn.badge)) {
@@ -80,7 +80,7 @@ export class MtxGridCellActionBadgePipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'cellActionDisable', standalone: true })
+@Pipe({ name: 'cellActionDisable' })
 export class MtxGridCellActionDisablePipe implements PipeTransform {
   transform(
     btn: MtxGridColumnButton,
@@ -98,7 +98,7 @@ export class MtxGridCellActionDisablePipe implements PipeTransform {
   }
 }
 
-@Pipe({ name: 'cellSummary', standalone: true })
+@Pipe({ name: 'cellSummary' })
 export class MtxGridCellSummaryPipe implements PipeTransform {
   private utils = inject(MtxGridUtils);
 

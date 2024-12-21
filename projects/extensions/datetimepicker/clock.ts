@@ -56,7 +56,6 @@ export interface ClockCell {
   exportAs: 'mtxClock',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
 })
 export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   private _elementRef = inject(ElementRef);

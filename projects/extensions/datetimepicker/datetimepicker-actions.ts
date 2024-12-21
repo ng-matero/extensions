@@ -16,7 +16,6 @@ import { MtxDatetimepicker } from './datetimepicker';
 @Directive({
   selector: '[mtxDatetimepickerApply]',
   host: { '(click)': '_datetimepicker._selectManually()' },
-  standalone: true,
 })
 export class MtxDatetimepickerApply<D> {
   _datetimepicker = inject<MtxDatetimepicker<D>>(MtxDatetimepicker);
@@ -30,7 +29,6 @@ export class MtxDatetimepickerApply<D> {
 @Directive({
   selector: '[mtxDatetimepickerCancel]',
   host: { '(click)': '_datetimepicker.close()' },
-  standalone: true,
 })
 export class MtxDatetimepickerCancel<D> {
   _datetimepicker = inject<MtxDatetimepicker<D>>(MtxDatetimepicker);
@@ -44,7 +42,6 @@ export class MtxDatetimepickerCancel<D> {
 @Directive({
   selector: '[mtxDatetimepickerClear]',
   host: { '(click)': '_datetimepicker._clearSelected()' },
-  standalone: true,
 })
 export class MtxDatetimepickerClear<D> {
   _datetimepicker = inject<MtxDatetimepicker<D>>(MtxDatetimepicker);
@@ -67,7 +64,6 @@ export class MtxDatetimepickerClear<D> {
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
 })
 export class MtxDatetimepickerActions<D> implements AfterViewInit, OnDestroy {
   private _datetimepicker = inject<MtxDatetimepicker<D>>(MtxDatetimepicker);

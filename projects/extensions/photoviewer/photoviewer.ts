@@ -13,7 +13,6 @@ import PhotoViewer from 'photoviewer';
 @Directive({
   selector: '[mtxPhotoviewer]',
   exportAs: 'mtxPhotoviewer',
-  standalone: true,
 })
 export class MtxPhotoviewer implements OnInit, OnDestroy {
   private _elementRef = inject<ElementRef<Element>>(ElementRef);

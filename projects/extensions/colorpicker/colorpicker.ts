@@ -123,7 +123,6 @@ export class MtxColorpickerContent implements OnDestroy {
   exportAs: 'mtxColorpicker',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  standalone: true,
 })
 export class MtxColorpicker implements OnChanges, OnDestroy {
   private _overlay = inject(Overlay);

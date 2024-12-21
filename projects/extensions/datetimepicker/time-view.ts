@@ -39,7 +39,6 @@ function pad(num: NumberInput, size: number) {
     '(focus)': 'focus($event)',
   },
   exportAs: 'mtxTimeInput',
-  standalone: true,
 })
 export class MtxTimeInput implements OnDestroy {
   private element = inject(ElementRef);

@@ -181,7 +181,6 @@ const MAX_WIDTH = 200;
     'class': 'mtx-mdc-tooltip-trigger',
     '[class.mtx-mdc-tooltip-disabled]': 'disabled',
   },
-  standalone: true,
 })
 export class MtxTooltip implements OnDestroy, AfterViewInit {
   private _overlay = inject(Overlay);

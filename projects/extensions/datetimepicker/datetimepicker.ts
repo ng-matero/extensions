@@ -206,7 +206,6 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterViewInit, OnDes
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
   preserveWhitespaces: false,
-  standalone: true,
 })
 export class MtxDatetimepicker<D> implements OnDestroy {
   private _overlay = inject(Overlay);

@@ -73,7 +73,6 @@ export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsv';
     '(keydown)': '_onKeydown($event)',
   },
   exportAs: 'mtxColorpickerInput',
-  standalone: true,
 })
 export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit, OnDestroy {
   private _elementRef = inject<ElementRef<HTMLInputElement>>(ElementRef);

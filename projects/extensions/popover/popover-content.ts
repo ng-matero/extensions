@@ -103,6 +103,5 @@ export abstract class _MtxPopoverContentBase implements OnDestroy {
 @Directive({
   selector: 'ng-template[mtxPopoverContent]',
   providers: [{ provide: MTX_POPOVER_CONTENT, useExisting: MtxPopoverContent }],
-  standalone: true,
 })
 export class MtxPopoverContent extends _MtxPopoverContentBase {}

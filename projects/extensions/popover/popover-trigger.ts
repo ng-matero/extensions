@@ -79,7 +79,6 @@ export const MTX_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
     '(mousedown)': '_handleMousedown($event)',
     '(keydown)': '_handleKeydown($event)',
   },
-  standalone: true,
 })
 export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   private _overlay = inject(Overlay);

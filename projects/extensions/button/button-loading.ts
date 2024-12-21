@@ -21,7 +21,6 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
              [mat-icon-button][loading],
              [mat-fab][loading],
              [mat-mini-fab][loading]`,
-  standalone: true,
 })
 export class MatButtonLoading implements OnChanges {
   private _elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);

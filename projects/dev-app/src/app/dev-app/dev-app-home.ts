@@ -6,6 +6,5 @@ import { Component } from '@angular/core';
     <p>Welcome to the development demos for Angular Material!</p>
     <p>Open the sidenav to select a demo.</p>
   `,
-  standalone: true,
 })
 export class DevAppHome {}

@@ -87,7 +87,6 @@ export const MTX_SPLIT_DEFAULT_OPTIONS = new InjectionToken<MtxSplitDefaultOptio
   changeDetection: ChangeDetectionStrategy.OnPush,
   styleUrl: './split.scss',
   templateUrl: './split.html',
-  standalone: true,
 })
 export class MtxSplit implements AfterViewInit, OnDestroy {
   private ngZone = inject(NgZone);

@@ -16,8 +16,9 @@ import { Subject } from 'rxjs';
   selector: 'mtx-option',
   exportAs: 'mtxOption',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  template: `<ng-content></ng-content>`,
-  standalone: true,
+  template: `
+    <ng-content></ng-content>
+  `,
 })
 export class MtxOption implements OnChanges, AfterViewChecked, OnDestroy {
   elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

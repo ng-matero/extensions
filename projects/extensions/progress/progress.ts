@@ -20,7 +20,6 @@ export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'dang
   styleUrl: './progress.scss',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
 })
 export class MtxProgress {
   /** The progress's type. Can be `default`, `info`, `success`, `warning` or `danger`. */

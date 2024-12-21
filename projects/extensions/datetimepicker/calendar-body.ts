@@ -47,7 +47,6 @@ export class MtxCalendarCell {
   exportAs: 'mtxCalendarBody',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
 })
 export class MtxCalendarBody implements OnChanges {
   private _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);

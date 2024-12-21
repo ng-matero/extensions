@@ -16,7 +16,6 @@ import { getInputPositiveNumber } from './utils';
 @Directive({
   selector: 'mtx-split-pane, [mtx-split-pane]',
   exportAs: 'mtxSplitPane',
-  standalone: true,
 })
 export class MtxSplitPane implements OnInit, OnDestroy {
   private ngZone = inject(NgZone);

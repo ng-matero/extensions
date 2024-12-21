@@ -24,7 +24,6 @@ import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 /** Can be used to override the icon of a `mtxDatetimepickerToggle`. */
 @Directive({
   selector: '[mtxDatetimepickerToggleIcon]',
-  standalone: true,
 })
 export class MtxDatetimepickerToggleIcon {}
 

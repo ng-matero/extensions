@@ -2,7 +2,6 @@ import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } fro
 
 @Directive({
   selector: '[mtx-grid-selectable-cell]',
-  standalone: true,
 })
 export class MtxGridSelectableCell {
   ctrlKeyPressed = false;

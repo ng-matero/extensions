@@ -23,7 +23,6 @@ import { MtxColorpicker } from './colorpicker';
 /** Can be used to override the icon of a `mtxColorpickerToggle`. */
 @Directive({
   selector: '[mtxColorpickerToggleIcon]',
-  standalone: true,
 })
 export class MtxColorpickerToggleIcon {}
 

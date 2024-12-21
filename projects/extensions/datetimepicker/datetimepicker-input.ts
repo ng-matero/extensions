@@ -84,7 +84,6 @@ export class MtxDatetimepickerInputEvent<D> {
     '(keydown)': '_onKeydown($event)',
   },
   exportAs: 'mtxDatetimepickerInput',
-  standalone: true,
 })
 export class MtxDatetimepickerInput<D>
   implements AfterContentInit, ControlValueAccessor, OnDestroy, Validator
