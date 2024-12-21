@@ -474,10 +474,11 @@ export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDes
     } else {
       this._AMPM = 'AM';
     }
+
     if (
       this.actionsPortal &&
+      this.currentView === 'clock' &&
       this._selected &&
-      this._clockView === 'hour' &&
       !this._adapter.sameHour(date, this._selected)
     ) {
       this.selectedChange.emit(date);

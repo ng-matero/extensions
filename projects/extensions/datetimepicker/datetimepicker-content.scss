@@ -70,6 +70,21 @@ $touch-max-height: 850px;
   .mtx-datetimepicker-content-container-with-actions .mtx-calendar.mtx-calendar-with-time-input {
     height: $non-touch-calendar-with-time-input-portrait-height;
   }
+
+  // Note that this selector doesn't technically have to be nested, but we want the slightly
+  // higher specificity, or it can be overridden based on the CSS insertion order (see #21043).
+  .mtx-datetimepicker-close-button {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 8px;
+
+    // Hide the button while the overlay is animating, because it's rendered
+    // outside of it and it seems to cause scrollbars in some cases (see #21493).
+    .ng-animating & {
+      display: none;
+    }
+  }
 }
 
 .mtx-datetimepicker-content-container {

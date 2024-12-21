@@ -40,12 +40,15 @@ import { ThemePalette } from '@angular/material/core';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
+import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { MatButton } from '@angular/material/button';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxCalendar } from './calendar';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
+import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 import { MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
@@ -107,7 +110,7 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [MtxCalendar, CdkPortalOutlet],
+  imports: [CdkTrapFocus, MtxCalendar, CdkPortalOutlet, MatButton],
 })
 export class MtxDatetimepickerContent<D> implements OnInit, AfterViewInit, OnDestroy {
   private _changeDetectorRef = inject(ChangeDetectorRef);
@@ -139,10 +142,20 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterViewInit, OnDes
   /** The view of the calendar. */
   view: MtxCalendarView = 'month';
 
+  /** Text for the close button. */
+  _closeButtonText: string = '';
+
+  /** Whether the close button currently has focus. */
+  _closeButtonFocused: boolean = false;
+
   /** Inserted by Angular inject() migration for backwards compatibility */
   constructor(...args: unknown[]);
 
-  constructor() {}
+  constructor() {
+    const intl = inject(MtxDatetimepickerIntl);
+
+    this._closeButtonText = intl.closeCalendarLabel;
+  }
 
   _viewChanged(view: MtxCalendarView): void {
     this.view = view;
