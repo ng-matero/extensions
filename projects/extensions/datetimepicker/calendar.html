@@ -124,7 +124,7 @@
         </mtx-multi-year-view>
       }
       @default {
-        <mtx-time
+        <mtx-time-view
           (_userSelection)="_userSelected()"
           (activeDateChange)="_onActiveDateChange($event)"
           (selectedChange)="_timeSelected($event)"
@@ -142,7 +142,7 @@
           [autoFocus]="timeInputAutoFocus"
           [timeInput]="timeInput"
           [preventSameDateTimeSelection]="preventSameDateTimeSelection">
-        </mtx-time>
+        </mtx-time-view>
       }
     }
   </div>

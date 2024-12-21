@@ -9,7 +9,7 @@ $time-ampm-width: 40px;
 
 $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token-slots();
 
-.mtx-time {
+.mtx-time-view {
   display: block;
   outline: none;
   user-select: none;

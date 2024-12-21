@@ -17,7 +17,7 @@ import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { MtxDatetimepickerToggle, MtxDatetimepickerToggleIcon } from './datetimepicker-toggle';
 import { MtxMonthView } from './month-view';
 import { MtxMultiYearView } from './multi-year-view';
-import { MtxTime, MtxTimeInput } from './time';
+import { MtxTimeView, MtxTimeInput } from './time-view';
 import { MtxYearView } from './year-view';
 import {
   MtxDatetimepickerActions,
@@ -36,7 +36,7 @@ import {
     MtxCalendar,
     MtxCalendarBody,
     MtxClock,
-    MtxTime,
+    MtxTimeView,
     MtxTimeInput,
     MtxDatetimepicker,
     MtxDatetimepickerToggle,
@@ -55,7 +55,7 @@ import {
     MtxCalendar,
     MtxCalendarBody,
     MtxClock,
-    MtxTime,
+    MtxTimeView,
     MtxDatetimepicker,
     MtxDatetimepickerToggle,
     MtxDatetimepickerToggleIcon,

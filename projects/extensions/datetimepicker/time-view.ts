@@ -224,12 +224,12 @@ export class MtxTimeInput implements OnDestroy {
 }
 
 @Component({
-  selector: 'mtx-time',
-  templateUrl: 'time.html',
-  styleUrl: 'time.scss',
+  selector: 'mtx-time-view',
+  templateUrl: 'time-view.html',
+  styleUrl: 'time-view.scss',
   exportAs: 'mtxTime',
   host: {
-    'class': 'mtx-time',
+    'class': 'mtx-time-view',
     'tabindex': '0',
     '(keydown)': '_handleCalendarBodyKeydown($event)',
   },
@@ -237,7 +237,7 @@ export class MtxTimeInput implements OnDestroy {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MatButton, MtxClock, MtxTimeInput],
 })
-export class MtxTime<D> implements OnChanges, OnDestroy {
+export class MtxTimeView<D> implements OnChanges, OnDestroy {
   private _adapter = inject<DatetimeAdapter<D>>(DatetimeAdapter);
   private _changeDetectorRef = inject(ChangeDetectorRef);
   private _elementRef = inject(ElementRef);

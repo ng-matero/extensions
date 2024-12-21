@@ -42,7 +42,7 @@ import {
   isSameMultiYearView,
   yearsPerPage,
 } from './multi-year-view';
-import { MtxTime } from './time';
+import { MtxTimeView } from './time-view';
 import { MtxYearView } from './year-view';
 
 /**
@@ -69,7 +69,7 @@ import { MtxYearView } from './year-view';
     MtxMonthView,
     MtxYearView,
     MtxMultiYearView,
-    MtxTime,
+    MtxTimeView,
   ],
 })
 export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDestroy {
@@ -121,7 +121,7 @@ export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDes
   @ViewChild(MtxMultiYearView) multiYearView!: MtxMultiYearView<D>;
 
   /** Reference to the current time view component. */
-  @ViewChild(MtxTime) timeView!: MtxTime<D>;
+  @ViewChild(MtxTimeView) timeView!: MtxTimeView<D>;
 
   _AMPM!: MtxAMPM;
 
