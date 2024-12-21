@@ -60,6 +60,12 @@ export class MtxCalendarBody implements OnChanges {
   /** The cells to display in the table. */
   @Input() rows!: MtxCalendarCell[][];
 
+  /**
+   * The aspect ratio (width / height) to use for the cells in the table. This aspect ratio will be
+   * maintained even as the table resizes.
+   */
+  @Input() cellAspectRatio: number = 1;
+
   /** The value in the table that corresponds to today. */
   @Input() todayValue!: number;
 
@@ -82,17 +88,25 @@ export class MtxCalendarBody implements OnChanges {
   @Output() selectedValueChange = new EventEmitter<number>();
 
   /** The number of blank cells to put at the beginning for the first row. */
-  get _firstRowOffset(): number {
-    return this.rows && this.rows.length && this.rows[0].length
-      ? this.numCols - this.rows[0].length
-      : 0;
-  }
+  _firstRowOffset!: number;
+
+  /** Padding for the individual date cells. */
+  _cellPadding!: string;
+
+  /** Width of an individual cell. */
+  _cellWidth!: string;
 
   _cellClicked(cell: MtxCalendarCell): void {
     if (!this.allowDisabledSelection && !cell.enabled) {
       return;
     }
     this.selectedValueChange.emit(cell.value);
+  }
+
+  _emitActiveDateChange(cell: MtxCalendarCell, event: FocusEvent): void {
+    if (cell.enabled) {
+      // this.activeDateChange.emit({ value: cell.value, event });
+    }
   }
 
   _isActiveCell(rowIndex: number, colIndex: number): boolean {
@@ -113,7 +127,22 @@ export class MtxCalendarBody implements OnChanges {
    */
   _trackRow = (row: MtxCalendarCell[]) => row;
 
-  ngOnChanges(changes: SimpleChanges) {}
+  ngOnChanges(changes: SimpleChanges) {
+    const columnChanges = changes['numCols'];
+    const { rows, numCols } = this;
+
+    if (changes['rows'] || columnChanges) {
+      this._firstRowOffset = rows && rows.length && rows[0].length ? numCols - rows[0].length : 0;
+    }
+
+    if (changes['cellAspectRatio'] || columnChanges || !this._cellPadding) {
+      this._cellPadding = `${(50 * this.cellAspectRatio) / numCols}%`;
+    }
+
+    if (columnChanges || !this._cellWidth) {
+      this._cellWidth = `${100 / numCols}%`;
+    }
+  }
 
   _focusActiveCell(movePreview = true) {
     afterNextRender(

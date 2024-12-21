@@ -1,8 +1,15 @@
 @use 'sass:math';
+@use '@angular/cdk';
+
+@use '../core/style/button-common';
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
 
 $calendar-body-label-padding-start: 5% !default;
+// We don't want the label to jump around when we switch between month and year views, so we use
+// the same amount of padding regardless of the number of columns. We align the header label with
+// the one third mark of the first cell, this was chosen somewhat arbitrarily to make it look
+// roughly like the mock. Half way is too far since the cell text is center aligned.
 $calendar-body-label-side-padding: math.div(33%, 7) !default;
 $calendar-body-cell-min-size: 32px !default;
 $calendar-body-cell-size: math.div(100%, 7) !default;
@@ -48,7 +55,8 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   height: 0;
   line-height: 0;
   text-align: left;
-  padding: $calendar-body-cell-padding $calendar-body-label-side-padding;
+  padding-left: $calendar-body-label-side-padding;
+  padding-right: $calendar-body-label-side-padding;
 
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(font-size, calendar-body-label-text-size);
@@ -61,15 +69,31 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   }
 }
 
-.mtx-calendar-body-cell {
+.mtx-calendar-body-cell-container {
   position: relative;
-  width: $calendar-body-cell-size;
   height: 0;
   line-height: 0;
-  padding: $calendar-body-cell-padding 0;
+}
+
+.mtx-calendar-body-cell {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: none;
   text-align: center;
   outline: none;
-  cursor: pointer;
+  font-family: inherit;
+  margin: 0;
+
+  // Needs to be repeated here in order to override the user agent styles.
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(font-family, calendar-text-font);
+    @include token-utils.create-token-slot(font-size, calendar-text-size);
+  }
+
+  @include button-common.reset();
 }
 
 .mtx-calendar-body-disabled {
@@ -85,30 +109,54 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
       @include token-utils.create-token-slot(border-color, calendar-date-disabled-state-text-color);
     }
   }
+
+  // Fade out the disabled cells so that they can be distinguished from the enabled ones. Note that
+  // ideally we'd use `color: GreyText` here which is what the browser uses for disabled buttons,
+  // but we can't because Firefox doesn't recognize it.
+  @include cdk.high-contrast {
+    opacity: 0.5;
+  }
 }
 
 .mtx-calendar-body-cell-content {
-  position: absolute;
   top: $calendar-body-cell-content-margin;
   left: $calendar-body-cell-content-margin;
+  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   width: $calendar-body-cell-content-size;
   height: $calendar-body-cell-content-size;
-  border: $calendar-body-cell-content-border-width solid transparent;
+
+  // Prevents text being off-center on Android.
+  line-height: 1;
+  border: $calendar-body-cell-content-border-width;
+  border-style: solid;
+
+  // Choosing a value clearly larger than the height ensures we get the correct capsule shape.
   border-radius: $calendar-body-cell-radius;
 
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(color, calendar-date-text-color);
     @include token-utils.create-token-slot(border-color, calendar-date-outline-color);
   }
+
+  // Increase specificity because focus indicator styles are part of the `mat-core` mixin and can
+  // potentially overwrite the absolute position of the container.
+  &.mat-focus-indicator {
+    position: absolute;
+  }
+
+  @include cdk.high-contrast {
+    border: none;
+  }
 }
 
 .mtx-calendar-body-active {
   @include token-utils.use-tokens($_tokens...) {
-    .cdk-keyboard-focused &, .cdk-program-focused & {
+    .cdk-keyboard-focused &,
+    .cdk-program-focused & {
       @include _highlighted-cell(calendar-date-focus-state-background-color);
     }
   }

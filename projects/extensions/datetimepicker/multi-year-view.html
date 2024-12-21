@@ -2,9 +2,10 @@
 <table class="mtx-calendar-table" role="grid">
   <thead class="mtx-calendar-table-header"></thead>
   <tbody mtx-calendar-body
-         [todayValue]="_todayYear"
          [rows]="_years"
+         [todayValue]="_todayYear"
          [numCols]="4"
+         [cellAspectRatio]="4 / 7"
          [activeCell]="_getActiveCell()"
          [allowDisabledSelection]="true"
          [selectedValue]="_selectedYear!"
