@@ -30,6 +30,15 @@ export const CLOCK_TICK_RADIUS = 7.0833;
 /** Possible views for datetimepicker clock. */
 export type MtxClockView = 'hour' | 'minute';
 
+export interface ClockCell {
+  value: number;
+  displayValue: string;
+  enabled: boolean;
+  top: number;
+  left: number;
+  fontSize?: string;
+}
+
 /**
  * A clock that is used as part of the datetimepicker.
  * @docs-private
@@ -81,20 +90,15 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   /** Whether the clock is in hour view. */
   _hourView: boolean = true;
 
-  _hours: any[] = [];
+  _hours: ClockCell[] = [];
 
-  _minutes: any[] = [];
+  _minutes: ClockCell[] = [];
 
   _selectedHour!: number;
 
   _selectedMinute!: number;
 
   private _timeChanged = false;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 
   /**
    * The date to display in this clock view.
@@ -254,7 +258,7 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
     const hourNames = this._adapter.getHourNames();
     const minuteNames = this._adapter.getMinuteNames();
     if (this.twelvehour) {
-      const hours = [];
+      const hours: ClockCell[] = [];
       for (let i = 0; i < hourNames.length; i++) {
         const radian = (i / 6) * Math.PI;
         const radius = CLOCK_OUTER_RADIUS;

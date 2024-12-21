@@ -33,6 +33,8 @@ import { MtxDatetimepickerType } from './datetimepicker-types';
 
 const DAYS_PER_WEEK = 7;
 
+let uniqueIdCounter = 0;
+
 /**
  * An internal component used to display a single month in the datetimepicker.
  * @docs-private
@@ -83,7 +85,7 @@ export class MtxMonthView<D> implements AfterContentInit {
   _todayDate!: number | null;
 
   /** The names of the weekdays. */
-  _weekdays: { long: string; narrow: string }[] = [];
+  _weekdays: { long: string; narrow: string; id: number }[] = [];
 
   _calendarState!: string;
 
@@ -194,7 +196,7 @@ export class MtxMonthView<D> implements AfterContentInit {
 
     // Rotate the labels for days of the week based on the configured first day of the week.
     const weekdays = longWeekdays.map((long, i) => {
-      return { long, narrow: narrowWeekdays[i] };
+      return { long, narrow: narrowWeekdays[i], id: uniqueIdCounter++ };
     });
     this._weekdays = weekdays.slice(firstDayOfWeek).concat(weekdays.slice(0, firstDayOfWeek));
   }

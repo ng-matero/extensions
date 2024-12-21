@@ -14,11 +14,15 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 
+let uniqueIdCounter = 0;
+
 /**
  * An internal class that represents the data corresponding to a single calendar cell.
  * @docs-private
  */
 export class MtxCalendarCell {
+  readonly id = uniqueIdCounter++;
+
   constructor(
     public value: number,
     public displayValue: string,
@@ -102,6 +106,13 @@ export class MtxCalendarBody implements OnChanges {
 
     return cellNumber === this.activeCell;
   }
+
+  /**
+   * Tracking function for rows based on their identity. Ideally we would use some sort of
+   * key on the row, but that would require a breaking change for the `rows` input. We don't
+   * use the built-in identity tracking, because it logs warnings.
+   */
+  _trackRow = (row: MtxCalendarCell[]) => row;
 
   ngOnChanges(changes: SimpleChanges) {}
 

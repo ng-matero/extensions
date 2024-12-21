@@ -9,7 +9,7 @@
 }
 
 <!-- Create the first row separately so we can include a special spacer cell. -->
-@for (row of rows; track row; let rowIndex = $index) {
+@for (row of rows; track _trackRow(row); let rowIndex = $index) {
   <tr role="row">
     <!--
       We mark this cell as aria-hidden so it doesn't get read out as one of the days in the week.
@@ -20,7 +20,7 @@
         {{ _firstRowOffset >= labelMinRequiredCells ? label : '' }}
       </td>
     }
-    @for (item of row; track item; let colIndex = $index) {
+    @for (item of row; track item.id; let colIndex = $index) {
       <td
         role="gridcell"
         class="mtx-calendar-body-cell"
