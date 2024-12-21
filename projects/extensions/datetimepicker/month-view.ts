@@ -30,6 +30,7 @@ import { MtxCalendarBody, MtxCalendarCell } from './calendar-body';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerType } from './datetimepicker-types';
+import { Directionality } from '@angular/cdk/bidi';
 
 const DAYS_PER_WEEK = 7;
 
@@ -50,6 +51,7 @@ let uniqueIdCounter = 0;
 })
 export class MtxMonthView<D> implements AfterContentInit {
   _adapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
+  private _dir = inject(Directionality, { optional: true });
   private _dateFormats = inject<MtxDatetimeFormats>(MTX_DATETIME_FORMATS, { optional: true })!;
 
   @Input() type: MtxDatetimepickerType = 'date';
@@ -247,13 +249,14 @@ export class MtxMonthView<D> implements AfterContentInit {
     // navigation should skip over disabled dates, and if so, how to implement that efficiently.
 
     const oldActiveDate = this._activeDate;
+    const isRtl = this._isRtl();
 
     switch (event.keyCode) {
       case LEFT_ARROW:
-        this.activeDate = this._adapter.addCalendarDays(this._activeDate, -1);
+        this.activeDate = this._adapter.addCalendarDays(this._activeDate, isRtl ? 1 : -1);
         break;
       case RIGHT_ARROW:
-        this.activeDate = this._adapter.addCalendarDays(this._activeDate, 1);
+        this.activeDate = this._adapter.addCalendarDays(this._activeDate, isRtl ? -1 : 1);
         break;
       case UP_ARROW:
         this.activeDate = this._adapter.addCalendarDays(this._activeDate, -7);
@@ -310,5 +313,10 @@ export class MtxMonthView<D> implements AfterContentInit {
   /** Focuses the active cell after the microtask queue is empty. */
   _focusActiveCell(movePreview?: boolean) {
     this._mtxCalendarBody._focusActiveCell(movePreview);
+  }
+
+  /** Determines whether the user has the RTL layout direction. */
+  private _isRtl() {
+    return this._dir && this._dir.value === 'rtl';
   }
 }

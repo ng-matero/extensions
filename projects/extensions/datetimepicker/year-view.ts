@@ -29,6 +29,7 @@ import {
 import { MtxCalendarBody, MtxCalendarCell } from './calendar-body';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerType } from './datetimepicker-types';
+import { Directionality } from '@angular/cdk/bidi';
 
 /**
  * An internal component used to display a single year in the datetimepicker.
@@ -44,6 +45,7 @@ import { MtxDatetimepickerType } from './datetimepicker-types';
 })
 export class MtxYearView<D> implements AfterContentInit {
   _adapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
+  private _dir = inject(Directionality, { optional: true });
   private _dateFormats = inject<MtxDatetimeFormats>(MTX_DATETIME_FORMATS, { optional: true })!;
 
   @Input() type: MtxDatetimepickerType = 'date';
@@ -235,13 +237,14 @@ export class MtxYearView<D> implements AfterContentInit {
     // navigation should skip over disabled dates, and if so, how to implement that efficiently.
 
     const oldActiveDate = this._activeDate;
+    const isRtl = this._isRtl();
 
     switch (event.keyCode) {
       case LEFT_ARROW:
-        this.activeDate = this._adapter.addCalendarMonths(this._activeDate, -1);
+        this.activeDate = this._adapter.addCalendarMonths(this._activeDate, isRtl ? 1 : -1);
         break;
       case RIGHT_ARROW:
-        this.activeDate = this._adapter.addCalendarMonths(this._activeDate, 1);
+        this.activeDate = this._adapter.addCalendarMonths(this._activeDate, isRtl ? -1 : 1);
         break;
       case UP_ARROW:
         this.activeDate = this._adapter.addCalendarMonths(this._activeDate, -4);
@@ -288,5 +291,10 @@ export class MtxYearView<D> implements AfterContentInit {
   /** Focuses the active cell after the microtask queue is empty. */
   _focusActiveCell() {
     this._mtxCalendarBody._focusActiveCell();
+  }
+
+  /** Determines whether the user has the RTL layout direction. */
+  private _isRtl() {
+    return this._dir && this._dir.value === 'rtl';
   }
 }
