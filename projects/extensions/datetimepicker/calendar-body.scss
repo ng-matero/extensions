@@ -106,10 +106,11 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   }
 }
 
-// TODO: cdk-keyboard-focused, cdk-program-focused
 .mtx-calendar-body-active {
   @include token-utils.use-tokens($_tokens...) {
-    @include _highlighted-cell(calendar-date-focus-state-background-color);
+    .cdk-keyboard-focused &, .cdk-program-focused & {
+      @include _highlighted-cell(calendar-date-focus-state-background-color);
+    }
   }
 }
 

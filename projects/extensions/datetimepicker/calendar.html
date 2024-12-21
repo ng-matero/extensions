@@ -60,72 +60,70 @@
 
 <div class="mtx-calendar-content">
   @if (currentView === 'month' || currentView === 'year' || currentView === 'multi-year') {
-    <div class="mtx-month-content">
-      <div class="mtx-calendar-controls">
-        <button mat-icon-button type="button"
-          class="mtx-calendar-previous-button"
-          [class.disabled]="!_previousEnabled()"
-          [attr.aria-disabled]="!_previousEnabled()"
-          [attr.aria-label]="_prevButtonLabel"
-          (click)="_previousClicked()">
-          <svg width="24" height="24" viewBox="0 0 24 24">
-            <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
-          </svg>
-        </button>
-        <div class="mtx-calendar-period-button"
-          [@slideCalendar]="_calendarState"
-          (@slideCalendar.done)="_calendarStateDone()">
-          <strong>{{ _yearPeriodText }}</strong>
-        </div>
-        <button mat-icon-button type="button"
-          class="mtx-calendar-next-button"
-          [class.disabled]="!_nextEnabled()"
-          [attr.aria-disabled]="!_nextEnabled()"
-          [attr.aria-label]="_nextButtonLabel"
-          (click)="_nextClicked()">
-          <svg width="24" height="24" viewBox="0 0 24 24">
-            <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
-          </svg>
-        </button>
+    <div class="mtx-calendar-controls">
+      <button mat-icon-button type="button"
+        class="mtx-calendar-previous-button"
+        [class.disabled]="!_previousEnabled()"
+        [attr.aria-disabled]="!_previousEnabled()"
+        [attr.aria-label]="_prevButtonLabel"
+        (click)="_previousClicked()">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+        </svg>
+      </button>
+      <div class="mtx-calendar-period-button"
+        [@slideCalendar]="_calendarState"
+        (@slideCalendar.done)="_calendarStateDone()">
+        <strong>{{ _yearPeriodText }}</strong>
       </div>
+      <button mat-icon-button type="button"
+        class="mtx-calendar-next-button"
+        [class.disabled]="!_nextEnabled()"
+        [attr.aria-disabled]="!_nextEnabled()"
+        [attr.aria-label]="_nextButtonLabel"
+        (click)="_nextClicked()">
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+        </svg>
+      </button>
     </div>
   }
 
-  @switch (currentView) {
-    @case ('month') {
-      <mtx-month-view
-        (_userSelection)="_userSelected()"
-        (selectedChange)="_dateSelected($event)"
-        [activeDate]="_activeDate"
-        [dateFilter]="_dateFilterForViews"
-        [selected]="selected!"
-        [type]="type">
-      </mtx-month-view>
-    }
-    @case ('year') {
-      <mtx-year-view
-        (_userSelection)="_userSelected()"
-        (selectedChange)="_monthSelected($event)"
-        [activeDate]="_activeDate"
-        [dateFilter]="_dateFilterForViews"
-        [selected]="selected!"
-        [type]="type">
-      </mtx-year-view>
-    }
-    @case ('multi-year') {
-      <mtx-multi-year-view
-        (_userSelection)="_userSelected()"
-        (selectedChange)="_yearSelected($event)"
-        [activeDate]="_activeDate"
-        [dateFilter]="_dateFilterForViews"
-        [maxDate]="maxDate"
-        [minDate]="minDate"
-        [selected]="selected!"
-        [type]="type">
-      </mtx-multi-year-view>
-    }
-    @default {
-      @if (timeInput) {
+  <div class="mtx-calendar-view" cdkMonitorSubtreeFocus tabindex="-1">
+    @switch (currentView) {
+      @case ('month') {
+        <mtx-month-view
+          (_userSelection)="_userSelected()"
+          (selectedChange)="_dateSelected($event)"
+          [(activeDate)]="_activeDate"
+          [dateFilter]="_dateFilterForViews"
+          [selected]="selected"
+          [type]="type">
+        </mtx-month-view>
+      }
+      @case ('year') {
+        <mtx-year-view
+          (_userSelection)="_userSelected()"
+          (selectedChange)="_monthSelected($event)"
+          [(activeDate)]="_activeDate"
+          [dateFilter]="_dateFilterForViews"
+          [selected]="selected"
+          [type]="type">
+        </mtx-year-view>
+      }
+      @case ('multi-year') {
+        <mtx-multi-year-view
+          (_userSelection)="_userSelected()"
+          (selectedChange)="_yearSelected($event)"
+          [(activeDate)]="_activeDate"
+          [dateFilter]="_dateFilterForViews"
+          [maxDate]="maxDate"
+          [minDate]="minDate"
+          [selected]="selected"
+          [type]="type">
+        </mtx-multi-year-view>
+      }
+      @default {
         <mtx-time
           (_userSelection)="_userSelected()"
           (activeDateChange)="_onActiveDateChange($event)"
@@ -139,24 +137,13 @@
           [interval]="timeInterval"
           [maxDate]="maxDate"
           [minDate]="minDate"
-          [selected]="_activeDate"
+          [(selected)]="_activeDate"
           [actionsPortal]="actionsPortal"
-          [autoFocus]="timeInputAutoFocus">
+          [autoFocus]="timeInputAutoFocus"
+          [timeInput]="timeInput"
+          [preventSameDateTimeSelection]="preventSameDateTimeSelection">
         </mtx-time>
-      } @else {
-        <mtx-clock (_userSelection)="_userSelected()"
-          (activeDateChange)="_onActiveDateChange($event)"
-          (selectedChange)="_dialTimeSelected($event)"
-          [AMPM]="_AMPM"
-          [dateFilter]="dateFilter"
-          [interval]="timeInterval"
-          [maxDate]="maxDate"
-          [minDate]="minDate"
-          [selected]="_activeDate"
-          [startView]="_clockView"
-          [twelvehour]="twelvehour">
-        </mtx-clock>
       }
     }
-  }
+  </div>
 </div>

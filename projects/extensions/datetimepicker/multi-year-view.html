@@ -1,13 +1,13 @@
-﻿<table class="mtx-calendar-table" role="grid">
+﻿<!-- eslint-disable @angular-eslint/template/interactive-supports-focus -->
+<table class="mtx-calendar-table" role="grid">
   <thead class="mtx-calendar-table-header"></thead>
   <tbody mtx-calendar-body
-         (@slideCalendar.done)="_calendarStateDone()"
-         [@slideCalendar]="_calendarState"
          [todayValue]="_todayYear"
          [rows]="_years"
          [numCols]="4"
          [activeCell]="_getActiveCell()"
          [allowDisabledSelection]="true"
          [selectedValue]="_selectedYear!"
-         (selectedValueChange)="_yearSelected($event)"></tbody>
+         (selectedValueChange)="_yearSelected($event)"
+         (keydown)="_handleCalendarBodyKeydown($event)"></tbody>
 </table>

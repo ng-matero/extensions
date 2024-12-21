@@ -1,50 +1,53 @@
-<div class="mtx-time-input-wrapper">
-  <div class="mtx-time-input-inner">
-    <input class="mtx-time-input"
-      [class.mtx-time-input-active]="clockView === 'hour'"
-      [class.mtx-time-input-warning]="!hourInput.valid"
-      #hourInput="mtxTimeInput"
-      type="text"
-      inputmode="numeric"
-      maxlength="2"
-      [timeMin]="twelvehour ? 1 : 0"
-      [timeMax]="twelvehour ? 12 : 23"
-      [timeValue]="hour"
-      (timeValueChanged)="_handleHourInputChange($event)"
-      (focus)="_handleFocus('hour')" />
+@if (timeInput) {
+  <div class="mtx-time-input-wrapper">
+    <div class="mtx-time-input-inner">
+      <input class="mtx-time-input"
+        [class.mtx-time-input-active]="clockView === 'hour'"
+        [class.mtx-time-input-warning]="!hourInput.valid"
+        #hourInput="mtxTimeInput"
+        type="text"
+        inputmode="numeric"
+        maxlength="2"
+        [timeMin]="twelvehour ? 1 : 0"
+        [timeMax]="twelvehour ? 12 : 23"
+        [timeValue]="hour"
+        (timeValueChanged)="_handleHourInputChange($event)"
+        (focus)="_handleFocus('hour')" />
 
-    <div class="mtx-time-seperator">:</div>
+      <div class="mtx-time-seperator">:</div>
 
-    <input class="mtx-time-input"
-      [class.mtx-time-input-active]="clockView === 'minute'"
-      [class.mtx-time-input-warning]="!minuteInput.valid"
-      #minuteInput="mtxTimeInput"
-      type="text"
-      inputmode="numeric"
-      maxlength="2"
-      [timeMin]="0"
-      [timeMax]="59"
-      [timeValue]="minute"
-      (timeValueChanged)="_handleMinuteInputChange($event)"
-      [timeInterval]="interval"
-      (focus)="_handleFocus('minute')" />
+      <input class="mtx-time-input"
+        [class.mtx-time-input-active]="clockView === 'minute'"
+        [class.mtx-time-input-warning]="!minuteInput.valid"
+        #minuteInput="mtxTimeInput"
+        type="text"
+        inputmode="numeric"
+        maxlength="2"
+        [timeMin]="0"
+        [timeMax]="59"
+        [timeValue]="minute"
+        (timeValueChanged)="_handleMinuteInputChange($event)"
+        [timeInterval]="interval"
+        (focus)="_handleFocus('minute')" />
 
-    @if (twelvehour) {
-      <div class="mtx-time-ampm">
-        <button mat-button type="button" class="mtx-time-am"
-          [class.mtx-time-ampm-active]="AMPM === 'AM'" aria-label="AM"
-          (keydown)="$event.stopPropagation()"
-          (click)="ampmChange.emit('AM')">AM</button>
-        <button mat-button type="button" class="mtx-time-pm"
-          [class.mtx-time-ampm-active]="AMPM === 'PM'" aria-label="PM"
-          (keydown)="$event.stopPropagation()"
-          (click)="ampmChange.emit('PM')">PM</button>
-      </div>
-    }
+      @if (twelvehour) {
+        <div class="mtx-time-ampm">
+          <button mat-button type="button" class="mtx-time-am"
+            [class.mtx-time-ampm-active]="AMPM === 'AM'" aria-label="AM"
+            (keydown)="$event.stopPropagation()"
+            (click)="ampmChange.emit('AM')">AM</button>
+          <button mat-button type="button" class="mtx-time-pm"
+            [class.mtx-time-ampm-active]="AMPM === 'PM'" aria-label="PM"
+            (keydown)="$event.stopPropagation()"
+            (click)="ampmChange.emit('PM')">PM</button>
+        </div>
+      }
+    </div>
   </div>
-</div>
+}
 
-<mtx-clock (selectedChange)="_timeSelected($event)"
+<mtx-clock
+  (selectedChange)="_timeSelected($event)"
   (activeDateChange)="_onActiveDateChange($event)"
   (_userSelection)="_handleSelection()"
   [AMPM]="AMPM"
@@ -58,7 +61,7 @@
   [twelvehour]="twelvehour">
 </mtx-clock>
 
-@if (!actionsPortal) {
+@if (timeInput && !actionsPortal) {
   <div class="mtx-time-button-wrapper">
     <button class="mtx-time-cancel-button" mat-button type="button" (click)="_handleCancel()">
       {{ _datetimepickerIntl.cancelLabel }}

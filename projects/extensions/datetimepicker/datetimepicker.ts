@@ -17,8 +17,8 @@ import {
 } from '@angular/cdk/portal';
 import { DOCUMENT } from '@angular/common';
 import {
-  AfterContentInit,
   afterNextRender,
+  AfterViewInit,
   booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -109,7 +109,7 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MtxCalendar, CdkPortalOutlet],
 })
-export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, OnDestroy {
+export class MtxDatetimepickerContent<D> implements OnInit, AfterViewInit, OnDestroy {
   private _changeDetectorRef = inject(ChangeDetectorRef);
 
   @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
@@ -152,8 +152,8 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterContentInit, On
     this._animationState = this.datetimepicker.touchUi ? 'enter-dialog' : 'enter-dropdown';
   }
 
-  ngAfterContentInit() {
-    this._calendar._focusActiveCell();
+  ngAfterViewInit() {
+    this._calendar.focusActiveCell();
   }
 
   ngOnDestroy() {

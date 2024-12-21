@@ -1,9 +1,16 @@
 import {
+  afterNextRender,
   ChangeDetectionStrategy,
   Component,
+  ElementRef,
   EventEmitter,
+  inject,
+  Injector,
   Input,
+  NgZone,
+  OnChanges,
   Output,
+  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 
@@ -29,14 +36,21 @@ export class MtxCalendarCell {
   templateUrl: 'calendar-body.html',
   styleUrl: 'calendar-body.scss',
   host: {
-    class: 'mtx-calendar-body',
+    'class': 'mtx-calendar-body',
+    'role': 'grid',
+    'aria-readonly': 'true',
   },
   exportAs: 'mtxCalendarBody',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
 })
-export class MtxCalendarBody {
+export class MtxCalendarBody implements OnChanges {
+  private _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  private _ngZone = inject(NgZone);
+
+  private _injector = inject(Injector);
+
   /** The label for the table. (e.g. "Jan 2017"). */
   @Input() label!: string;
 
@@ -87,5 +101,24 @@ export class MtxCalendarBody {
     }
 
     return cellNumber === this.activeCell;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {}
+
+  _focusActiveCell(movePreview = true) {
+    afterNextRender(
+      () => {
+        setTimeout(() => {
+          const activeCell: HTMLElement | null = this._elementRef.nativeElement.querySelector(
+            '.mtx-calendar-body-active'
+          );
+
+          if (activeCell) {
+            activeCell.focus();
+          }
+        });
+      },
+      { injector: this._injector }
+    );
   }
 }

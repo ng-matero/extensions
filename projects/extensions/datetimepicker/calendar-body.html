@@ -32,7 +32,7 @@
         [attr.aria-label]="item.ariaLabel"
         [attr.aria-disabled]="!item.enabled || null"
         (click)="_cellClicked(item)">
-        <div class="mtx-calendar-body-cell-content"
+        <div class="mtx-calendar-body-cell-content mat-focus-indicator"
           [class.mtx-calendar-body-selected]="selectedValue === item.value"
           [class.mtx-calendar-body-today]="todayValue === item.value"
           [attr.aria-selected]="selectedValue === item.value">
