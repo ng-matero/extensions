@@ -81,7 +81,7 @@
       @if (sortable) {
         <div class="mtx-grid-column-menu-list"
           cdkDropList (cdkDropListDropped)="_handleDroped($event)">
-          @for (col of columns; track col) {
+          @for (col of columns; track col.field) {
             <div class="mtx-grid-column-menu-item"
               cdkDrag [cdkDragDisabled]="selectableChecked === 'show'? !col.show : col.hide">
               <svg class="mtx-grid-icon mtx-grid-column-drag-handle-icon" viewBox="0 0 24 24"
@@ -98,7 +98,7 @@
 
       @if (!sortable) {
         <div class="mtx-grid-column-menu-list">
-          @for (col of columns; track col) {
+          @for (col of columns; track col.field) {
             <div class="mtx-grid-column-menu-item">
               <ng-template [ngTemplateOutlet]="checkboxList"
                 [ngTemplateOutletContext]="{ $implicit: col }">

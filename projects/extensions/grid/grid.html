@@ -88,7 +88,7 @@
               <td mat-footer-cell *matFooterCellDef class="mtx-grid-checkbox-cell"></td>
             </ng-container>
           }
-          @for (col of columns; track col) {
+          @for (col of columns; track col.field) {
             <ng-container [matColumnDef]="col.field"
               [sticky]="col.pinned==='left'" [stickyEnd]="col.pinned==='right'">
               <th mat-header-cell *matHeaderCellDef
@@ -280,7 +280,7 @@
               <td mat-footer-cell *matFooterCellDef class="mtx-grid-checkbox-cell"></td>
             </ng-container>
           }
-          @for (col of columns; track col) {
+          @for (col of columns; track col.field) {
             <ng-container [matColumnDef]="col.field"
               [sticky]="col.pinned==='left'" [stickyEnd]="col.pinned==='right'">
               <th mat-header-cell *matHeaderCellDef
