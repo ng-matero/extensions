@@ -2,7 +2,12 @@
 
 <h2>Checkbox Group</h2>
 
-<mtx-checkbox-group [items]="foods" [(ngModel)]="selectedFoods" showSelectAll></mtx-checkbox-group>
+<mtx-checkbox-group
+  [items]="foods"
+  [trackBy]="trackBy"
+  [(ngModel)]="selectedFoods"
+  showSelectAll
+></mtx-checkbox-group>
 <p>{{ selectedFoods | json }}</p>
 
 <h2>Test touched</h2>

@@ -27,4 +27,8 @@ export class CheckboxGroupDemoComponent {
   cars = ['Ford', 'Chevrolet', 'Dodge'];
   f1 = new UntypedFormControl(['Chevrolet'], Validators.required);
   f2 = new UntypedFormControl(true, Validators.required);
+
+  trackBy = (index: number, item: MtxCheckboxGroupOption) => {
+    return item.value;
+  };
 }

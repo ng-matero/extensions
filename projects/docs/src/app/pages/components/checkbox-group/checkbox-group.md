@@ -17,6 +17,7 @@ Exported as: `mtxCheckboxGroup`
 | Name | Description |
 | :--- | :--- |
 | `@Input()`<br>`items: any[]` | Items array. |
+| `@Input()`<br>`trackBy: TrackByFunction<any>` | Tracking function that will be used to check the differences in data changes. Used similarly to ngFor trackBy function. Optimize row operations by identifying a row based on its data relative to the function to know if a row should be added/removed/moved. Accepts a function that takes two parameters, index and item. |
 | `@Input()`<br>`bindLabel: string` | Object property to use for label. Default is **`'label'`**. |
 | `@Input()`<br>`bindValue: string` | Object property to use for selected model. By default binds to whole object. Default is **`'value'`**. |
 | `@Input()`<br>`compareWith: (a: any, b: any) => boolean` | A function to compare the option values with the selected values. The first argument is a value from an option. The second is a value from the selection(model). A boolean should be returned. |
