@@ -552,8 +552,8 @@ export class MtxTimeView<D> implements OnChanges, OnDestroy {
 
   _dialTimeSelected(date: D): void {
     if (this.clockView === 'hour') {
+      this.clockView = 'minute';
       this._activeDate = date;
-      this._clockView = 'minute';
     }
     if (!this._adapter.sameDatetime(date, this.selected) || !this.preventSameDateTimeSelection) {
       this.selectedChange.emit(date);
@@ -569,6 +569,7 @@ export class MtxTimeView<D> implements OnChanges, OnDestroy {
     } else {
       this._dialTimeSelected(date);
     }
+    this.clockViewChange.emit(this.clockView);
   }
 
   _onActiveDateChange(date: D) {
