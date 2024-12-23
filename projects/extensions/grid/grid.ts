@@ -48,6 +48,7 @@ import {
   MatTableDataSource,
 } from '@angular/material/table';
 
+import { ColumnResize } from '@ng-matero/extensions/column-resize';
 import { MtxIsTemplateRefPipe, MtxToObservablePipe } from '@ng-matero/extensions/core';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
@@ -137,7 +138,8 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @ContentChildren(MatRowDef) rowDefs!: QueryList<MatRowDef<any>>;
   @ContentChildren(MatHeaderRowDef) headerRowDefs!: QueryList<MatHeaderRowDef>;
   @ContentChildren(MatFooterRow) footerRowDefs!: QueryList<MatFooterRowDef>;
-  @ViewChild('columnMenu') columnMenu!: MtxGridColumnMenu;
+  @ViewChild(ColumnResize) columnResize?: ColumnResize;
+  @ViewChild(MtxGridColumnMenu) columnMenu!: MtxGridColumnMenu;
   @ViewChild('tableContainer') tableContainer!: ElementRef<HTMLDivElement>;
 
   dataSource = new MatTableDataSource();

@@ -51,7 +51,7 @@ import {
   ],
 })
 export class MtxGridColumnMenu {
-  @ViewChild('menu', { static: true }) menuPanel!: MatMenu;
+  @ViewChild(MatMenu, { static: true }) menuPanel!: MatMenu;
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;
 
   @Input() columns: MtxGridColumn[] = [];
