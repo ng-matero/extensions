@@ -6,12 +6,12 @@ $calendar-padding: 8px;
 $non-touch-calendar-cell-size: 40px;
 $non-touch-calendar-portrait-width: $non-touch-calendar-cell-size * 7 + $calendar-padding * 2;
 $non-touch-calendar-portrait-height: 424px;
-$non-touch-calendar-landscape-width: 432px;
+$non-touch-calendar-landscape-width: 440px;
 $non-touch-calendar-landscape-height: 328px;
 $non-touch-calendar-with-time-input-portrait-height: 442px;
-$non-touch-calendar-with-time-input-actions-portrait-height: 490px;
+$non-touch-calendar-with-time-input-actions-portrait-height: 494px;
 $non-touch-calendar-with-time-input-landscape-height: 356px;
-$non-touch-calendar-with-time-input-actions-landscape-height: 404px;
+$non-touch-calendar-with-time-input-actions-landscape-height: 416px;
 
 // Ideally the calendar would have a constant aspect ratio, no matter its size, and we would base
 // these measurements off the aspect ratio. Unfortunately, the aspect ratio does change a little as

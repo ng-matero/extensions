@@ -76,8 +76,8 @@ $prefix: (mtx, datetimepicker);
     container-touch-shape: map.get($systems, md-sys-shape, corner-extra-large),
     selector-container-shape: map.get($systems, md-sys-shape, corner-small),
 
-    calendar-text-font: map.get($systems, md-sys-typescale, body-large-font),
-    calendar-text-size: map.get($systems, md-sys-typescale, body-large-size),
+    calendar-text-font: map.get($systems, md-sys-typescale, body-medium-font),
+    calendar-text-size: map.get($systems, md-sys-typescale, body-medium-size),
     calendar-body-label-text-size: map.get($systems, md-sys-typescale, title-small-size),
     calendar-body-label-text-weight: map.get($systems, md-sys-typescale, title-small-weight),
     calendar-period-button-text-size: map.get($systems, md-sys-typescale, title-small-size),
