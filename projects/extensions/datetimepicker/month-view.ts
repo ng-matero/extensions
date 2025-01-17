@@ -20,6 +20,7 @@ import {
   ViewChild,
   ViewEncapsulation,
   inject,
+  booleanAttribute,
 } from '@angular/core';
 import {
   DatetimeAdapter,
@@ -58,6 +59,9 @@ export class MtxMonthView<D> implements AfterContentInit {
 
   /** A function used to filter which dates are selectable. */
   @Input() dateFilter!: (date: D) => boolean;
+
+  /** Whether to show week numbers */
+  @Input({ transform: booleanAttribute }) weekNumbers = false;
 
   /** Emits when a new date is selected. */
   @Output() selectedChange = new EventEmitter<D>();
@@ -220,6 +224,18 @@ export class MtxMonthView<D> implements AfterContentInit {
         this._adapter.getHour(this.activeDate),
         this._adapter.getMinute(this.activeDate)
       );
+
+      if (this.weekNumbers) {
+        const firstDayOfWeek = this._adapter.getFirstDayOfWeek();
+        const weekNumber = this._adapter.getWeek(date, firstDayOfWeek);
+
+        if (cell === 0 || cell === this._firstWeekOffset) {
+          this._weeks[this._weeks.length - 1].push(
+            new MtxCalendarCell(weekNumber, weekNumber.toString(), '', false, true)
+          );
+        }
+      }
+
       const enabled = !this.dateFilter || this.dateFilter(date);
       const ariaLabel = this._adapter.format(date, this._dateFormats.display.dateA11yLabel);
       this._weeks[this._weeks.length - 1].push(

@@ -85,6 +85,9 @@ export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDes
   /** Whether the clock uses 12 hour format. */
   @Input({ transform: booleanAttribute }) twelvehour = false;
 
+  /** Whether to show week numbers in month view */
+  @Input({ transform: booleanAttribute }) weekNumbers = false;
+
   /** Whether the calendar should be started in month or year view. */
   @Input() startView: MtxCalendarView = 'month';
 

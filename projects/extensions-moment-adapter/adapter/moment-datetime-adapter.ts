@@ -81,6 +81,10 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     return super.sameMonthAndYear(nextMonth, endDate);
   }
 
+  getWeek(date: moment.Moment, firstDayOfWeek: number): number {
+    return super.clone(date).week();
+  }
+
   createDatetime(year: number, month: number, date: number, hour: number, minute: number): Moment {
     // Check for invalid month and date (except upper bound on date which we have to check after
     // creating the Date).

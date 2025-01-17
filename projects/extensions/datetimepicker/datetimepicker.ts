@@ -224,6 +224,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   /** Whether the clock uses 12 hour format. */
   @Input({ transform: booleanAttribute }) twelvehour = false;
 
+  /** Whether to show week numbers in month view */
+  @Input({ transform: booleanAttribute }) weekNumbers = false;
+
   /** The view that the calendar should start in. */
   @Input() startView: MtxCalendarView = 'month';
 

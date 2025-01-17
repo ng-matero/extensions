@@ -52,6 +52,10 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
     return super.sameMonthAndYear(nextMonth, endDate);
   }
 
+  getWeek(date: DateTime, firstDayOfWeek: number): number {
+    return date.localWeekNumber;
+  }
+
   createDatetime(year: number, month: number, day: number, hour: number, minute: number): DateTime {
     if (month < 0 || month > 11) {
       throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);

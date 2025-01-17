@@ -52,6 +52,37 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
     return this.sameMonthAndYear(nextMonth, endDate);
   }
 
+  getWeek(date: Date, firstDayOfWeek: number): number {
+    const target = new Date(date.getTime());
+
+    const yearStart = new Date(target.getFullYear(), 0, 1);
+
+    // Adjust the year start to the first occurrence of the specified first day of the week
+    const dayOfWeek = yearStart.getDay();
+    const diff = dayOfWeek - firstDayOfWeek;
+    const adjustedYearStart = new Date(yearStart.getTime());
+
+    if (diff > 0) {
+      adjustedYearStart.setDate(yearStart.getDate() + (7 - diff));
+    } else if (diff < 0) {
+      adjustedYearStart.setDate(yearStart.getDate() - diff);
+    }
+
+    // If the date is before the first week of the year,
+    // it belongs to the last week of the previous year
+    if (target < adjustedYearStart) {
+      const prevYearDate = new Date(target.getFullYear() - 1, 11, 31);
+      return this.getWeek(prevYearDate, firstDayOfWeek);
+    }
+
+    // Calculate the number of weeks
+    const timeDiff = target.getTime() - adjustedYearStart.getTime();
+    const daysDiff = Math.floor(timeDiff / (24 * 60 * 60 * 1000));
+    const weekNumber = Math.floor(daysDiff / 7) + 1;
+
+    return weekNumber;
+  }
+
   createDatetime(year: number, month: number, date: number, hour: number, minute: number): Date {
     // Check for invalid month and date (except upper bound on date which we have to check after
     // creating the Date).
