@@ -4,6 +4,7 @@ import { Direction } from '@angular/cdk/bidi';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ContentChild,
   ElementRef,
@@ -60,6 +61,7 @@ let popoverPanelUid = 0;
   imports: [CdkTrapFocus],
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
+  private _changeDetectorRef = inject(ChangeDetectorRef);
   private _elementRef = inject(ElementRef);
   private _unusedNgZone = inject(NgZone);
   private _defaultOptions = inject<MtxPopoverDefaultOptions>(MTX_POPOVER_DEFAULT_OPTIONS);
@@ -312,18 +314,23 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
    * folds out from the correct direction.
    */
   setPositionClasses(pos = this.position): void {
-    this._classList['mtx-popover-before-above'] = pos[0] === 'before' && pos[1] === 'above';
-    this._classList['mtx-popover-before-center'] = pos[0] === 'before' && pos[1] === 'center';
-    this._classList['mtx-popover-before-below'] = pos[0] === 'before' && pos[1] === 'below';
-    this._classList['mtx-popover-after-above'] = pos[0] === 'after' && pos[1] === 'above';
-    this._classList['mtx-popover-after-center'] = pos[0] === 'after' && pos[1] === 'center';
-    this._classList['mtx-popover-after-below'] = pos[0] === 'after' && pos[1] === 'below';
-    this._classList['mtx-popover-above-before'] = pos[0] === 'above' && pos[1] === 'before';
-    this._classList['mtx-popover-above-center'] = pos[0] === 'above' && pos[1] === 'center';
-    this._classList['mtx-popover-above-after'] = pos[0] === 'above' && pos[1] === 'after';
-    this._classList['mtx-popover-below-before'] = pos[0] === 'below' && pos[1] === 'before';
-    this._classList['mtx-popover-below-center'] = pos[0] === 'below' && pos[1] === 'center';
-    this._classList['mtx-popover-below-after'] = pos[0] === 'below' && pos[1] === 'after';
+    this._classList = {
+      ...this._classList,
+      ['mtx-popover-before-above']: pos[0] === 'before' && pos[1] === 'above',
+      ['mtx-popover-before-center']: pos[0] === 'before' && pos[1] === 'center',
+      ['mtx-popover-before-below']: pos[0] === 'before' && pos[1] === 'below',
+      ['mtx-popover-after-above']: pos[0] === 'after' && pos[1] === 'above',
+      ['mtx-popover-after-center']: pos[0] === 'after' && pos[1] === 'center',
+      ['mtx-popover-after-below']: pos[0] === 'after' && pos[1] === 'below',
+      ['mtx-popover-above-before']: pos[0] === 'above' && pos[1] === 'before',
+      ['mtx-popover-above-center']: pos[0] === 'above' && pos[1] === 'center',
+      ['mtx-popover-above-after']: pos[0] === 'above' && pos[1] === 'after',
+      ['mtx-popover-below-before']: pos[0] === 'below' && pos[1] === 'before',
+      ['mtx-popover-below-center']: pos[0] === 'below' && pos[1] === 'center',
+      ['mtx-popover-below-after']: pos[0] === 'below' && pos[1] === 'after',
+    };
+
+    this._changeDetectorRef.markForCheck();
   }
 
   /** Sets the popover-panel's elevation. */
