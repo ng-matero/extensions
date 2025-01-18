@@ -10,6 +10,8 @@ export abstract class DatetimeAdapter<D> extends DateAdapter<D> {
 
   abstract getFirstDateOfMonth(date: D): D;
 
+  abstract getWeek(date: D, firstDayOfWeek: number): number;
+
   abstract isInNextMonth(startDate: D, endDate: D): boolean;
 
   abstract getHourNames(): string[];

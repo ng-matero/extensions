@@ -75,6 +75,7 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
 
   themeColor: ThemePalette = 'primary';
   timeInputAutoFocus = true;
+  weekNumbers = false;
 
   type = 'moment';
 

@@ -9,6 +9,8 @@ import {
   getMinutes,
   isValid,
   startOfMonth,
+  getWeek,
+  Day,
 } from 'date-fns';
 
 function range<T>(length: number, valueFunction: (index: number) => T): T[] {
@@ -47,6 +49,10 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
   isInNextMonth(startDate: Date, endDate: Date): boolean {
     const nextMonth = this.getDateInNextMonth(startDate);
     return super.sameMonthAndYear(nextMonth, endDate);
+  }
+
+  getWeek(date: Date, weekStartsOn: number): number {
+    return getWeek(date, { weekStartsOn: weekStartsOn as Day });
   }
 
   createDatetime(year: number, month: number, day: number, hour: number, minute: number): Date {

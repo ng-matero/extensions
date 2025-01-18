@@ -27,7 +27,8 @@ export class MtxCalendarCell {
     public value: number,
     public displayValue: string,
     public ariaLabel: string,
-    public enabled: boolean
+    public enabled: boolean,
+    public headerCell: boolean = false
   ) {}
 }
 
