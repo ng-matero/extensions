@@ -15,6 +15,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
 import { provideMomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter';
 import {
+  MTX_DATETIMEPICKER_DEFAULT_OPTIONS,
+  MtxDatetimepickerDefaultOptions,
   MtxDatetimepickerFilterType,
   MtxDatetimepickerModule,
 } from '@ng-matero/extensions/datetimepicker';
@@ -66,6 +68,10 @@ const moment = _rollupMoment || _moment;
       },
       { useUtc: false }
     ),
+    {
+      provide: MTX_DATETIMEPICKER_DEFAULT_OPTIONS,
+      useValue: {} as MtxDatetimepickerDefaultOptions,
+    },
   ],
 })
 export class DatetimepickerDemoComponent implements OnInit, OnDestroy {

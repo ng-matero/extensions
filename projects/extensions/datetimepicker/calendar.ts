@@ -101,7 +101,7 @@ export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDes
   @Input({ transform: booleanAttribute }) preventSameDateTimeSelection = false;
 
   /** Input for custom header component */
-  @Input() headerComponent!: ComponentType<any>;
+  @Input() headerComponent?: ComponentType<any>;
 
   /** Input for action buttons. */
   @Input() actionsPortal: TemplatePortal | null = null;

@@ -29,6 +29,7 @@ import {
   InjectionToken,
   Injector,
   Input,
+  numberAttribute,
   OnDestroy,
   OnInit,
   Output,
@@ -84,6 +85,26 @@ export const MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   deps: [Overlay],
   useFactory: MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY,
 };
+
+export interface MtxDatetimepickerDefaultOptions {
+  mode?: MtxDatetimepickerMode;
+  type?: MtxDatetimepickerType;
+  startView?: MtxCalendarView;
+  multiYearSelector?: boolean;
+  showWeekNumbers?: boolean;
+  twelvehour?: boolean;
+  timeInterval?: number;
+  timeInput?: boolean;
+  timeInputAutoFocus?: boolean;
+  color?: ThemePalette;
+  touchUi?: boolean;
+  panelClass?: string | string[];
+  calendarHeaderComponent?: ComponentType<any>;
+}
+
+/** Injection token that can be used to specify default datetimepicker options. */
+export const MTX_DATETIMEPICKER_DEFAULT_OPTIONS =
+  new InjectionToken<MtxDatetimepickerDefaultOptions>('mtx-datetimepicker-default-options');
 
 /**
  * Component used as the content for the datetimepicker dialog and popup. We use this instead of
@@ -213,34 +234,43 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   private _scrollStrategy = inject(MTX_DATETIMEPICKER_SCROLL_STRATEGY);
   private _dateAdapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
   private _dir = inject(Directionality, { optional: true });
+  private _defaultOptions = inject<MtxDatetimepickerDefaultOptions>(
+    MTX_DATETIMEPICKER_DEFAULT_OPTIONS,
+    { optional: true }
+  );
 
   private _document = inject(DOCUMENT);
 
   private _injector = inject(Injector);
 
   /** Whether to show multi-year view. */
-  @Input({ transform: booleanAttribute }) multiYearSelector = false;
+  @Input({ transform: booleanAttribute })
+  multiYearSelector = this._defaultOptions?.multiYearSelector ?? false;
 
   /** Whether the clock uses 12 hour format. */
-  @Input({ transform: booleanAttribute }) twelvehour = false;
+  @Input({ transform: booleanAttribute })
+  twelvehour = this._defaultOptions?.twelvehour ?? false;
 
   /** Whether to show week numbers in month view */
-  @Input({ transform: booleanAttribute }) showWeekNumbers = false;
+  @Input({ transform: booleanAttribute })
+  showWeekNumbers = this._defaultOptions?.showWeekNumbers ?? false;
 
   /** The view that the calendar should start in. */
-  @Input() startView: MtxCalendarView = 'month';
+  @Input() startView: MtxCalendarView = this._defaultOptions?.startView ?? 'month';
 
   /** The display mode of datetimepicker. */
-  @Input() mode: MtxDatetimepickerMode = 'auto';
+  @Input() mode: MtxDatetimepickerMode = this._defaultOptions?.mode ?? 'auto';
 
   /** Step over minutes. */
-  @Input() timeInterval: number = 1;
+  @Input({ transform: numberAttribute })
+  timeInterval: number = this._defaultOptions?.timeInterval ?? 1;
 
   /** Prevent user to select same date time */
   @Input({ transform: booleanAttribute }) preventSameDateTimeSelection = false;
 
   /** Input for a custom header component */
-  @Input() calendarHeaderComponent!: ComponentType<any>;
+  @Input()
+  calendarHeaderComponent?: ComponentType<any> = this._defaultOptions?.calendarHeaderComponent;
 
   /**
    * Emits new selected date when selected date changes.
@@ -265,7 +295,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   set panelClass(value: string | string[]) {
     this._panelClass = coerceStringArray(value);
   }
-  private _panelClass!: string[];
+  private _panelClass: string[] = coerceStringArray(this._defaultOptions?.panelClass);
 
   /** Whether the calendar is open. */
   @Input({ transform: booleanAttribute })
@@ -291,7 +321,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   set color(value: ThemePalette) {
     this._color = value;
   }
-  private _color: ThemePalette;
+  private _color: ThemePalette = this._defaultOptions?.color;
 
   /** The input element this datetimepicker is associated with. */
   datetimepickerInput!: MtxDatetimepickerInput<D>;
@@ -350,22 +380,23 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   set type(value: MtxDatetimepickerType) {
     this._type = value || 'datetime';
   }
-  private _type: MtxDatetimepickerType = 'datetime';
+  private _type: MtxDatetimepickerType = this._defaultOptions?.type ?? 'datetime';
 
   /**
    * Whether the calendar UI is in touch mode. In touch mode the calendar opens in a dialog rather
    * than a popup and elements have more padding to allow for bigger touch targets.
    */
-  @Input({ transform: booleanAttribute }) touchUi = false;
+  @Input({ transform: booleanAttribute }) touchUi = this._defaultOptions?.touchUi ?? false;
 
   /**
    * Whether the calendar is in time mode. In time mode the calendar clock gets time input
    * elements rather then just clock. When `touchUi` is enabled this will be disabled.
    */
-  @Input({ transform: booleanAttribute }) timeInput = false;
+  @Input({ transform: booleanAttribute }) timeInput = this._defaultOptions?.timeInput ?? false;
 
   /** Whether the time input should be auto-focused after view init.  */
-  @Input({ transform: booleanAttribute }) timeInputAutoFocus = true;
+  @Input({ transform: booleanAttribute })
+  timeInputAutoFocus = this._defaultOptions?.timeInputAutoFocus ?? true;
 
   /** Whether the datetimepicker pop-up should be disabled. */
   @Input({ transform: booleanAttribute })
