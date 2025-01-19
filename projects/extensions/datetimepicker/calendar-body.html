@@ -18,14 +18,14 @@
 <!-- Create the first row separately so we can include a special spacer cell. -->
 @for (row of rows; track _trackRow(row); let rowIndex = $index) {
   <tr role="row">
-    @if (row.length && row[0].headerCell) {
-      @let item = row[0];
+    @if (row[0].isWeekNumber) {
       <th
-        class="mtx-calendar-body-label"
+        class="mtx-calendar-body-week-number"
         [style.paddingTop]="_cellPadding"
         [style.paddingBottom]="_cellPadding"
+        [attr.aria-label]="row[0].ariaLabel"
       >
-        {{ item.displayValue }}
+        {{ row[0].displayValue }}
       </th>
     }
 
@@ -51,7 +51,7 @@
       background.
     -->
     @for (item of row; track item.id; let colIndex = $index) {
-      @if (!item.headerCell) {
+      @if (!item.isWeekNumber) {
         <td
           role="gridcell"
           class="mtx-calendar-body-cell-container"
@@ -71,13 +71,13 @@
             [attr.aria-disabled]="!item.enabled || null"
             (click)="_cellClicked(item)"
           >
-          <span
-            class="mtx-calendar-body-cell-content mat-focus-indicator"
-            [class.mtx-calendar-body-selected]="selectedValue === item.value"
-            [class.mtx-calendar-body-today]="todayValue === item.value"
-          >
-            {{ item.displayValue }}
-          </span>
+            <span
+              class="mtx-calendar-body-cell-content mat-focus-indicator"
+              [class.mtx-calendar-body-selected]="selectedValue === item.value"
+              [class.mtx-calendar-body-today]="todayValue === item.value"
+            >
+              {{ item.displayValue }}
+            </span>
           </button>
         </td>
       }

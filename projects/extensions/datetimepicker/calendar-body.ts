@@ -28,7 +28,7 @@ export class MtxCalendarCell {
     public displayValue: string,
     public ariaLabel: string,
     public enabled: boolean,
-    public headerCell: boolean = false
+    public isWeekNumber?: boolean
   ) {}
 }
 

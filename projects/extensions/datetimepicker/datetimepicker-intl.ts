@@ -51,6 +51,11 @@ export class MtxDatetimepickerIntl {
   /** A label for the last date of a range of dates (used by screen readers). */
   endDateLabel = 'End date';
 
+  /** A label for the week numbers (used by screen readers). */
+  weekNumberLabel(number: number): string {
+    return `Week ${number}`;
+  }
+
   /** Formats a range of years (used for visuals). */
   formatYearRange(start: string, end: string): string {
     return `${start} \u2013 ${end}`;

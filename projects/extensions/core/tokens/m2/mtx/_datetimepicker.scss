@@ -82,6 +82,7 @@ $_today-fade-amount: .2;
   @return mat.private-merge-all($calendar-tokens, $toggle-tokens, (
     toggle-icon-color: $inactive-icon-color,
     calendar-body-label-text-color: $secondary-text-color,
+    calendar-body-week-number-text-color: $secondary-text-color,
     // calendar-period-button-icon-color: $inactive-icon-color,
     // calendar-navigation-button-icon-color: $inactive-icon-color,
     calendar-header-text-color: white,

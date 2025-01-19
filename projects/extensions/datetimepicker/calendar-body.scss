@@ -69,6 +69,16 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   }
 }
 
+.mtx-calendar-body-week-number {
+  height: 0;
+  line-height: 0;
+  font-weight: 400;
+
+  @include token-utils.use-tokens($_tokens...) {
+    @include token-utils.create-token-slot(color, calendar-body-week-number-text-color);
+  }
+}
+
 .mtx-calendar-body-cell-container {
   position: relative;
   height: 0;

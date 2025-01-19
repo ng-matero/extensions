@@ -1,3 +1,4 @@
+import { Directionality } from '@angular/cdk/bidi';
 import {
   DOWN_ARROW,
   END,
@@ -19,8 +20,8 @@ import {
   Output,
   ViewChild,
   ViewEncapsulation,
-  inject,
   booleanAttribute,
+  inject,
 } from '@angular/core';
 import {
   DatetimeAdapter,
@@ -30,8 +31,8 @@ import {
 import { MtxCalendarBody, MtxCalendarCell } from './calendar-body';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
+import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 import { MtxDatetimepickerType } from './datetimepicker-types';
-import { Directionality } from '@angular/cdk/bidi';
 
 const DAYS_PER_WEEK = 7;
 
@@ -54,6 +55,7 @@ export class MtxMonthView<D> implements AfterContentInit {
   _adapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
   private _dir = inject(Directionality, { optional: true });
   private _dateFormats = inject<MtxDatetimeFormats>(MTX_DATETIME_FORMATS, { optional: true })!;
+  private _intl = inject(MtxDatetimepickerIntl);
 
   @Input() type: MtxDatetimepickerType = 'date';
 
@@ -61,7 +63,7 @@ export class MtxMonthView<D> implements AfterContentInit {
   @Input() dateFilter!: (date: D) => boolean;
 
   /** Whether to show week numbers */
-  @Input({ transform: booleanAttribute }) weekNumbers = false;
+  @Input({ transform: booleanAttribute }) showWeekNumbers = false;
 
   /** Emits when a new date is selected. */
   @Output() selectedChange = new EventEmitter<D>();
@@ -225,15 +227,13 @@ export class MtxMonthView<D> implements AfterContentInit {
         this._adapter.getMinute(this.activeDate)
       );
 
-      if (this.weekNumbers) {
+      if (this.showWeekNumbers && (cell === 0 || i === 0)) {
         const firstDayOfWeek = this._adapter.getFirstDayOfWeek();
         const weekNumber = this._adapter.getWeek(date, firstDayOfWeek);
-
-        if (cell === 0 || cell === this._firstWeekOffset) {
-          this._weeks[this._weeks.length - 1].push(
-            new MtxCalendarCell(weekNumber, weekNumber.toString(), '', false, true)
-          );
-        }
+        const ariaLabel = this._intl.weekNumberLabel(weekNumber);
+        this._weeks[this._weeks.length - 1].push(
+          new MtxCalendarCell(weekNumber, `${weekNumber}`, ariaLabel, false, true)
+        );
       }
 
       const enabled = !this.dateFilter || this.dateFilter(date);

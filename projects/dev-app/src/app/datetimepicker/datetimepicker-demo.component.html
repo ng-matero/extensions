@@ -5,13 +5,18 @@
 </mat-radio-group>
 
 <mat-checkbox [(ngModel)]="timeInputAutoFocus">timeInputAutoFocus</mat-checkbox>
-<mat-checkbox [(ngModel)]="weekNumbers">weekNumbers</mat-checkbox>
+<mat-checkbox [(ngModel)]="showWeekNumbers">showWeekNumbers</mat-checkbox>
 
 <form [formGroup]="group">
   <mat-form-field [color]="themeColor">
     <mat-label>DateTime</mat-label>
     <mtx-datetimepicker-toggle [for]="datetimePicker" matSuffix />
-    <mtx-datetimepicker #datetimePicker startView="month" [timeInterval]="5" [weekNumbers]="weekNumbers" />
+    <mtx-datetimepicker
+      #datetimePicker
+      startView="month"
+      [timeInterval]="5"
+      [showWeekNumbers]="showWeekNumbers"
+    />
     <input
       [mtxDatetimepicker]="datetimePicker"
       [max]="tomorrow"
@@ -235,7 +240,13 @@
     <mat-label>TouchUi</mat-label>
     <input [mtxDatetimepicker]="touch" [min]="min" formControlName="touch" matInput required />
     <mtx-datetimepicker-toggle [for]="touch" matSuffix />
-    <mtx-datetimepicker #touch mode="portrait" [timeInterval]="5" [touchUi]="true" [weekNumbers]="weekNumbers" />
+    <mtx-datetimepicker
+      #touch
+      mode="portrait"
+      [timeInterval]="5"
+      [touchUi]="true"
+      [showWeekNumbers]="showWeekNumbers"
+    />
     @if (group.get('touch')?.errors?.required) {
       <mat-error>required</mat-error>
     }
@@ -277,7 +288,7 @@
       type="datetime"
       [timeInput]="true"
       [timeInputAutoFocus]="timeInputAutoFocus"
-      [weekNumbers]="weekNumbers"
+      [showWeekNumbers]="showWeekNumbers"
     >
       <mtx-datetimepicker-actions>
         <button mat-button mtxDatetimepickerClear>Clear</button>

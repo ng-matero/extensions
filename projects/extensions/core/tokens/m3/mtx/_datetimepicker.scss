@@ -32,6 +32,7 @@ $prefix: (mtx, datetimepicker);
     toggle-active-state-icon-color: map.get($systems, md-sys-color, on-surface-variant),
     toggle-icon-color: map.get($systems, md-sys-color, on-surface-variant),
     calendar-body-label-text-color: map.get($systems, md-sys-color, on-surface),
+    calendar-body-week-number-text-color: map.get($systems, md-sys-color, secondary),
     calendar-header-text-color: map.get($systems, md-sys-color, on-surface-variant),
     calendar-header-divider-color: map.get($systems, md-sys-color, outline-variant),
     calendar-table-header-text-color: map.get($systems, md-sys-color, on-surface),
