@@ -29,14 +29,14 @@
   >
     Components
   </a>
-  <a
-    mat-button
-    class="docs-navbar-hide-small docs-button"
-    routerLink="guides"
-    routerLinkActive="docs-navbar-header-item-selected"
-  >
-    Guides
+  <a mat-button [matMenuTriggerFor]="menu" class="docs-navbar-hide-small docs-button">
+    Acrodata Components
   </a>
+  <mat-menu #menu="matMenu">
+    <a mat-menu-item href="https://github.com/acrodata/gui" target="_blank">GUI</a>
+    <a mat-menu-item href="https://github.com/acrodata/code-editor" target="_blank">Code Editor</a>
+    <a mat-menu-item href="https://github.com/acrodata/watermark" target="_blank">Watermark</a>
+  </mat-menu>
 
   <div class="flex-spacer"></div>
 
@@ -68,7 +68,7 @@
 </nav>
 <nav class="docs-navbar docs-navbar-show-small" aria-label="Section Nav Bar">
   <a mat-button class="docs-navbar-link" routerLink="components">Components</a>
-  <a mat-button class="docs-navbar-link" routerLink="guides">Guides</a>
+  <a mat-button [matMenuTriggerFor]="menu" class="docs-navbar-link">Acrodata Components</a>
 </nav>
 
 <ng-template #githubIcon>

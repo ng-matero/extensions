@@ -1,7 +1,7 @@
-import { Component, ViewEncapsulation, ElementRef, inject } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
-import { AppThemes, themeClass } from './shared';
+import { Component, ElementRef, inject, ViewEncapsulation } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AppThemes, themeClass } from './shared';
 import { Navbar } from './shared/navbar/navbar';
 
 @Component({
@@ -15,18 +15,17 @@ export class AppComponent {
   private _element = inject<ElementRef<HTMLElement>>(ElementRef);
   private _overlayContainer = inject(OverlayContainer);
   private _appThemes = inject(AppThemes);
+  private _htmlElement = document.querySelector('html')!;
 
   constructor() {
     this._appThemes.change.subscribe((themeSelect: themeClass) => {
       this._appThemes.themes
         .filter(theme => theme !== themeSelect)
         .forEach(theme => {
-          this._element.nativeElement.classList.remove(theme);
-          this._overlayContainer.getContainerElement().classList.remove(theme);
+          this._htmlElement.classList.remove(theme);
         });
 
-      this._element.nativeElement.classList.add(themeSelect);
-      this._overlayContainer.getContainerElement().classList.add(themeSelect);
+      this._htmlElement.classList.add(themeSelect);
     });
   }
 }

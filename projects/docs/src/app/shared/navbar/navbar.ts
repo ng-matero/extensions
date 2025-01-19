@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { NgProgressbar } from 'ngx-progressbar';
@@ -24,6 +25,7 @@ import { AppThemes } from '../themes';
     MatButtonModule,
     MatTooltipModule,
     MatIconModule,
+    MatMenuModule,
     AppLogo,
     NgTemplateOutlet,
     AsyncPipe,
