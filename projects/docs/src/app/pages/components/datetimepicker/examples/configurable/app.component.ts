@@ -64,6 +64,7 @@ export class AppComponent {
   timeInputAutoFocus = true;
   customHeader!: any;
   actionButtons = false;
+  showWeekNumbers = false;
 
   datetime = '';
 

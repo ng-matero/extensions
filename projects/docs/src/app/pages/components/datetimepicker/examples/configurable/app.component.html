@@ -47,6 +47,13 @@
 </section>
 
 <section>
+  <label for="">TimeInterval:</label>
+  <mat-slider min="1" max="30" discrete>
+    <input matSliderThumb [(ngModel)]="timeInterval" />
+  </mat-slider>
+</section>
+
+<section>
   <mat-checkbox (change)="showCustomHeader($event)">Custom Header</mat-checkbox>
 </section>
 
@@ -55,10 +62,7 @@
 </section>
 
 <section>
-  <label for="">TimeInterval:</label>
-  <mat-slider min="1" max="30" discrete>
-    <input matSliderThumb [(ngModel)]="timeInterval" />
-  </mat-slider>
+  <mat-checkbox [(ngModel)]="showWeekNumbers">Show Week Numbers</mat-checkbox>
 </section>
 
 <section>
@@ -81,6 +85,7 @@
     [touchUi]="touchUi"
     [timeInput]="timeInput"
     [timeInputAutoFocus]="timeInputAutoFocus"
+    [showWeekNumbers]="showWeekNumbers"
   >
     @if (actionButtons) {
       <mtx-datetimepicker-actions>

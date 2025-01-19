@@ -76,6 +76,7 @@ Exported as: `mtxCalendar`
 | `@Input()`<br>`startView: MtxCalendarView` | The calendar started view. Default is **`'month'`**. |
 | `@Input()`<br>`timeInput: boolean` | Whether to show the time input in time mode. When the `touchUi` is enabled it will be disabled. Default is **`false`**. |
 | `@Input()`<br>`timeInpuAutoFocus: boolean` | Whether the time input should be auto-focused after view init. Default is **`true`**. |
+| `@Input()`<br>`showWeekNumbers: boolean` | Whether to show week numbers in month view. Default is **`false`**. |
 | `@Output()`<br>`selectedChange: EventEmitter<D \| null>` | Emits when the currently selected datetime changes. |
 | `@Output()`<br>`viewChanged: EventEmitter<MtxCalendarView>` | Emits when the current view changes. |
 
@@ -113,6 +114,7 @@ Exported as: `mtxDatetimepicker`
 | `@Input()`<br>`startView: MtxCalendarView` | The calendar started view. Default is **`'month'`**. |
 | `@Input()`<br>`timeInput: boolean` | Whether to show the time input in time mode. When the `touchUi` is enabled it will be disabled. Default is **`false`**. |
 | `@Input()`<br>`timeInpuAutoFocus: boolean` | Whether the time input should be auto-focused after view init. Default is **`true`**. |
+| `@Input()`<br>`showWeekNumbers: boolean` | Whether to show week numbers in month view. Default is **`false`**. |
 | `@Output('opened')`<br>`openedStream: EventEmitter<void>`| Emits when the datetimepicker has been opened. |
 | `@Output('closed')`<br>`closedStream: EventEmitter<void>`| Emits when the datetimepicker has been closed. |
 | `@Output()`<br>`viewChanged: EventEmitter<MtxCalendarView>` | Emits when the current view changes. |
@@ -241,6 +243,14 @@ type MtxClockView = 'hour' | 'minute';
 ```
 
 ### Constants
+
+#### `MTX_DATETIMEPICKER_DEFAULT_OPTIONS`
+
+Injection token that can be used to specify default datetimepicker options.
+
+```ts
+const MTX_DATETIMEPICKER_DEFAULT_OPTIONS: InjectionToken<MtxDatetimepickerDefaultOptions>;
+```
 
 #### `MTX_DATETIMEPICKER_SCROLL_STRATEGY`
 
