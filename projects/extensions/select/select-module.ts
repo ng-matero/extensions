@@ -17,6 +17,7 @@ import {
   MtxSelectPlaceholderTemplate,
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
+  MtxSelectClearbuttonTemplate,
 } from './templates';
 import { MtxOption } from './option';
 
@@ -40,6 +41,7 @@ import { MtxOption } from './option';
     MtxSelectTagTemplate,
     MtxSelectLoadingSpinnerTemplate,
     MtxSelectPlaceholderTemplate,
+    MtxSelectClearbuttonTemplate,
   ],
   exports: [
     MtxSelect,
@@ -56,6 +58,7 @@ import { MtxOption } from './option';
     MtxSelectTagTemplate,
     MtxSelectLoadingSpinnerTemplate,
     MtxSelectPlaceholderTemplate,
+    MtxSelectClearbuttonTemplate,
   ],
 })
 export class MtxSelectModule {}

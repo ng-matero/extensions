@@ -51,6 +51,7 @@ import {
   MtxSelectPlaceholderTemplate,
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
+  MtxSelectClearbuttonTemplate,
 } from './templates';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';
@@ -166,6 +167,8 @@ export class MtxSelect
   loadingSpinnerTemplate!: TemplateRef<any>;
   @ContentChild(MtxSelectPlaceholderTemplate, { read: TemplateRef })
   placeholderTemplate!: TemplateRef<any>;
+  @ContentChild(MtxSelectClearbuttonTemplate, { read: TemplateRef })
+  clearbuttonTemplate!: TemplateRef<any>;
 
   @ContentChildren(MtxOption, { descendants: true })
   mtxOptions!: QueryList<MtxOption>;

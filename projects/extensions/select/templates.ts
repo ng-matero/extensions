@@ -59,3 +59,8 @@ export class MtxSelectLoadingSpinnerTemplate {
 export class MtxSelectPlaceholderTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
+
+@Directive({ selector: '[ng-clearbutton-tmp]' })
+export class MtxSelectClearbuttonTemplate {
+  template = inject<TemplateRef<any>>(TemplateRef);
+}

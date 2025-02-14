@@ -182,6 +182,37 @@
   <mat-error>Please choose a food</mat-error>
 </mat-form-field>
 
+<mat-form-field>
+  <mtx-select
+    [(ngModel)]="selectedAccount"
+    [items]="accounts"
+    bindLabel="name"
+    bindValue="name"
+    groupBy="country"
+    [disabled]="disabled"
+    [readonly]="readonly"
+    [multiple]="multipleSelect"
+    [closeOnSelect]="closeOnSelect"
+    [deselectOnClick]="deselectOnClick"
+  >
+    <ng-template ng-clearbutton-tmp>
+      <button
+        class="clearbutton"
+        mat-icon-button
+        tabindex="0"
+        aria-label="clear all"
+        [disabled]="disabled"
+        (click)="selectedAccount = ''"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
+    </ng-template>
+  </mtx-select>
+
+  <mat-hint>Choose your favorite food</mat-hint>
+  <mat-error>Please choose a food</mat-error>
+</mat-form-field>
+
 <h2>Test Events</h2>
 
 <mat-form-field>
