@@ -67,7 +67,7 @@
     }
   },
   "dependencies": {
-    "@ng-select/ng-select": "^14.1.0",
+    "@ng-select/ng-select": "^14.2.0",
     "ngx-color": "^9.0.0",
     "photoviewer": "^3.10.0",
     "tslib": "^2.4.0"

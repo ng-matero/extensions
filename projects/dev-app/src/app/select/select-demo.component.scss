@@ -1,3 +1,16 @@
 mat-form-field {
   vertical-align: middle;
 }
+
+.clearbutton {
+  --mdc-icon-button-icon-size: 14px;
+  --mdc-icon-button-state-layer-size: 20px;
+
+  margin-right: 3px;
+
+  .mat-icon {
+    font-size: var(--mdc-icon-button-icon-size, 10px);
+    height: var(--mdc-icon-button-icon-size, 10px);
+    width: var(--mdc-icon-button-icon-size, 10px);
+  }
+}

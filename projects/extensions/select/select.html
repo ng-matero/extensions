@@ -147,4 +147,10 @@
     </ng-template>
   }
 
+  @if (clearbuttonTemplate) {
+    <ng-template ng-clearbutton-tmp>
+      <ng-template [ngTemplateOutlet]="clearbuttonTemplate"></ng-template>
+    </ng-template>
+  }
+  
 </ng-select>
