@@ -498,7 +498,7 @@ export class MtxSelect
   /** Implemented as part of MatFormFieldControl. */
   onContainerClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (/mat-mdc-form-field|mtx-select/g.test(target.parentElement?.classList[0] || '')) {
+    if (!target.classList.contains('ng-arrow-wrapper')) {
       this.focus();
       this.open();
     }
