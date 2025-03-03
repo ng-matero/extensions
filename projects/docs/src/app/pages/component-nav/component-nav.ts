@@ -1,4 +1,3 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input } from '@angular/core';
 import { MatListModule } from '@angular/material/list';
 import { Params, RouterLink, RouterLinkActive } from '@angular/router';
@@ -86,13 +85,6 @@ export const COMPONENTS_MENU = [
   selector: 'app-component-nav',
   templateUrl: './component-nav.html',
   styleUrl: './component-nav.scss',
-  animations: [
-    trigger('bodyExpansion', [
-      state('collapsed', style({ height: '0px', display: 'none' })),
-      state('expanded', style({ height: '*', display: 'block' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4,0.0,0.2,1)')),
-    ]),
-  ],
   imports: [MatListModule, RouterLinkActive, RouterLink],
 })
 export class ComponentNav {
