@@ -27,7 +27,7 @@
     "build:moment-adapter": "ng build extensions-moment-adapter --configuration production",
     "build:luxon-adapter": "ng build extensions-luxon-adapter --configuration production",
     "build:date-fns-adapter": "ng build extensions-date-fns-adapter --configuration production",
-    "publish": "npm run build:lib && cd dist/extensions && npm publish",
+    "publish": "npm run build:lib && cd dist/extensions && npm publish --tag v18-lts",
     "publish:moment-adapter": "npm run build:moment-adapter && cd dist/extensions-moment-adapter && npm publish",
     "publish:luxon-adapter": "npm run build:luxon-adapter && cd dist/extensions-luxon-adapter && npm publish",
     "publish:date-fns-adapter": "npm run build:date-fns-adapter && cd dist/extensions-date-fns-adapter && npm publish",
