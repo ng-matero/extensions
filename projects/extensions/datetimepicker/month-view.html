@@ -6,18 +6,18 @@
         <th></th>
       }
       @for (day of _weekdays; track day.id) {
-        <th [attr.aria-label]="day.long">{{day.narrow}}</th>
+        <th [attr.aria-label]="day.long">{{ day.narrow }}</th>
       }
     </tr>
   </thead>
-  <tbody mtx-calendar-body
-    (@slideCalendar.done)="_calendarStateDone()"
-    [@slideCalendar]="_calendarState"
+  <tbody
+    mtx-calendar-body
     [rows]="_weeks"
     [numCols]="showWeekNumbers ? 8 : 7"
     [todayValue]="_todayDate!"
     [activeCell]="_adapter.getDate(activeDate) - 1"
     [selectedValue]="_selectedDate!"
     (selectedValueChange)="_dateSelected($event)"
-    (keydown)="_handleCalendarBodyKeydown($event)"></tbody>
+    (keydown)="_handleCalendarBodyKeydown($event)"
+  ></tbody>
 </table>

@@ -30,7 +30,6 @@ import {
 } from '@ng-matero/extensions/core';
 import { Subscription } from 'rxjs';
 import { MtxClockView } from './clock';
-import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
@@ -58,7 +57,6 @@ import { MtxYearView } from './year-view';
     '[class.mtx-calendar-with-time-input]': 'timeInput',
   },
   exportAs: 'mtxCalendar',
-  animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
@@ -129,8 +127,6 @@ export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDes
   _AMPM!: MtxAMPM;
 
   _clockView: MtxClockView = 'hour';
-
-  _calendarState!: string;
 
   /** A portal containing the header component. */
   _calendarHeaderPortal!: Portal<any>;
@@ -235,24 +231,10 @@ export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDes
     return this._clampedActiveDate;
   }
   set _activeDate(value: D) {
-    const oldActiveDate = this._clampedActiveDate;
     this._clampedActiveDate = this._adapter.clampDate(value, this.minDate, this.maxDate);
 
     // whenever active date changed, and possibly got clamped we should adjust the am/pm setting
     this._selectAMPM(this._clampedActiveDate);
-
-    if (
-      oldActiveDate &&
-      this._clampedActiveDate &&
-      this.currentView === 'month' &&
-      !this._adapter.sameMonthAndYear(oldActiveDate, this._clampedActiveDate)
-    ) {
-      if (this._adapter.isInNextMonth(oldActiveDate, this._clampedActiveDate)) {
-        this.calendarState('right');
-      } else {
-        this.calendarState('left');
-      }
-    }
 
     this._changeDetectorRef.markForCheck();
   }
@@ -585,10 +567,6 @@ export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDes
     return !this.maxDate || !this._isSameView(this._activeDate, this.maxDate);
   }
 
-  _calendarStateDone() {
-    this._calendarState = '';
-  }
-
   /** Whether the two dates represent the same view in the current view mode (month or year). */
   private _isSameView(date1: D, date2: D): boolean {
     if (this.currentView === 'month') {
@@ -602,10 +580,6 @@ export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDes
     }
     // Otherwise we are in 'multi-year' view.
     return isSameMultiYearView(this._adapter, date1, date2, this.minDate, this.maxDate);
-  }
-
-  private calendarState(direction: string): void {
-    this._calendarState = direction;
   }
 
   private _2digit(n: number) {

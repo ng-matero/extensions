@@ -29,7 +29,6 @@ import {
   MtxDatetimeFormats,
 } from '@ng-matero/extensions/core';
 import { MtxCalendarBody, MtxCalendarCell } from './calendar-body';
-import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 import { MtxDatetimepickerType } from './datetimepicker-types';
@@ -46,7 +45,6 @@ let uniqueIdCounter = 0;
   selector: 'mtx-month-view',
   templateUrl: 'month-view.html',
   exportAs: 'mtxMonthView',
-  animations: [mtxDatetimepickerAnimations.slideCalendar],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [MtxCalendarBody],
@@ -95,8 +93,6 @@ export class MtxMonthView<D> implements AfterContentInit {
   /** The names of the weekdays. */
   _weekdays: { long: string; narrow: string; id: number }[] = [];
 
-  _calendarState!: string;
-
   /** Inserted by Angular inject() migration for backwards compatibility */
   constructor(...args: unknown[]);
 
@@ -130,11 +126,6 @@ export class MtxMonthView<D> implements AfterContentInit {
       !this._adapter.sameMonthAndYear(oldActiveDate, this._activeDate)
     ) {
       this._init();
-      if (this._adapter.isInNextMonth(oldActiveDate, this._activeDate)) {
-        this.calendarState('right');
-      } else {
-        this.calendarState('left');
-      }
     }
   }
 
@@ -168,10 +159,6 @@ export class MtxMonthView<D> implements AfterContentInit {
     if (this.type === 'date') {
       this._userSelection.emit();
     }
-  }
-
-  _calendarStateDone() {
-    this._calendarState = '';
   }
 
   /** Initializes this month view. */
@@ -252,10 +239,6 @@ export class MtxMonthView<D> implements AfterContentInit {
     return date && this._adapter.sameMonthAndYear(date, this.activeDate)
       ? this._adapter.getDate(date)
       : null;
-  }
-
-  private calendarState(direction: string): void {
-    this._calendarState = direction;
   }
 
   /** Handles keydown events on the calendar body when calendar is in month view. */

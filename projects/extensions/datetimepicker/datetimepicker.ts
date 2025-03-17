@@ -19,20 +19,23 @@ import { DOCUMENT } from '@angular/common';
 import {
   afterNextRender,
   AfterViewInit,
+  ANIMATION_MODULE_TYPE,
   booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ComponentRef,
+  ElementRef,
   EventEmitter,
   inject,
   InjectionToken,
   Injector,
   Input,
+  NgZone,
   numberAttribute,
   OnDestroy,
-  OnInit,
   Output,
+  Renderer2,
   ViewChild,
   ViewContainerRef,
   ViewEncapsulation,
@@ -45,7 +48,6 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { MatButton } from '@angular/material/button';
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxCalendar } from './calendar';
-import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { createMissingDateImplError } from './datetimepicker-errors';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
@@ -121,20 +123,22 @@ export const MTX_DATETIMEPICKER_DEFAULT_OPTIONS =
     'class': 'mtx-datetimepicker-content',
     '[class]': 'color ? "mat-" + color : ""',
     '[class.mtx-datetimepicker-content-touch]': 'datetimepicker?.touchUi',
+    '[class.mtx-datetimepicker-content-animations-enabled]': '!_animationsDisabled',
     '[attr.mode]': 'datetimepicker.mode',
-    '[@transformPanel]': '_animationState',
-    '(@transformPanel.done)': '_animationDone.next()',
   },
-  animations: [
-    mtxDatetimepickerAnimations.transformPanel,
-    mtxDatetimepickerAnimations.fadeInCalendar,
-  ],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [CdkTrapFocus, MtxCalendar, CdkPortalOutlet, MatButton],
 })
-export class MtxDatetimepickerContent<D> implements OnInit, AfterViewInit, OnDestroy {
+export class MtxDatetimepickerContent<D> implements AfterViewInit, OnDestroy {
+  protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  protected _animationsDisabled =
+    inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
   private _changeDetectorRef = inject(ChangeDetectorRef);
+  private _ngZone = inject(NgZone);
+  private _stateChanges: Subscription | undefined;
+  private _eventCleanups: (() => void)[] | undefined;
+  private _animationFallback: ReturnType<typeof setTimeout> | undefined;
 
   @ViewChild(MtxCalendar, { static: true }) _calendar!: MtxCalendar<D>;
 
@@ -145,11 +149,11 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterViewInit, OnDes
   /** Whether the datetimepicker is above or below the input. */
   _isAbove!: boolean;
 
-  /** Current state of the animation. */
-  _animationState!: 'enter-dropdown' | 'enter-dialog' | 'void';
-
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
+
+  /** Whether there is an in-progress animation. */
+  _isAnimating = false;
 
   /** Id of the label for the `role="dialog"` element. */
   _dialogLabelId: string | null = null;
@@ -169,35 +173,76 @@ export class MtxDatetimepickerContent<D> implements OnInit, AfterViewInit, OnDes
   /** Whether the close button currently has focus. */
   _closeButtonFocused: boolean = false;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {
-    const intl = inject(MtxDatetimepickerIntl);
-
-    this._closeButtonText = intl.closeCalendarLabel;
-  }
-
   _viewChanged(view: MtxCalendarView): void {
     this.view = view;
   }
 
-  ngOnInit() {
-    this._animationState = this.datetimepicker.touchUi ? 'enter-dialog' : 'enter-dropdown';
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  constructor() {
+    this._closeButtonText = inject(MtxDatetimepickerIntl).closeCalendarLabel;
+    if (!this._animationsDisabled) {
+      const element = this._elementRef.nativeElement;
+      const renderer = inject(Renderer2);
+      this._eventCleanups = this._ngZone.runOutsideAngular(() => [
+        renderer.listen(element, 'animationstart', this._handleAnimationEvent),
+        renderer.listen(element, 'animationend', this._handleAnimationEvent),
+        renderer.listen(element, 'animationcancel', this._handleAnimationEvent),
+      ]);
+    }
   }
 
   ngAfterViewInit() {
+    this._stateChanges = this.datetimepicker._disabledChange.subscribe(() => {
+      this._changeDetectorRef.markForCheck();
+    });
+
     this._calendar.focusActiveCell();
   }
 
   ngOnDestroy() {
+    clearTimeout(this._animationFallback);
+    this._eventCleanups?.forEach(cleanup => cleanup());
     this._animationDone.complete();
   }
 
   _startExitAnimation() {
-    this._animationState = 'void';
-    this._changeDetectorRef.markForCheck();
+    this._elementRef.nativeElement.classList.add('mtx-datetimepicker-content-exit');
+
+    if (this._animationsDisabled) {
+      this._animationDone.next();
+    } else {
+      // Some internal apps disable animations in tests using `* {animation: none !important}`.
+      // If that happens, the animation events won't fire and we'll never clean up the overlay.
+      // Add a fallback that will fire if the animation doesn't run in a certain amount of time.
+      clearTimeout(this._animationFallback);
+      this._animationFallback = setTimeout(() => {
+        if (!this._isAnimating) {
+          this._animationDone.next();
+        }
+      }, 200);
+    }
   }
+
+  private _handleAnimationEvent = (event: AnimationEvent) => {
+    const element = this._elementRef.nativeElement;
+
+    if (
+      event.target !== element ||
+      !event.animationName.startsWith('_mtx-datetimepicker-content')
+    ) {
+      return;
+    }
+
+    clearTimeout(this._animationFallback);
+    this._isAnimating = event.type === 'animationstart';
+    element.classList.toggle('mtx-datetimepicker-content-animating', this._isAnimating);
+
+    if (!this._isAnimating) {
+      this._animationDone.next();
+    }
+  };
 
   _handleUserSelection() {
     // Delegate closing the overlay to the actions.
@@ -541,7 +586,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
     if (this._componentRef) {
       const { instance, location } = this._componentRef;
-      instance._startExitAnimation();
       instance._animationDone.pipe(take(1)).subscribe(() => {
         const activeElement = this._document.activeElement;
 
@@ -559,6 +603,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
         this._focusedElementBeforeOpen = null;
         this._destroyOverlay();
       });
+      instance._startExitAnimation();
     }
 
     if (canRestoreFocus) {
