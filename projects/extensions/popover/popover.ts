@@ -1,8 +1,8 @@
-import { AnimationEvent } from '@angular/animations';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import {
+  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -10,6 +10,7 @@ import {
   ElementRef,
   EventEmitter,
   InjectionToken,
+  Injector,
   Input,
   NgZone,
   OnDestroy,
@@ -22,8 +23,6 @@ import {
   inject,
 } from '@angular/core';
 import { Subject } from 'rxjs';
-
-import { transformPopover } from './popover-animations';
 import { MTX_POPOVER_CONTENT, MtxPopoverContent } from './popover-content';
 import {
   throwMtxPopoverInvalidPositionEnd,
@@ -50,17 +49,23 @@ export function MTX_POPOVER_DEFAULT_OPTIONS_FACTORY(): MtxPopoverDefaultOptions 
 
 let popoverPanelUid = 0;
 
+/** Name of the enter animation `@keyframes`. */
+const ENTER_ANIMATION = '_mtx-popover-enter';
+
+/** Name of the exit animation `@keyframes`. */
+const EXIT_ANIMATION = '_mtx-popover-exit';
+
 @Component({
   selector: 'mtx-popover',
   templateUrl: './popover.html',
   styleUrl: './popover.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
-  animations: [transformPopover],
   exportAs: 'mtxPopover',
   imports: [CdkTrapFocus],
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
+  private _injector = inject(Injector);
   private _changeDetectorRef = inject(ChangeDetectorRef);
   private _elementRef = inject(ElementRef);
   private _unusedNgZone = inject(NgZone);
@@ -69,6 +74,10 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _previousElevation?: string;
   private _elevationPrefix = 'mat-elevation-z';
   private _baseElevation: number | null = null;
+  private _exitFallbackTimeout: ReturnType<typeof setTimeout> | undefined;
+
+  /** Whether animations are currently disabled. */
+  protected _animationsDisabled = false;
 
   /** Config object to be passed into the popover's class. */
   _classList: { [key: string]: boolean } = {};
@@ -77,7 +86,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   _panelAnimationState: 'void' | 'enter' = 'void';
 
   /** Emits whenever an animation on the popover completes. */
-  readonly _animationDone = new Subject<AnimationEvent>();
+  readonly _animationDone = new Subject<'void' | 'enter'>();
 
   /** Whether the popover is animating. */
   _isAnimating = false;
@@ -236,12 +245,18 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
 
   readonly panelId = `mtx-popover-panel-${popoverPanelUid++}`;
 
+  constructor() {
+    this._animationsDisabled =
+      inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
+  }
+
   ngOnInit() {
     this.setPositionClasses();
   }
 
   ngOnDestroy() {
     this.closed.complete();
+    clearTimeout(this._exitFallbackTimeout);
   }
 
   /** Handle a keyboard event from the popover, delegating to the appropriate action. */
@@ -364,25 +379,45 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
     }
   }
 
-  /** Starts the enter animation. */
-  _startAnimation() {
-    // @breaking-change 8.0.0 Combine with _resetAnimation.
-    this._panelAnimationState = 'enter';
-  }
-
-  /** Resets the panel animation to its initial state. */
-  _resetAnimation() {
-    // @breaking-change 8.0.0 Combine with _startAnimation.
-    this._panelAnimationState = 'void';
-  }
-
   /** Callback that is invoked when the panel animation completes. */
-  _onAnimationDone(event: AnimationEvent) {
-    this._animationDone.next(event);
-    this._isAnimating = false;
+  protected _onAnimationDone(state: string) {
+    const isExit = state === EXIT_ANIMATION;
+
+    if (isExit || state === ENTER_ANIMATION) {
+      if (isExit) {
+        clearTimeout(this._exitFallbackTimeout);
+        this._exitFallbackTimeout = undefined;
+      }
+      this._animationDone.next(isExit ? 'void' : 'enter');
+      this._isAnimating = false;
+    }
   }
 
-  _onAnimationStart(event: AnimationEvent) {
-    this._isAnimating = true;
+  protected _onAnimationStart(state: string) {
+    if (state === ENTER_ANIMATION || state === EXIT_ANIMATION) {
+      this._isAnimating = true;
+    }
+  }
+
+  _setIsOpen(isOpen: boolean) {
+    this._panelAnimationState = isOpen ? 'enter' : 'void';
+
+    if (isOpen) {
+      //
+    } else if (!this._animationsDisabled) {
+      // Some apps do `* { animation: none !important; }` in tests which will prevent the
+      // `animationend` event from firing. Since the exit animation is loading-bearing for
+      // removing the content from the DOM, add a fallback timer.
+      this._exitFallbackTimeout = setTimeout(() => this._onAnimationDone(EXIT_ANIMATION), 200);
+    }
+
+    // Animation events won't fire when animations are disabled so we simulate them.
+    if (this._animationsDisabled) {
+      setTimeout(() => {
+        this._onAnimationDone(isOpen ? ENTER_ANIMATION : EXIT_ANIMATION);
+      });
+    }
+
+    this._changeDetectorRef.markForCheck();
   }
 }

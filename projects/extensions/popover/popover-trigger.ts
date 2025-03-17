@@ -94,6 +94,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   private _halt = false;
   private _positionSubscription = Subscription.EMPTY;
   private _popoverCloseSubscription = Subscription.EMPTY;
+  private _pendingRemoval: Subscription | undefined;
   private _closingActionsSubscription = Subscription.EMPTY;
   private _scrollStrategy = inject(MTX_POPOVER_SCROLL_STRATEGY);
   private _mouseoverTimer: any;
@@ -144,15 +145,16 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this._halt = true;
+    this._positionSubscription.unsubscribe();
+    this._pendingRemoval?.unsubscribe();
+    this._popoverCloseSubscription.unsubscribe();
+    this._closingActionsSubscription.unsubscribe();
+
     if (this._overlayRef) {
       this._overlayRef.dispose();
       this._overlayRef = null;
     }
-
-    this._halt = true;
-    this._positionSubscription.unsubscribe();
-    this._popoverCloseSubscription.unsubscribe();
-    this._closingActionsSubscription.unsubscribe();
   }
 
   private _setCurrentConfig() {
@@ -243,6 +245,8 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
 
     this._checkPopover();
 
+    this._pendingRemoval?.unsubscribe();
+
     const overlayRef = this._createOverlay();
     const overlayConfig = overlayRef.getConfig();
 
@@ -262,7 +266,7 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
     this._initPopover();
 
     if (this.popover instanceof MtxPopover) {
-      this.popover._startAnimation();
+      this.popover._setIsOpen(true);
     }
   }
 
@@ -285,7 +289,9 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
 
   /** Removes the popover from the DOM. */
   private _destroyPopover(reason: PopoverCloseReason) {
-    if (!this._overlayRef || !this.popoverOpen) {
+    const overlayRef = this._overlayRef;
+
+    if (!overlayRef || !this.popoverOpen) {
       return;
     }
 
@@ -297,34 +303,28 @@ export class MtxPopoverTrigger implements AfterContentInit, OnDestroy {
 
     const popover = this.popover;
     this._closingActionsSubscription.unsubscribe();
-    this._overlayRef.detach();
+    this._pendingRemoval?.unsubscribe();
 
-    this._openedBy = undefined;
+    overlayRef.detach();
 
+    // Note that we don't wait for the animation to finish if another trigger took
+    // over the popover, because the panel will end up empty which looks glitchy.
     if (popover instanceof MtxPopover) {
-      popover._resetAnimation();
-
-      if (popover.lazyContent) {
-        // Wait for the exit animation to finish before detaching the content.
-        popover._animationDone
-          .pipe(
-            filter(event => event.toState === 'void'),
-            take(1),
-            // Interrupt if the content got re-attached.
-            takeUntil(popover.lazyContent._attached)
-          )
-          .subscribe({
-            next: () => popover.lazyContent!.detach(),
-            // No matter whether the content got re-attached, reset the popover.
-            complete: () => this._setIsPopoverOpen(false),
-          });
-      } else {
-        this._setIsPopoverOpen(false);
-      }
+      // Wait for the exit animation to finish before detaching the content.
+      this._pendingRemoval = popover._animationDone
+        .pipe(
+          filter(event => event === 'void'),
+          take(1)
+        )
+        .subscribe(() => {
+          popover.lazyContent?.detach();
+        });
     } else {
-      this._setIsPopoverOpen(false);
       popover.lazyContent?.detach();
     }
+
+    this._openedBy = undefined;
+    this._setIsPopoverOpen(false);
   }
 
   /**
