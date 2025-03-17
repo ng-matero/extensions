@@ -1,9 +1,34 @@
+/* stylelint-disable keyframes-name-pattern */
 @use '@angular/cdk' as cdk;
 @use '@angular/material' as mat;
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/drawer' as tokens-mtx-drawer;
 
 $_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
+
+@keyframes _mtx-drawer-enter {
+  from {
+    box-shadow: none;
+    visibility: hidden;
+  }
+
+  to {
+    transform: none;
+    visibility: visible;
+  }
+}
+
+@keyframes _mtx-drawer-exit {
+  from {
+    transform: none;
+    visibility: visible;
+  }
+
+  to {
+    box-shadow: none;
+    visibility: hidden;
+  }
+}
 
 .mtx-drawer-container {
   display: block;
@@ -12,6 +37,10 @@ $_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
   overflow: auto;
   outline: 0;
   box-sizing: border-box;
+
+  // We don't use this, but it's useful for consumers to position
+  // elements (e.g. close buttons) inside the bottom sheet.
+  position: relative;
 
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(background-color, container-background-color);
@@ -24,9 +53,33 @@ $_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
   }
 }
 
-.mtx-drawer-right {
-  transform: translateX(100%);
+.mtx-drawer-container-animations-enabled {
+  &.mtx-drawer-container-enter {
+    animation: _mtx-drawer-enter 150ms cubic-bezier(0, 0, 0.2, 1) forwards;
+  }
 
+  &.mtx-drawer-container-exit {
+    animation: _mtx-drawer-exit 400ms cubic-bezier(0.25, 0.8, 0.25, 1) backwards;
+  }
+
+  &.mtx-drawer-right {
+    transform: translateX(100%);
+  }
+
+  &.mtx-drawer-left {
+    transform: translateX(-100%);
+  }
+
+  &.mtx-drawer-bottom {
+    transform: translateY(100%);
+  }
+
+  &.mtx-drawer-top {
+    transform: translateY(-100%);
+  }
+}
+
+.mtx-drawer-right {
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(border-top-left-radius, container-shape);
     @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
@@ -34,8 +87,6 @@ $_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
 }
 
 .mtx-drawer-left {
-  transform: translateX(-100%);
-
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(border-top-right-radius, container-shape);
     @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
@@ -43,8 +94,6 @@ $_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
 }
 
 .mtx-drawer-bottom {
-  transform: translateY(100%);
-
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(border-top-left-radius, container-shape);
     @include token-utils.create-token-slot(border-top-right-radius, container-shape);
@@ -52,8 +101,6 @@ $_tokens: tokens-mtx-drawer.$prefix, tokens-mtx-drawer.get-token-slots();
 }
 
 .mtx-drawer-top {
-  transform: translateY(-100%);
-
   @include token-utils.use-tokens($_tokens...) {
     @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
     @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);

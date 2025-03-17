@@ -1,16 +1,19 @@
-import { AnimationEvent } from '@angular/animations';
 import { CdkDialogContainer } from '@angular/cdk/dialog';
 import { CdkPortalOutlet } from '@angular/cdk/portal';
 import {
+  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  inject,
   OnDestroy,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { mtxDrawerAnimations } from './drawer-animations';
 import { MtxDrawerConfig } from './drawer-config';
+
+const ENTER_ANIMATION = '_mtx-drawer-enter';
+const EXIT_ANIMATION = '_mtx-drawer-exit';
 
 /**
  * Internal component that wraps user-provided drawer content.
@@ -25,18 +28,20 @@ import { MtxDrawerConfig } from './drawer-config';
   // because it might cause the sheets that were opened from a template not to be out of date.
   changeDetection: ChangeDetectionStrategy.Default,
   encapsulation: ViewEncapsulation.None,
-  animations: [mtxDrawerAnimations.drawerState],
   host: {
     'class': 'mtx-drawer-container',
     '[class]': '_drawerPosition',
+    '[class.mtx-drawer-container-animations-enabled]': '!_animationsDisabled',
+    '[class.mtx-drawer-container-enter]': '_animationState === "visible"',
+    '[class.mtx-drawer-container-exit]': '_animationState === "hidden"',
     'tabindex': '-1',
     '[id]': '_config.id',
     '[attr.role]': '_config.role',
     '[attr.aria-modal]': '_config.isModal',
     '[attr.aria-label]': '_config.ariaLabel',
-    '[@state]': '_animationState',
-    '(@state.start)': '_onAnimationStart($event)',
-    '(@state.done)': '_onAnimationDone($event)',
+    '(animationstart)': '_handleAnimationEvent(true, $event.animationName)',
+    '(animationend)': '_handleAnimationEvent(false, $event.animationName)',
+    '(animationcancel)': '_handleAnimationEvent(false, $event.animationName)',
   },
   imports: [CdkPortalOutlet],
 })
@@ -44,11 +49,17 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
   /** The portal outlet inside of this container into which the content will be loaded. */
   @ViewChild(CdkPortalOutlet, { static: true }) _portalOutlet!: CdkPortalOutlet;
 
+  protected _animationsDisabled =
+    inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
+
   /** The state of the drawer animations. */
   _animationState: 'void' | 'visible' | 'hidden' = 'void';
 
   /** Emits whenever the state of the animation changes. */
-  _animationStateChanged = new EventEmitter<AnimationEvent>();
+  _animationStateChanged = new EventEmitter<{
+    toState: 'visible' | 'hidden';
+    phase: 'start' | 'done';
+  }>();
 
   /** Whether the component has been destroyed. */
   private _destroyed = false;
@@ -71,6 +82,9 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
       this._animationState = 'visible';
       this._changeDetectorRef.markForCheck();
       this._changeDetectorRef.detectChanges();
+      if (this._animationsDisabled) {
+        this._simulateAnimation(ENTER_ANIMATION);
+      }
     }
   }
 
@@ -79,6 +93,9 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
     if (!this._destroyed) {
       this._animationState = 'hidden';
       this._changeDetectorRef.markForCheck();
+      if (this._animationsDisabled) {
+        this._simulateAnimation(EXIT_ANIMATION);
+      }
     }
   }
 
@@ -88,16 +105,27 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
     this._destroyed = true;
   }
 
-  _onAnimationDone(event: AnimationEvent) {
-    if (event.toState === 'visible') {
+  private _simulateAnimation(name: typeof ENTER_ANIMATION | typeof EXIT_ANIMATION) {
+    this._ngZone.run(() => {
+      this._handleAnimationEvent(true, name);
+      setTimeout(() => this._handleAnimationEvent(false, name));
+    });
+  }
+
+  protected _handleAnimationEvent(isStart: boolean, animationName: string) {
+    const isEnter = animationName === ENTER_ANIMATION;
+    const isExit = animationName === EXIT_ANIMATION;
+
+    if (isEnter) {
       this._trapFocus();
     }
 
-    this._animationStateChanged.emit(event);
-  }
-
-  _onAnimationStart(event: AnimationEvent) {
-    this._animationStateChanged.emit(event);
+    if (isEnter || isExit) {
+      this._animationStateChanged.emit({
+        toState: isEnter ? 'visible' : 'hidden',
+        phase: isStart ? 'start' : 'done',
+      });
+    }
   }
 
   protected override _captureInitialFocus(): void {}

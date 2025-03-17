@@ -7,7 +7,11 @@ import {
   AnimationTriggerMetadata,
 } from '@angular/animations';
 
-/** Animations used by the drawer. */
+/**
+ * Animations used by the drawer.
+ * @deprecated No longer used. Will be removed.
+ * @breaking-change 21.0.0
+ */
 export const mtxDrawerAnimations: {
   readonly drawerState: AnimationTriggerMetadata;
 } = {
