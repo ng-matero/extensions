@@ -1,7 +1,7 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
+  ANIMATION_MODULE_TYPE,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -78,18 +78,11 @@ export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions
   templateUrl: './grid.html',
   styleUrl: './grid.scss',
   host: {
-    class: 'mtx-grid',
+    'class': 'mtx-grid',
+    '[class.mtx-grid-animations-enabled]': '!_animationsDisabled',
   },
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  animations: [
-    trigger('expansion', [
-      state('collapsed, void', style({ height: '0', minHeight: '0', visibility: 'hidden' })),
-      state('expanded', style({ height: '*', visibility: 'visible' })),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-      transition('expanded <=> void', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
   imports: [
     AsyncPipe,
     NgTemplateOutlet,
@@ -126,6 +119,8 @@ export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions
   ],
 })
 export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
+  protected _animationsDisabled =
+    inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
   private _utils = inject(MtxGridUtils);
   private _changeDetectorRef = inject(ChangeDetectorRef);
   private _defaultOptions = inject<MtxGridDefaultOptions>(MTX_GRID_DEFAULT_OPTIONS, {

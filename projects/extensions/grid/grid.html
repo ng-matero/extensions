@@ -223,11 +223,12 @@
             <ng-container matColumnDef="MtxGridExpansionColumnDef">
               <td mat-cell *matCellDef="let row; let dataIndex = dataIndex"
                 [attr.colspan]="displayedColumns.length">
-                <div class="mtx-grid-expansion-detail"
-                  [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
-                  <ng-template [ngTemplateOutlet]="expansionTemplate"
-                    [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex, expanded: expansionRowStates[dataIndex].expanded }">
-                  </ng-template>
+                <div class="mtx-grid-expansion-detail-wrapper">
+                  <div class="mtx-grid-expansion-detail">
+                    <ng-template [ngTemplateOutlet]="expansionTemplate"
+                      [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex, expanded: expansionRowStates[dataIndex].expanded }">
+                    </ng-template>
+                  </div>
                 </div>
               </td>
             </ng-container>
@@ -415,11 +416,12 @@
             <ng-container matColumnDef="MtxGridExpansionColumnDef">
               <td mat-cell *matCellDef="let row; let dataIndex = dataIndex"
                 [attr.colspan]="displayedColumns.length">
-                <div class="mtx-grid-expansion-detail"
-                  [@expansion]="expansionRowStates[dataIndex].expanded ? 'expanded' : 'collapsed'">
-                  <ng-template [ngTemplateOutlet]="expansionTemplate"
-                    [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex, expanded: expansionRowStates[dataIndex].expanded }">
-                  </ng-template>
+                <div class="mtx-grid-expansion-detail-wrapper">
+                  <div class="mtx-grid-expansion-detail">
+                    <ng-template [ngTemplateOutlet]="expansionTemplate"
+                      [ngTemplateOutletContext]="{ $implicit: row, rowData: row, index: dataIndex, expanded: expansionRowStates[dataIndex].expanded }">
+                    </ng-template>
+                  </div>
                 </div>
               </td>
             </ng-container>
