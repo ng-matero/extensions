@@ -10,17 +10,21 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
 import {
+  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ComponentRef,
+  ElementRef,
   EventEmitter,
   InjectionToken,
   Injector,
   Input,
+  NgZone,
   OnChanges,
   OnDestroy,
   Output,
+  Renderer2,
   TemplateRef,
   ViewContainerRef,
   ViewEncapsulation,
@@ -35,7 +39,6 @@ import { filter, take } from 'rxjs/operators';
 import { TinyColor } from '@ctrl/tinycolor';
 import { ColorEvent } from 'ngx-color';
 import { ColorChromeModule } from 'ngx-color/chrome';
-import { mtxColorpickerAnimations } from './colorpicker-animations';
 import { ColorFormat, MtxColorpickerInput } from './colorpicker-input';
 
 /** Used to generate a unique ID for each colorpicker instance. */
@@ -76,36 +79,84 @@ export const MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
   host: {
     'class': 'mtx-colorpicker-content',
     '[class]': 'color ? "mat-" + color : ""',
-    '[@transformPanel]': '_animationState',
-    '(@transformPanel.done)': '_animationDone.next()',
+    '[class.mtx-colorpicker-content-animations-enabled]': '!_animationsDisabled',
   },
-  animations: [mtxColorpickerAnimations.transformPanel],
   exportAs: 'mtxColorpickerContent',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ColorChromeModule, NgTemplateOutlet],
 })
 export class MtxColorpickerContent implements OnDestroy {
+  protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
+  protected _animationsDisabled =
+    inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
   private _changeDetectorRef = inject(ChangeDetectorRef);
+  private _ngZone = inject(NgZone);
+
+  private _eventCleanups: (() => void)[] | undefined;
+  private _animationFallback: ReturnType<typeof setTimeout> | undefined;
 
   @Input() color: ThemePalette;
 
   picker!: MtxColorpicker;
 
-  /** Current state of the animation. */
-  _animationState: 'enter-dropdown' | 'void' = 'enter-dropdown';
-
   /** Emits when an animation has finished. */
   readonly _animationDone = new Subject<void>();
 
-  _startExitAnimation() {
-    this._animationState = 'void';
-    this._changeDetectorRef.markForCheck();
+  /** Whether there is an in-progress animation. */
+  _isAnimating = false;
+
+  constructor() {
+    if (!this._animationsDisabled) {
+      const element = this._elementRef.nativeElement;
+      const renderer = inject(Renderer2);
+      this._eventCleanups = this._ngZone.runOutsideAngular(() => [
+        renderer.listen(element, 'animationstart', this._handleAnimationEvent),
+        renderer.listen(element, 'animationend', this._handleAnimationEvent),
+        renderer.listen(element, 'animationcancel', this._handleAnimationEvent),
+      ]);
+    }
   }
 
   ngOnDestroy() {
+    clearTimeout(this._animationFallback);
+    this._eventCleanups?.forEach(cleanup => cleanup());
     this._animationDone.complete();
   }
+
+  _startExitAnimation() {
+    this._elementRef.nativeElement.classList.add('mtx-colorpicker-content-exit');
+
+    if (this._animationsDisabled) {
+      this._animationDone.next();
+    } else {
+      // Some internal apps disable animations in tests using `* {animation: none !important}`.
+      // If that happens, the animation events won't fire and we'll never clean up the overlay.
+      // Add a fallback that will fire if the animation doesn't run in a certain amount of time.
+      clearTimeout(this._animationFallback);
+      this._animationFallback = setTimeout(() => {
+        if (!this._isAnimating) {
+          this._animationDone.next();
+        }
+      }, 200);
+    }
+  }
+
+  private _handleAnimationEvent = (event: AnimationEvent) => {
+    const element = this._elementRef.nativeElement;
+
+    if (event.target !== element || !event.animationName.startsWith('_mtx-colorpicker-content')) {
+      return;
+    }
+
+    clearTimeout(this._animationFallback);
+    this._isAnimating = event.type === 'animationstart';
+    element.classList.toggle('mtx-colorpicker-content-animating', this._isAnimating);
+
+    if (!this._isAnimating) {
+      this._animationDone.next();
+    }
+  };
 
   getColorString(e: ColorEvent): string {
     return {
@@ -292,9 +343,9 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     }
 
     if (this._componentRef) {
-      const instance = this._componentRef.instance;
-      instance._startExitAnimation();
+      const { instance } = this._componentRef;
       instance._animationDone.pipe(take(1)).subscribe(() => this._destroyOverlay());
+      instance._startExitAnimation();
     }
 
     const completeClose = () => {

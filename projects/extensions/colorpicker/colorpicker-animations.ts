@@ -10,6 +10,8 @@ import {
 /**
  * Animations used by the colorpicker.
  * @docs-private
+ * @deprecated No longer used, will be removed.
+ * @breaking-change 21.0.0
  */
 export const mtxColorpickerAnimations: {
   readonly transformPanel: AnimationTriggerMetadata;
