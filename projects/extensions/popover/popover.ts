@@ -40,7 +40,11 @@ export const MTX_POPOVER_DEFAULT_OPTIONS = new InjectionToken<MtxPopoverDefaultO
   }
 );
 
-/** @docs-private */
+/**
+ * @docs-private
+ * @deprecated No longer used, will be removed.
+ * @breaking-change 21.0.0
+ */
 export function MTX_POPOVER_DEFAULT_OPTIONS_FACTORY(): MtxPopoverDefaultOptions {
   return {
     backdropClass: 'cdk-overlay-transparent-backdrop',

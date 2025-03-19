@@ -2,14 +2,7 @@ import { coerceCssPixelValue } from '@angular/cdk/coercion';
 import { Dialog, DialogConfig } from '@angular/cdk/dialog';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentType } from '@angular/cdk/portal';
-import {
-  Injectable,
-  InjectionToken,
-  Injector,
-  OnDestroy,
-  TemplateRef,
-  inject,
-} from '@angular/core';
+import { inject, Injectable, InjectionToken, OnDestroy, TemplateRef } from '@angular/core';
 import { defer, Observable, Subject } from 'rxjs';
 import { startWith } from 'rxjs/operators';
 import { MtxDrawerConfig } from './drawer-config';
