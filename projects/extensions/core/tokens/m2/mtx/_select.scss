@@ -40,6 +40,7 @@ $prefix: (mtx, select);
 
     multiple-value-background-color: mat.get-theme-color($theme, background, unselected-chip),
     multiple-value-outline-color: $divider-color,
+    multiple-value-disabled-outline-color: mat.private-safe-color-change($divider-color, $alpha: 0.06),
     multiple-value-icon-hover-background-color: $divider-color,
 
     clear-icon-color: $secondary-text-color,

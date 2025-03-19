@@ -28,6 +28,10 @@ $prefix: (mtx, select);
 
     multiple-value-background-color: token-definition.hardcode(transparent, $exclude-hardcoded),
     multiple-value-outline-color: map.get($systems, md-sys-color, outline),
+    multiple-value-disabled-outline-color: mat.private-safe-color-change(
+      map.get($systems, md-sys-color, outline),
+      $alpha: 0.38
+    ),
     multiple-value-icon-hover-background-color: map.get($systems, md-sys-color, outline-variant),
 
     clear-icon-color: map.get($systems, md-sys-color, on-surface),
