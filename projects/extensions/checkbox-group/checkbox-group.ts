@@ -55,6 +55,9 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
     this._items = value.map(option => {
       return option instanceof Object ? { ...option } : new MtxCheckboxBase(option, option);
     });
+
+    // update the state of selectAll when items changed
+    this.writeValue(this.selectedItems);
   }
   private _items: any[] = [];
   private _originalItems: any[] = [];
