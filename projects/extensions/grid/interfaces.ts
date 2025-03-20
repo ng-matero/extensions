@@ -211,6 +211,8 @@ export interface MtxGridDefaultOptions {
   columnMenuButtonColor?: ThemePalette;
   columnMenuButtonClass?: string;
   columnMenuButtonIcon?: string;
+  columnMenuButtonFontIcon?: string;
+  columnMenuButtonSvgIcon?: string;
 
   showColumnMenuHeader?: boolean;
   columnMenuHeaderText?: string;

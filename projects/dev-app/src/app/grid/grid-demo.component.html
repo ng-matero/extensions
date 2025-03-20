@@ -45,6 +45,8 @@
   [showColumnMenuButton]="true"
   [showColumnMenuHeader]="true"
   [showColumnMenuFooter]="true"
+  [columnMenuButtonType]="'icon'"
+  [columnMenuButtonFontIcon]="'fa-gear'"
   [columnMenuFooterTemplate]="menuFooterTpl"
   (rowClick)="log($event)"
   (rowContextMenu)="onContextMenu($event)"
@@ -80,12 +82,12 @@
 </ng-template>
 
 <ng-template #headerTpl let-col>
-  <mat-icon>build</mat-icon>
+  <mat-icon fontIcon="fa-wrench"></mat-icon>
   {{ col.header | async }}
 </ng-template>
 
 <ng-template #headerExtraTpl let-col>
-  <mat-icon>info</mat-icon>
+  <mat-icon fontIcon="fa-circle-info"></mat-icon>
 </ng-template>
 
 <ng-template #avatarTpl let-row>

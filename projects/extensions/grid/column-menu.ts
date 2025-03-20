@@ -74,6 +74,8 @@ export class MtxGridColumnMenu {
   @Input() buttonColor: ThemePalette;
   @Input() buttonClass = '';
   @Input() buttonIcon = '';
+  @Input() buttonFontIcon = '';
+  @Input() buttonSvgIcon = '';
 
   @Input() showHeader = false;
   @Input() headerText = 'Columns Header';

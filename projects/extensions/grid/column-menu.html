@@ -2,66 +2,62 @@
   @case ('raised') {
     <button [class]="buttonClass" mat-raised-button type="button" [color]="buttonColor"
       [matMenuTriggerFor]="menu">
-      @if (buttonIcon) {
-        <mat-icon>{{buttonIcon}}</mat-icon>
-      }
+      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
       {{buttonText}}
     </button>
   }
   @case ('stroked') {
     <button [class]="buttonClass" mat-stroked-button type="button" [color]="buttonColor"
       [matMenuTriggerFor]="menu">
-      @if (buttonIcon) {
-        <mat-icon>{{buttonIcon}}</mat-icon>
-      }
+      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
       {{buttonText}}
     </button>
   }
   @case ('flat') {
     <button [class]="buttonClass" mat-flat-button type="button" [color]="buttonColor"
       [matMenuTriggerFor]="menu">
-      @if (buttonIcon) {
-        <mat-icon>{{buttonIcon}}</mat-icon>
-      }
+      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
       {{buttonText}}
     </button>
     }
   @case ('icon') {
     <button [class]="buttonClass" mat-icon-button type="button" [color]="buttonColor"
       [matMenuTriggerFor]="menu">
-      @if (buttonIcon) {
-        <mat-icon>{{buttonIcon}}</mat-icon>
-      }
+      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
     </button>
   }
   @case ('fab') {
     <button [class]="buttonClass" mat-fab type="button" [color]="buttonColor"
       [matMenuTriggerFor]="menu">
-      @if (buttonIcon) {
-        <mat-icon>{{buttonIcon}}</mat-icon>
-      }
+      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
       {{buttonText}}
     </button>
   }
   @case ('mini-fab') {
     <button [class]="buttonClass" mat-mini-fab type="button" [color]="buttonColor"
       [matMenuTriggerFor]="menu">
-      @if (buttonIcon) {
-        <mat-icon>{{buttonIcon}}</mat-icon>
-      }
+      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
       {{buttonText}}
     </button>
   }
   @default {
     <button [class]="buttonClass" mat-button type="button" [color]="buttonColor"
       [matMenuTriggerFor]="menu">
-      @if (buttonIcon) {
-        <mat-icon>{{buttonIcon}}</mat-icon>
-      }
+      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
       {{buttonText}}
     </button>
   }
 }
+
+<ng-template #iconTpl>
+  @if (buttonIcon) {
+    <mat-icon>{{buttonIcon}}</mat-icon>
+  } @else if(buttonFontIcon) {
+    <mat-icon [fontIcon]="buttonFontIcon"></mat-icon>
+  } @else if(buttonSvgIcon) {
+    <mat-icon [svgIcon]="buttonSvgIcon"></mat-icon>
+  }
+</ng-template>
 
 <mat-menu #menu="matMenu" class="mtx-grid-column-menu">
   <!-- eslint-disable-next-line @angular-eslint/template/interactive-supports-focus -->

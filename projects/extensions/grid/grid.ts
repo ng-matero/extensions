@@ -319,6 +319,10 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() columnMenuButtonClass = this._defaultOptions?.columnMenuButtonClass ?? '';
   /** The icon for the column menu button. */
   @Input() columnMenuButtonIcon = this._defaultOptions?.columnMenuButtonIcon ?? '';
+  /** The font icon for the column menu button. */
+  @Input() columnMenuButtonFontIcon = this._defaultOptions?.columnMenuButtonFontIcon ?? '';
+  /** The svg icon for the column menu button. */
+  @Input() columnMenuButtonSvgIcon = this._defaultOptions?.columnMenuButtonSvgIcon ?? '';
 
   /** Whether to show the column-menu's header. */
   @Input({ transform: booleanAttribute })
