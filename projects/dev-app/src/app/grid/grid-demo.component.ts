@@ -1,10 +1,10 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
-import { MatIconModule } from '@angular/material/icon';
+import { MatIconModule, MatIconRegistry } from '@angular/material/icon';
 import { MatMenuModule, MatMenuTrigger } from '@angular/material/menu';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
@@ -38,7 +38,7 @@ import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
     MtxGridModule,
   ],
 })
-export class GridDemoComponent implements OnInit, AfterViewInit {
+export class GridDemoComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('grid', { static: true }) grid!: MtxGrid;
   @ViewChild('grid2', { static: true }) grid2!: MtxGrid;
 
@@ -122,7 +122,7 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
         {
           type: 'basic',
           text: this.translate.stream('delete'),
-          icon: 'delete',
+          fontIcon: 'fa-trash',
           tooltip: this.translate.stream('delete'),
           color: 'warn',
           pop: {
@@ -213,8 +213,11 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
 
   constructor(
     private translate: TranslateService,
-    private http: HttpClient
-  ) {}
+    private http: HttpClient,
+    private iconRegistry: MatIconRegistry
+  ) {
+    this.iconRegistry.setDefaultFontSetClass('fas');
+  }
 
   ngOnInit() {
     this.getRemoteData();
@@ -229,6 +232,10 @@ export class GridDemoComponent implements OnInit, AfterViewInit {
       this.list2.push(item, item, item, item, item, item, item, item);
     });
     this.list2 = this.list2.filter(_ => true);
+  }
+
+  ngOnDestroy(): void {
+    this.iconRegistry.setDefaultFontSetClass('material-icons');
   }
 
   trackByName(index: number, item: any) {
