@@ -6,7 +6,7 @@
     (change)="_updateMasterCheckboxState($event, -1)">{{selectAllLabel}}</mat-checkbox>
 }
 
-@for (option of items; track option; let i = $index) {
+@for (option of items; track _trackBy(i, option); let i = $index) {
   <mat-checkbox class="mtx-checkbox-normal"
     [(ngModel)]="option.checked"
     [ngModelOptions]="{standalone: true}"
