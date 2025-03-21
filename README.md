@@ -63,6 +63,7 @@ $theme: mat.define-light-theme(...);
 
 $config: (...);
 
+// <19.0
 $theme: mat.private-deep-merge-all(
   mat.define-theme($config),
   mtx.define-theme($config)
@@ -71,6 +72,13 @@ $theme: mat.private-deep-merge-all(
 html {
   @include mat.all-component-themes($theme);
   @include mtx.all-component-themes($theme);
+}
+
+// >=19.0
+html {
+  color-scheme: light;
+
+  @include mat.theme($config);
 }
 ```
 
