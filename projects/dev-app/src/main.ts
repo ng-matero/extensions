@@ -3,6 +3,7 @@ import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overl
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {
   importProvidersFrom,
+  provideExperimentalCheckNoChangesForDebug,
   provideExperimentalZonelessChangeDetection,
   provideZoneChangeDetection,
 } from '@angular/core';
@@ -47,5 +48,10 @@ bootstrapApplication(AppComponent, {
     cachedAppState.zoneless
       ? provideExperimentalZonelessChangeDetection()
       : provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
+
+    // verify for check no changes for debug
+    provideExperimentalCheckNoChangesForDebug({
+      interval: 1000,
+    }),
   ],
 }).catch(err => console.error(err));
