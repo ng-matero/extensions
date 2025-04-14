@@ -15,6 +15,7 @@ import {
   OnDestroy,
   Output,
   SimpleChanges,
+  viewChild,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -278,14 +279,22 @@ export class MtxTimeView<D> implements OnChanges, OnDestroy {
   @ViewChild('hourInput', { read: ElementRef<HTMLInputElement> })
   protected hourInputElement: ElementRef<HTMLInputElement> | undefined;
 
+  protected _hourInputDirective: MtxTimeInput | undefined;
   @ViewChild('hourInput', { read: MtxTimeInput })
-  protected hourInputDirective: MtxTimeInput | undefined;
+  set hourInputDirective(input: MtxTimeInput) {
+    this._hourInputDirective = input;
+    this._changeDetectorRef.detectChanges();
+  }
 
   @ViewChild('minuteInput', { read: ElementRef<HTMLInputElement> })
   protected minuteInputElement: ElementRef<HTMLInputElement> | undefined;
 
+  protected _minuteInputDirective: MtxTimeInput | undefined;
   @ViewChild('minuteInput', { read: MtxTimeInput })
-  protected minuteInputDirective: MtxTimeInput | undefined;
+  set minuteInputDirective(input: MtxTimeInput) {
+    this._hourInputDirective = input;
+    this._changeDetectorRef.detectChanges();
+  }
 
   datetimepickerIntlChangesSubscription: SubscriptionLike;
 
@@ -539,8 +548,8 @@ export class MtxTimeView<D> implements OnChanges, OnDestroy {
       // will make it "40" again then the minuteInputDirective will not have been updated
       // since "40" === "40" same reference so no change detected by directly setting it within
       // this handler, we handle this usecase
-      if (this.minuteInputDirective) {
-        this.minuteInputDirective.timeValue = this.minute;
+      if (this._minuteInputDirective) {
+        this._minuteInputDirective.timeValue = this.minute;
       }
     }
   }
