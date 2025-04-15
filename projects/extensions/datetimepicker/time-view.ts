@@ -279,22 +279,22 @@ export class MtxTimeView<D> implements OnChanges, OnDestroy {
   @ViewChild('hourInput', { read: ElementRef<HTMLInputElement> })
   protected hourInputElement: ElementRef<HTMLInputElement> | undefined;
 
-  protected _hourInputDirective: MtxTimeInput | undefined;
   @ViewChild('hourInput', { read: MtxTimeInput })
   set hourInputDirective(input: MtxTimeInput) {
     this._hourInputDirective = input;
     this._changeDetectorRef.detectChanges();
   }
+  protected _hourInputDirective: MtxTimeInput | undefined;
 
   @ViewChild('minuteInput', { read: ElementRef<HTMLInputElement> })
   protected minuteInputElement: ElementRef<HTMLInputElement> | undefined;
 
-  protected _minuteInputDirective: MtxTimeInput | undefined;
   @ViewChild('minuteInput', { read: MtxTimeInput })
   set minuteInputDirective(input: MtxTimeInput) {
-    this._hourInputDirective = input;
+    this._minuteInputDirective = input;
     this._changeDetectorRef.detectChanges();
   }
+  protected _minuteInputDirective: MtxTimeInput | undefined;
 
   datetimepickerIntlChangesSubscription: SubscriptionLike;
 
