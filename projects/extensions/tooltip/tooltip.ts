@@ -220,7 +220,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   private readonly _tooltipComponent = TooltipComponent;
   private _viewportMargin = 8;
   private _currentPosition!: TooltipPosition;
-  private readonly _cssClassPrefix: string = 'mat-mdc';
+  private readonly _cssClassPrefix: string = 'mtx-mdc';
   private _ariaDescriptionPending!: boolean;
   private _dirSubscribed = false;
 
