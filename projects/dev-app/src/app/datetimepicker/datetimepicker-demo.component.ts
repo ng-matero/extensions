@@ -12,6 +12,15 @@ import { MtxDatetimepickerFilterType } from '@ng-matero/extensions/datetimepicke
   styleUrls: ['datetimepicker-demo.component.scss'],
 })
 export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
+  private _withSeconds = false;
+  public set withSeconds(val: boolean) {
+    this._withSeconds = val;
+    localStorage.setItem('withSeconds', JSON.stringify(val));
+    window.location.reload();
+  }
+  public get withSeconds() {
+    return this._withSeconds;
+  }
   type = 'moment';
 
   group: UntypedFormGroup;
@@ -30,23 +39,31 @@ export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
     private dateAdapter: DateAdapter<any>,
     private translate: TranslateService
   ) {
+    const tmpWithSeconds = localStorage.getItem('withSeconds');
+    this._withSeconds = tmpWithSeconds ? JSON.parse(tmpWithSeconds) : false;
+
     this.today = moment.utc();
     this.tomorrow = moment.utc().date(moment.utc().date() + 1);
     this.yesterday = moment.utc().date(moment.utc().date() - 1);
     this.min = this.today.clone().year(2018).month(10).date(3).hour(11).minute(10);
     this.max = this.min.clone().date(4).minute(45);
     this.start = this.today.clone().year(1930).month(9).date(28);
-    this.filter = (date: moment.Moment | null, type: MtxDatetimepickerFilterType) => {
-      if (date === null) {
+    this.filter = (date: moment.Moment | null, type: MtxDatetimepickerFilterType): boolean => {
+      if (!date) {
         return true;
       }
+
+      const isEven = (value: number) => value % 2 === 0;
+
       switch (type) {
         case MtxDatetimepickerFilterType.DATE:
-          return date.year() % 2 === 0 && date.month() % 2 === 0 && date.date() % 2 === 0;
+          return isEven(date.year()) && isEven(date.month()) && isEven(date.date());
         case MtxDatetimepickerFilterType.HOUR:
-          return date.hour() % 2 === 0;
+          return isEven(date.hour());
         case MtxDatetimepickerFilterType.MINUTE:
-          return date.minute() % 2 === 0;
+          return isEven(date.minute());
+        case MtxDatetimepickerFilterType.SECOND:
+          return isEven(date.second());
       }
     };
 

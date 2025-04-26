@@ -10,11 +10,19 @@
          [style.left]="item.left+'%'"
          [style.top]="item.top+'%'">{{ item.displayValue }}</div>
   </div>
-  <div class="mtx-clock-minutes" [class.active]="!_hourView">
+  <div class="mtx-clock-minutes" [class.active]="!_hourView && _minuteView">
     <div *ngFor="let item of _minutes"
          class="mtx-clock-cell"
          [class.mtx-clock-cell-disabled]="!item.enabled"
          [class.mtx-clock-cell-selected]="_selectedMinute === item.value"
+         [style.left]="item.left+'%'"
+         [style.top]="item.top+'%'">{{ item.displayValue }}</div>
+  </div>
+  <div class="mtx-clock-seconds" [class.active]="!_hourView && _secondView">
+    <div *ngFor="let item of _seconds"
+         class="mtx-clock-cell"
+         [class.mtx-clock-cell-disabled]="!item.enabled"
+         [class.mtx-clock-cell-selected]="_selectedSecond === item.value"
          [style.left]="item.left+'%'"
          [style.top]="item.top+'%'">{{ item.displayValue }}</div>
   </div>

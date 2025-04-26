@@ -67,6 +67,9 @@ export class MtxDatetimepickerIntl {
   /** A label for the 'switch to clock minute view' button (used by screen readers). */
   switchToClockMinuteViewLabel = 'Choose minute';
 
+  /** A label for the 'switch to clock seconds view' button (used by screen readers). */
+  switchToClockSecondViewLabel = 'Choose seconds';
+
   /** Label used for ok button within the manual time input. */
   okLabel = 'OK';
 

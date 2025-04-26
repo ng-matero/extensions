@@ -13,7 +13,7 @@ $calendar-prev-icon-transform: translateX(2px) rotate(-45deg);
 $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 $landscape-calendar-header-width: 144px;
-
+$landscape-calendar-header-with-seconds-width: calc(#{$landscape-calendar-header-width} + 12px);
 @mixin landscape-calendar-header {
   .mtx-calendar {
     display: flex;
@@ -21,6 +21,12 @@ $landscape-calendar-header-width: 144px;
     .mtx-calendar-header {
       width: $landscape-calendar-header-width;
       min-width: $landscape-calendar-header-width;
+
+      &.mtx-calendar-header-with-seconds {
+        width:$landscape-calendar-header-with-seconds-width;
+        min-width: $landscape-calendar-header-with-seconds-width;
+      }
+
       padding: 16px 8px;
       border-radius: 4px 0 0 4px;
 
@@ -44,6 +50,7 @@ $landscape-calendar-header-width: 144px;
 
       .mtx-calendar-header-hours,
       .mtx-calendar-header-minutes,
+      .mtx-calendar-header-seconds,
       .mtx-calendar-header-ampm {
         width: 40px;
         text-align: center;
@@ -79,6 +86,7 @@ $landscape-calendar-header-width: 144px;
   .mtx-calendar-header-date,
   .mtx-calendar-header-hours,
   .mtx-calendar-header-minutes,
+  .mtx-calendar-header-seconds,
   .mtx-calendar-header-ampm {
     height: auto;
     min-width: auto;
@@ -111,6 +119,7 @@ $landscape-calendar-header-width: 144px;
 .mtx-calendar-header-date,
 .mtx-calendar-header-hours,
 .mtx-calendar-header-minutes,
+.mtx-calendar-header-seconds,
 .mtx-calendar-header-ampm {
   &:not(.active) {
     opacity: .6;
@@ -129,6 +138,7 @@ $landscape-calendar-header-width: 144px;
 
     .mtx-calendar-header-hours,
     .mtx-calendar-header-minutes,
+    .mtx-calendar-header-seconds,
     .mtx-calendar-header-ampm {
       opacity: 1;
     }

@@ -1,11 +1,28 @@
 $calendar-padding: 8px;
 $non-touch-calendar-cell-size: 40px;
 $non-touch-calendar-portrait-width: $non-touch-calendar-cell-size * 7 + $calendar-padding * 2;
+$non-touch-calendar-portrait-with-seconds-width: calc(
+  #{$non-touch-calendar-portrait-width} + 50px
+);
+
 $non-touch-calendar-portrait-height: 424px;
 $non-touch-calendar-landscape-width: 432px;
+$non-touch-calendar-landscape-with-seconds-width: calc(
+  #{$non-touch-calendar-landscape-width} + 60px
+);
 $non-touch-calendar-landscape-height: 328px;
+
+$non-touch-calendar-landscape-with-seconds-height: calc(
+  #{$non-touch-calendar-landscape-height} + 20px
+);
 $non-touch-calendar-with-time-input-portrait-height: 490px;
+$non-touch-calendar-with-time-input-portrait-with-seconds-height: calc(
+  #{$non-touch-calendar-with-time-input-portrait-height} + 50px
+);
 $non-touch-calendar-with-time-input-landscape-height: 404px;
+$non-touch-calendar-with-time-input-landscape-with-seconds-height: calc(
+  #{$non-touch-calendar-with-time-input-landscape-height} + 50px
+);
 
 // Ideally the calendar would have a constant aspect ratio, no matter its size, and we would base
 // these measurements off the aspect ratio. Unfortunately, the aspect ratio does change a little as
@@ -30,9 +47,12 @@ $touch-max-height: 850px;
   .mtx-calendar {
     width: $non-touch-calendar-landscape-width;
     height: $non-touch-calendar-landscape-height;
-
     &.mtx-calendar-with-time-input {
       height: $non-touch-calendar-with-time-input-landscape-height;
+    }
+    &.mtx-calendar-with-time-with-seconds-input {
+      width: $non-touch-calendar-landscape-with-seconds-width;
+      height: $non-touch-calendar-with-time-input-landscape-with-seconds-height;
     }
   }
 }
@@ -56,6 +76,10 @@ $touch-max-height: 850px;
 
   &.mtx-calendar-with-time-input {
     height: $non-touch-calendar-with-time-input-portrait-height;
+  }
+  &.mtx-calendar-with-time-with-seconds-input {
+    width: $non-touch-calendar-portrait-with-seconds-width;
+    height: $non-touch-calendar-with-time-input-portrait-with-seconds-height;
   }
 }
 

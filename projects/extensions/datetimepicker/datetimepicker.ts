@@ -42,6 +42,7 @@ import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
 import { DOCUMENT } from '@angular/common';
+import { mtxSameSeconds } from './datetimepicker.utils';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
@@ -189,6 +190,9 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   /** Prevent user to select same date time */
   @Input() preventSameDateTimeSelection = false;
 
+  /** Includes the option to enter seconds. */
+  @Input() withSeconds: boolean = false;
+
   /**
    * Emits new selected date when selected date changes.
    * @deprecated Switch to the `dateChange` and `dateInput` binding on the input element.
@@ -297,6 +301,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
   set type(value: MtxDatetimepickerType) {
     this._type = value || 'datetime';
+    if (this.withSeconds && this._type !== 'datetime' && this._type !== 'time') {
+      console.warn('The option \'withSeconds\' is not supported for types other than datetime and time');
+      this.withSeconds = false;
+    }
   }
   private _type: MtxDatetimepickerType = 'datetime';
 
@@ -404,6 +412,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
     const oldValue = this._selected;
     this._selected = date;
     if (!this._dateAdapter.sameDatetime(oldValue, this._selected)) {
+      this.selectedChanged.emit(date);
+    }
+    else
+    if (this.withSeconds && !mtxSameSeconds(oldValue, this._selected)) {
       this.selectedChanged.emit(date);
     }
   }
