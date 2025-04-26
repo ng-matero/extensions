@@ -5,8 +5,10 @@ import {
   addHours,
   addMinutes,
   addMonths,
+  addSeconds,
   getHours,
   getMinutes,
+  getSeconds,
   isValid,
   startOfMonth,
 } from 'date-fns';
@@ -41,12 +43,23 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
     return getMinutes(date);
   }
 
+  getSecond(date: Date): number {
+    return getSeconds(date);
+  }
+
   isInNextMonth(startDate: Date, endDate: Date): boolean {
     const nextMonth = this.getDateInNextMonth(startDate);
     return super.sameMonthAndYear(nextMonth, endDate);
   }
 
-  createDatetime(year: number, month: number, day: number, hour: number, minute: number): Date {
+  createDatetime(
+    year: number,
+    month: number,
+    day: number,
+    hour: number,
+    minute: number,
+    second: number
+  ): Date {
     if (month < 0 || month > 11) {
       throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
     }
@@ -63,7 +76,11 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
       throw Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
     }
 
-    const result = new Date(year, month, day, hour, minute);
+    if (second < 0 || second > 59) {
+      throw Error(`Invalid second "${second}". Second has to be between 0 and 59.`);
+    }
+
+    const result = new Date(year, month, day, hour, minute, second);
 
     if (!isValid(result)) {
       throw Error(`Invalid date "${day}" for month with index "${month}".`);
@@ -84,12 +101,20 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
     return range(60, i => i.toLocaleString(this.locale));
   }
 
+  getSecondsNames(): string[] {
+    return range(60, i => i.toLocaleString(this.locale));
+  }
+
   addCalendarHours(date: Date, hours: number): Date {
     return addHours(date, hours);
   }
 
   addCalendarMinutes(date: Date, minutes: number): Date {
     return addMinutes(date, minutes);
+  }
+
+  addCalendarSeconds(date: Date, seconds: number): Date {
+    return addSeconds(date, seconds);
   }
 
   deserialize(value: any): Date | null {

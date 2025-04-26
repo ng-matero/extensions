@@ -43,12 +43,23 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
     return date.minute;
   }
 
+  getSecond(date: DateTime): number {
+    return date.second;
+  }
+
   isInNextMonth(startDate: DateTime, endDate: DateTime): boolean {
     const nextMonth = this.getDateInNextMonth(startDate);
     return super.sameMonthAndYear(nextMonth, endDate);
   }
 
-  createDatetime(year: number, month: number, day: number, hour: number, minute: number): DateTime {
+  createDatetime(
+    year: number,
+    month: number,
+    day: number,
+    hour: number,
+    minute: number,
+    second: number
+  ): DateTime {
     if (month < 0 || month > 11) {
       throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
     }
@@ -65,12 +76,16 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
       throw Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
     }
 
+    if (second < 0 || second > 59) {
+      throw Error(`Invalid second "${second}". Second has to be between 0 and 59.`);
+    }
+
     // Luxon uses 1-indexed months so we need to add one to the month.
     let result;
     if (this._useUtc) {
-      result = DateTime.utc(year, month + 1, day, hour, minute);
+      result = DateTime.utc(year, month + 1, day, hour, minute, second);
     } else {
-      result = DateTime.local(year, month + 1, day, hour, minute);
+      result = DateTime.local(year, month + 1, day, hour, minute, second);
     }
 
     if (!result.isValid) {
@@ -92,12 +107,20 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
     return range(60, i => i.toLocaleString(this.locale));
   }
 
+  getSecondsNames(): string[] {
+    return range(60, i => i.toLocaleString(this.locale));
+  }
+
   addCalendarHours(date: DateTime, hours: number): DateTime {
     return date.plus({ hours });
   }
 
   addCalendarMinutes(date: DateTime, minutes: number): DateTime {
     return date.plus({ minutes });
+  }
+
+  addCalendarSeconds(date: DateTime, seconds: number): DateTime {
+    return date.plus({ seconds });
   }
 
   deserialize(value: any): DateTime | null {

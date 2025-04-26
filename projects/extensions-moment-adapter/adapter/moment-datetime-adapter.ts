@@ -28,6 +28,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     dates: string[];
     hours: string[];
     minutes: string[];
+    seconds: string[];
     longDaysOfWeek: string[];
     shortDaysOfWeek: string[];
     narrowDaysOfWeek: string[];
@@ -56,8 +57,9 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
       longMonths: momentLocaleData.months(),
       shortMonths: momentLocaleData.monthsShort(),
       dates: range(31, i => super.createDate(2017, 0, i + 1).format('D')),
-      hours: range(24, i => this.createDatetime(2017, 0, 1, i, 0).format('H')),
-      minutes: range(60, i => this.createDatetime(2017, 0, 1, 1, i).format('m')),
+      hours: range(24, i => this.createDatetime(2017, 0, 1, i, 0, 0).format('H')),
+      minutes: range(60, i => this.createDatetime(2017, 0, 1, 1, i, 0).format('m')),
+      seconds: range(60, i => this.createDatetime(2017, 0, 1, 0, 0, i).format('s')),
       longDaysOfWeek: momentLocaleData.weekdays(),
       shortDaysOfWeek: momentLocaleData.weekdaysShort(),
       narrowDaysOfWeek: momentLocaleData.weekdaysMin(),
@@ -72,12 +74,23 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     return super.clone(date).minute();
   }
 
+  getSecond(date: Moment): number {
+    return super.clone(date).second();
+  }
+
   isInNextMonth(startDate: Moment, endDate: Moment): boolean {
     const nextMonth = this.getDateInNextMonth(startDate);
     return super.sameMonthAndYear(nextMonth, endDate);
   }
 
-  createDatetime(year: number, month: number, date: number, hour: number, minute: number): Moment {
+  createDatetime(
+    year: number,
+    month: number,
+    date: number,
+    hour: number,
+    minute: number,
+    second: number
+  ): Moment {
     // Check for invalid month and date (except upper bound on date which we have to check after
     // creating the Date).
     if (month < 0 || month > 11) {
@@ -96,11 +109,15 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
       throw Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
     }
 
+    if (second < 0 || second > 59) {
+      throw Error(`Invalid second "${second}". Second has to be between 0 and 59.`);
+    }
+
     let result;
     if (this._useUtc) {
-      result = moment.utc({ year, month, date, hour, minute });
+      result = moment.utc({ year, month, date, hour, minute, second });
     } else {
-      result = moment({ year, month, date, hour, minute });
+      result = moment({ year, month, date, hour, minute, second });
     }
 
     // If the result isn't valid, the date must have been out of bounds for this month.
@@ -123,12 +140,20 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     return this._localeData.minutes;
   }
 
+  getSecondsNames(): string[] {
+    return this._localeData.seconds;
+  }
+
   addCalendarHours(date: Moment, hours: number): Moment {
     return super.clone(date).add({ hours });
   }
 
   addCalendarMinutes(date: Moment, minutes: number): Moment {
     return super.clone(date).add({ minutes });
+  }
+
+  addCalendarSeconds(date: Moment, seconds: number): Moment {
+    return super.clone(date).add({ seconds });
   }
 
   deserialize(value: any): Moment | null {

@@ -42,7 +42,6 @@ import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { mtxDatetimepickerAnimations } from './datetimepicker-animations';
 import { MtxCalendarView, MtxDatetimepickerType } from './datetimepicker-types';
 import { DOCUMENT } from '@angular/common';
-import { mtxSameSeconds } from './datetimepicker.utils';
 
 /** Used to generate a unique ID for each datetimepicker instance. */
 let datetimepickerUid = 0;
@@ -415,7 +414,7 @@ export class MtxDatetimepicker<D> implements OnDestroy {
       this.selectedChanged.emit(date);
     }
     else
-    if (this.withSeconds && !mtxSameSeconds(oldValue, this._selected)) {
+    if (this.withSeconds && !this._dateAdapter.sameSecond(oldValue, this._selected)) {
       this.selectedChanged.emit(date);
     }
   }

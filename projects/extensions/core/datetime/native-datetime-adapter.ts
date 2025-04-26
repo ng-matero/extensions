@@ -8,6 +8,9 @@ const DEFAULT_HOUR_NAMES = range(24, i => String(i));
 /** The default minute names to use if Intl API is not available. */
 const DEFAULT_MINUTE_NAMES = range(60, i => String(i));
 
+/** The default second names to use if Intl API is not available. */
+const DEFAULT_SECOND_NAMES = range(60, i => String(i));
+
 function range<T>(length: number, valueFunction: (index: number) => T): T[] {
   const valuesArray = Array(length);
   for (let i = 0; i < length; i++) {
@@ -32,7 +35,8 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
       this.getMonth(date),
       this.getDate(date),
       this.getHour(date),
-      this.getMinute(date)
+      this.getMinute(date),
+      this.getSecond(date)
     );
   }
 
@@ -44,12 +48,23 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
     return date.getMinutes();
   }
 
+  getSecond(date: Date): number {
+    return date.getSeconds();
+  }
+
   isInNextMonth(startDate: Date, endDate: Date): boolean {
     const nextMonth = this.getDateInNextMonth(startDate);
     return this.sameMonthAndYear(nextMonth, endDate);
   }
 
-  createDatetime(year: number, month: number, date: number, hour: number, minute: number): Date {
+  createDatetime(
+    year: number,
+    month: number,
+    date: number,
+    hour: number,
+    minute: number,
+    second: number
+  ): Date {
     // Check for invalid month and date (except upper bound on date which we have to check after
     // creating the Date).
     if (month < 0 || month > 11) {
@@ -68,7 +83,11 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
       throw Error(`Invalid minute "${minute}". Minute has to be between 0 and 59.`);
     }
 
-    const result = this._createDateWithOverflow(year, month, date, hour, minute);
+    if (second < 0 || second > 59) {
+      throw Error(`Invalid second "${second}". Second has to be between 0 and 59.`);
+    }
+
+    const result = this._createDateWithOverflow(year, month, date, hour, minute, second);
 
     // Check that the date wasn't above the upper bound for the month, causing the month to overflow
     if (result.getMonth() !== month) {
@@ -92,6 +111,10 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
     return DEFAULT_MINUTE_NAMES;
   }
 
+  getSecondsNames(): string[] {
+    return DEFAULT_SECOND_NAMES;
+  }
+
   addCalendarYears(date: Date, years: number): Date {
     return this.addCalendarMonths(date, years * 12);
   }
@@ -102,7 +125,8 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
       this.getMonth(date) + months,
       this.getDate(date),
       this.getHour(date),
-      this.getMinute(date)
+      this.getMinute(date),
+      this.getSecond(date)
     );
 
     // It's possible to wind up in the wrong month if the original month has more days than the new
@@ -115,7 +139,8 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
         this.getMonth(newDate),
         0,
         this.getHour(date),
-        this.getMinute(date)
+        this.getMinute(date),
+        this.getSecond(date)
       );
     }
 
@@ -128,7 +153,8 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
       this.getMonth(date),
       this.getDate(date) + days,
       this.getHour(date),
-      this.getMinute(date)
+      this.getMinute(date),
+      this.getSecond(date)
     );
   }
 
@@ -138,7 +164,8 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
       this.getMonth(date),
       this.getDate(date),
       this.getHour(date) + hours,
-      this.getMinute(date)
+      this.getMinute(date),
+      this.getSecond(date)
     );
   }
 
@@ -148,7 +175,19 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
       this.getMonth(date),
       this.getDate(date),
       this.getHour(date),
-      this.getMinute(date) + minutes
+      this.getMinute(date) + minutes,
+      this.getSecond(date)
+    );
+  }
+
+  addCalendarSeconds(date: Date, seconds: number): Date {
+    return this._createDateWithOverflow(
+      this.getYear(date),
+      this.getMonth(date),
+      this.getDate(date),
+      this.getHour(date),
+      this.getMinute(date),
+      this.getSecond(date) + seconds
     );
   }
 
@@ -156,7 +195,11 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
     return (
       super.toIso8601(date) +
       'T' +
-      [this._2digit(date.getUTCHours()), this._2digit(date.getUTCMinutes())].join(':')
+      [
+        this._2digit(date.getUTCHours()),
+        this._2digit(date.getUTCMinutes()),
+        this._2digit(date.getUTCSeconds()),
+      ].join(':')
     );
   }
 
@@ -190,9 +233,10 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
     month: number,
     date: number,
     hours: number,
-    minutes: number
+    minutes: number,
+    seconds: number
   ) {
-    const result = new Date(year, month, date, hours, minutes);
+    const result = new Date(year, month, date, hours, minutes, seconds);
 
     // We need to correct for the fact that JS native Date treats years in range [0, 99] as
     // abbreviations for 19xx.

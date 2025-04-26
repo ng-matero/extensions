@@ -27,7 +27,6 @@ import { MtxClockView } from './clock';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxDatetimepickerIntl } from './datetimepicker-intl';
 import { MtxAMPM } from './datetimepicker-types';
-import { mtxGetSeconds, mtxSetSeconds } from './datetimepicker.utils';
 
 function pad(num: NumberInput, size: number) {
   num = String(num);
@@ -389,7 +388,7 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
 
   get second() {
     if (this.activeDate) {
-      return this.prefixWithZero(mtxGetSeconds(this.activeDate));
+      return this.prefixWithZero(this._adapter.getSecond(this.activeDate));
     }
 
     return '00';
@@ -445,17 +444,14 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   handleHourInputChange(value: NumberInput) {
     const hour = coerceNumberProperty(value);
     if (hour || hour === 0) {
-      const baseNewValue = this._adapter.createDatetime(
+      const newValue = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
         this._adapter.getDate(this.activeDate),
         this.updateHourForAmPm(hour),
-        this._adapter.getMinute(this.activeDate)
+        this._adapter.getMinute(this.activeDate),
+        this._adapter.getSecond(this.activeDate),
       );
-
-      const newValue = this.withSeconds
-        ? mtxSetSeconds(baseNewValue, mtxGetSeconds(this.activeDate))
-        : baseNewValue;
 
       this._activeDate = this._adapter.clampDate(newValue, this.minDate, this.maxDate);
       this.activeDateChange.emit(this.activeDate);
@@ -496,18 +492,14 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   handleMinuteInputChange(value: NumberInput) {
     const minute = coerceNumberProperty(value);
     if (minute || minute === 0) {
-      const baseNewValue = this._adapter.createDatetime(
+      const newValue = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
         this._adapter.getDate(this.activeDate),
         this._adapter.getHour(this._activeDate),
-        minute
+        minute,
+        this._adapter.getSecond(this.activeDate),
       );
-
-      const newValue = this.withSeconds
-        ? mtxSetSeconds(baseNewValue, mtxGetSeconds(this.activeDate))
-        : baseNewValue;
-
       this._activeDate = this._adapter.clampDate(newValue, this.minDate, this.maxDate);
       this.activeDateChange.emit(this.activeDate);
 
@@ -524,25 +516,23 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   handleSecondInputChange(value: NumberInput) {
     const second = coerceNumberProperty(value);
     if (second || second === 0) {
-      const newValue = mtxSetSeconds(
-        this._adapter.createDatetime(
-          this._adapter.getYear(this.activeDate),
-          this._adapter.getMonth(this.activeDate),
-          this._adapter.getDate(this.activeDate),
-          this._adapter.getHour(this._activeDate),
-          this._adapter.getMinute(this._activeDate)
-        ),
+      const newValue = this._adapter.createDatetime(
+        this._adapter.getYear(this.activeDate),
+        this._adapter.getMonth(this.activeDate),
+        this._adapter.getDate(this.activeDate),
+        this._adapter.getHour(this._activeDate),
+        this._adapter.getMinute(this.activeDate),
         second
       );
       this._activeDate = this._adapter.clampDate(newValue, this.minDate, this.maxDate);
       this.activeDateChange.emit(this.activeDate);
 
-      // If previously we did set [tmValue]="40" and the input changed to 30, and the clamping
+      // If previously we did set [mtxValue]="40" and the input changed to 30, and the clamping
       // will make it "40" again then the secondInputDirective will not have been updated
       // since "40" === "40" same reference so no change detected by directly setting it within
       // this handler, we handle this usecase
       if (this.secondInputDirective) {
-        this.secondInputDirective.timeValue = this.second;
+        this.secondInputDirective.timeValue = this.minute;
       }
     }
   }

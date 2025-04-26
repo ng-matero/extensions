@@ -19,7 +19,6 @@ import {
 import { DatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxDatetimepickerFilterType } from './datetimepicker-filtertype';
 import { MtxAMPM } from './datetimepicker-types';
-import { mtxGetSeconds, mtxSameSeconds, mtxSetSeconds } from './datetimepicker.utils';
 
 const activeEventOptions = normalizePassiveListenerOptions({ passive: false });
 
@@ -112,9 +111,7 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
     this._activeDate = this._adapter.clampDate(value, this.minDate, this.maxDate);
     if (!this._adapter.sameMinute(oldActiveDate, this._activeDate)) {
       this._init();
-    }
-    else
-    if (this.withSeconds && !mtxSameSeconds(oldActiveDate, this._activeDate)) {
+    } else if (this.withSeconds && !this._adapter.sameSecond(oldActiveDate, this._activeDate)) {
       this._init();
     }
   }
@@ -165,7 +162,7 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
     const hour = this._adapter.getHour(this.activeDate);
     this._selectedHour = hour;
     this._selectedMinute = this._adapter.getMinute(this.activeDate);
-    this._selectedSecond = mtxGetSeconds(this.activeDate);
+    this._selectedSecond = this._adapter.getSecond(this.activeDate);
     let deg = 0;
     let radius = CLOCK_OUTER_RADIUS;
     if (this._hourView) {
@@ -267,7 +264,7 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
 
     const hourNames = this._adapter.getHourNames();
     const minuteNames = this._adapter.getMinuteNames();
-    const secondNames = this._adapter.getMinuteNames(); //Because it matches the minutes
+    const secondNames = this._adapter.getSecondsNames();
     if (this.twelvehour) {
       const hours = [];
       for (let i = 0; i < hourNames.length; i++) {
@@ -280,13 +277,16 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
           this._adapter.getMonth(this.activeDate),
           this._adapter.getDate(this.activeDate),
           hour,
+          0,
           0
         );
 
         // Check if the date is enabled, no need to respect the minute setting here
         const enabled =
-          (!this.minDate || (this._adapter.compareDatetime(date, this.minDate, false) as number) >= 0) &&
-          (!this.maxDate || (this._adapter.compareDatetime(date, this.maxDate, false) as number) <= 0) &&
+          (!this.minDate ||
+            (this._adapter.compareDatetime(date, this.minDate, false) as number) >= 0) &&
+          (!this.maxDate ||
+            (this._adapter.compareDatetime(date, this.maxDate, false) as number) <= 0) &&
           (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.HOUR));
 
         // display value for twelvehour clock should be from 1-12 not including 0 and not above 12
@@ -315,13 +315,16 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
           this._adapter.getMonth(this.activeDate),
           this._adapter.getDate(this.activeDate),
           i,
+          0,
           0
         );
 
         // Check if the date is enabled, no need to respect the minute setting here
         const enabled =
-          (!this.minDate || (this._adapter.compareDatetime(date, this.minDate, false) as number) >= 0) &&
-          (!this.maxDate || (this._adapter.compareDatetime(date, this.maxDate, false) as number) <= 0) &&
+          (!this.minDate ||
+            (this._adapter.compareDatetime(date, this.minDate, false) as number) >= 0) &&
+          (!this.maxDate ||
+            (this._adapter.compareDatetime(date, this.maxDate, false) as number) <= 0) &&
           (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.HOUR));
 
         this._hours.push({
@@ -342,7 +345,8 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
         this._adapter.getMonth(this.activeDate),
         this._adapter.getDate(this.activeDate),
         this._adapter.getHour(this.activeDate),
-        i
+        i,
+        0
       );
       const enabled =
         (!this.minDate || (this._adapter.compareDatetime(date, this.minDate) as number) >= 0) &&
@@ -357,31 +361,29 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
       });
     }
 
-    if(this.withSeconds) {
+    if (this.withSeconds) {
       for (let i = 0; i < secondNames.length; i += 5) {
-          const radian = (i / 30) * Math.PI;
-          const date = mtxSetSeconds(
-            this._adapter.createDatetime(
-              this._adapter.getYear(this.activeDate),
-              this._adapter.getMonth(this.activeDate),
-              this._adapter.getDate(this.activeDate),
-              this._adapter.getHour(this.activeDate),
-              this._adapter.getMinute(this.activeDate)
-            ),
-            i
-          );
-          const enabled =
-            (!this.minDate || (this._adapter.compareDatetime(date, this.minDate) as number) >= 0) &&
-            (!this.maxDate || (this._adapter.compareDatetime(date, this.maxDate) as number) <= 0) &&
-            (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.SECOND));
-          this._seconds.push({
-            value: i,
-            displayValue: i === 0 ? '00' : secondNames[i],
-            enabled,
-            top: CLOCK_RADIUS - Math.cos(radian) * CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS,
-            left: CLOCK_RADIUS + Math.sin(radian) * CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS,
-          });
-        }
+        const radian = (i / 30) * Math.PI;
+        const date = this._adapter.createDatetime(
+          this._adapter.getYear(this.activeDate),
+          this._adapter.getMonth(this.activeDate),
+          this._adapter.getDate(this.activeDate),
+          this._adapter.getHour(this.activeDate),
+          this._adapter.getMinute(this.activeDate),
+          i
+        );
+        const enabled =
+          (!this.minDate || (this._adapter.compareDatetime(date, this.minDate) as number) >= 0) &&
+          (!this.maxDate || (this._adapter.compareDatetime(date, this.maxDate) as number) <= 0) &&
+          (!this.dateFilter || this.dateFilter(date, MtxDatetimepickerFilterType.SECOND));
+        this._seconds.push({
+          value: i,
+          displayValue: i === 0 ? '00' : secondNames[i],
+          enabled,
+          top: CLOCK_RADIUS - Math.cos(radian) * CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS,
+          left: CLOCK_RADIUS + Math.sin(radian) * CLOCK_OUTER_RADIUS - CLOCK_TICK_RADIUS,
+        });
+      }
     }
   }
 
@@ -427,17 +429,14 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
         value = outer ? (value === 0 ? 12 : value) : value === 0 ? 0 : value + 12;
       }
 
-      const baseDate = this._adapter.createDatetime(
+      date = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
         this._adapter.getDate(this.activeDate),
         value,
-        this._adapter.getMinute(this.activeDate)
+        this._adapter.getMinute(this.activeDate),
+        this.withSeconds ? this._adapter.getSecond(this.activeDate) : 0
       );
-
-      date = this.withSeconds
-        ? mtxSetSeconds(baseDate, mtxGetSeconds(this.activeDate))
-        : baseDate;
     } else if (this._secondView) {
       if (this.interval) {
         value *= this.interval;
@@ -445,14 +444,12 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
       if (value === 60) {
         value = 0;
       }
-      date = mtxSetSeconds(
-        this._adapter.createDatetime(
-          this._adapter.getYear(this.activeDate),
-          this._adapter.getMonth(this.activeDate),
-          this._adapter.getDate(this.activeDate),
-          this._adapter.getHour(this.activeDate),
-          this._adapter.getMinute(this.activeDate)
-        ),
+      date = this._adapter.createDatetime(
+        this._adapter.getYear(this.activeDate),
+        this._adapter.getMonth(this.activeDate),
+        this._adapter.getDate(this.activeDate),
+        this._adapter.getHour(this.activeDate),
+        this._adapter.getMinute(this.activeDate),
         value
       );
     } else {
@@ -462,17 +459,14 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
       if (value === 60) {
         value = 0;
       }
-      const baseDate = this._adapter.createDatetime(
+      date = this._adapter.createDatetime(
         this._adapter.getYear(this.activeDate),
         this._adapter.getMonth(this.activeDate),
         this._adapter.getDate(this.activeDate),
         this._adapter.getHour(this.activeDate),
-        value
+        value,
+        this.withSeconds ? this._adapter.getSecond(this.activeDate) : 0
       );
-
-      date = this.withSeconds
-        ? mtxSetSeconds(baseDate, mtxGetSeconds(this.activeDate))
-        : baseDate;
     }
 
     // if there is a dateFilter, check if the date is allowed if it is not then do not set/emit new date
