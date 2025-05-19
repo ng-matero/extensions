@@ -3,7 +3,6 @@ import {
   ChangeDetectorRef,
   Component,
   EventEmitter,
-  HostBinding,
   Input,
   Output,
   ViewEncapsulation,
@@ -18,7 +17,7 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
   selector: 'mtx-alert',
   exportAs: 'mtxAlert',
   host: {
-    'class': 'mtx-alert',
+    '[class]': 'hostClassList',
     '[class.mtx-alert-dismissible]': 'dismissible',
     'role': 'alert',
   },
@@ -31,9 +30,8 @@ export type MtxAlertType = 'default' | 'info' | 'success' | 'warning' | 'danger'
 export class MtxAlert {
   private _changeDetectorRef = inject(ChangeDetectorRef);
 
-  @HostBinding('class')
-  get _hostClassList() {
-    return `mtx-alert-${this.type} mat-elevation-z${this.elevation}`;
+  get hostClassList() {
+    return `mtx-alert mtx-alert-${this.type} mat-elevation-z${this.elevation}`;
   }
 
   /** The alert's type. Can be `default`, `info`, `success`, `warning` or `danger`. */

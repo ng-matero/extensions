@@ -1,7 +1,6 @@
 import {
   Directive,
   ElementRef,
-  HostListener,
   Input,
   OnDestroy,
   OnInit,
@@ -13,6 +12,9 @@ import PhotoViewer from 'photoviewer';
 @Directive({
   selector: '[mtxPhotoviewer]',
   exportAs: 'mtxPhotoviewer',
+  host: {
+    '(click)': 'onClick($event)',
+  },
 })
 export class MtxPhotoviewer implements OnInit, OnDestroy {
   private _elementRef = inject<ElementRef<Element>>(ElementRef);
@@ -52,7 +54,6 @@ export class MtxPhotoviewer implements OnInit, OnDestroy {
     this.photoviewerInstance?.close();
   }
 
-  @HostListener('click', ['$event'])
   onClick(event: MouseEvent) {
     event.preventDefault();
 

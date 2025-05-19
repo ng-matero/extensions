@@ -1,15 +1,11 @@
-import {
-  Directive,
-  EventEmitter,
-  HostBinding,
-  HostListener,
-  Input,
-  Output,
-  TemplateRef,
-} from '@angular/core';
+import { Directive, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 
 @Directive({
   selector: '[mtx-grid-expansion-toggle]',
+  host: {
+    '[class.expanded]': 'opened',
+    '(click)': 'onClick($event)',
+  },
 })
 export class MtxGridExpansionToggle {
   private _opened = false;
@@ -25,11 +21,6 @@ export class MtxGridExpansionToggle {
     this.openedChange.emit(newValue);
   }
   @Output() openedChange = new EventEmitter<boolean>();
-
-  @HostBinding('class.expanded')
-  get expanded(): boolean {
-    return this._opened;
-  }
 
   @Input()
   set expandableRow(value: any) {
@@ -47,16 +38,13 @@ export class MtxGridExpansionToggle {
 
   @Output() toggleChange = new EventEmitter<MtxGridExpansionToggle>();
 
-  constructor() {}
-
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent): void {
+  onClick(event: MouseEvent) {
     event.preventDefault();
     event.stopPropagation();
     this.toggle();
   }
 
-  toggle(): void {
+  toggle() {
     this.opened = !this.opened;
     this.toggleChange.emit(this);
   }

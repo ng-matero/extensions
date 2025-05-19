@@ -1,13 +1,16 @@
-import { Directive, EventEmitter, HostBinding, HostListener, Input, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, Output } from '@angular/core';
 
 @Directive({
   selector: '[mtx-grid-selectable-cell]',
+  host: {
+    '[class.selected]': 'selected',
+    '(click)': 'onClick($event)',
+  },
 })
 export class MtxGridSelectableCell {
   ctrlKeyPressed = false;
   shiftKeyPressed = false;
 
-  @HostBinding('class.selected')
   get selected() {
     return this._selected;
   }
@@ -17,8 +20,7 @@ export class MtxGridSelectableCell {
 
   @Output() cellSelectedChange = new EventEmitter<MtxGridSelectableCell>();
 
-  @HostListener('click', ['$event'])
-  onClick(event: MouseEvent): void {
+  onClick(event: MouseEvent) {
     this.ctrlKeyPressed = event.ctrlKey;
     this.shiftKeyPressed = event.shiftKey;
 
@@ -27,17 +29,17 @@ export class MtxGridSelectableCell {
     }
   }
 
-  select(): void {
+  select() {
     this._selected = true;
     this.cellSelectedChange.emit(this);
   }
 
-  deselect(): void {
+  deselect() {
     this._selected = false;
     this.cellSelectedChange.emit(this);
   }
 
-  toggle(): void {
+  toggle() {
     this._selected = !this._selected;
     this.cellSelectedChange.emit(this);
   }

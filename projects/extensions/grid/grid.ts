@@ -510,7 +510,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     column: MtxGridColumn,
     index: number
   ) {
-    this.expansionChange.emit({ expanded: expansionRef.expanded, data: rowData, index, column });
+    this.expansionChange.emit({ expanded: expansionRef.opened, data: rowData, index, column });
   }
 
   /** Cell select event */

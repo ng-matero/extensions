@@ -1,22 +1,21 @@
-import {
-  Directive,
-  ElementRef,
-  Injector,
-  NgZone,
-  ViewContainerRef,
-  ChangeDetectorRef,
-  Input,
-  HostBinding,
-  inject,
-} from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 import { Directionality } from '@angular/cdk/bidi';
 import { Overlay } from '@angular/cdk/overlay';
 import {
   CdkColumnDef,
-  _CoalescedStyleScheduler,
   _COALESCED_STYLE_SCHEDULER,
+  _CoalescedStyleScheduler,
 } from '@angular/cdk/table';
+import { DOCUMENT } from '@angular/common';
+import {
+  ChangeDetectorRef,
+  Directive,
+  ElementRef,
+  Injector,
+  Input,
+  NgZone,
+  ViewContainerRef,
+  inject,
+} from '@angular/core';
 import {
   ColumnResize,
   ColumnResizeNotifierSource,
@@ -31,7 +30,9 @@ import { AbstractMatResizable, RESIZABLE_HOST_BINDINGS, RESIZABLE_INPUTS } from 
  */
 @Directive({
   selector: 'mat-header-cell[resizable], th[mat-header-cell][resizable]',
-  host: RESIZABLE_HOST_BINDINGS,
+  host: {
+    '[class]': 'resizableClass',
+  },
   inputs: RESIZABLE_INPUTS,
 })
 export class MatResizable extends AbstractMatResizable {
@@ -52,7 +53,7 @@ export class MatResizable extends AbstractMatResizable {
 
   isResizable = true;
 
-  @HostBinding('class') get hasResizableClass() {
+  get resizableClass() {
     return this.isResizable ? RESIZABLE_HOST_BINDINGS.class : '';
   }
 
