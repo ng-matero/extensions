@@ -6,12 +6,12 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { AfterViewInit, Directive, ElementRef, OnDestroy, NgZone } from '@angular/core';
-import { coerceCssPixelValue } from '@angular/cdk/coercion';
 import { Directionality } from '@angular/cdk/bidi';
+import { coerceCssPixelValue } from '@angular/cdk/coercion';
 import { ESCAPE } from '@angular/cdk/keycodes';
-import { CdkColumnDef, _CoalescedStyleScheduler } from '@angular/cdk/table';
-import { fromEvent, Subject, merge } from 'rxjs';
+import { CdkColumnDef } from '@angular/cdk/table';
+import { AfterViewInit, Directive, ElementRef, NgZone, OnDestroy } from '@angular/core';
+import { fromEvent, merge, Subject } from 'rxjs';
 import {
   distinctUntilChanged,
   filter,
@@ -22,11 +22,12 @@ import {
   takeUntil,
 } from 'rxjs/operators';
 
-import { HEADER_CELL_SELECTOR } from './selectors';
+import { _CoalescedStyleScheduler } from './coalesced-style-scheduler';
 import { ColumnResizeNotifierSource } from './column-resize-notifier';
 import { HeaderRowEventDispatcher } from './event-dispatcher';
-import { ResizeRef } from './resize-ref';
 import { closest } from './polyfill';
+import { ResizeRef } from './resize-ref';
+import { HEADER_CELL_SELECTOR } from './selectors';
 
 // TODO: Take another look at using cdk drag drop. IIRC I ran into a couple
 // good reasons for not using it but I don't remember what they were at this point.

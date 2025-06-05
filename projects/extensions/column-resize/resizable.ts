@@ -1,5 +1,10 @@
+import { Directionality } from '@angular/cdk/bidi';
+import { Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
+import { CdkColumnDef } from '@angular/cdk/table';
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Directive,
   ElementRef,
   Injector,
@@ -7,23 +12,19 @@ import {
   OnDestroy,
   Type,
   ViewContainerRef,
-  ChangeDetectorRef,
 } from '@angular/core';
-import { Directionality } from '@angular/cdk/bidi';
-import { ComponentPortal } from '@angular/cdk/portal';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { CdkColumnDef, _CoalescedStyleScheduler } from '@angular/cdk/table';
 import { merge, Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
-import { HEADER_ROW_SELECTOR } from './selectors';
-import { ResizeOverlayHandle } from './overlay-handle';
+import { _CoalescedStyleScheduler } from './coalesced-style-scheduler';
 import { ColumnResize } from './column-resize';
-import { ColumnSizeAction, ColumnResizeNotifierSource } from './column-resize-notifier';
+import { ColumnResizeNotifierSource, ColumnSizeAction } from './column-resize-notifier';
 import { HeaderRowEventDispatcher } from './event-dispatcher';
+import { ResizeOverlayHandle } from './overlay-handle';
+import { closest } from './polyfill';
 import { ResizeRef } from './resize-ref';
 import { ResizeStrategy } from './resize-strategy';
-import { closest } from './polyfill';
+import { HEADER_ROW_SELECTOR } from './selectors';
 
 const OVERLAY_ACTIVE_CLASS = 'cdk-resizable-overlay-thumb-active';
 

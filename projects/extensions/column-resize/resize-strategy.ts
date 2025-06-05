@@ -9,8 +9,9 @@
 import { CSP_NONCE, DOCUMENT, Injectable, OnDestroy, Provider, inject } from '@angular/core';
 
 import { coerceCssPixelValue } from '@angular/cdk/coercion';
-import { CdkTable, _COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler } from '@angular/cdk/table';
+import { CdkTable } from '@angular/cdk/table';
 
+import { _COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler } from './coalesced-style-scheduler';
 import { ColumnResize } from './column-resize';
 
 /**

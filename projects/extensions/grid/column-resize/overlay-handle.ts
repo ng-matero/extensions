@@ -7,11 +7,7 @@
  */
 
 import { Directionality } from '@angular/cdk/bidi';
-import {
-  CdkColumnDef,
-  _COALESCED_STYLE_SCHEDULER,
-  _CoalescedStyleScheduler,
-} from '@angular/cdk/table';
+import { CdkColumnDef } from '@angular/cdk/table';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -28,6 +24,8 @@ import {
   HeaderRowEventDispatcher,
   ResizeOverlayHandle,
   ResizeRef,
+  _COALESCED_STYLE_SCHEDULER,
+  _CoalescedStyleScheduler,
 } from '@ng-matero/extensions/column-resize';
 
 import { AbstractMatColumnResize } from './column-resize-directives/common';

@@ -1,10 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { Overlay } from '@angular/cdk/overlay';
-import {
-  CdkColumnDef,
-  _COALESCED_STYLE_SCHEDULER,
-  _CoalescedStyleScheduler,
-} from '@angular/cdk/table';
+import { CdkColumnDef } from '@angular/cdk/table';
 import {
   ChangeDetectorRef,
   DOCUMENT,
@@ -21,6 +17,8 @@ import {
   ColumnResizeNotifierSource,
   HeaderRowEventDispatcher,
   ResizeStrategy,
+  _COALESCED_STYLE_SCHEDULER,
+  _CoalescedStyleScheduler,
 } from '@ng-matero/extensions/column-resize';
 
 import { AbstractMatResizable, RESIZABLE_HOST_BINDINGS, RESIZABLE_INPUTS } from './common';
