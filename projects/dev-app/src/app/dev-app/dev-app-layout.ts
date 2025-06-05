@@ -1,8 +1,9 @@
 import { Direction, Directionality } from '@angular/cdk/bidi';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   ChangeDetectorRef,
   Component,
+  DOCUMENT,
   ElementRef,
   NgZone,
   ViewEncapsulation,

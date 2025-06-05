@@ -6,22 +6,22 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
+import { Directionality } from '@angular/cdk/bidi';
+import {
+  CdkColumnDef,
+  _COALESCED_STYLE_SCHEDULER,
+  _CoalescedStyleScheduler,
+} from '@angular/cdk/table';
 import {
   ChangeDetectionStrategy,
   Component,
+  DOCUMENT,
   ElementRef,
   NgZone,
   ViewChild,
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import {
-  CdkColumnDef,
-  _CoalescedStyleScheduler,
-  _COALESCED_STYLE_SCHEDULER,
-} from '@angular/cdk/table';
-import { Directionality } from '@angular/cdk/bidi';
 import {
   ColumnResize,
   ColumnResizeNotifierSource,

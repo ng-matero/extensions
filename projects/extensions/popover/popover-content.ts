@@ -1,10 +1,10 @@
 import { DomPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
 import {
   ApplicationRef,
   ChangeDetectorRef,
   ComponentFactoryResolver,
   Directive,
+  DOCUMENT,
   Inject,
   InjectionToken,
   Injector,

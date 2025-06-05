@@ -22,7 +22,7 @@ import {
 } from '@angular/cdk/overlay';
 import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { DOCUMENT, NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   afterNextRender,
   AfterViewInit,
@@ -31,6 +31,7 @@ import {
   ChangeDetectorRef,
   Component,
   Directive,
+  DOCUMENT,
   ElementRef,
   inject,
   InjectionToken,

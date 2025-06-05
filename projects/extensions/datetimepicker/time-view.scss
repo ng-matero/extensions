@@ -82,7 +82,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 
   .mtx-time-am,
   .mtx-time-pm {
-    --mdc-text-button-label-text-weight: 400;
+    --mat-button-text-label-text-weight: 400;
 
     flex: 1;
     width: $time-ampm-width;
@@ -91,14 +91,14 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
     border-style: solid;
 
     @include token-utils.use-tokens($_tokens...) {
-      @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-text-color);
-      @include token-utils.create-token-slot(--mdc-text-button-container-shape, selector-container-shape);
+      @include token-utils.create-token-slot(--mat-button-text-label-text-color, time-ampm-text-color);
+      @include token-utils.create-token-slot(--mat-button-text-container-shape, selector-container-shape);
       @include token-utils.create-token-slot(border-color, time-ampm-outline-color);
 
       &.mtx-time-ampm-active {
-        --mdc-text-button-label-text-weight: 500;
+        --mat-button-text-label-text-weight: 500;
 
-        @include token-utils.create-token-slot(--mdc-text-button-label-text-color, time-ampm-selected-state-text-color);
+        @include token-utils.create-token-slot(--mat-button-text-label-text-color, time-ampm-selected-state-text-color);
         @include token-utils.create-token-slot(background-color, time-ampm-selected-state-background-color);
       }
     }

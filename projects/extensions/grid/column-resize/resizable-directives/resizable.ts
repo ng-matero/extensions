@@ -5,9 +5,9 @@ import {
   _COALESCED_STYLE_SCHEDULER,
   _CoalescedStyleScheduler,
 } from '@angular/cdk/table';
-import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectorRef,
+  DOCUMENT,
   Directive,
   ElementRef,
   Injector,

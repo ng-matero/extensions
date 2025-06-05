@@ -5,32 +5,54 @@
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
     "strict": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
     "declaration": false,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "module": "ES2022",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "target": "ES2022",
-    "typeRoots": ["node_modules/@types"],
-    "types": ["jasmine"],
-    "lib": ["ES2022", "dom"],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "jasmine"
+    ],
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
     "paths": {
-      "@ng-matero/extensions": ["projects/extensions"],
-      "@ng-matero/extensions/*": ["projects/extensions/*"],
-      "@ng-matero/extensions-moment-adapter": ["projects/extensions-moment-adapter"],
-      "@ng-matero/extensions-moment-adapter/*": ["projects/extensions-moment-adapter/*"],
-      "@ng-matero/extensions-luxon-adapter": ["projects/extensions-luxon-adapter"],
-      "@ng-matero/extensions-luxon-adapter/*": ["projects/extensions-luxon-adapter/*"],
-      "@ng-matero/extensions-date-fns-adapter": ["projects/extensions-date-fns-adapter"],
-      "@ng-matero/extensions-date-fns-adapter/*": ["projects/extensions-date-fns-adapter/*"]
+      "@ng-matero/extensions": [
+        "projects/extensions"
+      ],
+      "@ng-matero/extensions/*": [
+        "projects/extensions/*"
+      ],
+      "@ng-matero/extensions-moment-adapter": [
+        "projects/extensions-moment-adapter"
+      ],
+      "@ng-matero/extensions-moment-adapter/*": [
+        "projects/extensions-moment-adapter/*"
+      ],
+      "@ng-matero/extensions-luxon-adapter": [
+        "projects/extensions-luxon-adapter"
+      ],
+      "@ng-matero/extensions-luxon-adapter/*": [
+        "projects/extensions-luxon-adapter/*"
+      ],
+      "@ng-matero/extensions-date-fns-adapter": [
+        "projects/extensions-date-fns-adapter"
+      ],
+      "@ng-matero/extensions-date-fns-adapter/*": [
+        "projects/extensions-date-fns-adapter/*"
+      ]
     },
-    "useDefineForClassFields": false,
-    "allowSyntheticDefaultImports": true
+    "useDefineForClassFields": false
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -142,7 +142,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   .mtx-grid-checkbox-cell {
     width: 60px;
     min-width: 60px;
-    padding: 0 calc((60px - var(--mdc-checkbox-state-layer-size, 40px)) / 2);
+    padding: 0 calc((60px - var(--mat-checkbox-state-layer-size, 40px)) / 2);
   }
 }
 
@@ -234,8 +234,8 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   @include token-utils.use-tokens($_tokens...) {
     $compat-size: token-utils.get-token-variable(row-expand-button-size, 40px);
 
-    width: var(--mdc-icon-button-state-layer-size, $compat-size);
-    height: var(--mdc-icon-button-state-layer-size, $compat-size);
+    width: var(--mat-icon-button-state-layer-size, $compat-size);
+    height: var(--mat-icon-button-state-layer-size, $compat-size);
   }
 }
 

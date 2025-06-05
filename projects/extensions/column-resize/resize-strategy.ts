@@ -6,10 +6,10 @@
  * found in the LICENSE file at https://angular.io/license
  */
 
-import { Injectable, OnDestroy, Provider, CSP_NONCE, inject } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { CSP_NONCE, DOCUMENT, Injectable, OnDestroy, Provider, inject } from '@angular/core';
+
 import { coerceCssPixelValue } from '@angular/cdk/coercion';
-import { CdkTable, _CoalescedStyleScheduler, _COALESCED_STYLE_SCHEDULER } from '@angular/cdk/table';
+import { CdkTable, _COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler } from '@angular/cdk/table';
 
 import { ColumnResize } from './column-resize';
 

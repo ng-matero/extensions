@@ -1,7 +1,7 @@
-import { DOCUMENT } from '@angular/common';
 import {
   AfterViewInit,
   Component,
+  DOCUMENT,
   ElementRef,
   Input,
   OnDestroy,

@@ -15,7 +15,6 @@ import {
   ComponentType,
   TemplatePortal,
 } from '@angular/cdk/portal';
-import { DOCUMENT } from '@angular/common';
 import {
   afterNextRender,
   AfterViewInit,
@@ -25,6 +24,7 @@ import {
   ChangeDetectorRef,
   Component,
   ComponentRef,
+  DOCUMENT,
   ElementRef,
   EventEmitter,
   inject,

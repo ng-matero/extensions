@@ -148,7 +148,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
     @include token-utils.create-token-slot(background-color, calendar-header-background-color);
     @include token-utils.create-token-slot(color, calendar-header-text-color);
 
-    @include token-utils.create-token-slot(--mdc-text-button-container-shape, selector-container-shape);
+    @include token-utils.create-token-slot(--mat-button-text-container-shape, selector-container-shape);
   }
 
   .mtx-calendar-header-year,
@@ -166,7 +166,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
     font-weight: inherit;
     letter-spacing: normal;
     white-space: normal;
-    word-break: break-word;
+    overflow-wrap: anywhere;
 
     .mat-mdc-button-touch-target {
       height: 100%;

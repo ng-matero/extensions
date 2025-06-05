@@ -1,5 +1,5 @@
 import { FocusMonitor } from '@angular/cdk/a11y';
-import { DOCUMENT, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -7,6 +7,7 @@ import {
   Component,
   ContentChild,
   ContentChildren,
+  DOCUMENT,
   DoCheck,
   ElementRef,
   EventEmitter,
@@ -39,6 +40,7 @@ import { startWith, takeUntil } from 'rxjs/operators';
 import { MtxOption } from './option';
 import { MtxSelectIntl } from './select-intl';
 import {
+  MtxSelectClearbuttonTemplate,
   MtxSelectFooterTemplate,
   MtxSelectHeaderTemplate,
   MtxSelectLabelTemplate,
@@ -51,7 +53,6 @@ import {
   MtxSelectPlaceholderTemplate,
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
-  MtxSelectClearbuttonTemplate,
 } from './templates';
 
 export type DropdownPosition = 'bottom' | 'top' | 'auto';

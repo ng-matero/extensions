@@ -3,14 +3,14 @@ mat-form-field {
 }
 
 .clearbutton {
-  --mdc-icon-button-icon-size: 14px;
-  --mdc-icon-button-state-layer-size: 20px;
+  --mat-icon-button-icon-size: 14px;
+  --mat-icon-button-state-layer-size: 20px;
 
   margin-right: 3px;
 
   .mat-icon {
-    font-size: var(--mdc-icon-button-icon-size, 10px);
-    height: var(--mdc-icon-button-icon-size, 10px);
-    width: var(--mdc-icon-button-icon-size, 10px);
+    font-size: var(--mat-icon-button-icon-size, 10px);
+    height: var(--mat-icon-button-icon-size, 10px);
+    width: var(--mat-icon-button-icon-size, 10px);
   }
 }

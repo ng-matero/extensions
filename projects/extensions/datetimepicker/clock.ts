@@ -1,10 +1,10 @@
 import { normalizePassiveListenerOptions } from '@angular/cdk/platform';
-import { DOCUMENT } from '@angular/common';
 import {
   AfterContentInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
+  DOCUMENT,
   ElementRef,
   EventEmitter,
   Input,
