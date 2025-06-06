@@ -2,7 +2,6 @@ import { DomPortalOutlet, TemplatePortal } from '@angular/cdk/portal';
 import {
   ApplicationRef,
   ChangeDetectorRef,
-  ComponentFactoryResolver,
   Directive,
   DOCUMENT,
   Inject,
@@ -31,7 +30,6 @@ export abstract class _MtxPopoverContentBase implements OnDestroy {
 
   constructor(
     private _template: TemplateRef<any>,
-    private _componentFactoryResolver: ComponentFactoryResolver,
     private _appRef: ApplicationRef,
     private _injector: Injector,
     private _viewContainerRef: ViewContainerRef,
@@ -53,7 +51,6 @@ export abstract class _MtxPopoverContentBase implements OnDestroy {
     if (!this._outlet) {
       this._outlet = new DomPortalOutlet(
         this._document.createElement('div'),
-        this._componentFactoryResolver,
         this._appRef,
         this._injector
       );

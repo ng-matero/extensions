@@ -3,9 +3,8 @@ import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overl
 import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import {
   importProvidersFrom,
-  provideExperimentalCheckNoChangesForDebug,
-  provideExperimentalZonelessChangeDetection,
   provideZoneChangeDetection,
+  provideZonelessChangeDetection,
 } from '@angular/core';
 import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
 import { bootstrapApplication } from '@angular/platform-browser';
@@ -46,12 +45,7 @@ bootstrapApplication(AppComponent, {
     { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: DevAppRippleOptions },
     { provide: Directionality, useClass: DevAppDirectionality },
     cachedAppState.zoneless
-      ? provideExperimentalZonelessChangeDetection()
+      ? provideZonelessChangeDetection()
       : provideZoneChangeDetection({ eventCoalescing: true, runCoalescing: true }),
-
-    // verify for check no changes for debug
-    provideExperimentalCheckNoChangesForDebug({
-      interval: 1000,
-    }),
   ],
 }).catch(err => console.error(err));

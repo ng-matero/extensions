@@ -3,6 +3,7 @@
 @use 'sass:string';
 @use '@angular/material' as mat;
 @use '../style/elevation';
+@use '../style/sass-utils';
 @use './m3-system';
 @use './m3-tokens';
 
@@ -186,7 +187,7 @@ $_system-fallbacks: m3-system.create-system-fallbacks();
 /// @throws If given options are invalid
 /// @return {Map} The token values for the requested component.
 @function get-tokens-for($tokens, $prefix, $options...) {
-  $options: mat.private-validate-keyword-args($options, (color-variant, emit-overrides-only));
+  $options: sass-utils.validate-keyword-args($options, (color-variant, emit-overrides-only));
   @if $tokens == () {
     @return ();
   }
