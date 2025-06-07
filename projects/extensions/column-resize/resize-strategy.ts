@@ -3,16 +3,16 @@
  * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * found in the LICENSE file at https://angular.dev/license
  */
 
-import { CSP_NONCE, DOCUMENT, Injectable, OnDestroy, Provider, inject } from '@angular/core';
+import { Injectable, OnDestroy, Provider, CSP_NONCE, inject, DOCUMENT } from '@angular/core';
 
 import { coerceCssPixelValue } from '@angular/cdk/coercion';
 import { CdkTable } from '@angular/cdk/table';
 
-import { _COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler } from './coalesced-style-scheduler';
 import { ColumnResize } from './column-resize';
+import { _COALESCED_STYLE_SCHEDULER, _CoalescedStyleScheduler } from './coalesced-style-scheduler';
 
 /**
  * Provides an implementation for resizing a column.
@@ -52,7 +52,7 @@ export abstract class ResizeStrategy {
   protected updateTableWidthAndStickyColumns(delta: number): void {
     if (this._pendingResizeDelta === null) {
       const tableElement = this.columnResize.elementRef.nativeElement;
-      const tableWidth = getElementWidth(tableElement);
+      const tableWidth = this.getElementWidth(tableElement);
 
       this.styleScheduler.schedule(() => {
         tableElement.style.width = coerceCssPixelValue(tableWidth + this._pendingResizeDelta!);
@@ -66,6 +66,13 @@ export abstract class ResizeStrategy {
     }
 
     this._pendingResizeDelta = (this._pendingResizeDelta ?? 0) + delta;
+  }
+
+  /** Gets the style.width pixels on the specified element if present, otherwise its offsetWidth. */
+  protected getElementWidth(element: HTMLElement) {
+    // Optimization: Check style.width first as we probably set it already before reading
+    // offsetWidth which triggers layout.
+    return coercePixelsFromCssValue(element.style.width) || element.offsetWidth;
   }
 }
 
@@ -82,20 +89,13 @@ export class TableLayoutFixedResizeStrategy extends ResizeStrategy {
   protected readonly styleScheduler = inject<_CoalescedStyleScheduler>(_COALESCED_STYLE_SCHEDULER);
   protected readonly table = inject<CdkTable<unknown>>(CdkTable);
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {
-    super();
-  }
-
   applyColumnSize(
     _: string,
     columnHeader: HTMLElement,
     sizeInPx: number,
     previousSizeInPx?: number
   ): void {
-    const delta = sizeInPx - (previousSizeInPx ?? getElementWidth(columnHeader));
+    const delta = sizeInPx - (previousSizeInPx ?? this.getElementWidth(columnHeader));
 
     if (delta === 0) {
       return;
@@ -109,14 +109,14 @@ export class TableLayoutFixedResizeStrategy extends ResizeStrategy {
   }
 
   applyMinColumnSize(_: string, columnHeader: HTMLElement, sizeInPx: number): void {
-    const currentWidth = getElementWidth(columnHeader);
+    const currentWidth = this.getElementWidth(columnHeader);
     const newWidth = Math.max(currentWidth, sizeInPx);
 
     this.applyColumnSize(_, columnHeader, newWidth, currentWidth);
   }
 
   applyMaxColumnSize(_: string, columnHeader: HTMLElement, sizeInPx: number): void {
-    const currentWidth = getElementWidth(columnHeader);
+    const currentWidth = this.getElementWidth(columnHeader);
     const newWidth = Math.min(currentWidth, sizeInPx);
 
     this.applyColumnSize(_, columnHeader, newWidth, currentWidth);
@@ -234,7 +234,7 @@ export class CdkFlexTableResizeStrategy extends ResizeStrategy implements OnDest
       this._styleElement = this._document.createElement('style');
 
       if (this._nonce) {
-        this._styleElement.nonce = this._nonce;
+        this._styleElement.setAttribute('nonce', this._nonce);
       }
 
       this._styleElement.appendChild(this._document.createTextNode(''));
@@ -276,20 +276,13 @@ export class CdkFlexTableResizeStrategy extends ResizeStrategy implements OnDest
     const selector = `.${tableClassName} .${columnClassName}`;
     const body = propertyKeys.map(key => `${key}:${properties.get(key)}`).join(';');
 
-    this._getStyleSheet().insertRule(`${selector} {${body}}`, index);
+    this._getStyleSheet().insertRule(`${selector} {${body}}`, index!);
   }
 }
 
 /** Converts CSS pixel values to numbers, eg "123px" to 123. Returns NaN for non pixel values. */
 function coercePixelsFromCssValue(cssValue: string): number {
   return Number(cssValue.match(/(\d+)px/)?.[1]);
-}
-
-/** Gets the style.width pixels on the specified element if present, otherwise its offsetWidth. */
-function getElementWidth(element: HTMLElement) {
-  // Optimization: Check style.width first as we probably set it already before reading
-  // offsetWidth which triggers layout.
-  return coercePixelsFromCssValue(element.style.width) || element.offsetWidth;
 }
 
 /**

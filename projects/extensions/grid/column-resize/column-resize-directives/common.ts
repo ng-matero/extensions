@@ -1,6 +1,8 @@
 import { Provider } from '@angular/core';
 
 import {
+  _COALESCED_STYLE_SCHEDULER,
+  _CoalescedStyleScheduler,
   ColumnResize,
   ColumnResizeNotifier,
   ColumnResizeNotifierSource,
@@ -16,6 +18,7 @@ const PROVIDERS: Provider[] = [
   ColumnResizeNotifier,
   HeaderRowEventDispatcher,
   ColumnResizeNotifierSource,
+  { provide: _COALESCED_STYLE_SCHEDULER, useClass: _CoalescedStyleScheduler },
 ];
 export const TABLE_PROVIDERS: Provider[] = [
   ...PROVIDERS,

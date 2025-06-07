@@ -3,7 +3,7 @@
  * Copyright Google LLC All Rights Reserved.
  *
  * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * found in the LICENSE file at https://angular.dev/license
  */
 
 import { Directive, ElementRef, NgZone, inject } from '@angular/core';
@@ -29,11 +29,4 @@ export class CdkColumnResizeFlex extends ColumnResize {
   protected readonly ngZone = inject(NgZone);
   protected readonly notifier = inject(ColumnResizeNotifierSource);
   protected readonly table = inject<CdkTable<unknown>>(CdkTable);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {
-    super();
-  }
 }
