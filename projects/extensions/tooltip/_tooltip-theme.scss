@@ -3,7 +3,7 @@
 @use '../core/theming/inspection';
 @use '../core/theming/validation';
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mdc/plain-tooltip' as tokens-mdc-plain-tooltip;
+@use './m2-tooltip';
 
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
@@ -13,8 +13,8 @@
     // Add default values for tokens not related to color, typography, or density.
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mdc-plain-tooltip.$prefix,
-        tokens-mdc-plain-tooltip.get-unthemable-tokens()
+        m2-tooltip.$prefix,
+        m2-tooltip.get-unthemable-tokens()
       );
     }
   }
@@ -27,8 +27,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mdc-plain-tooltip.$prefix,
-        tokens-mdc-plain-tooltip.get-color-tokens($theme)
+        m2-tooltip.$prefix,
+        m2-tooltip.get-color-tokens($theme)
       );
     }
   }
@@ -41,8 +41,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mdc-plain-tooltip.$prefix,
-        tokens-mdc-plain-tooltip.get-typography-tokens($theme)
+        m2-tooltip.$prefix,
+        m2-tooltip.get-typography-tokens($theme)
       );
     }
   }
@@ -55,8 +55,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mdc-plain-tooltip.$prefix,
-        tokens-mdc-plain-tooltip.get-density-tokens($theme)
+        m2-tooltip.$prefix,
+        m2-tooltip.get-density-tokens($theme)
       );
     }
   }
@@ -66,8 +66,8 @@
 @function _define-overrides() {
   @return (
     (
-      namespace: tokens-mdc-plain-tooltip.$prefix,
-      tokens: tokens-mdc-plain-tooltip.get-token-slots(),
+      namespace: m2-tooltip.$prefix,
+      tokens: m2-tooltip.get-token-slots(),
     ),
   );
 }
@@ -100,7 +100,7 @@
   @include validation.selector-defined(
     'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
   @if $tokens != () {
-    $tokens: token-utils.get-tokens-for($tokens, tokens-mdc-plain-tooltip.$prefix);
-    @include token-utils.create-token-values(tokens-mdc-plain-tooltip.$prefix, $tokens);
+    $tokens: token-utils.get-tokens-for($tokens, m2-tooltip.$prefix);
+    @include token-utils.create-token-values(m2-tooltip.$prefix, $tokens);
   }
 }

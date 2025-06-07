@@ -1,31 +1,26 @@
-@use 'sass:color';
 @use 'sass:map';
-@use 'sass:meta';
 @use '@angular/material' as mat;
-@use '../../token-definition';
+@use '../core/tokens/m2-utils';
+@use '../core/style/elevation';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, split);
-
-@function private-get-color-palette-color-tokens($theme, $palette-name) {
-  @return (
-    gutter-hover-state-background-color: mat.get-theme-color($theme, $palette-name, text),
-  );
-}
+$prefix: (mtx, drawer);
 
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
-  @return ();
+  @return (
+    container-shape: 0,
+    container-elevation-shadow: elevation.get-box-shadow(16),
+  );
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
 @function get-color-tokens($theme) {
-  $gutter-tokens: private-get-color-palette-color-tokens($theme, primary);
-
-  @return mat.private-merge-all($gutter-tokens, (
-    gutter-background-color: mat.get-theme-color($theme, foreground, divider),
-  ));
+  @return (
+    container-background-color: mat.get-theme-color($theme, background, dialog),
+    container-text-color: mat.get-theme-color($theme, foreground, text),
+  );
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
@@ -43,8 +38,8 @@ $prefix: (mtx, split);
 @function get-token-slots() {
   @return mat.private-deep-merge-all(
     get-unthemable-tokens(),
-    get-color-tokens(token-definition.$placeholder-color-config),
-    get-typography-tokens(token-definition.$placeholder-typography-config),
-    get-density-tokens(token-definition.$placeholder-density-config)
+    get-color-tokens(m2-utils.$placeholder-color-config),
+    get-typography-tokens(m2-utils.$placeholder-typography-config),
+    get-density-tokens(m2-utils.$placeholder-density-config)
   );
 }

@@ -1,17 +1,17 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use '@angular/material' as mat;
-@use './mtx/alert' as tokens-mtx-alert;
-@use './mtx/colorpicker' as tokens-mtx-colorpicker;
-@use './mtx/datetimepicker' as tokens-mtx-datetimepicker;
-@use './mtx/drawer' as tokens-mtx-drawer;
-@use './mtx/grid' as tokens-mtx-grid;
-@use './mtx/loader' as tokens-mtx-loader;
-@use './mtx/popover' as tokens-mtx-popover;
-@use './mtx/progress' as tokens-mtx-progress;
-@use './mtx/select' as tokens-mtx-select;
-@use './mtx/split' as tokens-mtx-split;
-@use './mdc/plain-tooltip' as tokens-mdc-plain-tooltip;
+@use '../../alert/m2-alert';
+@use '../../colorpicker/m2-colorpicker';
+@use '../../datetimepicker/m2-datetimepicker';
+@use '../../drawer/m2-drawer';
+@use '../../grid/m2-grid';
+@use '../../loader/m2-loader';
+@use '../../popover/m2-popover';
+@use '../../progress/m2-progress';
+@use '../../select/m2-select';
+@use '../../split/m2-split';
+@use '../../tooltip/m2-tooltip';
 
 /// Gets the tokens for the given theme, m2 tokens module, and theming system.
 /// @param {Map} $theme The Angular Material theme object to generate token values from.
@@ -56,16 +56,16 @@
 ///     )
 @function m2-tokens-from-theme($theme) {
   @return mat.private-deep-merge-all(
-    _get-tokens-for-module($theme, tokens-mtx-alert),
-    _get-tokens-for-module($theme, tokens-mtx-colorpicker),
-    _get-tokens-for-module($theme, tokens-mtx-datetimepicker),
-    _get-tokens-for-module($theme, tokens-mtx-drawer),
-    _get-tokens-for-module($theme, tokens-mtx-grid),
-    _get-tokens-for-module($theme, tokens-mtx-loader),
-    _get-tokens-for-module($theme, tokens-mtx-popover),
-    _get-tokens-for-module($theme, tokens-mtx-progress),
-    _get-tokens-for-module($theme, tokens-mtx-select),
-    _get-tokens-for-module($theme, tokens-mtx-split),
-    _get-tokens-for-module($theme, tokens-mdc-plain-tooltip),
+    _get-tokens-for-module($theme, m2-alert),
+    _get-tokens-for-module($theme, m2-colorpicker),
+    _get-tokens-for-module($theme, m2-datetimepicker),
+    _get-tokens-for-module($theme, m2-drawer),
+    _get-tokens-for-module($theme, m2-grid),
+    _get-tokens-for-module($theme, m2-loader),
+    _get-tokens-for-module($theme, m2-popover),
+    _get-tokens-for-module($theme, m2-progress),
+    _get-tokens-for-module($theme, m2-select),
+    _get-tokens-for-module($theme, m2-split),
+    _get-tokens-for-module($theme, m2-tooltip),
   );
 }

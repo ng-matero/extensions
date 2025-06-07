@@ -1,9 +1,9 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '../../core/tokens/token-utils';
-@use '../../core/tokens/m2/mtx/grid' as tokens-mtx-grid;
+@use '../m2-grid';
 
-$_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
+$_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
 
 // Required for resizing to work properly.
 .mat-column-resize-table.cdk-column-resize-with-resized-column {
@@ -63,11 +63,11 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 
   @include token-utils.use-tokens($_tokens...) {
     .mat-mdc-header-cell:not(.mat-resizable)::after {
-      @include token-utils.create-token-slot(background-color, resizable-handle-disabled-background-color);
+      background-color: token-utils.slot(resizable-handle-disabled-background-color);
     }
 
     .mat-resizable-handle {
-      @include token-utils.create-token-slot(background-color, resizable-handle-hover-background-color);
+      background-color: token-utils.slot(resizable-handle-hover-background-color);
     }
   }
 }
@@ -82,7 +82,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   outline: none;
 
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(background-color, resizable-handle-active-background-color);
+    background-color: token-utils.slot(resizable-handle-active-background-color);
   }
 }
 
@@ -99,17 +99,17 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
     will-change: transform;
 
     @include token-utils.use-tokens($_tokens...) {
-      $background-color: token-utils.get-token-variable(resizable-handle-active-background-color);
+      $bg-color: token-utils.slot(resizable-handle-active-background-color);
 
       background: linear-gradient(90deg,
           transparent, transparent 7px,
-          $background-color 7px, $background-color 9px,
+          $bg-color 7px, $bg-color 9px,
           transparent 9px, transparent);
 
       .mat-column-resize-overlay-thumb-top {
         background: linear-gradient(90deg,
             transparent, transparent 4px,
-            $background-color 4px, $background-color 12px,
+            $bg-color 4px, $bg-color 12px,
             transparent 12px, transparent);
       }
     }

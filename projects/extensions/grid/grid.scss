@@ -1,7 +1,7 @@
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/grid' as tokens-mtx-grid;
+@use './m2-grid';
 
-$_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
+$_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
 
 .mtx-grid {
   position: relative;
@@ -11,37 +11,32 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   overflow: hidden;
 
   @include token-utils.use-tokens($_tokens...) {
-    $border-color: token-utils.get-token-variable(outline-color);
-
-    border: 1px solid $border-color;
-
-    @include token-utils.create-token-slot(border-radius, container-shape);
+    border: 1px solid token-utils.slot(outline-color);
+    border-radius: token-utils.slot(container-shape);
 
     .mat-mdc-table {
-      --mat-table-row-item-outline-color: #{$border-color};
+      --mat-table-row-item-outline-color: #{token-utils.slot(outline-color)};
 
       &.mat-table-striped .mat-row-odd {
-        @include token-utils.create-token-slot(background-color, table-row-striped-background-color);
+        background-color: token-utils.slot(table-row-striped-background-color);
       }
 
       &.mat-table-hover {
         .mat-mdc-row:hover {
-          @include token-utils.create-token-slot(background-color, table-row-hover-background-color);
+          background-color: token-utils.slot(table-row-hover-background-color);
         }
 
         .mat-mdc-row.selected:hover {
-          @include token-utils.create-token-slot(background-color, table-row-selected-hover-background-color);
+          background-color: token-utils.slot(table-row-selected-hover-background-color);
         }
       }
 
       .mat-mdc-row.selected {
-        @include token-utils.create-token-slot(background-color, table-row-selected-background-color);
+        background-color: token-utils.slot(table-row-selected-background-color);
       }
 
       .mat-mdc-cell.selected {
-        $shadow-color: token-utils.get-token-variable(table-cell-selected-outline-color);
-
-        box-shadow: inset 0 0 0 1px $shadow-color;
+        box-shadow: inset 0 0 0 1px token-utils.slot(table-cell-selected-outline-color);
       }
     }
   }
@@ -63,7 +58,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
     .mat-mdc-cell {
       &:not(.mtx-grid-checkbox-cell) {
         @include token-utils.use-tokens($_tokens...) {
-          @include token-utils.create-token-slot(min-width, table-cell-min-width);
+          min-width: token-utils.slot(table-cell-min-width);
         }
       }
     }
@@ -91,7 +86,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
     border-top: 1px solid var(--mat-table-row-item-outline-color);
 
     @include token-utils.use-tokens($_tokens...) {
-      @include token-utils.create-token-slot(background-color, table-footer-background-color);
+      background-color: token-utils.slot(table-footer-background-color);
     }
   }
 
@@ -126,12 +121,9 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 
   .mat-mdc-paginator {
     @include token-utils.use-tokens($_tokens...) {
-      $border-color: token-utils.get-token-variable(outline-color);
-
-      border-top: 1px solid $border-color;
-
-      @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
-      @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
+      border-top: 1px solid token-utils.slot(outline-color);
+      border-bottom-left-radius: token-utils.slot(container-shape);
+      border-bottom-right-radius: token-utils.slot(container-shape);
     }
   }
 
@@ -162,9 +154,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   box-sizing: border-box;
 
   @include token-utils.use-tokens($_tokens...) {
-    $border-color: token-utils.get-token-variable(outline-color);
-
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid token-utils.slot(outline-color);
   }
 }
 
@@ -189,13 +179,11 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   max-width: 50%;
 
   @include token-utils.use-tokens($_tokens...) {
-    $border-color: token-utils.get-token-variable(outline-color);
-
-    border-left: 1px solid $border-color;
+    border-left: 1px solid token-utils.slot(outline-color);
 
     [dir='rtl'] & {
       border-left-width: 0;
-      border-right: 1px solid $border-color;
+      border-right: 1px solid token-utils.slot(outline-color);
     }
   }
 }
@@ -213,9 +201,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   box-sizing: border-box;
 
   @include token-utils.use-tokens($_tokens...) {
-    $border-color: token-utils.get-token-variable(outline-color);
-
-    border-top: 1px solid $border-color;
+    border-top: 1px solid token-utils.slot(outline-color);
   }
 }
 
@@ -232,10 +218,8 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   vertical-align: middle;
 
   @include token-utils.use-tokens($_tokens...) {
-    $compat-size: token-utils.get-token-variable(row-expand-button-size, 40px);
-
-    width: var(--mat-icon-button-state-layer-size, $compat-size);
-    height: var(--mat-icon-button-state-layer-size, $compat-size);
+    width: var(--mat-icon-button-state-layer-size, token-utils.slot(row-expand-button-size, 40px));
+    height: var(--mat-icon-button-state-layer-size, token-utils.slot(row-expand-button-size, 40px));
   }
 }
 

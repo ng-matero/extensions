@@ -1,8 +1,8 @@
 @use '@angular/material' as mat;
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/select' as tokens-mtx-select;
+@use './m2-select';
 
-$_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
+$_tokens: m2-select.$prefix, m2-select.get-token-slots();
 
 @mixin rtl {
   @at-root [dir='rtl'] #{&} {
@@ -30,8 +30,7 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
     .ng-select-container {
       align-items: center;
-
-      @include token-utils.create-token-slot(color, container-text-color);
+      color: token-utils.slot(container-text-color);
 
       .ng-value-container {
         align-items: center;
@@ -56,8 +55,7 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
     .ng-placeholder {
       transition: opacity 200ms;
       opacity: 1;
-
-      @include token-utils.create-token-slot(color, placeholder-text-color);
+      color: token-utils.slot(placeholder-text-color);
 
       .mat-form-field-hide-placeholder & {
         opacity: 0;
@@ -69,16 +67,16 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
     }
 
     .ng-clear-wrapper {
-      @include token-utils.create-token-slot(color, clear-icon-color);
+      color: token-utils.slot(clear-icon-color);
 
       &:hover .ng-clear {
-        @include token-utils.create-token-slot(color, clear-icon-hover-color);
+        color: token-utils.slot(clear-icon-hover-color);
       }
     }
 
     &.ng-select-disabled {
       .ng-value {
-        @include token-utils.create-token-slot(color, disabled-text-color);
+        color: token-utils.slot(disabled-text-color);
       }
     }
 
@@ -104,12 +102,8 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
         padding: 0 calc(($text-line-height - 16px) / 2);
         border-radius: 9999px;
         font-size: .875em;
-
-        @include token-utils.create-token-slot(background-color, multiple-value-background-color);
-
-        $border-color: token-utils.get-token-variable(multiple-value-outline-color);
-
-        border: 1px solid $border-color;
+        background-color: token-utils.slot(multiple-value-background-color);
+        border: 1px solid token-utils.slot(multiple-value-outline-color);
 
         &.ng-value-disabled {
           opacity: .4;
@@ -129,13 +123,13 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
           text-align: center;
 
           &:hover {
-            @include token-utils.create-token-slot(background-color, multiple-value-icon-hover-background-color);
+            background-color: token-utils.slot(multiple-value-icon-hover-background-color);
           }
         }
       }
 
       &.ng-select-disabled .ng-select-container .ng-value-container .ng-value {
-        border-color: token-utils.get-token-variable(multiple-value-disabled-outline-color);
+        border-color: token-utils.slot(multiple-value-disabled-outline-color);
       }
     }
 
@@ -143,9 +137,9 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
       width: 10px;
     }
 
-    $enabled-arrow-color: token-utils.get-token-variable(enabled-arrow-color);
-    $disabled-arrow-color: token-utils.get-token-variable(disabled-arrow-color);
-    $invalid-arrow-color: token-utils.get-token-variable(invalid-arrow-color);
+    $enabled-arrow-color: token-utils.slot(enabled-arrow-color);
+    $disabled-arrow-color: token-utils.slot(disabled-arrow-color);
+    $invalid-arrow-color: token-utils.slot(invalid-arrow-color);
 
     .ng-arrow {
       border-width: 5px 5px 2px;
@@ -173,22 +167,20 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
 
 .ng-dropdown-panel {
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(background-color, panel-background-color);
+    background-color: token-utils.slot(panel-background-color);
 
     &.ng-select-bottom {
       top: 100%;
-
-      @include token-utils.create-token-slot(border-bottom-left-radius, container-shape);
-      @include token-utils.create-token-slot(border-bottom-right-radius, container-shape);
-      @include token-utils.create-token-slot(box-shadow, container-elevation-shadow);
+      border-bottom-left-radius: token-utils.slot(container-shape);
+      border-bottom-right-radius: token-utils.slot(container-shape);
+      box-shadow: token-utils.slot(container-elevation-shadow);
     }
 
     &.ng-select-top {
       bottom: 100%;
-
-      @include token-utils.create-token-slot(border-top-left-radius, container-shape);
-      @include token-utils.create-token-slot(border-top-right-radius, container-shape);
-      @include token-utils.create-token-slot(box-shadow, container-elevation-shadow);
+      border-top-left-radius: token-utils.slot(container-shape);
+      border-top-right-radius: token-utils.slot(container-shape);
+      box-shadow: token-utils.slot(container-elevation-shadow);
     }
 
     .ng-dropdown-header,
@@ -196,14 +188,12 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
       padding: 14px 16px;
     }
 
-    $border-color: token-utils.get-token-variable(panel-divider-color);
-
     .ng-dropdown-header {
-      border-bottom: 1px solid $border-color;
+      border-bottom: 1px solid token-utils.slot(panel-divider-color);
     }
 
     .ng-dropdown-footer {
-      border-top: 1px solid $border-color;
+      border-top: 1px solid token-utils.slot(panel-divider-color);
     }
 
     .ng-dropdown-panel-items {
@@ -212,20 +202,19 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
         font-weight: 500;
         user-select: none;
         cursor: pointer;
-
-        @include token-utils.create-token-slot(color, optgroup-label-text-color);
+        color: token-utils.slot(optgroup-label-text-color);
 
         &.ng-option-disabled {
           cursor: default;
         }
 
         &.ng-option-marked {
-          @include token-utils.create-token-slot(background-color, option-hover-state-background-color);
+          background-color: token-utils.slot(option-hover-state-background-color);
         }
 
         &.ng-option-selected {
-          @include token-utils.create-token-slot(background-color, option-selected-state-background-color);
-          @include token-utils.create-token-slot(color, option-selected-state-text-color);
+          background-color: token-utils.slot(option-selected-state-background-color);
+          color: token-utils.slot(option-selected-state-text-color);
         }
       }
 
@@ -237,20 +226,19 @@ $_tokens: tokens-mtx-select.$prefix, tokens-mtx-select.get-token-slots();
         text-align: left;
         white-space: nowrap;
         overflow: hidden;
-
-        @include token-utils.create-token-slot(color, option-label-text-color);
+        color: token-utils.slot(option-label-text-color);
 
         &.ng-option-marked {
-          @include token-utils.create-token-slot(background-color, option-hover-state-background-color);
+          background-color: token-utils.slot(option-hover-state-background-color);
         }
 
         &.ng-option-selected {
-          @include token-utils.create-token-slot(background-color, option-selected-state-background-color);
-          @include token-utils.create-token-slot(color, option-selected-state-text-color);
+          background-color: token-utils.slot(option-selected-state-background-color);
+          color: token-utils.slot(option-selected-state-text-color);
         }
 
         &.ng-option-disabled {
-          @include token-utils.create-token-slot(color, option-disabled-state-text-color);
+          color: token-utils.slot(option-disabled-state-text-color);
         }
 
         @include rtl {

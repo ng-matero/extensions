@@ -3,10 +3,9 @@
 @use '../core/theming/inspection';
 @use '../core/theming/validation';
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/grid' as tokens-mtx-grid;
+@use './m2-grid';
 
 @use './column-resize/column-resize';
-
 
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
@@ -15,8 +14,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mtx-grid.$prefix,
-        tokens-mtx-grid.get-unthemable-tokens()
+        m2-grid.$prefix,
+        m2-grid.get-unthemable-tokens()
       );
     }
   }
@@ -29,8 +28,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mtx-grid.$prefix,
-        tokens-mtx-grid.get-color-tokens($theme)
+        m2-grid.$prefix,
+        m2-grid.get-color-tokens($theme)
       );
     }
   }
@@ -50,8 +49,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mtx-grid.$prefix,
-        tokens-mtx-grid.get-density-tokens($theme)
+        m2-grid.$prefix,
+        m2-grid.get-density-tokens($theme)
       );
     }
   }
@@ -61,8 +60,8 @@
 @function _define-overrides() {
   @return (
     (
-      namespace: tokens-mtx-grid.$prefix,
-      tokens: tokens-mtx-grid.get-token-slots(),
+      namespace: m2-grid.$prefix,
+      tokens: m2-grid.get-token-slots(),
     ),
   );
 }
@@ -95,7 +94,7 @@
   @include validation.selector-defined(
     'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
   @if ($tokens != ()) {
-    @include token-utils.create-token-values(tokens-mtx-grid.$prefix,
-      map.get($tokens, tokens-mtx-grid.$prefix));
+    @include token-utils.create-token-values(m2-grid.$prefix,
+      map.get($tokens, m2-grid.$prefix));
   }
 }

@@ -6,12 +6,12 @@
 @use './config-validation';
 
 // Prefix used for component token fallback variables, e.g.
-// `color: var(--mat-button-text-label-text-color, var(--mat-sys-primary));`
+// `color: var(--mat-text-button-label-text-color, var(--mat-sys-primary));`
 $system-fallback-prefix: mat-sys;
 
 // Default system level prefix to use when directly calling the `system-level-*` mixins.
 // Prefix used for component token fallback variables, e.g.
-// `color: var(--mat-button-text-label-text-color, var(--mat-sys-primary));`
+// `color: var(--mat-text-button-label-text-color, var(--mat-sys-primary));`
 // TODO: Remove this variable after internal clients are migrated from "sys"
 $system-level-prefix: mat-sys;
 
@@ -41,7 +41,7 @@ $theme-version: 1;
 /// @param {Map} $config The color configuration
 /// @return {Map} A theme object
 @function define-colors($config: ()) {
-$err: config-validation.validate-color-config($config);
+  $err: config-validation.validate-color-config($config);
   @if $err {
     @error $err;
   }
@@ -85,7 +85,7 @@ $err: config-validation.validate-color-config($config);
   $bold: map.get($config, bold-weight) or 700;
   $medium: map.get($config, medium-weight) or 500;
   $regular: map.get($config, regular-weight) or 400;
-  $system-variables-prefix: map.get($config, system-variables-prefix) or sys;
+  $system-variables-prefix: map.get($config, system-variables-prefix) or $system-level-prefix;
   mat.$private-use-system-typography-variables: map.get($config, use-system-variables) or false;
 
   @return (

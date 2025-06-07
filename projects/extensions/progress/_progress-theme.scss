@@ -3,7 +3,7 @@
 @use '../core/theming/inspection';
 @use '../core/theming/validation';
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/progress' as tokens-mtx-progress;
+@use './m2-progress';
 
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
@@ -12,8 +12,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mtx-progress.$prefix,
-        tokens-mtx-progress.get-unthemable-tokens()
+        m2-progress.$prefix,
+        m2-progress.get-unthemable-tokens()
       );
     }
   }
@@ -26,8 +26,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mtx-progress.$prefix,
-        tokens-mtx-progress.get-color-tokens($theme)
+        m2-progress.$prefix,
+        m2-progress.get-color-tokens($theme)
       );
     }
   }
@@ -40,8 +40,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mtx-progress.$prefix,
-        tokens-mtx-progress.get-typography-tokens($theme)
+        m2-progress.$prefix,
+        m2-progress.get-typography-tokens($theme)
       );
     }
   }
@@ -58,8 +58,8 @@
 @function _define-overrides() {
   @return (
     (
-      namespace: tokens-mtx-progress.$prefix,
-      tokens: tokens-mtx-progress.get-token-slots(),
+      namespace: m2-progress.$prefix,
+      tokens: m2-progress.get-token-slots(),
     ),
   );
 }
@@ -92,7 +92,7 @@
   @include validation.selector-defined(
     'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
   @if ($tokens != ()) {
-    @include token-utils.create-token-values(tokens-mtx-progress.$prefix,
-      map.get($tokens, tokens-mtx-progress.$prefix));
+    @include token-utils.create-token-values(m2-progress.$prefix,
+      map.get($tokens, m2-progress.$prefix));
   }
 }

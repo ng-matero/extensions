@@ -1,5 +1,5 @@
 @use 'sass:map';
-@use '../../token-definition';
+@use '../core/tokens/m3-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, popover);
@@ -18,8 +18,8 @@ $prefix: (mtx, popover);
     text-color: map.get($systems, md-sys-color, on-surface),
     // Note that this uses a value, rather than a computed box-shadow, because we use
     // the value at runtime to determine which shadow to set based on the popover's depth.
-    base-elevation-level: token-definition.hardcode(2, $exclude-hardcoded),
+    base-elevation-level: m3-utils.hardcode(2, $exclude-hardcoded),
   );
 
-  @return token-definition.namespace-tokens($prefix, $tokens, $token-slots);
+  @return m3-utils.namespace($prefix, $tokens, $token-slots);
 }

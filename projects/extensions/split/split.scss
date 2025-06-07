@@ -1,11 +1,11 @@
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/split' as tokens-mtx-split;
+@use './m2-split';
 
 $gutter-size: 4px;
 $handle-size: 8px;
 $handle-offset: ($handle-size - $gutter-size) * .5;
 
-$_tokens: tokens-mtx-split.$prefix, tokens-mtx-split.get-token-slots();
+$_tokens: m2-split.$prefix, m2-split.get-token-slots();
 
 .mtx-split {
   display: flex;
@@ -25,10 +25,10 @@ $_tokens: tokens-mtx-split.$prefix, tokens-mtx-split.get-token-slots();
     justify-content: center;
 
     @include token-utils.use-tokens($_tokens...) {
-      @include token-utils.create-token-slot(background-color, gutter-background-color);
+      background-color: token-utils.slot(gutter-background-color);
 
       &:hover {
-        @include token-utils.create-token-slot(background-color, gutter-hover-state-background-color);
+        background-color: token-utils.slot(gutter-hover-state-background-color);
       }
     }
 

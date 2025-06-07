@@ -1,10 +1,10 @@
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/progress' as tokens-mtx-progress;
+@use './m2-progress';
 
 $progress-height: 16px !default;
 $progress-fill-animation-timing: 1s linear infinite !default;
 
-$_tokens: tokens-mtx-progress.$prefix, tokens-mtx-progress.get-token-slots();
+$_tokens: m2-progress.$prefix, m2-progress.get-token-slots();
 
 @mixin gradient-striped($color: rgba(white, .15), $angle: 45deg) {
   background-image:
@@ -27,9 +27,9 @@ $_tokens: tokens-mtx-progress.$prefix, tokens-mtx-progress.get-token-slots();
   overflow: hidden;
 
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(font-size, text-size);
-    @include token-utils.create-token-slot(border-radius, container-shape);
-    @include token-utils.create-token-slot(background-color, track-color);
+    font-size: token-utils.slot(text-size);
+    border-radius: token-utils.slot(container-shape);
+    background-color: token-utils.slot(track-color);
   }
 }
 
@@ -41,36 +41,36 @@ $_tokens: tokens-mtx-progress.$prefix, tokens-mtx-progress.get-token-slots();
   transition: width .6s ease;
 
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(background-color, indicator-color);
-    @include token-utils.create-token-slot(color, text-color);
+    background-color: token-utils.slot(indicator-color);
+    color: token-utils.slot(text-color);
   }
 }
 
 .mtx-progress-fill-info {
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(background-color, info-indicator-color);
-    @include token-utils.create-token-slot(color, info-text-color);
+    background-color: token-utils.slot(info-indicator-color);
+    color: token-utils.slot(info-text-color);
   }
 }
 
 .mtx-progress-fill-success {
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(background-color, success-indicator-color);
-    @include token-utils.create-token-slot(color, success-text-color);
+    background-color: token-utils.slot(success-indicator-color);
+    color: token-utils.slot(success-text-color);
   }
 }
 
 .mtx-progress-fill-warning {
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(background-color, warning-indicator-color);
-    @include token-utils.create-token-slot(color, warning-text-color);
+    background-color: token-utils.slot(warning-indicator-color);
+    color: token-utils.slot(warning-text-color);
   }
 }
 
 .mtx-progress-fill-danger {
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(background-color, danger-indicator-color);
-    @include token-utils.create-token-slot(color, danger-text-color);
+    background-color: token-utils.slot(danger-indicator-color);
+    color: token-utils.slot(danger-text-color);
   }
 }
 

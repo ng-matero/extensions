@@ -1,8 +1,8 @@
 @use '@angular/cdk';
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/colorpicker' as tokens-mtx-colorpicker;
+@use './m2-colorpicker';
 
-$_tokens: tokens-mtx-colorpicker.$prefix, tokens-mtx-colorpicker.get-token-slots();
+$_tokens: m2-colorpicker.$prefix, m2-colorpicker.get-token-slots();
 
 // We support the case where the form field is disabled, but the colorpicker is not.
 // MDC sets `pointer-events: none` on disabled form fields which prevents clicks on the toggle.
@@ -10,13 +10,13 @@ $_tokens: tokens-mtx-colorpicker.$prefix, tokens-mtx-colorpicker.get-token-slots
   pointer-events: auto;
 
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(color, toggle-icon-color);
+    color: token-utils.slot(toggle-icon-color);
   }
 }
 
 .mtx-colorpicker-toggle-active {
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(color, toggle-active-state-icon-color);
+    color: token-utils.slot(toggle-active-state-icon-color);
   }
 }
 

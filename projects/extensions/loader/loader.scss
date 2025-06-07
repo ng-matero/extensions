@@ -1,5 +1,5 @@
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/loader' as tokens-mtx-loader;
+@use './m2-loader';
 
 .mtx-loader {
   position: relative;
@@ -41,7 +41,7 @@
   height: 100%;
   content: '';
 
-  @include token-utils.use-tokens(tokens-mtx-loader.$prefix, tokens-mtx-loader.get-token-slots()) {
-    @include token-utils.create-token-slot(background-color, backdrop-background-color);
+  @include token-utils.use-tokens(m2-loader.$prefix, m2-loader.get-token-slots()) {
+    background-color: token-utils.slot(backdrop-background-color);
   }
 }

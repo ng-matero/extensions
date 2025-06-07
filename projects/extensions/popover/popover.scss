@@ -1,10 +1,10 @@
 /* stylelint-disable keyframes-name-pattern */
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/popover' as tokens-mtx-popover;
+@use './m2-popover';
 
 $arrow-size: 1em; // 16px default
 
-$_tokens: tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots();
+$_tokens: m2-popover.$prefix, m2-popover.get-token-slots();
 
 @keyframes _mtx-popover-enter {
   from {
@@ -37,9 +37,9 @@ $_tokens: tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots();
   animation: _mtx-popover-enter 120ms cubic-bezier(0, 0, 0.2, 1);
 
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(border-radius, container-shape);
-    @include token-utils.create-token-slot(background-color, background-color);
-    @include token-utils.create-token-slot(color, text-color);
+    border-radius: token-utils.slot(container-shape);
+    background-color: token-utils.slot(background-color);
+    color: token-utils.slot(text-color);
   }
 
   &.mtx-popover-panel-exit-animation {
@@ -103,15 +103,14 @@ $_tokens: tokens-mtx-popover.$prefix, tokens-mtx-popover.get-token-slots();
 
   @include token-utils.use-tokens($_tokens...) {
     &::before {
-      @include token-utils.create-token-slot(border-color, outline-color);
+      border-color: token-utils.slot(outline-color);
     }
 
     &::after {
       border-width: calc(#{$arrow-size * .5} - 1px);
-      @include token-utils.create-token-slot(border-color, background-color);
+      border-color: token-utils.slot(background-color);
     }
   }
-
 }
 
 // Arrow up and down

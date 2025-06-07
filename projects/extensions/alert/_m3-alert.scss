@@ -1,6 +1,6 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../../token-definition';
+@use '../core/tokens/m3-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, alert);
@@ -37,5 +37,7 @@ $prefix: (mtx, alert);
     danger-text-color: light-dark(map.get(mat.$red-palette, 20), map.get(mat.$red-palette, 90)),
   );
 
-  @return token-definition.namespace-tokens($prefix, $tokens, $token-slots);
+  $variant-tokens: ();
+
+  @return m3-utils.namespace($prefix, ($tokens, $variant-tokens), $token-slots);
 }

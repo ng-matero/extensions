@@ -2,8 +2,8 @@
 @use 'sass:map';
 @use 'sass:meta';
 @use '@angular/material' as mat;
-@use '../../token-definition';
-@use '../../../style/elevation';
+@use '../core/tokens/m2-utils';
+@use '../core/style/elevation';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
 $prefix: (mtx, datetimepicker);
@@ -145,8 +145,8 @@ $_today-fade-amount: .2;
 @function get-token-slots() {
   @return mat.private-deep-merge-all(
     get-unthemable-tokens(),
-    get-color-tokens(token-definition.$placeholder-color-config),
-    get-typography-tokens(token-definition.$placeholder-typography-config),
-    get-density-tokens(token-definition.$placeholder-density-config)
+    get-color-tokens(m2-utils.$placeholder-color-config),
+    get-typography-tokens(m2-utils.$placeholder-typography-config),
+    get-density-tokens(m2-utils.$placeholder-density-config)
   );
 }

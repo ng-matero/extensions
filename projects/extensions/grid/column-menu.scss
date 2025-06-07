@@ -1,13 +1,13 @@
 @use '@angular/material' as mat;
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/grid' as tokens-mtx-grid;
+@use './m2-grid';
 
-$_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
+$_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
 
 .mtx-grid-column-menu,
 .mtx-grid-column-pin-list {
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(color, column-menu-text-color);
+    color: token-utils.slot(column-menu-text-color);
   }
 }
 
@@ -34,9 +34,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   top: 0;
 
   @include token-utils.use-tokens($_tokens...) {
-    $border-color: token-utils.get-token-variable(column-menu-divider-color);
-
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid token-utils.slot(column-menu-divider-color);
   }
 }
 
@@ -44,9 +42,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
   bottom: 0;
 
   @include token-utils.use-tokens($_tokens...) {
-    $border-color: token-utils.get-token-variable(column-menu-divider-color);
-
-    border-top: 1px solid $border-color;
+    border-top: 1px solid token-utils.slot(column-menu-divider-color);
   }
 }
 
@@ -81,9 +77,7 @@ $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
     border-radius: 4px;
 
     @include token-utils.use-tokens($_tokens...) {
-      $shadow-color: token-utils.get-token-variable(outline-color);
-
-      box-shadow: 0 0 0 1px $shadow-color;
+      box-shadow: 0 0 0 1px token-utils.slot(outline-color);
     }
   }
 

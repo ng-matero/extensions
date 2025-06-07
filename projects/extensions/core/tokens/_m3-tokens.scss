@@ -1,10 +1,20 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use './m3';
-@use './m3/definitions' as m3-token-definitions;
-@use '../tokens/m2' as m2-tokens;
+@use '../../alert/m3-alert';
+@use '../../colorpicker/m3-colorpicker';
+@use '../../datetimepicker/m3-datetimepicker';
+@use '../../drawer/m3-drawer';
+@use '../../grid/m3-grid';
+@use '../../loader/m3-loader';
+@use '../../popover/m3-popover';
+@use '../../progress/m3-progress';
+@use '../../select/m3-select';
+@use '../../split/m3-split';
+@use '../../tooltip/m3-tooltip';
 @use './density';
 @use './format-tokens';
+@use './m2-tokens';
+@use './m3';
 
 /// Generates tokens for the given palette with the given prefix.
 /// @param {Map} $palette The palette to generate tokens for
@@ -107,10 +117,10 @@ $_cached-token-slots: null;
   $result: mat.private-deep-merge-all(
     // Add the system color & typography tokens (so we can give users access via an API).
     (
-      (mdc, theme): map.get($systems, md-sys-color),
-      (mdc, typography): map.get($systems, md-sys-typescale),
+      (mat, theme): map.get($systems, md-sys-color),
+      (mat, typography): map.get($systems, md-sys-typescale),
     ),
-    m3.get-m3-tokens($systems, $exclude-hardcoded, $token-slots),
+    get-m3-tokens($systems, $exclude-hardcoded, $token-slots),
   );
 
   // Strip out tokens that are systemized by our made up density system.
@@ -136,8 +146,8 @@ $_cached-token-slots: null;
 
 @function _get-sys-color($type, $ref, $prefix) {
   $mdc-sys-color: if($type == dark,
-    m3-token-definitions.md-sys-color-values-dark($ref),
-    m3-token-definitions.md-sys-color-values-light($ref));
+    m3.md-sys-color-values-dark($ref),
+    m3.md-sys-color-values-light($ref));
 
   @if (mat.$private-use-system-color-variables) {
     $keys: (
@@ -191,7 +201,7 @@ $_cached-token-slots: null;
             'tertiary-fixed-dim'
     );
     @return map.merge(create-map($keys, $prefix), (
-            shadow: map.get($mdc-sys-color, shadow)
+      shadow: map.get($mdc-sys-color, shadow)
     ));
   }
 
@@ -297,7 +307,7 @@ $_cached-token-slots: null;
 
     @return create-map($keys, $prefix);
   }
-  @return m3-token-definitions.md-sys-typescale-values($ref);
+  @return m3.md-sys-typescale-values($ref);
 }
 
 /// Generates a set of namespaced color tokens for all components.
@@ -321,12 +331,12 @@ $_cached-token-slots: null;
     md-sys-color: $sys-color,
     // Because the elevation values are always combined with color values to create the box shadow,
     // elevation needs to be part of the color dimension.
-    md-sys-elevation: m3-token-definitions.md-sys-elevation-values(),
+    md-sys-elevation: m3.md-sys-elevation-values(),
     // Because the state values are sometimes combined with color values to create rgba colors,
     // state needs to be part of color dimension.
     // TODO(mmalerba): If at some point we remove the need for these combined values, we can move
     //  state to the base dimension.
-    md-sys-state: m3-token-definitions.md-sys-state-values(),
+    md-sys-state: m3.md-sys-state-values(),
   )));
 }
 
@@ -362,7 +372,35 @@ $system-variables-prefix) {
 @function generate-base-tokens() {
   // TODO(mmalerba): Exclude density tokens once implemented.
   @return generate-tokens((
-    md-sys-motion: m3-token-definitions.md-sys-motion-values(),
-    md-sys-shape: m3-token-definitions.md-sys-shape-values(),
+    md-sys-motion: m3.md-sys-motion-values(),
+    md-sys-shape: m3.md-sys-shape-values(),
   ), $include-non-systemized: true);
+}
+
+/// Gets the full set of M3 tokens for the given theme object.
+/// @param {Map} $systems The MDC system tokens
+/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
+/// @param {Map} $token-slots Possible token slots
+/// @return {Map} Full set of M3 tokens
+@function get-m3-tokens($systems, $exclude-hardcoded, $token-slots) {
+  $tokens-list: (
+    m3-alert.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-colorpicker.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-datetimepicker.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-drawer.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-grid.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-loader.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-popover.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-progress.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-select.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-split.get-tokens($systems, $exclude-hardcoded, $token-slots),
+    m3-tooltip.get-tokens($systems, $exclude-hardcoded, $token-slots),
+  );
+
+  $merged-tokens: ();
+  @each $tokens in $tokens-list {
+    $merged-tokens: map.deep-merge($merged-tokens, $tokens);
+  }
+
+  @return $merged-tokens;
 }

@@ -1,8 +1,8 @@
 @use '@angular/material' as mat;
-@use '../../token-definition';
+@use '../core/tokens/m2-utils';
 
 // The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mdc, plain-tooltip);
+$prefix: (mtx, tooltip);
 
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
@@ -12,12 +12,8 @@ $prefix: (mdc, plain-tooltip);
 // our CSS.
 @function get-unthemable-tokens() {
   @return (
-    // Border radius for the tooltip container.
     container-shape: 4px,
-    // Line height of the tooltip text.
     supporting-text-line-height: 16px,
-    // MDC does not seem to use these token.
-    supporting-text-type: null,
   );
 }
 
@@ -25,9 +21,7 @@ $prefix: (mdc, plain-tooltip);
 @function get-color-tokens($theme) {
 
   @return (
-    // Color of the tooltip container.
     container-color: mat.get-theme-color($theme, background, tooltip),
-    // Color of the tooltip text.
     supporting-text-color: #fff,
   );
 }
@@ -35,13 +29,9 @@ $prefix: (mdc, plain-tooltip);
 // Tokens that can be configured through Angular Material's typography theming API.
 @function get-typography-tokens($theme) {
   @return (
-    // Font for the tooltip text.
     supporting-text-font: mat.get-theme-typography($theme, caption, font-family),
-    // Font size for the tooltip text.
     supporting-text-size: mat.get-theme-typography($theme, caption, font-size),
-    // Font weight of the tooltip text.
     supporting-text-weight: mat.get-theme-typography($theme, caption, font-weight),
-    // Tracking (space between letters) of the tooltip text.
     supporting-text-tracking: mat.get-theme-typography($theme, caption, letter-spacing),
   );
 }
@@ -56,8 +46,8 @@ $prefix: (mdc, plain-tooltip);
 @function get-token-slots() {
   @return mat.private-deep-merge-all(
       get-unthemable-tokens(),
-      get-color-tokens(token-definition.$placeholder-color-config),
-      get-typography-tokens(token-definition.$placeholder-typography-config),
-      get-density-tokens(token-definition.$placeholder-density-config)
+      get-color-tokens(m2-utils.$placeholder-color-config),
+      get-typography-tokens(m2-utils.$placeholder-typography-config),
+      get-density-tokens(m2-utils.$placeholder-density-config)
   );
 }

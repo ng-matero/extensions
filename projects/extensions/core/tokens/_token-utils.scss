@@ -5,7 +5,6 @@
 @use '../style/elevation';
 @use '../style/sass-utils';
 @use './m3-system';
-@use './m3-tokens';
 
 $_tokens: null;
 $_component-prefix: null;
@@ -67,16 +66,13 @@ $_system-fallbacks: m3-system.create-system-fallbacks();
   @return true;
 }
 
-// Emits a slot for the given token, provided that it has a non-null value in the token map passed
-// to `use-tokens`.
+// Returns the token slot value.
 // Accepts an optional fallback parameter to include in the CSS variable.
 // If $fallback is `true`, then use the tokens map to get the fallback.
 // TODO: Remove the use case where we accept "true" and handle any failing client screenshots
-@mixin create-token-slot($property, $token, $fallback: null) {
+@function slot($token, $fallback: null) {
   $_assert: _assert-use-tokens($token);
-  @if map.get($_tokens, $token) != null {
-    #{$property}: #{_get-token-value($token, $fallback)};
-  }
+  @return _get-token-value($token, $fallback);
 }
 
 // Returns the name of a token including the current prefix. Intended to be used in calculations
@@ -84,16 +80,6 @@ $_system-fallbacks: m3-system.create-system-fallbacks();
 @function get-token-variable-name($token) {
   $_assert: _assert-use-tokens($token);
   @return _create-var-name($_component-prefix, $token);
-}
-
-// Returns a `var()` reference to a specific token. Intended for declarations
-// where the token has to be referenced as a part of a larger expression.
-// Accepts an optional fallback parameter to include in the CSS variable.
-// If $fallback is `true`, then use the tokens map to get the fallback.
-// TODO: Remove the use case where we accept "true" and handle any failing client screenshots
-@function get-token-variable($token, $fallback: null) {
-  $_assert: _assert-use-tokens($token);
-  @return _get-token-value($token, $fallback);
 }
 
 // Gets the token's fallback value. Prefers adding a system-level fallback if one exists, otherwise
@@ -120,18 +106,39 @@ $_system-fallbacks: m3-system.create-system-fallbacks();
 
 // Outputs a map of tokens under a specific prefix.
 @mixin create-token-values($prefix, $tokens) {
-  @if $tokens != null {
-    // TODO: The `&` adds to the file size of theme, but it's necessary for compatibility
-    // with https://sass-lang.com/documentation/breaking-changes/mixed-decls/. We should
-    // figure out a better way to do this or move all the concrete styles out of the theme.
-    & {
+  @include _create-token-values-internal($prefix, $tokens, false);
+}
+
+// Outputs a map of tokens under a specific prefix in scenarios where tokens may be mixed with
+// other declarations (e.g. M2 themes). Used to avoid https://sass-lang.com/documentation/breaking-changes/mixed-decls/
+@mixin create-token-values-mixed($prefix, $tokens) {
+  @include _create-token-values-internal($prefix, $tokens, true);
+}
+
+@mixin _create-token-values-internal($prefix, $tokens, $in-place) {
+  @if ($tokens != null) {
+    @if ($in-place) {
+      & {
+        @each $key, $value in $tokens {
+          @if $value != null {
+            @include define-css_var($prefix, $key, $value);
+          }
+        }
+      }
+    } @else {
       @each $key, $value in $tokens {
         @if $value != null {
-          #{_create-var-name($prefix, $key)}: #{$value};
+          @include define-css-var($prefix, $key, $value);
         }
       }
     }
   }
+}
+
+@mixin define-css-var($prefix, $key, $value) {
+  $name: _create-var-name($prefix, $key);
+
+  #{$name}: #{$value};
 }
 
 // MDC doesn't currently handle elevation tokens properly. As a temporary workaround we can combine
@@ -217,7 +224,6 @@ $_system-fallbacks: m3-system.create-system-fallbacks();
 @mixin batch-create-token-values($overrides: (), $namespace-configs...) {
   @include mat.private-current-selector-or-root() {
     $prefixed-name-data: ();
-    $unprefixed-name-data: ();
     $all-names: ();
 
     @each $config in $namespace-configs {
@@ -227,29 +233,7 @@ $_system-fallbacks: m3-system.create-system-fallbacks();
       @each $name, $value in $tokens {
         $prefixed-name: $prefix + $name;
         $all-names: list.append($all-names, $prefixed-name, $separator: comma);
-        @if map.has-key($prefixed-name-data, $prefixed-name) {
-          @error #{
-          'Error overriding token: Ambiguous token name `'
-        }#{
-          $prefixed-name
-        }#{
-          '` exists in multiple namespaces: `('
-        }#{
-          list.nth(map.get($prefixed-name-data, $prefixed-name), 1)
-        }#{
-          ')` and `('
-        }#{
-          $namespace
-        }#{
-          ')`'
-        };
-        }
         $prefixed-name-data: map.set($prefixed-name-data, $prefixed-name, ($namespace, $name));
-        $unprefixed-data: map.has-key($unprefixed-name-data, $name) and
-          map.get($unprefixed-name-data, $name) or
-          ();
-        $unprefixed-data: list.append($unprefixed-data, ($namespace, $prefixed-name));
-        $unprefixed-name-data: map.set($unprefixed-name-data, $name, $unprefixed-data);
       }
     }
 
@@ -264,28 +248,6 @@ $_system-fallbacks: m3-system.create-system-fallbacks();
             $name: $value,
           )
         );
-      } @else if (map.has-key($unprefixed-name-data, $name)) {
-        $datalist: map.get($unprefixed-name-data, $name);
-        $prefixed-names: ();
-        @each $data in $datalist {
-          $namespace: list.nth($data, 1);
-          $prefixed-names: list.append($prefixed-names, list.nth($data, 2), $separator: comma);
-          @include create-token-values(
-            $namespace,
-            (
-              $name: $value,
-            )
-          );
-        }
-        @warn #{
-        'Token `'
-      }#{
-        $name
-      }#{
-        '` is deprecated. Please use one of the following alternatives: '
-      }#{
-        $prefixed-names
-      };
       } @else {
         @error #{'Invalid token name `'}#{$name}#{'`. '}#{'Valid tokens are: '}#{$all-names};
       }
@@ -304,4 +266,38 @@ $_system-fallbacks: m3-system.create-system-fallbacks();
     }
   }
   @return $result;
+}
+
+/// Gets the MDC tokens for the given prefix, M3 token values, and supported token slots.
+/// @param {List} $prefix The token prefix for the given tokens.
+/// @param {Map|(Map, Map)} $values A map of M3 token values for the given prefix.
+///  This param may also be a tuple of maps, the first one representing the default M3 token values,
+//   and the second containing overrides for different color variants.
+//   Single map example:
+//     (token1: green, token2: 2px)
+//   Tuple example:
+//     (
+//       (token1: green, token2: 2px),
+//       (
+//         secondary: (token1: blue),
+//         error: (token1: red),
+//       )
+//     )
+/// @param {Map} $slots A map of token slots, with null value indicating the token is not supported.
+/// @param {String|null} $variant The name of the variant the token values are for.
+/// @return {Map} A map of fully qualified token names to values, for only the supported tokens.
+@function namespace-tokens($prefix, $values, $slots, $variant: null) {
+  $result: ();
+  @if $variant == null and meta.type-of($values) == 'list' and list.length($values == 2) {
+    $variants: list.nth($values, 2);
+    $values: list.nth($values, 1);
+    @each $variant, $overrides in $variants {
+
+      $result: map.merge($result, namespace-tokens($prefix, $overrides, $slots, $variant));
+    }
+  }
+  $used-token-names: map.keys(_filter-nulls(map.get($slots, $prefix)));
+  $used-m3-tokens: _pick(_filter-nulls($values), $used-token-names);
+  $prefix: if($variant == null, $prefix, list.append($prefix, $variant));
+  @return map.merge($result, ($prefix: $used-m3-tokens));
 }

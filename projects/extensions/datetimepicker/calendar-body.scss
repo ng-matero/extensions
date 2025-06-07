@@ -3,7 +3,7 @@
 
 @use '../core/style/button-common';
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/datetimepicker' as tokens-mtx-datetimepicker;
+@use './m2-datetimepicker';
 
 $calendar-body-label-padding-start: 5% !default;
 // We don't want the label to jump around when we switch between month and year views, so we use
@@ -21,13 +21,13 @@ $calendar-body-cell-radius: 999px !default;
 $calendar-body-min-size: 7 * $calendar-body-cell-min-size !default;
 $calendar-body-cell-content-size: 100% - $calendar-body-cell-content-margin * 2 !default;
 
-$_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token-slots();
+$_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
 
 // Styles for a highlighted calendar cell (e.g. hovered or focused).
 @mixin _highlighted-cell($token-name) {
   &>.mtx-calendar-body-cell-content {
     @include _unselected-cell {
-      @include token-utils.create-token-slot(background-color, $token-name);
+      background-color: token-utils.slot($token-name);
     }
   }
 }
@@ -46,7 +46,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 .mtx-calendar-body-today {
   @include _unselected-cell {
     @include token-utils.use-tokens($_tokens...) {
-      @include token-utils.create-token-slot(border-color, calendar-date-today-outline-color);
+      border-color: token-utils.slot(calendar-date-today-outline-color);
     }
   }
 }
@@ -59,9 +59,9 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   padding-right: $calendar-body-label-side-padding;
 
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(font-size, calendar-body-label-text-size);
-    @include token-utils.create-token-slot(font-weight, calendar-body-label-text-weight);
-    @include token-utils.create-token-slot(color, calendar-body-label-text-color);
+    font-size: token-utils.slot(calendar-body-label-text-size);
+    font-weight: token-utils.slot(calendar-body-label-text-weight);
+    color: token-utils.slot(calendar-body-label-text-color);
   }
 
   [dir='rtl'] & {
@@ -75,7 +75,7 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   font-weight: 400;
 
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(color, calendar-body-week-number-text-color);
+    color: token-utils.slot(calendar-body-week-number-text-color);
   }
 }
 
@@ -99,8 +99,8 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 
   // Needs to be repeated here in order to override the user agent styles.
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(font-family, calendar-text-font);
-    @include token-utils.create-token-slot(font-size, calendar-text-size);
+    font-family: token-utils.slot(calendar-text-font);
+    font-size: token-utils.slot(calendar-text-size);
   }
 
   @include button-common.reset();
@@ -112,11 +112,11 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 
   @include token-utils.use-tokens($_tokens...) {
     >.mtx-calendar-body-cell-content:not(.mtx-calendar-body-selected) {
-      @include token-utils.create-token-slot(color, calendar-date-disabled-state-text-color);
+      color: token-utils.slot(calendar-date-disabled-state-text-color);
     }
 
     >.mtx-calendar-body-today:not(.mtx-calendar-body-selected) {
-      @include token-utils.create-token-slot(border-color, calendar-date-disabled-state-text-color);
+      border-color: token-utils.slot(calendar-date-disabled-state-text-color);
     }
   }
 
@@ -148,8 +148,8 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
   border-radius: $calendar-body-cell-radius;
 
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(color, calendar-date-text-color);
-    @include token-utils.create-token-slot(border-color, calendar-date-outline-color);
+    color: token-utils.slot(calendar-date-text-color);
+    border-color: token-utils.slot(calendar-date-outline-color);
   }
 
   // Increase specificity because focus indicator styles are part of the `mat-core` mixin and can
@@ -182,17 +182,15 @@ $_tokens: tokens-mtx-datetimepicker.$prefix, tokens-mtx-datetimepicker.get-token
 
 .mtx-calendar-body-selected {
   @include token-utils.use-tokens($_tokens...) {
-    @include token-utils.create-token-slot(background-color, calendar-date-selected-state-background-color);
-    @include token-utils.create-token-slot(color, calendar-date-selected-state-text-color);
+    background-color: token-utils.slot(calendar-date-selected-state-background-color);
+    color: token-utils.slot(calendar-date-selected-state-text-color);
 
     .mtx-calendar-body-disabled>& {
-      @include token-utils.create-token-slot(background-color, calendar-date-selected-disabled-state-background-color);
+      background-color: token-utils.slot(calendar-date-selected-disabled-state-background-color);
     }
 
     &.mtx-calendar-body-today {
-      $shadow-color: token-utils.get-token-variable(calendar-date-today-selected-state-outline-color);
-
-      box-shadow: inset 0 0 0 1px #{$shadow-color};
+      box-shadow: inset 0 0 0 1px token-utils.slot(calendar-date-today-selected-state-outline-color);
     }
   }
 }

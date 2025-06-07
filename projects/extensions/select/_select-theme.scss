@@ -3,7 +3,7 @@
 @use '../core/theming/inspection';
 @use '../core/theming/validation';
 @use '../core/tokens/token-utils';
-@use '../core/tokens/m2/mtx/select' as tokens-mtx-select;
+@use './m2-select';
 
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
@@ -12,8 +12,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mtx-select.$prefix,
-        tokens-mtx-select.get-unthemable-tokens()
+        m2-select.$prefix,
+        m2-select.get-unthemable-tokens()
       );
     }
   }
@@ -26,20 +26,20 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mtx-select.$prefix,
-        tokens-mtx-select.get-color-tokens($theme)
+        m2-select.$prefix,
+        m2-select.get-color-tokens($theme)
       );
     }
 
     .ng-dropdown-panel {
       &.mat-accent {
-        $accent-tokens: tokens-mtx-select.private-get-color-palette-color-tokens($theme, accent);
-        @include token-utils.create-token-values(tokens-mtx-select.$prefix, $accent-tokens);
+        $accent-tokens: m2-select.private-get-color-palette-color-tokens($theme, accent);
+        @include token-utils.create-token-values(m2-select.$prefix, $accent-tokens);
       }
 
       &.mat-warn {
-        $warn-tokens: tokens-mtx-select.private-get-color-palette-color-tokens($theme, warn);
-        @include token-utils.create-token-values(tokens-mtx-select.$prefix, $warn-tokens);
+        $warn-tokens: m2-select.private-get-color-palette-color-tokens($theme, warn);
+        @include token-utils.create-token-values(m2-select.$prefix, $warn-tokens);
       }
     }
   }
@@ -59,8 +59,8 @@
   @else {
     @include mat.private-current-selector-or-root() {
       @include token-utils.create-token-values(
-        tokens-mtx-select.$prefix,
-        tokens-mtx-select.get-density-tokens($theme)
+        m2-select.$prefix,
+        m2-select.get-density-tokens($theme)
       );
     }
   }
@@ -70,8 +70,8 @@
 @function _define-overrides() {
   @return (
     (
-      namespace: tokens-mtx-select.$prefix,
-      tokens: tokens-mtx-select.get-token-slots(),
+      namespace: m2-select.$prefix,
+      tokens: m2-select.get-token-slots(),
     ),
   );
 }
@@ -103,6 +103,6 @@
 @mixin _theme-from-tokens($tokens, $options...) {
   @include validation.selector-defined(
     'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
-  $mtx-select-tokens: token-utils.get-tokens-for($tokens, tokens-mtx-select.$prefix, $options...);
-  @include token-utils.create-token-values(tokens-mtx-select.$prefix, $mtx-select-tokens);
+  $mtx-select-tokens: token-utils.get-tokens-for($tokens, m2-select.$prefix, $options...);
+  @include token-utils.create-token-values(m2-select.$prefix, $mtx-select-tokens);
 }

@@ -1,47 +1,8 @@
-@use 'sass:meta';
-@use 'sass:map';
-@use './mtx/alert' as tokens-mtx-alert;
-@use './mtx/colorpicker' as tokens-mtx-colorpicker;
-@use './mtx/datetimepicker' as tokens-mtx-datetimepicker;
-@use './mtx/drawer' as tokens-mtx-drawer;
-@use './mtx/grid' as tokens-mtx-grid;
-@use './mtx/loader' as tokens-mtx-loader;
-@use './mtx/popover' as tokens-mtx-popover;
-@use './mtx/progress' as tokens-mtx-progress;
-@use './mtx/select' as tokens-mtx-select;
-@use './mtx/split' as tokens-mtx-split;
-@use './mdc/plain-tooltip' as tokens-mdc-plain-tooltip;
-
-$_module-names: (
-  // Custom tokens
-  tokens-mtx-alert,
-  tokens-mtx-colorpicker,
-  tokens-mtx-datetimepicker,
-  tokens-mtx-drawer,
-  tokens-mtx-grid,
-  tokens-mtx-loader,
-  tokens-mtx-popover,
-  tokens-mtx-progress,
-  tokens-mtx-select,
-  tokens-mtx-split,
-  tokens-mdc-plain-tooltip,
-);
-
-/// Gets the full set of M3 tokens for the given theme object.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} Full set of M3 tokens
-@function get-m3-tokens($systems, $exclude-hardcoded, $token-slots) {
-  $tokens: ();
-
-  @each $module-name in $_module-names {
-    $fn: meta.get-function(
-      $name: 'get-tokens',
-      $module: $module-name,
-    );
-    $tokens: map.merge($tokens, meta.call($fn, $systems, $exclude-hardcoded, $token-slots));
-  }
-
-  @return $tokens;
-}
+@forward './md-ref-palette' as md-ref-palette-*;
+@forward './md-ref-typeface' as md-ref-typeface-*;
+@forward './md-sys-color' as md-sys-color-*;
+@forward './md-sys-elevation' as md-sys-elevation-*;
+@forward './md-sys-motion' as md-sys-motion-*;
+@forward './md-sys-shape' as md-sys-shape-*;
+@forward './md-sys-state' as md-sys-state-*;
+@forward './md-sys-typescale' as md-sys-typescale-*;
