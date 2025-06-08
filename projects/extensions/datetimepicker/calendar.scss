@@ -1,5 +1,7 @@
 @use '../core/tokens/token-utils';
-@use './m2-datetimepicker';
+@use './m3-datetimepicker';
+
+$fallbacks: m3-datetimepicker.get-tokens();
 
 $calendar-padding: 8px !default;
 
@@ -17,7 +19,8 @@ $calendar-next-icon-transform: translateX(-2px) rotate(45deg);
 
 $landscape-calendar-header-width: 144px;
 
-$_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
+$panel-corner: token-utils.slot(datetimepicker-container-shape, $fallbacks);
+$panel-divider: token-utils.slot(datetimepicker-calendar-header-divider-color, $fallbacks);
 
 @mixin landscape-calendar-header {
   .mtx-calendar {
@@ -28,21 +31,18 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
       min-width: $landscape-calendar-header-width;
       padding: 16px 8px;
       border-bottom-width: 0;
+      border-radius: $panel-corner 0 0 $panel-corner;
+      border-right: 1px solid $panel-divider;
 
-      @include token-utils.use-tokens($_tokens...) {
-        border-radius: token-utils.slot(container-shape) 0 0 token-utils.slot(container-shape);
-        border-right: 1px solid token-utils.slot(calendar-header-divider-color);
-
-        [dir='rtl'] & {
-          border-radius: 0 token-utils.slot(container-shape) token-utils.slot(container-shape) 0;
-          border-right-width: 0;
-          border-left: 1px solid token-utils.slot(calendar-header-divider-color);
-        }
+      [dir='rtl'] & {
+        border-radius: 0 $panel-corner $panel-corner 0;
+        border-right-width: 0;
+        border-left: 1px solid $panel-divider;
       }
     }
 
-    .mtx-calendar-header-year+.mtx-calendar-header-date-time,
-    .mtx-calendar-header-date+.mtx-calendar-header-time {
+    .mtx-calendar-header-year + .mtx-calendar-header-date-time,
+    .mtx-calendar-header-date + .mtx-calendar-header-time {
       margin-top: 4px;
     }
 
@@ -70,7 +70,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
     .mtx-calendar-header-ampm {
       padding: 4px;
 
-      +.mtx-calendar-header-ampm {
+      + .mtx-calendar-header-ampm {
         margin: 0 8px;
       }
     }
@@ -91,20 +91,17 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
     width: $landscape-calendar-header-width;
     height: 100%;
     content: '';
+    border-right: 1px solid $panel-divider;
+    background-color: token-utils.slot(datetimepicker-calendar-header-background-color, $fallbacks);
+    border-bottom-left-radius: $panel-corner;
 
-    @include token-utils.use-tokens($_tokens...) {
-      border-right: 1px solid token-utils.slot(calendar-header-divider-color);
-      background-color: token-utils.slot(calendar-header-background-color);
-      border-bottom-left-radius: token-utils.slot(container-shape);
-
-      [dir='rtl'] & {
-        left: auto;
-        right: 0;
-        border-right-width: 0;
-        border-left: 1px solid token-utils.slot(calendar-header-divider-color);
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: token-utils.slot(container-shape);
-      }
+    [dir='rtl'] & {
+      left: auto;
+      right: 0;
+      border-right-width: 0;
+      border-left: 1px solid $panel-divider;
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: $panel-corner;
     }
   }
 }
@@ -112,26 +109,20 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
 .mtx-calendar {
   display: block;
   outline: none;
-
-  @include token-utils.use-tokens($_tokens...) {
-    font-family: token-utils.slot(calendar-text-font);
-    font-size: token-utils.slot(calendar-text-size);
-  }
+  font-family: token-utils.slot(datetimepicker-calendar-text-font, $fallbacks);
+  font-size: token-utils.slot(datetimepicker-calendar-text-size, $fallbacks);
 }
 
 .mtx-calendar-header {
+  --mat-button-text-container-shape: #{token-utils.slot(datetimepicker-selector-container-shape, $fallbacks)};
+
   box-sizing: border-box;
   padding: 8px;
-
-  @include token-utils.use-tokens($_tokens...) {
-    border-bottom: 1px solid token-utils.slot(calendar-header-divider-color);
-    border-top-left-radius: token-utils.slot(container-shape);
-    border-top-right-radius: token-utils.slot(container-shape);
-    background-color: token-utils.slot(calendar-header-background-color);
-    color: token-utils.slot(calendar-header-text-color);
-
-    --mat-button-text-container-shape: token-utils.slot(selector-container-shape);
-  }
+  border-bottom: 1px solid $panel-divider;
+  border-top-left-radius: $panel-corner;
+  border-top-right-radius: $panel-corner;
+  background-color: token-utils.slot(datetimepicker-calendar-header-background-color, $fallbacks);
+  color: token-utils.slot(datetimepicker-calendar-header-text-color, $fallbacks);
 
   .mtx-calendar-header-year,
   .mtx-calendar-header-date,
@@ -171,7 +162,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
 .mtx-calendar-header-minutes,
 .mtx-calendar-header-ampm {
   &:not(.active) {
-    opacity: .6;
+    opacity: 0.6;
   }
 
   &.not-clickable {
@@ -183,7 +174,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   display: inline-flex;
 
   &:not(.active) {
-    opacity: .6;
+    opacity: 0.6;
 
     .mtx-calendar-header-hours,
     .mtx-calendar-header-minutes,
@@ -233,7 +224,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   margin: 0 $calendar-controls-side-margin;
 
   .mat-icon-button:hover .mat-button-focus-overlay {
-    opacity: .04;
+    opacity: 0.04;
   }
 }
 
@@ -245,21 +236,15 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   border: 0;
   background: transparent;
   box-sizing: border-box;
-
-  @include token-utils.use-tokens($_tokens...) {
-    font-size: token-utils.slot(calendar-period-button-text-size);
-    font-weight: token-utils.slot(calendar-period-button-text-weight);
-  }
+  font-size: token-utils.slot(datetimepicker-calendar-period-button-text-size, $fallbacks);
+  font-weight: token-utils.slot(datetimepicker-calendar-period-button-text-weight, $fallbacks);
 }
 
 .mtx-calendar-previous-button,
 .mtx-calendar-next-button {
   &.disabled {
     pointer-events: none;
-
-    @include token-utils.use-tokens($_tokens...) {
-      color: token-utils.slot(calendar-date-disabled-state-text-color);
-    }
+    color: token-utils.slot(datetimepicker-calendar-date-disabled-state-text-color, $fallbacks);
   }
 
   svg {
@@ -281,10 +266,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
 .mtx-calendar-table-header th {
   text-align: center;
   padding: $calendar-padding 0;
-
-  @include token-utils.use-tokens($_tokens...) {
-    color: token-utils.slot(calendar-table-header-text-color);
-    font-size: token-utils.slot(calendar-table-header-text-size);
-    font-weight: token-utils.slot(calendar-table-header-text-weight);
-  }
+  color: token-utils.slot(datetimepicker-calendar-table-header-text-color, $fallbacks);
+  font-size: token-utils.slot(datetimepicker-calendar-table-header-text-size, $fallbacks);
+  font-weight: token-utils.slot(datetimepicker-calendar-table-header-text-weight, $fallbacks);
 }

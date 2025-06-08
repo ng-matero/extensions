@@ -1,76 +1,43 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '../core/tokens/m3-utils';
+@use '../core/tokens/m3';
 @use '../core/style/elevation';
 
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, select);
-
 /// Generates custom tokens for the mtx-select.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mtx-select
-@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
-  $tokens: ((
-    container-shape: map.get($systems, md-sys-shape, corner-extra-small),
-    container-elevation-shadow: m3-utils.hardcode(elevation.get-box-shadow(2), $exclude-hardcoded),
+@function get-tokens($theme: m3.$sys-theme) {
+  $system: m3-utils.get-system($theme);
 
-    container-text-color: map.get($systems, md-sys-color, on-surface),
-    placeholder-text-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: 0.38
+  $tokens: (
+    base: (
+      select-container-shape: map.get($system, corner-extra-small),
+      select-container-elevation-shadow: elevation.get-box-shadow(2),
     ),
-    disabled-text-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: 0.38
+    color: (
+      select-container-text-color: map.get($system, on-surface),
+      select-placeholder-text-color: mat.private-safe-color-change(map.get($system, on-surface), $alpha: 0.38),
+      select-disabled-text-color: mat.private-safe-color-change(map.get($system, on-surface), $alpha: 0.38),
+      select-multiple-value-background-color: transparent,
+      select-multiple-value-outline-color: map.get($system, outline),
+      select-multiple-value-disabled-outline-color: mat.private-safe-color-change(map.get($system, outline), $alpha: 0.38),
+      select-multiple-value-icon-hover-background-color: map.get($system, outline-variant),
+      select-clear-icon-color: map.get($system, on-surface),
+      select-clear-icon-hover-color: map.get($system, error),
+      select-enabled-arrow-color: map.get($system, on-surface),
+      select-disabled-arrow-color: mat.private-safe-color-change(map.get($system, on-surface), $alpha: 0.38),
+      select-invalid-arrow-color: map.get($system, error),
+      select-panel-background-color: map.get($system, surface-container),
+      select-panel-divider-color: map.get($system, outline),
+      select-optgroup-label-text-color: map.get($system, on-surface),
+      select-option-label-text-color: map.get($system, on-surface),
+      select-option-selected-state-background-color: map.get($system, secondary-container),
+      select-option-selected-state-text-color: map.get($system, on-surface),
+      select-option-hover-state-background-color: mat.private-safe-color-change(map.get($system, on-surface), $alpha: map.get($system,hover-state-layer-opacity)),
+      select-option-disabled-state-text-color: mat.private-safe-color-change(map.get($system, on-surface), $alpha: 0.38),
     ),
+    typography: (),
+    density: (),
+  );
 
-    multiple-value-background-color: m3-utils.hardcode(transparent, $exclude-hardcoded),
-    multiple-value-outline-color: map.get($systems, md-sys-color, outline),
-    multiple-value-disabled-outline-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, outline),
-      $alpha: 0.38
-    ),
-    multiple-value-icon-hover-background-color: map.get($systems, md-sys-color, outline-variant),
-
-    clear-icon-color: map.get($systems, md-sys-color, on-surface),
-    clear-icon-hover-color: map.get($systems, md-sys-color, error),
-
-    enabled-arrow-color: map.get($systems, md-sys-color, on-surface),
-    disabled-arrow-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: 0.38
-    ),
-    invalid-arrow-color: map.get($systems, md-sys-color, error),
-
-    panel-background-color: map.get($systems, md-sys-color, surface-container),
-    panel-divider-color: map.get($systems, md-sys-color, outline),
-    optgroup-label-text-color: map.get($systems, md-sys-color, on-surface),
-    option-label-text-color: map.get($systems, md-sys-color, on-surface),
-    option-selected-state-background-color: map.get($systems, md-sys-color, secondary-container),
-    option-selected-state-text-color: map.get($systems, md-sys-color, on-surface),
-    option-hover-state-background-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: map.get($systems, md-sys-state, hover-state-layer-opacity)
-    ),
-    option-disabled-state-text-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: 0.38
-    ),
-  ), (
-    // Color variants:
-    primary: (
-      option-selected-state-background-color: map.get($systems, md-sys-color, primary-container),
-    ),
-    secondary: (), // Default, no overrides needed.
-    tertiary: (
-      option-selected-state-background-color: map.get($systems, md-sys-color, tertiary-container),
-    ),
-    error: (
-      option-selected-state-background-color: map.get($systems, md-sys-color, error-container),
-    )
-  ));
-
-  @return m3-utils.namespace($prefix, $tokens, $token-slots);
+  @return $tokens;
 }

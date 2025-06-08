@@ -1,41 +1,34 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../core/theming/inspection';
-@use '../core/theming/validation';
 @use '../core/tokens/token-utils';
 @use './m2-datetimepicker';
+@use './m3-datetimepicker';
 
 @mixin _calendar-color($theme, $palette-name) {
   $palette-color: mat.get-theme-color($theme, $palette-name);
   $calendar-tokens: m2-datetimepicker.private-get-calendar-color-palette-color-tokens($theme, $palette-name);
 
-  @include token-utils.create-token-values(m2-datetimepicker.$prefix, $calendar-tokens);
+  @include token-utils.create-token-values-mixed($calendar-tokens);
 }
 
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, base));
+    @include token-utils.create-token-values(map.get(m3-datetimepicker.get-tokens($theme), base));
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(
-        m2-datetimepicker.$prefix,
-        m2-datetimepicker.get-unthemable-tokens()
-      );
+      @include token-utils.create-token-values-mixed(m2-datetimepicker.get-unthemable-tokens());
     }
   }
 }
 
-@mixin color($theme, $options...) {
+@mixin color($theme, $color-variant: null) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, color), $options...);
+    @include token-utils.create-token-values(map.get(m3-datetimepicker.get-tokens($theme), color));
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(
-        m2-datetimepicker.$prefix,
-        m2-datetimepicker.get-color-tokens($theme)
-      );
+      @include token-utils.create-token-values-mixed(m2-datetimepicker.get-color-tokens($theme));
     }
 
     .mtx-datetimepicker-content {
@@ -51,12 +44,12 @@
     .mtx-datetimepicker-toggle-active {
       &.mat-accent {
         $accent-tokens: m2-datetimepicker.private-get-toggle-color-palette-color-tokens($theme, accent);
-        @include token-utils.create-token-values(m2-datetimepicker.$prefix, $accent-tokens);
+        @include token-utils.create-token-values-mixed($accent-tokens);
       }
 
       &.mat-warn {
         $warn-tokens: m2-datetimepicker.private-get-toggle-color-palette-color-tokens($theme, warn);
-        @include token-utils.create-token-values(m2-datetimepicker.$prefix, $warn-tokens);
+        @include token-utils.create-token-values-mixed($warn-tokens);
       }
     }
   }
@@ -64,21 +57,18 @@
 
 @mixin typography($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, typography));
+    @include token-utils.create-token-values(map.get(m3-datetimepicker.get-tokens($theme), typography));
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(
-        m2-datetimepicker.$prefix,
-        m2-datetimepicker.get-typography-tokens($theme)
-      );
+      @include token-utils.create-token-values-mixed(m2-datetimepicker.get-typography-tokens($theme));
     }
   }
 }
 
 @mixin density($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, density));
+    @include token-utils.create-token-values(map.get(m3-datetimepicker.get-tokens($theme), density));
   }
   @else {}
 }
@@ -87,20 +77,23 @@
 @function _define-overrides() {
   @return (
     (
-      namespace: m2-datetimepicker.$prefix,
-      tokens: m2-datetimepicker.get-token-slots(),
+      namespace: datetimepicker,
+      tokens: token-utils.get-overrides(m3-datetimepicker.get-tokens(), datetimepicker),
     ),
   );
 }
 
 @mixin overrides($tokens: ()) {
-  @include token-utils.batch-create-token-values($tokens, _define-overrides()...);
+  @include token-utils.batch-create-token-values($tokens, _define-overrides());
 }
 
-@mixin theme($theme, $options...) {
+@mixin theme($theme, $color-variant: null) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-datetimepicker') {
     @if mat.get-theme-version($theme) == 1 {
-      @include _theme-from-tokens(inspection.get-theme-tokens($theme), $options...);
+      @include base($theme);
+      @include color($theme, $color-variant);
+      @include density($theme);
+      @include typography($theme);
     }
     @else {
       @include base($theme);
@@ -115,11 +108,4 @@
       }
     }
   }
-}
-
-@mixin _theme-from-tokens($tokens, $options...) {
-  @include validation.selector-defined(
-    'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
-  $mtx-datetimepicker-tokens: token-utils.get-tokens-for($tokens, m2-datetimepicker.$prefix, $options...);
-  @include token-utils.create-token-values(m2-datetimepicker.$prefix, $mtx-datetimepicker-tokens);
 }

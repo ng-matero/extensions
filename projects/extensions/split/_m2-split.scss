@@ -4,12 +4,9 @@
 @use '@angular/material' as mat;
 @use '../core/tokens/m2-utils';
 
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, split);
-
 @function private-get-color-palette-color-tokens($theme, $palette-name) {
   @return (
-    gutter-hover-state-background-color: mat.get-theme-color($theme, $palette-name, text),
+    split-gutter-hover-state-background-color: mat.get-theme-color($theme, $palette-name, text),
   );
 }
 
@@ -24,7 +21,7 @@ $prefix: (mtx, split);
   $gutter-tokens: private-get-color-palette-color-tokens($theme, primary);
 
   @return mat.private-merge-all($gutter-tokens, (
-    gutter-background-color: mat.get-theme-color($theme, foreground, divider),
+    split-gutter-background-color: mat.get-theme-color($theme, foreground, divider),
   ));
 }
 

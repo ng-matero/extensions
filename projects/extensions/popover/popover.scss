@@ -1,10 +1,10 @@
 /* stylelint-disable keyframes-name-pattern */
 @use '../core/tokens/token-utils';
-@use './m2-popover';
+@use './m3-popover';
+
+$fallbacks: m3-popover.get-tokens();
 
 $arrow-size: 1em; // 16px default
-
-$_tokens: m2-popover.$prefix, m2-popover.get-token-slots();
 
 @keyframes _mtx-popover-enter {
   from {
@@ -35,12 +35,9 @@ $_tokens: m2-popover.$prefix, m2-popover.get-token-slots();
   font-size: inherit; // It can change the arrow size
   outline: 0;
   animation: _mtx-popover-enter 120ms cubic-bezier(0, 0, 0.2, 1);
-
-  @include token-utils.use-tokens($_tokens...) {
-    border-radius: token-utils.slot(container-shape);
-    background-color: token-utils.slot(background-color);
-    color: token-utils.slot(text-color);
-  }
+  border-radius: token-utils.slot(popover-container-shape, $fallbacks);
+  background-color: token-utils.slot(popover-background-color, $fallbacks);
+  color: token-utils.slot(popover-text-color, $fallbacks);
 
   &.mtx-popover-panel-exit-animation {
     animation: _mtx-popover-exit 100ms 25ms linear forwards;
@@ -59,28 +56,28 @@ $_tokens: m2-popover.$prefix, m2-popover.get-token-slots();
   }
 
   &[class*='mtx-popover-below'] {
-    margin-top: calc(#{$arrow-size * .5} + 2px);
+    margin-top: calc(#{$arrow-size * 0.5} + 2px);
   }
 
   &[class*='mtx-popover-above'] {
-    margin-bottom: calc(#{$arrow-size * .5} + 2px);
+    margin-bottom: calc(#{$arrow-size * 0.5} + 2px);
   }
 
   &[class*='mtx-popover-before'] {
-    margin-right: calc(#{$arrow-size * .5} + 2px);
+    margin-right: calc(#{$arrow-size * 0.5} + 2px);
 
     [dir='rtl'] & {
       margin-right: auto;
-      margin-left: calc(#{$arrow-size * .5} + 2px);
+      margin-left: calc(#{$arrow-size * 0.5} + 2px);
     }
   }
 
   &[class*='mtx-popover-after'] {
-    margin-left: calc(#{$arrow-size * .5} + 2px);
+    margin-left: calc(#{$arrow-size * 0.5} + 2px);
 
     [dir='rtl'] & {
       margin-left: auto;
-      margin-right: calc(#{$arrow-size * .5} + 2px);
+      margin-right: calc(#{$arrow-size * 0.5} + 2px);
     }
   }
 
@@ -97,19 +94,17 @@ $_tokens: m2-popover.$prefix, m2-popover.get-token-slots();
     position: absolute;
     display: inline-block;
     content: '';
-    border-width: $arrow-size * .5;
+    border-width: $arrow-size * 0.5;
     border-style: solid;
   }
 
-  @include token-utils.use-tokens($_tokens...) {
-    &::before {
-      border-color: token-utils.slot(outline-color);
-    }
+  &::before {
+    border-color: token-utils.slot(popover-outline-color, $fallbacks);
+  }
 
-    &::after {
-      border-width: calc(#{$arrow-size * .5} - 1px);
-      border-color: token-utils.slot(background-color);
-    }
+  &::after {
+    border-width: calc(#{$arrow-size * 0.5} - 1px);
+    border-color: token-utils.slot(popover-background-color, $fallbacks);
   }
 }
 
@@ -202,11 +197,11 @@ $_tokens: m2-popover.$prefix, m2-popover.get-token-slots();
       }
 
       &::before {
-        border-right-width: $arrow-size * .5;
+        border-right-width: $arrow-size * 0.5;
       }
 
       &::after {
-        border-right-width: calc(#{$arrow-size * .5} - 1px);
+        border-right-width: calc(#{$arrow-size * 0.5} - 1px);
       }
     }
   }
@@ -234,11 +229,11 @@ $_tokens: m2-popover.$prefix, m2-popover.get-token-slots();
       }
 
       &::before {
-        border-left-width: $arrow-size * .5;
+        border-left-width: $arrow-size * 0.5;
       }
 
       &::after {
-        border-left-width: calc(#{$arrow-size * .5} - 1px);
+        border-left-width: calc(#{$arrow-size * 0.5} - 1px);
       }
     }
   }

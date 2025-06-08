@@ -2,14 +2,11 @@
 @use '@angular/material' as mat;
 @use '../core/tokens/m2-utils';
 
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, alert);
-
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
   @return (
-    container-shape: 4px,
+    alert-container-shape: 4px,
   );
 }
 
@@ -18,25 +15,25 @@ $prefix: (mtx, alert);
   $is-dark: mat.get-theme-type($theme) == dark;
 
   @return (
-    outline-color: transparent,
-    background-color: mat.m2-get-color-from-palette(mat.$m2-gray-palette, if($is-dark, 900, 100)),
-    text-color: mat.get-theme-color($theme, foreground, text),
+    alert-outline-color: transparent,
+    alert-background-color: mat.m2-get-color-from-palette(mat.$m2-gray-palette, if($is-dark, 900, 100)),
+    alert-text-color: mat.get-theme-color($theme, foreground, text),
 
-    info-outline-color: transparent,
-    info-background-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 100)),
-    info-text-color: mat.get-theme-color($theme, foreground, text),
+    alert-info-outline-color: transparent,
+    alert-info-background-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 100)),
+    alert-info-text-color: mat.get-theme-color($theme, foreground, text),
 
-    success-outline-color: transparent,
-    success-background-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 100)),
-    success-text-color: mat.get-theme-color($theme, foreground, text),
+    alert-success-outline-color: transparent,
+    alert-success-background-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 100)),
+    alert-success-text-color: mat.get-theme-color($theme, foreground, text),
 
-    warning-outline-color: transparent,
-    warning-background-color: mat.m2-get-color-from-palette(mat.$m2-amber-palette, if($is-dark, 900, 100)),
-    warning-text-color: mat.get-theme-color($theme, foreground, text),
+    alert-warning-outline-color: transparent,
+    alert-warning-background-color: mat.m2-get-color-from-palette(mat.$m2-amber-palette, if($is-dark, 900, 100)),
+    alert-warning-text-color: mat.get-theme-color($theme, foreground, text),
 
-    danger-outline-color: transparent,
-    danger-background-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 100)),
-    danger-text-color: mat.get-theme-color($theme, foreground, text),
+    alert-danger-outline-color: transparent,
+    alert-danger-background-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 100)),
+    alert-danger-text-color: mat.get-theme-color($theme, foreground, text),
   );
 }
 

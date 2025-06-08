@@ -1,11 +1,11 @@
 @use '../core/tokens/token-utils';
-@use './m2-split';
+@use './m3-split';
+
+$fallbacks: m3-split.get-tokens();
 
 $gutter-size: 4px;
 $handle-size: 8px;
-$handle-offset: ($handle-size - $gutter-size) * .5;
-
-$_tokens: m2-split.$prefix, m2-split.get-token-slots();
+$handle-offset: ($handle-size - $gutter-size) * 0.5;
 
 .mtx-split {
   display: flex;
@@ -23,13 +23,10 @@ $_tokens: m2-split.$prefix, m2-split.get-token-slots();
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
+    background-color: token-utils.slot(split-gutter-background-color, $fallbacks);
 
-    @include token-utils.use-tokens($_tokens...) {
-      background-color: token-utils.slot(gutter-background-color);
-
-      &:hover {
-        background-color: token-utils.slot(gutter-hover-state-background-color);
-      }
+    &:hover {
+      background-color: token-utils.slot(split-gutter-hover-state-background-color, $fallbacks);
     }
 
     > .mtx-split-gutter-handle {
@@ -114,7 +111,7 @@ $_tokens: m2-split.$prefix, m2-split.get-token-slots();
   &.mtx-split-transition.mtx-split-init:not(.mtx-dragging) {
     > .mtx-split-gutter,
     > .mtx-split-pane {
-      transition: flex-basis .3s;
+      transition: flex-basis 0.3s;
     }
   }
 }

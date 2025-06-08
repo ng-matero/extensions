@@ -1,11 +1,11 @@
 @use '../core/tokens/token-utils';
-@use './m2-datetimepicker';
+@use './m3-datetimepicker';
+
+$fallbacks: m3-datetimepicker.get-tokens();
 
 $clock-min-size: 224px !default;
 $clock-margin: 12px !default;
 $clock-cell-size: 14.1666% !default;
-
-$_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
 
 .mtx-clock {
   position: relative;
@@ -15,10 +15,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   box-sizing: border-box;
   user-select: none;
   touch-action: none;
-
-  @include token-utils.use-tokens($_tokens...) {
-    font-size: token-utils.slot(clock-text-size);
-  }
+  font-size: token-utils.slot(datetimepicker-clock-text-size, $fallbacks);
 }
 
 .mtx-clock-wrapper {
@@ -27,10 +24,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   height: 0;
   padding-top: 100%;
   border-radius: 50%;
-
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(clock-dial-background-color);
-  }
+  background-color: token-utils.slot(datetimepicker-clock-dial-background-color, $fallbacks);
 }
 
 .mtx-clock-center {
@@ -41,10 +35,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   height: 3%;
   margin: -1.5%;
   border-radius: 50%;
-
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(clock-hand-background-color);
-  }
+  background-color: token-utils.slot(datetimepicker-clock-hand-background-color, $fallbacks);
 }
 
 .mtx-clock-hand {
@@ -53,22 +44,18 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   width: 2px;
   margin: 0 auto;
   transform-origin: bottom;
+  background-color: token-utils.slot(datetimepicker-clock-hand-background-color, $fallbacks);
 
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(clock-hand-background-color);
-
-    &::before {
-      content: '';
-      position: absolute;
-      top: -4px;
-      left: -3px; // 8px - 2px / 2
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: token-utils.slot(clock-hand-background-color);
-    }
+  &::before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -3px; // 8px - 2px / 2
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: token-utils.slot(datetimepicker-clock-hand-background-color, $fallbacks);
   }
-
 }
 
 .mtx-clock-hours,
@@ -104,22 +91,19 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   border-radius: 50%;
   align-items: center;
   cursor: pointer;
+  color: token-utils.slot(datetimepicker-clock-cell-text-color, $fallbacks);
 
-  @include token-utils.use-tokens($_tokens...) {
-    color: token-utils.slot(clock-cell-text-color);
+  &.mtx-clock-cell-selected {
+    color: white;
+    background-color: token-utils.slot(datetimepicker-clock-hand-background-color, $fallbacks);
+  }
 
-    &.mtx-clock-cell-selected {
-      color: white;
-      background-color: token-utils.slot(clock-hand-background-color);
-    }
+  &:not(.mtx-clock-cell-selected, .mtx-clock-cell-disabled):hover {
+    background-color: token-utils.slot(datetimepicker-clock-cell-hover-state-background-color, $fallbacks);
+  }
 
-    &:not(.mtx-clock-cell-selected, .mtx-clock-cell-disabled):hover {
-      background-color: token-utils.slot(clock-cell-hover-state-background-color);
-    }
-
-    &.mtx-clock-cell-disabled {
-      pointer-events: none;
-      color: token-utils.slot(clock-cell-disabled-state-text-color);
-    }
+  &.mtx-clock-cell-disabled {
+    pointer-events: none;
+    color: token-utils.slot(datetimepicker-clock-cell-disabled-state-text-color, $fallbacks);
   }
 }

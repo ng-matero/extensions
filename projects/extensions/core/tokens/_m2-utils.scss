@@ -2,7 +2,7 @@
 @use 'sass:math';
 @use 'sass:meta';
 @use '@angular/material' as mat;
-@use '../m2/typography' as m2-typography;
+@use '../m2/typography';
 
 $_placeholder-color-palette: mat.m2-define-palette(mat.$m2-red-palette);
 
@@ -20,7 +20,7 @@ $placeholder-color-config: (
   background: mat.$m2-light-theme-background-palette,
 );
 
-$_placeholder-typography-level-config: m2-typography.typography-config-level-from-mdc(body1);
+$_placeholder-typography-level-config: typography.typography-config-level-from-mdc(body1);
 
 // Placeholder typography config that can be passed to token getter functions when generating token
 // slots.

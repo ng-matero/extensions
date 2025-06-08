@@ -1,25 +1,26 @@
 @use 'sass:map';
 @use '../core/tokens/m3-utils';
-
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, popover);
+@use '../core/tokens/m3';
 
 /// Generates custom tokens for the mtx-popover.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mtx-popover
-@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
-  $tokens: (
-    container-shape: map.get($systems, md-sys-shape, corner-extra-small),
+@function get-tokens($theme: m3.$sys-theme) {
+  $system: m3-utils.get-system($theme);
 
-    outline-color: map.get($systems, md-sys-color, surface-container),
-    background-color: map.get($systems, md-sys-color, surface-container),
-    text-color: map.get($systems, md-sys-color, on-surface),
-    // Note that this uses a value, rather than a computed box-shadow, because we use
-    // the value at runtime to determine which shadow to set based on the popover's depth.
-    base-elevation-level: m3-utils.hardcode(2, $exclude-hardcoded),
+  $tokens: (
+    base: (
+      popover-container-shape: map.get($system, corner-extra-small),
+      // Note that this uses a value, rather than a computed box-shadow, because we use
+      // the value at runtime to determine which shadow to set based on the popover's depth.
+      popover-base-elevation-level: 2,
+    ),
+    color: (
+      popover-outline-color: map.get($system, surface-container),
+      popover-background-color: map.get($system, surface-container),
+      popover-text-color: map.get($system, on-surface),
+    ),
+    typography: (),
+    density: (),
   );
 
-  @return m3-utils.namespace($prefix, $tokens, $token-slots);
+  @return $tokens;
 }

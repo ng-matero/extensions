@@ -1,9 +1,9 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '../../core/tokens/token-utils';
-@use '../m2-grid';
+@use '../m3-grid';
 
-$_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
+$fallbacks: m3-grid.get-tokens();
 
 // Required for resizing to work properly.
 .mat-column-resize-table.cdk-column-resize-with-resized-column {
@@ -34,7 +34,8 @@ $_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
   right: 0;
   width: 1px;
   background: transparent;
-  transition: background mat.$private-swift-ease-in-duration mat.$private-swift-ease-in-timing-function;
+  transition: background mat.$private-swift-ease-in-duration
+    mat.$private-swift-ease-in-timing-function;
 }
 
 .mat-mdc-header-cell:not(.mat-resizable)::after {
@@ -61,18 +62,16 @@ $_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
     border-right: none;
   }
 
-  @include token-utils.use-tokens($_tokens...) {
-    .mat-mdc-header-cell:not(.mat-resizable)::after {
-      background-color: token-utils.slot(resizable-handle-disabled-background-color);
-    }
+  .mat-mdc-header-cell:not(.mat-resizable)::after {
+    background-color: token-utils.slot(grid-resizable-handle-disabled-background-color, $fallbacks);
+  }
 
-    .mat-resizable-handle {
-      background-color: token-utils.slot(resizable-handle-hover-background-color);
-    }
+  .mat-resizable-handle {
+    background-color: token-utils.slot(grid-resizable-handle-hover-background-color, $fallbacks);
   }
 }
 
-.mat-resizable.cdk-resizable-overlay-thumb-active>.mat-resizable-handle {
+.mat-resizable.cdk-resizable-overlay-thumb-active > .mat-resizable-handle {
   opacity: 0;
   transition: none;
 }
@@ -80,10 +79,7 @@ $_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
 .mat-resizable-handle:focus,
 .mat-mdc-header-row.cdk-column-resize-hover-or-active .mat-resizable-handle:focus {
   outline: none;
-
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(resizable-handle-active-background-color);
-  }
+  background-color: token-utils.slot(grid-resizable-handle-active-background-color, $fallbacks);
 }
 
 .mat-column-resize-overlay-thumb {
@@ -91,27 +87,36 @@ $_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
   cursor: col-resize;
   width: 100%;
   height: 100%;
-  transition: background mat.$private-swift-ease-in-duration mat.$private-swift-ease-in-timing-function;
+  transition: background mat.$private-swift-ease-in-duration
+    mat.$private-swift-ease-in-timing-function;
 
   @include mat.private-user-select(none);
 
   &:active {
     will-change: transform;
 
-    @include token-utils.use-tokens($_tokens...) {
-      $bg-color: token-utils.slot(resizable-handle-active-background-color);
+    $bg-color: token-utils.slot(grid-resizable-handle-active-background-color, $fallbacks);
 
-      background: linear-gradient(90deg,
-          transparent, transparent 7px,
-          $bg-color 7px, $bg-color 9px,
-          transparent 9px, transparent);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      transparent 7px,
+      $bg-color 7px,
+      $bg-color 9px,
+      transparent 9px,
+      transparent
+    );
 
-      .mat-column-resize-overlay-thumb-top {
-        background: linear-gradient(90deg,
-            transparent, transparent 4px,
-            $bg-color 4px, $bg-color 12px,
-            transparent 12px, transparent);
-      }
+    .mat-column-resize-overlay-thumb-top {
+      background: linear-gradient(
+        90deg,
+        transparent,
+        transparent 4px,
+        $bg-color 4px,
+        $bg-color 12px,
+        transparent 12px,
+        transparent
+      );
     }
   }
 }

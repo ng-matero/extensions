@@ -1,14 +1,12 @@
 @use '@angular/material' as mat;
 @use '../core/tokens/token-utils';
-@use './m2-grid';
+@use './m3-grid';
 
-$_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
+$fallbacks: m3-grid.get-tokens();
 
 .mtx-grid-column-menu,
 .mtx-grid-column-pin-list {
-  @include token-utils.use-tokens($_tokens...) {
-    color: token-utils.slot(column-menu-text-color);
-  }
+  color: token-utils.slot(grid-column-menu-text-color, $fallbacks);
 }
 
 .mtx-grid-column-menu {
@@ -32,18 +30,12 @@ $_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
 
 .mtx-grid-column-menu-header {
   top: 0;
-
-  @include token-utils.use-tokens($_tokens...) {
-    border-bottom: 1px solid token-utils.slot(column-menu-divider-color);
-  }
+  border-bottom: 1px solid token-utils.slot(grid-column-menu-divider-color, $fallbacks);
 }
 
 .mtx-grid-column-menu-footer {
   bottom: 0;
-
-  @include token-utils.use-tokens($_tokens...) {
-    border-top: 1px solid token-utils.slot(column-menu-divider-color);
-  }
+  border-top: 1px solid token-utils.slot(grid-column-menu-divider-color, $fallbacks);
 }
 
 .mtx-grid-column-menu-list {
@@ -75,10 +67,7 @@ $_tokens: m2-grid.$prefix, m2-grid.get-token-slots();
 
   &.cdk-drag-preview {
     border-radius: 4px;
-
-    @include token-utils.use-tokens($_tokens...) {
-      box-shadow: 0 0 0 1px token-utils.slot(outline-color);
-    }
+    box-shadow: 0 0 0 1px token-utils.slot(grid-outline-color, $fallbacks);
   }
 
   &.cdk-drag-placeholder {

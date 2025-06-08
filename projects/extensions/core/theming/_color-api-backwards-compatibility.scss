@@ -8,39 +8,32 @@
 // from the bundle.
 $_overrides-only: true;
 
-@mixin color-variant-styles($theme, $color-variant) {
-  $primary-options: (color-variant: $color-variant, emit-overrides-only: $_overrides-only);
-
-  // Some components use the secondary color rather than primary color for `.mat-primary`.
-  // Those components should use the $secondary-color-variant.
-  $secondary-options: (
-    color-variant: if($color-variant == primary, secondary, $color-variant),
-    emit-overrides-only: $_overrides-only
-  );
+@mixin _color-variant-styles($theme, $color-variant) {
+  $secondary-when-primary: if($color-variant == primary, secondary, $color-variant);
 
   &.mtx-split-gutter {
-    @include split-theme.color($theme, $primary-options...);
+    @include split-theme.color($theme, $color-variant);
   }
 
   &.mtx-datetimepicker-content {
-    @include datetimepicker-theme.color($theme, $primary-options...);
+    @include datetimepicker-theme.color($theme, $color-variant);
   }
 
   &.ng-dropdown-panel {
-    @include select-theme.color($theme, $secondary-options...);
+    @include select-theme.color($theme, $secondary-when-primary);
   }
 }
 
 @mixin color-variants-backwards-compatibility($theme) {
   .mat-primary {
-    @include color-variant-styles($theme, primary);
+    @include _color-variant-styles($theme, $color-variant: primary);
   }
 
   .mat-accent {
-    @include color-variant-styles($theme, tertiary);
+    @include _color-variant-styles($theme, $color-variant: tertiary);
   }
 
   .mat-warn {
-    @include color-variant-styles($theme, error);
+    @include _color-variant-styles($theme, $color-variant: error);
   }
 }

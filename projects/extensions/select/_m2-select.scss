@@ -4,13 +4,10 @@
 @use '../core/tokens/m2-utils';
 @use '../core/style/elevation';
 
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, select);
-
 // Generates the tokens used to theme the option based on a palette.
 @function private-get-color-palette-color-tokens($theme, $palette-name) {
   @return (
-    option-selected-state-text-color: mat.get-theme-color($theme, $palette-name),
+    select-option-selected-state-text-color: mat.get-theme-color($theme, $palette-name),
   );
 }
 
@@ -18,8 +15,8 @@ $prefix: (mtx, select);
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
   @return (
-    container-shape: 4px,
-    container-elevation-shadow: elevation.get-box-shadow(8),
+    select-container-shape: 4px,
+    select-container-elevation-shadow: elevation.get-box-shadow(8),
   );
 }
 
@@ -34,29 +31,29 @@ $prefix: (mtx, select);
   $palette-tokens: private-get-color-palette-color-tokens($theme, primary);
 
   @return map.merge($palette-tokens, (
-    container-text-color: $text-color,
-    placeholder-text-color: $hint-text-color,
-    disabled-text-color: $hint-text-color,
+    select-container-text-color: $text-color,
+    select-placeholder-text-color: $hint-text-color,
+    select-disabled-text-color: $hint-text-color,
 
-    multiple-value-background-color: mat.get-theme-color($theme, background, unselected-chip),
-    multiple-value-outline-color: $divider-color,
-    multiple-value-disabled-outline-color: mat.private-safe-color-change($divider-color, $alpha: 0.06),
-    multiple-value-icon-hover-background-color: $divider-color,
+    select-multiple-value-background-color: mat.get-theme-color($theme, background, unselected-chip),
+    select-multiple-value-outline-color: $divider-color,
+    select-multiple-value-disabled-outline-color: mat.private-safe-color-change($divider-color, $alpha: 0.06),
+    select-multiple-value-icon-hover-background-color: $divider-color,
 
-    clear-icon-color: $secondary-text-color,
-    clear-icon-hover-color: mat.get-theme-color($theme, warn),
+    select-clear-icon-color: $secondary-text-color,
+    select-clear-icon-hover-color: mat.get-theme-color($theme, warn),
 
-    enabled-arrow-color: $secondary-text-color,
-    disabled-arrow-color: $disabled-text-color,
-    invalid-arrow-color: mat.get-theme-color($theme, warn),
+    select-enabled-arrow-color: $secondary-text-color,
+    select-disabled-arrow-color: $disabled-text-color,
+    select-invalid-arrow-color: mat.get-theme-color($theme, warn),
 
-    panel-background-color: mat.get-theme-color($theme, background, card),
-    panel-divider-color: $divider-color,
-    optgroup-label-text-color: $secondary-text-color,
-    option-label-text-color: $text-color,
-    option-selected-state-background-color: $hover-color,
-    option-hover-state-background-color: $hover-color,
-    option-disabled-state-text-color: $hint-text-color,
+    select-panel-background-color: mat.get-theme-color($theme, background, card),
+    select-panel-divider-color: $divider-color,
+    select-optgroup-label-text-color: $secondary-text-color,
+    select-option-label-text-color: $text-color,
+    select-option-selected-state-background-color: $hover-color,
+    select-option-hover-state-background-color: $hover-color,
+    select-option-disabled-state-text-color: $hint-text-color,
   ));
 }
 

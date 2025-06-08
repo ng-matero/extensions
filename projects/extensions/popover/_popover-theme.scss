@@ -1,48 +1,41 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../core/theming/inspection';
-@use '../core/theming/validation';
 @use '../core/tokens/token-utils';
 @use './m2-popover';
+@use './m3-popover';
 
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, base));
+    @include token-utils.create-token-values(map.get(m3-popover.get-tokens($theme), base));
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(
-        m2-popover.$prefix,
-        m2-popover.get-unthemable-tokens()
-      );
+      @include token-utils.create-token-values-mixed(m2-popover.get-unthemable-tokens());
     }
   }
 }
 
 @mixin color($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, color));
+    @include token-utils.create-token-values(map.get(m3-popover.get-tokens($theme), color));
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(
-        m2-popover.$prefix,
-        m2-popover.get-color-tokens($theme)
-      );
+      @include token-utils.create-token-values-mixed(m2-popover.get-color-tokens($theme));
     }
   }
 }
 
 @mixin typography($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, typography));
+    @include token-utils.create-token-values(map.get(m3-popover.get-tokens($theme), typography));
   }
   @else {}
 }
 
 @mixin density($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, density));
+    @include token-utils.create-token-values(map.get(m3-popover.get-tokens($theme), density));
   }
   @else {}
 }
@@ -51,20 +44,23 @@
 @function _define-overrides() {
   @return (
     (
-      namespace: m2-popover.$prefix,
-      tokens: m2-popover.get-token-slots(),
+      namespace: popover,
+      tokens: token-utils.get-overrides(m3-popover.get-tokens(), popover),
     ),
   );
 }
 
 @mixin overrides($tokens: ()) {
-  @include token-utils.batch-create-token-values($tokens, _define-overrides()...);
+  @include token-utils.batch-create-token-values($tokens, _define-overrides());
 }
 
-@mixin theme($theme) {
+@mixin theme($theme, $color-variant: null) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-popover') {
     @if mat.get-theme-version($theme) == 1 {
-      @include _theme-from-tokens(inspection.get-theme-tokens($theme));
+      @include base($theme);
+      @include color($theme);
+      @include density($theme);
+      @include typography($theme);
     }
     @else {
       @include base($theme);
@@ -78,14 +74,5 @@
         @include typography($theme);
       }
     }
-  }
-}
-
-@mixin _theme-from-tokens($tokens) {
-  @include validation.selector-defined(
-    'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
-  @if ($tokens != ()) {
-    @include token-utils.create-token-values(m2-popover.$prefix,
-      map.get($tokens, m2-popover.$prefix));
   }
 }

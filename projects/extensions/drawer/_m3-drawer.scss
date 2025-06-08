@@ -1,22 +1,24 @@
 @use 'sass:map';
 @use '../core/style/elevation';
 @use '../core/tokens/m3-utils';
-
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, drawer);
+@use '../core/tokens/m3';
 
 /// Generates custom tokens for the mtx-drawer.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mtx-drawer
-@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
+@function get-tokens($theme: m3.$sys-theme) {
+  $system: m3-utils.get-system($theme);
+
   $tokens: (
-    container-shape: map.get($systems, md-sys-shape, corner-large),
-    container-elevation-shadow: m3-utils.hardcode(elevation.get-box-shadow(2), $exclude-hardcoded),
-    container-background-color: map.get($systems, md-sys-color, surface),
-    container-text-color: map.get($systems, md-sys-color, on-surface-variant),
+    base: (
+      drawer-container-shape: map.get($system, corner-large),
+      drawer-container-elevation-shadow: elevation.get-box-shadow(2),
+    ),
+    color: (
+      drawer-container-background-color: map.get($system, surface),
+      drawer-container-text-color: map.get($system, on-surface-variant),
+    ),
+    typography: (),
+    density: (),
   );
 
-  @return m3-utils.namespace($prefix, $tokens, $token-slots);
+  @return $tokens;
 }

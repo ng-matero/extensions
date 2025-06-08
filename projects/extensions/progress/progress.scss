@@ -1,23 +1,22 @@
 @use '../core/tokens/token-utils';
-@use './m2-progress';
+@use './m3-progress';
+
+$fallbacks: m3-progress.get-tokens();
 
 $progress-height: 16px !default;
 $progress-fill-animation-timing: 1s linear infinite !default;
 
-$_tokens: m2-progress.$prefix, m2-progress.get-token-slots();
-
-@mixin gradient-striped($color: rgba(white, .15), $angle: 45deg) {
-  background-image:
-    linear-gradient(
-      $angle,
-      $color 25%,
-      transparent 25%,
-      transparent 50%,
-      $color 50%,
-      $color 75%,
-      transparent 75%,
-      transparent
-    );
+@mixin gradient-striped($color: rgba(white, 0.15), $angle: 45deg) {
+  background-image: linear-gradient(
+    $angle,
+    $color 25%,
+    transparent 25%,
+    transparent 50%,
+    $color 50%,
+    $color 75%,
+    transparent 75%,
+    transparent
+  );
 }
 
 .mtx-progress {
@@ -25,12 +24,9 @@ $_tokens: m2-progress.$prefix, m2-progress.get-token-slots();
   height: $progress-height;
   margin: 8px 0;
   overflow: hidden;
-
-  @include token-utils.use-tokens($_tokens...) {
-    font-size: token-utils.slot(text-size);
-    border-radius: token-utils.slot(container-shape);
-    background-color: token-utils.slot(track-color);
-  }
+  font-size: token-utils.slot(progress-text-size, $fallbacks);
+  border-radius: token-utils.slot(progress-container-shape, $fallbacks);
+  background-color: token-utils.slot(progress-track-color, $fallbacks);
 }
 
 .mtx-progress-fill {
@@ -38,40 +34,29 @@ $_tokens: m2-progress.$prefix, m2-progress.get-token-slots();
   flex-direction: column;
   justify-content: center;
   text-align: center;
-  transition: width .6s ease;
-
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(indicator-color);
-    color: token-utils.slot(text-color);
-  }
+  transition: width 0.6s ease;
+  background-color: token-utils.slot(progress-indicator-color, $fallbacks);
+  color: token-utils.slot(progress-text-color, $fallbacks);
 }
 
 .mtx-progress-fill-info {
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(info-indicator-color);
-    color: token-utils.slot(info-text-color);
-  }
+  background-color: token-utils.slot(progress-info-indicator-color, $fallbacks);
+  color: token-utils.slot(progress-info-text-color, $fallbacks);
 }
 
 .mtx-progress-fill-success {
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(success-indicator-color);
-    color: token-utils.slot(success-text-color);
-  }
+  background-color: token-utils.slot(progress-success-indicator-color, $fallbacks);
+  color: token-utils.slot(progress-success-text-color, $fallbacks);
 }
 
 .mtx-progress-fill-warning {
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(warning-indicator-color);
-    color: token-utils.slot(warning-text-color);
-  }
+  background-color: token-utils.slot(progress-warning-indicator-color, $fallbacks);
+  color: token-utils.slot(progress-warning-text-color, $fallbacks);
 }
 
 .mtx-progress-fill-danger {
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(danger-indicator-color);
-    color: token-utils.slot(danger-text-color);
-  }
+  background-color: token-utils.slot(progress-danger-indicator-color, $fallbacks);
+  color: token-utils.slot(progress-danger-text-color, $fallbacks);
 }
 
 .mtx-progress-fill-striped {

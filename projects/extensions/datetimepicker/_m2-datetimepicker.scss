@@ -5,9 +5,6 @@
 @use '../core/tokens/m2-utils';
 @use '../core/style/elevation';
 
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, datetimepicker);
-
 $_selected-fade-amount: .6;
 $_today-fade-amount: .2;
 
@@ -25,30 +22,30 @@ $_today-fade-amount: .2;
   }
 
   @return (
-    calendar-header-background-color: $palette-color,
+    datetimepicker-calendar-header-background-color: $palette-color,
 
-    calendar-date-selected-state-text-color: $default-contrast,
-    calendar-date-selected-state-background-color: $palette-color,
-    calendar-date-selected-disabled-state-background-color: $active-disabled-color,
-    calendar-date-today-selected-state-outline-color: $default-contrast,
-    calendar-date-focus-state-background-color: $active-background-color,
-    calendar-date-hover-state-background-color: $active-background-color,
+    datetimepicker-calendar-date-selected-state-text-color: $default-contrast,
+    datetimepicker-calendar-date-selected-state-background-color: $palette-color,
+    datetimepicker-calendar-date-selected-disabled-state-background-color: $active-disabled-color,
+    datetimepicker-calendar-date-today-selected-state-outline-color: $default-contrast,
+    datetimepicker-calendar-date-focus-state-background-color: $active-background-color,
+    datetimepicker-calendar-date-hover-state-background-color: $active-background-color,
 
-    clock-hand-background-color: $palette-color,
-    clock-cell-selected-state-background-color: $palette-color,
+    datetimepicker-clock-hand-background-color: $palette-color,
+    datetimepicker-clock-cell-selected-state-background-color: $palette-color,
 
-    time-input-active-state-text-color: $palette-color,
-    time-input-active-state-background-color: mat.private-safe-color-change($palette-color, $alpha: .2),
-    time-input-focus-state-outline-color: $palette-color,
-    time-input-focus-state-placeholder-text-color: mat.private-safe-color-change($palette-color, $alpha: .6),
+    datetimepicker-time-input-active-state-text-color: $palette-color,
+    datetimepicker-time-input-active-state-background-color: mat.private-safe-color-change($palette-color, $alpha: .2),
+    datetimepicker-time-input-focus-state-outline-color: $palette-color,
+    datetimepicker-time-input-focus-state-placeholder-text-color: mat.private-safe-color-change($palette-color, $alpha: .6),
 
-    time-ampm-selected-state-background-color: mat.private-safe-color-change($palette-color, $alpha: .2),
+    datetimepicker-time-ampm-selected-state-background-color: mat.private-safe-color-change($palette-color, $alpha: .2),
   );
 }
 
 @function private-get-toggle-color-palette-color-tokens($theme, $palette-name) {
   @return (
-    toggle-active-state-icon-color: mat.get-theme-color($theme, $palette-name, text),
+    datetimepicker-toggle-active-state-icon-color: mat.get-theme-color($theme, $palette-name, text),
   );
 }
 
@@ -56,11 +53,11 @@ $_today-fade-amount: .2;
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
   @return (
-    container-elevation-shadow: elevation.get-box-shadow(4),
-    container-touch-elevation-shadow: elevation.get-box-shadow(24),
-    container-shape: 4px,
-    container-touch-shape: 4px,
-    selector-container-shape: 4px,
+    datetimepicker-container-elevation-shadow: elevation.get-box-shadow(4),
+    datetimepicker-container-touch-elevation-shadow: elevation.get-box-shadow(24),
+    datetimepicker-container-shape: 4px,
+    datetimepicker-container-touch-shape: 4px,
+    datetimepicker-selector-container-shape: 4px,
   );
 }
 
@@ -80,58 +77,58 @@ $_today-fade-amount: .2;
   $toggle-tokens: private-get-toggle-color-palette-color-tokens($theme, primary);
 
   @return mat.private-merge-all($calendar-tokens, $toggle-tokens, (
-    toggle-icon-color: $inactive-icon-color,
-    calendar-body-label-text-color: $secondary-text-color,
-    calendar-body-week-number-text-color: $secondary-text-color,
-    // calendar-period-button-icon-color: $inactive-icon-color,
-    // calendar-navigation-button-icon-color: $inactive-icon-color,
-    calendar-header-text-color: white,
-    calendar-header-divider-color: transparent,
-    calendar-table-header-text-color: $secondary-text-color,
+    datetimepicker-toggle-icon-color: $inactive-icon-color,
+    datetimepicker-calendar-body-label-text-color: $secondary-text-color,
+    datetimepicker-calendar-body-week-number-text-color: $secondary-text-color,
+    // datetimepicker-calendar-period-button-icon-color: $inactive-icon-color,
+    // datetimepicker-calendar-navigation-button-icon-color: $inactive-icon-color,
+    datetimepicker-calendar-header-text-color: white,
+    datetimepicker-calendar-header-divider-color: transparent,
+    datetimepicker-calendar-table-header-text-color: $secondary-text-color,
 
     // Note: though it's not text, the border is a hint about the fact
     // that this is today's date, so we use the hint color.
-    calendar-date-today-outline-color: $hint-text-color,
-    // calendar-date-today-disabled-state-outline-color: $today-disabled-outline-color,
-    calendar-date-text-color: $text-color,
-    calendar-date-outline-color: transparent,
-    calendar-date-disabled-state-text-color: $disabled-text-color,
-    // calendar-date-preview-state-outline-color: $preview-outline-color,
+    datetimepicker-calendar-date-today-outline-color: $hint-text-color,
+    // datetimepicker-calendar-date-today-disabled-state-outline-color: $today-disabled-outline-color,
+    datetimepicker-calendar-date-text-color: $text-color,
+    datetimepicker-calendar-date-outline-color: transparent,
+    datetimepicker-calendar-date-disabled-state-text-color: $disabled-text-color,
+    // datetimepicker-calendar-date-preview-state-outline-color: $preview-outline-color,
 
-    container-background-color: mat.get-theme-color($theme, background, card),
-    container-text-color: $text-color,
+    datetimepicker-container-background-color: mat.get-theme-color($theme, background, card),
+    datetimepicker-container-text-color: $text-color,
 
-    clock-dial-background-color: $divider-color,
-    clock-cell-text-color: $text-color,
-    clock-cell-hover-state-background-color: mat.get-theme-color($theme, background, hover),
-    clock-cell-disabled-state-text-color: $disabled-text-color,
+    datetimepicker-clock-dial-background-color: $divider-color,
+    datetimepicker-clock-cell-text-color: $text-color,
+    datetimepicker-clock-cell-hover-state-background-color: mat.get-theme-color($theme, background, hover),
+    datetimepicker-clock-cell-disabled-state-text-color: $disabled-text-color,
 
-    time-input-text-color: $text-color,
-    time-input-background-color: $divider-color,
-    time-input-focus-state-background-color: mat.get-theme-color($theme, background, background),
-    time-input-warn-state-outline-color: mat.get-theme-color($theme, warn),
-    time-ampm-text-color: mat.private-safe-color-change($text-color, $alpha: .75),
-    time-ampm-outline-color: $hint-text-color,
-    time-ampm-selected-state-text-color: $text-color,
+    datetimepicker-time-input-text-color: $text-color,
+    datetimepicker-time-input-background-color: $divider-color,
+    datetimepicker-time-input-focus-state-background-color: mat.get-theme-color($theme, background, background),
+    datetimepicker-time-input-warn-state-outline-color: mat.get-theme-color($theme, warn),
+    datetimepicker-time-ampm-text-color: mat.private-safe-color-change($text-color, $alpha: .75),
+    datetimepicker-time-ampm-outline-color: $hint-text-color,
+    datetimepicker-time-ampm-selected-state-text-color: $text-color,
   ));
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
 @function get-typography-tokens($theme) {
   @return (
-    calendar-text-font: mat.get-theme-typography($theme, body-1, font-family),
-    calendar-text-size: 13px,
+    datetimepicker-calendar-text-font: mat.get-theme-typography($theme, body-1, font-family),
+    datetimepicker-calendar-text-size: 13px,
 
-    calendar-body-label-text-size: mat.get-theme-typography($theme, button, font-size),
-    calendar-body-label-text-weight: mat.get-theme-typography($theme, button, font-weight),
+    datetimepicker-calendar-body-label-text-size: mat.get-theme-typography($theme, button, font-size),
+    datetimepicker-calendar-body-label-text-weight: mat.get-theme-typography($theme, button, font-weight),
 
-    calendar-period-button-text-size: mat.get-theme-typography($theme, button, font-size),
-    calendar-period-button-text-weight: mat.get-theme-typography($theme, button, font-weight),
+    datetimepicker-calendar-period-button-text-size: mat.get-theme-typography($theme, button, font-size),
+    datetimepicker-calendar-period-button-text-weight: mat.get-theme-typography($theme, button, font-weight),
 
-    calendar-table-header-text-size: 11px,
-    calendar-table-header-text-weight: mat.get-theme-typography($theme, body-1, font-weight),
+    datetimepicker-calendar-table-header-text-size: 11px,
+    datetimepicker-calendar-table-header-text-weight: mat.get-theme-typography($theme, body-1, font-weight),
 
-    clock-text-size: 14px,
+    datetimepicker-clock-text-size: 14px,
   );
 }
 

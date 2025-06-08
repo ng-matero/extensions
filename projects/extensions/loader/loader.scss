@@ -1,5 +1,7 @@
 @use '../core/tokens/token-utils';
-@use './m2-loader';
+@use './m3-loader';
+
+$fallbacks: m3-loader.get-tokens();
 
 .mtx-loader {
   position: relative;
@@ -40,8 +42,5 @@
   width: 100%;
   height: 100%;
   content: '';
-
-  @include token-utils.use-tokens(m2-loader.$prefix, m2-loader.get-token-slots()) {
-    background-color: token-utils.slot(backdrop-background-color);
-  }
+  background-color: token-utils.slot(loader-backdrop-background-color, $fallbacks);
 }

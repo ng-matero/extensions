@@ -1,30 +1,20 @@
 @use 'sass:map';
 @use '../core/tokens/m3-utils';
-
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, split);
+@use '../core/tokens/m3';
 
 /// Generates custom tokens for the mtx-split.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mtx-split
-@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
-  $tokens: ((
-    gutter-background-color: map.get($systems, md-sys-color, outline-variant),
-    gutter-hover-state-background-color: map.get($systems, md-sys-color, primary),
-  ), (
-    primary: (),
-    secondary: (
-      gutter-hover-state-background-color: map.get($systems, md-sys-color, secondary),
-    ),
-    tertiary: (
-      gutter-hover-state-background-color: map.get($systems, md-sys-color, tertiary),
-    ),
-    error: (
-      gutter-hover-state-background-color: map.get($systems, md-sys-color, error),
-    )
-  ));
+@function get-tokens($theme: m3.$sys-theme) {
+  $system: m3-utils.get-system($theme);
 
-  @return m3-utils.namespace($prefix, $tokens, $token-slots);
+  $tokens: (
+    base: (),
+    color: (
+      split-gutter-background-color: map.get($system, outline-variant),
+      split-gutter-hover-state-background-color: map.get($system, primary),
+    ),
+    typography: (),
+    density: (),
+  );
+
+  @return $tokens;
 }

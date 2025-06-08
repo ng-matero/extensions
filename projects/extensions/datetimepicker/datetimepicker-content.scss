@@ -1,7 +1,9 @@
 /* stylelint-disable keyframes-name-pattern */
 @use '@angular/material' as mat;
 @use '../core/tokens/token-utils';
-@use './m2-datetimepicker';
+@use './m3-datetimepicker';
+
+$fallbacks: m3-datetimepicker.get-tokens();
 
 $calendar-padding: 8px;
 $non-touch-calendar-cell-size: 40px;
@@ -84,13 +86,10 @@ $touch-max-height: 850px;
 
 .mtx-datetimepicker-content {
   display: block;
-
-  @include token-utils.use-tokens(m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots()) {
-    border-radius: token-utils.slot(container-shape);
-    background-color: token-utils.slot(container-background-color);
-    box-shadow: token-utils.slot(container-elevation-shadow);
-    color: token-utils.slot(container-text-color);
-  }
+  border-radius: token-utils.slot(datetimepicker-container-shape, $fallbacks);
+  background-color: token-utils.slot(datetimepicker-container-background-color, $fallbacks);
+  box-shadow: token-utils.slot(datetimepicker-container-elevation-shadow, $fallbacks);
+  color: token-utils.slot(datetimepicker-container-text-color, $fallbacks);
 
   &.mtx-datetimepicker-content-animations-enabled {
     animation: _mtx-datetimepicker-content-dropdown-enter 120ms cubic-bezier(0, 0, 0.2, 1);
@@ -146,11 +145,8 @@ $touch-max-height: 850px;
 .mtx-datetimepicker-content-touch {
   display: block;
   max-height: 84vh;
-
-  @include token-utils.use-tokens(m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots()) {
-    box-shadow: token-utils.slot(container-touch-elevation-shadow);
-    border-radius: token-utils.slot(container-touch-shape);
-  }
+  box-shadow: token-utils.slot(datetimepicker-container-touch-elevation-shadow, $fallbacks);
+  border-radius: token-utils.slot(datetimepicker-container-touch-shape, $fallbacks);
 
   // Allows for the screen reader close button to be seen in touch UI mode.
   position: relative;

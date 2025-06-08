@@ -2,15 +2,12 @@
 @use '@angular/material' as mat;
 @use '../core/tokens/m2-utils';
 
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, grid);
-
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
   @return (
-    container-shape: 0,
-    table-cell-min-width: 80px,
+    grid-container-shape: 0,
+    grid-table-cell-min-width: 80px,
   );
 }
 
@@ -21,18 +18,18 @@ $prefix: (mtx, grid);
   $divider-color: mat.get-theme-color($theme, foreground, divider);
 
   @return (
-    outline-color: mat.private-safe-color-change($text-color, $alpha: .2),
-    column-menu-text-color: $text-color,
-    column-menu-divider-color: $divider-color,
-    table-footer-background-color: mat.get-theme-color($theme, background, app-bar),
-    table-row-striped-background-color: if($is-dark, #3a3a3a, #f5f5f5),
-    table-row-hover-background-color: if($is-dark, #2a2a2a, #eee),
-    table-row-selected-background-color: if($is-dark, #2a2a2a, #eee),
-    table-row-selected-hover-background-color: if($is-dark, #1a1a1a, #e0e0e0),
-    table-cell-selected-outline-color: mat.get-theme-color($theme, accent),
-    resizable-handle-active-background-color: mat.get-theme-color($theme, primary),
-    resizable-handle-hover-background-color: mat.get-theme-color($theme, primary),
-    resizable-handle-disabled-background-color: $divider-color,
+    grid-outline-color: mat.private-safe-color-change($text-color, $alpha: .2),
+    grid-column-menu-text-color: $text-color,
+    grid-column-menu-divider-color: $divider-color,
+    grid-table-footer-background-color: mat.get-theme-color($theme, background, app-bar),
+    grid-table-row-striped-background-color: if($is-dark, #3a3a3a, #f5f5f5),
+    grid-table-row-hover-background-color: if($is-dark, #2a2a2a, #eee),
+    grid-table-row-selected-background-color: if($is-dark, #2a2a2a, #eee),
+    grid-table-row-selected-hover-background-color: if($is-dark, #1a1a1a, #e0e0e0),
+    grid-table-cell-selected-outline-color: mat.get-theme-color($theme, accent),
+    grid-resizable-handle-active-background-color: mat.get-theme-color($theme, primary),
+    grid-resizable-handle-hover-background-color: mat.get-theme-color($theme, primary),
+    grid-resizable-handle-disabled-background-color: $divider-color,
   );
 }
 
@@ -53,7 +50,7 @@ $prefix: (mtx, grid);
   );
 
   @return (
-    row-expand-button-size: map.get($expand-button-scale, $scale),
+    grid-row-expand-button-size: map.get($expand-button-scale, $scale),
   );
 }
 

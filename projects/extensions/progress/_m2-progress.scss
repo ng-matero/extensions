@@ -2,14 +2,11 @@
 @use '@angular/material' as mat;
 @use '../core/tokens/m2-utils';
 
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, progress);
-
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
   @return (
-    container-shape: 4px,
+    progress-container-shape: 4px,
   );
 }
 
@@ -18,24 +15,24 @@ $prefix: (mtx, progress);
   $is-dark: mat.get-theme-type($theme) == dark;
 
   @return (
-    track-color: mat.get-theme-color($theme, background, hover),
-    indicator-color: mat.get-theme-color($theme, foreground, divider),
-    text-color: mat.get-theme-color($theme, foreground, text),
-    info-indicator-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 500)),
-    info-text-color: white,
-    success-indicator-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 500)),
-    success-text-color: white,
-    warning-indicator-color: mat.m2-get-color-from-palette(mat.$m2-orange-palette, if($is-dark, 900, 500)),
-    warning-text-color: white,
-    danger-indicator-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 500)),
-    danger-text-color: white,
+    progress-track-color: mat.get-theme-color($theme, background, hover),
+    progress-indicator-color: mat.get-theme-color($theme, foreground, divider),
+    progress-text-color: mat.get-theme-color($theme, foreground, text),
+    progress-info-indicator-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 500)),
+    progress-info-text-color: white,
+    progress-success-indicator-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 500)),
+    progress-success-text-color: white,
+    progress-warning-indicator-color: mat.m2-get-color-from-palette(mat.$m2-orange-palette, if($is-dark, 900, 500)),
+    progress-warning-text-color: white,
+    progress-danger-indicator-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 500)),
+    progress-danger-text-color: white,
   );
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
 @function get-typography-tokens($theme) {
   @return (
-    text-size: 12px,
+    progress-text-size: 12px,
   );
 }
 

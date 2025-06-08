@@ -1,142 +1,98 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../core/tokens/m3-utils';
 @use '../core/style/elevation';
-
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, datetimepicker);
+@use '../core/tokens/m3-utils';
+@use '../core/tokens/m3';
 
 /// Generates custom tokens for the mtx-datetimepicker.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mtx-datetimepicker
-@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
-  $tokens: ((
-    calendar-header-background-color: m3-utils.hardcode(transparent, $exclude-hardcoded),
-    calendar-date-selected-state-text-color: map.get($systems, md-sys-color, on-primary),
-    calendar-date-selected-state-background-color: map.get($systems, md-sys-color, primary),
-    calendar-date-selected-disabled-state-background-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: 0.38
-    ),
-    calendar-date-today-selected-state-outline-color: map.get($systems, md-sys-color, primary),
-    calendar-date-focus-state-background-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: map.get($systems, md-sys-state, focus-state-layer-opacity)
-    ),
-    calendar-date-hover-state-background-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: map.get($systems, md-sys-state, hover-state-layer-opacity)
-    ),
-    toggle-active-state-icon-color: map.get($systems, md-sys-color, on-surface-variant),
-    toggle-icon-color: map.get($systems, md-sys-color, on-surface-variant),
-    calendar-body-label-text-color: map.get($systems, md-sys-color, on-surface),
-    calendar-body-week-number-text-color: map.get($systems, md-sys-color, secondary),
-    calendar-header-text-color: map.get($systems, md-sys-color, on-surface-variant),
-    calendar-header-divider-color: map.get($systems, md-sys-color, outline-variant),
-    calendar-table-header-text-color: map.get($systems, md-sys-color, on-surface),
-    calendar-date-today-outline-color: map.get($systems, md-sys-color, primary),
-    calendar-date-text-color: map.get($systems, md-sys-color, on-surface),
-    calendar-date-outline-color: m3-utils.hardcode(transparent, $exclude-hardcoded),
-    calendar-date-disabled-state-text-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: 0.38
-    ),
-    container-background-color: map.get($systems, md-sys-color, surface-container-high),
-    container-text-color: map.get($systems, md-sys-color, on-surface),
+@function get-tokens($theme: m3.$sys-theme, $color-variant: null) {
+  $system: m3-utils.get-system($theme);
+  @if $color-variant {
+    $system: m3-utils.replace-colors-with-variant($system, primary, $color-variant);
+  }
 
-    clock-dial-background-color: map.get($systems, md-sys-color, surface-container-highest),
-    clock-cell-text-color: map.get($systems, md-sys-color, on-surface),
-    clock-cell-hover-state-background-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: map.get($systems, md-sys-state, hover-state-layer-opacity)
+  $tokens: (
+    base: (
+      datetimepicker-container-elevation-shadow: elevation.get-box-shadow(0),
+      datetimepicker-container-touch-elevation-shadow: elevation.get-box-shadow(0),
+      datetimepicker-container-shape: map.get($system, corner-large),
+      datetimepicker-container-touch-shape: map.get($system, corner-extra-large),
+      datetimepicker-selector-container-shape: map.get($system, corner-small),
     ),
-    clock-cell-disabled-state-text-color: mat.private-safe-color-change(
-      map.get($systems, md-sys-color, on-surface),
-      $alpha: 0.38
+    color: (
+      datetimepicker-calendar-header-background-color: transparent,
+      datetimepicker-calendar-date-selected-state-text-color: map.get($system, on-primary),
+      datetimepicker-calendar-date-selected-state-background-color: map.get($system, primary),
+      datetimepicker-calendar-date-selected-disabled-state-background-color: mat.private-safe-color-change(
+        map.get($system, on-surface),
+        $alpha: 0.38
+      ),
+      datetimepicker-calendar-date-today-selected-state-outline-color: map.get($system, primary),
+      datetimepicker-calendar-date-focus-state-background-color: mat.private-safe-color-change(
+        map.get($system, on-surface),
+        $alpha: map.get($system, focus-state-layer-opacity)
+      ),
+      datetimepicker-calendar-date-hover-state-background-color: mat.private-safe-color-change(
+        map.get($system, on-surface),
+        $alpha: map.get($system, hover-state-layer-opacity)
+      ),
+      datetimepicker-toggle-active-state-icon-color: map.get($system, on-surface-variant),
+      datetimepicker-toggle-icon-color: map.get($system, on-surface-variant),
+      datetimepicker-calendar-body-label-text-color: map.get($system, on-surface),
+      datetimepicker-calendar-body-week-number-text-color: map.get($system, secondary),
+      datetimepicker-calendar-header-text-color: map.get($system, on-surface-variant),
+      datetimepicker-calendar-header-divider-color: map.get($system, outline-variant),
+      datetimepicker-calendar-table-header-text-color: map.get($system, on-surface),
+      datetimepicker-calendar-date-today-outline-color: map.get($system, primary),
+      datetimepicker-calendar-date-text-color: map.get($system, on-surface),
+      datetimepicker-calendar-date-outline-color: transparent,
+      datetimepicker-calendar-date-disabled-state-text-color: mat.private-safe-color-change(
+        map.get($system, on-surface),
+        $alpha: 0.38
+      ),
+      datetimepicker-container-background-color: map.get($system, surface-container-high),
+      datetimepicker-container-text-color: map.get($system, on-surface),
+
+      datetimepicker-clock-dial-background-color: map.get($system, surface-container-highest),
+      datetimepicker-clock-cell-text-color: map.get($system, on-surface),
+      datetimepicker-clock-cell-hover-state-background-color: mat.private-safe-color-change(
+        map.get($system, on-surface),
+        $alpha: map.get($system, hover-state-layer-opacity)
+      ),
+      datetimepicker-clock-cell-disabled-state-text-color: mat.private-safe-color-change(
+        map.get($system, on-surface),
+        $alpha: 0.38
+      ),
+      datetimepicker-clock-cell-selected-state-background-color: map.get($system, primary),
+      datetimepicker-clock-hand-background-color: map.get($system, primary),
+      datetimepicker-time-input-active-state-text-color: map.get($system, on-primary-container),
+      datetimepicker-time-input-active-state-background-color: map.get($system, primary-container),
+      datetimepicker-time-input-focus-state-outline-color: map.get($system, primary),
+      datetimepicker-time-input-focus-state-placeholder-text-color: map.get($system, on-primary-container),
+      datetimepicker-time-input-text-color: map.get($system, on-surface),
+      datetimepicker-time-input-background-color: map.get($system, surface-container-highest),
+      datetimepicker-time-input-focus-state-background-color: map.get($system, primary-container),
+      datetimepicker-time-input-warn-state-outline-color: map.get($system, error),
+      datetimepicker-time-ampm-text-color: map.get($system, on-surface),
+      datetimepicker-time-ampm-outline-color: map.get($system, outline),
+      datetimepicker-time-ampm-selected-state-text-color: map.get($system, on-tertiary-container),
+      datetimepicker-time-ampm-selected-state-background-color: map.get($system, tertiary-container),
     ),
-    clock-cell-selected-state-background-color: map.get($systems, md-sys-color, primary),
-    clock-hand-background-color: map.get($systems, md-sys-color, primary),
-    time-input-active-state-text-color: map.get($systems, md-sys-color, on-primary-container),
-    time-input-active-state-background-color: map.get($systems, md-sys-color, primary-container),
-    time-input-focus-state-outline-color: map.get($systems, md-sys-color, primary),
-    time-input-focus-state-placeholder-text-color: map.get($systems, md-sys-color, on-primary-container),
-    time-input-text-color: map.get($systems, md-sys-color, on-surface),
-    time-input-background-color: map.get($systems, md-sys-color, surface-container-highest),
-    time-input-focus-state-background-color: map.get($systems, md-sys-color, primary-container),
-    time-input-warn-state-outline-color: map.get($systems, md-sys-color, error),
-    time-ampm-text-color: map.get($systems, md-sys-color, on-surface),
-    time-ampm-outline-color: map.get($systems, md-sys-color, outline),
-    time-ampm-selected-state-text-color: map.get($systems, md-sys-color, on-tertiary-container),
-    time-ampm-selected-state-background-color: map.get($systems, md-sys-color, tertiary-container),
-
-    container-elevation-shadow: m3-utils.hardcode(elevation.get-box-shadow(0), $exclude-hardcoded),
-    container-touch-elevation-shadow: m3-utils.hardcode(elevation.get-box-shadow(0), $exclude-hardcoded),
-    container-shape: map.get($systems, md-sys-shape, corner-large),
-    container-touch-shape: map.get($systems, md-sys-shape, corner-extra-large),
-    selector-container-shape: map.get($systems, md-sys-shape, corner-small),
-
-    calendar-text-font: map.get($systems, md-sys-typescale, body-medium-font),
-    calendar-text-size: map.get($systems, md-sys-typescale, body-medium-size),
-    calendar-body-label-text-size: map.get($systems, md-sys-typescale, title-small-size),
-    calendar-body-label-text-weight: map.get($systems, md-sys-typescale, title-small-weight),
-    calendar-period-button-text-size: map.get($systems, md-sys-typescale, title-small-size),
-    calendar-period-button-text-weight: map.get($systems, md-sys-typescale, title-small-weight),
-    calendar-header-text-size: map.get($systems, md-sys-typescale, title-small-size),
-    calendar-header-text-weight: map.get($systems, md-sys-typescale, title-small-weight),
-    clock-text-size: map.get($systems, md-sys-typescale, title-small-size),
-  ), (
-    // Color variants:
-    primary: (), // Default, no overrides needed.
-    secondary: (
-      calendar-date-selected-state-text-color: map.get($systems, md-sys-color, on-secondary),
-      calendar-date-selected-state-background-color: map.get($systems, md-sys-color, secondary),
-      calendar-date-today-selected-state-outline-color: map.get($systems, md-sys-color, secondary),
-      calendar-date-today-outline-color: map.get($systems, md-sys-color, secondary),
-      clock-hand-background-color: map.get($systems, md-sys-color, secondary),
-      clock-cell-selected-state-background-color: map.get($systems, md-sys-color, secondary),
-      time-input-active-state-text-color: map.get($systems, md-sys-color, on-secondary-container),
-      time-input-active-state-background-color: map.get($systems, md-sys-color, secondary-container),
-      time-input-focus-state-outline-color: map.get($systems, md-sys-color, secondary),
-      time-input-focus-state-placeholder-text-color: map.get($systems, md-sys-color, on-secondary-container),
-      time-input-focus-state-background-color: map.get($systems, md-sys-color, secondary-container),
-      time-ampm-selected-state-text-color: map.get($systems, md-sys-color, on-tertiary-container),
-      time-ampm-selected-state-background-color: map.get($systems, md-sys-color, tertiary-container),
+    typography: (
+      datetimepicker-calendar-text-font: map.get($system, body-medium-font),
+      datetimepicker-calendar-text-size: map.get($system, body-medium-size),
+      datetimepicker-calendar-table-header-text-size: null,
+      datetimepicker-calendar-table-header-text-weight: null,
+      datetimepicker-calendar-body-label-text-size: map.get($system, title-small-size),
+      datetimepicker-calendar-body-label-text-weight: map.get($system, title-small-weight),
+      datetimepicker-calendar-period-button-text-size: map.get($system, title-small-size),
+      datetimepicker-calendar-period-button-text-weight: map.get($system, title-small-weight),
+      datetimepicker-calendar-header-text-size: map.get($system, title-small-size),
+      datetimepicker-calendar-header-text-weight: map.get($system, title-small-weight),
+      datetimepicker-clock-text-size: map.get($system, title-small-size),
     ),
-    tertiary: (
-      calendar-date-selected-state-text-color: map.get($systems, md-sys-color, on-tertiary),
-      calendar-date-selected-state-background-color: map.get($systems, md-sys-color, tertiary),
-      calendar-date-today-selected-state-outline-color: map.get($systems, md-sys-color, tertiary),
-      calendar-date-today-outline-color: map.get($systems, md-sys-color, tertiary),
-      clock-hand-background-color: map.get($systems, md-sys-color, tertiary),
-      clock-cell-selected-state-background-color: map.get($systems, md-sys-color, tertiary),
-      time-input-active-state-text-color: map.get($systems, md-sys-color, on-tertiary-container),
-      time-input-active-state-background-color: map.get($systems, md-sys-color, tertiary-container),
-      time-input-focus-state-outline-color: map.get($systems, md-sys-color, tertiary),
-      time-input-focus-state-placeholder-text-color: map.get($systems, md-sys-color, on-tertiary-container),
-      time-input-focus-state-background-color: map.get($systems, md-sys-color, tertiary-container),
-      time-ampm-selected-state-text-color: map.get($systems, md-sys-color, on-error-container),
-      time-ampm-selected-state-background-color: map.get($systems, md-sys-color, error-container),
-    ),
-    error: (
-      calendar-date-selected-state-text-color: map.get($systems, md-sys-color, on-error),
-      calendar-date-selected-state-background-color: map.get($systems, md-sys-color, error),
-      calendar-date-today-selected-state-outline-color: map.get($systems, md-sys-color, error),
-      calendar-date-today-outline-color: map.get($systems, md-sys-color, error),
-      clock-hand-background-color: map.get($systems, md-sys-color, error),
-      clock-cell-selected-state-background-color: map.get($systems, md-sys-color, error),
-      time-input-active-state-text-color: map.get($systems, md-sys-color, on-error-container),
-      time-input-active-state-background-color: map.get($systems, md-sys-color, error-container),
-      time-input-focus-state-outline-color: map.get($systems, md-sys-color, error),
-      time-input-focus-state-placeholder-text-color: map.get($systems, md-sys-color, on-error-container),
-      time-input-focus-state-background-color: map.get($systems, md-sys-color, error-container),
-      time-ampm-selected-state-text-color: map.get($systems, md-sys-color, on-primary-container),
-      time-ampm-selected-state-background-color: map.get($systems, md-sys-color, primary-container),
-    )
-  ));
+    density: (),
+  );
 
-  $variant-tokens: ();
-
-  @return m3-utils.namespace($prefix, $tokens, $token-slots);
+  @return $tokens;
 }

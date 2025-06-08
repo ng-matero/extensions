@@ -1,21 +1,23 @@
 @use 'sass:map';
 @use '../core/tokens/m3-utils';
-
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, colorpicker);
+@use '../core/tokens/m3';
 
 /// Generates custom tokens for the mtx-colorpicker.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mtx-colorpicker
-@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
+@function get-tokens($theme: m3.$sys-theme, $color-variant: null) {
+  $system: m3-utils.get-system($theme);
+  @if $color-variant {
+    $system: m3-utils.replace-colors-with-variant($system, primary, $color-variant);
+  }
+
   $tokens: (
-    toggle-active-state-icon-color: map.get($systems, md-sys-color, on-surface-variant),
-    toggle-icon-color: map.get($systems, md-sys-color, on-surface-variant),
+    base: (),
+    color: (
+      colorpicker-toggle-active-state-icon-color: map.get($system, on-surface-variant),
+      colorpicker-toggle-icon-color: map.get($system, on-surface-variant),
+    ),
+    typography: (),
+    density: (),
   );
 
-  $variant-tokens: ();
-
-  @return m3-utils.namespace($prefix, $tokens, $token-slots);
+  @return $tokens;
 }

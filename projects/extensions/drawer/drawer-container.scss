@@ -2,9 +2,9 @@
 @use '@angular/cdk' as cdk;
 @use '@angular/material' as mat;
 @use '../core/tokens/token-utils';
-@use './m2-drawer';
+@use './m3-drawer';
 
-$_tokens: m2-drawer.$prefix, m2-drawer.get-token-slots();
+$fallbacks: m3-drawer.get-tokens();
 
 @keyframes _mtx-drawer-enter {
   from {
@@ -41,12 +41,9 @@ $_tokens: m2-drawer.$prefix, m2-drawer.get-token-slots();
   // We don't use this, but it's useful for consumers to position
   // elements (e.g. close buttons) inside the bottom sheet.
   position: relative;
-
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(container-background-color);
-    color: token-utils.slot(container-text-color);
-    box-shadow: token-utils.slot(container-elevation-shadow);
-  }
+  background-color: token-utils.slot(drawer-container-background-color, $fallbacks);
+  color: token-utils.slot(drawer-container-text-color, $fallbacks);
+  box-shadow: token-utils.slot(drawer-container-elevation-shadow, $fallbacks);
 
   @include cdk.high-contrast(active, off) {
     outline: 1px solid;
@@ -80,29 +77,21 @@ $_tokens: m2-drawer.$prefix, m2-drawer.get-token-slots();
 }
 
 .mtx-drawer-right {
-  @include token-utils.use-tokens($_tokens...) {
-    border-top-left-radius: token-utils.slot(container-shape);
-    border-bottom-left-radius: token-utils.slot(container-shape);
-  }
+  border-top-left-radius: token-utils.slot(drawer-container-shape, $fallbacks);
+  border-bottom-left-radius: token-utils.slot(drawer-container-shape, $fallbacks);
 }
 
 .mtx-drawer-left {
-  @include token-utils.use-tokens($_tokens...) {
-    border-top-right-radius: token-utils.slot(container-shape);
-    border-bottom-right-radius: token-utils.slot(container-shape);
-  }
+  border-top-right-radius: token-utils.slot(drawer-container-shape, $fallbacks);
+  border-bottom-right-radius: token-utils.slot(drawer-container-shape, $fallbacks);
 }
 
 .mtx-drawer-bottom {
-  @include token-utils.use-tokens($_tokens...) {
-    border-top-left-radius: token-utils.slot(container-shape);
-    border-top-right-radius: token-utils.slot(container-shape);
-  }
+  border-top-left-radius: token-utils.slot(drawer-container-shape, $fallbacks);
+  border-top-right-radius: token-utils.slot(drawer-container-shape, $fallbacks);
 }
 
 .mtx-drawer-top {
-  @include token-utils.use-tokens($_tokens...) {
-    border-bottom-left-radius: token-utils.slot(container-shape);
-    border-bottom-right-radius: token-utils.slot(container-shape);
-  }
+  border-bottom-left-radius: token-utils.slot(drawer-container-shape, $fallbacks);
+  border-bottom-right-radius: token-utils.slot(drawer-container-shape, $fallbacks);
 }

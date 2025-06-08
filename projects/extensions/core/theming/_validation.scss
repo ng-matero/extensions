@@ -1,5 +1,0 @@
-@mixin selector-defined($msg) {
-  @if #{&} == '' {
-    @error $msg;
-  }
-}

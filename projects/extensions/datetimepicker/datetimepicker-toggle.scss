@@ -1,23 +1,18 @@
 @use '@angular/cdk';
 @use '../core/tokens/token-utils';
-@use './m2-datetimepicker';
+@use './m3-datetimepicker';
 
-$_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
+$fallbacks: m3-datetimepicker.get-tokens();
 
 // We support the case where the form field is disabled, but the datetimepicker is not.
 // MDC sets `pointer-events: none` on disabled form fields which prevents clicks on the toggle.
 .mtx-datetimepicker-toggle {
   pointer-events: auto;
-
-  @include token-utils.use-tokens($_tokens...) {
-    color: token-utils.slot(toggle-icon-color);
-  }
+  color: token-utils.slot(datetimepicker-toggle-icon-color, $fallbacks);
 }
 
 .mtx-datetimepicker-toggle-active {
-  @include token-utils.use-tokens($_tokens...) {
-    color: token-utils.slot(toggle-active-state-icon-color);
-  }
+  color: token-utils.slot(datetimepicker-toggle-active-state-icon-color, $fallbacks);
 }
 
 @include cdk.high-contrast(active, off) {

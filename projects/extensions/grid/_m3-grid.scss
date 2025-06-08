@@ -1,32 +1,35 @@
 @use 'sass:map';
 @use '../core/tokens/m3-utils';
-
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, grid);
+@use '../core/tokens/m3';
 
 /// Generates custom tokens for the mtx-grid.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mtx-grid
-@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
-  $tokens: (
-    container-shape:  map.get($systems, md-sys-shape, corner-medium),
-    table-cell-min-width: m3-utils.hardcode(80px, $exclude-hardcoded),
+@function get-tokens($theme: m3.$sys-theme) {
+  $system: m3-utils.get-system($theme);
 
-    outline-color: map.get($systems, md-sys-color, outline-variant),
-    column-menu-text-color: map.get($systems, md-sys-color, on-surface-variant),
-    column-menu-divider-color: map.get($systems, md-sys-color, outline-variant),
-    table-footer-background-color: map.get($systems, md-sys-color, surface-container),
-    table-row-striped-background-color: map.get($systems, md-sys-color, surface-container),
-    table-row-hover-background-color: map.get($systems, md-sys-color, secondary-container),
-    table-row-selected-background-color: map.get($systems, md-sys-color, secondary-container),
-    table-row-selected-hover-background-color: map.get($systems, md-sys-color, primary-container),
-    table-cell-selected-outline-color: map.get($systems, md-sys-color, primary),
-    resizable-handle-active-background-color: map.get($systems, md-sys-color, primary),
-    resizable-handle-hover-background-color: map.get($systems, md-sys-color, primary),
-    resizable-handle-disabled-background-color: map.get($systems, md-sys-color, outline-variant),
+  $tokens: (
+    base: (
+      grid-container-shape: map.get($system, corner-medium),
+      grid-table-cell-min-width: 80px,
+    ),
+    color: (
+      grid-outline-color: map.get($system, outline-variant),
+      grid-column-menu-text-color: map.get($system, on-surface-variant),
+      grid-column-menu-divider-color: map.get($system, outline-variant),
+      grid-table-footer-background-color: map.get($system, surface-container),
+      grid-table-row-striped-background-color: map.get($system, surface-container),
+      grid-table-row-hover-background-color: map.get($system, secondary-container),
+      grid-table-row-selected-background-color: map.get($system, secondary-container),
+      grid-table-row-selected-hover-background-color: map.get($system, primary-container),
+      grid-table-cell-selected-outline-color: map.get($system, primary),
+      grid-resizable-handle-active-background-color: map.get($system, primary),
+      grid-resizable-handle-hover-background-color: map.get($system, primary),
+      grid-resizable-handle-disabled-background-color: map.get($system, outline-variant),
+    ),
+    typography: (),
+    density: (
+      grid-row-expand-button-size: 40px
+    ),
   );
 
-  @return m3-utils.namespace($prefix, $tokens, $token-slots);
+  @return $tokens;
 }

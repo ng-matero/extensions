@@ -3,23 +3,20 @@
 @use '../core/tokens/m2-utils';
 @use '../core/style/elevation';
 
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, drawer);
-
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
   @return (
-    container-shape: 0,
-    container-elevation-shadow: elevation.get-box-shadow(16),
+    drawer-container-shape: 0,
+    drawer-container-elevation-shadow: elevation.get-box-shadow(16),
   );
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
 @function get-color-tokens($theme) {
   @return (
-    container-background-color: mat.get-theme-color($theme, background, dialog),
-    container-text-color: mat.get-theme-color($theme, foreground, text),
+    drawer-container-background-color: mat.get-theme-color($theme, background, dialog),
+    drawer-container-text-color: mat.get-theme-color($theme, foreground, text),
   );
 }
 

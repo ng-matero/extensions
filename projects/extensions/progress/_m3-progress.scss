@@ -1,32 +1,33 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '../core/tokens/m3-utils';
-
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, progress);
+@use '../core/tokens/m3';
 
 /// Generates custom tokens for the mtx-progress.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mtx-progress
-@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
-  $tokens: (
-    container-shape: map.get($systems, md-sys-shape, corner-extra-small),
-    text-size: map.get($systems, md-sys-typescale, label-medium-size),
+@function get-tokens($theme: m3.$sys-theme) {
+  $system: m3-utils.get-system($theme);
 
-    track-color: map.get($systems, md-sys-color, surface-container),
-    indicator-color: map.get($systems, md-sys-color, outline-variant),
-    text-color: map.get($systems, md-sys-color, on-surface),
-    info-indicator-color: map.get(mat.$blue-palette, 50),
-    info-text-color:m3-utils.hardcode(white, $exclude-hardcoded),
-    success-indicator-color: map.get(mat.$green-palette, 50),
-    success-text-color:m3-utils.hardcode(white, $exclude-hardcoded),
-    warning-indicator-color: map.get(mat.$orange-palette, 50),
-    warning-text-color:m3-utils.hardcode(white, $exclude-hardcoded),
-    danger-indicator-color: map.get(mat.$red-palette, 50),
-    danger-text-color:m3-utils.hardcode(white, $exclude-hardcoded),
+  $tokens: (
+    base: (
+      progress-container-shape: map.get($system, corner-extra-small),
+      progress-text-size: map.get($system, label-medium-size),
+    ),
+    color: (
+      progress-track-color: map.get($system, surface-container),
+      progress-indicator-color: map.get($system, outline-variant),
+      progress-text-color: map.get($system, on-surface),
+      progress-info-indicator-color: map.get(mat.$blue-palette, 50),
+      progress-info-text-color: white,
+      progress-success-indicator-color: map.get(mat.$green-palette, 50),
+      progress-success-text-color: white,
+      progress-warning-indicator-color: map.get(mat.$orange-palette, 50),
+      progress-warning-text-color: white,
+      progress-danger-indicator-color: map.get(mat.$red-palette, 50),
+      progress-danger-text-color: white,
+    ),
+    typography: (),
+    density: (),
   );
 
-  @return m3-utils.namespace($prefix, $tokens, $token-slots);
+  @return $tokens;
 }

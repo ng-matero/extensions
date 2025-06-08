@@ -1,43 +1,41 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
 @use '../core/tokens/m3-utils';
-
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, alert);
+@use '../core/tokens/m3';
 
 /// Generates custom tokens for the mtx-alert.
-/// @param {Map} $systems The MDC system tokens
-/// @param {Boolean} $exclude-hardcoded Whether to exclude hardcoded token values
-/// @param {Map} $token-slots Possible token slots
-/// @return {Map} A set of custom tokens for the mtx-alert
-@function get-tokens($systems, $exclude-hardcoded, $token-slots) {
-  $is-dark: map.get($systems, md-sys-type) == dark;
+@function get-tokens($theme: m3.$sys-theme) {
+  $system: m3-utils.get-system($theme);
+  $is-dark: map.get($system, md-sys-type) == dark;
 
   $tokens: (
-    container-shape: map.get($systems, md-sys-shape, corner-small),
+    base: (
+      alert-container-shape: map.get($system, corner-small),
+    ),
+    color: (
+      alert-outline-color: map.get($system, outline-variant),
+      alert-background-color: map.get($system, surface-container),
+      alert-text-color: map.get($system, on-surface),
 
-    outline-color: map.get($systems, md-sys-color, outline-variant),
-    background-color: map.get($systems, md-sys-color, surface-container),
-    text-color: map.get($systems, md-sys-color, on-surface),
+      alert-info-outline-color: light-dark(map.get(mat.$azure-palette, 80), map.get(mat.$azure-palette, 40)),
+      alert-info-background-color: light-dark(map.get(mat.$azure-palette, 90), map.get(mat.$azure-palette, 20)),
+      alert-info-text-color: light-dark(map.get(mat.$azure-palette, 20), map.get(mat.$azure-palette, 90)),
 
-    info-outline-color: light-dark(map.get(mat.$azure-palette, 80), map.get(mat.$azure-palette, 40)),
-    info-background-color: light-dark(map.get(mat.$azure-palette, 90), map.get(mat.$azure-palette, 20)),
-    info-text-color: light-dark(map.get(mat.$azure-palette, 20), map.get(mat.$azure-palette, 90)),
+      alert-success-outline-color: light-dark(map.get(mat.$green-palette, 80), map.get(mat.$green-palette, 40)),
+      alert-success-background-color: light-dark(map.get(mat.$green-palette, 95), map.get(mat.$green-palette, 20)),
+      alert-success-text-color: light-dark(map.get(mat.$green-palette, 20), map.get(mat.$green-palette, 95)),
 
-    success-outline-color: light-dark(map.get(mat.$green-palette, 80), map.get(mat.$green-palette, 40)),
-    success-background-color: light-dark(map.get(mat.$green-palette, 95), map.get(mat.$green-palette, 20)),
-    success-text-color: light-dark(map.get(mat.$green-palette, 20), map.get(mat.$green-palette, 95)),
+      alert-warning-outline-color: light-dark(map.get(mat.$yellow-palette, 80), map.get(mat.$yellow-palette, 40)),
+      alert-warning-background-color: light-dark(map.get(mat.$yellow-palette, 98), map.get(mat.$yellow-palette, 20)),
+      alert-warning-text-color: light-dark(map.get(mat.$yellow-palette, 20), map.get(mat.$yellow-palette, 98)),
 
-    warning-outline-color: light-dark(map.get(mat.$yellow-palette, 80), map.get(mat.$yellow-palette, 40)),
-    warning-background-color: light-dark(map.get(mat.$yellow-palette, 98), map.get(mat.$yellow-palette, 20)),
-    warning-text-color: light-dark(map.get(mat.$yellow-palette, 20), map.get(mat.$yellow-palette, 98)),
-
-    danger-outline-color: light-dark(map.get(mat.$red-palette, 80), map.get(mat.$red-palette, 40)),
-    danger-background-color: light-dark(map.get(mat.$red-palette, 90), map.get(mat.$red-palette, 20)),
-    danger-text-color: light-dark(map.get(mat.$red-palette, 20), map.get(mat.$red-palette, 90)),
+      alert-danger-outline-color: light-dark(map.get(mat.$red-palette, 80), map.get(mat.$red-palette, 40)),
+      alert-danger-background-color: light-dark(map.get(mat.$red-palette, 90), map.get(mat.$red-palette, 20)),
+      alert-danger-text-color: light-dark(map.get(mat.$red-palette, 20), map.get(mat.$red-palette, 90)),
+    ),
+    typography: (),
+    density: (),
   );
 
-  $variant-tokens: ();
-
-  @return m3-utils.namespace($prefix, ($tokens, $variant-tokens), $token-slots);
+  @return $tokens;
 }

@@ -1,5 +1,7 @@
 @use '../core/tokens/token-utils';
-@use './m2-alert';
+@use './m3-alert';
+
+$fallbacks: m3-alert.get-tokens();
 
 .mtx-alert {
   position: relative;
@@ -7,36 +9,33 @@
   padding: .75rem 1rem;
   margin-bottom: 1rem;
   line-height: 1.5;
+  border: 1px solid token-utils.slot(alert-outline-color, $fallbacks);
+  border-radius: token-utils.slot(alert-container-shape, $fallbacks);
+  background-color: token-utils.slot(alert-background-color, $fallbacks);
+  color: token-utils.slot(alert-text-color, $fallbacks);
 
-  @include token-utils.use-tokens(m2-alert.$prefix, m2-alert.get-token-slots()) {
-    border: 1px solid token-utils.slot(outline-color);
-    border-radius: token-utils.slot(container-shape);
-    background-color: token-utils.slot(background-color);
-    color: token-utils.slot(text-color);
+  &.mtx-alert-info {
+    border-color: token-utils.slot(alert-info-outline-color, $fallbacks);
+    background-color: token-utils.slot(alert-info-background-color, $fallbacks);
+    color: token-utils.slot(alert-info-text-color, $fallbacks);
+  }
 
-    &.mtx-alert-info {
-      border-color: token-utils.slot(info-outline-color);
-      background-color: token-utils.slot(info-background-color);
-      color: token-utils.slot(info-text-color);
-    }
+  &.mtx-alert-success {
+    border-color: token-utils.slot(alert-success-outline-color, $fallbacks);
+    background-color: token-utils.slot(alert-success-background-color, $fallbacks);
+    color: token-utils.slot(alert-success-text-color, $fallbacks);
+  }
 
-    &.mtx-alert-success {
-      border-color: token-utils.slot(success-outline-color);
-      background-color: token-utils.slot(success-background-color);
-      color: token-utils.slot(success-text-color);
-    }
+  &.mtx-alert-warning {
+    border-color: token-utils.slot(alert-warning-outline-color, $fallbacks);
+    background-color: token-utils.slot(alert-warning-background-color, $fallbacks);
+    color: token-utils.slot(alert-warning-text-color, $fallbacks);
+  }
 
-    &.mtx-alert-warning {
-      border-color: token-utils.slot(warning-outline-color);
-      background-color: token-utils.slot(warning-background-color);
-      color: token-utils.slot(warning-text-color);
-    }
-
-    &.mtx-alert-danger {
-      border-color: token-utils.slot(danger-outline-color);
-      background-color: token-utils.slot(danger-background-color);
-      color: token-utils.slot(danger-text-color);
-    }
+  &.mtx-alert-danger {
+    border-color: token-utils.slot(alert-danger-outline-color, $fallbacks);
+    background-color: token-utils.slot(alert-danger-background-color, $fallbacks);
+    color: token-utils.slot(alert-danger-text-color, $fallbacks);
   }
 }
 

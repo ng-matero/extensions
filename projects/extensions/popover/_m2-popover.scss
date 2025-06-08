@@ -2,26 +2,23 @@
 @use '@angular/material' as mat;
 @use '../core/tokens/m2-utils';
 
-// The prefix used to generate the fully qualified name for tokens in this file.
-$prefix: (mtx, popover);
-
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
 @function get-unthemable-tokens() {
   @return (
-    container-shape: 4px,
+    popover-container-shape: 4px,
     // Note that this uses a value, rather than a computed box-shadow, because we use
     // the value at runtime to determine which shadow to set based on the popover's depth.
-    base-elevation-level: 8,
+    popover-base-elevation-level: 8,
   );
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
 @function get-color-tokens($theme) {
   @return (
-    outline-color: mat.get-theme-color($theme, foreground, divider),
-    background-color: mat.get-theme-color($theme, background, card),
-    text-color: mat.get-theme-color($theme, foreground, text),
+    popover-outline-color: mat.get-theme-color($theme, foreground, divider),
+    popover-background-color: mat.get-theme-color($theme, background, card),
+    popover-text-color: mat.get-theme-color($theme, foreground, text),
   );
 }
 

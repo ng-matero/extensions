@@ -1,9 +1,10 @@
 @use 'sass:math';
 @use '@angular/cdk';
-
 @use '../core/style/button-common';
 @use '../core/tokens/token-utils';
-@use './m2-datetimepicker';
+@use './m3-datetimepicker';
+
+$fallbacks: m3-datetimepicker.get-tokens();
 
 $calendar-body-label-padding-start: 5% !default;
 // We don't want the label to jump around when we switch between month and year views, so we use
@@ -21,13 +22,11 @@ $calendar-body-cell-radius: 999px !default;
 $calendar-body-min-size: 7 * $calendar-body-cell-min-size !default;
 $calendar-body-cell-content-size: 100% - $calendar-body-cell-content-margin * 2 !default;
 
-$_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
-
 // Styles for a highlighted calendar cell (e.g. hovered or focused).
 @mixin _highlighted-cell($token-name) {
-  &>.mtx-calendar-body-cell-content {
+  & > .mtx-calendar-body-cell-content {
     @include _unselected-cell {
-      background-color: token-utils.slot($token-name);
+      background-color: token-utils.slot($token-name, $fallbacks);
     }
   }
 }
@@ -45,9 +44,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
 
 .mtx-calendar-body-today {
   @include _unselected-cell {
-    @include token-utils.use-tokens($_tokens...) {
-      border-color: token-utils.slot(calendar-date-today-outline-color);
-    }
+    border-color: token-utils.slot(datetimepicker-calendar-date-today-outline-color, $fallbacks);
   }
 }
 
@@ -57,12 +54,9 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   text-align: left;
   padding-left: $calendar-body-label-side-padding;
   padding-right: $calendar-body-label-side-padding;
-
-  @include token-utils.use-tokens($_tokens...) {
-    font-size: token-utils.slot(calendar-body-label-text-size);
-    font-weight: token-utils.slot(calendar-body-label-text-weight);
-    color: token-utils.slot(calendar-body-label-text-color);
-  }
+  font-size: token-utils.slot(datetimepicker-calendar-body-label-text-size, $fallbacks);
+  font-weight: token-utils.slot(datetimepicker-calendar-body-label-text-weight, $fallbacks);
+  color: token-utils.slot(datetimepicker-calendar-body-label-text-color, $fallbacks);
 
   [dir='rtl'] & {
     text-align: right;
@@ -73,10 +67,7 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   height: 0;
   line-height: 0;
   font-weight: 400;
-
-  @include token-utils.use-tokens($_tokens...) {
-    color: token-utils.slot(calendar-body-week-number-text-color);
-  }
+  color: token-utils.slot(datetimepicker-calendar-body-week-number-text-color, $fallbacks);
 }
 
 .mtx-calendar-body-cell-container {
@@ -94,14 +85,10 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   background: none;
   text-align: center;
   outline: none;
-  font-family: inherit;
   margin: 0;
-
   // Needs to be repeated here in order to override the user agent styles.
-  @include token-utils.use-tokens($_tokens...) {
-    font-family: token-utils.slot(calendar-text-font);
-    font-size: token-utils.slot(calendar-text-size);
-  }
+  font-family: token-utils.slot(datetimepicker-calendar-text-font, $fallbacks);
+  font-size: token-utils.slot(datetimepicker-calendar-text-size, $fallbacks);
 
   @include button-common.reset();
 }
@@ -110,14 +97,12 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
   cursor: default;
   pointer-events: none;
 
-  @include token-utils.use-tokens($_tokens...) {
-    >.mtx-calendar-body-cell-content:not(.mtx-calendar-body-selected) {
-      color: token-utils.slot(calendar-date-disabled-state-text-color);
-    }
+  > .mtx-calendar-body-cell-content:not(.mtx-calendar-body-selected) {
+    color: token-utils.slot(datetimepicker-calendar-date-disabled-state-text-color, $fallbacks);
+  }
 
-    >.mtx-calendar-body-today:not(.mtx-calendar-body-selected) {
-      border-color: token-utils.slot(calendar-date-disabled-state-text-color);
-    }
+  > .mtx-calendar-body-today:not(.mtx-calendar-body-selected) {
+    border-color: token-utils.slot(datetimepicker-calendar-date-disabled-state-text-color, $fallbacks);
   }
 
   // Fade out the disabled cells so that they can be distinguished from the enabled ones. Note that
@@ -146,11 +131,8 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
 
   // Choosing a value clearly larger than the height ensures we get the correct capsule shape.
   border-radius: $calendar-body-cell-radius;
-
-  @include token-utils.use-tokens($_tokens...) {
-    color: token-utils.slot(calendar-date-text-color);
-    border-color: token-utils.slot(calendar-date-outline-color);
-  }
+  color: token-utils.slot(datetimepicker-calendar-date-text-color, $fallbacks);
+  border-color: token-utils.slot(datetimepicker-calendar-date-outline-color, $fallbacks);
 
   // Increase specificity because focus indicator styles are part of the `mat-core` mixin and can
   // potentially overwrite the absolute position of the container.
@@ -164,33 +146,28 @@ $_tokens: m2-datetimepicker.$prefix, m2-datetimepicker.get-token-slots();
 }
 
 .mtx-calendar-body-active {
-  @include token-utils.use-tokens($_tokens...) {
-    .cdk-keyboard-focused &,
-    .cdk-program-focused & {
-      @include _highlighted-cell(calendar-date-focus-state-background-color);
-    }
+  .cdk-keyboard-focused &,
+  .cdk-program-focused & {
+    @include _highlighted-cell(datetimepicker-calendar-date-focus-state-background-color);
   }
 }
 
 @media (hover: hover) {
   .mtx-calendar-body-cell:not(.mtx-calendar-body-disabled):hover {
-    @include token-utils.use-tokens($_tokens...) {
-      @include _highlighted-cell(calendar-date-hover-state-background-color);
-    }
+    @include _highlighted-cell(datetimepicker-calendar-date-hover-state-background-color);
   }
 }
 
 .mtx-calendar-body-selected {
-  @include token-utils.use-tokens($_tokens...) {
-    background-color: token-utils.slot(calendar-date-selected-state-background-color);
-    color: token-utils.slot(calendar-date-selected-state-text-color);
+  background-color: token-utils.slot(datetimepicker-calendar-date-selected-state-background-color, $fallbacks);
+  color: token-utils.slot(datetimepicker-calendar-date-selected-state-text-color, $fallbacks);
 
-    .mtx-calendar-body-disabled>& {
-      background-color: token-utils.slot(calendar-date-selected-disabled-state-background-color);
-    }
+  .mtx-calendar-body-disabled > & {
+    background-color: token-utils.slot(datetimepicker-calendar-date-selected-disabled-state-background-color, $fallbacks);
+  }
 
-    &.mtx-calendar-body-today {
-      box-shadow: inset 0 0 0 1px token-utils.slot(calendar-date-today-selected-state-outline-color);
-    }
+  &.mtx-calendar-body-today {
+    box-shadow: inset 0 0 0 1px
+      token-utils.slot(datetimepicker-calendar-date-today-selected-state-outline-color, $fallbacks);
   }
 }

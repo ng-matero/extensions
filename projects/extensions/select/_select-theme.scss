@@ -1,45 +1,38 @@
 @use 'sass:map';
 @use '@angular/material' as mat;
-@use '../core/theming/inspection';
-@use '../core/theming/validation';
 @use '../core/tokens/token-utils';
 @use './m2-select';
+@use './m3-select';
 
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, base));
+    @include token-utils.create-token-values(map.get(m3-select.get-tokens($theme), base));
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(
-        m2-select.$prefix,
-        m2-select.get-unthemable-tokens()
-      );
+      @include token-utils.create-token-values-mixed(m2-select.get-unthemable-tokens());
     }
   }
 }
 
-@mixin color($theme, $options...) {
+@mixin color($theme, $color-variant: null) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, color), $options...);
+    @include token-utils.create-token-values(map.get(m3-select.get-tokens($theme), color));
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(
-        m2-select.$prefix,
-        m2-select.get-color-tokens($theme)
-      );
+      @include token-utils.create-token-values-mixed(m2-select.get-color-tokens($theme));
     }
 
     .ng-dropdown-panel {
       &.mat-accent {
         $accent-tokens: m2-select.private-get-color-palette-color-tokens($theme, accent);
-        @include token-utils.create-token-values(m2-select.$prefix, $accent-tokens);
+        @include token-utils.create-token-values-mixed($accent-tokens);
       }
 
       &.mat-warn {
         $warn-tokens: m2-select.private-get-color-palette-color-tokens($theme, warn);
-        @include token-utils.create-token-values(m2-select.$prefix, $warn-tokens);
+        @include token-utils.create-token-values-mixed($warn-tokens);
       }
     }
   }
@@ -47,21 +40,18 @@
 
 @mixin typography($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, typography));
+    @include token-utils.create-token-values(map.get(m3-select.get-tokens($theme), typography));
   }
   @else {}
 }
 
 @mixin density($theme) {
   @if mat.get-theme-version($theme) == 1 {
-    @include _theme-from-tokens(inspection.get-theme-tokens($theme, density));
+    @include token-utils.create-token-values(map.get(m3-select.get-tokens($theme), density));
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values(
-        m2-select.$prefix,
-        m2-select.get-density-tokens($theme)
-      );
+      @include token-utils.create-token-values-mixed(m2-select.get-density-tokens($theme));
     }
   }
 }
@@ -70,20 +60,23 @@
 @function _define-overrides() {
   @return (
     (
-      namespace: m2-select.$prefix,
-      tokens: m2-select.get-token-slots(),
+      namespace: select,
+      tokens: token-utils.get-overrides(m3-select.get-tokens(), select),
     ),
   );
 }
 
 @mixin overrides($tokens: ()) {
-  @include token-utils.batch-create-token-values($tokens, _define-overrides()...);
+  @include token-utils.batch-create-token-values($tokens, _define-overrides());
 }
 
-@mixin theme($theme, $options...) {
+@mixin theme($theme, $color-variant: null) {
   @include mat.private-check-duplicate-theme-styles($theme, 'mtx-select') {
     @if mat.get-theme-version($theme) == 1 {
-      @include _theme-from-tokens(inspection.get-theme-tokens($theme), $options...);
+      @include base($theme);
+      @include color($theme, $color-variant);
+      @include density($theme);
+      @include typography($theme);
     }
     @else {
       @include base($theme);
@@ -98,11 +91,4 @@
       }
     }
   }
-}
-
-@mixin _theme-from-tokens($tokens, $options...) {
-  @include validation.selector-defined(
-    'Calls to Angular Material theme mixins with an M3 theme must be wrapped in a selector');
-  $mtx-select-tokens: token-utils.get-tokens-for($tokens, m2-select.$prefix, $options...);
-  @include token-utils.create-token-values(m2-select.$prefix, $mtx-select-tokens);
 }
