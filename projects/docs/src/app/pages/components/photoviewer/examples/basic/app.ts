@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MtxPhotoviewerModule } from '@ng-matero/extensions/photoviewer';
 
 @Component({
-  selector: 'photoviewer-example',
+  selector: 'photoviewer-basic-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatButtonModule, MtxPhotoviewerModule],

@@ -6,7 +6,7 @@ import { MtxGrid, MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/gri
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'data-grid-column-hiding-moving-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatCheckboxModule, FormsModule, MatRadioModule, MtxGridModule],

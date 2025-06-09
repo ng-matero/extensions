@@ -6,7 +6,7 @@ import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'dialog-example',
+  selector: 'dialog-i18n-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [FormsModule, MatRadioModule, MatButtonModule],

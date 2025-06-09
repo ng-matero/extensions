@@ -6,7 +6,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { ColorFormat, MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
 
 @Component({
-  selector: 'color-picker-example',
+  selector: 'colorpicker-basic-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [FormsModule, MatRadioModule, MatFormFieldModule, MatInputModule, MtxColorpickerModule],

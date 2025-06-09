@@ -10,7 +10,7 @@ import {
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'data-grid-row-selectable-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatCheckboxModule, FormsModule, MatRadioModule, MtxGridModule],

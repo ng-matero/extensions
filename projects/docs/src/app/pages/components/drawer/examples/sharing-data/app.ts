@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MTX_DRAWER_DATA, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/drawer';
 
 @Component({
-  selector: 'drawer-example',
+  selector: 'drawer-sharing-data-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule],

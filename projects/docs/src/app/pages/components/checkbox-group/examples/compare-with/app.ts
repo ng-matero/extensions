@@ -5,7 +5,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
 
 @Component({
-  selector: 'checkbox-group-example',
+  selector: 'checkbox-group-compare-with-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MtxCheckboxGroupModule, FormsModule, MatDividerModule, JsonPipe],

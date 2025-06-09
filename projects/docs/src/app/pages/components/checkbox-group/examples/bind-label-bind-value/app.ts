@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
 
 @Component({
-  selector: 'checkbox-group-example',
+  selector: 'checkbox-group-bind-label-bind-value-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MtxCheckboxGroupModule, FormsModule, JsonPipe],

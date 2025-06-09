@@ -9,7 +9,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { DrawerPosition, MtxDrawer, MtxDrawerRef } from '@ng-matero/extensions/drawer';
 
 @Component({
-  selector: 'drawer-example',
+  selector: 'drawer-configurable-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [

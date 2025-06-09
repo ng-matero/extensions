@@ -6,7 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'data-grid-i18n-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [FormsModule, MatRadioModule, MtxGridModule],

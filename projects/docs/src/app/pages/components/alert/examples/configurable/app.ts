@@ -6,7 +6,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MtxAlertModule, MtxAlertType } from '@ng-matero/extensions/alert';
 
 @Component({
-  selector: 'alert-example',
+  selector: 'alert-configurable-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [FormsModule, MatRadioModule, MatCheckboxModule, MatSliderModule, MtxAlertModule],

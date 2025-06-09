@@ -6,7 +6,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MtxPopoverModule } from '@ng-matero/extensions/popover';
 
 @Component({
-  selector: 'popover-example',
+  selector: 'popover-target-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [FormsModule, MatRadioModule, MatButtonModule, MtxPopoverModule, CdkDrag],

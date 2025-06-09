@@ -16,7 +16,7 @@ import { CustomHeader } from './custom-header';
 import { MatButtonModule } from '@angular/material/button';
 
 @Component({
-  selector: 'datetimepicker-example',
+  selector: 'datetimepicker-configurable-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [

@@ -7,7 +7,7 @@ import { ColorEvent } from 'ngx-color';
 import { ColorSketchModule } from 'ngx-color/sketch';
 
 @Component({
-  selector: 'color-picker-example',
+  selector: 'colorpicker-custom-picker-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatFormFieldModule, MatInputModule, MtxColorpickerModule, ColorSketchModule],

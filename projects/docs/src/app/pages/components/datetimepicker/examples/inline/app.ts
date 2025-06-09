@@ -4,7 +4,7 @@ import { provideNativeDatetimeAdapter } from '@ng-matero/extensions/core';
 import { MtxDatetimepickerModule } from '@ng-matero/extensions/datetimepicker';
 
 @Component({
-  selector: 'datetimepicker-example',
+  selector: 'datetimepicker-inline-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatCardModule, MtxDatetimepickerModule],

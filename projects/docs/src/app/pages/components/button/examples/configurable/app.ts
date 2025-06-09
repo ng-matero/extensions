@@ -8,7 +8,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MtxButtonModule } from '@ng-matero/extensions/button';
 
 @Component({
-  selector: 'button-example',
+  selector: 'button-configurable-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [

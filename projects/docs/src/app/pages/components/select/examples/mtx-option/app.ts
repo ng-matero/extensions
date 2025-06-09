@@ -6,7 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MtxSelectModule } from '@ng-matero/extensions/select';
 
 @Component({
-  selector: 'select-example',
+  selector: 'select-mtx-option-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [FormsModule, MatButtonModule, MatFormFieldModule, JsonPipe, MtxSelectModule],

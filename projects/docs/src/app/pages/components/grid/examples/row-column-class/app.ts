@@ -3,7 +3,7 @@ import { MtxGridColumn, MtxGridModule, MtxGridRowClassFormatter } from '@ng-mate
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'data-grid-row-column-class-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MtxGridModule],

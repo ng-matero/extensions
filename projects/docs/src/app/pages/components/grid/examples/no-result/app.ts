@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'data-grid-no-result-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MtxGridModule],

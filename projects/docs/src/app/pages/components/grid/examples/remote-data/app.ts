@@ -5,7 +5,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'data-grid-remote-data-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatButtonModule, MtxGridModule],

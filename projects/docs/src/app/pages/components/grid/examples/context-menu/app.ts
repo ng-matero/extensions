@@ -5,7 +5,7 @@ import { Observable, Subscription, fromEvent, merge } from 'rxjs';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'data-grid-context-menu-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MtxGridModule, MatMenuModule],

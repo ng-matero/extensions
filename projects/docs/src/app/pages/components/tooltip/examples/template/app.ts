@@ -6,7 +6,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MtxTooltipModule, TooltipPosition } from '@ng-matero/extensions/tooltip';
 
 @Component({
-  selector: 'tooltip-example',
+  selector: 'tooltip-template-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [FormsModule, MatFormFieldModule, MatSelectModule, MatButtonModule, MtxTooltipModule],

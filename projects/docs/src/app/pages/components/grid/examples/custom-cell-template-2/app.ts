@@ -4,7 +4,7 @@ import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'data-grid-custom-cell-template-2-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MtxGridModule, MatButtonModule],

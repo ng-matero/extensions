@@ -16,7 +16,7 @@ import {
 } from '@ng-matero/extensions/popover';
 
 @Component({
-  selector: 'popover-example',
+  selector: 'popover-configurable-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [

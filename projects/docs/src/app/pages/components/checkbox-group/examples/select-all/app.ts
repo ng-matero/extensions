@@ -6,7 +6,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MtxCheckboxGroupModule } from '@ng-matero/extensions/checkbox-group';
 
 @Component({
-  selector: 'checkbox-group-example',
+  selector: 'checkbox-group-select-all-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatButtonModule, MatCheckboxModule, FormsModule, MtxCheckboxGroupModule, JsonPipe],

@@ -5,7 +5,7 @@ import { MtxGridColumn, MtxGridModule } from '@ng-matero/extensions/grid';
 import { EXAMPLE_DATA } from '../../data';
 
 @Component({
-  selector: 'data-grid-example',
+  selector: 'data-grid-loading-status-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatCheckboxModule, FormsModule, MtxGridModule],

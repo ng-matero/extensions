@@ -3,7 +3,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 
 @Component({
-  selector: 'dialog-example',
+  selector: 'dialog-basic-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatButtonModule],

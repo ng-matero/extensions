@@ -6,7 +6,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MtxLoaderModule, MtxLoaderType } from '@ng-matero/extensions/loader';
 
 @Component({
-  selector: 'loader-example',
+  selector: 'loader-configurable-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatRadioModule, FormsModule, MatCheckboxModule, MtxLoaderModule],

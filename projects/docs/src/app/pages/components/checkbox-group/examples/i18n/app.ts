@@ -9,7 +9,7 @@ import {
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'checkbox-group-example',
+  selector: 'checkbox-group-i18n-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [MatRadioModule, FormsModule, MtxCheckboxGroupModule, JsonPipe],

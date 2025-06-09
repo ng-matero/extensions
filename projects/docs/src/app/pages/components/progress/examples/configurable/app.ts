@@ -9,7 +9,7 @@ import { MtxColorpickerModule } from '@ng-matero/extensions/colorpicker';
 import { MtxProgressModule, MtxProgressType } from '@ng-matero/extensions/progress';
 
 @Component({
-  selector: 'progress-example',
+  selector: 'progress-configurable-example',
   templateUrl: './app.html',
   styleUrl: './app.scss',
   imports: [
