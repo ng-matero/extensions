@@ -4,6 +4,7 @@ import { ActivatedRoute, Routes } from '@angular/router';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { tooltipTemplateExampleConfig } from './examples/template';
+import { tooltipContextExampleConfig } from './examples/context';
 
 @Component({
   selector: 'app-tooltip-overview',
@@ -30,7 +31,7 @@ export const routes: Routes = [
     component: TooltipOverview,
     pathMatch: 'full',
     data: {
-      examples: [tooltipTemplateExampleConfig],
+      examples: [tooltipTemplateExampleConfig, tooltipContextExampleConfig],
     },
   },
   {

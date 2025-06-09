@@ -1,7 +1,7 @@
 import { App } from './app';
 
-const tooltipTemplateExampleConfig = {
-  title: 'Tooltip template',
+const tooltipContextExampleConfig = {
+  title: 'Tooltip context',
   component: App,
   files: [
     {
@@ -22,4 +22,4 @@ const tooltipTemplateExampleConfig = {
   ],
 };
 
-export { tooltipTemplateExampleConfig };
+export { tooltipContextExampleConfig };

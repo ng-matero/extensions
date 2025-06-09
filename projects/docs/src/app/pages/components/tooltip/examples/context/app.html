@@ -1,0 +1,10 @@
+<mat-form-field>
+  <mat-label>Tooltip context</mat-label>
+  <input matInput [(ngModel)]="data" />
+</mat-form-field>
+
+<button mat-raised-button [mtxTooltip]="tooltipTpl" [mtxTooltipContext]="data">Action</button>
+
+<ng-template #tooltipTpl let-data>
+  <div>Hi, {{ data }}</div>
+</ng-template>
