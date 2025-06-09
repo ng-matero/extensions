@@ -2,10 +2,10 @@ import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http'
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
-import { AppComponent } from './app/app.component';
+import { App } from './app/app';
 import { DOCS_APP_ROUTES } from './app/routes';
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),

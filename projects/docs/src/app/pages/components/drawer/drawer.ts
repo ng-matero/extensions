@@ -11,7 +11,7 @@ import { drawerSharingDataExampleConfig } from './examples/sharing-data';
   templateUrl: './drawer-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class DrawerOverviewComponent {
+export class DrawerOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -20,7 +20,7 @@ export class DrawerOverviewComponent {
   templateUrl: './drawer-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class DrawerApiComponent {
+export class DrawerApi {
   route = inject(ActivatedRoute);
 }
 
@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: DrawerOverviewComponent,
+    component: DrawerOverview,
     pathMatch: 'full',
     data: {
       examples: [drawerConfigurableExampleConfig, drawerSharingDataExampleConfig],
@@ -36,7 +36,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: DrawerApiComponent,
+    component: DrawerApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./drawer.md'),

@@ -4,7 +4,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
+import { DocHeading } from '../../../shared/doc-heading/doc-heading';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { gridBasicExampleConfig } from './examples/basic';
@@ -33,9 +33,9 @@ import { gridSortableExampleConfig } from './examples/sortable';
 @Component({
   selector: 'app-grid-overview',
   templateUrl: './grid-overview.html',
-  imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
+  imports: [DocHeading, ExampleViewer, AsyncPipe],
 })
-export class GridOverviewComponent {
+export class GridOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -44,7 +44,7 @@ export class GridOverviewComponent {
   templateUrl: './grid-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class GridApiComponent {
+export class GridApi {
   route = inject(ActivatedRoute);
 }
 
@@ -56,7 +56,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: GridOverviewComponent,
+    component: GridOverview,
     pathMatch: 'full',
     data: {
       examples: [
@@ -96,7 +96,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: GridApiComponent,
+    component: GridApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./grid.md'),

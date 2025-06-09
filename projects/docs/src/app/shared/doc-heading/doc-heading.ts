@@ -1,18 +1,18 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { HeaderLinkComponent } from './header-link';
+import { HeaderLink } from './header-link';
 
 @Component({
   selector: 'doc-heading',
   template: `
     <h3 [id]="id">
       <header-link [example]="text"></header-link>
-      <span> {{ text }}</span>
+      <span>{{ text }}</span>
     </h3>
   `,
   encapsulation: ViewEncapsulation.None,
-  imports: [HeaderLinkComponent],
+  imports: [HeaderLink],
 })
-export class DocHeadingComponent implements OnInit {
+export class DocHeading implements OnInit {
   @Input() text = '';
 
   id = '';

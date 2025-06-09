@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { MtxAlert } from '@ng-matero/extensions/alert';
-import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
+import { DocHeading } from '../../../shared/doc-heading/doc-heading';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { selectBasicExampleConfig } from './examples/basic';
@@ -20,9 +20,9 @@ import { selectOptionExampleConfig } from './examples/mtx-option';
       display: block;
     }
   `,
-  imports: [MtxAlert, DocHeadingComponent, ExampleViewer, AsyncPipe],
+  imports: [MtxAlert, DocHeading, ExampleViewer, AsyncPipe],
 })
-export class SelectOverviewComponent {
+export class SelectOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -31,7 +31,7 @@ export class SelectOverviewComponent {
   templateUrl: './select-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class SelectApiComponent {
+export class SelectApi {
   route = inject(ActivatedRoute);
 }
 
@@ -39,7 +39,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: SelectOverviewComponent,
+    component: SelectOverview,
     pathMatch: 'full',
     data: {
       examples: [
@@ -53,7 +53,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: SelectApiComponent,
+    component: SelectApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./select.md'),

@@ -11,7 +11,7 @@ import { progressCustomColorExampleConfig } from './examples/custom-color';
   templateUrl: './progress-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class ProgressOverviewComponent {
+export class ProgressOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -20,7 +20,7 @@ export class ProgressOverviewComponent {
   templateUrl: './progress-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class ProgressApiComponent {
+export class ProgressApi {
   route = inject(ActivatedRoute);
 }
 
@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: ProgressOverviewComponent,
+    component: ProgressOverview,
     pathMatch: 'full',
     data: {
       examples: [progressConfigurableExampleConfig, progressCustomColorExampleConfig],
@@ -36,7 +36,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: ProgressApiComponent,
+    component: ProgressApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./progress.md'),

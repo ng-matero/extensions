@@ -10,7 +10,7 @@ import { splitBasicExampleConfig } from './examples/basic';
   templateUrl: './split-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class SplitOverviewComponent {
+export class SplitOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -19,7 +19,7 @@ export class SplitOverviewComponent {
   templateUrl: './split-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class SplitApiComponent {
+export class SplitApi {
   route = inject(ActivatedRoute);
 }
 
@@ -27,7 +27,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: SplitOverviewComponent,
+    component: SplitOverview,
     pathMatch: 'full',
     data: {
       examples: [splitBasicExampleConfig],
@@ -35,7 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: SplitApiComponent,
+    component: SplitApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./split.md'),

@@ -11,7 +11,7 @@ import { datetimepickerTargetExampleConfig } from './examples/inline';
   templateUrl: './datetimepicker-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class DatetimepickerOverviewComponent {
+export class DatetimepickerOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -20,7 +20,7 @@ export class DatetimepickerOverviewComponent {
   templateUrl: './datetimepicker-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class DatetimepickerApiComponent {
+export class DatetimepickerApi {
   route = inject(ActivatedRoute);
 }
 
@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: DatetimepickerOverviewComponent,
+    component: DatetimepickerOverview,
     pathMatch: 'full',
     data: {
       examples: [datetimepickerConfigurableExampleConfig, datetimepickerTargetExampleConfig],
@@ -36,7 +36,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: DatetimepickerApiComponent,
+    component: DatetimepickerApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./datetimepicker.md'),

@@ -11,7 +11,7 @@ import { loaderSimpleExampleConfig } from './examples/simple';
   templateUrl: './loader-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class LoaderOverviewComponent {
+export class LoaderOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -20,7 +20,7 @@ export class LoaderOverviewComponent {
   templateUrl: './loader-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class LoaderApiComponent {
+export class LoaderApi {
   route = inject(ActivatedRoute);
 }
 
@@ -28,7 +28,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: LoaderOverviewComponent,
+    component: LoaderOverview,
     pathMatch: 'full',
     data: {
       examples: [loaderConfigurableExampleConfig, loaderSimpleExampleConfig],
@@ -36,7 +36,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: LoaderApiComponent,
+    component: LoaderApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./loader.md'),

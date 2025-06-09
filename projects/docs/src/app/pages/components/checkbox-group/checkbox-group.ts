@@ -4,7 +4,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
+import { DocHeading } from '../../../shared/doc-heading/doc-heading';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { checkboxGroupBasicExampleConfig } from './examples/basic';
@@ -16,9 +16,9 @@ import { checkboxGroupSelectAllExampleConfig } from './examples/select-all';
 @Component({
   selector: 'app-checkbox-group-overview',
   templateUrl: './checkbox-group-overview.html',
-  imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
+  imports: [DocHeading, ExampleViewer, AsyncPipe],
 })
-export class CheckboxGroupOverviewComponent {
+export class CheckboxGroupOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -27,7 +27,7 @@ export class CheckboxGroupOverviewComponent {
   templateUrl: './checkbox-group-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class CheckboxGroupApiComponent {
+export class CheckboxGroupApi {
   route = inject(ActivatedRoute);
 }
 
@@ -39,7 +39,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: CheckboxGroupOverviewComponent,
+    component: CheckboxGroupOverview,
     data: {
       examples: [
         checkboxGroupBasicExampleConfig,
@@ -61,7 +61,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: CheckboxGroupApiComponent,
+    component: CheckboxGroupApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./checkbox-group.md'),

@@ -12,7 +12,7 @@ import { popoverTargetExampleConfig } from './examples/target';
   templateUrl: './popover-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class PopoverOverviewComponent {
+export class PopoverOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -21,7 +21,7 @@ export class PopoverOverviewComponent {
   templateUrl: './popover-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class PopoverApiComponent {
+export class PopoverApi {
   route = inject(ActivatedRoute);
 }
 
@@ -29,7 +29,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: PopoverOverviewComponent,
+    component: PopoverOverview,
     pathMatch: 'full',
     data: {
       examples: [
@@ -41,7 +41,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: PopoverApiComponent,
+    component: PopoverApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./popover.md'),

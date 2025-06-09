@@ -10,7 +10,7 @@ import { buttonConfigurableExampleConfig } from './examples/configurable';
   templateUrl: './button-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class ButtonOverviewComponent {
+export class ButtonOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -19,7 +19,7 @@ export class ButtonOverviewComponent {
   templateUrl: './button-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class ButtonApiComponent {
+export class ButtonApi {
   route = inject(ActivatedRoute);
 }
 
@@ -27,7 +27,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: ButtonOverviewComponent,
+    component: ButtonOverview,
     pathMatch: 'full',
     data: {
       examples: [buttonConfigurableExampleConfig],
@@ -35,7 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: ButtonApiComponent,
+    component: ButtonApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./button.md'),

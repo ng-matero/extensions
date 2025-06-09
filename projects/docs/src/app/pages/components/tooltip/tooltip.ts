@@ -10,7 +10,7 @@ import { tooltipTemplateExampleConfig } from './examples/template';
   templateUrl: './tooltip-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class TooltipOverviewComponent {
+export class TooltipOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -19,7 +19,7 @@ export class TooltipOverviewComponent {
   templateUrl: './tooltip-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class TooltipApiComponent {
+export class TooltipApi {
   route = inject(ActivatedRoute);
 }
 
@@ -27,7 +27,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: TooltipOverviewComponent,
+    component: TooltipOverview,
     pathMatch: 'full',
     data: {
       examples: [tooltipTemplateExampleConfig],
@@ -35,7 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: TooltipApiComponent,
+    component: TooltipApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./tooltip.md'),

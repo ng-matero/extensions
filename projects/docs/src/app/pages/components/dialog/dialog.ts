@@ -4,7 +4,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { DocHeadingComponent } from '../../../shared/doc-heading/doc-heading';
+import { DocHeading } from '../../../shared/doc-heading/doc-heading';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
 import { dialogBasicExampleConfig } from './examples/basic';
@@ -14,9 +14,9 @@ import { dialogOriginalExampleConfig } from './examples/original';
 @Component({
   selector: 'app-dialog-overview',
   templateUrl: './dialog-overview.html',
-  imports: [DocHeadingComponent, ExampleViewer, AsyncPipe],
+  imports: [DocHeading, ExampleViewer, AsyncPipe],
 })
-export class DialogOverviewComponent {
+export class DialogOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -25,7 +25,7 @@ export class DialogOverviewComponent {
   templateUrl: './dialog-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class DialogApiComponent {
+export class DialogApi {
   route = inject(ActivatedRoute);
 }
 
@@ -37,7 +37,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: DialogOverviewComponent,
+    component: DialogOverview,
     pathMatch: 'full',
     data: {
       examples: [dialogBasicExampleConfig, dialogOriginalExampleConfig, dialogI18nExampleConfig],
@@ -54,7 +54,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: DialogApiComponent,
+    component: DialogApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./dialog.md'),

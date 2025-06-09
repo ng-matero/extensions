@@ -19,7 +19,7 @@ Exported as: `mtxAlert`
 | `@Input()`<br>`type: MtxAlertType` | The alert's type. Default is **`'default'`**. |
 | `@Input()`<br>`dismissible: boolean` | Whether to display an inline close button. |
 | `@Input()`<br>`elevation: number` | The alert's elevation (0~24). Default is **`0`**. |
-| `@Output()`<br>`closed: EventEmitter<MtxAlertComponent>` | Event emitted when the alert closed. |
+| `@Output()`<br>`closed: EventEmitter<MtxAlert>` | Event emitted when the alert closed. |
 
 ### Type aliases
 

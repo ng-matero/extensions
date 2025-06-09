@@ -13,7 +13,7 @@ import { photoviewerThumbnailExampleConfig } from './examples/thumbnail';
   templateUrl: './photoviewer-overview.html',
   imports: [MtxAlert, ExampleViewer, AsyncPipe],
 })
-export class PhotoviewerOverviewComponent {
+export class PhotoviewerOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -22,7 +22,7 @@ export class PhotoviewerOverviewComponent {
   templateUrl: './photoviewer-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class PhotoviewerApiComponent {
+export class PhotoviewerApi {
   route = inject(ActivatedRoute);
 }
 
@@ -30,7 +30,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: PhotoviewerOverviewComponent,
+    component: PhotoviewerOverview,
     pathMatch: 'full',
     data: {
       examples: [
@@ -42,7 +42,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: PhotoviewerApiComponent,
+    component: PhotoviewerApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./photoviewer.md'),

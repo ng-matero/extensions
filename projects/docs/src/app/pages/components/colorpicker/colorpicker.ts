@@ -13,7 +13,7 @@ import { colorpickerDisabledExampleConfig } from './examples/disabled';
   templateUrl: './colorpicker-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class ColorPickerOverviewComponent {
+export class ColorPickerOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -22,7 +22,7 @@ export class ColorPickerOverviewComponent {
   templateUrl: './colorpicker-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class ColorPickerApiComponent {
+export class ColorPickerApi {
   route = inject(ActivatedRoute);
 }
 
@@ -30,7 +30,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: ColorPickerOverviewComponent,
+    component: ColorPickerOverview,
     pathMatch: 'full',
     data: {
       examples: [
@@ -43,7 +43,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: ColorPickerApiComponent,
+    component: ColorPickerApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./colorpicker.md'),

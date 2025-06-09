@@ -18,7 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
   encapsulation: ViewEncapsulation.None,
   imports: [MatIconModule],
 })
-export class HeaderLinkComponent implements OnInit {
+export class HeaderLink implements OnInit {
   private platformLocation = inject(PlatformLocation);
 
   /**

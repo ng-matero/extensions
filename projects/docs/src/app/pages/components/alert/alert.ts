@@ -10,7 +10,7 @@ import { alertConfigurableExampleConfig } from './examples/configurable';
   templateUrl: './alert-overview.html',
   imports: [ExampleViewer, AsyncPipe],
 })
-export class AlertOverviewComponent {
+export class AlertOverview {
   route = inject(ActivatedRoute);
 }
 
@@ -19,7 +19,7 @@ export class AlertOverviewComponent {
   templateUrl: './alert-api.html',
   imports: [DocViewer, AsyncPipe],
 })
-export class AlertApiComponent {
+export class AlertApi {
   route = inject(ActivatedRoute);
 }
 
@@ -27,7 +27,7 @@ export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
     path: 'overview',
-    component: AlertOverviewComponent,
+    component: AlertOverview,
     pathMatch: 'full',
     data: {
       examples: [alertConfigurableExampleConfig],
@@ -35,7 +35,7 @@ export const routes: Routes = [
   },
   {
     path: 'api',
-    component: AlertApiComponent,
+    component: AlertApi,
     pathMatch: 'full',
     data: {
       content: require('!!raw-loader!!highlight-loader!markdown-loader!./alert.md'),
