@@ -36,8 +36,3 @@ export function provideDateFnsDatetimeAdapter(
   providers: [provideDateFnsDatetimeAdapter()],
 })
 export class MtxDateFnsDatetimeModule {}
-
-/**
- * @deprecated Use `MtxDateFnsDatetimeModule` instead.
- */
-export const MatDateFnsDatetimeModule = MtxDateFnsDatetimeModule;

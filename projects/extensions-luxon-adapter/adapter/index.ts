@@ -40,8 +40,3 @@ export function provideLuxonDatetimeAdapter(
   providers: [provideLuxonDatetimeAdapter()],
 })
 export class MtxLuxonDatetimeModule {}
-
-/**
- * @deprecated Use `MtxLuxonDatetimeModule` instead.
- */
-export const MatLuxonDatetimeModule = MtxLuxonDatetimeModule;

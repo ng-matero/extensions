@@ -48,8 +48,3 @@ export function provideMomentDatetimeAdapter(
   providers: [provideMomentDatetimeAdapter()],
 })
 export class MtxMomentDatetimeModule {}
-
-/**
- * @deprecated Use `MtxMomentDatetimeModule` instead.
- */
-export const MatMomentDatetimeModule = MtxMomentDatetimeModule;
