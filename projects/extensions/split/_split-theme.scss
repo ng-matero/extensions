@@ -17,7 +17,7 @@
 
 @mixin color($theme, $color-variant: null) {
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-split.get-tokens($theme), color));
+    @include token-utils.create-token-values(map.get(m3-split.get-tokens($theme, $color-variant), color));
   }
   @else {
     @include mat.private-current-selector-or-root() {

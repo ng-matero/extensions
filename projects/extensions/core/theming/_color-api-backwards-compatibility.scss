@@ -26,14 +26,14 @@ $_overrides-only: true;
 
 @mixin color-variants-backwards-compatibility($theme) {
   .mat-primary {
-    @include _color-variant-styles($theme, $color-variant: primary);
+    @include _color-variant-styles($theme, primary);
   }
 
   .mat-accent {
-    @include _color-variant-styles($theme, $color-variant: tertiary);
+    @include _color-variant-styles($theme, tertiary);
   }
 
   .mat-warn {
-    @include _color-variant-styles($theme, $color-variant: error);
+    @include _color-variant-styles($theme, error);
   }
 }

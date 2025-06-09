@@ -5,8 +5,11 @@
 @use '../core/style/elevation';
 
 /// Generates custom tokens for the mtx-select.
-@function get-tokens($theme: m3.$sys-theme) {
+@function get-tokens($theme: m3.$sys-theme, $color-variant: null) {
   $system: m3-utils.get-system($theme);
+  @if $color-variant {
+    $system: m3-utils.replace-colors-with-variant($system, secondary, $color-variant);
+  }
 
   $tokens: (
     base: (
