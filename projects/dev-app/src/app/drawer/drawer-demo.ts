@@ -14,8 +14,8 @@ import {
 
 @Component({
   selector: 'dev-drawer-demo',
-  templateUrl: './drawer-demo.component.html',
-  styleUrl: './drawer-demo.component.scss',
+  templateUrl: './drawer-demo.html',
+  styleUrl: './drawer-demo.scss',
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -26,7 +26,7 @@ import {
     MatButtonModule,
   ],
 })
-export class DrawerDemoComponent {
+export class DrawerDemo {
   private drawer = inject(MtxDrawer);
 
   position: DrawerPosition = 'right';

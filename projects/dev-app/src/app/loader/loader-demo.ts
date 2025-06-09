@@ -8,8 +8,8 @@ import { MtxLoaderModule, MtxLoaderType } from '@ng-matero/extensions/loader';
 
 @Component({
   selector: 'dev-loader-demo',
-  templateUrl: 'loader-demo.component.html',
-  styleUrl: 'loader-demo.component.scss',
+  templateUrl: 'loader-demo.html',
+  styleUrl: 'loader-demo.scss',
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -19,7 +19,7 @@ import { MtxLoaderModule, MtxLoaderType } from '@ng-matero/extensions/loader';
     MtxLoaderModule,
   ],
 })
-export class LoaderDemoComponent {
+export class LoaderDemo {
   loading = true;
   type: MtxLoaderType = 'spinner';
   color: ThemePalette = 'primary';

@@ -6,10 +6,10 @@ import { MtxSplitModule } from '@ng-matero/extensions/split';
 
 @Component({
   selector: 'dev-split',
-  templateUrl: './split-demo.component.html',
-  styleUrl: './split-demo.component.scss',
+  templateUrl: './split-demo.html',
+  styleUrl: './split-demo.scss',
   imports: [MatRadioModule, ReactiveFormsModule, FormsModule, MtxSplitModule],
 })
-export class SplitDemoComponent {
+export class SplitDemo {
   themeColor: ThemePalette = 'primary';
 }

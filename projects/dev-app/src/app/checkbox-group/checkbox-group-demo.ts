@@ -10,11 +10,11 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'dev-checkbox-group-demo',
-  templateUrl: './checkbox-group-demo.component.html',
-  styleUrl: './checkbox-group-demo.component.scss',
+  templateUrl: './checkbox-group-demo.html',
+  styleUrl: './checkbox-group-demo.scss',
   imports: [MatCheckboxModule, MtxCheckboxGroupModule, ReactiveFormsModule, FormsModule, JsonPipe],
 })
-export class CheckboxGroupDemoComponent {
+export class CheckboxGroupDemo {
   private translate = inject(TranslateService);
 
   foods: MtxCheckboxGroupOption[] = [

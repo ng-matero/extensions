@@ -12,7 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AppComponent } from './app/app.component';
+import { App } from './app/app';
 import { DevAppDirectionality } from './app/dev-app/dev-app-directionality';
 import { getAppState } from './app/dev-app/dev-app-state';
 import { DevAppRippleOptions } from './app/dev-app/ripple-options';
@@ -25,7 +25,7 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
 }
 
-bootstrapApplication(AppComponent, {
+bootstrapApplication(App, {
   providers: [
     provideRouter(DEV_APP_ROUTES),
     provideHttpClient(withInterceptorsFromDi()),

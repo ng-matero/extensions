@@ -13,4 +13,4 @@ import { DevAppLayout } from './dev-app/dev-app-layout';
   encapsulation: ViewEncapsulation.None,
   imports: [DevAppLayout, RouterOutlet],
 })
-export class AppComponent {}
+export class App {}

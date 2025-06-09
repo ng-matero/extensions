@@ -13,8 +13,8 @@ import { MtxSelectIntl, MtxSelectModule } from '@ng-matero/extensions/select';
 
 @Component({
   selector: 'dev-app-select',
-  templateUrl: './select-demo.component.html',
-  styleUrl: './select-demo.component.scss',
+  templateUrl: './select-demo.html',
+  styleUrl: './select-demo.scss',
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -29,7 +29,7 @@ import { MtxSelectIntl, MtxSelectModule } from '@ng-matero/extensions/select';
     MtxSelectModule,
   ],
 })
-export class SelectDemoComponent {
+export class SelectDemo {
   private intl = inject(MtxSelectIntl);
 
   themeColor: ThemePalette = 'primary';

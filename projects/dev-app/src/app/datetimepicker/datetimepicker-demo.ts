@@ -24,14 +24,14 @@ import { TranslateService } from '@ngx-translate/core';
 import * as _moment from 'moment';
 import { default as _rollupMoment } from 'moment';
 import { Subscription } from 'rxjs';
-import { CustomHeader } from './custom-header.component';
+import { CustomHeader } from './custom-header';
 
 const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'dev-datetimepicker-demo',
-  templateUrl: 'datetimepicker-demo.component.html',
-  styleUrl: 'datetimepicker-demo.component.scss',
+  templateUrl: 'datetimepicker-demo.html',
+  styleUrl: 'datetimepicker-demo.scss',
   imports: [
     MatRadioGroup,
     ReactiveFormsModule,
@@ -74,7 +74,7 @@ const moment = _rollupMoment || _moment;
     },
   ],
 })
-export class DatetimepickerDemoComponent implements OnInit, OnDestroy {
+export class DatetimepickerDemo implements OnInit, OnDestroy {
   private dateAdapter = inject<DateAdapter<any>>(DateAdapter);
   private translate = inject(TranslateService);
   private fb = inject(UntypedFormBuilder);

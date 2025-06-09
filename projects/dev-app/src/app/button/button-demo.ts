@@ -9,8 +9,8 @@ import { MtxButtonModule } from '@ng-matero/extensions/button';
 
 @Component({
   selector: 'dev-button-demo',
-  templateUrl: 'button-demo.component.html',
-  styleUrl: 'button-demo.component.scss',
+  templateUrl: 'button-demo.html',
+  styleUrl: 'button-demo.scss',
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -21,7 +21,7 @@ import { MtxButtonModule } from '@ng-matero/extensions/button';
     MtxButtonModule,
   ],
 })
-export class ButtonDemoComponent {
+export class ButtonDemo {
   color: ThemePalette = 'primary';
   loading = true;
   disabled = false;

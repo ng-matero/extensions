@@ -5,12 +5,12 @@ import { MtxTooltipModule } from '@ng-matero/extensions/tooltip';
 
 @Component({
   selector: 'dev-tooltip-demo',
-  templateUrl: 'tooltip-demo.component.html',
-  styleUrl: 'tooltip-demo.component.scss',
+  templateUrl: 'tooltip-demo.html',
+  styleUrl: 'tooltip-demo.scss',
   encapsulation: ViewEncapsulation.None,
   imports: [MatButtonModule, MatTooltipModule, MtxTooltipModule],
 })
-export class TooltipDemoComponent {
+export class TooltipDemo {
   i = 0;
 
   update() {

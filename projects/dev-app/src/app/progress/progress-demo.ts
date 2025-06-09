@@ -3,8 +3,8 @@ import { MtxProgressModule } from '@ng-matero/extensions/progress';
 
 @Component({
   selector: 'dev-progress-demo',
-  templateUrl: './progress-demo.component.html',
-  styleUrl: './progress-demo.component.scss',
+  templateUrl: './progress-demo.html',
+  styleUrl: './progress-demo.scss',
   imports: [MtxProgressModule],
 })
-export class ProgressDemoComponent {}
+export class ProgressDemo {}

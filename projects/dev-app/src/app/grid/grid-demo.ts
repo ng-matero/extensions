@@ -22,8 +22,8 @@ import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
 
 @Component({
   selector: 'dev-grid-demo',
-  templateUrl: './grid-demo.component.html',
-  styleUrl: './grid-demo.component.scss',
+  templateUrl: './grid-demo.html',
+  styleUrl: './grid-demo.scss',
   imports: [
     AsyncPipe,
     JsonPipe,
@@ -37,7 +37,7 @@ import { EXAMPLE_DATA, EXAMPLE_DATA2 } from './data';
     MtxGridModule,
   ],
 })
-export class GridDemoComponent implements OnInit, AfterViewInit, OnDestroy {
+export class GridDemo implements OnInit, AfterViewInit, OnDestroy {
   private translate = inject(TranslateService);
   private http = inject(HttpClient);
   private iconRegistry = inject(MatIconRegistry);

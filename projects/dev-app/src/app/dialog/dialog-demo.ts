@@ -9,11 +9,11 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'dev-dialog-demo',
-  templateUrl: './dialog-demo.component.html',
-  styleUrl: './dialog-demo.component.scss',
+  templateUrl: './dialog-demo.html',
+  styleUrl: './dialog-demo.scss',
   imports: [MatButtonModule],
 })
-export class DialogDemoComponent implements OnInit {
+export class DialogDemo implements OnInit {
   private mtxDialog = inject(MtxDialog);
   private translate = inject(TranslateService);
 

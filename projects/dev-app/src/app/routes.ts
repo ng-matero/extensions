@@ -6,74 +6,65 @@ export const DEV_APP_ROUTES: Routes = [
   { path: '', component: DevAppHome },
   {
     path: 'alert',
-    loadComponent: () => import('./alert/alert-demo.component').then(m => m.AlertDemoComponent),
+    loadComponent: () => import('./alert/alert-demo').then(m => m.AlertDemo),
   },
   {
     path: 'button',
-    loadComponent: () => import('./button/button-demo.component').then(m => m.ButtonDemoComponent),
+    loadComponent: () => import('./button/button-demo').then(m => m.ButtonDemo),
   },
   {
     path: 'checkbox-group',
     loadComponent: () =>
-      import('./checkbox-group/checkbox-group-demo.component').then(
-        m => m.CheckboxGroupDemoComponent
-      ),
+      import('./checkbox-group/checkbox-group-demo').then(m => m.CheckboxGroupDemo),
   },
   {
     path: 'colorpicker',
-    loadComponent: () =>
-      import('./colorpicker/colorpicker-demo.component').then(m => m.ColorPickerDemoComponent),
+    loadComponent: () => import('./colorpicker/colorpicker-demo').then(m => m.ColorPickerDemo),
   },
   {
     path: 'datetimepicker',
     loadComponent: () =>
-      import('./datetimepicker/datetimepicker-demo.component').then(
-        m => m.DatetimepickerDemoComponent
-      ),
+      import('./datetimepicker/datetimepicker-demo').then(m => m.DatetimepickerDemo),
   },
   {
     path: 'dialog',
-    loadComponent: () => import('./dialog/dialog-demo.component').then(m => m.DialogDemoComponent),
+    loadComponent: () => import('./dialog/dialog-demo').then(m => m.DialogDemo),
   },
   {
     path: 'drawer',
-    loadComponent: () => import('./drawer/drawer-demo.component').then(m => m.DrawerDemoComponent),
+    loadComponent: () => import('./drawer/drawer-demo').then(m => m.DrawerDemo),
   },
   {
     path: 'grid',
-    loadComponent: () => import('./grid/grid-demo.component').then(m => m.GridDemoComponent),
+    loadComponent: () => import('./grid/grid-demo').then(m => m.GridDemo),
   },
   {
     path: 'loader',
-    loadComponent: () => import('./loader/loader-demo.component').then(m => m.LoaderDemoComponent),
+    loadComponent: () => import('./loader/loader-demo').then(m => m.LoaderDemo),
   },
   {
     path: 'photoviewer',
-    loadComponent: () =>
-      import('./photoviewer/photoviewer-demo.component').then(m => m.PhotoviewerDemoComponent),
+    loadComponent: () => import('./photoviewer/photoviewer-demo').then(m => m.PhotoviewerDemo),
   },
   {
     path: 'popover',
-    loadComponent: () =>
-      import('./popover/popover-demo.component').then(m => m.PopoverDemoComponent),
+    loadComponent: () => import('./popover/popover-demo').then(m => m.PopoverDemo),
   },
   {
     path: 'progress',
-    loadComponent: () =>
-      import('./progress/progress-demo.component').then(m => m.ProgressDemoComponent),
+    loadComponent: () => import('./progress/progress-demo').then(m => m.ProgressDemo),
   },
   {
     path: 'select',
-    loadComponent: () => import('./select/select-demo.component').then(m => m.SelectDemoComponent),
+    loadComponent: () => import('./select/select-demo').then(m => m.SelectDemo),
   },
   {
     path: 'split',
-    loadComponent: () => import('./split/split-demo.component').then(m => m.SplitDemoComponent),
+    loadComponent: () => import('./split/split-demo').then(m => m.SplitDemo),
   },
   {
     path: 'tooltip',
-    loadComponent: () =>
-      import('./tooltip/tooltip-demo.component').then(m => m.TooltipDemoComponent),
+    loadComponent: () => import('./tooltip/tooltip-demo').then(m => m.TooltipDemo),
   },
   { path: '**', component: DevApp404 },
 ];

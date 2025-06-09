@@ -7,8 +7,8 @@ import { MtxAlertModule, MtxAlertType } from '@ng-matero/extensions/alert';
 
 @Component({
   selector: 'dev-alert-demo',
-  templateUrl: 'alert-demo.component.html',
-  styleUrl: 'alert-demo.component.scss',
+  templateUrl: 'alert-demo.html',
+  styleUrl: 'alert-demo.scss',
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -18,7 +18,7 @@ import { MtxAlertModule, MtxAlertType } from '@ng-matero/extensions/alert';
     MtxAlertModule,
   ],
 })
-export class AlertDemoComponent {
+export class AlertDemo {
   dismissible = false;
   elevation = 0;
   type: MtxAlertType = 'default';

@@ -11,8 +11,8 @@ import { ColorSketchModule } from 'ngx-color/sketch';
 
 @Component({
   selector: 'dev-colorpicker-demo',
-  templateUrl: './colorpicker-demo.component.html',
-  styleUrl: './colorpicker-demo.component.scss',
+  templateUrl: './colorpicker-demo.html',
+  styleUrl: './colorpicker-demo.scss',
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -25,7 +25,7 @@ import { ColorSketchModule } from 'ngx-color/sketch';
     ColorSketchModule,
   ],
 })
-export class ColorPickerDemoComponent {
+export class ColorPickerDemo {
   themeColor: ThemePalette = 'primary';
 
   color = '#3f51b5';

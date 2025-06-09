@@ -9,8 +9,8 @@ import { MtxPopoverModule } from '@ng-matero/extensions/popover';
 
 @Component({
   selector: 'dev-popover-demo',
-  templateUrl: 'popover-demo.component.html',
-  styleUrl: 'popover-demo.component.scss',
+  templateUrl: 'popover-demo.html',
+  styleUrl: 'popover-demo.scss',
   imports: [
     ReactiveFormsModule,
     FormsModule,
@@ -22,7 +22,7 @@ import { MtxPopoverModule } from '@ng-matero/extensions/popover';
     MtxPopoverModule,
   ],
 })
-export class PopoverDemoComponent {
+export class PopoverDemo {
   hideArrow = false;
 
   log() {
