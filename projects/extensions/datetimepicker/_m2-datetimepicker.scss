@@ -11,7 +11,7 @@ $_today-fade-amount: .2;
 @function private-get-calendar-color-palette-color-tokens($theme, $palette-name) {
   $palette-color: mat.get-theme-color($theme, $palette-name);
   $default-contrast: mat.get-theme-color($theme, $palette-name, default-contrast);
-  $active-background-color: mat.private-safe-color-change($palette-color, $alpha: .3);
+  $active-background-color: mat.get-theme-color($theme, $palette-name, 0.3);
   $active-disabled-color: null;
 
   @if (meta.type-of($palette-color) == color) {
@@ -35,11 +35,11 @@ $_today-fade-amount: .2;
     datetimepicker-clock-cell-selected-state-background-color: $palette-color,
 
     datetimepicker-time-input-active-state-text-color: $palette-color,
-    datetimepicker-time-input-active-state-background-color: mat.private-safe-color-change($palette-color, $alpha: .2),
+    datetimepicker-time-input-active-state-background-color: mat.get-theme-color($theme, $palette-name, 0.2),
     datetimepicker-time-input-focus-state-outline-color: $palette-color,
-    datetimepicker-time-input-focus-state-placeholder-text-color: mat.private-safe-color-change($palette-color, $alpha: .6),
+    datetimepicker-time-input-focus-state-placeholder-text-color: mat.get-theme-color($theme, $palette-name, 0.6),
 
-    datetimepicker-time-ampm-selected-state-background-color: mat.private-safe-color-change($palette-color, $alpha: .2),
+    datetimepicker-time-ampm-selected-state-background-color: mat.get-theme-color($theme, $palette-name, 0.2),
   );
 }
 
@@ -107,7 +107,7 @@ $_today-fade-amount: .2;
     datetimepicker-time-input-background-color: $divider-color,
     datetimepicker-time-input-focus-state-background-color: mat.get-theme-color($theme, background, background),
     datetimepicker-time-input-warn-state-outline-color: mat.get-theme-color($theme, warn),
-    datetimepicker-time-ampm-text-color: mat.private-safe-color-change($text-color, $alpha: .75),
+    datetimepicker-time-ampm-text-color: mat.get-theme-color($theme, foreground, text, .75),
     datetimepicker-time-ampm-outline-color: $hint-text-color,
     datetimepicker-time-ampm-selected-state-text-color: $text-color,
   ));

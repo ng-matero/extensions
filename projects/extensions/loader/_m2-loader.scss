@@ -12,10 +12,8 @@
 
 // Tokens that can be configured through Angular Material's color theming API.
 @function get-color-tokens($theme) {
-  $background-color: mat.get-theme-color($theme, background, background);
-
   @return (
-    loader-backdrop-background-color: mat.private-safe-color-change($background-color, $alpha: .75),
+    loader-backdrop-background-color: mat.get-theme-color($theme, background, background, 0.75)
   );
 }
 

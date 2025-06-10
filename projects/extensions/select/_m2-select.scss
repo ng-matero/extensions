@@ -37,7 +37,7 @@
 
     select-multiple-value-background-color: mat.get-theme-color($theme, background, unselected-chip),
     select-multiple-value-outline-color: $divider-color,
-    select-multiple-value-disabled-outline-color: mat.private-safe-color-change($divider-color, $alpha: 0.06),
+    select-multiple-value-disabled-outline-color: mat.get-theme-color($theme, foreground, divider, 0.06),
     select-multiple-value-icon-hover-background-color: $divider-color,
 
     select-clear-icon-color: $secondary-text-color,

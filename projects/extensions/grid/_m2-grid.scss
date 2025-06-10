@@ -18,7 +18,7 @@
   $divider-color: mat.get-theme-color($theme, foreground, divider);
 
   @return (
-    grid-outline-color: mat.private-safe-color-change($text-color, $alpha: .2),
+    grid-outline-color: mat.get-theme-color($theme, foreground, text, 0.2),
     grid-column-menu-text-color: $text-color,
     grid-column-menu-divider-color: $divider-color,
     grid-table-footer-background-color: mat.get-theme-color($theme, background, app-bar),
