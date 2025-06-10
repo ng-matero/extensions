@@ -41,7 +41,11 @@
   @if mat.get-theme-version($theme) == 1 {
     @include token-utils.create-token-values(map.get(m3-progress.get-tokens($theme), density));
   }
-  @else {}
+  @else {
+    @include mat.private-current-selector-or-root() {
+      @include token-utils.create-token-values-mixed(m2-progress.get-density-tokens($theme));
+    }
+  }
 }
 
 /// Defines the tokens that will be available in the `overrides` mixin and for docs extraction.

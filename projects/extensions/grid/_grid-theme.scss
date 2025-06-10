@@ -32,7 +32,11 @@
   @if mat.get-theme-version($theme) == 1 {
     @include token-utils.create-token-values(map.get(m3-grid.get-tokens($theme), typography));
   }
-  @else {}
+  @else {
+    @include mat.private-current-selector-or-root() {
+      @include token-utils.create-token-values-mixed(m2-grid.get-typography-tokens($theme));
+    }
+  }
 }
 
 @mixin density($theme) {

@@ -16,9 +16,9 @@ $tertiary: mat.$blue-palette;
       theme-type: $type,
       primary: $primary,
       tertiary: $tertiary,
-      use-system-variables: false,
+      use-system-variables: true,
     ),
-    typography: (use-system-variables: false),
+    typography: (use-system-variables: true),
     density: (
       scale: $density
     ),
