@@ -3,7 +3,6 @@
 <section>
   <label for="">Color:</label>
   <mat-radio-group [(ngModel)]="color">
-    <mat-radio-button value="basic">Basic</mat-radio-button>
     <mat-radio-button value="primary">Primary</mat-radio-button>
     <mat-radio-button value="accent">Accent</mat-radio-button>
     <mat-radio-button value="warn">Warn</mat-radio-button>
@@ -20,10 +19,11 @@
 
 <h2>Result</h2>
 
-<button mat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
-<button mat-raised-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
-<button mat-stroked-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
-<button mat-flat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button matButton [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button matButton="elevated" [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button matButton="outlined" [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button matButton="filled" [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+<button matButton="tonal" [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
 <button mat-icon-button [loading]="loading" [color]="color" [disabled]="disabled">
   <mat-icon>more_vert</mat-icon>
 </button>

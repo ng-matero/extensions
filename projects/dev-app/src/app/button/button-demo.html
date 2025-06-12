@@ -9,26 +9,33 @@
   <mat-radio-button value="warn">warn</mat-radio-button>
 </mat-radio-group>
 
+<h2>matButton</h2>
 <div>
-  <button mat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
-  <button mat-raised-button [loading]="loading" [color]="color" [disabled]="disabled">
+  <button matButton [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
+  <button matButton="elevated" [loading]="loading" [color]="color" [disabled]="disabled">
     Button
   </button>
-  <button mat-stroked-button [loading]="loading" [color]="color" [disabled]="disabled">
+  <button matButton="outlined" [loading]="loading" [color]="color" [disabled]="disabled">
     Button
   </button>
-  <button mat-flat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</button>
-  <button mat-icon-button [loading]="loading" [color]="color" [disabled]="disabled">
+  <button matButton="filled" [loading]="loading" [color]="color" [disabled]="disabled">
+    Button
+  </button>
+  <button matButton="tonal" [loading]="loading" [color]="color" [disabled]="disabled">
+    Button
+  </button>
+  <button matIconButton [loading]="loading" [color]="color" [disabled]="disabled">
     <mat-icon>more_vert</mat-icon>
   </button>
-  <button mat-fab [loading]="loading" [color]="color" [disabled]="disabled">
+  <button matFab [loading]="loading" [color]="color" [disabled]="disabled">
     <mat-icon>delete</mat-icon>
   </button>
-  <button mat-mini-fab [loading]="loading" [color]="color" [disabled]="disabled">
+  <button matMiniFab [loading]="loading" [color]="color" [disabled]="disabled">
     <mat-icon>menu</mat-icon>
   </button>
 </div>
 
+<h2>mat-button</h2>
 <div>
   <a mat-button [loading]="loading" [color]="color" [disabled]="disabled">Button</a>
   <a mat-raised-button [loading]="loading" [color]="color" [disabled]="disabled">Button</a>

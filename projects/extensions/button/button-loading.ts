@@ -14,13 +14,13 @@ import { ThemePalette } from '@angular/material/core';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Directive({
-  selector: `[mat-button][loading],
+  selector: `[mat-button][loading], [matButton][loading],
              [mat-raised-button][loading],
              [mat-stroked-button][loading],
              [mat-flat-button][loading],
-             [mat-icon-button][loading],
-             [mat-fab][loading],
-             [mat-mini-fab][loading]`,
+             [mat-icon-button][loading], [matIconButton][loading],
+             [mat-fab][loading], [matFab][loading],
+             [mat-mini-fab][loading], [matMiniFab][loading]`,
 })
 export class MatButtonLoading implements OnChanges {
   private _elementRef = inject<ElementRef<HTMLButtonElement>>(ElementRef);
