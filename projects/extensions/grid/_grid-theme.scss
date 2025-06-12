@@ -4,8 +4,6 @@
 @use './m2-grid';
 @use './m3-grid';
 
-@use './column-resize/column-resize';
-
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
     @include token-utils.create-token-values(map.get(m3-grid.get-tokens($theme), base));

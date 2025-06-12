@@ -1,5 +1,6 @@
 @use '../core/tokens/token-utils';
 @use './m3-grid';
+@use './column-resize/column-resize';
 
 $fallbacks: m3-grid.get-tokens();
 
