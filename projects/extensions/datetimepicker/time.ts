@@ -517,6 +517,11 @@ export class MtxTime<D> implements OnChanges, AfterViewInit, OnDestroy {
   }
 
   _onActiveDateChange(date: D) {
+    // On mobile devices, inputs fail to blur properly when trigger touchstart event.
+    // https://github.com/ng-matero/extensions/issues/425
+    this.hourInputElement?.nativeElement.blur();
+    this.minuteInputElement?.nativeElement.blur();
+
     this._activeDate = date;
     this.activeDateChange.emit(date);
   }
