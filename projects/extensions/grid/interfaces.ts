@@ -1,5 +1,6 @@
 import { TemplateRef } from '@angular/core';
 import { MatBadgePosition, MatBadgeSize } from '@angular/material/badge';
+import { MatButtonAppearance } from '@angular/material/button';
 import { ThemePalette } from '@angular/material/core';
 import { SortDirection } from '@angular/material/sort';
 import { TooltipPosition, TooltipTouchGestures } from '@angular/material/tooltip';
@@ -152,14 +153,7 @@ export interface MtxGridRowClassFormatter<T = any> {
 }
 
 /** Possible button type values. */
-export type MtxGridButtonType =
-  | 'basic'
-  | 'raised'
-  | 'stroked'
-  | 'flat'
-  | 'icon'
-  | 'fab'
-  | 'mini-fab';
+export type MtxGridButtonType = MatButtonAppearance | 'icon';
 
 /**
  * Represents the default options for the grid that can be configured

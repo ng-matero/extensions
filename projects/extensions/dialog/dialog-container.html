@@ -1,6 +1,6 @@
 @if (data.title) {
   <h1 class="mtx-dialog-title">
-    <span>{{data.title | toObservable | async}}</span>
+    <span>{{ data.title | toObservable | async }}</span>
     @if (data.showCloseIcon) {
       <button mat-icon-button (click)="_onClose()">
         <mat-icon>close</mat-icon>
@@ -10,64 +10,30 @@
 }
 @if (data.description) {
   <div class="mtx-dialog-content">
-    <p>{{data.description | toObservable | async}}</p>
+    <p>{{ data.description | toObservable | async }}</p>
   </div>
 }
 <div class="mtx-dialog-actions">
   @for (btn of data.buttons; track btn) {
-    @switch (btn.type) {
-      @case ('raised') {
-        @if (btn.focusInitial) {
-          <button mat-raised-button cdkFocusInitial
-            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
-            {{btn.text | toObservable | async}}
-          </button>
-        } @else {
-          <button mat-raised-button
-            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
-            {{btn.text | toObservable | async}}
-          </button>
-        }
-      }
-      @case ('stroked') {
-        @if (btn.focusInitial) {
-          <button mat-stroked-button cdkFocusInitial
-            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
-            {{btn.text | toObservable | async}}
-          </button>
-        } @else {
-          <button mat-stroked-button
-            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
-            {{btn.text | toObservable | async}}
-          </button>
-        }
-      }
-      @case ('flat') {
-        @if (btn.focusInitial) {
-          <button mat-flat-button cdkFocusInitial
-            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
-            {{btn.text | toObservable | async}}
-          </button>
-        } @else {
-          <button mat-flat-button
-            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
-            {{btn.text | toObservable | async}}
-          </button>
-        }
-      }
-      @default {
-        @if (btn.focusInitial) {
-          <button mat-button cdkFocusInitial
-            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
-            {{btn.text | toObservable | async}}
-          </button>
-        } @else {
-          <button mat-button
-            [color]="btn.color" [class]="btn.class" (click)="_onClick(btn.onClick!)">
-            {{btn.text | toObservable | async}}
-          </button>
-        }
-      }
+    @if (btn.focusInitial) {
+      <button
+        cdkFocusInitial
+        [matButton]="btn.type || 'text'"
+        [color]="btn.color"
+        [class]="btn.class"
+        (click)="_onClick(btn.onClick!)"
+      >
+        {{ btn.text | toObservable | async }}
+      </button>
+    } @else {
+      <button
+        [matButton]="btn.type || 'text'"
+        [color]="btn.color"
+        [class]="btn.class"
+        (click)="_onClick(btn.onClick!)"
+      >
+        {{ btn.text | toObservable | async }}
+      </button>
     }
   }
 </div>

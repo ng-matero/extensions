@@ -23,7 +23,7 @@ import {
   inject,
 } from '@angular/core';
 import { MatBadge } from '@angular/material/badge';
-import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatChip, MatChipListbox } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -57,8 +57,6 @@ import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
     PercentPipe,
     MatButton,
     MatIconButton,
-    MatFabButton,
-    MatMiniFabButton,
     MatIcon,
     MatChipListbox,
     MatChip,

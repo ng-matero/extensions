@@ -312,7 +312,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
   @Input() columnMenuButtonText = this._defaultOptions?.columnMenuButtonText ?? '';
   /** The type for the column menu button. */
   @Input() columnMenuButtonType: MtxGridButtonType =
-    this._defaultOptions?.columnMenuButtonType ?? 'stroked';
+    this._defaultOptions?.columnMenuButtonType ?? 'outlined';
   /** The color for the column menu button. */
   @Input() columnMenuButtonColor: ThemePalette = this._defaultOptions?.columnMenuButtonColor;
   /** The class for the column menu button. */

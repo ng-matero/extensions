@@ -1,52 +1,24 @@
-@switch (buttonType) {
-  @case ('raised') {
-    <button [class]="buttonClass" mat-raised-button type="button" [color]="buttonColor"
-      [matMenuTriggerFor]="menu">
-      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
-      {{buttonText}}
-    </button>
-  }
-  @case ('stroked') {
-    <button [class]="buttonClass" mat-stroked-button type="button" [color]="buttonColor"
-      [matMenuTriggerFor]="menu">
-      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
-      {{buttonText}}
-    </button>
-  }
-  @case ('flat') {
-    <button [class]="buttonClass" mat-flat-button type="button" [color]="buttonColor"
-      [matMenuTriggerFor]="menu">
-      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
-      {{buttonText}}
-    </button>
-    }
-  @case ('icon') {
-    <button [class]="buttonClass" mat-icon-button type="button" [color]="buttonColor"
-      [matMenuTriggerFor]="menu">
-      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
-    </button>
-  }
-  @case ('fab') {
-    <button [class]="buttonClass" mat-fab type="button" [color]="buttonColor"
-      [matMenuTriggerFor]="menu">
-      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
-      {{buttonText}}
-    </button>
-  }
-  @case ('mini-fab') {
-    <button [class]="buttonClass" mat-mini-fab type="button" [color]="buttonColor"
-      [matMenuTriggerFor]="menu">
-      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
-      {{buttonText}}
-    </button>
-  }
-  @default {
-    <button [class]="buttonClass" mat-button type="button" [color]="buttonColor"
-      [matMenuTriggerFor]="menu">
-      <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
-      {{buttonText}}
-    </button>
-  }
+@if (buttonType === 'icon') {
+  <button
+    [class]="buttonClass"
+    matIconButton
+    type="button"
+    [color]="buttonColor"
+    [matMenuTriggerFor]="menu"
+  >
+    <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
+  </button>
+} @else {
+  <button
+    [class]="buttonClass"
+    [matButton]="buttonType"
+    type="button"
+    [color]="buttonColor"
+    [matMenuTriggerFor]="menu"
+  >
+    <mat-icon *ngTemplateOutlet="iconTpl"></mat-icon>
+    {{ buttonText }}
+  </button>
 }
 
 <ng-template #iconTpl>

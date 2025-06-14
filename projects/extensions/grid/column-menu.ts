@@ -11,7 +11,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatButton, MatFabButton, MatIconButton, MatMiniFabButton } from '@angular/material/button';
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { ThemePalette } from '@angular/material/core';
 import { MatIcon } from '@angular/material/icon';
@@ -38,8 +38,6 @@ import {
     FormsModule,
     MatButton,
     MatIconButton,
-    MatFabButton,
-    MatMiniFabButton,
     MatIcon,
     MatMenu,
     MatMenuTrigger,
@@ -70,7 +68,7 @@ export class MtxGridColumnMenu {
   }
   private _buttonText = '';
 
-  @Input() buttonType: MtxGridButtonType = 'stroked';
+  @Input() buttonType: MtxGridButtonType = 'outlined';
   @Input() buttonColor: ThemePalette;
   @Input() buttonClass = '';
   @Input() buttonIcon = '';

@@ -1,3 +1,4 @@
+import { MatButtonAppearance } from '@angular/material/button';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogConfig } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
@@ -10,7 +11,7 @@ export interface MtxDialogData extends MatDialogConfig {
 }
 
 export interface MtxDialogBtns {
-  type?: 'raised' | 'stroked' | 'flat';
+  type?: MatButtonAppearance;
   color?: ThemePalette;
   class?: string;
   focusInitial?: boolean;

@@ -123,7 +123,7 @@ export class GridDemo implements OnInit, AfterViewInit, OnDestroy {
       type: 'button',
       buttons: [
         {
-          type: 'basic',
+          type: 'text',
           text: this.translate.stream('delete'),
           fontIcon: 'fa-trash',
           tooltip: this.translate.stream('delete'),
