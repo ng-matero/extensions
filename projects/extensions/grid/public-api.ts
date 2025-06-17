@@ -2,6 +2,7 @@ export * from './grid-module';
 export * from './grid-utils';
 export * from './grid-pipes';
 export * from './grid';
+export * from './grid-menu';
 export * from './cell';
 export * from './column-menu';
 export * from './expansion-toggle';

@@ -26,11 +26,13 @@ import { MatBadge } from '@angular/material/badge';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatChip, MatChipListbox } from '@angular/material/chips';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenuTrigger } from '@angular/material/menu';
 import { MatTooltip } from '@angular/material/tooltip';
 import { isObservable } from 'rxjs';
 
 import { MtxToObservablePipe } from '@ng-matero/extensions/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
+import { MtxGridMenu } from './grid-menu';
 import {
   MtxGridCellActionBadgePipe,
   MtxGridCellActionDisablePipe,
@@ -62,12 +64,14 @@ import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
     MatChip,
     MatTooltip,
     MatBadge,
+    MatMenuTrigger,
     MtxToObservablePipe,
     MtxGridCellActionsPipe,
     MtxGridCellSummaryPipe,
     MtxGridCellActionDisablePipe,
     MtxGridCellActionTooltipPipe,
     MtxGridCellActionBadgePipe,
+    MtxGridMenu,
   ],
 })
 export class MtxGridCell implements OnInit, DoCheck {

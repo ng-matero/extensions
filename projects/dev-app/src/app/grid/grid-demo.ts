@@ -137,6 +137,41 @@ export class GridDemo implements OnInit, AfterViewInit, OnDestroy {
           disabled: data => data.weight > 10,
           click: () => alert('delete'),
         },
+        {
+          type: 'outlined',
+          fontIcon: 'fa-pen',
+          text: this.translate.stream('edit'),
+          children: [
+            {
+              fontIcon: 'fa-star',
+              text: 'edit1',
+              iif: data => data.weight > 10,
+              click: data => {
+                console.log(data);
+              },
+            },
+            {
+              fontIcon: 'fa-star',
+              text: 'edit2',
+              children: [
+                {
+                  text: 'edit21',
+                  click: data => {
+                    console.log(data);
+                  },
+                },
+                {
+                  text: 'edit22',
+                },
+              ],
+            },
+            {
+              fontIcon: 'fa-star',
+              text: 'edit3',
+              disabled: data => data.weight > 10,
+            },
+          ],
+        },
       ],
     },
   ];

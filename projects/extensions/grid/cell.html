@@ -17,63 +17,128 @@
       @case ('button') {
         @for (btn of colDef.buttons | cellActions: rowData: rowChangeRecord: rowChangeRecord?.currentValue; track btn) {
           @if (!btn.iif || btn.iif(rowData)) {
-            @if (btn.type === 'icon') {
-              <button
-                matIconButton
-                [color]="btn.color || 'primary'"
-                type="button"
-                class="mtx-grid-action-button"
-                [class]="btn.class"
-                [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
-                [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
-                [matTooltipClass]="(btn | cellActionTooltip).class"
-                [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
-                [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
-                [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
-                [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
-                [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
-                [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
-                [matBadge]="(btn | cellActionBadge).content | toObservable | async"
-                [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
-                [matBadgeColor]="(btn | cellActionBadge).color"
-                [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
-                [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
-                [matBadgeOverlap]="(btn | cellActionBadge).overlap"
-                [matBadgeDisabled]="(btn | cellActionBadge).disabled"
-                [matBadgeHidden]="(btn | cellActionBadge).hidden"
-                (click)="_onActionClick($event, btn, rowData)"
-              >
-                <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
-              </button>
-            } @else {
-              <button
-                [matButton]="btn.type || 'text'"
-                [color]="btn.color || 'primary'"
-                type="button"
-                class="mtx-grid-action-button"
-                [class]="btn.class"
-                [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
-                [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
-                [matTooltipClass]="(btn | cellActionTooltip).class"
-                [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
-                [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
-                [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
-                [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
-                [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
-                [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
-                [matBadge]="(btn | cellActionBadge).content | toObservable | async"
-                [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
-                [matBadgeColor]="(btn | cellActionBadge).color"
-                [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
-                [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
-                [matBadgeOverlap]="(btn | cellActionBadge).overlap"
-                [matBadgeDisabled]="(btn | cellActionBadge).disabled"
-                [matBadgeHidden]="(btn | cellActionBadge).hidden"
-                (click)="_onActionClick($event, btn, rowData)"
-              >
-                <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
-                <span>{{ btn.text | toObservable | async }}</span>
-              </button>
+            @if(btn.children && btn.children.length>0){
+              @if (btn.type === 'icon') {
+                <button
+                  matIconButton
+                  [color]="btn.color || 'primary'"
+                  type="button"
+                  class="mtx-grid-action-button"
+                  [class]="btn.class"
+                  [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
+                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltipClass]="(btn | cellActionTooltip).class"
+                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
+                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
+                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
+                  [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
+                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
+                  [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
+                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
+                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
+                  [matBadgeColor]="(btn | cellActionBadge).color"
+                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
+                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
+                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
+                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
+                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
+                  [matMenuTriggerFor]="btn.children && btn.children.length>0 ? gridMenu.menu : null"
+                >
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
+                </button>
+
+                <mtx-grid-menu #gridMenu [items]="btn.children || []" [data]="rowData" />
+              } @else {
+                <button
+                  [matButton]="btn.type || 'text'"
+                  [color]="btn.color || 'primary'"
+                  type="button"
+                  class="mtx-grid-action-button"
+                  [class]="btn.class"
+                  [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
+                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltipClass]="(btn | cellActionTooltip).class"
+                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
+                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
+                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
+                  [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
+                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
+                  [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
+                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
+                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
+                  [matBadgeColor]="(btn | cellActionBadge).color"
+                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
+                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
+                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
+                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
+                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
+                  [matMenuTriggerFor]="btn.children && btn.children.length>0 ? gridMenu.menu : null"
+                >
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
+                  <span>{{ btn.text | toObservable | async }}</span>
+                </button>
+
+                <mtx-grid-menu #gridMenu [items]="btn.children || []" [data]="rowData" />
+              }
+            }@else {
+              @if (btn.type === 'icon') {
+                <button
+                  matIconButton
+                  [color]="btn.color || 'primary'"
+                  type="button"
+                  class="mtx-grid-action-button"
+                  [class]="btn.class"
+                  [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
+                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltipClass]="(btn | cellActionTooltip).class"
+                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
+                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
+                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
+                  [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
+                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
+                  [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
+                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
+                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
+                  [matBadgeColor]="(btn | cellActionBadge).color"
+                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
+                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
+                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
+                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
+                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
+                  (click)="_onActionClick($event, btn, rowData)"
+                >
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
+                </button>
+              } @else {
+                <button
+                  [matButton]="btn.type || 'text'"
+                  [color]="btn.color || 'primary'"
+                  type="button"
+                  class="mtx-grid-action-button"
+                  [class]="btn.class"
+                  [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
+                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltipClass]="(btn | cellActionTooltip).class"
+                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
+                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
+                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
+                  [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
+                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
+                  [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
+                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
+                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
+                  [matBadgeColor]="(btn | cellActionBadge).color"
+                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
+                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
+                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
+                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
+                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
+                  (click)="_onActionClick($event, btn, rowData)"
+                >
+                  <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
+                  <span>{{ btn.text | toObservable | async }}</span>
+                </button>
+              }
             }
           }
         }

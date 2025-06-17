@@ -100,6 +100,7 @@ export interface MtxGridColumnButton<T = any> {
   pop?: string | Observable<string> | MtxGridColumnButtonPop;
   tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
   badge?: number | string | Observable<string> | MtxGridColumnButtonBadge;
+  children?: MtxGridMenuItem<T>[];
 }
 
 /** The properties of column button pop. */
@@ -214,4 +215,17 @@ export interface MtxGridDefaultOptions {
   columnMenuFooterText?: string;
 
   noResultText?: string;
+}
+
+/** The properties of menu item. */
+export interface MtxGridMenuItem<T = any> {
+  text: string | Observable<string>;
+  icon?: string;
+  fontIcon?: string;
+  svgIcon?: string;
+  class?: string;
+  disabled?: boolean | ((rowData: T) => boolean);
+  click?: (rowData: T) => void;
+  iif?: (rowData: T) => boolean;
+  children?: MtxGridMenuItem[];
 }
