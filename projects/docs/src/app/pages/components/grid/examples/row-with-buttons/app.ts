@@ -18,14 +18,13 @@ export class App {
     {
       header: 'Operation',
       field: 'operation',
-      width: '180px',
+      width: '220px',
       pinned: 'right',
       right: '0px',
       type: 'button',
       buttons: [
         {
           type: 'icon',
-          text: 'copy',
           icon: 'file_copy',
           tooltip: 'copy',
           disabled: true,
@@ -33,22 +32,46 @@ export class App {
         },
         {
           type: 'icon',
-          text: 'edit',
           icon: 'edit',
           tooltip: 'Edit',
           click: () => alert('edit'),
         },
         {
           type: 'icon',
-          text: 'delete',
           icon: 'delete',
           tooltip: 'Delete',
           color: 'warn',
           pop: 'Confirm delete?',
           click: () => alert('delete'),
-          badge: {
-            content: 1,
-          },
+        },
+        {
+          type: 'icon',
+          icon: 'more_vert',
+          tooltip: 'More',
+          children: [
+            {
+              icon: 'dialpad',
+              text: 'Redial',
+              children: [
+                {
+                  text: 'Vertebrates',
+                },
+                {
+                  text: 'Invertebrates',
+                },
+              ],
+            },
+            {
+              icon: 'voicemail',
+              text: 'Check voice mail',
+              disabled: true,
+            },
+            {
+              icon: 'notifications_off',
+              text: 'Disable alerts',
+              click: () => alert('Disable alerts'),
+            },
+          ],
         },
       ],
     },

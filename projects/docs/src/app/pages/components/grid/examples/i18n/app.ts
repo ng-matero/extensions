@@ -44,7 +44,6 @@ export class App {
       type: 'button',
       buttons: [
         {
-          type: 'basic',
           text: this.translate.stream('delete'),
           icon: 'delete',
           tooltip: this.translate.stream('delete'),

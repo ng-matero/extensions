@@ -237,6 +237,7 @@ interface MtxGridColumnButton<T = any> {
   pop?: string | Observable<string> | MtxGridColumnButtonPop;
   tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
   badge?: number | string | Observable<string> | MtxGridColumnButtonBadge;
+  children?: MtxGridMenuItem<T>[];
 }
 ```
 
@@ -377,6 +378,22 @@ interface MtxGridDefaultOptions {
 }
 ```
 
+#### `MtxGridMenuItem`
+
+```ts
+export interface MtxGridMenuItem<T = any> {
+  text: string | Observable<string>;
+  icon?: string;
+  fontIcon?: string;
+  svgIcon?: string;
+  class?: string;
+  disabled?: boolean | ((rowData: T) => boolean);
+  click?: (rowData: T) => void;
+  iif?: (rowData: T) => boolean;
+  children?: MtxGridMenuItem[];
+}
+```
+
 ### Type aliases
 
 #### `MtxGridColumnType`
@@ -395,7 +412,7 @@ type MtxGridColumnPinValue = 'left' | 'right' | null;
 #### `MtxGridButtonType`
 
 ```ts
-type MtxGridButtonType = 'basic' | 'raised' | 'stroked' | 'flat' | 'icon' | 'fab' | 'mini-fab';
+type MtxGridButtonType = MatButtonAppearance | 'icon';
 ```
 
 ### Constants

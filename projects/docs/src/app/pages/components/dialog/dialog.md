@@ -66,8 +66,8 @@ interface MtxDialogData extends MatDialogConfig {
 
 ```ts
 interface MtxDialogBtns {
-  type?: '' | 'raised' | 'stroked' | 'flat';
-  color?: '' | 'primary' | 'accent' | 'warn';
+  type?: MatButtonAppearance;
+  color?: ThemePalette;
   class?: string;
   focusInitial?: boolean;
   text: string | Observable<string>;
