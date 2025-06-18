@@ -5,9 +5,6 @@
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/grid' as tokens-mtx-grid;
 
-@use './column-resize/column-resize';
-
-
 @mixin base($theme) {
   @if mat.get-theme-version($theme) == 1 {
     @include _theme-from-tokens(inspection.get-theme-tokens($theme, base));

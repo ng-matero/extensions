@@ -1,5 +1,6 @@
 @use '../core/tokens/token-utils';
 @use '../core/tokens/m2/mtx/grid' as tokens-mtx-grid;
+@use './column-resize/column-resize';
 
 $_tokens: tokens-mtx-grid.$prefix, tokens-mtx-grid.get-token-slots();
 
