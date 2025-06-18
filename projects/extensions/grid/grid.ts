@@ -50,11 +50,12 @@ import {
 
 import { ColumnResize } from '@ng-matero/extensions/column-resize';
 import { MtxIsTemplateRefPipe, MtxToObservablePipe } from '@ng-matero/extensions/core';
+import { MatColumnResize, MatResizable } from './column-resize';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
-import { MatColumnResize, MatResizable } from './column-resize';
-import { MtxGridExpansionToggle } from './expansion-toggle';
+import { MtxGridExpansionToggle } from './grid-expansion-toggle';
 import { MtxGridColClassPipe, MtxGridRowClassPipe } from './grid-pipes';
+import { MtxGridSelectableCell } from './grid-selectable-cell';
 import { MtxGridUtils } from './grid-utils';
 import {
   MtxGridButtonType,
@@ -65,7 +66,6 @@ import {
   MtxGridRowClassFormatter,
   MtxGridRowSelectionFormatter,
 } from './interfaces';
-import { MtxGridSelectableCell } from './selectable-cell';
 
 /** Injection token that can be used to specify default grid options. */
 export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions>(

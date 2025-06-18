@@ -19,10 +19,11 @@ import { MatColumnResizeModule } from './column-resize/column-resize-module';
 
 import { MtxPipesModule } from '@ng-matero/extensions/core';
 import { MtxDialogModule } from '@ng-matero/extensions/dialog';
+import { MtxGrid } from './grid';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
-import { MtxGridExpansionToggle } from './expansion-toggle';
-import { MtxGrid } from './grid';
+import { MtxGridExpansionToggle } from './grid-expansion-toggle';
+import { MtxGridMenu } from './grid-menu';
 import {
   MtxGridCellActionBadgePipe,
   MtxGridCellActionDisablePipe,
@@ -32,8 +33,8 @@ import {
   MtxGridColClassPipe,
   MtxGridRowClassPipe,
 } from './grid-pipes';
+import { MtxGridSelectableCell } from './grid-selectable-cell';
 import { MtxGridUtils } from './grid-utils';
-import { MtxGridSelectableCell } from './selectable-cell';
 
 @NgModule({
   imports: [
@@ -61,6 +62,7 @@ import { MtxGridSelectableCell } from './selectable-cell';
     MtxGridColumnMenu,
     MtxGridExpansionToggle,
     MtxGridSelectableCell,
+    MtxGridMenu,
     MtxGridRowClassPipe,
     MtxGridColClassPipe,
     MtxGridCellActionsPipe,
@@ -76,6 +78,7 @@ import { MtxGridSelectableCell } from './selectable-cell';
     MtxGridColumnMenu,
     MtxGridExpansionToggle,
     MtxGridSelectableCell,
+    MtxGridMenu,
     MtxGridRowClassPipe,
     MtxGridColClassPipe,
     MtxGridCellActionsPipe,
