@@ -43,6 +43,7 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   [matMenuTriggerFor]="btn.children && btn.children.length>0 ? gridMenu.menu : null"
+                  (click)="$event.stopPropagation()"
                 >
                   <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
                 </button>
@@ -73,6 +74,7 @@
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
                   [matMenuTriggerFor]="btn.children && btn.children.length>0 ? gridMenu.menu : null"
+                  (click)="$event.stopPropagation()"
                 >
                   <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
                   <span>{{ btn.text | toObservable | async }}</span>
