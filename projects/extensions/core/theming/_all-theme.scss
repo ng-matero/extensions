@@ -15,21 +15,18 @@
 
 // Create a theme.
 @mixin all-component-themes($theme) {
-  $dedupe-key: 'angular-material-extensions-theme';
-  @include mat.private-check-duplicate-theme-styles($theme, $dedupe-key) {
-    @include alert-theme.theme($theme);
-    @include button-theme.theme($theme);
-    @include colorpicker-theme.theme($theme);
-    @include datetimepicker-theme.theme($theme);
-    @include drawer-theme.theme($theme);
-    @include grid-theme.theme($theme);
-    @include loader-theme.theme($theme);
-    @include popover-theme.theme($theme);
-    @include progress-theme.theme($theme);
-    @include select-theme.theme($theme);
-    @include split-theme.theme($theme);
-    @include tooltip-theme.theme($theme);
-  }
+  @include alert-theme.theme($theme);
+  @include button-theme.theme($theme);
+  @include colorpicker-theme.theme($theme);
+  @include datetimepicker-theme.theme($theme);
+  @include drawer-theme.theme($theme);
+  @include grid-theme.theme($theme);
+  @include loader-theme.theme($theme);
+  @include popover-theme.theme($theme);
+  @include progress-theme.theme($theme);
+  @include select-theme.theme($theme);
+  @include split-theme.theme($theme);
+  @include tooltip-theme.theme($theme);
 }
 
 @mixin all-component-bases($theme) {

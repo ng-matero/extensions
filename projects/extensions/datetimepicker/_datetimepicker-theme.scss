@@ -92,24 +92,22 @@
 }
 
 @mixin theme($theme, $color-variant: null) {
-  @include mat.private-check-duplicate-theme-styles($theme, 'mtx-datetimepicker') {
-    @if mat.get-theme-version($theme) == 1 {
-      @include base($theme);
-      @include color($theme, $color-variant);
-      @include density($theme);
-      @include typography($theme);
+  @if mat.get-theme-version($theme) == 1 {
+    @include base($theme);
+    @include color($theme, $color-variant);
+    @include density($theme);
+    @include typography($theme);
+  }
+  @else {
+    @include base($theme);
+    @if mat.theme-has($theme, color) {
+      @include color($theme);
     }
-    @else {
-      @include base($theme);
-      @if mat.theme-has($theme, color) {
-        @include color($theme);
-      }
-      @if mat.theme-has($theme, density) {
-        @include density($theme);
-      }
-      @if mat.theme-has($theme, typography) {
-        @include typography($theme);
-      }
+    @if mat.theme-has($theme, density) {
+      @include density($theme);
+    }
+    @if mat.theme-has($theme, typography) {
+      @include typography($theme);
     }
   }
 }
