@@ -40,7 +40,9 @@
 
 // Tokens that can be configured through Angular Material's density theming API.
 @function get-density-tokens($theme) {
-  $scale: mat.private-clamp-density(mat.get-theme-density($theme), -4);
+  $system: m2-utils.get-system($theme);
+
+  $scale: mat.private-clamp-density(map.get($system, density-scale), -4);
   $expand-button-scale: (
     0: 48px,
     -1: 44px,

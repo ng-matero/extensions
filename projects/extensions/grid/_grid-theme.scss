@@ -5,47 +5,39 @@
 @use './m3-grid';
 
 @mixin base($theme) {
+  $tokens: m2-grid.get-unthemable-tokens();
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-grid.get-tokens($theme), base));
+    $tokens: map.get(m3-grid.get-tokens($theme), base);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-grid.get-unthemable-tokens());
-    }
-  }
+
+  @include token-utils.values($tokens);
 }
 
 @mixin color($theme) {
+  $tokens: m2-grid.get-color-tokens($theme);
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-grid.get-tokens($theme), color));
+    $tokens: map.get(m3-grid.get-tokens($theme), color);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-grid.get-color-tokens($theme));
-    }
-  }
+
+  @include token-utils.values($tokens);
 }
 
 @mixin typography($theme) {
+  $tokens: m2-grid.get-typography-tokens($theme);
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-grid.get-tokens($theme), typography));
+    $tokens: map.get(m3-grid.get-tokens($theme), typography);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-grid.get-typography-tokens($theme));
-    }
-  }
+
+  @include token-utils.values($tokens);
 }
 
 @mixin density($theme) {
+  $tokens: m2-grid.get-density-tokens($theme);
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-grid.get-tokens($theme), density));
+    $tokens: map.get(m3-grid.get-tokens($theme), density);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-grid.get-density-tokens($theme));
-    }
-  }
+
+  @include token-utils.values($tokens);
 }
 
 /// Defines the tokens that will be available in the `overrides` mixin and for docs extraction.

@@ -5,57 +5,51 @@
 @use './m3-split';
 
 @mixin base($theme) {
+  $tokens: m2-split.get-unthemable-tokens();
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-split.get-tokens($theme), base));
-  }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-split.get-unthemable-tokens());
-    }
+    $tokens: map.get(m3-split.get-tokens($theme), base);
   }
 }
 
 @mixin color($theme, $color-variant: null) {
+  $tokens: m2-split.get-color-tokens($theme, primary);
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-split.get-tokens($theme, $color-variant), color));
+    $tokens: map.get(m3-split.get-tokens($theme, $color-variant), color);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-split.get-color-tokens($theme, primary));
-    }
 
-    .mtx-split>.mtx-split-gutter {
+  @include token-utils.values($tokens);
+
+  @if mat.get-theme-version($theme) != 1 {
+    .mtx-split > .mtx-split-gutter {
       &.mat-accent:hover {
-        @include token-utils.create-token-values-mixed(m2-split.get-color-tokens($theme, secondary));
+        $tokens: m2-split.get-color-tokens($theme, secondary);
+        @include token-utils.values($tokens);
       }
 
       &.mat-warn:hover {
-        @include token-utils.create-token-values-mixed(m2-split.get-color-tokens($theme, error));
+        $tokens: m2-split.get-color-tokens($theme, secondary);
+        @include token-utils.values($tokens);
       }
     }
   }
 }
 
 @mixin typography($theme) {
+  $tokens: m2-split.get-typography-tokens($theme);
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-split.get-tokens($theme), typography));
+    $tokens: map.get(m3-split.get-tokens($theme), typography);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-split.get-typography-tokens($theme));
-    }
-  }
+
+  @include token-utils.values($tokens);
 }
 
 @mixin density($theme) {
+  $tokens: m2-split.get-density-tokens($theme);
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-split.get-tokens($theme), density));
+    $tokens: map.get(m3-split.get-tokens($theme), density);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-split.get-density-tokens($theme));
-    }
-  }
+
+  @include token-utils.values($tokens);
 }
 
 /// Defines the tokens that will be available in the `overrides` mixin and for docs extraction.

@@ -6,57 +6,53 @@
 @use './m3-colorpicker';
 
 @mixin base($theme) {
+  $tokens: m2-colorpicker.get-unthemable-tokens();
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-colorpicker.get-tokens($theme), base));
+    $tokens: map.get(m3-colorpicker.get-tokens($theme), base);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-colorpicker.get-unthemable-tokens());
-    }
-  }
+
+  @include token-utils.values($tokens);
 }
 
 @mixin color($theme, $color-variant: null) {
+  $tokens: m2-colorpicker.get-color-tokens($theme, primary);
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-colorpicker.get-tokens($theme), color));
+    $tokens: map.get(m3-colorpicker.get-tokens($theme), color);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-colorpicker.get-color-tokens($theme, primary));
-    }
 
+  @include token-utils.values($tokens);
+
+  @if mat.get-theme-version($theme) != 1 {
     .mtx-colorpicker-toggle-active {
       &.mat-accent {
-        @include token-utils.create-token-values-mixed(m2-colorpicker.get-color-tokens($theme, secondary));
+        $tokens: m2-colorpicker.get-color-tokens($theme, secondary);
+        @include token-utils.values($tokens);
       }
 
       &.mat-warn {
-        @include token-utils.create-token-values-mixed(m2-colorpicker.get-color-tokens($theme, error));
+        $tokens: m2-colorpicker.get-color-tokens($theme, secondary);
+        @include token-utils.values($tokens);
       }
     }
   }
 }
 
 @mixin typography($theme) {
+  $tokens: m2-colorpicker.get-typography-tokens($theme);
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-colorpicker.get-tokens($theme), typography));
+    $tokens: map.get(m3-colorpicker.get-tokens($theme), typography);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-colorpicker.get-typography-tokens($theme));
-    }
-  }
+
+  @include token-utils.values($tokens);
 }
 
 @mixin density($theme) {
+  $tokens: m2-colorpicker.get-density-tokens($theme);
   @if mat.get-theme-version($theme) == 1 {
-    @include token-utils.create-token-values(map.get(m3-colorpicker.get-tokens($theme), density));
+    $tokens: map.get(m3-colorpicker.get-tokens($theme), density);
   }
-  @else {
-    @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-colorpicker.get-density-tokens($theme));
-    }
-  }
+
+  @include token-utils.values($tokens);
 }
 
 /// Defines the tokens that will be available in the `overrides` mixin and for docs extraction.
@@ -64,8 +60,8 @@
   @return (
     (
       namespace: colorpicker,
-      tokens: token-utils.get-overrides(m3-colorpicker.get-tokens(), colorpicker),
-    ),
+      tokens: token-utils.get-overrides(m3-colorpicker.get-tokens(), colorpicker)
+    )
   );
 }
 
@@ -79,8 +75,7 @@
     @include color($theme, $color-variant);
     @include density($theme);
     @include typography($theme);
-  }
-  @else {
+  } @else {
     @include base($theme);
     @if mat.theme-has($theme, color) {
       @include color($theme);

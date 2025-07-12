@@ -89,18 +89,20 @@ $_today-fade-amount: .2;
 
 // Tokens that can be configured through Angular Material's typography theming API.
 @function get-typography-tokens($theme) {
+  $system: m2-utils.get-system($theme);
+
   @return (
-    datetimepicker-calendar-text-font: mat.get-theme-typography($theme, body-1, font-family),
+    datetimepicker-calendar-text-font: map.get($system, body-large-font),
     datetimepicker-calendar-text-size: 13px,
 
-    datetimepicker-calendar-body-label-text-size: mat.get-theme-typography($theme, button, font-size),
-    datetimepicker-calendar-body-label-text-weight: mat.get-theme-typography($theme, button, font-weight),
+    datetimepicker-calendar-body-label-text-size: map.get($system, label-small-size),
+    datetimepicker-calendar-body-label-text-weight: map.get($system, label-small-weight),
 
-    datetimepicker-calendar-period-button-text-size: mat.get-theme-typography($theme, button, font-size),
-    datetimepicker-calendar-period-button-text-weight: mat.get-theme-typography($theme, button, font-weight),
+    datetimepicker-calendar-period-button-text-size: map.get($system, label-small-size),
+    datetimepicker-calendar-period-button-text-weight: map.get($system, label-small-weight),
 
     datetimepicker-calendar-table-header-text-size: 11px,
-    datetimepicker-calendar-table-header-text-weight: mat.get-theme-typography($theme, body-1, font-weight),
+    datetimepicker-calendar-table-header-text-weight: map.get($system, body-large-weight),
 
     datetimepicker-clock-text-size: 14px,
   );
