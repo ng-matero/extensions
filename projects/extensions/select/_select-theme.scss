@@ -5,7 +5,7 @@
 @use './m3-select';
 
 @mixin base($theme) {
-  $tokens: m2-select.get-unthemable-tokens();
+  $tokens: map.get(m2-select.get-tokens($theme), base);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-select.get-tokens($theme), base);
   }
@@ -14,7 +14,7 @@
 }
 
 @mixin color($theme, $color-variant: null) {
-  $tokens: m2-select.get-color-tokens($theme, primary);
+  $tokens: map.get(m2-select.get-tokens($theme), color);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-select.get-tokens($theme), color);
   }
@@ -24,12 +24,12 @@
   @if mat.get-theme-version($theme) != 1 {
     .ng-dropdown-panel {
       &.mat-accent {
-        $tokens: m2-select.get-color-tokens($theme, secondary);
+        $tokens: m2-select.private-get-color-palette-color-tokens($theme, secondary);
         @include token-utils.values($tokens);
       }
 
       &.mat-warn {
-        $tokens: m2-select.get-color-tokens($theme, secondary);
+        $tokens: m2-select.private-get-color-palette-color-tokens($theme, error);
         @include token-utils.values($tokens);
       }
     }
@@ -37,7 +37,7 @@
 }
 
 @mixin typography($theme) {
-  $tokens: m2-select.get-typography-tokens($theme);
+  $tokens: map.get(m2-select.get-tokens($theme), typography);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-select.get-tokens($theme), typography);
   }
@@ -46,7 +46,7 @@
 }
 
 @mixin density($theme) {
-  $tokens: m2-select.get-density-tokens($theme);
+  $tokens: map.get(m2-select.get-tokens($theme), density);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-select.get-tokens($theme), density);
   }
@@ -74,8 +74,7 @@
     @include color($theme, $color-variant);
     @include density($theme);
     @include typography($theme);
-  }
-  @else {
+  } @else {
     @include base($theme);
     @if mat.theme-has($theme, color) {
       @include color($theme);

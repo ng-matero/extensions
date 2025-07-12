@@ -35,7 +35,8 @@
       select-option-label-text-color: map.get($system, on-surface),
       select-option-selected-state-background-color: map.get($system, secondary-container),
       select-option-selected-state-text-color: map.get($system, on-surface),
-      select-option-hover-state-background-color: m3-utils.color-with-opacity(map.get($system, on-surface), map.get($system,hover-state-layer-opacity)),
+      select-option-hover-state-background-color: m3-utils.color-with-opacity(
+        map.get($system, on-surface), map.get($system,hover-state-layer-opacity)),
       select-option-disabled-state-text-color: m3-utils.color-with-opacity(map.get($system, on-surface), 38%),
     ),
     typography: (),

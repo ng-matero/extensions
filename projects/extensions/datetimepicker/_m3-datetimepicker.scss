@@ -24,13 +24,13 @@
       datetimepicker-calendar-header-background-color: transparent,
       datetimepicker-calendar-date-selected-state-text-color: map.get($system, on-primary),
       datetimepicker-calendar-date-selected-state-background-color: map.get($system, primary),
-      datetimepicker-calendar-date-selected-disabled-state-background-color:
-        m3-utils.color-with-opacity(map.get($system, on-surface), 38%),
+      datetimepicker-calendar-date-selected-disabled-state-background-color: m3-utils.color-with-opacity(
+        map.get($system, on-surface), 38%),
       datetimepicker-calendar-date-today-selected-state-outline-color: map.get($system, primary),
-      datetimepicker-calendar-date-focus-state-background-color:
-        m3-utils.color-with-opacity(map.get($system, on-surface), map.get($system, focus-state-layer-opacity)),
-      datetimepicker-calendar-date-hover-state-background-color:
-        m3-utils.color-with-opacity(map.get($system, on-surface), map.get($system, hover-state-layer-opacity)),
+      datetimepicker-calendar-date-focus-state-background-color: m3-utils.color-with-opacity(
+        map.get($system, on-surface), map.get($system, focus-state-layer-opacity)),
+      datetimepicker-calendar-date-hover-state-background-color: m3-utils.color-with-opacity(
+        map.get($system, on-surface), map.get($system, hover-state-layer-opacity)),
       datetimepicker-toggle-active-state-icon-color: map.get($system, on-surface-variant),
       datetimepicker-toggle-icon-color: map.get($system, on-surface-variant),
       datetimepicker-calendar-body-label-text-color: map.get($system, on-surface),
@@ -41,16 +41,16 @@
       datetimepicker-calendar-date-today-outline-color: map.get($system, primary),
       datetimepicker-calendar-date-text-color: map.get($system, on-surface),
       datetimepicker-calendar-date-outline-color: transparent,
-      datetimepicker-calendar-date-disabled-state-text-color:
-        m3-utils.color-with-opacity(map.get($system, on-surface), 38%),
+      datetimepicker-calendar-date-disabled-state-text-color: m3-utils.color-with-opacity(
+        map.get($system, on-surface), 38%),
       datetimepicker-container-background-color: map.get($system, surface-container-high),
       datetimepicker-container-text-color: map.get($system, on-surface),
       datetimepicker-clock-dial-background-color: map.get($system, surface-container-highest),
       datetimepicker-clock-cell-text-color: map.get($system, on-surface),
-      datetimepicker-clock-cell-hover-state-background-color:
-        m3-utils.color-with-opacity(map.get($system, on-surface), map.get($system, hover-state-layer-opacity)),
-      datetimepicker-clock-cell-disabled-state-text-color:
-        m3-utils.color-with-opacity(map.get($system, on-surface), 38%),
+      datetimepicker-clock-cell-hover-state-background-color: m3-utils.color-with-opacity(
+        map.get($system, on-surface), map.get($system, hover-state-layer-opacity)),
+      datetimepicker-clock-cell-disabled-state-text-color: m3-utils.color-with-opacity(
+        map.get($system, on-surface), 38%),
       datetimepicker-clock-cell-selected-state-background-color: map.get($system, primary),
       datetimepicker-clock-hand-background-color: map.get($system, primary),
       datetimepicker-time-input-active-state-text-color: map.get($system, on-primary-container),

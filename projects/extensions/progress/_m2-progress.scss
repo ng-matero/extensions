@@ -1,44 +1,38 @@
 @use 'sass:map';
+@use 'sass:meta';
 @use '@angular/material' as mat;
 @use '../core/tokens/m2-utils';
 @use '../core/tokens/m3-utils';
 
-// Tokens that can't be configured through Angular Material's current theming API,
-// but may be in a future version of the theming API.
-@function get-unthemable-tokens() {
-  @return (
-    progress-container-shape: 4px,
-  );
-}
-
-// Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($theme) {
+@function get-tokens($theme) {
   $system: m2-utils.get-system($theme);
-  $is-dark: mat.get-theme-type($theme) == dark;
+
+  $is-dark: false;
+  @if meta.type-of($theme) == 'map' {
+    $is-dark: mat.get-theme-type($theme) == dark;
+  }
 
   @return (
-    progress-track-color: m3-utils.color-with-opacity(map.get($system, on-surface), map.get($system, hover-state-layer-opacity)),
-    progress-indicator-color: map.get($system, outline),
-    progress-text-color: map.get($system, on-surface),
-    progress-info-indicator-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 500)),
-    progress-info-text-color: white,
-    progress-success-indicator-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 500)),
-    progress-success-text-color: white,
-    progress-warning-indicator-color: mat.m2-get-color-from-palette(mat.$m2-orange-palette, if($is-dark, 900, 500)),
-    progress-warning-text-color: white,
-    progress-danger-indicator-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 500)),
-    progress-danger-text-color: white,
+    base: (
+      progress-container-shape: 4px,
+    ),
+    color: (
+      progress-track-color: m3-utils.color-with-opacity(
+        map.get($system, on-surface), map.get($system, hover-state-layer-opacity)),
+      progress-indicator-color: map.get($system, outline),
+      progress-text-color: map.get($system, on-surface),
+      progress-info-indicator-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 500)),
+      progress-info-text-color: white,
+      progress-success-indicator-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 500)),
+      progress-success-text-color: white,
+      progress-warning-indicator-color: mat.m2-get-color-from-palette(mat.$m2-orange-palette, if($is-dark, 900, 500)),
+      progress-warning-text-color: white,
+      progress-danger-indicator-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 500)),
+      progress-danger-text-color: white,
+    ),
+    typography: (
+      progress-text-size: 12px,
+    ),
+    density: ()
   );
-}
-
-// Tokens that can be configured through Angular Material's typography theming API.
-@function get-typography-tokens($theme) {
-  @return (
-    progress-text-size: 12px,
-  );
-}
-
-// Tokens that can be configured through Angular Material's density theming API.
-@function get-density-tokens($theme) {
-  @return ();
 }

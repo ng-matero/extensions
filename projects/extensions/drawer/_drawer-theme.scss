@@ -5,7 +5,7 @@
 @use './m3-drawer';
 
 @mixin base($theme) {
-  $tokens: m2-drawer.get-unthemable-tokens();
+  $tokens: map.get(m2-drawer.get-tokens($theme), base);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-drawer.get-tokens($theme), base);
   }
@@ -14,7 +14,7 @@
 }
 
 @mixin color($theme) {
-  $tokens: m2-drawer.get-color-tokens($theme);
+  $tokens: map.get(m2-drawer.get-tokens($theme), color);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-drawer.get-tokens($theme), color);
   }
@@ -23,7 +23,7 @@
 }
 
 @mixin typography($theme) {
-  $tokens: m2-drawer.get-typography-tokens($theme);
+  $tokens: map.get(m2-drawer.get-tokens($theme), typography);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-drawer.get-tokens($theme), typography);
   }
@@ -32,7 +32,7 @@
 }
 
 @mixin density($theme) {
-  $tokens: m2-drawer.get-density-tokens($theme);
+  $tokens: map.get(m2-drawer.get-tokens($theme), density);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-drawer.get-tokens($theme), density);
   }
@@ -60,8 +60,7 @@
     @include color($theme);
     @include density($theme);
     @include typography($theme);
-  }
-  @else {
+  } @else {
     @include base($theme);
     @if mat.theme-has($theme, color) {
       @include color($theme);

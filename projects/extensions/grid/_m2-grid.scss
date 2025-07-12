@@ -1,57 +1,47 @@
 @use 'sass:map';
+@use 'sass:meta';
 @use '@angular/material' as mat;
 @use '../core/tokens/m2-utils';
 @use '../core/tokens/m3-utils';
 
-// Tokens that can't be configured through Angular Material's current theming API,
-// but may be in a future version of the theming API.
-@function get-unthemable-tokens() {
-  @return (
-    grid-container-shape: 0,
-    grid-table-cell-min-width: 80px,
-  );
-}
-
-// Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($theme) {
-  $system: m2-utils.get-system($theme);
-  $is-dark: mat.get-theme-type($theme) == dark;
-
-  @return (
-    grid-outline-color: m3-utils.color-with-opacity(map.get($system, on-surface), 20%),
-    grid-column-menu-text-color: map.get($system, on-surface),
-    grid-column-menu-divider-color: map.get($system, outline),
-    grid-table-footer-background-color: map.get($system, surface),
-    grid-table-row-striped-background-color: if($is-dark, #3a3a3a, #f5f5f5),
-    grid-table-row-hover-background-color: if($is-dark, #2a2a2a, #eee),
-    grid-table-row-selected-background-color: if($is-dark, #2a2a2a, #eee),
-    grid-table-row-selected-hover-background-color: if($is-dark, #1a1a1a, #e0e0e0),
-    grid-table-cell-selected-outline-color: map.get($system, secondary),
-    grid-resizable-handle-active-background-color: map.get($system, primary),
-    grid-resizable-handle-hover-background-color: map.get($system, primary),
-    grid-resizable-handle-disabled-background-color: map.get($system, outline),
-  );
-}
-
-// Tokens that can be configured through Angular Material's typography theming API.
-@function get-typography-tokens($theme) {
-  @return ();
-}
-
-// Tokens that can be configured through Angular Material's density theming API.
-@function get-density-tokens($theme) {
+@function get-tokens($theme) {
   $system: m2-utils.get-system($theme);
 
-  $scale: mat.private-clamp-density(map.get($system, density-scale), -4);
-  $expand-button-scale: (
-    0: 48px,
-    -1: 44px,
-    -2: 40px,
-    -3: 36px,
-    -4: 28px
-  );
+  $is-dark: false;
+  @if meta.type-of($theme) == 'map' {
+    $is-dark: mat.get-theme-type($theme) == dark;
+  }
+
+  $density-scale: mat.private-clamp-density(map.get($system, density-scale), -4);
 
   @return (
-    grid-row-expand-button-size: map.get($expand-button-scale, $scale),
+    base: (
+      grid-container-shape: 0,
+      grid-table-cell-min-width: 80px,
+    ),
+    color: (
+      grid-outline-color: m3-utils.color-with-opacity(map.get($system, on-surface), 20%),
+      grid-column-menu-text-color: map.get($system, on-surface),
+      grid-column-menu-divider-color: map.get($system, outline),
+      grid-table-footer-background-color: map.get($system, surface),
+      grid-table-row-striped-background-color: if($is-dark, #3a3a3a, #f5f5f5),
+      grid-table-row-hover-background-color: if($is-dark, #2a2a2a, #eee),
+      grid-table-row-selected-background-color: if($is-dark, #2a2a2a, #eee),
+      grid-table-row-selected-hover-background-color: if($is-dark, #1a1a1a, #e0e0e0),
+      grid-table-cell-selected-outline-color: map.get($system, secondary),
+      grid-resizable-handle-active-background-color: map.get($system, primary),
+      grid-resizable-handle-hover-background-color: map.get($system, primary),
+      grid-resizable-handle-disabled-background-color: map.get($system, outline),
+    ),
+    typography: (),
+    density: (
+      grid-row-expand-button-size: map.get((
+        0: 48px,
+        -1: 44px,
+        -2: 40px,
+        -3: 36px,
+        -4: 28px
+      ), $density-scale),
+    )
   );
 }

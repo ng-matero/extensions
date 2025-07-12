@@ -1,49 +1,42 @@
 @use 'sass:map';
+@use 'sass:meta';
 @use '@angular/material' as mat;
 @use '../core/tokens/m2-utils';
 
-// Tokens that can't be configured through Angular Material's current theming API,
-// but may be in a future version of the theming API.
-@function get-unthemable-tokens() {
-  @return (
-    alert-container-shape: 4px,
-  );
-}
-
-// Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($theme) {
+@function get-tokens($theme) {
   $system: m2-utils.get-system($theme);
-  $is-dark: mat.get-theme-type($theme) == dark;
+
+  $is-dark: false;
+  @if meta.type-of($theme) == 'map' {
+    $is-dark: mat.get-theme-type($theme) == dark;
+  }
 
   @return (
-    alert-outline-color: transparent,
-    alert-background-color: mat.m2-get-color-from-palette(mat.$m2-gray-palette, if($is-dark, 900, 100)),
-    alert-text-color: map.get($system, on-surface),
+    base: (
+      alert-container-shape: 4px,
+    ),
+    color: (
+      alert-outline-color: transparent,
+      alert-background-color: mat.m2-get-color-from-palette(mat.$m2-gray-palette, if($is-dark, 900, 100)),
+      alert-text-color: map.get($system, on-surface),
 
-    alert-info-outline-color: transparent,
-    alert-info-background-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 100)),
-    alert-info-text-color: map.get($system, on-surface),
+      alert-info-outline-color: transparent,
+      alert-info-background-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 100)),
+      alert-info-text-color: map.get($system, on-surface),
 
-    alert-success-outline-color: transparent,
-    alert-success-background-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 100)),
-    alert-success-text-color: map.get($system, on-surface),
+      alert-success-outline-color: transparent,
+      alert-success-background-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 100)),
+      alert-success-text-color: map.get($system, on-surface),
 
-    alert-warning-outline-color: transparent,
-    alert-warning-background-color: mat.m2-get-color-from-palette(mat.$m2-amber-palette, if($is-dark, 900, 100)),
-    alert-warning-text-color: map.get($system, on-surface),
+      alert-warning-outline-color: transparent,
+      alert-warning-background-color: mat.m2-get-color-from-palette(mat.$m2-amber-palette, if($is-dark, 900, 100)),
+      alert-warning-text-color: map.get($system, on-surface),
 
-    alert-danger-outline-color: transparent,
-    alert-danger-background-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 100)),
-    alert-danger-text-color: map.get($system, on-surface),
-  );
-}
-
-// Tokens that can be configured through Angular Material's typography theming API.
-@function get-typography-tokens($theme) {
-  @return ();
-}
-
-// Tokens that can be configured through Angular Material's density theming API.
-@function get-density-tokens($theme) {
-  @return ();
+      alert-danger-outline-color: transparent,
+      alert-danger-background-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 100)),
+      alert-danger-text-color: map.get($system, on-surface),
+    ),
+    typography: (),
+    density: ()
+  )
 }

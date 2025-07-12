@@ -5,14 +5,14 @@
 @use './m3-split';
 
 @mixin base($theme) {
-  $tokens: m2-split.get-unthemable-tokens();
+  $tokens: map.get(m2-split.get-tokens($theme), base);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-split.get-tokens($theme), base);
   }
 }
 
 @mixin color($theme, $color-variant: null) {
-  $tokens: m2-split.get-color-tokens($theme, primary);
+  $tokens: map.get(m2-split.get-tokens($theme), color);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-split.get-tokens($theme, $color-variant), color);
   }
@@ -22,12 +22,12 @@
   @if mat.get-theme-version($theme) != 1 {
     .mtx-split > .mtx-split-gutter {
       &.mat-accent:hover {
-        $tokens: m2-split.get-color-tokens($theme, secondary);
+        $tokens: m2-split.private-get-color-palette-color-tokens($theme, secondary);
         @include token-utils.values($tokens);
       }
 
       &.mat-warn:hover {
-        $tokens: m2-split.get-color-tokens($theme, secondary);
+        $tokens: m2-split.private-get-color-palette-color-tokens($theme, error);
         @include token-utils.values($tokens);
       }
     }
@@ -35,7 +35,7 @@
 }
 
 @mixin typography($theme) {
-  $tokens: m2-split.get-typography-tokens($theme);
+  $tokens: map.get(m2-split.get-tokens($theme), typography);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-split.get-tokens($theme), typography);
   }
@@ -44,7 +44,7 @@
 }
 
 @mixin density($theme) {
-  $tokens: m2-split.get-density-tokens($theme);
+  $tokens: map.get(m2-split.get-tokens($theme), density);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-split.get-tokens($theme), density);
   }
@@ -72,8 +72,7 @@
     @include color($theme, $color-variant);
     @include density($theme);
     @include typography($theme);
-  }
-  @else {
+  } @else {
     @include base($theme);
     @if mat.theme-has($theme, color) {
       @include color($theme);

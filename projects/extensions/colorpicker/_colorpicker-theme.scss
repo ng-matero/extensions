@@ -6,7 +6,7 @@
 @use './m3-colorpicker';
 
 @mixin base($theme) {
-  $tokens: m2-colorpicker.get-unthemable-tokens();
+  $tokens: map.get(m2-colorpicker.get-tokens($theme), base);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-colorpicker.get-tokens($theme), base);
   }
@@ -15,7 +15,7 @@
 }
 
 @mixin color($theme, $color-variant: null) {
-  $tokens: m2-colorpicker.get-color-tokens($theme, primary);
+  $tokens: map.get(m2-colorpicker.get-tokens($theme), color);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-colorpicker.get-tokens($theme), color);
   }
@@ -25,12 +25,12 @@
   @if mat.get-theme-version($theme) != 1 {
     .mtx-colorpicker-toggle-active {
       &.mat-accent {
-        $tokens: m2-colorpicker.get-color-tokens($theme, secondary);
+        $tokens: m2-colorpicker.private-get-color-palette-color-tokens($theme, secondary);
         @include token-utils.values($tokens);
       }
 
       &.mat-warn {
-        $tokens: m2-colorpicker.get-color-tokens($theme, secondary);
+        $tokens: m2-colorpicker.private-get-color-palette-color-tokens($theme, error);
         @include token-utils.values($tokens);
       }
     }
@@ -38,7 +38,7 @@
 }
 
 @mixin typography($theme) {
-  $tokens: m2-colorpicker.get-typography-tokens($theme);
+  $tokens: map.get(m2-colorpicker.get-tokens($theme), typography);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-colorpicker.get-tokens($theme), typography);
   }
@@ -47,7 +47,7 @@
 }
 
 @mixin density($theme) {
-  $tokens: m2-colorpicker.get-density-tokens($theme);
+  $tokens: map.get(m2-colorpicker.get-tokens($theme), density);
   @if mat.get-theme-version($theme) == 1 {
     $tokens: map.get(m3-colorpicker.get-tokens($theme), density);
   }
