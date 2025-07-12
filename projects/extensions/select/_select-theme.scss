@@ -21,18 +21,16 @@
   }
   @else {
     @include mat.private-current-selector-or-root() {
-      @include token-utils.create-token-values-mixed(m2-select.get-color-tokens($theme));
+      @include token-utils.create-token-values-mixed(m2-select.get-color-tokens($theme, primary));
     }
 
     .ng-dropdown-panel {
       &.mat-accent {
-        $accent-tokens: m2-select.private-get-color-palette-color-tokens($theme, accent);
-        @include token-utils.create-token-values-mixed($accent-tokens);
+        @include token-utils.create-token-values-mixed(m2-select.get-color-tokens($theme, secondary));
       }
 
       &.mat-warn {
-        $warn-tokens: m2-select.private-get-color-palette-color-tokens($theme, warn);
-        @include token-utils.create-token-values-mixed($warn-tokens);
+        @include token-utils.create-token-values-mixed(m2-select.get-color-tokens($theme, error));
       }
     }
   }

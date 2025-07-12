@@ -3,51 +3,11 @@
 @use 'sass:meta';
 @use '@angular/material' as mat;
 @use '../core/tokens/m2-utils';
+@use '../core/tokens/m3-utils';
 @use '../core/style/elevation';
 
 $_selected-fade-amount: .6;
 $_today-fade-amount: .2;
-
-@function private-get-calendar-color-palette-color-tokens($theme, $palette-name) {
-  $palette-color: mat.get-theme-color($theme, $palette-name);
-  $default-contrast: mat.get-theme-color($theme, $palette-name, default-contrast);
-  $active-background-color: mat.get-theme-color($theme, $palette-name, 0.3);
-  $active-disabled-color: null;
-
-  @if (meta.type-of($palette-color) == color) {
-    $active-disabled-color: color.adjust($palette-color, $alpha: -$_selected-fade-amount);
-  }
-  @else {
-    $active-disabled-color: mat.get-theme-color($theme, foreground, disabled-button);
-  }
-
-  @return (
-    datetimepicker-calendar-header-background-color: $palette-color,
-
-    datetimepicker-calendar-date-selected-state-text-color: $default-contrast,
-    datetimepicker-calendar-date-selected-state-background-color: $palette-color,
-    datetimepicker-calendar-date-selected-disabled-state-background-color: $active-disabled-color,
-    datetimepicker-calendar-date-today-selected-state-outline-color: $default-contrast,
-    datetimepicker-calendar-date-focus-state-background-color: $active-background-color,
-    datetimepicker-calendar-date-hover-state-background-color: $active-background-color,
-
-    datetimepicker-clock-hand-background-color: $palette-color,
-    datetimepicker-clock-cell-selected-state-background-color: $palette-color,
-
-    datetimepicker-time-input-active-state-text-color: $palette-color,
-    datetimepicker-time-input-active-state-background-color: mat.get-theme-color($theme, $palette-name, 0.2),
-    datetimepicker-time-input-focus-state-outline-color: $palette-color,
-    datetimepicker-time-input-focus-state-placeholder-text-color: mat.get-theme-color($theme, $palette-name, 0.6),
-
-    datetimepicker-time-ampm-selected-state-background-color: mat.get-theme-color($theme, $palette-name, 0.2),
-  );
-}
-
-@function private-get-toggle-color-palette-color-tokens($theme, $palette-name) {
-  @return (
-    datetimepicker-toggle-active-state-icon-color: mat.get-theme-color($theme, $palette-name, text),
-  );
-}
 
 // Tokens that can't be configured through Angular Material's current theming API,
 // but may be in a future version of the theming API.
@@ -62,55 +22,69 @@ $_today-fade-amount: .2;
 }
 
 // Tokens that can be configured through Angular Material's color theming API.
-@function get-color-tokens($theme) {
-  $inactive-icon-color: mat.get-theme-color($theme, foreground, icon);
-  $text-color: mat.get-theme-color($theme, foreground, text);
-  $secondary-text-color: mat.get-theme-color($theme, foreground, secondary-text);
-  $disabled-text-color: mat.get-theme-color($theme, foreground, disabled-text);
-  $divider-color: mat.get-theme-color($theme, foreground, divider);
-  $hint-text-color: mat.get-theme-color($theme, foreground, hint-text);
-  $preview-outline-color: $divider-color;
-  $today-disabled-outline-color: null;
+@function get-color-tokens($theme, $color-variant) {
+  $system: m2-utils.get-system($theme);
+  $system: m3-utils.replace-colors-with-variant($system, primary, $color-variant);
+  $disabled: m3-utils.color-with-opacity(map.get($system, on-surface), 38%);
 
-  $primary-color: mat.get-theme-color($theme, primary);
-  $calendar-tokens: private-get-calendar-color-palette-color-tokens($theme, primary);
-  $toggle-tokens: private-get-toggle-color-palette-color-tokens($theme, primary);
+  @return (
+    datetimepicker-calendar-date-selected-state-text-color: map.get($system, on-primary),
+    datetimepicker-calendar-date-selected-state-background-color: map.get($system, primary),
+    datetimepicker-calendar-date-selected-disabled-state-background-color:
+      m3-utils.color-with-opacity(map.get($system, primary), 38%),
+    datetimepicker-calendar-date-today-selected-state-outline-color: map.get($system, on-primary),
+    datetimepicker-calendar-date-focus-state-background-color:
+      m3-utils.color-with-opacity(map.get($system, primary), map.get($system, focus-state-layer-opacity)),
+    datetimepicker-calendar-date-hover-state-background-color:
+      m3-utils.color-with-opacity(map.get($system, primary), map.get($system, focus-state-layer-opacity)),
 
-  @return mat.private-merge-all($calendar-tokens, $toggle-tokens, (
-    datetimepicker-toggle-icon-color: $inactive-icon-color,
-    datetimepicker-calendar-body-label-text-color: $secondary-text-color,
-    datetimepicker-calendar-body-week-number-text-color: $secondary-text-color,
-    // datetimepicker-calendar-period-button-icon-color: $inactive-icon-color,
-    // datetimepicker-calendar-navigation-button-icon-color: $inactive-icon-color,
-    datetimepicker-calendar-header-text-color: white,
+    datetimepicker-toggle-active-state-icon-color: map.get($system, primary),
+    datetimepicker-toggle-icon-color: map.get($system, on-surface-variant),
+    datetimepicker-calendar-body-label-text-color: map.get($system, on-surface-variant),
+    // datepicker-calendar-period-button-text-color: map.get($system, on-surface),
+    // datepicker-calendar-period-button-icon-color: map.get($system, on-surface-variant),
+    // datepicker-calendar-navigation-button-icon-color: map.get($system, on-surface-variant),
     datetimepicker-calendar-header-divider-color: transparent,
-    datetimepicker-calendar-table-header-text-color: $secondary-text-color,
+    datetimepicker-calendar-header-text-color: white,
 
-    // Note: though it's not text, the border is a hint about the fact
-    // that this is today's date, so we use the hint color.
-    datetimepicker-calendar-date-today-outline-color: $hint-text-color,
-    // datetimepicker-calendar-date-today-disabled-state-outline-color: $today-disabled-outline-color,
-    datetimepicker-calendar-date-text-color: $text-color,
+    datetimepicker-calendar-body-week-number-text-color: map.get($system, on-surface-variant),
+    datetimepicker-calendar-header-background-color: map.get($system, primary),
+    datetimepicker-calendar-table-header-text-color: map.get($system, on-surface-variant),
+
+    datetimepicker-calendar-date-today-outline-color: map.get($system, on-surface-variant),
+    // datetimepicker-calendar-date-today-disabled-state-outline-color: $disabled,
+    datetimepicker-calendar-date-text-color: map.get($system, on-surface),
     datetimepicker-calendar-date-outline-color: transparent,
-    datetimepicker-calendar-date-disabled-state-text-color: $disabled-text-color,
-    // datetimepicker-calendar-date-preview-state-outline-color: $preview-outline-color,
+    datetimepicker-calendar-date-disabled-state-text-color: $disabled,
+    // datetimepicker-calendar-date-preview-state-outline-color: map.get($system, on-surface-variant),
 
-    datetimepicker-container-background-color: mat.get-theme-color($theme, background, card),
-    datetimepicker-container-text-color: $text-color,
+    datetimepicker-container-background-color: map.get($system, surface),
+    datetimepicker-container-text-color: map.get($system, on-surface),
 
-    datetimepicker-clock-dial-background-color: $divider-color,
-    datetimepicker-clock-cell-text-color: $text-color,
-    datetimepicker-clock-cell-hover-state-background-color: mat.get-theme-color($theme, background, hover),
-    datetimepicker-clock-cell-disabled-state-text-color: $disabled-text-color,
+    datetimepicker-clock-dial-background-color: map.get($system, outline),
+    datetimepicker-clock-cell-text-color: map.get($system, on-surface),
+    datetimepicker-clock-cell-hover-state-background-color:
+      m3-utils.color-with-opacity(map.get($system, on-surface), map.get($system, hover-state-layer-opacity)),
+    datetimepicker-clock-cell-disabled-state-text-color: $disabled,
+    datetimepicker-clock-cell-selected-state-background-color: map.get($system, primary),
+    datetimepicker-clock-hand-background-color: map.get($system, primary),
 
-    datetimepicker-time-input-text-color: $text-color,
-    datetimepicker-time-input-background-color: $divider-color,
-    datetimepicker-time-input-focus-state-background-color: mat.get-theme-color($theme, background, background),
-    datetimepicker-time-input-warn-state-outline-color: mat.get-theme-color($theme, warn),
-    datetimepicker-time-ampm-text-color: mat.get-theme-color($theme, foreground, text, .75),
-    datetimepicker-time-ampm-outline-color: $hint-text-color,
-    datetimepicker-time-ampm-selected-state-text-color: $text-color,
-  ));
+    datetimepicker-time-input-active-state-text-color: map.get($system, primary),
+    datetimepicker-time-input-active-state-background-color:
+      m3-utils.color-with-opacity(map.get($system, primary), 20%),
+    datetimepicker-time-input-focus-state-outline-color: map.get($system, primary),
+    datetimepicker-time-input-focus-state-placeholder-text-color:
+      m3-utils.color-with-opacity(map.get($system, primary), 60%),
+    datetimepicker-time-input-text-color: map.get($system, on-surface),
+    datetimepicker-time-input-background-color: map.get($system, outline),
+    datetimepicker-time-input-focus-state-background-color: map.get($system, primary-container),
+    datetimepicker-time-input-warn-state-outline-color: map.get($system, error),
+    datetimepicker-time-ampm-text-color: m3-utils.color-with-opacity(map.get($system, on-surface), 75%),
+    datetimepicker-time-ampm-outline-color: m3-utils.color-with-opacity(map.get($system, on-surface), 38%),
+    datetimepicker-time-ampm-selected-state-text-color: map.get($system, on-surface),
+    datetimepicker-time-ampm-selected-state-background-color:
+      m3-utils.color-with-opacity(map.get($system, primary), 20%),
+  );
 }
 
 // Tokens that can be configured through Angular Material's typography theming API.
@@ -135,15 +109,4 @@ $_today-fade-amount: .2;
 // Tokens that can be configured through Angular Material's density theming API.
 @function get-density-tokens($theme) {
   @return ();
-}
-
-// Combines the tokens generated by the above functions into a single map with placeholder values.
-// This is used to create token slots.
-@function get-token-slots() {
-  @return mat.private-deep-merge-all(
-    get-unthemable-tokens(),
-    get-color-tokens(m2-utils.$placeholder-color-config),
-    get-typography-tokens(m2-utils.$placeholder-typography-config),
-    get-density-tokens(m2-utils.$placeholder-density-config)
-  );
 }

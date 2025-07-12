@@ -13,13 +13,15 @@
   }
 
   $tokens: (
-    base: (datetimepicker-container-elevation-shadow: elevation.get-box-shadow(0),
+    base: (
+      datetimepicker-container-elevation-shadow: elevation.get-box-shadow(0),
       datetimepicker-container-touch-elevation-shadow: elevation.get-box-shadow(0),
       datetimepicker-container-shape: map.get($system, corner-large),
       datetimepicker-container-touch-shape: map.get($system, corner-extra-large),
       datetimepicker-selector-container-shape: map.get($system, corner-small),
     ),
-    color: (datetimepicker-calendar-header-background-color: transparent,
+    color: (
+      datetimepicker-calendar-header-background-color: transparent,
       datetimepicker-calendar-date-selected-state-text-color: map.get($system, on-primary),
       datetimepicker-calendar-date-selected-state-background-color: map.get($system, primary),
       datetimepicker-calendar-date-selected-disabled-state-background-color:
@@ -64,7 +66,8 @@
       datetimepicker-time-ampm-selected-state-text-color: map.get($system, on-tertiary-container),
       datetimepicker-time-ampm-selected-state-background-color: map.get($system, tertiary-container),
     ),
-    typography: (datetimepicker-calendar-text-font: map.get($system, body-medium-font),
+    typography: (
+      datetimepicker-calendar-text-font: map.get($system, body-medium-font),
       datetimepicker-calendar-text-size: map.get($system, body-medium-size),
       datetimepicker-calendar-body-label-text-size: map.get($system, title-small-size),
       datetimepicker-calendar-body-label-text-weight: map.get($system, title-small-weight),
