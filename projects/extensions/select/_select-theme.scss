@@ -16,7 +16,7 @@
 @mixin color($theme, $color-variant: null) {
   $tokens: map.get(m2-select.get-tokens($theme), color);
   @if mat.get-theme-version($theme) == 1 {
-    $tokens: map.get(m3-select.get-tokens($theme), color);
+    $tokens: map.get(m3-select.get-tokens($theme, $color-variant), color);
   }
 
   @include token-utils.values($tokens);
