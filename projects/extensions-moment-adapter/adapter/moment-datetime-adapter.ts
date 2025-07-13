@@ -35,9 +35,6 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
 
   private _useUtc = false;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     super();
 

@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DatetimeAdapter } from './datetime-adapter';
 
 /** The default hour names to use if Intl API is not available. */
@@ -18,9 +18,6 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
 
 @Injectable()
 export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     super();
 

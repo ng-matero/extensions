@@ -116,9 +116,6 @@ export class MtxDatetimepickerInput<D>
   /** Whether the last value set on the input was valid. */
   private _lastValueValid = false;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     const _dateAdapter = this._dateAdapter;
 

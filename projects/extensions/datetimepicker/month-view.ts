@@ -93,9 +93,6 @@ export class MtxMonthView<D> implements AfterContentInit {
   /** The names of the weekdays. */
   _weekdays: { long: string; narrow: string; id: number }[] = [];
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     if (!this._adapter) {
       throw createMissingDateImplError('DatetimeAdapter');

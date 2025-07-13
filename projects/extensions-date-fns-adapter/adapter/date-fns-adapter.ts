@@ -23,9 +23,6 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
 
 @Injectable()
 export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     super();
 

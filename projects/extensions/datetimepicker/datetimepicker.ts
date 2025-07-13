@@ -187,9 +187,6 @@ export class MtxDatetimepickerContent<D> implements AfterViewInit, OnDestroy {
     this.view = view;
   }
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     this._closeButtonText = inject(MtxDatetimepickerIntl).closeCalendarLabel;
     if (!this._animationsDisabled) {
@@ -405,9 +402,6 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   /** Previous selected value. */
   oldValue: D | null = null;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
 
   constructor() {
     if (!this._dateAdapter) {

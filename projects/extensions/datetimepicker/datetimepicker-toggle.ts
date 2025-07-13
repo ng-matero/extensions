@@ -84,9 +84,6 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   /** Underlying button element. */
   @ViewChild('button') _button!: MatButton;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     const defaultTabIndex = inject(new HostAttributeToken('tabindex'), { optional: true });
     const parsedTabIndex = Number(defaultTabIndex);

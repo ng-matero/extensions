@@ -19,9 +19,6 @@ function range<T>(length: number, valueFunction: (index: number) => T): T[] {
 export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
   private _useUtc = false;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     super();
 

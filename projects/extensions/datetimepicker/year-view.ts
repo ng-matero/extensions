@@ -80,9 +80,6 @@ export class MtxYearView<D> implements AfterContentInit {
    */
   _selectedMonth!: number | null;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     if (!this._adapter) {
       throw createMissingDateImplError('DatetimeAdapter');

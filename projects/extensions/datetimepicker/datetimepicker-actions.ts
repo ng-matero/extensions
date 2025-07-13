@@ -1,3 +1,4 @@
+import { TemplatePortal } from '@angular/cdk/portal';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -10,7 +11,6 @@ import {
   ViewEncapsulation,
   inject,
 } from '@angular/core';
-import { TemplatePortal } from '@angular/cdk/portal';
 import { MtxDatetimepicker } from './datetimepicker';
 
 @Directive({
@@ -19,11 +19,6 @@ import { MtxDatetimepicker } from './datetimepicker';
 })
 export class MtxDatetimepickerApply<D> {
   _datetimepicker = inject<MtxDatetimepicker<D>>(MtxDatetimepicker);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 }
 
 @Directive({
@@ -32,11 +27,6 @@ export class MtxDatetimepickerApply<D> {
 })
 export class MtxDatetimepickerCancel<D> {
   _datetimepicker = inject<MtxDatetimepicker<D>>(MtxDatetimepicker);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 }
 
 @Directive({
@@ -45,11 +35,6 @@ export class MtxDatetimepickerCancel<D> {
 })
 export class MtxDatetimepickerClear<D> {
   _datetimepicker = inject<MtxDatetimepicker<D>>(MtxDatetimepicker);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 }
 
 @Component({
@@ -71,11 +56,6 @@ export class MtxDatetimepickerActions<D> implements AfterViewInit, OnDestroy {
 
   @ViewChild(TemplateRef) _template!: TemplateRef<unknown>;
   private _portal!: TemplatePortal;
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
-  constructor() {}
 
   ngAfterViewInit() {
     this._portal = new TemplatePortal(this._template, this._viewContainerRef);

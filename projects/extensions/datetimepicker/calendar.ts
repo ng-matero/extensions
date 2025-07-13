@@ -142,9 +142,6 @@ export class MtxCalendar<D> implements AfterViewChecked, AfterContentInit, OnDes
    */
   private _moveFocusOnNextTick = false;
 
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
-
   constructor() {
     const _intl = this._intl;
 

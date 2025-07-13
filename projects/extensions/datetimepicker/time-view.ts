@@ -15,7 +15,6 @@ import {
   OnDestroy,
   Output,
   SimpleChanges,
-  viewChild,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
@@ -79,9 +78,6 @@ export class MtxTimeInput implements OnDestroy {
   private keyDownListener = this.keyDownHandler.bind(this);
   private keyPressListener = this.keyPressHandler.bind(this);
   private inputEventListener = this.inputChangedHandler.bind(this);
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
 
   constructor() {
     this.inputElement.addEventListener('keydown', this.keyDownListener, {
@@ -402,9 +398,6 @@ export class MtxTimeView<D> implements OnChanges, OnDestroy {
 
     return String(value);
   }
-
-  /** Inserted by Angular inject() migration for backwards compatibility */
-  constructor(...args: unknown[]);
 
   constructor() {
     this.datetimepickerIntlChangesSubscription = this._datetimepickerIntl.changes.subscribe(() => {
