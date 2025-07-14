@@ -1,19 +1,21 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxChange, MatCheckboxModule } from '@angular/material/checkbox';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSliderModule } from '@angular/material/slider';
-import { provideMomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter';
+import { provideDateFnsDatetimeAdapter } from '@ng-matero/extensions-date-fns-adapter';
 import {
   MtxCalendarView,
   MtxDatetimepickerMode,
   MtxDatetimepickerModule,
   MtxDatetimepickerType,
 } from '@ng-matero/extensions/datetimepicker';
+import { enUS } from 'date-fns/locale';
 import { CustomHeader } from './custom-header';
-import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'datetimepicker-configurable-example',
@@ -30,24 +32,28 @@ import { MatButtonModule } from '@angular/material/button';
     MtxDatetimepickerModule,
   ],
   providers: [
-    provideMomentDatetimeAdapter({
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: enUS,
+    },
+    provideDateFnsDatetimeAdapter({
       parse: {
-        dateInput: 'YYYY-MM-DD',
+        dateInput: 'yyyy-MM-dd',
+        yearInput: 'yyyy',
         monthInput: 'MMMM',
-        yearInput: 'YYYY',
+        datetimeInput: 'yyyy-MM-dd HH:mm',
         timeInput: 'HH:mm',
-        datetimeInput: 'YYYY-MM-DD HH:mm',
       },
       display: {
-        dateInput: 'YYYY-MM-DD',
+        dateInput: 'yyyy-MM-dd',
+        yearInput: 'yyyy',
         monthInput: 'MMMM',
-        yearInput: 'YYYY',
+        datetimeInput: 'yyyy-MM-dd HH:mm',
         timeInput: 'HH:mm',
-        datetimeInput: 'YYYY-MM-DD HH:mm',
-        monthYearLabel: 'YYYY MMMM',
+        monthYearLabel: 'yyyy MMMM',
         dateA11yLabel: 'LL',
-        monthYearA11yLabel: 'MMMM YYYY',
-        popupHeaderDateLabel: 'MMM DD, ddd',
+        monthYearA11yLabel: 'MMMM yyyy',
+        popupHeaderDateLabel: 'MMM dd, E',
       },
     }),
   ],

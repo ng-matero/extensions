@@ -13,7 +13,11 @@
       "@ng-matero/extensions": ["../../extensions"],
       "@ng-matero/extensions/*": ["../../extensions/*"],
       "@ng-matero/extensions-moment-adapter": ["../../extensions-moment-adapter"],
-      "@ng-matero/extensions-moment-adapter/*": ["../../extensions-moment-adapter/*"]
+      "@ng-matero/extensions-moment-adapter/*": ["../../extensions-moment-adapter/*"],
+      "@ng-matero/extensions-luxon-adapter": ["../../extensions-luxon-adapter"],
+      "@ng-matero/extensions-luxon-adapter/*": ["../../extensions-luxon-adapter/*"],
+      "@ng-matero/extensions-date-fns-adapter": ["../../extensions-date-fns-adapter"],
+      "@ng-matero/extensions-date-fns-adapter/*": ["../../extensions-date-fns-adapter/*"]
     }
   },
   "files": ["src/main.ts"],
