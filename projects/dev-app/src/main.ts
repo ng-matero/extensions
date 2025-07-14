@@ -1,6 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
 import {
   importProvidersFrom,
   provideZoneChangeDetection,
@@ -28,7 +28,7 @@ export function TranslateHttpLoaderFactory(http: HttpClient) {
 bootstrapApplication(App, {
   providers: [
     provideRouter(DEV_APP_ROUTES),
-    provideHttpClient(withInterceptorsFromDi()),
+    provideHttpClient(withFetch()),
     provideTranslateService({
       loader: {
         provide: TranslateLoader,

@@ -1,19 +1,13 @@
 import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import {
-  FormsModule,
-  ReactiveFormsModule,
-  UntypedFormBuilder,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { DateAdapter, ThemePalette } from '@angular/material/core';
+import { DateAdapter, MAT_DATE_LOCALE, ThemePalette } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatRadioButton, MatRadioGroup } from '@angular/material/radio';
-import { provideMomentDatetimeAdapter } from '@ng-matero/extensions-moment-adapter';
+import { provideDateFnsDatetimeAdapter } from '@ng-matero/extensions-date-fns-adapter';
 import {
   MTX_DATETIMEPICKER_DEFAULT_OPTIONS,
   MtxDatetimepickerDefaultOptions,
@@ -21,12 +15,10 @@ import {
   MtxDatetimepickerModule,
 } from '@ng-matero/extensions/datetimepicker';
 import { TranslateService } from '@ngx-translate/core';
-import * as _moment from 'moment';
-import { default as _rollupMoment } from 'moment';
+import { addDays, set } from 'date-fns';
+import { enUS } from 'date-fns/locale';
 import { Subscription } from 'rxjs';
 import { CustomHeader } from './custom-header';
-
-const moment = _rollupMoment || _moment;
 
 @Component({
   selector: 'dev-datetimepicker-demo',
@@ -45,29 +37,30 @@ const moment = _rollupMoment || _moment;
     MtxDatetimepickerModule,
   ],
   providers: [
-    provideMomentDatetimeAdapter(
-      {
-        parse: {
-          dateInput: 'YYYY-MM-DD',
-          monthInput: 'MMMM',
-          yearInput: 'YYYY',
-          timeInput: 'HH:mm',
-          datetimeInput: 'YYYY-MM-DD HH:mm',
-        },
-        display: {
-          dateInput: 'YYYY-MM-DD',
-          monthInput: 'MMMM',
-          yearInput: 'YYYY',
-          timeInput: 'HH:mm',
-          datetimeInput: 'YYYY-MM-DD HH:mm',
-          monthYearLabel: 'YYYY MMMM',
-          dateA11yLabel: 'LL',
-          monthYearA11yLabel: 'MMMM YYYY',
-          popupHeaderDateLabel: 'MMM DD, ddd',
-        },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: enUS,
+    },
+    provideDateFnsDatetimeAdapter({
+      parse: {
+        dateInput: 'yyyy-MM-dd',
+        yearInput: 'yyyy',
+        monthInput: 'MMMM',
+        datetimeInput: 'yyyy-MM-dd HH:mm',
+        timeInput: 'HH:mm',
       },
-      { useUtc: false }
-    ),
+      display: {
+        dateInput: 'yyyy-MM-dd',
+        yearInput: 'yyyy',
+        monthInput: 'MMMM',
+        datetimeInput: 'yyyy-MM-dd HH:mm',
+        timeInput: 'HH:mm',
+        monthYearLabel: 'yyyy MMMM',
+        dateA11yLabel: 'LL',
+        monthYearA11yLabel: 'MMMM yyyy',
+        popupHeaderDateLabel: 'MMM dd, E',
+      },
+    }),
     {
       provide: MTX_DATETIMEPICKER_DEFAULT_OPTIONS,
       useValue: {} as MtxDatetimepickerDefaultOptions,
@@ -83,65 +76,58 @@ export class DatetimepickerDemo implements OnInit, OnDestroy {
   timeInputAutoFocus = true;
   showWeekNumbers = false;
 
-  type = 'moment';
+  today = new Date();
+  tomorrow = addDays(this.today, 1);
+  yesterday = addDays(this.today, -1);
+  min = new Date(2018, 10, 3, 11, 10);
+  max = new Date(2018, 10, 4, 11, 45);
+  start = set(this.today, {
+    year: 1930,
+    month: 9,
+    date: 28,
+  });
+  filter = (date: Date | null, type: MtxDatetimepickerFilterType) => {
+    if (date === null) {
+      return true;
+    }
+    switch (type) {
+      case MtxDatetimepickerFilterType.DATE:
+        return (
+          date.getFullYear() % 2 === 0 && date.getMonth() % 2 === 0 && date.getDate() % 2 === 0
+        );
+      case MtxDatetimepickerFilterType.HOUR:
+        return date.getHours() % 2 === 0;
+      case MtxDatetimepickerFilterType.MINUTE:
+        return date.getMinutes() % 2 === 0;
+    }
+  };
 
-  group: UntypedFormGroup;
-  today: moment.Moment;
-  tomorrow: moment.Moment;
-  yesterday: moment.Moment;
-  min: moment.Moment;
-  max: moment.Moment;
-  start: moment.Moment;
-  filter: (date: moment.Moment | null, type: MtxDatetimepickerFilterType) => boolean;
+  group = this.fb.group({
+    dateTime: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
+    dateTimeManual: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
+    dateTimeYear: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
+    date: [null, Validators.required],
+    time: [null, Validators.required],
+    timeAMPM: [null, Validators.required],
+    timeAMPM2: [null, Validators.required],
+    timeAMPMManual: [null, Validators.required],
+    month: [null, Validators.required],
+    year: [null, Validators.required],
+    mintest: [this.today, Validators.required],
+    filtertest: [this.today, Validators.required],
+    touch: [null, Validators.required],
+    dateTimeButtons: [null, Validators.required],
+  });
 
   customHeader = CustomHeader;
 
-  translateSubscription!: Subscription;
-
-  constructor() {
-    this.today = moment.utc();
-    this.tomorrow = moment.utc().date(moment.utc().date() + 1);
-    this.yesterday = moment.utc().date(moment.utc().date() - 1);
-    this.min = this.today.clone().year(2018).month(10).date(3).hour(11).minute(10);
-    this.max = this.min.clone().date(4).minute(45);
-    this.start = this.today.clone().year(1930).month(9).date(28);
-    this.filter = (date: moment.Moment | null, type: MtxDatetimepickerFilterType) => {
-      if (date === null) {
-        return true;
-      }
-      switch (type) {
-        case MtxDatetimepickerFilterType.DATE:
-          return date.year() % 2 === 0 && date.month() % 2 === 0 && date.date() % 2 === 0;
-        case MtxDatetimepickerFilterType.HOUR:
-          return date.hour() % 2 === 0;
-        case MtxDatetimepickerFilterType.MINUTE:
-          return date.minute() % 2 === 0;
-      }
-    };
-
-    this.group = this.fb.group({
-      dateTime: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
-      dateTimeManual: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
-      dateTimeYear: [new Date('2017-11-09T12:10:00.000Z'), Validators.required],
-      date: [null, Validators.required],
-      time: [null, Validators.required],
-      timeAMPM: [null, Validators.required],
-      timeAMPM2: [null, Validators.required],
-      timeAMPMManual: [null, Validators.required],
-      month: [null, Validators.required],
-      year: [null, Validators.required],
-      mintest: [this.today, Validators.required],
-      filtertest: [this.today, Validators.required],
-      touch: [null, Validators.required],
-      dateTimeButtons: [null, Validators.required],
-    });
-  }
+  translateSubscription = Subscription.EMPTY;
 
   selectedDate: Date | null = null;
   selectedTime: Date | null = null;
 
   ngOnInit() {
-    this.translateSubscription = this.translate.onLangChange.subscribe((res: { lang: any }) => {
+    this.translateSubscription = this.translate.onLangChange.subscribe(res => {
       this.dateAdapter.setLocale(res.lang);
     });
   }
