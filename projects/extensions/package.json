@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "20.1.1",
+  "version": "20.2.0",
   "description": "Angular Material Extensions",
   "publishConfig": {
     "access": "public"
@@ -73,10 +73,10 @@
     "tslib": "^2.4.0"
   },
   "peerDependencies": {
-    "@angular/cdk": ">=20.0.0",
-    "@angular/common": ">=20.0.0",
-    "@angular/core": ">=20.0.0",
-    "@angular/material": ">=20.0.0"
+    "@angular/cdk": ">=20.1.0",
+    "@angular/common": ">=20.1.0",
+    "@angular/core": ">=20.1.0",
+    "@angular/material": ">=20.1.0"
   },
   "sideEffects": false
 }
