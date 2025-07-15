@@ -27,7 +27,7 @@ export class MatButtonLoading implements OnChanges {
   private _viewContainerRef = inject(ViewContainerRef);
   private _renderer = inject(Renderer2);
 
-  private spinner!: ComponentRef<MatProgressSpinner> | null;
+  private spinner: ComponentRef<MatProgressSpinner> | null = null;
 
   @Input({ transform: booleanAttribute }) loading = false;
 
@@ -39,13 +39,28 @@ export class MatButtonLoading implements OnChanges {
     if (!changes.loading) {
       return;
     }
+
     if (changes.loading.currentValue) {
       this._elementRef.nativeElement.classList.add('mat-button-loading');
-      setTimeout(() => this._elementRef.nativeElement.setAttribute('disabled', ''));
+
+      if (!this.disabled) {
+        setTimeout(() => {
+          this._elementRef.nativeElement.classList.add('mat-mdc-button-disabled');
+          this._elementRef.nativeElement.setAttribute('disabled', 'true');
+        });
+      }
+
       this.createSpinner();
     } else if (!changes.loading.firstChange) {
       this._elementRef.nativeElement.classList.remove('mat-button-loading');
-      setTimeout(() => this._elementRef.nativeElement.removeAttribute('disabled'));
+
+      if (!this.disabled) {
+        setTimeout(() => {
+          this._elementRef.nativeElement.classList.remove('mat-mdc-button-disabled');
+          this._elementRef.nativeElement.removeAttribute('disabled');
+        });
+      }
+
       this.destroySpinner();
     }
   }
