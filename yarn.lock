@@ -2164,10 +2164,10 @@
     "@napi-rs/nice-win32-ia32-msvc" "1.0.1"
     "@napi-rs/nice-win32-x64-msvc" "1.0.1"
 
-"@ng-select/ng-select@^15.1.0":
-  version "15.1.2"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-15.1.2.tgz#9ef7da94c9a43ae7d36005c2fe5ebaa83289703f"
-  integrity sha512-SHz+15A30QP3QNkGHZ0p1tNn5ZgXFi8f+wkPp2Vfkst2dEyaIHVT0v3fvHAo7Qy8FqHJk2LdPVSZW0i/aOfvpw==
+"@ng-select/ng-select@^20.1.0":
+  version "20.1.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-20.1.0.tgz#236d4ebc7e701990cdbf3cd38885d7e82e2d6165"
+  integrity sha512-Co4JWm2vOUaXjy/JbKJergIpXOf7hR83q04uCs4Jfthf4IVLaIonthVu62cl7T4MWXDWx4e7emarcJ1JgvYZkQ==
   dependencies:
     tslib "^2.8.1"
 
