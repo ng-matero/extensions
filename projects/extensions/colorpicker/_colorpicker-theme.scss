@@ -61,7 +61,7 @@
     (
       namespace: colorpicker,
       tokens: token-utils.get-overrides(m3-colorpicker.get-tokens(), colorpicker)
-    )
+    ),
   );
 }
 

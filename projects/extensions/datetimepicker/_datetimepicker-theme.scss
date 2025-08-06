@@ -60,7 +60,7 @@
     (
       namespace: datetimepicker,
       tokens: token-utils.get-overrides(m3-datetimepicker.get-tokens(), datetimepicker)
-    )
+    ),
   );
 }
 

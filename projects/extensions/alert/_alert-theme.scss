@@ -46,7 +46,7 @@
     (
       namespace: alert,
       tokens: token-utils.get-overrides(m3-alert.get-tokens(), alert)
-    )
+    ),
   );
 }
 

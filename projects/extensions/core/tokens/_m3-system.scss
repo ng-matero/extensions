@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use 'sass:meta';
+@use '@angular/material' as mat;
 @use '../../alert/m3-alert';
 @use '../../colorpicker/m3-colorpicker';
 @use '../../datetimepicker/m3-datetimepicker';
@@ -183,7 +184,7 @@
       m3.md-sys-shape-values(),
       m3.md-sys-state-values());
 
-  & {
+  @include mat.private-current-selector-or-root {
     @each $name, $value in $overrides {
       @if (map.has-key($sys-names, $name)) {
         --#{$prefix}-#{$name}: #{map.get($overrides, $name)};
@@ -209,7 +210,7 @@
   $sys-colors: map.set($sys-colors, neutral-variant20, map.get($palettes, neutral-variant, 20));
   $sys-colors: map.set($sys-colors, neutral10, map.get($palettes, neutral, 10));
 
-  & {
+  @include mat.private-current-selector-or-root {
     @each $name, $value in $sys-colors {
       --#{$prefix}-#{$name}: #{map.get($overrides, $name) or $value};
     }
@@ -248,7 +249,7 @@
         typography-system-variables-prefix) or definition.$system-level-prefix;
   }
 
-  & {
+  @include mat.private-current-selector-or-root {
     @each $name, $value in m3.md-sys-typescale-values($font-definition) {
       --#{$prefix}-#{$name}: #{map.get($overrides, $name) or $value};
     }
@@ -259,18 +260,19 @@
   $shadow-color: map.get(
       $theme, definition.$internals, palettes, neutral, 0);
 
-  @each $name, $value in m3.md-sys-elevation-values() {
-    $level: map.get($overrides, $name) or $value;
-    $value: elevation.get-box-shadow($level, $shadow-color);
 
-    & {
+  @include mat.private-current-selector-or-root {
+    @each $name, $value in m3.md-sys-elevation-values() {
+      $level: map.get($overrides, $name) or $value;
+      $value: elevation.get-box-shadow($level, $shadow-color);
+
       --#{$prefix}-#{$name}: #{$value};
     }
   }
 }
 
 @mixin system-level-shape($theme: (), $overrides: (), $prefix: definition.$system-level-prefix) {
-  & {
+  @include mat.private-current-selector-or-root {
     @each $name, $value in m3.md-sys-shape-values() {
       --#{$prefix}-#{$name}: #{map.get($overrides, $name) or $value};
     }
@@ -278,7 +280,7 @@
 }
 
 @mixin system-level-state($theme: (), $overrides: (), $prefix: definition.$system-level-prefix) {
-  & {
+  @include mat.private-current-selector-or-root {
     @each $name, $value in m3.md-sys-state-values() {
       --#{$prefix}-#{$name}: #{map.get($overrides, $name) or $value};
     }
