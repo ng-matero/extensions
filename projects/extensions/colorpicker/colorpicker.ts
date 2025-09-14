@@ -204,7 +204,8 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
   /** Emits when the colorpicker has been closed. */
   @Output('closed') closedStream: EventEmitter<void> = new EventEmitter<void>();
 
-  @Input({ transform: booleanAttribute }) get disabled() {
+  @Input({ transform: booleanAttribute })
+  get disabled() {
     return this._disabled === undefined && this.pickerInput
       ? this.pickerInput.disabled
       : !!this._disabled;
@@ -258,12 +259,12 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
   /** The input and output color format. */
   @Input()
   get format(): ColorFormat {
-    return this._format || this.pickerInput.format;
+    return this._format || this.pickerInput?.format || this.getColorFormat();
   }
-  set format(value: ColorFormat) {
+  set format(value: ColorFormat | null | undefined) {
     this._format = value;
   }
-  _format!: ColorFormat;
+  private _format?: ColorFormat | null;
 
   /** The currently selected color. */
   get selected(): string {
@@ -304,6 +305,15 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     this.close();
     this._inputStateChanges.unsubscribe();
     this._disabledChange.complete();
+  }
+
+  getColorFormat() {
+    const color = new TinyColor(this.selected);
+    if (color.format === 'rgb' || color.format === 'hsl' || color.format === 'hsv') {
+      return color.format;
+    } else {
+      return 'hex';
+    }
   }
 
   /** Selects the given color. */

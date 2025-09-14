@@ -1,6 +1,7 @@
 <div>
   <label for="">Color Format</label>
   <mat-radio-group [(ngModel)]="format">
+    <mat-radio-button [value]="null">None</mat-radio-button>
     <mat-radio-button value="hex">HEX</mat-radio-button>
     <mat-radio-button value="rgb">RGB</mat-radio-button>
     <mat-radio-button value="hsl">HSL</mat-radio-button>

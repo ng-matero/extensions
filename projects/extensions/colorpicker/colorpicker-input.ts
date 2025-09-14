@@ -142,7 +142,7 @@ export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit,
   private _value!: string | null;
 
   /** The input and output color format. */
-  @Input() format: ColorFormat = 'hex';
+  @Input() format?: ColorFormat | null;
 
   /** Emits when a `change` event is fired on this `<input>`. */
   @Output() readonly colorChange: EventEmitter<MtxColorPickerInputEvent> =
