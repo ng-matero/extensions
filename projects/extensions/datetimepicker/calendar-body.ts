@@ -1,5 +1,6 @@
 import {
   afterNextRender,
+  booleanAttribute,
   ChangeDetectionStrategy,
   Component,
   ElementRef,
@@ -61,6 +62,9 @@ export class MtxCalendarBody implements OnChanges {
   /** The cells to display in the table. */
   @Input() rows!: MtxCalendarCell[][];
 
+  /** Whether to show week numbers */
+  @Input({ transform: booleanAttribute }) showWeekNumbers = false;
+
   /**
    * The aspect ratio (width / height) to use for the cells in the table. This aspect ratio will be
    * maintained even as the table resizes.
@@ -111,14 +115,14 @@ export class MtxCalendarBody implements OnChanges {
   }
 
   _isActiveCell(rowIndex: number, colIndex: number): boolean {
-    let cellNumber = rowIndex * this.numCols + colIndex;
+    const week = this.rows[rowIndex];
+    const cell = week[colIndex];
 
-    // Account for the fact that the first row may not have as many cells.
-    if (rowIndex) {
-      cellNumber -= this._firstRowOffset;
+    if (cell.isWeekNumber) {
+      return false;
     }
 
-    return cellNumber === this.activeCell;
+    return cell.value === this.activeCell + 1;
   }
 
   /**
