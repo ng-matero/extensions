@@ -14,6 +14,7 @@
     mtx-calendar-body
     [rows]="_weeks"
     [numCols]="showWeekNumbers ? 8 : 7"
+    [showWeekNumbers]="showWeekNumbers"
     [todayValue]="_todayDate!"
     [activeCell]="_adapter.getDate(activeDate) - 1"
     [selectedValue]="_selectedDate!"
