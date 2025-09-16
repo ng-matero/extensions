@@ -180,12 +180,13 @@ export class MtxTimeInput implements OnDestroy {
   }
 
   /**
-   * Prevent non number inputs in the inputElement with the exception of Enter/BackSpace
+   * Prevent non number inputs in the inputElement with the exception of Enter/Tab
    * @param event KeyboardEvent
    */
   keyPressHandler(event: KeyboardEvent) {
     const key = event?.key ?? null;
-    if (isNaN(Number(key)) && key !== 'Enter') {
+    // we should allow numbers and tab/enter
+    if (isNaN(Number(key)) && !['Enter', 'Tab', 'Backspace'].includes(key)) {
       event.preventDefault();
     }
   }
@@ -445,6 +446,7 @@ export class MtxTimeView<D> implements OnChanges, OnDestroy {
           this._focusInputElement();
         } else {
           this._userSelection.emit();
+          this.selectedChange.emit(this._activeDate);
         }
         return;
       default:
