@@ -191,7 +191,7 @@ export class MtxClock<D> implements AfterContentInit, OnDestroy, OnChanges {
   }
 
   /** Called when the user has put their pointer down on the clock. */
-  private _pointerDown = (event: TouchEvent | MouseEvent) => {
+  _pointerDown = (event: TouchEvent | MouseEvent) => {
     this._timeChanged = false;
     this.setTime(event);
     this._bindGlobalEvents(event);

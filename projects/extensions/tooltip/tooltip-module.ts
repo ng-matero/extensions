@@ -1,27 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { A11yModule } from '@angular/cdk/a11y';
+import { BidiModule } from '@angular/cdk/bidi';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CdkScrollableModule } from '@angular/cdk/scrolling';
-import { MatCommonModule } from '@angular/material/core';
+import { NgModule } from '@angular/core';
 import { MtxPipesModule } from '@ng-matero/extensions/core';
-import {
-  MtxTooltip,
-  TooltipComponent,
-  MTX_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER,
-} from './tooltip';
+import { MtxTooltip, TooltipComponent } from './tooltip';
 
 @NgModule({
-  imports: [
-    A11yModule,
-    CommonModule,
-    OverlayModule,
-    MatCommonModule,
-    MtxPipesModule,
-    MtxTooltip,
-    TooltipComponent,
-  ],
-  exports: [MtxTooltip, TooltipComponent, MatCommonModule, CdkScrollableModule],
-  providers: [MTX_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER],
+  imports: [A11yModule, OverlayModule, MtxPipesModule, MtxTooltip, TooltipComponent],
+  exports: [MtxTooltip, TooltipComponent, BidiModule, CdkScrollableModule],
 })
 export class MtxTooltipModule {}

@@ -35,8 +35,8 @@ function pad(num: NumberInput, size: number) {
 @Directive({
   selector: 'input.mtx-time-input',
   host: {
-    '(blur)': 'blur($event)',
-    '(focus)': 'focus($event)',
+    '(blur)': 'blur()',
+    '(focus)': 'focus()',
   },
   exportAs: 'mtxTimeInput',
 })

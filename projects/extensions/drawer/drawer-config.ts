@@ -1,4 +1,5 @@
 import { Direction } from '@angular/cdk/bidi';
+import { DialogRole } from '@angular/cdk/dialog';
 import { ScrollStrategy } from '@angular/cdk/overlay';
 import { ViewContainerRef } from '@angular/core';
 
@@ -17,6 +18,9 @@ export class MtxDrawerConfig<D = any> {
 
   /** ID for the drawer. If omitted, a unique one will be generated. */
   id?: string;
+
+  /** The ARIA role of the dialog element. */
+  role?: DialogRole = 'dialog';
 
   /** Extra CSS classes to be added to the drawer container. */
   panelClass?: string | string[];
@@ -38,6 +42,13 @@ export class MtxDrawerConfig<D = any> {
 
   /** Aria label to assign to the drawer element. */
   ariaLabel?: string | null = null;
+
+  /**
+   * Whether this is a modal dialog. Used to set the `aria-modal` attribute. Off by default,
+   * because it can interfere with other overlay-based components (e.g. `mat-select`) and because
+   * it is redundant since the dialog marks all outside content as `aria-hidden` anyway.
+   */
+  ariaModal?: boolean = false;
 
   /**
    * Whether the drawer should close when the user goes backwards/forwards in history.

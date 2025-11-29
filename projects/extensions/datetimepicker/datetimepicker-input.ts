@@ -78,7 +78,7 @@ export class MtxDatetimepickerInputEvent<D> {
     '[attr.min]': 'min ? _dateAdapter.toIso8601(min) : null',
     '[attr.max]': 'max ? _dateAdapter.toIso8601(max) : null',
     '[disabled]': 'disabled',
-    '(input)': '_onInput($event.target.value)',
+    '(input)': '_onInput($event)',
     '(change)': '_onChange()',
     '(blur)': '_onBlur()',
     '(keydown)': '_onKeydown($event)',
@@ -89,7 +89,7 @@ export class MtxDatetimepickerInput<D>
   implements AfterContentInit, ControlValueAccessor, OnDestroy, Validator
 {
   private _elementRef = inject(ElementRef);
-  private _dateAdapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
+  _dateAdapter = inject<DatetimeAdapter<D>>(DatetimeAdapter, { optional: true })!;
   private _dateFormats = inject<MtxDatetimeFormats>(MTX_DATETIME_FORMATS, { optional: true })!;
   private _formField = inject(MatFormField, { optional: true });
 
@@ -282,7 +282,8 @@ export class MtxDatetimepickerInput<D>
     }
   }
 
-  _onInput(value: string) {
+  _onInput(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
     let date = this._dateAdapter.parse(value, this.getParseFormat());
     this._lastValueValid = !date || this._dateAdapter.isValid(date);
     date = this._dateAdapter.getValidDateOrNull(date);

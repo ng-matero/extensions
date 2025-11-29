@@ -8,7 +8,6 @@
 
 import { NgModule } from '@angular/core';
 import { OverlayModule } from '@angular/cdk/overlay';
-import { MatCommonModule } from '@angular/material/core';
 
 import { MatColumnResize } from './column-resize-directives/column-resize';
 import { MatColumnResizeFlex } from './column-resize-directives/column-resize-flex';
@@ -23,7 +22,7 @@ const ENTRY_COMMON_COMPONENTS = [MatColumnResizeOverlayHandle];
 })
 export class MatColumnResizeCommonModule {}
 
-const IMPORTS = [MatCommonModule, OverlayModule, MatColumnResizeCommonModule];
+const IMPORTS = [OverlayModule, MatColumnResizeCommonModule];
 
 @NgModule({
   imports: [...IMPORTS, MatColumnResize, MatColumnResizeFlex, MatResizable],

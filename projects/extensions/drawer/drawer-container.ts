@@ -37,7 +37,7 @@ const EXIT_ANIMATION = '_mtx-drawer-exit';
     'tabindex': '-1',
     '[id]': '_config.id',
     '[attr.role]': '_config.role',
-    '[attr.aria-modal]': '_config.isModal',
+    '[attr.aria-modal]': '_config.ariaModal',
     '[attr.aria-label]': '_config.ariaLabel',
     '(animationstart)': '_handleAnimationEvent(true, $event.animationName)',
     '(animationend)': '_handleAnimationEvent(false, $event.animationName)',
