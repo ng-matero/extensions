@@ -22,10 +22,6 @@
     "types": [
       "jasmine"
     ],
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
     "paths": {
       "@ng-matero/extensions": [
         "projects/extensions"
