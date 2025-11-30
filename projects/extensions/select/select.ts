@@ -14,7 +14,6 @@ import {
   InjectionToken,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   QueryList,
   TemplateRef,
@@ -123,13 +122,7 @@ let nextUniqueId = 0;
   imports: [NgSelectModule, FormsModule, NgTemplateOutlet],
 })
 export class MtxSelect
-  implements
-    OnInit,
-    OnDestroy,
-    DoCheck,
-    AfterViewInit,
-    ControlValueAccessor,
-    MatFormFieldControl<any>
+  implements OnDestroy, DoCheck, AfterViewInit, ControlValueAccessor, MatFormFieldControl<any>
 {
   protected _intl = inject(MtxSelectIntl);
   protected _changeDetectorRef = inject(ChangeDetectorRef);
@@ -422,14 +415,6 @@ export class MtxSelect
     // Force setter to be called in case id was not specified.
     // eslint-disable-next-line no-self-assign
     this.id = this.id;
-  }
-
-  ngOnInit() {
-    // Fix compareWith warning of undefined value
-    // https://github.com/ng-select/ng-select/issues/1537
-    if (this.compareWith) {
-      this.ngSelect.compareWith = this.compareWith;
-    }
   }
 
   ngAfterViewInit() {

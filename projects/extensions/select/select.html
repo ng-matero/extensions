@@ -19,7 +19,7 @@
   [groupValue]="groupValue"
   [bufferAmount]="bufferAmount"
   [hideSelected]="hideSelected"
-  [isOpen]="isOpen"
+  [isOpen]="$any(isOpen)"
   [inputAttrs]="inputAttrs"
   [loading]="loading"
   [loadingText]="loadingText || _intl.loadingText"
@@ -152,5 +152,5 @@
       <ng-template [ngTemplateOutlet]="clearbuttonTemplate"></ng-template>
     </ng-template>
   }
-  
+
 </ng-select>

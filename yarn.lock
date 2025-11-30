@@ -2796,10 +2796,10 @@
     "@emnapi/runtime" "^1.5.0"
     "@tybys/wasm-util" "^0.10.1"
 
-"@ng-select/ng-select@^20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-20.1.0.tgz#236d4ebc7e701990cdbf3cd38885d7e82e2d6165"
-  integrity sha512-Co4JWm2vOUaXjy/JbKJergIpXOf7hR83q04uCs4Jfthf4IVLaIonthVu62cl7T4MWXDWx4e7emarcJ1JgvYZkQ==
+"@ng-select/ng-select@^21.0.0":
+  version "21.0.0"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-21.0.0.tgz#2773a4d6e8b1742b432a148dbf0ca6df8644abcc"
+  integrity sha512-6BvWpi+g2Phg2JfWHha1CSBbvzcslwZHUv3qfjI/rn8XWyHK2pqt9AZRh+tLxplP9cLdmsrWhnb80an6AxzEpg==
   dependencies:
     tslib "^2.8.1"
 
