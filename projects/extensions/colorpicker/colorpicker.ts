@@ -57,31 +57,11 @@ export const MTX_COLORPICKER_SCROLL_STRATEGY = new InjectionToken<() => ScrollSt
   }
 );
 
-/**
- * @docs-private
- * @deprecated No longer used, will be removed.
- * @breaking-change 21.0.0
- */
-export function MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {
-  return () => overlay.scrollStrategies.reposition();
-}
-
 /** Possible positions for the colorpicker dropdown along the X axis. */
 export type ColorpickerDropdownPositionX = 'start' | 'end';
 
 /** Possible positions for the colorpicker dropdown along the Y axis. */
 export type ColorpickerDropdownPositionY = 'above' | 'below';
-
-/**
- * @docs-private
- * @deprecated No longer used, will be removed.
- * @breaking-change 21.0.0
- */
-export const MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
-  provide: MTX_COLORPICKER_SCROLL_STRATEGY,
-  deps: [Overlay],
-  useFactory: MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY,
-};
 
 @Component({
   selector: 'mtx-colorpicker-content',

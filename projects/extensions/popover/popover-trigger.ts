@@ -51,26 +51,6 @@ export const MTX_POPOVER_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrate
 );
 
 /**
- * @docs-private
- * @deprecated No longer used, will be removed.
- * @breaking-change 21.0.0
- */
-export function MTX_POPOVER_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {
-  return () => overlay.scrollStrategies.reposition();
-}
-
-/**
- * @docs-private
- * @deprecated No longer used, will be removed.
- * @breaking-change 21.0.0
- */
-export const MTX_POPOVER_SCROLL_STRATEGY_FACTORY_PROVIDER = {
-  provide: MTX_POPOVER_SCROLL_STRATEGY,
-  deps: [Overlay],
-  useFactory: MTX_POPOVER_SCROLL_STRATEGY_FACTORY,
-};
-
-/**
  * This directive is intended to be used in conjunction with an `mtx-popover` tag. It is
  * responsible for toggling the display of the provided popover instance.
  */

@@ -10,10 +10,12 @@ import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import {
   ConnectedPosition,
   ConnectionPositionPair,
+  createFlexibleConnectedPositionStrategy,
+  createOverlayRef,
+  createRepositionScrollStrategy,
   FlexibleConnectedPositionStrategy,
   HorizontalConnectionPos,
   OriginConnectionPosition,
-  Overlay,
   OverlayConnectionPosition,
   OverlayRef,
   ScrollDispatcher,
@@ -44,6 +46,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
+import { _animationsDisabled } from '@angular/material/core';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -78,51 +81,22 @@ export const MTX_TOOLTIP_SCROLL_STRATEGY = new InjectionToken<() => ScrollStrate
   {
     providedIn: 'root',
     factory: () => {
-      const overlay = inject(Overlay);
-      return () => overlay.scrollStrategies.reposition({ scrollThrottle: SCROLL_THROTTLE_MS });
+      const injector = inject(Injector);
+      return () => createRepositionScrollStrategy(injector, { scrollThrottle: SCROLL_THROTTLE_MS });
     },
   }
 );
-
-/**
- * @docs-private
- * @deprecated No longer used, will be removed.
- * @breaking-change 21.0.0
- */
-export function MTX_TOOLTIP_SCROLL_STRATEGY_FACTORY(overlay: Overlay): () => ScrollStrategy {
-  return () => overlay.scrollStrategies.reposition({ scrollThrottle: SCROLL_THROTTLE_MS });
-}
-
-/**
- * @docs-private
- * @deprecated No longer used, will be removed.
- * @breaking-change 21.0.0
- */
-export const MTX_TOOLTIP_SCROLL_STRATEGY_FACTORY_PROVIDER = {
-  provide: MTX_TOOLTIP_SCROLL_STRATEGY,
-  deps: [Overlay],
-  useFactory: MTX_TOOLTIP_SCROLL_STRATEGY_FACTORY,
-};
-
-/**
- * @docs-private
- * @deprecated No longer used, will be removed.
- * @breaking-change 21.0.0
- */
-export function MTX_TOOLTIP_DEFAULT_OPTIONS_FACTORY(): MtxTooltipDefaultOptions {
-  return {
-    showDelay: 0,
-    hideDelay: 0,
-    touchendHideDelay: 1500,
-  };
-}
 
 /** Injection token to be used to override the default options for `mtxTooltip`. */
 export const MTX_TOOLTIP_DEFAULT_OPTIONS = new InjectionToken<MtxTooltipDefaultOptions>(
   'mtx-tooltip-default-options',
   {
     providedIn: 'root',
-    factory: MTX_TOOLTIP_DEFAULT_OPTIONS_FACTORY,
+    factory: () => ({
+      showDelay: 0,
+      hideDelay: 0,
+      touchendHideDelay: 1500,
+    }),
   }
 );
 
@@ -204,12 +178,14 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   protected _dir = inject(Directionality);
   private _injector = inject(Injector);
   private _viewContainerRef = inject(ViewContainerRef);
+  private _animationsDisabled = _animationsDisabled();
   private _defaultOptions = inject<MtxTooltipDefaultOptions>(MTX_TOOLTIP_DEFAULT_OPTIONS, {
     optional: true,
   });
 
   _overlayRef: OverlayRef | null = null;
   _tooltipInstance: TooltipComponent | null = null;
+  _overlayPanelClass: string[] | undefined; //
 
   private _portal!: ComponentPortal<TooltipComponent>;
   private _position: TooltipPosition = 'below';
@@ -531,16 +507,18 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
       .get(ScrollDispatcher)
       .getAncestorScrollContainers(this._elementRef);
 
-    const overlay = this._injector.get(Overlay);
+    const panelClass = `${this._cssClassPrefix}-${PANEL_CLASS}`;
 
     // Create connected position strategy that listens for scroll events to reposition.
-    const strategy = overlay
-      .position()
-      .flexibleConnectedTo(this.positionAtOrigin ? origin || this._elementRef : this._elementRef)
+    const strategy = createFlexibleConnectedPositionStrategy(
+      this._injector,
+      this.positionAtOrigin ? origin || this._elementRef : this._elementRef
+    )
       .withTransformOriginOn(`.${this._cssClassPrefix}-tooltip`)
       .withFlexibleDimensions(false)
       .withViewportMargin(this._viewportMargin)
-      .withScrollableContainers(scrollableAncestors);
+      .withScrollableContainers(scrollableAncestors)
+      .withPopoverLocation('global');
 
     strategy.positionChanges.pipe(takeUntil(this._destroyed)).subscribe(change => {
       this._updateCurrentPositionClass(change.connectionPair);
@@ -554,11 +532,13 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
       }
     });
 
-    this._overlayRef = overlay.create({
+    this._overlayRef = createOverlayRef(this._injector, {
       direction: this._dir,
       positionStrategy: strategy,
-      panelClass: `${this._cssClassPrefix}-${PANEL_CLASS}`,
+      panelClass: this._overlayPanelClass ? [...this._overlayPanelClass, panelClass] : panelClass,
       scrollStrategy: this._injector.get(MTX_TOOLTIP_SCROLL_STRATEGY)(),
+      disableAnimations: this._animationsDisabled,
+      usePopover: true,
     });
 
     this._updatePosition(this._overlayRef);
@@ -1026,7 +1006,7 @@ export class TooltipComponent implements OnDestroy {
   _mouseLeaveHideDelay!: number;
 
   /** Whether animations are currently disabled. */
-  private _animationsDisabled: boolean;
+  private _animationsDisabled = _animationsDisabled();
 
   /** Reference to the internal tooltip element. */
   @ViewChild('tooltip', {

@@ -6,11 +6,7 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 
 import { ColorChromeModule } from 'ngx-color/chrome';
-import {
-  MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
-  MtxColorpicker,
-  MtxColorpickerContent,
-} from './colorpicker';
+import { MtxColorpicker, MtxColorpickerContent } from './colorpicker';
 import { MtxColorpickerInput } from './colorpicker-input';
 import { MtxColorpickerToggle, MtxColorpickerToggleIcon } from './colorpicker-toggle';
 
@@ -35,6 +31,5 @@ import { MtxColorpickerToggle, MtxColorpickerToggleIcon } from './colorpicker-to
     MtxColorpickerToggle,
     MtxColorpickerToggleIcon,
   ],
-  providers: [MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER],
 })
 export class MtxColorpickerModule {}

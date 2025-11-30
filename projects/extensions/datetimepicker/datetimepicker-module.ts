@@ -8,11 +8,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MtxCalendar } from './calendar';
 import { MtxCalendarBody } from './calendar-body';
 import { MtxClock } from './clock';
-import {
-  MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
-  MtxDatetimepicker,
-  MtxDatetimepickerContent,
-} from './datetimepicker';
+import { MtxDatetimepicker, MtxDatetimepickerContent } from './datetimepicker';
 import { MtxDatetimepickerInput } from './datetimepicker-input';
 import { MtxDatetimepickerToggle, MtxDatetimepickerToggleIcon } from './datetimepicker-toggle';
 import { MtxMonthView } from './month-view';
@@ -69,6 +65,5 @@ import {
     MtxDatetimepickerClear,
     MtxDatetimepickerActions,
   ],
-  providers: [MTX_DATETIMEPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER],
 })
 export class MtxDatetimepickerModule {}

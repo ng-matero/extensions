@@ -1,8 +1,6 @@
 export * from './colorpicker-module';
 export {
   MTX_COLORPICKER_SCROLL_STRATEGY,
-  MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY,
-  MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
   MtxColorpickerContent,
   ColorpickerDropdownPositionX,
   ColorpickerDropdownPositionY,
@@ -15,4 +13,3 @@ export {
   ColorFormat,
 } from './colorpicker-input';
 export * from './colorpicker-toggle';
-export * from './colorpicker-animations';
