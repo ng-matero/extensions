@@ -1,17 +1,16 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
-import { HttpClient, provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideZoneChangeDetection, provideZonelessChangeDetection } from '@angular/core';
 import {
-  importProvidersFrom,
-  provideZoneChangeDetection,
-  provideZonelessChangeDetection,
-} from '@angular/core';
-import { MAT_RIPPLE_GLOBAL_OPTIONS } from '@angular/material/core';
+  AnimationsConfig,
+  MAT_RIPPLE_GLOBAL_OPTIONS,
+  MATERIAL_ANIMATIONS,
+} from '@angular/material/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
-import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { App } from './app/app';
 import { DevAppDirectionality } from './app/dev-app/dev-app-directionality';
 import { getAppState } from './app/dev-app/dev-app-state';
@@ -20,27 +19,19 @@ import { DEV_APP_ROUTES } from './app/routes';
 
 const cachedAppState = getAppState();
 
-// Required for AOT compilation
-export function TranslateHttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
-}
-
 bootstrapApplication(App, {
   providers: [
     provideRouter(DEV_APP_ROUTES),
     provideHttpClient(withFetch()),
     provideTranslateService({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: TranslateHttpLoaderFactory,
-        deps: [HttpClient],
-      },
+      loader: provideTranslateHttpLoader({ prefix: 'assets/i18n/', suffix: '.json' }),
     }),
-    importProvidersFrom(
-      BrowserAnimationsModule.withConfig({
-        disableAnimations: !cachedAppState.animations,
-      })
-    ),
+    {
+      provide: MATERIAL_ANIMATIONS,
+      useValue: {
+        animationsDisabled: !cachedAppState.animations,
+      } as AnimationsConfig,
+    },
     { provide: OverlayContainer, useClass: FullscreenOverlayContainer },
     { provide: MAT_RIPPLE_GLOBAL_OPTIONS, useExisting: DevAppRippleOptions },
     { provide: Directionality, useClass: DevAppDirectionality },
