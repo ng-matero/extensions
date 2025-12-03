@@ -23,9 +23,12 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/extensions/test.ts",
+            "polyfills": [
+              "zone.js",
+              "zone.js/testing"
+            ],
             "tsConfig": "projects/extensions/tsconfig.spec.json",
-            "karmaConfig": "projects/extensions/karma.conf.js"
+            "inlineStyleLanguage": "scss"
           }
         },
         "lint": {
@@ -125,11 +128,6 @@
     },
     "docs": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "root": "projects/docs",
       "sourceRoot": "projects/docs/src",
       "prefix": "app",
@@ -211,13 +209,12 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/docs/src/test.ts",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
             ],
             "tsConfig": "projects/docs/tsconfig.spec.json",
-            "karmaConfig": "projects/docs/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/docs/src/favicon.ico",
               "projects/docs/src/assets"
@@ -254,11 +251,6 @@
     },
     "dev-app": {
       "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        }
-      },
       "root": "projects/dev-app",
       "sourceRoot": "projects/dev-app/src",
       "prefix": "dev",
@@ -337,13 +329,12 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/dev-app/src/test.ts",
             "polyfills": [
               "zone.js",
               "zone.js/testing"
             ],
             "tsConfig": "projects/dev-app/tsconfig.spec.json",
-            "karmaConfig": "projects/dev-app/karma.conf.js",
+            "inlineStyleLanguage": "scss",
             "assets": [
               "projects/dev-app/src/favicon.ico",
               "projects/dev-app/src/assets"
@@ -387,7 +378,8 @@
   },
   "schematics": {
     "@schematics/angular:component": {
-      "type": "component"
+      "type": "component",
+      "style": "scss"
     },
     "@schematics/angular:directive": {
       "type": "directive"
