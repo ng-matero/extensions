@@ -2,7 +2,6 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { Direction } from '@angular/cdk/bidi';
 import { ESCAPE, hasModifierKey } from '@angular/cdk/keycodes';
 import {
-  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -10,7 +9,6 @@ import {
   ElementRef,
   EventEmitter,
   InjectionToken,
-  Injector,
   Input,
   NgZone,
   OnDestroy,
@@ -22,6 +20,7 @@ import {
   booleanAttribute,
   inject,
 } from '@angular/core';
+import { _animationsDisabled } from '@angular/material/core';
 import { Subject } from 'rxjs';
 import { MTX_POPOVER_CONTENT, MtxPopoverContent } from './popover-content';
 import {
@@ -60,7 +59,6 @@ const EXIT_ANIMATION = '_mtx-popover-exit';
   imports: [CdkTrapFocus],
 })
 export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
-  private _injector = inject(Injector);
   private _changeDetectorRef = inject(ChangeDetectorRef);
   private _elementRef = inject(ElementRef);
   private _unusedNgZone = inject(NgZone);
@@ -72,7 +70,7 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   private _exitFallbackTimeout: ReturnType<typeof setTimeout> | undefined;
 
   /** Whether animations are currently disabled. */
-  protected _animationsDisabled = false;
+  protected _animationsDisabled = _animationsDisabled();
 
   /** Config object to be passed into the popover's class. */
   _classList: { [key: string]: boolean } = {};
@@ -239,11 +237,6 @@ export class MtxPopover implements MtxPopoverPanel, OnInit, OnDestroy {
   @ContentChild(MTX_POPOVER_CONTENT) lazyContent?: MtxPopoverContent;
 
   readonly panelId = `mtx-popover-panel-${popoverPanelUid++}`;
-
-  constructor() {
-    this._animationsDisabled =
-      inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
-  }
 
   ngOnInit() {
     this.setPositionClasses();

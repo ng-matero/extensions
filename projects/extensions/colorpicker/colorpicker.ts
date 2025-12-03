@@ -10,7 +10,6 @@ import {
 import { ComponentPortal } from '@angular/cdk/portal';
 import { NgTemplateOutlet } from '@angular/common';
 import {
-  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -33,7 +32,7 @@ import {
   booleanAttribute,
   inject,
 } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
+import { ThemePalette, _animationsDisabled } from '@angular/material/core';
 import { Subject, Subscription, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
@@ -79,8 +78,7 @@ export type ColorpickerDropdownPositionY = 'above' | 'below';
 })
 export class MtxColorpickerContent implements OnDestroy {
   protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-  protected _animationsDisabled =
-    inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
+  protected _animationsDisabled = _animationsDisabled();
   private _changeDetectorRef = inject(ChangeDetectorRef);
   private _ngZone = inject(NgZone);
 

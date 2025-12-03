@@ -28,7 +28,6 @@ import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   afterNextRender,
   AfterViewInit,
-  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
@@ -1030,11 +1029,6 @@ export class TooltipComponent implements OnDestroy {
 
   /** Name of the hide animation and the class that toggles it. */
   private readonly _hideAnimation = 'mtx-mdc-tooltip-hide';
-
-  constructor() {
-    const animationMode = inject(ANIMATION_MODULE_TYPE, { optional: true });
-    this._animationsDisabled = animationMode === 'NoopAnimations';
-  }
 
   /**
    * Shows the tooltip with an animation originating from the provided origin

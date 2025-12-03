@@ -18,7 +18,6 @@ import {
 import {
   afterNextRender,
   AfterViewInit,
-  ANIMATION_MODULE_TYPE,
   booleanAttribute,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -40,7 +39,7 @@ import {
   ViewContainerRef,
   ViewEncapsulation,
 } from '@angular/core';
-import { ThemePalette } from '@angular/material/core';
+import { _animationsDisabled, ThemePalette } from '@angular/material/core';
 import { merge, Subject, Subscription } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
@@ -122,8 +121,7 @@ export const MTX_DATETIMEPICKER_DEFAULT_OPTIONS =
 })
 export class MtxDatetimepickerContent<D> implements AfterViewInit, OnDestroy {
   protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
-  protected _animationsDisabled =
-    inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
+  protected _animationsDisabled = _animationsDisabled();
   private _changeDetectorRef = inject(ChangeDetectorRef);
   private _ngZone = inject(NgZone);
   private _stateChanges: Subscription | undefined;

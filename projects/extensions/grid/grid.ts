@@ -1,7 +1,6 @@
 import { SelectionModel } from '@angular/cdk/collections';
 import { AsyncPipe, NgTemplateOutlet } from '@angular/common';
 import {
-  ANIMATION_MODULE_TYPE,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
@@ -26,7 +25,7 @@ import {
 } from '@angular/core';
 import { MatIconButton } from '@angular/material/button';
 import { MatCheckbox } from '@angular/material/checkbox';
-import { ThemePalette } from '@angular/material/core';
+import { ThemePalette, _animationsDisabled } from '@angular/material/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatProgressBar } from '@angular/material/progress-bar';
 import { MatSort, MatSortHeader, Sort, SortDirection } from '@angular/material/sort';
@@ -50,9 +49,9 @@ import {
 
 import { ColumnResize } from '@ng-matero/extensions/column-resize';
 import { MtxIsTemplateRefPipe, MtxToObservablePipe } from '@ng-matero/extensions/core';
-import { MatColumnResize, MatResizable } from './column-resize';
 import { MtxGridCell } from './cell';
 import { MtxGridColumnMenu } from './column-menu';
+import { MatColumnResize, MatResizable } from './column-resize';
 import { MtxGridExpansionToggle } from './grid-expansion-toggle';
 import { MtxGridColClassPipe, MtxGridRowClassPipe } from './grid-pipes';
 import { MtxGridSelectableCell } from './grid-selectable-cell';
@@ -119,8 +118,7 @@ export const MTX_GRID_DEFAULT_OPTIONS = new InjectionToken<MtxGridDefaultOptions
   ],
 })
 export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
-  protected _animationsDisabled =
-    inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
+  protected _animationsDisabled = _animationsDisabled();
   private _utils = inject(MtxGridUtils);
   private _changeDetectorRef = inject(ChangeDetectorRef);
   private _defaultOptions = inject<MtxGridDefaultOptions>(MTX_GRID_DEFAULT_OPTIONS, {

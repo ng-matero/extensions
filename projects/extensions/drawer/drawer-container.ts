@@ -1,15 +1,14 @@
 import { CdkDialogContainer } from '@angular/cdk/dialog';
 import { CdkPortalOutlet } from '@angular/cdk/portal';
 import {
-  ANIMATION_MODULE_TYPE,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  inject,
   OnDestroy,
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
+import { _animationsDisabled } from '@angular/material/core';
 import { MtxDrawerConfig } from './drawer-config';
 
 const ENTER_ANIMATION = '_mtx-drawer-enter';
@@ -49,8 +48,7 @@ export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> impl
   /** The portal outlet inside of this container into which the content will be loaded. */
   @ViewChild(CdkPortalOutlet, { static: true }) _portalOutlet!: CdkPortalOutlet;
 
-  protected _animationsDisabled =
-    inject(ANIMATION_MODULE_TYPE, { optional: true }) === 'NoopAnimations';
+  protected _animationsDisabled = _animationsDisabled();
 
   /** The state of the drawer animations. */
   _animationState: 'void' | 'visible' | 'hidden' = 'void';
