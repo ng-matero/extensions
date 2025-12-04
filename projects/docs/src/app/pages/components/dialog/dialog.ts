@@ -1,9 +1,8 @@
 import { AsyncPipe } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Routes } from '@angular/router';
-import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideTranslateService } from '@ngx-translate/core';
+import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DocHeading } from '../../../shared/doc-heading/doc-heading';
 import { DocViewer } from '../../../shared/doc-viewer/doc-viewer';
 import { ExampleViewer } from '../../../shared/example-viewer/example-viewer';
@@ -29,10 +28,6 @@ export class DialogApi {
   route = inject(ActivatedRoute);
 }
 
-export function TranslateHttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, 'assets/i18n/dialog/', '_json');
-}
-
 export const routes: Routes = [
   { path: '', redirectTo: 'overview', pathMatch: 'full' },
   {
@@ -44,11 +39,10 @@ export const routes: Routes = [
     },
     providers: [
       provideTranslateService({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: TranslateHttpLoaderFactory,
-          deps: [HttpClient],
-        },
+        loader: provideTranslateHttpLoader({
+          prefix: 'assets/i18n/dialog',
+          suffix: '_json',
+        }),
       }),
     ],
   },
