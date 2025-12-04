@@ -95,8 +95,8 @@ export class DialogDemo implements OnInit {
       </mat-form-field>
     </div>
     <div mat-dialog-actions>
-      <button mat-button (click)="onNoClick()">No Thanks</button>
-      <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+      <button matButton (click)="onNoClick()">No Thanks</button>
+      <button matButton [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
     </div>
   `,
   imports: [FormsModule, MatDialogModule, MatFormFieldModule, MatInputModule, MatButtonModule],

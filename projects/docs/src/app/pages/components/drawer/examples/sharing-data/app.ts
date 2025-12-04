@@ -37,7 +37,7 @@ export class App {
     <h1 class="heading">
       Hi, {{ data.name }}
       <span class="flex-spacer"></span>
-      <button mat-icon-button (click)="onNoClick()">
+      <button matIconButton (click)="onNoClick()">
         <mat-icon>close</mat-icon>
       </button>
     </h1>
@@ -49,8 +49,8 @@ export class App {
       </mat-form-field>
     </div>
     <div>
-      <button mat-button (click)="onNoClick()">No Thanks</button>
-      <button mat-button (click)="onOkClick()" cdkFocusInitial>Ok</button>
+      <button matButton (click)="onNoClick()">No Thanks</button>
+      <button matButton (click)="onOkClick()" cdkFocusInitial>Ok</button>
     </div>
   `,
   styles: `

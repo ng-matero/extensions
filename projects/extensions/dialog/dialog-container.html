@@ -2,7 +2,7 @@
   <h1 class="mtx-dialog-title">
     <span>{{ data.title | toObservable | async }}</span>
     @if (data.showCloseIcon) {
-      <button mat-icon-button (click)="_onClose()">
+      <button matIconButton (click)="_onClose()">
         <mat-icon>close</mat-icon>
       </button>
     }

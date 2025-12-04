@@ -6,7 +6,7 @@ import { MatAnchor } from '@angular/material/button';
   template: `
     <h1>404</h1>
     <p>This page does not exist</p>
-    <a mat-raised-button routerLink="/">Go back to the home page</a>
+    <a matButton="elevated" routerLink="/">Go back to the home page</a>
   `,
   host: { class: 'mat-typography' },
   imports: [MatAnchor, RouterLink],

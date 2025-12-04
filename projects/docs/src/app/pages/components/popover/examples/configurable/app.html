@@ -74,7 +74,7 @@
 @if (triggerEvent === 'hover') {
   <button
     cdkDrag
-    mat-raised-button
+    matButton="elevated"
     color="primary"
     #popoverTrigger="mtxPopoverTrigger"
     [mtxPopoverTriggerFor]="popover"
@@ -87,7 +87,7 @@
 @if (triggerEvent === 'click') {
   <button
     cdkDrag
-    mat-raised-button
+    matButton="elevated"
     color="primary"
     #popoverTrigger2="mtxPopoverTrigger"
     [mtxPopoverTriggerFor]="popover"

@@ -68,8 +68,8 @@ export class DrawerDemo {
       </mat-form-field>
     </div>
     <div>
-      <button mat-button (click)="onNoClick()">No Thanks</button>
-      <button mat-button (click)="onOkClick()" cdkFocusInitial>Ok</button>
+      <button matButton (click)="onNoClick()">No Thanks</button>
+      <button matButton (click)="onOkClick()" cdkFocusInitial>Ok</button>
     </div>
   `,
   imports: [MatFormField, MatInput, ReactiveFormsModule, FormsModule, MatButton],

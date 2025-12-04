@@ -4,7 +4,7 @@
   @if (skipLinkHref) {
     <div class="skip-link-wrapper" [class.cdk-visually-hidden]="skipLinkHidden">
       <a
-        mat-raised-button
+        matButton="elevated"
         [href]="skipLinkHref"
         (focus)="skipLinkHidden = false"
         (blur)="skipLinkHidden = true"
@@ -15,21 +15,21 @@
     </div>
   }
 
-  <a mat-button class="docs-button" routerLink="/" aria-label="Angular Material">
+  <a matButton class="docs-button" routerLink="/" aria-label="Angular Material">
     <app-logo matButtonIcon />
 
     <span>Material Extensions</span>
   </a>
 
   <a
-    mat-button
+    matButton
     class="docs-navbar-hide-small docs-button"
     routerLink="components"
     routerLinkActive="docs-navbar-header-item-selected"
   >
     Components
   </a>
-  <a mat-button [matMenuTriggerFor]="menu" class="docs-navbar-hide-small docs-button">
+  <a matButton [matMenuTriggerFor]="menu" class="docs-navbar-hide-small docs-button">
     Acrodata Components
   </a>
   <mat-menu #menu="matMenu">
@@ -44,14 +44,14 @@
 
   <div class="flex-spacer"></div>
 
-  <button mat-button>{{ version$ | async }}</button>
+  <button matButton >{{ version$ | async }}</button>
 
-  <button mat-icon-button matTooltip="Toggle the theme" (click)="toggleTheme()">
+  <button matIconButton matTooltip="Toggle the theme" (click)="toggleTheme()">
     <mat-icon>{{ dark ? 'brightness_3' : 'wb_sunny' }}</mat-icon>
   </button>
 
   <a
-    mat-button
+    matButton
     class="docs-button docs-navbar-hide-small"
     href="https://github.com/ng-matero/extensions"
     target="_blank"
@@ -61,7 +61,7 @@
     GitHub
   </a>
   <a
-    mat-icon-button
+    matIconButton
     class="docs-button docs-navbar-show-small"
     href="https://github.com/ng-matero/extensions"
     target="_blank"
@@ -71,8 +71,8 @@
   </a>
 </nav>
 <nav class="docs-navbar docs-navbar-show-small" aria-label="Section Nav Bar">
-  <a mat-button class="docs-navbar-link" routerLink="components">Components</a>
-  <a mat-button [matMenuTriggerFor]="menu" class="docs-navbar-link">Acrodata Components</a>
+  <a matButton class="docs-navbar-link" routerLink="components">Components</a>
+  <a matButton [matMenuTriggerFor]="menu" class="docs-navbar-link">Acrodata Components</a>
 </nav>
 
 <ng-template #githubIcon>

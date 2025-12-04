@@ -32,11 +32,11 @@
 
       @if (twelvehour) {
         <div class="mtx-time-ampm">
-          <button mat-button type="button" class="mtx-time-am"
+          <button matButton type="button" class="mtx-time-am"
             [class.mtx-time-ampm-active]="AMPM === 'AM'" aria-label="AM"
             (keydown)="$event.stopPropagation()"
             (click)="ampmChange.emit('AM')">AM</button>
-          <button mat-button type="button" class="mtx-time-pm"
+          <button matButton type="button" class="mtx-time-pm"
             [class.mtx-time-ampm-active]="AMPM === 'PM'" aria-label="PM"
             (keydown)="$event.stopPropagation()"
             (click)="ampmChange.emit('PM')">PM</button>
@@ -63,10 +63,10 @@
 
 @if (timeInput && !actionsPortal) {
   <div class="mtx-time-button-wrapper">
-    <button class="mtx-time-cancel-button" mat-button type="button" (click)="_handleCancel()">
+    <button class="mtx-time-cancel-button" matButton type="button" (click)="_handleCancel()">
       {{ _datetimepickerIntl.cancelLabel }}
     </button>
-    <button class="mtx-time-ok-button" mat-button type="button" (click)="_handleOk()"
+    <button class="mtx-time-ok-button" matButton type="button" (click)="_handleOk()"
       [disabled]="_minuteInputDirective?.invalid || _hourInputDirective?.invalid">
       {{ _datetimepickerIntl.okLabel }}
     </button>

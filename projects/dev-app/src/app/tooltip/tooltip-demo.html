@@ -2,7 +2,7 @@
 <div>
   <span>Click the following buttons to...</span>
   <button
-    mat-button
+    matButton
     (click)="tooltip1.show()"
     aria-label="Show tooltip on the button at the end of this section"
     class="example-action-button"
@@ -10,7 +10,7 @@
     show
   </button>
   <button
-    mat-button
+    matButton
     (click)="tooltip1.hide()"
     aria-label="Hide tooltip on the button at the end of this section"
     class="example-action-button"
@@ -18,7 +18,7 @@
     hide
   </button>
   <button
-    mat-button
+    matButton
     (click)="tooltip1.toggle()"
     aria-label="Show/Hide tooltip on the button at the end of this section"
     class="example-action-button"
@@ -28,7 +28,7 @@
 </div>
 
 <button
-  mat-raised-button
+  matButton="elevated"
   #tooltip1="matTooltip"
   matTooltip="我的组件库"
   matTooltipPosition="right"
@@ -42,7 +42,7 @@
 <div>
   <span>Click the following buttons to...</span>
   <button
-    mat-button
+    matButton
     (click)="tooltip.show()"
     aria-label="Show tooltip on the button at the end of this section"
     class="example-action-button"
@@ -50,7 +50,7 @@
     show
   </button>
   <button
-    mat-button
+    matButton
     (click)="tooltip.hide()"
     aria-label="Hide tooltip on the button at the end of this section"
     class="example-action-button"
@@ -58,18 +58,18 @@
     hide
   </button>
   <button
-    mat-button
+    matButton
     (click)="tooltip.toggle()"
     aria-label="Show/Hide tooltip on the button at the end of this section"
     class="example-action-button"
   >
     toggle show/hide
   </button>
-  <button mat-button (click)="update()">update message</button>
+  <button matButton (click)="update()">update message</button>
 </div>
 
 <button
-  mat-raised-button
+  matButton="elevated"
   #tooltip="mtxTooltip"
   [mtxTooltip]="tpl"
   mtxTooltipPosition="right"
@@ -87,7 +87,7 @@
 
 <div>
   <button
-    mat-raised-button
+    matButton="elevated"
     mtxTooltip="我是一个字符串"
     mtxTooltipPosition="right"
     mtxTooltipClass="example-tooltip-red"

@@ -4,7 +4,7 @@
   } @else {
     @if (type !== 'time') {
       <button
-        mat-button type="button" class="mtx-calendar-header-year"
+        matButton type="button" class="mtx-calendar-header-year"
         [class.active]="currentView === 'year' || currentView === 'multi-year'"
         [attr.aria-label]="_yearButtonLabel"
         (click)="_yearClicked()">
@@ -22,7 +22,7 @@
       <div class="mtx-calendar-header-date-time">
         @if (type !== 'time') {
           <button
-            mat-button type="button" class="mtx-calendar-header-date"
+            matButton type="button" class="mtx-calendar-header-date"
             [class.active]="currentView === 'month'"
             [class.not-clickable]="type === 'month'"
             [attr.aria-label]="_dateButtonLabel"
@@ -31,22 +31,22 @@
         @if (type.endsWith('time')) {
           <span class="mtx-calendar-header-time" [class.active]="currentView === 'clock'">
             <span class="mtx-calendar-header-hour-minute-container">
-              <button mat-button type="button" class="mtx-calendar-header-hours"
+              <button matButton type="button" class="mtx-calendar-header-hours"
                 [class.active]="_clockView === 'hour'"
                 [attr.aria-label]="_hourButtonLabel"
                 (click)="_hoursClicked()">{{ _hoursButtonText }}</button>
               <span class="mtx-calendar-header-hour-minute-separator">:</span>
-              <button mat-button type="button" class="mtx-calendar-header-minutes"
+              <button matButton type="button" class="mtx-calendar-header-minutes"
                 [class.active]="_clockView === 'minute'"
                 [attr.aria-label]="_minuteButtonLabel"
                 (click)="_minutesClicked()">{{ _minutesButtonText }}</button>
             </span>
             @if (twelvehour) {
               <span class="mtx-calendar-header-ampm-container">
-                <button mat-button type="button" class="mtx-calendar-header-ampm"
+                <button matButton type="button" class="mtx-calendar-header-ampm"
                   [class.active]="_AMPM === 'AM'" aria-label="AM"
                   (click)="_ampmClicked('AM')">AM</button>
-                <button mat-button type="button" class="mtx-calendar-header-ampm"
+                <button matButton type="button" class="mtx-calendar-header-ampm"
                   [class.active]="_AMPM === 'PM'" aria-label="PM"
                   (click)="_ampmClicked('PM')">PM</button>
               </span>
@@ -61,7 +61,7 @@
 <div class="mtx-calendar-content">
   @if (currentView === 'month' || currentView === 'year' || currentView === 'multi-year') {
     <div class="mtx-calendar-controls">
-      <button mat-icon-button type="button"
+      <button matIconButton type="button"
         class="mtx-calendar-previous-button"
         [class.disabled]="!_previousEnabled()"
         [attr.aria-disabled]="!_previousEnabled()"
@@ -74,7 +74,7 @@
       <div class="mtx-calendar-period-button">
         <strong>{{ _yearPeriodText }}</strong>
       </div>
-      <button mat-icon-button type="button"
+      <button matIconButton type="button"
         class="mtx-calendar-next-button"
         [class.disabled]="!_nextEnabled()"
         [attr.aria-disabled]="!_nextEnabled()"

@@ -1,5 +1,5 @@
 <button
-  mat-stroked-button
+  matButton="outlined"
   mtxPhotoviewer
   [mtxPhotoviewerItems]="images1"
   [mtxPhotoviewerOptions]="{}"
@@ -32,7 +32,7 @@
 
 <h2>Embed</h2>
 
-<button mat-stroked-button (click)="showEmbed = !showEmbed">Toggle embed PhotoViewer</button>
+<button matButton="outlined" (click)="showEmbed = !showEmbed">Toggle embed PhotoViewer</button>
 
 @if (showEmbed) {
   <div

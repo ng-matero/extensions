@@ -8,7 +8,7 @@ import { MtxButtonModule } from './button-module';
 @Component({
   selector: 'test-app',
   template: `
-    <button mat-button [loading]="loading">Test Button</button>
+    <button matButton [loading]="loading">Test Button</button>
   `,
   imports: [MatButtonModule, MtxButtonModule],
 })

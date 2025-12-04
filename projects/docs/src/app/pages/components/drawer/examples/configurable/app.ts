@@ -54,7 +54,7 @@ export class App {
     <h1 class="heading">
       <span>Title</span>
       <span class="flex-spacer"></span>
-      <button mat-icon-button (click)="onClose()">
+      <button matIconButton (click)="onClose()">
         <mat-icon>close</mat-icon>
       </button>
     </h1>

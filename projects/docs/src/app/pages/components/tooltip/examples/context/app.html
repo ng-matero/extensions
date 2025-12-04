@@ -3,7 +3,7 @@
   <input matInput [(ngModel)]="data" />
 </mat-form-field>
 
-<button mat-raised-button [mtxTooltip]="tooltipTpl" [mtxTooltipContext]="data">Action</button>
+<button matButton="elevated" [mtxTooltip]="tooltipTpl" [mtxTooltipContext]="data">Action</button>
 
 <ng-template #tooltipTpl let-data>
   <div>Hi, {{ data }}</div>

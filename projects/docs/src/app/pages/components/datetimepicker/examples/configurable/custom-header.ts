@@ -19,7 +19,7 @@ import {
   template: `
     @if (type !== 'time') {
       <button
-        mat-button
+        matButton
         type="button"
         class="mtx-calendar-header-year"
         [class.active]="currentView === 'year' || currentView === 'multi-year'"
@@ -46,7 +46,7 @@ import {
       <div class="mtx-calendar-header-date-time">
         @if (type !== 'time') {
           <button
-            mat-button
+            matButton
             type="button"
             class="mtx-calendar-header-date"
             [class.active]="currentView === 'month'"
@@ -61,7 +61,7 @@ import {
           <span class="mtx-calendar-header-time" [class.active]="currentView === 'clock'">
             <span class="mtx-calendar-header-hour-minute-container">
               <button
-                mat-button
+                matButton
                 type="button"
                 class="mtx-calendar-header-hours"
                 [class.active]="_clockView === 'hour'"
@@ -72,7 +72,7 @@ import {
               </button>
               <span class="mtx-calendar-header-hour-minute-separator">:</span>
               <button
-                mat-button
+                matButton
                 type="button"
                 class="mtx-calendar-header-minutes"
                 [class.active]="_clockView === 'minute'"
@@ -85,7 +85,7 @@ import {
             @if (twelvehour) {
               <span class="mtx-calendar-header-ampm-container">
                 <button
-                  mat-button
+                  matButton
                   type="button"
                   class="mtx-calendar-header-ampm"
                   [class.active]="_AMPM === 'AM'"
@@ -95,7 +95,7 @@ import {
                   AM
                 </button>
                 <button
-                  mat-button
+                  matButton
                   type="button"
                   class="mtx-calendar-header-ampm"
                   [class.active]="_AMPM === 'PM'"
