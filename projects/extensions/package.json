@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions",
-  "version": "20.3.1",
+  "version": "21.0.0",
   "description": "Angular Material Extensions",
   "publishConfig": {
     "access": "public"
@@ -67,16 +67,16 @@
     }
   },
   "dependencies": {
-    "@ng-select/ng-select": "^20.0.0",
+    "@ng-select/ng-select": "^21.0.0",
     "ngx-color": "^10.0.0",
     "photoviewer": "^3.10.0",
     "tslib": "^2.4.0"
   },
   "peerDependencies": {
-    "@angular/cdk": ">=20.1.0",
-    "@angular/common": ">=20.1.0",
-    "@angular/core": ">=20.1.0",
-    "@angular/material": ">=20.1.0"
+    "@angular/cdk": ">=21.0.0",
+    "@angular/common": ">=21.0.0",
+    "@angular/core": ">=21.0.0",
+    "@angular/material": ">=21.0.0"
   },
   "sideEffects": false
 }

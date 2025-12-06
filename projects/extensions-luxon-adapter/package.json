@@ -1,6 +1,6 @@
 {
   "name": "@ng-matero/extensions-luxon-adapter",
-  "version": "20.0.0",
+  "version": "21.0.0",
   "description": "Angular Material Extensions Luxon Adapter",
   "publishConfig": {
     "access": "public"
@@ -12,11 +12,11 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": ">=20.0.0",
-    "@angular/material": ">=20.0.0",
-    "@angular/material-luxon-adapter": ">=20.0.0",
-    "@ng-matero/extensions": ">=20.0.0",
-    "luxon": "^3.4.0"
+    "@angular/core": ">=21.0.0",
+    "@angular/material": ">=21.0.0",
+    "@angular/material-luxon-adapter": ">=21.0.0",
+    "@ng-matero/extensions": ">=21.0.0",
+    "luxon": "^3.7.0"
   },
   "dependencies": {
     "tslib": "^2.4.0"
