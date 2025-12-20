@@ -1,3 +1,6 @@
+@acrodata/color-picker
+MIT
+
 @angular/cdk
 MIT
 The MIT License
