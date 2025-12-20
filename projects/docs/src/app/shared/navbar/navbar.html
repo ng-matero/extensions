@@ -40,11 +40,14 @@
     <a mat-menu-item href="https://github.com/acrodata/gradient-picker" target="_blank">
       Gradient Picker
     </a>
+    <a mat-menu-item href="https://github.com/acrodata/color-picker" target="_blank">
+      Color Picker
+    </a>
   </mat-menu>
 
   <div class="flex-spacer"></div>
 
-  <button matButton >{{ version$ | async }}</button>
+  <button matButton>{{ version$ | async }}</button>
 
   <button matIconButton matTooltip="Toggle the theme" (click)="toggleTheme()">
     <mat-icon>{{ dark ? 'brightness_3' : 'wb_sunny' }}</mat-icon>

@@ -25,6 +25,7 @@ import { MatFormField } from '@angular/material/form-field';
 import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { Subscription } from 'rxjs';
 
+import { ColorFormat } from '@acrodata/color-picker';
 import { MtxColorpicker } from './colorpicker';
 
 export class MtxColorPickerInputEvent {
@@ -52,8 +53,6 @@ export const MTX_COLORPICKER_VALIDATORS: any = {
   useExisting: forwardRef(() => MtxColorpickerInput),
   multi: true,
 };
-
-export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsv';
 
 @Directive({
   selector: 'input[mtxColorpicker]',
@@ -142,7 +141,7 @@ export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit,
   private _value!: string | null;
 
   /** The input and output color format. */
-  @Input() format?: ColorFormat | null;
+  @Input() format?: ColorFormat;
 
   /** Emits when a `change` event is fired on this `<input>`. */
   @Output() readonly colorChange: EventEmitter<MtxColorPickerInputEvent> =

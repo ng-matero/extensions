@@ -36,10 +36,8 @@ import { ThemePalette, _animationsDisabled } from '@angular/material/core';
 import { Subject, Subscription, merge } from 'rxjs';
 import { filter, take } from 'rxjs/operators';
 
-import { TinyColor } from '@ctrl/tinycolor';
-import { ColorEvent } from 'ngx-color';
-import { ColorChromeModule } from 'ngx-color/chrome';
-import { ColorFormat, MtxColorpickerInput } from './colorpicker-input';
+import { ColorFormat, ColorPicker } from '@acrodata/color-picker';
+import { MtxColorpickerInput } from './colorpicker-input';
 
 /** Used to generate a unique ID for each colorpicker instance. */
 let colorpickerUid = 0;
@@ -74,7 +72,7 @@ export type ColorpickerDropdownPositionY = 'above' | 'below';
   exportAs: 'mtxColorpickerContent',
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ColorChromeModule, NgTemplateOutlet],
+  imports: [ColorPicker, NgTemplateOutlet],
 })
 export class MtxColorpickerContent implements OnDestroy {
   protected _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -146,15 +144,6 @@ export class MtxColorpickerContent implements OnDestroy {
       this._animationDone.next();
     }
   };
-
-  getColorString(e: ColorEvent): string {
-    return {
-      hex: e.color.rgb.a === 1 ? e.color.hex : new TinyColor(e.color.rgb).toHex8String(),
-      rgb: new TinyColor(e.color.rgb).toRgbString(),
-      hsl: new TinyColor(e.color.hsl).toHslString(),
-      hsv: new TinyColor(e.color.hsv).toHsvString(),
-    }[this.picker.format];
-  }
 }
 
 @Component({
@@ -236,13 +225,13 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
 
   /** The input and output color format. */
   @Input()
-  get format(): ColorFormat {
-    return this._format || this.pickerInput?.format || this.getColorFormat();
+  get format(): ColorFormat | undefined {
+    return this._format || this.pickerInput?.format;
   }
-  set format(value: ColorFormat | null | undefined) {
+  set format(value: ColorFormat | undefined) {
     this._format = value;
   }
-  private _format?: ColorFormat | null;
+  private _format?: ColorFormat;
 
   /** The currently selected color. */
   get selected(): string {
@@ -283,15 +272,6 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
     this.close();
     this._inputStateChanges.unsubscribe();
     this._disabledChange.complete();
-  }
-
-  getColorFormat() {
-    const color = new TinyColor(this.selected);
-    if (color.format === 'rgb' || color.format === 'hsl' || color.format === 'hsv') {
-      return color.format;
-    } else {
-      return 'hex';
-    }
   }
 
   /** Selects the given color. */
