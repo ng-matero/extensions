@@ -26,6 +26,7 @@ import { MAT_INPUT_VALUE_ACCESSOR } from '@angular/material/input';
 import { Subscription } from 'rxjs';
 
 import { MtxColorpicker } from './colorpicker';
+import { ColorFormat } from '@acrodata/color-picker';
 
 export class MtxColorPickerInputEvent {
   /** The new value for the target colorpicker input. */
@@ -53,8 +54,6 @@ export const MTX_COLORPICKER_VALIDATORS: any = {
   multi: true,
 };
 
-export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsv';
-
 @Directive({
   selector: 'input[mtxColorpicker]',
   providers: [
@@ -67,7 +66,7 @@ export type ColorFormat = 'hex' | 'rgb' | 'hsl' | 'hsv';
     '[attr.aria-haspopup]': '_picker ? "dialog" : null',
     '[attr.aria-owns]': '(_picker?.opened && _picker.id) || null',
     '[disabled]': 'disabled',
-    '(input)': '_onInput($event.target.value)',
+    '(input)': '_onInput($event)',
     '(change)': '_onChange()',
     '(blur)': '_onBlur()',
     '(keydown)': '_onKeydown($event)',
@@ -142,7 +141,7 @@ export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit,
   private _value!: string | null;
 
   /** The input and output color format. */
-  @Input() format: ColorFormat = 'hex';
+  @Input() format?: ColorFormat;
 
   /** Emits when a `change` event is fired on this `<input>`. */
   @Output() readonly colorChange: EventEmitter<MtxColorPickerInputEvent> =
@@ -255,7 +254,8 @@ export class MtxColorpickerInput implements ControlValueAccessor, AfterViewInit,
     this._onTouched();
   }
 
-  _onInput(value: string) {
+  _onInput(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
     const nextValue = value;
 
     this._value = nextValue;
