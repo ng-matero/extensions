@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@acrodata/color-picker@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@acrodata/color-picker/-/color-picker-1.1.0.tgz#db2a8f374b3321daff3b0b94ed160042977849de"
+  integrity sha512-6jAlEIMKU4+EcKVvHqYklvA+fvocX/4OuxF7xegCF/hnRjWa9YLjzs6gyO5KQ6StnewWhc8B4EDvPHswM8Fx0g==
+  dependencies:
+    "@ctrl/tinycolor" "^4.2.0"
+    tslib "^2.3.0"
+
 "@algolia/abtesting@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@algolia/abtesting/-/abtesting-1.1.0.tgz#32c84876956727dcdca8df03c567f12fb39edf0d"
@@ -1666,6 +1674,11 @@
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-4.1.0.tgz#91a8f8120ffc9da2feb2a38f7862b300d5e9691a"
   integrity sha512-WyOx8cJQ+FQus4Mm4uPIZA64gbk3Wxh0so5Lcii0aJifqwoVOlfFtorjLE0Hen4OYyHZMXDWqMmaQemBhgxFRQ==
+
+"@ctrl/tinycolor@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-4.2.0.tgz#ba5d0b917303c0b3d3c14c4865cdc6ded25ac05f"
+  integrity sha512-kzyuwOAQnXJNLS9PSyrk0CWk35nWJW/zl/6KvnTBMFK65gm7U1/Z5BqjxeapjZCIhQcM/DsrEmcbRwDyXyXK4A==
 
 "@discoveryjs/json-ext@0.6.3":
   version "0.6.3"

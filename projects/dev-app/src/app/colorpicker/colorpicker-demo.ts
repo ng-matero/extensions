@@ -35,7 +35,7 @@ export class ColorPickerDemo {
 
   color3 = new UntypedFormControl({ value: '#3f51b5', disabled: false });
 
-  format: ColorFormat | null = null;
+  format?: ColorFormat;
 
   onColorChange(e: any) {
     console.log(e);

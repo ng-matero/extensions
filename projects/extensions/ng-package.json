@@ -8,8 +8,8 @@
     "entryFile": "public-api.ts"
   },
   "allowedNonPeerDependencies": [
+    "@acrodata/color-picker",
     "@ng-select/ng-select",
-    "ngx-color",
     "photoviewer"
   ]
 }
