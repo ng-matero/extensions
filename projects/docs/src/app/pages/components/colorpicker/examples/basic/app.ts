@@ -13,5 +13,5 @@ import { ColorFormat, MtxColorpickerModule } from '@ng-matero/extensions/colorpi
 })
 export class App {
   color = '#3f51b5';
-  format: ColorFormat | null = null;
+  format?: ColorFormat;
 }
