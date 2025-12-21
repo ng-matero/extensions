@@ -2,6 +2,14 @@
 # yarn lockfile v1
 
 
+"@acrodata/color-picker@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@acrodata/color-picker/-/color-picker-1.1.0.tgz#db2a8f374b3321daff3b0b94ed160042977849de"
+  integrity sha512-6jAlEIMKU4+EcKVvHqYklvA+fvocX/4OuxF7xegCF/hnRjWa9YLjzs6gyO5KQ6StnewWhc8B4EDvPHswM8Fx0g==
+  dependencies:
+    "@ctrl/tinycolor" "^4.2.0"
+    tslib "^2.3.0"
+
 "@ampproject/remapping@2.3.0", "@ampproject/remapping@^2.2.0":
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/@ampproject/remapping/-/remapping-2.3.0.tgz#ed441b6fa600072520ce18b43d2c8cc8caecc7f4"
@@ -1689,6 +1697,11 @@
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-3.6.1.tgz#b6c75a56a1947cc916ea058772d666a2c8932f31"
   integrity sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==
+
+"@ctrl/tinycolor@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@ctrl/tinycolor/-/tinycolor-4.2.0.tgz#ba5d0b917303c0b3d3c14c4865cdc6ded25ac05f"
+  integrity sha512-kzyuwOAQnXJNLS9PSyrk0CWk35nWJW/zl/6KvnTBMFK65gm7U1/Z5BqjxeapjZCIhQcM/DsrEmcbRwDyXyXK4A==
 
 "@discoveryjs/json-ext@0.6.1":
   version "0.6.1"
