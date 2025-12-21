@@ -5,7 +5,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 
-import { ColorChromeModule } from 'ngx-color/chrome';
+import { ColorPicker } from '@acrodata/color-picker';
 import {
   MTX_COLORPICKER_SCROLL_STRATEGY_FACTORY_PROVIDER,
   MtxColorpicker,
@@ -21,12 +21,12 @@ import { MtxColorpickerToggle, MtxColorpickerToggleIcon } from './colorpicker-to
     A11yModule,
     PortalModule,
     MatButtonModule,
-    ColorChromeModule,
     MtxColorpicker,
     MtxColorpickerContent,
     MtxColorpickerInput,
     MtxColorpickerToggle,
     MtxColorpickerToggleIcon,
+    ColorPicker,
   ],
   exports: [
     MtxColorpicker,
