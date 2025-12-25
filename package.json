@@ -35,7 +35,7 @@
   },
   "private": true,
   "dependencies": {
-    "@acrodata/color-picker": "^1.1.0",
+    "@acrodata/color-picker": "^1.3.0",
     "@angular/animations": "^20.3.0",
     "@angular/cdk": "^20.2.2",
     "@angular/common": "^20.3.0",
