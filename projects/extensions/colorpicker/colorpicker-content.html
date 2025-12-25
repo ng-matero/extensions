@@ -3,7 +3,7 @@
 } @else {
   <color-picker
     [format]="picker.format"
-    [color]="picker.selected"
-    (colorChange)="picker.select($event)"
+    [value]="picker.selected"
+    (valueChange)="picker.select($event)"
   />
 }
