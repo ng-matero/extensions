@@ -7,10 +7,10 @@
   resolved "https://registry.yarnpkg.com/@aashutoshrathi/word-wrap/-/word-wrap-1.2.6.tgz#bd9154aec9983f77b3a034ecaa015c2e4201f6cf"
   integrity sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==
 
-"@acrodata/color-picker@^1.1.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@acrodata/color-picker/-/color-picker-1.1.0.tgz#db2a8f374b3321daff3b0b94ed160042977849de"
-  integrity sha512-6jAlEIMKU4+EcKVvHqYklvA+fvocX/4OuxF7xegCF/hnRjWa9YLjzs6gyO5KQ6StnewWhc8B4EDvPHswM8Fx0g==
+"@acrodata/color-picker@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@acrodata/color-picker/-/color-picker-1.3.0.tgz#80b616dc1ef463259b397b6b7fc4c7aa35378b48"
+  integrity sha512-Ee6gLthLvcPTne6poeSnhiQj+tBH05tp/nnF1ruuPcJknja1ab2WFjha6B9u1D4blYijRJWztepuXIdAsmDxcw==
   dependencies:
     "@ctrl/tinycolor" "^4.2.0"
     tslib "^2.3.0"
