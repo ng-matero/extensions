@@ -11,29 +11,34 @@
     $is-dark: mat.get-theme-type($theme) == dark;
   }
 
+  $hue: 100;
+  @if $is-dark {
+    $hue: 900;
+  }
+
   @return (
     base: (
       alert-container-shape: 4px,
     ),
     color: (
       alert-outline-color: transparent,
-      alert-background-color: mat.m2-get-color-from-palette(mat.$m2-gray-palette, if($is-dark, 900, 100)),
+      alert-background-color: mat.m2-get-color-from-palette(mat.$m2-gray-palette, $hue),
       alert-text-color: map.get($system, on-surface),
 
       alert-info-outline-color: transparent,
-      alert-info-background-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 100)),
+      alert-info-background-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, $hue),
       alert-info-text-color: map.get($system, on-surface),
 
       alert-success-outline-color: transparent,
-      alert-success-background-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 100)),
+      alert-success-background-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, $hue),
       alert-success-text-color: map.get($system, on-surface),
 
       alert-warning-outline-color: transparent,
-      alert-warning-background-color: mat.m2-get-color-from-palette(mat.$m2-amber-palette, if($is-dark, 900, 100)),
+      alert-warning-background-color: mat.m2-get-color-from-palette(mat.$m2-amber-palette, $hue),
       alert-warning-text-color: map.get($system, on-surface),
 
       alert-danger-outline-color: transparent,
-      alert-danger-background-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 100)),
+      alert-danger-background-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, $hue),
       alert-danger-text-color: map.get($system, on-surface),
     ),
     typography: (),

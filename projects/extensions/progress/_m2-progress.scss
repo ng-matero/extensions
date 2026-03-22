@@ -12,6 +12,11 @@
     $is-dark: mat.get-theme-type($theme) == dark;
   }
 
+  $hue: 500;
+  @if $is-dark {
+    $hue: 900;
+  }
+
   @return (
     base: (
       progress-container-shape: 4px,
@@ -21,13 +26,13 @@
         map.get($system, on-surface), map.get($system, hover-state-layer-opacity)),
       progress-indicator-color: map.get($system, outline),
       progress-text-color: map.get($system, on-surface),
-      progress-info-indicator-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, if($is-dark, 900, 500)),
+      progress-info-indicator-color: mat.m2-get-color-from-palette(mat.$m2-blue-palette, $hue),
       progress-info-text-color: white,
-      progress-success-indicator-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, if($is-dark, 900, 500)),
+      progress-success-indicator-color: mat.m2-get-color-from-palette(mat.$m2-green-palette, $hue),
       progress-success-text-color: white,
-      progress-warning-indicator-color: mat.m2-get-color-from-palette(mat.$m2-orange-palette, if($is-dark, 900, 500)),
+      progress-warning-indicator-color: mat.m2-get-color-from-palette(mat.$m2-orange-palette, $hue),
       progress-warning-text-color: white,
-      progress-danger-indicator-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, if($is-dark, 900, 500)),
+      progress-danger-indicator-color: mat.m2-get-color-from-palette(mat.$m2-red-palette, $hue),
       progress-danger-text-color: white,
     ),
     typography: (
