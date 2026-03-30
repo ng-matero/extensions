@@ -19,7 +19,7 @@ import { Subject } from 'rxjs';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NgOptionComponent implements OnChanges, AfterViewChecked, OnDestroy {
+export class NgOption implements OnChanges, AfterViewChecked, OnDestroy {
   @Input() value: any;
   @Input({ transform: booleanAttribute }) disabled = false;
 
@@ -29,7 +29,7 @@ export class NgOptionComponent implements OnChanges, AfterViewChecked, OnDestroy
 
   private _previousLabel = '';
 
-  get label(): string {
+  get label() {
     return (this.elementRef.nativeElement.textContent || '').trim();
   }
 

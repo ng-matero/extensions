@@ -35,7 +35,7 @@ import { ErrorStateMatcher, _ErrorStateTracker } from '@angular/material/core';
 import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 import { Subject, Subscription, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { NgSelectComponent, NgSelectModule } from './ng-select';
+import { NgSelect, NgSelectModule } from './ng-select';
 import { MtxOption } from './option';
 import { MtxSelectIntl } from './select-intl';
 import {
@@ -135,7 +135,7 @@ export class MtxSelect
   });
   private _document = inject(DOCUMENT);
 
-  @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelectComponent;
+  @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelect;
 
   @ContentChild(MtxSelectOptionTemplate, { read: TemplateRef })
   optionTemplate!: TemplateRef<any>;

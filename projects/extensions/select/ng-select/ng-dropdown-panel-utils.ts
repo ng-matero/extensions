@@ -13,17 +13,16 @@ export interface PanelDimensions {
   itemsPerViewport: number;
 }
 
-@Injectable()
-export class NgDropdownPanelService {
+@Injectable({ providedIn: 'root' })
+export class NgDropdownPanelUtils {
+  get dimensions() {
+    return this._dimensions;
+  }
   private _dimensions: PanelDimensions = {
     itemHeight: 0,
     panelHeight: 0,
     itemsPerViewport: 0,
   };
-
-  get dimensions() {
-    return this._dimensions;
-  }
 
   calculateItems(scrollPos: number, itemsLength: number, buffer: number): ItemsRangeResult {
     const d = this._dimensions;

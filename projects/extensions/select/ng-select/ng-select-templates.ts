@@ -7,12 +7,12 @@ import {
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
-import { escapeHTML } from './value-utils';
+import { escapeHTML } from './ng-select-utils';
 
 @Directive({
   selector: '[ngItemLabel]',
 })
-export class NgItemLabelDirective implements OnChanges {
+export class NgItemLabel implements OnChanges {
   @Input() ngItemLabel = '';
   @Input() escape = true;
 
@@ -28,90 +28,90 @@ export class NgItemLabelDirective implements OnChanges {
 @Directive({
   selector: '[ng-option-tmp]',
 })
-export class NgOptionTemplateDirective {
+export class NgOptionTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-optgroup-tmp]',
 })
-export class NgOptgroupTemplateDirective {
+export class NgOptgroupTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-label-tmp]',
 })
-export class NgLabelTemplateDirective {
+export class NgLabelTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-multi-label-tmp]',
 })
-export class NgMultiLabelTemplateDirective {
+export class NgMultiLabelTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-header-tmp]',
 })
-export class NgHeaderTemplateDirective {
+export class NgHeaderTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-footer-tmp]',
 })
-export class NgFooterTemplateDirective {
+export class NgFooterTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-notfound-tmp]',
 })
-export class NgNotFoundTemplateDirective {
+export class NgNotFoundTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-placeholder-tmp]',
 })
-export class NgPlaceholderTemplateDirective {
+export class NgPlaceholderTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-typetosearch-tmp]',
 })
-export class NgTypeToSearchTemplateDirective {
+export class NgTypeToSearchTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-loadingtext-tmp]',
 })
-export class NgLoadingTextTemplateDirective {
+export class NgLoadingTextTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-tag-tmp]',
 })
-export class NgTagTemplateDirective {
+export class NgTagTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-loadingspinner-tmp]',
 })
-export class NgLoadingSpinnerTemplateDirective {
+export class NgLoadingSpinnerTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }
 
 @Directive({
   selector: '[ng-clearbutton-tmp]',
 })
-export class NgClearButtonTemplateDirective {
+export class NgClearButtonTemplate {
   template = inject<TemplateRef<any>>(TemplateRef);
 }

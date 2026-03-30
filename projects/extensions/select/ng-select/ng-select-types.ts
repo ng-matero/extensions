@@ -1,4 +1,4 @@
-export interface NgOption {
+export interface NgOptionItem {
   [name: string]: any;
 
   index?: number | null;
@@ -8,18 +8,8 @@ export interface NgOption {
   marked?: boolean;
   label?: string;
   value?: string | any;
-  parent?: NgOption | null;
-  children?: NgOption[];
-}
-
-export enum KeyCode {
-  Tab = 'Tab',
-  Enter = 'Enter',
-  Esc = 'Escape',
-  Space = ' ',
-  ArrowUp = 'ArrowUp',
-  ArrowDown = 'ArrowDown',
-  Backspace = 'Backspace',
+  parent?: NgOptionItem | null;
+  children?: NgOptionItem[];
 }
 
 export type DropdownPosition = 'top' | 'right' | 'bottom' | 'left' | 'auto';

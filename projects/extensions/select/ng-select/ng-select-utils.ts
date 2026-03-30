@@ -15,7 +15,7 @@ export function escapeHTML(value: string) {
 }
 
 export function isDefined(value: any) {
-  return value !== undefined && value !== null;
+  return value != null;
 }
 
 export function isObject(value: any) {
@@ -28,4 +28,22 @@ export function isPromise(value: any) {
 
 export function isFunction(value: any) {
   return value instanceof Function;
+}
+
+export function newId() {
+  // First character is an 'a', it's good practice to tag id to begin with a letter
+  return 'axxxxxxxxxxx'.replace(/[x]/g, () => {
+    const val = (Math.random() * 16) | 0;
+    return val.toString(16);
+  });
+}
+
+export enum KeyCode {
+  Tab = 'Tab',
+  Enter = 'Enter',
+  Esc = 'Escape',
+  Space = ' ',
+  ArrowUp = 'ArrowUp',
+  ArrowDown = 'ArrowDown',
+  Backspace = 'Backspace',
 }

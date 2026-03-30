@@ -1,3 +1,4 @@
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import {
   AfterViewInit,
   booleanAttribute,
@@ -29,39 +30,34 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { merge, Subject } from 'rxjs';
 import { debounceTime, filter, map, startWith, takeUntil, tap } from 'rxjs/operators';
-
-import {
-  NgClearButtonTemplateDirective,
-  NgFooterTemplateDirective,
-  NgHeaderTemplateDirective,
-  NgItemLabelDirective,
-  NgLabelTemplateDirective,
-  NgLoadingSpinnerTemplateDirective,
-  NgLoadingTextTemplateDirective,
-  NgMultiLabelTemplateDirective,
-  NgNotFoundTemplateDirective,
-  NgOptgroupTemplateDirective,
-  NgOptionTemplateDirective,
-  NgPlaceholderTemplateDirective,
-  NgTagTemplateDirective,
-  NgTypeToSearchTemplateDirective,
-} from './ng-templates.directive';
-
-import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { NgSelectConfig } from './config.service';
-import { ConsoleService } from './console.service';
-import { newId } from './id';
 import { ItemsList } from './items-list';
-import { NgDropdownPanelComponent } from './ng-dropdown-panel.component';
-import { NgDropdownPanelService } from './ng-dropdown-panel.service';
-import { NgOptionComponent } from './ng-option.component';
-import { DropdownPosition, KeyCode, NgOption } from './ng-select.types';
+import { NgDropdownPanel } from './ng-dropdown-panel';
+import { NgOption } from './ng-option';
+import { NgSelectConfig } from './ng-select-config';
+import {
+  NgClearButtonTemplate,
+  NgFooterTemplate,
+  NgHeaderTemplate,
+  NgItemLabel,
+  NgLabelTemplate,
+  NgLoadingSpinnerTemplate,
+  NgLoadingTextTemplate,
+  NgMultiLabelTemplate,
+  NgNotFoundTemplate,
+  NgOptgroupTemplate,
+  NgOptionTemplate,
+  NgPlaceholderTemplate,
+  NgTagTemplate,
+  NgTypeToSearchTemplate,
+} from './ng-select-templates';
+import { DropdownPosition, NgOptionItem } from './ng-select-types';
+import { isDefined, isFunction, isObject, isPromise, KeyCode, newId } from './ng-select-utils';
 import { DefaultSelectionModelFactory, SelectionModelFactory } from './selection-model';
-import { isDefined, isFunction, isObject, isPromise } from './value-utils';
 
 export const SELECTION_MODEL_FACTORY = new InjectionToken<SelectionModelFactory>(
   'ng-select-selection-model'
 );
+
 export type AddTagFn = (term: string) => any | Promise<any>;
 export type CompareWithFn = (a: any, b: any) => boolean;
 export type GroupValueFn = (key: string | any, children: any[]) => string | any;
@@ -70,23 +66,20 @@ export type TrackByFn = (item: any) => any;
 
 @Component({
   selector: 'ng-select',
-  templateUrl: './ng-select.component.html',
-  styleUrl: './ng-select.component.scss',
-  imports: [NgTemplateOutlet, NgItemLabelDirective, NgDropdownPanelComponent, NgClass],
+  templateUrl: './ng-select.html',
+  styleUrl: './ng-select.scss',
+  imports: [NgTemplateOutlet, NgItemLabel, NgDropdownPanel, NgClass],
   encapsulation: ViewEncapsulation.None,
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => NgSelectComponent),
+      useExisting: forwardRef(() => NgSelect),
       multi: true,
     },
-    NgDropdownPanelService,
   ],
 })
-export class NgSelectComponent
-  implements OnDestroy, OnChanges, OnInit, AfterViewInit, ControlValueAccessor
-{
+export class NgSelect implements OnDestroy, OnChanges, OnInit, AfterViewInit, ControlValueAccessor {
   @Input() ariaLabelDropdown: string = 'Options List';
   @Input() bindLabel!: string;
   @Input() bindValue!: string;
@@ -166,54 +159,53 @@ export class NgSelectComponent
   @Output('scrollToEnd') scrollToEnd = new EventEmitter();
 
   // custom templates
-  @ContentChild(NgOptionTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgOptionTemplate, { read: TemplateRef })
   optionTemplate!: TemplateRef<any>;
-  @ContentChild(NgOptgroupTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgOptgroupTemplate, { read: TemplateRef })
   optgroupTemplate!: TemplateRef<any>;
-  @ContentChild(NgLabelTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgLabelTemplate, { read: TemplateRef })
   labelTemplate!: TemplateRef<any>;
-  @ContentChild(NgMultiLabelTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgMultiLabelTemplate, { read: TemplateRef })
   multiLabelTemplate!: TemplateRef<any>;
-  @ContentChild(NgHeaderTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgHeaderTemplate, { read: TemplateRef })
   headerTemplate!: TemplateRef<any>;
-  @ContentChild(NgFooterTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgFooterTemplate, { read: TemplateRef })
   footerTemplate!: TemplateRef<any>;
-  @ContentChild(NgNotFoundTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgNotFoundTemplate, { read: TemplateRef })
   notFoundTemplate!: TemplateRef<any>;
-  @ContentChild(NgPlaceholderTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgPlaceholderTemplate, { read: TemplateRef })
   placeholderTemplate!: TemplateRef<any>;
-  @ContentChild(NgTypeToSearchTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgTypeToSearchTemplate, { read: TemplateRef })
   typeToSearchTemplate!: TemplateRef<any>;
-  @ContentChild(NgLoadingTextTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgLoadingTextTemplate, { read: TemplateRef })
   loadingTextTemplate!: TemplateRef<any>;
-  @ContentChild(NgTagTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgTagTemplate, { read: TemplateRef })
   tagTemplate!: TemplateRef<any>;
-  @ContentChild(NgLoadingSpinnerTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgLoadingSpinnerTemplate, { read: TemplateRef })
   loadingSpinnerTemplate!: TemplateRef<any>;
-  @ContentChild(NgClearButtonTemplateDirective, { read: TemplateRef })
+  @ContentChild(NgClearButtonTemplate, { read: TemplateRef })
   clearButtonTemplate!: TemplateRef<any>;
 
-  @ViewChild(forwardRef(() => NgDropdownPanelComponent))
-  dropdownPanel!: NgDropdownPanelComponent;
+  @ViewChild(forwardRef(() => NgDropdownPanel))
+  dropdownPanel!: NgDropdownPanel;
   @ViewChild('searchInput', { static: true })
   searchInput!: ElementRef<HTMLInputElement>;
   @ViewChild('clearButton')
   clearButton!: ElementRef<HTMLSpanElement>;
-  @ContentChildren(NgOptionComponent, { descendants: true })
-  ngOptions!: QueryList<NgOptionComponent>;
+  @ContentChildren(NgOption, { descendants: true })
+  ngOptions!: QueryList<NgOption>;
 
   @HostBinding('class.ng-select') useDefaultClass = true;
 
   config = inject(NgSelectConfig);
   private _cdr = inject(ChangeDetectorRef);
-  private _console = inject(ConsoleService);
   private _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
   readonly newSelectionModel = inject(SELECTION_MODEL_FACTORY, { optional: true });
   readonly autoFocus = inject(new HostAttributeToken('autofocus'), { optional: true });
   readonly classes = inject(new HostAttributeToken('class'), { optional: true });
 
   itemsList: ItemsList;
-  viewPortItems: NgOption[] = [];
+  viewPortItems: NgOptionItem[] = [];
   searchTerm: string | null = null;
   dropdownId = newId();
   element = this._elementRef.nativeElement;
@@ -300,7 +292,7 @@ export class NgSelectComponent
   }
   private _deselectOnClick = false;
 
-  get selectedItems(): NgOption[] {
+  get selectedItems() {
     return this.itemsList.selectedItems;
   }
 
@@ -312,7 +304,7 @@ export class NgSelectComponent
     return this.selectedItems.length > 0;
   }
 
-  get currentPanelPosition(): DropdownPosition | undefined {
+  get currentPanelPosition() {
     if (this.dropdownPanel) {
       return this.dropdownPanel.currentPosition;
     }
@@ -334,7 +326,7 @@ export class NgSelectComponent
     );
   }
 
-  private get _editableSearchTerm(): boolean {
+  private get _editableSearchTerm() {
     return this.editableSearchTerm && !this.multiple;
   }
 
@@ -578,7 +570,7 @@ export class NgSelectComponent
     this._cdr.markForCheck();
   }
 
-  toggleItem(item: NgOption) {
+  toggleItem(item: NgOptionItem) {
     if (!item || item.disabled || this.disabled) {
       return;
     }
@@ -594,7 +586,7 @@ export class NgSelectComponent
     }
   }
 
-  select(item: NgOption) {
+  select(item: NgOptionItem) {
     if (!item.selected) {
       this.itemsList.select(item);
       if (this.clearSearchOnAdd && !this._editableSearchTerm) {
@@ -622,7 +614,7 @@ export class NgSelectComponent
     this.searchInput.nativeElement.blur();
   }
 
-  unselect(item: NgOption) {
+  unselect(item: NgOptionItem) {
     if (!item) {
       return;
     }
@@ -664,7 +656,7 @@ export class NgSelectComponent
     }
   }
 
-  trackByOption = (_: number, item: NgOption) => {
+  trackByOption = (_: number, item: NgOptionItem) => {
     if (this.trackByFn) {
       return this.trackByFn(item.value);
     }
@@ -746,7 +738,7 @@ export class NgSelectComponent
     this.focused = false;
   }
 
-  onItemHover(item: NgOption) {
+  onItemHover(item: NgOptionItem) {
     if (item.disabled) {
       return;
     }
@@ -787,7 +779,7 @@ export class NgSelectComponent
   }
 
   private _setItemsFromNgOptions() {
-    const mapNgOptions = (options: QueryList<NgOptionComponent>) => {
+    const mapNgOptions = (options: QueryList<NgOption>) => {
       this.items = options.map(option => ({
         $ngOptionValue: option.value,
         $ngOptionLabel: option.elementRef.nativeElement.innerHTML,
@@ -821,7 +813,7 @@ export class NgSelectComponent
       });
   }
 
-  private _isValidWriteValue(value: any): boolean {
+  private _isValidWriteValue(value: any) {
     if (
       !isDefined(value) ||
       (this.multiple && value === '') ||
@@ -830,9 +822,9 @@ export class NgSelectComponent
       return false;
     }
 
-    const validateBinding = (item: any): boolean => {
+    const validateBinding = (item: any) => {
       if (!isDefined(this.compareWith) && isObject(item) && this.bindValue) {
-        this._console.warn(
+        console.warn(
           `Setting object(${JSON.stringify(item)}) as your model with bindValue is not allowed unless [compareWith] is used.`
         );
         return false;
@@ -842,7 +834,7 @@ export class NgSelectComponent
 
     if (this.multiple) {
       if (!Array.isArray(value)) {
-        this._console.warn('Multiple select ngModel should be array.');
+        console.warn('Multiple select ngModel should be array.');
         return false;
       }
       return value.every(item => validateBinding(item));
@@ -1076,7 +1068,7 @@ export class NgSelectComponent
     $event.preventDefault();
   }
 
-  private _nextItemIsTag(nextStep: number): boolean {
+  private _nextItemIsTag(nextStep: number) {
     const nextIndex = this.itemsList.markedIndex + nextStep;
     return !!(
       this.addTag &&
@@ -1122,7 +1114,7 @@ export class NgSelectComponent
    *
    *  @returns `true` if virtual scroll is enabled, `false` otherwise
    */
-  private getVirtualScroll(config: NgSelectConfig): boolean {
+  private getVirtualScroll(config: NgSelectConfig) {
     return isDefined(this.virtualScroll)
       ? this.virtualScroll
       : this.isVirtualScrollDisabled(config);
