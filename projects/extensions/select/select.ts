@@ -33,9 +33,9 @@ import {
 } from '@angular/forms';
 import { ErrorStateMatcher, _ErrorStateTracker } from '@angular/material/core';
 import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
-import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
 import { Subject, Subscription, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
+import { NgSelectComponent, NgSelectModule } from './ng-select';
 import { MtxOption } from './option';
 import { MtxSelectIntl } from './select-intl';
 import {
@@ -207,7 +207,7 @@ export class MtxSelect
   @Input({ transform: booleanAttribute }) virtualScroll =
     this._defaultOptions?.virtualScroll ?? false;
   @Input() typeToSearchText?: string;
-  @Input() typeahead!: Subject<string>;
+  @Input() typeahead!: Subject<string | null>;
   @Input() isOpen?: boolean;
   @Input({ transform: booleanAttribute }) fixedPlaceholder =
     this._defaultOptions?.fixedPlaceholder ?? false;

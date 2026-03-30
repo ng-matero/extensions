@@ -9,7 +9,6 @@
   },
   "allowedNonPeerDependencies": [
     "@acrodata/color-picker",
-    "@ng-select/ng-select",
     "photoviewer"
   ]
 }

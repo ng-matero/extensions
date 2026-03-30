@@ -68,7 +68,6 @@
   },
   "dependencies": {
     "@acrodata/color-picker": "^1.4.0",
-    "@ng-select/ng-select": "^21.0.0",
     "photoviewer": "^3.11.0",
     "tslib": "^2.4.0"
   },
