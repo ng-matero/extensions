@@ -50,19 +50,21 @@ import {
   NgTagTemplate,
   NgTypeToSearchTemplate,
 } from './ng-select-templates';
-import { DropdownPosition, NgOptionItem } from './ng-select-types';
+import {
+  AddTagFn,
+  CompareWithFn,
+  DropdownPosition,
+  GroupValueFn,
+  NgOptionItem,
+  SearchFn,
+  TrackByFn,
+} from './ng-select-types';
 import { isDefined, isFunction, isObject, isPromise, KeyCode, newId } from './ng-select-utils';
 import { DefaultSelectionModelFactory, SelectionModelFactory } from './selection-model';
 
 export const SELECTION_MODEL_FACTORY = new InjectionToken<SelectionModelFactory>(
   'ng-select-selection-model'
 );
-
-export type AddTagFn = (term: string) => any | Promise<any>;
-export type CompareWithFn = (a: any, b: any) => boolean;
-export type GroupValueFn = (key: string | any, children: any[]) => string | any;
-export type SearchFn = (term: string, item: any) => boolean;
-export type TrackByFn = (item: any) => any;
 
 @Component({
   selector: 'ng-select',
@@ -257,7 +259,7 @@ export class NgSelect implements OnDestroy, OnChanges, OnInit, AfterViewInit, Co
     return this._compareWith;
   }
   set compareWith(fn: CompareWithFn) {
-    if (fn !== undefined && fn !== null && !isFunction(fn)) {
+    if (fn != null && !isFunction(fn)) {
       throw Error('`compareWith` must be a function.');
     }
     this._compareWith = fn;

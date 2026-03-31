@@ -66,7 +66,7 @@ const SCROLL_SCHEDULER =
 })
 export class NgDropdownPanel implements OnInit, OnChanges, OnDestroy {
   @Input() items: NgOptionItem[] = [];
-  @Input() markedItem!: NgOptionItem;
+  @Input() markedItem?: NgOptionItem;
   @Input() position: DropdownPosition = 'auto';
   @Input() appendTo!: string;
   @Input() bufferAmount!: number;
@@ -157,7 +157,7 @@ export class NgDropdownPanel implements OnInit, OnChanges, OnDestroy {
     }
   }
 
-  scrollTo(option: NgOptionItem, startFromOption = false) {
+  scrollTo(option?: NgOptionItem, startFromOption = false) {
     if (!option) {
       return;
     }

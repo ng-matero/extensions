@@ -35,7 +35,16 @@ import { ErrorStateMatcher, _ErrorStateTracker } from '@angular/material/core';
 import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
 import { Subject, Subscription, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
-import { NgSelect, NgSelectModule } from './ng-select';
+import {
+  AddTagFn,
+  CompareWithFn,
+  DropdownPosition,
+  GroupValueFn,
+  NgSelect,
+  NgSelectModule,
+  SearchFn,
+  TrackByFn,
+} from './ng-select';
 import { MtxOption } from './option';
 import { MtxSelectIntl } from './select-intl';
 import {
@@ -53,16 +62,6 @@ import {
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
 } from './templates';
-
-export type DropdownPosition = 'bottom' | 'top' | 'auto';
-export type AddTagFn = (term: string) => any;
-export type CompareWithFn = (a: any, b: any) => boolean;
-export type GroupValueFn = (
-  key: string | Record<string, any>,
-  children: any[]
-) => string | Record<string, any>;
-export type SearchFn = (term: string, item: any) => boolean;
-export type TrackByFn = (item: any) => any;
 
 /**
  * Represents the default options for the select that can be configured

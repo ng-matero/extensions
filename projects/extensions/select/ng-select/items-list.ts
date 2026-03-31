@@ -33,7 +33,7 @@ export class ItemsList {
     return this._selectionModel.value;
   }
 
-  get markedItem() {
+  get markedItem(): NgOptionItem | undefined {
     return this._filteredItems[this._markedIndex];
   }
 
@@ -314,7 +314,7 @@ export class ItemsList {
     }
 
     this._markedIndex = this._getNextItemIndex(steps);
-    if (this.markedItem.disabled) {
+    if (this.markedItem?.disabled) {
       this._stepToItem(steps);
     }
   }
