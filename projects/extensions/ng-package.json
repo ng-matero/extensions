@@ -9,7 +9,7 @@
   },
   "allowedNonPeerDependencies": [
     "@acrodata/color-picker",
-    "@ng-select/ng-select",
+    "@ng-matero/ng-select",
     "photoviewer"
   ]
 }

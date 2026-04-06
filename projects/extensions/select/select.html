@@ -1,30 +1,29 @@
-<ng-select #ngSelect
+<ng-select
+  #ngSelect
   [class.ng-select-invalid]="errorState"
+  [panelClass]="panelClass"
   [(ngModel)]="value"
-  [ngModelOptions]="{standalone: true}"
-  [placeholder]="placeholder || _intl.placeholder!"
+  [placeholder]="placeholder || _intl.placeholder"
   [items]="items"
   [addTag]="addTag"
   [addTagText]="addTagText || _intl.addTagText"
   [appendTo]="appendTo"
   [appearance]="appearance"
-  [bindLabel]="bindLabel!"
-  [bindValue]="bindValue!"
+  [bindLabel]="bindLabel"
+  [bindValue]="bindValue"
   [closeOnSelect]="closeOnSelect"
   [clearAllText]="clearAllText || _intl.clearAllText"
   [clearable]="clearable"
   [clearOnBackspace]="clearOnBackspace"
-  [dropdownPosition]="dropdownPosition"
+  [panelPosition]="panelPosition"
   [groupBy]="groupBy"
   [groupValue]="groupValue"
   [bufferAmount]="bufferAmount"
   [hideSelected]="hideSelected"
-  [isOpen]="$any(isOpen)"
+  [panelDisabled]="panelDisabled"
   [compareWith]="compareWith"
-  [inputAttrs]="inputAttrs"
   [loading]="loading"
   [loadingText]="loadingText || _intl.loadingText"
-  [labelForId]="labelForId"
   [markFirst]="markFirst"
   [maxSelectedItems]="maxSelectedItems"
   [multiple]="multiple"
@@ -48,49 +47,79 @@
   [virtualScroll]="virtualScroll"
   [fixedPlaceholder]="fixedPlaceholder"
   [deselectOnClick]="deselectOnClick"
+  [preventToggleOnRightClick]="preventToggleOnRightClick"
   (blur)="blurEvent.emit($event)"
   (focus)="focusEvent.emit($event)"
   (change)="changeEvent.emit($event)"
-  (open)="openChange()"
+  (open)="openEvent.emit()"
   (close)="closeEvent.emit()"
   (search)="searchEvent.emit($event)"
   (clear)="clearEvent.emit($event)"
   (add)="addEvent.emit($event)"
   (remove)="removeEvent.emit($event)"
   (scroll)="scroll.emit($event)"
-  (scrollToEnd)="scrollToEnd.emit()">
-
+  (scrollToEnd)="scrollToEnd.emit()"
+  [inputId]="inputId"
+  [ariaLabel]="ariaLabel"
+  [ariaLabelledby]="_getAriaLabelledby()"
+  [ariaDescribedby]="_ariaDescribedby"
+  [inputAttrs]="inputAttrs"
+>
   @if (optionTemplate) {
-    <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index"
-      let-searchTerm="searchTerm">
-      <ng-template [ngTemplateOutlet]="optionTemplate"
-        [ngTemplateOutletContext]="{ item: item, item$: item$, index: index, searchTerm: searchTerm }">
-      </ng-template>
+    <ng-template
+      ng-option-tmps
+      let-item="item"
+      let-item$="item$"
+      let-index="index"
+      let-searchTerm="searchTerm"
+    >
+      <ng-template
+        [ngTemplateOutlet]="optionTemplate"
+        [ngTemplateOutletContext]="{
+          item: item,
+          item$: item$,
+          index: index,
+          searchTerm: searchTerm,
+        }"
+      ></ng-template>
     </ng-template>
   }
 
   @if (optgroupTemplate) {
-    <ng-template ng-optgroup-tmp let-item="item" let-item$="item$" let-index="index"
-      let-searchTerm="searchTerm">
-      <ng-template [ngTemplateOutlet]="optgroupTemplate"
-        [ngTemplateOutletContext]="{ item: item, item$: item$, index: index, searchTerm: searchTerm }">
-      </ng-template>
+    <ng-template
+      ng-optgroup-tmp
+      let-item="item"
+      let-item$="item$"
+      let-index="index"
+      let-searchTerm="searchTerm"
+    >
+      <ng-template
+        [ngTemplateOutlet]="optgroupTemplate"
+        [ngTemplateOutletContext]="{
+          item: item,
+          item$: item$,
+          index: index,
+          searchTerm: searchTerm,
+        }"
+      ></ng-template>
     </ng-template>
   }
 
   @if (labelTemplate) {
     <ng-template ng-label-tmp let-item="item" let-clear="clear" let-label="label">
-      <ng-template [ngTemplateOutlet]="labelTemplate"
-        [ngTemplateOutletContext]="{ item: item, clear: clear, label: label }">
-      </ng-template>
+      <ng-template
+        [ngTemplateOutlet]="labelTemplate"
+        [ngTemplateOutletContext]="{ item: item, clear: clear, label: label }"
+      ></ng-template>
     </ng-template>
   }
 
   @if (multiLabelTemplate) {
     <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
-      <ng-template [ngTemplateOutlet]="multiLabelTemplate"
-        [ngTemplateOutletContext]="{ items: items, clear: clear }">
-      </ng-template>
+      <ng-template
+        [ngTemplateOutlet]="multiLabelTemplate"
+        [ngTemplateOutletContext]="{ items: items, clear: clear }"
+      ></ng-template>
     </ng-template>
   }
 
@@ -108,9 +137,10 @@
 
   @if (notFoundTemplate) {
     <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
-      <ng-template [ngTemplateOutlet]="notFoundTemplate"
-        [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
-      </ng-template>
+      <ng-template
+        [ngTemplateOutlet]="notFoundTemplate"
+        [ngTemplateOutletContext]="{ searchTerm: searchTerm }"
+      ></ng-template>
     </ng-template>
   }
 
@@ -122,17 +152,19 @@
 
   @if (loadingTextTemplate) {
     <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
-      <ng-template [ngTemplateOutlet]="loadingTextTemplate"
-        [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
-      </ng-template>
+      <ng-template
+        [ngTemplateOutlet]="loadingTextTemplate"
+        [ngTemplateOutletContext]="{ searchTerm: searchTerm }"
+      ></ng-template>
     </ng-template>
   }
 
   @if (tagTemplate) {
     <ng-template ng-tag-tmp let-searchTerm="searchTerm">
-      <ng-template [ngTemplateOutlet]="tagTemplate"
-        [ngTemplateOutletContext]="{ searchTerm: searchTerm }">
-      </ng-template>
+      <ng-template
+        [ngTemplateOutlet]="tagTemplate"
+        [ngTemplateOutletContext]="{ searchTerm: searchTerm }"
+      ></ng-template>
     </ng-template>
   }
 
@@ -153,5 +185,4 @@
       <ng-template [ngTemplateOutlet]="clearbuttonTemplate"></ng-template>
     </ng-template>
   }
-
 </ng-select>

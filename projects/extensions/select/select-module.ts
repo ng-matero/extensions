@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgSelectModule } from '@ng-select/ng-select';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-matero/ng-select';
 
+import { MtxOption } from './option';
 import { MtxSelect } from './select';
 import {
+  MtxSelectClearbuttonTemplate,
   MtxSelectFooterTemplate,
   MtxSelectHeaderTemplate,
   MtxSelectLabelTemplate,
@@ -17,15 +19,12 @@ import {
   MtxSelectPlaceholderTemplate,
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
-  MtxSelectClearbuttonTemplate,
 } from './templates';
-import { MtxOption } from './option';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    ReactiveFormsModule,
     NgSelectModule,
     MtxSelect,
     MtxOption,
