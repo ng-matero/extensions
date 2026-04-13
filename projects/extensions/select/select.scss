@@ -4,12 +4,6 @@
 
 $fallbacks: m3-select.get-tokens();
 
-@mixin rtl {
-  @at-root [dir='rtl'] #{&} {
-    @content;
-  }
-}
-
 .ng-select {
   $filled-padding-top: var(--mat-form-field-filled-with-label-container-padding-top, 24px);
   $filled-padding-bottom: var(--mat-form-field-filled-with-label-container-padding-bottom, 8px);
@@ -210,8 +204,6 @@ $fallbacks: m3-select.get-tokens();
   .ng-option {
     position: relative;
     padding: 14px 16px;
-    text-decoration: none;
-    text-align: left;
     color: token-utils.slot(select-option-label-text-color, $fallbacks);
 
     &.ng-option-marked {
@@ -227,27 +219,14 @@ $fallbacks: m3-select.get-tokens();
       color: token-utils.slot(select-option-disabled-state-text-color, $fallbacks);
     }
 
-    @include rtl {
-      text-align: right;
-    }
-
     &.ng-option-child {
-      padding-left: 32px;
-
-      @include rtl {
-        padding-right: 32px;
-        padding-left: 0;
-      }
+      padding-inline-start: 32px;
     }
   }
 
   .ng-tag-label {
-    margin-right: 6px;
+    display: inline-block;
+    margin-inline-end: 6px;
     font-size: 80%;
-
-    @include rtl {
-      margin-left: 6px;
-      margin-right: 0;
-    }
   }
 }
