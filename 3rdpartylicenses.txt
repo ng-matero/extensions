@@ -244,7 +244,7 @@ MIT
 @ng-matero/extensions-date-fns-adapter
 MIT
 
-@ng-select/ng-select
+@ng-matero/ng-select
 MIT
 
 @ngx-translate/core
