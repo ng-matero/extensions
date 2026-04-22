@@ -172,7 +172,6 @@ export class MtxSelect
 
   @Input() addTag: boolean | AddTagFn = false;
   @Input() addTagText?: string;
-  @Input() appearance = 'underline';
   @Input() appendTo = this._defaultOptions?.appendTo ?? 'body';
   @Input() bindLabel = this._defaultOptions?.bindLabel;
   @Input() bindValue = this._defaultOptions?.bindValue;
@@ -200,7 +199,6 @@ export class MtxSelect
   @Input({ transform: booleanAttribute }) searchWhileComposing = true;
   @Input({ transform: booleanAttribute }) selectOnTab = false;
   @Input() trackByFn: TrackByFn | null = null;
-  @Input() tabIndex?: number;
   @Input({ transform: booleanAttribute }) openOnEnter = this._defaultOptions?.openOnEnter;
   @Input() minTermLength = 0;
   @Input({ transform: booleanAttribute }) editableSearchTerm = false;
@@ -214,6 +212,7 @@ export class MtxSelect
   @Input({ transform: booleanAttribute }) preventToggleOnRightClick = false;
   @Input({ transform: booleanAttribute }) clearSearchOnAdd = this._defaultOptions?.clearSearchOnAdd;
   @Input({ transform: booleanAttribute }) deselectOnClick = this._defaultOptions?.deselectOnClick;
+  @Input() tabIndex?: number;
   @Input() inputId?: string | null;
   @Input() inputAttrs: { [key: string]: string } = {};
 
@@ -319,13 +318,13 @@ export class MtxSelect
   }
 
   /** `aria-label` of the ng-select input. */
-  @Input('aria-label') ariaLabel: string | null = null;
+  @Input() ariaLabel: string | null = null;
 
   /** `aria-labelledby` of the ng-select input. */
-  @Input('aria-labelledby') ariaLabelledby: string | null = null;
+  @Input() ariaLabelledby: string | null = null;
 
   /** `aria-describedby` of the ng-select input. */
-  @Input('aria-describedby') ariaDescribedby: string | null = null;
+  @Input() ariaDescribedby: string | null = null;
 
   /** The aria-describedby attribute on the ng-select input for improved a11y. */
   _ariaDescribedby: string | null = null;

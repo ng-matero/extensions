@@ -49,7 +49,7 @@ Exported as: `mtxSelect`
 | `@Input()`<br>`searchWhileComposing: boolean` | Whether items should be filtered while composition started. Default is **`true`**. |
 | `@Input()`<br>`trackByFn: TrackByFn` | Provide custom trackBy function. Default is **`null`**. |
 | `@Input()`<br>`clearSearchOnAdd: boolean` | Clears search input when item is selected. Default **`true`**. Default **`false`** when `closeOnSelect` is **`false`**. |
-| `@Input()`<br>`editableSearchTerm: boolean` | Allow to edit search query if option selected. Default is **`false`**. Works only if `[multiple]="false"`. |
+| `@Input()`<br>`editableSearchTerm: boolean` | Allow to edit search query if option selected. Default is **`false`**. Works only if `multiple` is `false`. |
 | `@Input()`<br>`selectOnTab: boolean` | Select marked dropdown item using tab. Default is **`true`**. |
 | `@Input()`<br>`openOnEnter: boolean` | Open dropdown using enter. Default is **`true`**. |
 | `@Input()`<br>`typeahead: Subject` | Custom autocomplete or advanced filter. |
@@ -61,18 +61,18 @@ Exported as: `mtxSelect`
 | `@Input()`<br>`tabIndex: number` | Set tabindex on `ng-select`. |
 | `@Input()`<br>`keyDownFn: (e: KeyboardEvent) => boolean` | Provide custom keyDown function. Executed before default handler. Return false to suppress execution of default key down handlers. Default is **`true`**. |
 | `@Input()`<br>`fixedPlaceholder: boolean` | Set placeholder visible even when an item is selected. Default is **`false`**. |
-| `@Input()`<br>`deselectOnClick: boolean` | Deselects a selected item when it is clicked in the dropdown. Default is **`false`**. Default **`true`** when `[multiple]="true"`. |
+| `@Input()`<br>`deselectOnClick: boolean` | Deselects a selected item when it is clicked in the dropdown. Default is **`false`**. Default **`true`** when `multiple` is `true`. |
 | `@Input()`<br>`preventToggleOnRightClick: boolean` | Prevent opening of ng-select on right mouse click. Default is **`false`**. |
-| `@Input('aria-label')`<br>`ariaLabel: string` | `aria-label` of the ng-select input. |
-| `@Input('aria-labelledby')`<br>`ariaLabelledby: string` | `aria-labelledby` of the ng-select input. |
-| `@Input('aria-describedby')`<br>`ariaDescribedby: string` | `aria-describedby` of the ng-select input. |
+| `@Input()`<br>`ariaLabel: string` | `aria-label` of the ng-select input. |
+| `@Input()`<br>`ariaLabelledby: string` | `aria-labelledby` of the ng-select input. |
+| `@Input()`<br>`ariaDescribedby: string` | `aria-describedby` of the ng-select input. |
 | `@Output()`<br>`focus: FocusEvent` | Fired on select focus. |
 | `@Output()`<br>`blur: FocusEvent` | Fired on select blur. |
 | `@Output()`<br>`change: any` | Fired on model change. Outputs whole model. |
 | `@Output()`<br>`open: void` | Fired on select dropdown open. |
 | `@Output()`<br>`close: void` | Fired on select dropdown close. |
-| `@Output()`<br>`add: any` | Fired when item is added while `[multiple]="true"`. Outputs added item. |
-| `@Output()`<br>`remove: any` | Fired when item is removed while `[multiple]="true"`. |
+| `@Output()`<br>`add: any` | Fired when item is added while `multiple` is `true`. Outputs added item. |
+| `@Output()`<br>`remove: any` | Fired when item is removed while `multiple` is `true`. |
 | `@Output()`<br>`search: SearchEvent`| Fired while typing search term. Outputs search term with filtered items. |
 | `@Output()`<br>`clear: void` | Fired on clear icon click. |
 | `@Output()`<br>`scroll: ScrollEvent` | Fired when scrolled. Provides the start and end index of the currently available items. Can be used for loading more items in chunks before the user has scrolled all the way to the bottom of the list. |
