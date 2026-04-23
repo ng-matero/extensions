@@ -24,7 +24,7 @@ import {
 } from '@angular/cdk/overlay';
 import { normalizePassiveListenerOptions, Platform } from '@angular/cdk/platform';
 import { ComponentPortal } from '@angular/cdk/portal';
-import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { NgTemplateOutlet } from '@angular/common';
 import {
   afterNextRender,
   AfterViewInit,
@@ -719,7 +719,8 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
   /** Updates the tooltip class */
   private _setTooltipClass(tooltipClass: string | string[] | Set<string> | { [key: string]: any }) {
     if (this._tooltipInstance) {
-      this._tooltipInstance.tooltipClass = tooltipClass;
+      this._tooltipInstance.tooltipClass =
+        tooltipClass instanceof Set ? Array.from(tooltipClass) : tooltipClass;
       this._tooltipInstance._markForCheck();
     }
   }
@@ -974,7 +975,7 @@ export class MtxTooltip implements OnDestroy, AfterViewInit {
     '(mouseleave)': '_handleMouseLeave($event)',
     'aria-hidden': 'true',
   },
-  imports: [NgClass, NgTemplateOutlet, MtxIsTemplateRefPipe],
+  imports: [NgTemplateOutlet, MtxIsTemplateRefPipe],
 })
 export class TooltipComponent implements OnDestroy {
   private _changeDetectorRef = inject(ChangeDetectorRef);
@@ -989,8 +990,8 @@ export class TooltipComponent implements OnDestroy {
   /** Context to be added to the tooltip */
   tooltipContext: any;
 
-  /** Classes to be added to the tooltip. Supports the same syntax as `ngClass`. */
-  tooltipClass!: string | string[] | Set<string> | { [key: string]: any };
+  /** Classes to be added to the tooltip. */
+  tooltipClass!: string | string[] | { [key: string]: any };
 
   /** The timeout ID of any current timer set to show the tooltip */
   private _showTimeoutId: ReturnType<typeof setTimeout> | undefined;
