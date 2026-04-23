@@ -37,8 +37,11 @@
   table {
     width: 100%;
     margin: 0 0 32px;
-    border-collapse: collapse;
+    border-collapse: separate;
     border-spacing: 0;
+    background-color: var(--mat-sys-surface-container-lowest);
+    border: solid 1px var(--mat-sys-outline-variant);
+    border-radius: 12px;
 
     code {
       padding: 0;
@@ -47,15 +50,20 @@
     }
   }
 
+  th,
+  td {
+    border-bottom: 1px solid var(--mat-sys-outline-variant);
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
   th {
     max-width: 100px;
     padding: 14px 16px;
-    font-weight: 500;
     text-align: left;
-  }
-
-  tr {
-    border-bottom: 1px solid var(--mat-sys-outline-variant);
+    font-weight: 500;
   }
 
   td {

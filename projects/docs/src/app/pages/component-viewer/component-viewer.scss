@@ -6,9 +6,8 @@ app-component-viewer {
 }
 
 app-component-viewer {
-  width: calc(100% - #{constants.$sidenav-width + 1} - #{constants.$content-padding-sidenav * 2});
   font-weight: 400;
-  line-height: 1.5;
+  width: calc(100% - #{constants.$sidenav-width + 1} - #{constants.$content-padding-sidenav * 2});
 
   // spacing for the component viewer
   padding: 20px constants.$content-padding-sidenav;
@@ -31,6 +30,13 @@ app-component-viewer {
 
 .docs-component-viewer-tabbed-content {
   margin-bottom: 25px;
+
+  &.docs-sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+    background: var(--mat-sys-surface);
+  }
 }
 
 .docs-component-viewer-content {
@@ -51,16 +57,17 @@ app-component-viewer {
   }
 
   table-of-contents {
-    top: 35px;
+    top: 50px;
     position: sticky;
 
     // Reposition on top of content on small screens and remove
     // sticky positioning
     @media (max-width: constants.$small-breakpoint-width) {
       order: -1;
-      position: inherit;
+      position: relative;
       width: auto;
       padding-left: 0;
+      max-height: none;
     }
   }
 }
@@ -72,7 +79,7 @@ app-component-viewer {
 
 .docs-component-api,
 .docs-component-overview {
-  width: 80%;
+  width: 75%;
 
   @media (max-width: constants.$small-breakpoint-width) {
     width: 100%;

@@ -40,12 +40,12 @@ pre {
 }
 
 code {
-  padding: 2px 4px;
+  padding: 3px;
   font-size: 90%;
-  word-break: break-word;
-  background-color: rgba(0, 0, 0, .04);
-  border: 1px solid rgba(0, 0, 0, .08);
-  border-radius: 4px;
+  overflow-wrap: break-word;
+  word-break: break-all;
+  background:
+    color-mix(in srgb, var(--mat-sys-primary-container) 25%, transparent);
 }
 
 pre {
