@@ -4,20 +4,19 @@
 
 $fallbacks: m3-select.get-tokens();
 
-@mixin rtl {
-  @at-root [dir='rtl'] #{&} {
-    @content;
-  }
-}
-
 .ng-select {
   $filled-padding-top: var(--mat-form-field-filled-with-label-container-padding-top, 24px);
   $filled-padding-bottom: var(--mat-form-field-filled-with-label-container-padding-bottom, 8px);
   $vertical-padding: var(--mat-form-field-container-vertical-padding, 16px);
-  $text-line-height: var(--mat-form-field-container-text-line-height, var(--mat-sys-body-large-line-height));
+  $text-line-height: var(
+    --mat-form-field-container-text-line-height,
+    var(--mat-sys-body-large-line-height)
+  );
 
-  padding: $filled-padding-top 16px $filled-padding-bottom;
-  margin: calc($filled-padding-top * -1) -16px calc($filled-padding-bottom * -1);
+  .mat-mdc-form-field & {
+    padding: $filled-padding-top 16px $filled-padding-bottom;
+    margin: calc($filled-padding-top * -1) -16px calc($filled-padding-bottom * -1);
+  }
 
   .mdc-text-field--outlined &,
   .mdc-text-field--no-label & {
@@ -30,24 +29,29 @@ $fallbacks: m3-select.get-tokens();
   .ng-select-container {
     align-items: center;
     color: token-utils.slot(select-container-text-color, $fallbacks);
+  }
 
-    .ng-value-container {
-      align-items: center;
-      gap: 4px;
+  .ng-value-container {
+    align-items: center;
+    gap: 4px;
+  }
 
-      .ng-input > input {
-        height: $text-line-height;
-        color: inherit;
-        font: inherit;
-      }
-    }
+  .ng-input > input {
+    height: $text-line-height;
+    color: inherit;
+    font: inherit;
+  }
 
-    .ng-clear-wrapper {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      width: 24px;
-      height: $text-line-height;
+  .ng-clear-wrapper {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 24px;
+    height: $text-line-height;
+    color: token-utils.slot(select-clear-icon-color, $fallbacks);
+
+    &:hover .ng-clear {
+      color: token-utils.slot(select-clear-icon-hover-color, $fallbacks);
     }
   }
 
@@ -61,28 +65,9 @@ $fallbacks: m3-select.get-tokens();
     }
   }
 
-  .ng-has-value .ng-placeholder {
-    display: none;
-  }
-
-  .ng-clear-wrapper {
-    color: token-utils.slot(select-clear-icon-color, $fallbacks);
-
-    &:hover .ng-clear {
-      color: token-utils.slot(select-clear-icon-hover-color, $fallbacks);
-    }
-  }
-
   &.ng-select-disabled {
     .ng-value {
       color: token-utils.slot(select-disabled-text-color, $fallbacks);
-    }
-  }
-
-  &.ng-select-opened {
-    .ng-arrow-wrapper .ng-arrow {
-      top: -2px;
-      border-width: 0 5px 5px;
     }
   }
 
@@ -94,7 +79,8 @@ $fallbacks: m3-select.get-tokens();
   }
 
   &.ng-select-multiple {
-    .ng-select-container .ng-value-container .ng-value {
+    .ng-value {
+      box-sizing: border-box;
       display: inline-flex;
       align-items: center;
       height: $text-line-height;
@@ -107,33 +93,32 @@ $fallbacks: m3-select.get-tokens();
       &.ng-value-disabled {
         opacity: 0.4;
       }
+    }
 
-      .ng-value-label {
-        display: inline-block;
-        margin: 0 4px;
-        line-height: 16px;
-      }
+    .ng-value-label {
+      display: inline-block;
+      margin: 0 4px;
+      line-height: 16px;
+    }
 
-      .ng-value-icon {
-        width: 16px;
-        height: 16px;
-        line-height: 16px;
-        border-radius: 50%;
-        text-align: center;
+    .ng-value-remove {
+      width: 16px;
+      height: 16px;
+      line-height: 16px;
+      border-radius: 50%;
+      text-align: center;
 
-        &:hover {
-          background-color: token-utils.slot(select-multiple-value-icon-hover-background-color, $fallbacks);
-        }
+      &:hover {
+        background-color: token-utils.slot(
+          select-multiple-value-icon-hover-background-color,
+          $fallbacks
+        );
       }
     }
 
-    &.ng-select-disabled .ng-select-container .ng-value-container .ng-value {
+    &.ng-select-disabled .ng-value {
       border-color: token-utils.slot(select-multiple-value-disabled-outline-color, $fallbacks);
     }
-  }
-
-  .ng-arrow-wrapper {
-    width: 10px;
   }
 
   $enabled-arrow-color: token-utils.slot(select-enabled-arrow-color, $fallbacks);
@@ -155,6 +140,8 @@ $fallbacks: m3-select.get-tokens();
   }
 
   &.ng-select-opened .ng-arrow {
+    top: -2px;
+    border-width: 0 5px 5px;
     border-color: transparent transparent $enabled-arrow-color;
   }
 
@@ -193,73 +180,53 @@ $fallbacks: m3-select.get-tokens();
     border-top: 1px solid token-utils.slot(select-panel-divider-color, $fallbacks);
   }
 
-  .ng-dropdown-panel-items {
-    .ng-optgroup {
-      padding: 14px 16px;
-      font-weight: 500;
-      user-select: none;
-      cursor: pointer;
-      color: token-utils.slot(select-optgroup-label-text-color, $fallbacks);
+  .ng-optgroup {
+    padding: 14px 16px;
+    font-weight: 500;
+    user-select: none;
+    cursor: pointer;
+    color: token-utils.slot(select-optgroup-label-text-color, $fallbacks);
 
-      &.ng-option-disabled {
-        cursor: default;
-      }
-
-      &.ng-option-marked {
-        background-color: token-utils.slot(select-option-hover-state-background-color, $fallbacks);
-      }
-
-      &.ng-option-selected {
-        background-color: token-utils.slot(select-option-selected-state-background-color, $fallbacks);
-        color: token-utils.slot(select-option-selected-state-text-color, $fallbacks);
-      }
+    &.ng-option-disabled {
+      cursor: default;
     }
 
-    .ng-option {
-      position: relative;
-      padding: 14px 16px;
-      text-overflow: ellipsis;
-      text-decoration: none;
-      text-align: left;
-      white-space: nowrap;
-      overflow: hidden;
-      color: token-utils.slot(select-option-label-text-color, $fallbacks);
-
-      &.ng-option-marked {
-        background-color: token-utils.slot(select-option-hover-state-background-color, $fallbacks);
-      }
-
-      &.ng-option-selected {
-        background-color: token-utils.slot(select-option-selected-state-background-color, $fallbacks);
-        color: token-utils.slot(select-option-selected-state-text-color, $fallbacks);
-      }
-
-      &.ng-option-disabled {
-        color: token-utils.slot(select-option-disabled-state-text-color, $fallbacks);
-      }
-
-      @include rtl {
-        text-align: right;
-      }
-
-      &.ng-option-child {
-        padding-left: 32px;
-
-        @include rtl {
-          padding-right: 32px;
-          padding-left: 0;
-        }
-      }
-
-      .ng-tag-label {
-        margin-right: 6px;
-        font-size: 80%;
-
-        @include rtl {
-          margin-left: 6px;
-          margin-right: 0;
-        }
-      }
+    &.ng-option-marked {
+      background-color: token-utils.slot(select-option-hover-state-background-color, $fallbacks);
     }
+
+    &.ng-option-selected {
+      background-color: token-utils.slot(select-option-selected-state-background-color, $fallbacks);
+      color: token-utils.slot(select-option-selected-state-text-color, $fallbacks);
+    }
+  }
+
+  .ng-option {
+    position: relative;
+    padding: 14px 16px;
+    color: token-utils.slot(select-option-label-text-color, $fallbacks);
+
+    &.ng-option-marked {
+      background-color: token-utils.slot(select-option-hover-state-background-color, $fallbacks);
+    }
+
+    &.ng-option-selected {
+      background-color: token-utils.slot(select-option-selected-state-background-color, $fallbacks);
+      color: token-utils.slot(select-option-selected-state-text-color, $fallbacks);
+    }
+
+    &.ng-option-disabled {
+      color: token-utils.slot(select-option-disabled-state-text-color, $fallbacks);
+    }
+
+    &.ng-option-child {
+      padding-inline-start: 32px;
+    }
+  }
+
+  .ng-tag-label {
+    display: inline-block;
+    margin-inline-end: 6px;
+    font-size: 80%;
   }
 }

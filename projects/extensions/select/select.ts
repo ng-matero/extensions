@@ -7,14 +7,12 @@ import {
   Component,
   ContentChild,
   ContentChildren,
-  DOCUMENT,
   DoCheck,
   ElementRef,
   EventEmitter,
   InjectionToken,
   Input,
   OnDestroy,
-  OnInit,
   Output,
   QueryList,
   TemplateRef,
@@ -34,7 +32,18 @@ import {
 } from '@angular/forms';
 import { ErrorStateMatcher, _ErrorStateTracker } from '@angular/material/core';
 import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/material/form-field';
-import { NgSelectComponent, NgSelectModule } from '@ng-select/ng-select';
+import {
+  AddTagFn,
+  CompareWithFn,
+  DropdownPanelPosition,
+  GroupValueFn,
+  NgSelect,
+  NgSelectModule,
+  ScrollEvent,
+  SearchEvent,
+  SearchFn,
+  TrackByFn,
+} from '@ng-matero/ng-select';
 import { Subject, Subscription, merge } from 'rxjs';
 import { startWith, takeUntil } from 'rxjs/operators';
 import { MtxOption } from './option';
@@ -54,16 +63,6 @@ import {
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
 } from './templates';
-
-export type DropdownPosition = 'bottom' | 'top' | 'auto';
-export type AddTagFn = (term: string) => any;
-export type CompareWithFn = (a: any, b: any) => boolean;
-export type GroupValueFn = (
-  key: string | Record<string, any>,
-  children: any[]
-) => string | Record<string, any>;
-export type SearchFn = (term: string, item: any) => boolean;
-export type TrackByFn = (item: any) => any;
 
 /**
  * Represents the default options for the select that can be configured
@@ -97,23 +96,17 @@ let nextUniqueId = 0;
   selector: 'mtx-select',
   exportAs: 'mtxSelect',
   host: {
-    'role': 'combobox',
-    'aria-autocomplete': 'none',
     '[attr.id]': 'id',
-    '[attr.aria-expanded]': 'panelOpen',
-    '[attr.aria-label]': 'ariaLabel || null',
-    '[attr.aria-labelledby]': '_getAriaLabelledby()',
-    '[attr.aria-describedby]': '_ariaDescribedby || null',
     '[attr.aria-required]': 'required.toString()',
     '[attr.aria-disabled]': 'disabled.toString()',
     '[attr.aria-invalid]': 'errorState',
+    'class': 'mtx-select',
     '[class.mtx-select-floating]': 'shouldLabelFloat',
     '[class.mtx-select-disabled]': 'disabled',
     '[class.mtx-select-invalid]': 'errorState',
     '[class.mtx-select-required]': 'required',
     '[class.mtx-select-empty]': 'empty',
     '[class.mtx-select-multiple]': 'multiple',
-    'class': 'mtx-select',
   },
   templateUrl: './select.html',
   styleUrl: './select.scss',
@@ -123,13 +116,7 @@ let nextUniqueId = 0;
   imports: [NgSelectModule, FormsModule, NgTemplateOutlet],
 })
 export class MtxSelect
-  implements
-    OnInit,
-    OnDestroy,
-    DoCheck,
-    AfterViewInit,
-    ControlValueAccessor,
-    MatFormFieldControl<any>
+  implements OnDestroy, DoCheck, AfterViewInit, ControlValueAccessor, MatFormFieldControl<any>
 {
   protected _intl = inject(MtxSelectIntl);
   protected _changeDetectorRef = inject(ChangeDetectorRef);
@@ -140,63 +127,70 @@ export class MtxSelect
   protected _defaultOptions? = inject<MtxSelectDefaultOptions>(MTX_SELECT_DEFAULT_OPTIONS, {
     optional: true,
   });
-  private _document = inject(DOCUMENT);
 
-  @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelectComponent;
+  @ViewChild('ngSelect', { static: true }) ngSelect!: NgSelect;
+  @ContentChildren(MtxOption, { descendants: true }) mtxOptions?: QueryList<MtxOption>;
 
   @ContentChild(MtxSelectOptionTemplate, { read: TemplateRef })
-  optionTemplate!: TemplateRef<any>;
+  optionTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectOptgroupTemplate, { read: TemplateRef })
-  optgroupTemplate!: TemplateRef<any>;
+  optgroupTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectLabelTemplate, { read: TemplateRef })
-  labelTemplate!: TemplateRef<any>;
+  labelTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectMultiLabelTemplate, { read: TemplateRef })
-  multiLabelTemplate!: TemplateRef<any>;
+  multiLabelTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectHeaderTemplate, { read: TemplateRef })
-  headerTemplate!: TemplateRef<any>;
+  headerTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectFooterTemplate, { read: TemplateRef })
-  footerTemplate!: TemplateRef<any>;
+  footerTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectNotFoundTemplate, { read: TemplateRef })
-  notFoundTemplate!: TemplateRef<any>;
+  notFoundTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectTypeToSearchTemplate, { read: TemplateRef })
-  typeToSearchTemplate!: TemplateRef<any>;
+  typeToSearchTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectLoadingTextTemplate, { read: TemplateRef })
-  loadingTextTemplate!: TemplateRef<any>;
+  loadingTextTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectTagTemplate, { read: TemplateRef })
-  tagTemplate!: TemplateRef<any>;
+  tagTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectLoadingSpinnerTemplate, { read: TemplateRef })
-  loadingSpinnerTemplate!: TemplateRef<any>;
+  loadingSpinnerTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectPlaceholderTemplate, { read: TemplateRef })
-  placeholderTemplate!: TemplateRef<any>;
+  placeholderTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectClearbuttonTemplate, { read: TemplateRef })
-  clearbuttonTemplate!: TemplateRef<any>;
+  clearbuttonTemplate?: TemplateRef<any>;
 
-  @ContentChildren(MtxOption, { descendants: true })
-  mtxOptions!: QueryList<MtxOption>;
+  @Output('blur') blurEvent = new EventEmitter();
+  @Output('focus') focusEvent = new EventEmitter();
+  @Output('change') changeEvent = new EventEmitter();
+  @Output('open') openEvent = new EventEmitter();
+  @Output('close') closeEvent = new EventEmitter();
+  @Output('search') searchEvent = new EventEmitter<SearchEvent>();
+  @Output('clear') clearEvent = new EventEmitter();
+  @Output('add') addEvent = new EventEmitter();
+  @Output('remove') removeEvent = new EventEmitter();
+  @Output('scroll') scroll = new EventEmitter<ScrollEvent>();
+  @Output('scrollToEnd') scrollToEnd = new EventEmitter();
 
   @Input() addTag: boolean | AddTagFn = false;
   @Input() addTagText?: string;
-  @Input() appearance = 'underline';
   @Input() appendTo = this._defaultOptions?.appendTo ?? 'body';
   @Input() bindLabel = this._defaultOptions?.bindLabel;
   @Input() bindValue = this._defaultOptions?.bindValue;
   @Input({ transform: booleanAttribute }) closeOnSelect = true;
-  @Input() clearAllText?: string;
   @Input({ transform: booleanAttribute }) clearable = true;
+  @Input() clearAllText?: string;
   @Input({ transform: booleanAttribute }) clearOnBackspace = true;
   @Input() compareWith!: CompareWithFn;
-  @Input() dropdownPosition: DropdownPosition = 'auto';
-  @Input() groupBy!: string | ((value: any) => any);
-  @Input() groupValue!: GroupValueFn;
+  @Input() panelPosition: DropdownPanelPosition = 'auto';
+  @Input() groupBy?: string | ((value: any) => any);
+  @Input() groupValue?: GroupValueFn;
   @Input() bufferAmount = 4;
   @Input({ transform: booleanAttribute }) selectableGroup = false;
   @Input({ transform: booleanAttribute }) selectableGroupAsModel = true;
   @Input({ transform: booleanAttribute }) hideSelected = false;
   @Input({ transform: booleanAttribute }) loading = false;
   @Input() loadingText?: string;
-  @Input() labelForId: string | null = null;
   @Input({ transform: booleanAttribute }) markFirst = true;
-  @Input() maxSelectedItems!: number;
+  @Input() maxSelectedItems?: number;
   @Input({ transform: booleanAttribute }) multiple = false;
   @Input() notFoundText?: string;
   @Input({ transform: booleanAttribute }) searchable = true;
@@ -205,42 +199,24 @@ export class MtxSelect
   @Input({ transform: booleanAttribute }) searchWhileComposing = true;
   @Input({ transform: booleanAttribute }) selectOnTab = false;
   @Input() trackByFn: TrackByFn | null = null;
-  @Input() inputAttrs: { [key: string]: string } = {};
-  @Input() tabIndex!: number;
-  @Input({ transform: booleanAttribute }) openOnEnter = this._defaultOptions?.openOnEnter ?? true;
+  @Input({ transform: booleanAttribute }) openOnEnter = this._defaultOptions?.openOnEnter;
   @Input() minTermLength = 0;
   @Input({ transform: booleanAttribute }) editableSearchTerm = false;
   @Input() keyDownFn = (_: KeyboardEvent) => true;
-  @Input({ transform: booleanAttribute }) virtualScroll =
-    this._defaultOptions?.virtualScroll ?? false;
+  @Input({ transform: booleanAttribute }) virtualScroll = this._defaultOptions?.virtualScroll;
   @Input() typeToSearchText?: string;
-  @Input() typeahead!: Subject<string>;
-  @Input() isOpen?: boolean;
+  @Input() typeahead?: Subject<string>;
+  @Input({ transform: booleanAttribute }) panelDisabled = false;
   @Input({ transform: booleanAttribute }) fixedPlaceholder =
     this._defaultOptions?.fixedPlaceholder ?? false;
-  @Input({ transform: booleanAttribute }) deselectOnClick =
-    this._defaultOptions?.deselectOnClick ?? false;
+  @Input({ transform: booleanAttribute }) preventToggleOnRightClick = false;
+  @Input({ transform: booleanAttribute }) clearSearchOnAdd = this._defaultOptions?.clearSearchOnAdd;
+  @Input({ transform: booleanAttribute }) deselectOnClick = this._defaultOptions?.deselectOnClick;
+  @Input() tabIndex?: number;
+  @Input() inputId?: string | null;
+  @Input() inputAttrs: { [key: string]: string } = {};
 
-  @Output('blur') blurEvent = new EventEmitter();
-  @Output('focus') focusEvent = new EventEmitter();
-  @Output('change') changeEvent = new EventEmitter();
-  @Output('open') openEvent = new EventEmitter();
-  @Output('close') closeEvent = new EventEmitter();
-  @Output('search') searchEvent = new EventEmitter<{ term: string; items: any[] }>();
-  @Output('clear') clearEvent = new EventEmitter();
-  @Output('add') addEvent = new EventEmitter();
-  @Output('remove') removeEvent = new EventEmitter();
-  @Output('scroll') scroll = new EventEmitter<{ start: number; end: number }>();
-  @Output('scrollToEnd') scrollToEnd = new EventEmitter();
-
-  @Input()
-  get clearSearchOnAdd() {
-    return this._clearSearchOnAdd ?? this.closeOnSelect;
-  }
-  set clearSearchOnAdd(value) {
-    this._clearSearchOnAdd = value;
-  }
-  private _clearSearchOnAdd = this._defaultOptions?.clearSearchOnAdd;
+  @Input() panelClass?: string | string[] | Record<string, any>;
 
   @Input()
   get items() {
@@ -341,13 +317,16 @@ export class MtxSelect
     this._errorStateTracker.matcher = value;
   }
 
-  /** Aria label of the select. */
-  @Input('aria-label') ariaLabel: string = '';
+  /** `aria-label` of the ng-select input. */
+  @Input() ariaLabel: string | null = null;
 
-  /** Input that can be used to specify the `aria-labelledby` attribute. */
-  @Input('aria-labelledby') ariaLabelledby: string | null = null;
+  /** `aria-labelledby` of the ng-select input. */
+  @Input() ariaLabelledby: string | null = null;
 
-  /** The aria-describedby attribute on the select for improved a11y. */
+  /** `aria-describedby` of the ng-select input. */
+  @Input() ariaDescribedby: string | null = null;
+
+  /** The aria-describedby attribute on the ng-select input for improved a11y. */
   _ariaDescribedby: string | null = null;
 
   /** A name for this control that can be used by `mat-form-field`. */
@@ -361,11 +340,6 @@ export class MtxSelect
 
   /** ID for the DOM node containing the select's value. */
   _valueId = `mtx-select-value-${nextUniqueId++}`;
-
-  /** Whether or not the overlay panel is open. */
-  get panelOpen(): boolean {
-    return !!this.ngSelect.isOpen;
-  }
 
   /**
    * Keeps track of the previous form control assigned to the select.
@@ -424,14 +398,6 @@ export class MtxSelect
     this.id = this.id;
   }
 
-  ngOnInit() {
-    // Fix compareWith warning of undefined value
-    // https://github.com/ng-select/ng-select/issues/1537
-    if (this.compareWith) {
-      this.ngSelect.compareWith = this.compareWith;
-    }
-  }
-
   ngAfterViewInit() {
     if (!this._itemsAreUsed) {
       this.ngSelect.escapeHTML = false;
@@ -473,11 +439,14 @@ export class MtxSelect
       return null;
     }
 
-    const labelId = this._parentFormField?.getLabelId();
-    let value = (labelId ? labelId + ' ' : '') + this._valueId;
+    let value = this._parentFormField?.getLabelId() || '';
 
     if (this.ariaLabelledby) {
       value += ' ' + this.ariaLabelledby;
+    }
+
+    if (!value) {
+      value = this._valueId;
     }
 
     return value;
@@ -485,7 +454,7 @@ export class MtxSelect
 
   /** Implemented as part of MatFormFieldControl. */
   setDescribedByIds(ids: string[]) {
-    this._ariaDescribedby = ids.length ? ids.join(' ') : null;
+    this._ariaDescribedby = this.ariaDescribedby || (ids.length ? ids.join(' ') : null);
   }
 
   /**
@@ -573,8 +542,8 @@ export class MtxSelect
     };
 
     const handleOptionChange = () => {
-      const changedOrDestroyed = merge(this.mtxOptions.changes, this._destroy$);
-      merge(...this.mtxOptions.map(option => option.stateChange$))
+      const changedOrDestroyed = merge(this.mtxOptions!.changes, this._destroy$);
+      merge(...this.mtxOptions!.map(option => option.stateChange$))
         .pipe(takeUntil(changedOrDestroyed))
         .subscribe(option => {
           const item = this.ngSelect.itemsList.findItem(option.value);
@@ -584,12 +553,12 @@ export class MtxSelect
         });
     };
 
-    this.mtxOptions.changes
-      .pipe(startWith(this.mtxOptions), takeUntil(this._destroy$))
-      .subscribe(options => {
+    this.mtxOptions!.changes.pipe(startWith(this.mtxOptions), takeUntil(this._destroy$)).subscribe(
+      options => {
         mapMtxOptions(options);
         handleOptionChange();
-      });
+      }
+    );
   }
 
   open() {
@@ -606,15 +575,5 @@ export class MtxSelect
 
   blur() {
     this.ngSelect.blur();
-  }
-
-  openChange() {
-    this.openEvent.emit();
-
-    // TODO: The ng-select has no `panelClass` prop, so we can add the theme color by the following way.
-    setTimeout(() => {
-      const dropdownEl = this._document.getElementById(this.ngSelect.dropdownId);
-      dropdownEl?.classList.add('mat-' + this._parentFormField?.color);
-    });
   }
 }
