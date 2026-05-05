@@ -3,13 +3,19 @@
   background: var(--mat-sys-primary-container);
 }
 
+:host ::ng-deep {
+  .mdc-button__label {
+    text-align: center;
+  }
+}
+
 .docs-navbar-header {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   padding: 8px 16px;
 
-  > .mat-mdc-button {
+  >.mat-mdc-button {
     &:last-child {
       margin-left: auto;
     }
@@ -58,7 +64,7 @@ app-logo {
 
 // Rules for when the device is detected to be a small screen.
 // Moves content two rows instead of one.
-@media (width <= 720px) {
+@media (width <=720px) {
   .docs-navbar-hide-small {
     display: none;
   }
@@ -79,7 +85,7 @@ app-logo {
 theme-picker {
   display: none;
 
-  @media (width >= 328px) {
+  @media (width >=328px) {
     display: block;
   }
 }

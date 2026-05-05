@@ -45,6 +45,15 @@
     </a>
   </mat-menu>
 
+  <a
+    matButton
+    class="docs-navbar-hide-small docs-button"
+    href="https://github.com/ng-dnd/ng-dnd"
+    target="_blank"
+  >
+    NG DnD
+  </a>
+
   <div class="flex-spacer"></div>
 
   <button matButton>{{ version$ | async }}</button>
@@ -75,7 +84,10 @@
 </nav>
 <nav class="docs-navbar docs-navbar-show-small" aria-label="Section Nav Bar">
   <a matButton class="docs-navbar-link" routerLink="components">Components</a>
-  <a matButton [matMenuTriggerFor]="menu" class="docs-navbar-link">Acrodata Components</a>
+  <a matButton class="docs-navbar-link" [matMenuTriggerFor]="menu">Acrodata Components</a>
+  <a matButton class="docs-navbar-link" href="https://github.com/ng-dnd/ng-dnd" target="_blank">
+    NG DnD
+  </a>
 </nav>
 
 <ng-template #githubIcon>
