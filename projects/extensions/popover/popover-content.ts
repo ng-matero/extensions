@@ -4,7 +4,7 @@ import {
   ChangeDetectorRef,
   Directive,
   DOCUMENT,
-  Inject,
+  inject,
   InjectionToken,
   Injector,
   OnDestroy,
@@ -22,20 +22,18 @@ export const MTX_POPOVER_CONTENT = new InjectionToken<MtxPopoverContent>('MtxPop
 
 @Directive()
 export abstract class _MtxPopoverContentBase implements OnDestroy {
+  private _template = inject(TemplateRef);
+  private _appRef = inject(ApplicationRef);
+  private _injector = inject(Injector);
+  private _viewContainerRef = inject(ViewContainerRef);
+  private _document = inject(DOCUMENT);
+  private _changeDetectorRef = inject(ChangeDetectorRef);
+
   private _portal!: TemplatePortal<any>;
   private _outlet!: DomPortalOutlet;
 
   /** Emits when the popover content has been attached. */
   readonly _attached = new Subject<void>();
-
-  constructor(
-    private _template: TemplateRef<any>,
-    private _appRef: ApplicationRef,
-    private _injector: Injector,
-    private _viewContainerRef: ViewContainerRef,
-    @Inject(DOCUMENT) private _document: any,
-    private _changeDetectorRef?: ChangeDetectorRef
-  ) {}
 
   /**
    * Attaches the content with a particular context.
@@ -68,11 +66,7 @@ export abstract class _MtxPopoverContentBase implements OnDestroy {
     // by Angular. This causes the `@ContentChildren` for popover items within the popover to
     // not be updated by Angular. By explicitly marking for check here, we tell Angular that
     // it needs to check for new popover items and update the `@ContentChild` in `MtxPopover`.
-    // @breaking-change 9.0.0 Make change detector ref required
-    if (this._changeDetectorRef) {
-      this._changeDetectorRef.markForCheck();
-    }
-
+    this._changeDetectorRef.markForCheck();
     this._portal.attach(this._outlet, context);
     this._attached.next();
   }
