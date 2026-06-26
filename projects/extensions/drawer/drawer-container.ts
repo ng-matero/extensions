@@ -25,7 +25,8 @@ const EXIT_ANIMATION = '_mtx-drawer-exit';
   // In Ivy embedded views will be change detected from their declaration place, rather than where
   // they were stamped out. This means that we can't have the drawer container be OnPush,
   // because it might cause the sheets that were opened from a template not to be out of date.
-  changeDetection: ChangeDetectionStrategy.Default,
+  // eslint-disable-next-line @angular-eslint/prefer-on-push-component-change-detection
+  changeDetection: ChangeDetectionStrategy.Eager,
   encapsulation: ViewEncapsulation.None,
   host: {
     'class': 'mtx-drawer-container',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { MatAnchor } from '@angular/material/button';
+import { RouterLink } from '@angular/router';
 
 @Component({
   template: `

@@ -2,7 +2,6 @@
   "compileOnSave": false,
   "compilerOptions": {
     "rootDir": ".",
-    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
@@ -24,28 +23,28 @@
     ],
     "paths": {
       "@ng-matero/extensions": [
-        "projects/extensions"
+        "./projects/extensions"
       ],
       "@ng-matero/extensions/*": [
-        "projects/extensions/*"
+        "./projects/extensions/*"
       ],
       "@ng-matero/extensions-moment-adapter": [
-        "projects/extensions-moment-adapter"
+        "./projects/extensions-moment-adapter"
       ],
       "@ng-matero/extensions-moment-adapter/*": [
-        "projects/extensions-moment-adapter/*"
+        "./projects/extensions-moment-adapter/*"
       ],
       "@ng-matero/extensions-luxon-adapter": [
-        "projects/extensions-luxon-adapter"
+        "./projects/extensions-luxon-adapter"
       ],
       "@ng-matero/extensions-luxon-adapter/*": [
-        "projects/extensions-luxon-adapter/*"
+        "./projects/extensions-luxon-adapter/*"
       ],
       "@ng-matero/extensions-date-fns-adapter": [
-        "projects/extensions-date-fns-adapter"
+        "./projects/extensions-date-fns-adapter"
       ],
       "@ng-matero/extensions-date-fns-adapter/*": [
-        "projects/extensions-date-fns-adapter/*"
+        "./projects/extensions-date-fns-adapter/*"
       ]
     },
     "useDefineForClassFields": false

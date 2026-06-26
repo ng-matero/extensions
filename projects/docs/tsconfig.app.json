@@ -2,24 +2,61 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "src",
     "outDir": "../../out-tsc/app",
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "paths": {
-      "@shared": ["app/shared"],
-      "@shared/*": ["app/shared/*"],
-      "@assets": ["assets"],
-      "@assets/*": ["assets/*"],
-      "@ng-matero/extensions": ["../../extensions"],
-      "@ng-matero/extensions/*": ["../../extensions/*"],
-      "@ng-matero/extensions-moment-adapter": ["../../extensions-moment-adapter"],
-      "@ng-matero/extensions-moment-adapter/*": ["../../extensions-moment-adapter/*"],
-      "@ng-matero/extensions-luxon-adapter": ["../../extensions-luxon-adapter"],
-      "@ng-matero/extensions-luxon-adapter/*": ["../../extensions-luxon-adapter/*"],
-      "@ng-matero/extensions-date-fns-adapter": ["../../extensions-date-fns-adapter"],
-      "@ng-matero/extensions-date-fns-adapter/*": ["../../extensions-date-fns-adapter/*"]
+      "@shared": [
+        "./src/app/shared"
+      ],
+      "@shared/*": [
+        "./src/app/shared/*"
+      ],
+      "@assets": [
+        "./src/assets"
+      ],
+      "@assets/*": [
+        "./src/assets/*"
+      ],
+      "@ng-matero/extensions": [
+        "../extensions"
+      ],
+      "@ng-matero/extensions/*": [
+        "../extensions/*"
+      ],
+      "@ng-matero/extensions-moment-adapter": [
+        "../extensions-moment-adapter"
+      ],
+      "@ng-matero/extensions-moment-adapter/*": [
+        "../extensions-moment-adapter/*"
+      ],
+      "@ng-matero/extensions-luxon-adapter": [
+        "../extensions-luxon-adapter"
+      ],
+      "@ng-matero/extensions-luxon-adapter/*": [
+        "../extensions-luxon-adapter/*"
+      ],
+      "@ng-matero/extensions-date-fns-adapter": [
+        "../extensions-date-fns-adapter"
+      ],
+      "@ng-matero/extensions-date-fns-adapter/*": [
+        "../extensions-date-fns-adapter/*"
+      ]
     }
   },
-  "files": ["src/main.ts"],
-  "include": ["src/**/*.d.ts"]
+  "files": [
+    "src/main.ts"
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ],
+  "angularCompilerOptions": {
+    "extendedDiagnostics": {
+      "checks": {
+        "nullishCoalescingNotNullable": "suppress",
+        "optionalChainNotNullable": "suppress"
+      }
+    }
+  }
 }

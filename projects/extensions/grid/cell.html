@@ -1,23 +1,30 @@
 @if (summary) {
   <span
-    [title]="_getFormatterTooltip((data | cellSummary: colDef))"
-    [innerHTML]="_getText((data | cellSummary: colDef))">
-  </span>
+    [title]="_getFormatterTooltip(data | cellSummary: colDef)"
+    [innerHTML]="_getText(data | cellSummary: colDef)"
+  ></span>
 } @else {
   <!-- Custom formatting -->
   @if (colDef.formatter) {
     <span
       [title]="_getFormatterTooltip(colDef.formatter(rowData, colDef))"
-      [innerHTML]="_getText(colDef.formatter(rowData, colDef))">
-    </span>
+      [innerHTML]="_getText(colDef.formatter(rowData, colDef))"
+    ></span>
   } @else {
     <!-- Default formatting -->
     @switch (colDef.type) {
       <!-- Buttons -->
       @case ('button') {
-        @for (btn of colDef.buttons | cellActions: rowData: rowChangeRecord: rowChangeRecord?.currentValue; track btn) {
+        @for (
+          btn of colDef.buttons
+            | cellActions
+              : rowData
+              : rowChangeRecord
+              : $safeNavigationMigration(rowChangeRecord?.currentValue);
+          track btn
+        ) {
           @if (!btn.iif || btn.iif(rowData)) {
-            @if(btn.children && btn.children.length>0){
+            @if (btn.children && btn.children.length > 0) {
               @if (btn.type === 'icon') {
                 <button
                   matIconButton
@@ -25,7 +32,13 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
-                  [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
+                  [disabled]="
+                    btn
+                      | cellActionDisable
+                        : rowData
+                        : rowChangeRecord
+                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
+                  "
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
                   [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
@@ -42,7 +55,9 @@
                   [matBadgeOverlap]="(btn | cellActionBadge).overlap"
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
-                  [matMenuTriggerFor]="btn.children && btn.children.length>0 ? gridMenu.menu : null"
+                  [matMenuTriggerFor]="
+                    btn.children && btn.children.length > 0 ? gridMenu.menu : null
+                  "
                   (click)="$event.stopPropagation()"
                 >
                   <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
@@ -56,7 +71,13 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
-                  [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
+                  [disabled]="
+                    btn
+                      | cellActionDisable
+                        : rowData
+                        : rowChangeRecord
+                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
+                  "
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
                   [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
@@ -73,7 +94,9 @@
                   [matBadgeOverlap]="(btn | cellActionBadge).overlap"
                   [matBadgeDisabled]="(btn | cellActionBadge).disabled"
                   [matBadgeHidden]="(btn | cellActionBadge).hidden"
-                  [matMenuTriggerFor]="btn.children && btn.children.length>0 ? gridMenu.menu : null"
+                  [matMenuTriggerFor]="
+                    btn.children && btn.children.length > 0 ? gridMenu.menu : null
+                  "
                   (click)="$event.stopPropagation()"
                 >
                   <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
@@ -82,7 +105,7 @@
 
                 <mtx-grid-menu #gridMenu [items]="btn.children || []" [data]="rowData" />
               }
-            }@else {
+            } @else {
               @if (btn.type === 'icon') {
                 <button
                   matIconButton
@@ -90,7 +113,13 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
-                  [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
+                  [disabled]="
+                    btn
+                      | cellActionDisable
+                        : rowData
+                        : rowChangeRecord
+                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
+                  "
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
                   [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
@@ -118,7 +147,13 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
-                  [disabled]="btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue"
+                  [disabled]="
+                    btn
+                      | cellActionDisable
+                        : rowData
+                        : rowChangeRecord
+                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
+                  "
                   [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
                   [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
@@ -150,52 +185,122 @@
         @if (colDef.tag && colDef.tag[_value]) {
           <mat-chip-listbox>
             <mat-chip color="primary" [class]="'bg-' + colDef.tag[_value].color">
-              {{colDef.tag[_value].text}}
+              {{ colDef.tag[_value].text }}
             </mat-chip>
           </mat-chip-listbox>
         } @else {
-          {{_value}}
+          {{ _value }}
         }
       }
       <!-- Link -->
       @case ('link') {
-        <a [href]="_value" target="_blank">{{_value}}</a>
+        <a [href]="_value" target="_blank">{{ _value }}</a>
       }
       <!-- Image -->
       @case ('image') {
-        <img class="mtx-grid-img" [src]="_value" alt="">
+        <img class="mtx-grid-img" [src]="_value" alt="" />
       }
       <!-- Boolean -->
       @case ('boolean') {
-        <span [title]="_getTooltip(_value)">{{_getText(_value)}}</span>
+        <span [title]="_getTooltip(_value)">{{ _getText(_value) }}</span>
       }
       <!-- Number -->
       @case ('number') {
-        <span [title]="_getTooltip(_value | number: colDef.typeParameter?.digitsInfo: colDef.typeParameter?.locale)">
-          {{_getText(_value | number: colDef.typeParameter?.digitsInfo: colDef.typeParameter?.locale)}}
+        <span
+          [title]="
+            _getTooltip(
+              _value
+                | number
+                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
+                  : $safeNavigationMigration(colDef.typeParameter?.locale)
+            )
+          "
+        >
+          {{
+            _getText(
+              _value
+                | number
+                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
+                  : $safeNavigationMigration(colDef.typeParameter?.locale)
+            )
+          }}
         </span>
       }
       <!-- Currency -->
       @case ('currency') {
-        <span [title]="_getTooltip(_value | currency: colDef.typeParameter?.currencyCode: colDef.typeParameter?.display: colDef.typeParameter?.digitsInfo: colDef.typeParameter?.locale)">
-          {{_getText(_value | currency: colDef.typeParameter?.currencyCode: colDef.typeParameter?.display: colDef.typeParameter?.digitsInfo: colDef.typeParameter?.locale)}}
+        <span
+          [title]="
+            _getTooltip(
+              _value
+                | currency
+                  : $safeNavigationMigration(colDef.typeParameter?.currencyCode)
+                  : $safeNavigationMigration(colDef.typeParameter?.display)
+                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
+                  : $safeNavigationMigration(colDef.typeParameter?.locale)
+            )
+          "
+        >
+          {{
+            _getText(
+              _value
+                | currency
+                  : $safeNavigationMigration(colDef.typeParameter?.currencyCode)
+                  : $safeNavigationMigration(colDef.typeParameter?.display)
+                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
+                  : $safeNavigationMigration(colDef.typeParameter?.locale)
+            )
+          }}
         </span>
       }
       <!-- Percent -->
       @case ('percent') {
-        <span [title]="_getTooltip(_value | percent: colDef.typeParameter?.digitsInfo: colDef.typeParameter?.locale)">
-          {{_getText(_value | percent: colDef.typeParameter?.digitsInfo: colDef.typeParameter?.locale)}}
+        <span
+          [title]="
+            _getTooltip(
+              _value
+                | percent
+                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
+                  : $safeNavigationMigration(colDef.typeParameter?.locale)
+            )
+          "
+        >
+          {{
+            _getText(
+              _value
+                | percent
+                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
+                  : $safeNavigationMigration(colDef.typeParameter?.locale)
+            )
+          }}
         </span>
       }
       <!-- Date -->
       @case ('date') {
-        <span [title]="_getTooltip(_value | date: colDef.typeParameter?.format: colDef.typeParameter?.timezone: colDef.typeParameter?.locale)">
-          {{_getText(_value | date: colDef.typeParameter?.format: colDef.typeParameter?.timezone: colDef.typeParameter?.locale)}}
+        <span
+          [title]="
+            _getTooltip(
+              _value
+                | date
+                  : $safeNavigationMigration(colDef.typeParameter?.format)
+                  : $safeNavigationMigration(colDef.typeParameter?.timezone)
+                  : $safeNavigationMigration(colDef.typeParameter?.locale)
+            )
+          "
+        >
+          {{
+            _getText(
+              _value
+                | date
+                  : $safeNavigationMigration(colDef.typeParameter?.format)
+                  : $safeNavigationMigration(colDef.typeParameter?.timezone)
+                  : $safeNavigationMigration(colDef.typeParameter?.locale)
+            )
+          }}
         </span>
       }
       <!-- Default -->
       @default {
-        <span [title]="_getTooltip(_value)">{{_getText(_value)}}</span>
+        <span [title]="_getTooltip(_value)">{{ _getText(_value) }}</span>
       }
     }
   }
@@ -203,10 +308,10 @@
 
 <ng-template #iconTpl let-btn>
   @if (btn.icon) {
-    <mat-icon class="mtx-grid-icon">{{btn.icon}}</mat-icon>
-  } @else if(btn.fontIcon) {
+    <mat-icon class="mtx-grid-icon">{{ btn.icon }}</mat-icon>
+  } @else if (btn.fontIcon) {
     <mat-icon class="mtx-grid-icon" [fontIcon]="btn.fontIcon"></mat-icon>
-  } @else if(btn.svgIcon) {
+  } @else if (btn.svgIcon) {
     <mat-icon class="mtx-grid-icon" [svgIcon]="btn.svgIcon"></mat-icon>
   }
 </ng-template>
