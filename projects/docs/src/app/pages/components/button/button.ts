@@ -38,7 +38,7 @@ export const routes: Routes = [
     component: ButtonApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./button.md'),
+      path: 'button/button.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

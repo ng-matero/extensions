@@ -9,18 +9,15 @@ const gridDataFormattingExampleConfig = {
   files: [
     {
       file: 'app.html',
-      content: require('!!highlight-loader?raw=true&lang=html!./app.html'),
-      filecontent: require('!!raw-loader!./app.html'),
+      path: 'grid/examples/data-formatting/app.html',
     },
     {
       file: 'app.ts',
-      content: require('!!highlight-loader?raw=true&lang=typescript!./app.ts'),
-      filecontent: require('!!raw-loader!./app.ts'),
+      path: 'grid/examples/data-formatting/app.ts',
     },
     {
       file: 'app.scss',
-      content: require('!!highlight-loader?raw=true&lang=scss!./app.scss'),
-      filecontent: require('!!raw-loader!./app.scss'),
+      path: 'grid/examples/data-formatting/app.scss',
     },
   ],
 };

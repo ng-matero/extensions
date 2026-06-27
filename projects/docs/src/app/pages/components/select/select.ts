@@ -56,7 +56,7 @@ export const routes: Routes = [
     component: SelectApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./select.md'),
+      path: 'select/select.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

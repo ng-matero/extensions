@@ -25,7 +25,7 @@
                 <button
                   matIconButton
                   type="button"
-                  (click)="copySource(textContent)"
+                  (click)="copySource(snippet.getRawText())"
                   class="docs-example-source-copy docs-example-button"
                   [matTooltip]="'Copy example source'"
                   title="Copy example source"
@@ -35,7 +35,7 @@
                 </button>
               </div>
               <div class="code-snippet">
-                <pre class="docs-example-source" [innerHtml]="f.content" #textContent></pre>
+                <code-snippet #snippet [path]="f.path || ''" />
               </div>
             </div>
           </mat-tab>

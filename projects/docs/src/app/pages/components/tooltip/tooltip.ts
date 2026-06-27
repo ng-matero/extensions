@@ -39,7 +39,7 @@ export const routes: Routes = [
     component: TooltipApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./tooltip.md'),
+      path: 'tooltip/tooltip.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

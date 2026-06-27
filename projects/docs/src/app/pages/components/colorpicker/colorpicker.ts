@@ -46,7 +46,7 @@ export const routes: Routes = [
     component: ColorPickerApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./colorpicker.md'),
+      path: 'colorpicker/colorpicker.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

@@ -58,7 +58,7 @@ export const routes: Routes = [
     component: CheckboxGroupApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./checkbox-group.md'),
+      path: 'checkbox-group/checkbox-group.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

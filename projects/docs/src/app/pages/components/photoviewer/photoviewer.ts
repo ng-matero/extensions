@@ -45,7 +45,7 @@ export const routes: Routes = [
     component: PhotoviewerApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./photoviewer.md'),
+      path: 'photoviewer/photoviewer.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

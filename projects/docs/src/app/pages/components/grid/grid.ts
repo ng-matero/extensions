@@ -82,7 +82,7 @@ export const routes: Routes = [
     providers: [
       provideTranslateService({
         loader: provideTranslateHttpLoader({
-          prefix: 'assets/i18n/data-grid',
+          prefix: 'assets/i18n/data-grid/',
           suffix: '_json',
         }),
       }),
@@ -93,7 +93,7 @@ export const routes: Routes = [
     component: GridApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./grid.md'),
+      path: 'grid/grid.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

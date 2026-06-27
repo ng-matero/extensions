@@ -38,7 +38,7 @@ export const routes: Routes = [
     component: SplitApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./split.md'),
+      path: 'split/split.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

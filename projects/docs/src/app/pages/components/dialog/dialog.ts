@@ -40,7 +40,7 @@ export const routes: Routes = [
     providers: [
       provideTranslateService({
         loader: provideTranslateHttpLoader({
-          prefix: 'assets/i18n/dialog',
+          prefix: 'assets/i18n/dialog/',
           suffix: '_json',
         }),
       }),
@@ -51,7 +51,7 @@ export const routes: Routes = [
     component: DialogApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./dialog.md'),
+      path: 'dialog/dialog.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

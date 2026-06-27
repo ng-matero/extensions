@@ -39,7 +39,7 @@ export const routes: Routes = [
     component: DatetimepickerApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./datetimepicker.md'),
+      path: 'datetimepicker/datetimepicker.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

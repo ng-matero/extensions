@@ -44,7 +44,7 @@ export const routes: Routes = [
     component: PopoverApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./popover.md'),
+      path: 'popover/popover.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

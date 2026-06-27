@@ -39,7 +39,7 @@ export const routes: Routes = [
     component: ProgressApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./progress.md'),
+      path: 'progress/progress.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

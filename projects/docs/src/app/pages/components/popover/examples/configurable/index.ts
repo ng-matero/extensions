@@ -6,18 +6,15 @@ const popoverConfigurableExampleConfig = {
   files: [
     {
       file: 'app.html',
-      content: require('!!highlight-loader?raw=true&lang=html!./app.html'),
-      filecontent: require('!!raw-loader!./app.html'),
+      path: 'popover/examples/configurable/app.html',
     },
     {
       file: 'app.ts',
-      content: require('!!highlight-loader?raw=true&lang=typescript!./app.ts'),
-      filecontent: require('!!raw-loader!./app.ts'),
+      path: 'popover/examples/configurable/app.ts',
     },
     {
       file: 'app.scss',
-      content: require('!!highlight-loader?raw=true&lang=scss!./app.scss'),
-      filecontent: require('!!raw-loader!./app.scss'),
+      path: 'popover/examples/configurable/app.scss',
     },
   ],
 };

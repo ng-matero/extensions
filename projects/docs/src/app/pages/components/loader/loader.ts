@@ -39,7 +39,7 @@ export const routes: Routes = [
     component: LoaderApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./loader.md'),
+      path: 'loader/loader.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

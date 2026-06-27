@@ -14,17 +14,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CopierService } from '../copier/copier.service';
+import { CodeSnippet } from './code-snippet';
 
 export interface ExampleType {
   title: string;
-  description: string;
+  description?: string;
   component: any;
   deps?: string[];
   debug?: boolean;
   files: {
     file: string;
-    content?: string;
-    filecontent: { default: string };
+    path?: string;
   }[];
 }
 
@@ -32,12 +32,11 @@ export interface ExampleType {
   selector: 'example-viewer',
   templateUrl: './example-viewer.html',
   styleUrl: './example-viewer.scss',
-  imports: [MatIconButton, MatTooltipModule, MatIconModule, MatTabsModule],
+  imports: [MatIconButton, MatTooltipModule, MatIconModule, MatTabsModule, CodeSnippet],
 })
 export class ExampleViewer implements OnInit, OnDestroy {
   private readonly snackbar = inject(MatSnackBar);
   private readonly copier = inject(CopierService);
-
   @Input() type!: string;
   @Input() exampleData!: ExampleType;
 
@@ -61,8 +60,8 @@ export class ExampleViewer implements OnInit, OnDestroy {
     this.showSource = !this.showSource;
   }
 
-  copySource(content: any) {
-    if (this.copier.copyText(content.innerText)) {
+  copySource(text: string) {
+    if (this.copier.copyText(text)) {
       this.snackbar.open('Code copied', '', { duration: 2500 });
     } else {
       this.snackbar.open('Copy failed. Please try again!', '', { duration: 2500 });

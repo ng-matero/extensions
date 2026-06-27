@@ -39,7 +39,7 @@ export const routes: Routes = [
     component: DrawerApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./drawer.md'),
+      path: 'drawer/drawer.md',
     },
   },
   { path: '**', redirectTo: 'overview' },

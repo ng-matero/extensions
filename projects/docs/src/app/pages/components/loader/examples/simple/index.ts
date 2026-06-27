@@ -6,18 +6,15 @@ const loaderSimpleExampleConfig = {
   files: [
     {
       file: 'app.html',
-      content: require('!!highlight-loader?raw=true&lang=html!./app.html'),
-      filecontent: require('!!raw-loader!./app.html'),
+      path: 'loader/examples/simple/app.html',
     },
     {
       file: 'app.ts',
-      content: require('!!highlight-loader?raw=true&lang=typescript!./app.ts'),
-      filecontent: require('!!raw-loader!./app.ts'),
+      path: 'loader/examples/simple/app.ts',
     },
     {
       file: 'app.scss',
-      content: require('!!highlight-loader?raw=true&lang=scss!./app.scss'),
-      filecontent: require('!!raw-loader!./app.scss'),
+      path: 'loader/examples/simple/app.scss',
     },
   ],
 };

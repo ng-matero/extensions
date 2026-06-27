@@ -38,7 +38,7 @@ export const routes: Routes = [
     component: AlertApi,
     pathMatch: 'full',
     data: {
-      content: require('!!raw-loader!!highlight-loader!markdown-loader!./alert.md'),
+      path: 'alert/alert.md',
     },
   },
   { path: '**', redirectTo: 'overview' },
