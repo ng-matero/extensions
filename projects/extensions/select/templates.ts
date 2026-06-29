@@ -1,66 +1,66 @@
 import { Directive, TemplateRef, inject } from '@angular/core';
 
-@Directive({ selector: '[ng-option-tmp]' })
+@Directive({ selector: '[ngSelectOption]' })
 export class MtxSelectOptionTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-optgroup-tmp]' })
+@Directive({ selector: '[ngSelectOptgroup]' })
 export class MtxSelectOptgroupTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-label-tmp]' })
+@Directive({ selector: '[ngSelectLabel]' })
 export class MtxSelectLabelTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-multi-label-tmp]' })
+@Directive({ selector: '[ngSelectMultiLabel]' })
 export class MtxSelectMultiLabelTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-header-tmp]' })
-export class MtxSelectHeaderTemplate {
+@Directive({ selector: '[ngSelectPanelHeader]' })
+export class MtxSelectPanelHeaderTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-footer-tmp]' })
-export class MtxSelectFooterTemplate {
+@Directive({ selector: '[ngSelectPanelFooter]' })
+export class MtxSelectPanelFooterTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-notfound-tmp]' })
+@Directive({ selector: '[ngSelectNotFound]' })
 export class MtxSelectNotFoundTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-typetosearch-tmp]' })
+@Directive({ selector: '[ngSelectTypeToSearch]' })
 export class MtxSelectTypeToSearchTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-loadingtext-tmp]' })
+@Directive({ selector: '[ngSelectLoadingText]' })
 export class MtxSelectLoadingTextTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-tag-tmp]' })
+@Directive({ selector: '[ngSelectTag]' })
 export class MtxSelectTagTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-loadingspinner-tmp]' })
-export class MtxSelectLoadingSpinnerTemplate {
+@Directive({ selector: '[ngSelectLoading]' })
+export class MtxSelectLoadingTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-placeholder-tmp]' })
+@Directive({ selector: '[ngSelectPlaceholder]' })
 export class MtxSelectPlaceholderTemplate {
   template = inject(TemplateRef);
 }
 
-@Directive({ selector: '[ng-clearbutton-tmp]' })
+@Directive({ selector: '[ngSelectClearButton]' })
 export class MtxSelectClearbuttonTemplate {
   template = inject(TemplateRef);
 }

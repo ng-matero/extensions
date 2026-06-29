@@ -63,10 +63,11 @@
   [ariaLabelledby]="_getAriaLabelledby()"
   [ariaDescribedby]="_ariaDescribedby"
   [inputAttrs]="inputAttrs"
+  [usePopover]="usePopover"
 >
   @if (optionTemplate) {
     <ng-template
-      ng-option-tmp
+      ngSelectOption
       let-item="item"
       let-item$="item$"
       let-index="index"
@@ -86,7 +87,7 @@
 
   @if (optgroupTemplate) {
     <ng-template
-      ng-optgroup-tmp
+      ngSelectOptgroup
       let-item="item"
       let-item$="item$"
       let-index="index"
@@ -105,7 +106,7 @@
   }
 
   @if (labelTemplate) {
-    <ng-template ng-label-tmp let-item="item" let-clear="clear" let-label="label">
+    <ng-template ngSelectLabel let-item="item" let-clear="clear" let-label="label">
       <ng-template
         [ngTemplateOutlet]="labelTemplate"
         [ngTemplateOutletContext]="{ item: item, clear: clear, label: label }"
@@ -114,7 +115,7 @@
   }
 
   @if (multiLabelTemplate) {
-    <ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+    <ng-template ngSelectMultiLabel let-items="items" let-clear="clear">
       <ng-template
         [ngTemplateOutlet]="multiLabelTemplate"
         [ngTemplateOutletContext]="{ items: items, clear: clear }"
@@ -122,20 +123,20 @@
     </ng-template>
   }
 
-  @if (headerTemplate) {
-    <ng-template ng-header-tmp>
-      <ng-template [ngTemplateOutlet]="headerTemplate"></ng-template>
+  @if (panelHeaderTemplate) {
+    <ng-template ngSelectPanelHeader>
+      <ng-template [ngTemplateOutlet]="panelHeaderTemplate"></ng-template>
     </ng-template>
   }
 
-  @if (footerTemplate) {
-    <ng-template ng-footer-tmp>
-      <ng-template [ngTemplateOutlet]="footerTemplate"></ng-template>
+  @if (panelFooterTemplate) {
+    <ng-template ngSelectPanelFooter>
+      <ng-template [ngTemplateOutlet]="panelFooterTemplate"></ng-template>
     </ng-template>
   }
 
   @if (notFoundTemplate) {
-    <ng-template ng-notfound-tmp let-searchTerm="searchTerm">
+    <ng-template ngSelectNotFound let-searchTerm="searchTerm">
       <ng-template
         [ngTemplateOutlet]="notFoundTemplate"
         [ngTemplateOutletContext]="{ searchTerm: searchTerm }"
@@ -144,13 +145,13 @@
   }
 
   @if (typeToSearchTemplate) {
-    <ng-template ng-typetosearch-tmp>
+    <ng-template ngSelectTypeToSearch>
       <ng-template [ngTemplateOutlet]="typeToSearchTemplate"></ng-template>
     </ng-template>
   }
 
   @if (loadingTextTemplate) {
-    <ng-template ng-loadingtext-tmp let-searchTerm="searchTerm">
+    <ng-template ngSelectLoadingText let-searchTerm="searchTerm">
       <ng-template
         [ngTemplateOutlet]="loadingTextTemplate"
         [ngTemplateOutletContext]="{ searchTerm: searchTerm }"
@@ -159,7 +160,7 @@
   }
 
   @if (tagTemplate) {
-    <ng-template ng-tag-tmp let-searchTerm="searchTerm">
+    <ng-template ngSelectTag let-searchTerm="searchTerm">
       <ng-template
         [ngTemplateOutlet]="tagTemplate"
         [ngTemplateOutletContext]="{ searchTerm: searchTerm }"
@@ -167,20 +168,20 @@
     </ng-template>
   }
 
-  @if (loadingSpinnerTemplate) {
-    <ng-template ng-loadingspinner-tmp>
-      <ng-template [ngTemplateOutlet]="loadingSpinnerTemplate"></ng-template>
+  @if (loadingTemplate) {
+    <ng-template ngSelectLoading>
+      <ng-template [ngTemplateOutlet]="loadingTemplate"></ng-template>
     </ng-template>
   }
 
   @if (placeholderTemplate) {
-    <ng-template ng-placeholder-tmp>
+    <ng-template ngSelectPlaceholder>
       <ng-template [ngTemplateOutlet]="placeholderTemplate"></ng-template>
     </ng-template>
   }
 
   @if (clearbuttonTemplate) {
-    <ng-template ng-clearbutton-tmp>
+    <ng-template ngSelectClearButton>
       <ng-template [ngTemplateOutlet]="clearbuttonTemplate"></ng-template>
     </ng-template>
   }

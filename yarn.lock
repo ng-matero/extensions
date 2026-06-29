@@ -1699,10 +1699,10 @@
     "@napi-rs/nice-win32-ia32-msvc" "1.1.1"
     "@napi-rs/nice-win32-x64-msvc" "1.1.1"
 
-"@ng-matero/ng-select@^0.6.0":
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/@ng-matero/ng-select/-/ng-select-0.6.2.tgz#740a2195a3ece742012bb7a75e3e0d60d8d51987"
-  integrity sha512-u7GPSFLvLwAKufmZu4f4G3S4QlO6uQ5xSo8wwvMlyFxyvh7QMDSabWl9xs5o8tIhgp9maN+1BPn4NzMrjvYSzw==
+"@ng-matero/ng-select@^1.2.1":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@ng-matero/ng-select/-/ng-select-1.2.1.tgz#fb418b6295759068cf737c51354af003701fa3cf"
+  integrity sha512-wL3Rf5wAJqro6OYi5MGHBFuQ39ja620A7Zfi4EYZ8AJ98eHOo8ZAERHMCVA+DsK2ERKPT9MEUZCLoNncXjMbqA==
   dependencies:
     tslib "^2.3.0"
 

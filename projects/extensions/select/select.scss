@@ -3,15 +3,16 @@
 @use './m3-select';
 
 $fallbacks: m3-select.get-tokens();
+$filled-padding-top: var(--mat-form-field-filled-with-label-container-padding-top, 24px);
+$filled-padding-bottom: var(--mat-form-field-filled-with-label-container-padding-bottom, 8px);
+$vertical-padding: var(--mat-form-field-container-vertical-padding, 16px);
+$text-line-height: var(
+  --mat-form-field-container-text-line-height,
+  var(--mat-sys-body-large-line-height)
+);
 
 .ng-select {
-  $filled-padding-top: var(--mat-form-field-filled-with-label-container-padding-top, 24px);
-  $filled-padding-bottom: var(--mat-form-field-filled-with-label-container-padding-bottom, 8px);
-  $vertical-padding: var(--mat-form-field-container-vertical-padding, 16px);
-  $text-line-height: var(
-    --mat-form-field-container-text-line-height,
-    var(--mat-sys-body-large-line-height)
-  );
+  --ns-indicator-icon-size: 16px;
 
   .mat-mdc-form-field & {
     padding: $filled-padding-top 16px $filled-padding-bottom;
@@ -25,132 +26,112 @@ $fallbacks: m3-select.get-tokens();
     margin-top: calc($vertical-padding * -1);
     margin-bottom: calc($vertical-padding * -1);
   }
+}
 
-  .ng-select-container {
-    align-items: center;
-    color: token-utils.slot(select-container-text-color, $fallbacks);
-  }
-
-  .ng-value-container {
-    align-items: center;
-    gap: 4px;
-  }
-
-  .ng-input > input {
+.ng-select-multiple {
+  .ng-select-value {
+    box-sizing: border-box;
     height: $text-line-height;
-    color: inherit;
-    font: inherit;
+    padding: 0 calc(($text-line-height - 16px) / 2);
+    border-radius: 9999px;
+    font-size: 0.875em;
+    background-color: token-utils.slot(select-multiple-value-background-color, $fallbacks);
+    border: 1px solid token-utils.slot(select-multiple-value-outline-color, $fallbacks);
+
+    &.ng-select-value-disabled {
+      opacity: 0.4;
+    }
   }
 
-  .ng-clear-wrapper {
+  .ng-select-value-label {
+    display: inline-block;
+    margin: 0 4px;
+  }
+
+  .ng-select-value-remove {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    width: 24px;
-    height: $text-line-height;
-    color: token-utils.slot(select-clear-icon-color, $fallbacks);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
 
-    &:hover .ng-clear {
-      color: token-utils.slot(select-clear-icon-hover-color, $fallbacks);
+    &:hover {
+      background-color: token-utils.slot(
+        select-multiple-value-icon-hover-background-color,
+        $fallbacks
+      );
     }
   }
 
-  .ng-placeholder {
-    transition: opacity 200ms;
-    opacity: 1;
-    color: token-utils.slot(select-placeholder-text-color, $fallbacks);
-
-    .mat-form-field-hide-placeholder & {
-      opacity: 0;
-    }
-  }
-
-  &.ng-select-disabled {
-    .ng-value {
-      color: token-utils.slot(select-disabled-text-color, $fallbacks);
-    }
-  }
-
-  &.ng-select-single {
-    &.ng-select-filtered .ng-placeholder {
-      display: initial;
-      visibility: hidden;
-    }
-  }
-
-  &.ng-select-multiple {
-    .ng-value {
-      box-sizing: border-box;
-      display: inline-flex;
-      align-items: center;
-      height: $text-line-height;
-      padding: 0 calc(($text-line-height - 16px) / 2);
-      border-radius: 9999px;
-      font-size: 0.875em;
-      background-color: token-utils.slot(select-multiple-value-background-color, $fallbacks);
-      border: 1px solid token-utils.slot(select-multiple-value-outline-color, $fallbacks);
-
-      &.ng-value-disabled {
-        opacity: 0.4;
-      }
-    }
-
-    .ng-value-label {
-      display: inline-block;
-      margin: 0 4px;
-      line-height: 16px;
-    }
-
-    .ng-value-remove {
-      width: 16px;
-      height: 16px;
-      line-height: 16px;
-      border-radius: 50%;
-      text-align: center;
-
-      &:hover {
-        background-color: token-utils.slot(
-          select-multiple-value-icon-hover-background-color,
-          $fallbacks
-        );
-      }
-    }
-
-    &.ng-select-disabled .ng-value {
-      border-color: token-utils.slot(select-multiple-value-disabled-outline-color, $fallbacks);
-    }
-  }
-
-  $enabled-arrow-color: token-utils.slot(select-enabled-arrow-color, $fallbacks);
-  $disabled-arrow-color: token-utils.slot(select-disabled-arrow-color, $fallbacks);
-  $invalid-arrow-color: token-utils.slot(select-invalid-arrow-color, $fallbacks);
-
-  .ng-arrow {
-    border-width: 5px 5px 2px;
-    border-style: solid;
-    border-color: $enabled-arrow-color transparent transparent;
-  }
-
-  &.ng-select-disabled .ng-arrow {
-    border-color: $disabled-arrow-color transparent transparent;
-  }
-
-  &.ng-select-invalid .ng-arrow {
-    border-color: $invalid-arrow-color transparent transparent;
-  }
-
-  &.ng-select-opened .ng-arrow {
-    top: -2px;
-    border-width: 0 5px 5px;
-    border-color: transparent transparent $enabled-arrow-color;
-  }
-
-  &.ng-select-opened.ng-select-invalid .ng-arrow {
-    border-color: transparent transparent $invalid-arrow-color;
+  &.ng-select-disabled .ng-select-value {
+    border-color: token-utils.slot(select-multiple-value-disabled-outline-color, $fallbacks);
   }
 }
 
-.ng-dropdown-panel {
+.ng-select-control {
+  color: token-utils.slot(select-container-text-color, $fallbacks);
+}
+
+.ng-select-value-container {
+  gap: 4px;
+}
+
+.ng-select-value {
+  .ng-select-disabled & {
+    color: token-utils.slot(select-disabled-text-color, $fallbacks);
+  }
+}
+
+.ng-select-input {
+  height: $text-line-height;
+  color: inherit;
+  font: inherit;
+}
+
+.ng-select-placeholder {
+  transition: opacity 200ms;
+  opacity: 1;
+  color: token-utils.slot(select-placeholder-text-color, $fallbacks);
+
+  .mat-form-field-hide-placeholder & {
+    opacity: 0;
+  }
+}
+
+.ng-select-clear,
+.ng-select-arrow {
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  transition: color 150ms;
+}
+
+.ng-select-clear {
+  color: token-utils.slot(select-clear-icon-color, $fallbacks);
+
+  &:hover {
+    color: token-utils.slot(select-clear-icon-hover-color, $fallbacks);
+  }
+}
+
+.ng-select-arrow {
+  color: token-utils.slot(select-enabled-arrow-color, $fallbacks);
+
+  .ng-select-disabled & {
+    color: token-utils.slot(select-disabled-arrow-color, $fallbacks);
+  }
+
+  .ng-select-invalid & {
+    color: token-utils.slot(select-invalid-arrow-color, $fallbacks);
+  }
+
+  .ng-select-opened & {
+    transform: rotate(180deg);
+  }
+}
+
+.ng-select-panel {
   background-color: token-utils.slot(select-panel-background-color, $fallbacks);
 
   &.ng-select-bottom {
@@ -166,67 +147,67 @@ $fallbacks: m3-select.get-tokens();
     border-top-right-radius: token-utils.slot(select-container-shape, $fallbacks);
     box-shadow: token-utils.slot(select-container-elevation-shadow, $fallbacks);
   }
+}
 
-  .ng-dropdown-header,
-  .ng-dropdown-footer {
-    padding: 14px 16px;
+.ng-select-panel-header,
+.ng-select-panel-footer {
+  padding: 14px 16px;
+}
+
+.ng-select-panel-header {
+  border-bottom: 1px solid token-utils.slot(select-panel-divider-color, $fallbacks);
+}
+
+.ng-select-panel-footer {
+  border-top: 1px solid token-utils.slot(select-panel-divider-color, $fallbacks);
+}
+
+.ng-select-optgroup {
+  padding: 14px 16px;
+  font-weight: 500;
+  user-select: none;
+  cursor: pointer;
+  color: token-utils.slot(select-optgroup-label-text-color, $fallbacks);
+
+  &.ng-select-option-disabled {
+    cursor: default;
   }
 
-  .ng-dropdown-header {
-    border-bottom: 1px solid token-utils.slot(select-panel-divider-color, $fallbacks);
+  &.ng-select-option-marked {
+    background-color: token-utils.slot(select-option-hover-state-background-color, $fallbacks);
   }
 
-  .ng-dropdown-footer {
-    border-top: 1px solid token-utils.slot(select-panel-divider-color, $fallbacks);
+  &.ng-select-option-selected {
+    background-color: token-utils.slot(select-option-selected-state-background-color, $fallbacks);
+    color: token-utils.slot(select-option-selected-state-text-color, $fallbacks);
+  }
+}
+
+.ng-select-option {
+  position: relative;
+  padding: 14px 16px;
+  color: token-utils.slot(select-option-label-text-color, $fallbacks);
+
+  &.ng-select-option-marked {
+    background-color: token-utils.slot(select-option-hover-state-background-color, $fallbacks);
   }
 
-  .ng-optgroup {
-    padding: 14px 16px;
-    font-weight: 500;
-    user-select: none;
-    cursor: pointer;
-    color: token-utils.slot(select-optgroup-label-text-color, $fallbacks);
-
-    &.ng-option-disabled {
-      cursor: default;
-    }
-
-    &.ng-option-marked {
-      background-color: token-utils.slot(select-option-hover-state-background-color, $fallbacks);
-    }
-
-    &.ng-option-selected {
-      background-color: token-utils.slot(select-option-selected-state-background-color, $fallbacks);
-      color: token-utils.slot(select-option-selected-state-text-color, $fallbacks);
-    }
+  &.ng-select-option-selected {
+    background-color: token-utils.slot(select-option-selected-state-background-color, $fallbacks);
+    color: token-utils.slot(select-option-selected-state-text-color, $fallbacks);
   }
 
-  .ng-option {
-    position: relative;
-    padding: 14px 16px;
-    color: token-utils.slot(select-option-label-text-color, $fallbacks);
-
-    &.ng-option-marked {
-      background-color: token-utils.slot(select-option-hover-state-background-color, $fallbacks);
-    }
-
-    &.ng-option-selected {
-      background-color: token-utils.slot(select-option-selected-state-background-color, $fallbacks);
-      color: token-utils.slot(select-option-selected-state-text-color, $fallbacks);
-    }
-
-    &.ng-option-disabled {
-      color: token-utils.slot(select-option-disabled-state-text-color, $fallbacks);
-    }
-
-    &.ng-option-child {
-      padding-inline-start: 32px;
-    }
+  &.ng-select-option-disabled {
+    color: token-utils.slot(select-option-disabled-state-text-color, $fallbacks);
   }
 
-  .ng-tag-label {
-    display: inline-block;
-    margin-inline-end: 6px;
-    font-size: 80%;
+  &.ng-select-option-child {
+    padding-inline-start: 32px;
   }
+}
+
+.ng-select-tag-option {
+  display: inline-block;
+  margin-inline-end: 6px;
+  font-size: 80%;
 }

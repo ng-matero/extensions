@@ -35,10 +35,10 @@ import { MAT_FORM_FIELD, MatFormField, MatFormFieldControl } from '@angular/mate
 import {
   AddTagFn,
   CompareWithFn,
-  DropdownPanelPosition,
   GroupValueFn,
   NgSelect,
   NgSelectModule,
+  PanelPosition,
   ScrollEvent,
   SearchEvent,
   SearchFn,
@@ -50,15 +50,15 @@ import { MtxOption } from './option';
 import { MtxSelectIntl } from './select-intl';
 import {
   MtxSelectClearbuttonTemplate,
-  MtxSelectFooterTemplate,
-  MtxSelectHeaderTemplate,
   MtxSelectLabelTemplate,
-  MtxSelectLoadingSpinnerTemplate,
+  MtxSelectLoadingTemplate,
   MtxSelectLoadingTextTemplate,
   MtxSelectMultiLabelTemplate,
   MtxSelectNotFoundTemplate,
   MtxSelectOptgroupTemplate,
   MtxSelectOptionTemplate,
+  MtxSelectPanelFooterTemplate,
+  MtxSelectPanelHeaderTemplate,
   MtxSelectPlaceholderTemplate,
   MtxSelectTagTemplate,
   MtxSelectTypeToSearchTemplate,
@@ -83,6 +83,7 @@ export interface MtxSelectDefaultOptions {
   virtualScroll?: boolean;
   fixedPlaceholder?: boolean;
   deselectOnClick?: boolean;
+  usePopover?: boolean;
 }
 
 /** Injection token that can be used to specify default select options. */
@@ -139,10 +140,10 @@ export class MtxSelect
   labelTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectMultiLabelTemplate, { read: TemplateRef })
   multiLabelTemplate?: TemplateRef<any>;
-  @ContentChild(MtxSelectHeaderTemplate, { read: TemplateRef })
-  headerTemplate?: TemplateRef<any>;
-  @ContentChild(MtxSelectFooterTemplate, { read: TemplateRef })
-  footerTemplate?: TemplateRef<any>;
+  @ContentChild(MtxSelectPanelHeaderTemplate, { read: TemplateRef })
+  panelHeaderTemplate?: TemplateRef<any>;
+  @ContentChild(MtxSelectPanelFooterTemplate, { read: TemplateRef })
+  panelFooterTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectNotFoundTemplate, { read: TemplateRef })
   notFoundTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectTypeToSearchTemplate, { read: TemplateRef })
@@ -151,8 +152,8 @@ export class MtxSelect
   loadingTextTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectTagTemplate, { read: TemplateRef })
   tagTemplate?: TemplateRef<any>;
-  @ContentChild(MtxSelectLoadingSpinnerTemplate, { read: TemplateRef })
-  loadingSpinnerTemplate?: TemplateRef<any>;
+  @ContentChild(MtxSelectLoadingTemplate, { read: TemplateRef })
+  loadingTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectPlaceholderTemplate, { read: TemplateRef })
   placeholderTemplate?: TemplateRef<any>;
   @ContentChild(MtxSelectClearbuttonTemplate, { read: TemplateRef })
@@ -170,9 +171,10 @@ export class MtxSelect
   @Output('scroll') scroll = new EventEmitter<ScrollEvent>();
   @Output('scrollToEnd') scrollToEnd = new EventEmitter();
 
+  @Input({ transform: booleanAttribute }) usePopover = this._defaultOptions?.usePopover ?? true;
   @Input() addTag: boolean | AddTagFn = false;
   @Input() addTagText?: string;
-  @Input() appendTo = this._defaultOptions?.appendTo ?? 'body';
+  @Input() appendTo = this._defaultOptions?.appendTo;
   @Input() bindLabel = this._defaultOptions?.bindLabel;
   @Input() bindValue = this._defaultOptions?.bindValue;
   @Input({ transform: booleanAttribute }) closeOnSelect = true;
@@ -180,7 +182,7 @@ export class MtxSelect
   @Input() clearAllText?: string;
   @Input({ transform: booleanAttribute }) clearOnBackspace = true;
   @Input() compareWith!: CompareWithFn;
-  @Input() panelPosition: DropdownPanelPosition = 'auto';
+  @Input() panelPosition: PanelPosition = 'auto';
   @Input() groupBy?: string | ((value: any) => any);
   @Input() groupValue?: GroupValueFn;
   @Input() bufferAmount = 4;
@@ -472,7 +474,7 @@ export class MtxSelect
   /** Implemented as part of MatFormFieldControl. */
   onContainerClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (!target.classList.contains('ng-arrow-wrapper')) {
+    if (!target.closest('.ng-select-arrow')) {
       this.focus();
       this.open();
     }

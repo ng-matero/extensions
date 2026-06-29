@@ -1,6 +1,6 @@
 <p>
   Custom dropdown panel option template using
-  <b>ng-option-tmp</b>
+  <b>ngSelectOption</b>
 </p>
 
 <mat-form-field>
@@ -13,7 +13,7 @@
     bindValue="name"
     appendTo="app-select-overview"
   >
-    <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+    <ng-template ngSelectOption let-item="item" let-index="index" let-search="searchTerm">
       @if (item.name === 'Kaunas') {
         <div>{{ item.name }}</div>
       }

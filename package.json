@@ -47,7 +47,7 @@
     "@angular/material-moment-adapter": "^22.0.2",
     "@angular/platform-browser": "^22.0.3",
     "@angular/router": "^22.0.3",
-    "@ng-matero/ng-select": "^0.6.0",
+    "@ng-matero/ng-select": "^1.2.1",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "date-fns": "^4.1.0",

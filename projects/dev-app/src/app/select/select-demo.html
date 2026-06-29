@@ -130,7 +130,7 @@
     placeholder="select food"
     required
   >
-    <ng-template ng-placeholder-tmp>
+    <ng-template ngSelectPlaceholder>
       <img
         height="15"
         width="15"
@@ -140,7 +140,7 @@
       Select your food
     </ng-template>
     <!-- <ng-template
-      ng-option-tmp
+      ngSelectOption
       let-item="item"
       let-item$="item$"
       let-index="index"
@@ -168,7 +168,7 @@
     [deselectOnClick]="deselectOnClick"
   >
     <!-- <ng-template
-      ng-optgroup-tmp
+      ngSelectOptgroup
       let-item="item"
       let-item$="item$"
       let-index="index"
@@ -195,7 +195,7 @@
     [closeOnSelect]="closeOnSelect"
     [deselectOnClick]="deselectOnClick"
   >
-    <ng-template ng-clearbutton-tmp>
+    <ng-template ngSelectClearButton>
       <button
         class="clearbutton"
         matIconButton
