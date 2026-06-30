@@ -47,7 +47,7 @@ const EXIT_ANIMATION = '_mtx-drawer-exit';
 })
 export class MtxDrawerContainer extends CdkDialogContainer<MtxDrawerConfig> implements OnDestroy {
   /** The portal outlet inside of this container into which the content will be loaded. */
-  @ViewChild(CdkPortalOutlet, { static: true }) _portalOutlet!: CdkPortalOutlet;
+  @ViewChild(CdkPortalOutlet, { static: true }) override _portalOutlet!: CdkPortalOutlet;
 
   protected _animationsDisabled = _animationsDisabled();
 

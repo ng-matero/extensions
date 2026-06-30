@@ -48,7 +48,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     this._useUtc = matMomentAdapterOptions?.useUtc || false;
   }
 
-  setLocale(locale: string) {
+  override setLocale(locale: string) {
     super.setLocale(locale);
 
     const momentLocaleData = moment.localeData(locale);
@@ -136,7 +136,7 @@ export class MomentDatetimeAdapter extends DatetimeAdapter<Moment> {
     return super.clone(date).add({ minutes });
   }
 
-  deserialize(value: any): Moment | null {
+  override deserialize(value: any): Moment | null {
     return this._delegate.deserialize(value);
   }
 

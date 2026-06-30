@@ -408,8 +408,11 @@ export class MtxTimeView<D> implements OnChanges, OnDestroy {
 
   ngOnChanges(changes: SimpleChanges): void {
     // when clockView changes by input we should focus the correct input
-    if (changes.clockView) {
-      if (changes.clockView.currentValue !== changes.clockView.previousValue && this.autoFocus) {
+    if (changes['clockView']) {
+      if (
+        changes['clockView'].currentValue !== changes['clockView'].previousValue &&
+        this.autoFocus
+      ) {
         this._focusInputElement();
       }
     }

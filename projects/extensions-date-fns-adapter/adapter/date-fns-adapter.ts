@@ -31,7 +31,7 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
     this.setLocale(matDateLocale);
   }
 
-  setLocale(locale: string) {
+  override setLocale(locale: string) {
     super.setLocale(locale);
   }
 
@@ -98,7 +98,7 @@ export class DateFnsDateTimeAdapter extends DatetimeAdapter<Date> {
     return addMinutes(date, minutes);
   }
 
-  deserialize(value: any): Date | null {
+  override deserialize(value: any): Date | null {
     return this._delegate.deserialize(value);
   }
 

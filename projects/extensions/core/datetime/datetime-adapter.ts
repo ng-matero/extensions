@@ -30,7 +30,7 @@ export abstract class DatetimeAdapter<D> extends DateAdapter<D> {
     minute: number
   ): D;
 
-  getValidDateOrNull(obj: any): D | null {
+  override getValidDateOrNull(obj: any): D | null {
     return this.isDateInstance(obj) && this.isValid(obj) ? obj : null;
   }
 
@@ -185,7 +185,7 @@ export abstract class DatetimeAdapter<D> extends DateAdapter<D> {
     return this._delegate.invalid();
   }
 
-  clampDate(date: D, min?: D | null, max?: D | null): D {
+  override clampDate(date: D, min?: D | null, max?: D | null): D {
     if (min && (this.compareDatetime(date, min) as number) < 0) {
       return min;
     }

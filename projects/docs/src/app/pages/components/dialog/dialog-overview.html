@@ -3,7 +3,7 @@
 </p>
 
 @if (route.data | async; as data) {
-  @for (exampleData of data.examples; track exampleData) {
+  @for (exampleData of data['examples']; track exampleData) {
     <doc-heading [text]="exampleData.title"></doc-heading>
     <example-viewer [exampleData]="exampleData"></example-viewer>
   }

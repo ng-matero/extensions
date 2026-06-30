@@ -445,7 +445,7 @@ export class MtxGrid implements OnChanges, AfterViewInit, OnDestroy {
     this.dataSource.sort = this.sortOnFront ? this.sort : null;
 
     // Only scroll top with data change
-    if (changes.data) {
+    if (changes['data']) {
       this.scrollTop(0);
     }
   }

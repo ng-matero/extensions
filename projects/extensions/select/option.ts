@@ -39,7 +39,7 @@ export class MtxOption implements OnChanges, AfterViewChecked, OnDestroy {
   }>();
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.disabled) {
+    if (changes['disabled']) {
       this.stateChange$.next({
         value: this.value,
         disabled: this.disabled,

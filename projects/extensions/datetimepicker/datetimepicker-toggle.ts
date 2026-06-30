@@ -91,7 +91,7 @@ export class MtxDatetimepickerToggle<D> implements AfterContentInit, OnChanges, 
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.datetimepicker) {
+    if (changes['datetimepicker']) {
       this._watchStateChanges();
     }
   }

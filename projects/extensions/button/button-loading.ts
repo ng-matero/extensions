@@ -36,11 +36,11 @@ export class MatButtonLoading implements OnChanges {
   @Input() color: ThemePalette;
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.loading) {
+    if (!changes['loading']) {
       return;
     }
 
-    if (changes.loading.currentValue) {
+    if (changes['loading'].currentValue) {
       this._elementRef.nativeElement.classList.add('mat-button-loading');
 
       if (!this.disabled) {
@@ -51,7 +51,7 @@ export class MatButtonLoading implements OnChanges {
       }
 
       this.createSpinner();
-    } else if (!changes.loading.firstChange) {
+    } else if (!changes['loading'].firstChange) {
       this._elementRef.nativeElement.classList.remove('mat-button-loading');
 
       if (!this.disabled) {

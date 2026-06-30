@@ -91,7 +91,7 @@ export class MtxColorpickerToggle implements AfterContentInit, OnChanges, OnDest
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.picker) {
+    if (changes['picker']) {
       this._watchStateChanges();
     }
   }

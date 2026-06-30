@@ -26,7 +26,7 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
     this.setLocale(matDateLocale);
   }
 
-  clone(date: Date): Date {
+  override clone(date: Date): Date {
     return this.createDatetime(
       this.getYear(date),
       this.getMonth(date),
@@ -123,11 +123,11 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
     return DEFAULT_MINUTE_NAMES;
   }
 
-  addCalendarYears(date: Date, years: number): Date {
+  override addCalendarYears(date: Date, years: number): Date {
     return this.addCalendarMonths(date, years * 12);
   }
 
-  addCalendarMonths(date: Date, months: number): Date {
+  override addCalendarMonths(date: Date, months: number): Date {
     let newDate = this._createDateWithOverflow(
       this.getYear(date),
       this.getMonth(date) + months,
@@ -153,7 +153,7 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
     return newDate;
   }
 
-  addCalendarDays(date: Date, days: number): Date {
+  override addCalendarDays(date: Date, days: number): Date {
     return this._createDateWithOverflow(
       this.getYear(date),
       this.getMonth(date),
@@ -183,7 +183,7 @@ export class NativeDatetimeAdapter extends DatetimeAdapter<Date> {
     );
   }
 
-  toIso8601(date: Date): string {
+  override toIso8601(date: Date): string {
     return (
       super.toIso8601(date) +
       'T' +

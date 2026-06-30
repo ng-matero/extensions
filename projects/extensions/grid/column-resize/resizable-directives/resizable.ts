@@ -49,7 +49,7 @@ export class MatResizable extends AbstractMatResizable {
   protected readonly changeDetectorRef = inject(ChangeDetectorRef);
   protected readonly document = inject(DOCUMENT);
 
-  isResizable = true;
+  override isResizable = true;
 
   get resizableClass() {
     return this.isResizable ? RESIZABLE_HOST_BINDINGS.class : '';

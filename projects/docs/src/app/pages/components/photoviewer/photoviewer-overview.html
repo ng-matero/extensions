@@ -10,7 +10,7 @@
 </mtx-alert>
 
 @if (route.data | async; as data) {
-  @for (exampleData of data.examples; track exampleData) {
+  @for (exampleData of data['examples']; track exampleData) {
     <example-viewer [exampleData]="exampleData"></example-viewer>
   }
 }

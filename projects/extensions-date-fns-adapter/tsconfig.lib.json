@@ -2,18 +2,10 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "../../out-tsc/lib",
-    "declarationMap": true,
     "declaration": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitReturns": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "noUnusedParameters": false,
-    "noUnusedLocals": false,
-    "strictNullChecks": true,
-    "strictFunctionTypes": true,
-    "strictBindCallApply": true,
-    "skipLibCheck": true
+    "declarationMap": true,
+    "inlineSources": true,
+    "types": []
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,
@@ -24,8 +16,7 @@
         "nullishCoalescingNotNullable": "suppress",
         "optionalChainNotNullable": "suppress"
       }
-    },
-    "strictInjectionParameters": true
+    }
   },
   "files": [
     "public-api.ts"

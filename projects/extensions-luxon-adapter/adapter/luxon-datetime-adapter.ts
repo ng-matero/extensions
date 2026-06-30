@@ -32,7 +32,7 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
     this._useUtc = matLuxonAdapterOptions?.useUtc || false;
   }
 
-  setLocale(locale: string) {
+  override setLocale(locale: string) {
     super.setLocale(locale);
   }
 
@@ -105,7 +105,7 @@ export class LuxonDatetimeAdapter extends DatetimeAdapter<DateTime> {
     return date.plus({ minutes });
   }
 
-  deserialize(value: any): DateTime | null {
+  override deserialize(value: any): DateTime | null {
     return this._delegate.deserialize(value);
   }
 
