@@ -25,8 +25,11 @@ export class CheckboxGroupDemo {
   selectedFoods = ['steak', 'pizza'];
 
   cars = ['Ford', 'Chevrolet', 'Dodge'];
+
   f1 = new UntypedFormControl(['Chevrolet'], Validators.required);
   f2 = new UntypedFormControl(true, Validators.required);
+
+  selectedColors = ['red', 'green'];
 
   trackBy = (index: number, item: MtxCheckboxGroupOption) => {
     return item.value;

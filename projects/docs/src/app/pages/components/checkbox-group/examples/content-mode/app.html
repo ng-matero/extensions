@@ -1,0 +1,7 @@
+<mtx-checkbox-group [(ngModel)]="selectedColors" showSelectAll>
+  <mat-checkbox value="red" color="primary">Red</mat-checkbox>
+  <mat-checkbox value="green" color="accent">Green</mat-checkbox>
+  <mat-checkbox value="blue" color="warn">Blue</mat-checkbox>
+  <mat-checkbox value="yellow" disabled>Yellow</mat-checkbox>
+</mtx-checkbox-group>
+<p>{{ selectedColors | json }}</p>

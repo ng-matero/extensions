@@ -55,7 +55,6 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
   private _focusMonitor = inject(FocusMonitor);
   private _elementRef = inject<ElementRef<HTMLElement>>(ElementRef);
 
-  // TODO: support ng-content for checkbox-group
   @ContentChildren(forwardRef(() => MatCheckbox), { descendants: true })
   _checkboxes!: QueryList<MatCheckbox>;
 
@@ -82,6 +81,8 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
     return this._items;
   }
   set items(value: any[]) {
+    this._itemsAreUsed = true;
+
     // store the original data with deep clone
     this._originalItems = JSON.parse(JSON.stringify(value));
     this._items = value.map(option => {
@@ -93,6 +94,7 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
   }
   private _items: any[] = [];
   private _originalItems: any[] = [];
+  private _itemsAreUsed = false;
 
   @Input() bindLabel = 'label';
 
@@ -141,6 +143,34 @@ export class MtxCheckboxGroup implements AfterViewInit, OnDestroy, ControlValueA
         });
       }
     });
+
+    if (!this._itemsAreUsed) {
+      this._setItemsFromContentCheckboxes();
+    }
+  }
+
+  /**
+   * Reads projected `<mat-checkbox>` elements and converts them into items.
+   */
+  private _setItemsFromContentCheckboxes() {
+    if (!this._checkboxes?.length) {
+      return;
+    }
+
+    const items = this._checkboxes.map(cb => ({
+      label: cb._elementRef.nativeElement.textContent?.trim() || '',
+      value: cb.value,
+      disabled: cb.disabled,
+      color: cb.color,
+      disableRipple: cb.disableRipple,
+      labelPosition: cb.labelPosition,
+      required: cb.required,
+      ariaLabel: cb.ariaLabel,
+      ariaLabelledby: cb.ariaLabelledby,
+      ariaDescribedby: cb.ariaDescribedby,
+    }));
+
+    this.items = items;
   }
 
   ngOnDestroy() {

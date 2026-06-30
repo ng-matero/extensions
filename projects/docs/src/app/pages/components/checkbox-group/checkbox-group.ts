@@ -11,6 +11,7 @@ import { checkboxGroupBindLabelBindValueExampleConfig } from './examples/bind-la
 import { checkboxGroupCompareWithExampleConfig } from './examples/compare-with';
 import { checkboxGroupI18nExampleConfig } from './examples/i18n';
 import { checkboxGroupSelectAllExampleConfig } from './examples/select-all';
+import { checkboxGroupContentModeExampleConfig } from './examples/content-mode';
 
 @Component({
   selector: 'app-checkbox-group-overview',
@@ -41,6 +42,7 @@ export const routes: Routes = [
         checkboxGroupBindLabelBindValueExampleConfig,
         checkboxGroupCompareWithExampleConfig,
         checkboxGroupSelectAllExampleConfig,
+        checkboxGroupContentModeExampleConfig,
         checkboxGroupI18nExampleConfig,
       ],
     },
