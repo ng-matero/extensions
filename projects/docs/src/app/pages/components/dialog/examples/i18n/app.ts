@@ -17,7 +17,7 @@ export class App {
 
   constructor() {
     this.translate.addLangs(this.langs.map(item => item.value));
-    this.translate.setDefaultLang(this.defaultlang);
+    this.translate.setFallbackLang(this.defaultlang);
   }
 
   open() {
