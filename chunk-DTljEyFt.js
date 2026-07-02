@@ -1,0 +1,1 @@
+import {l as lt,Y as Ye,bs as C_}from'./main-CKBO76XE.js';var r=class o{static{this.\u0275fac=function(m){return new(m||o)};}static{this.\u0275mod=lt({type:o});}static{this.\u0275inj=Ye({imports:[C_]});}};export{r};

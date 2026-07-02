@@ -1,0 +1,1 @@
+import {be as Ao,ck as Hn}from'./main-CKBO76XE.js';var a=class e{transform(r){return r instanceof Ao}static{this.\u0275fac=function(n){return new(n||e)};}static{this.\u0275pipe=Hn({name:"isTemplateRef",type:e,pure:true});}};export{a};
