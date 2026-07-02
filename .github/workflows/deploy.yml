@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      PUBLISH_DIR: ./dist/docs/browser
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -15,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
 
       - name: Install dependencies
         run: yarn
@@ -24,13 +26,13 @@ jobs:
         run: npm run build:docs
 
       - name: Create 404.html
-        run: cp ./dist/docs/index.html ./dist/docs/404.html
+        run: cp ${{ env.PUBLISH_DIR }}/index.html ${{ env.PUBLISH_DIR }}/404.html
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist/docs
+          publish_dir: ${{ env.PUBLISH_DIR }}
           publish_branch: gh-pages
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
