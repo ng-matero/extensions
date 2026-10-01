@@ -1,0 +1,1 @@
+import{St as Lo,W as Hn}from"./chunk-_FgkqbxZ.js";var i=class e{transform(r){return r instanceof Lo}static{this.ɵfac=function(n){return new(n||e)}}static{this.ɵpipe=Hn({name:`isTemplateRef`,type:e,pure:!0})}};export{i as t};
