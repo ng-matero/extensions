@@ -1,6 +1,6 @@
 import { Directionality } from '@angular/cdk/bidi';
 import { FullscreenOverlayContainer, OverlayContainer } from '@angular/cdk/overlay';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient } from '@angular/common/http';
 import { provideZoneChangeDetection, provideZonelessChangeDetection } from '@angular/core';
 import {
   AnimationsConfig,
@@ -22,7 +22,7 @@ const cachedAppState = getAppState();
 bootstrapApplication(App, {
   providers: [
     provideRouter(DEV_APP_ROUTES),
-    provideHttpClient(withFetch()),
+    provideHttpClient(),
     provideTranslateService({
       loader: provideTranslateHttpLoader({ prefix: 'assets/i18n/', suffix: '.json' }),
     }),

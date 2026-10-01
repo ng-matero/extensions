@@ -142,9 +142,6 @@
               "base": "dist/docs"
             },
             "index": "projects/docs/src/index.html",
-            "polyfills": [
-              "zone.js"
-            ],
             "tsConfig": "projects/docs/tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [

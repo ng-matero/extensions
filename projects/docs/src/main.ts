@@ -1,5 +1,4 @@
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideZoneChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter, withInMemoryScrolling } from '@angular/router';
 import { provideHighlightOptions } from 'ngx-highlightjs';
@@ -8,8 +7,7 @@ import { DOCS_APP_ROUTES } from './app/routes';
 
 bootstrapApplication(App, {
   providers: [
-    provideZoneChangeDetection(),
-    provideHttpClient(withFetch()),
+    provideHttpClient(),
     provideRouter(
       DOCS_APP_ROUTES,
       withInMemoryScrolling({
