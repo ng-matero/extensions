@@ -6,13 +6,7 @@
 <mat-form-field>
   <mat-label>Select City</mat-label>
 
-  <mtx-select
-    [items]="cities"
-    [(ngModel)]="selectedCity"
-    bindLabel="name"
-    bindValue="name"
-    appendTo="app-select-overview"
-  >
+  <mtx-select [items]="cities" [(ngModel)]="selectedCity" bindLabel="name" bindValue="name">
     <ng-template ngSelectLabel let-item="item">
       <img height="15" width="15" [src]="item.avatar" alt="" />
       {{ item.name }}

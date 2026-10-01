@@ -11,7 +11,7 @@
 <mat-form-field>
   <mat-label>Select Car</mat-label>
 
-  <mtx-select [multiple]="true" [(ngModel)]="selectedCars" appendTo="app-select-overview">
+  <mtx-select [multiple]="true" [(ngModel)]="selectedCars">
     @for (car of cars; track car) {
       <mtx-option [value]="car.id" [disabled]="car.disabled">{{ car.name }}</mtx-option>
     }

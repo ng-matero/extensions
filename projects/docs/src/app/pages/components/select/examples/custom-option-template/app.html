@@ -6,13 +6,7 @@
 <mat-form-field>
   <mat-label>Select City</mat-label>
 
-  <mtx-select
-    [items]="cities"
-    [(ngModel)]="selectedCity"
-    bindLabel="name"
-    bindValue="name"
-    appendTo="app-select-overview"
-  >
+  <mtx-select [items]="cities" [(ngModel)]="selectedCity" bindLabel="name" bindValue="name">
     <ng-template ngSelectOption let-item="item" let-index="index" let-search="searchTerm">
       @if (item.name === 'Kaunas') {
         <div>{{ item.name }}</div>
@@ -28,8 +22,8 @@
             Some quick example text to build
           </mat-card-content>
           <mat-card-actions>
-            <button matButton >LIKE</button>
-            <button matButton >SHARE</button>
+            <button matButton>LIKE</button>
+            <button matButton>SHARE</button>
           </mat-card-actions>
         </mat-card>
       }
