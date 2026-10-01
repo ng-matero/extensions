@@ -211,7 +211,7 @@ export class MtxSelect
   @Input({ transform: booleanAttribute }) panelDisabled = false;
   @Input({ transform: booleanAttribute }) fixedPlaceholder =
     this._defaultOptions?.fixedPlaceholder ?? false;
-  @Input({ transform: booleanAttribute }) preventToggleOnRightClick = false;
+  @Input({ transform: booleanAttribute }) preventToggleOnRightClick = true;
   @Input({ transform: booleanAttribute }) clearSearchOnAdd = this._defaultOptions?.clearSearchOnAdd;
   @Input({ transform: booleanAttribute }) deselectOnClick = this._defaultOptions?.deselectOnClick;
   @Input() tabIndex?: number;
