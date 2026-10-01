@@ -70,6 +70,7 @@ $text-line-height: var(
 }
 
 .ng-select-control {
+  min-height: 24px;
   color: token-utils.slot(select-container-text-color, $fallbacks);
 }
 

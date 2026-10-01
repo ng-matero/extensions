@@ -3,6 +3,7 @@
   [class.ng-select-invalid]="errorState"
   [panelClass]="panelClass"
   [(ngModel)]="value"
+  [ngModelOptions]="{ standalone: true }"
   [placeholder]="placeholder || _intl.placeholder"
   [items]="items"
   [addTag]="addTag"
