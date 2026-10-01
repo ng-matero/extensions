@@ -1,57 +1,126 @@
 import { Component } from '@angular/core';
-import { TestBed, fakeAsync, flush, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatButtonModule } from '@angular/material/button';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { By } from '@angular/platform-browser';
+import { vi } from 'vitest';
+import { MatButtonLoading } from './button-loading';
 import { MtxButtonModule } from './button-module';
 
 @Component({
-  selector: 'test-app',
   template: `
-    <button matButton [loading]="loading">Test Button</button>
+    <button matButton [loading]="isLoading" [disabled]="isDisabled">Click me</button>
   `,
-  imports: [MatButtonModule, MtxButtonModule],
+  imports: [MtxButtonModule, MatButtonModule],
 })
-class TestApp {
-  loading = false;
+class TestHostComponent {
+  isLoading = false;
+  isDisabled = false;
 }
 
-describe('ButtonLoading', () => {
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [TestApp],
+describe('MatButtonLoading Directive', () => {
+  let fixture: ComponentFixture<TestHostComponent>;
+  let buttonEl: HTMLButtonElement;
+  let directiveInstance: MatButtonLoading;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TestHostComponent, MtxButtonModule, MatButtonModule],
+    }).compileComponents();
+
+    fixture = TestBed.createComponent(TestHostComponent);
+    buttonEl = fixture.debugElement.query(By.css('button')).nativeElement;
+
+    directiveInstance = fixture.debugElement
+      .query(By.directive(MatButtonLoading))
+      .injector.get(MatButtonLoading);
+
+    fixture.detectChanges();
+  });
+
+  it('should add loading class and disable button when loading becomes true', async () => {
+    vi.useFakeTimers();
+
+    directiveInstance.loading = true;
+    directiveInstance.ngOnChanges({
+      loading: {
+        previousValue: false,
+        currentValue: true,
+        firstChange: true,
+        isFirstChange: () => true,
+      },
     });
-  }));
-
-  it('button loading', fakeAsync(() => {
-    const fixture = TestBed.createComponent(TestApp);
-    const testComponent = fixture.debugElement.componentInstance;
-    const buttonDebugElement = fixture.debugElement.query(By.css('button'))!;
-    const buttonNativeElement = fixture.nativeElement.querySelector('button') as HTMLButtonElement;
-
-    testComponent.loading = true;
-    tick();
     fixture.detectChanges();
-    expect(buttonDebugElement.nativeElement.classList.contains('mat-button-loading')).toBe(true);
-    expect(buttonNativeElement.getAttribute('disabled'))
-      .withContext('Expected button to be disabled')
-      .toBeTruthy();
-    const spinner1 = fixture.debugElement.query(
-      By.directive(MatProgressSpinner)
-    )!.componentInstance;
-    expect(spinner1).withContext('Expected spinner to be existed').toBeTruthy();
 
-    testComponent.loading = false;
-    tick();
+    expect(buttonEl.classList.contains('mat-button-loading')).toBe(true);
+    expect(buttonEl.querySelector('mat-progress-spinner')).toBeTruthy();
+
+    await vi.advanceTimersByTimeAsync(0);
     fixture.detectChanges();
-    expect(buttonDebugElement.nativeElement.classList.contains('mat-button-loading')).toBe(false);
-    expect(buttonNativeElement.getAttribute('disabled'))
-      .withContext('Expected button not to be disabled')
-      .toBeFalsy();
-    const spinner2 = fixture.debugElement.query(
-      By.directive(MatProgressSpinner)
-    )?.componentInstance;
-    expect(spinner2).withContext('Expected spinner to be not existed').toBeFalsy();
-    flush();
-  }));
+
+    expect(buttonEl.classList.contains('mat-mdc-button-disabled')).toBe(true);
+    expect(buttonEl.hasAttribute('disabled')).toBe(true);
+
+    vi.useRealTimers();
+  });
+
+  it('should remove loading class and re-enable button when loading becomes false', async () => {
+    vi.useFakeTimers();
+
+    directiveInstance.loading = true;
+    directiveInstance.ngOnChanges({
+      loading: {
+        previousValue: false,
+        currentValue: true,
+        firstChange: true,
+        isFirstChange: () => true,
+      },
+    });
+    fixture.detectChanges();
+    await vi.advanceTimersByTimeAsync(0);
+
+    directiveInstance.loading = false;
+    directiveInstance.ngOnChanges({
+      loading: {
+        previousValue: true,
+        currentValue: false,
+        firstChange: false,
+        isFirstChange: () => false,
+      },
+    });
+    fixture.detectChanges();
+
+    expect(buttonEl.classList.contains('mat-button-loading')).toBe(false);
+    expect(buttonEl.querySelector('mat-progress-spinner')).toBeFalsy();
+
+    await vi.advanceTimersByTimeAsync(0);
+    fixture.detectChanges();
+
+    expect(buttonEl.classList.contains('mat-mdc-button-disabled')).toBe(false);
+    expect(buttonEl.hasAttribute('disabled')).toBe(false);
+
+    vi.useRealTimers();
+  });
+
+  it('should not override disabled state if button was already disabled', async () => {
+    vi.useFakeTimers();
+
+    fixture.componentInstance.isDisabled = true;
+    fixture.detectChanges();
+
+    directiveInstance.loading = true;
+    directiveInstance.ngOnChanges({
+      loading: {
+        previousValue: false,
+        currentValue: true,
+        firstChange: true,
+        isFirstChange: () => true,
+      },
+    });
+    fixture.detectChanges();
+    await vi.advanceTimersByTimeAsync(0);
+
+    expect(buttonEl.hasAttribute('disabled')).toBe(true);
+
+    vi.useRealTimers();
+  });
 });

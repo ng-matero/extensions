@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { TableOfContents } from './table-of-contents';
@@ -10,12 +10,12 @@ const mockActivatedRoute = {
 };
 
 describe('TableOfContents', () => {
-  beforeEach(waitForAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [],
       providers: [{ provide: ActivatedRoute, useValue: mockActivatedRoute }],
     }).compileComponents();
-  }));
+  });
 
   let fixture: ComponentFixture<TableOfContents>;
   let component: TableOfContents;

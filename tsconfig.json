@@ -11,6 +11,9 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "preserve",
+    "types": [
+      "jasmine"
+    ],
     "useDefineForClassFields": false,
     "paths": {
       "@ng-matero/extensions": [
