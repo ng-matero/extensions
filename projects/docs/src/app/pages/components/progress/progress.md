@@ -4,6 +4,14 @@
 
 `import { MtxProgressModule } from '@ng-matero/extensions/progress';`
 
+### Accessibility
+
+`<mtx-progress>` has `role="progressbar"`, with `aria-valuemin="0"`, `aria-valuemax="100"` and `aria-valuenow` set from `value`. Give each progress bar an accessible name with `aria-label` or `aria-labelledby`.
+
+```html
+<mtx-progress [value]="40" aria-label="Upload progress">40%</mtx-progress>
+```
+
 ### Directives
 
 #### `MtxProgress`
