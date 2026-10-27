@@ -13,6 +13,10 @@ export type MtxProgressType = 'default' | 'info' | 'success' | 'warning' | 'dang
   exportAs: 'mtxProgress',
   host: {
     'class': 'mtx-progress',
+    'role': 'progressbar',
+    'aria-valuemin': '0',
+    'aria-valuemax': '100',
+    '[attr.aria-valuenow]': '_ariaValueNow',
     '[style.height]': 'height',
     '[style.backgroundColor]': 'background',
   },
@@ -45,4 +49,9 @@ export class MtxProgress {
 
   /** Whether to apply the animated class. */
   @Input({ transform: booleanAttribute }) animate = false;
+
+  /** The value for `aria-valuenow`, clamped between 0 and 100. */
+  protected get _ariaValueNow() {
+    return Math.min(Math.max(Number(this.value) || 0, 0), 100);
+  }
 }
