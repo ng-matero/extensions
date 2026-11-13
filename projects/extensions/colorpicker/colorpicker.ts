@@ -276,6 +276,10 @@ export class MtxColorpicker implements OnChanges, OnDestroy {
 
   /** Selects the given color. */
   select(nextVal: string): void {
+    if (this.disabled) {
+      return;
+    }
+
     const oldValue = this.selected;
     this.selected = nextVal;
 
