@@ -491,6 +491,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
 
   /** Selects the given date */
   _select(date: D): void {
+    if (this.disabled) {
+      return;
+    }
+
     this.oldValue = this._selected;
     this._selected = date;
     if (!this._actionsPortal) {
@@ -501,6 +505,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   _selectManually(): void {
+    if (this.disabled) {
+      return;
+    }
+
     if (!this._selected) {
       this._selected = this._dateAdapter.today();
       this.selectedChanged.emit(this._selected);
@@ -511,6 +519,10 @@ export class MtxDatetimepicker<D> implements OnDestroy {
   }
 
   _clearSelected(): void {
+    if (this.disabled) {
+      return;
+    }
+
     this.oldValue = null;
     this._selected = null;
     this.selectedChanged.emit();
