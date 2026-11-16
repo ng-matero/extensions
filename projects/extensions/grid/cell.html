@@ -32,6 +32,15 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
+                  [attr.aria-label]="
+                    (btn
+                      | cellActionAriaLabel
+                        : rowData
+                        : rowChangeRecord
+                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
+                      | toObservable
+                      | async) || null
+                  "
                   [disabled]="
                     btn
                       | cellActionDisable
@@ -113,6 +122,15 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
+                  [attr.aria-label]="
+                    (btn
+                      | cellActionAriaLabel
+                        : rowData
+                        : rowChangeRecord
+                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
+                      | toObservable
+                      | async) || null
+                  "
                   [disabled]="
                     btn
                       | cellActionDisable

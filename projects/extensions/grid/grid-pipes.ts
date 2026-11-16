@@ -1,5 +1,5 @@
 import { KeyValueChangeRecord, Pipe, PipeTransform, inject } from '@angular/core';
-import { isObservable } from 'rxjs';
+import { Observable, isObservable } from 'rxjs';
 import { MtxGridUtils } from './grid-utils';
 import { MtxGridColumn, MtxGridColumnButton, MtxGridRowClassFormatter } from './interfaces';
 
@@ -65,6 +65,26 @@ export class MtxGridCellActionTooltipPipe implements PipeTransform {
       return { message: btn.tooltip };
     } else {
       return btn.tooltip || { message: '' };
+    }
+  }
+}
+
+@Pipe({ name: 'cellActionAriaLabel' })
+export class MtxGridCellActionAriaLabelPipe implements PipeTransform {
+  transform(
+    btn: MtxGridColumnButton,
+    rowData: Record<string, any>,
+    rowChangeRecord?: KeyValueChangeRecord<string, any>,
+    currentValue?: any
+  ): string | Observable<string> {
+    if (typeof btn.ariaLabel === 'function') {
+      return btn.ariaLabel(rowData);
+    } else if (btn.ariaLabel) {
+      return btn.ariaLabel;
+    } else if (typeof btn.tooltip === 'string' || isObservable(btn.tooltip)) {
+      return btn.tooltip;
+    } else {
+      return btn.tooltip?.message ?? '';
     }
   }
 }
