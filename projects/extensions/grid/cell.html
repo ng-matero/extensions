@@ -24,6 +24,7 @@
           track btn
         ) {
           @if (!btn.iif || btn.iif(rowData)) {
+            @let tooltipMessage = (btn | cellActionTooltip).message | toObservable | async;
             @if (btn.children && btn.children.length > 0) {
               @if (btn.type === 'icon') {
                 <button
@@ -39,7 +40,9 @@
                         : rowChangeRecord
                         : $safeNavigationMigration(rowChangeRecord?.currentValue)
                       | toObservable
-                      | async) || null
+                      | async) ||
+                    tooltipMessage ||
+                    null
                   "
                   [disabled]="
                     btn
@@ -48,7 +51,7 @@
                         : rowChangeRecord
                         : $safeNavigationMigration(rowChangeRecord?.currentValue)
                   "
-                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltip]="tooltipMessage"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
                   [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
                   [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
@@ -80,6 +83,15 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
+                  [attr.aria-label]="
+                    (btn
+                      | cellActionAriaLabel
+                        : rowData
+                        : rowChangeRecord
+                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
+                      | toObservable
+                      | async) || null
+                  "
                   [disabled]="
                     btn
                       | cellActionDisable
@@ -87,7 +99,7 @@
                         : rowChangeRecord
                         : $safeNavigationMigration(rowChangeRecord?.currentValue)
                   "
-                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltip]="tooltipMessage"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
                   [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
                   [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
@@ -129,7 +141,9 @@
                         : rowChangeRecord
                         : $safeNavigationMigration(rowChangeRecord?.currentValue)
                       | toObservable
-                      | async) || null
+                      | async) ||
+                    tooltipMessage ||
+                    null
                   "
                   [disabled]="
                     btn
@@ -138,7 +152,7 @@
                         : rowChangeRecord
                         : $safeNavigationMigration(rowChangeRecord?.currentValue)
                   "
-                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltip]="tooltipMessage"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
                   [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
                   [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
@@ -165,6 +179,15 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
+                  [attr.aria-label]="
+                    (btn
+                      | cellActionAriaLabel
+                        : rowData
+                        : rowChangeRecord
+                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
+                      | toObservable
+                      | async) || null
+                  "
                   [disabled]="
                     btn
                       | cellActionDisable
@@ -172,7 +195,7 @@
                         : rowChangeRecord
                         : $safeNavigationMigration(rowChangeRecord?.currentValue)
                   "
-                  [matTooltip]="(btn | cellActionTooltip).message | toObservable | async"
+                  [matTooltip]="tooltipMessage"
                   [matTooltipClass]="(btn | cellActionTooltip).class"
                   [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
                   [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"

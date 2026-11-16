@@ -76,16 +76,8 @@ export class MtxGridCellActionAriaLabelPipe implements PipeTransform {
     rowData: Record<string, any>,
     rowChangeRecord?: KeyValueChangeRecord<string, any>,
     currentValue?: any
-  ): string | Observable<string> {
-    if (typeof btn.ariaLabel === 'function') {
-      return btn.ariaLabel(rowData);
-    } else if (btn.ariaLabel) {
-      return btn.ariaLabel;
-    } else if (typeof btn.tooltip === 'string' || isObservable(btn.tooltip)) {
-      return btn.tooltip;
-    } else {
-      return btn.tooltip?.message ?? '';
-    }
+  ): string | Observable<string> | undefined {
+    return typeof btn.ariaLabel === 'function' ? btn.ariaLabel(rowData) : btn.ariaLabel;
   }
 }
 

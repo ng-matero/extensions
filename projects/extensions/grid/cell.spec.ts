@@ -43,6 +43,21 @@ class TestHostComponent {
         },
         { type: 'icon', icon: 'info', class: 'no-label' },
         { type: 'text', text: 'View', class: 'text-button', tooltip: 'View details' },
+        { type: 'filled', icon: 'edit', class: 'filled-icon-label', ariaLabel: 'Edit row' },
+        {
+          type: 'icon',
+          icon: 'label',
+          class: 'empty-label',
+          tooltip: 'Tag',
+          ariaLabel: () => '',
+        },
+        {
+          type: 'filled',
+          icon: 'more_vert',
+          class: 'filled-menu-label',
+          ariaLabel: 'More',
+          children: [{ text: 'Copy' }],
+        },
       ],
     },
   ];
@@ -95,5 +110,17 @@ describe('MtxGridCell action buttons', () => {
 
   it('should not override the visible text of text buttons', () => {
     expect(getButton('text-button').hasAttribute('aria-label')).toBe(false);
+  });
+
+  it('should apply an explicit ariaLabel to non-icon buttons', () => {
+    expect(getButton('filled-icon-label').getAttribute('aria-label')).toBe('Edit row');
+  });
+
+  it('should fall back to the tooltip message when ariaLabel is empty', () => {
+    expect(getButton('empty-label').getAttribute('aria-label')).toBe('Tag');
+  });
+
+  it('should apply an explicit ariaLabel to non-icon buttons that open a menu', () => {
+    expect(getButton('filled-menu-label').getAttribute('aria-label')).toBe('More');
   });
 });
