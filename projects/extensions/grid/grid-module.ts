@@ -25,6 +25,7 @@ import { MtxGridColumnMenu } from './column-menu';
 import { MtxGridExpansionToggle } from './grid-expansion-toggle';
 import { MtxGridMenu } from './grid-menu';
 import {
+  MtxGridCellActionAriaLabelPipe,
   MtxGridCellActionBadgePipe,
   MtxGridCellActionDisablePipe,
   MtxGridCellActionTooltipPipe,
@@ -67,6 +68,7 @@ import { MtxGridUtils } from './grid-utils';
     MtxGridColClassPipe,
     MtxGridCellActionsPipe,
     MtxGridCellActionTooltipPipe,
+    MtxGridCellActionAriaLabelPipe,
     MtxGridCellActionBadgePipe,
     MtxGridCellActionDisablePipe,
     MtxGridCellSummaryPipe,
@@ -83,6 +85,7 @@ import { MtxGridUtils } from './grid-utils';
     MtxGridColClassPipe,
     MtxGridCellActionsPipe,
     MtxGridCellActionTooltipPipe,
+    MtxGridCellActionAriaLabelPipe,
     MtxGridCellActionBadgePipe,
     MtxGridCellActionDisablePipe,
     MtxGridCellSummaryPipe,

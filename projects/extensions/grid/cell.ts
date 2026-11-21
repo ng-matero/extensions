@@ -34,6 +34,7 @@ import { MtxToObservablePipe } from '@ng-matero/extensions/core';
 import { MtxDialog } from '@ng-matero/extensions/dialog';
 import { MtxGridMenu } from './grid-menu';
 import {
+  MtxGridCellActionAriaLabelPipe,
   MtxGridCellActionBadgePipe,
   MtxGridCellActionDisablePipe,
   MtxGridCellActionTooltipPipe,
@@ -70,6 +71,7 @@ import { MtxGridColumn, MtxGridColumnButton } from './interfaces';
     MtxGridCellSummaryPipe,
     MtxGridCellActionDisablePipe,
     MtxGridCellActionTooltipPipe,
+    MtxGridCellActionAriaLabelPipe,
     MtxGridCellActionBadgePipe,
     MtxGridMenu,
   ],

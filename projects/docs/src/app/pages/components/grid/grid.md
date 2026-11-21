@@ -236,6 +236,7 @@ interface MtxGridColumnButton<T = any> {
   iif?: (rowData: T) => boolean;
   pop?: string | Observable<string> | MtxGridColumnButtonPop;
   tooltip?: string | Observable<string> | MtxGridColumnButtonTooltip;
+  ariaLabel?: string | Observable<string> | ((rowData: T) => string | Observable<string>);
   badge?: number | string | Observable<string> | MtxGridColumnButtonBadge;
   children?: MtxGridMenuItem<T>[];
 }

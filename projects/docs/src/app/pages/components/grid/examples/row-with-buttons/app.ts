@@ -34,6 +34,7 @@ export class App {
           type: 'icon',
           icon: 'edit',
           tooltip: 'Edit',
+          ariaLabel: row => `Edit ${row.name}`,
           click: () => alert('edit'),
         },
         {
