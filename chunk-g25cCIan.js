@@ -1,0 +1,1 @@
+import{jt as Po,n as $n}from"./chunk-DzaGEPAO.js";var i=class e{transform(r){return r instanceof Po}static{this.ɵfac=function(n){return new(n||e)}}static{this.ɵpipe=$n({name:`isTemplateRef`,type:e,pure:!0})}};export{i as t};
