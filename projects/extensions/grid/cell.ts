@@ -135,7 +135,11 @@ export class MtxGridCell implements OnInit, DoCheck {
   }
 
   _getFormatterTooltip(value: any) {
-    return this._utils.isContainHTML(value) || this._utils.isEmpty(value) ? '' : value;
+    if (this._utils.isEmpty(value)) {
+      return '';
+    }
+    const doc = new DOMParser().parseFromString(value, 'text/html');
+    return doc.documentElement.textContent || '';
   }
 
   _onActionClick(event: MouseEvent, btn: MtxGridColumnButton, rowData: Record<string, any>) {
