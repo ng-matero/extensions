@@ -127,9 +127,7 @@
                       [ngTemplateOutletContext]="{ $implicit: col, colDef: col }"
                     ></ng-template>
                   } @else {
-                    @if (
-                      $safeNavigationMigration($any(headerTemplate)?.[col.field]) | isTemplateRef
-                    ) {
+                    @if ($any(headerTemplate)?.[col.field] | isTemplateRef) {
                       <ng-template
                         [ngTemplateOutlet]="$any(headerTemplate)[col.field]"
                         [ngTemplateOutletContext]="{ $implicit: col, colDef: col }"
@@ -139,8 +137,8 @@
                         [mat-sort-header]="col.sortProp?.id || col.field"
                         [disabled]="!col.sortable"
                         [disableClear]="col.sortProp?.disableClear ?? sortDisableClear"
-                        [arrowPosition]="$safeNavigationMigration(col.sortProp?.arrowPosition)!"
-                        [start]="$safeNavigationMigration(col.sortProp?.start)!"
+                        [arrowPosition]="(col.sortProp?.arrowPosition)!"
+                        [start]="(col.sortProp?.start)!"
                       >
                         @if (col.showExpand) {
                           <span class="mtx-grid-expansion-placeholder"></span>
@@ -170,13 +168,7 @@
               <td
                 mat-cell
                 *matCellDef="let row; let index = index; let dataIndex = dataIndex"
-                [class]="
-                  col
-                    | colClass
-                      : row
-                      : rowChangeRecord
-                      : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                "
+                [class]="col | colClass: row : rowChangeRecord : rowChangeRecord?.currentValue"
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
                 [style.width]="col.width"
@@ -198,7 +190,7 @@
                     }"
                   ></ng-template>
                 } @else {
-                  @if ($safeNavigationMigration($any(cellTemplate)?.[col.field]) | isTemplateRef) {
+                  @if ($any(cellTemplate)?.[col.field] | isTemplateRef) {
                     <ng-template
                       [ngTemplateOutlet]="$any(cellTemplate)[col.field]"
                       [ngTemplateOutletContext]="{
@@ -270,9 +262,7 @@
                     [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }"
                   ></ng-template>
                 } @else {
-                  @if (
-                    $safeNavigationMigration($any(summaryTemplate)?.[col.field]) | isTemplateRef
-                  ) {
+                  @if ($any(summaryTemplate)?.[col.field] | isTemplateRef) {
                     <ng-template
                       [ngTemplateOutlet]="$any(summaryTemplate)[col.field]"
                       [ngTemplateOutletContext]="{
@@ -430,9 +420,7 @@
                       [ngTemplateOutletContext]="{ $implicit: col, colDef: col }"
                     ></ng-template>
                   } @else {
-                    @if (
-                      $safeNavigationMigration($any(headerTemplate)?.[col.field]) | isTemplateRef
-                    ) {
+                    @if ($any(headerTemplate)?.[col.field] | isTemplateRef) {
                       <ng-template
                         [ngTemplateOutlet]="$any(headerTemplate)[col.field]"
                         [ngTemplateOutletContext]="{ $implicit: col, colDef: col }"
@@ -442,8 +430,8 @@
                         [mat-sort-header]="col.sortProp?.id || col.field"
                         [disabled]="!col.sortable"
                         [disableClear]="col.sortProp?.disableClear ?? sortDisableClear"
-                        [arrowPosition]="$safeNavigationMigration(col.sortProp?.arrowPosition)!"
-                        [start]="$safeNavigationMigration(col.sortProp?.start)!"
+                        [arrowPosition]="(col.sortProp?.arrowPosition)!"
+                        [start]="(col.sortProp?.start)!"
                       >
                         @if (col.showExpand) {
                           <span class="mtx-grid-expansion-placeholder"></span>
@@ -473,13 +461,7 @@
               <td
                 mat-cell
                 *matCellDef="let row; let index = index; let dataIndex = dataIndex"
-                [class]="
-                  col
-                    | colClass
-                      : row
-                      : rowChangeRecord
-                      : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                "
+                [class]="col | colClass: row : rowChangeRecord : rowChangeRecord?.currentValue"
                 [class.mat-table-sticky-left]="col.pinned === 'left'"
                 [class.mat-table-sticky-right]="col.pinned === 'right'"
                 [style.width]="col.width"
@@ -500,7 +482,7 @@
                     }"
                   ></ng-template>
                 } @else {
-                  @if ($safeNavigationMigration($any(cellTemplate)?.[col.field]) | isTemplateRef) {
+                  @if ($any(cellTemplate)?.[col.field] | isTemplateRef) {
                     <ng-template
                       [ngTemplateOutlet]="$any(cellTemplate)[col.field]"
                       [ngTemplateOutletContext]="{
@@ -571,9 +553,7 @@
                     [ngTemplateOutletContext]="{ $implicit: col, colDef: col, data: data }"
                   ></ng-template>
                 } @else {
-                  @if (
-                    $safeNavigationMigration($any(summaryTemplate)?.[col.field]) | isTemplateRef
-                  ) {
+                  @if ($any(summaryTemplate)?.[col.field] | isTemplateRef) {
                     <ng-template
                       [ngTemplateOutlet]="$any(summaryTemplate)[col.field]"
                       [ngTemplateOutletContext]="{
@@ -713,7 +693,7 @@
       [ngTemplateOutletContext]="{ $implicit: col, colDef: col }"
     ></ng-template>
   } @else {
-    @if ($safeNavigationMigration($any(headerExtraTemplate)?.[col.field]) | isTemplateRef) {
+    @if ($any(headerExtraTemplate)?.[col.field] | isTemplateRef) {
       <ng-template
         [ngTemplateOutlet]="headerExtraTemplate[col.field]"
         [ngTemplateOutletContext]="{ $implicit: col, colDef: col }"

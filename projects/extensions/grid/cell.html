@@ -11,20 +11,28 @@
       [innerHTML]="_getText(colDef.formatter(rowData, colDef))"
     ></span>
   } @else {
+    @let typeParam = colDef.typeParameter;
+
     <!-- Default formatting -->
     @switch (colDef.type) {
       <!-- Buttons -->
       @case ('button') {
-        @for (
-          btn of colDef.buttons
-            | cellActions
-              : rowData
-              : rowChangeRecord
-              : $safeNavigationMigration(rowChangeRecord?.currentValue);
-          track btn
-        ) {
+        @let colBtns =
+          colDef.buttons | cellActions: rowData : rowChangeRecord : rowChangeRecord?.currentValue;
+
+        @for (btn of colBtns; track btn) {
           @if (!btn.iif || btn.iif(rowData)) {
-            @let tooltipMessage = (btn | cellActionTooltip).message | toObservable | async;
+            @let btnAriaLabelStream =
+              btn | cellActionAriaLabel: rowData : rowChangeRecord : rowChangeRecord?.currentValue;
+            @let btnAriaLabel = btnAriaLabelStream | toObservable | async;
+            @let btnDisabled =
+              btn | cellActionDisable: rowData : rowChangeRecord : rowChangeRecord?.currentValue;
+            @let btnTooltip = btn | cellActionTooltip;
+            @let btnTooltipMessage = btnTooltip.message | toObservable | async;
+            @let btnBadge = btn | cellActionBadge;
+            @let btnBadgeContent = btnBadge.content | toObservable | async;
+            @let btnBadgeDescription = btnBadge.description | toObservable | async;
+
             @if (btn.children && btn.children.length > 0) {
               @if (btn.type === 'icon') {
                 <button
@@ -33,43 +41,25 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
-                  [attr.aria-label]="
-                    (btn
-                      | cellActionAriaLabel
-                        : rowData
-                        : rowChangeRecord
-                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                      | toObservable
-                      | async) ||
-                    tooltipMessage ||
-                    null
-                  "
-                  [disabled]="
-                    btn
-                      | cellActionDisable
-                        : rowData
-                        : rowChangeRecord
-                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                  "
-                  [matTooltip]="tooltipMessage"
-                  [matTooltipClass]="(btn | cellActionTooltip).class"
-                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
-                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
-                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
-                  [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
-                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
-                  [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
-                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
-                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
-                  [matBadgeColor]="(btn | cellActionBadge).color"
-                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
-                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
-                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
-                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
-                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
-                  [matMenuTriggerFor]="
-                    btn.children && btn.children.length > 0 ? gridMenu.menu : null
-                  "
+                  [attr.aria-label]="btnAriaLabel || btnTooltipMessage || null"
+                  [disabled]="btnDisabled"
+                  [matTooltip]="btnTooltipMessage"
+                  [matTooltipClass]="btnTooltip.class"
+                  [matTooltipHideDelay]="btnTooltip.hideDelay"
+                  [matTooltipShowDelay]="btnTooltip.showDelay"
+                  [matTooltipPosition]="btnTooltip.position || 'below'"
+                  [matTooltipPositionAtOrigin]="btnTooltip.positionAtOrigin"
+                  [matTooltipTouchGestures]="btnTooltip.touchGestures || 'auto'"
+                  [matTooltipDisabled]="btnTooltip.disabled"
+                  [matBadge]="btnBadgeContent"
+                  [matBadgeDescription]="btnBadgeDescription"
+                  [matBadgeColor]="btnBadge.color"
+                  [matBadgePosition]="btnBadge.position || 'above after'"
+                  [matBadgeSize]="btnBadge.size || 'medium'"
+                  [matBadgeOverlap]="btnBadge.overlap"
+                  [matBadgeDisabled]="btnBadge.disabled"
+                  [matBadgeHidden]="btnBadge.hidden"
+                  [matMenuTriggerFor]="gridMenu.menu"
                   (click)="$event.stopPropagation()"
                 >
                   <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
@@ -83,41 +73,25 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
-                  [attr.aria-label]="
-                    (btn
-                      | cellActionAriaLabel
-                        : rowData
-                        : rowChangeRecord
-                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                      | toObservable
-                      | async) || null
-                  "
-                  [disabled]="
-                    btn
-                      | cellActionDisable
-                        : rowData
-                        : rowChangeRecord
-                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                  "
-                  [matTooltip]="tooltipMessage"
-                  [matTooltipClass]="(btn | cellActionTooltip).class"
-                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
-                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
-                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
-                  [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
-                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
-                  [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
-                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
-                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
-                  [matBadgeColor]="(btn | cellActionBadge).color"
-                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
-                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
-                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
-                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
-                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
-                  [matMenuTriggerFor]="
-                    btn.children && btn.children.length > 0 ? gridMenu.menu : null
-                  "
+                  [attr.aria-label]="btnAriaLabel || null"
+                  [disabled]="btnDisabled"
+                  [matTooltip]="btnTooltipMessage"
+                  [matTooltipClass]="btnTooltip.class"
+                  [matTooltipHideDelay]="btnTooltip.hideDelay"
+                  [matTooltipShowDelay]="btnTooltip.showDelay"
+                  [matTooltipPosition]="btnTooltip.position || 'below'"
+                  [matTooltipPositionAtOrigin]="btnTooltip.positionAtOrigin"
+                  [matTooltipTouchGestures]="btnTooltip.touchGestures || 'auto'"
+                  [matTooltipDisabled]="btnTooltip.disabled"
+                  [matBadge]="btnBadgeContent"
+                  [matBadgeDescription]="btnBadgeDescription"
+                  [matBadgeColor]="btnBadge.color"
+                  [matBadgePosition]="btnBadge.position || 'above after'"
+                  [matBadgeSize]="btnBadge.size || 'medium'"
+                  [matBadgeOverlap]="btnBadge.overlap"
+                  [matBadgeDisabled]="btnBadge.disabled"
+                  [matBadgeHidden]="btnBadge.hidden"
+                  [matMenuTriggerFor]="gridMenu.menu"
                   (click)="$event.stopPropagation()"
                 >
                   <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
@@ -134,40 +108,24 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
-                  [attr.aria-label]="
-                    (btn
-                      | cellActionAriaLabel
-                        : rowData
-                        : rowChangeRecord
-                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                      | toObservable
-                      | async) ||
-                    tooltipMessage ||
-                    null
-                  "
-                  [disabled]="
-                    btn
-                      | cellActionDisable
-                        : rowData
-                        : rowChangeRecord
-                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                  "
-                  [matTooltip]="tooltipMessage"
-                  [matTooltipClass]="(btn | cellActionTooltip).class"
-                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
-                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
-                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
-                  [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
-                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
-                  [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
-                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
-                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
-                  [matBadgeColor]="(btn | cellActionBadge).color"
-                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
-                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
-                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
-                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
-                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
+                  [attr.aria-label]="btnAriaLabel || btnTooltipMessage || null"
+                  [disabled]="btnDisabled"
+                  [matTooltip]="btnTooltipMessage"
+                  [matTooltipClass]="btnTooltip.class"
+                  [matTooltipHideDelay]="btnTooltip.hideDelay"
+                  [matTooltipShowDelay]="btnTooltip.showDelay"
+                  [matTooltipPosition]="btnTooltip.position || 'below'"
+                  [matTooltipPositionAtOrigin]="btnTooltip.positionAtOrigin"
+                  [matTooltipTouchGestures]="btnTooltip.touchGestures || 'auto'"
+                  [matTooltipDisabled]="btnTooltip.disabled"
+                  [matBadge]="btnBadgeContent"
+                  [matBadgeDescription]="btnBadgeDescription"
+                  [matBadgeColor]="btnBadge.color"
+                  [matBadgePosition]="btnBadge.position || 'above after'"
+                  [matBadgeSize]="btnBadge.size || 'medium'"
+                  [matBadgeOverlap]="btnBadge.overlap"
+                  [matBadgeDisabled]="btnBadge.disabled"
+                  [matBadgeHidden]="btnBadge.hidden"
                   (click)="_onActionClick($event, btn, rowData)"
                 >
                   <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
@@ -179,38 +137,24 @@
                   type="button"
                   class="mtx-grid-action-button"
                   [class]="btn.class"
-                  [attr.aria-label]="
-                    (btn
-                      | cellActionAriaLabel
-                        : rowData
-                        : rowChangeRecord
-                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                      | toObservable
-                      | async) || null
-                  "
-                  [disabled]="
-                    btn
-                      | cellActionDisable
-                        : rowData
-                        : rowChangeRecord
-                        : $safeNavigationMigration(rowChangeRecord?.currentValue)
-                  "
-                  [matTooltip]="tooltipMessage"
-                  [matTooltipClass]="(btn | cellActionTooltip).class"
-                  [matTooltipHideDelay]="(btn | cellActionTooltip).hideDelay"
-                  [matTooltipShowDelay]="(btn | cellActionTooltip).showDelay"
-                  [matTooltipPosition]="(btn | cellActionTooltip).position || 'below'"
-                  [matTooltipPositionAtOrigin]="(btn | cellActionTooltip).positionAtOrigin"
-                  [matTooltipTouchGestures]="(btn | cellActionTooltip).touchGestures || 'auto'"
-                  [matTooltipDisabled]="(btn | cellActionTooltip).disabled"
-                  [matBadge]="(btn | cellActionBadge).content | toObservable | async"
-                  [matBadgeDescription]="(btn | cellActionBadge).description | toObservable | async"
-                  [matBadgeColor]="(btn | cellActionBadge).color"
-                  [matBadgePosition]="(btn | cellActionBadge).position || 'above after'"
-                  [matBadgeSize]="(btn | cellActionBadge).size || 'medium'"
-                  [matBadgeOverlap]="(btn | cellActionBadge).overlap"
-                  [matBadgeDisabled]="(btn | cellActionBadge).disabled"
-                  [matBadgeHidden]="(btn | cellActionBadge).hidden"
+                  [attr.aria-label]="btnAriaLabel || null"
+                  [disabled]="btnDisabled"
+                  [matTooltip]="btnTooltipMessage"
+                  [matTooltipClass]="btnTooltip.class"
+                  [matTooltipHideDelay]="btnTooltip.hideDelay"
+                  [matTooltipShowDelay]="btnTooltip.showDelay"
+                  [matTooltipPosition]="btnTooltip.position || 'below'"
+                  [matTooltipPositionAtOrigin]="btnTooltip.positionAtOrigin"
+                  [matTooltipTouchGestures]="btnTooltip.touchGestures || 'auto'"
+                  [matTooltipDisabled]="btnTooltip.disabled"
+                  [matBadge]="btnBadgeContent"
+                  [matBadgeDescription]="btnBadgeDescription"
+                  [matBadgeColor]="btnBadge.color"
+                  [matBadgePosition]="btnBadge.position || 'above after'"
+                  [matBadgeSize]="btnBadge.size || 'medium'"
+                  [matBadgeOverlap]="btnBadge.overlap"
+                  [matBadgeDisabled]="btnBadge.disabled"
+                  [matBadgeHidden]="btnBadge.hidden"
                   (click)="_onActionClick($event, btn, rowData)"
                 >
                   <mat-icon *ngTemplateOutlet="iconTpl; context: { $implicit: btn }"></mat-icon>
@@ -247,97 +191,29 @@
       }
       <!-- Number -->
       @case ('number') {
-        <span
-          [title]="
-            _getTooltip(
-              _value
-                | number
-                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
-                  : $safeNavigationMigration(colDef.typeParameter?.locale)
-            )
-          "
-        >
-          {{
-            _getText(
-              _value
-                | number
-                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
-                  : $safeNavigationMigration(colDef.typeParameter?.locale)
-            )
-          }}
-        </span>
+        @let numberValue = _value | number: typeParam?.digitsInfo : typeParam?.locale;
+        <span [title]="_getTooltip(numberValue)">{{ _getText(numberValue) }}</span>
       }
       <!-- Currency -->
       @case ('currency') {
-        <span
-          [title]="
-            _getTooltip(
-              _value
-                | currency
-                  : $safeNavigationMigration(colDef.typeParameter?.currencyCode)
-                  : $safeNavigationMigration(colDef.typeParameter?.display)
-                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
-                  : $safeNavigationMigration(colDef.typeParameter?.locale)
-            )
-          "
-        >
-          {{
-            _getText(
-              _value
-                | currency
-                  : $safeNavigationMigration(colDef.typeParameter?.currencyCode)
-                  : $safeNavigationMigration(colDef.typeParameter?.display)
-                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
-                  : $safeNavigationMigration(colDef.typeParameter?.locale)
-            )
-          }}
-        </span>
+        @let currencyValue =
+          _value
+            | currency
+              : typeParam?.currencyCode
+              : typeParam?.display
+              : typeParam?.digitsInfo
+              : typeParam?.locale;
+        <span [title]="_getTooltip(currencyValue)">{{ _getText(currencyValue) }}</span>
       }
       <!-- Percent -->
       @case ('percent') {
-        <span
-          [title]="
-            _getTooltip(
-              _value
-                | percent
-                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
-                  : $safeNavigationMigration(colDef.typeParameter?.locale)
-            )
-          "
-        >
-          {{
-            _getText(
-              _value
-                | percent
-                  : $safeNavigationMigration(colDef.typeParameter?.digitsInfo)
-                  : $safeNavigationMigration(colDef.typeParameter?.locale)
-            )
-          }}
-        </span>
+        @let percentValue = _value | percent: typeParam?.digitsInfo : typeParam?.locale;
+        <span [title]="_getTooltip(percentValue)">{{ _getText(percentValue) }}</span>
       }
       <!-- Date -->
       @case ('date') {
-        <span
-          [title]="
-            _getTooltip(
-              _value
-                | date
-                  : $safeNavigationMigration(colDef.typeParameter?.format)
-                  : $safeNavigationMigration(colDef.typeParameter?.timezone)
-                  : $safeNavigationMigration(colDef.typeParameter?.locale)
-            )
-          "
-        >
-          {{
-            _getText(
-              _value
-                | date
-                  : $safeNavigationMigration(colDef.typeParameter?.format)
-                  : $safeNavigationMigration(colDef.typeParameter?.timezone)
-                  : $safeNavigationMigration(colDef.typeParameter?.locale)
-            )
-          }}
-        </span>
+        @let dateValue = _value | date: typeParam?.format : typeParam?.timezone : typeParam?.locale;
+        <span [title]="_getTooltip(dateValue)">{{ _getText(dateValue) }}</span>
       }
       <!-- Default -->
       @default {
